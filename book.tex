@@ -37,6 +37,10 @@ A \textbf{scientific statement} $\mathsf{s}$ is a proposition about a physical o
 	Two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$ are \textbf{experimentally equivalent} $\mathsf{o}_1 = \mathsf{o}_2$ if each is verified when the other one is.
 \end{defn}
 
+\begin{defn}
+	Two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$ are \textbf{mutually exclusive} if each is never verified when the other one is.
+\end{defn}
+
 \section{Logical operations}
 
 Once we have set of verified observations, we can use logic to create others or check for consistency. For example, once we have established that \emph{``cold reduces swelling"} and that \emph{``ice is cold"} we may conclude that \emph{``ice 
@@ -79,17 +83,23 @@ This discussion leads to the following definitions and properties.
 \end{defn}
 
 \begin{defn}
-	The \textbf{conjunction of two experimental observations} (logical AND) $\mathsf{o}_1=(\mathsf{s}_1, \mathsf{e}_1)$ and  $\mathsf{o}_2=(\mathsf{s}_2, \mathsf{e}_2)$ is the experimental observation $\mathsf{o}_1 \wedge \mathsf{o}_2 =(\mathsf{s}_1 \wedge \mathsf{s}_2, \mathsf{e}(\mathsf{e}_1, \mathsf{e}_2))$ formed by the conjunction (logical AND) of the respective scientific statements and the experimental test $\mathsf{e}$ that executes both $\mathsf{e}_1$ and $\mathsf{e}_2$ and succeeds only if both are successful.
+	The \textbf{conjunction of two experimental observations} (logical AND) $\mathsf{o}_1=(\mathsf{s}_1, \mathsf{e}_1)$ and  $\mathsf{o}_2=(\mathsf{s}_2, \mathsf{e}_2)$ is the experimental observation $\mathsf{o}_1 \wedge \mathsf{o}_2 =(\mathsf{s}_1 \wedge \mathsf{s}_2, \mathsf{e}_{\wedge}(\mathsf{e}_1, \mathsf{e}_2))$ formed by the conjunction (logical AND) of the respective scientific statements and the experimental test $\mathsf{e}$ that executes both $\mathsf{e}_1$ and $\mathsf{e}_2$ and succeeds only if both are successful.
 \end{defn}
 
 \begin{defn}
-	The \textbf{disjunction of two experimental observations} (logical OR) $\mathsf{o}_1=(\mathsf{s}_1, \mathsf{e}_1)$ and  $\mathsf{o}_2=(\mathsf{s}_2, \mathsf{e}_2)$ is the experimental observation $\mathsf{o}_1 \vee \mathsf{o}_2 =(\mathsf{s}_1 \vee \mathsf{s}_2, \mathsf{e}(\mathsf{e}_1, \mathsf{e}_2))$ formed by the disjunction (logical OR)  of the respective scientific statements and the experimental test $\mathsf{e}$ that executes both $\mathsf{e}_1$ and $\mathsf{e}_2$ and succeeds if any of them is successful.
+	The \textbf{disjunction of two experimental observations} (logical OR) $\mathsf{o}_1=(\mathsf{s}_1, \mathsf{e}_1)$ and  $\mathsf{o}_2=(\mathsf{s}_2, \mathsf{e}_2)$ is the experimental observation $\mathsf{o}_1 \vee \mathsf{o}_2 =(\mathsf{s}_1 \vee \mathsf{s}_2, \mathsf{e}_{\vee}(\mathsf{e}_1, \mathsf{e}_2))$ formed by the disjunction (logical OR)  of the respective scientific statements and the experimental test $\mathsf{e}$ that executes both $\mathsf{e}_1$ and $\mathsf{e}_2$ and succeeds if any of them is successful.
 \end{defn}
 
 
 \begin{prop}
-	Let $\mathsf{o}_1, \mathsf{o}_2, ... , \mathsf{o}_n, ...$ be an infinite sequence of experimental observations. The finite conjunction $\bigwedge\limits_{i=1}^{n} \mathsf{o}_i$ and the countable disjunction  $\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i$ are well defined.
+	Let $\mathsf{o}_1, \mathsf{o}_2, ... , \mathsf{o}_n, ...$ be a countable infinite sequence of experimental observations. The finite conjunction $\bigwedge\limits_{i=1}^{n} \mathsf{o}_i$ and the countable disjunction  $\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i$ are experimental observations.
 \end{prop}
+
+\begin{proof}
+	We claim the finite conjunction of experimental observations is an experimental observation. Let $\mathsf{e}_{\wedge}(\mathsf{e}_i)$ be the procedure that executes all experimental tests $\mathsf{e}_i$ and succeeds if all $\mathsf{e}_i$ succeed. If $\mathsf{e}_{\wedge}(\mathsf{e}_i)$ succeeds then all $\mathsf{e}_i$ have succeeded using a finite amount of resources as they are experimental tests. $\mathsf{e}_{\wedge}(\mathsf{e}_i)$ succeeds using at maximum the sum of the resources used by a finite number of experimental tests, which is finite. $\mathsf{e}_{\wedge}(\mathsf{e}_i)$ is an experimental test. $\bigwedge\limits_{i=1}^{n} \mathsf{o}_i = (\bigwedge\limits_{i=1}^{n} \mathsf{s}_i, \mathsf{e}_{\wedge}(\mathsf{e}_i))$ is an experimental observation.
+	
+	We claim the infinite disjunction of experimental observations is an experimental observation. Let $\mathsf{e}_{\vee}(\mathsf{e}_i)$ be the experimental procedure that executes the experimental tests $\mathsf{e}_i$, a finite number within each finite time interval, and succeeds when one of them succeeds. If $\mathsf{e}_{\vee}(\mathsf{e}_i)$ succeeds then a particular $\mathsf{e}_j$ has succeeded and the overall procedure can stop. The duration of the experimental procedure is the time it took for $\mathsf{e}_j$ to start, which is finite by construction, plus the time it took for $\mathsf{e}_j$ to succeed, which is finite as $\mathsf{e}_j$ is an experimental test. Let $n$ be the index of the last experimental test that was started before $\mathsf{e}_j$ was successful. $\mathsf{e}_{\vee}(\mathsf{e}_i)$ succeeds using at maximum the sum of the resources used by the first $n$ experimental tests, which is finite. $\bigvee\limits_{i=1}^{n} \mathsf{o}_i = (\bigvee\limits_{i=1}^{n} \mathsf{s}_i, \mathsf{e}_{\vee}(\mathsf{e}_i))$ is an experimental observation.
+\end{proof}
 
 \section{Experimental identification}
 
@@ -112,6 +122,36 @@ To sum up, let $X$ be a set of elements and let $\mathsf{T}$ be the collection o
 	\item Any union of a countable number of sets in $\mathsf{T}$ can also be found in $\mathsf{T}$ as the countable disjunction (i.e. logical OR) of experimental observations is also an experimental observation
 \end{itemize}
 This is the mathematical definition of a topology: a set of sets that contains both the whole set and the empty set, that is closed under finite intersection and under countable union.
+
+\begin{defn}
+	A \textbf{set of experimental possibilities} $X$ is a collection of possible physical elements within which we identify a physical object.
+\end{defn}
+
+\begin{defn}
+	A \textbf{verifiable set} $U \subseteq X$ is a subset of possibilities for which there exists an experimental observation $\mathsf{o} = (\text{``The object is in } U \text{"}, \mathsf{e}_\in(U))$ where $\mathsf{e}_\in(U)$ is an experimental test that succeeds only if the object to identify is an element of $U$.
+\end{defn}
+
+\begin{defn}
+	A \textbf{refutable set} $U \subseteq X$ is a subset of possibilities for which there exists an experimental counter-observation $\mathsf{o} = (\text{``The object is in } U \text{"}, \mathsf{e}_{\notin}(U))$ where $\mathsf{e}_{\notin}(U)$ is an experimental test that succeeds only if the object to identify is not an element of $U$.
+\end{defn}
+
+\begin{prop}
+	The complement $U^C$ of a verifiable set $U \subseteq X$ is a refutable set.
+\end{prop}
+
+\begin{proof}
+	Let $U\subset X$ be a verifiable set. There exists an experimental observation $\mathsf{o} = (\text{``The object is in } U \text{"}, \mathsf{e}_\in(U))$. Consider $\neg \mathsf{o} = (\neg \text{``The object is in } U \text{"}, \mathsf{e}_\in(U)) = ($``The object  is not in $ U \text{"}, \mathsf{e}_{\notin}(U^C)) = ($``The object  is in $ U^C \text{"}, \mathsf{e}_{\notin}(U^C))$. That is, there exists a counter-observation $($``The object  is in $ U^C \text{"}, \mathsf{e}_{\notin}(U^C))$: $U^C$ is a refutable set.
+\end{proof}
+
+\begin{prop}
+	Let $U_1, U_2, ... , U_n, ...$ be a countable infinite sequence of verifiable sets. The finite intersection $\bigcap\limits_{i=1}^{n} U_i$ and the countable union  $\bigcup\limits_{i=1}^{\infty} U_i$ are verifiable sets.
+\end{prop}
+
+\begin{proof}
+	We claim the finite intersection of verifiable sets is a verifiable set. Let $U_1, U_2, ... , U_n \subseteq X$ be n verifiable sets. For each $U_i$ there exists an experimental observation $\mathsf{o}_i = ($``The object is in $ U_i \text{"}, \mathsf{e}_\in(U_i))$. Consider $\mathsf{o} = \bigwedge\limits_{i=1}^{n} \mathsf{o}_i = (\bigwedge\limits_{i=1}^{n} $``The object is in $ U_i \text{"}, \mathsf{e}_{\wedge}(\mathsf{e}_\in(U_i)))=( $``The object is in $ \bigcap\limits_{i=1}^{n} U_i \text{"}, \mathsf{e}_\in(\bigcap\limits_{i=1}^{n} U_i))$ is an experimental observation. $\bigcap\limits_{i=1}^{n} U_i$ is a verifiable set.
+	
+	We claim the countable union of verifiable sets is a verifiable set. Let $U_1, U_2, ... , U_n, ... \subseteq X$ be an infinite sequence of verifiable sets. For each $U_i$ there exists an experimental observation $\mathsf{o}_i = ($``The object is in $ U_i \text{"}, \mathsf{e}_\in(U_i))$. Consider $\mathsf{o} = \bigvee\limits_{i=1}^{\infty} \mathsf{o}_i = (\bigvee\limits_{i=1}^{\infty} $``The object is in $ U_i \text{"}, \mathsf{e}_{\vee}(\mathsf{e}_\in(U_i)))=( $``The object is in $ \bigcup\limits_{i=1}^{\infty} U_i \text{"}, \mathsf{e}_\in(\bigcup\limits_{i=1}^{\infty} U_i))$ is an experimental observation. $\bigcup\limits_{i=1}^{\infty} U_i$ is a verifiable set.
+\end{proof}
 
 \begin{stmt}
 	Let $\mathsf{T}$ be a collection of experimental observations that identifies elements of $X$. $\mathsf{T}$ establishes a topology for $X$.
@@ -145,8 +185,13 @@ If the smallest sub-base is finite, it is possible to test all experimental obse
 
 If there is a countable sub-base, then there is a countable base as well. This is the definition of a second countable space: one that allows a countable bases for its topology.
 
+\begin{defn}
+	A set of experimental possibilities $X$ is \textbf{physically distinguishable} if given n possibilities $x_i \in X$ with $i=1..n$ we can always find n mutually exclusive experimental observation $\mathsf{o}_i$ (i.e. n disjoint verifiable sets $U_i$) such that each possibility $x_i$ is compatible with the respective experimental observation (i.e. $x_i \subset U_i$).
+\end{defn}
+
+
 \begin{prop}
-	Let $X$ be a topological space of experimentally distinguishable elements and the topology induced by the associated experimental observations. $X$ is Hausdorff and second countable.
+	A set $X$ of physically distinguishable experimental possibilities is a Hausdorff and second countable topological space with the topology $\mathsf{T}(X)$ formed by all distinguishable sets.
 \end{prop}
 
 \begin{justification}
