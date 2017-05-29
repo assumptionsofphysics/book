@@ -322,6 +322,44 @@ Now we need to show that we can distinguish between any two functions. Say we ha
 
 This confirms that all the conceptual infrastructure is solid and self consistent. Sets of experimentally distinguishable elements are Hausdorff and second countable topological spaces. Maps between elements of such spaces are continuous maps as they preserve experimental distinguishability. The maps themselves are experimentally distinguishable and the can be given a Hausdorff and second countable topology. We can continues this recursively by constructing maps of maps (e.g. a map from a state to a trajectory) without ever going outside our definitions: everything remains experimental distinguishable.
 
+Given two Hausdorff, second-countable spaces $X$ and $Y$, let $\mathcal{C} = C(X,Y)$ denote the set of continuous functions from $X$ to $Y$ (not necessarily surjective or injective). We will define a topology on $\mathcal{C}$ which is Hausdorff and second-countable. 
+
+	$$
+	$$
+\end{defn}
+A basis $\mathcal{B}$ for $\mathsf{T}(\mathcal{C})$ may be given by the collection of all finite intersections of the subsets $V_{ij}$. Those familiar with topologies on function spaces will notice that this is a coarsened version of the usual definition of the open-open topology on $\mathcal{C}$. We will show this below. Next, we will prove that $\mathsf{T}(\mathcal{C})$ has the properties previously claimed.
+
+\begin{prop}
+	The topology $\mathsf{T}(\mathcal{C})$ is Hausdorff and second-countable. 
+\end{prop}
+\begin{proof}
+	
+
+We will also show that this is not in general equal to the open-open topology. 
+
+\begin{prop}
+	The topology $\mathsf{T}(\mathcal{C})$ defined above is not equal to the open-open topology for $X=Y=\mathbb{R}$ with the usual topology on $\mathbb{R}$.
+\end{prop}
+\begin{proof}
+	We will give an example of a set open in the open-open topology which is not open in our topology $\mathsf{T}(\mathcal{C})$; that is, we prove the open-open topology is a strict refinement. Consider the following set, open in the open-open topology:
+	$$
+	V = \{f\in\mathcal{C}| f((0,\pi))\subset(0,1)\}
+	$$
+	We show that no finite intersection and/or infinite union of sub-basis elements for $\mathsf{T}(\mathcal{C})$ will equal $V$. Henceforth, when we say ``open" subsets, unless otherwise stated, we will refer exclusively to the topology $\mathsf{T}(\mathcal{C})$. The smallest sub-basis subsets containing $V$ are those of the form:
+	$$
+	B_r = \{f\in\mathcal{C} | f((0,r))\subset(0,1)\}
+	$$
+	for each $r\in\mathbb{Q}$ with $r<\pi$. By ``smallest" we mean any sub-basis elements containing $V$ which are not in the form of $B_r$ will contain some $B_r$. Now, any finite intersection of the $B_r$'s will be another $B_r$, but these strictly contain $V$, so we can never obtain $V$ from this sub-basis. 
+	
+	Similarly, the largest sub-basis sets contained within $V$ are of the form: 
+	$$
+	S_r = \{f\in\mathcal{C} | f((0,r))\subset(0,1)\}
+	$$
+	for each $r\in \mathbb{Q}$ with $r>\pi$. Let $S = \cup_{r>\pi}S_r$. This is the largest open set in our topology which is contained in $V$. Consider the function $f(x) = x/\pi$. This is continuous and is an element of $V$. But notice $f(\pi)=1$, so $f\notin S_r$ for all $r>\pi$, hence $f\notin S$. Thus, $V$ is a set which is open in the open-open topology, but not open in our topology $\mathsf{T}(\mathcal{C})$. 
+\end{proof}
+
+Thus we have shown one can start with two Hausdorff, second-countable spaces, and generate a new Hausdorff second-countable space consisting of all functions between them. Topological spaces with these properties make up our class of scientifically interesting spaces, so the space of continuous (distinguishability-preserving) functions between spaces of distinguishable quantities is again a physically distinguishable space. Because one can iterate this construction (since the relevant properties are preserved), this is a way to generate arbitrarily many new physically distinguishable spaces encoding important information about the ``lower-order" spaces (i.e. they consist of functions which encode a conversion between verifiable sets in different spaces). 
+
 \section{Summary}
 
 \begin{table}[h]
