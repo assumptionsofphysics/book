@@ -297,18 +297,45 @@ If nothing is known about $y$ (e.g. if ``the height of the mercury column is in 
 Under these conditions, one can show that for any such relationship there exists a continuous function $f: X \rightarrow Y$ such that $g=f^{-1}$ is its inverse image.
 
 \begin{prop}
-	Let $g: \mathsf{T}(Y) \rightarrow \mathsf{T}(X)$ such that:
+	\label{setfunctions}
+	Let $X$ and $Y$ be two Hausdorff topological spaces, and let $g: \mathsf{T}(Y) \rightarrow \mathsf{T}(X)$ be a mapping such that:
 	\begin{enumerate}
-		\item it is compatible with union and intersection $\forall V_1, V_2 \in Y$ $g(V_1 \cup V_2)=g(V_1)\cup g(V_2)$ and $g(V_1 \cap V_2)=g(V_1)\cap g(V_2)$
+		\item It is compatible with union and intersection $\forall V_1, V_2 \in Y$ $g(V_1 \cup V_2)=g(V_1)\cup g(V_2)$ and $g(V_1 \cap V_2)=g(V_1)\cap g(V_2)$
 		\item $g(\emptyset) = \emptyset$
 		\item $g(Y) = X$
 	\end{enumerate}
-    There exists a unique continuous function $f: X \rightarrow Y$ such that $g = f^{-1} |_{\mathsf{T}(Y)}$.
+	Then there exists a unique continuous function $f: X \rightarrow Y$ such that $g = f^{-1} |_{\mathsf{T}(Y)}$.
 \end{prop}
 
 \begin{proof}
-	TODO
+	We claim there exists a unique extension $\bar{g}:\sigma(Y)\to\sigma(X)$ to the Borel $\sigma$-algebras of $X$ and $Y$, respectively $\sigma(X)$ and $\sigma(Y)$, such that $\bar{g}|_{\mathsf{T}(Y)}=g$ and $\bar{g}$ is compatible with union, intersection and complements. Let $\bar{g}(V) = g(V)$ for all open sets $V \in \mathsf{T}(Y)$. Let $A \in \sigma(Y)$ (not necessarily open) and $A^C$ be its complement. We must have $\bar{g}(A^C) = \bar{g}(A)^C = X\setminus \bar{g}(A)$ for $\bar{g}$ to be compatible with complements. Recall that all Borel sets in $\sigma(Y)$ and $\sigma(X)$ may be written as some combination of unions, intersections, and complements of open sets. Thus, the construction uniquely determine what $\bar{g}$ should output on any Borel set. We need only check that the output is still a Borel set. But by definition of $\bar{g}$, the outputs will be given as unions, intersections, and complements of outputs of $g$, which are open sets, and so the image of $\bar{g}$ is contained in $\sigma(X)$.  $\bar{g}$ is well defined. The function $\bar{g}$ in a sense represents extracting the maximum amount of information possible out of $g$.
+	
+	We claim we can define $\hat{g}:Y\to\sigma(X)$ such that $\hat{g}(y) = \bar{g}(\{y\})$. Since $Y$ is Hausdorff, every singleton $\{y\}$ is closed and is therefore a Borel set. $\bar{g}(\{y\})$ is well defined and so is $\hat{g}(y)$.
+	
+	We claim  $\hat{g}(y_1)\cap\hat{g}(y_2) = \emptyset$ if and only if $y_1\neq y_2$ for all $y_1,y_2\in Y$ such that $\hat{g}(y_i)\neq\emptyset$ for $i=1,2$. If $y_1\neq y_2$ we have
+	$$
+	\hat{g}(y_1)\cap\hat{g}(y_2) = \bar{g}(\{y_1\})\cap\bar{g}(\{y_2\}) = \bar{g}(\{y_1\}\cap\{y_2\}) = \bar{g}(\emptyset) = \emptyset.
+	$$
+	Conversely, if $y_1 = y_2$ we have
+	$$
+	\hat{g}(y_1)\cap\hat{g}(y_2) = 	\hat{g}(y_1)\cap\hat{g}(y_1) = 
+	\hat{g}(y_1) \neq \emptyset.
+	$$
+	
+	We claim we can define $f: X\to Y$ such that $f(x) = y$ if and only if $x\in \hat{g}(y)$. Since $g(Y)=X$, there exists $y\in Y$ such that $x\in\hat{g}(y)$. By the preceding claim, this $y$ is unique. $f: X\to Y$ is well defined. Note that no arbitrary choice where made so far that lead to the construction of $f$, which is therefore determined uniquely by $g$. 
+	
+	We claim $g = f^{-1} |_{\mathsf{T}(Y)}$. Let $V\in\mathsf{T}(Y)$. We want to show $f^{-1}(V) = g(V)$. Let $x\in f^{-1}(V)$. Then for some $y \in V$ we have $f(x)=y$. $x\in \hat{g}(y)$ by construction of $f$. $\hat{g}(y) \subset g(V)$ since $\{y\}\subset V$, so $x\in g(V)$. $f^{-1}(V) \subseteq g(V)$. Conversely, let $x\in g(V)=\bar{g}(V)$. Then for some $y\in V$, we have $x\in\bar{g}(\{y\})\subset\bar{g}(V)$. But then by definition we have $f(x)=y$, so $x\in f^{-1}(V)$. $f^{-1}(V) \supseteq g(V)$. $f^{-1}(V) = g(V)$ for all $V\in\mathsf{T}(Y)$ and therefore $f^{-1}|_{\mathsf{T}(Y)}$.
+	
+	We claim $f$ is continuous. It is so since $g = f^{-1} |_{\mathsf{T}(Y)}$ takes open sets to open sets. 
 \end{proof}
+
+The above work gives us an approach to reconstruct continuous functions given the behavior of the inverse on open sets. In the context of collecting information on observable phenomena, the function $g$ represents the total of all information possible to gather on the correlation between two variables. The fact that from $g$ we can construct a unique continuous $f$ shows us that in the infinite-resource ideal, we fully obtain the information to give exact relations between variables. Further, the result itself tells us that the interesting phenomena in our framework of experimental observations will be continuous, which is often a baseline assumption in physics. 
+
+
+
+
+
+TODO: Introduce/define Borel algebra? In fact, we really only need infinite intersections of open sets. We could skip complements all together and just let $\bar{g}$ be defined on all open sets plus all infinite intersections of open sets. This might be slightly simpler but won't make much of a difference either way. Also, it might make more sense to absorb Lemma 1.24 and $\hat{g}$ into the proof of Proposition 1.22. 
 
 \section{Distinguishability of functions}
 
@@ -324,7 +351,9 @@ This confirms that all the conceptual infrastructure is solid and self consisten
 
 Given two Hausdorff, second-countable spaces $X$ and $Y$, let $\mathcal{C} = C(X,Y)$ denote the set of continuous functions from $X$ to $Y$ (not necessarily surjective or injective). We will define a topology on $\mathcal{C}$ which is Hausdorff and second-countable. 
 
+\begin{defn} Let $X$ and $Y$ be two Hausdorff, second-countable spaces. Let $C(X,Y)$ denote the set of continuous functions from $X$ to $Y$. Let $\{X_i\}_{i=1}^{\infty}$ and $\{Y_j\}_{j=1}^{\infty}$ be countable bases for $X$ and $Y$ respectively. The basis-to-basis topology $\mathsf{T}(C(X,Y), \{X_i\}_{i=1}^{\infty}, \{Y_j\}_{j=1}^{\infty})$ on $C(X,Y)$ is the topology generated by all sets of the following form: 
 	$$
+	V_{ij} = \{f\in C(X,Y) : f(X_i)\subset Y_j\}.
 	$$
 \end{defn}
 A basis $\mathcal{B}$ for $\mathsf{T}(\mathcal{C})$ may be given by the collection of all finite intersections of the subsets $V_{ij}$. Those familiar with topologies on function spaces will notice that this is a coarsened version of the usual definition of the open-open topology on $\mathcal{C}$. We will show this below. Next, we will prove that $\mathsf{T}(\mathcal{C})$ has the properties previously claimed.
@@ -333,7 +362,12 @@ A basis $\mathcal{B}$ for $\mathsf{T}(\mathcal{C})$ may be given by the collecti
 	The topology $\mathsf{T}(\mathcal{C})$ is Hausdorff and second-countable. 
 \end{prop}
 \begin{proof}
+	We claim $\mathsf{T}(\mathcal{C})$ is second-countable. First note that the sub-basis $\{V_{ij}\}_{i,j=1}^{\infty}$ is countable. The collection $\mathcal{B}$ of all finite intersections is still countable, since it is in one-to-one correspondence with the collection of finite subsets of a countable set, which is still countable. Therefore $\mathcal{B}$ is a countable basis, which means $\mathsf{T}(\mathcal{C})$ is second-countable.
 	
+	We claim $\mathsf{T}(\mathcal{C})$ is Hausdorff. Let $f,g:X\to Y$ be distinct continuous functions. Then for some $x\in X$, we have $f(x)\neq g(x)$. Pick $V_1, V_2$ disjoint open subsets of $Y$ with $f(x)\in V_1$ and $g(x)\in V_2$. We may assume (possibly by shrinking $V_1$ or $V_2$) that both are basis elements for the topology of $Y$. Let $U=f^{-1}(V_1)\cap g^{-1}(V_2)$. Then $U$ is an open neighborhood of $x$. We may assume again that $U$ is a basis element for the topology on $X$ by shrinking it if necessary. Now, let $T_1$ to be the (sub-)basis element for $\mathsf{T}(\mathcal{C})$ corresponding to $U$ and $V_1$. By construction, $f\in T_1$. Similarly, let $T_2$ to be the basis element for $\mathsf{T}(\mathcal{C})$ corresponding to $U$ and $V_2$ and containing $g$. Since $V_1$ and $V_2$ are disjoint, so are $T_1$ and $T_2$. $\mathsf{T}(\mathcal{C})$ is Hausdorff.
+\end{proof}
+
+TODO: need to review the rest once I find the notes of the discussion.
 
 We will also show that this is not in general equal to the open-open topology. 
 
