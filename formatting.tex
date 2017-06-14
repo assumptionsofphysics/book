@@ -6,6 +6,10 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{sectionNumbers}{RGB}{44, 103, 0}
+
+
 \renewcommand\thesubsection{\thesection.\Alph{subsection}}
 \renewcommand{\theequation}{\thechapter.\arabic{equation}}
 
@@ -21,3 +25,45 @@
 \newenvironment{rationale}{\emph{Rationale}.}{\qed}
 \newenvironment{justification}{\emph{Justification}.}{\qed}
 \renewenvironment{proof}{\emph{Proof}.}{\qed}
+
+% Style for math section
+\RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
+\newmdenv[skipabove=7pt,
+skipbelow=7pt,
+rightline=false,
+leftline=true,
+topline=false,
+bottomline=false,
+linecolor=sectionNumbers,
+backgroundcolor=black!2,
+innerleftmargin=5pt,
+innerrightmargin=5pt,
+innertopmargin=5pt,
+leftmargin=0cm,
+rightmargin=0cm,
+linewidth=4pt,
+innerbottommargin=5pt]{mathSection}
+
+
+%----------------------------------------------------------------------------------------
+%	SECTION NUMBERING IN THE MARGIN
+%----------------------------------------------------------------------------------------
+
+\makeatletter
+\renewcommand{\@seccntformat}[1]{\llap{\textcolor{sectionNumbers}{\csname the#1\endcsname}\hspace{1em}}}                    
+\renewcommand{\section}{\@startsection{section}{1}{\z@}
+	{-4ex \@plus -1ex \@minus -.4ex}
+	{1ex \@plus.2ex }
+	{\normalfont\large\sffamily\bfseries}}
+\renewcommand{\subsection}{\@startsection {subsection}{2}{\z@}
+	{-3ex \@plus -0.1ex \@minus -.4ex}
+	{0.5ex \@plus.2ex }
+	{\normalfont\sffamily\bfseries}}
+\renewcommand{\subsubsection}{\@startsection {subsubsection}{3}{\z@}
+	{-2ex \@plus -0.1ex \@minus -.2ex}
+	{.2ex \@plus.2ex }
+	{\normalfont\small\sffamily\bfseries}}                        
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}
+	{-2ex \@plus-.2ex \@minus .2ex}
+	{.1ex}
+	{\normalfont\small\sffamily\bfseries}}
