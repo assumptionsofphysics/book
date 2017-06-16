@@ -36,23 +36,34 @@ The point is that science is limited to study only certain kinds of statement: t
 
 \begin{mathSection}
 
-We capture this discussion with the following definition:
+To formally capture experimentally verifiable statements, we introduce the following definitions.
 
 \begin{defn}
 	An \textbf{experimental test} $\mathsf{e}$ is a repeatable procedure that can terminate successfully in a finite amount of time and that can be stopped at any time.
 \end{defn}
 
+TODO: in principle, time can be defined as a monoid. This would prevent circular arguments to some extent.
+
 \begin{defn}
-	An \textbf{experimental observation} is a tuple $\mathsf{o} = (\mathsf{s}, \mathsf{e})$ composed by a statement $\mathsf{s}$ and an experimental test $\mathsf{e}$ such that the statement is true if and only if the  experimental test is always successful.
+	An \textbf{experimental observation} is a tuple $\mathsf{o} = \llparenthesis \mathsf{s}, \mathsf{e} \rrparenthesis$ composed by a statement $\mathsf{s}$ and an experimental test $\mathsf{e}$ such that the statement is true if and only if the  experimental test is always successful. The experimental observation is \textbf{verified} if the statement is true.
 \end{defn}
 
 \begin{defn}
-	Two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$ are \textbf{equivalent} $\mathsf{o}_1 = \mathsf{o}_2$ if each is verified when the other one is.
+	An \textbf{experimental counter-observation} is a tuple $\mathsf{o}^c= \llbracket \mathsf{s}, \mathsf{e} \rrbracket$ composed by a statement $\mathsf{s}$ and an experimental test $\mathsf{e}$ such that the statement is false if and only if the experimental test is always successful. The experimental counter-observation is \textbf{refuted} if the statement is false.
 \end{defn}
 
+We also define some basic relationships between experimental observations.
+
 \begin{defn}
-	Two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$ are \textbf{mutually exclusive} if neither is ever verified when the other one is.
+	Given two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$:
+	\begin{itemize}
+	\item \textbf{implication}: $\mathsf{o}_1 \implies \mathsf{o}_2$ if $\mathsf{o}_2$ is verified whenever $\mathsf{o}_1$ is verified
+	\item \textbf{equivalence}: $\mathsf{o}_1 = \mathsf{o}_2$ if $\mathsf{o}_1 \implies \mathsf{o}_2$ and $\mathsf{o}_2 \implies \mathsf{o}_1$
+	\item \textbf{mutual exclusion}: $\mathsf{o}_1 \asymp \mathsf{o}_2$ ($\mathsf{o}_1$ excludes $\mathsf{o}_2$) if one is not verified whenever the other one is
+	\end{itemize}
 \end{defn}
+
+A note on the language: if $\mathsf{o}_1$ implies $\mathsf{o}_2$ this does not give us a way to verify $\mathsf{o}_2$. There may be cases where the $\mathsf{o}_2$ is verified and $\mathsf{o}_1$ is not. Therefore it is improper to say that one observation verifies another: only experimental tests verify observations.
 
 \end{mathSection}
 
@@ -90,10 +101,6 @@ Combining observations with disjunction, i.e. the logical OR, is also straightfo
 \begin{mathSection}
 
 This discussion leads to the following definitions and properties.
-
-\begin{defn}
-	An \textbf{experimental counter-observation} is a tuple $\mathsf{o}^c=(\mathsf{s}, \mathsf{e})$ where $\mathsf{s}$ is a statement and $\mathsf{e}$ an experimental test that, if successful, refutes the statement.
-\end{defn}
 
 \begin{defn}
 	The \textbf{negation of an experimental observation} $\mathsf{o}=(\mathsf{s}, \mathsf{e})$ is the experimental counter-observation $\neg \mathsf{o}=(\neg \mathsf{s}, \mathsf{e})$ where the negation of the statement $\mathsf{s}$ can be refuted by the experimental test $\mathsf{e}$.
@@ -321,7 +328,7 @@ Under these conditions, one can show that for any such relationship there exists
 	
 	We claim we can define $f: X\to Y$ such that $f(x) = y$ if and only if $x\in \hat{g}(y)$. Since $g(Y)=X$, there exists $y\in Y$ such that $x\in\hat{g}(y)$. By the preceding claim, this $y$ is unique. $f: X\to Y$ is well defined. Note that no arbitrary choice where made so far that lead to the construction of $f$, which is therefore determined uniquely by $g$. 
 	
-	We claim $g = f^{-1} |_{\mathsf{T}(Y)}$. Let $V\in\mathsf{T}(Y)$. We want to show $f^{-1}(V) = g(V)$. Let $x\in f^{-1}(V)$. Then for some $y \in V$ we have $f(x)=y$. $x\in \hat{g}(y)$ by construction of $f$. $\hat{g}(y) \subset g(V)$ since $\{y\}\subset V$, so $x\in g(V)$. $f^{-1}(V) \subseteq g(V)$. Conversely, let $x\in g(V)=\bar{g}(V)$. Then for some $y\in V$, we have $x\in\bar{g}(\{y\})\subset\bar{g}(V)$. But then by definition we have $f(x)=y$, so $x\in f^{-1}(V)$. $f^{-1}(V) \supseteq g(V)$. $f^{-1}(V) = g(V)$ for all $V\in\mathsf{T}(Y)$ and therefore $f^{-1}|_{\mathsf{T}(Y)}$.
+	We claim $g = f^{-1} |_{\mathsf{T}(Y)}$. Let $V\in\mathsf{T}(Y)$. We want to show $f^{-1}(V) = g(V)$. Let $x\in f^{-1}(V)$. Then for some $y \in V$ we have $f(x)=y$. $x\in \hat{g}(y)$ by construction of $f$. $\hat{g}(y) \subset g(V)$ since $\{y\}\subset V$, so $x\in g(V)$. $f^{-1}(V) \subseteq g(V)$. Conversely, let $x\in g(V)=\bar{g}(V)$. Then for some $y\in V$, we have $x\in\bar{g}(\{y\})\subset\bar{g}(V)$. But then by definition we have $f(x)=y$, so $x\in f^{-1}(V)$. $f^{-1}(V) \supseteq g(V)$. $f^{-1}(V) = g(V)$ for all $V\in\mathsf{T}(Y)$ and therefore $f^{-1}|_{\mathsf{T}(Y)}=g$.
 	
 	We claim $f$ is continuous. It is so since $g = f^{-1} |_{\mathsf{T}(Y)}$ takes open sets to open sets. 
 \end{proof}
@@ -348,7 +355,7 @@ This confirms that all the conceptual infrastructure is solid and self consisten
 
 Given two Hausdorff, second-countable spaces $X$ and $Y$, let $\mathcal{C} = C(X,Y)$ denote the set of continuous functions from $X$ to $Y$ (not necessarily surjective or injective). We will define a topology on $\mathcal{C}$ which is Hausdorff and second-countable. 
 
-\begin{defn} Let $X$ and $Y$ be two Hausdorff, second-countable spaces. Let $C(X,Y)$ denote the set of continuous functions from $X$ to $Y$. Let $\{X_i\}_{i=1}^{\infty}$ and $\{Y_j\}_{j=1}^{\infty}$ be countable bases for $X$ and $Y$ respectively. The basis-to-basis topology $\mathsf{T}(C(X,Y), \{X_i\}_{i=1}^{\infty}, \{Y_j\}_{j=1}^{\infty})$ on $C(X,Y)$ is the topology generated by all sets of the following form: 
+\begin{defn} Let $X$ and $Y$ be two Hausdorff, second-countable spaces. Let $C(X,Y)$ denote the set of continuous functions from $X$ to $Y$. Let $\{X_i\}_{i=1}^{\infty}$ and $\{Y_j\}_{j=1}^{\infty}$ be countable bases for $X$ and $Y$ respectively. The basis-to-basis topology $\mathsf{T}(C(X,Y), \{X_i\}_{i=1}^{\infty}, \{Y_j\}_{j=1}^{\infty})$ on $C(X,Y)$ TODO with respect to the basis??? is the topology generated by all sets of the following form: 
 	$$
 	V_{ij} = \{f\in C(X,Y) : f(X_i)\subset Y_j\}.
 	$$
