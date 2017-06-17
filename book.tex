@@ -39,6 +39,10 @@ The point is that science is limited to study only certain kinds of statement: t
 To formally capture experimentally verifiable statements, we introduce the following definitions.
 
 \begin{defn}
+	A \textbf{statement} $\mathsf{s}$ is a declarative sentence that is either true or false, as in classical logic.
+\end{defn}
+
+\begin{defn}
 	An \textbf{experimental test} $\mathsf{e}$ is a repeatable procedure that can terminate successfully in a finite amount of time and that can be stopped at any time.
 \end{defn}
 
@@ -100,40 +104,45 @@ Combining observations with disjunction, i.e. the logical OR, is also straightfo
 
 \begin{mathSection}
 
-This discussion leads to the following definitions and properties.
+We define the following logical operations on experimental observations. Taken as whole, they define the \textbf{algebra of experimental observations}.
 
 \begin{defn}
-	The \textbf{negation of an experimental observation} $\mathsf{o}=(\mathsf{s}, \mathsf{e})$ is the experimental counter-observation $\neg \mathsf{o}=(\neg \mathsf{s}, \mathsf{e})$ where the negation of the statement $\mathsf{s}$ can be refuted by the experimental test $\mathsf{e}$.
+	The \textbf{negation or logical NOT} of an experimental observation $\mathsf{o}=\llparenthesis \mathsf{s}, \mathsf{e}\rrparenthesis$ is the experimental counter-observation $\neg \mathsf{o}=\llbracket\neg \mathsf{s}, \mathsf{e}\rrbracket$ where the negation of the statement $\mathsf{s}$ can be refuted by the experimental test $\mathsf{e}$.
 \end{defn}
-
-\begin{defn}
-	The \textbf{conjunction of two experimental observations} (logical AND) $\mathsf{o}_1=(\mathsf{s}_1, \mathsf{e}_1)$ and  $\mathsf{o}_2=(\mathsf{s}_2, \mathsf{e}_2)$ is the experimental observation $\mathsf{o}_1 \wedge \mathsf{o}_2 =(\mathsf{s}_1 \wedge \mathsf{s}_2, \mathsf{e}_{\wedge}(\mathsf{e}_1, \mathsf{e}_2))$ formed by the conjunction (logical AND) of the respective statements and the experimental test $\mathsf{e}_\wedge$ that executes both $\mathsf{e}_1$ and $\mathsf{e}_2$ and terminates successfully only when both $\mathsf{e}_1$ and $\mathsf{e}_2$ terminated successfully.
-\end{defn}
-
-\begin{defn}
-	The \textbf{disjunction of two experimental observations} (logical OR) $\mathsf{o}_1=(\mathsf{s}_1, \mathsf{e}_1)$ and  $\mathsf{o}_2=(\mathsf{s}_2, \mathsf{e}_2)$ is the experimental observation $\mathsf{o}_1 \vee \mathsf{o}_2 =(\mathsf{s}_1 \vee \mathsf{s}_2, \mathsf{e}_{\vee}(\mathsf{e}_1, \mathsf{e}_2))$ formed by the disjunction (logical OR)  of the respective statements and the experimental test $\mathsf{e}_{\vee}$ that executes both $\mathsf{e}_1$ and $\mathsf{e}_2$ and terminates successfully when any of them terminated successfully.
-\end{defn}
-
-
-\begin{prop}
-	Let $\mathsf{o}_1, \mathsf{o}_2, ... , \mathsf{o}_n, ...$ be a countable (possibly infinite) sequence of experimental observations. The finite conjunction $\bigwedge\limits_{i=1}^{n} \mathsf{o}_i$ and the countable disjunction  $\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i$ are experimental observations.
-\end{prop}
 
 \begin{proof}
-	We claim the finite conjunction of experimental observations is an experimental observation. Let $\mathsf{e}_{\wedge}(\mathsf{e}_i)$ be the procedure that executes all experimental tests $\mathsf{e}_i$ and succeeds if all $\mathsf{e}_i$ succeed. If $\mathsf{e}_{\wedge}(\mathsf{e}_i)$ succeeds then all $\mathsf{e}_i$ have succeeded using a finite amount of resources as they are experimental tests. $\mathsf{e}_{\wedge}(\mathsf{e}_i)$ succeeds using at maximum the sum of the resources used by a finite number of experimental tests, which is finite. $\mathsf{e}_{\wedge}(\mathsf{e}_i)$ is an experimental test. $\bigwedge\limits_{i=1}^{n} \mathsf{o}_i = (\bigwedge\limits_{i=1}^{n} \mathsf{s}_i, \mathsf{e}_{\wedge}(\mathsf{e}_i))$ is an experimental observation.
-	
-	We claim the infinite disjunction of experimental observations is an experimental observation. Let $\mathsf{e}_{\vee}(\mathsf{e}_i)$ be the experimental procedure that proceeds as follows.
+	We show that the negation exists and is well defined. Let $\mathsf{o}=\llparenthesis \mathsf{s}, \mathsf{e}\rrparenthesis$ be an experimental observation. The experimental test $\mathsf{e}$ succeeds if and only if $\mathsf{s}$ is true or, equivalently, if and only if $\neg \mathsf{s}$ is false. So the tuple $\llbracket\neg \mathsf{s}, \mathsf{e}\rrbracket$ forms an experimental counter-observation.
+\end{proof}
+
+\begin{defn}
+	The \textbf{conjunction or logical AND} of a finite collection  of experimental observations $\{\mathsf{o}_i\}_{i=1}^{n}=\{\llparenthesis \mathsf{s}_i, \mathsf{e}_i\rrparenthesis\}_{i=1}^{n}$ is the experimental observation $\bigwedge\limits_{i=1}^{n} \mathsf{o}_i = \llparenthesis \mathsf{s}, \mathsf{e}\rrparenthesis$ where $\mathsf{s} = \bigwedge\limits_{i=1}^{n} \mathsf{s}_i$ is the conjunction of the respective statements and $\mathsf{e} = \mathsf{e}_\wedge(\{\mathsf{e}_i\}_{i=1}^{n})$ is the experimental test that successfully terminates if and only if all $\{\mathsf{e}_i\}_{i=1}^{n}$ successfully terminate.
+\end{defn}
+
+\begin{proof}
+	We show that the conjunction exists and is well defined. Let $\mathsf{e}_\wedge(\{\mathsf{e}_i\}_{i=1}^{n})$ be the experimental procedure defined as follows:
 	\begin{enumerate}
-		\item initialize $n$ to 1
-		\item for each $i=1..n$
-		\begin{enumerate}
+	\item for each $i=1..n$ run the test $\mathsf{e}_i$
+	\item if all tests terminated successfully terminate successfully.
+	\end{enumerate}
+	The experimental procedure so defined terminates successfully if and only if all $\mathsf{e}_i$ terminate successfully. It will do so in finite time as each $\mathsf{e}_i$ succeeds in finite time and there only a finite number of them. Therefore $\mathsf{e}_\wedge(\{\mathsf{e}_i\}_{i=1}^{n})$ is an experimental test that is successful if and only if all statements $\{\mathsf{s}_i\}_{i=1}^{n}$ are successful. So $\llparenthesis\bigwedge\limits_{i=1}^{n} \mathsf{s}_i, \mathsf{e}_{\wedge}(\mathsf{e}_i)\rrparenthesis$ is an experimental observation.
+\end{proof}
+
+\begin{defn}
+	The \textbf{disjunction or logical OR} of a countable collection of experimental observations $\{\mathsf{o}_i\}_{i=1}^{\infty}=\{\llparenthesis \mathsf{s}_i, \mathsf{e}_i\rrparenthesis\}_{i=1}^{\infty}$ is the experimental observation $\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i = \llparenthesis \mathsf{s}, \mathsf{e}\rrparenthesis$ where $\mathsf{s} = \bigvee\limits_{i=1}^{\infty} \mathsf{s}_i$ is the disjunction of the respective statements and $\mathsf{e} = \mathsf{e}_\vee(\{\mathsf{e}_i\}_{i=1}^{\infty})$ is the experimental test that successfully terminates if and only if at least one experimental test in $\{\mathsf{e}_i\}_{i=1}^{\infty}$ successfully terminate.
+\end{defn}
+
+\begin{proof}
+	We show that the disjunction exists and is well defined. Let $\mathsf{e}_\vee(\{\mathsf{e}_i\}_{i=1}^{\infty})$ be the experimental procedure defined as follows:
+	\begin{enumerate}
+	\item initialize $n$ to 1
+	\item for each $i=1..n$
+	\begin{enumerate}
 		\item run the test $\mathsf{e}_i$ for $n$ seconds
 		\item if $\mathsf{e}_i$ terminated successfully, terminate successfully
-		\end{enumerate}
-		\item increment $n$ and go to step 2
 	\end{enumerate}
-	Suppose any of the individual experimental
-	tests terminates successfully, it will be do so in finite time, so the overall process will find it. The overall process terminates, at which point only finite time has passed in total. $\mathsf{e}_{\vee}(\mathsf{e}_i)$ terminates successfully in finite time and is therefore an experimental test. $\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i = (\bigvee\limits_{i=1}^{\infty} \mathsf{s}_i, \mathsf{e}_{\vee}(\mathsf{e}_i))$ is an experimental observation.
+	\item increment $n$ and go to step 2
+	\end{enumerate}
+	Suppose there exists an $i \in \mathbb{Z}^+$ such that $\mathsf{e}_i$ will terminate successfully, then the above procedure will eventually run that test for a time long enough and terminate successfully. It will do so in finite time as it will have run finitely many tests finitely many times for a finite amount of time. Therefore $\mathsf{e}_\vee(\{\mathsf{e}_i\}_{i=1}^{\infty})$ is an experimental test that is successful if and only if at least one statement in $\{\mathsf{s}_i\}_{i=1}^{n}$ is successful. So $\llparenthesis\bigvee\limits_{i=1}^{\infty} \mathsf{s}_i, \mathsf{e}_{\wedge}(\{\mathsf{e}_i\}_{i=1}^{\infty})\rrparenthesis$ is an experimental observation.
 \end{proof}
 
 \end{mathSection}
