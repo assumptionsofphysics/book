@@ -536,14 +536,16 @@ Now we need to show that if the two spaces $X$ and $Y$ are Hausdorff and second-
 We will also show that this is not in general equal to the open-open topology. 
 
 \begin{prop}
-	The topology $\mathsf{T}(\mathcal{C})$ defined above is not equal to the open-open topology for $X=Y=\mathbb{R}$ with the usual topology on $\mathbb{R}$.
+	In general, the topology $\mathsf{T}(\mathcal{C})$ defined above depends on the bases for $X$ and $Y$. 
 \end{prop}
 \begin{proof}
-	We will give an example of a set open in the open-open topology which is not open in our topology $\mathsf{T}(\mathcal{C})$; that is, we prove the open-open topology is a strict refinement. Consider the following set, open in the open-open topology:
+	We will give an example of such a case. Let $X=Y=\mathbb{R}$ with the usual topology on $\mathbb{R}$. Let $\mathcal{B}_1$ be the basis for $\mathbb{R}$ consisting of all open intervals with rational endpoints, and let $\mathcal{B}_2 = \mathcal{B}_1\cup\{(0,\pi)\}$. We find a set open in our topology $\mathsf{T}(\mathcal{C})$ using $\mathcal{B}_2$ as our basis which is not open when we use $\mathcal{B}_1$. Consider the following set, open in our topology when using $\mathcal{B}_2$:
 	$$
 	V = \{f\in\mathcal{C}| f((0,\pi))\subset(0,1)\}
 	$$
-	We show that no finite intersection and/or infinite union of sub-basis elements for $\mathsf{T}(\mathcal{C})$ will equal $V$. Henceforth, when we say ``open" subsets, unless otherwise stated, we will refer exclusively to the topology $\mathsf{T}(\mathcal{C})$. The smallest sub-basis subsets containing $V$ are those of the form:
+	This is clearly open because $(0,\pi)$ and $(0,1)$ are basis elements in $\mathcal{B}_2$. 
+	
+	Next, we show that when using $\mathcal{B}_1$ as our basis for $X=Y=\mathbb{R}$, no finite intersection and/or infinite union of sub-basis elements for $\mathsf{T}(\mathcal{C})$ will equal $V$. Henceforth, when we say ``open" subsets, unless otherwise stated, we will refer exclusively to the topology $\mathsf{T}(\mathcal{C})$ when using $\mathcal{B}_1$ for $\mathbb{R}$. The smallest sub-basis subsets containing $V$ are those of the form:
 	$$
 	B_r = \{f\in\mathcal{C} | f((0,r))\subset(0,1)\}
 	$$
@@ -553,8 +555,19 @@ We will also show that this is not in general equal to the open-open topology.
 	$$
 	S_r = \{f\in\mathcal{C} | f((0,r))\subset(0,1)\}
 	$$
-	for each $r\in \mathbb{Q}$ with $r>\pi$. Let $S = \cup_{r>\pi}S_r$. This is the largest open set in our topology which is contained in $V$. Consider the function $f(x) = x/\pi$. This is continuous and is an element of $V$. But notice $f(\pi)=1$, so $f\notin S_r$ for all $r>\pi$, hence $f\notin S$. Thus, $V$ is a set which is open in the open-open topology, but not open in our topology $\mathsf{T}(\mathcal{C})$. 
+	for each $r\in \mathbb{Q}$ with $r>\pi$. Let $S = \cup_{r>\pi}S_r$. This is the largest open set in our topology which is contained in $V$. Consider the function $f(x) = x/\pi$. This is continuous and is an element of $V$. But notice $f(\pi)=1$, so $f\notin S_r$ for all $r>\pi$, hence $f\notin S$. Thus, $V$ is a set which is open in $\mathsf{T}(\mathcal{C})$ when we use $\mathcal{B}_1$ for $X$ and $Y$, but not open when we use $\mathcal{B}_2$ for $X$ and $Y$. 
 \end{proof}
+
+TODO: add corollary environment for this one. 
+
+\begin{prop}
+The topology $\mathsf{T}(\mathcal{C})$ on the set of continuous functions $C(\mathbb{R},\mathbb{R})$ from $\mathbb{R}$ to itself is in general not equal to the open-open topology on $C(\mathbb{R},\mathbb{R})$.
+\end{prop}
+\begin{proof}
+In the proof of the previous proposition, note that the basis for the open-open topology is independent of the basis used for the underlying spaces, and in particular is a superset of the basis for $\mathsf{T}(\mathcal{C})$ when using $\mathbb{B}_2$ to construct it. Hence the open-open topology is distinct from $\mathsf{T}(\mathcal{C})$ when using the basis $\mathcal{B}_1$ on $\mathbb{R}$. 
+\end{proof}
+
+TODO: the above propositions might generalize to any uncountable, second-countable space. This will be considered during the paper-writing process later. 
 
 Thus we have shown one can start with two Hausdorff, second-countable spaces, and generate a new Hausdorff second-countable space consisting of all functions between them. Topological spaces with these properties make up our class of scientifically interesting spaces, so the space of continuous (distinguishability-preserving) functions between spaces of distinguishable quantities is again a physically distinguishable space. Because one can iterate this construction (since the relevant properties are preserved), this is a way to generate arbitrarily many new physically distinguishable spaces encoding important information about the ``lower-order" spaces (i.e. they consist of functions which encode a conversion between verifiable sets in different spaces).
 
