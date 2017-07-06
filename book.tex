@@ -59,15 +59,14 @@ TODO: in principle, time can be defined as a monoid. This would prevent circular
 We also define some basic relationships between experimental observations.
 
 \begin{defn}
-	Given two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$:
+	Given two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$ we define:
 	\begin{itemize}
 	\item \textbf{implication}: $\mathsf{o}_1 \implies \mathsf{o}_2$ if $\mathsf{o}_2$ is verified whenever $\mathsf{o}_1$ is verified
 	\item \textbf{equivalence}: $\mathsf{o}_1 = \mathsf{o}_2$ if $\mathsf{o}_1 \implies \mathsf{o}_2$ and $\mathsf{o}_2 \implies \mathsf{o}_1$
-	\item \textbf{mutual exclusion}: $\mathsf{o}_1 \asymp \mathsf{o}_2$ ($\mathsf{o}_1$ excludes $\mathsf{o}_2$) if one is not verified whenever the other one is
+	\item \textbf{mutual exclusion}: $\mathsf{o}_1 \me \mathsf{o}_2$ ($\mathsf{o}_1$ excludes $\mathsf{o}_2$) if one is not verified whenever the other one is
 	\end{itemize}
+    The negation will be noted by $\nimplies$, $\neq$ , $\nme$ respectively.
 \end{defn}
-TODO: add a symbol for ``not mutually exclusive". I couldn't find the $\asymp$ with a slash through it. 
-
 
 A note on the language: even if $\mathsf{o}_1$ implies $\mathsf{o}_2$ this does not give us a way to verify $\mathsf{o}_2$. There may be cases where the $\mathsf{o}_2$ is verified and $\mathsf{o}_1$ is not. Therefore it is improper to say that one observation verifies another: only experimental tests verify observations.
 
@@ -210,7 +209,7 @@ We will now use our notions of experimental observations and experimental domain
 \begin{defn}
 A \textbf{generalized exact outcome} for $\mathcal{S}$ is a sequence of experimental observations $\mathcal{P} = \{\mathsf{o}_i\}_{i=1}^{\infty}\subset\mathcal{S}$ with the following property. For all experimental observations $\mathsf{o}\in\mathcal{S}$, there exists some positive integer $N$ such that for all integers $n>N$, one of the following must happen:
 \begin{enumerate}
-\item $\mathsf{o}_n \asymp \mathsf{o}$ 
+\item $\mathsf{o}_n \me \mathsf{o}$ 
 \item $\mathsf{o}_n \implies \mathsf{o}$
 \end{enumerate}
 \end{defn}
@@ -254,7 +253,7 @@ In light of the above definition, we will refer to experimental observations eit
 Let $\mathcal{P}=\{\mathsf{o}_i\}_{i=1}^{\infty}$ be an exact outcome which is an element of observation $\mathsf{o}$. Suppose $\mathcal{P}'$ is another exact outcome $\mathcal{P}'=\{\mathsf{o}'_j\}_{j=1}^{\infty}$ such that $\mathcal{P}\sim\mathcal{P}'$. Then $\mathcal{P}'\in\mathsf{o}$. 
 \end{prop}
 \begin{proof}
-Suppose not - then we must be in case (1) of the definition of (generalized) exact outcome. Then there exists some $N_1$ such that for all $n>N_1$, we have $\mathsf{o}'_n\asymp\mathsf{o}$. By hypothesis, there exists some $N_2$ such that for all $m>N_2$, we have $\mathsf{o}_m\implies\mathsf{o}$. Let $N=\max(N_1,N_2)$. But then for all $k>N$, we have that $\mathsf{o}_k$ and $\mathsf{o}'_k$ are not mutually exclusive. This contradicts $\mathsf{o}'_k\asymp\mathsf{o}$. 
+Suppose not - then we must be in case (1) of the definition of (generalized) exact outcome. Then there exists some $N_1$ such that for all $n>N_1$, we have $\mathsf{o}'_n\me\mathsf{o}$. By hypothesis, there exists some $N_2$ such that for all $m>N_2$, we have $\mathsf{o}_m\implies\mathsf{o}$. Let $N=\max(N_1,N_2)$. But then for all $k>N$, we have that $\mathsf{o}_k \nme \mathsf{o}'_k$. This contradicts $\mathsf{o}'_k\me\mathsf{o}$. 
 \end{proof}
 
 In particular, we immediately extend the definition of ``exact outcome containment" for elements of $\mathcal{S}$ to containment of equivalence classes of exact outcomes in $\mathcal{C}/\sim$. By the above, we can use containment of an individual exact outcome interchangeably with its equivalence class. In practice, most of our work will use individual exact outcomes representing an equivalence class, while the technical definitions will use their equivalence classes.
@@ -303,7 +302,7 @@ Next, let $\mathsf{o}_1,\mathsf{o}_2\in\mathcal{S}$. Then by the previous propos
 
 This proves that $(X,\mathcal{S})$ is a topology. Further, we can see that $\mathcal{B}$ is a countable basis for the topology (because conjunction and disjunction correspond to intersection and union), so it is second-countable. Next, we prove that $(X,\mathcal{S})$ is Hausdorff. 
 
-Let $\mathcal{P} = \{\mathsf{o}_i\}_{i=1}^{\infty}$ and $\mathcal{P}' = \{\mathsf{o}'_i\}_{j=1}^{\infty}$ be two non-equivalent exact outcomes. Then there exist some $m,n$ such that $\mathsf{o}_m\asymp\mathsf{o}'_n$. But then $\mathcal{P}\in\mathsf{o}_m$ and $\mathcal{P}'\in\mathsf{o}'_n$, which are two disjoint sets in $\mathcal{S}$. This completes the proof. 
+Let $\mathcal{P} = \{\mathsf{o}_i\}_{i=1}^{\infty}$ and $\mathcal{P}' = \{\mathsf{o}'_i\}_{j=1}^{\infty}$ be two non-equivalent exact outcomes. Then there exist some $m,n$ such that $\mathsf{o}_m\me\mathsf{o}'_n$. But then $\mathcal{P}\in\mathsf{o}_m$ and $\mathcal{P}'\in\mathsf{o}'_n$, which are two disjoint sets in $\mathcal{S}$. This completes the proof. 
 \end{proof}
 
 
