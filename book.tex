@@ -76,6 +76,7 @@ Lastly, we define a special observation.
 	The \textbf{null observation} is any experimental observation that is never verified (i.e. the experimental test will never terminate successfully). 
 \end{defn}
 
+Note that the null observation is mutually exclusive with every experimental observation, including itself.
 
 \end{mathSection}
 
@@ -157,27 +158,29 @@ We define the following logical operations on experimental observations. Taken a
 
 \section{Experimental domain}
 
+\begin{mathSection}
+
 \begin{defn}
-	An \textbf{generalized experimental domain} is a set of observations closed under finite conjunction and countable disjunction. Any subset that can generate all others via finite conjunction and countable disjunction is called a \textbf{sub-basis} of the domain. A \textbf{basis} is a subset of the observations which can generate all others by countable disjunctions. 
+	An \textbf{experimental domain} is a set of observations closed under finite conjunction and countable disjunction such that all observations can be tested in infinite time. 
+\end{defn}
+
+\begin{defn}
+	A \textbf{sub-basis} of an experimental domain is any subset that can generate all others via finite conjunction and countable disjunction. A \textbf{basis} of an experimental domain is any subset that can generate all others by countable disjunctions. 
 \end{defn}
 
 Clearly, given a sub-basis one can generate a basis by taking all finite conjunctions of the observations. Note that any infinite sub-basis will generate a basis of the same cardinality. We claim that it is only possible to verify all members of an experimental domain with a countable (sub-)basis even given infinite time. 
 
 \begin{prop}
-Let $\mathcal{S}$ be an experimental domain. Then it is possible to verify all experimental observations $\mathsf{o}\in S$ in infinite time if and only if there exists a countable basis (equivalently, sub-basis) $\mathcal{B}$ of $\mathcal{S}$. 
+Let $\mathcal{S}$ be an experimental domain. Then there exists a countable basis (equivalently, sub-basis) $\mathcal{B}$ of $\mathcal{S}$.
 \end{prop}
+
 \begin{proof}
 If there exists a countable basis $\mathcal{B}$, then given infinite time one can test all observations in $\mathcal{B}$. Given all truth values for elements of the basis, one can deduce the truth values for the other observations in $\mathcal{S}$ (again using infinite time) by computing the appropriate conjunctions and disjunctions. 
 
-If there does not exist a countable basis, then by definition there does not exist a sequence of experimental observations in $\mathcal{S}$ from which one can deduce all other observations in $\mathcal{S}$. Hence it is impossible to verify all members of $\mathcal{S}$.
+If there does not exist a countable basis, then by definition there does not exist a sequence of experimental observations in $\mathcal{S}$ from which one can deduce all other observations in $\mathcal{S}$. Hence it is impossible to test all members of $\mathcal{S}$.
 \end{proof}
 
-In light of the above result, we have the following definition, on which the remainder of this chapter will focus. 
-
-\begin{defn}
-An \textbf{experimental domain} is a set of observations closed under finite conjunction and countable disjunction which has a countable basis and contains the empty observation. 
-\end{defn}
-
+\end{mathSection}
 
 \section{Experimental identification}
 
