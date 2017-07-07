@@ -204,9 +204,52 @@ To sum up, let $X$ be a set of elements and let $\mathsf{T}$ be the collection o
 \end{itemize}
 This is the mathematical definition of a topology: a set of sets that contains both the whole set and the empty set, that is closed under finite intersection and under countable union. 
 
+\begin{mathSection}
 
+We will now use our notions of experimental observations and experimental domains to construct a new space with a topology which will more rigorously capture our notion of possible answers to an experimental domain. We will begin with a given experimental domain $\mathcal{S}$.
 
-We will now use our notions of experimental observations and experimental domains to construct a new space with a topology which will more rigorously capture our notion of ``exact" possibilities. We will begin with a given experimental domain $\mathcal{S}$. 
+\begin{defn}
+	A \textbf{possible answer} for $\mathcal{S}$, or \textbf{possibility}, is a set of experimental observations $x \subseteq \mathcal{S}$ such that:
+	\begin{enumerate}
+		\item $\mathsf{o_1} \in x$ if and only if $\mathsf{o_1} \nme \mathsf{o}_2$ for all $\mathsf{o_2} \in x$ 
+		\item $\mathsf{o_1} \notin x$ if and only if $\mathsf{o_1} \me \mathsf{o}_2$ for some $\mathsf{o_2} \in x$ 
+	\end{enumerate}
+\end{defn}
+
+This represents a maximal set of experimental observations that can be verified without contradiction.
+
+\begin{prop}
+	Let $x$ be a possible answer for $\mathcal{S}$. If $\mathsf{o_1} \in x$ and $\mathsf{o_1} \implies \mathsf{o_2}$ then $\mathsf{o_2} \in x$. If $\mathsf{o_1}, \mathsf{o_2} \in x$ then $\mathsf{o_1} \cap \mathsf{o_2} \in x$.
+\end{prop}
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{defn}
+	The \textbf{set of possible answers} $X$, or \textbf{possibilities}, for an experimental domain is the collection of all possibile answers. An experimental domain is \textbf{trivial} if it admits less than two possibilities (i.e. $|X| < 2$).
+\end{defn}
+
+\begin{defn}
+	Let $\mathcal{S}$ be an experimental domain and $X$ its possibilities. For each experimental observation $\mathsf{o} \in \mathcal{S}$ we define its \textbf{compatible possibilities} $U(\mathsf{o}) \subseteq X$ as those that contain $\mathsf{o}$ as part of the answer. That is: $U(\mathsf{o}) = \{x \in X \, | \, \mathsf{o} \in x\}$.
+\end{defn}
+
+\begin{prop}
+	Let $U : \mathcal{S} \rightarrow 2^X$ the function that maps an observation to its compatible possibilities. Let $\{\mathsf{o}_i\}_{i=1}^{n} \subseteq \mathcal{S}$ a finite collection of experimental observations. Then we have $U(\bigwedge\limits_{i=1}^{n} \mathsf{o}_i) = \bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$.
+\end{prop}
+\begin{proof}
+	Let $\mathsf{o} = \bigwedge\limits_{i=1}^{n} \mathsf{o}_i$. Suppose $x \in U(\bigwedge\limits_{i=1}^{n} \mathsf{o}_i)$. Then $\bigwedge\limits_{i=1}^{n} \mathsf{o}_i \in x$. Since every $\mathsf{o} \implies \mathsf{o}_i$ for all $i$ then $\mathsf{o}_i \in x$ for all $i$. Then $x \in U(\mathsf{o}_i)$: $x \in\bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$. Now suppose $x \in\bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$. Then $\mathsf{o}_i \in x$ for all $i$. Then $\mathsf{o} = \bigwedge\limits_{i=1}^{n} \mathsf{o}_i \in x$: $x \in U(\bigwedge\limits_{i=1}^{n} \mathsf{o}_i)$.
+\end{proof}
+
+\begin{prop}
+	Let $U : \mathcal{S} \rightarrow 2^X$ the function that maps an observation to its compatible possibilities. Let $\{\mathsf{o}_i\}_{i=1}^{\infty} \subseteq \mathcal{S}$ a countable collection of experimental observations. Then we have $U(\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i) = \bigcup\limits_{i=1}^{\infty} U (\mathsf{o}_i)$.
+\end{prop}
+\begin{proof}
+	Let $\mathsf{o} = \bigvee\limits_{i=1}^{\infty} \mathsf{o}_i$. Suppose $x \in U(\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i)$. Then $\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i \in x$. Since every $\mathsf{o} \implies \mathsf{o}_i$ for all $i$ then $\mathsf{o}_i \in x$ for all $i$. Then $x \in U(\mathsf{o}_i)$: $x \in\bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$.
+	
+	Now suppose $x \in\bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$. Then $\mathsf{o}_i \in x$ for all $i$. Then $\mathsf{o} = \bigwedge\limits_{i=1}^{n} \mathsf{o}_i \in x$: $x \in U(\bigwedge\limits_{i=1}^{n} \mathsf{o}_i)$.
+\end{proof}
+
+END NEW DEFINITIONS
 
 \begin{defn}
 A \textbf{generalized exact outcome} for $\mathcal{S}$ is a sequence of experimental observations $\mathcal{P} = \{\mathsf{o}_i\}_{i=1}^{\infty}\subset\mathcal{S}$ with the following property. For all experimental observations $\mathsf{o}\in\mathcal{S}$, there exists some positive integer $N$ such that for all integers $n>N$, one of the following must happen:
@@ -306,6 +349,8 @@ This proves that $(X,\mathcal{S})$ is a topology. Further, we can see that $\mat
 
 Let $\mathcal{P} = \{\mathsf{o}_i\}_{i=1}^{\infty}$ and $\mathcal{P}' = \{\mathsf{o}'_i\}_{j=1}^{\infty}$ be two non-equivalent exact outcomes. Then there exist some $m,n$ such that $\mathsf{o}_m\me\mathsf{o}'_n$. But then $\mathcal{P}\in\mathsf{o}_m$ and $\mathcal{P}'\in\mathsf{o}'_n$, which are two disjoint sets in $\mathcal{S}$. This completes the proof. 
 \end{proof}
+
+\end{mathSection}
 
 
 \section{Example of an Experimental Domain}
