@@ -43,7 +43,7 @@ To formally capture experimentally verifiable statements, we introduce the follo
 \end{defn}
 
 \begin{defn}
-	An \textbf{experimental test} $\mathsf{e}$ is a repeatable procedure that can terminate successfully in a finite amount of time and that can be stopped at any time.
+	An \textbf{experimental test} $\mathsf{e}$ is a repeatable procedure (i.e. it can be restarted and stopped an arbitrary number of times) that, if successful, terminates in a finite amount of time.
 \end{defn}
 
 TODO: in principle, time can be defined as a monoid. This would prevent circular arguments to some extent.
@@ -61,11 +61,11 @@ We also define some basic relationships between experimental observations.
 \begin{defn}
 	Given two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$ we define:
 	\begin{itemize}
-	\item \textbf{implication}: $\mathsf{o}_1 \implies \mathsf{o}_2$ if $\mathsf{o}_2$ is verified whenever $\mathsf{o}_1$ is verified
-	\item \textbf{equivalence}: $\mathsf{o}_1 = \mathsf{o}_2$ if $\mathsf{o}_1 \implies \mathsf{o}_2$ and $\mathsf{o}_2 \implies \mathsf{o}_1$
-	\item \textbf{mutual exclusion}: $\mathsf{o}_1 \me \mathsf{o}_2$ ($\mathsf{o}_1$ excludes $\mathsf{o}_2$) if one is not verified whenever the other one is
+	\item \textbf{implication}: $\mathsf{o}_1 \imp \mathsf{o}_2$ if $\mathsf{o}_2$ is verified whenever $\mathsf{o}_1$ is verified
+	\item \textbf{equivalence}: $\mathsf{o}_1 = \mathsf{o}_2$ if $\mathsf{o}_1 \imp \mathsf{o}_2$ and $\mathsf{o}_2 \imp \mathsf{o}_1$
+	\item \textbf{compatibility}: $\mathsf{o}_1 \comp \mathsf{o}_2$ ($\mathsf{o}_1$ is compatible with $\mathsf{o}_2$) if $\mathsf{o}_1$ and $\mathsf{o}_2$ can jointly be verified
 	\end{itemize}
-    The negation will be noted by $\nimplies$, $\neq$ , $\nme$ respectively.
+    The negation will be noted by $\nimp$, $\neq$ , $\ncomp$ respectively.
 \end{defn}
 
 A note on the language: even if $\mathsf{o}_1$ implies $\mathsf{o}_2$ this does not give us a way to verify $\mathsf{o}_2$. There may be cases where the $\mathsf{o}_2$ is verified and $\mathsf{o}_1$ is not. Therefore it is improper to say that one observation verifies another: only experimental tests verify observations.
@@ -76,7 +76,7 @@ Lastly, we define a special observation.
 	The \textbf{null observation} is any experimental observation that is never verified (i.e. the experimental test will never terminate successfully). 
 \end{defn}
 
-Note that the null observation is mutually exclusive with every experimental observation, including itself.
+Note that a null observations is incompatible with every experimental observation, including itself, since it can never be verified.
 
 \end{mathSection}
 
