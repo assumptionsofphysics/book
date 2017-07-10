@@ -206,27 +206,27 @@ This is the mathematical definition of a topology: a set of sets that contains b
 
 \begin{mathSection}
 
-We will now use our notions of experimental observations and experimental domains to construct a new space with a topology which will more rigorously capture our notion of possible answers to an experimental domain. We will begin with a given experimental domain $\mathcal{S}$.
+We will now use our notions of experimental observations and experimental domains to construct a new space with a topology which will more rigorously capture our notion of possibilities for an experimental domain. We will begin with a given experimental domain $\mathcal{S}$.
 
 \begin{defn}
-	A \textbf{possible answer} for $\mathcal{S}$, or \textbf{possibility}, is a set of experimental observations $x \subseteq \mathcal{S}$ such that:
+	A \textbf{possibility} for $\mathcal{S}$ is a subset of experimental observations compatible with each other but incompatible with the rest of the domain. That is $x \subseteq \mathcal{S}$ such that:
 	\begin{enumerate}
-		\item $\mathsf{o_1} \in x$ if and only if $\mathsf{o_1} \nme \mathsf{o}_2$ for all $\mathsf{o_2} \in x$ 
-		\item $\mathsf{o_1} \notin x$ if and only if $\mathsf{o_1} \me \mathsf{o}_2$ for some $\mathsf{o_2} \in x$ 
+		\item $\mathsf{o_1} \in x$ if and only if $\mathsf{o_1} \comp \mathsf{o}_2$ for all $\mathsf{o_2} \in x$ 
+		\item $\mathsf{o_1} \notin x$ if and only if $\mathsf{o_1} \ncomp \mathsf{o}_2$ for some $\mathsf{o_2} \in x$ 
 	\end{enumerate}
 \end{defn}
 
 This represents a maximal set of experimental observations that can be verified without contradiction.
 
 \begin{prop}
-	Let $x$ be a possible answer for $\mathcal{S}$. If $\mathsf{o_1} \in x$ and $\mathsf{o_1} \implies \mathsf{o_2}$ then $\mathsf{o_2} \in x$. If $\mathsf{o_1}, \mathsf{o_2} \in x$ then $\mathsf{o_1} \cap \mathsf{o_2} \in x$.
+	Let $x$ be a possibility for $\mathcal{S}$. If $\mathsf{o_1} \in x$ and $\mathsf{o_1} \imp \mathsf{o_2} \in \mathcal{S}$ then $\mathsf{o_2} \in x$. If $\mathsf{o_1}, \mathsf{o_2} \in x$ then $\mathsf{o_1} \cap \mathsf{o_2} \in x$. If $\mathsf{o_1} \cup \mathsf{o_2} \in x$ then $\mathsf{o_1} \in x$ and/or $\mathsf{o_2} \in x$.
 \end{prop}
 \begin{proof}
 	TODO
 \end{proof}
 
 \begin{defn}
-	The \textbf{set of possible answers} $X$, or \textbf{possibilities}, for an experimental domain is the collection of all possibile answers. An experimental domain is \textbf{trivial} if it admits less than two possibilities (i.e. $|X| < 2$).
+	The \textbf{set of possibilities} $X$ for an experimental domain is the collection of all possibilities. An experimental domain is \textbf{trivial} if it admits less than two possibilities (i.e. $|X| < 2$).
 \end{defn}
 
 \begin{defn}
@@ -237,16 +237,14 @@ This represents a maximal set of experimental observations that can be verified 
 	Let $U : \mathcal{S} \rightarrow 2^X$ the function that maps an observation to its compatible possibilities. Let $\{\mathsf{o}_i\}_{i=1}^{n} \subseteq \mathcal{S}$ a finite collection of experimental observations. Then we have $U(\bigwedge\limits_{i=1}^{n} \mathsf{o}_i) = \bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$.
 \end{prop}
 \begin{proof}
-	Let $\mathsf{o} = \bigwedge\limits_{i=1}^{n} \mathsf{o}_i$. Suppose $x \in U(\bigwedge\limits_{i=1}^{n} \mathsf{o}_i)$. Then $\bigwedge\limits_{i=1}^{n} \mathsf{o}_i \in x$. Since every $\mathsf{o} \implies \mathsf{o}_i$ for all $i$ then $\mathsf{o}_i \in x$ for all $i$. Then $x \in U(\mathsf{o}_i)$: $x \in\bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$. Now suppose $x \in\bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$. Then $\mathsf{o}_i \in x$ for all $i$. Then $\mathsf{o} = \bigwedge\limits_{i=1}^{n} \mathsf{o}_i \in x$: $x \in U(\bigwedge\limits_{i=1}^{n} \mathsf{o}_i)$.
+	Let $\mathsf{o} = \bigwedge\limits_{i=1}^{n} \mathsf{o}_i$. Suppose $x \in U(\mathsf{o})$. Then $\mathsf{o} \in x$. Since $\mathsf{o} \imp \mathsf{o}_i$ for all $i$ then $\mathsf{o}_i \in x$ for all $i$. Then $x \in U(\mathsf{o}_i)$ for all $i$: $x \in\bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$. Conversely suppose $x \in\bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$. Then $\mathsf{o}_i \in x$ for all $i$. Then $\mathsf{o} = \bigwedge\limits_{i=1}^{n} \mathsf{o}_i \in x$: $x \in U(\bigwedge\limits_{i=1}^{n} \mathsf{o}_i)$.
 \end{proof}
 
 \begin{prop}
 	Let $U : \mathcal{S} \rightarrow 2^X$ the function that maps an observation to its compatible possibilities. Let $\{\mathsf{o}_i\}_{i=1}^{\infty} \subseteq \mathcal{S}$ a countable collection of experimental observations. Then we have $U(\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i) = \bigcup\limits_{i=1}^{\infty} U (\mathsf{o}_i)$.
 \end{prop}
 \begin{proof}
-	Let $\mathsf{o} = \bigvee\limits_{i=1}^{\infty} \mathsf{o}_i$. Suppose $x \in U(\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i)$. Then $\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i \in x$. Since every $\mathsf{o} \implies \mathsf{o}_i$ for all $i$ then $\mathsf{o}_i \in x$ for all $i$. Then $x \in U(\mathsf{o}_i)$: $x \in\bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$.
-	
-	Now suppose $x \in\bigcap\limits_{i=1}^{n} U (\mathsf{o}_i)$. Then $\mathsf{o}_i \in x$ for all $i$. Then $\mathsf{o} = \bigwedge\limits_{i=1}^{n} \mathsf{o}_i \in x$: $x \in U(\bigwedge\limits_{i=1}^{n} \mathsf{o}_i)$.
+	Let $\mathsf{o} = \bigvee\limits_{i=1}^{\infty} \mathsf{o}_i$. Suppose $x \in U(\mathsf{o})$. Then $\mathsf{o} \in x$. Since $\mathsf{o} = \bigvee\limits_{i=1}^{\infty} \mathsf{o}_i$ for at least some $i$ we must have $\mathsf{o}_i \in x$. Then $x \in U(\mathsf{o}_i)$ for some $i$: $x \in\bigcup\limits_{i=1}^{\infty} U (\mathsf{o}_i)$. Conversely suppose $x \in\bigcup\limits_{i=1}^{\infty} U (\mathsf{o}_i)$. Then $x \in U(\mathsf{o}_i)$ and $\mathsf{o}_i \in x$ for some $i$.  Since $\mathsf{o}_i \imp \mathsf{o}$ we have $\mathsf{o} \in x$: $x \in U(\bigvee\limits_{i=1}^{\infty} \mathsf{o}_i)$.
 \end{proof}
 
 END NEW DEFINITIONS
