@@ -5,7 +5,7 @@
 \input{formatting} % Loads the book formatting
 
 \begin{document}
-	
+
 \chapter{Experimental observations and distinguishability}
 
 In this chapter we want to establish the basic building blocks that are necessary to capture the nature of scientific descriptions. While mathematics finds much of its foundation in classical logic and set theory, we want to find equivalent ideas for science. In essence, we need to define what is a scientific truth and what it means to define elements and collections in the physical world.
@@ -19,6 +19,64 @@ Then we define \textbf{experimental characterization/identification/categorizati
 Lastly, we define \textbf{experimental relationships} between experimentally distinguishable objects. As these need to be compatible with the experimental distinguishability of the objects, the associated mathematical functions must be compatible with the topology: they must be \textbf{continuous functions}. These, a set, are themselves experimentally distinguishable which means that we can describe relationships of arbitrarily higher-order (i.e. functions of functions of functions ...) without ever losing experimental distinguishability.
 
 The overall result is that all sets of objects that are of scientific interest are mathematically described by a Hausdorff and second countable topological space. All relationships that are of scientific interest are continuous functions as defined on the respective topologies. This explains at the core why topological space and continuous functions are indeed so prevalent within scientific theories.
+
+\chapter{Classical logic}
+
+
+\begin{mathSection}
+
+\begin{defn}
+	A \textbf{statement} $\mathsf{s}$ is a declarative sentence that is either true or false.
+\end{defn}
+
+\begin{defn}
+	A \textbf{tautology} $\top$ is any statement that is always true.
+\end{defn}
+
+\begin{defn}
+	A \textbf{contradiction} $\bot$ is any statement that is always false.
+\end{defn}
+
+\begin{defn}
+	Two statements $\mathsf{s}_1$ and $\mathsf{s}_2$ are \textbf{logically equivalent} $\mathsf{s}_1 \equiv \mathsf{s}_2$ if they have the same logical content. That is, if they always have the same truth value. They are inequivalent $\mathsf{s}_1 \nequiv \mathsf{s}_2$ if the opposite holds.
+\end{defn}
+
+Note that logical equivalence compares the content of the statements, not their truth value. For example, \emph{``the mass of the electron is less and greater than 1 g"} $\equiv \bot$ as it is a contradiction while \emph{``the mass of the electron is less than 1 g"}$\nequiv \bot$ as it is not a contradiction: it just happens to be false. Material equivalence, instead, compares the truth value but it is not needed in this work.
+
+
+\begin{defn}
+	The \textbf{negation or logical NOT} of a statement $\mathsf{s}$ is the statement $\NOT\mathsf{s}$ that is true when $\mathsf{s}$ is false and is false when $\mathsf{s}$ is true.
+\end{defn}
+
+\begin{defn}
+	The \textbf{conjunction or logical AND} of two statements $\mathsf{s}_1$ and $\mathsf{s}_2$ is the statement $\mathsf{s}_1 \AND \mathsf{s}_2$ that is true only when both $\mathsf{s}_1$ and $\mathsf{s}_2$ are true.
+\end{defn}
+
+\begin{defn}
+	The \textbf{disjunction or logical OR} of two statements $\mathsf{s}_1$ and $\mathsf{s}_2$ is the statement $\mathsf{s}_1 \OR \mathsf{s}_2$ that is true when at least  $\mathsf{s}_1$ or $\mathsf{s}_2$ is true.
+\end{defn}
+
+Properties of these operators can be expressed in terms of logical equivalence. For example:
+\begin{itemize}
+	\item Double negation law: $\NOT\NOT\mathsf{s}\equiv\mathsf{s}$
+	\item Commutative law: $\mathsf{s}_1 \AND \mathsf{s}_2\equiv\mathsf{s}_2 \AND \mathsf{s}_1$
+	\item De Morgan's law : $\mathsf{s}_1 \AND \mathsf{s}_2\equiv \NOT(\NOT\mathsf{s}_1 \OR \NOT\mathsf{s}_2)$.
+\end{itemize}
+
+So far we have only introduced standard elements of classical logic. Now we do something different: we want to introduce some relationships that allow us to compare the content of two statements. These will be important later to classify and organize groups of statements. 
+
+\begin{defn}
+	Given two statement $\mathsf{s}_1$ and $\mathsf{s}_2$, we say that:
+	\begin{itemize}
+		\item $\mathsf{s}_1$ \textbf{is narrower than} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \subseteq \mathsf{s}_2$) if $\mathsf{s}_2$ is true whenever $\mathsf{s}_1$ is true. That is: $\mathsf{s}_1 \wedge \neg \mathsf{s}_2 \equiv \bot$.
+		\item $\mathsf{s}_1$ \textbf{is broader than} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \supseteq \mathsf{s}_2$) if $\mathsf{s}_2 \subseteq \mathsf{s}_1$.
+		\item $\mathsf{s}_1$ \textbf{is compatible to} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \comp \mathsf{s}_2$) if they can be true at the same time. That is: $\mathsf{s}_1 \wedge \mathsf{s}_2 \nequiv \bot$.
+		\item $\mathsf{s}_1$ \textbf{is independent from} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \indep \mathsf{s}_2$) if the truth of one does not implies the truth of the other. That is: $\mathsf{s}_1 \comp \mathsf{s}_2 \AND \NOT(\mathsf{s}_1 \subseteq \mathsf{s}_2) \AND \NOT(\mathsf{s}_2 \subseteq \mathsf{s}_1)$.
+	\end{itemize}
+	The negation of these properties will be noted by $\nsubseteq$, $\nsupseteq$ , $\ncomp$, $\nindep$ respectively.
+\end{defn}
+
+\end{mathSection}
 
 \section{Experimental observations}
 
@@ -35,10 +93,6 @@ So what is the property that allows a statement to be studied scientifically? Th
 \begin{mathSection}
 
 To formally capture the idea of experimentally verifiable statements, we introduce the following definitions.
-
-\begin{defn}
-	A \textbf{statement} $\mathsf{s}$ is a declarative sentence that is either true or false, as in classical logic.
-\end{defn}
 
 \begin{defn}
 	An \textbf{experimental test} $\mathsf{e}$ is a repeatable procedure (i.e. it can be restarted and stopped an arbitrary number of times) that, if successful, terminates in a finite amount of time.
@@ -66,38 +120,10 @@ These relationships are built into meaning of the statements themselves regardle
 
 \begin{mathSection}
 
-We first define two special kind of statements.
+We can extend the operations that compare the content of statements to the experimental observations.
 
 \begin{defn}
-	A \textbf{tautology} $\top$ is any statement that is always true.
-\end{defn}
-
-\begin{defn}
-	A \textbf{contradiction} $\bot$ is any statement that is always false.
-\end{defn}
-
-\begin{defn}
-	Two statements $\mathsf{s}_1$ and $\mathsf{s}_2$ are \textbf{logically equivalent} $\mathsf{s}_1 \equiv \mathsf{s}_2$ if they have the same logical content. That is, if they always have the same truth value. They are inequivalent $\mathsf{s}_1 \nequiv \mathsf{s}_2$ if the opposite holds.
-\end{defn}
-
-For example, \emph{``That animal is a cat or not a cat"}$\equiv \top$ as it is always true; \emph{``That animal is a cat and not a cat"}$\equiv \bot$ as it is always false. \emph{``That animal is a cat" $\nequiv \top$} as it can be false.
-
-Given this notion of equivalence, we can define the following:
-
-\begin{defn}
-	Given two statement $\mathsf{s}_1$ and $\mathsf{s}_2$, we say that:
-	\begin{itemize}
-	\item $\mathsf{s}_1$ \textbf{is narrower than} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \subseteq \mathsf{s}_2$) if $\mathsf{s}_2$ is true whenever $\mathsf{s}_1$ is true. That is: $\mathsf{s}_1 \wedge \neg \mathsf{s}_2 \equiv \bot$.
-	\item $\mathsf{s}_1$ \textbf{is broader than} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \supseteq \mathsf{s}_2$) if $\mathsf{s}_2 \subseteq \mathsf{s}_1$.
-	\item $\mathsf{s}_1$ \textbf{is compatible to} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \comp \mathsf{s}_2$) if they can be true at the same time. That is: $\mathsf{s}_1 \wedge \mathsf{s}_2 \nequiv \bot$.
-	\end{itemize}
-    The negation of these properties will be noted by $\nsubseteq$, $\nsupseteq$ , $\ncomp$ respectively.
-\end{defn}
-
-Though these properties are defined on the statements, they can be extended to experimental observations as well.
-
-\begin{defn}
-	Two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$, $\mathsf{o}_1$ is equivalent to, inequivalent to, compatible to, narrower than, not narrower than, broader then, not broader than, compatible to or incompatible to $\mathsf{o}_2$ if the respective statements satisfy the respective relationship.
+	Two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$, $\mathsf{o}_1$ is equivalent to, inequivalent to, compatible to, narrower than, not narrower than, broader then, not broader than, compatible to, incompatible to, independent from or not independent from $\mathsf{o}_2$ if the respective statements satisfy the respective relationship.
 \end{defn}
 
 \end{mathSection}
