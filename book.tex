@@ -51,28 +51,54 @@ To formally capture the idea of experimentally verifiable statements, we introdu
 \begin{defn}
 	An \textbf{experimental counter-observation} is a tuple $\mathsf{o}^c= \llbracket \mathsf{s}, \mathsf{e} \rrbracket$ composed by a statement $\mathsf{s}$ and an experimental test $\mathsf{e}$ such that the statement is false if and only if the experimental test is always successful. The experimental counter-observation is \textbf{refuted} if the statement is false.
 \end{defn}
+\end{mathSection}
 
-Experimental observations are the core object of the scientific discourse. We now define some basic relationships between experimental observations.
+Experimental tests, though, are not the only way we can use to prove scientific statements to be wrong. Consider these statements and their relationship to each other:
+\begin{enumerate}
+	\item \emph{``that animal is a cat"}
+	\item \emph{``that animal is a mammal"}
+	\item \emph{``that animal is a dog"}
+	\item \emph{``that animal is a black"}
+\end{enumerate}
+The second one is a narrower statement of the first, and it will be true whenever the first is true. The third one is incompatible with the first, it will be false whenever the first is true. The fourth one is independent of the first, it will be true or false regardless of whether the first is true.
+
+These relationships are built into meaning of the statements themselves regardless of their truth. Our scientific description must be consistent with these relationship or it would be meaningless and contradictory.
+
+\begin{mathSection}
+
+We first define two special kind of statements.
 
 \begin{defn}
-	Given two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$ we define:
+	A \textbf{tautology} $\top$ is any statement that is always true.
+\end{defn}
+
+\begin{defn}
+	A \textbf{contradiction} $\bot$ is any statement that is always false.
+\end{defn}
+
+\begin{defn}
+	Two statements $\mathsf{s}_1$ and $\mathsf{s}_2$ are \textbf{logically equivalent} $\mathsf{s}_1 \equiv \mathsf{s}_2$ if they have the same logical content. That is, if they always have the same truth value. They are inequivalent $\mathsf{s}_1 \nequiv \mathsf{s}_2$ if the opposite holds.
+\end{defn}
+
+For example, \emph{``That animal is a cat or not a cat"}$\equiv \top$ as it is always true; \emph{``That animal is a cat and not a cat"}$\equiv \bot$ as it is always false. \emph{``That animal is a cat" $\nequiv \top$} as it can be false.
+
+Given this notion of equivalence, we can define the following:
+
+\begin{defn}
+	Given two statement $\mathsf{s}_1$ and $\mathsf{s}_2$, we say that:
 	\begin{itemize}
-	\item \textbf{implication}: $\mathsf{o}_1 \imp \mathsf{o}_2$ ($\mathsf{o}_1$ implies $\mathsf{o}_2$) if $\mathsf{o}_2$ is always verified whenever $\mathsf{o}_1$ is verified
-	\item \textbf{equivalence}: $\mathsf{o}_1 = \mathsf{o}_2$ ($\mathsf{o}_1$ is equal to $\mathsf{o}_2$) if $\mathsf{o}_1 \imp \mathsf{o}_2$ and $\mathsf{o}_2 \imp \mathsf{o}_1$
-	\item \textbf{compatibility}: $\mathsf{o}_1 \comp \mathsf{o}_2$ ($\mathsf{o}_1$ is compatible with $\mathsf{o}_2$) if there exists a case in which $\mathsf{o}_1$ and $\mathsf{o}_2$ are jointly verified
+	\item $\mathsf{s}_1$ \textbf{is narrower than} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \subseteq \mathsf{s}_2$) if $\mathsf{s}_2$ is true whenever $\mathsf{s}_1$ is true. That is: $\mathsf{s}_1 \wedge \neg \mathsf{s}_2 \equiv \bot$.
+	\item $\mathsf{s}_1$ \textbf{is broader than} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \supseteq \mathsf{s}_2$) if $\mathsf{s}_2 \subseteq \mathsf{s}_1$.
+	\item $\mathsf{s}_1$ \textbf{is compatible to} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \comp \mathsf{s}_2$) if they can be true at the same time. That is: $\mathsf{s}_1 \wedge \mathsf{s}_2 \nequiv \bot$.
 	\end{itemize}
-    The negation of these properties will be noted by $\nimp$, $\neq$ , $\ncomp$ respectively.
+    The negation of these properties will be noted by $\nsubseteq$, $\nsupseteq$ , $\ncomp$ respectively.
 \end{defn}
 
-A note on the language: even if $\mathsf{o}_1$ implies $\mathsf{o}_2$ this does not give us a way to verify $\mathsf{o}_2$. There may be cases where the $\mathsf{o}_2$ is verified and $\mathsf{o}_1$ is not. Therefore it is improper to say that one observation verifies another: only experimental tests verify observations.
-
-Lastly, we define a special type of observation. 
+Though these properties are defined on the statements, they can be extended to experimental observations as well.
 
 \begin{defn}
-	The \textbf{null observation} is any experimental observation that is never verified (i.e. the experimental test will never terminate successfully). 
+	Two experimental observations $\mathsf{o}_1$ and $\mathsf{o}_2$, $\mathsf{o}_1$ is equivalent to, inequivalent to, compatible to, narrower than, not narrower than, broader then, not broader than, compatible to or incompatible to $\mathsf{o}_2$ if the respective statements satisfy the respective relationship.
 \end{defn}
-
-The null observation is the degenerate case and has the following, maybe counterintuitive, properties. Since it is never verified, it can never rule out any other observations: the null observation implies all other observations. Since it is never verified, it can never be jointly verified with another observation: the null observation is incompatible with every experimental observation, including itself.
 
 \end{mathSection}
 
@@ -112,11 +138,11 @@ Combining observations with disjunction, i.e. the logical OR, is also straightfo
 We formally capture these properties of experimental observations by defining the following logical operations. Taken as whole, they define the \textbf{algebra of experimental observations}. With each definition, we will prove that the resulting object is an experimental (counter-)observation. 
 
 \begin{defn}
-	The \textbf{negation or logical NOT} of an experimental observation $\mathsf{o}=\llparenthesis \mathsf{s}, \mathsf{e}\rrparenthesis$ is the experimental counter-observation $\neg \mathsf{o}=\llbracket\neg \mathsf{s}, \mathsf{e}\rrbracket$ where the negation of the statement $\mathsf{s}$ can be refuted by the experimental test $\mathsf{e}$.
+	The \textbf{negation or logical NOT} of an experimental observation $\mathsf{o}=\llparenthesis \mathsf{s}, \mathsf{e}\rrparenthesis$ is the experimental counter-observation $\neg \mathsf{o}=\llbracket\neg \mathsf{s}, \mathsf{e}\rrbracket$ where the negation of the statement $\mathsf{s}$ can be refuted by the experimental test $\mathsf{e}$. The negation of an experimental counter-observation $\mathsf{o}^c=\llbracket\mathsf{s}, \mathsf{e}\rrbracket$ is the experimental observation $\neg \mathsf{o}^c=\llparenthesis \neg \mathsf{s}, \mathsf{e}\rrparenthesis$.
 \end{defn}
 
 \begin{proof}
-	To show that the negation exists and is well defined, let $\mathsf{o}=\llparenthesis \mathsf{s}, \mathsf{e}\rrparenthesis$ be an experimental observation. The experimental test $\mathsf{e}$ succeeds if and only if $\mathsf{s}$ is true or, equivalently, if and only if $\neg \mathsf{s}$ is false. So the tuple $\llbracket\neg \mathsf{s}, \mathsf{e}\rrbracket$ forms an experimental counter-observation.
+	To show that the negation exists and is well defined, let $\mathsf{o}=\llparenthesis \mathsf{s}, \mathsf{e}\rrparenthesis$ be an experimental observation. The experimental test $\mathsf{e}$ succeeds if and only if $\mathsf{s}$ is true or, equivalently, if and only if $\neg \mathsf{s}$ is false. So the tuple $\llbracket\neg \mathsf{s}, \mathsf{e}\rrbracket$ forms an experimental counter-observation. Now let $\mathsf{o}^c=\llbracket\mathsf{s}, \mathsf{e}\rrbracket$ be a experimental counter-observation. The experimental test $\mathsf{e}$ succeeds if and only if $\mathsf{s}$ is false or, equivalently, if and only if $\neg \mathsf{s}$ is true. So the tuple $\llparenthesis \neg \mathsf{s}, \mathsf{e}\rrparenthesis$ forms an experimental counter-observation.
 \end{proof}
 
 \begin{defn}
@@ -157,23 +183,23 @@ We formally capture these properties of experimental observations by defining th
 \begin{mathSection}
 
 \begin{defn}
-	An \textbf{experimental domain} is a set of observations closed under finite conjunction and countable disjunction such that all observations can be tested in infinite time. 
+	An \textbf{experimental domain} $\mathcal{D}$ is a set of observations closed under finite conjunction and countable disjunction such that all observations can be tested in infinite time. 
 \end{defn}
 
 \begin{defn}
-	A \textbf{sub-basis} of an experimental domain is any subset that can generate all others via finite conjunction and countable disjunction. A \textbf{basis} of an experimental domain is any subset that can generate all others by countable disjunctions. 
+	A \textbf{sub-basis} of an experimental domain $\mathcal{D}$ is any subset that can generate all others via finite conjunction and countable disjunction. A \textbf{basis} of an experimental domain is any subset that can generate all others by countable disjunctions. 
 \end{defn}
 
 Clearly, given a sub-basis one can generate a basis by taking all finite conjunctions of the observations. Note that any infinite sub-basis will generate a basis of the same cardinality. We claim that it is only possible to verify all members of an experimental domain with a countable (sub-)basis even given infinite time. 
 
 \begin{prop}
-Let $\mathcal{S}$ be an experimental domain. Then there exists a countable basis (equivalently, sub-basis) $\mathcal{B}$ of $\mathcal{S}$.
+Let $\mathcal{D}$ be an experimental domain. Then there exists a countable basis (equivalently, sub-basis) $\mathcal{B}$ of $\mathcal{D}$.
 \end{prop}
 
 \begin{proof}
-If there exists a countable basis $\mathcal{B}$, then given infinite time one can test all observations in $\mathcal{B}$. Given all truth values for elements of the basis, one can deduce the truth values for the other observations in $\mathcal{S}$ (again using infinite time) by computing the appropriate conjunctions and disjunctions. 
+If there exists a countable basis $\mathcal{B}$, then given infinite time one can test all observations in $\mathcal{D}$. Given all truth values for elements of the basis, one can deduce the truth values for the other observations in $\mathcal{D}$ (again using infinite time) by computing the appropriate conjunctions and disjunctions. 
 
-If there does not exist a countable basis, then by definition there does not exist a sequence of experimental observations in $\mathcal{S}$ from which one can deduce all other observations in $\mathcal{S}$. Hence it is impossible to test all members of $\mathcal{S}$.
+If there does not exist a countable basis, then by definition there does not exist a sequence of experimental observations in $\mathcal{D}$ from which one can deduce all other observations in $\mathcal{D}$. Hence it is impossible to test all members of $\mathcal{D}$.
 \end{proof}
 
 \end{mathSection}
@@ -203,14 +229,54 @@ This is the mathematical definition of a topology: a set of sets that contains b
 \begin{mathSection}
 
 We will now use our notions of experimental observations and experimental domains to construct a new space with a topology which will more rigorously capture our notion of possibilities for an experimental domain. We will begin with a given experimental domain $\mathcal{S}$.
+\begin{defn}
+	The \textbf{theoretical domain} $\bar{\mathcal{D}}$ of an experimental domain $\mathcal{D}$ is the set of statement that could be tested if all negations were verifiable. More formally, let $\mathsf{S}$ be the set of all statements associated with an experimental observation in $\mathcal{D}$. $\bar{\mathcal{D}}$ is the set of all statements generated from $\mathsf{S}$ using negation, finite conjunction and countable disjunction.
+\end{defn}
+
+\begin{prop}
+	All theoretical domains are closed under countable conjunction.
+\end{prop}
+
+\begin{proof}
+	Any countable conjunction $\mathsf{s} = \bigAND\limits_{i=1}^{\infty} \mathsf{s}_i$ is equivalent to the negation of disjunction of the negation: $\mathsf{s} = \NOT\bigOR\limits_{i=1}^{\infty} \NOT\mathsf{s}_i$. As the theoretical domain is closed under negation and countable disjunction, so it is closed under countable conjunction.  
+\end{proof}
+
+\begin{prop}
+	The truth value of the statements of a basis $\mathcal{B}$ for an experimental domain $\mathcal{D}$ are enough to determine the truth value for all statements in the associated experimental domain $\bar{\mathcal{D}}$. More formally, all statements in the theoretical domain $\bar{\mathcal{D}}$ can be generated by negation, countable conjunction and countable disjunction from the statements associated to $\mathcal{B}$.
+\end{prop}
+
+\begin{proof}
+	By definition of basis, any observation within the experimental domain $\mathcal{D}$ can be generated from $\mathcal{B}$ using only finite conjunction and countable disjunction. Therefore the set $\mathsf{S}$ of all statements associated with an experimental observation in $\mathcal{D}$ can be generated from the set $\mathsf{B}$ of all statements associated with an element of the basis $\mathcal{B}$ using negation, countable conjunction and countable disjunction. As $\mathsf{B}$ generates $\mathsf{S}$, it also generates all elements generated by $\mathsf{S}$. Therefore $\mathsf{B}$ generates $\bar{\mathcal{D}}$.
+\end{proof}
 
 \begin{defn}
-	A \textbf{possibility} for $\mathcal{S}$ is a subset of experimental observations compatible with each other but incompatible with the rest of the domain. That is $x \subseteq \mathcal{S}$ such that:
-	\begin{enumerate}
-		\item $\mathsf{o_1} \in x$ if and only if $\mathsf{o_1} \comp \mathsf{o}_2$ for all $\mathsf{o_2} \in x$ 
-		\item $\mathsf{o_1} \notin x$ if and only if $\mathsf{o_1} \ncomp \mathsf{o}_2$ for some $\mathsf{o_2} \in x$ 
-	\end{enumerate}
+	A \textbf{possibility} for $\mathcal{D}$ is a statement $x \in \bar{\mathcal{D}}$ that determines all truth values for statements in the theoretical domain. That is, given a statement $\mathsf{s} \in \bar{\mathcal{D}}$, either $x \subseteq \mathsf{s}$ or $x \ncomp \mathsf{s}$. The set of \textbf{possibilities} $X$ for $\mathcal{D}$ is the collection of all possibilities.
 \end{defn}
+
+\begin{prop}[No more possibilities]
+	All statements that determine and only determine all truth values of all statements in a theoretical domain $\bar{\mathcal{D}}$ are possibilities of $\mathcal{D}$.
+\end{prop}
+
+\begin{proof}
+	Let $\mathsf{s}$ be a statement that determine and only determine all truth values of all statements in a theoretical domain $\bar{\mathcal{D}}$. This is equivalent to determine the truth values and only the truth values of all elements of a basis $\mathcal{B}$ of $\mathcal{D}$. As we can find a countable basis, the statement $\mathsf{s}$ is equivalent to the countable conjunction of statements or negation of statements associated with the basis $\mathcal{B}$. Therefore $\mathsf{s} \in \bar{\mathcal{D}}$ as it is generated by the statements of the basis. But a statement in $\bar{\mathcal{D}}$ that determines all truth values of the statements in $\bar{\mathcal{D}}$ is a possibility by definition.
+\end{proof}
+
+\begin{prop}
+	Let $U : \mathcal{D} \rightarrow 2^X$ be a map that for each observation $\mathsf{o}$ in the experimental domain $\mathcal{D}$ returns the set of possibilities $U(\mathsf{o})$ compatible with the statement associated with $\mathsf{o}$. Then $U(\mathcal{D})$ provides a second-countable topology for $X$.
+\end{prop}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{prop}
+	Let $A : \bar{\mathcal{D}} \rightarrow 2^X$ be a map that for each statement $\mathsf{s}$ in the theoretical domain $\bar{\mathcal{D}}$ returns the set of possibilities $A(\mathsf{s})$ compatible with $\mathsf{s}$. Then $A(\mathcal{D})$ provides a sigma algebra for $X$ that is the Borel algebra of topology defined by $U(\mathcal{D})$.
+\end{prop}
+
+\begin{proof}
+	TODO
+\end{proof}
+
 
 This represents a maximal set of experimental observations that can be verified without contradiction.
 
