@@ -20,8 +20,9 @@ Lastly, we define \textbf{experimental relationships} between experimentally dis
 
 The overall result is that all sets of objects that are of scientific interest are mathematically described by a Hausdorff and second countable topological space. All relationships that are of scientific interest are continuous functions as defined on the respective topologies. This explains at the core why topological space and continuous functions are indeed so prevalent within scientific theories.
 
-\chapter{Classical logic}
+\section{Statements}
 
+DEVELOP: justify why we should only be talking about statements that have a definite yes or no.
 
 \begin{mathSection}
 
@@ -29,21 +30,43 @@ The overall result is that all sets of objects that are of scientific interest a
 	A \textbf{statement} $\mathsf{s}$ is a declarative sentence that is either true or false.
 \end{defn}
 
-\begin{defn}
-	A \textbf{tautology} $\top$ is any statement that is always true.
-\end{defn}
+\end{mathSection}
+
+Any language can be used to form the statement, formal or natural, as indeed any language is used in practice. Scientific investigation in the broad sense of learning from experimentation predates math and formal languages: information about agriculture, astronomy, metallurgy, botany and the like were collected and used even before the written word. Moreover, cognitive scientists have shown that children start using deliberate experimentation at a very young age to understand the world around them, even before their speech is fully developed. Ultimately, that knowledge is encoded in the language of electrical and biochemical signals.
+
+As such, the particular syntax of the language used to write the statements is not of interested. That is: we are not going to care what particular symbols and particular grammar rules are used. In fact, even a grammatically incorrect statement is fine as long as the intent is clear. What we are going to care about is the semantics of the statements: its meaning, its content. Therefore we need to have available some simple operations that allow us to work with the content of the statements. These are not operations within the language: they are operations about the language.
+
+%TODO: Make a nice extra box about syntax vs semantics
+
+The first thing we need to do is avoid assigning truths that are inconsistent with the content of the statement.  We want to avoid saying that meaningless statements such as \emph{``that cat is a bird"} are true or that obvious statements such as \emph{``that cat is an animal"} are false.
+
+\begin{mathSection}
+	
+	\begin{defn}
+		A \textbf{tautology} $\top$ is a statement that must be true simply because of its content.
+	\end{defn}
+	
+	\begin{defn}
+		A \textbf{contradiction} $\bot$ is a statement that must be false simply because of its content.
+	\end{defn}
+	
+\end{mathSection}
+
+Therefore \emph{``that cat is a bird"} is a contradiction while \emph{``that cat is an animal"} is a tautology. Note that \emph{``that cat is a cat"} is also a tautology and this time we do not need to know the meaning of the word cat. Some tautologies are independent of meaning and can be shown to be tautologies just based on the syntax of the language and how symbols can be manipulated. We are not going to distinguish between these two kinds.
+
+Another thing we need to do is be able to distinguish statements that have the same content. For example \emph{``that animal is a cat"}, \emph{``that creature is a cat"} and \emph{``quell'animale \`{e} un gatto"} all mean the same thing. It would be inconsistent to assign different truth values to them.
+
+\begin{mathSection}
 
 \begin{defn}
-	A \textbf{contradiction} $\bot$ is any statement that is always false.
+	Two statements $\mathsf{s}_1$ and $\mathsf{s}_2$ are \textbf{equivalent} $\mathsf{s}_1 \equiv \mathsf{s}_2$ if they must be equally true or false simply because of their content.
 \end{defn}
 
-\begin{defn}
-	Two statements $\mathsf{s}_1$ and $\mathsf{s}_2$ are \textbf{logically equivalent} $\mathsf{s}_1 \equiv \mathsf{s}_2$ if they have the same logical content. That is, if they always have the same truth value. They are inequivalent $\mathsf{s}_1 \nequiv \mathsf{s}_2$ if the opposite holds.
-\end{defn}
+\end{mathSection}
 
-Note that logical equivalence compares the content of the statements, not their truth value. For example, \emph{``the mass of the electron is less and greater than 1 g"} $\equiv \bot$ as it is a contradiction while \emph{``the mass of the electron is less than 1 g"}$\nequiv \bot$ as it is not a contradiction: it just happens to be false. Material equivalence, instead, compares the truth value but it is not needed in this work.
+Next we want to keep track when the truth of a statement is a function of the truth of the other statements. For example, \emph{``that animal is a cat"} and \emph{``that animal is not a cat"} can't both be true. Fortunately all such relationships can be expressed by combining the following three simple operations.
 
-
+\begin{mathSection}
 \begin{defn}
 	The \textbf{negation or logical NOT} of a statement $\mathsf{s}$ is the statement $\NOT\mathsf{s}$ that is true when $\mathsf{s}$ is false and is false when $\mathsf{s}$ is true.
 \end{defn}
@@ -55,28 +78,37 @@ Note that logical equivalence compares the content of the statements, not their 
 \begin{defn}
 	The \textbf{disjunction or logical OR} of two statements $\mathsf{s}_1$ and $\mathsf{s}_2$ is the statement $\mathsf{s}_1 \OR \mathsf{s}_2$ that is true when at least  $\mathsf{s}_1$ or $\mathsf{s}_2$ is true.
 \end{defn}
+\end{mathSection}
 
-Properties of these operators can be expressed in terms of logical equivalence. For example:
-\begin{itemize}
-	\item Double negation law: $\NOT\NOT\mathsf{s}\equiv\mathsf{s}$
-	\item Commutative law: $\mathsf{s}_1 \AND \mathsf{s}_2\equiv\mathsf{s}_2 \AND \mathsf{s}_1$
-	\item De Morgan's law : $\mathsf{s}_1 \AND \mathsf{s}_2\equiv \NOT(\NOT\mathsf{s}_1 \OR \NOT\mathsf{s}_2)$.
-\end{itemize}
+While all languages have similar operations within them, we should consider the ones defined here as an extension. For example, \emph{``x is the position of a ball"}$\AND$\emph{``$\frac{d^2 x}{dt^2} = - g$"} stitches together an English statement with a calculus statement into a new statement that is neither. This kind of mix is exactly what happens in science.
 
-So far we have only introduced standard elements of classical logic. Now we do something different: we want to introduce some relationships that allow us to compare the content of two statements. These will be important later to classify and organize groups of statements. 
+Now consider the contents of the following statements:
+\begin{enumerate}
+	\item \emph{``that animal is a cat"}
+	\item \emph{``that animal is a mammal"}
+	\item \emph{``that animal is a dog"}
+	\item \emph{``that animal is a black"}
+\end{enumerate}
+The second will be true whenever the first is true. The third will be false whenever the first is true. The fourth will be true or false regardless of whether the first is true. Assigning truth values at odds with these relationships would be inconsistent. So we want to give a name to these kind of correlations and track them.
+
+\begin{mathSection}
 
 \begin{defn}
 	Given two statement $\mathsf{s}_1$ and $\mathsf{s}_2$, we say that:
 	\begin{itemize}
-		\item $\mathsf{s}_1$ \textbf{is narrower than} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \subseteq \mathsf{s}_2$) if $\mathsf{s}_2$ is true whenever $\mathsf{s}_1$ is true. That is: $\mathsf{s}_1 \wedge \neg \mathsf{s}_2 \equiv \bot$.
+		\item $\mathsf{s}_1$ \textbf{is narrower than} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \subseteq \mathsf{s}_2$) if $\mathsf{s}_2$ is true whenever $\mathsf{s}_1$ is true simply because of their content. That is: $\mathsf{s}_1 \wedge \neg \mathsf{s}_2 \equiv \bot$.
 		\item $\mathsf{s}_1$ \textbf{is broader than} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \supseteq \mathsf{s}_2$) if $\mathsf{s}_2 \subseteq \mathsf{s}_1$.
-		\item $\mathsf{s}_1$ \textbf{is compatible to} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \comp \mathsf{s}_2$) if they can be true at the same time. That is: $\mathsf{s}_1 \wedge \mathsf{s}_2 \nequiv \bot$.
-		\item $\mathsf{s}_1$ \textbf{is independent from} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \indep \mathsf{s}_2$) if the truth of one does not implies the truth of the other. That is: $\mathsf{s}_1 \comp \mathsf{s}_2 \AND \NOT(\mathsf{s}_1 \subseteq \mathsf{s}_2) \AND \NOT(\mathsf{s}_2 \subseteq \mathsf{s}_1)$.
+		\item $\mathsf{s}_1$ \textbf{is compatible to} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \comp \mathsf{s}_2$) if their content allows them to be true at the same time. That is: $\mathsf{s}_1 \wedge \mathsf{s}_2 \nequiv \bot$.
+		\item $\mathsf{s}_1$ \textbf{is independent from} $\mathsf{s}_2$ (noted $\mathsf{s}_1 \indep \mathsf{s}_2$) if their content is such that the truth of one does not implies the truth of the other. That is: $\mathsf{s}_1 \comp \mathsf{s}_2 \AND \NOT(\mathsf{s}_1 \subseteq \mathsf{s}_2) \AND \NOT(\mathsf{s}_2 \subseteq \mathsf{s}_1)$.
 	\end{itemize}
 	The negation of these properties will be noted by $\nsubseteq$, $\nsupseteq$ , $\ncomp$, $\nindep$ respectively.
 \end{defn}
 
 \end{mathSection}
+
+In the example before: the first is narrower than the second (1 $\subseteq$ 2), is incompatible with the third (1 $\ncomp$ 3) and is independent from the fourth (1 $\indep$ 4).
+
+With these tools in place we are in a position to formulate scientific models that are consistent. In this framework we are allowed to mix statements in different languages (natural and formal) reflecting what happens in scientific practice. The only requirement is that we are able to keep track of the relationships that the content of the statements provides.
 
 \section{Experimental observations}
 
