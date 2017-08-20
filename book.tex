@@ -16,7 +16,7 @@ The question is: what can you do if you are given a set of verifiable statements
 
 We will group experimental observations into \textbf{experimental domains} which are the list of all possible answers to a particular scientific question that can be experimentally tested. From those, we define \textbf{theoretical domains} that will add those statements that, though not directly testable, would have consequences on the experimental tests. These will include, for example, limits of an experimental procedure. Within each theoretical domains, we find those particular statements that, once verified, they determine the truthfulness or falsehood of all other statements: they give us the full picture. We call those \textbf{possibilities}. To answer a scientific question, then, is to find which possibility is the correct one.
 
-The striking result is that the above organization is always possible on any given set of statements that can be experimentally verified. That is: it is a fundamental structure for all sciences. The other striking result is that these concept map exactly to two mathematical structures that are at the core of mathematics: experimental domains map to topologies whilewhile theoretical domains map to a $\sigma$-algebras. These two mathematical structures provide foundation to differential geometry, Lie algebras, measure theory and other mathematical branches that are heavily used in physics and other sciences.
+The striking result is that the above organization is always possible on any given set of statements that can be experimentally verified. That is, it is a fundamental structure for all sciences. The other striking result is that these concept map exactly to two mathematical structures that are at the core of mathematics: experimental domains map to topologies whilewhile theoretical domains map to a $\sigma$-algebras. These two mathematical structures provide foundation to differential geometry, Lie algebras, measure theory and other mathematical branches that are heavily used in physics and other sciences.
 
 As a consequence of this connection, we can fully understand why these mathematical ideas are pervasive in science, why only particular types of topologies (i.e. Hausdorff and second-countable) are relevant in science and why all relationships that are of scientific interest are continuous functions as defined on their topologies.
 
@@ -36,29 +36,29 @@ If we choose to do science, then, we are limited to those assertions that are ei
 \begin{mathSection}
 
 \begin{defn}\label{def_statement}
-	A \textbf{statement} $\stmt{s}$ is a declarative sentence that is either true or false. Formally, a statement is an element of the set $\mathcal{S}$ of all statements. On $\mathcal{S}$ is defined a function $\truth: \mathcal{S} \to \{\textsc{true}, \textsc{false}\}$ that returns the truth value for each element.
+	A \textbf{statement} $\stmt{s}$ is a declarative sentence that is either true or false. Formally, a statement is just an element of the set $\mathcal{S}$ of all statements. Moreover, there exists a function $\truth: \mathcal{S} \to \{\textsc{true}, \textsc{false}\}$ that returns the truth value for each element.
 \end{defn}
 
 \end{mathSection}
 
 Statements are the first building block of our general theory of science. Any language can be used to form them, formal or natural, as indeed any language is used in practice. Scientific investigation in the broad sense of learning from experimentation predates math and formal languages: information about agriculture, astronomy, metallurgy, botany and the like were collected and used even before the written word. Moreover, cognitive scientists have shown that children start using deliberate experimentation at a very young age to understand the world around them, even before their speech is fully developed. Ultimately, that knowledge is encoded in the language of electrical and biochemical signals. Formal languages are indeed extremely helpful in that they allow to be more precise and to better keep track of possible inconsistencies, but ultimately one always needs natural language to give meaning and context to the mathematical symbols. 
 
-Since any language is allowed, the particular syntax of the language used to write the statements is not of interested. That is: we are not going to care what particular symbols and particular grammar rules are used. In fact, even a grammatically incorrect statement is fine as long as the intent is clear. What we are going to care about is the semantics of the statements: its meaning, its content. If it is not clear, we cannot avoid contradictions and we cannot design suitable experimental tests. Therefore we need a few simple operations that allow us to compare and contrast the content of different statements. These are not operations within the language: they are operations about the language or meta-operations.
+Since any language is allowed, the particular syntax of the language used to write the statements is not of interested. That is, we are not going to care what particular symbols and particular grammar rules are used. In fact, even a grammatically incorrect statement is fine as long as the intent is clear. What we are going to care about is the semantics of the statements: its meaning, its content. If it is not clear, we cannot avoid contradictions and we cannot design suitable experimental tests. Therefore we need a few simple operations that allow us to compare and contrast the content of different statements. These are not operations within the language: they are operations about the language or meta-operations.
 
 
 First we want to keep track when the truth of a statement is a function of the truth of the other statements. For example, \statement{that animal is a cat} and \statement{that animal is not a cat} can't both be true. Fortunately, it is a result of Boolean algebra that all such relationships can be expressed by combining the following three simple operations.
 
 \begin{mathSection}
 	\begin{defn}
-		The \textbf{negation or logical NOT} of a statement $\stmt{s}$ is the statement $\NOT\stmt{s}$ that is true when $\stmt{s}$ is false and is false when $\stmt{s}$ is true. That is: if $\truth(\stmt{s}) = \TRUE$ then $\truth(\NOT \stmt{s}) = \FALSE$ and if $\truth(\stmt{s}) = \FALSE$ then $\truth(\NOT \stmt{s}) = \TRUE$.
+		The \textbf{negation or logical NOT} of a statement $\stmt{s}$ is the statement $\NOT\stmt{s}$ with the opposite truth value. Formally, for any $\stmt{s} \in \mathcal{S}$ there exists $\NOT\stmt{s} \in \mathcal{S}$ such that if $\truth(\stmt{s}) = \TRUE$ then $\truth(\NOT \stmt{s}) = \FALSE$ and if $\truth(\stmt{s}) = \FALSE$ then $\truth(\NOT \stmt{s}) = \TRUE$.
 	\end{defn}
 	
 	\begin{defn}
-		The \textbf{conjunction or logical AND} of a set of statements $S$ is the statement $\bigAND\limits_{\stmt{s} \in S} \stmt{s}$ (or simply $\stmt{s}_1 \AND \stmt{s}_2$ for two statements) that is true only when all statements in $S$ are true. That is: $\truth(\bigAND\limits_{\stmt{s} \in S} \stmt{s}) = \TRUE$ if and only if $\truth(\stmt{s}) = \TRUE$ for all $\stmt{s} \in S$.
+		The \textbf{conjunction or logical AND} of a set of statements $S$ is the statement $\bigAND\limits_{\stmt{s} \in S} \stmt{s}$ (or simply $\stmt{s}_1 \AND \stmt{s}_2$ for two statements) that is true only when all statements in $S$ are true. Formally, for any $S \subseteq \mathcal{S}$ there exists $\bigAND\limits_{\stmt{s} \in S} \stmt{s} \in \mathcal{S}$ such that $\truth(\bigAND\limits_{\stmt{s} \in S} \stmt{s}) = \TRUE$ if and only if $\truth(\stmt{s}) = \TRUE$ for all $\stmt{s} \in S$.
 	\end{defn}
 	
 	\begin{defn}
-		The \textbf{disjunction or logical OR} of a set of statements $S$ is the statement $\bigOR\limits_{\stmt{s} \in S} \stmt{s}$ (or simply $\stmt{s}_1 \OR \stmt{s}_2$ for two statements) that is true only if at least one statement in $S$ is true. That is: $\truth(\bigOR\limits_{\stmt{s} \in S} \stmt{s}) = \TRUE$ if and only if $\truth(\stmt{s}) = \TRUE$ for at least one $\stmt{s} \in S$.
+		The \textbf{disjunction or logical OR} of a set of statements $S$ is the statement $\bigOR\limits_{\stmt{s} \in S} \stmt{s}$ (or simply $\stmt{s}_1 \OR \stmt{s}_2$ for two statements) that is true only if at least one statement in $S$ is true. Formally, for any $S \subseteq \mathcal{S}$ there exists $\bigOR\limits_{\stmt{s} \in S} \stmt{s} \in \mathcal{S}$ such that $\truth(\bigOR\limits_{\stmt{s} \in S} \stmt{s}) = \TRUE$ if and only if $\truth(\stmt{s}) = \TRUE$ for at least one $\stmt{s} \in S$.
 	\end{defn}
 \end{mathSection}
 
@@ -125,10 +125,10 @@ The second will be true whenever the first is true. The third will be false when
 \begin{defn}
 	Given two statement $\stmt{s}_1$ and $\stmt{s}_2$, we say that:
 	\begin{itemize}
-		\item $\stmt{s}_1$ \textbf{is narrower than} $\stmt{s}_2$ (noted $\stmt{s}_1 \narrower \stmt{s}_2$) if $\stmt{s}_2$ is true whenever $\stmt{s}_1$ is true simply because of their content. That is: $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \contradiction$.
+		\item $\stmt{s}_1$ \textbf{is narrower than} $\stmt{s}_2$ (noted $\stmt{s}_1 \narrower \stmt{s}_2$) if $\stmt{s}_2$ is true whenever $\stmt{s}_1$ is true simply because of their content. That is, $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \contradiction$.
 		\item $\stmt{s}_1$ \textbf{is broader than} $\stmt{s}_2$ (noted $\stmt{s}_1 \broader \stmt{s}_2$) if $\stmt{s}_2 \narrower \stmt{s}_1$.
-		\item $\stmt{s}_1$ \textbf{is compatible to} $\stmt{s}_2$ (noted $\stmt{s}_1 \comp \stmt{s}_2$) if their content allows them to be true at the same time. That is: $\stmt{s}_1 \AND \stmt{s}_2 \nequiv \contradiction$.
-		\item $\stmt{s}_1$ \textbf{is independent from} $\stmt{s}_2$ (noted $\stmt{s}_1 \indep \stmt{s}_2$) if their content is such that the truth of one does not imply the truth of the other. That is: $(\stmt{s}_1 \comp \stmt{s}_2)$, $(\NOT\stmt{s}_1 \comp \NOT\stmt{s}_2)$, $(\stmt{s}_1 \nnarrower \stmt{s}_2)$ and $(\stmt{s}_1 \nbroader \stmt{s}_2)$. Two statements that are not independent are also said to be \textbf{correlated}.
+		\item $\stmt{s}_1$ \textbf{is compatible to} $\stmt{s}_2$ (noted $\stmt{s}_1 \comp \stmt{s}_2$) if their content allows them to be true at the same time. That is, $\stmt{s}_1 \AND \stmt{s}_2 \nequiv \contradiction$.
+		\item $\stmt{s}_1$ \textbf{is independent from} $\stmt{s}_2$ (noted $\stmt{s}_1 \indep \stmt{s}_2$) if their content is such that the truth of one does not imply the truth of the other. That is, $(\stmt{s}_1 \comp \stmt{s}_2)$, $(\NOT\stmt{s}_1 \comp \NOT\stmt{s}_2)$, $(\stmt{s}_1 \nnarrower \stmt{s}_2)$ and $(\stmt{s}_1 \nbroader \stmt{s}_2)$. Two statements that are not independent are also said to be \textbf{correlated}.
 	\end{itemize}
 	The negation of these properties will be noted by $\nnarrower$, $\nbroader$ , $\ncomp$, $\nindep$ respectively.
 \end{defn}
@@ -145,11 +145,11 @@ The previous section took care of universality and non-contradiction, but the pr
 
 Limiting the scope of our discussion to objects and properties that are well defined physically is still not enough. For example, \emph{``the electron is green"} or \emph{``1 meter is equal to 5 Kelvin"} are still not suitable scientific statements as the relationships established are not physically meaningful. Even when the relationship is meaningful, we may still not be able to validate it experimentally. For example, \emph{``there is no extra-terrestrial life"} or \emph{``the mass of the electron is exactly $9.109 \times 10^{-31}$ kg"} are not something we can validate experimentally. In the first case, we would need to check every corner of the universe and find none, with the closest galaxy like ours, Andromeda, being 2.5 millions light-years; in the second, we will always have an error bar, however small.
 
-So we have to narrow the scope to those and only those statements that can be verified experimentally. That is: we have to provide a repeatable (i.e. non-contradictory) experimental procedure (i.e. evidence based) that anyone (i.e. universal) can in principle execute. This is both the power and the limit of scientific inquiry: it gives us a way to construct a coherent description of the physical world but it is limited to those aspects that can be reliably studied experimentally.
+So we have to narrow the scope to those and only those statements that can be verified experimentally. That is, we have to provide a repeatable (i.e. non-contradictory) experimental procedure (i.e. evidence based) that anyone (i.e. universal) can in principle execute. This is both the power and the limit of scientific inquiry: it gives us a way to construct a coherent description of the physical world but it is limited to those aspects that can be reliably studied experimentally.
 
 \begin{mathSection}
 \begin{defn}\label{def_experimental_tests}
-	An \textbf{experimental test} $\expt{e}$ is a repeatable procedure (i.e. it can be restarted and stopped an arbitrary number of times) that will always either terminate successfully, terminate unsuccessfully or never terminate. More formally, an experimental test is an element of the set $\mathcal{E}$ of all experimental tests on which is defined a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$ that returns the result for each element.
+	An \textbf{experimental test} $\expt{e}$ is a repeatable procedure (i.e. it can be restarted and stopped an arbitrary number of times) that will always either terminate successfully, terminate unsuccessfully or never terminate. Formally, an experimental test is just an element of the set $\mathcal{E}$ of all experimental tests. Moreover, there exists a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$ that returns the result for each element.
 \end{defn}
 \end{mathSection}
 
@@ -173,11 +173,11 @@ In the same vein, we are able to confirm experimentally that \emph{the mass of t
 	\emph{Remark}. The \textbf{negation or logical NOT} of an experimental test does not necessarily exist.
 \end{mathSection}
 
-Combining experimental test with conjunction (i.e. the logical AND) is more straightforward. To verify that \emph{``the sauce is sweet and sour"} we can first test that \emph{``the sauce is sweet"} and then that \emph{``the sauce is sour"}. If both are successful, then the conjunction is successful. That is: if we have two or more experimental tests, we can aways test the logical AND for success by checking one at a time if all tests are successful. Yet, the number of tests needs to be finite or we would never terminate.
+Combining experimental test with conjunction (i.e. the logical AND) is more straightforward. To verify that \emph{``the sauce is sweet and sour"} we can first test that \emph{``the sauce is sweet"} and then that \emph{``the sauce is sour"}. If both are successful, then the conjunction is successful. That is, if we have two or more experimental tests, we can aways test the logical AND for success by checking one at a time if all tests are successful. Yet, the number of tests needs to be finite or we would never terminate.
 
 \begin{mathSection}
 	\begin{defn}
-	The \textbf{conjunction or logical AND} of a finite collection of experimental tests $E=\{\expt{e}_i\}_{i=1}^{n}$ is the experimental test $\bigAND\limits_{i=1}^{n} \expt{e}_i$ (or simply $\expt{e}_1 \AND \expt{e}_2$ for two statements) that is successful only when all experimental tests in $E$ are successful. That is: $\result(\bigAND\limits_{i=1}^{n} \expt{e}_i) = \SUCCESS$ if and only if $\result(\expt{e}_i) = \SUCCESS$ for all $\expt{e}_i \in E$.
+	The \textbf{conjunction or logical AND} of a finite collection of experimental tests $\{\expt{e}_i\}_{i=1}^{n}$ is the experimental test $\bigAND\limits_{i=1}^{n} \expt{e}_i$ (or simply $\expt{e}_1 \AND \expt{e}_2$ for two statements) that is successful only when all experimental tests in $E$ are successful. Formally, for any finite collection $\{\expt{e}_i\}_{i=1}^{n} \in \mathcal{E}$ there exists $ \bigAND\limits_{i=1}^{n} \expt{e}_i \in \mathcal{E}$ such that $\result(\bigAND\limits_{i=1}^{n} \expt{e}_i) = \SUCCESS$ if and only if $\result(\expt{e}_i) = \SUCCESS$ for all $\expt{e}_i \in E$.
 	\end{defn}
 	\begin{proof}
 		Mathematically, we are simply assuming that the finite conjunction exists, so there it nothing to prove. However, we want to convince ourselves that in practice we can construct the test to show that the assumption is well justified. Let $\bigAND\limits_{i=1}^{n} \expt{e}_i$ be the experimental procedure defined as follows:
@@ -189,11 +189,11 @@ Combining experimental test with conjunction (i.e. the logical AND) is more stra
 	\end{proof}
 \end{mathSection}	
 
-Combining experimental tests with disjunction, i.e. the logical OR, is also straightforward. To verify that \emph{``the sauce is at least sweet or sour"} we can first test that \emph{``the sauce is sweet"}. If that is verified that's enough: the sauce is at least sour. If not, we test that \emph{``the sauce is sour"}. That is: if we have two or more experimental tests we can always test the logical OR for success just by stopping at the first test that is successful. Because we stop at the first success, the number of observations we combine in a logical OR can be countably infinite. As long as one test succeeds, which will always be the case when the overall test succeeds, it does not matter how many elements we are not going to verify later.
+Combining experimental tests with disjunction, i.e. the logical OR, is also straightforward. To verify that \emph{``the sauce is at least sweet or sour"} we can first test that \emph{``the sauce is sweet"}. If that is verified that's enough: the sauce is at least sour. If not, we test that \emph{``the sauce is sour"}. That is, if we have two or more experimental tests we can always test the logical OR for success just by stopping at the first test that is successful. Because we stop at the first success, the number of observations we combine in a logical OR can be countably infinite. As long as one test succeeds, which will always be the case when the overall test succeeds, it does not matter how many elements we are not going to verify later.
 
 \begin{mathSection}
 	\begin{defn}\label{def_experimental_test_OR}
-	The \textbf{disjunction or logical OR} of a (finite or infinite) countable collection of experimental tests $E=\{\expt{e}_i\}_{i=1}^{\infty}$ is the experimental test $\bigOR\limits_{i=1}^{\infty} \expt{e}_i$ (or simply $\expt{e}_1 \OR \expt{e}_2$ for two statements) that is successful if and only if at least one experimental test in $E$ is successful. That is: $\result(\bigOR\limits_{i=1}^{\infty} \expt{e}_i) = \SUCCESS$ if and only if $\result(\expt{e}_i) = \SUCCESS$ for at least one $\expt{e}_i \in E$.
+	The \textbf{disjunction or logical OR} of a (finite or infinite) countable collection of experimental tests $E=\{\expt{e}_i\}_{i=1}^{\infty}$ is the experimental test $\bigOR\limits_{i=1}^{\infty} \expt{e}_i$ (or simply $\expt{e}_1 \OR \expt{e}_2$ for two statements) that is successful if and only if at least one experimental test in $E$ is successful. Formally, for any countable collection $\{\expt{e}_i\}_{i=1}^{\infty} \in \mathcal{E}$ there exists $ \bigOR\limits_{i=1}^{\infty} \expt{e}_i \in \mathcal{E}$ such that $\result(\bigOR\limits_{i=1}^{\infty} \expt{e}_i) = \SUCCESS$ if and only if $\result(\expt{e}_i) = \SUCCESS$ for at least one $\expt{e}_i \in E$.
 	\end{defn}
 	\begin{proof}
 		Mathematically, we are simply assuming that the countable disjunction exists, so there it nothing to prove. As before, we want to convince ourselves that in practice we can construct the test to show that the assumption is well justified.
@@ -219,7 +219,7 @@ Now that statement and experimental tests are well defined, we can match them to
 
 \begin{mathSection}
 \begin{defn}
-	An \textbf{experimental observation} is a tuple $\obs{o} = \llparenthesis \stmt{s}, \expt{e} \rrparenthesis$ composed by a statement $\stmt{s}$ and an experimental test $\expt{e}$ such that the statement is true if and only if the  experimental test is always successful. That is: $\truth(\stmt{s})=\textsc{true}$ if and only if $\result(\expt{e})=\textsc{success}$. The experimental observation is \textbf{verified} if the statement is true.
+	An \textbf{experimental observation} is a tuple $\obs{o} = \llparenthesis \stmt{s}, \expt{e} \rrparenthesis$ composed by a statement $\stmt{s}$ and an experimental test $\expt{e}$ such that the statement is true if and only if the  experimental test is always successful. That is, $\truth(\stmt{s})=\textsc{true}$ if and only if $\result(\expt{e})=\textsc{success}$. The experimental observation is \textbf{verified} if the statement is true.
 \end{defn}
 \end{mathSection}
 
