@@ -29,14 +29,14 @@ Science is the systematic study of the physical world through observation and ex
 		Science is universal, non-contradictory and evidence based.
 \end{mathSection}
 
-We should take this principle not as touting the merit of scientific investigation, but rather as an acknowledgment of its limits. For example, statements like \statement{jazz is marvelous} or \statement{green and red go well together} are not suitable scientific as they are not universal. That is, there is no agreed upon definition or procedure for what constitutes marvelous music or good color combination. This does not mean that marvelous music or good color combinations do not exist or are not worthy pursuits. They just can't be the subject of scientific inquiry. In fact, one can argue that most of the things that make life worth living (e.g. love, friendship, arts, purpose and so on) defy objective characterization and therefore that science gives us certain truth only on things that don't matter that much.
+We should take this principle not as touting the merit of scientific investigation, but rather as an acknowledgment of its limits. Statements like \statement{jazz is marvelous} or \statement{green and red go well together} are not suitable scientific as they are not universal. That is, there is no agreed upon definition or procedure for what constitutes marvelous music or good color combination. This does not mean that marvelous music or good color combinations do not exist or are not worthy pursuits. They just can't be the subject of scientific inquiry. In fact, one can argue that most of the things that make life worth living (e.g. love, friendship, arts, purpose and so on) defy objective characterization and therefore that science gives us certain truth only on things that don't matter that much.
 
 If we choose to do science, then, we are limited to those assertions that are either true or false (i.e. non-contradictory) for everybody (i.e. universal): assertions that have a single truth value. This also means that we have to provide enough context to those assertions such that we all agree on their meaning.
 
 \begin{mathSection}
 
 \begin{defn}\label{def_statement}
-	A \textbf{statement} $\stmt{s}$ is a declarative sentence that is either true or false. Formally, a statement is an element of the set $\mathcal{S}$ of all statements on which is defined a function $\truth: \mathcal{S} \to \{\textsc{true}, \textsc{false}\}$ that returns the truth value for each element.
+	A \textbf{statement} $\stmt{s}$ is a declarative sentence that is either true or false. Formally, a statement is an element of the set $\mathcal{S}$ of all statements. On $\mathcal{S}$ is defined a function $\truth: \mathcal{S} \to \{\textsc{true}, \textsc{false}\}$ that returns the truth value for each element.
 \end{defn}
 
 \end{mathSection}
@@ -70,7 +70,7 @@ Here is a table with a few examples on how these logical operations work.
 		\hline 
 		Negation & NOT & $\NOT \stmt{s}_1$ &  \emph{``the sauce is not sweet"} \\ 
 		Conjunction & AND & $\stmt{s}_1 \AND \stmt{s}_2$ & \emph{``the sauce is sweet and sour"} \\ 
-		Disjunction & OR & $\stmt{s}_1 \OR \stmt{s}_2$ & \emph{``the sauce is at least one of sweet or sour"}\\
+		Disjunction & OR & $\stmt{s}_1 \OR \stmt{s}_2$ & \emph{``the sauce is at least sweet or sour"}\\
 		\multicolumn{4}{c}{  where $\stmt{s}_1$ = \emph{``the sauce is sweet"} and $\stmt{s}_2$ = \emph{``the sauce is sour"}}
 	\end{tabular} 
 	\caption{Boolean operations on statements}
@@ -81,7 +81,7 @@ While all languages have similar operations within them, we should consider the 
 
 %TODO: Make a nice extra box about syntax vs semantics
 
-Next we want to avoid assigning truths that are inconsistent with the content of the statement.  We want to avoid saying that inconsistent statements such as \statement{that cat is a bird} are true or that obvious statements such as \statement{that cat is an animal} are false. This means we not only want to talk about the truth value of a statement, but also what possible truth values are even allowed by the content of the statement itself.
+Next we want to avoid assigning truths that are inconsistent with the content of the statement.  We want to avoid saying that contradictory statements such as \statement{that cat is a bird} are true or that obvious statements such as \statement{that cat is an animal} are false. This means we not only want to talk about the truth value of a statement, but also what possible truth values are even allowed by the content of the statement itself.
 
 \begin{mathSection}
 	
@@ -106,7 +106,7 @@ In the same vein we need to tell when two statements have the same content. For 
 \begin{mathSection}
 
 \begin{defn}
-	Two statements $\stmt{s}_1$ and $\stmt{s}_2$ are \textbf{equivalent} $\stmt{s}_1 \equiv \stmt{s}_2$ if they must be equally true or false simply because of their content. That is, $\poss((\stmt{s}_1 \AND \stmt{s}_2) \OR (\NOT\stmt{s}_1 \AND \NOT\stmt{s}_2) )= \{\TRUE\}$.
+	Two statements $\stmt{s}_1$ and $\stmt{s}_2$ are \textbf{equivalent} $\stmt{s}_1 \equiv \stmt{s}_2$ if they must be equally true or false simply because of their content. That is, $(\stmt{s}_1 \AND \stmt{s}_2) \OR (\NOT\stmt{s}_1 \AND \NOT\stmt{s}_2)$ is a tautology.
 \end{defn}
 
 \end{mathSection}
@@ -128,7 +128,7 @@ The second will be true whenever the first is true. The third will be false when
 		\item $\stmt{s}_1$ \textbf{is narrower than} $\stmt{s}_2$ (noted $\stmt{s}_1 \narrower \stmt{s}_2$) if $\stmt{s}_2$ is true whenever $\stmt{s}_1$ is true simply because of their content. That is: $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \contradiction$.
 		\item $\stmt{s}_1$ \textbf{is broader than} $\stmt{s}_2$ (noted $\stmt{s}_1 \broader \stmt{s}_2$) if $\stmt{s}_2 \narrower \stmt{s}_1$.
 		\item $\stmt{s}_1$ \textbf{is compatible to} $\stmt{s}_2$ (noted $\stmt{s}_1 \comp \stmt{s}_2$) if their content allows them to be true at the same time. That is: $\stmt{s}_1 \AND \stmt{s}_2 \nequiv \contradiction$.
-		\item $\stmt{s}_1$ \textbf{is independent from} $\stmt{s}_2$ (noted $\stmt{s}_1 \indep \stmt{s}_2$) if their content is such that the truth of one does not imply the truth of the other. That is: $(\stmt{s}_1 \comp \stmt{s}_2) \AND (\stmt{s}_1 \nnarrower \stmt{s}_2) \AND (\stmt{s}_1 \nbroader \stmt{s}_2)$. Two statements that are not independent are said to be \textbf{correlated}.
+		\item $\stmt{s}_1$ \textbf{is independent from} $\stmt{s}_2$ (noted $\stmt{s}_1 \indep \stmt{s}_2$) if their content is such that the truth of one does not imply the truth of the other. That is: $(\stmt{s}_1 \comp \stmt{s}_2)$, $(\NOT\stmt{s}_1 \comp \NOT\stmt{s}_2)$, $(\stmt{s}_1 \nnarrower \stmt{s}_2)$ and $(\stmt{s}_1 \nbroader \stmt{s}_2)$. Two statements that are not independent are also said to be \textbf{correlated}.
 	\end{itemize}
 	The negation of these properties will be noted by $\nnarrower$, $\nbroader$ , $\ncomp$, $\nindep$ respectively.
 \end{defn}
@@ -137,9 +137,7 @@ The second will be true whenever the first is true. The third will be false when
 
 In the example before: the first statement is narrower than the second (1 $\narrower$ 2), is incompatible with the third (1 $\ncomp$ 3) and is independent from the fourth (1 $\indep$ 4).
 
-With these tools in place we are in a position to formulate scientific models that are consistent. In this framework we are allowed to mix statements in different languages (natural and formal) reflecting what happens in scientific practice. The only requirement is that we are able to keep track of the relationships that the content of the statements provides.
-
-Technically, definitions from \ref{def_statement} to \ref{def_possibilities} in our formalism represent the axioms for the statements. The actual content of the statements is left unspecified and mathematically is just treated as a label that we use for identification. What is actually assumed is that each statement has a set of possible truth values, an actual truth value and that we can always perform the logical operations.
+With these tools in place we are in a position to formulate scientific models that are consistent. These models will be a collection of statements, whose truth value will be discovered experimentally, which have a well defined content. Technically, definitions from \ref{def_statement} to \ref{def_possibilities} in our formalism represent the axioms for statements. The actual content of the statements is left unspecified and mathematically is just treated as a label that we use for identification. What is actually assumed is that each statement exists, it has a set of possible truth values, an actual truth value and that we can always perform the logical operations.
 
 \section{Experimental observations}
 
@@ -147,32 +145,32 @@ The previous section took care of universality and non-contradiction, but the pr
 
 Limiting the scope of our discussion to objects and properties that are well defined physically is still not enough. For example, \emph{``the electron is green"} or \emph{``1 meter is equal to 5 Kelvin"} are still not suitable scientific statements as the relationships established are not physically meaningful. Even when the relationship is meaningful, we may still not be able to validate it experimentally. For example, \emph{``there is no extra-terrestrial life"} or \emph{``the mass of the electron is exactly $9.109 \times 10^{-31}$ kg"} are not something we can validate experimentally. In the first case, we would need to check every corner of the universe and find none, with the closest galaxy like ours, Andromeda, being 2.5 millions light-years; in the second, we will always have an error bar, however small.
 
-So we have to narrow the scope to those and only those statements that can be verified experimentally. That is: we have to provide a repeatable (i.e. non-contradictory) experimental procedure (i.e. evidence based) that anyone (i.e. universal) can in principle execute. This is both the power and the limit of scientific inquiry: it gives us a way to construct a coherent description of the physical world but it is limited to those aspects that can be reliably studied experimentally. Therefore, science is only one of the intellectual tools we have at our disposal and it can only complement the others (such as mathematics, philosophy, theology and art).
+So we have to narrow the scope to those and only those statements that can be verified experimentally. That is: we have to provide a repeatable (i.e. non-contradictory) experimental procedure (i.e. evidence based) that anyone (i.e. universal) can in principle execute. This is both the power and the limit of scientific inquiry: it gives us a way to construct a coherent description of the physical world but it is limited to those aspects that can be reliably studied experimentally.
 
 \begin{mathSection}
 \begin{defn}\label{def_experimental_tests}
-	An \textbf{experimental test} $\expt{e}$ is a repeatable procedure (i.e. it can be restarted and stopped an arbitrary number of times) that will always either terminate successfully, terminate unsuccessfully or never terminate. More formally, an experimental test is an element of the set $\mathcal{E}$ of all experimental tests on which is defined a function $\result: \mathcal{E} \to \{\textsc{success}, \textsc{failure}, \textsc{undefined}\}$ that returns the result for each element.
+	An \textbf{experimental test} $\expt{e}$ is a repeatable procedure (i.e. it can be restarted and stopped an arbitrary number of times) that will always either terminate successfully, terminate unsuccessfully or never terminate. More formally, an experimental test is an element of the set $\mathcal{E}$ of all experimental tests on which is defined a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$ that returns the result for each element.
 \end{defn}
 \end{mathSection}
 
 For example, the following procedure is an experimental test:
 \begin{enumerate}
-	\item find an unmarked swan
+	\item find a swan
 	\item if it's black terminate successfully
-	\item mark the swan and go to step 1
+	\item go to step 1
 \end{enumerate}
 If a black swan exists, at some point we'll find it and the test will be successful. If a black swan does not exist, then the procedure will never terminate.
 
-Similarly to statements, we want to define experimental tests whose success is a function of other experimental tests. This is not as straight forward as extending the logical operations: we need to make sure we actually can create a suitable experimental procedure in practice and this is not always possible.
+Similarly to statements, we want to define experimental tests whose success is a function of other experimental tests. This is not as straight forward as with statements: we need to make sure we actually can create a suitable experimental procedure in practice and this is not always possible.
 
-The first important result, in fact, is that the negation of an experimental test is not always an experimental test. Going back to the previous example, the procedure never finishes in the case that black swans do not exist so we cannot use it to confirm that case. Because of non-termination, no success does not necessarily mean failure.
+The first important result, in fact, is that the negation of an experimental test, an experimental test that is successful when the first is not successful, does not necessarily exist. Going back to the previous example, the procedure never finishes in the case that black swans do not exist so we cannot use it to confirm that case. Because of non-termination, no success does not necessarily mean failure. In fact, it is a result of computability theory that some problems are undecidable: they do not allow the construction of an algorithm that always leads to a correct yes-or-no answer.
 
 In the same vein, we are able to confirm experimentally that \emph{the mass of the neutrino is not exactly zero} but we are not able to confirm \emph{the mass of the photon is exactly zero}. We always have uncertainty in our measurement: we can't simply arbitrarily pick one value as this would contradict our principle of objectivity. What this means is that not all answers to the same question can be equally verified. Is the mass of the photon exactly zero? We can either give a precise ``no" or an imprecise ``it's within this range." Is there extra-terrestrial life? We can either give a precise ``yes" or an imprecise ``we haven't found it so far."\footnote{Note that we are on purpose avoiding induction. It cannot have any role in a fundamental theory of scientific investigation since it violates the principle of objectivity. Induction is an extremely useful mental shortcut that can be used to point us in the right direction, but giving it a central role in science just creates confusion. Induction is scaffolding and removing it is necessary to claim that a given conceptual framework is mature.}
 
 
 
 \begin{mathSection}
-	\emph{Remark}. The \textbf{negation or logical NOT} of an experimental test is not necessarily an experimental test.
+	\emph{Remark}. The \textbf{negation or logical NOT} of an experimental test does not necessarily exist.
 \end{mathSection}
 
 Combining experimental test with conjunction (i.e. the logical AND) is more straightforward. To verify that \emph{``the sauce is sweet and sour"} we can first test that \emph{``the sauce is sweet"} and then that \emph{``the sauce is sour"}. If both are successful, then the conjunction is successful. That is: if we have two or more experimental tests, we can aways test the logical AND for success by checking one at a time if all tests are successful. Yet, the number of tests needs to be finite or we would never terminate.
