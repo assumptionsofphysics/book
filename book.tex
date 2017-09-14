@@ -25,42 +25,78 @@ As a consequence of this connection, we can fully understand why these mathemati
 Science is the systematic study of the physical world through observation and experimentation. Therefore we start our discussion introducing the following principle that formally captures that idea.
 
 \begin{mathSection}
-	\textbf{Principle of objectivity}.
+	\textbf{Principle of scientific objectivity}.
 		Science is universal, non-contradictory and evidence based.
 \end{mathSection}
 
-The main objective in stating this principle is to make clear what is the domain of scientific investigation and acknowledge its limits. Statements like \statement{jazz is marvelous} or \statement{green and red go well together} are not suitable scientific as they are not universal. That is, there is no agreed upon definition or procedure for what constitutes marvelous music or good color combination. This does not mean that marvelous music or good color combinations do not exist or are not worth studying. They just can't be the subject of scientific inquiry.\footnote{In fact, one can argue that most of the things that make life worth living (e.g. love, friendship, arts, purpose and so on) defy objective characterization and therefore that science gives us certain truth only on things that don't matter that much.} If we choose to do science, then, we are limiting ourselves to those assertions that are either true or false (i.e. non-contradictory) for everybody (i.e. universal): assertions that have a single truth value.
+The main goal in stating this principle is to make clear what the domain of scientific investigation is and acknowledge its limits. For example, assertions like \statement{jazz is marvelous} or \statement{green and red go well together} cannot be the subject of scientific inquiry as they are not objective. That is, there is no agreed upon definition or procedure for what constitutes marvelous music or good color combination. This does not mean that marvelous music or good color combinations do not exist or are not worth studying. They just can't be the subject of scientific inquiry.\footnote{In fact, one can argue that most of the things that make life worth living (e.g. love, friendship, arts, purpose and so on) defy objective characterization and, therefore, that science gives us certain truth about trifling matters.} If we choose to do science, then, we are limiting ourselves to those assertions that are either true or false (i.e. non-contradictory) for everybody (i.e. universal): assertions that have a single truth value.
 
 \begin{mathSection}
+\begin{defn}
+	The \textbf{Boolean domain} is the set $\mathbb{B} = \{\FALSE, \TRUE\}$ of all possible truth values.
+\end{defn}
+
 
 \begin{defn}\label{def_statement}
-	A \textbf{statement} $\stmt{s}$ is a declarative sentence that is either true or false. Formally, a statement is just an element of the set $\mathcal{S}$ of all statements. Moreover, there exists a function $\truth: \mathcal{S} \to \{\textsc{true}, \textsc{false}\}$ that returns the truth value for each element.
+	A \textbf{statement} $\stmt{s}$ is a declarative sentence that is either true or false. Formally, a statement is an element of the set $\mathcal{S}$ of all statements upon which is defined a function $\truth: \mathcal{S} \to \mathbb{B}$ that returns the truth value for each element.
 \end{defn}
 
 \end{mathSection}
 
-Statements are the first building block of our general theory of science. Any language can be used to form them, formal or natural, as indeed any language is used in practice. Scientific investigation in the broad sense of learning from experimentation predates math and formal languages: information about agriculture, astronomy, metallurgy, botany and the like were collected and used even before the written word. Moreover, cognitive scientists have shown that children start using deliberate experimentation at a very young age to understand the world around them, even before their speech is fully developed. Ultimately, that knowledge is encoded in the language of electrical and biochemical signals. Formal languages are indeed extremely helpful in that they allow to be more precise and to better keep track of possible inconsistencies, but ultimately one always needs natural language to give meaning and context to the mathematical symbols. 
+Statements are the first building block of our general theory of science and we are borrowing them from the established philosophical tradition of classical logic. Any language can be used to form them, formal or natural, as indeed any language is used in practice. Scientific investigation in the broad sense of learning from experimentation predates math and formal languages: information about agriculture, astronomy, metallurgy, botany and the like were collected and used even before the written word. Moreover, cognitive scientists have shown that children start using deliberate experimentation at a very young age to understand the world around them, even before their speech is fully developed. Ultimately, that knowledge is encoded in the language of electrical and biochemical signals. Formal languages are indeed extremely helpful in that they allow to be more precise and to better keep track of possible inconsistencies, but ultimately one always needs natural language to give meaning and context to the mathematical symbols. 
 
-Since any language is allowed, the particular syntax of the language used to write the statements is not of interested. That is, we are not going to care what particular symbols and particular grammar rules are used. In fact, even a grammatically incorrect statement is fine as long as the intent is clear. What we are going to care about is the semantics of the statements (i.e. their content and meaning) and their truth value. Therefore we need a few simple operations that allow us to compare and contrast the content of different statements and to build statements whose truth values are a function of others. These are not operations within the language: they are operations about the language or meta-operations.
+Since any language is allowed, the particular syntax of the language used to write the statements is not of interested. That is, we are not going to care what particular symbols and particular grammar rules are used. In fact, even a grammatically incorrect statement is fine as long as the intent is clear. On the other hand, we are going to care about the semantics of the statements (i.e. their content and meaning). Therefore we need to extend the idea of a statement so that we can define a few simple operations that allow us to compare and contrast the content of different statements.
 
-
-First we want to keep track when the truth of a statement is a function of the truth of the other statements. For example, \statement{that animal is a cat} and \statement{that animal is not a cat} can't both be true. Fortunately, it is a result of Boolean algebra that all such relationships can be expressed by combining the following three simple operations.
+As a first step, we want to avoid assigning truths that are inconsistent with the content of the statement.  We want to avoid saying that contradictory statements such as \statement{that cat is a bird} are true or that obvious statements such as \statement{that cat is an animal} are false. The content of the statement, then, is such that it defines what possible truth values the statement is allowed to take.
 
 \begin{mathSection}
-	\begin{defn}
-		The \textbf{negation or logical NOT} of a statement $\stmt{s}$ is the statement $\NOT\stmt{s}$ with the opposite truth value. Formally, for any $\stmt{s} \in \mathcal{S}$ there exists $\NOT\stmt{s} \in \mathcal{S}$ such that if $\truth(\stmt{s}) = \TRUE$ then $\truth(\NOT \stmt{s}) = \FALSE$ and if $\truth(\stmt{s}) = \FALSE$ then $\truth(\NOT \stmt{s}) = \TRUE$.
+	
+	\begin{defn}\label{def_possibilities}
+		The \textbf{possibilities} of a statement $\stmt{s}$ are the possible truth values allowed by the content of the statement. Formally, on the set $\mathcal{S}$ of all statements is also defined a function $\poss: \mathcal{S} \to \{\{\FALSE, \TRUE\},\{\FALSE\},\{\TRUE\}\}$ such that $\truth(\stmt{s}) \in \poss(\stmt{s})$ for all $\stmt{s} \in \mathcal{S}$.
 	\end{defn}
 	
 	\begin{defn}
-		The \textbf{conjunction or logical AND} of a set of statements $S$ is the statement $\bigAND\limits_{\stmt{s} \in S} \stmt{s}$ (or simply $\stmt{s}_1 \AND \stmt{s}_2$ for two statements) that is true only when all statements in $S$ are true. Formally, for any $S \subseteq \mathcal{S}$ there exists $\bigAND\limits_{\stmt{s} \in S} \stmt{s} \in \mathcal{S}$ such that $\truth(\bigAND\limits_{\stmt{s} \in S} \stmt{s}) = \TRUE$ if and only if $\truth(\stmt{s}) = \TRUE$ for all $\stmt{s} \in S$.
+		A \textbf{tautology} $\tautology$ is a statement that must be true simply because of its content. That is, $\poss(\stmt{s}) = \{\TRUE\}$.
 	\end{defn}
 	
 	\begin{defn}
-		The \textbf{disjunction or logical OR} of a set of statements $S$ is the statement $\bigOR\limits_{\stmt{s} \in S} \stmt{s}$ (or simply $\stmt{s}_1 \OR \stmt{s}_2$ for two statements) that is true only if at least one statement in $S$ is true. Formally, for any $S \subseteq \mathcal{S}$ there exists $\bigOR\limits_{\stmt{s} \in S} \stmt{s} \in \mathcal{S}$ such that $\truth(\bigOR\limits_{\stmt{s} \in S} \stmt{s}) = \TRUE$ if and only if $\truth(\stmt{s}) = \TRUE$ for at least one $\stmt{s} \in S$.
+		A \textbf{contradiction} $\contradiction$ is a statement that must be false simply because of its content. That is, $\poss(\stmt{s}) = \{\FALSE\}$.
+	\end{defn}
+	
+\end{mathSection}
+
+Therefore we say \statement{that cat is a bird} is a contradiction while \statement{that cat is an animal} is a tautology.
+
+Next we want to keep track when the truth of a statement is a function of the truth of other statements. For example, \statement{that animal is a cat} and \statement{that animal is not a cat} can't both be true. As there are no limits in the way we can logically combine assertions, we will assume we can create any arbitrary function of any set of statements.
+
+\begin{mathSection}
+	\begin{defn}\label{def_functions_of_statement}
+		We can always construct a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally: given an arbitrary set of statements $S \subseteq \mathcal{S}$ and an arbitrary truth function $f : \mathbb{B}^{|S|} \to \mathbb{B}$ whose arity (i.e. number of arguments) matches the cardinality of $S$,  there exists a unique statement in $\mathcal{S}$, noted as $f(S)$, such that:
+		\begin{itemize}
+			\item its truth value is the result of the truth function: \newline $\truth(f(S)) = f(\truth(S))$
+			\item its possibilities are consistent with the truth function: \newline $\poss(f(S)) \subseteq f(\bigtimes\limits_{s\in S}\poss(s))$
+			\item all possibilities for all arguments are allowed: for every $t_i \in \poss(s_i)$ of every $s_i \in S$ there exists a combination of possibilities $T \in \bigtimes\limits_{s\in S}\poss(s)$ such that the value for $i$-th argument is $t_i$ and  $f(T) \in \poss(f(S))$.
+		\end{itemize}
 	\end{defn}
 \end{mathSection}
 
-Taken as a whole, these operations form the \textbf{Boolean algebra of statements}. Here is a table with a few examples that show how these logical operations work.
+A notable result of Boolean algebra is that all truth functions can be expressed by combining the following three simple operations.
+
+\begin{mathSection}
+	\begin{defn}
+		The \textbf{negation or logical NOT} is the function $\NOT : \mathbb{B} \to \mathbb{B}$ that takes a truth value and returns its opposite. That is: $\NOT \TRUE = \FALSE$ and $\NOT \FALSE = \TRUE$.
+	\end{defn}
+	
+	\begin{defn}
+		The \textbf{conjunction or logical AND} is the function $\AND : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ that returns $\TRUE$ only if all the arguments are $\TRUE$. That is: $\TRUE \AND \TRUE = \TRUE$ and $\TRUE \AND \FALSE =\FALSE \AND \TRUE =\FALSE \AND \FALSE = \FALSE$.
+	\end{defn}
+	
+	\begin{defn}
+		The \textbf{disjunction or logical OR} is the function $\OR : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ that returns $\FALSE$ only if all the arguments are $\FALSE$. That is: $\FALSE \AND \FALSE = \FALSE$ and $\TRUE \AND \FALSE =\FALSE \AND \TRUE =\TRUE \AND \TRUE = \TRUE$.
+	\end{defn}
+\end{mathSection}
+
+Each of these operations defined on the truth value will have a corresponding operation on statements. As an example, here is a table that show how these logical operations work.
 \begin{table}[h]
 	\centering
 	\begin{tabular}{p{0.2\textwidth} p{0.1\textwidth} p{0.1\textwidth} p{0.5\textwidth}}
@@ -74,32 +110,51 @@ Taken as a whole, these operations form the \textbf{Boolean algebra of statement
 	\caption{Boolean operations on statements}
 \end{table}
 
-While all languages have similar operations within them, we should consider the ones defined here as meta-operations that are defined outside the language of the statements. For example, \statement{x is the position of a ball}$\AND$\statement{$\,\frac{d^2 x}{dt^2} = - g$} stitches together an English statement with a calculus statement into a new statement that is neither. This kind of mix is exactly what happens in science.
-
-
-%TODO: Make a nice extra box about syntax vs semantics
-
-Next we want to avoid assigning truths that are inconsistent with the content of the statement.  We want to avoid saying that contradictory statements such as \statement{that cat is a bird} are true or that obvious statements such as \statement{that cat is an animal} are false. This means we not only want to talk about the truth value of a statement, but also what possible truth values are even allowed by the content of the statement itself.
+Negation, conjunction and disjunction form, as a group, the two elements Boolean algebra. Any function can be expressed into its \textbf{disjunctive normal form} by using only these three operations. The idea is to create one term for each combination of arguments that returns $\TRUE$ and using the disjunction to combine them together. For example, the statement \statement{the sauce is sweet and sour or neither} can be expressed as $(\stmt{s}_1 \AND \stmt{s}_2) \OR (\NOT \stmt{s}_1 \AND \NOT \stmt{s}_2)$ and the statement \statement{the sauce is not sweet and sour} can be expressed as $(\stmt{s}_1 \AND \NOT \stmt{s}_2) \OR (\NOT \stmt{s}_1 \AND \stmt{s}_2) \OR (\NOT \stmt{s}_1 \AND \NOT \stmt{s}_2)$.
 
 \begin{mathSection}
-	
-	\begin{defn}\label{def_possibilities}
-		The \textbf{possibilities} of a statement $\stmt{s}$ are the possible truth values allowed by the content of the statement. Formally, let $\mathcal{S}$ be the set of all statements then there exists a function $\poss: \mathcal{S} \to \{\{\textsc{true}, \textsc{false}\},\{\textsc{true}\},\{\textsc{false}\}\}$ such that $\truth(\stmt{s}) \in \poss(\stmt{s})$ for all $\stmt{s} \in \mathcal{S}$.
-	\end{defn}
-	
-	\begin{defn}
-		A \textbf{tautology} $\tautology$ is a statement that must be true simply because of its content. That is, $\poss(\stmt{s}) = \{\TRUE\}$.
-	\end{defn}
-	
-	\begin{defn}
-		A \textbf{contradiction} $\contradiction$ is a statement that must be false simply because of its content. That is, $\poss(\stmt{s}) = \{\FALSE\}$.
-	\end{defn}
-	
+	\begin{prop}\label{prop_disjunctive_normal_form}
+		Any function $f : \mathbb{B}^n \to \mathbb{B}$ that takes $n$ truth values and returns a truth values, which we call a \textbf{truth function}, can be expressed in its \textbf{disjunctive normal form} by using only the negation, conjunction and disjunction of the arguments. Formally, $f(t_1, ..., t_n) =\bigOR \limits_{i=1}^m \left( \bigAND \limits_{j=1}^n (\NOT)^{a_{ij}} \, t_j \right)$ where $m \in \mathbb{N}$, $a_{ij} \in \mathbb{B}$, $\NOT ^ \TRUE \, t_j = t_j$ and $\NOT ^ \FALSE \, t_j = \NOT t_j$.
+	\end{prop}
+	\begin{proof}
+		We first show that this can be done for a function that returns $\TRUE$ for a unique combination of values. Let $a_1, ..., a_n \in \mathbb{B}$ be $n$ truth values. Let $f_1: \mathbb{B}^n \to \mathbb{B}$ be a function such that $f_1(t_1, ..., t_n) = \TRUE$ if and only if $t_j = a_j$ for all $j=1...n$. Let a \textbf{minterm} be a conjunction where each function argument $t_j$ appears once and only once, negated or not. Consider the minterm $\bigAND \limits_{j=1}^n (\NOT)^{a_{j}} \, t_j$. Each argument $t_j$ appears once and is negated or not depending on the value of $a_j$. If any $t_j \nequal a_j$ then one term will be $\FALSE$ and the whole expression will be $\FALSE$. Then we have $f_1(t_1, ..., t_n) = \bigAND \limits_{j=1}^n (\NOT)^{a_{j}} \, t_j$ since they return the same values for the same arguments.
+		
+		Now we generalize the result for arbitrary functions. Let $f : \mathbb{B}^n \to \mathbb{B}$ be a truth function. Let $m \in \mathbb{N}$ be the number of value combinations for which $f(t_1, ..., t_n) = \TRUE$. For each value combination $i=1..m$ let $a_{ij} \in \mathbb{B}$ be the sequence of values. Then $f_i = \bigAND \limits_{j=1}^n (\NOT)^{a_{ij}} \, t_j$ is the minterm for each value combination. Consider $\bigOR \limits_{i=1}^m f_i$. This function returns $\TRUE$ if and only if the arguments match one of the value combinations for which $f$ returns $\TRUE$. Then we have $f(t_1, ..., t_n) =\bigOR \limits_{i=1}^m \left( \bigAND \limits_{j=1}^n (\NOT)^{a_{ij}} \, t_j \right)$ since they return the same values for the same arguments.
+	\end{proof}
 \end{mathSection}
 
-Therefore we say \statement{that cat is a bird} is a contradiction while \statement{that cat is an animal} is a tautology. Note that \statement{that cat is a cat} is also a tautology and this time we do not even need to know the meaning of the word cat. Some tautologies are independent of meaning and can be shown to be tautologies just based on the syntax of the language and how symbols can be manipulated. We are not going to distinguish between these two kinds in this context.\footnote{Formal languages are useful precisely because they help us find these tautologies of syntactic nature. In mathematics these syntactic tautologies are called theorems.}
+Note that the idea that all truth functions can be broken down into a few basic logic operations is what allows us to build computers. All electronic circuits are implemented from basic building block that perform some permutation of the Boolean operations. Also note that while languages typically have similar operations within them, we should consider the ones defined here as meta-operations that are defined outside the language of the statements. For example, \statement{x is the position of a ball}$\AND$\statement{$\,\frac{d^2 x}{dt^2} = - g$} stitches together an English statement with a calculus statement into a new statement that is neither. This kind of mix is exactly what happens in science.
 
-In the same vein we need to tell when two statements have the same content. For example \statement{that animal is a cat}, \statement{that creature is a cat} and \statement{quell'animale \`{e} un gatto} all mean the same thing. It would be inconsistent to assign different truth values to them.
+Since the disjunctive normal form allows us to write all functions in terms of just negation, conjunction and disjunction, it is sufficient to study those operations to understand the properties of all functions. Given the previous definitions, we can deduce the following.
+
+\begin{mathSection}
+	\begin{prop}
+		The set of all statements $\mathcal{S}$ is closed under negation, arbitrary intersection and arbitrary union.
+	\end{prop}
+	\begin{proof}
+		Negation, arbitrary intersection and arbitrary union are particular truth functions. The statement associated with them always exists by definition  \eqref{def_functions_of_statement}.
+	\end{proof}
+	\begin{prop}
+		The set of all statements $\mathcal{S}$ satisfies the following properties:
+		\begin{itemize}
+			\item associativity: $a \OR (b \OR c) = (a \OR b) \OR c$, $a \AND (b \AND c) = (a \AND b) \AND c$
+			\item commutativity: $a \OR b = b \OR a$, $a \AND b = b \AND a$
+			\item absorption: $a \OR (a \AND b) = a$, $a \AND (a \OR b) = a$
+			\item identity: $a \OR \contradiction = a
+			$, $a \AND \tautology = a$
+			\item distributivity: $a \OR (b \AND c) = (a \OR b) \AND (a \OR c)$, $a \AND (b \OR c) = (a \AND b) \OR (a \AND c)$
+			\item complements: $a \OR \NOT a = \tautology$, $a \AND \NOT a = \contradiction$
+		\end{itemize}
+		and is therefore a Boolean algebra.
+	\end{prop}
+	\begin{proof}
+		The left and right expression for each property correspond to the same truth function applied to the same statements. Therefore, by definition  \eqref{def_functions_of_statement}, they correspond to the same statement.
+	\end{proof}
+\end{mathSection}
+
+These operations and properties define the \textbf{algebra of statements}. Note that statements naturally inherit all the logical identities of classical logic from the properties of truth functions. This is exactly what we needed if we are to avoid assigning inconsistent truth values to statements that are related. 
+
+The last step is to keep track when two statements are different but have the same content. For example \statement{that animal is a cat}, \statement{that creature is a cat} and \statement{quell'animale \`{e} un gatto} all mean the same thing. It would be inconsistent to assign different truth values to them.
 
 \begin{mathSection}
 
@@ -109,7 +164,7 @@ In the same vein we need to tell when two statements have the same content. For 
 
 \end{mathSection}
 
-The above definitions allow us to create specific relationships between statements. Consider the contents of the following:
+Note that this definition is based simply on the previous definitions and it is consistent with equality: all statements are equivalent to themselves. Moreover, equivalence also allows us to capture specific relationships between statements. Consider the contents of the following:
 \begin{enumerate}
 	\item \statement{that animal is a cat}
 	\item \statement{that animal is a mammal}
@@ -126,22 +181,33 @@ The second will be true whenever the first is true. The third will be false when
 		\item $\stmt{s}_1$ \textbf{is narrower than} $\stmt{s}_2$ (noted $\stmt{s}_1 \narrower \stmt{s}_2$) if $\stmt{s}_2$ is true whenever $\stmt{s}_1$ is true simply because of their content. That is, $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \contradiction$.
 		\item $\stmt{s}_1$ \textbf{is broader than} $\stmt{s}_2$ (noted $\stmt{s}_1 \broader \stmt{s}_2$) if $\stmt{s}_2 \narrower \stmt{s}_1$.
 		\item $\stmt{s}_1$ \textbf{is compatible to} $\stmt{s}_2$ (noted $\stmt{s}_1 \comp \stmt{s}_2$) if their content allows them to be true at the same time. That is, $\stmt{s}_1 \AND \stmt{s}_2 \nequiv \contradiction$.
-		\item $\stmt{s}_1$ \textbf{is independent from} $\stmt{s}_2$ (noted $\stmt{s}_1 \indep \stmt{s}_2$) if their content is such that the truth of one does not imply the truth of the other. That is, $(\stmt{s}_1 \comp \stmt{s}_2)$, $(\NOT\stmt{s}_1 \comp \NOT\stmt{s}_2)$, $(\stmt{s}_1 \nnarrower \stmt{s}_2)$ and $(\stmt{s}_1 \nbroader \stmt{s}_2)$. Two statements that are not independent are also said to be \textbf{correlated}.
+
 	\end{itemize}
-	The negation of these properties will be noted by $\nnarrower$, $\nbroader$ , $\ncomp$, $\nindep$ respectively.
+	The negation of these properties will be noted by $\nnarrower$, $\nbroader$ , $\ncomp$ respectively.
+\end{defn}
+\begin{defn}
+	The elements of a set of statements $S \subseteq \mathcal{S}$ are said \textbf{independent} (noted $\stmt{s}_1 \indep \stmt{s}_2$ for a set of two) if their content is such that any combination of their possibilities are allowed. That is, $\poss(f(S)) = f(\bigtimes_{x \in S} \poss(s))$ for any truth function $f : \mathbb{B}^{|S|} \to \mathbb{B}$. The negation of independence, will be noted by $\nindep$.
 \end{defn}
 
 \end{mathSection}
 
 In the example before: the first statement is narrower than the second (1 $\narrower$ 2), is incompatible with the third (1 $\ncomp$ 3) and is independent from the fourth (1 $\indep$ 4).
 
-With these tools in place we are in a position to formulate scientific models that are consistent. These models will be a collection of statements with a well defined content, whose truth value will be discovered experimentally.
+Note that independence is not transitive and pair-wise independence is not sufficient. Consider the following statements for an ideal gas:
+\begin{enumerate}
+	\item \statement{the pressure is $101\pm1$ kPa}
+	\item \statement{the volume is $1\pm0.1$ $m^3$}
+	\item \statement{the temperature is $293\pm1$ Kelvin}
+\end{enumerate}
+Since the three quantities are linked by the equation of state $PV=nRT$, any two statements are independent but the three together aren't. Also note it is the notion of possibilities for the statements that allows us to define all the operations, like equivalence and independence, that allow us to keep track of the semantic relationships between statements. 
+
+With these tools in place we are in a position to formulate scientific models that are universal and non-contradictory. These models will be a collection of statements with a well defined content, whose truth value will be discovered experimentally.
 
 \section{Experimental tests}
 
-The previous section took care of universality and non-contradiction, but the principle of objectivity requires science to be evidence based. For example, \statement{the square of the hypotenuse is equal to the sum of the squares of the other two sides} or \statement{God is eternal} are not suitable scientific statements as they involve objects that are not physical in nature. As we cannot define those objects experimentally, they depend on what basic axioms or definitions we take as a starting point. For example, the first statement is not true in non-Euclidean geometry and the concept of God has evolved significantly throughout the millennia. Again, this does not mean these concepts are of less significance, just that they cannot be the subject of scientific inquiry.\footnote{In fact, one may be more interested in them precisely because of their abstract, and therefore less transient, nature.}
+The previous section took care of universality and non-contradiction, but the principle of scientific objectivity requires science to be evidence based. For example, \statement{the square of the hypotenuse is equal to the sum of the squares of the other two sides} or \statement{God is eternal} are not suitable scientific statements as they involve objects that are not physical in nature. As we cannot define those objects experimentally, they depend on what basic axioms or definitions we take as a starting point. For example, the first statement is not true in non-Euclidean geometry and the concept of God has evolved significantly throughout the millennia. Again, this does not mean these concepts are of less significance, just that they cannot be the subject of scientific inquiry.\footnote{In fact, one may be more interested in them precisely because of their abstract, and therefore less transient, nature.}
 
-Limiting the scope of our discussion to objects and properties that are well defined physically is still not enough. For example, \emph{``the electron is green"} or \emph{``1 meter is equal to 5 Kelvin"} are still not suitable scientific statements as the relationships established are not physically meaningful. Even when the relationship is meaningful, we may still not be able to validate it experimentally. For example, \emph{``there is no extra-terrestrial life"} or \emph{``the mass of the electron is exactly $9.109 \times 10^{-31}$ kg"} are not something we can validate experimentally. In the first case, we would need to check every corner of the universe and find none, with the closest galaxy like ours, Andromeda, being 2.5 millions light-years away; in the second case, we will always have an error bar, however small.
+Limiting the scope of our discussion to objects and properties that are well defined physically is still not enough. For example, \emph{``the electron is green"} or \emph{``1 meter is equal to 5 Kelvin"} are still not suitable scientific statements as the relationships established are not physically meaningful. Even when the relationship is meaningful, we may still not be able to validate it experimentally. For example, \emph{``there is no extra-terrestrial life"} or \emph{``the mass of the electron is exactly $9.109 \times 10^{-31}$ kg"} are not statements that can be verified in practice. In the first case, we would need to check every corner of the universe and find none, with the closest galaxy like ours, Andromeda, being 2.5 millions light-years away; in the second case, we will always have an uncertainty associated with the measurement, however small.
 
 So we have to narrow the scope to those and only those statements that can be verified experimentally. That is, we have to provide a repeatable (i.e. non-contradictory) experimental procedure (i.e. evidence based) that anyone (i.e. universal) can in principle execute. This is both the power and the limit of scientific inquiry: it gives us a way to construct a coherent description of the physical world but it is limited to those aspects that can be reliably studied experimentally.
 
@@ -151,9 +217,7 @@ So we have to narrow the scope to those and only those statements that can be ve
 \end{defn}
 \end{mathSection}
 
-Experimental tests are the second and last building block of our general theory of science. As with statements, any language can in principle be used to describe the procedure, which can be arbitrarily complicated. It may require building detectors, gathering large amount of data and performing complicated computations. We are not going to care how these procedure are described, just that it is done in a way that allows us to execute the test.
-
-As an example, the following is sufficient to define an experimental test:
+As an example, the following procedure defines an experimental test:
 \begin{enumerate}
 	\item find a swan
 	\item if it's black terminate successfully
@@ -161,40 +225,42 @@ As an example, the following is sufficient to define an experimental test:
 \end{enumerate}
 If a black swan exists, at some point we'll find it and the test will be successful. If a black swan does not exist, then the procedure will never terminate and the result is undefined.
 
-Similarly to statements, we want to define experimental tests whose success is a function of other experimental tests. This is not as straight forward as with statements: this time we need to make sure we actually can create a suitable experimental procedure in practice and this is not always possible.
+Experimental tests are the second and last building block of our general theory of science. As with statements, any language can in principle be used to describe the procedure, which can be arbitrarily complicated. It may require building detectors, gathering large amount of data and performing complicated computations. We are not going to care how these procedure are described, just that it is done in a way that allows us to execute the test.
 
-The first important result, in fact, is that the negation of an experimental test, an experimental test that is successful when the first is not successful, does not necessarily exist. Going back to the previous example, its negation would be a procedure that terminates successfully if black swans do not exist. But the given procedure never finishes in that case so it is not just a matter to switch success with failure. Because of non-termination, no success does not necessarily mean failure.\footnote{In this case, the old adage ``absence of evidence is not evidence of absence" applies.} As we would need an altogether different procedure, there is nothing that guarantees us that such procedure must exist. Moreover, it is a result of computability theory that some problems are undecidable: they do not allow the construction of an algorithm that always terminates with a correct yes-or-no answer. So we know that in some cases this is not actually possible.
+Similarly to statements, we want to define experimental tests whose success is a function of other experimental tests. This is not as straight forward as with statements: this time we need to make sure we actually can create a suitable experimental procedure in practice and this is not always possible. What we do, then, is to study how experimental tests combine under the three basic Boolean operations.
 
-In the same vein we are able confirm experimentally that \statement{the mass of this particle is not zero} but not that \statement{the mass of this particle is exactly zero} since we always have uncertainty in our measurements of mass. Even if we could continue shrinking the uncertainty arbitrarily, we would ideally need infinite time to shrink it to zero. What this means is that not all answers to the same question can be equally verified. Is the mass of the photon exactly zero? We can either give a precise ``no" or an imprecise ``it's within this range." Is there extra-terrestrial life? We can either give a precise ``yes" or an imprecise ``we haven't found it so far."\footnote{Note that we are on purpose avoiding induction. It cannot have any role in a fundamental theory of scientific investigation since it violates the principle of objectivity. Induction is an extremely useful mental shortcut that can be used to point us in the right direction, but giving it a central role in science just creates confusion. How and when to use induction is arbitrary and therefore violates the principle of objectivity. We should think of induction like scaffolding when constructing a building: its removal is necessary to claim that the work is done.}
+The first important result is that the negation of an experimental test, an experimental test that is successful when the first is not successful, does not necessarily exist. Going back to the previous example, its negation would be a procedure that terminates successfully if black swans do not exist. But the given procedure never finishes in that case, so it is not just a matter to switch success with failure. Because of non-termination, not-successful does not necessarily mean failure.\footnote{In this case, the old adage ``absence of evidence is not evidence of absence" applies.} Note that in many cases one may construct the negation of an experimental test, but there is nothing that guarantees us that it must exist a priori as we can't construct it in general. Moreover, it is a result of computability theory that some problems are undecidable: they do not allow the construction of an algorithm that always terminates with a correct yes-or-no answer. So we know that in some cases this is not actually possible.
+
+In the same vein we are able confirm experimentally that \statement{the mass of this particle is not zero} but not that \statement{the mass of this particle is exactly zero} since we always have uncertainty in our measurements of mass. Even if we could continue shrinking the uncertainty arbitrarily, we would ideally need infinite time to shrink it to zero. What this means is that not all answers to the same question can be equally verified. Is the mass of the photon exactly zero? We can either give a precise ``no" or an imprecise ``it's within this range." Is there extra-terrestrial life? We can either give a precise ``yes" or an imprecise ``we haven't found it so far."\footnote{Note that we are on purpose avoiding induction. It cannot have any role in a fundamental theory of scientific investigation since the decision of when and how to apply it violates the principle of objectivity. Induction is an extremely useful mental shortcut that can be used to point us in the right direction, but giving it a central role in science just creates confusion. We should think of induction like scaffolding when constructing a building: its removal is necessary to claim that the work is done.}
 
 
 \begin{mathSection}
 	\emph{Remark}. The \textbf{negation or logical NOT} of an experimental test does not necessarily exist.
 \end{mathSection}
 
-Combining experimental tests with conjunction (i.e. the logical AND) is more straightforward. To verify that \emph{``the sauce is sweet and sour"} we can first test that \emph{``the sauce is sweet"} and then that \emph{``the sauce is sour"}. If both are successful, then the conjunction is successful. That is, if we have two or more experimental tests, we can aways test the logical AND for success by checking one at a time if all tests are successful. Yet, the number of tests needs to be finite or we would never terminate.
+Combining experimental tests with conjunction (i.e. the logical AND) is more straightforward. If are able to verify that \emph{``the sauce is sweet"} and that \emph{``the sauce is sour"}, we can verify that \emph{``the sauce is sweet and sour"} by executing both. If both are successful, then the conjunction is successful. That is, if we have two or more experimental tests, we can aways test the logical AND for success by checking one at a time if all tests are successful. Yet, the number of tests needs to be finite or we would never terminate.
 
 \begin{mathSection}
-	\begin{defn}
+	\begin{defn}\label{def_experimental_test_AND}
 	The \textbf{conjunction or logical AND} of a finite collection of experimental tests $\{\expt{e}_i\}_{i=1}^{n}$ is the experimental test $\bigAND\limits_{i=1}^{n} \expt{e}_i$ (or simply $\expt{e}_1 \AND \expt{e}_2$ for two statements) that is successful only when all experimental tests are successful. Formally, for any finite collection $\{\expt{e}_i\}_{i=1}^{n} \subseteq \mathcal{E}$ there exists $ \bigAND\limits_{i=1}^{n} \expt{e}_i \in \mathcal{E}$ such that $\result(\bigAND\limits_{i=1}^{n} \expt{e}_i) = \SUCCESS$ if and only if $\result(\expt{e}_i) = \SUCCESS$ for all $i=1..n$.
 	\end{defn}
-	\begin{proof}
+	\begin{justification}
 		Mathematically, we are simply assuming that the finite conjunction exists, so there it nothing to prove. However, we want to convince ourselves that in practice we can construct the test to show that the assumption is well justified. Let $\bigAND\limits_{i=1}^{n} \expt{e}_i$ be the experimental procedure defined as follows:
 		\begin{enumerate}
 			\item for each $i=1..n$ run the test $\mathsf{e}_i$
 			\item if all tests terminated successfully terminate successfully.
 		\end{enumerate}
 		The experimental procedure so defined terminates successfully if and only if all $\mathsf{e}_i$ terminate successfully as per the definition.
-	\end{proof}
+	\end{justification}
 \end{mathSection}	
 
-Combining experimental tests with disjunction, i.e. the logical OR, is also straightforward. To verify that \emph{``the sauce is at least sweet or sour"} we can first test that \emph{``the sauce is sweet"}. If that is verified that's enough: the sauce is at least sour. If not, we test that \emph{``the sauce is sour"}. That is, if we have two or more experimental tests we can always test the logical OR for success just by stopping at the first test that is successful. Because we stop at the first success, the number of observations we combine in a logical OR can be countably infinite. As long as one test succeeds, which will always be the case when the overall test succeeds, it does not matter how many elements we are not going to verify later. But it cannot be more than countably infinite since the only way we have to find if one experimental test in the set is successful is testing them all one by one.
+Combining experimental tests with disjunction, i.e. the logical OR, is also straightforward. To verify that \emph{``the sauce is at least sweet or sour"} we can first test that \emph{``the sauce is sweet"}. If that is verified that's enough: the sauce is at least sour. If not, we test that \emph{``the sauce is sour"}. That is, if we have two or more experimental tests we can always test the logical OR for success just by stopping at the first test that is successful. Because we stop at the first success, the number of tests we combine in a logical OR can be countably infinite. As long as one test succeeds, which will always be the case when the overall test succeeds, it does not matter how many elements we are not going to verify later. But it cannot be more than countably infinite since the only way we have to find if one experimental test in the set is successful is testing them all one by one.
 
 \begin{mathSection}
 	\begin{defn}\label{def_experimental_test_OR}
 	The \textbf{disjunction or logical OR} of a (finite or infinite) countable collection of experimental tests $\{\expt{e}_i\}_{i=1}^{\infty}$ is the experimental test $\bigOR\limits_{i=1}^{\infty} \expt{e}_i$ (or simply $\expt{e}_1 \OR \expt{e}_2$ for two statements) that is successful if and only if at least one experimental test in $E$ is successful. Formally, for any countable collection $\{\expt{e}_i\}_{i=1}^{\infty} \in \mathcal{E}$ there exists $ \bigOR\limits_{i=1}^{\infty} \expt{e}_i \in \mathcal{E}$ such that $\result(\bigOR\limits_{i=1}^{\infty} \expt{e}_i) = \SUCCESS$ if and only if $\result(\expt{e}_i) = \SUCCESS$ for some $1 \leq i \leq n$.
 	\end{defn}
-	\begin{proof}
+	\begin{justification}
 		Mathematically, we are simply assuming that the countable disjunction exists, so there it nothing to prove. As before, we want to convince ourselves that in practice we can construct the test to show that the assumption is well justified. This time we have to be more careful to handle tests that may not terminate.
 		Let $\bigOR\limits_{i=1}^{\infty} \expt{e}_i$ be the experimental procedure defined as follows:
 		\begin{enumerate}
@@ -207,16 +273,14 @@ Combining experimental tests with disjunction, i.e. the logical OR, is also stra
 			\item increment $n$ and go to step 2
 		\end{enumerate}
 		The procedure will eventually run all tests for an arbitrary long amount of time. Suppose there exists an $1 \leq i \leq n$ such that $\mathsf{e}_i$ will terminate successfully. Then the above procedure will eventually run that test for a time long enough and terminate successfully.
-	\end{proof}
+	\end{justification}
 \end{mathSection}
 
-Taken as whole, these logical operations define the \textbf{algebra of experimental tests}. It is much more limited than the boolean algebra of statements, but is exactly the structure that will map to topological spaces later.
+Taken as whole, these logical operations define the \textbf{algebra of experimental tests}. It is much more limited than the algebra of statements since it has to account for the limitations of what can practically be accomplished.
 
-Technically, definitions from \ref{def_statement} to \ref{def_possibilities} and from \ref{def_experimental_tests} to \ref{def_experimental_test_OR} are the axioms of our mathematical formalism. Note that the actual content of the statements and the procedure for the tests are left unspecified and in the math they are just treated as a label that we use for identification. The only assumptions are that statements exist (each with a set of possible truth values and an actual truth value), that experimental tests exists (each with a well defined result) and that they both admit the associated algebra. That is: the mathematical formalism does not know what these objects actually are and whether the properties they have make sense in light of that. That is something we are guaranteeing to the math.
+Before we continue, it is interesting to understand how the interplay between physical and mathematical ideas work. Technically, definitions \ref{def_statement}, \ref{def_possibilities}, \ref{def_functions_of_statement}, \ref{def_experimental_tests}, \ref{def_experimental_test_AND} and \ref{def_experimental_test_OR} are the axioms of our mathematical formalism for statements and experimental tests. Note that the actual content of the statements and the procedure for the tests are left unspecified: the math treats them simply as label that we use for identification. The only assumptions are that statements exist (each with a set of possible truth values and an actual truth value), that experimental tests exists (each with a well defined result) and that they both admit the associated algebra. The mathematical formalism does not know what these objects actually are: they may as well be pieces of cardboard painted black or white. Therefore the math does not know whether the properties they have make actual sense: it just knows its consistent. In other words, the way that we are making the framework precise is not by making everything precise: is by omitting the details that are not amenable to a precise specification.
 
-In other words: the way that we are making the framework precise is not by making everything precise: is by omitting the details that are not amenable to a precise specification. It would be very hard to define a language for all past, present and future scientific statements... but we know they are always going to have a truth value. It would be impossible to define a language for all past, present and future ways to construct experimentally test... but we know they will always give a result. That is: we take these extremely complicated and ill defined objects and formalize only some narrow aspect. This is how we can guarantee that the framework is general: it does not depend of those details.
-
-We should stress this for a couple of reasons. First, the part that is not formalized is \emph{the most important part}. Discovering new science is exactly finding new things to study (i.e. new statements) or devising new measurement techniques (i.e. new experimental tests). The content of the statements and the procedure of the experimental test \emph{is} the actual science. What we are doing, in a sense, is the trivial bit and that is why it can be done generally. Second, it has to be clear that something gets lost in the formalization. The mathematical framework cannot carry all the physics content: we removed the most important part! The physics can never be entirely reconstructed from the math and that is why we always have to carefully bring it along. If not, we run the real risk that the math becomes meaningless.
+We should stress this for a couple of reasons. First, the part that is not formalized is \emph{the most important part}. Discovering new science is exactly finding new things to study (i.e. new statements) or devising new measurement techniques (i.e. new experimental tests). The content of the statements and the procedure of the experimental test \emph{is} the actual science. Everything that follows, in a sense, is the trivial bit and that is why it can be done generally. Which leads to the second reason: understanding whether statements and experimental tests \emph{actually} follow the algebras we defined is crucial. The math just takes it at face value, it does not prove it. If we botched the characterization, we'll have a nice, consistent, rich but meaningless mathematical framework. Lastly, it has to be clear that something gets lost in the formalization. The mathematical framework cannot carry all the physics content: we removed the most important part! The physics can never be entirely reconstructed from the math and that is why we always have to carefully bring it along.
 
 \section{Experimental observations and experimental domains}
 
