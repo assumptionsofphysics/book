@@ -340,48 +340,35 @@ The logical operations, though, are affected. To take the conjunction or the dis
 \end{proof}
 \end{mathSection}
 
-We have defined a way to verify each experimental observation by itself, now we have to understand how can we verify groups of them. On one side, we know it will be impossible to verify an uncountable set of experimental observations by going through them one by one. On the other side, if these observations are correlated then we may not have to verify all of them.
+Now that we know how we can verify each experimental observation or their combination, we want to understand how can we verify a group of them. The idea is that we may not need to individually verify all the observations. For example, once we test \statement{the sauce is sweet} and \statement{the sauce is sour}, for example, there will be no need to verify their conjunction \statement{the sauce is sweet and sour}. The test of the latter amounts to running the tests for the former two, which we already did.
 
-The idea is to group experimental observation into sets where we can perform our logical operations but where we can still, at least in principle, find out which ones are verified.
+\begin{mathSection}
+	\begin{defn}
+		Given a set $\mathcal{D}$ of experimental observations, $E \subseteq \mathcal{D}$ is an \textbf{essential subset} if verifying its elements is equivalent to verifying the whole set. Formally, all elements of $\mathcal{D}$ can be generated from $E$ using finite conjunction and countable disjunction.
+	\end{defn}
+\end{mathSection}
+
+The idea is that once we gathered experimentally the truth values of the essential observations, we can deduce the truth values of all other observations by computing the appropriate truth function.
 
 \begin{mathSection}
 \begin{defn}
-	An \textbf{experimental domain} $\mathcal{D}$ is a set of observations closed under finite conjunction and countable disjunction such that all observations can be tested in infinite time. 
+	An \textbf{experimental domain} $\mathcal{D}$ represents all the experimental evidence that can be acquired about a scientific subject in an indefinite amount of time. That is, it is a set of experimental observations that includes the tautology and the contradiction, is closed under finite conjunction and countable disjunction, and allows a countable essential subset.
 \end{defn}
+\begin{justification}
+	As usual, let's make sure the formal definition is consistent with the informal one. The set consists of experimental observations which can be verified experimentally. The set contains the tautology and contradiction since those don't even need to be verified experimentally. Functions of experimental observations represent experimental evidence about the same subject, therefore it is appropriate the experimental domain is closed under finite conjunction and countable disjunction. Given that each test terminates successfully in a finite amount of time, we can only verify a countable set in an indefinite amount of time. Therefore, if the experimental domain didn't allow for a countable essential subset, we would always have experimental observations we would never be able to test.
+\end{justification}
 \end{mathSection}
 
 An experimental domain represents the enumeration of all possible verifiable answers to a scientific question. For example: ``what is that animal?". The domain would include \emph{``it is a mammal"}, \emph{``it is a dog"}, \emph{``it is an animal with feathers"} and so on. If two statements are possible answers to that question, then their conjunction and disjunction will also be possible answers. For example: \emph{``it is a dog or a cat"} or \emph{``it is a mammal and it lays eggs"}.
 
-We only require infinite time, instead of finite time, for the domain because we want to capture those questions that can be answered only approximately. The idea is that, given more time, we can get a better and better answer, but we may not be able to give a perfect answer.
+While each observation only need finite time to be verified, we allow indefinite time for the domain because we want to capture those questions that can be answered only approximately. The idea is that, given more time, we can always get a better answer so, in principle, we have an infinite sequence of tests to perform and continue indefinitely.
 
-As the experimental domain contains conjunctions and disjunctions, not all observations are going to be independent. Therefore it may not be necessary to test all the observations to find which ones are verified.
-
-\begin{mathSection}
-\begin{defn}
-	A \textbf{sub-basis} of an experimental domain $\mathcal{D}$ is any subset that can generate all others via finite conjunction and countable disjunction. A \textbf{basis} of an experimental domain is any subset that can generate all others by countable disjunctions. 
-\end{defn}
-\end{mathSection}
-
-Since all observations of a domain can be expressed as conjunction and/or disjunction of a given sub-basis (of basis), the truth values for all observations can calculated from the truth values of the element of the sub-basis (or basis). So testing all elements of the basis means testing all the observations. And since we must be able to test all observations of a domain in the limit of infinite time, the domain must have a countable basis.
-
-\begin{mathSection}
-
-\begin{prop}
-Let $\mathcal{D}$ be an experimental domain. Then there exists a countable basis (equivalently, sub-basis) $\mathcal{B}$ of $\mathcal{D}$.
-\end{prop}
-
-\begin{proof}
-	First note that the existence of a countable sub-basis implies the existence of a countable basis and vice-versa. On one side, one can generate a countable basis from a countable sub-basis by adding all finite conjunctions, which will not change the cardinality of the infinite set. On the other side, any basis is also a sub-basis by definition.
-	
-	Now we show that there must exists a countable basis. If there exists a countable basis $\mathcal{B}$, then given infinite time one can test all observations in $\mathcal{D}$. Given all truth values for elements of the basis, one can deduce the truth values for the other observations in $\mathcal{D}$ (again using infinite time) by computing the appropriate conjunctions and disjunctions. If there does not exist a countable basis, then by definition there does not exist a sequence of experimental observations in $\mathcal{D}$ from which one can deduce all other observations in $\mathcal{D}$. Hence it is impossible to test all members of $\mathcal{D}$.
-\end{proof}
-
-\end{mathSection}
+The essential subset not only serves as a way to constrain the size of the experimental domain, most of the time will also serve to define the experimental domain itself. We will typically start by characterizing a set of observations (e.g. the set of animals and how to identify them) and then consider the domain of all the observations that can be constructed from them (e.g. the set of all groups of animals we can identify).
 
 \section{Theoretical domains and possibilities}
 
 
-While the negation of an observation is not an observation, it still gives us a statement. It's not one we can readily verify, but it still is a statement that can be used to answer the question at hand. That is: it is a theoretical statement but not an experimental observation. The idea is to group all theoretical statements one could construct from a given experimental domain.
+While the negation of an observation is not an observation, the negation of its statement is still a statement. It may not be one we can readily verify, but it still is one that can be used to characterize the outcome of some experimental test (i.e. if this statement is true then this test will never terminate). That is: it is a theoretical statement but not an experimental observation. To each set of experimental observations, then, we associate a set of theoretical statements that can be used to construct predictions.
 
 \begin{mathSection}
 \begin{defn}
@@ -391,15 +378,15 @@ While the negation of an observation is not an observation, it still gives us a 
 
 A theoretical domain represents all answers to a scientific question, not just the ones we can verify in practice. For example, if our experimental domain contained the experimental observation \emph{``the mass of the photon is not zero"}, its theoretical domain would contain the theoretical statement \emph{``the mass of the photon is exactly zero"} which cannot be experimentally verified.
 
-While the theoretical statement contains more statements, it does not contain more information. That is, if we knew what experimental observation are verified and which aren't, we would automatically know which theoretical statements would be true or not. So it is not adding extra cases. It is essentially completing the list of answers by adding a ``no" if only ``yes" can be experimentally verified and vice-versa.
+While the theoretical statement contains more statements, it does not contain more information. That is, if we knew what experimental observations are verified and which aren't, we would automatically know which theoretical statements would be true or not. So it is not adding extra cases. It is essentially completing the list of answers by adding a ``no" if only ``yes" can be experimentally verified and vice-versa.
 
 \begin{mathSection}
 \begin{prop}
-	The truth value of the statements of a basis $\mathcal{B}$ for an experimental domain $\mathcal{D}$ are enough to determine the truth value for all statements in the associated experimental domain $\bar{\mathcal{D}}$. More formally, all statements in the theoretical domain $\bar{\mathcal{D}}$ can be generated by negation, countable conjunction and countable disjunction from the statements associated to $\mathcal{B}$.
+	The truth value of the statements of an essential set $E$ for an experimental domain $\mathcal{D}$ are enough to determine the truth value for all statements in the associated experimental domain $\bar{\mathcal{D}}$. More formally, all statements in the theoretical domain $\bar{\mathcal{D}}$ can be generated by negation, countable conjunction and countable disjunction from the statements associated to $E$.
 \end{prop}
 
 \begin{proof}
-	By definition of basis, any observation within the experimental domain $\mathcal{D}$ can be generated from $\mathcal{B}$ using only finite conjunction and countable disjunction. Therefore the set $\mathsf{S}$ of all statements associated with an experimental observation in $\mathcal{D}$ can be generated from the set $\mathsf{B}$ of all statements associated with an element of the basis $\mathcal{B}$ using negation, countable conjunction and countable disjunction. As $\mathsf{B}$ generates $\mathsf{S}$, it also generates all elements generated by $\mathsf{S}$. Therefore $\mathsf{B}$ generates $\bar{\mathcal{D}}$.
+	By definition of essential set, any observation within the experimental domain $\mathcal{D}$ can be generated from $E$ using only finite conjunction and countable disjunction. Therefore this relationships will hold between the respective statements. Since the statements associated to $E$ generate, through finite conjunction and countable disjunction, all statements in $\mathcal{D}$ which in turn generate all statements in $\bar{\mathcal{D}}$, then $E$, through negation, countable conjunction and countable disjunction, generates all of $\bar{\mathcal{D}}$.
 \end{proof}
 \end{mathSection}
 
@@ -429,11 +416,11 @@ Both the experimental and the theoretical domains contain answers at different l
 \end{prop}
 
 \begin{proof}
-	Let $\mathsf{s}$ be a statement that determines and only determines all truth values of all statements in a theoretical domain $\bar{\mathcal{D}}$. This is equivalent to determine the truth values and only the truth values of all elements of a basis $\mathcal{B}$ of $\mathcal{D}$. As we can find a countable basis, the statement $\mathsf{s}$ is equivalent to the countable conjunction of statements or negation of statements associated with the basis $\mathcal{B}$. Therefore $\mathsf{s} \in \bar{\mathcal{D}}$ as it is generated by the statements of the basis by countable conjunction. But a statement in $\bar{\mathcal{D}}$ that determines all truth values of the statements in $\bar{\mathcal{D}}$ is a possibility by definition. Therefore $\mathsf{s}$ is a possibility.
+	Let $x \in \mathcal{S}$ be a statement that determines and only determines all truth values of all statements in a theoretical domain $\bar{\mathcal{D}}$. This is equivalent to determine the truth values and only the truth values of all elements of an essential subset $E \subseteq \mathcal{D}$. As we can find a countable basis, the statement $x$ is equivalent to the countable conjunction of statements or negation of statements associated to $E$. Therefore $x \in \bar{\mathcal{D}}$ as it is generated by the statements of the essential subset by negation and countable conjunction. But a statement in $\bar{\mathcal{D}}$ that determines all truth values of the statements in $\bar{\mathcal{D}}$ is a possibility by definition. Therefore $x$ is a possibility.
 \end{proof}
 \end{mathSection}
 
-The possibilities represent the true answers to the scientific question. Only one of them can be true and one of them must be true if we are to satisfy our principle of objectivity. There is still something that can go wrong, though: we may not be able to tell different possibilities apart experimentally. For example, if we are able to only verify \emph{``there is extra-terrestrial life"}, the opposite possibility will never have experimental confirmation. Since in most cases we want (and can) tell any two possibilities apart, we want to capture the idea that, at least with some approximation, we are able to experimentally distinguish between possibilities.
+A possibility represent a complete prediction for a scientific question. Only one of them can be true and one of them must be true if we are to satisfy our principle of objectivity. There is still something that can go wrong, though: we may not be able to tell different possibilities apart experimentally. For example, if we are able to only verify \emph{``there is extra-terrestrial life"}, the opposite possibility will never have experimental confirmation. Since in most cases we want (and are able) to tell any two possibilities apart, we want to capture the idea that, at least with some approximation, we are able to experimentally distinguish between possibilities.
 
 \begin{mathSection}
 \begin{defn}
