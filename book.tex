@@ -440,7 +440,9 @@ The point is that this conceptual structure is inescapable once we set the princ
 
 \section{Topological spaces}
 
-Now that we have fully defined our fundamental scientific objects, we want to find useful mathematical structures to capture them. What we want to show is that each set of possibilities has a natural topological structure given by the associated experimental domain. So first we need at least to define what a topology is.
+Now that we have defined what scientific domains are, we want to explore the link between them and some fundamental mathematical structures.
+
+The first connection we want to explore is between experimental domains and topology. What we want to show is that each set of possibilities has a natural topological structure given by the associated experimental domain. So first we need at least to define what a topology is.
 
 \begin{mathSection}
 	\begin{defn}
@@ -448,17 +450,15 @@ Now that we have fully defined our fundamental scientific objects, we want to fi
 	\end{defn}
 \end{mathSection}
 
-Topologies are used in math to define a notion of closeness without having to define an actual distance. In our case, this notion of closeness will map to how hard is to tell them apart. That is: points that are closer apart are more difficult to distinguish experimentally.
+Topologies are used in math to define a notion of closeness without having to define an actual distance. TODO.
+
+%In our case, this notion of closeness will map to how hard is to tell them apart. That is: points that are closer apart are more difficult to distinguish experimentally.
 
 \begin{mathSection}
 	
 \begin{defn}
 	Let $\mathcal{D}$ be an experimental domain and $X$ its possibilities. We define the map $U : \mathcal{D} \rightarrow 2^X$ that for each experimental observation $\mathsf{o} \in \mathcal{D}$ returns the set of possibilities compatible with it. That is: $U(\mathsf{o})\equiv\{ x \in X \, | \, x \comp \mathsf{o}\}$. We call $U(\mathsf{o})$ the \textbf{verifiable set} of possibilities associated with $\mathsf{o}$
 \end{defn}
-
-\end{mathSection}
-
-\begin{mathSection}
 
 \begin{prop}
 	Let $X$ be the set of possibilities for an experimental domain $\mathcal{D}$. $X$ has a natural topology given by the collection of all verifiable sets $\mathsf{T}_X=U(\mathcal{D})$.
@@ -471,9 +471,9 @@ Topologies are used in math to define a notion of closeness without having to de
 
 Mainly for historical reason, the sets in a topology are called \textbf{open sets}. The complements of open sets are called \textbf{closed sets}. When using a metric space, such as the Euclidean space with the standard topology, these will map to the natural definition. But, in general, they do not and this may lead to confusion. For example, if we take the integers with their standard topology, any subset is both open and closed.
 
-Given that we are only interested in the natural topologies of possibilities, we are going to refer to the sets in our topology as \textbf{verifiable sets} and we will call \textbf{refutable sets} their complements. As such, a subset of integer is both verifiable and refutable: the number could be in the set or not in the set and we have an observation for both cases.  While this terminology does not follow math convention, we find it more intuitive.
+Given that we are only interested in the natural topologies of possibilities, we are going to refer to the sets in our topology as \textbf{verifiable sets} and we will call \textbf{refutable sets} their complements. As such, a subset of integer is both verifiable and refutable: the number could be in the set or not in the set and we have an observation for both cases.  While this terminology does not follow math convention, we find it more intuitive and meaningful for this work.
 
-We can define basis and sub-basis on a topology.
+We can define basis and sub-basis on a topology along with an important property.
 \begin{mathSection}
 \begin{defn}
 	A collection $\mathcal{B}$ of verifiable sets of $X$ is a \textbf{sub-basis} if every verifiable set in $X$ is the union of finite intersections of $\mathcal{B}$. It is a \textbf{basis} if every verifiable set in $X$ is the union of elements of $\mathcal{B}$.
@@ -483,11 +483,13 @@ We can define basis and sub-basis on a topology.
 \end{defn}
 \end{mathSection}
 
-We can construct a basis (or sub-basis) on our topology simply bv taking the verifiable sets of a basis (or sub-basis) on the experimental domain.
+Basis are important since they are often used in proofs and calculations. Moreover, many properties of topologies can be shown to be equivalent to properties of one of their basis. Countability, and in particular second-countability, is one such property which characterizes the number of verifiable set in the topology.
+
+Conceptually, there is a link between sub-basis and essential subsets.
 
 \begin{mathSection}
 	\begin{prop}
-		Let $X$ be the set of possibilities of an experimental domain $\mathcal{D}$. Let $\mathcal{B}$ be a basis (or sub-basis) for $\mathcal{D}$, then the verifiable sets $U(\mathcal{B})$ form a basis for the natural topology of $X$.
+		Let $X$ be the set of possibilities of an experimental domain $\mathcal{D}$. Let $E \subseteq \mathcal{D}$ be an essential subset, then the verifiable sets $U(E)$ form a sub-basis for the natural topology of $X$.
 	\end{prop}
 	\begin{proof}
 		TODO.
@@ -497,7 +499,8 @@ We can construct a basis (or sub-basis) on our topology simply bv taking the ver
 \end{prop}
 \end{mathSection}
 
-When the set of possibilities is experimentally distinguishable, the topology has an important mathematical property called Hausdorff. Physically, this property captures the idea that we are able to tell apart experimentally the possibilities of our space.
+Another important property to classify topological space is their degree of separation: how well one can use open sets to tell points and sets apart. A Hausdorff space is one in which for every pair of points there always are two disjoint verifiable set each containing one. It is important because it implies the uniqueness of limits of sequences of points. Physically, this property captures the idea of physical distinguishability.
+
 \begin{mathSection}
 	\begin{defn}
 		A topology for $X$ is \textbf{Hausdorff} if for every two elements $x_1, x_2 \in X$ there exist two disjoint verifiable sets $U_1, U_2 \in \mathsf{T}_X$ each containing one element. That is: $U_1 \cap U_2 = \emptyset$, $x_1 
@@ -555,7 +558,7 @@ TODO
 	\end{proof}
 \end{mathSection}
 
-\section{Experimental identification}
+\section{To review}
 
 The most common and important type of experimental observation is when we want to identify a specific case from a set of possible ones. For example, we pick ``this is a duck" from all possible animals or ``the position of the ball is $3 \pm 0.5$ m" from all possible values of position.
 
