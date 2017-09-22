@@ -418,19 +418,42 @@ Both the experimental and the theoretical domains contain answers at different l
 \end{proof}
 \end{mathSection}
 
-A possibility represent a complete prediction for a scientific question. Only one of them can be true and one of them must be true since the theoretical domain contains all negations. There is still something that can go wrong, though: we may not be able to tell different possibilities apart experimentally. For example, if we are able to only verify \emph{``there is extra-terrestrial life"}, the opposite possibility will never have experimental confirmation. Since in most cases we want (and are able) to tell any two possibilities apart, we want to capture the idea that, at least with some approximation, we are able to experimentally distinguish between possibilities.
+A possibility represents a complete prediction for a scientific question. Only one of them can be true and one of them must be true since the theoretical domain contains all negations. Given the definitions, we can already prove an interesting result.
+
+\begin{mathSection}
+	\begin{prop}
+		The set of possibilities $X$ for an experimental domain $\mathcal{D}$ has at most cardinality of continuum.
+	\end{prop}
+	
+	\begin{proof}
+		The idea is that each possibility can be identified by knowing which observations of an essential set are verified. Since the essential set of an experimental domain can be assumed countable, the possible combinations of their truth values have at most cardinality of continuum.
+		
+		More formally, let $E = \{\obs{e}_i\}_{i=1}^{\infty} \subseteq \mathcal{D}$ be a countable essential set. Let $2^{\mathbb{N}}$ denotes the set of infinite binary sequences. We define the function $F:X\to2^{\mathbb{N}}$ such that $F(x) = (F(x)_i)_{i=1}^{\infty}$ is given by: 
+		$$
+		F(x)_i = 
+		\begin{cases}
+		1 & x \comp \obs{e}_i \\
+		0 & x \ncomp \obs{e}_i
+		\end{cases}
+		$$
+		For each $x \in X$ we have $x = \bigAND\limits_{i=1}^{\infty} \NOT^{F(x)_i} \obs{e}_i$. Suppose $x_1 \neq x_2$, then $F(x_1)_i \neq F(x_2)_i$ for some $i$, therefore $F$ is injective. We then have $|X| \leq |2^{\mathbb{N}}|=|\mathbb{R}|$. $X$ has at most cardinality of continuum.
+	\end{proof}
+\end{mathSection}
+
+This means we have an upper bound on how many cases can be distinguished experimentally: only up to the continuum. More than that we are not going to be able to tell them apart. This result gives us a basic requirement for any mathematical object we want to use in a scientific theory: if the cardinality is greater than it is cannot have a well defined experimental meaning. For example, while the set of all continuous functions between real numbers has cardinality of continuum, the set of all functions (including all discontinuous) has greater cardinality. We can already conclude that the first set may be useful to represent a physical objects and the second may not.
+
+There is still something that can go wrong, though: we need to make sure we have enough experimental observations to tell different possibilities apart. For example, if we are able to only verify \emph{``there is extra-terrestrial life"}, the opposite possibility will never have experimental confirmation. Since in most cases we want (and are able) to, we want to formally capture this notion.
 
 \begin{mathSection}
 \begin{defn}
-	Let $\mathcal{D}$ be an experimental domain with its associated theoretical domain $\bar{\mathcal{D}}$. An \textbf{experimental approximation} of $\textsf{s} \in \bar{\mathcal{D}}$ is any experimental observation $\textsf{o} \in \mathcal{D}$ wider than $\textsf{s}$ (i.e. the observation is always verified if the statement is). That is: $\textsf{o} \supseteq \textsf{s}$.
-\end{defn}
-
-\begin{defn}
-	The set of possibilities $X$ of a domain $\mathcal{D}$ is \textbf{experimentally distinguishable} if given two distinct possibilities $x_1, x_2 \in X$ we can always find two incompatible approximations $\textsf{o}_1, \textsf{o}_2 \in \mathcal{D}$.
+	The set of possibilities $X$ of a domain $\mathcal{D}$ is \textbf{experimentally distinguishable} if given two distinct possibilities $x_1, x_2 \in X$ we can always find two experimental observations $\textsf{o}_1, \textsf{o}_2 \in \mathcal{D}$ such that $\textsf{o}_1 \broader x_1$, $\textsf{o}_2 \broader x_2$ and $\textsf{o}_1 \ncomp \textsf{o}_2$.
 \end{defn}
 \end{mathSection}
 
-Experimental domains, with their respective theoretical domains and possibilities, are the essence of our theory of scientific investigation. In our context, a ``scientific theory" or a ``scientific model" \emph{are} an experimental domain.
+For example, to tell the house sparrow (Passer domesticus) apart from the Italian sparrow (Passer italiae) we have at least two observations (``it has a dark gray crown", ``it has a chestnut crown") that are incompatible with each other, but each compatible with one bird.
+
+This concludes the introduction to our fundamental scientific objects. Experimental domains, with their respective theoretical domains and possibilities, are the essence of our theory of scientific investigation. In our context, a ``scientific theory" or a ``scientific model" \emph{are} an experimental domain.
+
 
 The starting point is often an essential set of experimentally verifiable statements, which defines all the domain knowledge that we can gathered experimentally. The content of the statements determines what combinations can be true at the same time, which define the possibilities for our domain. Everything in the domain is grounded into the experimental observations: there is nothing else in it.
 
@@ -559,188 +582,6 @@ TODO
 \end{mathSection}
 
 \section{To review}
-
-The most common and important type of experimental observation is when we want to identify a specific case from a set of possible ones. For example, we pick ``this is a duck" from all possible animals or ``the position of the ball is $3 \pm 0.5$ m" from all possible values of position.
-
-As we hinted before, observations do not necessarily identify a single element and they are not necessarily mutually exclusive. For example, ``it is an egg-laying animal" and ``it is a mammal" still allow for the platypus and the echidna. ``the position of the ball is $3 \pm 0.5$ m" and ``the momentum of the ball is $2 \pm 0.1$ kg m/s" limits the possible states to a rectangular region. An experimental observation that identifies an object, then, is not in general associated with a single element, but with a set of elements compatible with that observation. For example, the observation ``it is a bird" will be compatible with duck, penguin, hawk and so on while it will be incompatible with cat, moose, shrimp and so on.
-
-Not only each experimental observation will be associated with a set, but two observations that share the same set are, for our purposes, equivalent. For example, ``it is a feathered animal" or ``it is a bird" will give us the same set of animals as all birds have feathers and all feathered animals are birds. The information they give us is the same. Therefore, we can treat an experimental observation as if it were equivalent to its associated set of elements. That is, if $U \subseteq X$ is the set of elements associated with the observation (e.g. all the birds), the observation may as well be ``the element is in U" (e.g. the element is within the set of birds).
-
-But not all sets of elements are necessarily associated to an experimental observation. As we saw ``the position of the ball is precisely $1$ m" is not an observation because we can't measure position with infinite precision. Therefore the set of states for which position is exactly $1$ m is not associated with an experimental observation. The whole problem, then, is to be able to keep track of which set of elements is associated with an experimental observation and which is not.
-
-At the very least, we need to be able to tell whether an object is or is not one of the elements in our set $X$. For example, we must be able to verify that ``it is an animal" or ``it is not an animal". In the same way, if we can't even verify whether something is a ball or not, it does not make sense to distinguish between the states of a ball. Therefore, to identify elements within a set $X$, there will be an experimental observation associated with the full set $X$, equivalent to ``that is an element of the set", and another experimental observation associated to the empty set $\emptyset$, equivalent to ``that is not an element of the set".
-
-As we saw before, we can always take the conjunction (logical AND) and disjunction (logical OR) of two experimental observation. How do these operations transpose in terms of sets? Suppose we have $U \subseteq X$ (e.g. the set of flying animals) with an associated experimental observation (e.g. ``it is a flying animal"). Suppose we have $V \subseteq X$ (e.g. the set of all insects) with an associated experimental observation (e.g. ``that is an insect"). We combine the two observations with a logical AND (e.g. ``that is a flying insect"). Only the elements that are both in $U$ and $V$ are compatible with it. That is: only the elements in the intersection $U \cap V$. This means that if $U$ and $V$ are two sets each associated with an experimental observation, then their intersection $U \cap V$ is also associated with an experimental observation. Similarly, if $U$ and $V$ are two sets each associated with an experimental observation, we can combine these with a logical OR. All elements either in $U$ or $V$ are compatible with it. That is: elements in the union $U \cup V$. This means the union $U \cup V$ is also associated with an experimental observation.
-
-To sum up, let $X$ be a set of elements and let $\mathsf{T}$ be the collection of the sets associated with some experimental observations we can use to identify among them. We have the following:
-\begin{itemize}
-	\item Both $X$ and $\emptyset$ can be found in $\mathsf{T}$ as we must be able to verify whether an object is or is not within the ones we can identify
-	\item Any intersection of a finite number of sets in $\mathsf{T}$ can also be found in $\mathsf{T}$ as the finite conjunction (i.e. logical AND) of experimental observations is also an experimental observation
-	\item Any union of a countable number of sets in $\mathsf{T}$ can also be found in $\mathsf{T}$ as the countable disjunction (i.e. logical OR) of experimental observations is also an experimental observation
-\end{itemize}
-This is the mathematical definition of a topology: a set of sets that contains both the whole set and the empty set, that is closed under finite intersection and under countable union. 
-
-\begin{mathSection}
-
-\begin{prop}
-	Let $A : \bar{\mathcal{D}} \rightarrow 2^X$ be a map that for each statement $\mathsf{s}$ in the theoretical domain $\bar{\mathcal{D}}$ returns the set of possibilities $A(\mathsf{s})$ compatible with $\mathsf{s}$. That is: $A(\mathsf{s})=\{ x \in X \, | \, x \comp \mathsf{s}\}$ Then $A(\mathcal{D})$. provides a sigma algebra for $X$ that is the Borel algebra of topology defined by $U(\mathcal{D})$.
-\end{prop}
-
-\begin{proof}
-	TODO
-\end{proof}
-
-\end{mathSection}
-
-
-\begin{mathSection}
-
-\begin{prop}
-	If $X$ is an experimentally distinguishable set of possibilities, then its natural topology is Hausdorff.
-\end{prop}
-
-%\begin{defn}
-%	The theoretical domain $\bar{\mathcal{D}}$ of a domain $\mathcal{D}$ is \textbf{experimentally distinguishable} if given two incompatible statements $\textbf{s}_1, \textbf{s}_2 \in \bar{\mathcal{D}}$ we can always find two incompatible approximations $\textbf{o}_1, \textbf{o}_2 \in \mathcal{D}$.
-%\end{defn}	
-
-%\begin{prop}
-%	If $\bar{\mathcal{D}}$ is an experimentally distinguishable theoretical domain, then the natural topology on its possibilities is normal and Hausdorff.
-%\end{prop}
-	
-\end{mathSection}
-
-
-\section{Example of an Experimental Domain}
-
-Consider the collection of statements, ``this object has a mass strictly between $x$ and $y$ kilograms" where $x$ and $y$ are any positive real numbers with $x<y$. Consider the experimental test where we put the object on a balance with an appropriate level of precision for each corresponding statement. Then each observation may be equated to an open interval of positive real numbers $(x,y)\subset\mathbb{R}$. Conjunction and disjunction of these observations will correspond exactly to intersection and union of these intervals, respectively. Further, the collection of intervals of the form $(p,q)$ for $p,q\in\mathbb{Q}$ forms a basis of observations. Next, one can show that any sequence of observations satisfying the conditions of exact outcome corresponds precisely to a real number. In particular, the set of possibilities $X$ for this experimental domain will be the set of positive real numbers with their usual topology. The reader with some experience with elementary real analysis will recognize that this construction is essentially the same as the Cauchy sequence construction of the real numbers, where representative Cauchy sequences come from endpoints of intervals, and the intervals used those corresponding to observations in a sequence of observations yielding an exact outcome. 
-
-TODO: write this out much better. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-TODO: I am not sure whether we should keep the rest of the section below and change the definitions to reflect the above. and, should we break the above proof into smaller pieces? is the above proof what we want??
-
-
-
-\begin{defn}
-	A \textbf{verifiable set} $U \subseteq X$ is a subset of possibilities for which there exists an experimental observation $\mathsf{o}\in\mathcal{S}$  = (\text{``The object is in } U \text{"}, $\mathsf{e}_\in(U))$ where $\mathsf{e}_\in(U)$ is an experimental test that succeeds only if the object to identify is an element of $U$.
-\end{defn}
-
-\begin{defn}
-	A \textbf{refutable set} $U \subseteq X$ is a subset of possibilities for which there exists an experimental counter-observation $\mathsf{o} = (\text{``The object is in } U \text{"}, \mathsf{e}_{\notin}(U))$ where $\mathsf{e}_{\notin}(U)$ is an experimental test that succeeds only if the object to identify is not an element of $U$.
-\end{defn}
-
-\begin{prop}
-	The complement $U^C$ of a verifiable set $U \subseteq X$ is a refutable set.
-\end{prop}
-
-\begin{proof}
-	Let $U\subset X$ be a verifiable set. There exists an experimental observation $\mathsf{o} = (\text{``The object is in } U \text{"}, \mathsf{e}_\in(U))$. Consider $\neg \mathsf{o} = (\neg \text{``The object is in } U \text{"}, \mathsf{e}_\in(U)) = ($``The object  is not in $ U \text{"}, \mathsf{e}_{\notin}(U^C)) = ($``The object  is in $ U^C \text{"}, \mathsf{e}_{\notin}(U^C))$. That is, there exists a counter-observation $($``The object  is in $ U^C \text{"}, \mathsf{e}_{\notin}(U^C))$: $U^C$ is a refutable set.
-\end{proof}
-
-\begin{prop}
-	Let $U_1, U_2, ... , U_n, ...$ be a countable infinite sequence of verifiable sets. The finite intersection $\bigcap\limits_{i=1}^{n} U_i$ and the countable union  $\bigcup\limits_{i=1}^{\infty} U_i$ are verifiable sets.
-\end{prop}
-
-\begin{proof}
-	We claim the finite intersection of verifiable sets is a verifiable set. Let $U_1, U_2, ... , U_n \subseteq X$ be n verifiable sets. For each $U_i$ there exists an experimental observation $\mathsf{o}_i = ($``The object is in $ U_i \text{"}, \mathsf{e}_\in(U_i))$. Consider $\mathsf{o} = \bigwedge\limits_{i=1}^{n} \mathsf{o}_i = (\bigwedge\limits_{i=1}^{n} $``The object is in $ U_i \text{"}, \mathsf{e}_{\wedge}(\mathsf{e}_\in(U_i)))=( $``The object is in $ \bigcap\limits_{i=1}^{n} U_i \text{"}, \mathsf{e}_\in(\bigcap\limits_{i=1}^{n} U_i))$ is an experimental observation. $\bigcap\limits_{i=1}^{n} U_i$ is a verifiable set.
-	
-	We claim the countable union of verifiable sets is a verifiable set. Let $U_1, U_2, ... , U_n, ... \subseteq X$ be an infinite sequence of verifiable sets. For each $U_i$ there exists an experimental observation $\mathsf{o}_i = ($``The object is in $ U_i \text{"}, \mathsf{e}_\in(U_i))$. Consider $\mathsf{o} = \bigvee\limits_{i=1}^{\infty} \mathsf{o}_i = (\bigvee\limits_{i=1}^{\infty} $``The object is in $ U_i \text{"}, \mathsf{e}_{\vee}(\mathsf{e}_\in(U_i)))=( $``The object is in $ \bigcup\limits_{i=1}^{\infty} U_i \text{"}, \mathsf{e}_\in(\bigcup\limits_{i=1}^{\infty} U_i))$ is an experimental observation. $\bigcup\limits_{i=1}^{\infty} U_i$ is a verifiable set.
-\end{proof}
-
-
-
-
-\section{Experimental distinguishability}
-
-What we have done so far is to assign to a set of elements $X$ a collection of experimental observations $\mathsf{T}$. This is not enough. For example, the observations ``it is an animal" and ``it is not an animal" form a collection closed under logical operators (i.e. it forms the trivial topology) but it is hardly useful.
-
-We call $X$ a set of experimentally distinguishable elements if we can associate with it a set of experimental observations rich enough to be able to distinguish each element from the other. That is, given two possible elements (e.g. two possible animals or two possible positions) we can always find an experimental observation that can tell them apart. This property is a basic requirement to treat these elements in a scientific context: if we are not even able to tell them apart experimentally, they cannot be the subject of scientific investigation.
-
-If two elements are experimentally distinguishable from each other there we must have an experimental observation that can tell them apart. For example, to be able to define the house sparrow (Passer domesticus) as a separate animal from the Italian sparrow (Passer italiae) we have at least two observations (``it has a dark gray crown", ``it has a chestnut crown") that are mutually exclusive, each compatible with just one element.
-
-That is, for each pair of elements $x_1, x_2 \in X$, we must be able to find two sets $U,V \in \mathsf{T}$ each associated with an experimental observation such that no element is in both (i.e. their intersection $U \cap V=\emptyset$ is empty) and one element is in one set (i.e. $x_1 \in U$ and $x_2 \in V$). This is the mathematical definition of a Hausdorff space: one in which distinct elements have disjoint neighborhoods. 
-
-This solves one problem, there exists a way to distinguish any two elements, but it does not solve the other problem: we must be able to actually find it. As we saw before, we can only test a finite amount of experimental observations. So we must make sure we can distinguish any two elements in a finite number of steps.
-
-Note that, once we have identified an element, we are able to tell which experimental observations are verified: the ones associated with a set that includes the element. For example, once we have identified the house sparrow, we have verified ``it has a gray crown", ``it is a bird", ``it has wings" and so on. Conversely, once we know all the experimental observations that can be verified, we have identified the element: the only one that is included in all sets associated with verified observations. That is, once we have verified that ``it has a gray crown", ``it is a bird", ``it has wings" and so on, we have identified the house sparrow. In other words: identifying an element is equivalent to being able to verify all possible observations.
-
-Fortunately we don't have to test all possible observations: just enough to be able to calculate all other cases. For example, we can simply test each animal one at a time (i.e. ``it is a cat", ``it is a dog", ``it is a duck" and so on) until we find the correct one. Once we verify one, we will know whether ``it is a bird" or ``it is a mammal". We define sub-base a set of experimental observations from which all others can be obtained through conjunction (i.e. logical AND) and disjunction (i.e. logical OR). In particular, we consider the smallest possible sub-base. This gives us the smallest number of experimental observation to test in order to distinguish an element from all others.
-
-If the smallest sub-base is finite, it is possible to test all experimental observations. This is the case of the set of animals: there are a large but finite number of species. If it's infinite, we cannot. But if the smallest sub-base is countably infinite, we can get as close as we want. This is the case for the position of a ball: we can in principle always increase the precision. Suppose, in fact, that we have a large but finite number of elements $n$ among which we want to distinguish. We need a set of $n$ disjoint sets, each including one element. Note that the union will not make two overlapping sets disjoint, so these sets will only be intersections of elements of the sub-base. Intersections can only be finite, therefore we will need only a finite number of members of the sub-basis. If the sub-basis is countable, at some point we will get to the last member needed and we can stop: we can distinguish between the $n$ elements. If the sub-basis is not countable, instead, we will never stop: we can't experimentally distinguish between a set of arbitrary elements in a finite amount of time.
-
-If there is a countable sub-base, then there is a countable base as well. This is the definition of a second countable space: one that allows a countable bases for its topology.
-
-\begin{defn}
-	A set of experimental possibilities $X$ is \textbf{experimentally distinguishable} if the collection of all possible experimental identifications form an experimental domain and if given two arbitrary possibilities $x_1, x_2 \in X$ we can always find two mutually exclusive experimental observation such that each possibility is compatible with one observation.
-\end{defn}
-
-
-\begin{prop}
-	A set $X$ of experimentally distinguishable  possibilities is a Hausdorff and second countable topological space with the topology $\mathsf{T}(X)$ formed by all distinguishable sets.
-\end{prop}
-
-\section{Connections between topology and experimental distinguishability}
-
-Now that we have made a tight link between topology and experimental distinguishability, we can go through some of the mathematical vocabulary and give it a more precise physical meaning.
-
-The topology defined on a set $X$, which will note as $\mathsf{T}(X)$, describes the collection of all possible experimental observations we can perform to identify an element of the set. Each of these observation can be identified by a subset $U \subseteq X$ which represents all the elements that are compatible with the observation.
-
-An open set $U \in \mathsf{T}(X)$, a set in the topology, is a set for which there exist a way to  experimentally verify that an element is in that set. Conversely, a closed set $V = X \setminus U $, a set whose complement is in the topology, is a set for which there exists a way to experimentally refute that an element is in that set. For example, in the standard topology for $\mathbb{R}$ the interval $(2.5, 3.5)$ is an open set because $3 \pm 0.5$ is a valid measurement for a continuous quantity while $\{3\}$ is a closed set because, while we can't measure a real number with infinite precision, we can exclude it.
-
-The discrete topology, the one for which each singleton $\{x\}$ (i.e. set of one element $x \in X$) is both open and closed, corresponds to the ability to verify and refute each element individually. Any finite set\footnote{TODO what about countable?} that is Hausdorff and second countable has a discrete topology. This is probably why it is not as intuitive to think that something verifiable may not be refutable: it only happens in infinite sets.
-
-The standard topology for $\mathbb{R}$, the one generate by all open intervals, corresponds to the ability of measuring continuous value only with finite precision. This topology is Hausdorff and second countable. While we can give a discrete topology to $\mathbb{R}$, this would no longer be second countable so it would violate our requirement for experimental distinguishability.
-
-An interesting mathematical result is the following.
-
-\begin{prop}
-	A Hausdorff and second countable space $X$ has at most cardinality of continuum.
-\end{prop}
-
-\begin{proof}
-	We define an injective function $F:X\to2^{\mathbb{N}}$, where $2^{\mathbb{N}}$ denotes all infinite binary sequences.
-	
-	Since $X$ is second-countable, we can enumerate the countable basis $\mathcal{B}$ as $\mathcal{B} = \{B_i\}_{i=1}^{\infty}$. Let $2^{\mathbb{N}}$ denote all infinite binary sequences. We define $F:X\to2^{\mathbb{N}}$ such that $F(x) = (F(x)_i)_{i=1}^{\infty}$ is the sequence where each element is given by: 
-	$$
-	F(x)_i = 
-	\begin{cases}
-	1 & x\in B_i \\
-	0 & x\notin B_i
-	\end{cases}
-	$$
-	This is an injective function. Suppose $x_1 \neq x_2$, then since $X$ is Hausdorff there is at least one element of the basis that contains one but not the other.\footnote{In fact, $T_0$ separability would be sufficient.} Therefore $F(x_1) \neq F(x_2)$. As $F$ injects $X$ into $2^{\mathbb{N}}$, we have $|X| \leq |2^{\mathbb{N}}|=|\mathbb{R}|$. $X$ has at most cardinality of continuum.
-\end{proof}
-
-This means that, no matter what technique we use now or in the future, the collections of elements that we can properly define experimentally are at most infinite like the continuum. This already gives us a first simple and basic requirement a set of mathematical objects need to pass to be of scientific interest.
-
-For example, these objects have cardinality of continuum, and therefore are good candidates:
-\begin{itemize}
-	\item Euclidean space $\mathbb{R}^n$
-	\item all continuous functions from $\mathbb{R}$ to $\mathbb{R}$
-	\item all open sets in $\mathbb{R}^n$
-	\item all subsets of $\mathbb{N}$
-\end{itemize}
-
-These, instead, have cardinality greater then continuum, and therefore are not good candidates:
-\begin{itemize}
-	\item all functions from $\mathbb{R}$ to $\mathbb{R}$
-	\item all subsets of $\mathbb{R}$
-\end{itemize}
 
 
 \section{Continuous functions}
