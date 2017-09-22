@@ -473,9 +473,9 @@ The first connection we want to explore is between experimental domains and topo
 	\end{defn}
 \end{mathSection}
 
-Topologies are used in math to define a notion of closeness without having to define an actual distance. TODO.
+Topologies are used in math to define a notion of closeness without having to define an actual distance. Other mathematical tools and fields (such as metric spaces, differential geometry, Lie algebras) have their foundation on topological spaces, which therefore play a very important role in mathematics as a whole.
 
-In our case, this notion of closeness will map to how hard is to tell them apart. That is: points that are closer apart are more difficult to distinguish experimentally. Each set in the topology corresponds to an experimental observation.
+In our case, this notion of closeness will map to how hard is to tell possibilities apart. That is: possibilities that are topologically closer are more difficult to distinguish experimentally. Each set in the topology corresponds to an experimental observation.
 
 \begin{mathSection}
 	
@@ -498,7 +498,7 @@ In our case, this notion of closeness will map to how hard is to tell them apart
 \end{proof}
 \end{mathSection}
 
-Mainly for historical reason, the sets in a topology are called \textbf{open sets}. The complements of open sets are called \textbf{closed sets}. In some spaces, such as the Euclidean space with the standard topology, these will map to the natural definition. But, in general, they do not and this may lead to confusion. For example, if we take the integers with their standard topology, any subset is both open and closed.
+Mainly for historical reason, the sets in a topology are called \textbf{open sets}. The complements of open sets are called \textbf{closed sets}. In metric spaces, such as the Euclidean space with the standard topology, these will map to the natural definition. But, in general, they do not and this may lead to confusion. For example, if we take the integers with their standard topology, any subset is both open and closed.
 
 Given that we are only interested in the natural topologies of possibilities, we are going to refer to the sets in our topology as \textbf{verifiable sets} and we will call \textbf{refutable sets} their complements. As such, a subset of integer is both verifiable and refutable: the number could be in the set or not in the set and we have an observation for both cases.  While this terminology does not follow math convention, we find it more intuitive and meaningful in the context of this work.
 
@@ -521,7 +521,7 @@ Conceptually, there is a link between sub-basis and essential subsets.
 		Let $X$ be the set of possibilities of an experimental domain $\mathcal{D}$. Let $E \subseteq \mathcal{D}$ be an essential subset, then the verifiable sets $U(E)$ form a sub-basis for the natural topology of $X$.
 	\end{prop}
 	\begin{proof}
-		Since every experimental observation of a domain can be expressed as disjunctions of conjunctions of the essential observations, its corresponding verifiable set can be expressed in terms of unions of intersections of the verifiable sets corresponding to the essential observations.
+		Since every experimental observation of a domain can be expressed as the disjunction of finite conjunctions of the essential observations, its corresponding verifiable set can be expressed as the union of finite intersections of the verifiable sets corresponding to the essential observations.
 	\end{proof}
 	\begin{prop}
 		The natural topology of a set of possibility is second-countable.
@@ -548,16 +548,16 @@ What we have is that the natural topology for any set of possibilities is Kolmog
 
 \begin{mathSection}
 	\begin{prop}
-	The natural topology of a set of possibilities is Kolmogorov.
+	The natural topology of a set of possibilities is Kolmogorov (or $\mathsf{T}_0$).
 \end{prop}
 \begin{proof}
-	TODO.
+	Let $X$ be the set of possibilities for an experimental domain $\mathcal{D}$. Let $\bar{\mathcal{D}}$ be the corresponding theoretical domain. Let $x_1, x_2 \in X$ be two distinct possibilities. Each of them can expressed as the conjunction of the elements of an essential set $E \subseteq \mathcal{D}$ or their negation. Since the two possibilities are distinct, there must exist an experimental observation $\obs{e}_i \in E$ that appears negated in one conjunction but not the other. That is, $\obs{e}_i$ is compatible with only one possibility. Since the verifiable set of an experimental observation contains only the possibilities compatible with the observation, the verifiable set of $\obs{e}_i$ either contains $x_1$ or $x_2$ but not both. The topology is therefore Kolmogorov (or $\mathsf{T}_0$).
 \end{proof}
 	\begin{prop}
-	The natural topology of a set of experimentally distinguishable possibilities is Hausdorff.
+	The natural topology of a set of experimentally distinguishable possibilities is Hausdorff (or $\mathsf{T}_2$).
 \end{prop}
 \begin{proof}
-	TODO.
+	Since the possibilities are distinguishable, given two distinct possibilities $x_1, x_2 \in X$ we can find two observations such that $\obs{o}_1 \broader x_1$, $\obs{o}_2 \broader x_2$ and $\obs{o}_1 \ncomp \obs{o}_2$. This means $x_1 \in U(\obs{o}_1)$, $x_2 \in U(\obs{o}_2)$ and $U(\obs{o}_1) \cap U(\obs{o}_2) = \emptyset$. The topology is therefore Hausdorff (or $\mathsf{T}_2$).
 \end{proof}
 \end{mathSection}
 
