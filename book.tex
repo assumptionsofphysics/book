@@ -469,13 +469,13 @@ The first connection we want to explore is between experimental domains and topo
 
 \begin{mathSection}
 	\begin{defn}
-		Let $X$ be a set. A \textbf{topology} on $X$ is a collection $\mathsf{T}$ of subsets of $X$ closed under finite intersection and arbitrary union such that it contains $X$ and $\emptyset$. A \textbf{topological space} is a tuple $(X, \mathsf{T})$ of a set and a topology defined on it.
+		Let $X$ be a set. A \textbf{topology} on $X$ is a collection $\mathsf{T}_X$ of subsets of $X$ closed under finite intersection and arbitrary union such that it contains $X$ and $\emptyset$. A \textbf{topological space} is a tuple $(X, \mathsf{T}_X)$ of a set and a topology defined on it.
 	\end{defn}
 \end{mathSection}
 
 Topologies are used in math to define a notion of closeness without having to define an actual distance. TODO.
 
-%In our case, this notion of closeness will map to how hard is to tell them apart. That is: points that are closer apart are more difficult to distinguish experimentally.
+In our case, this notion of closeness will map to how hard is to tell them apart. That is: points that are closer apart are more difficult to distinguish experimentally. Each set in the topology corresponds to an experimental observation.
 
 \begin{mathSection}
 	
@@ -488,15 +488,21 @@ Topologies are used in math to define a notion of closeness without having to de
 \end{prop}
 
 \begin{proof}
-	Let's show that $U(\mathcal{D})$ contains the empty set $\emptyset$. Let $\mathsf{s} \in \bar{\mathcal{D}}$ be a statement. Then $\NOT\mathsf{s} \in \bar{\mathcal{D}}$ and $\mathsf{s} \AND \NOT\mathsf{s} \equiv \contradiction \in \bar{\mathcal{D}}$. But the contradiction $\contradiction$ itself can't be a possibility and no possibility is narrower than $\contradiction$. Therefore $U(\contradiction) = \emptyset$
+	The verifiable sets for the tautology and the contradiction correspond to the full set and empty set respectively. Formally, $U(\tautology) = \{ x \in X \, | \, x \comp \tautology\} = X$ while $U(\contradiction) = \{ x \in X \, | \, x \comp \contradiction\} = \emptyset$. Therefore $X, \emptyset \in U(\mathcal{D})$ since $\tautology, \contradiction \in \mathcal{D}$.
+
+	The finite intersection of verifiable sets corresponds to the verifiable set of the finite conjunction and therefore is in the topology. Formally, $U(\obs{o}_1\AND\obs{o}_2) = \{ x \in X \, | \, x \comp \obs{o}_1\AND\obs{o}_2\} =  \{ x \in X \, | \, x \comp \obs{o}_1 \, and \, x \comp \obs{o}_2\} = \{ x \in X \, | \, x \comp \obs{o}_1\} \cap \{ x \in X \, | \, x \comp \obs{o}_2\} = U(\obs{o}_1) \cap U(\obs{o}_2)$.
+
+	The countable union of verifiable sets corresponds to the verifiable set of the countable disjunction and therefore is in the topology. Formally, $U(\obs{o}_1\OR\obs{o}_2) = \{ x \in X \, | \, x \comp \obs{o}_1\OR\obs{o}_2\} =  \{ x \in X \, | \, x \comp \obs{o}_1 \, or \, x \comp \obs{o}_2\} = \{ x \in X \, | \, x \comp \obs{o}_1\} \cup \{ x \in X \, | \, x \comp \obs{o}_2\} = U(\obs{o}_1) \cup U(\obs{o}_2)$. This generalizes to countable disjunctions.
+
+	Therefore $\mathsf{T}_X=U(\mathcal{D})$ is a topology by definition since it satisfies all its properties.
 \end{proof}
 \end{mathSection}
 
-Mainly for historical reason, the sets in a topology are called \textbf{open sets}. The complements of open sets are called \textbf{closed sets}. When using a metric space, such as the Euclidean space with the standard topology, these will map to the natural definition. But, in general, they do not and this may lead to confusion. For example, if we take the integers with their standard topology, any subset is both open and closed.
+Mainly for historical reason, the sets in a topology are called \textbf{open sets}. The complements of open sets are called \textbf{closed sets}. In some spaces, such as the Euclidean space with the standard topology, these will map to the natural definition. But, in general, they do not and this may lead to confusion. For example, if we take the integers with their standard topology, any subset is both open and closed.
 
-Given that we are only interested in the natural topologies of possibilities, we are going to refer to the sets in our topology as \textbf{verifiable sets} and we will call \textbf{refutable sets} their complements. As such, a subset of integer is both verifiable and refutable: the number could be in the set or not in the set and we have an observation for both cases.  While this terminology does not follow math convention, we find it more intuitive and meaningful for this work.
+Given that we are only interested in the natural topologies of possibilities, we are going to refer to the sets in our topology as \textbf{verifiable sets} and we will call \textbf{refutable sets} their complements. As such, a subset of integer is both verifiable and refutable: the number could be in the set or not in the set and we have an observation for both cases.  While this terminology does not follow math convention, we find it more intuitive and meaningful in the context of this work.
 
-We can define basis and sub-basis on a topology along with an important property.
+We now define basis and sub-basis on a topology along with an important property.
 \begin{mathSection}
 \begin{defn}
 	A collection $\mathcal{B}$ of verifiable sets of $X$ is a \textbf{sub-basis} if every verifiable set in $X$ is the union of finite intersections of $\mathcal{B}$. It is a \textbf{basis} if every verifiable set in $X$ is the union of elements of $\mathcal{B}$.
@@ -515,22 +521,40 @@ Conceptually, there is a link between sub-basis and essential subsets.
 		Let $X$ be the set of possibilities of an experimental domain $\mathcal{D}$. Let $E \subseteq \mathcal{D}$ be an essential subset, then the verifiable sets $U(E)$ form a sub-basis for the natural topology of $X$.
 	\end{prop}
 	\begin{proof}
-		TODO.
+		Since every experimental observation of a domain can be expressed as disjunctions of conjunctions of the essential observations, its corresponding verifiable set can be expressed in terms of unions of intersections of the verifiable sets corresponding to the essential observations.
 	\end{proof}
 	\begin{prop}
-	The natural topology of a set of possibility is second-countable.
-\end{prop}
+		The natural topology of a set of possibility is second-countable.
+	\end{prop}
+	\begin{proof}
+		Since each experimental domain admits a countable essential subset, its verifiable sets form a countable sub-basis for the natural topology. We can close the sub-basis through finite intersection, forming a countable basis for the topology. The natural topology is therefore second-countable as it admits a countable basis.
+\end{proof}
 \end{mathSection}
 
-Another important property to classify topological space is their degree of separation: how well one can use open sets to tell points and sets apart. A Hausdorff space is one in which for every pair of points there always are two disjoint verifiable set each containing one. It is important because it implies the uniqueness of limits of sequences of points. Physically, this property captures the idea of physical distinguishability.
+Another important property to classify topological space is their degree of separation: how well one can use open sets to tell points and sets apart. A Kolmogorov space is on in which for every pair of points there is always a verifiable set that contains one but not the other. This property is important because it allows to distinguish all points through the verifiable sets. A Hausdorff space is one in which for every pair of points there always are two disjoint verifiable set each containing one. It is important because it implies the uniqueness of limits of sequences of points.
 
 \begin{mathSection}
 	\begin{defn}
-		A topology for $X$ is \textbf{Hausdorff} if for every two elements $x_1, x_2 \in X$ there exist two disjoint verifiable sets $U_1, U_2 \in \mathsf{T}_X$ each containing one element. That is: $U_1 \cap U_2 = \emptyset$, $x_1 
-		\in U_1$ and $x_2 \in U_2$.
+		A topology for $X$ is \textbf{Kolmogorov} (or $\mathsf{T}_0$) if for every two elements $x_1, x_2 \in X$ there exists a verifiable sets $U \in \mathsf{T}_X$ containing one element but not the other. That is: either $x_1 \in U$ while $x_2 \notin U$ or $x_1 \notin U$ while $x_2 \in U$.
 	\end{defn}
+	\begin{defn}
+	A topology for $X$ is \textbf{Hausdorff} (or $\mathsf{T}_2$) if for every two elements $x_1, x_2 \in X$ there exist two disjoint verifiable sets $U_1, U_2 \in \mathsf{T}_X$ each containing one element. That is: $U_1 \cap U_2 = \emptyset$, $x_1 
+	\in U_1$ and $x_2 \in U_2$.
+\end{defn}
+
+\end{mathSection}
+
+What we have is that the natural topology for any set of possibilities is Kolmogorov because two different possibilities must give a different outcome for at least one experimental test. If the possibilities are physically distinguishable, then the topology is Hausdorff because we can always find two incompatible observations each verifying one.
+
+\begin{mathSection}
 	\begin{prop}
-		The natural topology of a set of experimentally distinguishable possibilities is Hausdorff.
+	The natural topology of a set of possibilities is Kolmogorov.
+\end{prop}
+\begin{proof}
+	TODO.
+\end{proof}
+	\begin{prop}
+	The natural topology of a set of experimentally distinguishable possibilities is Hausdorff.
 \end{prop}
 \begin{proof}
 	TODO.
@@ -581,10 +605,16 @@ TODO
 	\end{proof}
 \end{mathSection}
 
-\section{To review}
+\section{Refutation and discrete spaces}
+
+\section{Arbitrary precision and manifolds}
+
+\section{Independent domains and product topology}
+
+\section{Relationships between domains and continuous functions}
 
 
-\section{Continuous functions}
+\section{REDO - Continuous functions}
 
 We now turn our attention to relationships between two sets $X$ and $Y$ of experimentally distinguishable elements. There are two ways of characterize them and we want to show that they are equivalent.
 
@@ -641,7 +671,7 @@ The above work gives us an approach to reconstruct continuous functions given th
 
 TODO: Introduce/define Borel algebra? In fact, we really only need infinite intersections of open sets. We could skip complements all together and just let $\bar{g}$ be defined on all open sets plus all infinite intersections of open sets. This might be slightly simpler but won't make much of a difference either way. Also, it might make more sense to absorb Lemma 1.24 and $\hat{g}$ into the proof of Proposition 1.22. 
 
-\section{Distinguishability of functions}
+\section{REDO - Distinguishability of functions}
 
 For all of this to be self consistent, we must require that functions between experimentally distinguishable elements are  experimentally distinguishable themselves. That is, we must show that the set of continuous function $C(X,Y)$ from $X$ to $Y$ is a Hausdorff and second countable topological space with a suitable topology. Note that $C(X,Y)$ has the cardinality of continuum, therefore we already know it allows Hausdorff and second countable topologies, but we need to make sure we can give one that is actually physically meaningful in terms of experimental observations.
 
