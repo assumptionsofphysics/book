@@ -310,7 +310,7 @@ Now that statement and experimental tests are well defined, we can match them to
 
 \begin{mathSection}
 \begin{defn}
-	An \textbf{experimental observation} is a tuple $\obs{o} = \llparenthesis \stmt{s}, \expt{e} \rrparenthesis$ composed by a statement $\stmt{s}$ and an experimental test $\expt{e}$ such that the statement is true if and only if the  experimental test is always successful. That is, $\truth(\stmt{s})=\textsc{true}$ if and only if $\result(\expt{e})=\textsc{success}$. The experimental observation is \textbf{verified} if the statement is true.
+	An \textbf{experimental observation} is a tuple $\obs{o} = \obsdef{\stmt{s}}{\expt{e}}$ composed by a statement $\stmt{s}$ and an experimental test $\expt{e}$ such that the statement is true if and only if the  experimental test is always successful. That is, $\truth(\stmt{s})=\textsc{true}$ if and only if $\result(\expt{e})=\textsc{success}$. The experimental observation is \textbf{verified} if the statement is true.
 \end{defn}
 \end{mathSection}
 
@@ -617,11 +617,70 @@ From a conceptual standpoint, it gives a precise scientific meaning to the mathe
 
 \section{Refutation and discrete spaces}
 
-Define experimentally decidable domain if negation is in domain.
+To further our understanding of experimental domains and their connections to topologies, we want to characterize them under a couple of seemingly simple assumption.
 
-Natural topology is discrete.
+The first case is when all our tests always finish with a clear success or failure and, therefore, we can both verify and refute every statement of the domain. For example, if we are able to tell whether an animal is of a particular species (e.g. \statement{that animal is a cat}), we are typically able to tell its not of that particular species (e.g. \statement{that animal is not a cat}).
 
-Singletons form an essential set and they are countable.
+\begin{mathSection}
+	
+	\begin{defn}
+		An experimental domain $\mathcal{D}$ is \textbf{decidable} if all tests are guaranteed to terminate. Formally, for every $\obsdef{\stmt{s}_1}{\expt{e}_1} \in \mathcal{D}$ there exists a $\obsdef{\stmt{s}_2}{\expt{e}_2} \in \mathcal{D}$ such that $\stmt{s}_1 = \NOT \stmt{s}_2$
+	\end{defn}
+
+	\begin{justification}
+		The idea is that if all tests always terminate, then we can always construct a test for the negation by replacing $\SUCCESS$ with $\FAILURE$ and vice-versa.
+	\end{justification}
+	
+\end{mathSection}
+
+In this case we can prove the following.
+
+\begin{mathSection}
+	
+	\begin{prop}
+		The set of possibilities $X$ for a decidable domain $\mathcal{D}$ is a countable essential set. More precisely, there exists a countable essential set $E \subseteq \mathcal{D}$ such that the set statements associated with $E$ is $X$.
+	\end{prop}
+	
+	\begin{proof}
+		The decidable domain $\mathcal{D}$ is already closed under negation, therefore for each theoretical statement $\stmt{s} \in \bar{\mathcal{D}}$ there exists a corresponding experimental observation $\obsdef{\stmt{s}}{\expt{e}} \in \mathcal{D}$. We can then find a set of observations $E\subseteq \mathcal{D}$ such that their corresponding statements are the possibilities $X$.
+		
+		TODO
+	\end{proof}
+	
+\end{mathSection}
+
+This tells us that, in the case we can both verify and refute statements, we can only distinguish up to a countable set of cases. Recall that the cardinality of possibility is at most continuum, so in that case we cannot verify and refute all statements.
+
+We can also show that a domain has a finite number of physically distinguishable possibilities is decidable.
+
+\begin{mathSection}
+	
+	\begin{prop}
+		An experimentally distinguishable domain with a finite set of possibilities is decidable.
+	\end{prop}
+	
+	\begin{proof}
+		TODO
+	\end{proof}
+	
+\end{mathSection}
+
+In terms of topology, a decidable domain corresponds to a discrete topology.
+
+\begin{mathSection}
+	
+	\begin{defn}
+		A topology $\mathsf{T}_X$ on a set $X$ is said \textbf{discrete} if it contains every subset of $X$.
+	\end{defn}
+	
+	\begin{prop}
+		The natural topology of a set of possibilities $X$ of an experimental domain is discrete if and only if the domain is decidable.
+	\end{prop}
+	
+	\begin{proof}
+		TODO
+	\end{proof}	
+\end{mathSection}
 
 \section{Arbitrary precision and real numbers}
 
@@ -631,13 +690,54 @@ Space is real number with standard topology.
 
 \section{Independent domains and product topology}
 
-Define combined domain by taking two domains and closing over disjunction/conjunction.
 
-Possibilities of combined domain is pairwise conjunction of individual possibilities that is not a contradiction.
+\begin{mathSection}
+	
+	\begin{prop}
+		(Maybe in previous section?) The set of possibilities is the set of all minterms of an essential set that are not contradictions.
+	\end{prop}
+	
+	\begin{proof}
+		TODO
+	\end{proof}	
+\end{mathSection}
 
-Define independent domains as independent.
+\begin{mathSection}
+	
+	\begin{defn}
+		Let $\{\mathcal{D}_i\}_{i=1}^{\infty}$ be a countable set of experimental domains. The \textbf{combined} experimental domain $\prod\limits_{i=1}^{\infty} X_i$ is the experimental domain generated from all statements in $\{\mathcal{D}_i\}_{i=1}^{\infty}$ by finite conjunction and countable disjunction.
+	\end{defn}
+	\begin{proof}
+		TODO: show it is still a domain (e.g. countable essential set)
+	\end{proof}    
+\end{mathSection}
 
-Natural topology is product topology.
+\begin{mathSection}
+	
+	\begin{defn}
+		The experimental domains $\{\mathcal{D}_i\}_{i=1}^{\infty}$ are independent if taking one statement from each domain always gives an independent set of statements.
+	\end{defn}
+	\begin{prop}
+		Let $\{\mathcal{D}_i\}_{i=1}^{\infty}$ be a countable set of independent experimental domains. The set of possibilities of the combined experimental domain $\prod\limits_{i=1}^{\infty} X_i$ consists of all the possible conjunctions of the possibilities of each domain. That is: $X = \{ \bigAND\limits_{i=1}^{\infty} x_i \, | \, x_i \in X_i \}$.
+	\end{prop}
+	\begin{proof}
+		TODO
+	\end{proof}
+\end{mathSection}
+
+\begin{mathSection}
+	\begin{defn}
+	TODO: define product topology.
+\end{defn}
+	\begin{prop}
+	Let $\{\mathcal{D}_i\}_{i=1}^{\infty}$ be a countable set of independent experimental domains. The natural topology for the possibilities of the combined experimental domain $\prod\limits_{i=1}^{\infty} X_i$ is the product topology of the natural topology for the possibilities of each domain.
+\end{prop}
+\begin{proof}
+	TODO
+\end{proof}
+\end{mathSection}
+
+
 
 \section{Relationships between domains and continuous functions}
 
