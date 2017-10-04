@@ -739,9 +739,65 @@ Space is real number with standard topology.
 \end{proof}
 \end{mathSection}
 
-
-
 \section{Relationships between domains and continuous functions}
+
+\begin{mathSection}
+	
+	\begin{prop}
+		(Maybe in previous section?) Let $\stmt{s}_1 \equiv \bar{\stmt{s}}_1$ and $\stmt{s}_2 \equiv \bar{\stmt{s}}_2$. Then $\NOT \stmt{s}_1 \equiv \NOT \bar{\stmt{s}}_1$, $\stmt{s}_1 \AND \stmt{s}_2 \equiv \bar{\stmt{s}}_1 \AND \bar{\stmt{s}}_2$ and $\stmt{s}_1 \OR \stmt{s}_2 \equiv \bar{\stmt{s}}_1 \OR \bar{\stmt{s}}_2$.
+	\end{prop}
+	
+	\begin{proof}
+		TODO
+	\end{proof}	
+	
+	\begin{prop}
+		(Maybe in previous section?) $\stmt{s}_1 \narrower \stmt{s}_2$ if and only if $\stmt{s}_1 \AND \stmt{s}_2 \equiv \stmt{s}_1$.
+	\end{prop}
+	
+	\begin{proof}
+		Consider $\stmt{s}_1 \AND \stmt{s}_2 = \stmt{s}_1 \AND \stmt{s}_2 \OR \contradiction$. Since $\stmt{s}_1 \narrower \stmt{s}_2$, $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \contradiction$. We have $\stmt{s}_1 \AND \stmt{s}_2 \OR \contradiction \equiv ( \stmt{s}_1 \AND \stmt{s}_2 ) \OR (\stmt{s}_1 \AND \NOT \stmt{s}_2) = \stmt{s}_1 \AND (\stmt{s}_2 \OR \NOT \stmt{s}_2) = \stmt{s}_1 \AND \tautology = \stmt{s}_1$. Therefore $\stmt{s}_1 \AND \stmt{s}_2 \equiv \stmt{s}_1$. The same logic can be applied in reverse.
+	\end{proof}	
+	
+	\begin{prop}
+		(Maybe in previous section?) $\stmt{s}_1 \narrower \stmt{s}_2$ and $\stmt{s}_1 \broader \stmt{s}_2$ if and only if $\stmt{s}_1 \equiv \stmt{s}_1$.
+	\end{prop}
+	
+	\begin{proof}
+		We have $\stmt{s}_1 \AND \stmt{s}_2 \equiv \stmt{s}_1$ since $\stmt{s}_1 \narrower \stmt{s}_2$ and $\stmt{s}_1 \AND \stmt{s}_2 \equiv \stmt{s}_2$ since $\stmt{s}_2 \narrower \stmt{s}_1$. Therefore $\stmt{s}_1 \equiv \stmt{s}_1$.
+	\end{proof}	
+\end{mathSection}
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\mathcal{D}_X$ and $\mathcal{D}_Y$ two experimental domains.
+	\end{defn}
+	\begin{prop}
+		
+	\end{prop}
+	\begin{proof}
+		TODO
+	\end{proof}
+\end{mathSection}
+
+\begin{mathSection}
+	\begin{prop}
+		Let $g : \mathcal{D}_Y \to \mathcal{D}_X$ return the narrowest observation in $\mathcal{D}_X$ such that $\obs{o}_Y \narrower g(\obs{o}_Y)$. We have:
+		\begin{enumerate}
+			\item $g(\tautology) = \tautology$
+			\item $g(\contradiction) = \contradiction$
+			\item $g(\obs{o}_1 \OR \obs{o}_2) = g(\obs{o}_1) \OR (\obs{o}_2)$
+		\end{enumerate}
+	\end{prop}
+	\begin{proof}
+		Let $\obs{o}_X \in \mathcal{D}_X$ such that $\tautology \narrower \obs{o}_X$. Then $\obs{o}_X \equiv \tautology$ and we have $g(\tautology) = \tautology$.
+		
+		Let $\obs{o}_X \in \mathcal{D}_X$ such that $\contradiction \narrower \obs{o}_X$. Then $\obs{o}_X$ can be any observation in $\mathcal{D}_X$. The narrowest observation is $\contradiction$ so we have $g(\contradiction) = \contradiction$.
+		
+		Let $\obs{o}_1, \obs{o}_2 \in \mathcal{D}_Y$. Consider $(\obs{o}_1 \OR \obs{o}_2) \AND \NOT (g(\obs{o}_1) \OR g(\obs{o}_2)) = (\obs{o}_1 \OR \obs{o}_2) \AND (\NOT g(\obs{o}_1) \AND \NOT g(\obs{o}_2)) = (\obs{o}_1 \AND \NOT g(\obs{o}_1) \AND \NOT g(\obs{o}_2)) \OR (\obs{o}_2 \AND \NOT g(\obs{o}_1) \AND \NOT g(\obs{o}_2))$. Since $\obs{o}_1 \narrower g(\obs{o}_1)$, $\obs{o}_1 \AND \NOT g(\obs{o}_1) \equiv \contradiction$. Similarly, $\obs{o}_2 \AND \NOT g(\obs{o}_2) \equiv \contradiction$. We have $(\obs{o}_1 \OR \obs{o}_2) \AND \NOT (g(\obs{o}_1) \OR g(\obs{o}_2)) \equiv (\contradiction \AND \NOT g(\obs{o}_2)) \OR (\contradiction \AND \NOT g(\obs{o}_1)) = \contradiction \OR \contradiction = \contradiction$. Therefore $\obs{o}_1 \OR \obs{o}_2 \narrower g(\obs{o}_1) \OR g(\obs{o}_2)$ which gives $g(\obs{o}_1 \OR \obs{o}_2) \narrower g(\obs{o}_1) \OR g(\obs{o}_2)$. We also have $\obs{o}_1 \narrower \obs{o}_1 \OR \obs{o}_2 \narrower g(\obs{o}_1 \OR \obs{o}_2)$ therefore $g(\obs{o}_1) \narrower g(\obs{o}_1 \OR \obs{o}_2)$ which means $g(\obs{o}_1) \AND g(\obs{o}_1 \OR \obs{o}_2) \equiv g(\obs{o}_1)$. Similarly, $g(\obs{o}_2) \AND g(\obs{o}_1 \OR \obs{o}_2) \equiv g(\obs{o}_2)$. Now consider $(g(\obs{o}_1) \OR g(\obs{o}_2)) \AND g(\obs{o}_1 \OR \obs{o}_2) = (g(\obs{o}_1) \AND g(\obs{o}_1 \OR \obs{o}_2))\OR(g(\obs{o}_2) \AND g(\obs{o}_1 \OR \obs{o}_2)) \equiv g(\obs{o}_1)\OR g(\obs{o}_2)$ which means $g(\obs{o}_1) \OR g(\obs{o}_2) \narrower g(\obs{o}_1 \OR \obs{o}_2)$. We have $g(\obs{o}_1) \OR g(\obs{o}_2) \equiv g(\obs{o}_1 \OR \obs{o}_2)$ since they are both narrower of each other.
+	\end{proof}
+\end{mathSection}
+
 
 Define experimental relationship between two domain as set of implications between observations.
 
