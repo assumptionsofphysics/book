@@ -752,10 +752,10 @@ Define combined domain.
 		Two experimental domains $\mathcal{D}_X$ and $\mathcal{D}_Y$ are \textbf{equivalent} $\mathcal{D}_X \equiv \mathcal{D}_Y$ if $\mathcal{D}_X$ depends on $\mathcal{D}_Y$ and vice-versa.
 	\end{defn}
 	\begin{prop}
-		Let $\mathcal{D}_X$ and $\mathcal{D}_Y$ be two experimental domains such that $\mathcal{D}_Y$ depends on $\mathcal{D}_X$. Then combined domain $\mathcal{D}_X \times \mathcal{D}_Y \equiv \mathcal{D}_X$ is equivalent to the independent domain and there exists a function $f : X \to Y$ between the possibilities of the domains such that $x \narrower f(x)$. and $f$ is continuous with respect to the natural topologies.
+		Let $\mathcal{D}_X$ and $\mathcal{D}_Y$ be two experimental domains such that $\mathcal{D}_Y$ depends on $\mathcal{D}_X$. Then combined domain $\mathcal{D}_X \times \mathcal{D}_Y \equiv \mathcal{D}_X$ is equivalent to the independent domain and there exists a function $f : X \to Y$ between the possibilities of the domains such that $x \narrower f(x)$.
 	\end{prop}
 	\begin{proof}
-		TODO
+		Given that for each observation in $\mathcal{D}_Y$ there exists an equivalent observation in $\mathcal{D}_X$, $\mathcal{D}_Y$ is effectively a subset of $\mathcal{D}_X$. By the same token, the theoretical domain $\bar{\mathcal{D}}_Y$ is effectively a subset of $\bar{\mathcal{D}}_X$. This means that a possibility $x \in \bar{\mathcal{D}}_X$, if true, will determine all the truth values of  all statements in $\bar{\mathcal{D}}_Y$, including its possibilities. But only one possibility $y \in \bar{\mathcal{D}}_Y$ can be compatible with $x$ since the possibilities of a domain are all incompatible with each other. Therefore $x \narrower y$. We can define $f : X \to Y$ the function that given a possibility $x \in X$ returns the only possibility $f(x) \broader x$ that is compatible with it.
 	\end{proof}
 	\begin{defn}
 		TODO: define continuous functions.
@@ -776,15 +776,17 @@ Define combined domain.
 		Two experimental domains $\mathcal{D}_X$ and $\mathcal{D}_Y$ are \textbf{incompatible} if all observations in one are incompatible to all observations of the other, excluding the tautology. Formally, $\obs{o}_X \ncomp \obs{o}_Y$ for each $\obs{o}_X \in \mathcal{D}_X$ and $\obs{o}_Y \in \mathcal{D}_Y$ such that $\obs{o}_X \nequiv \tautology $ and $\obs{o}_Y \nequiv \tautology$.
 	\end{defn}
 	\begin{defn}
-		Two experimental domains $\mathcal{D}_X$ and $\mathcal{D}_Y$ are \textbf{equivalent} $\mathcal{D}_X \equiv \mathcal{D}_Y$ if $\mathcal{D}_X$ depends on $\mathcal{D}_Y$ and vice-versa.
+		The \textbf{final possibility} for a domain is the negation of the statement associated to the union of all experimental observations excluding the tautology. That is, $\stmt{x}_F \in \bar{\mathcal{D}}$ such that $\obsdef{\NOT \stmt{x}_F}{\expt{e}} = \bigOR ( \mathcal{D} \setminus \{\tautology\})$.
 	\end{defn}
 	\begin{prop}
-		Let $\mathcal{D}_X$ and $\mathcal{D}_Y$ be two experimental domains such that $\mathcal{D}_Y$ depends on $\mathcal{D}_X$. Then combined domain $\mathcal{D}_X \times \mathcal{D}_Y \equiv \mathcal{D}_X$ is equivalent to the independent domain.
+		Let $\mathcal{D}_{X_1}$ and $\mathcal{D}_{X_2}$ be two incompatible experimental domains. Then the possibilities of the combined domain $\mathcal{D}_X = \mathcal{D}_{X_1} \times \mathcal{D}_{X_2}$, excluded the final possibility, is equal to the union of the possibilities of the individual domains, excluded the respective final possibility. That is $X \setminus \{x_F\} = (X_1 \setminus \{x_{F_1}\}) \cup (X_2 \setminus \{x_{F_2}\})$. Notationally, we write $\mathcal{D}_{X_1} \times \mathcal{D}_{X_2} = \mathcal{D}_{X_1 \coprod X_2}$.
 	\end{prop}
 	\begin{proof}
 		TODO
 	\end{proof}
 \end{mathSection}
+
+TODO: In terms of category theory, a morphism of an experimental domain is a map $f : \mathcal{D}_1 \to \mathcal{D}_2$ such that $f(\obs{o}) \equiv \obs{o}$. That is, it is a map that preserves the semantic content of each observation. Therefore we cannot impose morphisms on any pair of domains. In the same vein, there is only one type of product (the combined domain) and it is the semantic content that decides what it corresponds to. If the domains are independent, then it is the categoric product. If the domains are incompatible, then it is the categoric co-product. In all other cases, it will correspond to something different.
 
 \section{Relationships between domains and continuous functions}
 
