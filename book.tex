@@ -39,7 +39,7 @@ The main goal in stating this principle is to make clear what the domain of scie
 
 
 \begin{defn}\label{def_statement}
-	A \textbf{statement} $\stmt{s}$ is a declarative sentence that is either true or false. Formally, a statement is an element of the set $\mathcal{S}$ of all statements upon which is defined a function $\truth: \mathcal{S} \to \mathbb{B}$ that returns the truth value for each element.
+	A \textbf{statement} $\stmt$ is a declarative sentence that is either true or false. Formally, a statement is an element of the set $\mathcal{S}$ of all statements upon which is defined a function $\truth: \mathcal{S} \to \mathbb{B}$ that returns the truth value for each element.
 \end{defn}
 
 \end{mathSection}
@@ -53,15 +53,15 @@ As a first step, we want to avoid assigning truths that are inconsistent with th
 \begin{mathSection}
 	
 	\begin{defn}\label{def_possibilities}
-		The \textbf{possibilities} of a statement $\stmt{s}$ are the possible truth values allowed by the content of the statement. Formally, on the set $\mathcal{S}$ of all statements is also defined a function $\poss: \mathcal{S} \to \{\{\FALSE, \TRUE\},\{\FALSE\},\{\TRUE\}\}$ such that $\truth(\stmt{s}) \in \poss(\stmt{s})$ for all $\stmt{s} \in \mathcal{S}$.
+		The \textbf{possibilities} of a statement $\stmt$ are the possible truth values allowed by the content of the statement. Formally, on the set $\mathcal{S}$ of all statements is also defined a function $\poss: \mathcal{S} \to \{\{\FALSE, \TRUE\},\{\FALSE\},\{\TRUE\}\}$ such that $\truth(\stmt) \in \poss(\stmt)$ for all $\stmt \in \mathcal{S}$.
 	\end{defn}
 	
 	\begin{defn}
-		A \textbf{tautology} $\tautology$ is a statement that must be true simply because of its content. That is, $\poss(\stmt{s}) = \{\TRUE\}$.
+		A \textbf{tautology} $\tautology$ is a statement that must be true simply because of its content. That is, $\poss(\stmt) = \{\TRUE\}$.
 	\end{defn}
 	
 	\begin{defn}
-		A \textbf{contradiction} $\contradiction$ is a statement that must be false simply because of its content. That is, $\poss(\stmt{s}) = \{\FALSE\}$.
+		A \textbf{contradiction} $\contradiction$ is a statement that must be false simply because of its content. That is, $\poss(\stmt) = \{\FALSE\}$.
 	\end{defn}
 	
 \end{mathSection}
@@ -103,17 +103,17 @@ Each of these operations defined on the truth value will have a corresponding op
 	\begin{tabular}{p{0.2\textwidth} p{0.1\textwidth} p{0.1\textwidth} p{0.5\textwidth}}
 		Operator & Gate & Symbol & Example \\ 
 		\hline 
-		Negation & NOT & $\NOT \stmt{s}_1$ &  \emph{``the sauce is not sweet"} \\ 
-		Conjunction & AND & $\stmt{s}_1 \AND \stmt{s}_2$ & \emph{``the sauce is sweet and sour"} \\ 
-		Disjunction & OR & $\stmt{s}_1 \OR \stmt{s}_2$ & \emph{``the sauce is at least sweet or sour"}\\
-		\multicolumn{4}{c}{  where $\stmt{s}_1$ = \emph{``the sauce is sweet"} and $\stmt{s}_2$ = \emph{``the sauce is sour"}}
+		Negation & NOT & $\NOT \stmt_1$ &  \emph{``the sauce is not sweet"} \\ 
+		Conjunction & AND & $\stmt_1 \AND \stmt_2$ & \emph{``the sauce is sweet and sour"} \\ 
+		Disjunction & OR & $\stmt_1 \OR \stmt_2$ & \emph{``the sauce is at least sweet or sour"}\\
+		\multicolumn{4}{c}{  where $\stmt_1$ = \emph{``the sauce is sweet"} and $\stmt_2$ = \emph{``the sauce is sour"}}
 	\end{tabular} 
 	\caption{Boolean operations on statements}
 \end{table}
 
 Most languages typically already provide similar operations, as the examples show. Technically, though, we should consider the ones defined here as meta-operations that are defined outside the language of the statements. For example, \statement{x is the position of a ball}$\AND$\statement{$\,\frac{d^2 x}{dt^2} = - g$} stitches together an English statement with a calculus statement into a new statement that is neither. This kind of mix should be allowed as it does happen in practice.
 
-Negation, conjunction and disjunction as we have defined them form the two-values Boolean algebra. Any function that takes truth values and return truth values can be expressed with only these three operations. Or, as we'll say, it can be \emph{generated} via negation, conjunction and disjunction. The idea is to create one term for each combination of arguments that returns $\TRUE$ and using the disjunction to combine them together. For example, the statement \statement{the sauce is sweet and sour or neither} can be expressed as $(\stmt{s}_1 \AND \stmt{s}_2) \OR (\NOT \stmt{s}_1 \AND \NOT \stmt{s}_2)$ and the statement \statement{the sauce is not sweet and sour} can be expressed as $(\stmt{s}_1 \AND \NOT \stmt{s}_2) \OR (\NOT \stmt{s}_1 \AND \stmt{s}_2) \OR (\NOT \stmt{s}_1 \AND \NOT \stmt{s}_2)$.
+Negation, conjunction and disjunction as we have defined them form the two-values Boolean algebra. Any function that takes truth values and return truth values can be expressed with only these three operations. Or, as we'll say, it can be \emph{generated} via negation, conjunction and disjunction. The idea is to create one term for each combination of arguments that returns $\TRUE$ and using the disjunction to combine them together. For example, the statement \statement{the sauce is sweet and sour or neither} can be expressed as $(\stmt_1 \AND \stmt_2) \OR (\NOT \stmt_1 \AND \NOT \stmt_2)$ and the statement \statement{the sauce is not sweet and sour} can be expressed as $(\stmt_1 \AND \NOT \stmt_2) \OR (\NOT \stmt_1 \AND \stmt_2) \OR (\NOT \stmt_1 \AND \NOT \stmt_2)$.
 
 \begin{mathSection}
 	\begin{prop}\label{prop_disjunctive_normal_form}
@@ -162,7 +162,7 @@ The last step is to keep track when two statements are different but have the sa
 \begin{mathSection}
 
 \begin{defn}
-	Two statements $\stmt{s}_1$ and $\stmt{s}_2$ are \textbf{equivalent} $\stmt{s}_1 \equiv \stmt{s}_2$ if they must be equally true or false simply because of their content. That is, $(\stmt{s}_1 \AND \stmt{s}_2) \OR (\NOT\stmt{s}_1 \AND \NOT\stmt{s}_2)$ is a tautology.
+	Two statements $\stmt_1$ and $\stmt_2$ are \textbf{equivalent} $\stmt_1 \equiv \stmt_2$ if they must be equally true or false simply because of their content. That is, $(\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)$ is a tautology.
 \end{defn}
 
 \begin{prop}
@@ -175,16 +175,16 @@ The last step is to keep track when two statements are different but have the sa
 	and is therefore an equivalence relation.
 \end{prop}
 \begin{proof}
-	For reflexivity, we have $(\stmt{s} \AND \stmt{s}) \OR (\NOT\stmt{s} \AND \NOT\stmt{s}) = (\stmt{s}) \OR (\NOT\stmt{s}) = \tautology$. Therefore $s \equiv s$.
+	For reflexivity, we have $(\stmt \AND \stmt) \OR (\NOT\stmt \AND \NOT\stmt) = (\stmt) \OR (\NOT\stmt) = \tautology$. Therefore $s \equiv s$.
 	
-	For symmetry, we have $s_1 \equiv s_2$ implies $\tautology = (\stmt{s}_1 \AND \stmt{s}_2) \OR (\NOT\stmt{s}_1 \AND \NOT\stmt{s}_2) = (\stmt{s}_2 \AND \stmt{s}_1) \OR (\NOT\stmt{s}_2 \AND \NOT\stmt{s}_1)$. Therefore $s_2 \equiv s_1$.
+	For symmetry, we have $s_1 \equiv s_2$ implies $\tautology = (\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2) = (\stmt_2 \AND \stmt_1) \OR (\NOT\stmt_2 \AND \NOT\stmt_1)$. Therefore $s_2 \equiv s_1$.
 	
 	For transitivity, we have TODO.
 \end{proof}
 
 \end{mathSection}
 
-Again, we want to stress that this notion of equivalence is not based on the truth value (i.e. whether the statements happen to be both true or false) or on properties \ref{boolean_properties} (i.e. whether they are the same statement): it is based on the possibilities (i.e. whether the two statement can possibly have a different truth). Also note that the semantics defines the possibilities but not the truth value, unless the statement is a tautology or a contradiction. For example, even if the meaning of \statement{the next race is going to be won by Secretariat} is clear, we may be none the wiser about its truthfulness. Intuitively, the equivalence we defined here answers the question: do these two statement carry the same information? If they do, they are essentially the same to us. So much so, that from now on we will implicitly assume two different statements to be inequivalent. Technically, when we'll say that $\stmt{s}$ is a statement we actually mean $\stmt{s}$ is an equivalence class of statement.
+Again, we want to stress that this notion of equivalence is not based on the truth value (i.e. whether the statements happen to be both true or false) or on properties \ref{boolean_properties} (i.e. whether they are the same statement): it is based on the possibilities (i.e. whether the two statement can possibly have a different truth). Also note that the semantics defines the possibilities but not the truth value, unless the statement is a tautology or a contradiction. For example, even if the meaning of \statement{the next race is going to be won by Secretariat} is clear, we may be none the wiser about its truthfulness. Intuitively, the equivalence we defined here answers the question: do these two statement carry the same information? If they do, they are essentially the same to us. So much so, that from now on we will implicitly assume two different statements to be inequivalent. Technically, when we'll say that $\stmt$ is a statement we actually mean $\stmt$ is an equivalence class of statement.
 
 Equivalence is not the only semantic relationship that we want to capture. Consider the contents of the following:
 \begin{enumerate}
@@ -198,17 +198,17 @@ The second will be true whenever the first is true. The third will be false when
 \begin{mathSection}
 
 \begin{defn}
-	Given two statement $\stmt{s}_1$ and $\stmt{s}_2$, we say that:
+	Given two statement $\stmt_1$ and $\stmt_2$, we say that:
 	\begin{itemize}
-		\item $\stmt{s}_1$ \textbf{is narrower than} $\stmt{s}_2$ (noted $\stmt{s}_1 \narrower \stmt{s}_2$) if $\stmt{s}_2$ is true whenever $\stmt{s}_1$ is true simply because of their content. That is, $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \contradiction$.
-		\item $\stmt{s}_1$ \textbf{is broader than} $\stmt{s}_2$ (noted $\stmt{s}_1 \broader \stmt{s}_2$) if $\stmt{s}_2 \narrower \stmt{s}_1$.
-		\item $\stmt{s}_1$ \textbf{is compatible to} $\stmt{s}_2$ (noted $\stmt{s}_1 \comp \stmt{s}_2$) if their content allows them to be true at the same time. That is, $\stmt{s}_1 \AND \stmt{s}_2 \nequiv \contradiction$.
+		\item $\stmt_1$ \textbf{is narrower than} $\stmt_2$ (noted $\stmt_1 \narrower \stmt_2$) if $\stmt_2$ is true whenever $\stmt_1$ is true simply because of their content. That is, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$.
+		\item $\stmt_1$ \textbf{is broader than} $\stmt_2$ (noted $\stmt_1 \broader \stmt_2$) if $\stmt_2 \narrower \stmt_1$.
+		\item $\stmt_1$ \textbf{is compatible to} $\stmt_2$ (noted $\stmt_1 \comp \stmt_2$) if their content allows them to be true at the same time. That is, $\stmt_1 \AND \stmt_2 \nequiv \contradiction$.
 
 	\end{itemize}
 	The negation of these properties will be noted by $\nnarrower$, $\nbroader$ , $\ncomp$ respectively.
 \end{defn}
 \begin{defn}
-	The elements of a set of statements $S \subseteq \mathcal{S}$ are said \textbf{independent} (noted $\stmt{s}_1 \indep \stmt{s}_2$ for a set of two) if their content is such that any combination of their possibilities are allowed. That is, $\poss(f(S)) = f(\bigtimes_{x \in S} \poss(s))$ for any truth function $f : \mathbb{B}^{|S|} \to \mathbb{B}$. The negation of independence, will be noted by $\nindep$.
+	The elements of a set of statements $S \subseteq \mathcal{S}$ are said \textbf{independent} (noted $\stmt_1 \indep \stmt_2$ for a set of two) if their content is such that any combination of their possibilities are allowed. That is, $\poss(f(S)) = f(\bigtimes_{x \in S} \poss(s))$ for any truth function $f : \mathbb{B}^{|S|} \to \mathbb{B}$. The negation of independence, will be noted by $\nindep$.
 \end{defn}
 
 \end{mathSection}
@@ -312,7 +312,7 @@ Now that statement and experimental tests are well defined, we can match them to
 
 \begin{mathSection}
 \begin{defn}
-	An \textbf{experimental observation} is a tuple $\obs{o} = \obsdef{\stmt{s}}{\expt{e}}$ composed by a statement $\stmt{s}$ and an experimental test $\expt{e}$ such that the statement is true if and only if the  experimental test is always successful. That is, $\truth(\stmt{s})=\textsc{true}$ if and only if $\result(\expt{e})=\textsc{success}$. The experimental observation is \textbf{verified} if the statement is true.
+	An \textbf{experimental observation} is a tuple $\obs{o} = \obsdef{\stmt}{\expt{e}}$ composed by a statement $\stmt$ and an experimental test $\expt{e}$ such that the statement is true if and only if the  experimental test is always successful. That is, $\truth(\stmt)=\textsc{true}$ if and only if $\result(\expt{e})=\textsc{success}$. The experimental observation is \textbf{verified} if the statement is true.
 \end{defn}
 \end{mathSection}
 
@@ -329,16 +329,16 @@ As pairing a statement with an experimental test does not affect its truth or me
 The logical operations, though, are affected. To take the conjunction or the disjunction of experimental observations we must make sure that the experimental tests still exist. And since the experimental tests are more restrictive, it is their rules that will determine what logical operations are available.
 \begin{mathSection}
 	\begin{defn}
-	The \textbf{conjunction or logical AND} of a finite collection  of experimental observations $\{\mathsf{o}_i\}_{i=1}^{n}=\{\llparenthesis \stmt{s}_i, \expt{e}_i\rrparenthesis\}_{i=1}^{n}$ is the experimental observation $\bigAND\limits_{i=1}^{n} \mathsf{o}_i = \llparenthesis \bigAND\limits_{i=1}^{n} \stmt{s}_i, \bigAND\limits_{i=1}^{n} \expt{e}_i\rrparenthesis$.
+	The \textbf{conjunction or logical AND} of a finite collection  of experimental observations $\{\mathsf{o}_i\}_{i=1}^{n}=\{\llparenthesis \stmt_i, \expt{e}_i\rrparenthesis\}_{i=1}^{n}$ is the experimental observation $\bigAND\limits_{i=1}^{n} \mathsf{o}_i = \llparenthesis \bigAND\limits_{i=1}^{n} \stmt_i, \bigAND\limits_{i=1}^{n} \expt{e}_i\rrparenthesis$.
 \end{defn}
 \begin{proof}
-	To check that the definition is valid, we need to make sure that the statement is true if and only if the experimental test is successful. We have $\truth(\bigAND\limits_{i=1}^{n} \stmt{s}_i) = \TRUE$ if and only if $\truth(\stmt{s}_i) = \TRUE$ for all $\stmt{s}_i \in \{\stmt{s}_i\}_{i=1}^{n}$. This is the case if and only $\result(\expt{e}_i) = \SUCCESS$ for all $\expt{e}_i \in \{\expt{e}_i\}_{i=1}^{n}$. This can only happen if and only if   $\result(\bigAND\limits_{i=1}^{n} \expt{e}_i) = \SUCCESS$. Therefore $\bigAND\limits_{i=1}^{n} \mathsf{o}_i$ is a valid experimental observation.
+	To check that the definition is valid, we need to make sure that the statement is true if and only if the experimental test is successful. We have $\truth(\bigAND\limits_{i=1}^{n} \stmt_i) = \TRUE$ if and only if $\truth(\stmt_i) = \TRUE$ for all $\stmt_i \in \{\stmt_i\}_{i=1}^{n}$. This is the case if and only $\result(\expt{e}_i) = \SUCCESS$ for all $\expt{e}_i \in \{\expt{e}_i\}_{i=1}^{n}$. This can only happen if and only if   $\result(\bigAND\limits_{i=1}^{n} \expt{e}_i) = \SUCCESS$. Therefore $\bigAND\limits_{i=1}^{n} \mathsf{o}_i$ is a valid experimental observation.
 \end{proof}
 	\begin{defn}
-	The \textbf{disjunction or logical OR} of a (finite or infinite) countable  collection of experimental observations $\{\mathsf{o}_i\}_{i=1}^{\infty}=\{\llparenthesis \stmt{s}_i, \expt{e}_i\rrparenthesis\}_{i=1}^{\infty}$ is the experimental observation $\bigOR\limits_{i=1}^{\infty} \mathsf{o}_i = \llparenthesis \bigOR\limits_{i=1}^{\infty} \stmt{s}_i, \bigOR\limits_{i=1}^{\infty} \expt{e}_i\rrparenthesis$.
+	The \textbf{disjunction or logical OR} of a (finite or infinite) countable  collection of experimental observations $\{\mathsf{o}_i\}_{i=1}^{\infty}=\{\llparenthesis \stmt_i, \expt{e}_i\rrparenthesis\}_{i=1}^{\infty}$ is the experimental observation $\bigOR\limits_{i=1}^{\infty} \mathsf{o}_i = \llparenthesis \bigOR\limits_{i=1}^{\infty} \stmt_i, \bigOR\limits_{i=1}^{\infty} \expt{e}_i\rrparenthesis$.
 \end{defn}
 \begin{proof}
-	As before, we need to make sure that the statement is true if and only if the experimental test is successful. We have $\truth(\bigOR\limits_{i=1}^{n} \stmt{s}_i) = \TRUE$ if and only if $\truth(\stmt{s}_i) = \TRUE$ for at least one $\stmt{s}_i \in \{\stmt{s}_i\}_{i=1}^{n}$. This is the case if and only $\result(\expt{e}_i) = \SUCCESS$ for the corresponding test $\expt{e}_i \in \{\expt{e}_i\}_{i=1}^{n}$. This can only happen if and only if   $\result(\bigOR\limits_{i=1}^{n} \expt{e}_i) = \SUCCESS$. Therefore $\bigOR\limits_{i=1}^{n} \mathsf{o}_i$ is a valid experimental observation.
+	As before, we need to make sure that the statement is true if and only if the experimental test is successful. We have $\truth(\bigOR\limits_{i=1}^{n} \stmt_i) = \TRUE$ if and only if $\truth(\stmt_i) = \TRUE$ for at least one $\stmt_i \in \{\stmt_i\}_{i=1}^{n}$. This is the case if and only $\result(\expt{e}_i) = \SUCCESS$ for the corresponding test $\expt{e}_i \in \{\expt{e}_i\}_{i=1}^{n}$. This can only happen if and only if   $\result(\bigOR\limits_{i=1}^{n} \expt{e}_i) = \SUCCESS$. Therefore $\bigOR\limits_{i=1}^{n} \mathsf{o}_i$ is a valid experimental observation.
 \end{proof}
 \end{mathSection}
 
@@ -416,7 +416,7 @@ Both the experimental and the theoretical domains contain answers at different l
 \end{prop}
 
 \begin{proof}
-	Let $E \subseteq \mathcal{D}$ be an essential set. Let $x$ be a minterm of $E$. Any theoretical statement $\stmt{s} \in \tdomain$ can be expressed as a function of the elements of $E$. Therefore $\stmt{s}$ can be expressed as the disjunction of minterms of $E$. $x$ is either within the minterms needed to express $\stmt{s}$, or not. If it is, $x \AND \stmt{s} \equiv x$ and therefore $x \narrower \stmt{s}$. If it's not, $x \AND \NOT \stmt{s} \equiv x$ and therefore $x \ncomp \obs{e}_i$. Therefore a minterm is either narrower or incompatible with all theoretical statement and, if it is not a contradiction, it is a possibility by definition.
+	Let $E \subseteq \mathcal{D}$ be an essential set. Let $x$ be a minterm of $E$. Any theoretical statement $\stmt \in \tdomain$ can be expressed as a function of the elements of $E$. Therefore $\stmt$ can be expressed as the disjunction of minterms of $E$. $x$ is either within the minterms needed to express $\stmt$, or not. If it is, $x \AND \stmt \equiv x$ and therefore $x \narrower \stmt$. If it's not, $x \AND \NOT \stmt \equiv x$ and therefore $x \ncomp \obs{e}_i$. Therefore a minterm is either narrower or incompatible with all theoretical statement and, if it is not a contradiction, it is a possibility by definition.
 	
 	Conversely, suppose $x \in \tdomain$ is a possibility. Then it can be expressed as a disjunction of minterms of an essential set $E$. Suppose it was the disjunction of more then one minterm. Then each minterm would be narrower than $x$, which cannot be. $x$ must be expressed by a single minter. Therefore any possibility is a minterm.
 \end{proof}
@@ -586,7 +586,7 @@ Like topologies, $\sigma$-algebras are fundamental in mathematics as they allow 
 \begin{mathSection}
 	
 	\begin{defn}
-		Let $\bar{\mathcal{D}}$ be a theoretical domain and $X$ its possibilities. We define the map $A : \bar{\mathcal{D}} \rightarrow 2^X$ that for each theoretical statement $\stmt{s} \in \mathcal{D}$ returns the set of possibilities compatible with it. That is: $A(\stmt{s})\equiv\{ x \in X \, | \, x \comp \stmt{s}\}$. We call $A(\stmt{s})$ the \textbf{theoretical set} of possibilities associated with $\stmt{s}$
+		Let $\bar{\mathcal{D}}$ be a theoretical domain and $X$ its possibilities. We define the map $A : \bar{\mathcal{D}} \rightarrow 2^X$ that for each theoretical statement $\stmt \in \mathcal{D}$ returns the set of possibilities compatible with it. That is: $A(\stmt)\equiv\{ x \in X \, | \, x \comp \stmt\}$. We call $A(\stmt)$ the \textbf{theoretical set} of possibilities associated with $\stmt$
 	\end{defn}
 	
 	\begin{prop}
@@ -596,9 +596,9 @@ Like topologies, $\sigma$-algebras are fundamental in mathematics as they allow 
 	\begin{proof}
 	The theoretical sets for the tautology and the contradiction correspond to the full set and empty set respectively. Formally, $U(\tautology) = \{ x \in X \, | \, x \comp \tautology\} = X$ while $U(\contradiction) = \{ x \in X \, | \, x \comp \contradiction\} = \emptyset$. Therefore $X, \emptyset \in A(\bar{\mathcal{D}})$ since $\tautology, \contradiction \in \bar{\mathcal{D}}$.
 
-	The complement of a theoretical set corresponds to the theoretical set of the negation and therefore it is a theoretical set. Formally, $A(\stmt{s})^C = \{ x \in X \, | \, x \ncomp \stmt{s}\} =  \{ x \in X \, | \, x \comp \NOT\stmt{s}\} = A(\NOT\stmt{s})$.
+	The complement of a theoretical set corresponds to the theoretical set of the negation and therefore it is a theoretical set. Formally, $A(\stmt)^C = \{ x \in X \, | \, x \ncomp \stmt\} =  \{ x \in X \, | \, x \comp \NOT\stmt\} = A(\NOT\stmt)$.
 
-	The countable union of verifiable sets corresponds to the verifiable set of the countable disjunction and therefore it is a theoretical set. Formally, $A(\stmt{s}_1\OR\stmt{s}_2) = \{ x \in X \, | \, x \comp \stmt{s}_1\OR\stmt{s}_2\} =  \{ x \in X \, | \, x \comp \stmt{s}_1 \, or \, x \comp \stmt{s}_2\} = \{ x \in X \, | \, x \comp \stmt{s}_1\} \cup \{ x \in X \, | \, x \comp \stmt{s}_2\} = A(\stmt{s}_1) \cup A(\stmt{s}_2)$. This generalizes to countable disjunctions.
+	The countable union of verifiable sets corresponds to the verifiable set of the countable disjunction and therefore it is a theoretical set. Formally, $A(\stmt_1\OR\stmt_2) = \{ x \in X \, | \, x \comp \stmt_1\OR\stmt_2\} =  \{ x \in X \, | \, x \comp \stmt_1 \, or \, x \comp \stmt_2\} = \{ x \in X \, | \, x \comp \stmt_1\} \cup \{ x \in X \, | \, x \comp \stmt_2\} = A(\stmt_1) \cup A(\stmt_2)$. This generalizes to countable disjunctions.
 
 	The collection $\Sigma_X=A(\bar{\mathcal{D}})$ is therefore a $\sigma$-algebra by definition since it satisfies all its properties.
 	\end{proof}
@@ -636,7 +636,7 @@ The first case is when all our tests always finish with a clear success or failu
 \begin{mathSection}
 	
 	\begin{defn}
-		An experimental domain $\mathcal{D}$ is \textbf{decidable} if all tests are guaranteed to terminate. Formally, for every $\obsdef{\stmt{s}_1}{\expt{e}_1} \in \mathcal{D}$ there exists a $\obsdef{\stmt{s}_2}{\expt{e}_2} \in \mathcal{D}$ such that $\stmt{s}_1 = \NOT \stmt{s}_2$
+		An experimental domain $\mathcal{D}$ is \textbf{decidable} if all tests are guaranteed to terminate. Formally, for every $\obsdef{\stmt_1}{\expt{e}_1} \in \mathcal{D}$ there exists a $\obsdef{\stmt_2}{\expt{e}_2} \in \mathcal{D}$ such that $\stmt_1 = \NOT \stmt_2$
 	\end{defn}
 
 	\begin{justification}
@@ -654,7 +654,7 @@ In this case we can prove the following.
 	\end{prop}
 	
 	\begin{proof}
-		The decidable domain $\mathcal{D}$ is already closed under negation, therefore for each theoretical statement $\stmt{s} \in \bar{\mathcal{D}}$ there exists a corresponding experimental observation $\obsdef{\stmt{s}}{\expt{e}} \in \mathcal{D}$. We can then find a set of observations $E\subseteq \mathcal{D}$ such that their corresponding statements are the possibilities $X$.
+		The decidable domain $\mathcal{D}$ is already closed under negation, therefore for each theoretical statement $\stmt \in \bar{\mathcal{D}}$ there exists a corresponding experimental observation $\obsdef{\stmt}{\expt{e}} \in \mathcal{D}$. We can then find a set of observations $E\subseteq \mathcal{D}$ such that their corresponding statements are the possibilities $X$.
 		
 		TODO
 	\end{proof}
@@ -774,7 +774,7 @@ Define combined domain.
 		Two experimental domains $\mathcal{D}_X$ and $\mathcal{D}_Y$ are \textbf{incompatible} if all observations in one are incompatible to all observations of the other, excluding the tautology. Formally, $\obs{o}_X \ncomp \obs{o}_Y$ for each $\obs{o}_X \in \mathcal{D}_X$ and $\obs{o}_Y \in \mathcal{D}_Y$ such that $\obs{o}_X \nequiv \tautology $ and $\obs{o}_Y \nequiv \tautology$.
 	\end{defn}
 	\begin{defn}
-		The \textbf{final possibility} for a domain is the negation of the statement associated to the union of all experimental observations excluding the tautology. That is, $\stmt{x}_F \in \bar{\mathcal{D}}$ such that $\obsdef{\NOT \stmt{x}_F}{\expt{e}} = \bigOR ( \mathcal{D} \setminus \{\tautology\})$.
+		The \textbf{final possibility} for a domain is the negation of the statement associated to the union of all experimental observations excluding the tautology. That is, $x_F \in \bar{\mathcal{D}}$ such that $\obsdef{\NOT x_F}{\expt{e}} = \bigOR ( \mathcal{D} \setminus \{\tautology\})$.
 	\end{defn}
 	\begin{prop}
 		Let $\mathcal{D}_{X_1}$ and $\mathcal{D}_{X_2}$ be two incompatible experimental domains. Then the possibilities of the combined domain $\mathcal{D}_X = \mathcal{D}_{X_1} \times \mathcal{D}_{X_2}$, excluded the final possibility, is equal to the union of the possibilities of the individual domains, excluded the respective final possibility. That is $X \setminus \{x_F\} = (X_1 \setminus \{x_{F_1}\}) \cup (X_2 \setminus \{x_{F_2}\})$. Notationally, we write $\mathcal{D}_{X_1} \times \mathcal{D}_{X_2} = \mathcal{D}_{X_1 \coprod X_2}$.
@@ -791,37 +791,37 @@ TODO: In terms of category theory, a morphism of an experimental domain is a map
 \begin{mathSection}
 	
 	\begin{prop}
-		(Maybe in previous section?) Let $\stmt{s}_1 \equiv \bar{\stmt{s}}_1$ and $\stmt{s}_2 \equiv \bar{\stmt{s}}_2$. Then $\NOT \stmt{s}_1 \equiv \NOT \bar{\stmt{s}}_1$, $\stmt{s}_1 \AND \stmt{s}_2 \equiv \bar{\stmt{s}}_1 \AND \bar{\stmt{s}}_2$ and $\stmt{s}_1 \OR \stmt{s}_2 \equiv \bar{\stmt{s}}_1 \OR \bar{\stmt{s}}_2$.
+		(Maybe in previous section?) Let $\stmt_1 \equiv \bar{\stmt}_1$ and $\stmt_2 \equiv \bar{\stmt}_2$. Then $\NOT \stmt_1 \equiv \NOT \bar{\stmt}_1$, $\stmt_1 \AND \stmt_2 \equiv \bar{\stmt}_1 \AND \bar{\stmt}_2$ and $\stmt_1 \OR \stmt_2 \equiv \bar{\stmt}_1 \OR \bar{\stmt}_2$.
 	\end{prop}
 	
 	\begin{proof}
-		Suppose $\stmt{s}_1 \equiv \bar{\stmt{s}}_1$, then $(\stmt{s}_1 \AND \bar{\stmt{s}}_1) \OR (\NOT \stmt{s}_1 \AND \NOT \bar{\stmt{s}}_1) = ( \NOT\stmt{s}_1 \AND \NOT \bar{\stmt{s}}_1) \OR (\NOT \NOT \stmt{s}_1 \AND \NOT \NOT \bar{\stmt{s}}_1)$ is a tautology. Which means $\NOT \stmt{s}_1 \equiv \NOT \bar{\stmt{s}}_1$.
+		Suppose $\stmt_1 \equiv \bar{\stmt}_1$, then $(\stmt_1 \AND \bar{\stmt}_1) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_1) = ( \NOT\stmt_1 \AND \NOT \bar{\stmt}_1) \OR (\NOT \NOT \stmt_1 \AND \NOT \NOT \bar{\stmt}_1)$ is a tautology. Which means $\NOT \stmt_1 \equiv \NOT \bar{\stmt}_1$.
 		
 		TODO
 	\end{proof}	
 	
 	\begin{prop}
-		(Maybe in previous section?) $\stmt{s}_1 \narrower \stmt{s}_2$ if and only if $\stmt{s}_1 \AND \stmt{s}_2 \equiv \stmt{s}_1$.
+		(Maybe in previous section?) $\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \stmt_2 \equiv \stmt_1$.
 	\end{prop}
 	
 	\begin{proof}
-		Consider $\stmt{s}_1 \AND \stmt{s}_2 = \stmt{s}_1 \AND \stmt{s}_2 \OR \contradiction$. Since $\stmt{s}_1 \narrower \stmt{s}_2$, $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \contradiction$. We have $\stmt{s}_1 \AND \stmt{s}_2 \OR \contradiction \equiv ( \stmt{s}_1 \AND \stmt{s}_2 ) \OR (\stmt{s}_1 \AND \NOT \stmt{s}_2) = \stmt{s}_1 \AND (\stmt{s}_2 \OR \NOT \stmt{s}_2) = \stmt{s}_1 \AND \tautology = \stmt{s}_1$. Therefore $\stmt{s}_1 \AND \stmt{s}_2 \equiv \stmt{s}_1$. The same logic can be applied in reverse.
+		Consider $\stmt_1 \AND \stmt_2 = \stmt_1 \AND \stmt_2 \OR \contradiction$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \stmt_2 ) \OR (\stmt_1 \AND \NOT \stmt_2) = \stmt_1 \AND (\stmt_2 \OR \NOT \stmt_2) = \stmt_1 \AND \tautology = \stmt_1$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
 	\end{proof}	
 	
 \begin{prop}
-	(Maybe in previous section?) $\stmt{s}_1 \ncomp \stmt{s}_2$ if and only if $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \stmt{s}_1$.
+	(Maybe in previous section?) $\stmt_1 \ncomp \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$.
 \end{prop}
 
 \begin{proof}
-	Consider $\stmt{s}_1 \AND \NOT \stmt{s}_2 = \stmt{s}_1 \AND \stmt{s}_2 \OR \contradiction$. Since $\stmt{s}_1 \ncomp \stmt{s}_2$, $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \contradiction$. We have $\stmt{s}_1 \AND \NOT \stmt{s}_2 \OR \contradiction \equiv ( \stmt{s}_1 \AND \NOT \stmt{s}_2 ) \OR (\stmt{s}_1 \AND \stmt{s}_2) = \stmt{s}_1 \AND (\NOT \stmt{s}_2 \OR \stmt{s}_2) = \stmt{s}_1 \AND \tautology = \stmt{s}_1$. Therefore $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \stmt{s}_1$. The same logic can be applied in reverse.
+	Consider $\stmt_1 \AND \NOT \stmt_2 = \stmt_1 \AND \stmt_2 \OR \contradiction$. Since $\stmt_1 \ncomp \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \NOT \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \NOT \stmt_2 ) \OR (\stmt_1 \AND \stmt_2) = \stmt_1 \AND (\NOT \stmt_2 \OR \stmt_2) = \stmt_1 \AND \tautology = \stmt_1$. Therefore $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
 \end{proof}	
 	
 	\begin{prop}
-		(Maybe in previous section?) $\stmt{s}_1 \narrower \stmt{s}_2$ and $\stmt{s}_1 \broader \stmt{s}_2$ if and only if $\stmt{s}_1 \equiv \stmt{s}_1$.
+		(Maybe in previous section?) $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$ if and only if $\stmt_1 \equiv \stmt_1$.
 	\end{prop}
 	
 	\begin{proof}
-		We have $\stmt{s}_1 \AND \stmt{s}_2 \equiv \stmt{s}_1$ since $\stmt{s}_1 \narrower \stmt{s}_2$ and $\stmt{s}_1 \AND \stmt{s}_2 \equiv \stmt{s}_2$ since $\stmt{s}_2 \narrower \stmt{s}_1$. Therefore $\stmt{s}_1 \equiv \stmt{s}_1$.
+		We have $\stmt_1 \AND \stmt_2 \equiv \stmt_1$ since $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \AND \stmt_2 \equiv \stmt_2$ since $\stmt_2 \narrower \stmt_1$. Therefore $\stmt_1 \equiv \stmt_1$.
 	\end{proof}	
 \end{mathSection}
 
