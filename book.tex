@@ -312,7 +312,7 @@ Now that statement and experimental tests are well defined, we can match them to
 
 \begin{mathSection}
 \begin{defn}
-	An \textbf{experimental observation} is a tuple $\obs{o} = \obsdef{\stmt}{\expt}$ composed by a statement $\stmt$ and an experimental test $\expt$ such that the statement is true if and only if the  experimental test is always successful. That is, $\truth(\stmt)=\textsc{true}$ if and only if $\result(\expt)=\textsc{success}$. The experimental observation is \textbf{verified} if the statement is true.
+	An \textbf{experimental observation} is a tuple $\obs = \obsdef{\stmt}{\expt}$ composed by a statement $\stmt$ and an experimental test $\expt$ such that the statement is true if and only if the  experimental test is always successful. That is, $\truth(\stmt)=\textsc{true}$ if and only if $\result(\expt)=\textsc{success}$. The experimental observation is \textbf{verified} if the statement is true.
 \end{defn}
 \end{mathSection}
 
@@ -416,7 +416,7 @@ Both the experimental and the theoretical domains contain answers at different l
 \end{prop}
 
 \begin{proof}
-	Let $E \subseteq \mathcal{D}$ be an essential set. Let $x$ be a minterm of $E$. Any theoretical statement $\stmt \in \tdomain$ can be expressed as a function of the elements of $E$. Therefore $\stmt$ can be expressed as the disjunction of minterms of $E$. $x$ is either within the minterms needed to express $\stmt$, or not. If it is, $x \AND \stmt \equiv x$ and therefore $x \narrower \stmt$. If it's not, $x \AND \NOT \stmt \equiv x$ and therefore $x \ncomp \obs{e}_i$. Therefore a minterm is either narrower or incompatible with all theoretical statement and, if it is not a contradiction, it is a possibility by definition.
+	Let $E \subseteq \mathcal{D}$ be an essential set. Let $x$ be a minterm of $E$. Any theoretical statement $\stmt \in \tdomain$ can be expressed as a function of the elements of $E$. Therefore $\stmt$ can be expressed as the disjunction of minterms of $E$. $x$ is either within the minterms needed to express $\stmt$, or not. If it is, $x \AND \stmt \equiv x$ and therefore $x \narrower \stmt$. If it's not, $x \AND \NOT \stmt \equiv x$ and therefore $x \ncomp \obs[e]_i$. Therefore a minterm is either narrower or incompatible with all theoretical statement and, if it is not a contradiction, it is a possibility by definition.
 	
 	Conversely, suppose $x \in \tdomain$ is a possibility. Then it can be expressed as a disjunction of minterms of an essential set $E$. Suppose it was the disjunction of more then one minterm. Then each minterm would be narrower than $x$, which cannot be. $x$ must be expressed by a single minter. Therefore any possibility is a minterm.
 \end{proof}
@@ -440,15 +440,15 @@ A possibility represents a complete prediction for a scientific question. Only o
 	\begin{proof}
 		The idea is that each possibility can be identified by knowing which observations of an essential set are verified. Since the essential set of an experimental domain can be assumed countable, the possible combinations of their truth values have at most cardinality of continuum.
 		
-		More formally, let $E = \{\obs{e}_i\}_{i=1}^{\infty} \subseteq \mathcal{D}$ be a countable essential set. Let $2^{\mathbb{N}}$ denotes the set of infinite binary sequences. We define the function $F:X\to2^{\mathbb{N}}$ such that $F(x) = (F(x)_i)_{i=1}^{\infty}$ is given by: 
+		More formally, let $E = \{\obs[e]_i\}_{i=1}^{\infty} \subseteq \mathcal{D}$ be a countable essential set. Let $2^{\mathbb{N}}$ denotes the set of infinite binary sequences. We define the function $F:X\to2^{\mathbb{N}}$ such that $F(x) = (F(x)_i)_{i=1}^{\infty}$ is given by: 
 		$$
 		F(x)_i = 
 		\begin{cases}
-		1 & x \comp \obs{e}_i \\
-		0 & x \ncomp \obs{e}_i
+		1 & x \comp \obs[e]_i \\
+		0 & x \ncomp \obs[e]_i
 		\end{cases}
 		$$
-		For each $x \in X$ we have $x = \bigAND\limits_{i=1}^{\infty} \NOT^{F(x)_i} \obs{e}_i$. Suppose $x_1 \neq x_2$, then $F(x_1)_i \neq F(x_2)_i$ for some $i$, therefore $F$ is injective. We then have $|X| \leq |2^{\mathbb{N}}|=|\mathbb{R}|$. $X$ has at most cardinality of continuum.
+		For each $x \in X$ we have $x = \bigAND\limits_{i=1}^{\infty} \NOT^{F(x)_i} \obs[e]_i$. Suppose $x_1 \neq x_2$, then $F(x_1)_i \neq F(x_2)_i$ for some $i$, therefore $F$ is injective. We then have $|X| \leq |2^{\mathbb{N}}|=|\mathbb{R}|$. $X$ has at most cardinality of continuum.
 	\end{proof}
 \end{mathSection}
 
@@ -500,9 +500,9 @@ In our case, this notion of closeness will map to how hard is to tell possibilit
 \begin{proof}
 	The verifiable sets for the tautology and the contradiction correspond to the full set and empty set respectively. Formally, $U(\tautology) = \{ x \in X \, | \, x \comp \tautology\} = X$ while $U(\contradiction) = \{ x \in X \, | \, x \comp \contradiction\} = \emptyset$. Therefore $X, \emptyset \in U(\mathcal{D})$ since $\tautology, \contradiction \in \mathcal{D}$.
 
-	The finite intersection of verifiable sets corresponds to the verifiable set of the finite conjunction and therefore it is a verifiable set. Formally, $U(\obs{o}_1\AND\obs{o}_2) = \{ x \in X \, | \, x \comp \obs{o}_1\AND\obs{o}_2\} =  \{ x \in X \, | \, x \comp \obs{o}_1 \, and \, x \comp \obs{o}_2\} = \{ x \in X \, | \, x \comp \obs{o}_1\} \cap \{ x \in X \, | \, x \comp \obs{o}_2\} = U(\obs{o}_1) \cap U(\obs{o}_2)$.
+	The finite intersection of verifiable sets corresponds to the verifiable set of the finite conjunction and therefore it is a verifiable set. Formally, $U(\obs_1\AND\obs_2) = \{ x \in X \, | \, x \comp \obs_1\AND\obs_2\} =  \{ x \in X \, | \, x \comp \obs_1 \, and \, x \comp \obs_2\} = \{ x \in X \, | \, x \comp \obs_1\} \cap \{ x \in X \, | \, x \comp \obs_2\} = U(\obs_1) \cap U(\obs_2)$.
 
-	The union of verifiable sets corresponds to the verifiable set of the disjunction and therefore it is a verifiable set. Formally, $U(\obs{o}_1\OR\obs{o}_2) = \{ x \in X \, | \, x \comp \obs{o}_1\OR\obs{o}_2\} =  \{ x \in X \, | \, x \comp \obs{o}_1 \, or \, x \comp \obs{o}_2\} = \{ x \in X \, | \, x \comp \obs{o}_1\} \cup \{ x \in X \, | \, x \comp \obs{o}_2\} = U(\obs{o}_1) \cup U(\obs{o}_2)$. This generalizes to countable disjunctions. Arbitrary disjunctions can be re-expressed as countable disjunctions, since any observation can always be expressed in term of a countable set of essential elements.
+	The union of verifiable sets corresponds to the verifiable set of the disjunction and therefore it is a verifiable set. Formally, $U(\obs_1\OR\obs_2) = \{ x \in X \, | \, x \comp \obs_1\OR\obs_2\} =  \{ x \in X \, | \, x \comp \obs_1 \, or \, x \comp \obs_2\} = \{ x \in X \, | \, x \comp \obs_1\} \cup \{ x \in X \, | \, x \comp \obs_2\} = U(\obs_1) \cup U(\obs_2)$. This generalizes to countable disjunctions. Arbitrary disjunctions can be re-expressed as countable disjunctions, since any observation can always be expressed in term of a countable set of essential elements.
 
 	The collection $\mathsf{T}_X=U(\mathcal{D})$ is therefore a topology by definition since it satisfies all its properties.
 \end{proof}
@@ -561,13 +561,13 @@ What we have is that the natural topology for any set of possibilities is Kolmog
 	The natural topology of a set of possibilities is Kolmogorov (or $\mathsf{T}_0$).
 \end{prop}
 \begin{proof}
-	Let $X$ be the set of possibilities for an experimental domain $\mathcal{D}$. Let $\bar{\mathcal{D}}$ be the corresponding theoretical domain. Let $x_1, x_2 \in X$ be two distinct possibilities. Each of them can expressed as the conjunction of the elements of an essential set $E \subseteq \mathcal{D}$ or their negation. Since the two possibilities are distinct, there must exist an experimental observation $\obs{e}_i \in E$ that appears negated in one conjunction but not the other. That is, $\obs{e}_i$ is compatible with only one possibility. Since the verifiable set of an experimental observation contains only the possibilities compatible with the observation, the verifiable set of $\obs{e}_i$ either contains $x_1$ or $x_2$ but not both. The topology is therefore Kolmogorov (or $\mathsf{T}_0$).
+	Let $X$ be the set of possibilities for an experimental domain $\mathcal{D}$. Let $\bar{\mathcal{D}}$ be the corresponding theoretical domain. Let $x_1, x_2 \in X$ be two distinct possibilities. Each of them can expressed as the conjunction of the elements of an essential set $E \subseteq \mathcal{D}$ or their negation. Since the two possibilities are distinct, there must exist an experimental observation $\obs[e]_i \in E$ that appears negated in one conjunction but not the other. That is, $\obs[e]_i$ is compatible with only one possibility. Since the verifiable set of an experimental observation contains only the possibilities compatible with the observation, the verifiable set of $\obs[e]_i$ either contains $x_1$ or $x_2$ but not both. The topology is therefore Kolmogorov (or $\mathsf{T}_0$).
 \end{proof}
 	\begin{prop}
 	The natural topology of a set of experimentally distinguishable possibilities is Hausdorff (or $\mathsf{T}_2$).
 \end{prop}
 \begin{proof}
-	Since the possibilities are distinguishable, given two distinct possibilities $x_1, x_2 \in X$ we can find two observations such that $\obs{o}_1 \broader x_1$, $\obs{o}_2 \broader x_2$ and $\obs{o}_1 \ncomp \obs{o}_2$. This means $x_1 \in U(\obs{o}_1)$, $x_2 \in U(\obs{o}_2)$ and $U(\obs{o}_1) \cap U(\obs{o}_2) = \emptyset$. The topology is therefore Hausdorff (or $\mathsf{T}_2$).
+	Since the possibilities are distinguishable, given two distinct possibilities $x_1, x_2 \in X$ we can find two observations such that $\obs_1 \broader x_1$, $\obs_2 \broader x_2$ and $\obs_1 \ncomp \obs_2$. This means $x_1 \in U(\obs_1)$, $x_2 \in U(\obs_2)$ and $U(\obs_1) \cap U(\obs_2) = \emptyset$. The topology is therefore Hausdorff (or $\mathsf{T}_2$).
 \end{proof}
 \end{mathSection}
 
@@ -744,7 +744,7 @@ Define combined domain.
 
 \begin{mathSection}
 	\begin{defn}
-		An experimental domain $\mathcal{D}_Y$ is \textbf{dependent} on another experimental domain $\mathcal{D}_X$ if each observation in the first is equivalent to an observation in the second. Formally, for each $\obs{o}_Y \in \mathcal{D}_Y$ there exists $\obs{o}_X \in \mathcal{D}_X$ such that $\obs{o}_Y\equiv \obs{o}_X$.
+		An experimental domain $\mathcal{D}_Y$ is \textbf{dependent} on another experimental domain $\mathcal{D}_X$ if each observation in the first is equivalent to an observation in the second. Formally, for each $\obs_Y \in \mathcal{D}_Y$ there exists $\obs_X \in \mathcal{D}_X$ such that $\obs_Y\equiv \obs_X$.
 	\end{defn}
 	\begin{defn}
 		Two experimental domains $\mathcal{D}_X$ and $\mathcal{D}_Y$ are \textbf{equivalent} $\mathcal{D}_X \equiv \mathcal{D}_Y$ if $\mathcal{D}_X$ depends on $\mathcal{D}_Y$ and vice-versa.
@@ -771,7 +771,7 @@ Define combined domain.
 
 \begin{mathSection}
 	\begin{defn}
-		Two experimental domains $\mathcal{D}_X$ and $\mathcal{D}_Y$ are \textbf{incompatible} if all observations in one are incompatible to all observations of the other, excluding the tautology. Formally, $\obs{o}_X \ncomp \obs{o}_Y$ for each $\obs{o}_X \in \mathcal{D}_X$ and $\obs{o}_Y \in \mathcal{D}_Y$ such that $\obs{o}_X \nequiv \tautology $ and $\obs{o}_Y \nequiv \tautology$.
+		Two experimental domains $\mathcal{D}_X$ and $\mathcal{D}_Y$ are \textbf{incompatible} if all observations in one are incompatible to all observations of the other, excluding the tautology. Formally, $\obs_X \ncomp \obs_Y$ for each $\obs_X \in \mathcal{D}_X$ and $\obs_Y \in \mathcal{D}_Y$ such that $\obs_X \nequiv \tautology $ and $\obs_Y \nequiv \tautology$.
 	\end{defn}
 	\begin{defn}
 		The \textbf{final possibility} for a domain is the negation of the statement associated to the union of all experimental observations excluding the tautology. That is, $x_F \in \bar{\mathcal{D}}$ such that $\obsdef{\NOT x_F}{\expt} = \bigOR ( \mathcal{D} \setminus \{\tautology\})$.
@@ -784,7 +784,7 @@ Define combined domain.
 	\end{proof}
 \end{mathSection}
 
-TODO: In terms of category theory, a morphism of an experimental domain is a map $f : \mathcal{D}_1 \to \mathcal{D}_2$ such that $f(\obs{o}) \equiv \obs{o}$. That is, it is a map that preserves the semantic content of each observation. Therefore we cannot impose morphisms on any pair of domains. In the same vein, there is only one type of product (the combined domain) and it is the semantic content that decides what it corresponds to. If the domains are independent, then it is the categoric product. If the domains are incompatible, then it is the categoric co-product. In all other cases, it will correspond to something different.
+TODO: In terms of category theory, a morphism of an experimental domain is a map $f : \mathcal{D}_1 \to \mathcal{D}_2$ such that $f(\obs) \equiv \obs$. That is, it is a map that preserves the semantic content of each observation. Therefore we cannot impose morphisms on any pair of domains. In the same vein, there is only one type of product (the combined domain) and it is the semantic content that decides what it corresponds to. If the domains are independent, then it is the categoric product. If the domains are incompatible, then it is the categoric co-product. In all other cases, it will correspond to something different.
 
 \section{Relationships between domains and continuous functions}
 
@@ -839,19 +839,19 @@ TODO: In terms of category theory, a morphism of an experimental domain is a map
 
 \begin{mathSection}
 	\begin{prop}
-		Let $g : \mathcal{D}_Y \to \mathcal{D}_X$ return the narrowest observation in $\mathcal{D}_X$ such that $\obs{o}_Y \narrower g(\obs{o}_Y)$. We have:
+		Let $g : \mathcal{D}_Y \to \mathcal{D}_X$ return the narrowest observation in $\mathcal{D}_X$ such that $\obs_Y \narrower g(\obs_Y)$. We have:
 		\begin{enumerate}
 			\item $g(\tautology) = \tautology$
 			\item $g(\contradiction) = \contradiction$
-			\item $g(\obs{o}_1 \OR \obs{o}_2) = g(\obs{o}_1) \OR (\obs{o}_2)$
+			\item $g(\obs_1 \OR \obs_2) = g(\obs_1) \OR (\obs_2)$
 		\end{enumerate}
 	\end{prop}
 	\begin{proof}
-		Let $\obs{o}_X \in \mathcal{D}_X$ such that $\tautology \narrower \obs{o}_X$. Then $\obs{o}_X \equiv \tautology$ and we have $g(\tautology) = \tautology$.
+		Let $\obs_X \in \mathcal{D}_X$ such that $\tautology \narrower \obs_X$. Then $\obs_X \equiv \tautology$ and we have $g(\tautology) = \tautology$.
 		
-		Let $\obs{o}_X \in \mathcal{D}_X$ such that $\contradiction \narrower \obs{o}_X$. Then $\obs{o}_X$ can be any observation in $\mathcal{D}_X$. The narrowest observation is $\contradiction$ so we have $g(\contradiction) = \contradiction$.
+		Let $\obs_X \in \mathcal{D}_X$ such that $\contradiction \narrower \obs_X$. Then $\obs_X$ can be any observation in $\mathcal{D}_X$. The narrowest observation is $\contradiction$ so we have $g(\contradiction) = \contradiction$.
 		
-		Let $\obs{o}_1, \obs{o}_2 \in \mathcal{D}_Y$. Consider $(\obs{o}_1 \OR \obs{o}_2) \AND \NOT (g(\obs{o}_1) \OR g(\obs{o}_2)) = (\obs{o}_1 \OR \obs{o}_2) \AND (\NOT g(\obs{o}_1) \AND \NOT g(\obs{o}_2)) = (\obs{o}_1 \AND \NOT g(\obs{o}_1) \AND \NOT g(\obs{o}_2)) \OR (\obs{o}_2 \AND \NOT g(\obs{o}_1) \AND \NOT g(\obs{o}_2))$. Since $\obs{o}_1 \narrower g(\obs{o}_1)$, $\obs{o}_1 \AND \NOT g(\obs{o}_1) \equiv \contradiction$. Similarly, $\obs{o}_2 \AND \NOT g(\obs{o}_2) \equiv \contradiction$. We have $(\obs{o}_1 \OR \obs{o}_2) \AND \NOT (g(\obs{o}_1) \OR g(\obs{o}_2)) \equiv (\contradiction \AND \NOT g(\obs{o}_2)) \OR (\contradiction \AND \NOT g(\obs{o}_1)) = \contradiction \OR \contradiction = \contradiction$. Therefore $\obs{o}_1 \OR \obs{o}_2 \narrower g(\obs{o}_1) \OR g(\obs{o}_2)$ which gives $g(\obs{o}_1 \OR \obs{o}_2) \narrower g(\obs{o}_1) \OR g(\obs{o}_2)$. We also have $\obs{o}_1 \narrower \obs{o}_1 \OR \obs{o}_2 \narrower g(\obs{o}_1 \OR \obs{o}_2)$ therefore $g(\obs{o}_1) \narrower g(\obs{o}_1 \OR \obs{o}_2)$ which means $g(\obs{o}_1) \AND g(\obs{o}_1 \OR \obs{o}_2) \equiv g(\obs{o}_1)$. Similarly, $g(\obs{o}_2) \AND g(\obs{o}_1 \OR \obs{o}_2) \equiv g(\obs{o}_2)$. Now consider $(g(\obs{o}_1) \OR g(\obs{o}_2)) \AND g(\obs{o}_1 \OR \obs{o}_2) = (g(\obs{o}_1) \AND g(\obs{o}_1 \OR \obs{o}_2))\OR(g(\obs{o}_2) \AND g(\obs{o}_1 \OR \obs{o}_2)) \equiv g(\obs{o}_1)\OR g(\obs{o}_2)$ which means $g(\obs{o}_1) \OR g(\obs{o}_2) \narrower g(\obs{o}_1 \OR \obs{o}_2)$. We have $g(\obs{o}_1) \OR g(\obs{o}_2) \equiv g(\obs{o}_1 \OR \obs{o}_2)$ since they are both narrower of each other.
+		Let $\obs_1, \obs_2 \in \mathcal{D}_Y$. Consider $(\obs_1 \OR \obs_2) \AND \NOT (g(\obs_1) \OR g(\obs_2)) = (\obs_1 \OR \obs_2) \AND (\NOT g(\obs_1) \AND \NOT g(\obs_2)) = (\obs_1 \AND \NOT g(\obs_1) \AND \NOT g(\obs_2)) \OR (\obs_2 \AND \NOT g(\obs_1) \AND \NOT g(\obs_2))$. Since $\obs_1 \narrower g(\obs_1)$, $\obs_1 \AND \NOT g(\obs_1) \equiv \contradiction$. Similarly, $\obs_2 \AND \NOT g(\obs_2) \equiv \contradiction$. We have $(\obs_1 \OR \obs_2) \AND \NOT (g(\obs_1) \OR g(\obs_2)) \equiv (\contradiction \AND \NOT g(\obs_2)) \OR (\contradiction \AND \NOT g(\obs_1)) = \contradiction \OR \contradiction = \contradiction$. Therefore $\obs_1 \OR \obs_2 \narrower g(\obs_1) \OR g(\obs_2)$ which gives $g(\obs_1 \OR \obs_2) \narrower g(\obs_1) \OR g(\obs_2)$. We also have $\obs_1 \narrower \obs_1 \OR \obs_2 \narrower g(\obs_1 \OR \obs_2)$ therefore $g(\obs_1) \narrower g(\obs_1 \OR \obs_2)$ which means $g(\obs_1) \AND g(\obs_1 \OR \obs_2) \equiv g(\obs_1)$. Similarly, $g(\obs_2) \AND g(\obs_1 \OR \obs_2) \equiv g(\obs_2)$. Now consider $(g(\obs_1) \OR g(\obs_2)) \AND g(\obs_1 \OR \obs_2) = (g(\obs_1) \AND g(\obs_1 \OR \obs_2))\OR(g(\obs_2) \AND g(\obs_1 \OR \obs_2)) \equiv g(\obs_1)\OR g(\obs_2)$ which means $g(\obs_1) \OR g(\obs_2) \narrower g(\obs_1 \OR \obs_2)$. We have $g(\obs_1) \OR g(\obs_2) \equiv g(\obs_1 \OR \obs_2)$ since they are both narrower of each other.
 	\end{proof}
 \end{mathSection}
 
