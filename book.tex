@@ -237,7 +237,7 @@ So we have to narrow the scope to those and only those statements that can be ve
 
 \begin{mathSection}
 \begin{defn}\label{def_experimental_tests}
-	An \textbf{experimental test} $\expt{e}$ is a repeatable procedure (i.e. it can be restarted and stopped an arbitrary number of times) that will always either terminate successfully, terminate unsuccessfully or never terminate. Formally, an experimental test is an element of the set $\mathcal{E}$ of all experimental tests upon which is defined a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$ that returns the result for each element.
+	An \textbf{experimental test} $\expt$ is a repeatable procedure (i.e. it can be restarted and stopped an arbitrary number of times) that will always either terminate successfully, terminate unsuccessfully or never terminate. Formally, an experimental test is an element of the set $\mathcal{E}$ of all experimental tests upon which is defined a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$ that returns the result for each element.
 \end{defn}
 \end{mathSection}
 
@@ -266,10 +266,10 @@ Combining experimental tests with conjunction (i.e. the logical AND) is more str
 
 \begin{mathSection}
 	\begin{defn}\label{def_experimental_test_AND}
-	The \textbf{conjunction or logical AND} of a finite collection of experimental tests $\{\expt{e}_i\}_{i=1}^{n}$ is the experimental test $\bigAND\limits_{i=1}^{n} \expt{e}_i$ (or simply $\expt{e}_1 \AND \expt{e}_2$ for two statements) that is successful only when all experimental tests are successful. Formally, for any finite collection $\{\expt{e}_i\}_{i=1}^{n} \subseteq \mathcal{E}$ there exists $ \bigAND\limits_{i=1}^{n} \expt{e}_i \in \mathcal{E}$ such that $\result(\bigAND\limits_{i=1}^{n} \expt{e}_i) = \SUCCESS$ if and only if $\result(\expt{e}_i) = \SUCCESS$ for all $i=1..n$.
+	The \textbf{conjunction or logical AND} of a finite collection of experimental tests $\{\expt_i\}_{i=1}^{n}$ is the experimental test $\bigAND\limits_{i=1}^{n} \expt_i$ (or simply $\expt_1 \AND \expt_2$ for two statements) that is successful only when all experimental tests are successful. Formally, for any finite collection $\{\expt_i\}_{i=1}^{n} \subseteq \mathcal{E}$ there exists $ \bigAND\limits_{i=1}^{n} \expt_i \in \mathcal{E}$ such that $\result(\bigAND\limits_{i=1}^{n} \expt_i) = \SUCCESS$ if and only if $\result(\expt_i) = \SUCCESS$ for all $i=1..n$.
 	\end{defn}
 	\begin{justification}
-		Mathematically, we are simply assuming that the finite conjunction exists, so there it nothing to prove. However, we want to convince ourselves that in practice we can construct the test to show that the assumption is well justified. Let $\bigAND\limits_{i=1}^{n} \expt{e}_i$ be the experimental procedure defined as follows:
+		Mathematically, we are simply assuming that the finite conjunction exists, so there it nothing to prove. However, we want to convince ourselves that in practice we can construct the test to show that the assumption is well justified. Let $\bigAND\limits_{i=1}^{n} \expt_i$ be the experimental procedure defined as follows:
 		\begin{enumerate}
 			\item for each $i=1..n$ run the test $\mathsf{e}_i$
 			\item if all tests terminated successfully terminate successfully.
@@ -282,11 +282,11 @@ Combining experimental tests with disjunction, i.e. the logical OR, is also stra
 
 \begin{mathSection}
 	\begin{defn}\label{def_experimental_test_OR}
-	The \textbf{disjunction or logical OR} of a (finite or infinite) countable collection of experimental tests $\{\expt{e}_i\}_{i=1}^{\infty}$ is the experimental test $\bigOR\limits_{i=1}^{\infty} \expt{e}_i$ (or simply $\expt{e}_1 \OR \expt{e}_2$ for two statements) that is successful if and only if at least one experimental test in $E$ is successful. Formally, for any countable collection $\{\expt{e}_i\}_{i=1}^{\infty} \in \mathcal{E}$ there exists $ \bigOR\limits_{i=1}^{\infty} \expt{e}_i \in \mathcal{E}$ such that $\result(\bigOR\limits_{i=1}^{\infty} \expt{e}_i) = \SUCCESS$ if and only if $\result(\expt{e}_i) = \SUCCESS$ for some $1 \leq i \leq n$.
+	The \textbf{disjunction or logical OR} of a (finite or infinite) countable collection of experimental tests $\{\expt_i\}_{i=1}^{\infty}$ is the experimental test $\bigOR\limits_{i=1}^{\infty} \expt_i$ (or simply $\expt_1 \OR \expt_2$ for two statements) that is successful if and only if at least one experimental test in $E$ is successful. Formally, for any countable collection $\{\expt_i\}_{i=1}^{\infty} \in \mathcal{E}$ there exists $ \bigOR\limits_{i=1}^{\infty} \expt_i \in \mathcal{E}$ such that $\result(\bigOR\limits_{i=1}^{\infty} \expt_i) = \SUCCESS$ if and only if $\result(\expt_i) = \SUCCESS$ for some $1 \leq i \leq n$.
 	\end{defn}
 	\begin{justification}
 		Mathematically, we are simply assuming that the countable disjunction exists, so there it nothing to prove. As before, we want to convince ourselves that in practice we can construct the test to show that the assumption is well justified. This time we have to be more careful to handle tests that may not terminate.
-		Let $\bigOR\limits_{i=1}^{\infty} \expt{e}_i$ be the experimental procedure defined as follows:
+		Let $\bigOR\limits_{i=1}^{\infty} \expt_i$ be the experimental procedure defined as follows:
 		\begin{enumerate}
 			\item initialize $n$ to 1
 			\item for each $i=1..n$
@@ -312,7 +312,7 @@ Now that statement and experimental tests are well defined, we can match them to
 
 \begin{mathSection}
 \begin{defn}
-	An \textbf{experimental observation} is a tuple $\obs{o} = \obsdef{\stmt}{\expt{e}}$ composed by a statement $\stmt$ and an experimental test $\expt{e}$ such that the statement is true if and only if the  experimental test is always successful. That is, $\truth(\stmt)=\textsc{true}$ if and only if $\result(\expt{e})=\textsc{success}$. The experimental observation is \textbf{verified} if the statement is true.
+	An \textbf{experimental observation} is a tuple $\obs{o} = \obsdef{\stmt}{\expt}$ composed by a statement $\stmt$ and an experimental test $\expt$ such that the statement is true if and only if the  experimental test is always successful. That is, $\truth(\stmt)=\textsc{true}$ if and only if $\result(\expt)=\textsc{success}$. The experimental observation is \textbf{verified} if the statement is true.
 \end{defn}
 \end{mathSection}
 
@@ -329,16 +329,16 @@ As pairing a statement with an experimental test does not affect its truth or me
 The logical operations, though, are affected. To take the conjunction or the disjunction of experimental observations we must make sure that the experimental tests still exist. And since the experimental tests are more restrictive, it is their rules that will determine what logical operations are available.
 \begin{mathSection}
 	\begin{defn}
-	The \textbf{conjunction or logical AND} of a finite collection  of experimental observations $\{\mathsf{o}_i\}_{i=1}^{n}=\{\llparenthesis \stmt_i, \expt{e}_i\rrparenthesis\}_{i=1}^{n}$ is the experimental observation $\bigAND\limits_{i=1}^{n} \mathsf{o}_i = \llparenthesis \bigAND\limits_{i=1}^{n} \stmt_i, \bigAND\limits_{i=1}^{n} \expt{e}_i\rrparenthesis$.
+	The \textbf{conjunction or logical AND} of a finite collection  of experimental observations $\{\mathsf{o}_i\}_{i=1}^{n}=\{\llparenthesis \stmt_i, \expt_i\rrparenthesis\}_{i=1}^{n}$ is the experimental observation $\bigAND\limits_{i=1}^{n} \mathsf{o}_i = \llparenthesis \bigAND\limits_{i=1}^{n} \stmt_i, \bigAND\limits_{i=1}^{n} \expt_i\rrparenthesis$.
 \end{defn}
 \begin{proof}
-	To check that the definition is valid, we need to make sure that the statement is true if and only if the experimental test is successful. We have $\truth(\bigAND\limits_{i=1}^{n} \stmt_i) = \TRUE$ if and only if $\truth(\stmt_i) = \TRUE$ for all $\stmt_i \in \{\stmt_i\}_{i=1}^{n}$. This is the case if and only $\result(\expt{e}_i) = \SUCCESS$ for all $\expt{e}_i \in \{\expt{e}_i\}_{i=1}^{n}$. This can only happen if and only if   $\result(\bigAND\limits_{i=1}^{n} \expt{e}_i) = \SUCCESS$. Therefore $\bigAND\limits_{i=1}^{n} \mathsf{o}_i$ is a valid experimental observation.
+	To check that the definition is valid, we need to make sure that the statement is true if and only if the experimental test is successful. We have $\truth(\bigAND\limits_{i=1}^{n} \stmt_i) = \TRUE$ if and only if $\truth(\stmt_i) = \TRUE$ for all $\stmt_i \in \{\stmt_i\}_{i=1}^{n}$. This is the case if and only $\result(\expt_i) = \SUCCESS$ for all $\expt_i \in \{\expt_i\}_{i=1}^{n}$. This can only happen if and only if   $\result(\bigAND\limits_{i=1}^{n} \expt_i) = \SUCCESS$. Therefore $\bigAND\limits_{i=1}^{n} \mathsf{o}_i$ is a valid experimental observation.
 \end{proof}
 	\begin{defn}
-	The \textbf{disjunction or logical OR} of a (finite or infinite) countable  collection of experimental observations $\{\mathsf{o}_i\}_{i=1}^{\infty}=\{\llparenthesis \stmt_i, \expt{e}_i\rrparenthesis\}_{i=1}^{\infty}$ is the experimental observation $\bigOR\limits_{i=1}^{\infty} \mathsf{o}_i = \llparenthesis \bigOR\limits_{i=1}^{\infty} \stmt_i, \bigOR\limits_{i=1}^{\infty} \expt{e}_i\rrparenthesis$.
+	The \textbf{disjunction or logical OR} of a (finite or infinite) countable  collection of experimental observations $\{\mathsf{o}_i\}_{i=1}^{\infty}=\{\llparenthesis \stmt_i, \expt_i\rrparenthesis\}_{i=1}^{\infty}$ is the experimental observation $\bigOR\limits_{i=1}^{\infty} \mathsf{o}_i = \llparenthesis \bigOR\limits_{i=1}^{\infty} \stmt_i, \bigOR\limits_{i=1}^{\infty} \expt_i\rrparenthesis$.
 \end{defn}
 \begin{proof}
-	As before, we need to make sure that the statement is true if and only if the experimental test is successful. We have $\truth(\bigOR\limits_{i=1}^{n} \stmt_i) = \TRUE$ if and only if $\truth(\stmt_i) = \TRUE$ for at least one $\stmt_i \in \{\stmt_i\}_{i=1}^{n}$. This is the case if and only $\result(\expt{e}_i) = \SUCCESS$ for the corresponding test $\expt{e}_i \in \{\expt{e}_i\}_{i=1}^{n}$. This can only happen if and only if   $\result(\bigOR\limits_{i=1}^{n} \expt{e}_i) = \SUCCESS$. Therefore $\bigOR\limits_{i=1}^{n} \mathsf{o}_i$ is a valid experimental observation.
+	As before, we need to make sure that the statement is true if and only if the experimental test is successful. We have $\truth(\bigOR\limits_{i=1}^{n} \stmt_i) = \TRUE$ if and only if $\truth(\stmt_i) = \TRUE$ for at least one $\stmt_i \in \{\stmt_i\}_{i=1}^{n}$. This is the case if and only $\result(\expt_i) = \SUCCESS$ for the corresponding test $\expt_i \in \{\expt_i\}_{i=1}^{n}$. This can only happen if and only if   $\result(\bigOR\limits_{i=1}^{n} \expt_i) = \SUCCESS$. Therefore $\bigOR\limits_{i=1}^{n} \mathsf{o}_i$ is a valid experimental observation.
 \end{proof}
 \end{mathSection}
 
@@ -636,7 +636,7 @@ The first case is when all our tests always finish with a clear success or failu
 \begin{mathSection}
 	
 	\begin{defn}
-		An experimental domain $\mathcal{D}$ is \textbf{decidable} if all tests are guaranteed to terminate. Formally, for every $\obsdef{\stmt_1}{\expt{e}_1} \in \mathcal{D}$ there exists a $\obsdef{\stmt_2}{\expt{e}_2} \in \mathcal{D}$ such that $\stmt_1 = \NOT \stmt_2$
+		An experimental domain $\mathcal{D}$ is \textbf{decidable} if all tests are guaranteed to terminate. Formally, for every $\obsdef{\stmt_1}{\expt_1} \in \mathcal{D}$ there exists a $\obsdef{\stmt_2}{\expt_2} \in \mathcal{D}$ such that $\stmt_1 = \NOT \stmt_2$
 	\end{defn}
 
 	\begin{justification}
@@ -654,7 +654,7 @@ In this case we can prove the following.
 	\end{prop}
 	
 	\begin{proof}
-		The decidable domain $\mathcal{D}$ is already closed under negation, therefore for each theoretical statement $\stmt \in \bar{\mathcal{D}}$ there exists a corresponding experimental observation $\obsdef{\stmt}{\expt{e}} \in \mathcal{D}$. We can then find a set of observations $E\subseteq \mathcal{D}$ such that their corresponding statements are the possibilities $X$.
+		The decidable domain $\mathcal{D}$ is already closed under negation, therefore for each theoretical statement $\stmt \in \bar{\mathcal{D}}$ there exists a corresponding experimental observation $\obsdef{\stmt}{\expt} \in \mathcal{D}$. We can then find a set of observations $E\subseteq \mathcal{D}$ such that their corresponding statements are the possibilities $X$.
 		
 		TODO
 	\end{proof}
@@ -774,7 +774,7 @@ Define combined domain.
 		Two experimental domains $\mathcal{D}_X$ and $\mathcal{D}_Y$ are \textbf{incompatible} if all observations in one are incompatible to all observations of the other, excluding the tautology. Formally, $\obs{o}_X \ncomp \obs{o}_Y$ for each $\obs{o}_X \in \mathcal{D}_X$ and $\obs{o}_Y \in \mathcal{D}_Y$ such that $\obs{o}_X \nequiv \tautology $ and $\obs{o}_Y \nequiv \tautology$.
 	\end{defn}
 	\begin{defn}
-		The \textbf{final possibility} for a domain is the negation of the statement associated to the union of all experimental observations excluding the tautology. That is, $x_F \in \bar{\mathcal{D}}$ such that $\obsdef{\NOT x_F}{\expt{e}} = \bigOR ( \mathcal{D} \setminus \{\tautology\})$.
+		The \textbf{final possibility} for a domain is the negation of the statement associated to the union of all experimental observations excluding the tautology. That is, $x_F \in \bar{\mathcal{D}}$ such that $\obsdef{\NOT x_F}{\expt} = \bigOR ( \mathcal{D} \setminus \{\tautology\})$.
 	\end{defn}
 	\begin{prop}
 		Let $\mathcal{D}_{X_1}$ and $\mathcal{D}_{X_2}$ be two incompatible experimental domains. Then the possibilities of the combined domain $\mathcal{D}_X = \mathcal{D}_{X_1} \times \mathcal{D}_{X_2}$, excluded the final possibility, is equal to the union of the possibilities of the individual domains, excluded the respective final possibility. That is $X \setminus \{x_F\} = (X_1 \setminus \{x_{F_1}\}) \cup (X_2 \setminus \{x_{F_2}\})$. Notationally, we write $\mathcal{D}_{X_1} \times \mathcal{D}_{X_2} = \mathcal{D}_{X_1 \coprod X_2}$.
