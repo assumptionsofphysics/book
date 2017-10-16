@@ -408,8 +408,18 @@ Both the experimental and the theoretical domains contain answers at different l
 \begin{mathSection}
 
 \begin{defn}
-	A \textbf{possibility} for $\mathcal{D}$ is a statement $x \in \bar{\mathcal{D}}$ that determines the truth value for all statements in the theoretical domain. That is, given a statement $\mathsf{s} \in \bar{\mathcal{D}}$, either $x \subseteq \mathsf{s}$ or $x \ncomp \mathsf{s}$. The set of \textbf{possibilities} $X$ for $\mathcal{D}$ is the collection of all possibilities.
+	A \textbf{possibility} for $\mathcal{D}$ is a statement $x \in \bar{\mathcal{D}}$ that, when true, determines the truth value for all statements in the theoretical domain. That is, $x \nequiv \contradiction$ and for each $\mathsf{s} \in \bar{\mathcal{D}}$, either $x \subseteq \mathsf{s}$ or $x \ncomp \mathsf{s}$. The set of \textbf{possibilities} $X$ for $\mathcal{D}$ is the collection of all possibilities.
 \end{defn}
+	
+\begin{prop}
+	Let $\edomain$ be an experimental domain. The set of possibilities associated with $\mathcal{D}$ is the set of all minterms of an essential set that are not contradictions.
+\end{prop}
+
+\begin{proof}
+	Let $E \subseteq \mathcal{D}$ be an essential set. Let $x$ be a minterm of $E$. Any theoretical statement $\stmt{s} \in \tdomain$ can be expressed as a function of the elements of $E$. Therefore $\stmt{s}$ can be expressed as the disjunction of minterms of $E$. $x$ is either within the minterms needed to express $\stmt{s}$, or not. If it is, $x \AND \stmt{s} \equiv x$ and therefore $x \narrower \stmt{s}$. If it's not, $x \AND \NOT \stmt{s} \equiv x$ and therefore $x \ncomp \obs{e}_i$. Therefore a minterm is either narrower or incompatible with all theoretical statement and, if it is not a contradiction, it is a possibility by definition.
+	
+	Conversely, suppose $x \in \tdomain$ is a possibility. Then it can be expressed as a disjunction of minterms of an essential set $E$. Suppose it was the disjunction of more then one minterm. Then each minterm would be narrower than $x$, which cannot be. $x$ must be expressed by a single minter. Therefore any possibility is a minterm.
+\end{proof}
 
 \begin{prop}[No other possibilities]
 	All statements that determine and only determine the truth value of all statements in a theoretical domain $\bar{\mathcal{D}}$ are possibilities of $\mathcal{D}$.
@@ -694,18 +704,6 @@ Space is real number with standard topology.
 
 Define combined domain.
 
-
-\begin{mathSection}
-	
-	\begin{prop}
-		(Maybe in previous section?) The set of possibilities is the set of all minterms of an essential set that are not contradictions.
-	\end{prop}
-	
-	\begin{proof}
-		TODO
-	\end{proof}	
-\end{mathSection}
-
 \begin{mathSection}
 	
 	\begin{defn}
@@ -809,6 +807,14 @@ TODO: In terms of category theory, a morphism of an experimental domain is a map
 	\begin{proof}
 		Consider $\stmt{s}_1 \AND \stmt{s}_2 = \stmt{s}_1 \AND \stmt{s}_2 \OR \contradiction$. Since $\stmt{s}_1 \narrower \stmt{s}_2$, $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \contradiction$. We have $\stmt{s}_1 \AND \stmt{s}_2 \OR \contradiction \equiv ( \stmt{s}_1 \AND \stmt{s}_2 ) \OR (\stmt{s}_1 \AND \NOT \stmt{s}_2) = \stmt{s}_1 \AND (\stmt{s}_2 \OR \NOT \stmt{s}_2) = \stmt{s}_1 \AND \tautology = \stmt{s}_1$. Therefore $\stmt{s}_1 \AND \stmt{s}_2 \equiv \stmt{s}_1$. The same logic can be applied in reverse.
 	\end{proof}	
+	
+\begin{prop}
+	(Maybe in previous section?) $\stmt{s}_1 \ncomp \stmt{s}_2$ if and only if $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \stmt{s}_1$.
+\end{prop}
+
+\begin{proof}
+	Consider $\stmt{s}_1 \AND \NOT \stmt{s}_2 = \stmt{s}_1 \AND \stmt{s}_2 \OR \contradiction$. Since $\stmt{s}_1 \ncomp \stmt{s}_2$, $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \contradiction$. We have $\stmt{s}_1 \AND \NOT \stmt{s}_2 \OR \contradiction \equiv ( \stmt{s}_1 \AND \NOT \stmt{s}_2 ) \OR (\stmt{s}_1 \AND \stmt{s}_2) = \stmt{s}_1 \AND (\NOT \stmt{s}_2 \OR \stmt{s}_2) = \stmt{s}_1 \AND \tautology = \stmt{s}_1$. Therefore $\stmt{s}_1 \AND \NOT \stmt{s}_2 \equiv \stmt{s}_1$. The same logic can be applied in reverse.
+\end{proof}	
 	
 	\begin{prop}
 		(Maybe in previous section?) $\stmt{s}_1 \narrower \stmt{s}_2$ and $\stmt{s}_1 \broader \stmt{s}_2$ if and only if $\stmt{s}_1 \equiv \stmt{s}_1$.
