@@ -38,9 +38,9 @@ The main goal in stating this principle is to make clear what the domain of scie
 \end{defn}
 
 
-\begin{defn}\label{def_statement}
+\begin{axiom}\label{def_statement}
 	A \textbf{statement} $\stmt$ is a declarative sentence that is either true or false. Formally, a statement is an element of the set $\mathcal{S}$ of all statements upon which is defined a function $\truth: \mathcal{S} \to \mathbb{B}$ that returns the truth value for each element.
-\end{defn}
+\end{axiom}
 
 \end{mathSection}
 
@@ -52,9 +52,9 @@ As a first step, we want to avoid assigning truths that are inconsistent with th
 
 \begin{mathSection}
 	
-	\begin{defn}\label{def_possibilities}
+	\begin{axiom}\label{def_possibilities}
 		The \textbf{possibilities} of a statement $\stmt$ are the possible truth values allowed by the content of the statement. Formally, on the set $\mathcal{S}$ of all statements is also defined a function $\poss: \mathcal{S} \to \{\{\FALSE, \TRUE\},\{\FALSE\},\{\TRUE\}\}$ such that $\truth(\stmt) \in \poss(\stmt)$ for all $\stmt \in \mathcal{S}$.
-	\end{defn}
+	\end{axiom}
 	
 	\begin{defn}
 		A \textbf{tautology} $\tautology$ is a statement that must be true simply because of its content. That is, $\poss(\stmt) = \{\TRUE\}$.
@@ -71,14 +71,30 @@ Therefore we say \statement{that cat is a bird} is a contradiction while \statem
 Next we want to keep track when the truth of a statement is a function of the truth of other statements. For example, \statement{that animal is a cat} and \statement{that animal is not a cat} can't both be true. As there are no limits in the way we can logically combine assertions, we will assume we can create any arbitrary function of any set of statements.
 
 \begin{mathSection}
-	\begin{defn}\label{def_functions_of_statement}
-		We can always construct a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally: given an arbitrary set of statements $S \subseteq \mathcal{S}$ and an arbitrary truth function $f : \mathbb{B}^{|S|} \to \mathbb{B}$ whose arity (i.e. number of arguments) matches the cardinality of $S$,  there exists a unique statement in $\mathcal{S}$, noted as $f(S)$, such that:
+	\begin{axiom}\label{def_functions_of_statement}
+		We can always construct a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally: given an arbitrary truth function $f : \mathbb{B}^n \to \mathbb{B}$ and a set of statements $\{\stmt_i\}_{i=1}^n \subseteq \mathcal{S}$  whose cardinality matches the arity (i.e. number of arguments) of the function, there exists a unique statement in $\mathcal{S}$, noted as $f(\stmt_1, ..., \stmt_n)$, such that:
 		\begin{itemize}
-			\item its truth value is the result of the truth function: \newline $\truth(f(S)) = f(\truth(S))$
-			\item its possibilities are consistent with the truth function: \newline $\poss(f(S)) \subseteq f(\bigtimes\limits_{s\in S}\poss(s))$
-			\item all possibilities for all arguments are allowed: for every $t_i \in \poss(s_i)$ of every $s_i \in S$ there exists a combination of possibilities $T \in \bigtimes\limits_{s\in S}\poss(s)$ such that the value for $i$-th argument is $t_i$ and  $f(T) \in \poss(f(S))$.
+			\item its truth value is the result of the truth function: \newline $\truth(f(\stmt_1, ..., \stmt_n)) = f(\truth(\stmt_1), ..., \truth(\stmt_n))$
+			\item its possibilities are consistent with the truth function: \newline $\poss(f(\stmt_1, ..., \stmt_n)) \subseteq f(\poss(\stmt_1) \times ... \times \poss(\stmt_n))$
+			\item all possibilities for all arguments are allowed: let $1 \leq i \leq n$, for every $t_i \in \poss(\stmt_i)$ there exists a combination of possibilities $(t_1, ..., t_n) \in \poss(\stmt_1) \times ... \times \poss(\stmt_n)$ such that the value for $i$-th argument is $t_i$ and  $f(t_1, ..., t_n) \in \poss(f(\stmt_1, ..., \stmt_n))$.
 		\end{itemize}
-	\end{defn}
+	This is also holds in the case of infinite, possibly uncountable, $n$.
+	\end{axiom}
+	\begin{justification}
+		Since this is an axiom, there is technically nothing to prove. However, we need to make sure the starting points of our framework are well justified.
+		
+		The idea that we can use statements to construct other statements is something well established in logic. The first property simply states that the truth of the final statement is calculable from the truth of the arguments.
+		
+		The properties related to the possibilities, however, are more subtle. In fact, it is not possible in general to calculate the possibilities of the result given only the truth value and possibilities of the arguments. These details are better understood with a few key examples.
+		
+		Let $\stmt_1$ be a statement such that $\truth(\stmt_1) = \TRUE$ and $\poss(\stmt_1) = \{\FALSE, \TRUE\}$. Let $\stmt_2$ be a statement such that $\truth(\stmt_2) = \FALSE$ and $\poss(\stmt_2) = \{\FALSE, \TRUE\}$. Let $f : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ be the truth function that returns $\TRUE$ only if the arguments are $\TRUE$ (i.e. the logical conjunction as we'll see later). Consider $f(\stmt_1, \stmt_2)$. We would expect $\truth(f(\stmt_1, \stmt_2)) = \FALSE$ since one of the statement is not $\TRUE$. This is guaranteed by the first property.
+		
+		The possibilities, though, cannot be known without further information. Suppose $\stmt_1$ is \statement{Felix is a cat} and that $\stmt_2$ is \statement{Felix is black}. If these are the actual statements, then we would expect $\poss(f(\stmt_1, \stmt_2)) = \{\FALSE, \TRUE\}$ since Felix could be a black cat or not a black cat. However, suppose $\stmt_1$ is \statement{Felix is a cat} and that $\stmt_2$ is \statement{Felix is a dog}. If these are the actual statements, then we would expect $\poss(f(\stmt_1, \stmt_2)) = \{\FALSE\}$ since Felix cannot be both a cat and a dog. Depending on the extra information we reach different results.
+		
+		While we are not always able to calculate the possibilities, we can put some bounds. Suppose $f$ is as defined before, and both $\stmt_1$ and $\stmt_2$ are tautologies. In this case we would expect $\FALSE \notin \poss(f(\stmt_1, \stmt_2))$ since both statement cannot be false and $f$ only returns false when one of the inputs is false. This justifies the second property: the result can only be possibly true or false if the possibilities of the arguments applied to the truth functions allows for it.
+		
+		Now suppose $f$ is as before, $\stmt_1$ is a tautology and $\poss(\stmt_2) = \{\FALSE, \TRUE\}$. We would expect that  $\poss(f(\stmt_1, \stmt_2)) = \{\FALSE, \TRUE\}$. Suppose, in fact, that $f(\stmt_1, \stmt_2)$ could only be true. Then we would expect that the arguments can never be false, since $f$ only returns true when both inputs are true. But this can't be since $\stmt_2$ is not a tautology. On the other hand, suppose that $f(\stmt_1, \stmt_2)$ could only be false. This would mean that $\stmt_2$ can only be false, since $f$ only returns false when one of the inputs is false and $\stmt_1$ can only be true. But this, again, can't be. This justifies the third property: the possibilities of the result can never limit the possibilities of the arguments in a way that is contradictory.	
+	\end{justification}
 \end{mathSection}
 
 To better characterize truth functions, we borrow ideas and definitions from Boolean algebra which is the branch of algebra that operates on truth values. Boolean algebra is fundamental in logic and computer science, since every digital circuit ultimately is implemented on two-state systems (e.g. high/low voltage, up/down magnetization).  One of its main results is that all truth functions can be expressed by combining the following three simple operations.
