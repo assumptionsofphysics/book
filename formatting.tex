@@ -60,6 +60,16 @@
 \def\bigOR{\bigvee}
 \def\NOT{\neg}
 
+\usepackage{xparse}
+% Formatting for observations
+\NewDocumentCommand \newobs { o o }
+{
+	\IfNoValueTF {#2}
+	{ \IfNoValueTF {#1}{\mathsf{o}}{\mathsf{o}_{#1}} }
+	{ \mathsf{#1}_{#2} }
+}
+
+
 % Formatting for statements
 \newcommand{\stmt}[1] {\mathsf{#1}}
 % Formatting for experimental tests
@@ -68,6 +78,19 @@
 \newcommand{\obs}[1] {\mathsf{#1}}
 % Formatting for observation definition
 \newcommand{\obsdef}[2] {\llparenthesis #1, #2 \rrparenthesis}
+
+% Formatting for experimental domain
+\NewDocumentCommand \edomain {o}
+{
+	\IfNoValueTF {#1} {\mathcal{D}} {\mathcal{D}_{#1}}
+}
+
+% Formatting for theoretical domain
+\NewDocumentCommand \tdomain {o}
+{
+	\IfNoValueTF {#1} {\bar{\mathcal{D}}} {\bar{\mathcal{D}}_{#1}}
+}
+
 
 % Formatting for sentence statements
 \newcommand{\statement}[1] {\emph{``#1"}}
