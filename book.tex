@@ -242,6 +242,48 @@ Note that independence is not transitive and pair-wise independence is not suffi
 \end{enumerate}
 Since the three quantities are linked by the equation of state $PV=nRT$, any two statements are independent but the three together aren't.
 
+We can also prove the following properties that will be useful later.
+
+
+\begin{mathSection}
+	
+	\begin{prop}
+		A truth function applied to equivalent statements returns two equivalent statements. That is: given $f : \mathbb{B}^n \to \mathbb{B}$ then $f(\stmt_1, ..., \stmt_n) \equiv f(\bar{\stmt}_1, ..., \bar{\stmt}_n)$ if $\stmt_i \equiv \bar{\stmt}_i$ for all $1 \leq i \leq n$. This extends to functions of arbitrary arguments.
+	\end{prop}
+	\begin{proof}
+		We first show the proposition holds when $f$ is the negation. Let $\stmt, \bar{\stmt} \in \mathcal{S}$ be two equivalent statements. Since $\stmt \equiv \bar{\stmt}$ we have $\{\TRUE\} = \poss((\stmt \AND \bar{\stmt}) \OR (\NOT \stmt \AND \NOT \bar{\stmt})) = \poss((\NOT \NOT \stmt \AND \NOT \NOT \bar{\stmt}) \OR (\NOT \stmt \AND \NOT \bar{\stmt})) = \poss((\NOT \stmt \AND \NOT \bar{\stmt}) \OR (\NOT (\NOT \stmt) \AND \NOT (\NOT \bar{\stmt})))$. Which means  $\NOT \stmt \equiv \NOT \bar{\stmt}$.
+		
+		We first show the proposition holds when $f$ is the conjunction. Let $\stmt_1, \stmt_2, \bar{\stmt}_1, \bar{\stmt}_2 \in \mathcal{S}$ be four statements such that $\stmt_1 \equiv \bar{\stmt}_1$ and $\stmt_2 \equiv \bar{\stmt}_2$. Consider $\stmt[a] = ((\stmt_1 \AND \bar{\stmt}_1) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_1)) \AND ((\stmt_2 \AND \bar{\stmt}_2) \OR (\NOT \stmt_2 \AND \NOT \bar{\stmt}_2))$. Since $\stmt_1 \equiv \bar{\stmt}_1$ and $\stmt_2 \equiv \bar{\stmt}_2$, $\stmt[a]$ is the conjunction of two tautologies so it is a tautology as well. Consider $\stmt[b] = ((\stmt_1 \AND \stmt_2) \AND (\bar{\stmt}_1 \AND \bar{\stmt}_2)) \OR  (\NOT (\stmt_1 \AND \stmt_2) \AND \NOT (\bar{\stmt}_1 \AND \bar{\stmt}_2))= 	
+		(\stmt_1 \AND \stmt_2 \AND \bar{\stmt}_1 \AND \bar{\stmt}_2) \OR ((\NOT \stmt_1 \OR \NOT \stmt_2) \AND (\NOT \bar{\stmt}_1 \OR \NOT \bar{\stmt}_2)) = (\stmt_1 \AND \stmt_2 \AND \bar{\stmt}_1 \AND \bar{\stmt}_2) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_1) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_2) \OR (\NOT \stmt_2 \AND \NOT \bar{\stmt}_1) \OR (\NOT \stmt_2 \AND \NOT \bar{\stmt}_2)$. Note that if $\stmt[a]$ is $\TRUE$ one of the following must be true: $(\stmt_1 \AND \stmt_2 \AND \bar{\stmt}_1 \AND \bar{\stmt}_2)$, $(\NOT \stmt_1 \AND \NOT \bar{\stmt}_1)$ or $(\NOT \stmt_2 \AND \NOT \bar{\stmt}_2)$. Which means $\stmt[b]$ must also be $\TRUE$. That is, we can write $\stmt[a] \AND \stmt[b] = \stmt[a]$. But if $\stmt[a]$ is a tautology, $\stmt[a] \AND \stmt[b]$ is a tautology as well or we would violate the third property of \ref{def_functions_of_statement}. Since $\stmt[b]$ is a tautology, $\stmt_1 \AND \stmt_2 \equiv \bar{\stmt}_1 \AND \bar{\stmt}_2$.
+		
+		Given that all functions can be generated from negation, conjunction and disjunction, and given that disjunction can be generated from negation and conjunction, the result proven generalizes to all functions.
+	\end{proof}
+	
+	\begin{prop}
+		$\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \stmt_2 \equiv \stmt_1$.
+	\end{prop}
+	
+	\begin{proof}
+		Consider $\stmt_1 \AND \stmt_2 = \stmt_1 \AND \stmt_2 \OR \contradiction$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \stmt_2 ) \OR (\stmt_1 \AND \NOT \stmt_2) = \stmt_1 \AND (\stmt_2 \OR \NOT \stmt_2) = \stmt_1 \AND \tautology = \stmt_1$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
+	\end{proof}	
+	
+	\begin{prop}
+		$\stmt_1 \ncomp \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$.
+	\end{prop}
+	
+	\begin{proof}
+		Consider $\stmt_1 \AND \NOT \stmt_2 = \stmt_1 \AND \stmt_2 \OR \contradiction$. Since $\stmt_1 \ncomp \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \NOT \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \NOT \stmt_2 ) \OR (\stmt_1 \AND \stmt_2) = \stmt_1 \AND (\NOT \stmt_2 \OR \stmt_2) = \stmt_1 \AND \tautology = \stmt_1$. Therefore $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
+	\end{proof}	
+	
+	\begin{prop}
+		$\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$ if and only if $\stmt_1 \equiv \stmt_1$.
+	\end{prop}
+	
+	\begin{proof}
+		We have $\stmt_1 \AND \stmt_2 \equiv \stmt_1$ since $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \AND \stmt_2 \equiv \stmt_2$ since $\stmt_2 \narrower \stmt_1$. Therefore $\stmt_1 \equiv \stmt_1$.
+	\end{proof}	
+\end{mathSection}
+
 With these tools in place we are in a position to formulate models that are universal and non-contradictory. These models will be a collection of statements with a well defined content, whose truth value will be discovered experimentally.
 
 \section{Experimental tests}
@@ -805,42 +847,6 @@ TODO: In terms of category theory, a morphism of an experimental domain is a map
 
 \section{Relationships between domains and continuous functions}
 
-\begin{mathSection}
-	
-	\begin{prop}
-		(Maybe in previous section?) Let $\stmt_1 \equiv \bar{\stmt}_1$ and $\stmt_2 \equiv \bar{\stmt}_2$. Then $\NOT \stmt_1 \equiv \NOT \bar{\stmt}_1$, $\stmt_1 \AND \stmt_2 \equiv \bar{\stmt}_1 \AND \bar{\stmt}_2$ and $\stmt_1 \OR \stmt_2 \equiv \bar{\stmt}_1 \OR \bar{\stmt}_2$.
-	\end{prop}
-	
-	\begin{proof}
-		Suppose $\stmt_1 \equiv \bar{\stmt}_1$, then $(\stmt_1 \AND \bar{\stmt}_1) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_1) = ( \NOT\stmt_1 \AND \NOT \bar{\stmt}_1) \OR (\NOT \NOT \stmt_1 \AND \NOT \NOT \bar{\stmt}_1)$ is a tautology. Which means $\NOT \stmt_1 \equiv \NOT \bar{\stmt}_1$.
-		
-		TODO
-	\end{proof}	
-	
-	\begin{prop}
-		(Maybe in previous section?) $\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \stmt_2 \equiv \stmt_1$.
-	\end{prop}
-	
-	\begin{proof}
-		Consider $\stmt_1 \AND \stmt_2 = \stmt_1 \AND \stmt_2 \OR \contradiction$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \stmt_2 ) \OR (\stmt_1 \AND \NOT \stmt_2) = \stmt_1 \AND (\stmt_2 \OR \NOT \stmt_2) = \stmt_1 \AND \tautology = \stmt_1$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
-	\end{proof}	
-	
-\begin{prop}
-	(Maybe in previous section?) $\stmt_1 \ncomp \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$.
-\end{prop}
-
-\begin{proof}
-	Consider $\stmt_1 \AND \NOT \stmt_2 = \stmt_1 \AND \stmt_2 \OR \contradiction$. Since $\stmt_1 \ncomp \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \NOT \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \NOT \stmt_2 ) \OR (\stmt_1 \AND \stmt_2) = \stmt_1 \AND (\NOT \stmt_2 \OR \stmt_2) = \stmt_1 \AND \tautology = \stmt_1$. Therefore $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
-\end{proof}	
-	
-	\begin{prop}
-		(Maybe in previous section?) $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$ if and only if $\stmt_1 \equiv \stmt_1$.
-	\end{prop}
-	
-	\begin{proof}
-		We have $\stmt_1 \AND \stmt_2 \equiv \stmt_1$ since $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \AND \stmt_2 \equiv \stmt_2$ since $\stmt_2 \narrower \stmt_1$. Therefore $\stmt_1 \equiv \stmt_1$.
-	\end{proof}	
-\end{mathSection}
 
 \begin{mathSection}
 	\begin{defn}
