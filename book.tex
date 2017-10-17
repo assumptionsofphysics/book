@@ -295,9 +295,9 @@ Limiting the scope of our discussion to objects and properties that are well def
 So we have to narrow the scope to those and only those statements that can be verified experimentally. That is, we have to provide a repeatable (i.e. non-contradictory) experimental procedure (i.e. evidence based) that anyone (i.e. universal) can in principle execute. This is both the power and the limit of scientific inquiry: it gives us a way to construct a coherent description of the physical world but it is limited to those aspects that can be reliably studied experimentally.
 
 \begin{mathSection}
-\begin{defn}\label{def_experimental_tests}
+\begin{axiom}\label{def_experimental_tests}
 	An \textbf{experimental test} $\expt$ is a repeatable procedure (i.e. it can be restarted and stopped an arbitrary number of times) that will always either terminate successfully, terminate unsuccessfully or never terminate. Formally, an experimental test is an element of the set $\mathcal{E}$ of all experimental tests upon which is defined a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$ that returns the result for each element.
-\end{defn}
+\end{axiom}
 \end{mathSection}
 
 As an example, the following procedure defines an experimental test:
@@ -324,9 +324,9 @@ In the same vein we are able confirm experimentally that \statement{the mass of 
 Combining experimental tests with conjunction (i.e. the logical AND) is more straightforward. If we are able to verify that \emph{``the sauce is sweet"} and that \emph{``the sauce is sour"}, we can verify that \emph{``the sauce is sweet and sour"} by executing both. If both are successful, then the conjunction is successful. That is, if we have two or more experimental tests, we can aways test the logical AND for success by checking one at a time if all tests are successful. Yet, the number of tests needs to be finite or we would never terminate.
 
 \begin{mathSection}
-	\begin{defn}\label{def_experimental_test_AND}
+	\begin{axiom}\label{def_experimental_test_AND}
 	The \textbf{conjunction or logical AND} of a finite collection of experimental tests $\{\expt_i\}_{i=1}^{n}$ is the experimental test $\bigAND\limits_{i=1}^{n} \expt_i$ (or simply $\expt_1 \AND \expt_2$ for two statements) that is successful only when all experimental tests are successful. Formally, for any finite collection $\{\expt_i\}_{i=1}^{n} \subseteq \mathcal{E}$ there exists $ \bigAND\limits_{i=1}^{n} \expt_i \in \mathcal{E}$ such that $\result(\bigAND\limits_{i=1}^{n} \expt_i) = \SUCCESS$ if and only if $\result(\expt_i) = \SUCCESS$ for all $i=1..n$.
-	\end{defn}
+	\end{axiom}
 	\begin{justification}
 		Mathematically, we are simply assuming that the finite conjunction exists, so there it nothing to prove. However, we want to convince ourselves that in practice we can construct the test to show that the assumption is well justified. Let $\bigAND\limits_{i=1}^{n} \expt_i$ be the experimental procedure defined as follows:
 		\begin{enumerate}
@@ -340,9 +340,9 @@ Combining experimental tests with conjunction (i.e. the logical AND) is more str
 Combining experimental tests with disjunction, i.e. the logical OR, is also straightforward. To verify that \emph{``the sauce is at least sweet or sour"} we can first test that \emph{``the sauce is sweet"}. If that is verified that's enough: the sauce is at least sour. If not, we test that \emph{``the sauce is sour"}. That is, if we have two or more experimental tests we can always test the logical OR for success just by stopping at the first test that is successful. Because we stop at the first success, the number of tests we combine in a logical OR can be countably infinite. As long as one test succeeds, which will always be the case when the overall test succeeds, it does not matter how many elements we are not going to verify later. But it cannot be more than countably infinite since the only way we have to find if one experimental test in the set is successful is testing them all one by one.
 
 \begin{mathSection}
-	\begin{defn}\label{def_experimental_test_OR}
+	\begin{axiom}\label{def_experimental_test_OR}
 	The \textbf{disjunction or logical OR} of a (finite or infinite) countable collection of experimental tests $\{\expt_i\}_{i=1}^{\infty}$ is the experimental test $\bigOR\limits_{i=1}^{\infty} \expt_i$ (or simply $\expt_1 \OR \expt_2$ for two statements) that is successful if and only if at least one experimental test in $E$ is successful. Formally, for any countable collection $\{\expt_i\}_{i=1}^{\infty} \in \mathcal{E}$ there exists $ \bigOR\limits_{i=1}^{\infty} \expt_i \in \mathcal{E}$ such that $\result(\bigOR\limits_{i=1}^{\infty} \expt_i) = \SUCCESS$ if and only if $\result(\expt_i) = \SUCCESS$ for some $1 \leq i \leq n$.
-	\end{defn}
+	\end{axiom}
 	\begin{justification}
 		Mathematically, we are simply assuming that the countable disjunction exists, so there it nothing to prove. As before, we want to convince ourselves that in practice we can construct the test to show that the assumption is well justified. This time we have to be more careful to handle tests that may not terminate.
 		Let $\bigOR\limits_{i=1}^{\infty} \expt_i$ be the experimental procedure defined as follows:
