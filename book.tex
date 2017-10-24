@@ -5,6 +5,8 @@
 \input{formatting} % Loads the book formatting
 
 \begin{document}
+	
+% Set theory (expected) \in, \subset, injective/surjective
 
 \chapter*{Assumptions of physics}
 
@@ -86,7 +88,7 @@ Next we want to keep track when the truth of a statement is a function of the tr
 		
 		The idea that we can use statements to construct other statements is something well established in logic. The first property simply states that the truth of the final statement is calculable from the truth of the arguments.
 		
-		The properties related to the possibilities, however, are more subtle. In fact, it is not possible in general to calculate the possibilities of the result given only the truth value and possibilities of the arguments. These details are better understood with a few key examples.
+		On the other hand, it is not possible in general to calculate the possibilities of the result given only the truth value and possibilities of the arguments. A few examples will illustrate the problem.
 		
 		Let $\stmt_1$ be a statement such that $\truth(\stmt_1) = \TRUE$ and $\poss(\stmt_1) = \{\FALSE, \TRUE\}$. Let $\stmt_2$ be a statement such that $\truth(\stmt_2) = \FALSE$ and $\poss(\stmt_2) = \{\FALSE, \TRUE\}$. Let $f : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ be the truth function that returns $\TRUE$ only if the arguments are $\TRUE$ (i.e. the logical conjunction as we'll see later). Consider $f(\stmt_1, \stmt_2)$. We would expect $\truth(f(\stmt_1, \stmt_2)) = \FALSE$ since one of the statement is not $\TRUE$. This is guaranteed by the first property.
 		
@@ -248,7 +250,7 @@ We can also prove the following properties that will be useful later.
 \begin{mathSection}
 	
 	\begin{prop}
-		A truth function applied to equivalent statements returns two equivalent statements. That is: given $f : \mathbb{B}^n \to \mathbb{B}$ then $f(\stmt_1, ..., \stmt_n) \equiv f(\bar{\stmt}_1, ..., \bar{\stmt}_n)$ if $\stmt_i \equiv \bar{\stmt}_i$ for all $1 \leq i \leq n$. This extends to functions of arbitrary arguments.
+		Two statements constructed using the same truth function and two sets of equivalent statements are equivalent. That is: given $f : \mathbb{B}^n \to \mathbb{B}$ then $f(\stmt_1, ..., \stmt_n) \equiv f(\bar{\stmt}_1, ..., \bar{\stmt}_n)$ if $\stmt_i \equiv \bar{\stmt}_i$ for all $1 \leq i \leq n$. This extends to functions of arbitrary arguments.
 	\end{prop}
 	\begin{proof}
 		We first show the proposition holds when $f$ is the negation. Let $\stmt, \bar{\stmt} \in \mathcal{S}$ be two equivalent statements. Since $\stmt \equiv \bar{\stmt}$ we have $\{\TRUE\} = \poss((\stmt \AND \bar{\stmt}) \OR (\NOT \stmt \AND \NOT \bar{\stmt})) = \poss((\NOT \NOT \stmt \AND \NOT \NOT \bar{\stmt}) \OR (\NOT \stmt \AND \NOT \bar{\stmt})) = \poss((\NOT \stmt \AND \NOT \bar{\stmt}) \OR (\NOT (\NOT \stmt) \AND \NOT (\NOT \bar{\stmt})))$. Which means  $\NOT \stmt \equiv \NOT \bar{\stmt}$.
@@ -276,11 +278,11 @@ We can also prove the following properties that will be useful later.
 	\end{proof}	
 	
 	\begin{prop}
-		$\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$ if and only if $\stmt_1 \equiv \stmt_1$.
+		$\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$ if and only if $\stmt_1 \equiv \stmt_2$.
 	\end{prop}
 	
 	\begin{proof}
-		We have $\stmt_1 \AND \stmt_2 \equiv \stmt_1$ since $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \AND \stmt_2 \equiv \stmt_2$ since $\stmt_2 \narrower \stmt_1$. Therefore $\stmt_1 \equiv \stmt_1$.
+		We have $\stmt_1 \AND \stmt_2 \equiv \stmt_1$ since $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \AND \stmt_2 \equiv \stmt_2$ since $\stmt_2 \narrower \stmt_1$. Therefore $\stmt_1 \equiv \stmt_2$.
 	\end{proof}	
 \end{mathSection}
 
@@ -296,7 +298,7 @@ So we have to narrow the scope to those and only those statements that can be ve
 
 \begin{mathSection}
 \begin{axiom}\label{def_experimental_tests}
-	An \textbf{experimental test} $\expt$ is a repeatable procedure (i.e. it can be restarted and stopped an arbitrary number of times) that will always either terminate successfully, terminate unsuccessfully or never terminate. Formally, an experimental test is an element of the set $\mathcal{E}$ of all experimental tests upon which is defined a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$ that returns the result for each element.
+	An \textbf{experimental test} $\expt$ is a repeatable procedure (i.e. it can be restarted and stopped at any time) that anybody can execute and will always either terminate successfully, terminate unsuccessfully or never terminate. Formally, an experimental test is an element of the set $\mathcal{E}$ of all experimental tests upon which is defined a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$ that returns the result for each element.
 \end{axiom}
 \end{mathSection}
 
@@ -645,7 +647,7 @@ Like topologies, $\sigma$-algebras are fundamental in mathematics as they allow 
 \begin{mathSection}
 	
 	\begin{defn}
-		Let $\bar{\mathcal{D}}$ be a theoretical domain and $X$ its possibilities. We define the map $A : \bar{\mathcal{D}} \rightarrow 2^X$ that for each theoretical statement $\stmt \in \mathcal{D}$ returns the set of possibilities compatible with it. That is: $A(\stmt)\equiv\{ x \in X \, | \, x \comp \stmt\}$. We call $A(\stmt)$ the \textbf{theoretical set} of possibilities associated with $\stmt$
+		Let $\bar{\mathcal{D}}$ be a theoretical domain and $X$ its possibilities. We define the map $A : \bar{\mathcal{D}} \rightarrow 2^X$ that for each theoretical statement $\stmt \in \bar{\mathcal{D}}$ returns the set of possibilities compatible with it. That is: $A(\stmt)\equiv\{ x \in X \, | \, x \comp \stmt\}$. We call $A(\stmt)$ the \textbf{theoretical set} of possibilities associated with $\stmt$
 	\end{defn}
 	
 	\begin{prop}
