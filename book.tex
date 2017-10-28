@@ -471,9 +471,15 @@ Both the experimental and the theoretical domains contain answers at different l
 \begin{defn}
 	A \textbf{possibility} for $\mathcal{D}$ is a statement $x \in \bar{\mathcal{D}}$ that, when true, determines the truth value for all statements in the theoretical domain. That is, $x \nequiv \contradiction$ and for each $\mathsf{s} \in \bar{\mathcal{D}}$, either $x \subseteq \mathsf{s}$ or $x \ncomp \mathsf{s}$. The set of \textbf{possibilities} $X$ for $\mathcal{D}$ is the collection of all possibilities.
 \end{defn}
+
+\end{mathSection}
+
+A possibility represents a complete prediction for a scientific question. Only one of them can be true and one of them must be true since the theoretical domain contains all negations. In fact, we can think it as the conjunction of all observations or their negations. That is, the possibility \statement{cat} is the conjunction \statement{that animal is a cat}$\AND \NOT$\statement{that animal is a dog}$\AND$... of all the elements of an essential set of observations.
+
+\begin{mathSection}
 	
 \begin{prop}
-	Let $\edomain$ be an experimental domain. The set of possibilities associated with $\mathcal{D}$ is the set of all minterms of an essential set that are not contradictions.
+	Let $\edomain$ be an experimental domain. A possibility for $\mathcal{D}$ is a minterm of an essential set that is not a contradiction.
 \end{prop}
 
 \begin{proof}
@@ -491,7 +497,34 @@ Both the experimental and the theoretical domains contain answers at different l
 \end{proof}
 \end{mathSection}
 
-A possibility represents a complete prediction for a scientific question. Only one of them can be true and one of them must be true since the theoretical domain contains all negations. Given the definitions, we can already prove an interesting result.
+There is one possibility that is often forgotten and needs special handling. Suppose one is trying to identify an illness by running a series of tests. In the back of our mind, we always have to be open to the case where all tests are going to be negative because we are dealing with a new illness. In the same way, we should keep in the back of our mind that the plant or animal we are trying to identify is not on our list of possible targets. That is: it may be possible that all our observations are not verified.
+
+\begin{mathSection}
+	\begin{prop}
+		The \textbf{outer possibility} $\mathring{x}$ for an experimental domain $\edomain$ is the possibility that predicts the failure of all experimental tests. That is, let $E \subseteq \edomain$ be an essential set  $\mathring{x} = \bigAND\limits_{\stmt[e] \in E} \NOT e$.
+	\end{prop}
+\end{mathSection}
+
+We call this special case the outer possibility because it is outside of what our set of experimental tests can verify and, because it sometimes requires special handling, we make the following distinction.\footnote{We will use the same symbol for both cases because the distinction is just a technical detail. Sometimes theorems are more precisely stated with one or the other but the intuition remains the same.}
+
+\begin{mathSection}
+	\begin{prop}
+		The \textbf{possibilities} $X$ for an experimental domain is the set of all possibilities excluding the outer possibility.
+	\end{prop}
+	\begin{prop}
+		The \textbf{full possibilities} $X$ for an experimental domain is the set of all possibilities including the outer possibility.
+	\end{prop}
+\end{mathSection}
+
+Note, though, that the outer possibility does not exist for all domains. Suppose we have a basket of fruit and we want to count how many apples are there. There can only be a finite number of them, and we can successfully identify all finite numbers: there is no something else to be found in this case.
+
+\begin{mathSection}
+	\begin{prop}
+		An experimental domain is \textbf{complete} if there is no outer possibility. That is, if $\bigAND\limits_{\stmt[e] \in E} \NOT e$ is a contradiction where $E \subseteq \edomain$ is an essential set.
+	\end{prop}
+\end{mathSection}
+
+Given the definitions, we can already prove an interesting result.
 
 \begin{mathSection}
 	\begin{prop}
