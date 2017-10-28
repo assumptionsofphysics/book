@@ -8,6 +8,12 @@
 	
 % Set theory (expected) \in, \subset, injective/surjective
 
+% Closure of a set under an operation
+
+% Need examples of topology and sigma algebra
+
+% Note that sigma algebra are also closed under intersections
+
 \chapter*{Assumptions of physics}
 
 \textbf{This book is a work in progress}. This draft is a development copy built on \today. You can get the latest version for http://assumptionsofphysics.org. It is provided as-is for the purpose of early review and feedback. 
@@ -135,15 +141,19 @@ Most languages typically already provide similar operations, as the examples sho
 Negation, conjunction and disjunction as we have defined them form the two-values Boolean algebra. Any function that takes truth values and return truth values can be expressed with only these three operations. Or, as we'll say, it can be \emph{generated} via negation, conjunction and disjunction. The idea is to create one term for each combination of arguments that returns $\TRUE$ and using the disjunction to combine them together. For example, the statement \statement{the sauce is sweet and sour or neither} can be expressed as $(\stmt_1 \AND \stmt_2) \OR (\NOT \stmt_1 \AND \NOT \stmt_2)$ and the statement \statement{the sauce is not sweet and sour} can be expressed as $(\stmt_1 \AND \NOT \stmt_2) \OR (\NOT \stmt_1 \AND \stmt_2) \OR (\NOT \stmt_1 \AND \NOT \stmt_2)$.
 
 \begin{mathSection}
+	\begin{defn}\label{def_minterm}
+		Let $\{t_1, ..., t_n\} \subseteq \mathbb{B}^n$ be a set of truth values. A \textbf{minterm} of $\{t_1, ..., t_n\}$ is a conjunction where each element appears only once, either negated or not. That is, it can be written as $m = \bigAND \limits_{i=1}^n (\NOT)^{a_{i}} \, t_i$ where $a_{i} \in \mathbb{B}$, $\NOT ^ \TRUE \, t_i = t_i$ and $\NOT ^ \FALSE \, t_i = \NOT t_i$. In this notation, $m = \TRUE$ if and only if $t_i = a_i$ for all $i=1...n$. This extends to arbitrary sets of truth values
+	\end{defn}
+	
 	\begin{prop}\label{prop_disjunctive_normal_form}
-		Any function $f : \mathbb{B}^n \to \mathbb{B}$ that takes $n$ truth values and returns a truth values, which we call a \textbf{truth function}, can be expressed in its \textbf{disjunctive normal form} by using only the negation, conjunction and disjunction of the arguments. Formally, $f(t_1, ..., t_n) =\bigOR \limits_{i=1}^m \left( \bigAND \limits_{j=1}^n (\NOT)^{a_{ij}} \, t_j \right)$ where $m \in \mathbb{N}$, $a_{ij} \in \mathbb{B}$, $\NOT ^ \TRUE \, t_j = t_j$ and $\NOT ^ \FALSE \, t_j = \NOT t_j$.
+		Any function $f : \mathbb{B}^n \to \mathbb{B}$ that takes $n$ truth values and returns a truth values, which we call a \textbf{truth function}, can be expressed in its \textbf{disjunctive normal form} as a disjuction of minterms of the arguments. Formally, $f(t_1, ..., t_n) =\bigOR \limits_{i=1}^m \left( \bigAND \limits_{j=1}^n (\NOT)^{a_{ij}} \, t_j \right)$ where $m \in \mathbb{N}$ and  $a_{ij} \in \mathbb{B}$. This extends to functions of arbitrary arguments.
 	\end{prop}
 	\begin{proof}
-		We first show that this can be done for a function that returns $\TRUE$ for a unique combination of values. Let $a_1, ..., a_n \in \mathbb{B}$ be $n$ truth values. Let $f_1: \mathbb{B}^n \to \mathbb{B}$ be a function such that $f_1(t_1, ..., t_n) = \TRUE$ if and only if $t_j = a_j$ for all $j=1...n$. Let a \textbf{minterm} be a conjunction where each function argument $t_j$ appears once and only once, negated or not. Consider the minterm $\bigAND \limits_{j=1}^n (\NOT)^{a_{j}} \, t_j$. Each argument $t_j$ appears once and is negated or not depending on the value of $a_j$. If any $t_j \nequal a_j$ then one term will be $\FALSE$ and the whole expression will be $\FALSE$. Then we have $f_1(t_1, ..., t_n) = \bigAND \limits_{j=1}^n (\NOT)^{a_{j}} \, t_j$ since they return the same values for the same arguments.
+		We first show that this can be done for a function that returns $\TRUE$ for a unique combination of values. Let $a_1, ..., a_n \in \mathbb{B}$ be $n$ truth values. Let $f_1: \mathbb{B}^n \to \mathbb{B}$ be a function such that $f_1(t_1, ..., t_n) = \TRUE$ if and only if $t_j = a_j$ for all $j=1...n$. Consider the minterm $\bigAND \limits_{j=1}^n (\NOT)^{a_{j}} \, t_j$. It will be $\TRUE$ if and only if $t_j \equal a_j$ for all $j=1...n$. Then we have $f_1(t_1, ..., t_n) = \bigAND \limits_{j=1}^n (\NOT)^{a_{j}} \, t_j$ since they return the same values for the same arguments.
 		
 		Now we generalize the result for arbitrary functions. Let $f : \mathbb{B}^n \to \mathbb{B}$ be a truth function. Let $m \in \mathbb{N}$ be the number of value combinations for which $f(t_1, ..., t_n) = \TRUE$. For each value combination $i=1..m$ let $a_{ij} \in \mathbb{B}$ be the sequence of values. Then $f_i = \bigAND \limits_{j=1}^n (\NOT)^{a_{ij}} \, t_j$ is the minterm for each value combination. Consider $\bigOR \limits_{i=1}^m f_i$. This function returns $\TRUE$ if and only if the arguments match one of the value combinations for which $f$ returns $\TRUE$. Then we have $f(t_1, ..., t_n) =\bigOR \limits_{i=1}^m \left( \bigAND \limits_{j=1}^n (\NOT)^{a_{ij}} \, t_j \right)$ since they return the same values for the same arguments.
 		
-		This procedure can be generalized to the case where the number of arguments of $f$ is infinite.
+		This procedure can be generalized to the case where the number of arguments of $f$ and the number of minterms is infinite.
 	\end{proof}
 \end{mathSection}
 
@@ -151,7 +161,7 @@ Since the disjunctive normal form allows us to write all functions in terms of j
 
 \begin{mathSection}
 	\begin{prop}
-		The set of all statements $\mathcal{S}$ is closed under negation, arbitrary intersection and arbitrary union.
+		The set of all statements $\mathcal{S}$ is closed under negation, arbitrary conjunction and arbitrary disjunction.
 	\end{prop}
 	\begin{proof}
 		Negation, arbitrary intersection and arbitrary union are particular truth functions. The statement associated with them always exists by definition  \eqref{def_functions_of_statement}.
@@ -167,7 +177,7 @@ Since the disjunctive normal form allows us to write all functions in terms of j
 			\item distributivity: $a \OR (b \AND c) = (a \OR b) \AND (a \OR c)$, $a \AND (b \OR c) = (a \AND b) \OR (a \AND c)$
 			\item complements: $a \OR \NOT a = \tautology$, $a \AND \NOT a = \contradiction$
 		\end{itemize}
-		and is therefore a Boolean algebra.
+		This, by definition, means $\mathcal{S}$ is a \textbf{Boolean algebra}.
 	\end{prop}
 	\begin{proof}
 		The left and right expression for each equality correspond to the same truth function applied to the same statements. Therefore, by definition  \eqref{def_functions_of_statement}, they correspond to the same statement.
@@ -255,8 +265,19 @@ We can also prove the following properties that will be useful later.
 	\begin{proof}
 		We first show the proposition holds when $f$ is the negation. Let $\stmt, \bar{\stmt} \in \mathcal{S}$ be two equivalent statements. Since $\stmt \equiv \bar{\stmt}$ we have $\{\TRUE\} = \poss((\stmt \AND \bar{\stmt}) \OR (\NOT \stmt \AND \NOT \bar{\stmt})) = \poss((\NOT \NOT \stmt \AND \NOT \NOT \bar{\stmt}) \OR (\NOT \stmt \AND \NOT \bar{\stmt})) = \poss((\NOT \stmt \AND \NOT \bar{\stmt}) \OR (\NOT (\NOT \stmt) \AND \NOT (\NOT \bar{\stmt})))$. Which means  $\NOT \stmt \equiv \NOT \bar{\stmt}$.
 		
-		We first show the proposition holds when $f$ is the conjunction. Let $\stmt_1, \stmt_2, \bar{\stmt}_1, \bar{\stmt}_2 \in \mathcal{S}$ be four statements such that $\stmt_1 \equiv \bar{\stmt}_1$ and $\stmt_2 \equiv \bar{\stmt}_2$. Consider $\stmt[a] = ((\stmt_1 \AND \bar{\stmt}_1) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_1)) \AND ((\stmt_2 \AND \bar{\stmt}_2) \OR (\NOT \stmt_2 \AND \NOT \bar{\stmt}_2))$. Since $\stmt_1 \equiv \bar{\stmt}_1$ and $\stmt_2 \equiv \bar{\stmt}_2$, $\stmt[a]$ is the conjunction of two tautologies so it is a tautology as well. Consider $\stmt[b] = ((\stmt_1 \AND \stmt_2) \AND (\bar{\stmt}_1 \AND \bar{\stmt}_2)) \OR  (\NOT (\stmt_1 \AND \stmt_2) \AND \NOT (\bar{\stmt}_1 \AND \bar{\stmt}_2))= 	
-		(\stmt_1 \AND \stmt_2 \AND \bar{\stmt}_1 \AND \bar{\stmt}_2) \OR ((\NOT \stmt_1 \OR \NOT \stmt_2) \AND (\NOT \bar{\stmt}_1 \OR \NOT \bar{\stmt}_2)) = (\stmt_1 \AND \stmt_2 \AND \bar{\stmt}_1 \AND \bar{\stmt}_2) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_1) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_2) \OR (\NOT \stmt_2 \AND \NOT \bar{\stmt}_1) \OR (\NOT \stmt_2 \AND \NOT \bar{\stmt}_2)$. Note that if $\stmt[a]$ is $\TRUE$ one of the following must be true: $(\stmt_1 \AND \stmt_2 \AND \bar{\stmt}_1 \AND \bar{\stmt}_2)$, $(\NOT \stmt_1 \AND \NOT \bar{\stmt}_1)$ or $(\NOT \stmt_2 \AND \NOT \bar{\stmt}_2)$. Which means $\stmt[b]$ must also be $\TRUE$. That is, we can write $\stmt[a] \AND \stmt[b] = \stmt[a]$. But if $\stmt[a]$ is a tautology, $\stmt[a] \AND \stmt[b]$ is a tautology as well or we would violate the third property of \ref{def_functions_of_statement}. Since $\stmt[b]$ is a tautology, $\stmt_1 \AND \stmt_2 \equiv \bar{\stmt}_1 \AND \bar{\stmt}_2$.
+		We first show the proposition holds when $f$ is the conjunction. Let $\stmt_1, \stmt_2, \bar{\stmt}_1, \bar{\stmt}_2 \in \mathcal{S}$ be four statements such that $\stmt_1 \equiv \bar{\stmt}_1$ and $\stmt_2 \equiv \bar{\stmt}_2$. Consider
+		\begin{align*}
+\stmt[a] &= ((\stmt_1 \AND \bar{\stmt}_1) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_1)) \AND ((\stmt_2 \AND \bar{\stmt}_2) \OR (\NOT \stmt_2 \AND \NOT \bar{\stmt}_2)) \\
+&=(\stmt_1 \AND \bar{\stmt}_1 \AND \stmt_2 \AND \bar{\stmt}_2) \OR (\stmt_1 \AND \bar{\stmt}_1 \AND \NOT \stmt_2 \AND \NOT \bar{\stmt}_2) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_1 \AND \stmt_2 \AND \bar{\stmt}_2) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_1 \AND \NOT \stmt_2 \AND \NOT \bar{\stmt}_2).
+		\end{align*}
+		Since $\stmt_1 \equiv \bar{\stmt}_1$ and $\stmt_2 \equiv \bar{\stmt}_2$, $\stmt[a]$ is the conjunction of two tautologies so it is a tautology as well. Consider
+		\begin{align*}
+		\stmt[b] &= ((\stmt_1 \AND \stmt_2) \AND (\bar{\stmt}_1 \AND \bar{\stmt}_2)) \OR  (\NOT (\stmt_1 \AND \stmt_2) \AND \NOT (\bar{\stmt}_1 \AND \bar{\stmt}_2)) \\
+		&= 	
+		(\stmt_1 \AND \stmt_2 \AND \bar{\stmt}_1 \AND \bar{\stmt}_2) \OR ((\NOT \stmt_1 \OR \NOT \stmt_2) \AND (\NOT \bar{\stmt}_1 \OR \NOT \bar{\stmt}_2)) \\
+		&= (\stmt_1 \AND \stmt_2 \AND \bar{\stmt}_1 \AND \bar{\stmt}_2) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_1) \OR (\NOT \stmt_1 \AND \NOT \bar{\stmt}_2) \OR (\NOT \stmt_2 \AND \NOT \bar{\stmt}_1) \OR (\NOT \stmt_2 \AND \NOT \bar{\stmt}_2).
+		\end{align*}
+		Note that the conjunction of $\stmt[b]$ with any minterm of $\stmt[a]$ is the same minterm. Therefore we have  $\stmt[a] \AND \stmt[b] = \stmt[a]$. But if $\stmt[a]$ is a tautology, then $\stmt[a] \AND \stmt[b]$ is a tautology because it is equal to $\stmt[a]$, and $\stmt[b]$ is tautology as well or we would violate the third property of \ref{def_functions_of_statement}. Since $\stmt[b]$ is a tautology, $\stmt_1 \AND \stmt_2 \equiv \bar{\stmt}_1 \AND \bar{\stmt}_2$.
 		
 		Given that all functions can be generated from negation, conjunction and disjunction, and given that disjunction can be generated from negation and conjunction, the result proven generalizes to all functions.
 	\end{proof}
@@ -282,7 +303,7 @@ We can also prove the following properties that will be useful later.
 	\end{prop}
 	
 	\begin{proof}
-		We have $\stmt_1 \AND \stmt_2 \equiv \stmt_1$ since $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \AND \stmt_2 \equiv \stmt_2$ since $\stmt_2 \narrower \stmt_1$. Therefore $\stmt_1 \equiv \stmt_2$.
+		Suppose $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$. Then $\stmt_1 \AND \stmt_2 \equiv \stmt_1$ since $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \AND \stmt_2 \equiv \stmt_2$ since $\stmt_2 \narrower \stmt_1$. Therefore $\stmt_1 \equiv \stmt_2$. Conversely, suppose $\stmt_1 \equiv \stmt_2$. Then $\stmt_1 \AND \stmt_2 \equiv \stmt_1 \equiv \stmt_2$. Therefore $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$.
 	\end{proof}	
 \end{mathSection}
 
