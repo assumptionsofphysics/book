@@ -499,7 +499,7 @@ A possibility represents a complete prediction for a scientific question. Only o
 
 \begin{mathSection}
 	
-\begin{prop}
+\begin{prop}\label{prop_poss_is_minterm}
 	Let $\edomain$ be an experimental domain. A possibility for $\mathcal{D}$ is a minterm of an essential set that is not a contradiction.
 \end{prop}
 
@@ -744,29 +744,38 @@ From a conceptual standpoint, it gives a precise scientific meaning to the mathe
 
 \section{Combining domains}
 
-Define combined domain.
+We have characterized experimental and theoretical domains together with their connection to topologies and $\sigma$-algebras. But what happens when we want to combine domains together?
+
+For example, suppose we have the experimental domain for the pressure of an ideal gas and the experimental domain for its temperature. We can still take observations from both and create finite conjunctions and countable disjunctions. That is, we can create observations like \statement{the pressure is between 1 and 1.1 KPa}$\AND$\statement{the temperature is between 20 and 21 C} creating a new domain. What are the possibilities of the combined domain compared to the individual ones?
 
 \begin{mathSection}
 	
 	\begin{defn}
-		Let $\{\edomain_{X_i}\}_{i=1}^{\infty}$ be a countable set of experimental domains. The \textbf{combined experimental domain} $\bigtimes\limits_{i=1}^{\infty} \edomain_{X_i}$ is the experimental domain generated from all statements in $\{\edomain_{X_i}\}_{i=1}^{\infty}$ by finite conjunction and countable disjunction.
+		Let $\{\edomain_{X_i}\}_{i=1}^{\infty}$ be a countable set of experimental domains. The \textbf{combined experimental domain} $\edomain_{X} = \bigtimes\limits_{i=1}^{\infty} \edomain_{X_i}$ is the experimental domain generated from all statements in $\{\edomain_{X_i}\}_{i=1}^{\infty}$ by finite conjunction and countable disjunction.
 	\end{defn}
 	\begin{proof}
-		TODO: show it is still a domain (e.g. countable essential set)
-	\end{proof}    
+		We need to show that the combined experimental domain is indeed an experimental domain. It will contain the tautology and the contradiction since any of the original experimental domain contains them. It is closed under finite conjunction and countable disjunction by construction. To show that it has a countable essential subset, for each $i=1..\infty$ let $E_i \in \edomain_{X_i}$ be a countable essential subset. Consider $E=\bigcup\limits_{i=1}^\infty E_i$. From this set we can generate any $\edomain_{X_i}$ and therefore we can also generate all of $\edomain_{X}$. $E$ is an essential subset and it is countable since it is the union of a countable set of countable elements.
+	\end{proof}
+
+\begin{prop}\label{prop_combined_possibility}
+	A possibility $x$ of a combined domain $\edomain_{X} = \bigtimes\limits_{i=1}^{\infty} \edomain_{X_i}$ is the conjunction $x=\bigAND\limits_{i=1}^{\infty}x_i$ of one possibility $x_i$ for each domain such that $x$ is not a contradiction.
+\end{prop}   
+\begin{proof}
+	A possibility $x$ of the combined domain is a minterm of an essential set $E \subseteq \edomain_{X}$. Since we can choose $E=\bigcup\limits_{i=1}^\infty E_i$ where $E_i \subseteq \edomain_{X_i}$ is the essential set for each domain, $x$ is the conjunction $x=\bigAND\limits_{i=1}^{\infty}x_i$ of minterms $x_i$ of $E_i$. Since $x$ is a possibility, it is not a contradiction and therefore neither of the $x_i$ can be a contradiction. Since each $x_i$ is a minterm of the respective essential set $E_i$ that is not a contradiction, it is a possibility by \ref{prop_poss_is_minterm}. Therefore a possibility $x$ of the combined domain is the conjunction of the possibilities $x_i$ of the original domain that does not lead to a contradiction.
+\end{proof}
 \end{mathSection}
 
 \subsection{Independent domains}
 
 \begin{mathSection}
 	\begin{defn}
-		The experimental domains in a countable set $\{\mathcal{D}_{X_i}\}_{i=1}^{\infty}$ are \textbf{independent} if taking one statement from each domain always gives an independent set of statements.
+		The experimental domains in a countable set $\{\mathcal{D}_{X_i}\}_{i=1}^{\infty}$ are \textbf{independent} if taking one observation $\obs_i \in \mathcal{D}_{X_i}$ from each domain always gives an independent set of statements.
 	\end{defn}
 	\begin{prop}
 		Let $\{\mathcal{D}_{X_i}\}_{i=1}^{\infty}$ be a countable set of independent experimental domains and $X_i$ their respective possibilities. The set of possibilities of the combined experimental domain $\bigtimes\limits_{i=1}^{\infty} \mathcal{D}_{X_i}$ consists of all the possible conjunctions of the possibilities of each domain. That is: $X = \{ \bigAND\limits_{i=1}^{\infty} x_i \, | \, x_i \in X_i \}$. Notationally, we write $\mathcal{D}_{\bigtimes\limits_{i=1}^{\infty} X_i}$.
 	\end{prop}
 	\begin{proof}
-		TODO
+		A possibility $x=\bigAND\limits_{i=1}^{\infty}x_i$ for the combined domain is the conjunction of possibilities of each individual domain by \ref{prop_combined_possibility}. Since the domains are independent and since possibilities are neither tautologies or contradictions, we have $\poss(x) = \poss(\bigAND\limits_{i=1}^{\infty}x_i) = \bigAND\limits_{i=1}^{\infty}\poss(x_i)= \bigAND\limits_{i=1}^{\infty} \{\FALSE, \TRUE\} = \{\FALSE, \TRUE\}$. That is, each conjunction $x=\bigAND\limits_{i=1}^{\infty}x_i$ is not a contradiction and therefore is a possibility.
 	\end{proof}
 \end{mathSection}
 
