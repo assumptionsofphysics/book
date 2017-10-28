@@ -721,79 +721,6 @@ From a practical standpoint, it guarantees that these mathematical tools can alw
 
 From a conceptual standpoint, it gives a precise scientific meaning to the mathematical tools and everything built on top of them. Every single step in a calculation, every single argument in a proof can be given a clear, and possibly insightful, physical meaning. It grounds the abstract mathematical language in more concrete scientific objects. This in turn helps clarify the science described by common mathematical tools, unearthing possible hidden assumptions and simplifications about the physical systems being studied.
 
-\section{Refutation and discrete spaces}
-
-To further our understanding of experimental domains and their connections to topologies, we want to characterize them under a couple of seemingly simple assumption.
-
-The first case is when all our tests always finish with a clear success or failure and, therefore, we can both verify and refute every statement of the domain. For example, if we are able to tell whether an animal is of a particular species (e.g. \statement{that animal is a cat}), we are typically able to tell its not of that particular species (e.g. \statement{that animal is not a cat}).
-
-\begin{mathSection}
-	
-	\begin{defn}
-		An experimental domain $\mathcal{D}$ is \textbf{decidable} if all tests are guaranteed to terminate. Formally, for every $\obsdef{\stmt_1}{\expt_1} \in \mathcal{D}$ there exists a $\obsdef{\stmt_2}{\expt_2} \in \mathcal{D}$ such that $\stmt_1 = \NOT \stmt_2$
-	\end{defn}
-
-	\begin{justification}
-		The idea is that if all tests always terminate, then we can always construct a test for the negation by replacing $\SUCCESS$ with $\FAILURE$ and vice-versa.
-	\end{justification}
-	
-\end{mathSection}
-
-In this case we can prove the following.
-
-\begin{mathSection}
-	
-	\begin{prop}
-		The set of possibilities $X$ for a decidable domain $\mathcal{D}$ is a countable essential set. More precisely, there exists a countable essential set $E \subseteq \mathcal{D}$ such that the set statements associated with $E$ is $X$.
-	\end{prop}
-	
-	\begin{proof}
-		The decidable domain $\mathcal{D}$ is already closed under negation, therefore for each theoretical statement $\stmt \in \bar{\mathcal{D}}$ there exists a corresponding experimental observation $\obsdef{\stmt}{\expt} \in \mathcal{D}$. We can then find a set of observations $E\subseteq \mathcal{D}$ such that their corresponding statements are the possibilities $X$.
-		
-		TODO
-	\end{proof}
-	
-\end{mathSection}
-
-This tells us that, in the case we can both verify and refute statements, we can only distinguish up to a countable set of cases. Recall that the cardinality of possibility is at most continuum, so in that case we cannot verify and refute all statements.
-
-We can also show that a domain has a finite number of physically distinguishable possibilities is decidable.
-
-\begin{mathSection}
-	
-	\begin{prop}
-		An experimentally distinguishable domain with a finite set of possibilities is decidable.
-	\end{prop}
-	
-	\begin{proof}
-		TODO
-	\end{proof}
-	
-\end{mathSection}
-
-In terms of topology, a decidable domain corresponds to a discrete topology.
-
-\begin{mathSection}
-	
-	\begin{defn}
-		A topology $\mathsf{T}_X$ on a set $X$ is said \textbf{discrete} if it contains every subset of $X$.
-	\end{defn}
-	
-	\begin{prop}
-		The natural topology of a set of possibilities $X$ of an experimental domain is discrete if and only if the domain is decidable.
-	\end{prop}
-	
-	\begin{proof}
-		TODO
-	\end{proof}	
-\end{mathSection}
-
-\section{Arbitrary precision and real numbers}
-
-Define arbitrary precision as all statements are intervals of rationals.
-
-Space is real number with standard topology.
-
 \section{Combining domains}
 
 Define combined domain.
@@ -867,11 +794,20 @@ Define combined domain.
 	\begin{defn}
 		Two experimental domains $\mathcal{D}_X$ and $\mathcal{D}_Y$ are \textbf{incompatible} if all observations in one are incompatible to all observations of the other, excluding the tautology. Formally, $\obs_X \ncomp \obs_Y$ for each $\obs_X \in \mathcal{D}_X$ and $\obs_Y \in \mathcal{D}_Y$ such that $\obs_X \nequiv \tautology $ and $\obs_Y \nequiv \tautology$.
 	\end{defn}
-	\begin{defn}
-		The \textbf{final possibility} for a domain is the negation of the statement associated to the union of all experimental observations excluding the tautology. That is, $x_F \in \bar{\mathcal{D}}$ such that $\obsdef{\NOT x_F}{\expt} = \bigOR ( \mathcal{D} \setminus \{\tautology\})$.
-	\end{defn}
 	\begin{prop}
-		Let $\mathcal{D}_{X_1}$ and $\mathcal{D}_{X_2}$ be two incompatible experimental domains. Then the possibilities of the combined domain $\mathcal{D}_X = \mathcal{D}_{X_1} \times \mathcal{D}_{X_2}$, excluded the final possibility, is equal to the union of the possibilities of the individual domains, excluded the respective final possibility. That is $X \setminus \{x_F\} = (X_1 \setminus \{x_{F_1}\}) \cup (X_2 \setminus \{x_{F_2}\})$. Notationally, we write $\mathcal{D}_{X_1} \times \mathcal{D}_{X_2} = \mathcal{D}_{X_1 \coprod X_2}$.
+		Let $\mathcal{D}_{X_1}$ and $\mathcal{D}_{X_2}$ be two incompatible experimental domains. Then the possibilities of the combined domain $\mathcal{D}_X = \mathcal{D}_{X_1} \times \mathcal{D}_{X_2}$ is equal to the union of the possibilities of the individual domains, excluded the respective final possibility. That is $X = X_1 \cup X_2$. Notationally, we write $\mathcal{D}_{X_1} \times \mathcal{D}_{X_2} = \mathcal{D}_{X_1 \coprod X_2}$.
+	\end{prop}
+	\begin{proof}
+		TODO
+	\end{proof}
+	\begin{prop}
+		If two experimental domains $\mathcal{D}_{X_1}$ and $\mathcal{D}_{X_2}$ are incompatible then they are also incomplete.
+	\end{prop}
+	\begin{proof}
+		TODO
+	\end{proof}
+	\begin{prop}
+		Let $\mathcal{D}_{X_1}$ and $\mathcal{D}_{X_2}$ be two incompatible domains and $\edomain_{X}$ their combined domain. Let $\mathring{x}_1$, $\mathring{x}_2$ and $\mathring{x}$ the respective outer possibilities. Then $\mathring{x}_1$ and $\mathring{x}_2$ are not possibilities of $\edomain_{X}$. More specifically, $\mathring{x}_1 = \mathring{x} \OR ( \bigOR\limits_{x \in X_2} x )$, $\mathring{x}_2 = \mathring{x} \OR ( \bigOR\limits_{x \in X_1} x )$ and $\mathring{x} = \mathring{x}_1 \AND \mathring{x}_2$.
 	\end{prop}
 	\begin{proof}
 		TODO
@@ -879,6 +815,130 @@ Define combined domain.
 \end{mathSection}
 
 TODO: In terms of category theory, a morphism of an experimental domain is a map $f : \mathcal{D}_1 \to \mathcal{D}_2$ such that $f(\obs) \equiv \obs$. That is, it is a map that preserves the semantic content of each observation. Therefore we cannot impose morphisms on any pair of domains. In the same vein, there is only one type of product (the combined domain) and it is the semantic content that decides what it corresponds to. If the domains are independent, then it is the categoric product. If the domains are incompatible, then it is the categoric co-product. In all other cases, it will correspond to something different.
+
+\section{Discrete and continuous quantities}
+
+\begin{mathSection}
+	
+	\begin{defn}
+		A \textbf{label} for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
+	\end{defn}
+	
+	\begin{defn}
+		A \textbf{total order} on a set $\mathcal{Q}$ is a relationship $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ such that:
+		\begin{enumerate}
+			\item (antisymmetry) if $q_1 \leq q_2$ and $q_1 \leq q_2$ then $q_1 = q_2$
+			\item (transitivity) if $q_1 \leq q_2$ and $q_2 \leq q_3$ then $q_1 \leq q_3$
+			\item (antisymmetry) if $q_1 \leq q_2$ and $q_1 \leq q_2$ then $q_1 = q_2$
+		\end{enumerate}
+		
+		 for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
+	\end{defn}
+	
+	\begin{defn}
+		A \textbf{label} for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
+	\end{defn}
+
+\end{mathSection}
+
+\subsection{Decidable domains and discrete quantities}
+
+The first case is when all our tests always finish with a clear success or failure and, therefore, we can both verify and refute every statement of the domain. For example, if we are able to tell whether an animal is of a particular species (e.g. \statement{that animal is a cat}), we are typically able to tell its not of that particular species (e.g. \statement{that animal is not a cat}).
+
+\begin{mathSection}
+	
+	\begin{defn}
+		An experimental domain $\mathcal{D}$ is \textbf{decidable} if all tests are guaranteed to terminate. Formally, for every $\obsdef{\stmt_1}{\expt_1} \in \mathcal{D}$ there exists a $\obsdef{\stmt_2}{\expt_2} \in \mathcal{D}$ such that $\stmt_1 = \NOT \stmt_2$
+	\end{defn}
+	
+	\begin{justification}
+		The idea is that if all tests always terminate, then we can always construct a test for the negation by replacing $\SUCCESS$ with $\FAILURE$ and vice-versa.
+	\end{justification}
+	
+\end{mathSection}
+
+In this case we can prove the following.
+
+\begin{mathSection}
+	
+	\begin{prop}
+		The set of possibilities $X$ for a decidable domain $\mathcal{D}$ is a countable essential set. More precisely, there exists a countable essential set $E \subseteq \mathcal{D}$ such that the set statements associated with $E$ is $X$.
+	\end{prop}
+	
+	\begin{proof}
+		The decidable domain $\mathcal{D}$ is already closed under negation, therefore for each theoretical statement $\stmt \in \bar{\mathcal{D}}$ there exists a corresponding experimental observation $\obsdef{\stmt}{\expt} \in \mathcal{D}$. We can then find a set of observations $E\subseteq \mathcal{D}$ such that their corresponding statements are the possibilities $X$.
+		
+		TODO
+	\end{proof}
+	
+\end{mathSection}
+
+This tells us that, in the case we can both verify and refute statements, we can only distinguish up to a countable set of cases. Recall that the cardinality of possibility is at most continuum, so in that case we cannot verify and refute all statements.
+
+We can also show that a domain has a finite number of physically distinguishable possibilities is decidable.
+
+\begin{mathSection}
+	
+	\begin{prop}
+		An experimentally distinguishable domain with a finite set of possibilities is decidable.
+	\end{prop}
+	
+	\begin{proof}
+		TODO
+	\end{proof}
+	
+\end{mathSection}
+
+In terms of topology, a decidable domain corresponds to a discrete topology and the possibilities can always be labeled by assigning a different integer ot each.
+
+\begin{mathSection}
+	
+	\begin{defn}
+		A topology $\mathsf{T}_X$ on a set $X$ is said \textbf{discrete} if it contains every subset of $X$.
+	\end{defn}
+	
+	\begin{defn}
+		An experimental domain corresponds to a \textbf{discrete quantity} if its possibilities can be labeled by an integer. Formally, the set of possibilities $X$, with its natural topology $\mathsf{T}_X$, is homeomorphic to a subset of the integers $\mathbb{Z}$ with the discrete topology.
+	\end{defn}
+	
+	\begin{prop}
+		An experimental domain is decidable if and only if it corresponds to a discrete quantity.
+	\end{prop}
+	
+	\begin{proof}
+		TODO
+	\end{proof}	
+\end{mathSection}
+
+\subsection{Arbitrary precision and continuous quantities}
+
+\begin{mathSection}
+	
+	\begin{defn}
+		An experimental domain $\edomain$ allows \textbf{arbitrary precision} if TODO.
+	\end{defn}
+	
+	\begin{defn}
+		The standard topology on the real numbers $\mathbb{R}$ is the one generated by the collections of sets $\mathcal{B} = \{ (a,b) \subset \mathbb{R} \; | \; a,b \in \mathbb{Q} \}$ of all open sets of rational numbers $\mathbb{Q}$.
+	\end{defn}
+	
+	\begin{defn}
+		An experimental domain corresponds to a \textbf{continuous quantity} if its possibilities can be labeled by a real number. Formally, the set of possibilities $X$, with its natural topology $\mathsf{T}_X$, is locally homeomorphic to a subset of the real $\mathbb{R}$ with its standard topology.
+	\end{defn}
+	
+	\begin{prop}
+		An experimental domain is decidable if and only if it corresponds to a discrete quantity.
+	\end{prop}
+	
+	\begin{proof}
+		TODO
+	\end{proof}	
+\end{mathSection}
+
+
+Define arbitrary precision as all statements are intervals of rationals.
+
+Space is real number with standard topology.
 
 \section{Relationships between domains and continuous functions}
 
