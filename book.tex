@@ -966,33 +966,6 @@ Define arbitrary precision as all statements are intervals of rationals.
 
 Space is real number with standard topology.
 
-\section{Relationships between domains and continuous functions}
-
-\begin{mathSection}
-	\begin{prop}
-		Let $g : \mathcal{D}_Y \to \mathcal{D}_X$ return the narrowest observation in $\mathcal{D}_X$ such that $\obs_Y \narrower g(\obs_Y)$. We have:
-		\begin{enumerate}
-			\item $g(\tautology) = \tautology$
-			\item $g(\contradiction) = \contradiction$
-			\item $g(\obs_1 \OR \obs_2) = g(\obs_1) \OR (\obs_2)$
-		\end{enumerate}
-	\end{prop}
-	\begin{proof}
-		Let $\obs_X \in \mathcal{D}_X$ such that $\tautology \narrower \obs_X$. Then $\obs_X \equiv \tautology$ and we have $g(\tautology) = \tautology$.
-		
-		Let $\obs_X \in \mathcal{D}_X$ such that $\contradiction \narrower \obs_X$. Then $\obs_X$ can be any observation in $\mathcal{D}_X$. The narrowest observation is $\contradiction$ so we have $g(\contradiction) = \contradiction$.
-		
-		Let $\obs_1, \obs_2 \in \mathcal{D}_Y$. Consider $(\obs_1 \OR \obs_2) \AND \NOT (g(\obs_1) \OR g(\obs_2)) = (\obs_1 \OR \obs_2) \AND (\NOT g(\obs_1) \AND \NOT g(\obs_2)) = (\obs_1 \AND \NOT g(\obs_1) \AND \NOT g(\obs_2)) \OR (\obs_2 \AND \NOT g(\obs_1) \AND \NOT g(\obs_2))$. Since $\obs_1 \narrower g(\obs_1)$, $\obs_1 \AND \NOT g(\obs_1) \equiv \contradiction$. Similarly, $\obs_2 \AND \NOT g(\obs_2) \equiv \contradiction$. We have $(\obs_1 \OR \obs_2) \AND \NOT (g(\obs_1) \OR g(\obs_2)) \equiv (\contradiction \AND \NOT g(\obs_2)) \OR (\contradiction \AND \NOT g(\obs_1)) = \contradiction \OR \contradiction = \contradiction$. Therefore $\obs_1 \OR \obs_2 \narrower g(\obs_1) \OR g(\obs_2)$ which gives $g(\obs_1 \OR \obs_2) \narrower g(\obs_1) \OR g(\obs_2)$. We also have $\obs_1 \narrower \obs_1 \OR \obs_2 \narrower g(\obs_1 \OR \obs_2)$ therefore $g(\obs_1) \narrower g(\obs_1 \OR \obs_2)$ which means $g(\obs_1) \AND g(\obs_1 \OR \obs_2) \equiv g(\obs_1)$. Similarly, $g(\obs_2) \AND g(\obs_1 \OR \obs_2) \equiv g(\obs_2)$. Now consider $(g(\obs_1) \OR g(\obs_2)) \AND g(\obs_1 \OR \obs_2) = (g(\obs_1) \AND g(\obs_1 \OR \obs_2))\OR(g(\obs_2) \AND g(\obs_1 \OR \obs_2)) \equiv g(\obs_1)\OR g(\obs_2)$ which means $g(\obs_1) \OR g(\obs_2) \narrower g(\obs_1 \OR \obs_2)$. We have $g(\obs_1) \OR g(\obs_2) \equiv g(\obs_1 \OR \obs_2)$ since they are both narrower of each other.
-	\end{proof}
-\end{mathSection}
-
-
-Define experimental relationship between two domain as set of implications between observations.
-
-Possibilities are continuous functions.
-
-Natural topology is basis-to-basis topology. (Check if defined on subbasis whether all subbasis that lead to the same basis are equivalent)
-
 \section{REDO - Continuous functions}
 
 We now turn our attention to relationships between two sets $X$ and $Y$ of experimentally distinguishable elements. There are two ways of characterize them and we want to show that they are equivalent.
