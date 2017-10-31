@@ -735,26 +735,40 @@ From a conceptual standpoint, it gives a precise scientific meaning to the mathe
 
 \section{Experimental relationships and dependent domains}
 
+Talk about relationships.
+
+Define based on inference.
+
 \begin{mathSection}
 	\begin{defn}
-		An \textbf{experimental relationship} between two experimental domains establishes that verifying an observation in one means verifying an observation in the other. More formally, it is a map $f: \edomain_Y \to \edomain_X$ between two experimental domains $\edomain_X$ and $\edomain_Y$ such that $f(\obs_Y) \equiv \obs_Y$. In other words: it is an equivalence preserving maps between experimental domains.
+		An \textbf{experimental relationship} between two experimental domains establishes that verifying an observation in one means verifying an observation in the other. More formally, it is a map $\erel: \edomain_Y \to \edomain_X$ between two experimental domains $\edomain_X$ and $\edomain_Y$ such that $f(\obs_Y) \equiv \obs_Y$. In other words: it is an equivalence preserving maps between experimental domains.
 	\end{defn}
 	\begin{defn}
-		An experimental domain $\edomain_Y$ is \textbf{dependent} on another experimental domain $\edomain_X$ if there exists and experimental relationship $f: \edomain_Y \to \edomain_X$.
+		An experimental domain $\edomain_Y$ is \textbf{dependent} on another experimental domain $\edomain_X$ if there exists and experimental relationship $\erel: \edomain_Y \to \edomain_X$.
 	\end{defn}
 	\begin{defn}
 		Two experimental domains $\edomain_X$ and $\edomain_Y$ are \textbf{equivalent} $\edomain_X \equiv \edomain_Y$ if $\edomain_X$ depends on $\edomain_Y$ and vice-versa.
 	\end{defn}
+\end{mathSection}
+
+Define relationship based on causation.
+
+\begin{mathSection}
 	\begin{defn}
 		Let $(X, \mathsf{T}_X)$ and $(Y, \mathsf{T}_Y)$ be two topological spaces. A \textbf{continuous function} is a map $f: X \to Y$ such that given any open set $U_Y \in \mathsf{T}_Y$ its reverse image $f^{-1}(U_Y) \in \mathsf{T}_X$ is an open set. Moreover, $f$ is continuous in the natural topologies.
 	\end{defn}
-	\begin{prop}
-		Let $\edomain_X$ and $\edomain_Y$ be two experimental domains such that $\edomain_Y$ depends on $\edomain_X$. Then combined domain $\edomain_X \times \edomain_Y \equiv \edomain_X$ is equivalent to the independent domain and there exists a function $f : X \to Y$ between the possibilities of the domains such that $x \narrower f(x)$. TODO: add other direction.
-	\end{prop}
+	\begin{defn}
+		Let $\edomain_X$ and $\edomain_Y$ be two experimental domains. A \textbf{causal relationship} from $\edomain_X$ to $\edomain_Y$ is a continuous function $f : X \to Y$ between the possibilities of the domains such that $x \narrower f(x)$.
+	\end{defn}
+	\begin{thrm}
+		Let $\edomain_X$ and $\edomain_Y$ be two experimental domains. $\edomain_Y$ depends on $\edomain_X$ if and only if there is causal relationship from  $\edomain_X$ to $\edomain_Y$.
+	\end{thrm}
 	\begin{proof}
-		First we show that the function exists. Given that for each observation in $\edomain_Y$ there exists an equivalent observation in $\edomain_X$, $\edomain_Y$ is effectively a subset of $\edomain_X$. By the same token, the theoretical domain $\tdomain_Y$ is effectively a subset of $\tdomain_X$. This means that a possibility $x \in \tdomain_X$, if true, will determine all the truth values of  all statements in $\tdomain_Y$, including its possibilities. But only one possibility $y \in \tdomain_Y$ can be compatible with $x$ since the possibilities of a domain are all incompatible with each other. Therefore $x \narrower y$. We can define $f : X \to Y$ the function that given a possibility $x \in X$ returns the only possibility $f(x) \broader x$ that is compatible with it.
+		First we show that a causal relationship exists between independent and dependent domain. Suppose $\edomain_Y$ depends on $\edomain_X$. Given that for each observation in $\edomain_Y$ there exists an equivalent observation in $\edomain_X$, $\edomain_Y$ is effectively a subset of $\edomain_X$. By the same token, the theoretical domain $\tdomain_Y$ is effectively a subset of $\tdomain_X$. This means that a possibility $x \in \tdomain_X$, if true, will determine all the truth values of  all statements in $\tdomain_Y$, including its possibilities. But only one possibility $y \in \tdomain_Y$ can be compatible with $x$ since the possibilities of a domain are all incompatible with each other. Therefore we can define $f : X \to Y$ the function that given a possibility $x \in X$ returns the only possibility $y=f(x) \broader x$ that is compatible with it.
 		
-		Now we prove it is continuous. Consider an observation $\obs_Y \in \edomain_Y$. Let $U_Y(\obs_Y) \in \mathsf{T}_Y$ be its verifiable set. Since $\edomain_Y$ depends on $\edomain_X$, we can find $\obs_X \in \edomain_X$ such that $\obs_X \equiv \obs_Y$. Let $U_X(\obs_X) \in \mathsf{T}_X$ be its verifiable set. This is the set of all possibilities in $X$ that is compatible with $\obs_Y$, which means $U_X(\obs_X)$ contains all the possibilities that are compatible with one possibility in $U_Y(\obs_Y)$. Since $f$ returns the only possibility in $Y$ compatible with a possibility in $X$, $f^{-1}(U_Y(\obs_Y))$ will return all the possibilities in $X$ that are compatible with one possibility in $U_Y(\obs_Y)$. That means $f^{-1}(U_Y(\obs_Y)) = U_X(\obs_X)$ maps verifiable sets to verifiable sets. Therefore $f$ is continuous.
+		We still need to show that $f$ is continuous. Consider an observation $\obs_Y \in \edomain_Y$. Let $U_Y(\obs_Y) \in \mathsf{T}_Y$ be its verifiable set. Since $\edomain_Y$ depends on $\edomain_X$, we can find $\obs_X \in \edomain_X$ such that $\obs_X \equiv \obs_Y$. Let $U_X(\obs_X) \in \mathsf{T}_X$ be its verifiable set. This is the set of all possibilities in $X$ that is compatible with $\obs_Y$, which means $U_X(\obs_X)$ contains all the possibilities that are compatible with one possibility in $U_Y(\obs_Y)$. Since $f$ returns the only possibility in $Y$ compatible with a possibility in $X$, $f^{-1}(U_Y(\obs_Y))$ will return all the possibilities in $X$ that are compatible with one possibility in $U_Y(\obs_Y)$. That means $f^{-1}(U_Y(\obs_Y)) = U_X(\obs_X)$ maps verifiable sets to verifiable sets. Therefore $f$ is continuous.
+		
+		Now we show that a causal relationship implies dependence between domain. Suppose we have a causal relationship $f: X \to Y$ between $\edomain_X$ and $\edomain_Y$. Let $y \in Y$ be a possibility for $\edomain_Y$. Consider   $f^{-1}(\{y\})$: this is the set of all possibilities in $X$ that are compatible with $y$. Since $\truth(y)=\TRUE$ if and only if $\truth(x)=\TRUE$ for some $x \in f^{-1}(\{y\})$, we must have $y \equiv \bigOR\limits_{x \in f^{-1}(\{y\})} x$. Now consider an observation $\obs_Y \in \edomain_Y$ and its associated theoretical statement $\stmt_Y \in \tdomain_Y$. Let $U_Y(\obs_Y)$ be the verifiable set associated with $\obs_Y$. We can write $\stmt_Y = \bigOR\limits_{y \in U_Y(\obs_Y)} y$ since the observation will be verified if and only if one of the possibilities compatible with it is true. We can expand each possibility in $Y$ as a conjunction of possibilities in $X$ using the previous relationship. We have $\stmt_Y = \bigOR\limits_{y \in U_Y(\obs_Y)} \bigOR\limits_{x \in f^{-1}(\{y\})} x = \bigOR\limits_{x \in f^{-1}(U_Y(\obs_Y))} x$. Because $f$ is continuous, the reverse image of a verifiable set is a verifiable set. Therefore there is a $\obs_X \in \edomain_X$ such that $U_X(\obs_X) = f^{-1}(U_Y(\obs_Y))$. Consider $\stmt_X \equiv \bigOR\limits_{x \in U_X(\obs_X)} x \equiv \stmt_Y$. This is the statement associated with $\obs_X$ so $\obs_X \equiv \obs_Y$. Therefore for each $\obs_Y \in \edomain_Y$ we can find an equivalent observation $\obs_X \in \edomain_X$. The experimental domain $\edomain_Y$ depends on $\edomain_X$.
 	\end{proof}
 \end{mathSection}
 
