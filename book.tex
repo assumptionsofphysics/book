@@ -733,6 +733,32 @@ From a practical standpoint, it guarantees that these mathematical tools can alw
 
 From a conceptual standpoint, it gives a precise scientific meaning to the mathematical tools and everything built on top of them. Every single step in a calculation, every single argument in a proof can be given a clear, and possibly insightful, physical meaning. It grounds the abstract mathematical language in more concrete scientific objects. This in turn helps clarify the science described by common mathematical tools, unearthing possible hidden assumptions and simplifications about the physical systems being studied.
 
+\section{Experimental relationships and dependent domains}
+
+\begin{mathSection}
+	\begin{defn}
+		An \textbf{experimental relationship} between two experimental domains establishes that verifying an observation in one means verifying an observation in the other. More formally, it is a map $f: \edomain_Y \to \edomain_X$ between two experimental domains $\edomain_X$ and $\edomain_Y$ such that $f(\obs_Y) \equiv \obs_Y$. In other words: it is an equivalence preserving maps between experimental domains.
+	\end{defn}
+	\begin{defn}
+		An experimental domain $\mathcal{D}_Y$ is \textbf{dependent} on another experimental domain $\mathcal{D}_X$ if there exists and experimental relationship $f: \edomain_Y \to \edomain_X$.
+	\end{defn}
+	\begin{defn}
+		Two experimental domains $\mathcal{D}_X$ and $\mathcal{D}_Y$ are \textbf{equivalent} $\mathcal{D}_X \equiv \mathcal{D}_Y$ if $\mathcal{D}_X$ depends on $\mathcal{D}_Y$ and vice-versa.
+	\end{defn}
+	\begin{defn}
+		Let $(X, \mathsf{T}_X)$ and $(Y, \mathsf{T}_Y)$ be two topological spaces. A \textbf{continuous function} is a map $f: X \to Y$ such that given any open set $U_Y \in \mathsf{T}_Y$ its reverse image $f^{-1}(U_Y) \in \mathsf{T}_X$ is an open set. Moreover, $f$ is continuous in the natural topologies.
+	\end{defn}
+	\begin{prop}
+		Let $\mathcal{D}_X$ and $\mathcal{D}_Y$ be two experimental domains such that $\mathcal{D}_Y$ depends on $\mathcal{D}_X$. Then combined domain $\mathcal{D}_X \times \mathcal{D}_Y \equiv \mathcal{D}_X$ is equivalent to the independent domain and there exists a function $f : X \to Y$ between the possibilities of the domains such that $x \narrower f(x)$. TODO: add other direction.
+	\end{prop}
+	\begin{proof}
+		First we show that the function exists. Given that for each observation in $\mathcal{D}_Y$ there exists an equivalent observation in $\mathcal{D}_X$, $\mathcal{D}_Y$ is effectively a subset of $\mathcal{D}_X$. By the same token, the theoretical domain $\bar{\mathcal{D}}_Y$ is effectively a subset of $\bar{\mathcal{D}}_X$. This means that a possibility $x \in \bar{\mathcal{D}}_X$, if true, will determine all the truth values of  all statements in $\bar{\mathcal{D}}_Y$, including its possibilities. But only one possibility $y \in \bar{\mathcal{D}}_Y$ can be compatible with $x$ since the possibilities of a domain are all incompatible with each other. Therefore $x \narrower y$. We can define $f : X \to Y$ the function that given a possibility $x \in X$ returns the only possibility $f(x) \broader x$ that is compatible with it.
+		
+		Now we prove it is continuous. Consider an observation $\obs_Y \in \edomain_Y$. Let $U_Y(\obs_Y) \in \mathsf{T}_Y$ be its verifiable set. Since $\edomain_Y$ depends on $\edomain_X$, we can find $\obs_X \in \edomain_X$ such that $\obs_X \equiv \obs_Y$. Let $U_X(\obs_X) \in \mathsf{T}_X$ be its verifiable set. This is the set of all possibilities in $X$ that is compatible with $\obs_Y$, which means $U_X(\obs_X)$ contains all the possibilities that are compatible with one possibility in $U_Y(\obs_Y)$. Since $f$ returns the only possibility in $Y$ compatible with a possibility in $X$, $f^{-1}(U_Y(\obs_Y))$ will return all the possibilities in $X$ that are compatible with one possibility in $U_Y(\obs_Y)$. That means $f^{-1}(U_Y(\obs_Y)) = U_X(\obs_X)$ maps verifiable sets to verifiable sets. Therefore $f$ is continuous.
+	\end{proof}
+\end{mathSection}
+
+
 \section{Combining domains}
 
 We have characterized experimental and theoretical domains together with their connection to topologies and $\sigma$-algebras. But what happens when we want to combine domains together?
@@ -753,6 +779,12 @@ For example, suppose we have the experimental domain for the pressure of an idea
 \end{prop}   
 \begin{proof}
 	A possibility $x$ of the combined domain is a minterm of an essential set $E \subseteq \edomain_{X}$. Since we can choose $E=\bigcup\limits_{i=1}^\infty E_i$ where $E_i \subseteq \edomain_{X_i}$ is the essential set for each domain, $x$ is the conjunction $x=\bigAND\limits_{i=1}^{\infty}x_i$ of minterms $x_i$ of $E_i$. Since $x$ is a possibility, it is not a contradiction and therefore neither of the $x_i$ can be a contradiction. Since each $x_i$ is a minterm of the respective essential set $E_i$ that is not a contradiction, it is a possibility by \ref{prop_poss_is_minterm}. Therefore a possibility $x$ of the combined domain is the conjunction of the possibilities $x_i$ of the original domain that does not lead to a contradiction.
+\end{proof}
+\begin{prop}
+	Let $\edomain_X$ and $\edomain_Y$ be two experimental domain such that the second depends on the first. The combined domain $\edomain_X \times \edomain_Y$ is equal to the independent domain $\edomain_X$.
+\end{prop}
+\begin{proof}
+	TODO
 \end{proof}
 \end{mathSection}
 
@@ -781,33 +813,6 @@ For example, suppose we have the experimental domain for the pressure of an idea
 	Let $U_i : \edomain_{X_i} \to \mathsf{T}_{X_i}$ be the map from an observation of a domain to its verifiable set in the respective topology. Let $U : \edomain_{X} \to \mathsf{T}_X$ the same map for the combined domain. Let $\obs_i \in \edomain_{X_i}$ an observation from a particular domain and $U_i(\obs_i)$ its verifiable set in that domain. Since we also have $\obs_i \in \edomain_{X}$, it is also associate with the verifiable set $U(\obs_i)$ in the combined domain. Because the domains are independent, every possibility in $U_i(\obs_i)$ is compatible with any possibility $x_j \in X_j$ for all $j \neq i$. This means that $U(\obs_i)=X_1\times ... \times X_{i-1} \times U_i(\obs_i) \times X_{i+1} \times ...$ . Given that all observations in the combined domain can be generated using finite conjunction and countable disjunction from the observations of the independent domains, the topology of the combined space can be generated by all sets of the form $\bigtimes\limits_{i=1}^{\infty} U_{i}$, with $U_i \in \mathsf{T}_i$ and $U_i \neq X_i$ only once. Using finite intersection, this includes those sets where $U_i \neq X_i$ finitely many times. The natural topology of the combined domain is the product topology by definition.
 \end{proof}
 \end{mathSection}
-
-\subsection{Dependent domains}
-
-\begin{mathSection}
-	\begin{defn}
-		An experimental domain $\mathcal{D}_Y$ is \textbf{dependent} on another experimental domain $\mathcal{D}_X$ if each observation in the first is equivalent to an observation in the second. Formally, for each $\obs_Y \in \mathcal{D}_Y$ there exists $\obs_X \in \mathcal{D}_X$ such that $\obs_Y\equiv \obs_X$.
-	\end{defn}
-	\begin{defn}
-		Two experimental domains $\mathcal{D}_X$ and $\mathcal{D}_Y$ are \textbf{equivalent} $\mathcal{D}_X \equiv \mathcal{D}_Y$ if $\mathcal{D}_X$ depends on $\mathcal{D}_Y$ and vice-versa.
-	\end{defn}
-	\begin{prop}
-		Let $\mathcal{D}_X$ and $\mathcal{D}_Y$ be two experimental domains such that $\mathcal{D}_Y$ depends on $\mathcal{D}_X$. Then combined domain $\mathcal{D}_X \times \mathcal{D}_Y \equiv \mathcal{D}_X$ is equivalent to the independent domain and there exists a function $f : X \to Y$ between the possibilities of the domains such that $x \narrower f(x)$.
-	\end{prop}
-	\begin{proof}
-		Given that for each observation in $\mathcal{D}_Y$ there exists an equivalent observation in $\mathcal{D}_X$, $\mathcal{D}_Y$ is effectively a subset of $\mathcal{D}_X$. By the same token, the theoretical domain $\bar{\mathcal{D}}_Y$ is effectively a subset of $\bar{\mathcal{D}}_X$. This means that a possibility $x \in \bar{\mathcal{D}}_X$, if true, will determine all the truth values of  all statements in $\bar{\mathcal{D}}_Y$, including its possibilities. But only one possibility $y \in \bar{\mathcal{D}}_Y$ can be compatible with $x$ since the possibilities of a domain are all incompatible with each other. Therefore $x \narrower y$. We can define $f : X \to Y$ the function that given a possibility $x \in X$ returns the only possibility $f(x) \broader x$ that is compatible with it.
-	\end{proof}
-	\begin{defn}
-		TODO: define continuous functions.
-	\end{defn}
-	\begin{prop}
-		Let $\mathcal{D}_X$ and $\mathcal{D}_Y$ be two experimental domains such that $\mathcal{D}_Y$ depends on $\mathcal{D}_X$. The function $f : X \to Y$ between the possibilities of the domains is continuous with respect to the natural topologies.
-	\end{prop}
-	\begin{proof}
-		TODO
-	\end{proof}
-\end{mathSection}
-
 
 \subsection{Incompatible domains}
 
