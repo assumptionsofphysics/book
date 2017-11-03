@@ -735,13 +735,17 @@ From a conceptual standpoint, it gives a precise scientific meaning to the mathe
 
 \section{Experimental relationships and dependent domains}
 
-Talk about relationships.
+Having characterized experimental and theoretical domains together with their connection to topologies and $\sigma$-algebras, we want to study the case where an experimental domains is physically related to another. For example, consider the domains for the temperature and height of a mercury column or the domains for the temperature and density of water. How do we express, in this framework, the fact that these domains are connected?
 
-Define based on inference.
+We have two ways to do it. The first is in terms of inference: any experimental observation on the height of a mercury column is an indirect experimental observation on its temperature; any experimental observation on the density of water is an indirect experimental observation on its temperature. The second is in terms of causes: the height of the mercury column is a function of its temperature; the density of water is a function of its temperature. The first main result of this section is to show that these perspectives are equivalent. The second main result is to show that we can in general create an experimental domain for these relationships, meaning that they too can be verified experimentally.
+
+Let's develop the initial example. Suppose $\edomain_X$ represents the domain for the temperature of a mercury column while $\edomain_Y$ represents the domain for its height. Since we know that an increase in temperature makes the metal expand, we can infer the temperature of the mercury column by looking at its height. For example, if we verify that \statement{the height of the mercury column is between 24 and 25 millimeters} we may be able to infer that \statement{the temperature is 24 and 25 degrees Celsius}. That is, given an observation $\obs_Y$ we have an observation $\obs_X$ that is going to be verified if and only if the first one is.
+
+Note that the inferences is between observations in general and not a single interval. For example, the observation \statement{the water density is between 999.8 and 999.9 kg/$m^3$} will correspond to \statement{the water temperature is between 0 and 0.52 Celsius}$\OR$\statement{the water temperature is between 7.6 and 9.12 degrees Celsius} as water is most dense at 4 degrees Celsius. While the observations themselves can be as complicated as needed, the relationship is always the same: for each observation in $\edomain_Y$ we can find an observation in $\edomain_X$ that is verified if and only the first is. That is: an experimental relationship is a map from $\edomain_Y$ to $\edomain_X$ that preserves equivalence.
 
 \begin{mathSection}
 	\begin{defn}
-		An \textbf{experimental relationship} between two experimental domains establishes that verifying an observation in one means verifying an observation in the other. More formally, it is a map $\erel: \edomain_Y \to \edomain_X$ between two experimental domains $\edomain_X$ and $\edomain_Y$ such that $f(\obs_Y) \equiv \obs_Y$. In other words: it is an equivalence preserving maps between experimental domains.
+		An \textbf{experimental relationship} between two experimental domains establishes that verifying an observation in one means verifying an observation in the other. More formally, it is a map $\erel: \edomain_Y \to \edomain_X$ between two experimental domains $\edomain_X$ and $\edomain_Y$ such that $f(\obs_Y) \equiv \obs_Y$. In other words: it is an equivalence preserving map between experimental domains.
 	\end{defn}
 	\begin{defn}
 		An experimental domain $\edomain_Y$ is \textbf{dependent} on another experimental domain $\edomain_X$ if there exists and experimental relationship $\erel: \edomain_Y \to \edomain_X$.
@@ -751,7 +755,19 @@ Define based on inference.
 	\end{defn}
 \end{mathSection}
 
-Define relationship based on causation.
+Note that experimental relationships are not things we can impose between any domain: it's something that the domains allow. The domains for the temperature of two different mercury columns are in general not related: there is nothing that guarantees that we'll find an observation in one that is equivalent to one in the other. The equivalence of experimental domains is something much stronger than what one typically have in mathematical construct. The topologies for the domains for the temperature of two different mercury columns are going to be the same because we'll have the same possibilities and the same way to experimentally verify them. But the domains are not: they describe two different mercury columns. No inference from one to the other exists in general.
+
+This, again, confirms why the mathematical structure we have setup is most appropriate for scientific investigation: it carries enough of the semantic to be able to tell what elements are truly scientifically equivalent.
+
+Let's continue with our example. We can re-express the inference relationship in terms of causal relationship between the two domains. If $x$ is the value of temperature of the mercury column, that is a possibility for $\edomain_X$, and $y$ is the height of the mercury column, that is a possibility for $\edomain_Y$, then we can write $y=f(x)$ since the height if determined by the temperature.
+
+Note that the direction of the causal relationship is the opposite of the inference. $X$ causes $Y$ and we can infer $Y$ from $X$. Chain of events are in terms of possibilities and start with the cause and end with the effect. Chains of inferences are in terms of observations and start with the result and end with the origin.
+
+The reverse does not work in general. Even if we know the final possibility, we may not be able to reconstruct the initial possibility: if water density of water is exactly 999.9 kg/$m^3$, the temperature could be either 0.52 or 7.6 Celsius because density peaks at 4 Celsius. Similarly, even if we have initially observed an electron, we cannot infer the observation for its mass: we still need to measure it.
+
+Another important consideration is that, in order to be consistent, the function $y=f(x)$ has to be continuous. An observation $\obs_Y$ on the height of the mercury column, in fact, will establish that the height is within the set of possibilities compatible to $\obs_Y$, say between 24 and 25 millimeters. That is $y$ is in $U_Y(\obs_Y)$, a verifiable set in the topology for $Y$. We can then infer that the temperature must be in the reverse image of the possible heights, say between 24 and 25 Celsius. That is $x$ is in $f^{-1}(U_Y(\obs_Y))$. But this means that, indirectly, we have experimentally verified that $x$ is in $f^{-1}(U_Y(\obs_Y))$. And if $\edomain_X$ is really the domain of the observations for the temperature, then it must contain one that matches that set of possible temperature, one for which the temperature is between 24 and 25 Celsius. In other words, $f^{-1}(U_Y(\obs_Y))$ must be a set in the topology of $X$.
+
+Another way to look at this: if we say that we can only measure both the temperature and height of a mercury column with finite precision, we have to make sure that when we use the causal relationship for inference, a finite precision measurement of height will correspond to a finite precision measurement of temperature. This can only be true if the function is continuous.
 
 \begin{mathSection}
 	\begin{defn}
@@ -771,6 +787,7 @@ Define relationship based on causation.
 		Now we show that a causal relationship implies dependence between domain. Suppose we have a causal relationship $f: X \to Y$ between $\edomain_X$ and $\edomain_Y$. Let $y \in Y$ be a possibility for $\edomain_Y$. Consider   $f^{-1}(\{y\})$: this is the set of all possibilities in $X$ that are compatible with $y$. Since $\truth(y)=\TRUE$ if and only if $\truth(x)=\TRUE$ for some $x \in f^{-1}(\{y\})$, we must have $y \equiv \bigOR\limits_{x \in f^{-1}(\{y\})} x$. Now consider an observation $\obs_Y \in \edomain_Y$ and its associated theoretical statement $\stmt_Y \in \tdomain_Y$. Let $U_Y(\obs_Y)$ be the verifiable set associated with $\obs_Y$. We can write $\stmt_Y = \bigOR\limits_{y \in U_Y(\obs_Y)} y$ since the observation will be verified if and only if one of the possibilities compatible with it is true. We can expand each possibility in $Y$ as a conjunction of possibilities in $X$ using the previous relationship. We have $\stmt_Y = \bigOR\limits_{y \in U_Y(\obs_Y)} \bigOR\limits_{x \in f^{-1}(\{y\})} x = \bigOR\limits_{x \in f^{-1}(U_Y(\obs_Y))} x$. Because $f$ is continuous, the reverse image of a verifiable set is a verifiable set. Therefore there is a $\obs_X \in \edomain_X$ such that $U_X(\obs_X) = f^{-1}(U_Y(\obs_Y))$. Consider $\stmt_X \equiv \bigOR\limits_{x \in U_X(\obs_X)} x \equiv \stmt_Y$. This is the statement associated with $\obs_X$ so $\obs_X \equiv \obs_Y$. Therefore for each $\obs_Y \in \edomain_Y$ we can find an equivalent observation $\obs_X \in \edomain_X$. The experimental domain $\edomain_Y$ depends on $\edomain_X$.
 	\end{proof}
 \end{mathSection}
+
 
 
 \section{Combining domains}
@@ -981,20 +998,6 @@ Define arbitrary precision as all statements are intervals of rationals.
 Space is real number with standard topology.
 
 \section{REDO - Continuous functions}
-
-We now turn our attention to relationships between two sets $X$ and $Y$ of experimentally distinguishable elements. There are two ways of characterize them and we want to show that they are equivalent.
-
-Suppose we have two sets $X$ and $Y$ of experimentally distinguishable elements (e.g. the temperature and height of a mercury column in a thermometer). Let's assume we have a causal relationship $f: X \rightarrow Y$ between the first and the second (e.g. the temperature determines how high is the mercury column). We assume the relationship is valid on the whole set without loss of generality: if it is not, just redefine $X$ and $Y$ to be the appropriate regions (e.g. the valid ranges of temperature and height of a mercury column in which the thermometer can operate).
-
-The relationship $f$ can also be used to infer observations on $X$ from observations of $Y$. Suppose we verify that $y$ is within a set $V \in \mathsf{T}(Y)$ (e.g. ``the height of the mercury column is between 24 and 25 millimeters"). Then we can infer that $x$ is within the reverse image $U=f^{-1}(V)$ (e.g. ``the temperature is 24 and 25 degrees Celsius"). $U$ is therefore associated with an experimental observation: $U \in \mathsf{T}(X)$ must be a set in the topology (e.g. if we measure the height of the column with finite precision, we cannot end up inferring the value of temperature with infinite precision).
-
-In other words, to each causal relationship $f: X \rightarrow Y$ between two set of experimentally distinguishable elements (e.g. if the temperature is $x$ the height of the mercury column will be $f(x)$) we have an associated reverse inference relationship $g  : \mathsf{T}(Y) \rightarrow \mathsf{T}(X) = f^{-1}$ (e.g. if the height of the mercury column is within $V$ then the temperature is within $f^{-1}(V)$ ). This is true even if the function is not monotonic (e.g. if ``the water density is between 999.8 and 999.9 kg/$m^3$" then ``the water temperature is between 0 and 0.52 or between 7.6 and 9.12 degrees Celsius" as water is most dense at 4 degrees Celsius).  The reverse image $U=f^{-1}(V)$ of a set associated with an experimental observation (i.e. an open set) is also a set associated with an experimental observation (i.e. an open set). This is the definition of a continuous function in topology: one for which the reverse image of an open set is an open set. Note that, when using the standard topology on $\mathbb{R}^n$, topological continuity is equivalent to analytical continuity.
-
-Now suppose we start with the inference relationship $g  : \mathsf{T}(Y) \rightarrow \mathsf{T}(X)$ that for each verified experimental observation on $Y$ gives us a verified experimental observation on $X$ (e.g. if ``the height of the mercury column is within $V$" then ``the temperature is within $g(V)$"). For it to be a valid inference relationship, it will have to be compatible with logical operations (e.g. if ``the height of the mercury column is between the 23 and 25 millimeters" and ``the height of the mercury column is between the 24 and 26 millimeters" then ``the temperature is between 23 and 25 degree Celsius" and  ``the temperature is between 24 and 26 degree Celsius"). This means the relationship must also be compatible with the set operations that correspond to the logical operations: $g(V_1 \cup V_2)=g(V_1)\cup g(V_2)$ and $g(V_1 \cap V_2)=g(V_1)\cap g(V_2)$.
-
-If nothing is known about $y$ (e.g. if ``the height of the mercury column is in a valid range") then nothing should be known about $x$ (e.g. ``the temperature is in a valid range"): $g(Y)=X$. If we excluded all values in $Y$ (e.g. ``the height of the mercury column is not in a valid range of the thermometer") then we excluded all values in $X$ (e.g. ``the temperature is not in a valid range of the thermometer"): $g(\emptyset) = \emptyset$. That is, for the inference relationship to be valid we shouldn't be able to infer something from nothing or nothing from something.
-
-Under these conditions, one can show that for any such relationship there exists a continuous function $f: X \rightarrow Y$ such that $g=f^{-1}$ is its inverse image.
 
 \begin{prop}
 	\label{setfunctions}
