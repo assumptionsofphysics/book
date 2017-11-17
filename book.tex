@@ -733,6 +733,130 @@ From a practical standpoint, it guarantees that these mathematical tools can alw
 
 From a conceptual standpoint, it gives a precise scientific meaning to the mathematical tools and everything built on top of them. Every single step in a calculation, every single argument in a proof can be given a clear, and possibly insightful, physical meaning. It grounds the abstract mathematical language in more concrete scientific objects. This in turn helps clarify the science described by common mathematical tools, unearthing possible hidden assumptions and simplifications about the physical systems being studied.
 
+\section{Discrete and continuous quantities}
+
+\begin{mathSection}
+	
+	\begin{defn}
+		A \textbf{label} for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
+	\end{defn}
+	
+	\begin{defn}
+		A \textbf{total order} on a set $\mathcal{Q}$ is a relationship $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ such that:
+		\begin{enumerate}
+			\item (antisymmetry) if $q_1 \leq q_2$ and $q_1 \leq q_2$ then $q_1 = q_2$
+			\item (transitivity) if $q_1 \leq q_2$ and $q_2 \leq q_3$ then $q_1 \leq q_3$
+			\item (antisymmetry) if $q_1 \leq q_2$ and $q_1 \leq q_2$ then $q_1 = q_2$
+		\end{enumerate}
+		
+		for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
+	\end{defn}
+	
+	\begin{defn}
+		A \textbf{label} for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
+	\end{defn}
+	
+\end{mathSection}
+
+\subsection{Decidable domains and discrete quantities}
+
+The first case is when all our tests always finish with a clear success or failure and, therefore, we can both verify and refute every statement of the domain. For example, if we are able to tell whether an animal is of a particular species (e.g. \statement{that animal is a cat}), we are typically able to tell its not of that particular species (e.g. \statement{that animal is not a cat}).
+
+\begin{mathSection}
+	
+	\begin{defn}
+		An experimental domain $\edomain$ is \textbf{decidable} if all tests are guaranteed to terminate. Formally, for every $\obsdef{\stmt_1}{\expt_1} \in \edomain$ there exists a $\obsdef{\stmt_2}{\expt_2} \in \edomain$ such that $\stmt_1 = \NOT \stmt_2$
+	\end{defn}
+	
+	\begin{justification}
+		The idea is that if all tests always terminate, then we can always construct a test for the negation by replacing $\SUCCESS$ with $\FAILURE$ and vice-versa.
+	\end{justification}
+	
+\end{mathSection}
+
+In this case we can prove the following.
+
+\begin{mathSection}
+	
+	\begin{prop}
+		The set of possibilities $X$ for a decidable domain $\edomain$ is a countable essential set. More precisely, there exists a countable essential set $E \subseteq \edomain$ such that the set statements associated with $E$ is $X$.
+	\end{prop}
+	
+	\begin{proof}
+		The decidable domain $\edomain$ is already closed under negation, therefore for each theoretical statement $\stmt \in \tdomain$ there exists a corresponding experimental observation $\obsdef{\stmt}{\expt} \in \edomain$. We can then find a set of observations $E\subseteq \edomain$ such that their corresponding statements are the possibilities $X$.
+		
+		TODO
+	\end{proof}
+	
+\end{mathSection}
+
+This tells us that, in the case we can both verify and refute statements, we can only distinguish up to a countable set of cases. Recall that the cardinality of possibility is at most continuum, so in that case we cannot verify and refute all statements.
+
+We can also show that a domain has a finite number of physically distinguishable possibilities is decidable.
+
+\begin{mathSection}
+	
+	\begin{prop}
+		An experimentally distinguishable domain with a finite set of possibilities is decidable.
+	\end{prop}
+	
+	\begin{proof}
+		TODO
+	\end{proof}
+	
+\end{mathSection}
+
+In terms of topology, a decidable domain corresponds to a discrete topology and the possibilities can always be labeled by assigning a different integer ot each.
+
+\begin{mathSection}
+	
+	\begin{defn}
+		A topology $\mathsf{T}_X$ on a set $X$ is said \textbf{discrete} if it contains every subset of $X$.
+	\end{defn}
+	
+	\begin{defn}
+		An experimental domain corresponds to a \textbf{discrete quantity} if its possibilities can be labeled by an integer. Formally, the set of possibilities $X$, with its natural topology $\mathsf{T}_X$, is homeomorphic to a subset of the integers $\mathbb{Z}$ with the discrete topology.
+	\end{defn}
+	
+	\begin{prop}
+		An experimental domain is decidable if and only if it corresponds to a discrete quantity.
+	\end{prop}
+	
+	\begin{proof}
+		TODO
+	\end{proof}	
+\end{mathSection}
+
+\subsection{Arbitrary precision and continuous quantities}
+
+\begin{mathSection}
+	
+	\begin{defn}
+		An experimental domain $\edomain$ allows \textbf{arbitrary precision} if TODO.
+	\end{defn}
+	
+	\begin{defn}
+		The standard topology on the real numbers $\mathbb{R}$ is the one generated by the collections of sets $\mathcal{B} = \{ (a,b) \subset \mathbb{R} \; | \; a,b \in \mathbb{Q} \}$ of all open sets of rational numbers $\mathbb{Q}$.
+	\end{defn}
+	
+	\begin{defn}
+		An experimental domain corresponds to a \textbf{continuous quantity} if its possibilities can be labeled by a real number. Formally, the set of possibilities $X$, with its natural topology $\mathsf{T}_X$, is locally homeomorphic to a subset of the real $\mathbb{R}$ with its standard topology.
+	\end{defn}
+	
+	\begin{prop}
+		An experimental domain is decidable if and only if it corresponds to a discrete quantity.
+	\end{prop}
+	
+	\begin{proof}
+		TODO
+	\end{proof}	
+\end{mathSection}
+
+
+Define arbitrary precision as all statements are intervals of rationals.
+
+Space is real number with standard topology.
+
 \section{Dependence and equivalence between domains}
 
 Having characterized experimental and theoretical domains together with their connection to topologies and $\sigma$-algebras, we want to study the case where an experimental domains is physically related to another. For example, consider the domains for the temperature and height of a mercury column or the domains for the temperature and density of water. How do we express, in this framework, the fact that these domains are connected?
@@ -891,265 +1015,7 @@ The same applies to the combination of domains: if we have two one dimensional e
 
 The point is that much of the machinery of category theory is inapplicable to experimental domains directly because products and morphisms do not always exist. Yet, we will be able to recover and use parts of it later based on the definitions provided in these last two sections. The idea is that mathematical structures such as topologies, groups, smooth manifolds, lie group and the like simply ``forget" the semantic, so the morphism in their category equates objects that are not coming from equivalent domains. Therefore, while the domains for thetemperature of two different thermometers are not equivalent, their natural topologies are equivalent because we are assuming that they are both scalar quantity that can be measured with arbitrary precision.
 
-\section{Discrete and continuous quantities}
-
-\begin{mathSection}
-	
-	\begin{defn}
-		A \textbf{label} for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
-	\end{defn}
-	
-	\begin{defn}
-		A \textbf{total order} on a set $\mathcal{Q}$ is a relationship $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ such that:
-		\begin{enumerate}
-			\item (antisymmetry) if $q_1 \leq q_2$ and $q_1 \leq q_2$ then $q_1 = q_2$
-			\item (transitivity) if $q_1 \leq q_2$ and $q_2 \leq q_3$ then $q_1 \leq q_3$
-			\item (antisymmetry) if $q_1 \leq q_2$ and $q_1 \leq q_2$ then $q_1 = q_2$
-		\end{enumerate}
-		
-		 for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
-	\end{defn}
-	
-	\begin{defn}
-		A \textbf{label} for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
-	\end{defn}
-
-\end{mathSection}
-
-\subsection{Decidable domains and discrete quantities}
-
-The first case is when all our tests always finish with a clear success or failure and, therefore, we can both verify and refute every statement of the domain. For example, if we are able to tell whether an animal is of a particular species (e.g. \statement{that animal is a cat}), we are typically able to tell its not of that particular species (e.g. \statement{that animal is not a cat}).
-
-\begin{mathSection}
-	
-	\begin{defn}
-		An experimental domain $\edomain$ is \textbf{decidable} if all tests are guaranteed to terminate. Formally, for every $\obsdef{\stmt_1}{\expt_1} \in \edomain$ there exists a $\obsdef{\stmt_2}{\expt_2} \in \edomain$ such that $\stmt_1 = \NOT \stmt_2$
-	\end{defn}
-	
-	\begin{justification}
-		The idea is that if all tests always terminate, then we can always construct a test for the negation by replacing $\SUCCESS$ with $\FAILURE$ and vice-versa.
-	\end{justification}
-	
-\end{mathSection}
-
-In this case we can prove the following.
-
-\begin{mathSection}
-	
-	\begin{prop}
-		The set of possibilities $X$ for a decidable domain $\edomain$ is a countable essential set. More precisely, there exists a countable essential set $E \subseteq \edomain$ such that the set statements associated with $E$ is $X$.
-	\end{prop}
-	
-	\begin{proof}
-		The decidable domain $\edomain$ is already closed under negation, therefore for each theoretical statement $\stmt \in \tdomain$ there exists a corresponding experimental observation $\obsdef{\stmt}{\expt} \in \edomain$. We can then find a set of observations $E\subseteq \edomain$ such that their corresponding statements are the possibilities $X$.
-		
-		TODO
-	\end{proof}
-	
-\end{mathSection}
-
-This tells us that, in the case we can both verify and refute statements, we can only distinguish up to a countable set of cases. Recall that the cardinality of possibility is at most continuum, so in that case we cannot verify and refute all statements.
-
-We can also show that a domain has a finite number of physically distinguishable possibilities is decidable.
-
-\begin{mathSection}
-	
-	\begin{prop}
-		An experimentally distinguishable domain with a finite set of possibilities is decidable.
-	\end{prop}
-	
-	\begin{proof}
-		TODO
-	\end{proof}
-	
-\end{mathSection}
-
-In terms of topology, a decidable domain corresponds to a discrete topology and the possibilities can always be labeled by assigning a different integer ot each.
-
-\begin{mathSection}
-	
-	\begin{defn}
-		A topology $\mathsf{T}_X$ on a set $X$ is said \textbf{discrete} if it contains every subset of $X$.
-	\end{defn}
-	
-	\begin{defn}
-		An experimental domain corresponds to a \textbf{discrete quantity} if its possibilities can be labeled by an integer. Formally, the set of possibilities $X$, with its natural topology $\mathsf{T}_X$, is homeomorphic to a subset of the integers $\mathbb{Z}$ with the discrete topology.
-	\end{defn}
-	
-	\begin{prop}
-		An experimental domain is decidable if and only if it corresponds to a discrete quantity.
-	\end{prop}
-	
-	\begin{proof}
-		TODO
-	\end{proof}	
-\end{mathSection}
-
-\subsection{Arbitrary precision and continuous quantities}
-
-\begin{mathSection}
-	
-	\begin{defn}
-		An experimental domain $\edomain$ allows \textbf{arbitrary precision} if TODO.
-	\end{defn}
-	
-	\begin{defn}
-		The standard topology on the real numbers $\mathbb{R}$ is the one generated by the collections of sets $\mathcal{B} = \{ (a,b) \subset \mathbb{R} \; | \; a,b \in \mathbb{Q} \}$ of all open sets of rational numbers $\mathbb{Q}$.
-	\end{defn}
-	
-	\begin{defn}
-		An experimental domain corresponds to a \textbf{continuous quantity} if its possibilities can be labeled by a real number. Formally, the set of possibilities $X$, with its natural topology $\mathsf{T}_X$, is locally homeomorphic to a subset of the real $\mathbb{R}$ with its standard topology.
-	\end{defn}
-	
-	\begin{prop}
-		An experimental domain is decidable if and only if it corresponds to a discrete quantity.
-	\end{prop}
-	
-	\begin{proof}
-		TODO
-	\end{proof}	
-\end{mathSection}
-
-
-Define arbitrary precision as all statements are intervals of rationals.
-
-Space is real number with standard topology.
-
-\section{REDO - Continuous functions}
-
-\begin{prop}
-	\label{setfunctions}
-	Let $X$ and $Y$ be two Hausdorff topological spaces, and let $g: \mathsf{T}(Y) \rightarrow \mathsf{T}(X)$ be a mapping such that:
-	\begin{enumerate}
-		\item It is compatible with union and intersection $\forall V_1, V_2 \in Y$ $g(V_1 \cup V_2)=g(V_1)\cup g(V_2)$ and $g(V_1 \cap V_2)=g(V_1)\cap g(V_2)$
-		\item $g(\emptyset) = \emptyset$
-		\item $g(Y) = X$
-	\end{enumerate}
-	Then there exists a unique continuous function $f: X \rightarrow Y$ such that $g = f^{-1} |_{\mathsf{T}(Y)}$.
-\end{prop}
-
-\begin{proof}
-	We claim there exists a unique extension $\bar{g}:\sigma(Y)\to\sigma(X)$ to the Borel $\sigma$-algebras of $X$ and $Y$, respectively $\sigma(X)$ and $\sigma(Y)$, such that $\bar{g}|_{\mathsf{T}(Y)}=g$ and $\bar{g}$ is compatible with union, intersection and complements. Let $\bar{g}(V) = g(V)$ for all open sets $V \in \mathsf{T}(Y)$. Let $A \in \sigma(Y)$ (not necessarily open) and $A^C$ be its complement. We must have $\bar{g}(A^C) = \bar{g}(A)^C = X\setminus \bar{g}(A)$ for $\bar{g}$ to be compatible with complements. Recall that all Borel sets in $\sigma(Y)$ and $\sigma(X)$ may be written as some combination of unions, intersections, and complements of open sets. Thus, the construction uniquely determine what $\bar{g}$ should output on any Borel set. We need only check that the output is still a Borel set. But by definition of $\bar{g}$, the outputs will be given as unions, intersections, and complements of outputs of $g$, which are open sets, and so the image of $\bar{g}$ is contained in $\sigma(X)$.  $\bar{g}$ is well defined. The function $\bar{g}$ in a sense represents extracting the maximum amount of information possible out of $g$.
-	
-	We claim we can define $\hat{g}:Y\to\sigma(X)$ such that $\hat{g}(y) = \bar{g}(\{y\})$. Since $Y$ is Hausdorff, every singleton $\{y\}$ is closed and is therefore a Borel set. $\bar{g}(\{y\})$ is well defined and so is $\hat{g}(y)$.
-	
-	We claim  $\hat{g}(y_1)\cap\hat{g}(y_2) = \emptyset$ if and only if $y_1\neq y_2$ for all $y_1,y_2\in Y$ such that $\hat{g}(y_i)\neq\emptyset$ for $i=1,2$. If $y_1\neq y_2$ we have
-	$$
-	\hat{g}(y_1)\cap\hat{g}(y_2) = \bar{g}(\{y_1\})\cap\bar{g}(\{y_2\}) = \bar{g}(\{y_1\}\cap\{y_2\}) = \bar{g}(\emptyset) = \emptyset.
-	$$
-	Conversely, if $y_1 = y_2$ we have
-	$$
-	\hat{g}(y_1)\cap\hat{g}(y_2) = 	\hat{g}(y_1)\cap\hat{g}(y_1) = 
-	\hat{g}(y_1) \neq \emptyset.
-	$$
-	
-	We claim we can define $f: X\to Y$ such that $f(x) = y$ if and only if $x\in \hat{g}(y)$. Since $g(Y)=X$, there exists $y\in Y$ such that $x\in\hat{g}(y)$. By the preceding claim, this $y$ is unique. $f: X\to Y$ is well defined. Note that no arbitrary choice where made so far that lead to the construction of $f$, which is therefore determined uniquely by $g$. 
-	
-	We claim $g = f^{-1} |_{\mathsf{T}(Y)}$. Let $V\in\mathsf{T}(Y)$. We want to show $f^{-1}(V) = g(V)$. Let $x\in f^{-1}(V)$. Then for some $y \in V$ we have $f(x)=y$. $x\in \hat{g}(y)$ by construction of $f$. $\hat{g}(y) \subset g(V)$ since $\{y\}\subset V$, so $x\in g(V)$. $f^{-1}(V) \subseteq g(V)$. Conversely, let $x\in g(V)=\bar{g}(V)$. Then for some $y\in V$, we have $x\in\bar{g}(\{y\})\subset\bar{g}(V)$. But then by definition we have $f(x)=y$, so $x\in f^{-1}(V)$. $f^{-1}(V) \supseteq g(V)$. $f^{-1}(V) = g(V)$ for all $V\in\mathsf{T}(Y)$ and therefore $f^{-1}|_{\mathsf{T}(Y)}=g$.
-	
-	We claim $f$ is continuous. It is so since $g = f^{-1} |_{\mathsf{T}(Y)}$ takes open sets to open sets. 
-\end{proof}
-
-The above work gives us an approach to reconstruct continuous functions given the behavior of the inverse on open sets. In the context of collecting information on observable phenomena, the function $g$ represents the total of all information possible to gather on the correlation between two variables. The fact that from $g$ we can construct a unique continuous $f$ shows us that in the infinite-resource ideal, we fully obtain the information to give exact relations between variables. Further, the result itself tells us that the interesting phenomena in our framework of experimental observations will be continuous, which is often a baseline assumption in physics. 
-
-
-
-
-
-TODO: Introduce/define Borel algebra? In fact, we really only need infinite intersections of open sets. We could skip complements all together and just let $\bar{g}$ be defined on all open sets plus all infinite intersections of open sets. This might be slightly simpler but won't make much of a difference either way. Also, it might make more sense to absorb Lemma 1.24 and $\hat{g}$ into the proof of Proposition 1.22. 
-
-\section{REDO - Distinguishability of functions}
-
-For all of this to be self consistent, we must require that functions between experimentally distinguishable elements are  experimentally distinguishable themselves. That is, we must show that the set of continuous function $C(X,Y)$ from $X$ to $Y$ is a Hausdorff and second countable topological space with a suitable topology. Note that $C(X,Y)$ has the cardinality of continuum, therefore we already know it allows Hausdorff and second countable topologies, but we need to make sure we can give one that is actually physically meaningful in terms of experimental observations.
-
-Suppose we have two sets $X$ and $Y$ of experimentally distinguishable elements (e.g. time and space). Suppose we need to distinguish elements within the set of all continuous function $C(X,Y)$ from $X$ to $Y$ (e.g. all possible trajectories). From a sub-base of $X$ (e.g. all open time intervals between rational numbers) we pick a set $U$ (e.g. between 1 and 2 seconds). From a sub-base of $Y$ (e.g. all open spatial intervals between rational numbers) we pick a set $V$ (e.g. between 1 and 2 meters). We can define the set $S(U,V) = \{f: X \rightarrow Y | f \in C(X,Y), f(U) \subset V\}$ of all the continuous functions such that their value remains within $V$ over the domain $U$ (e.g. all trajectories that between $1$ and $2$ seconds remain within $1$ and $2$ meters).
-
-If we take all possible sets of functions constructed this way, and combine them with finite intersections and countable unions, we obtain a topology for the continuous function. The collections of all sets $S(U,V)$ forms a sub-base for this topology and is constructed from the sub-bases of $X$ and $Y$. This new sub-base is countable because the choices for $U$ and $V$ are countable themselves. This means that $C(X,Y)$ is second countable with this topology.
-
-Now we need to show that we can distinguish between any two functions. Say we have two different functions $f_1$ and $f_2$ (i.e. two different trajectories). Since they are different, there will be at least one value $x \in X$ such that the values $f_1(x)\neq f_2(x)$ will be different (e.g. at $1.2$ seconds the first trajectory is at $1.1$ meters while the second trajectory is at $1.2$ meters). We can now find two disjoint elements $V_1$ and $V_2$ of the sub-base for $Y$ such that each includes either $f_1(x)$ or $f_2(x)$ (e.g. the intervals $(1.095, 1.105)$ and $(1.195, 1.205)$ meters). Since the functions are continuous, we can find an element $U$ of the sub-base for $X$ such that both functions remain within those ranges (e.g. between $(1.197, 1.203)$ seconds the first trajectory remains within $(1.095, 1.105)$ meters and the second trajectory remains within $(1.195, 1.205)$ meters). The sets $S(U, V_1)$ (e.g. all trajectories that between $(1.197, 1.203)$ seconds that remain within $(1.095, 1.105)$ meters) and $S(U, V_2)$ (e.g. all trajectories that between $(1.197, 1.203)$ seconds that remain within $(1.195, 1.205)$ meters) are disjoint and they each contain $f_1$ and $f_2$ respectively. We can distinguish between functions: the topology is Hausdorff.
-
-This confirms that all the conceptual infrastructure is solid and self consistent. Sets of experimentally distinguishable elements are Hausdorff and second countable topological spaces. Maps between elements of such spaces are continuous maps as they preserve experimental distinguishability. The maps themselves are experimentally distinguishable and the can be given a Hausdorff and second countable topology. We can continues this recursively by constructing maps of maps (e.g. a map from a state to a trajectory) without ever going outside our definitions: everything remains experimental distinguishable.
-
-\begin{mathSection}
-
-For continuous functions to be physically distinguishable, we need to show they can always be given, as a set, given a topology that is Hausdorff and second-countable.
-
-To that end, we introduce the basis-to-basis topology on the set of continuous functions from two topological spaces. This is the topology generated by the sets of functions that map a basis element of one element inside an element of the other space. 
-
-\begin{defn} Let $X$ and $Y$ be two topological spaces. Let $C(X,Y)$ denote the set of all continuous functions from $X$ to $Y$. Let $\mathcal{B}_X$ and $\mathcal{B}_Y$ be two bases for $X$ and $Y$ respectively. The basis-to-basis topology $\mathsf{T}(C(X,Y), \mathcal{B}_X, \mathcal{B}_Y)$ on $C(X,Y)$ with respect to the basis $\mathcal{B}_X$ and $\mathcal{B}_Y$ is the topology generated by all sets of the form 
-	$$
-	V(U_X, U_Y) = \{f\in C(X,Y) : f(U_X)\subset U_Y\}
-	$$
-where $U_X \in \mathcal{B}_X$ and $U_Y \in \mathcal{B}_Y$.
-\end{defn}
-
-Now we need to show that if the two spaces $X$ and $Y$ are Hausdorff and second-countable, the basis-to-basis topology is Hausdorff and second-countable for a suitable choice of basis.
-
-\begin{prop}
-	Let $X$ and $Y$ be two Hausdorff and second-countable topological spaces. Let $C(X,Y)$ denote the set of all continuous functions from $X$ to $Y$. Let $\mathcal{B}_X$ and $\mathcal{B}_Y$ be two countable bases for $X$ and $Y$ respectively. The basis-to-basis topology $\mathsf{T}(C(X,Y), \mathcal{B}_X, \mathcal{B}_Y)$ on $C(X,Y)$ with respect to the basis $\mathcal{B}_X$ and $\mathcal{B}_Y$ is Hausdorff and second-countable. 
-\end{prop}
-\begin{proof}
-	We claim $\mathsf{T}(C(X,Y), \mathcal{B}_X, \mathcal{B}_Y)$ is second-countable. We first note that the sub-basis $\{V(U_X, U_Y) \, |\,   U_X \in \mathcal{B}_X , U_Y \in \mathcal{B}_Y \}$ is countable since $\mathcal{B}_X$ and $\mathcal{B}_Y$ are countable. The collection $\mathcal{B}$ of all finite intersections is still countable, since it is in one-to-one correspondence with the collection of finite subsets of a countable set, which is still countable. Therefore $\mathcal{B}$ is a countable basis, which means $\mathsf{T}(C(X,Y), \mathcal{B}_X, \mathcal{B}_Y)$ is second-countable.
-	
-	We claim $\mathsf{T}(C(X,Y), \mathcal{B}_X, \mathcal{B}_Y)$ is Hausdorff. Let $f,g:X\to Y$ be distinct continuous functions. Then for some $x\in X$, we have $f(x)\neq g(x)$. Pick $V_1, V_2$ disjoint open subsets of $Y$ with $f(x)\in V_1$ and $g(x)\in V_2$. We may assume (possibly by shrinking $V_1$ or $V_2$) that both are basis elements for the topology of $Y$. Let $U=f^{-1}(V_1)\cap g^{-1}(V_2)$. Then $U$ is an open neighborhood of $x$. We may assume again that $U$ is a basis element for the topology on $X$ by shrinking it if necessary. Now, let $T_1$ to be the (sub-)basis element for basis-to-basis topology corresponding to $U$ and $V_1$. By construction, $f\in T_1$. Similarly, let $T_2$ to be the basis element for the basis-to-basis topology corresponding to $U$ and $V_2$ and containing $g$. Since $V_1$ and $V_2$ are disjoint, so are $T_1$ and $T_2$. $\mathsf{T}(\mathcal{C})$ is Hausdorff.
-\end{proof}
-
-We will also show that this is not in general equal to the open-open topology. 
-
-\begin{prop}
-	In general, the topology $\mathsf{T}(\mathcal{C})$ defined above depends on the bases for $X$ and $Y$. 
-\end{prop}
-\begin{proof}
-	We will give an example of such a case. Let $X=Y=\mathbb{R}$ with the usual topology on $\mathbb{R}$. Let $\mathcal{B}_1$ be the basis for $\mathbb{R}$ consisting of all open intervals with rational endpoints, and let $\mathcal{B}_2 = \mathcal{B}_1\cup\{(0,\pi)\}$. We find a set open in our topology $\mathsf{T}(\mathcal{C})$ using $\mathcal{B}_2$ as our basis which is not open when we use $\mathcal{B}_1$. Consider the following set, open in our topology when using $\mathcal{B}_2$:
-	$$
-	V = \{f\in\mathcal{C}| f((0,\pi))\subset(0,1)\}
-	$$
-	This is clearly open because $(0,\pi)$ and $(0,1)$ are basis elements in $\mathcal{B}_2$. 
-	
-	Next, we show that when using $\mathcal{B}_1$ as our basis for $X=Y=\mathbb{R}$, no finite intersection and/or infinite union of sub-basis elements for $\mathsf{T}(\mathcal{C})$ will equal $V$. Henceforth, when we say ``open" subsets, unless otherwise stated, we will refer exclusively to the topology $\mathsf{T}(\mathcal{C})$ when using $\mathcal{B}_1$ for $\mathbb{R}$. The smallest sub-basis subsets containing $V$ are those of the form:
-	$$
-	B_r = \{f\in\mathcal{C} | f((0,r))\subset(0,1)\}
-	$$
-	for each $r\in\mathbb{Q}$ with $r<\pi$. By ``smallest" we mean any sub-basis elements containing $V$ which are not in the form of $B_r$ will contain some $B_r$. Now, any finite intersection of the $B_r$'s will be another $B_r$, but these strictly contain $V$, so we can never obtain $V$ from this sub-basis. 
-	
-	Similarly, the largest sub-basis sets contained within $V$ are of the form: 
-	$$
-	S_r = \{f\in\mathcal{C} | f((0,r))\subset(0,1)\}
-	$$
-	for each $r\in \mathbb{Q}$ with $r>\pi$. Let $S = \cup_{r>\pi}S_r$. This is the largest open set in our topology which is contained in $V$. Consider the function $f(x) = x/\pi$. This is continuous and is an element of $V$. But notice $f(\pi)=1$, so $f\notin S_r$ for all $r>\pi$, hence $f\notin S$. Thus, $V$ is a set which is open in $\mathsf{T}(\mathcal{C})$ when we use $\mathcal{B}_1$ for $X$ and $Y$, but not open when we use $\mathcal{B}_2$ for $X$ and $Y$. 
-\end{proof}
-
-TODO: add corollary environment for this one. 
-
-\begin{prop}
-The topology $\mathsf{T}(\mathcal{C})$ on the set of continuous functions $C(\mathbb{R},\mathbb{R})$ from $\mathbb{R}$ to itself is in general not equal to the open-open topology on $C(\mathbb{R},\mathbb{R})$.
-\end{prop}
-\begin{proof}
-In the proof of the previous proposition, note that the basis for the open-open topology is independent of the basis used for the underlying spaces, and in particular is a superset of the basis for $\mathsf{T}(\mathcal{C})$ when using $\mathbb{B}_2$ to construct it. Hence the open-open topology is distinct from $\mathsf{T}(\mathcal{C})$ when using the basis $\mathcal{B}_1$ on $\mathbb{R}$. 
-\end{proof}
-
-TODO: the above propositions might generalize to any uncountable, second-countable space. This will be considered during the paper-writing process later. 
-
-Thus we have shown one can start with two Hausdorff, second-countable spaces, and generate a new Hausdorff second-countable space consisting of all functions between them. Topological spaces with these properties make up our class of scientifically interesting spaces, so the space of continuous (distinguishability-preserving) functions between spaces of distinguishable quantities is again a physically distinguishable space. Because one can iterate this construction (since the relevant properties are preserved), this is a way to generate arbitrarily many new physically distinguishable spaces encoding important information about the ``lower-order" spaces (i.e. they consist of functions which encode a conversion between verifiable sets in different spaces).
-
-\end{mathSection}
-
 \section{Summary}
-
-\begin{table}[h]
-	\centering
-\begin{tabular}{p{0.20\textwidth} p{0.7\textwidth}}
-	Math/Topology & Science/Physics \\ 
-	\hline 
-	Hausdorff, second-countable topological space & Experimentally distinguishable space, whose points are the possible values and whose open sets represent the experimentally attainable levels of precision \\
-	Open set & Verifiable set. We can verify experimentally that an element is within the set  \\ 
-	Closed set & Refutable set. We can verify experimentally that an element is not in the set \\ 
-	Basis of a topology & A collection of verifiable sets such that any verifiable set is determined by the basis sets\\
-	Continuous \newline function &  A function between two sets of experimental distinguishable elements that preserves distinguishability \\
-	Homeomorphism &  A perfect equivalence between experimentally distinguishable spaces. \\
-\end{tabular} 
-\caption{Topology to physics dictionary}
-\end{table}
 
 \chapter{Second chapter}
 
