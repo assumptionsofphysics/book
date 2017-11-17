@@ -733,19 +733,19 @@ From a practical standpoint, it guarantees that these mathematical tools can alw
 
 From a conceptual standpoint, it gives a precise scientific meaning to the mathematical tools and everything built on top of them. Every single step in a calculation, every single argument in a proof can be given a clear, and possibly insightful, physical meaning. It grounds the abstract mathematical language in more concrete scientific objects. This in turn helps clarify the science described by common mathematical tools, unearthing possible hidden assumptions and simplifications about the physical systems being studied.
 
-\section{Experimental relationships and dependent domains}
+\section{Dependence and equivalence between domains}
 
 Having characterized experimental and theoretical domains together with their connection to topologies and $\sigma$-algebras, we want to study the case where an experimental domains is physically related to another. For example, consider the domains for the temperature and height of a mercury column or the domains for the temperature and density of water. How do we express, in this framework, the fact that these domains are connected?
 
-We have two ways to do it. The first is in terms of inference: any experimental observation on the height of a mercury column is an indirect experimental observation on its temperature; any experimental observation on the density of water is an indirect experimental observation on its temperature. The second is in terms of causes: the height of the mercury column is a function of its temperature; the density of water is a function of its temperature. The first main result of this section is to show that these perspectives are equivalent. The second main result is to show that we can in general create an experimental domain for these relationships, meaning that they too can be verified experimentally.
+We have two ways to define these type of relationships between domains. The first is in terms of inference: any experimental observation on the height of a mercury column is an indirect experimental observation on its temperature; any experimental observation on the density of water is an indirect experimental observation on its temperature. The second is in terms of causes: the height of the mercury column is a function of its temperature; the density of water is a function of its temperature. The main result of this section is to show that these perspectives are equivalent.
 
-Let's develop the initial example. Suppose $\edomain_X$ represents the domain for the temperature of a mercury column while $\edomain_Y$ represents the domain for its height. Since we know that an increase in temperature makes the metal expand, we can infer the temperature of the mercury column by looking at its height. For example, if we verify that \statement{the height of the mercury column is between 24 and 25 millimeters} we may be able to infer that \statement{the temperature is 24 and 25 degrees Celsius}. That is, given an observation $\obs_Y$ we have an observation $\obs_X$ that is going to be verified if and only if the first one is.
+Suppose $\edomain_X$ represents the domain for the temperature of a mercury column while $\edomain_Y$ represents the domain for its height. Since we know that an increase in temperature makes the metal expand, we can infer the temperature of the mercury column by looking at its height. For example, if we verify that \statement{the height of the mercury column is between 24 and 25 millimeters} we may be able to infer that \statement{the temperature is 24 and 25 degrees Celsius}. That is, given an observation $\obs_Y$ we have an observation $\obs_X$ that is going to be verified if and only if the first one is.
 
-Note that the inferences is between observations in general and not a single interval. For example, the observation \statement{the water density is between 999.8 and 999.9 kg/$m^3$} will correspond to \statement{the water temperature is between 0 and 0.52 Celsius}$\OR$\statement{the water temperature is between 7.6 and 9.12 degrees Celsius} as water is most dense at 4 degrees Celsius. While the observations themselves can be as complicated as needed, the relationship is always the same: for each observation in $\edomain_Y$ we can find an observation in $\edomain_X$ that is verified if and only the first is. That is: an experimental relationship is a map from $\edomain_Y$ to $\edomain_X$ that preserves equivalence.
+Note that the inferences is between observations in general and not a single interval. For example, the observation \statement{the water density is between 999.8 and 999.9 kg/$m^3$} will correspond to \statement{the water temperature is between 0 and 0.52 Celsius}$\OR$\statement{the water temperature is between 7.6 and 9.12 degrees Celsius} as water is most dense at 4 degrees Celsius. But the disjuction of an observation is still an observation so we are still inferring one observation from the other. For each observation in $\edomain_Y$ we can find an observation in $\edomain_X$ that is verified if and only the first is. That is: an inference relationship is a map from $\edomain_Y$ to $\edomain_X$ that preserves equivalence.
 
 \begin{mathSection}
 	\begin{defn}
-		An \textbf{experimental relationship} between two experimental domains establishes that verifying an observation in one means verifying an observation in the other. More formally, it is a map $\erel: \edomain_Y \to \edomain_X$ between two experimental domains $\edomain_X$ and $\edomain_Y$ such that $f(\obs_Y) \equiv \obs_Y$. In other words: it is an equivalence preserving map between experimental domains.
+		An \textbf{inference relationship} between two experimental domains establishes that verifying an observation in one means verifying an observation in the other. More formally, it is a map $\erel: \edomain_Y \to \edomain_X$ between two experimental domains $\edomain_X$ and $\edomain_Y$ such that $f(\obs_Y) \equiv \obs_Y$. In other words: it is an equivalence preserving map between experimental domains.
 	\end{defn}
 	\begin{defn}
 		An experimental domain $\edomain_Y$ is \textbf{dependent} on another experimental domain $\edomain_X$ if there exists and experimental relationship $\erel: \edomain_Y \to \edomain_X$.
@@ -755,15 +755,13 @@ Note that the inferences is between observations in general and not a single int
 	\end{defn}
 \end{mathSection}
 
-Note that experimental relationships are not things we can impose between any domain: it's something that the domains allow. The domains for the temperature of two different mercury columns are in general not related: there is nothing that guarantees that we'll find an observation in one that is equivalent to one in the other. The equivalence of experimental domains is something much stronger than what one typically have in mathematical construct. The topologies for the domains for the temperature of two different mercury columns are going to be the same because we'll have the same possibilities and the same way to experimentally verify them. But the domains are not: they describe two different mercury columns. No inference from one to the other exists in general.
-
-This, again, confirms why the mathematical structure we have setup is most appropriate for scientific investigation: it carries enough of the semantic to be able to tell what elements are truly scientifically equivalent.
+It should be evident that we cannot impose inference relationships between any domain: it's something that the domains allow. The domains for the temperature of two different mercury columns are in general not related: testing the value of one does not tell us anything about the other. The topologies of the two domains, however, are going to be the same because we'll have the same possible values and the same way to experimentally test them. This shows that the equivalence of experimental domains is much stronger one typically has for standard mathematical structure. And confirms why the one we have setup is most appropriate for scientific investigation: it carries enough of the semantic to be able to tell what elements are truly scientifically equivalent.
 
 Let's continue with our example. We can re-express the inference relationship in terms of causal relationship between the two domains. If $x$ is the value of temperature of the mercury column, that is a possibility for $\edomain_X$, and $y$ is the height of the mercury column, that is a possibility for $\edomain_Y$, then we can write $y=f(x)$ since the height if determined by the temperature.
 
-Note that the direction of the causal relationship is the opposite of the inference. $X$ causes $Y$ and we can infer $Y$ from $X$. Chain of events are in terms of possibilities and start with the cause and end with the effect. Chains of inferences are in terms of observations and start with the result and end with the origin.
+Note that the direction of the causal relationship is the opposite of the inference. $X$ causes $Y$ and we can infer $Y$ from $X$. Chains of events are in terms of possibilities and start with the cause and end with the effect. Chains of inferences are in terms of observations and start with the result and end with the origin.
 
-The reverse does not work in general. Even if we know the final possibility, we may not be able to reconstruct the initial possibility: if water density of water is exactly 999.9 kg/$m^3$, the temperature could be either 0.52 or 7.6 Celsius because density peaks at 4 Celsius. Similarly, even if we have initially observed an electron, we cannot infer the observation for its mass: we still need to measure it.
+The reverse does not work in general. Even if we know the final possibility, we may not be able to reconstruct the initial possibility: if water density of water is exactly 999.9 kg/$m^3$, the temperature could be either 0.52 or 7.6 Celsius because density peaks at 4 Celsius. Conversly, an observervation on the cause is not necessarily an observation of the effect: measuring we have produced an electron is not enough to measure its mass to arbitrary precision (that is a separate measurement).
 
 Another important consideration is that, in order to be consistent, the function $y=f(x)$ has to be continuous. An observation $\obs_Y$ on the height of the mercury column, in fact, will establish that the height is within the set of possibilities compatible to $\obs_Y$, say between 24 and 25 millimeters. That is $y$ is in $U_Y(\obs_Y)$, a verifiable set in the topology for $Y$. We can then infer that the temperature must be in the reverse image of the possible heights, say between 24 and 25 Celsius. That is $x$ is in $f^{-1}(U_Y(\obs_Y))$. But this means that, indirectly, we have experimentally verified that $x$ is in $f^{-1}(U_Y(\obs_Y))$. And if $\edomain_X$ is really the domain of the observations for the temperature, then it must contain one that matches that set of possible temperature, one for which the temperature is between 24 and 25 Celsius. In other words, $f^{-1}(U_Y(\obs_Y))$ must be a set in the topology of $X$.
 
@@ -776,8 +774,11 @@ Another way to look at this: if we say that we can only measure both the tempera
 	\begin{defn}
 		Let $\edomain_X$ and $\edomain_Y$ be two experimental domains. A \textbf{causal relationship} from $\edomain_X$ to $\edomain_Y$ is a continuous function $f : X \to Y$ between the possibilities of the domains such that $x \narrower f(x)$.
 	\end{defn}
-	\begin{thrm}
-		Let $\edomain_X$ and $\edomain_Y$ be two experimental domains. $\edomain_Y$ depends on $\edomain_X$ if and only if there is causal relationship from  $\edomain_X$ to $\edomain_Y$.
+	\begin{justification}
+		Formally, we simply define causal relationships to be continuous. The details of the physical justifications are in the theorem that follows, but the idea is that if the function is not continuous, one can experimentally test statements that are not part of the experimental domain of $\edomain_X$, which would be contradictory.
+	\end{justification}
+	\begin{thrm}[Experimental Relationship Theorem]
+		Inference and causal relationships are equivalent. More formally, let $\edomain_X$ and $\edomain_Y$ be two experimental domains. An inference relationship $\erel: \edomain_Y \to \edomain_X$ exists between them if and only if a causal relationship $f: \edomain_X \to \edomain_Y$ also exists.
 	\end{thrm}
 	\begin{proof}
 		First we show that a causal relationship exists between independent and dependent domain. Suppose $\edomain_Y$ depends on $\edomain_X$. Given that for each observation in $\edomain_Y$ there exists an equivalent observation in $\edomain_X$, $\edomain_Y$ is effectively a subset of $\edomain_X$. By the same token, the theoretical domain $\tdomain_Y$ is effectively a subset of $\tdomain_X$. This means that a possibility $x \in \tdomain_X$, if true, will determine all the truth values of  all statements in $\tdomain_Y$, including its possibilities. But only one possibility $y \in \tdomain_Y$ can be compatible with $x$ since the possibilities of a domain are all incompatible with each other. Therefore we can define $f : X \to Y$ the function that given a possibility $x \in X$ returns the only possibility $y=f(x) \broader x$ that is compatible with it.
@@ -788,7 +789,7 @@ Another way to look at this: if we say that we can only measure both the tempera
 	\end{proof}
 \end{mathSection}
 
-
+Given the equivalence, we will use \textbf{experimental relationship} to describe the link between the two domains. We still need to show that experimental relationships are themselves statements that can be tested experimentally. For example, \statement{there is a linear relationship between the temperature of a mercury column between 15 and 40 Celcius and it height between 15 and 40 millimeters} is also something tht we need to be able to verify experimentally. Intuitively, this something simple enough to do: one prepares different values of temperatures and measures different values of height. This means we'll have to extend our framework to define mathematically what we mean by preparing different values of temperature.
 
 \section{Combining domains}
 
@@ -1133,8 +1134,37 @@ Thus we have shown one can start with two Hausdorff, second-countable spaces, an
 \caption{Topology to physics dictionary}
 \end{table}
 
+\chapter{Second chapter}
+
+The first chapter was about testing truths about a single domain. The second chapter should about testing truths of multiple domain.
+
+It should address
+\begin{itemize}
+	\item Define some domain for general statements of other domains. For example \statement{the position of this electron is between 1 and 2 meters} and \statement{an electron can have position between 1 and 2 meters}.
+	\item Define the domain for relationships between two domains so we can show that experimental relationships can be themselves tested experimentally.
+	\item Define processes that produce a sequence of experimental domains. For example, I produce electrons within a certain range of momentum.
+	\item Define (statistical?) equivalence for processes. Define ``regular" or ``at equilibrium" processes as onces that are self-similar. Define probability
+	\item Define differentiable structure on a manifold. Define distributions, measures, etc...
+\end{itemize}
+
+(Moved from previous chpater) Now that we have characterized the nature of experimental relationships, we need to show that these relationship can be tested experimentally. That is, we must be able to create an experimental domain such that the possibilities are the continuous functions between two domains. We have to do this two show that our framework is complete.
+
+\begin{mathSection}
+	\begin{axiom}
+		Given two experimental tests $\expt_1$ and $\expt_2$ we can always construct another experimental test that is always successful if and only if the success of the first test $\expt_1$ implies the success of the second test is $\expt_2$. More formally, let $\expt_1, \expt_2 \in \exptSet$, there exists $\expt_3 \in \exptSet$ such that $\result(\expt_3, i) = \SUCCESS$ for all $i \in \mathbb{N}$ if and only if for all $j \in \mathbb{N}$ where $\result(\expt_1, j) = \SUCCESS$ we have $\result(\expt_2, j) = \SUCCESS$.
+	\end{axiom}
+	\begin{defn}
+		Let $\edomain_X$ and $\edomain_Y$ be two experimental domains such that the second is dependent on the first. Let $E_X \subseteq \edomain_X$,  $E_Y \subseteq \edomain_Y$ be the two countable essential sets of the respective domains. The relationiship domain $\edomain_{C(X,Y)}$ is the experimental domain generated by the experimental statements
+		$$\obs[v](\obs[e]_x, \obs[e]_y) = \statement{if $\obs[e]_x$ is true then $\obs[e]_y$ must also be true}=``\obs[e]_x \narrower \obs[e]_y"$$
+		where $\obs[e]_x \in E_X$ and $ \obs[e]_y \in E_Y$.
+	\end{defn}
+	\begin{proof}
+		We have to show that the statements $\obs[v](\obs[e]_x, \obs[e]_y)$ are indeed verifiable statements.
+	\end{proof}
+\end{mathSection}
 
 \chapter{Other}
+
 
 	
 \end{document}
