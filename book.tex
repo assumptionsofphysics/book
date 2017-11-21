@@ -522,6 +522,7 @@ There is one possibility that is often forgotten and sometimes needs special han
 
 \begin{mathSection}
 	\begin{prop}
+		%residual possibility?
 		The \textbf{alternative possibility} $\mathring{x}$ for an experimental domain $\edomain$ is, if it exists, the possibility that predicts the failure of all experimental tests. That is, let $E \subseteq \edomain$ be an essential set then  $\mathring{x} = \bigAND\limits_{\stmt[e] \in E} \NOT e$ if it is not a contradiction. An experimental domain is \textbf{complete} if it doesn't admit an alternative possibility.
 	\end{prop}
 
@@ -733,99 +734,113 @@ From a practical standpoint, it guarantees that these mathematical tools can alw
 
 From a conceptual standpoint, it gives a precise scientific meaning to the mathematical tools and everything built on top of them. Every single step in a calculation, every single argument in a proof can be given a clear, and possibly insightful, physical meaning. It grounds the abstract mathematical language in more concrete scientific objects. This in turn helps clarify the science described by common mathematical tools, unearthing possible hidden assumptions and simplifications about the physical systems being studied.
 
-\section{Discrete and continuous quantities}
+\section{Properties and quantities}
+
+In science we are interested in statements about the properties of a system, in particular those that are quantitative. For examples, \statement{the mass of the electron is $9.109 \times 10^{-31}$ kg} of \statement{the world population is 7.6 billion people}. Therefore we need to properly define what we mean by a quantity, by unit of measurement and how they relate to the mathematical structures defined before.
+
+First we'll introduce the idea of using properties to differentiate a possibility among the others. A property can be either a physical one (e.g. the beak color of a bird) or one we define by convention (e.g. the taxonomy name for an animal species). Quantities are properties that have a magnitude: we can compare two different values and determine which one is greater or smaller. For example, groups of individuals can be labeled by their number and distances can be labeled in meters. In particular, we will define discrete quantities, those that correspond to integers, and continuous quantities, those that correspond to real numbers.
+
+Suppose $\edomain_X$ is the domain for animal identification and $X$, its possibilities, are all animal species. Providing good names and definitions for species is a whole scientific subject by itself (i.e. taxonomy) with its own rules (i.e. the International Code of Zoological Nomenclature). The ICZN assignes each species a name composed of two latin words. For example, \statement{Passer domesticus} is the official name for the house sparrow while \statement{Passer italiae} is the one for the Italian sparrow. So, if $\mathcal{Q}$ is the set of all the names for all species, we have a function $q: X \to \mathcal{Q}$ from the species to its name. Since each species is given a unique name the function is invertible as well. This is the most discriminating type of property: one that covers the whole range of possibilities and fully identifies each of them. But this is a special case.
+
+The ICZN also assignes a genus (pl. genera) to each species, which corresponds to the first part of the species name. For example, both aforementioned sparrows are of the genus \statement{Passer} while all swans, black or white, are of the genus \statement{Cygnus}. Now suppose that $\mathcal{Q}$ is the set of all names for all genera and $q: X \to \mathcal{Q}$ is the function that gives us the genus name for each species. We can still use this as a label for our possibilities, but it does not fully identify them. We could also distinguish species by their morphological attributes. For example, if $\mathcal{Q}$ is the set of all colors, we can imagine a partial function $q: X \to \mathcal{Q}$ that gives us the beak color for each species, if they have one. While this is less general, it is still a valid label. In fact, it is with such labels that animal classification begun.
+
+Other examples of properties include: postal addresses for buildings, tax ID numbers for people, generation for fundamental particles, position for states of a point particles. In all these cases, the general pattern is that we give a label to a possibility from an established set.
 
 \begin{mathSection}
-	
 	\begin{defn}
-		A \textbf{label} for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
+		A \textbf{property} for an experimental domain $\edomain_X$ is any attribute we can use to distinguish between its possibilities. Formally, it is a tuple $(\mathcal{Q}, q)$ where $\mathcal{Q}$ is a topological space and $q : U \to \mathcal{Q}$ is continuous function where $U \in \mathsf{T}_X$ is a verifiable set of possibilities.
 	\end{defn}
+	\begin{justification}
+		For the property to be physically meaningful, the domain of $q$ must be in the topology as we must be able to tell experimentally when the property is defined or not. For example, we must be able to tell whether an animal has a beak if we want to define the beak color. Therefore there must be a verifiable statement that is true if the property is defined. This corresponds to the verifiable set $U$, the domain of the property.
+		
+		Similarly, $q$ must be continuous since we must be able to experimentally test the value for the property. For example, we can look at the beak color or we can look up the species name on a bird guide.
+	\end{justification}
+	\begin{defn}
+		An experimental domain is \textbf{fully identified} by a property if its value is enough to uniquely determine a possibility. Formally, let $(\mathcal{Q}, q)$ be a property for an experimental domain $\edomain_X$. Then it is fully identified if $q: X \to \mathcal{Q}$ is bijective. If $q$ is bijective but defined on a subset $U$ then the domain is \textbf{partially identified} by the property.
+	\end{defn}
+\end{mathSection}
+
+Some properties can be quantified. The number of elements of a group can be quantified by an integer, the distance between two objects can be quantified in meters, the force acting on a body can be quantified by a vector expressed in Newtons. The defining characteristic for a quantity is that a value can be greater, smaller or equal to another. That is: we have an ordering defined on our labels.
 	
+\begin{mathSection}
 	\begin{defn}
 		A \textbf{total order} on a set $\mathcal{Q}$ is a relationship $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ such that:
 		\begin{enumerate}
 			\item (antisymmetry) if $q_1 \leq q_2$ and $q_1 \leq q_2$ then $q_1 = q_2$
 			\item (transitivity) if $q_1 \leq q_2$ and $q_2 \leq q_3$ then $q_1 \leq q_3$
-			\item (antisymmetry) if $q_1 \leq q_2$ and $q_1 \leq q_2$ then $q_1 = q_2$
+			\item (total) at least $q_1 \leq q_2$ or $q_2 \leq q_1$
 		\end{enumerate}
-		
-		for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
 	\end{defn}
-	
-	\begin{defn}
-		A \textbf{label} for an experimental domain $\edomain_X$ is a symbol we can use to distinguish between its possibilities. Formally, it is a tuble $(\mathcal{L}, l)$ where $\mathcal{L}$ is a topological space and $l : X \to \mathcal{L}$ is continuous function  between possibilities and elements of $\mathcal{L}$.
-	\end{defn}
-	
+\begin{defn}
+	Let $\mathcal{Q}$ be a topological space and $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ a total order. The \textbf{order topology} is the topology generated by the collections of sets of the form:
+	$$(a, \infty) = \{x \in \mathcal{Q} \, | \, a < x\} \;,\; (-\infty, b) = \{x \in \mathcal{Q} \, | \, x < b\}.$$
+\end{defn}
+\begin{defn}
+	A \textbf{quantity} for an experimental domain $\edomain_X$ is an ordered property. Formally, it is a tuple $(\mathcal{Q}, \leq, q)$ where $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ is a total order, $\mathcal{Q}$ is a topological space with the order topology and $(\mathcal{Q}, q)$ is a property.
+\end{defn}
 \end{mathSection}
 
 \subsection{Decidable domains and discrete quantities}
 
-The first case is when all our tests always finish with a clear success or failure and, therefore, we can both verify and refute every statement of the domain. For example, if we are able to tell whether an animal is of a particular species (e.g. \statement{that animal is a cat}), we are typically able to tell its not of that particular species (e.g. \statement{that animal is not a cat}).
+If the possible values of a quantity are the integers (positive or negative) we say the quantity is discrete. For example, the number of chromosomes for a species, the number of abitants of a country or the proton number for an element are all discrete quantities.
+
+\begin{mathSection}
+\begin{defn}
+	A \textbf{discrete quantity} for an experimental domain $\edomain_X$ is a quantity $(\mathbb{Z}, \leq, q)$ where $\mathbb{Z}$ is the set of integers.
+\end{defn}
+\end{mathSection}
+
+There is a special relationship between discrete quantities and decidability, the ability to test experimentally both the truthfullness and falsehood of a statement. Consider the examples above of discrete quantities: in each case we can experimentally test whether we have a particular value or not. For example, we are always able to tell whether an element has three protons or not.\footnote{Recall that this is not the case with continuous quantities. Because of uncertainty of measurement, we are able to exclude that a given particle has exactly zero mass but it is not possible to conclusevely show that it has zero mass.} It turns out that whenever we have a domain formed of only decidable statements, we can always create a discrete quantity that enumerates all the possibilities.
 
 \begin{mathSection}
 	
 	\begin{defn}
-		An experimental domain $\edomain$ is \textbf{decidable} if all tests are guaranteed to terminate. Formally, for every $\obsdef{\stmt_1}{\expt_1} \in \edomain$ there exists a $\obsdef{\stmt_2}{\expt_2} \in \edomain$ such that $\stmt_1 = \NOT \stmt_2$
+		An experimental domain $\edomain_X$ is \textbf{decidable} if all statements in the domain are decidable. Formally, for every $\obsdef{\stmt_1}{\expt_1} \in \edomain$ there exists a $\obsdef{\stmt_2}{\expt_2} \in \edomain$ such that $\stmt_1 = \NOT \stmt_2$
 	\end{defn}
 	
 	\begin{justification}
 		The idea is that if all tests always terminate, then we can always construct a test for the negation by replacing $\SUCCESS$ with $\FAILURE$ and vice-versa.
 	\end{justification}
 	
-\end{mathSection}
-
-In this case we can prove the following.
-
-\begin{mathSection}
-	
 	\begin{prop}
-		The set of possibilities $X$ for a decidable domain $\edomain$ is a countable essential set. More precisely, there exists a countable essential set $E \subseteq \edomain$ such that the set statements associated with $E$ is $X$.
+		The set of possibilities $X$ for a decidable domain $\edomain_X$ is a countable essential set. More precisely, there exists a countable essential set $E \subseteq \edomain_X$ such that the set statements associated with $E$ is $X$.
 	\end{prop}
 	
 	\begin{proof}
-		The decidable domain $\edomain$ is already closed under negation, therefore for each theoretical statement $\stmt \in \tdomain$ there exists a corresponding experimental observation $\obsdef{\stmt}{\expt} \in \edomain$. We can then find a set of observations $E\subseteq \edomain$ such that their corresponding statements are the possibilities $X$.
+		The decidable domain $\edomain_X$ is already closed under negation, it coincides with the theoretical domain $\tdomain_X$. The set of possibilities $X$ is therefore a set of verifiables statements. Consider a countable essential set $E \subseteq \edomain_X$. Because the possibilities are verifiable statement, they must be generated from $E$. Moreover, since the possibilities are narrowest statement that are not contradictions, they can be generated from $E$ using finite conjunction. Since $E$ is countable and $X$ is generated by $E$ through finite conjunction, $X$ can be at most countable. This means that $X$ is a countable is essential set since it can generate all other verifiable statements through countable disjunction.
+	\end{proof}
 		
-		TODO
-	\end{proof}
-	
-\end{mathSection}
-
-This tells us that, in the case we can both verify and refute statements, we can only distinguish up to a countable set of cases. Recall that the cardinality of possibility is at most continuum, so in that case we cannot verify and refute all statements.
-
-We can also show that a domain has a finite number of physically distinguishable possibilities is decidable.
-
-\begin{mathSection}
-	
-	\begin{prop}
-		An experimentally distinguishable domain with a finite set of possibilities is decidable.
-	\end{prop}
-	
-	\begin{proof}
-		TODO
-	\end{proof}
-	
-\end{mathSection}
-
-In terms of topology, a decidable domain corresponds to a discrete topology and the possibilities can always be labeled by assigning a different integer ot each.
-
-\begin{mathSection}
-	
 	\begin{defn}
 		A topology $\mathsf{T}_X$ on a set $X$ is said \textbf{discrete} if it contains every subset of $X$.
 	\end{defn}
 	
-	\begin{defn}
-		An experimental domain corresponds to a \textbf{discrete quantity} if its possibilities can be labeled by an integer. Formally, the set of possibilities $X$, with its natural topology $\mathsf{T}_X$, is homeomorphic to a subset of the integers $\mathbb{Z}$ with the discrete topology.
-	\end{defn}
+\begin{prop}
+	The natural topology of the possibilities $X$ for a decidable domain $\edomain_X$ is the discrete topology.
+\end{prop}
+\begin{proof}
+	Let $U \subseteq X$ be a subset of possibilities. The statement $\stmt = \bigOR\limits_{x \in U} x$ is generated from $X$ through countable disjunction. Since $\edomain_X$ is decidable, $X$ is a countable essential set and $\stmt$ is verifiable. Therefore $U$ is a verifiable set and it is contained in the natural topology. The natural topology of $X$ is discrete by definition.
+\end{proof}
 	
-	\begin{prop}
-		An experimental domain is decidable if and only if it corresponds to a discrete quantity.
-	\end{prop}
+\begin{prop}
+	The order topology for the integers is the discrete topology.
+\end{prop}
+\begin{proof}
+	Each singleton $\{z\} \subseteq \mathbb{Z}$ is in the order topology since $\{z\} = (z-1, \infty) \cap (-\infty, z+1)$. Each arbitrary set of integers is the union of singletons and is therefore in the order topology as well. The order topology on the integers is the discrete topology.
+\end{proof}
+	
+	\begin{thrm}[Decidabily is discreteness]
+		An experimental domain is decidable if and only if it is fully identifiable by a discrete quantity.
+	\end{thrm}
 	
 	\begin{proof}
-		TODO
+		Let $\edomain_X$ be a decidable domain. Then the possibilities $X$ is countable and the natural topology is discrete. Since $X$ is countable, there exists a bijective map $q: X \to \mathbb{Z}$. The map is continuous since the topology on both $X$ and $\mathbb{Z}$ is discrete. The domain $\edomain_X$ is fully identify by $(\mathbb{Z}, \leq, q)$.
+		
+		Let $\edomain_X$ be fully identified by $(\mathbb{Z}, \leq, q)$. This means that $q : X \to \mathbb{Z}$ is bijective and continuous. This means that the complement of any verifiable set is also verifiable therefore the negation of a verifiable statement is also a verifiable statement. All statements are decidable therefore the domain is decidable.
 	\end{proof}	
+	
 \end{mathSection}
+
+Note that it is crucial here that discrete quantities are measurable: that we can actually experimentally ascertain their values. Consider the domain with the possibilities \statement{there is no extra-terrestrial life} and \statement{there is extra-terrestrial life}. We can label 0 the former and 1 the latter. But since we cannot verify the first statement, we cannot really measure 0. Mathematically, the the integers have the discrete topology while the possibilities do not, therefore the map between them cannot be continuous. The label we gave is not a quantity.
 
 \subsection{Arbitrary precision and continuous quantities}
 
