@@ -814,11 +814,13 @@ There is a special relationship between discrete quantities and decidability, th
 		A topology $\mathsf{T}_X$ on a set $X$ is said \textbf{discrete} if it contains every subset of $X$.
 	\end{defn}
 	
-\begin{prop}
-	The natural topology of the possibilities $X$ for a decidable domain $\edomain_X$ is the discrete topology.
-\end{prop}
+\begin{thrm}[Decidabily is discreteness]\label{thrm_decidablity_is_discreteness}
+	The natural topology of the possibilities $X$ for a domain $\edomain_X$ is the discrete topology if and only if the domain is decidable.
+\end{thrm}
 \begin{proof}
-	Let $U \subseteq X$ be a subset of possibilities. The statement $\stmt = \bigOR\limits_{x \in U} x$ is generated from $X$ through countable disjunction. Since $\edomain_X$ is decidable, $X$ is a countable essential set and $\stmt$ is verifiable. Therefore $U$ is a verifiable set and it is contained in the natural topology. The natural topology of $X$ is discrete by definition.
+	Suppose $\edomain_X$ is decidable. Let $U \subseteq X$ be a subset of possibilities. The statement $\stmt = \bigOR\limits_{x \in U} x$ is generated from $X$ through countable disjunction. Since $\edomain_X$ is decidable, $X$ is a countable essential set and $\stmt$ is verifiable. Therefore $U$ is a verifiable set and it is contained in the natural topology. The natural topology of $X$ is discrete by definition.
+	
+	Now suppose $\edomain_X$ is such that the natural topology for its possibilities $X$ is discrete. Let $\stmt = \bigOR\limits_{x \in U} x$ be a statement. Since the topology is discrete, $U$ is part of the topology and $\stmt$ is verifiable. Consider its negation $\NOT\stmt = \bigOR\limits_{x \in U^C} x$. Since the topology is discrete, $U^C$ is also part of the topology and $\NOT\stmt$ is verifiable. This means $\stmt$ is verifiable. Since every statement in $\edomain_X$, the domain is verifiable.
 \end{proof}
 	
 \begin{prop}
@@ -828,49 +830,82 @@ There is a special relationship between discrete quantities and decidability, th
 	Each singleton $\{z\} \subseteq \mathbb{Z}$ is in the order topology since $\{z\} = (z-1, \infty) \cap (-\infty, z+1)$. Each arbitrary set of integers is the union of singletons and is therefore in the order topology as well. The order topology on the integers is the discrete topology.
 \end{proof}
 	
-	\begin{thrm}[Decidabily is discreteness]
+	\begin{prop}
 		An experimental domain is decidable if and only if it is fully identifiable by a discrete quantity.
-	\end{thrm}
+	\end{prop}
 	
 	\begin{proof}
-		Let $\edomain_X$ be a decidable domain. Then the possibilities $X$ is countable and the natural topology is discrete. Since $X$ is countable, there exists a bijective map $q: X \to \mathbb{Z}$. The map is continuous since the topology on both $X$ and $\mathbb{Z}$ is discrete. The domain $\edomain_X$ is fully identify by $(\mathbb{Z}, \leq, q)$.
+		Let $\edomain_X$ be a decidable domain. Then the set of possibilities $X$ is countable and the natural topology is discrete. Since $X$ is countable, there exists a bijective map $q: X \to \mathbb{Z}$. The map is continuous since the topology on both $X$ and $\mathbb{Z}$ is discrete. The domain $\edomain_X$ is fully identify by $(\mathbb{Z}, \leq, q)$.
 		
-		Let $\edomain_X$ be fully identified by $(\mathbb{Z}, \leq, q)$. This means that $q : X \to \mathbb{Z}$ is bijective and continuous. This means that the complement of any verifiable set is also verifiable therefore the negation of a verifiable statement is also a verifiable statement. All statements are decidable therefore the domain is decidable.
+		Let $\edomain_X$ be fully identified by $(\mathbb{Z}, \leq, q)$. This means that $q : X \to \mathbb{Z}$ is bijective and continuous. The natural topology for $X$ is therefore discrete and the domain is decidable by \ref{thrm_decidablity_is_discreteness}.
 	\end{proof}	
 	
 \end{mathSection}
 
-Note that it is crucial here that discrete quantities are measurable: that we can actually experimentally ascertain their values. Consider the domain with the possibilities \statement{there is no extra-terrestrial life} and \statement{there is extra-terrestrial life}. We can label 0 the former and 1 the latter. But since we cannot verify the first statement, we cannot really measure 0. Mathematically, the the integers have the discrete topology while the possibilities do not, therefore the map between them cannot be continuous. The label we gave is not a quantity.
+Note that for the link between decidability and discrete quantities to apply, it is crucial the quantity is measurable: that we can actually experimentally ascertain their values. Consider the domain with the possibilities \statement{there is no extra-terrestrial life} and \statement{there is extra-terrestrial life}. We can label 0 the former and 1 the latter. But since we cannot verify the first statement, we cannot really measure 0. Mathematically, the the integers have the discrete topology while the possibilities do not as the domain is not decidable. Therefore the map between them cannot be continuous and the label we gave is not a quantity according to our definition.
 
 \subsection{Arbitrary precision and continuous quantities}
+
+If the possible values of a quantity are the real numbers we say the quantity is continuous. For example, the average wingspan for a species, the population density of a country or the mass of a proton are all continuous quantities.
+
+\begin{mathSection}
+	\begin{defn}
+		A \textbf{continuous quantity} for an experimental domain $\edomain_X$ is a quantity $(\mathbb{R}, \leq, q)$ where $\mathbb{R}$ is the set of the real numbers.
+	\end{defn}
+\end{mathSection}
+
+There is a special relationship between continuous quantities and the ability to measure the value with arbitrary precision. Consider the examples above of continuous quantities: in each can we can never experimentally ascertain the precise value, but we can (in principle) measure it to the desired level of precision.\footnote{Open problem: we define arbitrary precision using rational numbers but it may not be necessary. It may be sufficient to have a set of references, on which is defined an order. The verifiable statement would be of the form \statement{the value is between reference A and reference B}. We would require that there is always one reference between two references.}
 
 \begin{mathSection}
 	
 	\begin{defn}
-		An experimental domain $\edomain$ allows \textbf{arbitrary precision} if TODO.
+		An experimental domain $\edomain_X$ is said to allow \textbf{arbitrary precision} if it describes a quantity measurable with with arbitrary precision. Formally, there exists an essential set $E \subseteq \edomain_X$ such that:
+		\begin{itemize}
+			\item we can define a function $\operatorname{bounds} : E \to \mathbb{Q} \times \mathbb{Q}$ such that $\operatorname{bounds}(\stmt) = (a, b)$ where $a < b$ for all $\stmt \in E$
+			\item if $\stmt = \stmt_1 \AND \stmt_2$, $\operatorname{bounds}(\stmt_1) = (a_1, b_1)$ and $\operatorname{bounds}(\stmt_2) = (a_2, b_2)$, then $\stmt \equiv \contradiction$ if $b_1 \leq a_2$ or $b_2 \leq a_1$ otherwise $\stmt \nequiv \contradiction$ and $\operatorname{bounds}(\stmt) = (\max(a_1, a_2), \min(b_1, b_2))$
+		\end{itemize}
 	\end{defn}
 	
 	\begin{defn}
-		The standard topology on the real numbers $\mathbb{R}$ is the one generated by the collections of sets $\mathcal{B} = \{ (a,b) \subset \mathbb{R} \; | \; a,b \in \mathbb{Q} \}$ of all open sets of rational numbers $\mathbb{Q}$.
+		The call \textbf{standard topology} for the real numbers $\mathbb{R}$ the one generated by the collections of sets $\mathcal{B} = \{ (a,b) \subset \mathbb{R} \; | \; a,b \in \mathbb{Q} \}$ of all open sets of rational numbers $\mathbb{Q}$.
 	\end{defn}
 	
-	\begin{defn}
-		An experimental domain corresponds to a \textbf{continuous quantity} if its possibilities can be labeled by a real number. Formally, the set of possibilities $X$, with its natural topology $\mathsf{T}_X$, is locally homeomorphic to a subset of the real $\mathbb{R}$ with its standard topology.
-	\end{defn}
+	\begin{thrm}[Arbitrary precision is continuity]
+		The natural topology of the possibilities $X$ for a domain $\edomain_X$ is homeomorphic to the reals with the standard topology if and only the domain allows arbitrary precision.
+	\end{thrm}
+	\begin{proof}
+		Let $\edomain_X$ allow arbitrary precision and let $E \subseteq \edomain_X$ be the essential set on which the rational bounds are defined. A possibility $x$ is a minterm of such statements. Let $E^x =\{\obs[e]^x_i\}_{i=1}^{\infty} \subset E$ be the statements that are compatible with the possibility $x$. The set is countable since $E$ is countable. Note that the remaining elements of $E$ must be incompatible with at least of element of $E^x$ therefore $\bigAND\limits_{i=1}^\infty\{\obs[e]^x_i\} = x$.
+		
+		Consider the sequence $\{\stmt_j\}_{j=1}^{\infty}$ where $\stmt_j = \bigAND\limits_{i=1}^j\{\obs[e]^x_i\}$ is the conjunction of the first $j$ elements. For each element we have $\operatorname{bound}(\stmt_j) = (a_j, b_j)$. The sequence formed by $\{a_j\}_{j=1}^{\infty}$ is monotonically increasing as the lower bound cannot decrease during conjunction. The sequence formed by $\{b_j\}_{j=1}^{\infty}$ is monotonically decreasing as the upper bound cannot increase during conjunction. For each $j$ we have $a_j < b_j$, therefore both sequences are bound which means they both converge. Consider the sequence $c_j = b_j - a_j$. It must converge since it's the difference between two converging sequences. It cannot converge to a negative number since $a_j < b_j$ for all $j$. It cannot converge to a positive number: suppose it would, then we would be able to construct a statement strictly narrower than the limit of the sequence $\{\stmt_j\}_{j=1}^{\infty}$, but that is not possible since the limit is the possibility $x$ and only the contradiction is strictly narrower than a possibility. Therefore $c_j$ converges to zero and $a_j$ and $b_j$ are two equivalent Cauchy sequences of rational numbers. We can repeat the constraction by reordering the elements of $E^x$. We would obtain different Cauchy sequences that are also equivalent to the first two. Each possibility $x$, then, is an equivalence class for the Cauchy sequences of the rational numbers. But this is a standard way to construct the real numbers.
+		
+		The verifiable set for each element of $E$ is the set of real numbers contained between the bounds: it is the open set $(a,b)$. This means that the natural topology is the one generated by the collections of sets $\mathcal{B} = \{ (a,b) \subset \mathbb{R} \; | \; a,b \in \mathbb{Q} \}$ of all open sets of rational numbers $\mathbb{Q}$. The natural topology is the standard topology for the real numbers.
+		
+		Conversely, suppose let $\edomain_X$ be an experimental domain such that the possibilities are the real number and the natural topology is the standard topology. Since the collection of all open sets of rational numbers forms a subbase, the statements associated with those verifiable sets is an elemental set. To each statement in the set we can associate the bounds of the open set satisfying the definition of an arbitrary precision domain.
+	\end{proof}
 	
 	\begin{prop}
-		An experimental domain is decidable if and only if it corresponds to a discrete quantity.
+		The order topology for the real numbers is the standard topology.
 	\end{prop}
-	
 	\begin{proof}
-		TODO
+		To show that they are equivalent, we show that the subbase of generates the subbase of the other. Let $a,b \in \mathbb{Q}$ be two rationals. The sets $(-\infty, b)$ and $(a, \infty)$ are in the subbase of the order topology. Their intersection is the set $(a, b)$ of the standard topology. The subbase of the standard topology can be generated by the order topology.
+		
+		Conversely, let $a \in \mathbb{R}$ be a real number. Let $\{U_i\}_{i \in I}$ the collection of all sets $U_i = (a_i, b_i)$ such that $a_i, b_i \in \mathbb{Q}$ and $a < a_i$. These sets are in the subbase of the standard topology. We have $\bigcup\limits_{i \in I} U_i = (a, \infty)$. In the same way, let $b \in \mathbb{R}$ be a real number. Let $\{V_j\}_{j \in J}$ the collection of all sets $V_j = (a_j, b_j)$ such that $a_j, b_j \in \mathbb{Q}$ and $b > b_j$. These sets are in the subbase of the standard topology. We have $\bigcup\limits_{j \in J} V_j = (-\infty, b)$. The subbase of the order topology can be generated by the standard topology.
+	\end{proof}
+	
+	\begin{prop}
+		An experimental domain allows arbitrary precision if and only if it is fully identifiable by a continuous quantity.
+	\end{prop}
+
+	\begin{proof}
+		If an experimental domain allows arbitrary precision then the set of possibilities with the natural topolofy is homeomorphic to the real numbers with the standard topology, which is also the order topology. Therefore we can construct a continuous quantity that fully identifies the possibilities. Conversely, if the domain is fully identifiable by a continuous quantity, then the set of real numbers with the order topology, which is also the standard topology, is homeomophic to the set of possibilities with the natural topology. Therefore the domain allows arbitrary precision.
 	\end{proof}	
 \end{mathSection}
 
+The construction we present here clarifies a couple of imporant aspects about continuous quantities. First of all, finite precision measurements are the starting point. They are what actually exists in practice. Second, the idea that we can always refine the precision of our measurements is clearly an idealization: at some point we are bound to encounter the physical limitation of either our measurement process or of our definitions. For example, measuring the inside of a gas container with a ruler can only get us so far and at some point, since a gas is made of molecules and a lot of empty space in between, defining very precisely when the gas ends and the container begins becomes problematic (and probably pointless). So, while the coarse precision measurement are physically meaningful, the finer measurements may not. Third, real numbers (i.e. the possibilities of an arbitrary precision domain) are abstractions based on the idealization of an arbitrary precision measurement. They are not verifiable statement: we cannot measure a continuous quantity with infinite precision. They exist only in so far that our idealization holds. They are indeed useful ways to model the domain but we should be very cautious to assign them a real tangible status. In other words, $\pi$ is the approximation while $3.14 \pm 0.005$ is something that actually exists.
 
-Define arbitrary precision as all statements are intervals of rationals.
+This is may be countrary to the way many people see the relationship between math and the physical world. Some may feel that the geometric description, with its infinite precision, is the perfect one while the physical one, with the inherent measurement uncertainties, is the less precisise one. Actually, it is quite the opposite: the measurement uncetrainties qualify the extent of our description and knowledge while the geometrical description provides a simplified and idealized account.
 
-Space is real number with standard topology.
+Why, then, are continuous quantities so successful in science? We will look at this question in detail when we introduce the assumption of deterministic and reversible evolution. Without going too much into details, we can anticipate that the role of time is crucial. Time is the quantity that we want to assume continuous (i.e. that there is always an instant between other two). And because we want to describe deterministic and reversible systems, we will have an experimental relationship between time and all other quantities during the evolution. Which means that the way we assume time can be measured (i.e. its topology) will need to be consistent with the way those other quantities can be measured as well.
 
 \section{Dependence and equivalence between domains}
 
