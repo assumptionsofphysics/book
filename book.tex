@@ -476,7 +476,7 @@ Since some are functions of others, we do not need to actually run all the tests
 
 \begin{mathSection}
 	\begin{defn}
-		Given a set $\edomain$ of verifiable statements, $E \subseteq \edomain$ is a \textbf{basis} if verifying its elements is equivalent to verifying the whole set. Formally, all elements of $\edomain$ can be generated from $E$ using finite conjunction and countable disjunction.
+		Given a set $\edomain$ of verifiable statements, $\basis \subseteq \edomain$ is a \textbf{basis} if verifying its elements is equivalent to verifying the whole set. Formally, all elements of $\edomain$ can be generated from $\basis$ using finite conjunction and countable disjunction.
 	\end{defn}
 \end{mathSection}
 
@@ -499,62 +499,83 @@ The basis not only serves as a way to constrain the size of the experimental dom
 
 \section{Theoretical domains and possibilities}
 
+The basis for an experimental domain allows us to create a procedure that will eventually test any verifiable statement. But to fully characterize a domain we want to find those statements, like \statement{that animal is a cat} or \statement{the mass of the photon is exactly 0 eV}, that, if true, determine the truth value of all other verifiable statement in the domain. The main result of this section is that these statements, which we call possibilities, are not necessarily verifiable themselves. We will therefore need to introduce theoretical domains: all the statements that give predictions for an experimental domain. We will also be able to conclude that the set of possibilities for an arbitrary experimental domain has at most the cardinality of the continuum, thus putting a hard constrain on what type of mathematical objects are useful in science.
 
-While the negation of an experimental observation is not always an observation, the negation of its statement is still a statement. It may not be one we can readily verify, but it still is one that can be used to characterize the outcome of some experimental test. For example, if \statement{black swans do not exist} then a procedure that looks for one will never terminate. So, while in practice the negation my not be verifiable, in theory it does yield consequences. To each set of experimental observations, then, we associate a set of theoretical statements by allowing negation: these are the statements that can be used to construct predictions.
+Suppose $\edomain_X$ is the domain of animal species identification. It will contain verifiable statements such as \statement{that animal has feathers}, \statement{that animal has claws}, \statement{that animal has paws}. Some statements are broader and some are narrower. Some statements, like \statement{that animal is a swan} or \statement{that animal is a duck}, are special because if we verify those then we are able to know which other statements are true or false. Once we verify those we are essentially done. These are what we call the possibilities of the domain and enumerating them means characterizing the experimental domain.
+
+Unfortunately, not all possibilities are verifiable statements. Consider the statements $s_1=$\statement{there is extra-terrestrial life} and $s_2$=\statement{there is no extra-terrestrial life}. We can create an experimental test for the first (i.e. find extra-terrestrial life somewhere) but not for the second (it would require us to check every place in the universe which is something we cannot do). So, for this question, the experimental domain $\edomain_X = \{s_1, \tautology, \contradiction\}$ is composed by the first statement, the tautology and the contradiction. But $s_2$ is conceptually still one of the possibilities: if true we have a complete answer for the domain.
+
+What happens is that while the negation of a verifiable statement is not always a verifiable statement, it is still a statement that can be used to characterize the outcome of some experimental test. So, while in practice the negation may not be verifiable, in theory it does yield consequences. To be able to find all possibilities, then, we have to create the set of statements that can be used to make predictions. We call this set the theoretical domain and theoretical statements its elements.
 
 \begin{mathSection}
 \begin{defn}
-	The \textbf{theoretical domain} $\tdomain$ of an experimental domain $\edomain$ is the set of statement that could be tested if all negations were verifiable. More formally, let $\mathsf{S}$ be the set of all statements associated with an experimental observation in $\edomain$. $\tdomain$ is the set of all statements generated from $\mathsf{S}$ using negation, finite conjunction and countable disjunction.
+	The \textbf{theoretical domain} $\tdomain$ of an experimental domain $\edomain$ is the set of statements that we can use to state predictions, which is constructed from $\edomain$ by allowing negation. We call \textbf{theoretical statement} a statement that is part of a theoretical domain. More formally, $\tdomain$ is the set of all statements generated from $\edomain$ using negation, finite conjunction and countable disjunction.
 \end{defn}
 \end{mathSection}
 
-While the theoretical statement contains more statements, it does not contain more information. That is, if we knew what experimental observations are verified and which aren't, we would automatically know which theoretical statements would be true or not. So it is not adding extra cases. It is essentially completing the list of answers by adding a ``no" if only ``yes" can be experimentally verified and vice-versa. For example, if our experimental domain contained the experimental observation \emph{``the mass of the photon is not zero"}, its theoretical domain would contain the theoretical statement \emph{``the mass of the photon is exactly zero"} which cannot be experimentally verified.
+Because of its construction, the theoretical domain will also include all the limits of all the sequences of verifiable statements. Consider the experimental domain for the mass of the photon. It will contain verifiable statements such as
+\begin{description}
+	\item $\stmt_1$ =\statement{the mass of the photon is smaller than $10^{-1}$ eV}
+	\item $\stmt_2$ =\statement{the mass of the photon is smaller than $10^{-2}$ eV}
+	\item $\stmt_3$ =\statement{the mass of the photon is smaller than $10^{-3}$ eV}
+	\item ...
+\end{description}
+It will not contain the statement $\stmt=$\statement{the mass of the photon is exactly 0 eV}, though, as we cannot measure a continuous quantity with infinite precision.
 
-\begin{mathSection}
-\begin{prop}
-	The truth value of the statements of an essential set $E$ for an experimental domain $\edomain$ are enough to determine the truth value for all statements in the associated theoretical domain $\tdomain$. More formally, all statements in the theoretical domain $\tdomain$ can be generated by negation, countable conjunction and countable disjunction from the statements associated to $E$.
-\end{prop}
+Note $\stmt$ can be seen as the limit of the sequence of ever increasing precision, but can also be seen as the conjunction for all those statements $\stmt=\bigAND\limits_{i=1}^{\infty} \stmt_i$. In fact, the mass of the photon is exactly 0 if and only if all the finite precision measurement will contain 0 in the range. It makes sense, then, that is not part of the experimental domain because only finite conjunction of verifiable statements are verifiable. But we expect $\stmt$ to be a possibility for the mass of the photon. Why should it be in the theoretical domain?
 
-\begin{proof}
-	By definition of essential set, any observation within the experimental domain $\edomain$ can be generated from $E$ using only finite conjunction and countable disjunction. This relationships will hold between the respective statements. Since the statements associated to $E$ generate, through finite conjunction and countable disjunction, all statements in $\edomain$ which in turn generate all statements in $\tdomain$, then $E$, through negation, countable conjunction and countable disjunction, generates all of $\tdomain$.
-\end{proof}
-\end{mathSection}
-
-A direct consequence of our definitions is that the countable conjunction of theoretical statements is a theoretical statement.
+Because of the De Morgan properties in \ref{boolean_properties}, we can express conjunctions in terms of negation and disjuction. So we have $\stmt=\bigAND\limits_{i=1}^{\infty} \stmt_i=\NOT \bigOR\limits_{i=1}^{\infty} \NOT\stmt_i$. Therefore by allowing negation we are also allowing countable conjunction and therefore we are including all the limits of sequences of verifiable statements.
 
 \begin{mathSection}
 	\begin{prop}
 		All theoretical domains are closed under countable conjunction.
 	\end{prop}
-
-\begin{proof}
-	Any countable conjunction $\mathsf{s} = \bigAND\limits_{i=1}^{\infty} \mathsf{s}_i$ is equivalent to the negation of disjunction of the negation: $\mathsf{s} = \NOT\bigOR\limits_{i=1}^{\infty} \NOT\mathsf{s}_i$. As the theoretical domain is closed under negation and countable disjunction, so it is closed under countable conjunction.  
-\end{proof}
-
+	
+	\begin{proof}
+		Any countable conjunction $\mathsf{s} = \bigAND\limits_{i=1}^{\infty} \mathsf{s}_i$ is equivalent to the negation of disjunction of the negation: $\mathsf{s} = \NOT\bigOR\limits_{i=1}^{\infty} \NOT\mathsf{s}_i$. As the theoretical domain is closed under negation and countable disjunction, so it is closed under countable conjunction.  
+	\end{proof}
 \end{mathSection}
 
-Both the experimental and the theoretical domains contain answers at different level of precision. For example, \emph{``that animal is a feline"} tells us more than \emph{``that animal is a mammal"}. What we want to find are those theoretical statements that are narrowest: those that, if known to be true, would tell us whether each theoretical statement is true or false. For example, if we knew \emph{``that animal is a cat"} we would know that \emph{``that animal is a mammal"} is true and that \emph{``that animal is a dog"} is false.
+Note that not all theoretical statements can be approximated with a sequence of verifiable statements. Consider $\stmt=$\statement{the mass of the photon is rational as expressed in eV}. Any finite precision version of this statement will always cover all possible values since any finite range will include infinitely many rational (and irrational) numbers. Therefore we cannot construct a sequence of finite precision verifiable statements that, in the limit, will correspond to $\stmt$. This means we have to be cautious in giving physical significance to theoretical statements as they not even be approximately verifiable experimentally.\footnote{OPEN: Is it worth it to define approximately verifiable statements? What type of space we get if we require all possibilities to be approximately verifiable? Just Hausdorff or more?}
+
+Also note that we are closed under countable operations and not arbitrary. Therefore there could be statements that can be constructed from verifiable statements that are not even theoretical statements. While this is mathematically possible, these statements are very convoluted to construct and would correspond to nothing physically meaningful.\footnote{As we'll see later, this is equivalent to constructing sets of real numbers that are not Borel sets.}
+
+To sum up, verifiable statements are the only ones that, perhaps under some simplifying assumption, we can think of actual scientific objects. For example, the idea that we can measure mass with finite precision. From these we construct theoretical statements that represent idealizations. For example, the idea that a particle has a perfectly defined infinite precision mass or that it is a rational number expressed in a particular unit. And then there are statements that are not even physically meaningful.\footnote{It will be a recurrent theme of this work to make a precise distinction between mathematical objects that represent physical entities (e.g. verifiable statements), those that represent idealizations of physical entities (e.g. theoretical statements) and those that do not have scientific standing (e.g. statements that are neither verifiable or theoretical).}
+
+While the theoretical domain contains more statements, it does not contain more information. That is, if we knew what verifiable statements are true and which aren't, we would automatically know which theoretical statements would be true or not. So it is not adding extra cases. It is essentially completing the list of answers by adding a ``no" if only ``yes" can be experimentally verified and vice-versa. To see that this is true, we can show that a basis for an experimental domain $\edomain$ is also a basis for its theoretical domain $\tdomain$. That is, all verifiable and theoretical statements can be expressed as functions of the same basis. The difference is that a theoretical statement can be a function of the negation of the element of a basis.
+
+\begin{mathSection}
+\begin{prop}
+	The truth value of the statements of a basis $\basis$ for an experimental domain $\edomain$ are enough to determine the truth value for all statements in the associated theoretical domain $\tdomain$. More formally, all statements in the theoretical domain $\tdomain$ can be generated by negation, countable conjunction and countable disjunction from a basis $\basis$ of $\edomain$.
+\end{prop}
+
+\begin{proof}
+	By definition of basis, any verifiable statement within the experimental domain $\edomain$ can be generated from $\basis$ using only finite conjunction and countable disjunction. Since $\basis$ generates $\edomain$ which in turn generates $\tdomain$ by definition, then $\basis$, through negation, countable conjunction and countable disjunction, generates all of $\tdomain$.
+\end{proof}
+\end{mathSection}
+
+Having defined what a theoretical domain is, we can finally define what the possibilities of a domain are: those statements that if known to be true determine the truth value of all other statements.
 
 \begin{mathSection}
 
 \begin{defn}
-	A \textbf{possibility} for $\edomain$ is a statement $x \in \tdomain$ that, when true, determines the truth value for all statements in the theoretical domain. That is, $x \nequiv \contradiction$ and for each $\mathsf{s} \in \tdomain$, either $x \subseteq \mathsf{s}$ or $x \ncomp \mathsf{s}$. The \textbf{full possibilities}, or simply the \textbf{possibilities}, $X$ for $\edomain$ is the collection of all possibilities.
+	A \textbf{possibility} for an experimental domain $\edomain$ is a statement $x \in \tdomain$ that, when true, determines the truth value for all statements in the theoretical domain. That is, $x \nequiv \contradiction$ and for each $\mathsf{s} \in \tdomain$, either $x \subseteq \mathsf{s}$ or $x \ncomp \mathsf{s}$. The \textbf{full possibilities}, or simply the \textbf{possibilities}, $X$ for $\edomain$ is the collection of all possibilities.
 \end{defn}
 
 \end{mathSection}
 
-A possibility represents a complete prediction for a scientific question. Only one of them can be true and one of them must be true since the theoretical domain contains all negations. In fact, we can think it as the conjunction of all observations or their negations. That is, the possibility \statement{cat} is the conjunction \statement{that animal is a cat}$\AND \NOT$\statement{that animal is a dog}$\AND$... of all the elements of an essential set of observations.
+A possibility represents a complete prediction for a scientific question. Only one of them can be true and one of them must be true since the theoretical domain contains all negations. But how can we construct them? Suppose $\edomain$ is the experimental domain for animal species identification. Suppose $\basis \subset \edomain$ is a basis of statements, like \statement{that animal has fur}, \statement{that animal has feathers}, \statement{that animal has a bill} and so on, that allow us to fully identify the animal species. Consider a minterm, a conjunction where each statement appears once either negated or not. For example, \statement{that animal has fur}$\AND\NOT$\statement{that animal has feathers}$\AND$\statement{that animal has a bill}$\AND$... . If that statement is not a contradiction, then when true will determine the truth value of all the basis, and therefore of all verifiable statements. Then a possibility for the domain is simply a minterm of a basis.
 
 \begin{mathSection}
 	
 \begin{prop}\label{prop_poss_is_minterm}
-	Let $\edomain$ be an experimental domain. A possibility for $\edomain$ is a minterm of an essential set that is not a contradiction.
+	Let $\edomain$ be an experimental domain. A possibility for $\edomain$ is a minterm of a basis that is not a contradiction.
 \end{prop}
 
 \begin{proof}
-	Let $E \subseteq \edomain$ be an essential set. Let $x$ be a minterm of $E$. Any theoretical statement $\stmt \in \tdomain$ can be expressed as the disjunction of minterms of $E$. $x$ is either within the minterms needed to express $\stmt$, or not. If it is, $x \AND \stmt \equiv x$ and therefore $x \narrower \stmt$. If it's not, $x \AND \NOT \stmt \equiv x$ and therefore $x \ncomp \obs[e]_i$. Therefore a minterm is either narrower or incompatible with all theoretical statement and, if it is not a contradiction, it is a possibility by definition.
+	Let $\basis \subseteq \edomain$ be a basis for $\edomain$. Let $x$ be a minterm of $\basis$. Any theoretical statement $\stmt \in \tdomain$ can be expressed as the disjunction of minterms of $\basis$ by \ref{prop_disjunctive_normal_form}. $x$ is either within the minterms needed to express $\stmt$, or not. If it is, $x \AND \stmt \equiv x$ and therefore $x \narrower \stmt$. If it's not, $x \AND \NOT \stmt \equiv x$ and therefore $x \ncomp \obs[e]_i$. Therefore a minterm is either narrower or incompatible with all theoretical statement and, if it is not a contradiction, it is a possibility by definition.
 	
-	Conversely, suppose $x \in \tdomain$ is a possibility. As it is a theoretical statement, it can be expressed as a disjunction of minterms of an essential set $E$. Suppose it is the disjunction of more then one minterm. Then each minterm would be narrower than $x$, which cannot be. $x$ must be expressed by a single minterm. Therefore any possibility is a minterm.
+	Conversely, suppose $x \in \tdomain$ is a possibility. As it is a theoretical statement, it can be expressed as a disjunction of minterms of a basis $\basis$. Suppose it is the disjunction of more then one minterm. Then each minterm would be narrower than $x$, which cannot be. $x$ must be expressed by a single minterm. Therefore any possibility is a minterm.
 \end{proof}
 
 \begin{prop}[No other possibilities]
@@ -562,38 +583,35 @@ A possibility represents a complete prediction for a scientific question. Only o
 \end{prop}
 
 \begin{proof}
-	Let $x \in \mathcal{S}$ be a statement that determines and only determines all truth values of all statements in a theoretical domain $\tdomain$. This is equivalent to determine the truth values and only the truth values of all elements of an essential subset $E \subseteq \edomain$. As we can find a countable basis, the statement $x$ is equivalent to the countable conjunction of statements or negation of statements associated to $E$. Therefore $x \in \tdomain$ as it is generated by the statements of the essential subset by negation and countable conjunction. But a statement in $\tdomain$ that determines all truth values of the statements in $\tdomain$ is a possibility by definition. Therefore $x$ is a possibility.
+	Let $x \in \mathcal{S}$ be a statement that determines and only determines all truth values of all statements in a theoretical domain $\tdomain$. This is equivalent to determine the truth values and only the truth values of all elements of a basis $\basis \subseteq \edomain$. As we can find a countable basis, the statement $x$ is equivalent to the countable conjunction of statements or negation of $\basis$. Therefore $x \in \tdomain$ as it is generated by the statements of the basis by negation and countable conjunction. But a statement in $\tdomain$ that determines all truth values of the statements in $\tdomain$ is a possibility by definition. Therefore $x$ is a possibility.
 \end{proof}
 \end{mathSection}
 
-There is one possibility that is often forgotten and sometimes needs special handling. Suppose one is trying to identify an illness by going through a series of known markers. It may happen that no match for the disease is found: we are dealing with a new kind of illness. In the same way, we may fail to identify a plant or animal from the standard taxonomy: we may have found a new species. In other words, it may be possible that none of our tests succeed and none of the observations of a domain are verified.
+There is one possibility that is often forgotten and sometimes needs special handling. Suppose one is trying to identify an illness by going through a series of known markers. It may happen that no match for the disease is found because we are dealing with a new kind of illness. In the same way, we may fail to identify a plant or animal from the standard taxonomy as we may have found a new species. In other words, it may be possible that none of our tests succeed and none of the observations of a domain are verified. We call this possibility the residual because it's what remains after we went through all the cases we already know.
+
+Note, though, that the residual possibility does not exist for all domains. Suppose we have a basket of fruit and we want to count how many whole apples are there. There can only be a finite number of them, and we can successfully identify all finite numbers: there is no something else to be found in this case.
 
 \begin{mathSection}
 	\begin{prop}
-		%residual possibility?
-		The \textbf{alternative possibility} $\mathring{x}$ for an experimental domain $\edomain$ is, if it exists, the possibility that predicts the failure of all experimental tests. That is, let $E \subseteq \edomain$ be an essential set then  $\mathring{x} = \bigAND\limits_{\stmt[e] \in E} \NOT e$ if it is not a contradiction. An experimental domain is \textbf{complete} if it doesn't admit an alternative possibility.
+		The \textbf{residual possibility} $\mathring{x}$ for an experimental domain $\edomain$ is, if it exists, the possibility that predicts the failure of all experimental tests. That is, let $\basis \subseteq \edomain$ be a basis then  $\mathring{x} = \bigAND\limits_{\stmt[e] \in \basis} \NOT e$ if it is not a contradiction. An experimental domain is \textbf{complete} if it doesn't admit a residual possibility.
 	\end{prop}
 
 	\begin{prop}
-	The \textbf{established possibilities} $X$ for an experimental domain is the set of all possibilities excluding the alternative possibility.
+	The \textbf{established possibilities} $X$ for an experimental domain is the set of all possibilities excluding the residual possibility.
 \end{prop}
 \end{mathSection}
 
-We call this special case the alternative possibility because it is outside of what our set of experimental tests can verify and because it sometimes requires special handling. It should also be noted that, as we refine our understanding and techniques for a domain of knowledge, we may find that the alternative possibility actually corresponds to multiple cases that weren't previously cataloged. So, intuitively, is better thought as a bucket that contains all that is yet to be experimentally discovered within the particular domain of knowledge. Because of its special nature, the alternative possibility sometimes behaves differently than the other possibilities. Therefore we will find that some theorems are more elegantly expressed in terms of the established possibilities and some in terms of the full possibilities.\footnote{Since this distinction will mainly be technical, we will use the same symbol for both the established possibilities and the full possibilities as the intuition remains the same.}
+As we refine our understanding and techniques for a domain of knowledge, we may find that the residual possibility actually corresponds to multiple cases that weren't previously cataloged. So, intuitively, is better thought as a bucket that contains all that is yet to be experimentally discovered within the particular domain of knowledge. Because of its special nature, the residual possibility sometimes behaves differently than the other possibilities. Therefore we will find that some theorems are more elegantly expressed in terms of the established possibilities and some in terms of the full possibilities.\footnote{Since this distinction will mainly be technical, we will use the same symbol for both the established possibilities and the full possibilities as the intuition remains the same.}
 
-Note, though, that an alternative possibility does not exist for all domains. Suppose we have a basket of fruit and we want to count how many apples are there. There can only be a finite number of them, and we can successfully identify all finite numbers: there is no something else to be found in this case.
-
-Given the definitions, we can ask a fundamental questions: what is the maximum number of possibilities? That is, what is the maximum number of cases between which we can distinguish experimentally?
+With are definitions in mind, we can answer the following fundamental question: what is the maximum number of possibilities that an experimental domain can have? In other words: what is the maximum number of cases between which we can distinguish experimentally? As we saw before, a possibility is a statement that defines the truth values of a basis. Since a basis is countable, we can identify a possibility by a countable series of $\TRUE$ or $\FALSE$. But that means we can never have more possibilities than there are countable series of $\TRUE$ or $\FALSE$. Note that a real number expressed in a binary basis (e.g. 0.10110001... ) will uniquely identify such a sequence: the cardinality of the possibility is at most the one of continuum.
 
 \begin{mathSection}
-	\begin{prop}
+	\begin{thrm}
 		The possibilities $X$ for an experimental domain $\edomain$ has at most cardinality of continuum.
-	\end{prop}
+	\end{thrm}
 	
 	\begin{proof}
-		The idea is that each possibility can be identified by knowing which observations of an essential set are verified. Since the essential set of an experimental domain can be assumed countable, the possible combinations of their truth values have at most cardinality of continuum.
-		
-		More formally, let $E = \{\obs[e]_i\}_{i=1}^{\infty} \subseteq \edomain$ be a countable essential set. Let $2^{\mathbb{N}}$ denotes the set of infinite binary sequences. We define the function $F:X\to2^{\mathbb{N}}$ such that $F(x) = (F(x)_i)_{i=1}^{\infty}$ is given by: 
+		Let $E = \{\obs[e]_i\}_{i=1}^{\infty} \subseteq \edomain$ be a countable basis. Let $2^{\mathbb{N}}$ denote the set of infinite binary sequences. We define the function $F:X\to2^{\mathbb{N}}$ such that $F(x) = (F(x)_i)_{i=1}^{\infty}$ is given by: 
 		$$
 		F(x)_i = 
 		\begin{cases}
@@ -605,26 +623,23 @@ Given the definitions, we can ask a fundamental questions: what is the maximum n
 	\end{proof}
 \end{mathSection}
 
-This means we have an upper bound on how many cases can be distinguished experimentally: only up to the continuum. More than that we are not going to be able to tell them apart. This result gives us a basic requirement for any mathematical object we want to use in a scientific theory: if the cardinality is greater than it is cannot have a well defined experimental meaning. For example, while the set of all continuous functions between real numbers has cardinality of continuum, the set of all functions (including all discontinuous) has greater cardinality. We can already conclude that the first set may be useful to represent a physical objects and the second may not.
+This means we have an upper bound on how many cases can be distinguished experimentally: only up to the continuum. We are not going to be able to tell them apart more than those. This result gives us a basic requirement for any mathematical object we want to use in a scientific theory: if the cardinality is greater than the continuum, it cannot have a well defined experimental meaning. For example, while the set of all continuous functions between real numbers has cardinality of continuum, the set of all functions (including all discontinuous) has greater cardinality. We can already conclude that the first set may be useful to represent a physical objects and the second may not.
 
-There is still something that can go wrong, though: we need to make sure we have enough experimental observations to tell different possibilities apart. For example, if we are able to only verify \emph{``there is extra-terrestrial life"}, the opposite possibility will never have experimental confirmation. Since in most cases we want (and are able) to, we want to formally capture this notion.
+As we saw before, not all possibilities are verifiable statements. For example, if we are able to only verify \statement{there is extra-terrestrial life}, the opposite possibility will never have experimental confirmation. The possibility \statement{the mass of the photon is exactly 0 eV} is also not verifiable since we can only measure mass with finite precision. The second case, though, is different from the first. Given two different values of mass, we can in principle always find a resolution such that we can tell the two values apart experimentally. Similarly, we can tell the house sparrow (Passer domesticus) apart from the Italian sparrow (Passer italiae) because we have at least two verifiable statements (``it has a dark gray crown", ``it has a chestnut crown") that are incompatible with each other, but each compatible with one bird. In these cases, we say that the domain is experimentally distinguishable.
 
 \begin{mathSection}
 \begin{defn}
-	The set of possibilities $X$ of a domain $\edomain$ is \textbf{experimentally distinguishable} if given two distinct possibilities $x_1, x_2 \in X$ we can always find two experimental observations $\textsf{o}_1, \textsf{o}_2 \in \edomain$ such that $\textsf{o}_1 \broader x_1$, $\textsf{o}_2 \broader x_2$ and $\textsf{o}_1 \ncomp \textsf{o}_2$.
+	The set of possibilities $X$ of a domain $\edomain$ is \textbf{experimentally distinguishable} if given two distinct possibilities $x_1, x_2 \in X$ we can always find two verifiable statements $\stmt_1, \stmt_2 \in \edomain$ such that $\stmt_1 \broader x_1$, $\stmt_2 \broader x_2$ and $\stmt_1 \ncomp \stmt_2$.
 \end{defn}
 \end{mathSection}
 
-For example, to tell the house sparrow (Passer domesticus) apart from the Italian sparrow (Passer italiae) we have at least two observations (``it has a dark gray crown", ``it has a chestnut crown") that are incompatible with each other, but each compatible with one bird.
+We have now presented the fundamental objects of our general mathematical theory of experimental science. In our framework, a ``scientific theory" or a ``scientific model" \emph{is} an experimental domain: a set of verifiable statements together with its semantic and experimental tests. From this we can derive the theoretical domain and the possibilities.
 
-This concludes the introduction to our fundamental scientific objects. Experimental domains, with their respective theoretical domains and possibilities, are the essence of our theory of scientific investigation. In our context, a ``scientific theory" or a ``scientific model" \emph{are} an experimental domain.
+The starting point is often a basis: a set of verifiable statements which defines all the domain knowledge that we can gathered experimentally. The content of the statements determines what combinations can be true at the same time, which define the possibilities for our domain. Everything in the domain is grounded into the experimental observations: there is nothing else in it.
 
+As we'll see later, some verifiable statements may be idealizations. For example, we may assume that a quantity can be measured with arbitrary level of precision, which we know not to be strictly true. We may assume a volume of gas to have a well defined temperature, which we know not be true if it is not at equilibrium. This type of simplifications changes the details of the domain, but not the formal structure we have identified here. In fact, the main body of this work is deriving the details of different experimental domains under different physical assumptions.
 
-The starting point is often an essential set of experimentally verifiable statements, which defines all the domain knowledge that we can gathered experimentally. The content of the statements determines what combinations can be true at the same time, which define the possibilities for our domain. Everything in the domain is grounded into the experimental observations: there is nothing else in it.
-
-As we'll see later, the experimental observations may be idealizations. For example, we may assume that a quantity can be measured with arbitrary level of precision, which we know not to be true. Or the experimental observations may be valid only under some assumption. For example, we assume a volume of gas is at equilibrium and therefore has a well specified temperature. This type of simplifications changes the details of the domain, but not the formal structure we have identified here. In fact, the main body of this work is deriving the details of different experimental domains under different physical assumptions.
-
-The point is that this conceptual structure is inescapable once we set the principle of scientific objectivity. It is necessary and sufficient to be able to do science and it is, consciously or unconsciously, always there.
+The point is that this conceptual structure is inescapable once we set the principle of scientific objectivity. It is necessary and sufficient to be able to do science and it is, consciously or unconsciously, always there. And by being clear on which verifiable statement can be considered physically meaningful and which are idealizations, we can then be more precise on the physical status of each derived element in a scientific theory.
 
 \section{Topological spaces}
 
