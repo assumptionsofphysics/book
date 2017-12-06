@@ -628,7 +628,7 @@ This means we have an upper bound on how many cases can be distinguished experim
 As we saw before, not all possibilities are verifiable statements. For example, if we are able to only verify \statement{there is extra-terrestrial life}, the opposite possibility will never have experimental confirmation. The possibility \statement{the mass of the photon is exactly 0 eV} is also not verifiable since we can only measure mass with finite precision. The second case, though, is different from the first. Given two different values of mass, we can in principle always find a resolution such that we can tell the two values apart experimentally. Similarly, we can tell the house sparrow (Passer domesticus) apart from the Italian sparrow (Passer italiae) because we have at least two verifiable statements (``it has a dark gray crown", ``it has a chestnut crown") that are incompatible with each other, but each compatible with one bird. In these cases, we say that the domain is experimentally distinguishable.
 
 \begin{mathSection}
-\begin{defn}
+\begin{defn}\label{def_experimentally_distinguishable}
 	The set of possibilities $X$ of a domain $\edomain$ is \textbf{experimentally distinguishable} if given two distinct possibilities $x_1, x_2 \in X$ we can always find two verifiable statements $\stmt_1, \stmt_2 \in \edomain$ such that $\stmt_1 \broader x_1$, $\stmt_2 \broader x_2$ and $\stmt_1 \ncomp \stmt_2$.
 \end{defn}
 \end{mathSection}
@@ -643,7 +643,11 @@ The main point of our framework is that this conceptual structure is inescapable
 
 \section{Topological spaces}
 
-Now that we have defined what scientific domains are, we want to explore the link between them and some fundamental mathematical structures. The first such connection is between experimental domains and topology: each set of possibilities has a natural topological structure given by the associated experimental domain. So first we need at least to define what a topology is.
+Now that we have defined what scientific domains are, we want to explore the link between them and some fundamental mathematical structures. The first such connection is between experimental domains and topology: each set of possibilities has a natural topological structure given by the associated experimental domain. The main result of this section is that each verifiable statement can be seen as the disjunction of a set of possibilities. Performing conjunction and disjunction of verifiable statement means performing union and intersection on those sets of possibilities. This means that each experimental domain can be regarded as a topological space over the set of possibilities.
+
+Topological spaces were developed in the first half of the 1900s as a generalization of metric spaces. The idea is to define a notion of closeness without having to define an actual distance.\footnote{In science and engineering, one talks about topology also when discussing the structure of a molecule, an electronic circuit or a computer network. These type of structures (i.e. nodes connected by vertices) are studied by graph theory and should not be confused with point-set topology.} Other branches of math (e.g. metric spaces, differential geometry, Lie algebras) now see their foundation on topological spaces, which therefore play a very important role in mathematics as a whole. In our case, this notion of closeness will map to how hard is to tell possibilities apart. That is: possibilities that are topologically closer are more difficult to distinguish experimentally.
+
+Let's first review what a topology is. The general idea is that we have a set $X$ of elements, which we call point, and we have a collection of subsets of $X$ such that it is closed under finite intersections and arbitrary union, contains the empty set and the whole set $X$. For example, suppose $X=\{1,2,3\}$ then $\{\{\}, \{1\}, \{2\},\{1,2,3\}\}$ is not a topology while $\{\{\}, \{1\}, \{2\},\{1,2\},\{1,2,3\}\}$ is. The first one is missing the union of $\{1\}$ and $\{2\}$.
 
 \begin{mathSection}
 	\begin{defn}
@@ -651,15 +655,26 @@ Now that we have defined what scientific domains are, we want to explore the lin
 	\end{defn}
 \end{mathSection}
 
-Topologies are used to define a notion of closeness without having to define an actual distance. Other branches of math (e.g. metric spaces, differential geometry, Lie algebras) have their foundation on topological spaces, which therefore play a very important role in mathematics as a whole.
+Mathematicians designed this abstract mathematical structure because it is a useful and general tool to study the notion of continuity. It also happen that all the mathematical structure used in science happen to be topological spaces. Why is it? What is that topological spaces capture?
 
-In our case, this notion of closeness will map to how hard is to tell possibilities apart. That is: possibilities that are topologically closer are more difficult to distinguish experimentally. Each set in the topology corresponds to an experimental observation.
+Let's go back to our verifiable statements and possibilities. In \ref{prop_disjunctive_normal_form} we saw that, if a statement is a function of other statements, it can be expressed as the disjunction of minterms of the arguments. A verifiable set in a domain is a function of basis, so we can express each verifiable statement as the disjunction of minterms of a basis. But we have also seen that the minterms of a basis are the possibilities, so each verifiable statement can be expressed as the disjunction of possibilities.
+
+For example, consider $\stmt_1=$\statement{the mass of the photon is less than $10^{-10}$ eV} can be expressed as $\stmt_1=\bigOR\limits_{0\leq x<10^{-10}}$\statement{the mass of the photon is precisely x eV}: the precise value must be in the given range. Consider $\stmt_2=$\statement{the mass of the photon is greater than $10^{-20}$ eV}$=\bigOR\limits_{x>10^{-20}}$\statement{the mass of the photon is precisely x eV}. The conjunction is the intersection of the possible values: $\stmt_1\AND\stmt_2=$\statement{the mass of the photon is between $10^{-20}$ and $10^{-10}$ eV}$=\bigOR\limits_{10^{-20}\leq x<10^{-10}}$\statement{the mass of the photon is precisely x eV}. The disjunction is the union of the possible values: $\stmt_1\OR\stmt_2=$\statement{the mass of the photon can be anything}$=\bigOR\limits_{x\geq0}$\statement{the mass of the photon is precisely x eV}.
+
+Therefore each statement in the experimental domain defines a set of possibilities, which we call verifiable set. Since tautology and contradiction are in the domain, the empty set and the full set of possibilities are verifiable sets. Since we can take finite conjunction and countable disjunction of verifiable statements, we can take finite intersection and countable unions. The collection of all verifiable sets forms a topology on the set of possibilities.
 
 \begin{mathSection}
 	
 \begin{defn}
-	Let $\edomain$ be an experimental domain and $X$ its possibilities. We define the map $U : \edomain \rightarrow 2^X$ that for each experimental observation $\mathsf{o} \in \edomain$ returns the set of possibilities compatible with it. That is: $U(\mathsf{o})\equiv\{ x \in X \, | \, x \comp \mathsf{o}\}$. We call $U(\mathsf{o})$ the \textbf{verifiable set} of possibilities associated with $\mathsf{o}$
+	Let $\edomain$ be an experimental domain and $X$ its possibilities. We define the map $U : \edomain \rightarrow 2^X$ that for statement $\obs \in \edomain$ returns the set of possibilities compatible with it. That is: $U(\obs)\equiv\{ x \in X \, | \, x \comp \obs\}$. We call $U(\obs)$ the \textbf{verifiable set} of possibilities associated with $\obs$.
 \end{defn}
+
+\begin{prop}
+	A verifiable statement $\obs$ is the disjunction of its verifiable set $U(\obs)$. That is, $\obs=\bigOR\limits_{x \in U(\obs)} x$.
+\end{prop}
+\begin{proof}
+	Let $\edomain$ be an experimental domain, $\obs \in \edomain$ a verifiable statement and $\basis \subseteq \edomain$ a basis. Since $\obs$ is a function of the basis, it can be expressed in as a disjunction of minterms of $\basis$. But the minterms of 
+\end{proof}
 
 \begin{prop}
 	Let $X$ be the set of possibilities for an experimental domain $\edomain$. $X$ has a natural topology given by the collection of all verifiable sets $\mathsf{T}_X=U(\edomain)$.
@@ -676,11 +691,33 @@ In our case, this notion of closeness will map to how hard is to tell possibilit
 \end{proof}
 \end{mathSection}
 
-Mainly for historical reason, the sets in a topology are called \textbf{open sets}. The complements of open sets are called \textbf{closed sets}. In metric spaces, such as the Euclidean space with the standard topology, these will map to the more standard definition. But, in general, they do not and this may lead to confusion. For example, if we take the integers with their standard topology, any subset is both open and closed.
+Mainly for historical reason, the sets in a topology are called open sets. The complements of open sets are called closed sets. In metric spaces, such as the Euclidean space with the standard topology, these will map to the standard notion of open interval. But, in general, they do not and this may lead to confusion. For example, if we take the integers with their standard topology, any subset is both open and closed.
 
-Given that we are only interested in the natural topologies of possibilities, we are going to refer to the sets in our topology as \textbf{verifiable sets} and we will call \textbf{refutable sets} their complements. As such, a subset of integer is both verifiable and refutable: the number could be in the set or not in the set and we have a test for both cases.  While this terminology does not follow math convention, we find it more intuitive and meaningful in the context of this work.
+Given that we are only interested in the natural topologies of possibilities, we are going to refer to the sets in our topology as verifiable sets and we will call refutable sets their complements. For example, when counting apples a subset of the integers is both verifiable and refutable: we can test whether the apple count is in or on that set of possible numbers. While this terminology does not follow math convention, we find it more intuitive and meaningful in the context of this work.
 
-We now define basis and sub-basis on a topology along with an important property.
+The semantic relationship between statements can be expressed in terms of set operations on the verifiable sets. For example, \statement{that animal is a cat} is narrower than \statement{that animal is a mammal} because the set of possibilities for which the first is true is a subset of the possibilities for which the second is true. Conversely, \statement{that animal is a cat} and \statement{that animal is a dog} are incompatible because the set of possibilities in which both are true is empty.
+
+In the following table we sum how statement operations and relationship are expressed in terms of operations and relationships between sets of possibilities.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{p{0.075\textwidth} p{0.275\textwidth} p{0.2\textwidth} p{0.3\textwidth}}
+		& Statement relationship & & Set relationship  \\ 
+		\hline 
+		$\stmt_1 \AND \stmt_2$ & (Conjunction) & $U(\stmt_1) \cap U(\stmt_2)$ & (Intersection) \\ 
+		$\stmt_1 \OR \stmt_2$ & (Disjunction) & $U(\stmt_1) \cup U(\stmt_2)$ & (Union) \\ 
+		$\NOT \stmt$ & (Negation) & $U(\stmt)^C$ & (Complement) \\ 
+		$\stmt_1 \equiv \stmt_2$ & (Equivalence) & $U(\stmt_1) = U(\stmt_2)$ & (Equality) \\ 
+		$\stmt_1 \narrower \stmt_2$ & (Narrower than) & $U(\stmt_1) \subseteq U(\stmt_2)$ & (Subset) \\ 
+		$\stmt_1 \broader \stmt_2$ & (Broader than) & $U(\stmt_1) \supseteq U(\stmt_2)$ & (Superset) \\ 
+		$\stmt_1 \comp \stmt_2$ & (Compatibility) & $U(\stmt_1) \cap U(\stmt_2) \neq \emptyset$ & (Intersection not empty)
+	\end{tabular} 
+	\caption{Boolean operations on statements}
+\end{table}
+
+
+We can define basis and sub-basis for a topology: a collection of sets from which we can generate the whole topology through finite intersection and countable union (for a sub-basis) or just through countable union (for a basis). Basis are important since they are often used in proofs and calculations. Moreover, many properties of topologies can be shown to be equivalent to properties of one of their basis. Countability, and in particular second-countability, is one such property which characterizes the number of verifiable sets in the topology.
+
 \begin{mathSection}
 \begin{defn}
 	A collection $\mathcal{B} \subseteq \mathsf{T}_X$ of verifiable sets of $X$ is a \textbf{sub-basis} if every verifiable set in $X$ is the union of finite intersections of $\mathcal{B}$. It is a \textbf{basis} if every verifiable set in $X$ is the union of elements of $\mathcal{B}$.
@@ -690,26 +727,24 @@ We now define basis and sub-basis on a topology along with an important property
 \end{defn}
 \end{mathSection}
 
-Basis are important since they are often used in proofs and calculations. Moreover, many properties of topologies can be shown to be equivalent to properties of one of their basis. Countability, and in particular second-countability, is one such property which characterizes the number of verifiable sets in the topology.
-
-Conceptually, there is a link between sub-basis and essential subsets.
+There is a link between the basis of an experimental domain and a sub-basis of a topology. If every statement in the experimental domain can be constructed from a basis through finite conjunction and countable disjunction, then each corresponding verifiable set can be generated through intersection and union of the verifiable set corresponding to the basis. Therefore the verifiable set corresponding to the basis of the experimental domain forms a sub-basis in the topology. Since experimental domains must have a countable basis to make sure we can test any verifiable statement given enough time, the topologies we'll be interested in must be second-countable.
 
 \begin{mathSection}
 	\begin{prop}
-		Let $X$ be the set of possibilities of an experimental domain $\edomain$. Let $E \subseteq \edomain$ be an essential subset, then the collection of verifiable sets $U(E)$ forms a sub-basis for the natural topology of $X$.
+		Let $X$ be the set of possibilities of an experimental domain $\edomain$. Let $\basis \subseteq \edomain$ be an essential subset, then the collection of verifiable sets $U(\basis)\cup\{X\}$ forms a sub-basis for the natural topology of $X$.
 	\end{prop}
 	\begin{proof}
-		Since every experimental observation of a domain can be expressed as the disjunction of finite conjunctions of the essential observations, its corresponding verifiable set can be expressed as the union of finite intersections of the verifiable sets corresponding to the essential observations.
+		Since every verifiable statement of a domain can be expressed as the disjunction of finite conjunctions of a basis $\basis \subseteq \edomain$, its corresponding verifiable set can be expressed as the union of finite intersections of the verifiable sets $U(\basis)$ corresponding to the basis. The tautology, though, is not necessarily the union of the basis. If the domain is not complete, the residual possibility is not contained in any verifiable sets. Therefore $U(\basis)\cup\{X\}$ can generate all verifiable sets, including the one for the tautology, and is a sub-basis.
 	\end{proof}
 	\begin{prop}
-		The natural topology of a set of possibility is second-countable.
+		The natural topology of for the possibility of an experimental domain is second-countable.
 	\end{prop}
 	\begin{proof}
-		Since each experimental domain admits a countable essential subset, its verifiable sets form a countable sub-basis for the natural topology. We can close the sub-basis through finite intersection, forming a countable basis for the topology. The natural topology is therefore second-countable as it admits a countable basis.
+		Since each experimental domain admits a countable basis, its verifiable sets form a countable sub-basis for the natural topology. We can close the sub-basis over finite intersection, forming a countable basis for the topology. The natural topology is therefore second-countable as it admits a countable basis.
 \end{proof}
 \end{mathSection}
 
-Another important property to classify topological space is their degree of separation: how well one can use open sets to tell points and sets apart. A Kolmogorov space is on in which for every pair of points there is always a verifiable set that contains one but not the other. This property is significant because it allows to distinguish all points through the verifiable sets. A Hausdorff space is one in which for every pair of points there always are two disjoint verifiable set each containing one. It is significant because it implies the uniqueness of limits of sequences of points.
+Another important property to classify topological space is their degree of separation: how well one can use verifiable sets to tell points and sets apart. A Kolmogorov space is on in which for every pair of points there is always a verifiable set that contains one but not the other. This property is significant because it allows to distinguish all points through the verifiable sets. A Hausdorff space is one in which for every pair of points there always are two disjoint verifiable set each containing one. It is significant because it implies the uniqueness of limits of sequences of points.
 
 \begin{mathSection}
 	\begin{defn}
@@ -722,7 +757,9 @@ Another important property to classify topological space is their degree of sepa
 
 \end{mathSection}
 
-What we have is that the natural topology for any set of possibilities is Kolmogorov because two different possibilities must give a different outcome for at least one experimental test. If the possibilities are physically distinguishable, then the topology is Hausdorff because we can always find two incompatible observations each verifying one.
+How do these properties relate to experimental domains? Consider two possibilities for a domain, for example \statement{this is a cat} and \statement{this is a swan}. We can always find a verifiable statement, such as \statement{this animal has feathers}, that we can use to distinguish one possibility from the other. This means that, given two different possibilities, we can always find a verifiable set that contains one and not the other: the natural topology for any set of possibilities is always Kolmogorov.
+
+Suppose two possibilities that are physically distinguishable as we defined in \ref{def_experimentally_distinguishable}. For example, \statement{that animal is a house sparrow (Passer domesticus)} and \statement{that animal is an Italian sparrow (Passer italiae)}. That meant we can find two verifiable statements (``it has a dark gray crown", ``it has a chestnut crown") that are incompatible with each other, but each compatible with one bird. This means that, given given two possibilities, we can find two disjoint (i.e. incompatible) verifiable sets each containing one possibility: the natural topology for a set physically distinguishable possibilities is Hausdorff.
 
 \begin{mathSection}
 	\begin{prop}
@@ -741,7 +778,11 @@ What we have is that the natural topology for any set of possibilities is Kolmog
 
 \section{Sigma-algebras}
 
-In the same way that experimental domains find a natural mathematical representation as topological spaces, theoretical domains find a natural mathematical representation in $\sigma$-algebras. Let's first define what that is.
+In the same way that experimental domains find a natural mathematical representation as topological spaces, theoretical domains find a natural mathematical representation in $\sigma$-algebras. The main result of this section is that each theoretical statement can also be seen as a the disjunction of a set of possibilites, and that each experimental domain can be regarded as a $\sigma$-algebra over the set of possibilities.
+
+TODO: Like topologies, $\sigma$-algebras are fundamental in mathematics as they allow to construct measures (i.e. assigning sizes to sets), limits for sequences of sets and probabilities spaces. It is again fitting that we can associate such fundamental mathematical structure to theoretical domains.
+
+Let's first review what a $\sigma$-algebra is. The general idea is that we have a set of $X$ elements which we call points, and we have a collection of subsets of $X$ such that it is closed under complement and countable union, contains the empty set and the whole set $X$. For example, suppose $X = \{1,2,3\}$ then  $\{\{\},\{1\},\{1,2,3\}$ is not a $\sigma$-algebra while $\{\{\},\{1\}, \{2,3\},\{1,2,3\}$ is. The first one is missing the complement of $\{1\}$.
 
 \begin{mathSection}
 	\begin{defn}
@@ -751,7 +792,7 @@ In the same way that experimental domains find a natural mathematical representa
 
 Note that $\sigma$-algebras are also closed under countable intersections, since they can be expressed in terms of negation and countable unions.
 
-Like topologies, $\sigma$-algebras are fundamental in mathematics as they allow to construct measures (i.e. assigning sizes to sets), limits for sequences of sets and probabilities spaces. It is again fitting that we can associate such fundamental mathematical structure to theoretical domains.
+In the previous section we saw how each verifiable statement can be expressed as the conjunction of a set of possibilities, how the operations on statements can be expressed as operations on the verifiable sets and how all the verifiable sets form a topology. The same can be done for theoretical statement, with the only difference that we will end up with a collection of sets that is closed under complement and countable union since the theoretical domain is closed under negation and countable disjunction.
 
 \begin{mathSection}
 	
@@ -787,29 +828,31 @@ There is also a special link between topologies and $\sigma$-algebra. As one may
 	\end{prop}
 	
 	\begin{proof}
-		Since the theoretical domain can be generated by an essential set of the experimental domain, the natural $\sigma$-algebra can be generated by a sub-basis of the natural topology. This means that it is also generated by the countable union, countable intersection and negation from the verifiable sets of the natural topology.
+		Since the theoretical domain can be generated by a basis of the experimental domain, the natural $\sigma$-algebra can be generated by a sub-basis of the natural topology. This means that it is also generated by the countable union, countable intersection and negation from the verifiable sets of the natural topology.
 	\end{proof}
 \end{mathSection}
 
-This fundamental link between experimental domains and topology on one side and theoretical domains and $\sigma$-algebra on the other is important for a couple of reasons.
+This fundamental link between experimental domains and topology on one side and theoretical domains and $\sigma$-algebra on the other is important for multiple of reasons.
 
-From a practical standpoint, it guarantees that these mathematical tools can always be used. Since the experimental and theoretical domains are of truly general applicability, this means that any branch of scientific investigation can use techniques and results from topology and $\sigma$-algebras for calculations or for characterizing the domain at hand.
+From a practical standpoint, it guarantees that these mathematical tools can always be used in science. Since the experimental and theoretical domains are of truly general applicability, this means that any branch of scientific investigation can use techniques and results from topology and $\sigma$-algebras for calculations or for characterizing the domain at hand.
 
-From a conceptual standpoint, it gives a precise scientific meaning to the mathematical tools and everything built on top of them. Every single step in a calculation, every single argument in a proof can be given a clear, and possibly insightful, physical meaning. It grounds the abstract mathematical language in more concrete scientific objects. This in turn helps clarify the science described by common mathematical tools, unearthing possible hidden assumptions and simplifications about the physical systems being studied.
+From a conceptual standpoint it provides a Rosetta stone, i.e a way to translate, between the mathematical concepts and the scientific ones. It gives a precise scientific meaning to the mathematical tools and everything built on top of them. Every single step in a calculation, every single argument in a proof can be given a clear, and possibly insightful, physical meaning. It grounds the abstract mathematical language in more concrete scientific objects. This in turn helps clarify the science described by common mathematical tools, unearthing possible hidden assumptions and simplifications about the physical systems being studied.
+
+It explains why some mathematical tools have found such successful application in the physical sciences.
 
 \section{Dependence and equivalence between domains}
 
 Having characterized experimental and theoretical domains together with their connection to topologies and $\sigma$-algebras, we want to study the case where an experimental domains is physically related to another. For example, consider the domains for the temperature and height of a mercury column or the domains for the temperature and density of water. How do we express, in this framework, the fact that these domains are connected?
 
-We have two ways to define these type of relationships between domains. The first is in terms of inference: any experimental observation on the height of a mercury column is an indirect experimental observation on its temperature; any experimental observation on the density of water is an indirect experimental observation on its temperature. The second is in terms of causes: the height of the mercury column is a function of its temperature; the density of water is a function of its temperature. The main result of this section is to show that these perspectives are equivalent.
+We have two ways to define these type of relationships between domains. The first is in terms of inference: any measurement on the height of a mercury column is an indirect measurement on its temperature; any experimental test on the density of water is an indirect experimental test on its temperature. The second is in terms of causes: the height of the mercury column depends on its temperature; the density of water is a function of its temperature. The main result of this section is to show that these perspectives are equivalent.
 
-Suppose $\edomain_X$ represents the domain for the temperature of a mercury column while $\edomain_Y$ represents the domain for its height. Since we know that an increase in temperature makes the metal expand, we can infer the temperature of the mercury column by looking at its height. For example, if we verify that \statement{the height of the mercury column is between 24 and 25 millimeters} we may be able to infer that \statement{the temperature is 24 and 25 degrees Celsius}. That is, given an observation $\obs_Y$ we have an observation $\obs_X$ that is going to be verified if and only if the first one is.
+Suppose $\edomain_X$ represents the domain for the temperature of a mercury column while $\edomain_Y$ represents the domain for its height. Since we know that an increase in temperature makes the metal expand, we can infer the temperature of the mercury column by looking at its height. For example, if we verify that \statement{the height of the mercury column is between 24 and 25 millimeters} we may be able to infer that \statement{the temperature is 24 and 25 degrees Celsius}. That is, given an verifiable statement $\obs_Y$ we have another verifiable statement $\obs_X$ that is going to be true if and only if the first one is, that is $\obs_Y\equiv\obs_X$.
 
-Note that the inferences is between observations in general and not a single interval. For example, the observation \statement{the water density is between 999.8 and 999.9 kg/$m^3$} will correspond to \statement{the water temperature is between 0 and 0.52 Celsius}$\OR$\statement{the water temperature is between 7.6 and 9.12 degrees Celsius} as water is most dense at 4 degrees Celsius. But the disjuction of an observation is still an observation so we are still inferring one observation from the other. For each observation in $\edomain_Y$ we can find an observation in $\edomain_X$ that is verified if and only the first is. That is: an inference relationship is a map from $\edomain_Y$ to $\edomain_X$ that preserves equivalence.
+Note that the inference is between verifiable statements and not a intervals. For example, the observation \statement{the water density is between 999.8 and 999.9 kg/$m^3$} will correspond to \statement{the water temperature is between 0 and 0.52 Celsius}$\OR$\statement{the water temperature is between 7.6 and 9.12 degrees Celsius} as water is most dense at 4 degrees Celsius. The disjuction of verifiable statements is still a verifiable statement so we are still inferring one observation from the other. For each observation in $\edomain_Y$ we can find an observation in $\edomain_X$ that is verified if and only the first is. That is: an inference relationship is a map from $\edomain_Y$ to $\edomain_X$ that preserves equivalence.
 
 \begin{mathSection}
 	\begin{defn}
-		An \textbf{inference relationship} between two experimental domains establishes that verifying an observation in one means verifying an observation in the other. More formally, it is a map $\erel: \edomain_Y \to \edomain_X$ between two experimental domains $\edomain_X$ and $\edomain_Y$ such that $f(\obs_Y) \equiv \obs_Y$. In other words: it is an equivalence preserving map between experimental domains.
+		An \textbf{inference relationship} between two experimental domains establishes that testing a verifiable in one means testing a verifiable statement in the other. More formally, it is a map $\erel: \edomain_Y \to \edomain_X$ between two experimental domains $\edomain_X$ and $\edomain_Y$ such that $f(\obs_Y) \equiv \obs_Y$. In other words: it is an equivalence preserving map between experimental domains.
 	\end{defn}
 	\begin{defn}
 		An experimental domain $\edomain_Y$ is \textbf{dependent} on another experimental domain $\edomain_X$ if there exists and experimental relationship $\erel: \edomain_Y \to \edomain_X$.
@@ -823,13 +866,13 @@ It should be evident that we cannot impose inference relationships between any d
 
 Let's continue with our example. We can re-express the inference relationship in terms of causal relationship between the two domains. If $x$ is the value of temperature of the mercury column, that is a possibility for $\edomain_X$, and $y$ is the height of the mercury column, that is a possibility for $\edomain_Y$, then we can write $y=f(x)$ since the height if determined by the temperature.
 
-Note that the direction of the causal relationship is the opposite of the inference. $X$ causes $Y$ and we can infer $Y$ from $X$. Chains of events are in terms of possibilities and start with the cause and end with the effect. Chains of inferences are in terms of observations and start with the result and end with the origin.
+Note that the direction of the causal relationship is the opposite of the inference. $X$ causes $Y$ and we can infer $Y$ from $X$. Chains of events are in terms of possibilities and start with the cause and end with the effect. Chains of inferences are in terms of verifiable statements and start with the result and end with the origin.
 
-The reverse does not work in general. Even if we know the final possibility, we may not be able to reconstruct the initial possibility: if water density of water is exactly 999.9 kg/$m^3$, the temperature could be either 0.52 or 7.6 Celsius because density peaks at 4 Celsius. Conversly, an observervation on the cause is not necessarily an observation of the effect: measuring we have produced an electron is not enough to measure its mass to arbitrary precision (that is a separate measurement).
+The reverse does not work in general. Even if we know the final possibility, we may not be able to reconstruct the initial possibility: if water density of water is exactly 999.9 kg/$m^3$, the temperature could be either 0.52 or 7.6 Celsius because density peaks at 4 Celsius. Conversly, a measurement on the cause does not necessarily leads to a measurement of the effect: measuring we have produced an electron is not enough to measure its mass in eV to arbitrary precision (that is a separate measurement).
 
-Another important consideration is that, in order to be consistent, the function $y=f(x)$ has to be continuous. An observation $\obs_Y$ on the height of the mercury column, in fact, will establish that the height is within the set of possibilities compatible to $\obs_Y$, say between 24 and 25 millimeters. That is $y$ is in $U_Y(\obs_Y)$, a verifiable set in the topology for $Y$. We can then infer that the temperature must be in the reverse image of the possible heights, say between 24 and 25 Celsius. That is $x$ is in $f^{-1}(U_Y(\obs_Y))$. But this means that, indirectly, we have experimentally verified that $x$ is in $f^{-1}(U_Y(\obs_Y))$. And if $\edomain_X$ is really the domain of the observations for the temperature, then it must contain one that matches that set of possible temperature, one for which the temperature is between 24 and 25 Celsius. In other words, $f^{-1}(U_Y(\obs_Y))$ must be a set in the topology of $X$.
+Another important consideration is that, in order to be consistent, the function $y=f(x)$ has to be continuous. The general idea is the following: if we say that we can only measure both the temperature and height of a mercury column with finite precision, we have to make sure that when we use the causal relationship for inference, a finite precision measurement of height will correspond to a finite precision measurement of temperature. This means a small change in height has to correspond to a small change in temperature: the function is continuous.
 
-Another way to look at this: if we say that we can only measure both the temperature and height of a mercury column with finite precision, we have to make sure that when we use the causal relationship for inference, a finite precision measurement of height will correspond to a finite precision measurement of temperature. This can only be true if the function is continuous.
+More precisely, suppose $\obs_Y=$\statement{the height of the mercury column is between 24 and 25 millimeters} is a verifiable statement. The height of the mercury column $y$ is within the verifiable set $U(\obs_Y) = (24, 25)$ millimeters. We can then infer that the temperature must be in the reverse image of the possible heights $f^{-1}(U_Y(\obs_Y))=(24,25)$ Celcius. But this means that, indirectly, we have experimentally verified that $x$ is in $f^{-1}(U_Y(\obs_Y))$. And if $\edomain_X$ is really the domain of the observations for the temperature, then it must contain one that matches \statement{the temperature of the mercury column is between 24 and 25 Celcius}. In other words, $f^{-1}(U_Y(\obs_Y))$ must be a set in the topology of $X$ and the function is continuous.\footnote{In topology, continuity is defined in terms of the sets in the topology and not in terms of small changes as in analysis. When using the standard topology on real numbers, the two coincides but not in general.}
 
 \begin{mathSection}
 	\begin{defn}
@@ -839,7 +882,7 @@ Another way to look at this: if we say that we can only measure both the tempera
 		Let $\edomain_X$ and $\edomain_Y$ be two experimental domains. A \textbf{causal relationship} from $\edomain_X$ to $\edomain_Y$ is a continuous function $f : X \to Y$ between the possibilities of the domains such that $x \narrower f(x)$.
 	\end{defn}
 	\begin{justification}
-		Formally, we simply define causal relationships to be continuous. The details of the physical justifications are in the theorem that follows, but the idea is that if the function is not continuous, one can experimentally test statements that are not part of the experimental domain of $\edomain_X$, which would be contradictory.
+		Formally, we simply define causal relationships to be continuous. The details of the physical justifications are in the theorem that follows, but the idea is that if the function is not continuous, one can experimentally test statements about the possibilities of $\edomain_X$ that are not part of the experimental domain of $\edomain_X$, which would be contradictory.
 	\end{justification}
 	\begin{thrm}[Experimental Relationship Theorem]
 		Inference and causal relationships are equivalent. More formally, let $\edomain_X$ and $\edomain_Y$ be two experimental domains. An inference relationship $\erel: \edomain_Y \to \edomain_X$ exists between them if and only if a causal relationship $f: \edomain_X \to \edomain_Y$ also exists.
@@ -847,25 +890,27 @@ Another way to look at this: if we say that we can only measure both the tempera
 	\begin{proof}
 		First we show that a causal relationship exists between independent and dependent domain. Suppose $\edomain_Y$ depends on $\edomain_X$. Given that for each observation in $\edomain_Y$ there exists an equivalent observation in $\edomain_X$, $\edomain_Y$ is effectively a subset of $\edomain_X$. By the same token, the theoretical domain $\tdomain_Y$ is effectively a subset of $\tdomain_X$. This means that a possibility $x \in \tdomain_X$, if true, will determine all the truth values of  all statements in $\tdomain_Y$, including its possibilities. But only one possibility $y \in \tdomain_Y$ can be compatible with $x$ since the possibilities of a domain are all incompatible with each other. Therefore we can define $f : X \to Y$ the function that given a possibility $x \in X$ returns the only possibility $y=f(x) \broader x$ that is compatible with it.
 		
-		We still need to show that $f$ is continuous. Consider an observation $\obs_Y \in \edomain_Y$. Let $U_Y(\obs_Y) \in \mathsf{T}_Y$ be its verifiable set. Since $\edomain_Y$ depends on $\edomain_X$, we can find $\obs_X \in \edomain_X$ such that $\obs_X \equiv \obs_Y$. Let $U_X(\obs_X) \in \mathsf{T}_X$ be its verifiable set. This is the set of all possibilities in $X$ that is compatible with $\obs_Y$, which means $U_X(\obs_X)$ contains all the possibilities that are compatible with one possibility in $U_Y(\obs_Y)$. Since $f$ returns the only possibility in $Y$ compatible with a possibility in $X$, $f^{-1}(U_Y(\obs_Y))$ will return all the possibilities in $X$ that are compatible with one possibility in $U_Y(\obs_Y)$. That means $f^{-1}(U_Y(\obs_Y)) = U_X(\obs_X)$ maps verifiable sets to verifiable sets. Therefore $f$ is continuous.
+		We still need to show that $f$ is continuous. Consider a verifiable statement $\obs_Y \in \edomain_Y$. Let $U_Y(\obs_Y) \in \mathsf{T}_Y$ be its verifiable set. Since $\edomain_Y$ depends on $\edomain_X$, we can find $\obs_X \in \edomain_X$ such that $\obs_X \equiv \obs_Y$. Let $U_X(\obs_X) \in \mathsf{T}_X$ be its verifiable set. This is the set of all possibilities in $X$ that is compatible with $\obs_Y$, which means $U_X(\obs_X)$ contains all the possibilities that are compatible with one possibility in $U_Y(\obs_Y)$. Since $f$ returns the only possibility in $Y$ compatible with a possibility in $X$, $f^{-1}(U_Y(\obs_Y))$ will return all the possibilities in $X$ that are compatible with one possibility in $U_Y(\obs_Y)$. That means $f^{-1}(U_Y(\obs_Y)) = U_X(\obs_X)$ maps verifiable sets to verifiable sets. Therefore $f$ is continuous.
 		
-		Now we show that a causal relationship implies dependence between domain. Suppose we have a causal relationship $f: X \to Y$ between $\edomain_X$ and $\edomain_Y$. Let $y \in Y$ be a possibility for $\edomain_Y$. Consider   $f^{-1}(\{y\})$: this is the set of all possibilities in $X$ that are compatible with $y$. Since $\truth(y)=\TRUE$ if and only if $\truth(x)=\TRUE$ for some $x \in f^{-1}(\{y\})$, we must have $y \equiv \bigOR\limits_{x \in f^{-1}(\{y\})} x$. Now consider an observation $\obs_Y \in \edomain_Y$ and its associated theoretical statement $\stmt_Y \in \tdomain_Y$. Let $U_Y(\obs_Y)$ be the verifiable set associated with $\obs_Y$. We can write $\stmt_Y = \bigOR\limits_{y \in U_Y(\obs_Y)} y$ since the observation will be verified if and only if one of the possibilities compatible with it is true. We can expand each possibility in $Y$ as a conjunction of possibilities in $X$ using the previous relationship. We have $\stmt_Y = \bigOR\limits_{y \in U_Y(\obs_Y)} \bigOR\limits_{x \in f^{-1}(\{y\})} x = \bigOR\limits_{x \in f^{-1}(U_Y(\obs_Y))} x$. Because $f$ is continuous, the reverse image of a verifiable set is a verifiable set. Therefore there is a $\obs_X \in \edomain_X$ such that $U_X(\obs_X) = f^{-1}(U_Y(\obs_Y))$. Consider $\stmt_X \equiv \bigOR\limits_{x \in U_X(\obs_X)} x \equiv \stmt_Y$. This is the statement associated with $\obs_X$ so $\obs_X \equiv \obs_Y$. Therefore for each $\obs_Y \in \edomain_Y$ we can find an equivalent observation $\obs_X \in \edomain_X$. The experimental domain $\edomain_Y$ depends on $\edomain_X$.
+		Now we show that a causal relationship implies dependence between domains. Suppose we have a causal relationship $f: X \to Y$ between $\edomain_X$ and $\edomain_Y$. Let $y \in Y$ be a possibility for $\edomain_Y$. Consider   $f^{-1}(\{y\})$: this is the set of all possibilities in $X$ that are compatible with $y$. Since $\truth(y)=\TRUE$ if and only if $\truth(x)=\TRUE$ for some $x \in f^{-1}(\{y\})$, we must have $y \equiv \bigOR\limits_{x \in f^{-1}(\{y\})} x$. Now consider a verifiable statement $\obs_Y \in \edomain_Y$. We have $\obs_Y \equiv \bigOR\limits_{y \in U_Y(\obs_Y)} y \equiv \bigOR\limits_{y \in U_Y(\obs_Y)} \bigOR\limits_{x \in f^{-1}(\{y\})} x \equiv \bigOR\limits_{x \in f^{-1}(U_Y(\obs_Y))} x$. Because $f$ is continuous, the reverse image of a verifiable set is a verifiable set. Therefore there is a $\obs_X \in \edomain_X$ such that $U_X(\obs_X) = f^{-1}(U_Y(\obs_Y))$. The two verifiable statements $\obs_X \equiv \bigOR\limits_{x \in U_X(\obs_X)} x \equiv \obs_Y$ are equivalent. For each $\obs_Y \in \edomain_Y$ we can find an equivalent $\obs_X \in \edomain_X$ so $\edomain_Y$ depends on $\edomain_X$.
 	\end{proof}
 \end{mathSection}
 
-Given the equivalence, we will use \textbf{experimental relationship} to describe the link between the two domains. We still need to show that experimental relationships are themselves statements that can be tested experimentally. For example, \statement{there is a linear relationship between the temperature of a mercury column between 15 and 40 Celcius and it height between 15 and 40 millimeters} is also something tht we need to be able to verify experimentally. Intuitively, this something simple enough to do: one prepares different values of temperatures and measures different values of height. This means we'll have to extend our framework to define mathematically what we mean by preparing different values of temperature.
+Given the equivalence, we will use \textbf{experimental relationship} to describe the link between the two domains. We still need to show that experimental relationships are themselves statements that can be tested experimentally. For example, \statement{there is a linear relationship between the temperature of a mercury column between 15 and 40 Celcius and it height between 15 and 40 millimeters} is also something tht we need to be able to verify experimentally. Intuitively, this something simple enough to do: one prepares different values of temperatures and measures different values of height.
+
+TODO
 
 \section{Properties and quantities}
 
-In science we are interested in statements about the properties of a system, in particular those that are quantitative. For examples, \statement{the mass of the electron is $9.109 \times 10^{-31}$ kg} of \statement{the world population is 7.6 billion people}. Therefore we need to properly define what we mean by a quantity, by unit of measurement and how they relate to the mathematical structures defined before.
+Most of the statements will characterize a system by describing one of its properties, including quantifiable ones. For examples, \statement{the mass of the electron is $9.109 \times 10^{-31}$ kg} of \statement{the world population is 7.6 billion people}. Therefore we need to properly define what we mean by quantities how they relate to the mathematical structures defined before.
 
-First we'll introduce the idea of using properties to differentiate a possibility among the others. A property can be either a physical one (e.g. the beak color of a bird) or one we define by convention (e.g. the taxonomy name for an animal species). Quantities are properties that have a magnitude: we can compare two different values and determine which one is greater or smaller. For example, groups of individuals can be labeled by their number and distances can be labeled in meters. In particular, we will define discrete quantities, those that correspond to integers, and continuous quantities, those that correspond to real numbers.
+First we'll introduce the idea of using properties to differentiate a possibility among the others. A property can be either a physical one (e.g. the beak color of a bird) or one we define by convention (e.g. the taxonomy name for an animal species). Quantities are properties that have a magnitude: we can compare two different values and determine which one is greater or smaller. For example, groups of individuals can be labeled by their count and distances can be labeled in meters. In particular, we will define discrete quantities, those that correspond to integers, and continuous quantities, those that correspond to real numbers.
 
 Suppose $\edomain_X$ is the domain for animal identification and $X$, its possibilities, are all animal species. Providing good names and definitions for species is a whole scientific subject by itself (i.e. taxonomy) with its own rules (i.e. the International Code of Zoological Nomenclature). The ICZN assignes each species a name composed of two latin words. For example, \statement{Passer domesticus} is the official name for the house sparrow while \statement{Passer italiae} is the one for the Italian sparrow. So, if $\mathcal{Q}$ is the set of all the names for all species, we have a function $q: X \to \mathcal{Q}$ from the species to its name. Since each species is given a unique name the function is invertible as well. This is the most discriminating type of property: one that covers the whole range of possibilities and fully identifies each of them. But this is a special case.
 
-The ICZN also assignes a genus (pl. genera) to each species, which corresponds to the first part of the species name. For example, both aforementioned sparrows are of the genus \statement{Passer} while all swans, black or white, are of the genus \statement{Cygnus}. Now suppose that $\mathcal{Q}$ is the set of all names for all genera and $q: X \to \mathcal{Q}$ is the function that gives us the genus name for each species. We can still use this as a label for our possibilities, but it does not fully identify them. We could also distinguish species by their morphological attributes. For example, if $\mathcal{Q}$ is the set of all colors, we can imagine a partial function $q: X \to \mathcal{Q}$ that gives us the beak color for each species, if they have one. While this is less general, it is still a valid label. In fact, it is with such labels that animal classification begun.
+The ICZN also assignes a genus (pl. genera) to each species, which corresponds to the first part of the species name. For example, both aforementioned sparrows are of the genus \statement{Passer} while all swans, black or white, are of the genus \statement{Cygnus}. Now suppose that $\mathcal{Q}$ is the set of all names for all genera and $q: X \to \mathcal{Q}$ is the function that gives us the genus name for each species. We can still use this as a label for our possibilities, but it does not fully identify them. On a different note, we could decide to distinguish species by their morphological attributes. For example, if $\mathcal{Q}$ is the set of all colors, we can imagine a partial function $q: X \to \mathcal{Q}$ that gives us the beak color for each species, if they have one. While this is less general, it is still a valid label. In fact, it is with such labels that animal classification begun.
 
-Other examples of properties include: postal addresses for buildings, tax ID numbers for people, generation for fundamental particles, position for states of a point particles. In all these cases, the general pattern is that we give a label to a possibility from an established set.
+Other examples of properties include: postal addresses for buildings, tax ID numbers for people, generation for fundamental particles, position for states of a point particles. In all these cases, the general pattern is that we assign a label to a possibility from an established set.
 
 \begin{mathSection}
 	\begin{defn}
@@ -874,7 +919,7 @@ Other examples of properties include: postal addresses for buildings, tax ID num
 	\begin{justification}
 		For the property to be physically meaningful, the domain of $q$ must be in the topology as we must be able to tell experimentally when the property is defined or not. For example, we must be able to tell whether an animal has a beak if we want to define the beak color. Therefore there must be a verifiable statement that is true if the property is defined. This corresponds to the verifiable set $U$, the domain of the property.
 		
-		Similarly, $q$ must be continuous since we must be able to experimentally test the value for the property. For example, we can look at the beak color or we can look up the species name on a bird guide.
+		Similarly, $\mathcal{Q}$ must be a topological space and $q$ must be continuous since we must be able to experimentally test the value for the property. For example, we can look at the beak color or we can look up the species name on a bird guide.
 	\end{justification}
 	\begin{defn}
 		An experimental domain is \textbf{fully identified} by a property if its value is enough to uniquely determine a possibility. Formally, let $(\mathcal{Q}, q)$ be a property for an experimental domain $\edomain_X$. Then it is fully identified if $q: X \to \mathcal{Q}$ is bijective. If $q$ is bijective but defined on a subset $U$ then the domain is \textbf{partially identified} by the property.
@@ -911,24 +956,22 @@ If the possible values of a quantity are the integers (positive or negative) we 
 \end{defn}
 \end{mathSection}
 
-There is a special relationship between discrete quantities and decidability, the ability to test experimentally both the truthfullness and falsehood of a statement. Consider the examples above of discrete quantities: in each case we can experimentally test whether we have a particular value or not. For example, we are always able to tell whether an element has three protons or not.\footnote{Recall that this is not the case with continuous quantities. Because of uncertainty of measurement, we are able to exclude that a given particle has exactly zero mass but it is not possible to conclusevely show that it has zero mass.} It turns out that whenever we have a domain formed of only decidable statements, we can always create a discrete quantity that enumerates all the possibilities.
+There is a special relationship between discrete quantities and decidability, the ability to test experimentally both the truthfullness and falsehood of a statement. Consider the examples above of discrete quantities: in each case we can experimentally test whether we have a particular value or not. For example, we are always able to tell whether an element has three protons or not.\footnote{Recall that this is not the case with continuous quantities. Because of uncertainty of measurement, we are able to exclude that a given particle has exactly zero mass but it is not possible to conclusevely show that it has zero mass.} It turns out that whenever we have a domain consisting of only decidable statements, we can always create a discrete quantity that enumerates all the possibilities.
 
 \begin{mathSection}
 	
 	\begin{defn}
-		An experimental domain $\edomain_X$ is \textbf{decidable} if all statements in the domain are decidable. Formally, for every $\obsdef{\stmt_1}{\expt_1} \in \edomain$ there exists a $\obsdef{\stmt_2}{\expt_2} \in \edomain$ such that $\stmt_1 = \NOT \stmt_2$
+		An experimental domain $\edomain_X$ is \textbf{decidable} if all statements in the domain are decidable. Formally, for every $\obs \in \edomain$ we have $\NOT\obs \in \edomain$.
 	\end{defn}
-	
-	\begin{justification}
-		The idea is that if all tests always terminate, then we can always construct a test for the negation by replacing $\SUCCESS$ with $\FAILURE$ and vice-versa.
-	\end{justification}
-	
+
 	\begin{prop}
-		The set of possibilities $X$ for a decidable domain $\edomain_X$ is a countable essential set. More precisely, there exists a countable essential set $E \subseteq \edomain_X$ such that the set statements associated with $E$ is $X$.
+		The set of possibilities $X$ for a decidable domain $\edomain_X$ is a countable basis.
 	\end{prop}
 	
 	\begin{proof}
-		The decidable domain $\edomain_X$ is already closed under negation, it coincides with the theoretical domain $\tdomain_X$. The set of possibilities $X$ is therefore a set of verifiables statements. Consider a countable essential set $E \subseteq \edomain_X$. Because the possibilities are verifiable statement, they must be generated from $E$. Moreover, since the possibilities are narrowest statement that are not contradictions, they can be generated from $E$ using finite conjunction. Since $E$ is countable and $X$ is generated by $E$ through finite conjunction, $X$ can be at most countable. This means that $X$ is a countable is essential set since it can generate all other verifiable statements through countable disjunction.
+		First we show that $X$ is a basis. The decidable domain $\edomain_X$ is already closed under negation, so it coincides with the theoretical domain $\tdomain_X$. The set of possibilities $X$ is therefore a set of verifiables statements. Since the possibilities can generate all other statements through countable disjunction, $X$ is a basis.
+		
+		Now we show $X$ is countable. Consider a countable basis $\basis \subseteq \edomain_X$. Because the possibilities are verifiable statements, they can be generated from $\basis$. Moreover, since the possibilities are narrowest statement that are not contradictions, they can be generated from $\basis$ using finite conjunction. Since $\basis$ is countable and $X$ is generated by $\basis$ through finite conjunction, $X$ can be at most countable. Therefore $X$ is a countable basis.
 	\end{proof}
 		
 	\begin{defn}
@@ -939,9 +982,9 @@ There is a special relationship between discrete quantities and decidability, th
 	The natural topology of the possibilities $X$ for a domain $\edomain_X$ is the discrete topology if and only if the domain is decidable.
 \end{thrm}
 \begin{proof}
-	Suppose $\edomain_X$ is decidable. Let $U \subseteq X$ be a subset of possibilities. The statement $\stmt = \bigOR\limits_{x \in U} x$ is generated from $X$ through countable disjunction. Since $\edomain_X$ is decidable, $X$ is a countable essential set and $\stmt$ is verifiable. Therefore $U$ is a verifiable set and it is contained in the natural topology. The natural topology of $X$ is discrete by definition.
+	Suppose $\edomain_X$ is decidable. Let $U \subseteq X$ be a subset of possibilities. The statement $\stmt = \bigOR\limits_{x \in U} x$ is generated from $X$ through countable disjunction. Since $\edomain_X$ is decidable, $X$ is a countable basis and $\stmt$ is verifiable. Therefore $U$ is a verifiable set and it is contained in the natural topology. The natural topology of $X$ is discrete by definition.
 	
-	Now suppose $\edomain_X$ is such that the natural topology for its possibilities $X$ is discrete. Let $\stmt = \bigOR\limits_{x \in U} x$ be a statement. Since the topology is discrete, $U$ is part of the topology and $\stmt$ is verifiable. Consider its negation $\NOT\stmt = \bigOR\limits_{x \in U^C} x$. Since the topology is discrete, $U^C$ is also part of the topology and $\NOT\stmt$ is verifiable. This means $\stmt$ is verifiable. Since every statement in $\edomain_X$, the domain is verifiable.
+	Now suppose $\edomain_X$ is such that the natural topology for its possibilities $X$ is discrete. Let $\stmt = \bigOR\limits_{x \in U} x$ be a statement. Since the topology is discrete, $U$ is part of the topology and $\stmt$ is verifiable. Consider its negation $\NOT\stmt = \bigOR\limits_{x \in U^C} x$. Since the topology is discrete, $U^C$ is also part of the topology and $\NOT\stmt$ is verifiable. This means $\stmt$ is decidable. Since every statement in $\edomain_X$, the domain is verifiable.
 \end{proof}
 	
 \begin{prop}
@@ -963,7 +1006,7 @@ There is a special relationship between discrete quantities and decidability, th
 	
 \end{mathSection}
 
-Note that for the link between decidability and discrete quantities to apply, it is crucial the quantity is measurable: that we can actually experimentally ascertain their values. Consider the domain with the possibilities \statement{there is no extra-terrestrial life} and \statement{there is extra-terrestrial life}. We can label 0 the former and 1 the latter. But since we cannot verify the first statement, we cannot really measure 0. Mathematically, the the integers have the discrete topology while the possibilities do not as the domain is not decidable. Therefore the map between them cannot be continuous and the label we gave is not a quantity according to our definition.
+Note that for the link between decidability and discrete quantities to apply, it is crucial the quantity is measurable: that we can actually experimentally ascertain their values. Consider the domain with the possibilities \statement{there is no extra-terrestrial life} and \statement{there is extra-terrestrial life}. We can label 0 the former and 1 the latter. But since we cannot verify the first statement, we cannot really measure 0. Mathematically, the integers have the discrete topology while in this case the possibilities do not as the domain is not decidable. Therefore the map between them cannot be continuous and the label we gave is not a quantity according to our definition.
 
 \subsection{Arbitrary precision and continuous quantities}
 
@@ -975,14 +1018,14 @@ If the possible values of a quantity are the real numbers we say the quantity is
 	\end{defn}
 \end{mathSection}
 
-There is a special relationship between continuous quantities and the ability to measure the value with arbitrary precision. Consider the examples above of continuous quantities: in each can we can never experimentally ascertain the precise value, but we can (in principle) measure it to the desired level of precision.\footnote{Open problem: we define arbitrary precision using rational numbers but it may not be necessary. It may be sufficient to have a set of references, on which is defined an order. The verifiable statement would be of the form \statement{the value is between reference A and reference B}. We would require that there is always one reference between two references.}
+There is a special relationship between continuous quantities and the ability to measure the value with arbitrary precision. Consider the examples above of continuous quantities: in each can we can never experimentally ascertain the precise value, but we can (in principle) measure it to the desired level of precision.\footnote{Open problem: we define arbitrary precision using rational numbers but it may not be necessary. It may be sufficient to have a set of references, on which is defined an order. The verifiable statement would be of the form \statement{the value is between reference A and reference B}. We would require that there is always one reference between two references.} It turns out that whenever we can measure a quantity with arbitrary precision, we can always assign a continuous value to each possibility.
 
 \begin{mathSection}
 	
 	\begin{defn}
-		An experimental domain $\edomain_X$ is said to allow \textbf{arbitrary precision} if it describes a quantity measurable with with arbitrary precision. Formally, there exists an essential set $E \subseteq \edomain_X$ such that:
+		An experimental domain $\edomain_X$ is said to allow \textbf{arbitrary precision} if it describes a quantity measurable with with arbitrary precision. Formally, there exists a countable basis $\basis \subseteq \edomain_X$ such that:
 		\begin{itemize}
-			\item we can define a function $\operatorname{bounds} : E \to \mathbb{Q} \times \mathbb{Q}$ such that $\operatorname{bounds}(\stmt) = (a, b)$ where $a < b$ for all $\stmt \in E$
+			\item we can define a function $\operatorname{bounds} : \basis \to \mathbb{Q} \times \mathbb{Q}$ such that $\operatorname{bounds}(\stmt) = (a, b)$ is a tuple where $a < b$ for all $\stmt \in E$
 			\item if $\stmt = \stmt_1 \AND \stmt_2$, $\operatorname{bounds}(\stmt_1) = (a_1, b_1)$ and $\operatorname{bounds}(\stmt_2) = (a_2, b_2)$, then $\stmt \equiv \contradiction$ if $b_1 \leq a_2$ or $b_2 \leq a_1$ otherwise $\stmt \nequiv \contradiction$ and $\operatorname{bounds}(\stmt) = (\max(a_1, a_2), \min(b_1, b_2))$
 		\end{itemize}
 	\end{defn}
@@ -995,7 +1038,7 @@ There is a special relationship between continuous quantities and the ability to
 		The natural topology of the possibilities $X$ for a domain $\edomain_X$ is homeomorphic to the reals with the standard topology if and only the domain allows arbitrary precision.
 	\end{thrm}
 	\begin{proof}
-		Let $\edomain_X$ allow arbitrary precision and let $E \subseteq \edomain_X$ be the essential set on which the rational bounds are defined. A possibility $x$ is a minterm of such statements. Let $E^x =\{\obs[e]^x_i\}_{i=1}^{\infty} \subset E$ be the statements that are compatible with the possibility $x$. The set is countable since $E$ is countable. Note that the remaining elements of $E$ must be incompatible with at least of element of $E^x$ therefore $\bigAND\limits_{i=1}^\infty\{\obs[e]^x_i\} = x$.
+		Let $\edomain_X$ allow arbitrary precision and let $\basis \subseteq \edomain_X$ be a countable basis on which the rational bounds are defined. A possibility $x$ is a minterm of such statements. Let $\basis_x =\{\obs[e]_i\}_{i=1}^{\infty} \subset \basis$ be the statements that are compatible with the possibility $x$. The set is countable since $\basis$ is countable. Note that the remaining elements of $\basis$ must be incompatible with at least of element of $\basis_x$ therefore $\bigAND\limits_{i=1}^\infty\{\obs[e]^x_i\} = x$.
 		
 		Consider the sequence $\{\stmt_j\}_{j=1}^{\infty}$ where $\stmt_j = \bigAND\limits_{i=1}^j\{\obs[e]^x_i\}$ is the conjunction of the first $j$ elements. For each element we have $\operatorname{bound}(\stmt_j) = (a_j, b_j)$. The sequence formed by $\{a_j\}_{j=1}^{\infty}$ is monotonically increasing as the lower bound cannot decrease during conjunction. The sequence formed by $\{b_j\}_{j=1}^{\infty}$ is monotonically decreasing as the upper bound cannot increase during conjunction. For each $j$ we have $a_j < b_j$, therefore both sequences are bound which means they both converge. Consider the sequence $c_j = b_j - a_j$. It must converge since it's the difference between two converging sequences. It cannot converge to a negative number since $a_j < b_j$ for all $j$. It cannot converge to a positive number: suppose it would, then we would be able to construct a statement strictly narrower than the limit of the sequence $\{\stmt_j\}_{j=1}^{\infty}$, but that is not possible since the limit is the possibility $x$ and only the contradiction is strictly narrower than a possibility. Therefore $c_j$ converges to zero and $a_j$ and $b_j$ are two equivalent Cauchy sequences of rational numbers. We can repeat the constraction by reordering the elements of $E^x$. We would obtain different Cauchy sequences that are also equivalent to the first two. Each possibility $x$, then, is an equivalence class for the Cauchy sequences of the rational numbers. But this is a standard way to construct the real numbers.
 		
@@ -1022,11 +1065,11 @@ There is a special relationship between continuous quantities and the ability to
 	\end{proof}	
 \end{mathSection}
 
-The construction we present here clarifies a couple of imporant aspects about continuous quantities. First of all, finite precision measurements are the starting point. They are what actually exists in practice. Second, the idea that we can always refine the precision of our measurements is clearly an idealization: at some point we are bound to encounter the physical limitation of either our measurement process or of our definitions. For example, measuring the inside of a gas container with a ruler can only get us so far and at some point, since a gas is made of molecules and a lot of empty space in between, defining very precisely when the gas ends and the container begins becomes problematic (and probably pointless). So, while the coarse precision measurement are physically meaningful, the finer measurements may not. Third, real numbers (i.e. the possibilities of an arbitrary precision domain) are abstractions based on the idealization of an arbitrary precision measurement. They are not verifiable statement: we cannot measure a continuous quantity with infinite precision. They exist only in so far that our idealization holds. They are indeed useful ways to model the domain but we should be very cautious to assign them a real tangible status. In other words, $\pi$ is the approximation while $3.14 \pm 0.005$ is something that actually exists.
+The construction we present here clarifies a couple of imporant aspects about continuous quantities. First of all, finite precision measurements are the starting point. They are what actually exists in practice. Second, the idea that we can always refine the precision of our measurements is clearly an idealization: at some point we are bound to encounter the physical limitation of either our measurement process or of our definitions. For example, measuring the inside of a gas container with a ruler can only get us so far and at some point, since a gas is made of molecules and a lot of empty space in between, defining very precisely when the gas ends and the container begins becomes problematic (and probably pointless). So, while the coarse precision measurement are physically meaningful, the finer measurements may not. Third, real numbers (i.e. the possibilities of an arbitrary precision domain) are abstractions based on the idealization of an arbitrary precision measurement. They are not verifiable statement: we cannot measure a continuous quantity with infinite precision. They exist only in so far that our idealization holds. They are indeed useful ways to model the domain but we should be very cautious to assign them a real tangible status.
 
-This is may be countrary to the way many people see the relationship between math and the physical world. Some may feel that the geometric description, with its infinite precision, is the perfect one while the physical one, with the inherent measurement uncertainties, is the less precisise one. Actually, it is quite the opposite: the measurement uncetrainties qualify the extent of our description and knowledge while the geometrical description provides a simplified and idealized account.
+This is may be countrary to the way many people see the relationship between math and the physical world. Some may feel that the geometric description, with its infinite precision, is the perfect one while the physical one, with the inherent measurement uncertainties, is the less precisise one. Actually, it is quite the opposite: the measurement uncetrainties qualify the extent of our description and knowledge while the geometrical description provides a simplified and idealized account. In other words, $3.14 \pm 0.005$ is something that actually exists while $\pi$ is the approximation.
 
-Why, then, are continuous quantities so successful in science? We will look at this question in detail when we introduce the assumption of deterministic and reversible evolution. Without going too much into details, we can anticipate that the role of time is crucial. Time is the quantity that we want to assume continuous (i.e. that there is always an instant between other two). And because we want to describe deterministic and reversible systems, we will have an experimental relationship between time and all other quantities during the evolution. Which means that the way we assume time can be measured (i.e. its topology) will need to be consistent with the way those other quantities can be measured as well.
+Why, then, are continuous quantities so successful in science? We will look at this question in detail when we introduce the assumption of deterministic and reversible evolution. Without going too much into details, we can anticipate that the role of time is crucial. Time is the quantity that we want to assume continuous (i.e. that there is always an instant between other two). And because we want to describe deterministic and reversible systems, we will have an experimental relationship between time and all other quantities during the evolution. Which means that the way we assume time can be measured (i.e. its topology) will need to be consistent with the way those other quantities can be measured as well during deterministic and reversible evolution.
 
 
 \section{Combining domains}
