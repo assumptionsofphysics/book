@@ -65,15 +65,15 @@ We will call a tautology a statement, like \statement{that cat is an animal}, th
 \begin{mathSection}
 	
 	\begin{axiom}\label{def_possibilities}
-		The \textbf{possibilities} of a statement $\stmt$ are the possible truth values allowed by the content of the statement. Formally, on the set $\mathcal{S}$ of all statements is also defined a function $\poss: \mathcal{S} \to \{\{\FALSE, \TRUE\},\{\FALSE\},\{\TRUE\}\}$ such that $\truth(\stmt) \in \poss(\stmt)$ for all $\stmt \in \mathcal{S}$.
+		The \textbf{possibilities} of a statement $\stmt$ are the possible truth values allowed by the content of the statement. Formally, on the set $\mathcal{S}$ of all statements is also defined a function $\possFn: \mathcal{S} \to \{\{\FALSE, \TRUE\},\{\FALSE\},\{\TRUE\}\}$ such that $\truth(\stmt) \in \possFn(\stmt)$ for all $\stmt \in \mathcal{S}$.
 	\end{axiom}
 	
 	\begin{defn}
-		A \textbf{tautology} $\tautology$ is a statement that must be true simply because of its content. That is, $\poss(\stmt) = \{\TRUE\}$.
+		A \textbf{tautology} $\tautology$ is a statement that must be true simply because of its content. That is, $\possFn(\stmt) = \{\TRUE\}$.
 	\end{defn}
 	
 	\begin{defn}
-		A \textbf{contradiction} $\contradiction$ is a statement that must be false simply because of its content. That is, $\poss(\stmt) = \{\FALSE\}$.
+		A \textbf{contradiction} $\contradiction$ is a statement that must be false simply because of its content. That is, $\possFn(\stmt) = \{\FALSE\}$.
 	\end{defn}
 	
 \end{mathSection}
@@ -89,9 +89,9 @@ At first one may expect that the possibilities of the final statement will be de
 		We can always construct a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally: given an arbitrary truth function $f : \mathbb{B}^n \to \mathbb{B}$ and a set of statements $\{\stmt_1, ..., \stmt_n\} \subseteq \mathcal{S}$  whose cardinality matches the arity (i.e. number of arguments) of the function, there exists a unique statement in $\mathcal{S}$, noted as $f(\stmt_1, ..., \stmt_n)$, such that:
 		\begin{itemize}
 			\item its truth value is the result of the truth function $f$: \newline $\truth(f(\stmt_1, ..., \stmt_n)) = f(\truth(\stmt_1), ..., \truth(\stmt_n))$
-			\item its possibilities are consistent with the truth function $f$: \newline $\poss(f(\stmt_1, ..., \stmt_n)) \subseteq f(\poss(\stmt_1) \times ... \times \poss(\stmt_n))$
+			\item its possibilities are consistent with the truth function $f$: \newline $\possFn(f(\stmt_1, ..., \stmt_n)) \subseteq f(\possFn(\stmt_1) \times ... \times \possFn(\stmt_n))$
 			\item all possibilities for all arguments are allowed:
-			\newline let $1 \leq i \leq n$, for every truth value $t_i \in \poss(\stmt_i) \subseteq \mathbb{B}$ there exists a combination of possibilities $(t_1, ..., t_n) \in \poss(\stmt_1) \times ... \times \poss(\stmt_n)$ such that the value for the $i$-th argument is $t_i$ and  $f(t_1, ..., t_n) \in \poss(f(\stmt_1, ..., \stmt_n))$.
+			\newline let $1 \leq i \leq n$, for every truth value $t_i \in \possFn(\stmt_i) \subseteq \mathbb{B}$ there exists a combination of possibilities $(t_1, ..., t_n) \in \possFn(\stmt_1) \times ... \times \possFn(\stmt_n)$ such that the value for the $i$-th argument is $t_i$ and  $f(t_1, ..., t_n) \in \possFn(f(\stmt_1, ..., \stmt_n))$.
 		\end{itemize}
 	This is also holds in the case of infinite, possibly uncountable, arguments.
 	\end{axiom}
@@ -102,13 +102,13 @@ At first one may expect that the possibilities of the final statement will be de
 		
 		On the other hand, it is not possible in general to calculate the possibilities of the result given only the truth value and possibilities of the arguments. A few examples will illustrate the problem.
 		
-		Let $\stmt_1$ be a statement such that $\truth(\stmt_1) = \TRUE$ and $\poss(\stmt_1) = \{\FALSE, \TRUE\}$. Let $\stmt_2$ be a statement such that $\truth(\stmt_2) = \FALSE$ and $\poss(\stmt_2) = \{\FALSE, \TRUE\}$. Let $f : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ be the truth function that returns $\TRUE$ only if the arguments are $\TRUE$ (i.e. the logical conjunction as we'll see later). Consider $f(\stmt_1, \stmt_2)$. We would expect $\truth(f(\stmt_1, \stmt_2)) = \FALSE$ since one of the statement is not $\TRUE$. This is guaranteed by the first property.
+		Let $\stmt_1$ be a statement such that $\truth(\stmt_1) = \TRUE$ and $\possFn(\stmt_1) = \{\FALSE, \TRUE\}$. Let $\stmt_2$ be a statement such that $\truth(\stmt_2) = \FALSE$ and $\possFn(\stmt_2) = \{\FALSE, \TRUE\}$. Let $f : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ be the truth function that returns $\TRUE$ only if the arguments are $\TRUE$ (i.e. the logical conjunction as we'll see later). Consider $f(\stmt_1, \stmt_2)$. We would expect $\truth(f(\stmt_1, \stmt_2)) = \FALSE$ since one of the statement is not $\TRUE$. This is guaranteed by the first property.
 		
-		The possibilities, though, cannot be known without further information. Suppose $\stmt_1$ is \statement{Felix is a cat} and that $\stmt_2$ is \statement{Felix is black}. If these are the actual statements, then we would expect $\poss(f(\stmt_1, \stmt_2)) = \{\FALSE, \TRUE\}$ since Felix could be a black cat or not a black cat. However, suppose $\stmt_1$ is \statement{Felix is a cat} and that $\stmt_2$ is \statement{Felix is a dog}. If these are the actual statements, then we would expect $\poss(f(\stmt_1, \stmt_2)) = \{\FALSE\}$ since Felix cannot be both a cat and a dog. Depending on the extra information we reach different results.
+		The possibilities, though, cannot be known without further information. Suppose $\stmt_1$ is \statement{Felix is a cat} and that $\stmt_2$ is \statement{Felix is black}. If these are the actual statements, then we would expect $\possFn(f(\stmt_1, \stmt_2)) = \{\FALSE, \TRUE\}$ since Felix could be a black cat or not a black cat. However, suppose $\stmt_1$ is \statement{Felix is a cat} and that $\stmt_2$ is \statement{Felix is a dog}. If these are the actual statements, then we would expect $\possFn(f(\stmt_1, \stmt_2)) = \{\FALSE\}$ since Felix cannot be both a cat and a dog. Depending on the extra information we reach different results.
 		
-		While we are not always able to calculate the possibilities, we can put some bounds. Suppose $f$ is as defined before, and both $\stmt_1$ and $\stmt_2$ are tautologies. In this case we would expect $\FALSE \notin \poss(f(\stmt_1, \stmt_2))$ since both statements cannot be false and $f$ only returns false when one of the inputs is false. This justifies the second property: the result can only be possibly true or false if the possibilities of the arguments applied to the truth functions allow for it.
+		While we are not always able to calculate the possibilities, we can put some bounds. Suppose $f$ is as defined before, and both $\stmt_1$ and $\stmt_2$ are tautologies. In this case we would expect $\FALSE \notin \possFn(f(\stmt_1, \stmt_2))$ since both statements cannot be false and $f$ only returns false when one of the inputs is false. This justifies the second property: the result can only be possibly true or false if the possibilities of the arguments applied to the truth functions allow for it.
 		
-		Now suppose $f$ is as before, $\stmt_1$ is a tautology and $\poss(\stmt_2) = \{\FALSE, \TRUE\}$. We would expect that  $\poss(f(\stmt_1, \stmt_2)) = \{\FALSE, \TRUE\}$. Suppose, in fact, that $f(\stmt_1, \stmt_2)$ could only be true. Then we would expect that the arguments can never be false, since $f$ only returns true when both inputs are true. But this can't be since $\stmt_2$ is not a tautology. On the other hand, suppose that $f(\stmt_1, \stmt_2)$ could only be false. This would mean that $\stmt_2$ can only be false, since $f$ only returns false when one of the inputs is false and $\stmt_1$ can only be true. But this, again, can't be. This justifies the third property: the possibilities of the result can never limit the possibilities of the arguments in a way that is contradictory.	
+		Now suppose $f$ is as before, $\stmt_1$ is a tautology and $\possFn(\stmt_2) = \{\FALSE, \TRUE\}$. We would expect that  $\possFn(f(\stmt_1, \stmt_2)) = \{\FALSE, \TRUE\}$. Suppose, in fact, that $f(\stmt_1, \stmt_2)$ could only be true. Then we would expect that the arguments can never be false, since $f$ only returns true when both inputs are true. But this can't be since $\stmt_2$ is not a tautology. On the other hand, suppose that $f(\stmt_1, \stmt_2)$ could only be false. This would mean that $\stmt_2$ can only be false, since $f$ only returns false when one of the inputs is false and $\stmt_1$ can only be true. But this, again, can't be. This justifies the third property: the possibilities of the result can never limit the possibilities of the arguments in a way that is contradictory.	
 	\end{justification}
 \end{mathSection}
 
@@ -246,7 +246,7 @@ The second will be true whenever the first is true. In this case we say the firs
 	The negation of these properties will be noted by $\nnarrower$, $\nbroader$ , $\ncomp$ respectively.
 \end{defn}
 \begin{defn}
-	The elements of a set of statements $S \subseteq \mathcal{S}$ are said to be \textbf{independent} (noted $\stmt_1 \indep \stmt_2$ for a set of two) if their content is such that any combination of their possibilities is allowed. That is, $\poss(f(S)) = f(\bigtimes\limits_{\stmt \in S} \poss(\stmt))$ for any truth function $f : \mathbb{B}^{|S|} \to \mathbb{B}$. The negation of independence, will be noted by $\nindep$.
+	The elements of a set of statements $S \subseteq \mathcal{S}$ are said to be \textbf{independent} (noted $\stmt_1 \indep \stmt_2$ for a set of two) if their content is such that any combination of their possibilities is allowed. That is, $\possFn(f(S)) = f(\bigtimes\limits_{\stmt \in S} \possFn(\stmt))$ for any truth function $f : \mathbb{B}^{|S|} \to \mathbb{B}$. The negation of independence, will be noted by $\nindep$.
 \end{defn}
 
 \end{mathSection}
@@ -269,7 +269,7 @@ Finally, we prove the following propositions that will be useful in later proofs
 		Two statements constructed using the same truth function and two sets of equivalent statements are equivalent. That is: given $f : \mathbb{B}^n \to \mathbb{B}$ then $f(\stmt_1, ..., \stmt_n) \equiv f(\bar{\stmt}_1, ..., \bar{\stmt}_n)$ if $\stmt_i \equiv \bar{\stmt}_i$ for all $1 \leq i \leq n$. This extends to functions of arbitrary arguments.
 	\end{prop}
 	\begin{proof}
-		We first show the proposition holds when $f$ is the negation. Let $\stmt, \bar{\stmt} \in \mathcal{S}$ be two equivalent statements. Since $\stmt \equiv \bar{\stmt}$ we have $\{\TRUE\} = \poss((\stmt \AND \bar{\stmt}) \OR (\NOT \stmt \AND \NOT \bar{\stmt})) = \poss((\NOT \NOT \stmt \AND \NOT \NOT \bar{\stmt}) \OR (\NOT \stmt \AND \NOT \bar{\stmt})) = \poss((\NOT \stmt \AND \NOT \bar{\stmt}) \OR (\NOT (\NOT \stmt) \AND \NOT (\NOT \bar{\stmt})))$. Which means  $\NOT \stmt \equiv \NOT \bar{\stmt}$.
+		We first show the proposition holds when $f$ is the negation. Let $\stmt, \bar{\stmt} \in \mathcal{S}$ be two equivalent statements. Since $\stmt \equiv \bar{\stmt}$ we have $\{\TRUE\} = \possFn((\stmt \AND \bar{\stmt}) \OR (\NOT \stmt \AND \NOT \bar{\stmt})) = \possFn((\NOT \NOT \stmt \AND \NOT \NOT \bar{\stmt}) \OR (\NOT \stmt \AND \NOT \bar{\stmt})) = \possFn((\NOT \stmt \AND \NOT \bar{\stmt}) \OR (\NOT (\NOT \stmt) \AND \NOT (\NOT \bar{\stmt})))$. Which means  $\NOT \stmt \equiv \NOT \bar{\stmt}$.
 		
 		We then show the proposition holds when $f$ is the conjunction. Let $\stmt_1, \stmt_2, \bar{\stmt}_1, \bar{\stmt}_2 \in \mathcal{S}$ be four statements such that $\stmt_1 \equiv \bar{\stmt}_1$ and $\stmt_2 \equiv \bar{\stmt}_2$. Consider
 		\begin{align*}
@@ -1131,7 +1131,7 @@ In terms of topology, the possibilities of the combined domain is the cartesian 
 		Let $\{\edomain_{X_i}\}_{i=1}^{\infty}$ be a countable set of independent experimental domains and $X_i$ their respective possibilities. The set of possibilities of the combined experimental domain $\bigtimes\limits_{i=1}^{\infty} \edomain_{X_i}$ consists of all the possible conjunctions of the possibilities of each domain. That is: $X = \{ \bigAND\limits_{i=1}^{\infty} x_i \, | \, x_i \in X_i \}$. Notationally, we write $\edomain_{\bigtimes\limits_{i=1}^{\infty} X_i}$.
 	\end{prop}
 	\begin{proof}
-		A possibility $x=\bigAND\limits_{i=1}^{\infty}x_i$ for the combined domain is the conjunction of possibilities of each individual domain by \ref{prop_combined_possibility}. Since the domains are independent and since possibilities are neither tautologies or contradictions, we have $\poss(x) = \poss(\bigAND\limits_{i=1}^{\infty}x_i) = \bigAND\limits_{i=1}^{\infty}\poss(x_i)= \bigAND\limits_{i=1}^{\infty} \{\FALSE, \TRUE\} = \{\FALSE, \TRUE\}$. That is, each conjunction $x=\bigAND\limits_{i=1}^{\infty}x_i$ is not a contradiction and therefore is a possibility.
+		A possibility $x=\bigAND\limits_{i=1}^{\infty}x_i$ for the combined domain is the conjunction of possibilities of each individual domain by \ref{prop_combined_possibility}. Since the domains are independent and since possibilities are neither tautologies or contradictions, we have $\possFn(x) = \possFn(\bigAND\limits_{i=1}^{\infty}x_i) = \bigAND\limits_{i=1}^{\infty}\possFn(x_i)= \bigAND\limits_{i=1}^{\infty} \{\FALSE, \TRUE\} = \{\FALSE, \TRUE\}$. That is, each conjunction $x=\bigAND\limits_{i=1}^{\infty}x_i$ is not a contradiction and therefore is a possibility.
 	\end{proof}
 	\begin{defn}
 	Let $\{(X_i, \mathsf{T}_i)\}_{i=1}^{\infty}$ be a countable set of topological spaces. Let $X=\bigtimes\limits_{i=1}^{\infty} X_i$ be the Cartesian product of the points. Let $\mathcal{B}$ the collection of sets of the form $\bigtimes\limits_{i=1}^{\infty} U_{i}$, with $U_i \in \mathsf{T}_i$ and $U_i \neq X_i$ only finitely many times. The topology generated by $\mathcal{B}$ is called the \textbf{product topology}.
