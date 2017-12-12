@@ -216,7 +216,24 @@ Now we have all the elements to define when two statements have the same content
 	
 	For symmetry, we have $s_1 \equiv s_2$ implies $\tautology = (\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2) = (\stmt_2 \AND \stmt_1) \OR (\NOT\stmt_2 \AND \NOT\stmt_1)$. Therefore $s_2 \equiv s_1$.
 	
-	For transitivity, we have TODO.
+	For transitivity, consider the statements:
+	\begin{align*}
+\stmt_{12} &= (\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2) \\
+\stmt_{23} &= (\stmt_2 \AND \stmt_3) \OR (\NOT\stmt_2 \AND \NOT\stmt_3) \\
+\stmt_{13} &= (\stmt_1 \AND \stmt_3) \OR (\NOT\stmt_1 \AND \NOT\stmt_3) \\
+\stmt_{123} &= (\stmt_1 \AND \stmt_2 \AND \stmt_3) \OR (\NOT\stmt_1 \AND \NOT\stmt_2 \AND \NOT\stmt_3).
+\end{align*}
+These statements are true if and only if the values of the respective arguments are the same. Note that $\stmt_{12} \AND \stmt_{23} = \stmt_{123}$. In fact:
+	\begin{align*}
+\stmt_{12} \AND \stmt_{23}  &= ((\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)) \AND ((\stmt_2 \AND \stmt_3) \OR (\NOT\stmt_2 \AND \NOT\stmt_3)) \\
+&= (\stmt_1 \AND \stmt_3) \OR (\NOT\stmt_1 \AND \NOT\stmt_3) \\
+&= ((\stmt_1 \AND \stmt_2) \AND (\stmt_2 \AND \stmt_3)) \OR ((\NOT\stmt_1 \AND \NOT\stmt_2) \AND (\stmt_2 \AND \stmt_3)) \OR \\
+& ((\stmt_1 \AND \stmt_2) \AND (\NOT\stmt_2 \AND \NOT\stmt_3)) \OR ((\NOT\stmt_1 \AND \NOT\stmt_2) \AND (\NOT\stmt_2 \AND \NOT\stmt_3)) \\
+&= (\stmt_1 \AND \stmt_2 \AND \stmt_3) \OR (\NOT\stmt_1 \AND \NOT\stmt_2 \AND \NOT\stmt_3) = \stmt_{123}.
+\end{align*}
+That is, if the truth values are equal pairwise then they are all equal. Similarly, $\stmt_{13} \AND \stmt_{23} = \stmt_{123}$. If $s_1 \equiv s_2$ and $s_2 \equiv s_3$ then $\possFn(\stmt_{12})=\possFn(\stmt_{23})=\{\TRUE\}$. By the second property in axiom \ref{def_functions_of_statement} we also have $\possFn(\stmt_{123}) = \possFn(\stmt_{12} \AND \stmt_{23}) \subseteq \possFn(\stmt_{12}) \AND \possFn(\stmt_{23}) = \{\TRUE\} \AND \{\TRUE\} = \{\TRUE\}$. Therefore $\stmt_{123}$ is a tautology, meaning all three statements cannot possibly have different truth values.
+
+Consider now $\stmt_{13} \AND \stmt_{123} = \stmt_{13} \AND \stmt_{13} \AND \stmt_{23} = \stmt_{13} \AND \stmt_{23} = \stmt_{123}$. By the third property in axiom \ref{def_functions_of_statement}, for each $t_{13} \in \possFn(\stmt_{13})$ we must find suitable $t_{123} \in \possFn(\stmt_{123})$ and $\hat{t}_{123} \in \possFn(\stmt_{13})$ such that $t_{13} \AND t_{123} = \hat{t}_{123}$. But since $\possFn(\stmt_{123}) = \{\TRUE\}$, then we must have $t_{13} \AND \TRUE = \TRUE$ which cannot be satisfied if $t_{13}=\FALSE$. Therefore $\FALSE \notin \possFn(\stmt_{13})$, $\possFn(\stmt_{13})=\{\TRUE\}$, $\stmt_{13}$ is a tautology and $s_1 \equiv s_3$.
 \end{proof}
 
 \end{mathSection}
