@@ -168,7 +168,7 @@ At first one may expect that the possibilities of the final statement will be de
 
 \begin{mathSection}
 	\begin{defn}
-		Given a sequence of statements $\{\stmt_1, ..., \stmt_n\}$, a \textbf{possible truth assignment} is a sequence of truth values $\{t_1, ..., t_n\}$ such that supposing that $\truth(\stmt_i) = t_i$ for all $0 \leq i \leq n$ leads only to inconsistencies of the form $\truth(\stmt) = t$ from some $\stmt \in \mathcal{S}$ and $t \in \mathcal{B}$ when in fact $\truth(\stmt) \neq t$. This definition generalizes to the case of infinite, possibly uncountable, sequences.
+		Given a sequence of statements $\{\stmt_1, ..., \stmt_n\}$, a \textbf{possible truth assignment} is a sequence of truth values $\{t_1, ..., t_n\}$ such that merely supposing that $\truth(\stmt_i) = t_i$ for all $0 \leq i \leq n$ does not leads to inconsistencies. This definition generalizes to the case of infinite, possibly uncountable, sequences.
 	\end{defn}
 	\begin{coro}
 		If $\{t_1, ..., t_n\}$ is a possible truth assignment for $\{\stmt_1, ..., \stmt_n\}$, then $t_i \in \possFn(\stmt_i)$ for all $0 \leq i \leq n$.
@@ -1029,6 +1029,14 @@ The main result of this section is to show that, given two related experimental 
 Suppose we have a way to verify experimentally statements of the type \statement{if the temperature of the mercury column is between 24 and 25 Celsius then its height is between 24 and 25 millimeters}. That is, we can verify that whenever $\stmt_X=$\statement{the temperature of the mercury column is between 24 and 25 Celsius} is verified, then $\stmt_Y=$\statement{the height of the mercury column is between 24 and 25 millimeters} is verified. In that case, we can explore the connection between the two domains within different ranges at ever increasing precision. This means we can narrow the range of possible functions in the same way that we can narrow the range of possible values for a quantity. In other words, those types of statements form an experimental domain where each possibility corresponds to a possible continuous function between the two initial experimental domains.
 
 \begin{mathSection}
+	\begin{axiom}
+		The set of all statements $\mathcal{S}$ is equipped with a function $\narrower : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ such that $\truth(\narrower(\stmt_1, \stmt_2))) = \TRUE$ if and only if $\stmt_1 \narrower \stmt_2$.
+	\end{axiom}
+	\begin{coro}
+		For all $\stmt_1, \stmt_2, \stmt_a, \stmt_b \in \mathcal{S}$ the following are true:
+		$$ (\narrower(\stmt_1, \stmt_a) \AND \narrower(\stmt_2, \stmt_b)) \, \narrower \, ( \narrower(\stmt_1 \AND \stmt_2, \stmt_a \AND \stmt_b)) $$
+		$$ (\narrower(\stmt_1, \stmt_a) \AND \narrower(\stmt_2, \stmt_b)) \, \narrower \, ( \narrower(\stmt_1 \OR \stmt_2, \stmt_a \OR \stmt_b)) $$
+	\end{coro}
 	\begin{defn}
 		Let $\edomain_X$ and $\edomain_Y$ be two experimental domains such that the second is dependent on the first. Let $\basis_X \subseteq \edomain_X$,  $\basis_Y \subseteq \edomain_Y$ be the two countable basis of the respective domains. Suppose the statements of the form
 		$$\obs[u](\obs[e]_x, \obs[e]_y) = \statement{if $\obs[e]_x$ is true then $\obs[e]_y$ must also be true}=``\obs[e]_x \narrower \obs[e]_y"$$
