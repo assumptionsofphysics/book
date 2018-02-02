@@ -167,6 +167,15 @@ Since statements are intangible, there are no limits to the number of arguments 
 At first one may expect that the possibilities of the final statement will be determined by the possibilities of the original statement, but this is not the case in general. Consider the following statements: \statement{Felix is a cat}, \statement{Felix is black} and \statement{Felix is a dog}. All three can independently be true or false. But just knowing that does not allow us to know whether they can be true at the same time. It is because we know the meaning of cat, black and dog that we know that \statement{Felix is a cat and a dog} is a contradiction while \statement{Felix is a cat and black} is not. If the statements where written in a language we didn't understand, we would have no clue. There are, however, some constraints that the possibilities have to satisfy, though we leave the details in the justification that follows as they are a bit technical. The important point is that looking at the possibilities of combined statements tells us something more. Each statement can tell us whether it can be true or false individually while functions of statements can tell us whether those statement can be true or false at the same time.
 
 \begin{mathSection}
+	\begin{defn}
+		Given a sequence of statements $\{\stmt_1, ..., \stmt_n\}$, a \textbf{possible truth assignment} is a sequence of truth values $\{t_1, ..., t_n\}$ such that supposing that $\truth(\stmt_i) = t_i$ for all $0 \leq i \leq n$ does not lead to any other inconsistencies than the fact that $\truth(\stmt_i)$ may actually not be equal to $t_i$ for all $0 \leq i \leq n$. This definition generalizes to the case of infinite, possibly uncountable, sequences.
+	\end{defn}
+	\begin{coro}
+		If $\{t_1, ..., t_n\}$ is a possible truth assignment for $\{\stmt_1, ..., \stmt_n\}$, then $t_i \in \possFn(\stmt_i)$ for all $0 \leq i \leq n$.
+	\end{coro}
+	\begin{proof}
+		Since $\{t_1, ..., t_n\}$ is a possible truth assignment for $\{\stmt_1, ..., \stmt_n\}$, we can suppose $\truth(\stmt_i) = t_i$ for all $0 \leq i \leq n$ without further inconsistencies. Since we must always have that $\truth(\stmt_i) \in \possFn(\stmt_i)$ for all $\stmt_i$, then it must also be that $t_i \in \possFn(\stmt_i)$ for all $0 \leq i \leq n$.
+	\end{proof}
 	\begin{axiom}\label{def_functions_of_statement}
 		We can always construct a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally: given an arbitrary truth function $f : \mathbb{B}^n \to \mathbb{B}$ and a set of statements $\{\stmt_1, ..., \stmt_n\} \subseteq \mathcal{S}$  whose cardinality matches the arity (i.e. number of arguments) of the function, there exists a unique statement in $\mathcal{S}$, noted as $f(\stmt_1, ..., \stmt_n)$, such that:
 		\begin{itemize}
