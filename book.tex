@@ -113,9 +113,11 @@ As a consequence of this connection, we can build a more precise, intuitive and 
 
 \section{Statements}
 
-Statements will be the cornerstone of our general mathematical theory of experimental science. Statements are declarative sentences that are either true or false, like \statement{the mass of the electron is $511 \pm 0.5$ keV} or \statement{that animal is a cat}. In this section we will outline the basic definitions that allow us to combine statements into other statements (e.g. \statement{that animal is black} and \statement{that animal a cat} gives \statement{that animal is a black cat}) and to compare their content (e.g. \statement{the mass of the electron is $511 \pm 0.5$ keV} and \statement{the mass of the electron is $0.511 \pm 0.0005$ MeV} are equivalent).
+Statements, like \statement{the mass of the electron is $511 \pm 0.5$ keV} or \statement{that animal is a cat}, will be the cornerstone of our general mathematical theory of experimental science. In this section we will outline the basic definitions that allow us to combine statements into other statements (e.g. \statement{that animal is black} and \statement{that animal a cat} gives \statement{that animal is a black cat}) and to compare their content (e.g. \statement{the mass of the electron is $511 \pm 0.5$ keV} and \statement{the mass of the electron is $0.511 \pm 0.0005$ MeV} are equivalent).
 
-Science is the systematic study of the physical world through observation and experimentation. Therefore we start our discussion introducing the following principle that formally captures that idea.
+We will start from a somewhat different starting point than what is customary to address a few issues. The first is that we need to develop a formal framework to handle the relationship of statements that are not themselves formally defined.\footnote{This is the main reason we cannot simply use the tools of mathematical logic.} The second issue is that the truth values in our context are found experimentally, not through deduction. The role of the logic framework is to keep track of the consistency between the possible hypothetical cases. That is, we need relationships that capture the idea of causal relationship, that one is true because the other is true, and not merely because they both happen to be true.\footnote{For example, in standard logic the material condition is defined as the truth function $p \to q = \NOT( p \AND \NOT q)$. This means that the proposition ``pi is transcendental" $\to$ ``5 is prime" is true.}
+
+As a starting point, we need to define what science is: the systematic study of the physical world through observation and experimentation. Therefore we start by introducing the following principle that formally captures that idea.
 
 \begin{mathSection}
 	\textbf{Principle of scientific objectivity}.
@@ -138,11 +140,11 @@ Consider assertions like \statement{jazz is marvelous} or \statement{green and r
 
 The idea of statements has their origin in the philosophical tradition of classical logic, \statement{Socrates is a man} being a classic example. Any language can be used to form them, formal or natural, as indeed any language is used in practice. This means we are not going to care what particular syntax (i.e. symbols and grammar rules) is used.\footnote{In general, statements in this context are not necessarily well formed formulas, predicates or similar concepts in the context of mathematical or propositional logic. Scientific investigation in the broad sense of learning from experimentation predates math and formal languages: information about agriculture, astronomy, metallurgy, botany and the like were collected and used even before the written word. Moreover, cognitive scientists have shown that children start using deliberate experimentation at a very young age to understand the world around them, even before their speech is fully developed. Ultimately, that knowledge is encoded in the language of electrical and biochemical signals. Formal languages are indeed extremely helpful in that they allow us to be more precise and to better keep track of possible inconsistencies, but ultimately one always needs natural language to give meaning and context to the mathematical symbols.} In fact, even a grammatically incorrect statement is fine as long as the intent is clear.
 
-On the other hand, we are going to care about the semantics of the statements (i.e. their content and meaning). For example, when we say \statement{Socrates is a man} it has to be clear who is Socrates and what a man is. If it didn't, we would have no idea what to experimentally test and how.
+On the other hand, we are going to care about the semantics of the statements (i.e. their content and meaning). For example, when we say \statement{Socrates is a man} it has to be clear who is Socrates and what a man is. If it didn't, we would have no idea what to experimentally test and how. This is also important because the mere content of a set of statements puts constraints on what can be found to be true or false. Consider the statement \statement{that cat is a swan}. There is nothing to experimentally test here: based on the definitions of cat and bird we know the statement can never be true, no matter what particular cat we are considering. The statement provides no new information. Consider, instead, the statements \statement{that animal is a mammal} and \statement{that animal is a bird}. Based on the content, each of the statement can be found true or false separately, but they can't be found true together.
 
-At the very least, we should be able to know whether there is anything to test in the first place. Consider the statement \statement{that cat is a bird}. There is nothing to experimentally test here: based on the definitions of cat and bird we know the statement can never be true, no matter what particular cat we are considering. The statement provides no new information. Consider, instead, \statement{that cat is an animal}. This statement can never be false. Each statement, then, not only has a truth value but also a set of possibilities: the set of possible truth values the statement is allowed to take based on its content.
+To keep track of this sort of situations, each statement in our framework not only has a truth value but also a set of possibilities: the set of possible truth values the statement is allowed to take based on its content. The truth value will be one of these possible values. Moreover, in every context, for every set of statements, each possible value needs to be hypothetically assigned to that statement in a way that is consistent with the meaning.
 
-We will call a tautology a statement, like \statement{that cat is an animal}, that can only be true and a contradiction a statement, \statement{that cat is a bird}, that can only be false.
+Some statement will only be allowed one truth value. We will call a tautology a statement, like \statement{that cat is an animal}, that can only be true and a contradiction a statement, \statement{that cat is a bird}, that can only be false.
 
 \begin{mathSection}
 	\begin{defn}
@@ -178,7 +180,7 @@ Next we want to keep track of statements whose truths are a function of the trut
 
 Since statements are intangible, there are no limits to the number of arguments one statement may depend on. For example, consider the statement \statement{the mass of the electron is $511 \pm 0.5$ keV} and the set of all the statements of the form \statement{the mass of the electron is exactly $x$ keV} with $510.5 < x < 511.5$. If any of the latter is true then the original statement is true as well. Given that $x$ is a real number, that is uncountably many statements so the original statement can be seen as a function of uncountably many statements.
 
-At first one may expect that the possibilities of the final statement will be determined by the possibilities of the original statement, but this is not the case in general. Consider the following statements: \statement{Felix is a cat}, \statement{Felix is black} and \statement{Felix is a dog}. All three can independently be true or false. But just knowing that does not allow us to know whether they can be true at the same time. It is because we know the meaning of cat, black and dog that we know that \statement{Felix is a cat and a dog} is a contradiction while \statement{Felix is a cat and black} is not. If the statements where written in a language we didn't understand, we would have no clue. There are, however, some constraints that the possibilities have to satisfy, though we leave the details in the justification that follows as they are a bit technical. The important point is that looking at the possibilities of combined statements tells us something more. Each statement can tell us whether it can be true or false individually while functions of statements can tell us whether those statement can be true or false at the same time.
+At first one may expect that the possibilities of the final statement will be determined by the possibilities of the original statement, but this is not the case in general. Consider the following statements: \statement{Felix is a cat}, \statement{Felix is black} and \statement{Felix is a dog}. All three can independently be true or false. But just knowing that does not allow us to know whether they can be true at the same time. It is because we know the meaning of cat, black and dog that we know that \statement{Felix is a cat and a dog} is a contradiction while \statement{Felix is a cat and black} is not. If the statements where written in a language we didn't understand, we would have no clue. In fact, in our framework, it is by looking at the possibilities of \statement{Felix is a cat and a dog} that we learn that \statement{Felix is black} and \statement{Felix is a dog} cannot both be true as that does not allow a consistent truth assignment. That is: the possibilities combined with truth functions allow us to capture the semantic relationships of our informal statements.
 
 \begin{mathSection}
 
@@ -187,24 +189,9 @@ At first one may expect that the possibilities of the final statement will be de
 		$$\truth(f(\stmt_1, ..., \stmt_n)) = f_{\mathbb{B}}(\truth(\stmt_1), ..., \truth(\stmt_n))$$
 		This also holds in the case of infinite, possibly uncountable, arguments.
 	\end{axiom}
-	\begin{justification}
-		Since this is an axiom, there is technically nothing to prove. However, we need to make sure the starting points of our framework are well justified.
-		
-		The idea that we can use statements to construct other statements is something well established in logic. The first property simply states that the truth of the final statement is calculable from the truth of the arguments.
-		
-		On the other hand, it is not possible in general to calculate the possibilities of the result given only the truth value and possibilities of the arguments. A few examples will illustrate the problem.
-		
-		Let $\stmt_1$ be a statement such that $\truth(\stmt_1) = \TRUE$ and $\possFn(\stmt_1) = \{\FALSE, \TRUE\}$. Let $\stmt_2$ be a statement such that $\truth(\stmt_2) = \FALSE$ and $\possFn(\stmt_2) = \{\FALSE, \TRUE\}$. Let $f : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ be the truth function that returns $\TRUE$ only if the arguments are $\TRUE$ (i.e. the logical conjunction as we'll see later). Consider $f(\stmt_1, \stmt_2)$. We would expect $\truth(f(\stmt_1, \stmt_2)) = \FALSE$ since one of the statement is not $\TRUE$. This is guaranteed by the first property.
-		
-		The possibilities, though, cannot be known without further information. Suppose $\stmt_1$ is \statement{Felix is a cat} and that $\stmt_2$ is \statement{Felix is black}. If these are the actual statements, then we would expect $\possFn(f(\stmt_1, \stmt_2)) = \{\FALSE, \TRUE\}$ since Felix could be a black cat or not a black cat. However, suppose $\stmt_1$ is \statement{Felix is a cat} and that $\stmt_2$ is \statement{Felix is a dog}. If these are the actual statements, then we would expect $\possFn(f(\stmt_1, \stmt_2)) = \{\FALSE\}$ since Felix cannot be both a cat and a dog. Depending on the extra information we reach different results.
-		
-		While we are not always able to calculate the possibilities, we can put some bounds. Suppose $f$ is as defined before, and both $\stmt_1$ and $\stmt_2$ are tautologies. In this case we would expect $\FALSE \notin \possFn(f(\stmt_1, \stmt_2))$ since both statements cannot be false and $f$ only returns false when one of the inputs is false. This justifies the second property: the result can only be possibly true or false if the possibilities of the arguments applied to the truth functions allow for it.
-		
-		Now suppose $f$ is as before, $\stmt_1$ is a tautology and $\possFn(\stmt_2) = \{\FALSE, \TRUE\}$. We would expect that  $\possFn(f(\stmt_1, \stmt_2)) = \{\FALSE, \TRUE\}$. Suppose, in fact, that $f(\stmt_1, \stmt_2)$ could only be true. Then we would expect that the arguments can never be false, since $f$ only returns true when both inputs are true. But this can't be since $\stmt_2$ is not a tautology. On the other hand, suppose that $f(\stmt_1, \stmt_2)$ could only be false. This would mean that $\stmt_2$ can only be false, since $f$ only returns false when one of the inputs is false and $\stmt_1$ can only be true. But this, again, can't be. This justifies the third property: the possibilities of the result can never limit the possibilities of the arguments in a way that is contradictory.	
-	\end{justification}
 \end{mathSection}
 
-To better characterize truth functions, we borrow ideas and definitions from Boolean algebra which is the branch of algebra that operates on truth values. Boolean algebra is fundamental in logic and computer science, since every digital circuit ultimately is implemented on two-state systems (e.g. high/low voltage, up/down magnetization).  One of its main results is that all truth functions can be expressed by combining the following three simple operations: negation (i.e. logical NOT), conjunction (i.e. logical AND) and disjunction (i.e. logical OR).
+To better characterize truth functions, we borrow ideas and definitions from Boolean algebra which is the branch of algebra that operates on truth values. Boolean algebra is fundamental in logic and computer science, since every digital circuit ultimately is implemented on two-state systems (e.g. high/low voltage, up/down magnetization).  The most fundamental elements in that algebra are the following three simple operations: negation (i.e. logical NOT), conjunction (i.e. logical AND) and disjunction (i.e. logical OR).
 
 Suppose $\stmt_1$ = \emph{``the sauce is sweet"} and $\stmt_2$ = \emph{``the sauce is sour"}. We can apply the three operations to make this table:
 
@@ -224,27 +211,25 @@ Most languages typically already provide similar operations, as the examples sho
 
 \begin{mathSection}
 	\begin{defn}
-		The \textbf{negation or logical NOT} is the function $\NOT : \mathbb{B} \to \mathbb{B}$ that takes a truth value and returns its opposite. That is: $\NOT \TRUE = \FALSE$ and $\NOT \FALSE = \TRUE$. The negation $\NOT \stmt$ of a statement $\stmt$ is the statement whose truth is the negation of the truth of $\stmt$.
+		The \textbf{negation or logical NOT} is the function $\NOT : \mathbb{B} \to \mathbb{B}$ that takes a truth value and returns its opposite. That is: $\NOT \TRUE = \FALSE$ and $\NOT \FALSE = \TRUE$. We also call negation $\NOT: \mathcal{S} \to \mathcal{S}$ the related function on statements.
 	\end{defn}
 	
 	\begin{defn}
-		The \textbf{conjunction or logical AND} is the function $\AND : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ that returns $\TRUE$ only if all the arguments are $\TRUE$. That is: $\TRUE \AND \TRUE = \TRUE$ and $\TRUE \AND \FALSE =\FALSE \AND \TRUE =\FALSE \AND \FALSE = \FALSE$. The conjunction $\stmt_1 \AND \stmt_2$ is the statement whose truth is the conjunction of the truths of $\stmt_1$ and $\stmt_2$.
+		The \textbf{conjunction or logical AND} is the function $\AND : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ that returns $\TRUE$ only if all the arguments are $\TRUE$. That is: $\TRUE \AND \TRUE = \TRUE$ and $\TRUE \AND \FALSE =\FALSE \AND \TRUE =\FALSE \AND \FALSE = \FALSE$. We also call conjunction $\AND : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ the related function on statements.
 	\end{defn}
 	
 	\begin{defn}
-		The \textbf{disjunction or logical OR} is the function $\OR : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ that returns $\FALSE$ only if all the arguments are $\FALSE$. That is: $\FALSE \OR \FALSE = \FALSE$ and $\TRUE \OR \FALSE =\FALSE \OR \TRUE =\TRUE \OR \TRUE = \TRUE$. The disjunction $\stmt_1 \OR \stmt_2$ is the statement whose truth is the disjunction of the truths of $\stmt_1$ and $\stmt_2$.
+		The \textbf{disjunction or logical OR} is the function $\OR : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ that returns $\FALSE$ only if all the arguments are $\FALSE$. That is: $\FALSE \OR \FALSE = \FALSE$ and $\TRUE \OR \FALSE =\FALSE \OR \TRUE =\TRUE \OR \TRUE = \TRUE$.  We also call disjunction $\OR : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ the related function on statements.
 	\end{defn}
 
 	\begin{prop}
 	The set of all statements $\mathcal{S}$ is closed under negation, arbitrary conjunction and arbitrary disjunction.
 \end{prop}
 \begin{proof}
-	Negation, arbitrary intersection and arbitrary union are particular truth functions. The statement associated with them always exists by axiom \eqref{def_functions_of_statement}.
+	Negation, arbitrary intersection and arbitrary union are particular truth functions. Their output always exists by axiom \eqref{def_functions_of_statement}.
 \end{proof}\end{mathSection}
 
-
-Since the disjunctive normal form allows us to write all functions in terms of just negation, conjunction and disjunction, it is sufficient to study those operations to understand the properties of all functions.
-Now we have all the elements to define when two statements have the same content. Consider the two statements \statement{that animal is a cat} and \statement{quell'animale \`{e} un gatto}: they mean the same thing but in different languages. Consider \statement{the mass of the electron is $511 \pm 0.5$ keV} and \statement{the mass of the electron is $0.511 \pm 0.0005$ MeV}: they represent the same measurement but in different units. So, how can we express the fact that two statements $\stmt_1$ and $\stmt_2$ mean the same thing? The idea is that they can never have opposite truth values. If the first is true, then the second must be true. If the first is false, then the second must be false. That is: either $\stmt_1 \AND \stmt_2$ is true or $\NOT\stmt_1 \AND \NOT\stmt_2$ is true. In other words $(\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)$ can only be true: it's a tautology.
+Now we have all the elements to define when two statements have the same content. Consider the two statements \statement{that animal is a cat} and \statement{quell'animale \`{e} un gatto}: they mean the same thing but in different languages. Consider \statement{the mass of the electron is $511 \pm 0.5$ keV} and \statement{the mass of the electron is $0.511 \pm 0.0005$ MeV}: they represent the same measurement but in different units. So, how can we express the fact that two statements $\stmt_1$ and $\stmt_2$ mean the same thing? The idea is that they can never be assigned opposite truth values. If we assigned true to the first, then the second must be true as well. If we assigned false to the first, then the second must be false. That is: either $\stmt_1 \AND \stmt_2$ is true or $\NOT\stmt_1 \AND \NOT\stmt_2$ is true for all consistent truth assignments. In other words $(\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)$ can only be true: it's a tautology.\footnote{This technique allows us to do something analogous to model theory. To statements are equivalent if their truth is equal for all consistent truth assignements, which in our framework play the part of the models. But in our context they are only hypothetical: there isn't a model in which \statement{this is a cat} and another in which \statement{this is a dog}. There is only one truth value, the one we find experimentally.}
 
 \begin{mathSection}
 
@@ -265,6 +250,8 @@ Now we have all the elements to define when two statements have the same content
 \end{mathSection}
 
 Again, we want to stress that this notion of equivalence is not based on the truth value (i.e. whether the statements happen to be both true or false) or on properties in \ref{boolean_properties} (i.e. whether they are the same statement): it is based on the possibilities (i.e. whether the two statements can possibly have a different truth) and therefore on the content of the statement. Also note that the semantics defines the possibilities but not the truth value, unless the statement is a tautology or a contradiction. For example, even if the meaning of \statement{the next race is going to be won by Secretariat} is clear, we may be none the wiser about its truthfulness. Intuitively, the equivalence we defined here answers the question: do these two statements carry the same information? Is experimentally testing the first the same as experimentally testing the second? If that's the case, they are essentially equivalent to us. So much so, that from now on we will implicitly assume two different statements to be inequivalent.\footnote{Technically, when we'll say that $\stmt$ is a statement we actually mean $\stmt$ is an equivalence class of statements. We are not going to be explicit about the distinction, though, as we feel it simply distracts without adding greater clarity. We'll let the context determine what is meant.}
+
+There are a number of useful properties that statement equivalence satisfies.
 
 \begin{mathSection}
 
@@ -317,7 +304,7 @@ Again, we want to stress that this notion of equivalence is not based on the tru
 	\end{proof}
 \end{mathSection}
 
-These operations and properties define the \textbf{algebra of statements}. The relationships we found are the logical identities of classical logic. These are exactly what we need to make sure the truth values of all our statements are consistent. Note, though, that in our framework they are simply inherited from the properties of truth functions and are not separate axioms.
+These operations and properties define the \textbf{algebra of statements}. While we started from a slightly different premise, the relationships we found are the logical identities of classical logic. These are exactly what we need to make sure the truth values of all our statements are consistent.
 
 Equivalence is not the only semantic relationship that we want to capture. Consider the contents of the following:
 \begin{description}
@@ -394,7 +381,7 @@ The second will be true whenever the first is true. In this case we say the firs
 \end{proof}
 \end{mathSection}
 
-Depending on context, a statement could be narrower than another even if it is describing different qualities. For example, \statement{this harp seal is white} is narrower than \statement{this harp seal is less than one year old}. Since harp seals have white fur only for their first month, the first one can never be true while the second is not. Intuitively, if a statement implies another then it is narrower than the other. For example, \statement{this harp seal is white} implies \statement{this harp seal is less than one year old} so it is narrower.\footnote{We considered using the term implication directly, but it seems that it leads to confusion. Implication in classical logic is something different: it is simply another truth function. Moreover, saying that a contradiction is narrower than all other statements sounds better than saying that a contradiction implies all other statements.}
+Statement narrowness captures more than just the idea of one statement is more specific than another. Consider \statement{this harp seal is white} and \statement{this harp seal is less than one year old}. Since harp seals have white fur only for their first month, the first one can never be true while the second is not. Therefore \statement{this harp seal is white} $\narrower$ \statement{this harp seal is less than one year old}. By the same token, we also have \statement{I lighted the fuse} $\narrower$ \statement{the bomb will go off}. That is, narrowness can also capture causal relationships, which is essential if we want to develop a basic theory of scientific investigation.\footnote{We considered using the term implication directly, but it seems that it leads to confusion. Implication in classical logic is something different: it is simply another truth function. Moreover, saying that a contradiction is narrower than all other statements sounds better than saying that a contradiction implies all other statements.}
 
 Note that independence is not transitive and pair-wise independence is not sufficient. Consider the following statements for an ideal gas:
 \begin{enumerate}
@@ -404,9 +391,9 @@ Note that independence is not transitive and pair-wise independence is not suffi
 \end{enumerate}
 Since the three quantities are linked by the equation of state $PV=nRT$, any two statements are independent but the three together aren't. This notion of independence is similar, and in fact related, to statistical independence and linear independence.
 
-Negation, conjunction and disjunction as we have defined them form the two-values Boolean algebra and they are sufficient to express any truth function. Consider the statement $\stmt=$\statement{the sauce is sweet and sour or it is neither}. This is a function of the two statements $\stmt_1$ and $\stmt_2$ defined before: if we know whether $\stmt_1$ and $\stmt_2$ are true, we can tell whether $\stmt$ is true as well. The idea is that we can express the function as all possible cases that make the result true. For example, $\stmt$ will be true if the sauce is sweet and sour or if it is not sweet and not sour. That is: $(\stmt_1 \AND \stmt_2) \OR (\NOT \stmt_1 \AND \NOT \stmt_2)$. Similarly, the statement \statement{the sauce is not sweet and sour} can be expressed as $(\stmt_1 \AND \NOT \stmt_2) \OR (\NOT \stmt_1 \AND \stmt_2) \OR (\NOT \stmt_1 \AND \NOT \stmt_2)$ since is going to be true in all cases except the one where the sauce is sweet and sour.
+We finish this section by showing how every truth function can be naturally expressed in terms of negation, conjunction and disjunction. Consider the statement $\stmt=$\statement{the sauce is sweet and sour or it is neither}. This is a function of the two statements $\stmt_1=$\statement{the sauce is sweet} and $\stmt_2=$\statement{the sauce is sour} defined before: if we know whether $\stmt_1$ and $\stmt_2$ are true, we can tell whether $\stmt$ is true as well. The idea is that we can express the function as all possible cases that make the result true. For example, $\stmt$ will be true if the sauce is sweet and sour or if it is not sweet and not sour. That is: $(\stmt_1 \AND \stmt_2) \OR (\NOT \stmt_1 \AND \NOT \stmt_2)$. Similarly, the statement \statement{the sauce is not sweet and sour} can be expressed as $(\stmt_1 \AND \NOT \stmt_2) \OR (\NOT \stmt_1 \AND \stmt_2) \OR (\NOT \stmt_1 \AND \NOT \stmt_2)$ since is going to be true in all cases except the one where the sauce is sweet and sour.
 
-Each of the cases is the conjunction of all arguments where each one appears only once, negated or not. We call these expressions minterms. A function can always be expressed as the disjunction of all the minterms for which the function is true. This is called its disjunctive normal form.%TODO maybe explain the term?
+Each of the cases is the conjunction of all arguments where each one appears only once, negated or not. We call these expressions minterms. A function can always be expressed as the disjunction of all the minterms for which the function is true. This is called its disjunctive normal form because it is a canonical way to express the function in terms of disjunctions.
 
 \begin{mathSection}
 	\begin{defn}\label{def_minterm}
@@ -424,7 +411,6 @@ Each of the cases is the conjunction of all arguments where each one appears onl
 		This procedure can be generalized to the case where the number of arguments of $f$ and the number of minterms is infinite.
 	\end{proof}
 \end{mathSection}
-
 
 With these tools in place we are in a position to formulate models that are universal and non-contradictory. These models will be a collection of statements with a well defined content, whose truth value will be discovered experimentally.
 
