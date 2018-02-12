@@ -1184,7 +1184,8 @@ There is a special relationship between continuous quantities and the ability to
 	\begin{defn}
 		An experimental domain $\edomain_X$ is said to allow \textbf{arbitrary precision} if it describes a quantity measurable with arbitrary precision. Formally, there exists a countable basis $\basis \subseteq \edomain_X$ such that:
 		\begin{itemize}
-			\item we can define a function $\operatorname{bounds} : \basis \to \mathbb{Q} \times \mathbb{Q}$ such that $\operatorname{bounds}(\stmt) = (a, b)$ is a tuple where $a < b$ for all $\stmt \in E$
+			\item we can define a function $\operatorname{bounds} : \basis \to \mathbb{Q} \times \mathbb{Q}$ such that $\operatorname{bounds}(\stmt) = (a, b)$ is a tuple where $a < b$ for all $\stmt \in \basis$
+			\item given any $\stmt \in E$ we can always find a finite sequence $\{\stmt_i\}^n_{i=1} \subset \basis$ such that $\stmt_i \neq \stmt$ for all $1 \leq i \leq n$ and $\bigOR^n_{i=1} \stmt_i = \stmt$
 			\item if $\stmt = \stmt_1 \AND \stmt_2$, $\operatorname{bounds}(\stmt_1) = (a_1, b_1)$ and $\operatorname{bounds}(\stmt_2) = (a_2, b_2)$, then $\stmt \equiv \contradiction$ if $b_1 \leq a_2$ or $b_2 \leq a_1$ otherwise $\stmt \nequiv \contradiction$ and $\operatorname{bounds}(\stmt) = (\max(a_1, a_2), \min(b_1, b_2))$
 		\end{itemize}
 	\end{defn}
