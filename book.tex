@@ -1021,14 +1021,18 @@ The main result of this section is to show that, given two related experimental 
 Suppose we have a way to verify experimentally statements of the type \statement{if the temperature of the mercury column is between 24 and 25 Celsius then its height is between 24 and 25 millimeters}. That is, we can verify that whenever $\stmt_X=$\statement{the temperature of the mercury column is between 24 and 25 Celsius} is verified, then $\stmt_Y=$\statement{the height of the mercury column is between 24 and 25 millimeters} is verified. In that case, we can explore the connection between the two domains within different ranges at ever increasing precision. This means we can narrow the range of possible functions in the same way that we can narrow the range of possible values for a quantity. In other words, those types of statements form an experimental domain where each possibility corresponds to a possible continuous function between the two initial experimental domains.
 
 \begin{mathSection}
-	\begin{axiom}
-		The set of all statements $\mathcal{S}$ is equipped with a function $\narrower : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ such that $\truth(\narrower(\stmt_1, \stmt_2))) = \TRUE$ if and only if $\stmt_1 \narrower \stmt_2$.
+	\begin{axiom}\label{def_implication_of_statement}
+	Given two statements, we can always construct another one that is true only if the first statement is narrower than the second. Formally, the set of all statements $\mathcal{S}$ is equipped with a function $\narrower : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ such that $\truth(\narrower(\stmt_1, \stmt_2))) = \TRUE$ if and only if $\stmt_1 \narrower \stmt_2$.
 	\end{axiom}
 	\begin{coro}
 		For all $\stmt_1, \stmt_2, \stmt_a, \stmt_b \in \mathcal{S}$ the following are true:
 		$$ (\narrower(\stmt_1, \stmt_a) \AND \narrower(\stmt_2, \stmt_b)) \, \narrower \, ( \narrower(\stmt_1 \AND \stmt_2, \stmt_a \AND \stmt_b)) $$
 		$$ (\narrower(\stmt_1, \stmt_a) \AND \narrower(\stmt_2, \stmt_b)) \, \narrower \, ( \narrower(\stmt_1 \OR \stmt_2, \stmt_a \OR \stmt_b)) $$
-	\end{coro}
+		$$ \narrower(\stmt_1, \tautology) \equiv \tautology $$
+		$$ \narrower(\stmt_1, \contradiction) \equiv \contradiction $$
+		$$ \narrower(\tautology, \stmt_1) \equiv \contradiction $$
+		$$ \narrower(\contradiction, \stmt_1) \equiv \tautology $$
+		\end{coro}
 	\begin{defn}
 		Let $\edomain_X$ and $\edomain_Y$ be two experimental domains such that the second is dependent on the first. Let $\basis_X \subseteq \edomain_X$,  $\basis_Y \subseteq \edomain_Y$ be the two countable basis of the respective domains. Suppose the statements of the form
 		$$\obs[u](\obs[e]_x, \obs[e]_y) = \statement{if $\obs[e]_x$ is true then $\obs[e]_y$ must also be true}=``\obs[e]_x \narrower \obs[e]_y"$$
@@ -1038,10 +1042,16 @@ Suppose we have a way to verify experimentally statements of the type \statement
 		TODO: sufficient to show it has a countable basis.
 	\end{proof}
 \begin{prop}
-	The possibilities for a relationship domain $\edomain_{C(X,Y)}$ are the continuous functions between the possibilities $X$ and $Y$.
+	The possibilities for a relationship domain $\edomain_{C(X,Y)}$ coincide with the possible experimental relationships between $X$ and $Y$. That is, for each possibility $z$ of $\edomain_{C(X,Y)}$ there exists a continuous function $f : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} \narrower(x, f(x))$.
 \end{prop}
 \begin{proof}
-	TODO: tentative strategy is to show that a possibility needs to identify a possible causal relationship and that a causal relationship will determine a possibility (as it will say which terms in the basis are true and which ones are false).
+	Let $z$ be a possibility of $\edomain_{C(X,Y)}$. Let $x \in X$ and $y \in Y$ be two possibilities of the respective space $x \narrower y$ if and only if for all pairs $(e_x, e_y) \in \basis_X \times \basis_Y$  such that $x \narrower e_x$ and $e_x \narrower e_y$ we also have $y \narrower e_y$. Since by \ref{prop_poss_is_minterm} $z$ is a minterm of the basis of $\edomain_{C(X,Y)}$, it true it determines the truth values of all statements of the form $\narrower (e_x, e_y)$ and therefore we will either have $z \AND \narrower (x, y) \equiv z$ or $z \AND \narrower (x,y) \equiv \contradiction$.
+	
+	Given that $\edomain_Y$ depends on $\edomain_Y$, there exists a continuous function $f : X \to Y$ such that $x \narrower f(x)$ for all $x \in X$. This means that, for each possibility $z$ of the relationship domain, there must exist an $f$ such that $z \AND \bigAND\limits_{x\in X} \narrower(x,f(x)) \nequiv \contradiction$ or $z$ would not allow a consistent truth assignment. Combining with the result of the previous paragraph, $z \AND \bigAND\limits_{x\in X} \narrower(x,f(x)) \equiv z$.
+	
+	Now consider $e_x \narrower e_y$ from some $e_x \in \basis_X$ and $e_y \in \basis_Y$. Since $x \narrower f(x)$ for some continuous function $f$, $e_x \narrower e_y$ is true if and only if for all $x \in e_x$ we have $f(x) \in e_y$. Therefore either $\bigAND\limits_{x\in X} \narrower(x,f(x)) \AND \narrower(e_x, e_y) = \bigAND\limits_{x\in X} \narrower(x,f(x))$ or $\bigAND\limits_{x\in X} \narrower(x,f(x)) \AND \narrower(e_x, e_y) = \contradiction$. Recall that $z$ is a collection of minterms and that for each $z$ we must have an $f$ such that $\bigAND\limits_{x\in X} \narrower(x,f(x)) \AND z \nequiv \contradiction$. This means that we also have $\bigAND\limits_{x\in X} \narrower(x,f(x)) \AND z \equiv \bigAND\limits_{x\in X} \narrower(x,f(x))$.
+	
+	Combining all results, we have $z \AND \bigAND\limits_{x\in X} \narrower(x,f(x)) \equiv z \equiv \bigAND\limits_{x\in X} \narrower(x,f(x))$.
 \end{proof}
 \end{mathSection}
 
