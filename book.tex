@@ -959,6 +959,12 @@ What we have ended up with is a conceptual framework that captures the necessary
 
 \chapter{Relationships and combinations of domains}
 
+We continue our investigation on the fundamental mathematical structures for experimental science by studying what happens when we have more than one experimental domain. We will define \textbf{experimental relationships} between experimental domains, which capture either causal or inference relationships between them. We will see that these correspond to continuous functions in the natural topology.
+
+We will take two or more domains and merge all the experimental information that can be gathered through them into a \textbf{combined domain}. We will study how the possibilities of the combined domain will depend not only on the original domains, but also on the relationships between them. These will also affect the natural topology that can vary from the product topology all the way to the disjoint union topology.
+
+We will also show that experimental relationships, under suitable conditions, can also be studied experimentally by constructing the \textbf{relationship domain} for which its possibilities correspond to the possible relationships. To conclude, we study \textbf{properties} and \text{quantities} which we use to label the possibilities of an experimental domain.
+
 \section{Dependence and equivalence between domains}
 
 The first thing we want to be able to characterize, when dealing with more than one domain, is when there exists a relationship between them. For example, consider the domains for the temperature and height of a mercury column or the domains for the temperature and density of water. How do we express, in this framework, the fact that these domains are connected?
@@ -1034,6 +1040,13 @@ More precisely, consider the verifiable statement $\obs_Y=$\statement{the height
 \end{mathSection}
 
 Given the equivalence, we will simply use experimental relationship to describe the link between the two domains.
+
+Before ending this section, a note on category theory for those already familiar with it. We have seen that two experimental domains $\edomain_X$ and $\edomain_Y$ are equivalent if they are made of equivalent statements: if they allow a one to one correspondence that preserve the equivalence of their statements. This does imply, for example, that the possibilities are also equivalent but there is more to it.
+
+Suppose we define some type of operation on one domain. For example, on the experimental domain for the temperature of a mercury column we define an increase by one Celsius; or on the experimental domain for the amount of gasoline in a tank we define the sum of two possible amounts. These will correspond either to operations on the domain (e.g. $f : \edomain_X \to \edomain_X$) or on its possibilities (e.g. $+ : X \times X \to X$). But by doing so we are also defining them on all equivalent domains as well: in the end, they are made of equivalent statements. Therefore we are also defining an increase of the height of the mercury column and the sum of the monetary value of the gasoline.
+
+If we capture some physical feature by putting some mathematical structure on one domain, then all equivalent domain will inherit the same structure. If the possibilities of one domain have some particular topology, the possibilities of an equivalent domain also have the same topology. If the possibilities of one domain form a vector space, then the possibilities of an equivalent domain form a vector space. More generally, domain equivalence is an isomorphism in whatever category (e.g. topological space, group, vector space, ...) used to model the experimental domain. As we'll see much later, this is fundamental since deterministic and reversible evolution means equivalence of all domains describing the past, present and future. Therefore deterministic and reversible motion is not ``just" a one to one map.
+
 
 \section{Combining domains}
 
@@ -1120,7 +1133,7 @@ Another special case is combining a domain $\edomain_X$ with another $\edomain_Y
 
 The last special case we consider is when the domains are incompatible, that is all verifiable statements of one are incompatible with the verifiable statements of the other. As you will see, this is one of the cases where the residual possibility behaves differently from all the others.\footnote{In fact, this is what prompted us to introduce the residual possibility.} Suppose $\edomain_X$ is the domain to classify a particular specimen as an animal and $\edomain_Y$ is the domain to classify it as a plant. If we take a verifiable statement from the first, such as \statement{that specimen has fur}, then it will be incompatible with a verifiable statement from the other, such as \statement{that specimen has lobed leaves}. The only way we can combine the possibilities is to take an established possibility of one (e.g. \statement{this specimen is a cat}) and combine it with the residual possibility of the other (e.g. \statement{this specimen is not a plant}). In other words, the combined possibilities are the union of the possibilities of the two domains (e.g. all possible plants and all possible animals).
 
-In terms of the topology, the established possibilities of the combined domain is the disjoint union of the established possibilities of the original domains and its natural topology is the disjoint union topology (or coproduct topology). 
+In terms of the topology, the established possibilities of the combined domain is the disjoint union of the established possibilities of the original domains and its natural topology is the disjoint union topology (or co-product topology). 
 
 \begin{mathSection}
 	\begin{defn}
@@ -1167,15 +1180,9 @@ In terms of the topology, the established possibilities of the combined domain i
 	\end{proof}
 \end{mathSection}
 
-TODO: better motivate categories
+Another note on category theory, before we end this section. If we have two one dimensional euclidean spaces we can decide whether to take their product (i.e. the plane) or their co-product (i.e. the disjoint union of the two lines). For experimental domain we do not choose: it is what it is. There is no way to combine the two experimental domain for temperature and height of the same mercury column and get the Cartesian product of their possibilities. Though combining two independent domains mimics the categorical product and combining two incompatible domains mimics the categorical co-product, it is the semantic (and ultimately physical) relationship between them that decides which product we have.
 
-Before ending this section, a note on category theory for those already familiar with it. A morphism of an experimental domain is an experimental relationship: $\erel : \edomain_1 \to \edomain_2$ such that $f(\obs) \equiv \obs$. It is a map that preserves the semantic content of each statement and therefore what is verified by an experimental test.
-
-As we noted before, though, for experimental domains we do not get to choose what morphisms we have on the different domains. If we take two one dimensional euclidean spaces as topological spaces, we can choose what continuous function (if any) we have between them.  If we take the two experimental domain for temperature and height of the same mercury column, we have no choice. So the set of morphisms between two experimental domains either has one element or none. Indeed, this maps to what happens in science: whether there is a relationship between two physical quantities is something that we have to find out, not arbitrarily decide.
-
-The same applies to the combination of domains. If we have two one dimensional euclidean spaces we can decide whether to take their product (i.e. the plane) or their coproduct (i.e. the disjoint union of the two lines). For experimental domain we do not choose: it is what it is. There is no way to combine the two experimental domain for temperature and height of the same mercury column and get the Cartesian product of their possibilities. Though combining two independent domains mimics the categorical product and combining two incompatible domains mimics the categorical coproduct, it is the semantic (and ultimately physical) relationship between them that decides which product we have.
-
-In later chapters, though, we will find some limited use for category concepts by ``forgetting" the semantic. Topological spaces will only care how the possibilities are distinguished in terms of verifiable sets. Therefore, while the domains for temperature of two different thermometers are not equivalent, their natural topologies are equivalent because we are assuming that they are both fully characterized by a scalar quantity that can be measured with arbitrary precision. In the same vein, Abelian groups will only care how distributions can be composed into other distributions. Non-abelian groups will only care how transformations can be composed into other transformations. And so on. But it is the pattern defined by the combination of experimental domain that is really giving us the meta-structure common to all categories.
+One way to look at it is that the mathematical structures ``forget" the equivalence and only look at the structure. Topological spaces will only care how the possibilities are distinguished in terms of verifiable sets. Therefore, while the domains for temperature of two different thermometers are not equivalent, their natural topologies are equivalent because we are assuming that they are both fully characterized by a scalar quantity that can be measured with arbitrary precision. In the same vein, Abelian groups will only care how distributions can be composed into other distributions. Non-abelian groups will only care how transformations can be composed into other transformations. And so on. But, for us, it is the pattern defined by the combination of experimental domain that is justifying the meta-structure common to all categories.
 
 \section{Experimental domain for experimental relationships}
 
