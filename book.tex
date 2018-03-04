@@ -1455,6 +1455,25 @@ It should be possible to define the requirement for arbitrary precision more abs
 
 It may be necessary to require an ordering. This could be defined on the verifiable statements themselves. The idea would be to keep the basis of contiguous intervals. And then assign a partial ordering to those elements that are incompatible, which means they do not overlap. That is: if we have two contiguous intervals that do not overlap we can tell which is before the other.
 
+\subsection{Chapter 2 - limited precision}
+
+What type of space we have once we recognize that precision can't be arbitrary? How is it different from the continuous case? There are a few issues that are already identified.
+
+The limited precision case can't simply lead to a discrete topology. The standard topology of the real is not the limit of the integer topology since it is not discrete. Most likely, the limited precision case will need to have uncountable possibilities so that the limit to arbitrary precision can work well.
+
+The main cause of confusion is that, in the continuous case, overlapping of the precision and compatibility of the statements is the same. So ``position is between 0 and 1 meters" and ``position is between 2 and 3 meters" are both incompatible and not overlapping. This cannot be the case for limited precision. The possibilities themselves must be incompatible with each other but some of them must overlap. That is, suppose that 1 unit is the precision limit, the statements ``the position is between 0 and 1" and ``the position is between 0.5 and 1.5" are incompatible because if we measure one we cannot measure the other. If we could measure them both, we would measure at a smaller precision. So, overlapping cannot be defined in terms of incompatibility.
+
+We can define overlapping in terms of precision: suppose we have following arbitrary precision statements.
+\begin{description}
+	\item $\stmt_1=$\statement{the position is between 0 and 1 meter}
+	\item $\stmt_2=$\statement{the position is between 0.5 and 1.5 meter}
+	\item $\stmt_3=$\statement{the position is between 2 and 3 meter}
+\end{description}
+
+The precision associated to all statements will be one meter. The precision for $\stmt_1\OR\stmt_2$ will be one meter and a half while the precision for $\stmt_1\OR\stmt_3$ will be two meters. That is: the precision for non overlapping statements sums. In the limited precision case, we can still recognize if two statement are not overlapping by checking the precision of the disjunction. It it simply sums, they do not overlap.
+
+This has far reaching consequences. The measure associated to the real numbers is really the precision. Since we are saying that two incompatible statements are not necessarily non overlapping, we are saying that the ``measure" we define for limited precision does not sum if the open sets are disjoint. That is: it is not a measure mathematically. This means that many concepts built on top of the measure (e.g. probability, integration) may need to be revisited as well.
+
 \section{Main quest}
 
 This chapter includes partially developed ideas toward the main goal of the work.
