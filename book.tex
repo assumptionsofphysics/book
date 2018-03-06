@@ -1425,19 +1425,25 @@ To sum up, we should regard the real numbers for what they are: the limit of an 
 
 \chapter{Exploratory section}
 
-\section{Side quests}
+\section{Side tracks}
 
-This chapter includes ideas for side projects. These are problems left open as they are not critical for the foundation of the work, but are nonetheless interesting.
+This chapter lists ideas to be explored further. These are problems left open as they are not critical for the foundation of the work, but are nonetheless interesting. Some of these may very well turn out to be dead ends or not as interesting as they sound.
 
 \subsection{Chapter 1 - can we construct set theory?}
 
 One thing to explore is whether the same ideas can be extended to be used as a foundation for set theory. From what I understand, axiomatic set theory is developed to avoid paradoxes: proposition that if true prove their falsehood. For example: (Russel's paradox) does the set of all sets that do not contain themselves contain itself? Or (Berry's paradox) the set of all natural numbers that can be described in fewer than twenty words of the English language, which leads to ``the least natural number that cannot be described in fewer than twenty words of the English language", which we used less than twenty words to describe.
 
-The way this framed is that one needs to avoid the ability to construct predicates that allow to construct paradoxes. It uses two basic strategy. The first is to constrain statements to only ones formed with a formal language, which avoids the paradoxes of the semantic kind. The downside is that all ``real objects" are thrown out. The second strategy is to divide elements (things that can be contained) from classes (things that can contain things).
+The way this is framed is that one needs to avoid the ability to construct predicates that allow to construct paradoxes. It uses two basic strategy. The first is to constrain statements to only ones formed with a formal language, which avoids the paradoxes of the semantic kind. The downside is that all ``real objects" are thrown out. The second strategy is to divide elements (things that can be contained) from classes (things that can contain things). Since the machinery we introduced puts at the same level ``logical" relationships (i.e. $\stmt$ and $\NOT\stmt$ can't both be true) with ``semantic" relationships (i.e. \statement{this is a dog} and \statement{this is a cat} can't both be true) maybe it can be used to solve both problems at the same time, without sacrificing the semantic.
 
-Maybe this can be approached in a different way. We start with statements, like is done in this work, that are primary undefined objects. The formal operations do not ``construct" sentences, but simply pick statements from the universal set of statements. And since all statements have a well defined truth value, they can't be paradoxes. An object could simply be a set of statements (i.e. a particular chair is everything we can say about a chair, the number one is all the statements that we can say about it). A set, in particular, would be the set of statements that say what objects it contains. A predicate would be a function that given an element would give a statement.
+One possible point of attack. We start with statements, like is done in this work, that are primary undefined objects. The formal operations do not ``construct" sentences, but simply pick statements from the universal set of statements. And since all statements have a well defined truth value, they can't be paradoxes. The basic axioms, then, enumerate all the rules one has to follow to construct statements from statements (i.e. that do not generate paradoxes). An object could simply be a set of statements (i.e. a particular chair is everything we can say about a chair, the number one is all the statements that we can say about it). A set, in particular, would be the set of statements that say what objects it contains. A predicate would be a function that given an element would give a statement. 
 
 There may be a certain amount of circular reference in the basic definitions, but this does not seem to be a problem for computer languages.
+
+\subsection{Chapter 1 - homogeneity of an experimental domain}
+
+Probably an important property a domain can have is whether all possibilities can be equally verified. That is, the ``extra-terrestrial life" domain is not homogeneous because one possibility can be verified while the other cannot. While when we measure space, each point is equally verifiable from the other. It is not clear how this intuitive notion should be formalized, but it should have consequences. For example, it should give us a complete domain (since the residual possibility is not verifiable) and most likely it will give us approximately verifiable possibilities. In fact, it may coincide with approximately verifiable possibilities.
+
+It could be something like: suppose $\stmt_a \narrower \stmt$ and $\stmt_b \narrower \stmt$. If the domain is homogeneous then for each $\stmt_a \narrower \stmt_1 \narrower \stmt$ we can find a $\stmt_a \narrower \stmt_2 \narrower \stmt$. If there is a verifiable statement in the middle in one case, there is a verifiable statement in the middle in the other case as well.
 
 \subsection{Chapter 2 - predictive relationships}
 
@@ -1474,21 +1480,21 @@ The precision associated to all statements will be one meter. The precision for 
 
 This has far reaching consequences. The measure associated to the real numbers is really the precision. Since we are saying that two incompatible statements are not necessarily non overlapping, we are saying that the ``measure" we define for limited precision does not sum if the open sets are disjoint. That is: it is not a measure mathematically. This means that many concepts built on top of the measure (e.g. probability, integration) may need to be revisited as well.
 
-\section{Main quest}
+\section{Main track}
 
-This chapter includes partially developed ideas toward the main goal of the work.
+This chapter includes partially developed ideas toward the main goal of the work. Some of these may very well turn out to be dead ends.
 
 \subsection{Sequences/probability}
 
-A source? is a sequence of truth values $s=\{t_i\}$. Two sources $s=\{t_i\}$ and $s=\{u_i\}$ are similar $s_1 \sim s_2$ if given $\epsilon > 0$ we can find an $N \in \mathbb{N}$ such that for all $a,b>N$ we have $\left| \frac{1}{a} \sum\limits_{i=1}^a t_i - \frac{1}{b} \sum\limits_{i=1}^b u_i \right| < \epsilon$.
+One thing we'll need to recover/justify is probability theory. We already have sigma algebras, so we are not that far. One possible ideas is to link convergence of a sequence of truth values with the value of probability.
 
-A source? is stable? if it self-similar $s \sim s$. The average of a stable source converges as it satisfies the Cauchy condition.
+Here's a possible approach. A source is a sequence of truth values $s=\{t_i\}$. Two sources $s=\{t_i\}$ and $s=\{u_i\}$ are similar $s_1 \sim s_2$ if given $\epsilon > 0$ we can find an $N \in \mathbb{N}$ such that for all $a,b>N$ we have $\left| \frac{1}{a} \sum\limits_{i=1}^a t_i - \frac{1}{b} \sum\limits_{i=1}^b u_i \right| < \epsilon$. That is, at some point the number of truths from one is close to the number of truths of the other. A source is stable if it self-similar $s \sim s$. The average of a stable source converges as it satisfies the Cauchy condition. That average we call the probability.
+
+This means that if we have a sequence of experimental domains, all constructed the same, we can create a sequence for each verifiable statement and assign a probability to all. Then we can prove that the probability is a measure and it sums to 1.
 
 \subsection{Thermodynamics}
 
-We study a reducible systems. The state is a distribution over the state of the parts. Deterministic and reversible processes conserve information entropy. Non-deterministic processes increase information entropy. Non-reversible processes decrease information entropy.
-
-Deterministic and reversible processes lead to Hamiltonian mechanics.
+At some point we'll have to recover/justify thermodynamics. The idea is to study non-deterministic evolution, as opposed to deterministic/reversible evolution which gives Hamiltonian mechanics. We still have a reducible system, so the state is a distribution over the state of the parts. Deterministic and reversible processes conserve information entropy. Non-deterministic processes increase information entropy. Non-reversible processes decrease information entropy. Deterministic and reversible processes lead to Hamiltonian mechanics. Non-deterministic processes lead to max entropy.
 
 Suppose you have a non-deterministic process. Either because it is influenced by an external system or because of unknown internal degrees of freedom. Since the evolution is non-deterministic, information entropy increases.
 
@@ -1503,6 +1509,14 @@ Suppose two systems come into contact. The entropy of each one constraint by its
 Define temperature $\frac{1}{T_1} = \frac{\partial I_1}{\partial E_1}$: at equilibrium the two systems have the same temperature. Note that temperature cannot be zero since the information entropy at equilibrium is a function of the energy, and not the other way around.
 
 \subsection{Better notation for differential calculus}
+
+To really understand/derive the correct physical relationships we'll need to use differential geometry. The standard vector calculus does not generalize and does not lead to the correct way of thinking. The notation used in differential geometry (for vectors and covectors) and their definitions (i.e. space of derivations, space of real functions of derivations) makes no physical sense. We need to define better concepts and notation that fit the physics better.
+
+In terms of concepts, the main idea is to start from the integral operators and see the differential operators as the limit of recursive subdivisions. This is the opposite of what is typically done, but is what is closer to the physics. That is: mass over a finite region is what we measure and the density is the limit for which we make the region shrink. Same thing for a vector: a finite curve is what we have and the idea that we can divide it into infinitesimal parts, each described by a vector, is a limit. Since we start from a different point, some theorems get reversed.
+
+For example, given an $n$-dimensional space, we will have a function $F$ from an $m$-dimensional sub-space to a real number. These functions are going to be linear, in the sense that if the function applied to the union of disjoint region is equal to the sum of the function of the individual regions: $F(\bigcup X_i) = \sum F(X_i)$ if $X_i \cap X_j = \emptyset$. So, for example, $F(\emptyset) = F(\emptyset \cup \emptyset) = F(\emptyset) + F(\emptyset) = 0$ always. We want to be able to show that $F=\int f(dx^m)$ where $f$ is an $m$-form. Stokes theorem should be reversed. That is, we start by saying that if we have a function on $m$-dimensional subspace we can always create one that is $m+1$ dimensional by applying the $m$ dimensional to the boundary. That is $F_{(m+1)}(U) = F_{(m)}(\partial U)$. We then show/define the corresponding $f_{(m+1)} $ as the exterior derivative of $f_{m}$. Already we have $F_{(m+2)}(U) = F_{(m+1)}(\partial U) = F_{(m)}(\partial \partial U) = F_{(m+2)}(\emptyset) = 0$ since a boundary has no boundary. So double exterior derivative is the zero form. This is the generalization of $curl(grad)=0$ and $div(curl)=0$. 
+
+Here is a first stab at the notation.
 
 Exterior product: $\theta_1 \wedge \theta_2$. Anti-symmetric: rotating 180 degrees is the same as reflection.
 
