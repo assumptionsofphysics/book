@@ -957,13 +957,13 @@ We have seen that, because of the disjunctive normal form, each verifiable and t
 
 What we have ended up with is a conceptual framework that captures the necessary elements of scientific practice and codifies them into a symbolic representation with a well defined meaning. There is no guesswork as to what the points of our spaces are: they are the possibilities, statements that provide a complete prediction for the domain. We do not have to provide an ``interpretation" as to what the sets of a topology represent: they correspond to verifiable statements. All the objects have a clear definition and meaning from the start, we know which ones are necessary and to what extent they are physical or idealized. This will provide a much more solid foundation to the rest of the work, which will ultimately allow us to understand much better the fundamental physical theories and the connections between them and to other areas of scientific thought.
 
-\chapter{Relationships and combinations of domains}
+\chapter{Domain relationships and combinations}
 
 We continue our investigation on the fundamental mathematical structures for experimental science by studying what happens when we have more than one experimental domain. We will define \textbf{experimental relationships} between experimental domains, which capture either causal or inference relationships between them. We will see that these correspond to continuous functions in the natural topology.
 
 We will take two or more domains and merge all the experimental information that can be gathered through them into a \textbf{combined domain}. We will study how the possibilities of the combined domain will depend not only on the original domains, but also on the relationships between them. These will also affect the natural topology that can vary from the product topology all the way to the disjoint union topology.
 
-We will also show that experimental relationships, under suitable conditions, can also be studied experimentally by constructing the \textbf{relationship domain} for which its possibilities correspond to the possible relationships. To conclude, we study \textbf{properties} and \text{quantities} which we use to label the possibilities of an experimental domain.
+We will also show that experimental relationships, under suitable conditions, can also be studied experimentally by constructing the \textbf{relationship domain} for which its possibilities correspond to the possible relationships. To conclude, we study \textbf{properties} and \textbf{quantities} which we use to label the possibilities of an experimental domain.
 
 \section{Dependence and equivalence between domains}
 
@@ -988,19 +988,29 @@ An inference relationship is essentially an injection that preserves equivalence
 		An experimental domain $\edomain_Y$ is \textbf{dependent} on another experimental domain $\edomain_X$, noted $\edomain_Y \subseteq \edomain_X$, if there exists an inference relationship $\erel: \edomain_Y \to \edomain_X$.
 	\end{defn}
 	\begin{coro}
-		Let $\edomain_{X}$ be an experimental domain. Let $\edomain_{Y}$ be a subset of statements of $\edomain_{X}$ that form an experimental domain (i.e. contains contradiction, tautology and is closed under finite conjunction and countable disjunction). Then $\edomain_{Y} \subseteq \edomain_{X}$.
+		Let $\edomain_X$ be an experimental domain. Let $\edomain_Y$ be a subset of statements of $\edomain_X$ that form an experimental domain (i.e. contains contradiction, tautology and is closed under finite conjunction and countable disjunction). Then $\edomain_Y \subseteq \edomain_X$.
 	\end{coro}
 	\begin{proof}
-		Let $\iota : \edomain_Y \to \edomain_X$ be the inclusion map. This is an inference relationship since $\iota(\stmt_Y) = \stmt_Y \equiv \stmt_Y$ therefore $\edomain_{Y}$ depends on $\edomain_X$.
+		Let $\iota : \edomain_Y \to \edomain_X$ be the inclusion map. This is an inference relationship since $\iota(\stmt_Y) = \stmt_Y \equiv \stmt_Y$ therefore $\edomain_Y$ depends on $\edomain_X$.
 	\end{proof}
 	\begin{defn}
 		Two experimental domains $\edomain_X$ and $\edomain_Y$ are \textbf{equivalent} $\edomain_X \equiv \edomain_Y$ if $\edomain_X$ depends on $\edomain_Y$ and vice-versa.
 	\end{defn}
 	\begin{coro}
-		For every experimental domain $\edomain_{X}$ we have $\edomain_{X} \equiv \edomain_{X}$.
+		Domain equivalence satisfies the following properties:
+		\begin{itemize}
+			\item reflexivity: $\edomain \equiv \edomain$
+			\item symmetry: if $\edomain_X \equiv \edomain_Y$ then $\edomain_Y \equiv \edomain_X$
+			\item transitivity: if $\edomain_X \equiv \edomain_Y$ and $\edomain_Y \equiv \edomain_Z$ then $\edomain_X \equiv \edomain_Z$
+		\end{itemize}
+		and is therefore an \textbf{equivalence relationship}.
 	\end{coro}
 	\begin{proof}
-		Let $\idFn_{\edomain_X} : \edomain_X \to \edomain_X$ be the identity function. This is an inference relationship since $\idFn_{\edomain_X}(\stmt_X) = \stmt_X \equiv \stmt_Y$ therefore $\edomain_{X}$ depends on $\edomain_X$. Equivalence follows by symmetry.
+		For reflexivity, let $\idFn_{\edomain} : \edomain \to \edomain$ be the identity function. This is an inference relationship since $\idFn_{\edomain}(\stmt) = \stmt \equiv \stmt$ and therefore $\edomain$ depends on $\edomain$. Equivalence follows by symmetry.
+		
+		For symmetry, suppose $\edomain_X \equiv \edomain_Y$, then $\edomain_Y \subseteq \edomain_X$ and $\edomain_X \subseteq \edomain_Y$ and therefore $\edomain_Y \equiv \edomain_X$.
+		
+		For transitivity, suppose $\edomain_X \equiv \edomain_Y$ and $\edomain_Y \equiv \edomain_Z$. Then we have the following inference relationships: $\erel_{XY} : \edomain_X \to \edomain_Y$, $\erel_{YX} : \edomain_Y \to \edomain_X$, $\erel_{YZ} : \edomain_Y \to \edomain_Z$, $\erel_{ZY} : \edomain_Z \to \edomain_Y$. We can define the function compositions $\erel_{XZ} = \erel_{YZ} \circ \erel_{XY}$ and $\erel_{ZX} = \erel_{YX} \circ \erel_{ZY}$. These are inference relationship since $\stmt_X \equiv \erel_{XY}(\stmt_X) \equiv \erel_{YZ}(\erel_{XY}(\stmt_X))$ and $\stmt_Z \equiv \erel_{ZY}(\stmt_Z) \equiv \erel_{YX}(\erel_{XZ}(\stmt_Z))$. Therefore $\edomain_X \equiv \edomain_Z$.
 	\end{proof}
 \end{mathSection}
 
@@ -1011,9 +1021,9 @@ Let's continue with our example. We can re-express the relationship between doma
 
 Note that the direction of the causal relationship is the opposite of the inference. $X$ causes $Y$ and we can infer $Y$ from $X$. Chains of events are in terms of possibilities and start with the cause and end with the effect. Chains of inferences are in terms of verifiable statements and start with the result and end with the origin.
 
-The reverse does not work in general. Even if we know the final possibility, we may not be able to reconstruct the initial possibility: if the water density is exactly 999.9 kg/$m^3$, the temperature could be either 0.52 or 7.6 Celsius because density peaks at 4 Celsius. For the same reason, a measurement of the cause is not equivalent to a measurement of the effect: verifying that \statement{the water temperature is between 0 and 0.52 Celsius} will mean that \statement{the water density is between 999.8 and 999.9 kg/$m^3$} but not the other way around. Because of the peak in density, we can learn more about the temperature by measuring it directly.
+The reverse does not work in general. Even if we know the final possibility, we may not be able to reconstruct the initial possibility: if the water density is exactly 999.9 kg/$m^3$, the temperature could be either 0.52 or 7.6 Celsius because density peaks at 4 Celsius. For the same reason, a measurement of the cause is not equivalent to a measurement of the effect: verifying that \statement{the water temperature is between 0 and 0.52 Celsius} will mean that \statement{the water density is between 999.8 and 999.9 kg/$m^3$} but not the other way around. Because of the peak in density, we can learn more about the temperature by measuring it directly so the deduced statement is not equivalent.
 
-Another important consideration is that, in order to be consistent, the function $y=f(x)$ has to be continuous. The general idea is the following: if we say that we can only measure both the temperature and height of a mercury column with finite precision, we have to make sure that when we use the causal relationship for inference, a finite precision measurement of height will correspond to a finite precision measurement of temperature. This means a small change in height has to correspond to a small change in temperature: the function is continuous.
+Another important consideration is that, in order to be consistent, the function $y=f(x)$ has to be continuous. The general idea is the following: if we say that we can only measure both the temperature and height of a mercury column with finite precision, we have to make sure that when we can use the causal relationship for inference, a finite precision measurement of height will correspond to a finite precision measurement of temperature. This means a small change in height has to correspond to a small change in temperature: the function is continuous.
 
 More precisely, consider the verifiable statement $\obs_Y=$\statement{the height of the mercury column is between 24 and 25 millimeters}. The height of the mercury column $y$ is within the verifiable set $U(\obs_Y) = (24, 25)$ millimeters. We can then infer that the temperature must be in the reverse image of the possible heights $f^{-1}(U_Y(\obs_Y))=(24,25)$ Celsius. But this means that, indirectly, we have experimentally verified that $x$ is in $f^{-1}(U_Y(\obs_Y))$. And if $\edomain_X$ is really the domain of the verifiable statements for the temperature, then it must contain one that matches \statement{the temperature of the mercury column is between 24 and 25 Celsius}. In other words, $f^{-1}(U_Y(\obs_Y))$ must be a set in the topology of $X$ and the function is continuous.\footnote{In topology, continuity is defined in terms of the sets in the topology and not in terms of small changes as in analysis. When using the standard topology on real numbers, the two coincide but not in general.}
 
@@ -1039,20 +1049,20 @@ More precisely, consider the verifiable statement $\obs_Y=$\statement{the height
 	\end{proof}
 \end{mathSection}
 
-Given the equivalence, we will simply use experimental relationship to describe the link between the two domains.
+Since for each inference relationship we have causal relationship and vice-versa, we will simply use experimental relationship to describe the link between the two domains.
 
 Before ending this section, a note on category theory for those already familiar with it. We have seen that two experimental domains $\edomain_X$ and $\edomain_Y$ are equivalent if they are made of equivalent statements: if they allow a one to one correspondence that preserve the equivalence of their statements. This does imply, for example, that the possibilities are also equivalent but there is more to it.
 
 Suppose we define some type of operation on one domain. For example, on the experimental domain for the temperature of a mercury column we define an increase by one Celsius; or on the experimental domain for the amount of gasoline in a tank we define the sum of two possible amounts. These will correspond either to operations on the domain (e.g. $f : \edomain_X \to \edomain_X$) or on its possibilities (e.g. $+ : X \times X \to X$). But by doing so we are also defining them on all equivalent domains as well: in the end, they are made of equivalent statements. Therefore we are also defining an increase of the height of the mercury column and the sum of the monetary value of the gasoline.
 
-If we capture some physical feature by putting some mathematical structure on one domain, then all equivalent domain will inherit the same structure. If the possibilities of one domain have some particular topology, the possibilities of an equivalent domain also have the same topology. If the possibilities of one domain form a vector space, then the possibilities of an equivalent domain form a vector space. More generally, domain equivalence is an isomorphism in whatever category (e.g. topological space, group, vector space, ...) used to model the experimental domain. As we'll see much later, this is fundamental since deterministic and reversible evolution means equivalence of all domains describing the past, present and future. Therefore deterministic and reversible motion is not ``just" a one to one map.
+This means that if we capture some physical feature using some mathematical structure on one domain, then all equivalent domain will inherit the same structure. If the possibilities of one domain have some particular topology, the possibilities of an equivalent domain also have the same topology. If the possibilities of one domain form a vector space, then the possibilities of an equivalent domain form a vector space. More generally, domain equivalence is an isomorphism in whatever category (e.g. topological space, group, vector space, ...) used to model the experimental domain. As we'll see much later, this is fundamental since deterministic and reversible evolution means equivalence of the domains describing the past, present and future states. Therefore deterministic and reversible motion is not ``just" a one to one map.
 
 
 \section{Combining domains}
 
 In this section we want to understand what happens when we combine statements from different domains. For example, suppose we have the experimental domain for the pressure of an ideal gas and the experimental domain for its temperature. We can mix verifiable statements with conjunction and disjunction as in \statement{the pressure is between 1 and 1.1 KPa}$\AND$\statement{the temperature is between 20 and 21 C} creating a new domain. How can we characterize this combined experimental domain?
 
-The main result of this section is that the possibilities of the combined domain depend on how compatible the verifiable statements of the domains are. In particular, if the statements from the different domains are independent from each other, then the possibilities of the combined domain will be the scalar product of those for the individual domain. On the other hand, if the statements are incompatible with each other then possibilities for the combined domain will be the disjoint union of the possibilities of the individual domains.
+The main result of this section is that the possibilities of the combined domain depend on how compatible the verifiable statements of the domains are. In particular, if the verifiable statements are independent across domains (e.g. the horizontal and vertical position of an object), then the possibilities of the combined domain will be the scalar product of those for the individual domains. On the other hand, if the verifiable statements are incompatible across domains (e.g. plant and animal identification), then the possibilities for the combined domain will be the disjoint union of the possibilities of the individual domains.
 
 Suppose $\edomain_X$ is the experimental domain generated by the two verifiable statements \statement{the patient is dead} and \statement{the patient is alive} and a second one $\edomain_Y$ generated by the two verifiable statements \statement{the patient is not in a coma} and \statement{the patient is in a coma}. The given verifiable statements also correspond to the possibilities for the respective domain.
 
@@ -1071,7 +1081,7 @@ The third one is a contradiction: the patient cannot be dead and in a coma. Ther
 		Let $\{\edomain_{X_i}\}_{i=1}^{\infty}$ be a countable set of experimental domains. The \textbf{combined experimental domain} $\edomain_{X} = \bigtimes\limits_{i=1}^{\infty} \edomain_{X_i}$ is the experimental domain generated from all statements in $\{\edomain_{X_i}\}_{i=1}^{\infty}$ by finite conjunction and countable disjunction.
 	\end{defn}
 	\begin{proof}
-		We need to show that the combined experimental domain is indeed an experimental domain. It will contain the tautology and the contradiction since any of the original experimental domains contains them. It is closed under finite conjunction and countable disjunction by construction. To show that it has a countable basis, for each $i=1..\infty$ let $\basis_i \in \edomain_{X_i}$ be a countable basis. Consider $\basis=\bigcup\limits_{i=1}^\infty \basis_i$. From this set we can generate any $\edomain_{X_i}$ and therefore we can also generate all of $\edomain_{X}$. $\basis$ is a basis and it is countable since it is the union of a countable set of countable elements. Note that is precisely because the basis needs to remain countable that we cannot extend the operation to an uncountable set of domains.
+		We need to show that the combined experimental domain is indeed an experimental domain. It will contain the tautology and the contradiction since any of the original experimental domains contains them. It is closed under finite conjunction and countable disjunction by construction. To show that it has a countable basis, for each $i=1..\infty$ let $\basis_i \in \edomain_{X_i}$ be a countable basis. Consider $\basis=\bigcup\limits_{i=1}^\infty \basis_i$. From this set we can generate any $\edomain_{X_i}$ and therefore we can also generate all of $\edomain_{X}$. $\basis$ is a basis and it is countable since it is the union of a countable set of countable elements. Note that it is precisely because the basis needs to remain countable that we cannot extend the operation to an uncountable set of domains.
 	\end{proof}
 	
 	\begin{prop}\label{prop_combined_possibility}
@@ -1084,7 +1094,7 @@ The third one is a contradiction: the patient cannot be dead and in a coma. Ther
 
 \subsection{Independent domains}
 
-A special case is when combining two independent domains. For example, the domain for the pressure and the domain for the volume of an ideal gas are independent because a measurement on one tells us nothing about the other. Similarly, the domain for the shape and the domain for the color of an object are independent. In these cases, we can have any combination of the possibilities: any pressure with any volume or any color with any shape.
+A special case is when combining two independent domains. For example, the domain for the pressure and the domain for the volume of an ideal gas are independent because a measurement on one tells us nothing about the other. Similarly, the domain for the shape and the domain for the color of an object are independent. In these cases, we can have any combination of possibilities: any pressure with any volume or any color with any shape.
 
 In terms of topology, the possibilities of the combined domain is the Cartesian product of the possibilities of the original domains and its natural topology is the product topology.\footnote{Note that the topology is quite naturally the product topology and not the box topology. The box topology would require countable conjunction and is therefore discarded. The fact that the correct topology is the one most natural to define confirms again the appropriateness of our framework.}
 
