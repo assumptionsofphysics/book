@@ -156,11 +156,11 @@ Some statements will only be allowed one truth value. We will call a tautology a
 	Given a collection of statements $\{\stmt_i\}^n_{i=1}$, a \textbf{consistent truth assignment} is a collection of truth values $\{t_i\}^n_{i=1}$ such that it is logically consistent to simultaneously suppose that $\truth(\stmt_i) = t_i$ for all $1 \leq i \leq n$. That is, from those assumptions it cannot be proven that $\truth(\stmt_i) \neq t_i$ for any $1 \leq i \leq n$.  This definition generalizes to the case of infinite, possibly uncountable, collections.
 \end{defn}
 	
-\begin{axiom}\label{def_possibilities}
+\begin{axiom}\label{ax_possibilities}
 	The \textbf{possibilities} of a statement $\stmt$ are the possible truth values allowed by the content of the statement. Formally, on the set $\mathcal{S}$ of all statements is also defined a function $\possFn: \mathcal{S} \to \{\{\FALSE, \TRUE\},\{\FALSE\},\{\TRUE\}\}$ such that:
 	\begin{itemize}
-		\item $\truth(\stmt) \in \possFn(\stmt)$ for all $\stmt \in \mathcal{S}$
-		\item for any collection of statements $\{\stmt_i\}^n_{i=1}$, for any $1 \leq j \leq n$ and for any $t \in \possFn(\stmt_j)$ there exists a consistent truth assignment $\{t_i\}^n_{i=1}$ such that $t_j = t$. This generalizes to the case of infinite, possibly uncountable, sequences.
+		\item $\truth(\stmt) \in \possFn(\stmt)$ for all $\stmt \in \mathcal{S}$. This remains valid in every consistent truth assignment.
+		\item for any collection of statements $\{\stmt_i\}^n_{i=1}$, for any $1 \leq j \leq n$ and for any $t \in \possFn(\stmt_j)$ there exists a consistent truth assignment $\{t_i\}^n_{i=1}$ such that $t_j = t$. This generalizes to the case of infinite, possibly uncountable, indexed families.
 	\end{itemize}
 \end{axiom}
 
@@ -189,10 +189,10 @@ At first one may expect that the possibilities of the final statement will be de
 
 \begin{mathSection}
 
-	\begin{axiom}\label{def_functions_of_statement}
+	\begin{axiom}\label{ax_functions_of_statement}
 		We can always construct a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally: given an arbitrary truth function $f_{\mathbb{B}} : \mathbb{B}^n \to \mathbb{B}$ there exists a function $f : \mathcal{S}^n \to \mathcal{S}$ such that
 		$$\truth(f(\stmt_1, ..., \stmt_n)) = f_{\mathbb{B}}(\truth(\stmt_1), ..., \truth(\stmt_n))$$
-		This also holds in the case of infinite, possibly uncountable, arguments.
+		and the same relationship remains valid in every consistent truth assignment. This also holds in the case of infinite, possibly uncountable, arguments.
 	\end{axiom}
 \end{mathSection}
 
@@ -231,10 +231,10 @@ Most languages typically already provide similar operations, as the examples sho
 	The set of all statements $\mathcal{S}$ is closed under negation, arbitrary conjunction and arbitrary disjunction.
 \end{prop}
 \begin{proof}
-	Negation, arbitrary conjunction and arbitrary disjunction are particular truth functions. Their output always exists by axiom \eqref{def_functions_of_statement}.
+	Negation, arbitrary conjunction and arbitrary disjunction are particular truth functions. Their output always exists by axiom \eqref{ax_functions_of_statement}.
 \end{proof}\end{mathSection}
 
-Now we have all the elements to define when two statements have the same content. Consider the two statements \statement{that animal is a cat} and \statement{quell'animale \`{e} un gatto}: they mean the same thing but in different languages. Consider \statement{the mass of the electron is $511 \pm 0.5$ keV} and \statement{the mass of the electron is $0.511 \pm 0.0005$ MeV}: they represent the same measurement but in different units. So, how can we express the fact that two statements $\stmt_1$ and $\stmt_2$ mean the same thing? The idea is that they can never be assigned opposite truth values. If we assigned true to the first, then the second must be true as well. If we assigned false to the first, then the second must be false. That is: either $\stmt_1 \AND \stmt_2$ is true or $\NOT\stmt_1 \AND \NOT\stmt_2$ is true for all consistent truth assignments. In other words $(\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)$ can only be true: it's a tautology.\footnote{This technique allows us to do something analogous to model theory. Two statements are equivalent if their truth is equal for all consistent truth assignments, which in our framework play the part of the models of model theory. But in our context the assignments are only hypothetical: there isn't a model in which \statement{this is a cat} and another in which \statement{this is a dog}. There is only one truth value, the one we find experimentally.}
+Now we have all the elements to define when two statements have the same logical content. Consider the two statements \statement{that animal is a bird} and \statement{that animal has feathers}: since all birds and only birds have feathers they give us the same information. Consider \statement{the mass of the electron is $511 \pm 0.5$ keV} and \statement{the mass of the electron is $0.511 \pm 0.0005$ MeV}: they represent the same measurement but in different units. So, how can we express the fact that two statements $\stmt_1$ and $\stmt_2$ mean the same thing? The idea is that they can never be assigned opposite truth values. If we assigned true to the first, then the second must be true as well. If we assigned false to the first, then the second must be false. That is: either $\stmt_1 \AND \stmt_2$ is true or $\NOT\stmt_1 \AND \NOT\stmt_2$ is true for all consistent truth assignments. In other words $(\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)$ can only be true: it's a tautology.\footnote{This technique allows us to do something analogous to model theory. Two statements are equivalent if their truth is equal for all consistent truth assignments, which in our framework play the part of the models of model theory. But in our context the assignments are only hypothetical: there isn't a model in which \statement{this is a cat} and another in which \statement{this is a dog}. There is only one truth value, the one we find experimentally.}
 
 \begin{mathSection}
 
@@ -247,14 +247,31 @@ Now we have all the elements to define when two statements have the same content
 \end{coro}
 
 \begin{proof}
-	If $\stmt_1 \equiv \stmt_2$, then $\truth((\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)) \in \possFn((\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)) = \{\TRUE\}$. By \ref{def_functions_of_statement} $\truth((\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2))= (\truth(\stmt_1) \AND \truth(\stmt_2) ) \OR (\NOT\truth(\stmt_1) \AND \NOT\truth(\stmt_2)) = \TRUE$. This is true if and only if $\truth(\stmt_1) = \truth(\stmt_2)$.
+	If $\stmt_1 \equiv \stmt_2$, then $\truth((\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)) \in \possFn((\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)) = \{\TRUE\}$. By \ref{ax_functions_of_statement} $\truth((\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2))= (\truth(\stmt_1) \AND \truth(\stmt_2) ) \OR (\NOT\truth(\stmt_1) \AND \NOT\truth(\stmt_2)) = \TRUE$. This is true if and only if $\truth(\stmt_1) = \truth(\stmt_2)$.
 	
 	Consider a consistent truth assignment $\{t_1, t_2\}$ for the sequence of two equivalent statements $\{\stmt_1, \stmt_2\}$. We have $t_1=t_2$ since the truth values are the same. We also have $t_1 \in \possFn(\stmt_1)$ and $t_2 \in \possFn(\stmt_2)$. Since every possibility must be part of a consistent truth assignment, we must have $\possFn(\stmt_1) = \possFn(\stmt_2)$.
 \end{proof}
 
 \end{mathSection}
 
-Again, we want to stress that this notion of equivalence is not based on the truth value (i.e. whether the statements happen to be both true or false) or on whether they are the same statement: it is based on the possibilities (i.e. whether the two statements can possibly have a different truth) and therefore on the content of the statements. Also note that the semantics defines the possibilities but not the truth value, unless the statement is a tautology or a contradiction. For example, even if the meaning of \statement{the next race is going to be won by Secretariat} is clear, and so is its relationship to \statement{the next race is going to be lost by Secretariat}, we may be none the wiser about its truthfulness. Intuitively, the equivalence we defined here answers the question: do these two statements carry the same information? Is experimentally testing the first the same as experimentally testing the second? If that's the case, they are essentially equivalent to us. So much so, that from now on we will implicitly assume two different statements to be inequivalent.\footnote{Technically, when we'll say that $\stmt$ is a statement we actually mean $\stmt$ is an equivalence class of statements. We are not going to be explicit about the distinction, though, as we feel it simply distracts without adding greater clarity. We'll let the context determine what is meant.}
+Again, we want to stress that this notion of equivalence is not based on the truth value (i.e. whether the statements happen to be both true or false) or on whether they are the same statement (i.e. whether they assert the same thing): it is based on the possibilities (i.e. whether the two statements can possibly have a different truth) and therefore on the content of the statements. We sum up the difference in the following table.
+
+
+\begin{table}[h]
+	\centering
+	%	\begin{tabular}{p{0.2\textwidth} p{0.1\textwidth} p{0.1\textwidth} p{0.5\textwidth}}
+	\begin{tabular}{p{0.12\textwidth} c p{0.2\textwidth} p{0.25\textwidth}}
+		Equivalence & Symbol & First statement & Second statement \\ 
+		\hline 
+		Semantic & $\stmt_1 = \stmt_2$ & \statement{Swans are birds} & \statement{I cigni sono uccelli} \\ 
+		Logical & $\stmt_1 \equiv \stmt_2$ & \statement{Swans are birds}  & \statement{Swans have feathers} \\ 
+		Material & $\truth(\stmt_1) = \truth(\stmt_2)$ & \statement{Swans are birds}  & \statement{The earth is round} \\ 
+	\end{tabular}
+	\caption{Different types of statement equivalences.}
+\end{table}
+
+
+Also note that the semantics defines the possibilities but not the truth value, unless the statement is a tautology or a contradiction. For example, even if the meaning of \statement{the next race is going to be won by Secretariat} is clear, and so is its relationship to \statement{the next race is going to be lost by Secretariat}, we may be none the wiser about its truthfulness. Intuitively, the equivalence we defined here answers the question: do these two statements carry the same information? Is experimentally testing the first the same as experimentally testing the second? If that's the case, they are essentially equivalent to us. So much so, that from now on we will implicitly assume two different statements to be inequivalent.\footnote{Technically, when we'll say that $\stmt$ is a statement we actually mean $\stmt$ is an equivalence class of statements. We are not going to be explicit about the distinction, though, as we feel it simply distracts without adding greater clarity. We'll let the context determine what is meant.}
 
 There are a number of useful properties that statement equivalence satisfies.
 
@@ -423,19 +440,21 @@ With these tools in place we are in a position to formulate models that are univ
 
 We now focus on those statements that are verifiable: we have a way to experimentally confirm that the statement is true. The main result of this section is that not all functions of verifiable statements are verifiable statements. For example, since a test has to finish in a finite amount of time we are not going to be able to verify a statement that is the conjunction (i.e. logical AND) of infinitely many statements. We are also going to group verifiable statements into experimental domains which represent all the experimental evidence about a scientific subject that can be acquired in an indefinite amount of time.
 
-The previous section took care of universality and non-contradiction, but the principle of scientific objectivity requires science to be evidence based. Consider the statements \statement{the square of the hypotenuse is equal to the sum of the squares of the other two sides} or \statement{God is eternal}. They deal with abstract concepts that cannot solely be defined experimentally and therefore cannot be experimentally tested. Again, this does not mean these concepts are of less significance, just that they cannot be the subject of scientific inquiry.\footnote{In fact, one may be more interested in them precisely because of their abstract, and therefore less transient, nature.}
+The previous section took care of universality and non-contradiction, but the principle of scientific objectivity requires science to be evidence based. Consider the statements \statement{the square of the hypotenuse is equal to the sum of the squares of the other two sides} or \statement{God is eternal}. They deal with abstract concepts that cannot solely be defined experimentally and therefore cannot be experimentally verified conclusively. Again, this does not mean these concepts are of less significance, just that they cannot be the subject of scientific inquiry.\footnote{In fact, one may be more interested in them precisely because of their abstract, and therefore less transient, nature.}
 
 Limiting the scope of our discussion to objects and properties that are well defined physically is also not enough. For example, \emph{``the electron is green"} or \emph{``1 meter is equal to 5 Kelvin"} are still not suitable scientific statements as the relationships established are not physically meaningful. Even when the relationship is meaningful, we may still not be able to validate it experimentally. For example, \emph{``there is no extra-terrestrial life"} or \emph{``the mass of the electron is exactly $9.109 \times 10^{-31}$ kg"} are not statements that can be verified in practice. In the first case, we would need to check every corner of the universe and find none, with the closest galaxy like ours, Andromeda, being 2.5 million light-years away; in the second case, we will always have an uncertainty associated with the measurement, however small.
 
 So we have to narrow the scope to those and only those statements that can be verified experimentally. That is, we have to provide an experimental test: a repeatable experimental procedure (i.e. evidence based) that anyone (i.e. universal) can in principle execute and obtain consistent results (i.e. non-contradictory). This is both the power and the limit of scientific inquiry: it gives us a way to construct a coherent description of the physical world but it is limited to those aspects that can be reliably studied experimentally.
 
 \begin{mathSection}
-\begin{axiom}\label{def_experimental_tests}
-	An \textbf{experimental test} $\expt$ is a repeatable procedure (i.e. it can be restarted and stopped at any time) that anybody can execute and will always either terminate successfully, terminate unsuccessfully or never terminate. Formally, an experimental test is an element of the set $\mathcal{E}$ of all experimental tests upon which is defined a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$ that returns the result for each experimental test.
+\begin{axiom}\label{ax_verifiable_statements}
+	A \textbf{verifiable statement} is a statement that can be shown to be true experimentally. Formally, a statement $\stmt$ is verifiable if it is part of the subset $\stmt \in \vstmtSet \subset \stmtSet$ of all verifiable statements.
 \end{axiom}
-\begin{defn}
-	A \textbf{verifiable statement} is a statement that can be shown to be true experimentally. Formally, given a verifiable statement $\stmt \in \mathcal{S}$ we can find an experimental test $\expt \in \mathcal{E}$ such that $\truth(\stmt)=\TRUE$ if and only if $\result(\expt)=\SUCCESS$.
-\end{defn}
+\begin{justification}
+	To give a better justification for this and later axioms, we introduce the following pseudo-mathematical concepts. An \textbf{experimental test} $\expt$ is a repeatable procedure (i.e. it can be restarted and stopped at any time) that anybody can execute and will always either terminate successfully, terminate unsuccessfully or never terminate. We can assume it to be an element of the set $\mathcal{E}$ of all experimental tests upon which is defined a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$. The idea is that if a statement is verifiable we can find an experimental test $\expt$ such that we can find an experimental test that always succeed if the statement is true and if the statement is true than the experiment always succeed.
+	
+	To precisely define this relationship, we would have to link the possible truth of the statements with possible results of the experimental tests. This would not provide additional insight so we leave the idea of experimental tests informal and we use them only as part of the justifications.
+\end{justification}
 \end{mathSection}
 
 Experimental tests are the second and last building block of our general mathematical theory of experimental science. As with statements, any language (e.g. natural, formal, engineering drawings, computer programs, ...) can in principle be used to describe the procedure, which can be arbitrarily complicated. It may require building detectors, gathering large amounts of data and performing complicated computations. We are not going to care how these procedures are described, just that it is done in a way that allows us to execute the test.\footnote{Trying to formalize a universal language for experimental tests is not only impractical but also conceptually problematic. To know what we can test experimentally is to know what is physically possible, which is equivalent to knowing the laws of physics, which is what we are trying to construct a framework for.}
@@ -470,14 +489,11 @@ Note that, since the test always terminates, we can switch failure to success an
 
 \begin{mathSection}
 	\begin{defn}
-		A \textbf{decidable statement} is a statement that can be shown to be either true or false experimentally. Formally, given a decidable statement we can find an experimental test $\expt \in \mathcal{E}$ such that $\truth(\stmt)=\TRUE$ if and only if $\result(\expt)=\SUCCESS$ and such that $\truth(\stmt)=\FALSE$ if and only if $\result(\expt)=\FAILURE$.
+		A \textbf{decidable statement} is a statement that can be shown to be either true or false experimentally. Formally, a statement $\stmt$ is decidable if $\stmt \in \vstmtSet$ and $\NOT\stmt \in \vstmtSet$. We note $\dstmtSet$ the set of all decidable statements.
 	\end{defn}
-	\begin{axiom}
-		Let $\stmt \in \mathcal{S}$ be a verifiable statement. Then $\NOT\stmt$ is verifiable if and only if $\stmt$ is decidable.
-	\end{axiom}
 	\begin{justification}
-		Mathematically, we are simply assuming the negation of a decidable statement is decidable. However, we want to show that the axiom is well justified in practice.
-		
+		Note that the informal definition is slightly different from the formal one. The first says that the result of the experiment for the single decidable statement always terminates with either success or failure, and therefore we can tell experimentally that the statement is true or false. The second says there are two statements, one negation of the other, with two tests each is only guaranteed to succeed. We can give a pseudo-proof, though, to show that these are equivalent.
+
 		Let $\stmt \in \mathcal{S}$ be a decidable statement and $\expt \in \mathcal{E}$ an experimental test that verifies whether the statement is true or false. Consider the procedure $\expt_\NOT(\expt)$ defined as follows:
 		\begin{enumerate}
 			\item run test $\expt$
@@ -508,31 +524,33 @@ Decidable statements are not critical elements of our theory. We introduce them 
 Combining verifiable statements with conjunction (i.e. the logical AND) is more straightforward. If we are able to verify that \emph{``that animal is a swan"} and that \emph{``that animal is black"}, we can verify that \emph{``that animal is a black swan"} by verifying both. If the tests for both are successful, then the test for the conjunction is successful. That is, if we have two or more verifiable statements, we can always construct an experimental test for the logical AND by running all tests one at a time and check if they are successful. Yet, the number of tests needs to be finite or we would never terminate, so we are limited to the conjunction of a finite number of verifiable statements.
 
 \begin{mathSection}
-	\begin{axiom}\label{def_experimental_test_AND}
-	The conjunction of a finite collection of verifiable statements is a verifiable statement. Formally, for any finite collection of experimental tests $\{\expt_i\}_{i=1}^{n} \subseteq \mathcal{E}$ we can construct the experimental test $ \bigAND\limits_{i=1}^{n} \expt_i \in \mathcal{E}$ such that $\result(\bigAND\limits_{i=1}^{n} \expt_i) = \SUCCESS$ if and only if $\result(\expt_i) = \SUCCESS$ for all $i=1..n$, which makes the finite conjunction of verifiable statements a verifiable statement.
+	\begin{axiom}\label{ax_verifiable_AND}
+	The conjunction of a finite collection of verifiable statements is a verifiable statement. Formally, let $\{\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ be a finite collection of verifiable statements. Then the conjunction $\bigAND\limits_{i=1}^{n} \stmt_i \in \vstmtSet$ is a verifiable statement.
 	\end{axiom}
 	\begin{justification}
 		Mathematically, we are simply assuming that the finite conjunction exists, so in principle there is nothing to prove. However, we want to show that the axiom is well justified in practice.
 		
-		Let $\bigAND\limits_{i=1}^{n} \expt_i$ be the experimental procedure defined as follows:
+		Let $\{\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ be a finite collection of verifiable statements. Then we can find a corresponding set of experimental tests $\{\expt_i\}_{i=1}^{n} \subseteq \exptSet$ that terminate successfully if and only if the statements are true. Let $\bigAND\limits_{i=1}^{n} \expt_i$ be the experimental procedure defined as follows:
 		\begin{enumerate}
 			\item for each $i=1..n$ run the test $\mathsf{e}_i$
 			\item if all tests terminate successfully then terminate successfully.
 		\end{enumerate}
-		The experimental procedure so defined is repeatable, can be executed by anybody and terminates successfully if and only if all $\mathsf{e}_i$ terminate successfully as per the definition.
+		The experimental procedure so defined is repeatable, can be executed by anybody and terminates successfully if and only if all $\mathsf{e}_i$ terminate successfully. This means it terminates successfully if and only if all $\{\stmt_i\}_{i=1}^{n}$ are true, which is when $\bigAND\limits_{i=1}^{n} \stmt_i$ is true. This means the experimental procedure defined above is a suitable test for the conjunction so the conjunction is verifiable.
+		
+		Note that this cannot be generalized to infinite collections as the procedure would not be guaranteed to terminate.
 	\end{justification}
 \end{mathSection}	
 
 Combining verifiable statements with disjunction (i.e. the logical OR) is also straightforward. To verify that \emph{``the swan is black or white"} we can first test that \emph{``the swan is black"}. If that is verified that's enough: the swan is black or white. If not, we test that \emph{``the swan is white"}. That is, if we have two or more verifiable statements we can always construct an experimental test for the logical OR by running all tests and stopping at the first one that is successful. Because we stop at the first success, the number of tests can be countably infinite. As long as one test succeeds, which will always be the case when the overall test succeeds, it does not matter how many elements we are not going to verify later. But it cannot be more than countably infinite since the only way we have to find if one experimental test in the set is successful is testing them all one by one. Therefore we are limited to the disjunction of a countable number of verifiable statements.
 
 \begin{mathSection}
-	\begin{axiom}\label{def_experimental_test_OR}
-	The disjunction of a countable collection of verifiable statements is a verifiable statement. Formally, for any countable collection of experimental tests $\{\expt_i\}_{i=1}^{\infty} \in \mathcal{E}$ we can construct an experimental test $ \bigOR\limits_{i=1}^{\infty} \expt_i \in \mathcal{E}$ such that $\result(\bigOR\limits_{i=1}^{\infty} \expt_i) = \SUCCESS$ if and only if $\result(\expt_i) = \SUCCESS$ for some $i \geq 1$, which makes the countable disjunction of verifiable statements a verifiable statement.
+	\begin{axiom}\label{ax_verifiable_OR}
+	The disjunction of a countable collection of verifiable statements is a verifiable statement. Formally, let $\{\stmt_i\}_{i=1}^{\infty} \subseteq \vstmtSet$ be a countable collection of verifiable statements. Then the disjunction $\bigOR\limits_{i=1}^{\infty} \stmt_i \in \vstmtSet$ is a verifiable statement.
 	\end{axiom}
 	\begin{justification}
 		Mathematically, we are simply assuming that the countable disjunction exists, so in principle there is nothing to prove. However, we want to show that the axiom is well justified in practice.
 		
-		In this case, we have to be careful to handle tests that may not terminate.
+		In this case, we have to be careful to handle tests that may not terminate. Let $\{\stmt_i\}_{i=1}^{\infty} \subseteq \vstmtSet$ be a countable collection of verifiable statements. Then we can find a corresponding set of experimental tests $\{\expt_i\}_{i=1}^{\infty} \subseteq \exptSet$ that terminate successfully if and only if the statements are true.
 		Let $\bigOR\limits_{i=1}^{\infty} \expt_i$ be the experimental procedure defined as follows:
 		\begin{enumerate}
 			\item initialize $n$ to 1
@@ -543,28 +561,39 @@ Combining verifiable statements with disjunction (i.e. the logical OR) is also s
 			\end{enumerate}
 			\item increment $n$ and go to step 2
 		\end{enumerate}
-		The procedure will eventually run all tests for an arbitrarily long amount of time. Suppose there exists an $i \geq 1$ such that $\mathsf{e}_i$ will terminate successfully. Then the above procedure will eventually run that test for a time long enough and terminate successfully.
+		The procedure will eventually run all tests for an arbitrarily long amount of time. Suppose there exists an $i \geq 1$ such that $\mathsf{e}_i$ will terminate successfully. Then the above procedure will eventually run that test for a time long enough and terminate successfully. This means the procedure will terminate if and only if at least one of $\{\stmt_i\}_{i=1}^{\infty}$ is true, which is when $\bigOR\limits_{i=1}^{\infty} \stmt_i$ is true. This means the experimental procedure defined above is a suitable test for the disjunction so the disjunction is verifiable. 
+
+		Note that this cannot be generalized to more than countable infinity as the procedure would not be guaranteed to eventually run all tests.
 	\end{justification}
+	\begin{prop}\label{prop_decidable_AND_OR}
+		The conjunction and disjunction of a finite collection of decidable statements is decidable. Formally, let $\{\stmt_i\}_{i=1}^{n} \subseteq \dstmtSet$ be a finite collection of decidable statements. Then the conjunction $\bigAND\limits_{i=1}^{n} \stmt_i \in \dstmtSet$ and the disjuction $\bigOR\limits_{i=1}^{n} \stmt_i \in \dstmtSet$ are decidable statement.
+	\end{prop}
+\begin{proof}
+	Let $\{\stmt_i\}_{i=1}^{n} \subseteq \dstmtSet$ be a finite collection of decidable statements. Then $\{\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ and $\{\NOT\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ are verifiable. Consider $\bigAND\limits_{i=1}^{n} \stmt_i$: this is the finite conjunction of verifiable statements and is therefore a verifiable statement by \ref{ax_verifiable_AND}. Consider its negation $\NOT \bigAND\limits_{i=1}^{n} \stmt_i \equiv \bigOR\limits_{i=1}^{n} \NOT \stmt_i$: this is the finite disjunction of verifiable statements and is therefore a verifiable statement by \ref{ax_verifiable_OR}. The finite conjunction of decidable statements is decidable by definition.
+	
+	Similarly, consider $\bigOR\limits_{i=1}^{n} \stmt_i$: this is the finite disjunction of verifiable statements and is therefore a verifiable statement by \ref{ax_verifiable_OR}. Consider its negation $\NOT \bigOR\limits_{i=1}^{n} \stmt_i \equiv \bigAND\limits_{i=1}^{n} \NOT \stmt_i$: this is the finite conjunction of verifiable statements and is therefore a verifiable statement by \ref{ax_verifiable_AND}. The finite disjunction of decidable statements is decidable by definition.
+	
+	Note that this cannot be generalized to infinite collection as it would require closure under infinite conjunction. Also note that this result is consistent with the experimental tests given in \ref{ax_verifiable_AND} and \ref{ax_verifiable_OR}.
+\end{proof}
 \end{mathSection}
 
 Taken as a whole, finite conjunction and countable disjunction define the \textbf{algebra of verifiable statements}. It is limited compared to the algebra of statements and it tells us that, in practice, we are not going to be able in general to construct an experimental test whose success is an arbitrary function of the success of other tests.
 
 \begin{table}[h]
 	\centering
-%	\begin{tabular}{p{0.2\textwidth} p{0.1\textwidth} p{0.1\textwidth} p{0.5\textwidth}}
-\begin{tabular}{p{0.15\textwidth} p{0.15\textwidth} p{0.2\textwidth} p{0.3\textwidth}}
-	Operator & Gate & Statements & Verifiable Statements \\ 
+\begin{tabular}{p{0.14\textwidth} p{0.08\textwidth} p{0.13\textwidth} p{0.22\textwidth} p{0.23\textwidth}}
+	Operator & Gate & Statement & Verifiable Statement & Decidable Statement  \\ 
 	\hline 
-	Negation & NOT & allowed & disallowed \\ 
-	Conjunction & AND & arbitrary  & finite \\ 
-	Disjunction & OR & arbitrary  & countable \\ 
+	Negation & NOT & allowed & disallowed & allowed \\ 
+	Conjunction & AND & arbitrary  & finite & finite \\ 
+	Disjunction & OR & arbitrary  & countable & finite \\ 
 \end{tabular}
 	\caption{Comparing algebras of statements.}
 \end{table}
 
-Before we continue, it is interesting and useful to stop and understand the interplay between scientific and mathematical constructs.\footnote{It took us many many confusing years to fully understand where the scientific argument ends and the mathematical argument begins, what makes sense to assume physically and what makes sense to prove rigorously. Part of the confusion is that this line is not objective but it is based on what is considered ``precise" by a mathematician, which has evolved considerably through the centuries. The rule we follow is: in the mathematical formalism the only objects that can be left unspecified are the elements of a set.} Technically, definitions \ref{def_statement}, \ref{def_possibilities}, \ref{def_functions_of_statement}, \ref{def_experimental_tests}, \ref{def_experimental_test_AND} and \ref{def_experimental_test_OR} are the axioms of our mathematical formalism for statements and experimental tests. Note that the actual content of the statements and the procedure for the tests are not formally defined: the math treats them simply as a label that we use for identification. The only assumptions are that statements exist (each with a set of possible truth values and an actual truth value), that experimental tests exist (each with a well defined result) and that they both admit the associated algebra. The mathematical formalism does not know what these objects actually are: they may as well be pieces of cardboard painted black or white. Therefore the math does not know whether the properties we assigned make actual sense: it can only guarantee their non-contradiction. In other words, the way that we are making the framework precise is not by making everything precise: it is by omitting the details that are not amenable to a precise specification.
+Before we continue, it is interesting and useful to stop and understand the interplay between scientific and mathematical constructs.\footnote{It took us many many confusing years to fully understand where the scientific argument ends and the mathematical argument begins, what makes sense to assume physically and what makes sense to prove rigorously. Part of the confusion is that this line is not objective but it is based on what is considered ``precise" by a mathematician, which has evolved considerably through the centuries. The rule we follow is: in the mathematical formalism the only objects that can be left unspecified are the elements of a set.} Technically, definitions \ref{ax_statement}, \ref{ax_possibilities}, \ref{ax_functions_of_statement}, \ref{ax_verifiable_statements}, \ref{ax_verifiable_AND} and \ref{ax_verifiable_OR} are the axioms of our mathematical formalism for statements. Note that the actual content of the statements and the procedure for their verification are not formally defined: the math treats them simply as a label that we use for identification. The only assumptions are that statements exist (each with a set of possible truth values and an actual truth value), that some of them are verifiable and that they both admit the associated algebra. The mathematical formalism does not know what these objects actually are: they may as well be pieces of cardboard painted black or white. Therefore the math does not know whether the properties we assigned make actual sense: it can only guarantee their non-contradiction. In other words, the way that we are making the framework precise is not by making everything precise: it is by omitting the details that are not amenable to a precise specification.
 
-We should stress this for a couple of reasons. First, the part that is not formalized is \emph{the most important part}. Discovering new science is exactly finding new things to study (i.e. new statements) or devising new measurement techniques (i.e. new experimental tests). The content of the statements and the procedure of the experimental tests \emph{is} the actual science. Everything that follows is, in a sense, the trivial bit and that is why it can be done generally. Which leads to the second reason: understanding whether statements and experimental tests \emph{actually} follow the algebras we defined is crucial. The math just takes it at face value, it does not prove it. The justifications for our axioms, then, are the most critical part of this work and they are not mathematical proofs. If we botch them, we'll have a nice, consistent, rich but meaningless mathematical framework. Lastly, it has to be clear that something gets lost in the formalization. The mathematical framework cannot carry all the physics content: we removed the most important part! Different systems may have the same mathematical description, so the scientific content can never be entirely reconstructed from the math. That is why we always have to carefully bring it along.
+We should stress this for a couple of reasons. First, the part that is not formalized is \emph{the most important part}. Discovering new science is exactly finding new things to study (i.e. new statements) or devising new measurement techniques (i.e. new experimental tests). The content of the statements and the procedure of the experimental tests \emph{is} the actual science. Everything that follows is, in a sense, the trivial bit and that is why it can be done generally. Which leads to the second reason: understanding whether statements and verifiable statements \emph{actually} follow the algebras we defined is crucial. The math just takes it at face value, it does not prove it. The justifications for our axioms, then, are the most critical part of this work and they are not mathematical proofs. If we botch them, we'll have a nice, consistent, rich but meaningless mathematical framework. Lastly, it has to be clear that something gets lost in the formalization. The mathematical framework cannot carry all the physics content: we removed the most important part! Different systems may have the same mathematical description, so the scientific content can never be entirely reconstructed from the math. That is why we always have to carefully bring it along.
 
 Now that we have characterized verifiable statements we want to understand how to characterize groups of them. Consider the verifiable statements
 \begin{description}
@@ -580,7 +609,7 @@ Since some are functions of others, we do not need to actually run all the tests
 
 \begin{mathSection}
 	\begin{defn}
-		Given a set $\edomain$ of verifiable statements, $\basis \subseteq \edomain$ is a \textbf{basis} if verifying its elements is equivalent to verifying the whole set. Formally, all elements of $\edomain$ can be generated from $\basis$ using finite conjunction and countable disjunction.
+		Given a set $\edomain$ of verifiable statements, $\basis \subseteq \edomain$ is a \textbf{basis} if the truth values of $\basis$ are enough to deduce the truth values of the set. Formally, all elements of $\edomain$ can be generated from $\basis$ using finite conjunction and countable disjunction.
 	\end{defn}
 \end{mathSection}
 
@@ -588,7 +617,7 @@ Note that once we have tested the basis, we have tested any other verifiable sta
 
 \begin{mathSection}
 \begin{defn}
-	An \textbf{experimental domain} $\edomain$ represents all the experimental evidence that can be acquired about a scientific subject in an indefinite amount of time. Formally, it is a set of statements, closed under finite conjunction and countable disjunction, that includes the tautology, the contradiction, and a set of verifiable statements that can be generated from a countable basis.
+	An \textbf{experimental domain} $\edomain$ represents all the experimental evidence that can be acquired about a scientific subject in an indefinite amount of time. Formally, it is a set of statements, closed under finite conjunction and countable disjunction, that includes precisely the tautology, the contradiction, and a set of verifiable statements that can be generated from a countable basis.
 \end{defn}
 \begin{justification}
 	As usual, let's make sure the formal definition is consistent with the informal one. The set consists only of verifiable statements, which can be tested experimentally, and the tautology and contradiction, which don't need to be verified experimentally. Functions of verifiable statements represent experimental evidence about the same subject, therefore it is appropriate that the experimental domain is closed under finite conjunction and countable disjunction. Given that each test terminates successfully in a finite amount of time, we can only test a countable set in an indefinite amount of time. Therefore, if the experimental domain didn't allow for a countable basis, we would always have verifiable statements we would never be able to test.
@@ -669,7 +698,7 @@ Having defined what a theoretical domain is, we can finally define what the poss
 \begin{mathSection}
 
 \begin{defn}
-	A \textbf{possibility} for an experimental domain $\edomain$ is a statement $x \in \tdomain$ that, when true, determines the truth value for all statements in the theoretical domain. That is, $x \nequiv \contradiction$ and for each $\mathsf{s} \in \tdomain$, either $x \narrower \mathsf{s}$ or $x \ncomp \mathsf{s}$. The \textbf{full possibilities}, or simply the \textbf{possibilities}, $X$ for $\edomain$ are the collection of all possibilities.
+	A \textbf{possibility} for an experimental domain $\edomain$ is a statement $x \in \tdomain$ that, when true, determines the truth value for all statements in the theoretical domain. Formally, $x \nequiv \contradiction$ and for each $\mathsf{s} \in \tdomain$, either $x \narrower \mathsf{s}$ or $x \ncomp \mathsf{s}$. The \textbf{full possibilities}, or simply the \textbf{possibilities}, $X$ for $\edomain$ are the collection of all possibilities.
 \end{defn}
 
 \end{mathSection}
@@ -688,8 +717,10 @@ A possibility represents a complete answer for a scientific question. Only one o
 	Conversely, suppose $x \in \tdomain$ is a possibility. As it is a theoretical statement, it can be expressed as a disjunction of minterms of a basis $\basis$. Suppose it is the disjunction of more than one minterm. Then each minterm would be narrower than $x$, which cannot be. $x$ must be expressed by a single minterm. Therefore any possibility is a minterm.
 \end{proof}
 
+%TODO : clarify the whole universe business
+
 \begin{prop}[No other possibilities]
-	All statements that determine and only determine the truth value of all statements in a theoretical domain $\tdomain$ are possibilities of $\edomain$.
+	All statements that determine and only determine the truth value of all statements in a theoretical domain $\tdomain$ are possibilities of $\edomain$. Formally, there is no statement $\stmt \in \stmtSet$ that has all the properties of a possibility except that $\stmt \notin \tdomain$.
 \end{prop}
 
 \begin{proof}
@@ -702,13 +733,13 @@ There is one possibility that is often forgotten and sometimes needs special han
 Note, though, that the residual possibility does not exist for all domains. Suppose we have a basket of fruit and we want to count how many whole apples there are. There can only be a finite number of them, and we can successfully identify all finite numbers: there is no ``something else" to be found in this case.
 
 \begin{mathSection}
-	\begin{prop}
-		The \textbf{residual possibility} $\mathring{x}$ for an experimental domain $\edomain$ is, if it exists, the possibility that predicts that no test will be successful. That is, let $\basis \subseteq \edomain$ be a basis then  $\mathring{x} = \bigAND\limits_{\stmt[e] \in \basis} \NOT e$ if it is not a contradiction. An experimental domain is \textbf{complete} if it doesn't admit a residual possibility.
-	\end{prop}
+	\begin{defn}
+		The \textbf{residual possibility} $\mathring{x}$ for an experimental domain $\edomain$ is, if it exists, the possibility that predicts that no test will be successful. Formally, let $\basis \subseteq \edomain$ be a basis then  $\mathring{x} = \bigAND\limits_{\stmt[e] \in \basis} \NOT e$ if it is not a contradiction. An experimental domain is \textbf{complete} if it doesn't admit a residual possibility.
+	\end{defn}
 
-	\begin{prop}
+	\begin{defn}
 	The \textbf{established possibilities} $\dot{X}=X\setminus\{\mathring{x}\}$ for an experimental domain is the set of all possibilities excluding the residual possibility.
-\end{prop}
+\end{defn}
 \end{mathSection}
 
 As we refine our understanding and techniques for a domain of knowledge, we may find that the residual possibility actually corresponds to multiple cases that weren't previously cataloged. So, intuitively, it is better thought of as a bucket that contains all that is yet to be experimentally discovered within the particular domain of knowledge. Because of its special nature, the residual possibility sometimes behaves differently than the other possibilities. Therefore we will find that some theorems are more elegantly expressed in terms of the established possibilities and some in terms of the full possibilities.
