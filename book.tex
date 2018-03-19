@@ -1555,6 +1555,10 @@ Suppose two systems come into contact. The entropy of each one constraint by its
 
 Define temperature $\frac{1}{T_1} = \frac{\partial I_1}{\partial E_1}$: at equilibrium the two systems have the same temperature. Note that temperature cannot be zero since the information entropy at equilibrium is a function of the energy, and not the other way around.
 
+\subsection{Closed two form for Hamiltonian mechanics}
+
+We have to better understand why the two form $\omega$ has to be closed. One idea: consider $\frac{\omega^n}{n!}$. This gives us the volume in phase space. It's a $2n$-form in a $2n$-dimensional space. It's exterior derivative $\frac{\partial\omega^n}{n!}=0$ because its rank exceeds the dimensionality of the space. We have $\frac{\partial\omega^n}{n!}=\frac{\omega^{n-1}}{(n-1)!}\wedge\partial\omega=0$. Since $\omega$ cannot be degenerate, $\partial \omega$ must be zero. Does that work?
+
 \subsection{Better notation for differential calculus}
 
 To really understand/derive the correct physical relationships we'll need to use differential geometry. The standard vector calculus does not generalize and does not lead to the correct way of thinking. The notation used in differential geometry (for vectors and covectors) and their definitions (i.e. space of derivations, space of real functions of derivations) makes no physical sense. We need to define better concepts and notation that fit the physics better.
@@ -1578,7 +1582,41 @@ Exterior derivative: $\lozenge \theta = \partial_{i_1} \theta_{i_2...i_{n+1}}e^{
 In three dimensions. Exterior derivative of zero form $f$: $\lozenge f = \partial_x f e^x + \partial_y f e^y + \partial_z f e^z$. Exterior derivative of one-form $\theta$: $\lozenge \theta = \partial_x \theta_x e^x \wedge e^x + \partial_y \theta_x e^y \wedge e^x + \partial_z \theta_x e^z \wedge e^x + \partial_x \theta_y e^x \wedge e^y + \partial_y \theta_y e^y \wedge e^y + \partial_z \theta_y e^z \wedge e^y + \partial_z \theta_x e^x \wedge e^z + \partial_y \theta_z e^y \wedge e^z + \partial_z \theta_z e^z \wedge e^z = (\partial_x \theta_y - \partial_y \theta_x) e^x \wedge e^y + (\partial_y \theta_z - \partial_z \theta_y) e^y \wedge e^z + (\partial_z \theta_x - \partial_x \theta_z) e^z \wedge e^x$. Exterior derivative of two-form $\omega$: $\lozenge \theta = \partial_x \theta_{yz} e^x \wedge e^y \wedge e^z + \partial_y \theta_{zx} e^y \wedge e^z \wedge e^x + \partial_z \theta_{xy} e^z \wedge e^x \wedge e^y = (\partial_x \theta_{yz} + \partial_y \theta_{zx} + \partial_z \theta_{xy}) e^x \wedge e^y \wedge e^z$.
 
 Connection between axial vector and two-form: $B^x = \omega_{yz}, B^y = \omega_{zx}, B^z = \omega_{xy}$.
-	
+
+\subsection{Angular momentum and spin}
+
+To derive the Dirac equation, we need to have a good way to motivate spin. The idea is to say that spin is the degree of freedom that captures a direction in space. Many things work, but there are a number of open issues which makes it unclear (for example) how to make it relativistic.
+
+First, what works. Suppose you have one d.o.f. for spatial direction. Degrees of freedom must be two dimensional. This means that we can only use two variables to specify a direction. This means the space is three dimensional.
+
+Next, we need to find conjugate variable. Consider the solid angle $d\Omega=\sin \varphi_z d\varphi_z d\theta_{xy}$ where $\varphi_z$ is the azimuthal angle. This is a quantity that is dimensionless and that is proportional to the number of possible directions. Therefore we can use it as a measure for the number of degrees of freedom. We can the two form for our space as $\omega(d\theta_{xy}, d\varphi_z) = \hbar d\Omega = \hbar\sin \varphi_z d\varphi_z d\theta_{xy} = d(- \hbar \cos d\varphi_z ) \wedge d\theta_{xy} = d\theta_{xy} \wedge d(\hbar \cos \varphi_z )$. Set $S_z= \hbar \cos \varphi_z$ the component of the normalized vector multiplied by $\hbar$. We have that $\omega(d\theta_{xy}, dS_z) = d\theta_{xy} \wedge dS_z$ therefore $\theta_{xy}$ and $S_z$ are conjugate variables.
+
+The question is: how do those two quantities change under coordinate transformations?
+
+A simple answer should be: they should change like angular momentum. So we study that change and we should be fine. Except that in phase space angular momentum does not really change like a vector or a covector.
+
+Suppose we have $(q^x, q^y, q^z)$ and $(p_x, p_y, p_z)$. Note that we are assuming Cartesian, so we already have limited the applicability. Change to spherical coordinates $(r,\theta,\varphi) = (\sqrt{(q^x)^2 + (q^y)^2 + (q^z)^2 }, \arccos \frac{z}{r}, \arctan \frac{y}{z})$. Conjugate momentum becomes:
+\begin{align*}
+	q^x &= r \sin \varphi \cos \theta \\
+	q^y &= r \sin \varphi \sin \theta \\
+	q^z &= r \cos \varphi \\
+	p_r&= \frac{\partial q^x}{\partial r} p_x + \frac{\partial q^y}{\partial r} p_y + \frac{\partial q^z}{\partial r} p_z \\
+	&= \frac{1}{\sqrt{(q^x)^2 + (q^y)^2 + (q^z)^2 }} (q^x p_x + q^y p_y + q^z p_z) \\
+	p_\theta&= \frac{\partial q^x}{\partial \theta} p_x + \frac{\partial q^y}{\partial \theta} p_y + \frac{\partial q^z}{\partial \theta} p_z \\
+	&= - r \sin \varphi \sin \theta p_x + r \sin \varphi \cos \theta p_y + 0 p_z \\
+	&= - q^y p_x + q^x p_y \\
+	p_\varphi&= \frac{\partial q^x}{\partial \varphi} p_x + \frac{\partial q^y}{\partial \varphi} p_y + \frac{\partial q^z}{\partial \varphi} p_z \\
+	&= r \cos \varphi \cos \theta p_x + r \cos \varphi \sin \theta p_y - r \sin \varphi p_z \\
+	&= q^z \frac{q^x}{\sqrt{(q^x)^2 + (q^y)^2}} p_x + q^z \frac{q^y}{\sqrt{(q^x)^2 + (q^y)^2}} p_y - \sqrt{(q^x)^2 + (q^y)^2} p_z \\
+\end{align*}
+
+The conjugate of $\theta$ is angular momentum. The first problem is that here angular momentum is simply a component within a vector. The other components of the vector are not angular momentum. The second problem is that $q^x p_y - q^y p_x$ is neither invariant, covariant or contravariant. This is radically different from $x v^y - y v^x$ where we use velocity instead of momentum. This has better transformation rules but velocity and momentum are not the same. This is not going to help us understand how spin should transform. The last problem is that we could create an "angular-momentum of angular momentum". That is, we can make the spherical coordinate of the spherical coordinates and we'd have $r p_\theta - \theta p_r$. Is that an angular momentum?
+
+The issue seems to be that angular momentum is only vaguely related to actual momentum. The best way to look at it should be: I have a group of generators for rotations along different directions. How do they combine? So, I have a rotation along the $x$ axis and a rotation along the $y$ axis: how do they compose? But again, seems somewhat ill defined. These are going to be global rotations on the whole space. What group of rotation is possible depends on the topology of the space. For example, on a sphere a rotation along the pole is the same as a translation along the equator. How can this all be constructed in a way that does not lead into contradictions?
+
+
+
+
 \backmatter
 
 \chapter[Credits]{\centering Credits}
