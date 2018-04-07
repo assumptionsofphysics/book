@@ -287,7 +287,7 @@ There are a number of useful properties that statement equivalence satisfies.
 \end{proof}
 
 \begin{prop}\label{prop_equivalent_is_iff}
-	Let $\stmt_1, \stmt_2 \in \mathcal{S}$ be two statements such that it can be proven that $\truth(\stmt_1) = \TRUE$ if and only if $\truth(\stmt_2) = \TRUE$. Then $\stmt_1 \equiv \stmt_2$.
+	Let $\stmt_1, \stmt_2 \in \mathcal{S}$ be two statements such that it can be formally proven that $\truth(\stmt_1) = \TRUE$ if and only if $\truth(\stmt_2) = \TRUE$. Then $\stmt_1 \equiv \stmt_2$.
 \end{prop}
 
 \begin{proof}
@@ -353,7 +353,7 @@ The second will be true whenever the first is true. In this case we say the firs
 	The elements of a set of statements $S \subseteq \mathcal{S}$ are said to be \textbf{independent} (noted $\stmt_1 \indep \stmt_2$ for a set of two) if their content is such that any combination of their possibilities is allowed. That is, $\possFn(f(S)) = f(\bigtimes\limits_{\stmt \in S} \possFn(\stmt))$ for any truth function $f : \mathbb{B}^{|S|} \to \mathbb{B}$. The negation of independence, will be noted by $\nindep$.
 \end{defn}
 
-\begin{prop}
+\begin{prop}\label{prop_narrowness_properties}
 	The above operations obey the following relationships:
 	\begin{enumerate}[label=(\roman*)]
 		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \stmt_2 \equiv \stmt_1$
@@ -377,7 +377,7 @@ The second will be true whenever the first is true. In this case we say the firs
 \end{proof}
 
 \begin{prop}\label{prop_narrowness_is_if}
-	Let $\stmt_1, \stmt_2 \in \mathcal{S}$ be two statements such that it can be proven that if $\truth(\stmt_1) = \TRUE$ then $\truth(\stmt_2) = \TRUE$. Then $\stmt_1 \narrower \stmt_2$.
+	Let $\stmt_1, \stmt_2 \in \mathcal{S}$ be two statements such that it can be formally proven that if $\truth(\stmt_1) = \TRUE$ then $\truth(\stmt_2) = \TRUE$. Then $\stmt_1 \narrower \stmt_2$.
 \end{prop}
 
 \begin{proof}
@@ -401,6 +401,17 @@ The second will be true whenever the first is true. In this case we say the firs
 	For transitivity, let $\{t_1, t_2, t_3, t_4\}$ be a consistent truth assignment for the sequence of statements $\{\stmt_1, \stmt_2, \stmt_3, \stmt_1 \AND \NOT\stmt_3\}$.  Since $s_1 \narrower s_2$ and $s_2 \narrower s_3$, the consistent truth assignment must be one of the following: $\{\TRUE, \TRUE, \TRUE, \FALSE\}$, $\{\FALSE, \TRUE, \TRUE, \FALSE\}$, $\{\FALSE, \FALSE, \TRUE, \FALSE\}$, $\{\FALSE, \FALSE, \FALSE, \FALSE\}$.
 	Since in all cases $t_4=\FALSE$ then $\possFn(\stmt_1 \AND \NOT\stmt_3) = \{\FALSE\}$. Therefore $\stmt_1 \narrower \stmt_3$ by definition.
 \end{proof}
+
+\begin{prop}
+	Every subset $S \subseteq \stmtSet$ of statements has a supremum. That is, there exists an element $\bar{\stmt} \in \stmtSet$ such that $\stmt \narrower \bar{\stmt}$ for all $\stmt \in S$. This, by definition, means the $\stmtSet$ is a \textbf{complete} Boolean algebra and, as a consequence, that the distributivity and De Morgan laws in \ref{boolean_properties} hold in the infinite case.
+\end{prop}
+
+\begin{proof}
+	Let $S \subseteq \stmtSet$ be an arbitrary set of statements. Consider $\bar{\stmt}=\bigOR\limits_{\stmt[e] \in S} \stmt[e]$. This statement exists by \ref{ax_functions_of_statement}. Let $\stmt \in S$. Using the properties in \ref{boolean_properties} we have $\stmt \OR \bar{\stmt} \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in S} \stmt[e] \big) \equiv \stmt \OR \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \bigOR\limits_{\stmt[e] \in S} \stmt[e] = \bar{\stmt}$. By \ref{prop_narrowness_properties} we have $\stmt \narrower \bar{\stmt}$ for any $\stmt \in S$. Therefore any $S \subseteq \stmtSet$ admits a supremum $\bar{\stmt}$.
+	
+	A complete Boolean algebra is one such that every subset admits a supremum, therefore the algebra of statements is complete by definition. For a complete Boolean algebra infinite distributivity and De Morgan laws hold, therefore they will hold in the algebra of statements as well.
+\end{proof}
+
 \end{mathSection}
 
 It should be noted that statement narrowness captures more than just the idea of one statement being more specific than another. Consider \statement{this harp seal is white} and \statement{this harp seal is less than one year old}. Since harp seals have white fur only for their first month, the first one can never be true while the second is not. Therefore \statement{this harp seal is white} $\narrower$ \statement{this harp seal is less than one year old}. By the same token, we also have \statement{I lighted the fuse} $\narrower$ \statement{the bomb will go off}. That is, narrowness can also capture causal relationships, which is essential if we want to develop a basic theory of scientific investigation.\footnote{We considered using the term implication directly, but it seems that it leads to confusion. Implication in classical logic is something different: it is simply another truth function. Moreover, saying that a contradiction is narrower than all other statements sounds better than saying that a contradiction implies all other statements.} Intuitively, a statement is narrower than another if it provides more information when true. If we experimenally verified the narrower statement, then we already know that the broader one is also verified.
