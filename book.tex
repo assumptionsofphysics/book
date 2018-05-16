@@ -1208,6 +1208,24 @@ The third one is a contradiction: the patient cannot be dead and in a coma. Ther
 	\begin{proof}
 		A possibility $x$ of the combined domain is a minterm of a basis $\basis \subseteq \edomain_{X}$. Since we can choose $\basis=\bigcup\limits_{i=1}^\infty \basis_i$ where $\basis_i \subseteq \edomain_{X_i}$ is a countable basis for each domain, $x$ is the conjunction $x \equiv \bigAND\limits_{i=1}^{\infty}x_i$ of minterms $x_i$ of $\basis_i$. Since $x$ is a possibility, it is not a contradiction and therefore none of the $x_i$ can be a contradiction. Since each $x_i$ is a minterm of the respective basis $\basis_i$ that is not a contradiction, it is a possibility by \ref{prop_poss_is_minterm}. Therefore a possibility $x$ of the combined domain is the conjunction of the possibilities $x_i$ of the original domains that is not a contradiction.
 	\end{proof}
+
+	\begin{prop}
+		Let $\{\edomain_{X_i}\}_{i=1}^{\infty}$ be a countable set of incomplete experimental domains and $\edomain_X$ their combined experimental domain. Let $\{\resPoss_i\}_{i=1}^{\infty}$  the residual possibility of each respective domain. Let $\resPoss = \bigAND\limits_{i=1}^{\infty} \resPoss_i$. The combined domain $\edomain_X$ is incomplete if and only if $\resPoss \nequiv \contradiction$ in which case $\resPoss$ is the residual possibility.
+	\end{prop}
+	
+	\begin{proof}
+		For each domain, the residual possibility is the conjunction of the negation of its basis. Therefore we have $\resPoss \equiv \bigAND\limits_{\stmt[e] \in \basis} \stmt[e] \equiv \bigAND\limits_{i=1}^{\infty} \bigAND\limits_{\stmt[e]_i \in \basis_i} \stmt[e]_i \equiv \bigAND\limits_{i=1}^{\infty} \resPoss_i$. If $\resPoss \nequiv \contradiction$ then it is the residual possibility.
+	\end{proof}
+	
+	\begin{coro}
+		The residual possibility of the combined domain is narrower than the ones of the original domains. If one of the domains is complete then the combined domain is also complete.
+	\end{coro}
+
+	\begin{proof}
+		Let $\resPoss$ be the residual possibility for the combined domain and $\resPoss_j$ the one for one of the original domains. We have $\resPoss_j \AND \resPoss \equiv \resPoss_j \AND \bigAND\limits_{i=1}^{\infty} \resPoss_i \equiv \bigAND\limits_{i=1}^{\infty} \resPoss_i \equiv \resPoss$. Therefore, by \ref{prop_narrowness_properties} $\resPoss \narrower \resPoss_j$.
+		
+		Suppose that one of the original domains $\edomain_{X_j}$ is complete. Then the conjunction of the negation of its basis $\resPoss_j$ is a contradiction. This means the conjunction of the negation of the basis of the combined domain $\resPoss$ is also a contradiction and the combined domain is complete.
+	\end{proof}
 \end{mathSection}
 
 \subsection{Independent domains}
