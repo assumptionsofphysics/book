@@ -451,7 +451,7 @@ With these tools in place we are in a position to formulate models that are univ
 
 We now focus on those statements that are verifiable: we have a way to experimentally confirm that the statement is true. The main result of this section is that not all functions of verifiable statements are verifiable statements. For example, since a test has to finish in a finite amount of time we are not going to be able to verify a statement that is the conjunction (i.e. logical AND) of infinitely many statements. We are also going to group verifiable statements into experimental domains which represent all the experimental evidence about a scientific subject that can be acquired in an indefinite amount of time.
 
-The previous section took care of universality and non-contradiction, but the principle of scientific objectivity requires science to be evidence based. Consider the statements \statement{the square of the hypotenuse is equal to the sum of the squares of the other two sides} or \statement{God is eternal}. They deal with abstract concepts that cannot solely be defined experimentally and therefore cannot be experimentally verified conclusively. Again, this does not mean these concepts are of less significance, just that they cannot be the subject of scientific inquiry.\footnote{In fact, one may be more interested in them precisely because of their abstract, and therefore less transient, nature.}
+The previous section took care of universality and non-contradiction, but the principle of scientific objectivity requires science to be evidence based. Consider the statements \statement{the square of the hypotenuse is equal to the sum of the squares of the other two sides} or \statement{God is eternal}. They deal with abstract concepts that cannot solely be defined experimentally and therefore cannot be experimentally verified conclusively. For example, verifying that the Pythagorean theorem holds in some experimental setting does not imply that it must hold for the abstract concept of a right triangle: for that we need a mathematical proof. Again, this does not mean these concepts are of less significance, just that they cannot be the subject of scientific inquiry.\footnote{In fact, one may be more interested in them precisely because of their abstract, and therefore less transient, nature.}
 
 Limiting the scope of our discussion to objects and properties that are well defined physically is also not enough. For example, \emph{``the electron is green"} or \emph{``1 meter is equal to 5 Kelvin"} are still not suitable scientific statements as the relationships established are not physically meaningful. Even when the relationship is meaningful, we may still not be able to validate it experimentally. For example, \emph{``there is no extra-terrestrial life"} or \emph{``the mass of the electron is exactly $9.109 \times 10^{-31}$ kg"} are not statements that can be verified in practice. In the first case, we would need to check every corner of the universe and find none, with the closest galaxy like ours, Andromeda, being 2.5 million light-years away; in the second case, we will always have an uncertainty associated with the measurement, however small.
 
@@ -459,7 +459,7 @@ So we have to narrow the scope to those and only those statements that can be ve
 
 \begin{mathSection}
 \begin{axiom}\label{ax_verifiable_statements}
-	A \textbf{verifiable statement} is a statement that can be shown to be true experimentally. Formally, a statement $\stmt$ is verifiable if it is part of the subset $\stmt \in \vstmtSet \subset \stmtSet$ of all verifiable statements.
+	A \textbf{verifiable statement} is a statement that, if true, can be shown to be so experimentally. Formally, a statement $\stmt$ is verifiable if it is part of the subset $\stmt \in \vstmtSet \subset \stmtSet$ of all verifiable statements.
 \end{axiom}
 \begin{justification}
 	To give a better justification for this and later axioms, we introduce the following pseudo-mathematical concepts. An \textbf{experimental test} $\expt$ is a repeatable procedure (i.e. it can be restarted and stopped at any time) that anybody can execute and will always either terminate successfully, terminate unsuccessfully or never terminate. We can assume it to be an element of the set $\mathcal{E}$ of all experimental tests upon which is defined a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$. The idea is that if a statement is verifiable we can find an experimental test $\expt$ that always succeeds if the statement is true, and the statement is true if the experiment always succeeds.
@@ -470,13 +470,13 @@ So we have to narrow the scope to those and only those statements that can be ve
 
 Experimental tests are the second and last building block of our general mathematical theory of experimental science. As with statements, any language (e.g. natural, formal, engineering drawings, computer programs, ...) can in principle be used to describe the procedure, which can be arbitrarily complicated. It may require building detectors, gathering large amounts of data and performing complicated computations. We are not going to care how these procedures are described, just that it is done in a way that allows us to execute the test.\footnote{Trying to formalize a universal language for experimental tests is not only impractical but also conceptually problematic. To know what we can test experimentally is to know what is physically possible, which is equivalent to knowing the laws of physics, which is what we are trying to construct a framework for.}
 
-As an example, consider the following procedure:
+As an example, consider a procedure along the lines of:
 \begin{enumerate}
 	\item find a swan
 	\item if it's black terminate successfully
 	\item go to step 1
 \end{enumerate}
-If a black swan exists, at some point we'll find it and the test will be successful. If a black swan does not exist, then the procedure will never terminate and the result is undefined. This is something anybody can do and will always provide the same result: it is an experimental test. It also terminates successfully if and only if a black swan exists, so the statement \statement{black swans exist} is verifiable.
+If a black swan exists, at some point we'll find it and the test will be successful. If a black swan does not exist, then the procedure will never terminate and the result is undefined. This is something anybody can do and will eventually always provide the same result: it is an experimental test. It also terminates successfully if and only if a black swan exists, so the statement \statement{black swans exist} is verifiable.
 
 Note that, in principle, science can also study statements that can be refuted experimentally. But the negation of those is a statement that can be verified experimentally. Therefore we lose nothing by only focusing on verification.\footnote{Mathematically, the spaces of verifiable statements and refutable statements are dual to each other.}
 
@@ -761,12 +761,12 @@ With our definitions in mind, we can answer the following fundamental question: 
 	\end{thrm}
 	
 	\begin{proof}
-		Let $\basis = \{\obs[e]_i\}_{i=1}^{\infty} \subseteq \edomain$ be a countable basis. Let $2^{\mathbb{N}}$ denote the set of infinite binary sequences. We define the function $F:X\to2^{\mathbb{N}}$ such that $F(x) = \{F(x)_i\}_{i=1}^{\infty}$ is given by: 
+		Let $\basis = \{\obs[e]_i\}_{i=1}^{\infty} \subseteq \edomain$ be a countable basis. Let $2^{\mathbb{N}}$ denote the set of infinite binary sequences. We define the function $F:X\to\mathbb{B}^{\mathbb{N}}$ such that $F(x) = \{F(x)_i\}_{i=1}^{\infty}$ is given by: 
 		$$
 		F(x)_i = 
 		\begin{cases}
-		1 & x \comp \obs[e]_i \\
-		0 & x \ncomp \obs[e]_i
+		\TRUE & x \comp \obs[e]_i \\
+		\FALSE & x \ncomp \obs[e]_i
 		\end{cases}
 		$$
 		For each $x \in X$ we have $x = \bigAND\limits_{i=1}^{\infty} \NOT^{F(x)_i} \obs[e]_i$. Suppose $x_1 \neq x_2$, then $F(x_1)_i \neq F(x_2)_i$ for some $i$, therefore $F$ is injective. We then have $|X| \leq |2^{\mathbb{N}}|=|\mathbb{R}|$. $X$ has at most the cardinality of the continuum.
@@ -813,7 +813,7 @@ Therefore each statement in the experimental domain defines a set of possibiliti
 \end{defn}
 
 \begin{prop}
-	A statement $\obs \in \edomain$ is the disjunction of the possibilities in its verifiable set $U(\obs)$. That is, $\obs=\bigOR\limits_{x \in U(\obs)} x$.
+	A statement $\obs \in \edomain$ is equivalent the disjunction of the possibilities in its verifiable set $U(\obs)$. That is, $\obs \equiv \bigOR\limits_{x \in U(\obs)} x$.
 \end{prop}
 \begin{proof}
 	First we show each statement is the disjunction of some set of possibilities. Let $\edomain$ be an experimental domain, $\obs \in \edomain$ a verifiable statement and $\basis \subseteq \edomain$ a basis. Since $\obs$ is a function of the basis, it can be expressed as a disjunction of minterms of $\basis$. The minterms of $\basis$ that are contradictions can be ignored since $\obs \OR \contradiction \equiv \obs$. But the minterms of $\basis$ that are not contradictions are possibilities of $\edomain$ so $\obs=\bigOR\limits_{x \in U} x$ for some $U \subseteq X$.
