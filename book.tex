@@ -1069,7 +1069,7 @@ We continue our investigation of the fundamental mathematical structures for exp
 
 We will take two or more domains and merge all the experimental information that can be gathered through them into a \textbf{combined domain}. We will study how the set of possibilities of the combined domain depends not only on the original domains, but also on the relationships between them. These will also determine the natural topology that can vary from the product topology all the way to the disjoint union topology.
 
-We will also show that experimental relationships, under suitable conditions, can themselves be verified experimentally by constructing the \textbf{relationship domain} for which its possibilities correspond to the possible relationships. To conclude, we study \textbf{properties} and \textbf{quantities} which we use to label the possibilities of an experimental domain.
+We will also show that experimental relationships, under suitable conditions, can themselves be verified experimentally by constructing the \textbf{relationship domain} for which its possibilities correspond to the possible relationships.
 
 \section{Dependence and equivalence between domains}
 
@@ -1143,6 +1143,12 @@ More precisely, consider the verifiable statement $\obs_Y=$\statement{the height
 	\begin{justification}
 		Formally, we simply define causal relationships to be continuous but we still need a physical justification. An experimental test for the verifiable set $U_Y$ will indirectly test that the true possibility of $Y$ was in the set $f^{-1}(U_Y)$. This means that $f^{-1}(U_Y)$ can be associated with an experimental test and is therefore a verifiable set. If we want to be consistent, then, we need to make sure $f^{-1}(U_Y)$ is in the natural topology for $\edomain_X$.
 	\end{justification}
+	\begin{coro}
+		A \textbf{causal relationship} between two domains is unique if it exists.
+	\end{coro}\label{prop_causal_relationship_unique}
+	\begin{proof}
+		Suppose $f_1 : X \to Y$ and $f_2 : X \to Y$ are two causal relationships. Let $x \in X$. We have $x \narrower f_1(x)$ and $x \narrower f_2(x)$. This means $f_1(x) \comp f_2(x)$. But these are two possibilities of the same domain, so they are either incompatible or are the same possibilities. Therefore $f_1(x) \equiv f_2(x)$ for all $x \in X$. The causal relationships are the same.
+	\end{proof}
 	\begin{thrm}[Experimental Relationship Theorem]
 		Inference and causal relationships are equivalent. More formally, let $\edomain_X$ and $\edomain_Y$ be two experimental domains. An inference relationship $\erel: \edomain_Y \to \edomain_X$ exists between them if and only if a causal relationship $f: X \to Y$ also exists.
 	\end{thrm}
@@ -1174,7 +1180,7 @@ This means that if we capture some physical feature using some mathematical stru
 \end{proof}
 \end{mathSection}
 
-Note that the converse is not true: two domains that are endowed with the same mathematical structure are not necessarily equivalent. Consider two similarly constructed thermometers: their respective experimental domains are not equivalent since knowing something about one tells us nothing about the other. Yet, their natural topologies are equivalent because the way we can measure temperature for both is the same. One way to look at it is that the mathematical structures ``forget" the full equivalence between statements and only look at a particular aspect. Topological spaces capture how the possibilities are distinguished in terms of verifiable statements. Therefore, while the domains for temperature of two different thermometers are not equivalent, their natural topologies are equivalent because the way we characterize all possible measurements is the same (i.e. the value is within a finite precision interval). Similarly, the $\sigma$-algebra only cares about what statements are valid predictions. We'll see that, in some cases, Abelian groups will capture how distributions can be composed into other distributions, that non-Abelian groups will capture how transformations can be composed into other transformations, and so on.
+Note that the converse is not true: two domains that are endowed with the same mathematical structure are not necessarily equivalent. Consider two similarly constructed thermometers: their respective experimental domains are not equivalent since knowing something about one tells us nothing about the other. Yet, their natural topologies are equivalent because the way we can measure temperature for both is the same. One way to look at it is that the mathematical structures ``forget" the full equivalence between statements and only look at a particular aspect. Topological spaces capture how the possibilities are distinguished in terms of verifiable statements. Therefore, while the domains for temperature of two different thermometers are not equivalent, their natural topologies are equivalent because the way we characterize all possible measurements is the same (i.e. the value is within a finite precision interval). Similarly, the $\sigma$-algebra only cares about what statements lead to valid predictions. We'll see that, in some cases, Abelian groups will capture how distributions can be composed into other distributions, that non-Abelian groups will capture how transformations can be composed into other transformations, and so on.
 
 \section{Combining domains}
 
@@ -1277,7 +1283,7 @@ Another special case is combining a domain $\edomain_X$ with another $\edomain_Y
 
 \subsection{Incompatible domains}
 
-The last special case we consider is when the domains are incompatible, that is all verifiable statements of one are incompatible with the verifiable statements of the other. This is one case where the residual possibility behaves differently from all the others.\footnote{In fact, this is what prompted us to introduce the residual possibility.} Suppose $\edomain_X$ is the domain to classify a particular specimen as an animal and $\edomain_Y$ is the domain to classify it as a plant. If we take a verifiable statement from the first, such as \statement{that specimen has fur}, then it will be incompatible with a verifiable statement from the other, such as \statement{that specimen has lobed leaves}. The only way we can combine the possibilities is to take an established possibility of one (e.g. \statement{this specimen is a cat}) and combine it with the residual possibility of the other (e.g. \statement{this specimen is not a plant}). In other words, the combined possibilities are the union of the possibilities of the two domains (e.g. all possible plants and all possible animals).
+The last special case we consider is when the domains are incompatible, that is all verifiable statements of one are incompatible with the verifiable statements of the others. This is one case where the residual possibility behaves differently from all the others.\footnote{In fact, this is what prompted us to introduce the residual possibility.} Suppose $\edomain_X$ is the domain to classify a particular specimen as an animal and $\edomain_Y$ is the domain to classify it as a plant. If we take a verifiable statement from the first, such as \statement{that specimen has fur}, then it will be incompatible with a verifiable statement from the other, such as \statement{that specimen has lobed leaves}. The only way we can combine the possibilities is to take an established possibility of one (e.g. \statement{this specimen is a cat}) and combine it with the residual possibility of the other (e.g. \statement{this specimen is not a plant}). In other words, the combined possibilities are the union of the possibilities of the two domains (e.g. all possible plants and all possible animals).
 
 In terms of the topology, the established possibilities of the combined domain are the disjoint union of the established possibilities of the original domains and their natural topology is the disjoint union topology (or co-product topology). 
 
@@ -1369,7 +1375,7 @@ Suppose we have a way to verify experimentally statements of the type \statement
 	
 	Now we want to show that for each possibility $z$ there is a function $f_z : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} \narrower(x, f_z(x))$. Let $z$ be a possibility of a relationship domain such that $\edomain_Y \subseteq \edomain_X$. Let $P_z \subseteq X \times Y$ be defined as above. If $z$ is a possibility, then $P_z$ must contain at least one pair for each $x \in X$. Suppose it didn't. Then, if $z$ were true, there would be a particular $x$ such that $x \ncomp y$ for all $y \in Y$. This means $x \ncomp \bigOR\limits_{y \in Y} y \equiv \tautology$ and therefore $x \equiv \contradiction$. But this can't be because $x$ is a possibility. Therefore we cannot suppose $z$ to be true, which means $z$ is a contradiction. But this also can't be because $z$ was a possibility. Therefore $P_z$ must contain at least one pair for each $x \in X$. Similarly, $P_z$ must contain only one pair for each $x \in X$. Suppose it didn't. Then, if $z$ were true, there would be a particular $x \in X$ such that $x \comp y_1$ and $x \comp y_2$ for two possibilities $y_1, y_2 \in Y$. But since $\edomain_Y$ depends on $\edomain_X$ there is a causal relationship $f : X \to Y$ such that $x \narrower f(x)$. This would mean that $f(x)$ is compatible with two distinct possibilities, which can't be: $f(x)$ is a possibility of $Y$ and cannot be compatible with both $y_1$ and $y_2$. Therefore we cannot suppose $z$ to be true, which means $z$ is a contradiction. But this can't be because $z$ was a possibility. Therefore $P_z$ must contain only one pair for each $x \in X$. This means we can define $f_z : X \to Y$ as the function such that $(x, f_z(x)) \in P_z$. Note that, given $x \in X$ and  $y \in Y$, $x \narrower y$ if and only if $y$ is the only possibility in $Y$ such that $x \comp y$. Therefore we can write $f_z : X \to Y$ such that $z\equiv \left( \bigAND\limits_{(x,y) \in P_z} \comp(x, y) \right) \AND \left( \bigAND\limits_{(x,y) \nin P_z} \ncomp(x, y) \right)\equiv\bigAND\limits_{x\in X} \narrower(x, f_z(x))$.
 	
-	Lastly, we need to show that $f_z$ is continuous for each possibility $z$. Suppose $z$ is a possibility such that $f_z$ is discontinuous. Then, if $z$ were true, we would find that $x \narrower f_z(x)$ for all $x \in X$. Therefore $f_z$ would be equal to the causal relationship $f$ for the domain. But the causal relationship $f$ must be continuous, so we cannot cannot suppose $z$ to be true and therefore $z$ is a contradiction. But this can't be because $z$ is a possibility. Therefore $f_z$ must be continuous.
+	Lastly, we need to show that $f_z$ is continuous for each possibility $z$. Let $z$ be a possibility. Then, if $z$ were true, we would find that $f_z$ is a causal relationship. But by \ref{prop_causal_relationship_unique} it must match  $f$ which is a continuous function. Therefore $f_z$ must be continuous.
 	
 \end{proof}
 \end{mathSection}
@@ -1378,11 +1384,30 @@ Note that the definition for the relationship domain simply says that one can be
 
 Suppose, in fact, that we want to experimentally verify the link between inflation and money supply. As long as we cannot create new countries in different economic conditions, the only thing we can do is gather data for as many nations as we can throughout history.\footnote{Computer simulations can sometimes alleviate this problem, though they are only as good as the model one uses.} Since we cannot purposely explore different conditions and we can't even replicate older ones, the best we can do is show that there was a correlation between those specific values. It is the inability to freely and fully explore the problem space that may not enable us to experimentally verify the causal relationship.\footnote{In this sense, experimental sciences allow for more rigorous results than observational sciences precisely because it is more feasible to experimentally test relationships between domains.}
 
-The point is that we cannot give a general purpose algorithm for how to construct experimental tests for the relationships starting from the experimental tests of the individual domain. We cannot formalize in general what it means that we have explored the space ``enough" to consider the relationship verified, no more than we can formalize when the data collected is ``enough" to consider a statement verified or when a statement is specific ``enough" to consider the semantics well defined. This is where the practice of experimental science comes in.
+The point is that we cannot give a general purpose algorithm for how to construct experimental tests for the relationships starting from the experimental tests of the individual domains. We cannot formalize in general what it means that we have explored the space ``enough" to consider the relationship verified, no more than we can formalize when the data collected is ``enough" to consider a statement verified or when a statement is specific ``enough" to consider the semantics well defined. This is where the practice of experimental science comes in.
 
-But, while we may not know in general whether we can experimentally verify a relationship between two specific domains, we do know that the relationship domain can always be constructed in principle and therefore our mathematical framework is complete. That is: we can take two experimental domains (e.g. $\edomain_t$ for time and $\edomain_x$ for position), construct a relationship domain between them (e.g. $\edomain_{x(t)}$ for trajectories in space), then take another experimental domain (e.g. $\edomain_{(q,p)}$ for the states) and construct another relationship domain between the two (e.g. $\edomain_{(q,p)\to x(t)}$ for the relationship between states and trajectories). Our general mathematical theory of experimental science is therefore closed, since we can recursively create relationship domains about relationship domains indefinitely while remaining within its bounds. In other words, we cannot create relationships between domains that lie outside of the theory.
+But, while we may not know in general whether we can experimentally verify a relationship between two specific domains, we do know that the relationship domain can always be constructed in principle and therefore our mathematical framework is complete. That is: we can take two experimental domains (e.g. $\edomain_t$ for time and $\edomain_x$ for position), construct a relationship domain between them (e.g. $\edomain_{x(t)}$ for trajectories in space), then take another experimental domain (e.g. $\edomain_{(q,p)}$ for the states) and construct another relationship domain between the two (e.g. $\edomain_{(q,p)\to x(t)}$ for the relationship between states and trajectories). Our general mathematical theory of experimental science is therefore closed, since we can recursively create relationship domains about relationship domains indefinitely while remaining within its bounds. In other words, Experimentally distinguishable objects and their relationships will never lie outside of the theory.
 
-\section{Properties and quantities}
+
+\section{Summary}
+
+In this chapter we have seen the first important set of consequences of our general mathematical theory of experimental science. We have seen that experimental relationships between domains can be defined in terms of inference between verifiable statements or equivalently in terms of causal relationship between possibilities. The causal relationship always corresponds to a continuous function in the natural topology. Moreover, it will need to preserve any additional mathematical structure that formalizes a physical characteristic of the domain.
+
+We have also seen how to combine a set of countably many experimental domains and how the combined possibilities depend on the logical and semantic relationships that exist across domains. Depending on the case, we can have the scalar product of the possibilities (with the product topology) all the way to the disjoint union of the established possibilities (with the disjoint union topology).
+
+We have shown that it is possible to construct experimental domains for the relationships themselves. This means that within our theory we can describe relationships of arbitrarily higher order (i.e. relationships about relationships) and therefore we never go outside of our framework.
+
+As we have only explored simple constructions based on the original concepts, these conclusions are of a general nature and therefore must apply to any area of science. 
+
+\chapter{Properties and quantities}
+
+In this chapter we study how the possibilities of an experimental domain are typically labeled by \textbf{properties} and \textbf{quantities}. For example, the species of an animal can be labeled by its name according to the ICZN and the distance between two objects can, once a unit is chosen, be labeled by a number.
+
+The main objective will be to formalize
+
+
+ To conclude, we study \textbf{properties} and \textbf{quantities} which we use to label the possibilities of an experimental domain.
+
 
 Most of the time we characterize a system by qualifying one or more of its properties, some of which are quantifiable. For example, \statement{this animal is of genus Passer} or \statement{the mass of the electron is between $9.108 \times 10^{-31}$ and $9.110 \times 10^{-31}$ kg}. Therefore we need to properly define what we mean by properties and quantities in our framework and how they relate to the mathematical structures defined before.
 
@@ -1408,11 +1433,11 @@ Other examples of properties include: postal addresses for buildings, tax ID num
 	\begin{defn}
 		The possibilities of an experimental domain are \textbf{fully identified} by a property if its value is enough to uniquely determine a possibility. Formally, let $(\mathcal{Q}, q)$ be a property for an experimental domain $\edomain_X$. Then the possibilities $X$ are fully identified if $q: X \to \mathcal{Q}$ is injective.
 	\end{defn}
-
+	
 	\begin{defn}
 		An experimental domain is \textbf{fully characterized} by a property if there is a one to one correspondence between possibilities and property values. Formally, let $(\mathcal{Q}, q)$ be a property for an experimental domain $\edomain_X$. Then it is fully characterized if $q: X \to \mathcal{Q}$ is a homeomorphism.
 	\end{defn}
-
+	
 	\begin{justification}
 		Formally speaking, the one to one correspondence between possibilities and property values only implies that $q: X \to \mathcal{Q}$ is bijective and continuous. This, though, would not be sufficient to fully characterize the domain. We need that each verifiable statement on the property values corresponds to a verifiable statement on the possibilities. That is, the property tells us not only what possibilities exist, but also which statements can be experimentally verified. Therefore each open set of property values must correspond to an open set in the natural topology of the possibilities.		 
 	\end{justification}
@@ -1421,7 +1446,7 @@ Other examples of properties include: postal addresses for buildings, tax ID num
 The difference between properties that fully identify and fully characterize the domain is subtle. Consider the experimental domain for identifying negatively charged fundamental particles. The mass in eV is enough to determine the particle, therefore it fully identifies the possibilities. But, given that the range of mass is continuous, we can't know a priori which particular values of mass correspond to an actual particle. In this sense, the mass as a continuous quantity expressed in eV is not enough to fully characterize the experimental domain, which is in fact discrete. Somebody would have to tell us what the allowed values are. On the other hand, consider the experimental domain for the position of the center of mass of a particle along a particular direction. The distance from a fixed point is enough to identify the position, therefore it fully identifies the possibilities. But for each value of the distance we also have a possible position of the particle: the property fully characterizes the domain.
 
 Let's now turn our attention to those properties that can be quantified. The number of elements of a group can be quantified by an integer, the distance between two objects can be quantified in meters, the force acting on a body can be quantified by the magnitude of a vector expressed in Newtons. The defining characteristic for a quantity is that a value can be greater, smaller or equal to another. That is: we have an ordering defined on our labels.
-	
+
 \begin{mathSection}
 	\begin{defn}
 		A \textbf{total order} on a set $\mathcal{Q}$ is a relationship $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ such that:
@@ -1431,13 +1456,13 @@ Let's now turn our attention to those properties that can be quantified. The num
 			\item (total) at least $q_1 \leq q_2$ or $q_2 \leq q_1$
 		\end{enumerate}
 	\end{defn}
-\begin{defn}
-	Let $\mathcal{Q}$ be a topological space and $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ a total order. The \textbf{order topology} is the topology generated by the collections of sets of the form:
-	$$(a, \infty) = \{x \in \mathcal{Q} \, | \, a < x\} \;,\; (-\infty, b) = \{x \in \mathcal{Q} \, | \, x < b\}.$$
-\end{defn}
-\begin{defn}
-	A \textbf{quantity} for an experimental domain $\edomain_X$ is an ordered property. Formally, it is a tuple $(\mathcal{Q}, \leq, q)$ where $(\mathcal{Q}, q)$ is a property, $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ is a total order and $\mathcal{Q}$ is a topological space with the order topology with respect to $\leq$.
-\end{defn}
+	\begin{defn}
+		Let $\mathcal{Q}$ be a topological space and $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ a total order. The \textbf{order topology} is the topology generated by the collections of sets of the form:
+		$$(a, \infty) = \{x \in \mathcal{Q} \, | \, a < x\} \;,\; (-\infty, b) = \{x \in \mathcal{Q} \, | \, x < b\}.$$
+	\end{defn}
+	\begin{defn}
+		A \textbf{quantity} for an experimental domain $\edomain_X$ is an ordered property. Formally, it is a tuple $(\mathcal{Q}, \leq, q)$ where $(\mathcal{Q}, q)$ is a property, $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ is a total order and $\mathcal{Q}$ is a topological space with the order topology with respect to $\leq$.
+	\end{defn}
 \end{mathSection}
 
 \subsection{Decidable domains and discrete quantities}
@@ -1445,19 +1470,21 @@ Let's now turn our attention to those properties that can be quantified. The num
 If the possible values of a quantity are the integers (positive or negative) we say the quantity is discrete. For example, the number of chromosomes for a species, the number of inhabitants of a country or the atomic number for an element are all discrete quantities.
 
 \begin{mathSection}
-\begin{defn}
-	A \textbf{discrete quantity} for an experimental domain $\edomain_X$ is a quantity $(\mathbb{Z}, \leq, q)$ where $\mathbb{Z}$ is the set of integers.
-\end{defn}
+	\begin{defn}
+		A \textbf{discrete quantity} for an experimental domain $\edomain_X$ is a quantity $(\mathbb{Z}, \leq, q)$ where $\mathbb{Z}$ is the set of integers.
+	\end{defn}
 \end{mathSection}
 
 There is a special relationship between discrete quantities and decidability, the ability to test experimentally both the truthfulness and falsehood of a statement. Consider the examples above of discrete quantities: in each case we can experimentally test whether we have a particular value or not. For example, we are always able to tell whether an element has three protons or not.\footnote{Recall that this is not the case with continuous quantities. Because of uncertainty of measurement, we are able to exclude that a given particle has exactly zero mass but it is not possible to conclusively show that it has zero mass.} It turns out that whenever we have a domain consisting of only decidable statements, we can always create a discrete quantity that fully characterizes the experimental domain.
+
+% TODO: review both definitions with a corollary that iff possibilities are verifiable and iff singletons are open sets
 
 \begin{mathSection}
 	
 	\begin{defn}
 		An experimental domain $\edomain_X$ is \textbf{decidable} if all statements in the domain are decidable. Formally, for every $\obs \in \edomain_X$ we have $\NOT\obs \in \edomain_X$.
 	\end{defn}
-
+	
 	\begin{prop}
 		The set of possibilities $X$ for a decidable domain $\edomain_X$ is also a countable basis.
 	\end{prop}
@@ -1467,26 +1494,26 @@ There is a special relationship between discrete quantities and decidability, th
 		
 		Now we just need to show that $X$ is countable. Consider a countable basis $\basis \subseteq \edomain_X$. Because the possibilities are verifiable statements, they can be generated from $\basis$ by finite conjunction and countable disjunction. Moreover, since the possibilities are the narrowest statements that are not contradictions, they can be generated from $\basis$ using finite conjunction only. Since $\basis$ is countable and $X$ is generated by $\basis$ through finite conjunction, $X$ can be at most countable. Therefore $X$ is a countable basis.
 	\end{proof}
-		
+	
 	\begin{defn}
 		A topology $\mathsf{T}_X$ on a set $X$ is called \textbf{discrete} if it contains every subset of $X$.
 	\end{defn}
 	
-\begin{thrm}[Decidability is discreteness]\label{thrm_decidablity_is_discreteness}
-	The natural topology of the possibilities $X$ for a domain $\edomain_X$ is discrete if and only if the domain is decidable.
-\end{thrm}
-\begin{proof}
-	Suppose $\edomain_X$ is decidable. Let $U \subseteq X$ be a subset of possibilities. The statement $\stmt = \bigOR\limits_{x \in U} x$ is generated from $X$ through countable disjunction. Since $\edomain_X$ is decidable, $X$ is a countable basis and $\stmt$ is verifiable. Therefore $U$ is a verifiable set and it is contained in the natural topology. The natural topology of $X$ is discrete by definition.
+	\begin{thrm}[Decidability is discreteness]\label{thrm_decidablity_is_discreteness}
+		The natural topology of the possibilities $X$ for a domain $\edomain_X$ is discrete if and only if the domain is decidable.
+	\end{thrm}
+	\begin{proof}
+		Suppose $\edomain_X$ is decidable. Let $U \subseteq X$ be a subset of possibilities. The statement $\stmt = \bigOR\limits_{x \in U} x$ is generated from $X$ through countable disjunction. Since $\edomain_X$ is decidable, $X$ is a countable basis and $\stmt$ is verifiable. Therefore $U$ is a verifiable set and it is contained in the natural topology. The natural topology of $X$ is discrete by definition.
+		
+		Now suppose $\edomain_X$ is such that the natural topology for its possibilities $X$ is discrete. Let $\stmt = \bigOR\limits_{x \in U} x$ be a statement. Since the topology is discrete, $U$ is part of the topology and $\stmt$ is verifiable. Consider its negation $\NOT\stmt = \bigOR\limits_{x \in U^C} x$. Since the topology is discrete, $U^C$ is also part of the topology and $\NOT\stmt$ is verifiable. This means $\stmt$ is decidable. Since every statement in $\edomain_X$ is decidable, the domain is decidable.
+	\end{proof}
 	
-	Now suppose $\edomain_X$ is such that the natural topology for its possibilities $X$ is discrete. Let $\stmt = \bigOR\limits_{x \in U} x$ be a statement. Since the topology is discrete, $U$ is part of the topology and $\stmt$ is verifiable. Consider its negation $\NOT\stmt = \bigOR\limits_{x \in U^C} x$. Since the topology is discrete, $U^C$ is also part of the topology and $\NOT\stmt$ is verifiable. This means $\stmt$ is decidable. Since every statement in $\edomain_X$ is decidable, the domain is decidable.
-\end{proof}
-	
-\begin{prop}
-	The order topology for the integers is discrete.
-\end{prop}
-\begin{proof}
-	Each singleton $\{z\} \subseteq \mathbb{Z}$ is in the order topology since $\{z\} = (z-1, \infty) \cap (-\infty, z+1)$. Each arbitrary set of integers is the union of singletons and is therefore in the order topology as well. The order topology on the integers is discrete.
-\end{proof}
+	\begin{prop}
+		The order topology for the integers is discrete.
+	\end{prop}
+	\begin{proof}
+		Each singleton $\{z\} \subseteq \mathbb{Z}$ is in the order topology since $\{z\} = (z-1, \infty) \cap (-\infty, z+1)$. Each arbitrary set of integers is the union of singletons and is therefore in the order topology as well. The order topology on the integers is discrete.
+	\end{proof}
 	
 	\begin{prop}
 		An experimental domain is decidable if and only if it is fully characterized by a discrete quantity.
@@ -1554,7 +1581,7 @@ There is a special relationship between continuous quantities and the ability to
 	\begin{prop}
 		An experimental domain allows arbitrary precision if and only if it is fully characterized by a continuous quantity.
 	\end{prop}
-
+	
 	\begin{proof}
 		If an experimental domain allows arbitrary precision then the set of possibilities with the natural topology is homeomorphic to the real numbers with the standard topology, which is also the order topology. Therefore we can construct a continuous quantity that fully characterizes the possibilities. Conversely, if the domain is fully characterized by a continuous quantity, then the set of real numbers with the order topology, which is also the standard topology, is homeomophic to the set of possibilities with the natural topology. Therefore the domain allows arbitrary precision by \ref{thrm_arbitrary_precision_is_continuity}.
 	\end{proof}	
@@ -1568,17 +1595,9 @@ Why, then, are continuous quantities so successful in science? We will look at t
 
 To sum up, we should regard the real numbers for what they are: the limit of an infinite process of subdivision (i.e. the limit of a Cauchy sequence). But this process, in reality, cannot go on forever.
 
-\section{Summary}
-
-In this chapter we have seen the first important consequences of our general mathematical theory of experimental science. We have seen that experimental relationships between domains can be defined in terms of inference between verifiable statements or equivalently in terms of causal relationship between possibilities. The causal relationship always corresponds to a continuous function in the natural topology. Moreover, it always needs to preserve any mathematical structure that captures some physical relationship within the domain.
-
-We have also seen how to combine a set of countably many experimental domains and how the combined possibilities depend on the logical relationships that exist across domains. We can have the scalar product of the possibilities (with the product topology) all the way to the disjoint union of the established possibilities (with the disjoint union topology).
-
-We have shown that it is possible to construct experimental domains for the relationships themselves. This means that within our theory we can describe relationships of arbitrarily higher order (i.e. relationships about relationships) and therefore we never go outside of our framework.
 
 We have also seen how we can identify the possibilities of a domain using properties and quantities and the intimate connection between discrete quantities and decidability on one side and between continuous quantities and arbitrary precision on the other side.
 
-We should stress that we have only explored simple constructions based on the original concepts and yet we have already made far-reaching conclusions. These will have numerous consequences throughout the rest of this work. 
 
 \appendix
 
