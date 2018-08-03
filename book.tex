@@ -493,7 +493,9 @@ The first important result is that the negation of an experimental test, an expe
 In the same vein we are able to confirm experimentally that \statement{the mass of this particle is not zero} but not that \statement{the mass of this particle is exactly zero} since we always have uncertainty in our measurements of mass. Even if we could continue shrinking the uncertainty arbitrarily, we would ideally need infinite time to shrink it to zero. What this means is that not all answers to the same question can be equally verified. Is the mass of the photon exactly zero? We can either give a precise ``no" or an imprecise ``it's within this range." Is there extra-terrestrial life? We can either give a precise ``yes" or an imprecise ``we haven't found it so far."\footnote{Note that we are on purpose avoiding induction. It does not play any role in our general mathematical theory of experimental science since the decision of when and how to apply induction violates the principle of scientific objectivity.}
 
 \begin{mathSection}
-	\emph{Remark}. The \textbf{negation or logical NOT} of a verifiable statement is not necessarily a verifiable statement.
+	\begin{remark}
+	The \textbf{negation or logical NOT} of a verifiable statement is not necessarily a verifiable statement.
+	\end{remark}
 \end{mathSection}
 
 While this is true in general, we can still test the negation of many verifiable statements. Consider the statement \statement{this swan is black}. It allows the following experimental test:
@@ -1407,21 +1409,23 @@ As we have only explored simple constructions based on the original concepts, th
 
 \chapter{Properties and quantities}
 
-In this chapter we study how the possibilities of an experimental domain are typically labeled by \textbf{properties} and \textbf{quantities}. For example, the species of an animal can be labeled by its name according to the ICZN and the distance between two objects can, once a unit is chosen, be labeled by a number.
-
-The main objective will be to formalize
-
-
- To conclude, we study \textbf{properties} and \textbf{quantities} which we use to label the possibilities of an experimental domain.
-
-
-Most of the time we characterize a system by qualifying one or more of its properties, some of which are quantifiable. For example, \statement{this animal is of genus Passer} or \statement{the mass of the electron is between $9.108 \times 10^{-31}$ and $9.110 \times 10^{-31}$ kg}. Therefore we need to properly define what we mean by properties and quantities in our framework and how they relate to the mathematical structures defined before.
+Most of the time we characterize a system by qualifying one or more of its features. For example, \statement{this animal is of genus Passer} or \statement{the mass of the electron is between $9.108 \times 10^{-31}$ and $9.110 \times 10^{-31}$ kg}. In this chapter we will define how we use \textbf{properties} and \textbf{quantities} to label the possibilities of an experimental domain.
 
 First we'll introduce the idea of using properties to differentiate a possibility from the others within a domain. A property can be either a physical one (e.g. the beak color of a bird) or one we define by convention (e.g. the taxonomy name for an animal species). Quantities are properties that have a magnitude: we can compare two different values and determine which one is greater or smaller. For example, groups of individuals can be labeled by their count and distances can be labeled in meters. In particular, we will define discrete quantities (those that correspond to integers and are associated to decidable possibilities) and continuous quantities (those that correspond to real numbers and are associated with arbitrary precision statements).
 
-Suppose $\edomain_X$ is a domain for animal identification and $X$, its possibilities, are all animal species. Providing good names and definitions for species is a whole scientific subject by itself (i.e. taxonomy) with its own rules (i.e. the International Code of Zoological Nomenclature). The ICZN assigns each species a name composed of two Latin words. For example, \statement{Passer domesticus} is the official name for the house sparrow while \statement{Passer italiae} is the one for the Italian sparrow. So, if $\mathcal{Q}$ is the set of all the names for all species, we have a function $q: X \to \mathcal{Q}$ from the species to its name. Since each species is given a unique name the function is invertible as well. This is the most discriminating type of property: one that covers the whole range of possibilities and fully identifies each of them. But this is a special case.
+TODO
 
-The ICZN also assigns a genus (pl. genera) to each species, which corresponds to the first part of the species name. For example, both aforementioned sparrows are of the genus \statement{Passer} while all swans, black or white, are of the genus \statement{Cygnus}. Now suppose that $\mathcal{Q}$ is the set of all names for all genera and $q: X \to \mathcal{Q}$ is the function that gives us the genus name for each species. We can still use this as a label for our possibilities, but it does not fully identify them. On a different note, we could decide to distinguish species by their morphological attributes. For example, if $\mathcal{Q}$ is the set of all colors, we can imagine a partial function $q: X \to \mathcal{Q}$ that gives us the beak color for each species, if they have one. While this is less general, it is still a valid label. In fact, it is with such labels that animal classification began.
+\section{Properties}
+
+Whether the result of direct observation or not, a physical object is most often identify its properties and their values. A person may be identified by name and date of birth; a bird may be characterized by the color of its beak; the state of a particle may be qualified by its position and momentum.
+
+In this section we define how in general we can use properties to label the possibilities of an experimental domain. Each property will specify a continuous function from the possibilities to the topological space of the possible property values. Some properties may fully identify each possibility, as they assign distinct values, and some may also fully characterize what statement are verifiable.
+
+Suppose $\edomain_X$ is a domain for animal identification and $X$, its possibilities, are all animal species. Providing good names and definitions for species is a whole scientific subject by itself (i.e. taxonomy) with its own rules (i.e. the International Code of Zoological Nomenclature). The ICZN assigns each species a name composed of two Latin words. For example, \statement{Passer domesticus} is the official name for the house sparrow while \statement{Passer italiae} is the one for the Italian sparrow. This means that identifying an animal species is equivalent to identifying its name. Therefore the domain to identify the species name $\edomain_{\mathcal{Q}} \equiv \edomain_X$ is equivalent to the one for identifying the actual species and we have an experimental relationship $q: X \to \mathcal{Q}$ between them. As each species is given a unique name this is the most discriminating type of property: one that covers the whole range of possibilities and fully identifies each of them. But this is a special case.
+
+The ICZN also assigns a genus (pl. genera) to each species, which corresponds to the first part of the species name. For example, both aforementioned sparrows are of the genus \statement{Passer} while all swans, black or white, are of the genus \statement{Cygnus}. Now suppose that $\mathcal{Q}$ is the set of all names for all genera and $q: X \to \mathcal{Q}$ is the function that gives us the genus name for each species. We can still use this as a label for our possibilities, but it does not fully identify them.
+
+On a different note, we could decide to distinguish species by their morphological attributes. For example, if $\mathcal{Q}$ is the set of all colors, we can imagine a partial function that gives us the beak color for each species, if they have one. We have $q: U \to \mathcal{Q}$ where $U \subseteq X$ is the set where the property is defined. To be consistent, though, we must at least be able to tell in what cases the property is actually defined. For example, we must be able to tell whether an animal has a beak. Therefore there must be a verifiable statement that is true if and only if the property is well defined. The set $U$, then, must correspond to the verifiable set of said statement.
 
 Other examples of properties include: postal addresses for buildings, tax ID numbers for people, generation for fundamental particles, position of the center of mass of a body. In all these cases, the general pattern is that we assign a label to a possibility from an established set.
 
@@ -1430,12 +1434,20 @@ Other examples of properties include: postal addresses for buildings, tax ID num
 		A \textbf{property} for an experimental domain $\edomain_X$ is any attribute we can use to distinguish between its possibilities. Formally, it is a tuple $(\mathcal{Q}, q)$ where $\mathcal{Q}$ is a topological space and $q : U \to \mathcal{Q}$ is continuous function where $U \in \mathsf{T}_X$ is a verifiable set of possibilities.
 	\end{defn}
 	\begin{justification}
-		For the property to be physically meaningful, the domain of $q$ must be a verifiable set in the topology as we must be able to tell experimentally when the property is defined or not. For example, we must be able to tell whether an animal has a beak if we want to define the beak color. Therefore there must be a verifiable statement that is true if the property is defined. This corresponds to the verifiable set $U$, the domain of the property.
+		For the property to be physically meaningful, the domain of $q$ must be a verifiable set in the topology as we must be able to tell experimentally when the property is defined or not. Therefore there must be a verifiable statement that is true if the property is defined, which corresponds to the verifiable set $U$, the domain of the property.
 		
-		Similarly, $\mathcal{Q}$ must be a topological space since we must be able to experimentally test the value for the property. For example, we can look at the beak color or we can look up the species name in a bird guide. Furthermore $q$ must be continuous since there must be a causal relationship between the possibility and the value of the property. For example, the species of the animal determines the color of the beak.
-		
-		We do not define, though, a property itself as an experimental domain. The idea is that the property is defined independently of any particular object. For example, distance in meters is defined independently of whether we later want to measure the earth diameter or its distance to the moon. The latter two would correspond to two experimental domains with their possibilities. This also means that the range of values defined by the property may exceed the ones possible in each particular case. For example, we are able to recognize a lavender beak even though no animal species may have one.
+		Similarly, $\mathcal{Q}$ must be a topological space since we must be able to experimentally test the value for the property. Furthermore $q$ must be continuous since there must be a causal relationship between the possibility and the value of the property.
+
 	\end{justification}
+\end{mathSection}
+		
+Note that we have not defined a property as an experimental domain. The possibility of the domain for a property would be a statement like \statement{the species name for this animal is Passer domesticus} while the value is just the object \statement{Passer domesticus}. The idea is that the property and its values are defined independently of the particular object. For example, distance in meters is defined independently of whether we later want to measure the earth diameter or its distance to the moon.\footnote{While in principle we could envision a formal construction of properties and their values purely built on top of the notion of statement (e.g. define the value \emph{red} to be the set of all statements that claim that something is of that color) we are not going to do so. While appealing in some respects, it is not clear whether such a construction would actually help to clarify underlying assumptions while it is clear would distract from other more critical issues.}
+
+The fact that the property and its values are defined more generally leads to some subtle issues: while each possibility of the domain corresponds to one property and each verifiable statement of the property is equivalent to a verifiable statement of the domain, the reverse is not true. Consider the experimental domain for identifying negatively charged fundamental particles. In this case, each particle will correspond to a unique value of mass, and by measuring the mass we can infer the particle. But for each possible value of mass we will not have a possible fundamental particle. Moreover, the verifiable statement \statement{this particle is an electron} would correspond to an infinitely precise statement of the form \statement{the mass of the particle is exactly 510998.9461... eV} which is not verifiable. That is, simply knowing that a charged particle has mass does not help us understand what possible values of mass are allowed. On the other hand, consider the experimental domain for the position of the center of mass of a particle along a particular direction. Not only the distance from a fixed point is enough to identify the position, but for each value of the distance we also have a possible position of the particle.
+
+We say that a property fully identifies an experimental domain if each possibility corresponds to a unique value, like in the case of the mass of a charged particle. Additionally, we say that a property fully characterizes an experimental domain if each possible value of a property corresponds to a possibility of the domain, like in the case of the distance from a reference and position of a particle.
+
+\begin{mathSection}
 	\begin{defn}
 		The possibilities of an experimental domain are \textbf{fully identified} by a property if its value is enough to uniquely determine a possibility. Formally, let $(\mathcal{Q}, q)$ be a property for an experimental domain $\edomain_X$. Then the possibilities $X$ are fully identified if $q: X \to \mathcal{Q}$ is injective.
 	\end{defn}
@@ -1443,15 +1455,16 @@ Other examples of properties include: postal addresses for buildings, tax ID num
 	\begin{defn}
 		An experimental domain is \textbf{fully characterized} by a property if there is a one to one correspondence between possibilities and property values. Formally, let $(\mathcal{Q}, q)$ be a property for an experimental domain $\edomain_X$. Then it is fully characterized if $q: X \to \mathcal{Q}$ is a homeomorphism.
 	\end{defn}
-	
-	\begin{justification}
-		Formally speaking, the one to one correspondence between possibilities and property values only implies that $q: X \to \mathcal{Q}$ is bijective and continuous. This, though, would not be sufficient to fully characterize the domain. We need that each verifiable statement on the property values corresponds to a verifiable statement on the possibilities. That is, the property tells us not only what possibilities exist, but also which statements can be experimentally verified. Therefore each open set of property values must correspond to an open set in the natural topology of the possibilities.		 
-	\end{justification}
 \end{mathSection}
 
-The difference between properties that fully identify and fully characterize the domain is subtle. Consider the experimental domain for identifying negatively charged fundamental particles. The mass in eV is enough to determine the particle, therefore it fully identifies the possibilities. But, given that the range of mass is continuous, we can't know a priori which particular values of mass correspond to an actual particle. In this sense, the mass as a continuous quantity expressed in eV is not enough to fully characterize the experimental domain, which is in fact discrete. Somebody would have to tell us what the allowed values are. On the other hand, consider the experimental domain for the position of the center of mass of a particle along a particular direction. The distance from a fixed point is enough to identify the position, therefore it fully identifies the possibilities. But for each value of the distance we also have a possible position of the particle: the property fully characterizes the domain.
+\section{Quantities and ordering}
 
-Let's now turn our attention to those properties that can be quantified. The number of elements of a group can be quantified by an integer, the distance between two objects can be quantified in meters, the force acting on a body can be quantified by the magnitude of a vector expressed in Newtons. The defining characteristic for a quantity is that a value can be greater, smaller or equal to another. That is: we have an ordering defined on our labels.
+We now focus our attention to those properties that can be quantified. The number of elements of a group can be quantified by an integer, the distance between two objects can be quantified in meters, the force acting on a body can be quantified by the magnitude of a vector expressed in Newtons. The defining characteristic for a quantity is that a value can be greater, smaller or equal to another.
+
+We will see how an ordering can be defined on the values and what will mean for the topology. We will also  TODO
+
+We will start with the mathematical definitions of ordering. A total order for a set is a relationship that, given any two elements, is always able to say which one comes before the other. If they are at the same place, instead, then they are the same object. The order topology, instead, is the one generated by TODO
+
 
 \begin{mathSection}
 	\begin{defn}
@@ -1471,7 +1484,109 @@ Let's now turn our attention to those properties that can be quantified. The num
 	\end{defn}
 \end{mathSection}
 
-\subsection{Decidable domains and discrete quantities}
+\begin{mathSection}
+	\begin{defn}
+		A \textbf{reference} is something that defines a before and an after. Formally a reference $\refStmt = \langle \stmt[b], \stmt[r], \stmt[a] \rangle$ is a tuple formed by three statements such that:
+		\begin{enumerate}
+			\item the reference covers at least a possible case; $\stmt[r] \nequiv \contradiction$
+			\item the object is always either before, at or after the reference; $\stmt[b] \OR \stmt[r] \OR \stmt[a] \equiv \tautology$
+			\item the object cannot be before and after but not at the reference; $\stmt[b]\AND\NOT\stmt[r]\AND\stmt[a] \equiv \contradiction$
+			\item we can verify experimentally that the object is either before or after the reference; $\stmt[b]$ and $\stmt[a]$ are verifiable statements or contradictions 
+		\end{enumerate}
+	\end{defn}
+	\begin{defn}
+	A reference is \textbf{strict} if it never overlaps with what is being measured. Formally, $\refStmt = \langle \stmt[b], \stmt[r], \stmt[a] \rangle$ is such that $\stmt[b] \ncomp \stmt[r] \ncomp \stmt[a] \ncomp \stmt[b]$. A reference is \textbf{loose} if it is not strict.
+\end{defn}
+\begin{remark}
+	In general, we can't turn a loose reference into a strict one. The at statement can be made strict by replacing it with $\NOT \stmt[b] \AND \NOT \stmt[a]$. The before (and after) statements cannot would need to be changed to something like $\stmt[b] \AND \NOT \stmt[a]$, which are not in general verifiable because of the negation.
+\end{remark}
+\end{mathSection}
+
+\begin{mathSection}
+	\begin{defn}
+		Two references are \textbf{aligned} if what comes before/after one always has to come before/after the other. Formally, $\refStmt_1 = \langle \stmt[b]_1, \stmt[r]_1, \stmt[a]_1 \rangle$ and $\refStmt_2 = \langle \stmt[b]_2, \stmt[r]_2, \stmt[a]_2 \rangle$ are aligned if both of the following apply:
+		\begin{enumerate}
+			\item $\stmt[b]_1 \narrower \stmt[b]_2$ or $\stmt[b]_2 \narrower \stmt[b]_1$
+			\item $\stmt[a]_1 \narrower \stmt[a]_2$ or $\stmt[a]_2 \narrower \stmt[a]_1$
+			\item $\NOT\stmt[b]_1 \narrower \stmt[a]_2$ or $\stmt[a]_2 \narrower \NOT\stmt[b]_1$
+			\item $\NOT\stmt[b]_2 \narrower \stmt[a]_1$ or $\stmt[a]_1 \narrower \NOT\stmt[b]_2$
+		\end{enumerate}
+		A set of aligned references is a set $R$ of references that are pairwise aligned. That is, for any $\refStmt_1, \refStmt_2 \in R$, $\refStmt_1$ and $\refStmt_2$ are aligned.
+	\end{defn}
+	\begin{defn}
+	A reference is before another if when something is before or at the first it cannot be after or at the second. Formally, $\refStmt_1 \less \refStmt_2$ if and only if $\stmt[b]_1 \OR \stmt[r]_1 \ncomp \stmt[r]_2 \OR \stmt[a]_2$.
+\end{defn}
+	\begin{prop}
+	Let $\refStmt_1 = \langle \stmt[b]_1, \stmt[r]_1, \stmt[a]_1 \rangle$ and $\refStmt_2 = \langle \stmt[b]_2, \stmt[r]_2, \stmt[a]_2 \rangle$ be two references. If $\refStmt_1 \less \refStmt_2$ then the two references are aligned.
+\end{prop}
+\begin{proof}
+	We have $\stmt[b]_1 \OR \stmt[r]_1 \equiv (\stmt[b]_1 \OR \stmt[r]_1) \AND \tautology \equiv (\stmt[b]_1 \OR \stmt[r]_1) \AND (\stmt[b]_2 \OR \stmt[r]_2 \OR \stmt[a]_2) \equiv ((\stmt[b]_1 \OR \stmt[r]_1) \AND \stmt[b]_2) \OR ((\stmt[b]_1 \OR \stmt[r]_1) \AND (\stmt[r]_2 \OR \stmt[a]_2)) \equiv ((\stmt[b]_1 \OR \stmt[r]_1) \AND \stmt[b]_2) \OR \contradiction \equiv ((\stmt[b]_1 \OR \stmt[r]_1) \AND \stmt[b]_2)$. Therefore $\stmt[b]_1 \OR \stmt[r]_1 \narrower \stmt[b]_2$. And since $\stmt[b]_1 \narrower \stmt[b]_1 \OR \stmt[r]_1$, we have $\stmt[b]_1 \narrower \stmt[b]_2$.
+	
+	Similarly, we have $\stmt[r]_2 \OR \stmt[a]_2 \equiv (\stmt[r]_2 \OR \stmt[a]_2) \AND \tautology \equiv (\stmt[r]_2 \OR \stmt[a]_2) \AND (\stmt[b]_1 \OR \stmt[r]_1 \OR \stmt[a]_1) \equiv ((\stmt[r]_2 \OR \stmt[a]_2) \AND (\stmt[b]_1 \OR \stmt[r]_1)) \OR ((\stmt[r]_2 \OR \stmt[a]_2) \AND \stmt[a]_1) \equiv \contradiction \OR ((\stmt[r]_2 \OR \stmt[a]_2) \AND \stmt[a]_1) \equiv ((\stmt[r]_2 \OR \stmt[a]_2) \AND \stmt[a]_1)$. Therefore $\stmt[a]_2 \OR \stmt[r]_2 \narrower \stmt[a]_1$. And since $\stmt[a]_2 \narrower \stmt[r]_2 \OR \stmt[a]_2$, we have $\stmt[a]_2 \narrower \stmt[a]_1$.
+	
+	Since $\stmt[b]_1 \narrower \stmt[b]_2$ and $\stmt[a]_2 \narrower \stmt[a]_1$, the two references are aligned.
+\end{proof}
+\end{mathSection}
+ 
+ \begin{mathSection}
+ 	\begin{defn}
+ 		Let $R = \{\langle \stmt[b]_i, \stmt[r]_i, \stmt[a]_i \rangle\}$ be a set of references. Let $\basis_b = \{\stmt[b]_i\}_{i \in I}$ be the set of all before statements and $\basis_a = \{\stmt[a]_i\}_{i \in I}$ be the set of all after statements. The experimental domain $\edomain$ generated by $R$ is the one generated by all before and after statements $\basis_b \cup \basis_a$. The before domain $\edomain_b$ is the domain generated only by the before statements $\basis_b$ and the after domain $\edomain_a$ is the domain generated only by the before statements $\basis_a$.
+ 	\end{defn}
+ \begin{defn}
+ 	A reference is part of an experimental domain, noted $\refStmt = \langle \stmt[b], \stmt[r], \stmt[a] \rangle \in \edomain$ if the before and after statements $\stmt[a], \stmt[b] \in \edomain$ are in the experimental domain.
+ \end{defn}
+\begin{prop}
+	Let $\edomain$ be an experimental domain generated by a set of aligned sharp references $R$ and let $S=\edomain_b \cup \NOT (\edomain_a)$. Then $S$ is totally order by narrowness $\narrower$.
+\end{prop}
+\begin{proof}
+	TODO
+\end{proof}
+\end{mathSection}
+
+\begin{mathSection}
+\begin{defn}
+	Let $\edomain$ be an experimental domain. A sharp reference $\refStmt_1 = \langle \stmt[b]_1, \stmt[r]_1, \stmt[a]_1\rangle$ is \textbf{refinable} in the domain if given any other aligned sharp reference $\refStmt_2 = \langle \stmt[b]_2, \stmt[r]_2, \stmt[a]_2\rangle$ such that $\stmt[r]_2 \snarrower \stmt[r]_1$ there exists a third reference $\refStmt_3 = \langle \stmt[b]_3, \stmt[r]_3, \stmt[a]_3\rangle$ such that:
+	\begin{enumerate}
+		\item $\stmt[r]_3 \narrower \stmt[r]_1$
+		\item either $\stmt[b]_3 \equiv \stmt[b]_1$ and $\refStmt_3 < \refStmt_2$ or $\stmt[a]_3 \equiv \stmt[a]_1$ and $\refStmt_2 < \refStmt_3$.
+	\end{enumerate}
+\end{defn}
+\begin{defn}
+	Let $(\mathcal{Q}, \leq)$ be an ordered set. Let $q_1, q_2 \in \mathcal{Q}$. Then $q_2$ is an immediate successor of $q_1$ if there is no element strictly between them in the ordering. That is, $q_1 < q_2$ and there is no $q \in \mathcal{Q}$ such that $q_1 < q < q_2$.
+\end{defn}
+\begin{prop}\label{prop_refinable_within}
+	Let $\edomain$ be an experimental domain generated by a set of aligned sharp references $R$ and every sharp reference aligned with the generating set is refinable. Let $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ such that $\stmt[b]_1 \snarrower \stmt[b]_2$. There there exists $\stmt[a] \in \edomain_a$ such that $\stmt[b]_1 \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
+\end{prop}
+\begin{proof}
+	Suppose $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ such that $\stmt[b]_1 \snarrower \stmt[b]_2$. Then $\refStmt_1 = \langle \stmt[b]_1, \NOT \stmt[b]_1, \contradiction \rangle$ and  $\refStmt_2 = \langle \stmt[b]_2, \NOT \stmt[b]_2, \contradiction\rangle$ such that $\stmt[b]_2 \snarrower \stmt[b]_1$. Both of these are sharp references aligned with the generating set, and therefore are refinable. This means we can find $\refStmt_3 = \langle \stmt[b]_1, \NOT \stmt[b]_1 \AND \NOT \stmt[a], \stmt[a] \rangle$ such that $\refStmt_3 < \refStmt_2$ and therefore $\stmt[b]_1 \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
+\end{proof}
+\begin{prop}
+	Let $\edomain$ be an experimental domain generated by a set of aligned sharp references $R$ and every sharp reference aligned with the generating set is refinable. Let $S=\edomain_b \cup \NOT (\edomain_a)$. Let $\stmt[b] \in \edomain_b$. Let $B^*=\{\stmt[a] \in \edomain_a \, | \, \stmt[a] \OR \stmt[b] \nequiv \tautology \}$. Let $\stmt[b]^*=\bigOR\limits_{\stmt[a] \in B^*} \stmt[a]$. Then $\stmt[b]^*$ is either the immediate successor of $\stmt[b]$ in $S$ or it is equivalent to $\stmt[b]$ which has no immediate successor.
+\end{prop}
+\begin{proof}
+	Let $\edomain$, $S$, $\stmt[b]$, $B^*$ and $\stmt[b]^*$ be defined as in the proposition. First we show that $\stmt[b] \narrower \NOT \stmt[b]^*$. We have $\stmt[b] \AND \NOT \stmt[b]^* \equiv \stmt[b] \AND \NOT \bigOR\limits_{\stmt[a] \in B^*} \stmt[a] \equiv \stmt[b] \AND \bigAND\limits_{\stmt[a] \in B^*} \NOT \stmt[a] \equiv \bigAND\limits_{\stmt[a] \in B^*} \stmt[b] \AND \NOT \stmt[a]$. Since for all $\stmt[a] \in B^*$ we have $\stmt[a] \OR \stmt[b] \nequiv \tautology$, we have $\NOT \stmt[a] \nnarrower \stmt[b]$ which means $\stmt[b] \narrower \NOT \stmt[a]$ because of the total order of $S$. As $\stmt[b] \AND \NOT \stmt[a] \equiv \stmt[b]$ for all $\stmt[a] \in B^*$, then $\stmt[b] \AND \NOT \stmt[b]^* \equiv \stmt[b]$ and $\stmt[b] \narrower \stmt[b]^*$.
+	
+	Next we show that no statement $\stmt[s] \in S$ is such that $\stmt[b] \snarrower \stmt[s] \snarrower \stmt[b]^*$. By construction, all $\stmt[a] \in \edomain_a$ such that $\stmt[b] \snarrower \NOT \stmt[a]$ are included in $B^*$ and therefore $b^* \narrower \NOT \stmt[a]$. We also can't have $\stmt[b]_0 \in \edomain_b$ such that $\stmt[b] \snarrower \stmt[b]_0 \snarrower \stmt[b]^*$: by \ref{prop_refinable_within} we'd find $\stmt[a] \in \edomain_a$ such that $\stmt[b] \snarrower \stmt[a] \narrower \stmt[b]_0 \snarrower \stmt[b]^*$ which was ruled out.
+	
+	If $\stmt[b] \nequiv \NOT \stmt[b]^*$ then $\stmt[b] \snarrower \NOT \stmt[b]^*$ and $\stmt[s] \in S$ is such that $\stmt[b] \snarrower \stmt[s] \snarrower \NOT \stmt[b]^*$. $\NOT \stmt[b]^*$ is the immediate successor of $\stmt[b]$. $\stmt[b] \equiv \stmt[b]^*$, we note that $B^*$ does not contain $\NOT \stmt[b]$ as $\stmt[b] \OR \NOT \stmt[b] \equiv \tautology$. Then $B^*$ must contain a sequence of statements whose limit is $\NOT \stmt[b]$. Which means there cannot be a statement that immediately succeeds $\stmt[b]$.
+\end{proof}
+ \begin{thrm}
+ 	An experimental domain is fully characterized by a quantity if and only if it can be generated by a set of aligned sharp references and every sharp reference aligned with the generating set is refinable.\footnote{TODO: can we remove the condition that the reference must be aligned?}
+ \end{thrm}
+\begin{proof}
+	Let $\edomain_X$ be and experimental domain fully characterized by the quantity $\langle \mathcal{Q}, \leq, q \rangle$. We first show that it is generated by a set of aligned sharp references. Let $\stmt[b]_{q_1}$ indicate the statement that asserts that the quantity is less then $q_1 \in \mathcal{Q}$. That is: $\stmt[b]_{q_1} = \bigOR\limits_{x \in q^{-1}(\{q_i \in \mathcal{Q} | q_i < q_1\})} x$. This statement is verifiable because the function $q$ is a homeomorphism. Let $\basis_{b}$ be the domain generated by all such statements. Similarly, let $\stmt[a]_{q_1}$ indicate the statement that asserts that the quantity is more then $q_1 \in \mathcal{Q}$. That is: $\stmt[a]_{q_1} = \bigOR\limits_{x \in q^{-1}(\{q_i \in \mathcal{Q} | q_i > q_1\})} x$. This statement is verifiable because the function $q$ is a homeomorphism. Let $\basis_{a}$ be the domain generated by all such statements. The union $\basis = \basis_{b} \cup \basis_{a}$ is the reverse image of the basis of the order topology of the quantity and is therefore a basis of the domain. Define the set of references $R = \{\langle \stmt[b], \NOT \stmt[b] , \contradiction \rangle | \stmt[b] \in \basis_{b} \} \cup \{\langle \contradiction, \NOT \stmt[a] , \stmt[a] \rangle | \stmt[a] \in \basis_{a} \}$. The domain is generated by $R$. The references are sharp and are aligned.
+	
+	Let $r_1 = \langle \stmt[b]_1, \stmt[r]_1, \stmt[a]_1\rangle$ and $r_2 = \langle \stmt[b]_2, \stmt[r]_2, \stmt[a]_2\rangle$ be two different references aligned with the elements of $R$ such that $\stmt[r]_2 \narrower \stmt[r]_1$. As they are aligned with all elements of $R$, we have $r_1 = \langle \stmt[b]_{q_{1b}}, \stmt[r]_1, \stmt[a]_{q_{1a}}\rangle$ and $r_2 = \langle \stmt[b]_{q_{2b}}, \stmt[r]_2, \stmt[a]_{q_{2a}}\rangle$ with $q_{1b} \leq q_{2b} < q_{2a} \leq q_{1a}$ with at least $q_{1b} \neq q_{2b}$ or $q_{1a} \neq q_{2a}$. Suppose $q_{1b} \neq q_{2b}$, then we can construct $r_3 = \langle \stmt[b]_{q_{1b}}, \stmt[r]_1, \stmt[a]_{q_{1b}}\rangle$ which refines $r_1$. Otherwise $q_{1a} \neq q_{2a}$, and  $r_3 = \langle \stmt[b]_{q_{1a}}, \stmt[r]_1, \stmt[a]_{q_{1a}}\rangle$ which refines $r_1$. Every sharp reference aligned with the generating set of references  is refinable.
+	
+	Conversely, let $\edomain_X$ be and experimental domain generated by a set $R$ of aligned sharp references, such that every sharp reference aligned with $R$ is refinable. Let $\edomain_b$ the before domain, which is totally ordered by narrowness by PROOFREF. Let $\stmt[b] \in \edomain_b$ be a before reference. Let $\stmt[b]^* = \bigOR\limits_{\stmt[b] \ncomp \stmt[a] \in \edomain_a} \stmt[a]$ be the disjunction of all after statements incompatible with $\stmt[b]$. Let $X = \{\NOT \stmt[b] \AND \NOT \stmt[b]^* \, | \,  \stmt[b] \in \edomain_b, \NOT \stmt[b] \AND \NOT \stmt[b]^* \nequiv \contradiction \}$. Let $x \in X$ and let $\stmt[b] \in \edomain_b$ such that $x=\NOT \stmt[b] \AND \NOT \stmt[b]^*$. Let $\stmt[b]_1 \in \edomain_b$. If $\stmt[b]_1 \narrower \stmt[b]$ we have $\stmt[b]_1\ncomp \NOT \stmt[b]$ and therefore $\stmt[b]_1 \ncomp x$. On the other hand, if $\stmt[b]_1 \sbroader \stmt[b]$ then $\NOT \stmt[b] \snarrower \stmt[b]_1$. Since $x \narrower \NOT \stmt[b]$, we have $x \narrower \stmt[b]_1$. Since every sharp reference is refinable, there exists an $\stmt[a]_0 \in \edomain_a$ such that $\stmt[b] \snarrower \NOT \stmt[a]_0 \narrower \stmt[b]_1$.  Let $\stmt[a]_1 \in \edomain_a$. If $\stmt[a]_1 \narrower \stmt[b]^*$ we have $\stmt[a]_1\ncomp \NOT \stmt[b]^*$ and therefore $\stmt[a]_1 \ncomp x$. On the other hand, if $\stmt[a]_1 \sbroader \stmt[b]^*$ then $\NOT \stmt[b] \snarrower \stmt[b]_1$. Since $x \narrower \NOT \stmt[b]$, we have $x \narrower \stmt[b]_1$.  SHOW ALL BASIS ELEMENT ARE BROADER OR INCOMPATIBLE: IT'S A POSSIBILITY. SHOW EACH POSSIBILITY CAN BE WRITTEN IN THAT FORM. THEY ARE THE POSSIBILITIES.
+	
+	SHOW X IS TOTALLY ORDERED. SHOW THE TOPOLOGY IS THE ORDER TOPOLOGY. LET Q BE ISOMETRIC IN ORDERING. 
+	
+	From domain to quantity. Take all the before statements and form the domain generated by them. Take Q to be a set isomorphic in ordering and use them to label the statements. Take the after set. For each before statement, find the broadest after statement such that its union with the first does not form a tautology. Show that is unique, because the references are refinable. Call $x_q = \NOT (b_q \AND a_q)$. Show that $b_q = \bigOR\limits_{q_i < q} x_q$.
+\end{proof}
+\end{mathSection}
+
+\section{Decidable domains and discrete quantities}
 
 If the possible values of a quantity are the integers (positive or negative) we say the quantity is discrete. For example, the number of chromosomes for a species, the number of inhabitants of a country or the atomic number for an element are all discrete quantities.
 
@@ -1535,7 +1650,7 @@ There is a special relationship between discrete quantities and decidability, th
 
 Note that for the link between decidability and discrete quantities to apply, it is crucial the quantity is measurable: that we can actually experimentally ascertain its values. Consider the domain with the possibilities \statement{there is no extra-terrestrial life} and \statement{there is extra-terrestrial life}. We can arbitrarily label 0 the former and 1 the latter. But since we cannot verify the first statement, we cannot really ``measure'' 0. In that case, the domain is fully identified by the discrete quantity, but not fully characterized: we still need to say what values are measurable.
 
-\subsection{Arbitrary precision and continuous quantities}
+\section{Arbitrary precision and continuous quantities}
 
 If the possible values of a quantity are the real numbers we say the quantity is continuous. For example, the average wingspan for a species, the population density of a country or the mass of a proton are all continuous quantities.
 
