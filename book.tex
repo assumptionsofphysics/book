@@ -1486,6 +1486,22 @@ We will start with the mathematical definitions of ordering. A total order for a
 
 \begin{mathSection}
 	\begin{defn}
+		Let $(\mathcal{Q}, \leq)$ and $(\mathcal{P}, \leq)$ be two ordered sets. A function $f : \mathcal{Q} \to \mathcal{P}$ is an \textbf{order isomorphism} if it is bijective and, for every $q_1, q_2 \in \mathcal{Q}$, $q_1 \leq q_2$ if and only if $f(q_1) \leq f(q_2)$.
+	\end{defn}
+TODO: show order isomorphism between quantity and verifiable statements
+\end{mathSection}
+
+
+\begin{mathSection}
+\begin{defn}
+	Let $(\mathcal{Q}, \leq)$ be an ordered set. Let $q_1, q_2 \in \mathcal{Q}$. Then $q_2$ is an \textbf{immediate successor} of $q_1$ and $q_1$ is an \textbf{immediate predecessor} of $q_2$ if there is no element strictly between them in the ordering. That is, $q_1 < q_2$ and there is no $q \in \mathcal{Q}$ such that $q_1 < q < q_2$. 
+\end{defn}
+\end{mathSection}
+
+TODO: ordering is defined experimentally by using references
+
+\begin{mathSection}
+	\begin{defn}
 		A \textbf{reference} defines a before and an after. Formally a reference $\refStmt = \langle \stmt[b], \stmt[o], \stmt[a] \rangle$ is a tuple of three statements such that:
 		\begin{enumerate}
 			\item we can verify that the object is either before or after the reference: $\stmt[b]$ and $\stmt[a]$ are verifiable statements or contradictions
@@ -1502,7 +1518,7 @@ We will start with the mathematical definitions of ordering. A total order for a
 \end{remark}
 \end{mathSection}
 
-Note: strictness tells us $B < NOT A$.
+Note: strictness tells us $B < NOT A$. We need to define pair-wise alignment and ordering.
 
 \begin{mathSection}
 	\begin{defn}
@@ -1524,8 +1540,8 @@ Note: strictness tells us $B < NOT A$.
 	\begin{defn}
 	A reference is before another if when something is before or on the first it cannot be on or after the second. Formally, $\refStmt_1 \less \refStmt_2$ if and only if $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$.
 \end{defn}
-	\begin{prop}
-	Let $\refStmt_1 = \langle \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 \rangle$ and $\refStmt_2 = \langle \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 \rangle$ be two references. If $\refStmt_1 \less \refStmt_2$ then the two references are aligned.
+\begin{prop}\label{3_prop_ordered_references_are_aligned}
+	Let $\refStmt_1 = \langle \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 \rangle$ and $\refStmt_2 = \langle \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 \rangle$ be two references. If $\refStmt_1 \less \refStmt_2$ then $\stmt[b]_1 \narrower \stmt[b]_2$, $\stmt[a]_2 \narrower \stmt[a]_1$, $\stmt[b]_1 \narrower \NOT \stmt[a]_2$, $\NOT \stmt[a]_1 \narrower \stmt[b]_2$ and therefore the two references are aligned.
 \end{prop}
 \begin{proof}
 	We have $\stmt[b]_1 \OR \stmt[o]_1 \equiv (\stmt[b]_1 \OR \stmt[o]_1) \AND \tautology \equiv (\stmt[b]_1 \OR \stmt[o]_1) \AND (\stmt[b]_2 \OR \stmt[r]_2 \OR \stmt[a]_2) \equiv ((\stmt[b]_1 \OR \stmt[o]_1) \AND \stmt[b]_2) \OR ((\stmt[b]_1 \OR \stmt[o]_1) \AND (\stmt[o]_2 \OR \stmt[a]_2)) \equiv ((\stmt[b]_1 \OR \stmt[o]_1) \AND \stmt[b]_2) \OR \contradiction \equiv ((\stmt[b]_1 \OR \stmt[o]_1) \AND \stmt[b]_2)$. Therefore $\stmt[b]_1 \OR \stmt[o]_1 \narrower \stmt[b]_2$. And since $\stmt[b]_1 \narrower \stmt[b]_1 \OR \stmt[o]_1$, we have $\stmt[b]_1 \narrower \stmt[b]_2$.
@@ -1538,6 +1554,31 @@ Note: strictness tells us $B < NOT A$.
 	
 	Since $\stmt[b]_1 \narrower \stmt[b]_2$, $\stmt[a]_2 \narrower \stmt[a]_1$, $\stmt[b]_1 \narrower \NOT \stmt[a]_2$ and $\NOT \stmt[a]_1 \narrower \stmt[b]_2$ the two references are aligned.
 \end{proof}
+\begin{prop}\label{3_prop_strict_references_ordering_condition}
+	Let $\refStmt_1 = \langle \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 \rangle$ and $\refStmt_2 = \langle \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 \rangle$ be two strict references. Then $\refStmt_1 \less \refStmt_2$ if and only if $\NOT \stmt[a]_1 \narrower \stmt[b]_2$ .
+\end{prop}
+\begin{proof}
+	Let $\refStmt_1 \less \refStmt_2$. By \ref{3_prop_ordered_references_are_aligned}, we have $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Conversely, let $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Then $\NOT \stmt[a]_1 \ncomp \NOT \stmt[b]_2$. Because the references are strict, $\NOT \stmt[a]_1 \equiv \stmt[b]_1 \OR \stmt[o]_1$ and $\NOT \stmt[b]_1 \equiv \stmt[o]_2 \OR \stmt[a]_2$. Therefore $\stmt[b]_1 \OR \stmt[o]_1 \equiv \stmt[o]_2 \OR \stmt[a]_2$ and $\refStmt_1 \less \refStmt_2$ by definition.
+\end{proof}
+
+\begin{defn}
+	A reference is immediately before another if nothing can be found after the first and before the second. Formally, $\refStmt_1 \less \refStmt_2$ and $\stmt[a]_1 \ncomp \stmt[b]_2$.
+\end{defn}
+
+\begin{prop}\label{3_prop_immediately_before_is_not_after}
+	Let $\refStmt_1 = \langle \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 \rangle$ and $\refStmt_2 = \langle \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 \rangle$ be two references. If $\refStmt_1$ is immediately before $\refStmt_2$ then $\stmt[b]_2 \equiv \NOT \stmt[a]_1$.
+\end{prop}
+\begin{proof}
+	Let $\refStmt_1$ be immediately before $\refStmt_2$. Then $\stmt[a]_1 \ncomp \stmt[b]_2$ which means $\stmt[b]_2 \narrower \NOT \stmt[a]_1$. By \ref{3_prop_ordered_references_are_aligned} we also have $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Therefore $\stmt[b]_2 \equiv \NOT \stmt[a]_1$.
+\end{proof}
+
+\begin{prop}
+	Let $\refStmt_1 = \langle \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 \rangle$ and $\refStmt_2 = \langle \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 \rangle$ be two strict references. Then $\refStmt_1$ is immediately before $\refStmt_2$ if and only if $\stmt[b]_2 \equiv \NOT \stmt[a]_1$.
+\end{prop}
+\begin{proof}
+	Let $\refStmt_1$ be immediately before $\refStmt_2$. Then $\stmt[b]_2 \equiv \NOT \stmt[a]_1$ by \ref{3_prop_immediately_before_is_not_after}. Conversely, let $\stmt[b]_2 \equiv \NOT \stmt[a]_1$. Then $\refStmt_1 \less \refStmt_2$ by \ref{3_prop_strict_references_ordering_condition}. We also have $\stmt[a]_1 \ncomp \NOT \stmt[a]_1$, therefore $\stmt[a]_1 \ncomp \stmt[b]_2$ and $\refStmt_1$ is immediately before $\refStmt_2$ by definition.
+\end{proof}
+
 \end{mathSection}
  
  \begin{mathSection}
@@ -1566,9 +1607,6 @@ Note: strictness tells us $B < NOT A$.
 		\item $\stmt[r]_3 \narrower \stmt[r]_1$
 		\item either $\stmt[b]_3 \equiv \stmt[b]_1$ and $\refStmt_3 < \refStmt_2$ or $\stmt[a]_3 \equiv \stmt[a]_1$ and $\refStmt_2 < \refStmt_3$.
 	\end{enumerate}
-\end{defn}
-\begin{defn}
-	Let $(\mathcal{Q}, \leq)$ be an ordered set. Let $q_1, q_2 \in \mathcal{Q}$. Then $q_2$ is an immediate successor of $q_1$ if there is no element strictly between them in the ordering. That is, $q_1 < q_2$ and there is no $q \in \mathcal{Q}$ such that $q_1 < q < q_2$.
 \end{defn}
 \begin{prop}\label{prop_refinable_within}
 	Let $\edomain$ be an experimental domain generated by a set of aligned sharp references $R$ and every sharp reference aligned with the generating set is refinable. Let $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ such that $\stmt[b]_1 \snarrower \stmt[b]_2$. There there exists $\stmt[a] \in \edomain_a$ such that $\stmt[b]_1 \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
