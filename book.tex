@@ -367,6 +367,7 @@ The second will be true whenever the first is true. In this case we say the firs
 		\item 	$\stmt_1 \ncomp \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$
 		\item 	$\stmt_1 \narrower \stmt_1 \OR \stmt_2$
 		\item 	$\stmt_1 \AND \stmt_2 \narrower \stmt_1$
+		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\NOT \stmt_1 \OR \stmt_2 \equiv \tautology$
 	\end{enumerate}	
 \end{prop}
 
@@ -380,6 +381,8 @@ The second will be true whenever the first is true. In this case we say the firs
 	For (iv), we have $\stmt_1 \AND \NOT (\stmt_1 \OR \stmt_2) \equiv \stmt_1 \AND \NOT \stmt_1 \AND \NOT \stmt_2 \equiv \contradiction \AND \NOT \stmt_2 \equiv \contradiction$. Therefore $\stmt_1 \narrower \stmt_1 \OR \stmt_2$.
 	
 	For (v), we have $\stmt_1 \AND \stmt_2 \AND \NOT \stmt_1 \equiv \stmt_1 \AND \NOT \stmt_1 \AND \stmt_2 \equiv \contradiction \AND \stmt_2 \equiv \contradiction$. Therefore $\stmt_1 \AND \stmt_2 \narrower \stmt_1$.
+	
+	For (vi), suppose $\stmt_1 \narrower \stmt_2$. We have $\NOT \stmt_1 \OR \stmt_2 \equiv \NOT \stmt_1 \OR ( \stmt_1 \OR \stmt_2 ) \equiv (\NOT \stmt_1 \OR \stmt_1) \OR \stmt_2 \equiv \tautology \OR \stmt_2 \equiv \tautology$. Conversely, suppose $\NOT \stmt_1 \OR \stmt_2 \equiv \tautology$. We have $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \OR \tautology \equiv \stmt_1 \OR \stmt_2 \OR (\NOT \stmt_1 \OR \stmt_2) \equiv (\stmt_1 \OR \NOT \stmt_1) \OR \stmt_2 \equiv \tautology \OR \stmt_2 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$.
 \end{proof}
 
 \begin{prop}\label{prop_narrowness_is_if}
