@@ -786,6 +786,26 @@ With our definitions in mind, we can answer the following fundamental question: 
 
 This means we have an upper bound on how many cases can be distinguished experimentally: only up to the continuum. We are not going to be able to tell apart experimentally more possibilities than those. This result gives us a basic requirement for any mathematical object we want to use in a scientific theory: if the cardinality is greater than the continuum, it cannot have a well defined experimental meaning. For example, while the set of all continuous functions between real numbers has the cardinality of the continuum, the set of all functions (including discontinuous ones) has greater cardinality. We can already conclude that the first set may be useful to represent physical objects and the second may not.
 
+As we are looking into the cardinality of the possibilities of a domain, it should not be surprising that the only way we can have infinitely many possibilities is if we are given infinitely many verifiable statements. As each verifiable statement can distinguish between two cases (i.e. true or false), we need infinitely many of these distinctions to reach infinitely many cases.
+
+\begin{mathSection}
+\begin{prop}
+	Let $\edomain_X$ be an experimental domain. The following are equivalent:
+	\begin{enumerate}
+		\item the set of possibilities is finite
+		\item the experimental domain contains finitely many verifiable statements
+		\item there exists a finite basis
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+	To prove 2 from 1, let $\edomain_X$ be an experimental domain and $X$ its possibilities. Suppose $X$ is finite. Since any statement in $\edomain_X$ can generated from $X$ using finite conjunction, $\edomain_X$ must be finite as well.
+	
+	To prove 3 from 2, let $\edomain_X$ contain finitely many verifiable statements. Then a basis will consist of finitely many statements as it is a subset of the domain.
+	
+	To prove 1 from 3, suppose $\basis$ is a finite basis for the domain. Since the possibilities are minterms of the basis, we have $|X| \leq |2^{|\basis|}|$. Since the basis is finite, $X$ is finite as well.
+\end{proof}
+\end{mathSection}
+
 We have now presented the fundamental objects of our general mathematical theory of experimental science. In our framework, a ``scientific theory" or a ``scientific model" \emph{is} an experimental domain: a set of statements, what they mean and how to verify them experimentally.
 
 The starting point is often a basis: a set of verifiable statements which defines all the domain knowledge that we can gather experimentally. The content of the statements determines what combinations can be true at the same time, which defines the possibilities for our domain. Everything in the domain is grounded within the verifiable statements: there is nothing else in it. This also maps well to the practice of most scientific fields, where one defines states and other physical objects based on what can be measured.
@@ -997,6 +1017,60 @@ From a practical standpoint, it guarantees that these mathematical tools can alw
 From a conceptual standpoint it provides a Rosetta stone, i.e a way to translate, between the mathematical concepts and the scientific ones. It gives a precise scientific meaning to the mathematical tools and everything built on top of them. Every single step in a calculation, every single argument in a proof can be given a clear, and possibly insightful, physical meaning. It grounds the abstract mathematical language in more concrete scientific objects. This in turn helps clarify the science described by common mathematical tools, unearthing possible hidden assumptions or simplifications about the physical systems being studied.
 
 This connection explains why these mathematical tools have found such successful application in the physical sciences.
+
+\section{Decidable domains}
+
+We conclude this chapter by analyzing decidable domains, those for which we can experimentally check both the truth and the falsehood of all statements. For example, the domain for animal identification and the domain for the amount of money in my poket can be considered decidable as we can typically tell experimentally whether \statement{this animal has whiskers} or not, or whether \statement{there is more than one dollar and fifty cents in my pocket} or not.
+
+Decidable domains have special characteristics and are easier to study. Since we can verify the negation, any theoretical statement is also verifiable. And since all theoretical statements are verifiable, so are the possibilities. That is, we can verify that \statement{this animal is a cat} and that \statement{there are two dollars and thrity cents in my pocket}. As all statements can be expressed as a disjunction of possibilities, the possibilities themselves form a countable basis. For example, \statement{there is more than one dollars and fifty cents in my pocket} can be expressed as the disjunction of the appropriate statements of the form \statement{there are x dollars and y cents in my pocket}.
+
+\begin{mathSection}
+\begin{defn}
+	An experimental domain $\edomain_X$ is \textbf{decidable} if all statements in the domain are decidable. Formally, for every $\obs \in \edomain_X$ we have $\NOT\obs \in \edomain_X$.
+\end{defn}
+
+\begin{prop}
+	Let $\edomain_X$ be an experimental domain. The following are equivalent:
+	\begin{enumerate}
+		\item the experimental domain is decidable
+		\item the experimental domain and its theoretical domain coincide
+		\item all possibilities are verifiable
+		\item the possibilities form a countable basis.
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	To prove 2 from 1, suppose $\edomain_X$ is a decidable experimental domain. As $\edomain_X$ is decidable, it is already closed under negation and therefore all statements in its theoretical domain $\tdomain_X$ are already in $\edomain_X$.
+	
+	To prove 3 from 2, suppose $\edomain_X$ coincides with its theoretical domain $\tdomain_X$. As each possibility is a theoretical statement, it is also a verifiable statement.
+	
+	To prove 4 from 3, suppose the possibilities are verifiable. Note that the possibilities can generate all other statements through disjunction. To show $X$ is countable, consider a countable basis $\basis \subseteq \edomain_X$. Because the possibilities are verifiable statements, they can be generated from $\basis$ by finite conjunction and countable disjunction. Moreover, since the possibilities are the narrowest statements that are not contradictions, they can be generated from $\basis$ using finite conjunction only. Since $\basis$ is countable and $X$ is generated by $\basis$ through finite conjunction, $X$ can be at most countable. Therefore $X$ is a countable basis.
+	
+	To prove 1 from 4, suppose the possibilities $X$ form a countable basis. Then each possibility is verifiable and so is their countable union. The negation of a verifiable statement can be expressed as the countable union of possibilities, and is therefore verifiable. All statements in the experimental domain are decidable and therefore the domain is decidable.
+\end{proof}
+\end{mathSection}
+
+As the possibilities for a decidable domain must form a countable basis, their cardinality can't be greater than countable. That is: only domains that are non-decidable can have possibilities with cardinality of the continuum. In this sense they more constrained and simpler to study.
+
+Mathematically, the topology is also easier to study as it corresponds to the discrete topology: the one for which any subsets of the possibilities is a verifiable set. That is: the topology is simply the set of all possible sets of possibilities. This means that the cardinality of the possibility is enough to determine the topology of the space, which means that one number is enough to characterize the space.
+
+\begin{mathSection}
+\begin{defn}
+	A topology $\mathsf{T}_X$ on a set $X$ is called \textbf{discrete} if it contains every subset of $X$.
+\end{defn}
+
+\begin{thrm}[Decidability is discreteness]\label{thrm_decidablity_is_discreteness}
+	The natural topology of the possibilities $X$ for a domain $\edomain_X$ is discrete if and only if the domain is decidable.
+\end{thrm}
+\begin{proof}
+	Suppose $\edomain_X$ is decidable. Let $U \subseteq X$ be a subset of possibilities. The statement $\stmt = \bigOR\limits_{x \in U} x$ is generated from $X$ through countable disjunction. Since $\edomain_X$ is decidable, $X$ is a countable basis and $\stmt$ is verifiable. Therefore $U$ is a verifiable set and it is contained in the natural topology. The natural topology of $X$ is discrete by definition.
+	
+	Now suppose $\edomain_X$ is such that the natural topology for its possibilities $X$ is discrete. Let $\stmt = \bigOR\limits_{x \in U} x$ be a statement. Since the topology is discrete, $U$ is part of the topology and $\stmt$ is verifiable. Consider its negation $\NOT\stmt = \bigOR\limits_{x \in U^C} x$. Since the topology is discrete, $U^C$ is also part of the topology and $\NOT\stmt$ is verifiable. This means $\stmt$ is decidable. Since every statement in $\edomain_X$ is decidable, the domain is decidable.
+\end{proof}
+	
+\end{mathSection}
+
+Note, though, that discrete does not imply finite and vice-versa. The domain for extra-terrestrial life is finite but is not decidable as we cannot verify that \statement{there is no extra-terrestrial life}. The domain for the amount of money in my pocket, instead, is decidable but not finite as I could potentially have an arbitrarily large amount.
 
 \section{Summary}
 
