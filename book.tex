@@ -1610,22 +1610,56 @@ The important result is that the above characterization of the basis of the doma
 \begin{proof}
 	Note that $``x \leq x_1" \OR ``x > x_1" \equiv \bigOR\limits_{x \in X} x \equiv \tautology$ while $``x \leq x_1" \AND ``x > x_1" \equiv \bigOR\limits_{x \in \emptyset} x \equiv \contradiction$. Therefore one is the negation of the other. Similarly $``x < x_1" \OR ``x \geq x_1" \equiv \bigOR\limits_{x \in X} x \equiv \tautology$ while $``x < x_1" \AND ``x \geq x_1" \equiv \bigOR\limits_{x \in \emptyset} x \equiv \contradiction$.
 \end{proof}
-\begin{defn}
-	Let $\edomain_X$ be a naturally ordered experimental domain and $X$ its possibilities. Define $\edomain_b = \{ ``x < x_1" \, | \, x_1 \in X \}$, $\edomain_a = \{ ``x > x_1" \, | \, x_1 \in X \}$ and $S = \edomain_b \cup \NOT (\edomain_a)$.
+\begin{defn}\label{3_def_before_after_basis}
+	Let $\edomain_X$ be a naturally ordered experimental domain and $X$ its possibilities. Define $\basis_b = \{ ``x < x_1" \, | \, x_1 \in X \}$, $\basis_a = \{ ``x > x_1" \, | \, x_1 \in X \}$ and $S = \basis_b \cup \NOT (\basis_a)$.
 \end{defn}
 \begin{defn}
-	Let $(\mathcal{Q}, \leq)$ be an ordered set. Let $q_1, q_2 \in \mathcal{Q}$. Then $q_2$ is an \textbf{immediate successor} of $q_1$ and $q_1$ is an \textbf{immediate predecessor} of $q_2$ if there is no element strictly between them in the ordering. That is, $q_1 < q_2$ and there is no $q \in \mathcal{Q}$ such that $q_1 < q < q_2$. 
+	Let $(\mathcal{Q}, \leq)$ be an ordered set. Let $q_1, q_2 \in \mathcal{Q}$. Then $q_2$ is an \textbf{immediate successor} of $q_1$ and $q_1$ is an \textbf{immediate predecessor} of $q_2$ if there is no element strictly between them in the ordering. That is, $q_1 < q_2$ and there is no $q \in \mathcal{Q}$ such that $q_1 < q < q_2$.
 \end{defn}
 
-\begin{prop}
-	REMOVE? Let $\edomain_X$ be an experimental domain fully characterized by the quantity $(\mathcal{Q}, \leq)$, then there exists a set of statements $S \subseteq \edomain_X$ and an order isomorphism $f : \mathcal{Q} \to S$ between $(\mathcal{Q}, \leq)$ and $(S, \narrower)$.
+\begin{prop}\label{3_prop_statement_ordering}
+	Let $\edomain_X$ be a naturally ordered experimental domain. Then $(\basis_b, \narrower)$ and $(\basis_a, \broader)$ are linearly order sets and are order isomorphic to $(X, \leq)$.
 \end{prop}
 \begin{proof}
-	First we establish a bijection between values and statements. Define $f : \mathcal{Q} \to \edomain_x$ such that $f(a) =  \bigOR q^{-1}((-\infty, a))$ is the statement that asserts the quantity is less than $a$. We have $f(a) \in \edomain_X$ as $(-\infty, a)$ is in the topology of $\mathcal{Q}$. Since $f(a) \neq f(b)$ if $a,b \in \mathcal{Q}$ and $a \neq b$, $f$ is injective and therefore it is bijective over $S = f(\mathcal{Q})$.
+	Let $f : X \to \basis_b$ be defined such that $f(x_1) = ``x < x_1"$. As there is one and only one statement $``x < x_1"$ for each $x_1 \in X$, $f$ is a bijection. Suppose $x_1 < x_2$, we have $f(x_2) \equiv \bigOR\limits_{\{x \in X \, | \, x < x_2\}} x \equiv \bigOR\limits_{\{x \in X \, | \, x < x_1\}} x \OR \bigOR\limits_{\{x \in X \, | \, x_2 < x < x_1\}} x \equiv f(x_1) \OR \bigOR\limits_{\{x \in X \, | \, x_2 < x < x_1\}}$ and therefore $f(x_1) \narrower f(x_2)$. This means that $f$ is an order isomorphism between $(\basis_b, \narrower)$ and $(X, \leq)$.
 	
-	Now we show that the bijection is an order isomorphism. Let $a,b \in \mathcal{Q}$. Suppose $a \leq b$ then $(-\infty, a) \subseteq (-\infty, b)$ and therefore $f(a) \narrower f(b)$. Now let $\stmt_a, \stmt_b \in S$. Then we can find $a,b \in \mathcal{Q}$ such that $\stmt_a = f(a)$ and $\stmt_b = f(b)$. Now suppose $\stmt_a \narrower \stmt_b$. Then $f(a) \narrower f(b)$, $(-\infty, a) \subseteq (-\infty, b)$ which means $a \leq b$. Therefore $f$ is an order isomorphism.
+	Similarly, let $g : X \to \basis_a$ be defined such that $g(x_1) = ``x > x_1"$. As there is one and only one statement $``x > x_1"$ for each $x_1 \in X$, $g$ is a bijection. Suppose $x_1 < x_2$, we have $g(x_1) \equiv \bigOR\limits_{\{x \in X \, | \, x > x_1\}} x \equiv \bigOR\limits_{\{x \in X \, | \, x_2 > x > x_1\}} x \OR \bigOR\limits_{\{x \in X \, | \, x > x_2\}} x \equiv \bigOR\limits_{\{x \in X \, | \, x_2 < x < x_1\}} x \OR g(x_2)$ and therefore $g(x_1) \broader g(x_2)$. This means that $f$ is an order isomorphism between $(\basis_a, \broader)$ and $(X, \leq)$.
 \end{proof}
+
+\begin{prop}\label{3_prop_before_precededs_not_after}
+	Let $\edomain_X$ be a naturally ordered experimental domain. Then $(S, \narrower)$ is a linearly ordered set and each $\stmt_b \in \basis_b$ has an immediate successor $\NOT \stmt_a \in S$ such that $\stmt_a \in \basis_a$. Moreover, if $\stmt \in S$ has an immediate successor, then $\stmt \in \basis_b$.
+\end{prop}
+
+\begin{proof}
+	Let $x_1, x_2 \in X$ and consider the two statements $``x < x_1"$ and $``x \leq x_2"\equiv \NOT ``x > x_2"$. As $X$ is linearly ordered, either $\{x \in X \, | \, x < x_1\} \subseteq \{x \in X \, | \, x \leq x_2\}$ or $\{x \in X \, | \, x \leq x_2\} \subseteq \{x \in X \, | \, x < x_1\}$. Therefore either $``x < x_1" \narrower ``x \leq x_2"$ or $``x \leq x_2" \narrower ``x < x_1"$. Which means $S = \basis_b \cup \NOT(\basis_a)$ is linearly ordered by $\narrower$.
+	
+	Let $x_1 \in X"$ and consider the two statements $``x < x_1"$ and $``x \leq x_1"\equiv \NOT ``x > x_1"$. We have $``x \leq x_1" \equiv ``x < x_1" \OR x_1$. Given that, within the theoretical domain of $\edomain_X$, the only narrower statement of $x_1$ is the contradiction, there can't be a statement $\stmt \in S$ such that $``x < x_1" \snarrower \stmt \snarrower ``x \leq x_1"$. Therefore $``x \leq x_1"$ is the immediate successor of $``x < x_1"$. Which means that any $\stmt_b \in \basis_b$ has an immediate success $\NOT \stmt_a \in S$ such that $\stmt_a \in \basis_a$.
+	
+	Now let $\stmt_1, \stmt_2 \in S$ such that $\stmt_2$ is the successor of $\stmt_1$. This means we can write $\stmt_2 \equiv \stmt_1 \OR x_1$ from some $x_1 \in X$. This means $\stmt_1 \equiv ``x < x_1"$ while $\stmt_2 \equiv ``x \leq x_1"$ and therefore $\stmt_1 \in \basis_b$
+\end{proof}
+
+\begin{thrm}[Domain ordering theorem]\label{3_thrm_domain_ordering_theorem}
+	An experimental domain $\edomain_X$ is naturally ordered if and only if it is complete and there exists a basis $\basis = \basis_b \cup \basis_a$ such that:
+	\begin{enumerate}[label=(\roman*)]
+		\item $S = \basis_b \cup \NOT(\basis_a)$ is totally ordered
+		\item for each $\stmt_b \in \basis_b$ we can find $\stmt_a \in \basis_a$ such that $\NOT \stmt_a$ is the immediate successor of $\stmt_b$ in $S$
+		\item if $\stmt \in S$ has an immediate successor, then $\stmt \in \basis_b$
+	\end{enumerate}
+\end{thrm}
+
+\begin{proof}
+	Let $\edomain_X$ be a naturally ordered experimental domain. Let $\basis_a$ and $\basis_b$ defined as in \ref{3_def_before_after_basis} which means $\basis = \basis_b \cup \basis_a$ is the basis that generates the order topology. Then by \ref{3_prop_statement_ordering} and by \ref{3_prop_before_precededs_not_after} we have (i), (ii) and (iii). To show that the domain is complete, if it has two or more possibilities, take $``x > x_1" \AND ``x < x_2"$ with $x_1, x_2 \in X$ and $x_1 < x_2$. Since that covers all possibilities, each possibility is compatible with at least a verifiable statement and therefore is not a residual possibility and the domain is complete. If there is only one possibility, then $\{x\}$ is a basis and $\NOT x$ cannot be another possibility, must be a contradiction and the domain is complete.
+	
+	Now let $\edomain_X$ be an experimental domain that has a basis $\basis = \basis_b \cup \basis_a$ such that $S = \basis_b \cup \NOT(\basis_a)$ is totally ordered and for each $\stmt_b \in \basis_b$ we can find $\stmt_a \in \basis_a$ such that $\NOT \stmt_a$ is the immediate successor of $\stmt_b$ in $S$. Let $X$ be the set of all statements of the form $x = \NOT \stmt_b \AND \NOT \stmt_a$ for which $\stmt_b \in \basis_b$, $\stmt_a \in \basis_a$ and $\NOT \stmt_a$ is the immediate successor of $\stmt_b$ in $S$. All statements in $X$ are possibilities. In fact, take $x = \NOT \stmt_b \AND \NOT \stmt_a \in X$ and $\stmt \in S$. Since $\NOT \stmt_a$ is the immediate successor of $\stmt_b$, we either have $\stmt \narrower \stmt_b \narrower \stmt_b \OR \stmt_a \equiv x$ or $\stmt \broader \NOT \stmt_a \broader x$. That is, $x \ncomp \stmt$ or $x \narrower \stmt$. And since the theoretical domain of $\edomain_X$ can be generated from $S$, $x$ is either narrower than or incompatible with any other statement in the theoretical domain.
+	
+	Let $\cdot^{++} : S \to S$ the function that returns the successor in $S$ if it exists.  Let $\stmt[b] : X \to \basis_b$ the function such that $x \equiv \NOT \stmt[b](x) \AND \NOT \stmt[b](x) ^{++}$. On $X$ define the ordering $\leq$ such that $x_1 \leq x_2$ if $\stmt[b](x_1) \narrower \stmt[b](x_2)$. Since $(\basis_b, \narrower)$ is linearly ordered so is $(X, \leq)$.
+	
+	The last thing to show is that X covers all possibilities. Let $x$ be a possibility for $\edomain_x$. Let $F_x=\{\stmt \in S| x \ncomp \stmt \}$ and $T_x=\{\stmt \in S \, | \, x \narrower \stmt \}$. Since $x$ is a possibility $F_x \cup T_x = S$, since the domain is complete $T_x \neq \emptyset$ and since $S$ is totally ordered, $\stmt_1 \snarrower \stmt_2$ for all $\stmt_1 \in F_x$ and $\stmt_2 \in T_x$. Let $\stmt[f]_x = \bigOR\limits_{\stmt \in F_x} \stmt$ and $\stmt[t]_x = \bigAND\limits_{\stmt \in T_x} \stmt$. Consider $\NOT \stmt[f]_x \AND \stmt[t]_x$: if true $\stmt[f]_x$ will be false, and so will all statements in $F_x$ since they are narrower; on the other hand $\stmt[t]_x$ will be true, and so will all statements in $T_x$ since they are broader. We have $x \equiv \NOT \stmt[f]_x \AND \stmt[t]_x$. Since $x$ is not a contradiction, $\stmt[f]_x \nequiv \stmt[t]_x$. Since all statements in $S$ are either in $F_x$ or $T_x$, $\stmt[t]_x$ is the immediate successor of $\stmt[f]_x$. Therefore $\stmt[f]_x \in \basis_b$,  $\NOT stmt[t]_x$ and $\stmt[t]_x$ and $x \in X$.
+\end{proof}
+
 \end{mathSection}
+
+\section{References and experimental ordering}
 
 TODO: Here we argue how ordering is defined experimentally using references
 
