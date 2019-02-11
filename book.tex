@@ -1725,9 +1725,9 @@ A \textbf{beginning reference} has nothing before it. That is, $\stmt[b] \equiv 
 
 To measure a quantity we will have many references one after the other: a ruler will have many marks, a scale will have many reference weights, a clock will keep ticking. What does it mean that a reference comes after another in terms of the before/on/after statements?
 
-If reference $\refStmt_1$ is before reference $\refStmt_2$ we expect that if the value measured is before the first it will also be before the second, and if it is after the second it will also be before the first. Note that this is not enough, though, because as references have an extent they may overlap. And if they overlap one can't be after the other. To have an ordering properly defined we must have that the reference itself is also before. That is, if the value measured is on the first it will be before the second and if it is on the second it will be after the first.
+If reference $\refStmt_1$ is before reference $\refStmt_2$ we expect that if the value measured is before the first it will also be before the second, and if it is after the second it will also be after the first. Note that this is not enough, though, because as references have an extent they may overlap. And if they overlap one can't be after the other. To have an ordering properly defined we must have that the first reference is entirely before the second. That is, if the value measured is on the first it will be before the second and if it is on the second it will be after the first.
 
-Mathematically, this type of ordering is strict in the sense that defines what is strictly before and strictly after. It does not define what happens in the overlapping, in between cases. One may be tempted to define the ordering based on how the references overlap, but that requires refining the references and, in the end, it means we are defining an ordered on those refined references, not the original ones.
+Mathematically, this type of ordering is strict in the sense that it defines what is strictly before and strictly after. It does not define what happens in the overlap, in between cases. One may be tempted to define the ordering based on how the references overlap, but that requires refining the references and, in the end, it means we are defining an ordering on those refined references, not the original ones.
 
 \begin{mathSection}
 \begin{defn}
@@ -1742,22 +1742,22 @@ Mathematically, this type of ordering is strict in the sense that defines what i
 	and is therefore a \textbf{strict partial order}.
 \end{prop}
 \begin{proof}
-	For irreflexivity, we have $\stmt[b] \OR \stmt[o] \ncomp \stmt[o] \OR \stmt[a]$ is false since $\stmt[o] \comp \stmt[o]$. Since the on statement can't be a contradiction, a reference is not before itself and the relationship is irreflexive.
+	For irreflexivity, since the on statement can't be a contradiction, we have $\stmt[o] \comp \stmt[o]$ and therefore $\stmt[b] \OR \stmt[o] \comp \stmt[o] \OR \stmt[a]$. Therefore a reference is not before itself and the relationship is irreflexive.
 	
 	For transitivity, if $\refStmt_1 < \refStmt_2$, we have $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$ and therefore $\NOT (\stmt[b]_1 \OR \stmt[o]_1) \broader \stmt[o]_2 \OR \stmt[a]_2$ by \ref{prop_narrowness_properties}. Since $\stmt[b]_1 \OR \stmt[o]_1 \OR \stmt[a]_1 \equiv \tautology$, we have $\stmt[a]_1 \broader \NOT (\stmt[b]_1 \OR \stmt[o]_1)$. Similarly if $\refStmt_2 < \refStmt_3$ we'll have $\stmt[a]_2 \broader \NOT (\stmt[b]_2 \OR \stmt[o]_2) \broader \stmt[o]_3 \OR \stmt[a]_3$. Putting it all together $\NOT (\stmt[b]_1 \OR \stmt[o]_1) \broader \stmt[o]_2 \OR \stmt[a]_2 \broader \stmt[a]_2 \broader \NOT (\stmt[b]_2 \OR \stmt[o]_2) \broader \stmt[o]_3 \OR \stmt[a]_3$, which means $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_3 \OR \stmt[a]_3$.
 \end{proof}
 \begin{coro}
-	The relationship $\refStmt_1 \leq \refStmt_2$ defined to be true if $\refStmt_1 < \refStmt_2$ or $\refStmt_1 = \refStmt_2$ is a partial order.
+	The relationship $\refStmt_1 \leq \refStmt_2$, defined to be true if $\refStmt_1 < \refStmt_2$ or $\refStmt_1 = \refStmt_2$, is a partial order.
 \end{coro}
 \end{mathSection}
 
 As we saw, two references may overlap and therefore an ordering between them cannot be defined. But references can overlap in different ways.
 
-Suppose we have a vertical line one millimeter think and call the left side the part before the line and the right side the part after. We can have another vertical line of the same thickness overlapping but we can also have a horizontal line which will also, at some point, overlap. The case of the two vertical lines is something that, through finding finer references, can be given a linear order. The case of the vertical and horizontal line, instead, cannot. Intuitively, the vertical lines are aligned and while the horizontal and vertical are not.
+Suppose we have a vertical line one millimeter thick and call the left side the part before the line and the right side the part after. We can have another vertical line of the same thickness overlapping but we can also have a horizontal line which will also, at some point, overlap. The case of the two vertical lines is something that, through finding finer references, can be given a linear order. The case of the vertical and horizontal line, instead, cannot. Intuitively, the vertical lines are aligned while the horizontal and vertical are not.
 
-Conceptually, the overlapping vertical lines are aligned because we can imagine narrower lines around the borders, and those lines will be ordered references in the sense before: each lines would be completely before or after, without intersection. That is: the boundaries of the lines create areas that always increase. This means that the before and not-after statements of one reference are either narrower or broader of the before and not-after statements of the other. That is, alignment can be also defined in terms of narrowness of statements.
+Conceptually, the overlapping vertical lines are aligned because we can imagine narrower lines around the borders, and those lines will be ordered references in the above sense: each line would be completely before or after, without intersection. This means that the before and not-after statements of one reference are either narrower or broader than the before and not-after statements of the other. That is, alignment can also be defined in terms of narrowness of statements.
 
-Note that if a reference is strict, before and after statements are not compatible and therefore the before statement is narrower than the not-after statement. This means that, given a set of aligned strict references, the set of all before and not-after statements are linearly ordered by narrowness. As we saw in the previous section, this was a necessary condition for the possibilities of a domain to be ordered and therefore aligned strict references play a crucial role.
+Note that if a reference is strict, before and after statements are not compatible and therefore the before statement is narrower than the not-after statement. This means that, given a set of aligned strict references, the set of all before and not-after statements is linearly ordered by narrowness. As we saw in the previous section, this was a necessary condition for the possibilities of a domain to be ordered and therefore aligned strict references play a crucial role.
 
 \begin{mathSection}
 \begin{defn}
@@ -1765,10 +1765,10 @@ Note that if a reference is strict, before and after statements are not compatib
 	$\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$. A set $R$ of references is aligned if any pair of references is aligned.
 \end{defn}
 \begin{prop}\label{3_prop_strict_alignment_is_ordering}
-	Let $R = \{(\stmt[b]_i, \stmt[o]_i, \stmt[a]_i)\}_{i\in I}$ be a set of aligned strict references. Let $\basis_b = \{\stmt[b]_i\}_{i\in I}$ and $\basis_a = \{\stmt[a]\}_{i\in I}$ be respectively the sets of before and after statements. Then the set $B = \basis_b \cup \NOT (\basis_a)$ is linearly ordered by narrowness.
+	Let $R = \{(\stmt[b]_i, \stmt[o]_i, \stmt[a]_i)\}_{i\in I}$ be a set of aligned strict references. Let $\basis_b = \{\stmt[b]_i\}_{i\in I}$ and $\basis_a = \{\stmt[a]_i\}_{i\in I}$ be respectively the sets of before and after statements. Then the set $B = \basis_b \cup \NOT (\basis_a)$ is linearly ordered by narrowness.
 \end{prop}
 \begin{proof}
-	Let $R$ be a set of aligned strict references. Let $\stmt_1, \stmt_2 \in B$. Suppose they are from the same reference. If they are both before statements or both after statements, we have $\stmt_1 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$. If one is the before statement and the other is the not-after statements, since the reference is strict, we have $\stmt[b] \ncomp \stmt[a]$ and $\stmt[b] \narrower \NOT\stmt[a]$ by \ref{prop_narrowness_properties} and therefore $\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$. Suppose they are from different references, since they are aligned we have  $\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$ by definition.
+	Let $R$ be a set of aligned strict references. Let $\stmt_1, \stmt_2 \in B$. Suppose they are taken from the same reference. If they are both before statements or both after statements, we have $\stmt_1 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$. If one is the before statement and the other is the not-after statement, since the reference is strict, we have $\stmt[b] \ncomp \stmt[a]$ and $\stmt[b] \narrower \NOT\stmt[a]$ by \ref{prop_narrowness_properties} and therefore $\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$. Now suppose they are taken from different references. Since they are aligned we have  $\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$ by definition.
 \end{proof}
 
 \begin{prop}\label{3_prop_ordered_references_are_aligned}
@@ -1789,7 +1789,7 @@ Note that if a reference is strict, before and after statements are not compatib
 	Let $\refStmt_1 = ( \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 )$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 )$ be two strict references. Then $\refStmt_1 \less \refStmt_2$ if and only if $\NOT \stmt[a]_1 \narrower \stmt[b]_2$ .
 \end{prop}
 \begin{proof}
-	Let $\refStmt_1 \less \refStmt_2$. By \ref{3_prop_ordered_references_are_aligned}, we have $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Conversely, let $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Then $\NOT \stmt[a]_1 \ncomp \NOT \stmt[b]_2$. Because the references are strict, $\NOT \stmt[a]_1 \equiv \stmt[b]_1 \OR \stmt[o]_1$ and $\NOT \stmt[b]_1 \equiv \stmt[o]_2 \OR \stmt[a]_2$. Therefore $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$ and $\refStmt_1 \less \refStmt_2$ by definition.
+	Let $\refStmt_1 \less \refStmt_2$. By \ref{3_prop_ordered_references_are_aligned}, we have $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Conversely, let $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Then $\NOT \stmt[a]_1 \ncomp \NOT \stmt[b]_2$. Because the references are strict, $\NOT \stmt[a]_1 \equiv \stmt[b]_1 \OR \stmt[o]_1$ and $\NOT \stmt[b]_2 \equiv \stmt[o]_2 \OR \stmt[a]_2$. Therefore $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$ and $\refStmt_1 \less \refStmt_2$ by definition.
 \end{proof}
 
 \begin{defn}
@@ -1812,16 +1812,16 @@ Note that if a reference is strict, before and after statements are not compatib
 
 \end{mathSection}
 
-If we have a set of references, we can generate an experimental domain by using the before and after statements as the basis. More specifically we can take all the before statements and generate the before domain $\edomain_b$ and all the after statements and generate the after domain $\edomain_a$. If the reference all strict and aligned, the set $D=\edomain_b \cup \NOT (\edomain_a)$ of all the before and not-after statement will be linearly ordered by narrowness. We recognize this as the first requirement of the domain ordering theorem \ref{3_thrm_domain_ordering_theorem}.
+If we have a set of references, we can generate an experimental domain by using the before and after statements as the basis. More specifically we can take all the before statements and generate the before domain $\edomain_b$ and all the after statements and generate the after domain $\edomain_a$. If the references are all strict and aligned, the set $D=\edomain_b \cup \NOT (\edomain_a)$ of all the before and not-after statements will be linearly ordered by narrowness. We recognize this as the first requirement of the domain ordering theorem \ref{3_thrm_domain_ordering_theorem}.
 
 \begin{mathSection}
 
 \begin{defn}
-	Let $R = \{( \stmt[b]_i, \stmt[o]_i, \stmt[a]_i )\}_{i \in I}$ be a set of references. Let $\basis_b = \{\stmt[b]_i\}_{i \in I}$ be the set of all before statements and $\basis_a = \{\stmt[a]_i\}_{i \in I}$ be the set of all after statements. The experimental domain $\edomain$ generated by $R$ is the one generated by all before and after statements $\basis_b \cup \basis_a$. The before domain $\edomain_b$ is the domain generated only by the before statements $\basis_b$ and the after domain $\edomain_a$ is the domain generated only by the before statements $\basis_a$.
+	Let $R = \{( \stmt[b]_i, \stmt[o]_i, \stmt[a]_i )\}_{i \in I}$ be a set of references. Let $\basis_b = \{\stmt[b]_i\}_{i \in I}$ be the set of all before statements and $\basis_a = \{\stmt[a]_i\}_{i \in I}$ be the set of all after statements. The experimental domain $\edomain$ generated by $R$ is the one generated by all before and after statements $\basis_b \cup \basis_a$. The before domain $\edomain_b$ is the domain generated only by the before statements $\basis_b$ and the after domain $\edomain_a$ is the domain generated only by the after statements $\basis_a$.
 \end{defn}
 
 \begin{defn}
-	A reference $\refStmt = ( \stmt[b], \stmt[o], \stmt[a] ) \in \edomain$ is aligned with a domain generated by a set of references if $\stmt[b] \in \edomain_b$ and $\stmt[a] \in \edomain_a$.
+	Let $\edomain$ be a domain generated by a set of references $R$. A reference $\refStmt = ( \stmt[b], \stmt[o], \stmt[a] )$ is said to be aligned with $\edomain$ if $\stmt[b] \in \edomain_b$ and $\stmt[a] \in \edomain_a$.
 \end{defn}
 
 \begin{prop}\label{3_prop_basis_generate_ordering}
@@ -1833,16 +1833,16 @@ If we have a set of references, we can generate an experimental domain by using 
 
 \end{mathSection}
 
-Having a set of aligned reference is not necessarily enough to cover the whole space at all level of precision. To do that we need to make sure that, for example, between two references that are not consecutive we can at least put a reference in between. Or that if we have two references that overlap, we can break them apart into finer ones that do not overlap and one is after the other.
+Having a set of aligned references is not necessarily enough to cover the whole space at all levels of precision. To do that we need to make sure that, for example, between two references that are not consecutive we can at least put a reference in between. Or that if we have two references that overlap, we can break them apart into finer ones that do not overlap and one is after the other.
 
-We call a set of references refinable if the domain they generate has the above mentioned properties. This allows us to break up the whole domain into a sequence of references that do not overlap, are linearly ordered and that cover the whole space. As we get to the finest references, their before statement will be immediately followed by the negation of their after statement, since there can't be any reference in between. Conceptually, this will give us the second and the third condition of the domain ordering theorem \ref{3_thrm_domain_ordering_theorem}.
+We call a set of references refinable if the domain they generate has the above mentioned properties. This allows us to break up the whole domain into a sequence of references that do not overlap, are linearly ordered and that cover the whole space. As we get to the finest references, their before statements will be immediately followed by the negation of their after statements, since there can't be any reference in between. Conceptually, this will give us the second and the third condition of the domain ordering theorem \ref{3_thrm_domain_ordering_theorem}.
 
 \begin{mathSection}
 \begin{defn}
-	Let $\edomain$ be an experimental domain generated by a set of aligned references $R$. The set of references are \textbf{refinable} if, given two strict references $\refStmt_1 = ( \stmt[b]_1, \stmt[r]_1, \stmt[a]_1)$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[r]_2, \stmt[a]_2)$ aligned with $\edomain$, we can always:
+	Let $\edomain$ be an experimental domain generated by a set of aligned references $R$. The set of references is \textbf{refinable} if, given two strict references $\refStmt_1 = ( \stmt[b]_1, \stmt[o]_1, \stmt[a]_1)$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[o]_2, \stmt[a]_2)$ aligned with $\edomain$, we can always:
 	\begin{itemize}
 		\item find an intermediate one if they are not consecutive; that is, if $\refStmt[r]_1 < \refStmt[r]_2$ but $\refStmt[r]_2$ is not the immediate successor of $\refStmt[r]_1$, then we can find a strict reference $\refStmt_3$ aligned with $\edomain$ such that $\refStmt[r]_1 < \refStmt[r]_3 < \refStmt[r]_2$.
-		\item refine the first if the second is finer; that is, if $\stmt[o]_2 \snarrower \stmt[o]_1$, we can find a strict reference $\refStmt_3$ aligned with $\edomain$ such that $\stmt[o]_3 \narrower \stmt[o]_1$ and either $\stmt[b]_3 \equiv \stmt[b]_1$ and $\refStmt_3 < \refStmt_2$ or $\stmt[a]_3 \equiv \stmt[a]_1$ and $\refStmt_2 < \refStmt_3$.
+		\item refine overlapping references if one is finer than the other; that is, if $\stmt[o]_2 \snarrower \stmt[o]_1$, we can find a strict reference $\refStmt_3$ aligned with $\edomain$ such that $\stmt[o]_3 \narrower \stmt[o]_1$ and either $\stmt[b]_3 \equiv \stmt[b]_1$ and $\refStmt_3 < \refStmt_2$ or $\stmt[a]_3 \equiv \stmt[a]_1$ and $\refStmt_2 < \refStmt_3$.
 	\end{itemize}
 \end{defn}
 
@@ -1851,13 +1851,13 @@ We call a set of references refinable if the domain they generate has the above 
 	\begin{enumerate}
 		\item If $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ such that $\stmt[b]_1 \snarrower \stmt[b]_2$, then there exists $\stmt[a] \in \edomain_a$ such that $\stmt[b]_1 \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
 		\item If $\stmt[a]_1, \stmt[a]_2 \in \edomain_a$ such that $\NOT \stmt[a]_1 \snarrower \NOT \stmt[a]_2$, then there exists $\stmt[b] \in \edomain_b$ such that $\NOT \stmt[a]_1 \narrower \stmt[b] \snarrower \NOT \stmt[a]_2$.
-		\item If $\stmt[a]_1 \in \edomain_a$ and $\stmt[b]_2\in \edomain_b$ such that $\NOT \stmt[a]_1 \snarrower \stmt[b]_2$, then there exists a $\stmt[b] \in \edomain_b$ and a $\stmt[a] \in \edomain_a$ such that $\NOT \stmt[a]_1 \narrower \stmt[b] \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
+		\item If $\stmt[a]_1 \in \edomain_a$ and $\stmt[b]_2\in \edomain_b$ such that $\NOT \stmt[a]_1 \snarrower \stmt[b]_2$, then there exists $\stmt[b] \in \edomain_b$ and $\stmt[a] \in \edomain_a$ such that $\NOT \stmt[a]_1 \narrower \stmt[b] \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
 	\end{enumerate}
 \end{prop}
 \begin{proof}
-	For the first, suppose $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ such that $\stmt[b]_1 \snarrower \stmt[b]_2$. Then $\refStmt_1 = ( \stmt[b]_1, \NOT \stmt[b]_1, \contradiction )$ and  $\refStmt_2 = ( \stmt[b]_2, \NOT \stmt[b]_2, \contradiction)$ are strict references aligned with the domain such that $\NOT \stmt[b]_2 \snarrower \NOT \stmt[b]_1$. This means we can find $\refStmt_3 = ( \stmt[b]_1, \NOT \stmt[b]_1 \AND \NOT \stmt[a], \stmt[a] )$ such that $\refStmt_3 < \refStmt_2$ and therefore $\stmt[b]_1 \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
+	For the first, suppose $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ such that $\stmt[b]_1 \snarrower \stmt[b]_2$. Then $\refStmt_1 = ( \stmt[b]_1, \NOT \stmt[b]_1, \contradiction )$ and  $\refStmt_2 = ( \stmt[b]_2, \NOT \stmt[b]_2, \contradiction)$ are strict references aligned with the domain such that $\NOT \stmt[b]_2 \snarrower \NOT \stmt[b]_1$. This means we can find $\refStmt_3 = ( \stmt[b]_1, \NOT \stmt[b]_1 \AND \NOT \stmt[a], \stmt[a] )$ for some $\stmt[a] \in \edomain_a$ such that $\refStmt_3 < \refStmt_2$ and therefore $\stmt[b]_1 \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
 	
-	For the second, suppose $\stmt[a]_1, \stmt[a]_2 \in \edomain_b$ such that $\NOT \stmt[a]_1 \snarrower \NOT \stmt[a]_2$. Then $\refStmt_1 = ( \contradiction, \NOT \stmt[a]_2, \stmt[a]_2 )$ and  $\refStmt_2 = ( \contradiction, \NOT \stmt[a]_1, \stmt[a]_1)$ are strict references aligned with the domain such that $\NOT \stmt[a]_1 \snarrower \NOT \stmt[a]_2$. This means we can find $\refStmt_3 = ( \stmt[b], \NOT \stmt[b] \AND \NOT \stmt[a]_2, \stmt[a]_2 )$ such that $\refStmt_3 < \refStmt_2$ and therefore $\NOT \stmt[a]_1 \narrower \stmt[b] \snarrower \NOT \stmt[a]_2$.
+	For the second, suppose $\stmt[a]_1, \stmt[a]_2 \in \edomain_a$ such that $\NOT \stmt[a]_1 \snarrower \NOT \stmt[a]_2$. Then $\refStmt_1 = ( \contradiction, \NOT \stmt[a]_2, \stmt[a]_2 )$ and  $\refStmt_2 = ( \contradiction, \NOT \stmt[a]_1, \stmt[a]_1)$ are strict references aligned with the domain such that $\NOT \stmt[a]_1 \snarrower \NOT \stmt[a]_2$. This means we can find $\refStmt_3 = ( \stmt[b], \NOT \stmt[b] \AND \NOT \stmt[a]_2, \stmt[a]_2 )$ for some $\stmt[b] \in \edomain_b$ such that $\refStmt_3 < \refStmt_2$ and therefore $\NOT \stmt[a]_1 \narrower \stmt[b] \snarrower \NOT \stmt[a]_2$.
 	
 	For the third, suppose $\stmt[a]_1 \in \edomain_a$ and $\stmt[b]_2\in \edomain_b$ such that $\NOT \stmt[a]_1 \snarrower \stmt[b]_2$. Then $\refStmt_1 = ( \contradiction, \NOT \stmt[a]_1, \stmt[a]_1 )$ and  $\refStmt_2 = ( \stmt[b]_2, \NOT \stmt[b]_2, \contradiction)$ are strict references aligned with the domain such that $\refStmt_1 \less \refStmt_2$ but $\refStmt_2$ is not an immediate successor of $\refStmt_1$. This means we can find $\refStmt_3 = ( \stmt[b], \NOT \stmt[b] \AND \NOT \stmt[a], \stmt[a] )$ such that $\refStmt_1 < \refStmt_3 < \refStmt_2$ and therefore $\NOT \stmt[a]_1 \narrower \stmt[b] \snarrower \NOT \stmt[a] \narrower \NOT \stmt[b]_2$.
 \end{proof}
