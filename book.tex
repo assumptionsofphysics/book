@@ -1895,13 +1895,13 @@ The possibilities, then, correspond to the finest references we can construct wi
 
 \section{Discrete quantities}
 
-Now that we have seen the general conditions to have a naturally ordered experimental domain, we find the conditions for common types of quantity. The first type we consider are discrete ones, like the number of chromosomes for a species, the number of inhabitants of a country or the atomic number for an element are all discrete quantities. That is, those quantities that are fully characterized by integers (positive or negative).
+Now that we have seen the general conditions to have a naturally ordered experimental domain, we study common types of quantities and under what conditions they arise. We start with discrete ones: the number of chromosomes for a species, the number of inhabitants of a country or the atomic number for an element are all discrete quantities. These are quantities that are fully characterized by integers (positive or negative).
 
 We will see that discrete quantities have a simple characterization: between two references there can only be a finite number of other references.
 
 The first thing we want to do is characterize the ordering of the integers. That is, we want to find necessary and sufficient conditions for an ordered set of elements to be isomorphic to a subset of integers. First we note that between any two integers there are always finitely many elements. Let's call sparse an ordered set that has that property: that between two elements there are only finitely many. This is enough to say that the order is isomorphic to the integers.
 
-In fact, if an ordered set is coarse we can always go from any element to another in finitely many steps. Therefore we can pick one element, call it zero, go forward one element at a time and assign a positive integer to all the elements afterwards or go backward one element at a time and assign a positive integer to all the elements beforehand.
+In fact, if an ordered set is sparse we can always go from any element to another in finitely many steps. Therefore we can pick one element, call it zero, go forward one element at a time and assign a positive integer to all the following elements or go backward one element at a time and assign a negative integer to all the preceding elements.
 
 
 \begin{mathSection}
@@ -1919,22 +1919,22 @@ In fact, if an ordered set is coarse we can always go from any element to anothe
 \end{proof}
 
 \begin{remark}
-	The converse of the corollary is not always true. Consider the integers with the following ordering $\{0, 1, 2, 3, ... , -3, -2, -1\}$. All elements have an immediate predecessor/successor or no predecessor/successor, yet $3$ and $-3$ have infinitely many elements in between.
+	The converse of the corollary, that a linearly ordered set in which every element that has a predecessor (or successor) has an immediate predeccessor (or successor) is sparse, is not true. Consider the integers with the following ordering $\{0, 1, 2, 3, ... , -3, -2, -1\}$. All elements have an immediate predecessor/successor or no predecessor/successor, yet $3$ and $-3$ have infinitely many elements in between.
 \end{remark}
 \begin{prop}
-	An order is sparse if and only if is isomorphic to a contiguous subset of the integers.
+	An linear order is sparse if and only if it is isomorphic to a contiguous subset of the integers.
 \end{prop}
 \begin{proof}
-	Let $\mathcal{Q}$ be a sparse ordered set. Pick an element $q_0 \in \mathcal{Q}$. Let $q : \mathcal{Q} \to \mathbb{Z}$ such that it returns $0$ for $q_0$, $1$ for its immediate successor (if it exists), $-1$ for its immediate predecessor (if it exists), $2$ for the immediate successor of the immediate successor (if it exists) and so on. Since the order is sparse, all elements will eventually be reached through a chain of immediate successors/predecessors and will be assigned a value. The function is injective and order preserving, so it is an isomorphism over $q(\mathcal{Q})$, which, by construction, is a contiguous subset of the integers
+	Let $\mathcal{Q}$ be a sparse linearly ordered set. Pick an element $q_0 \in \mathcal{Q}$. Let $q : \mathcal{Q} \to \mathbb{Z}$ such that it returns $0$ for $q_0$, $1$ for its immediate successor (if it exists), $-1$ for its immediate predecessor (if it exists), $2$ for the immediate successor of the immediate successor (if it exists) and so on. Since the order is sparse, all elements will eventually be reached through a chain of immediate successors/predecessors and will be assigned a value. The function is injective and order preserving, so it is an isomorphism over $q(\mathcal{Q})$, which, by construction, is a contiguous subset of the integers
 	
-	Conversely, let $\mathcal{Q}$ be an ordered set isomorphic to a continuous subset of the integers and let $q : \mathcal{Q} \to \mathbb{Z}$ be the isomorphism. The number of elements between two elements of the set will be equal to the number of elements between the two corresponding integers, which is always finite.
+	Conversely, let $\mathcal{Q}$ be an ordered set isomorphic to a contiguous subset of the integers and let $q : \mathcal{Q} \to \mathbb{Z}$ be the isomorphism. The number of elements between two elements of the set will be equal to the number of elements between the two corresponding integers, which is always finite.
 \end{proof}
 
 \end{mathSection}
 
-We can now define a discrete quantity as one for which the ordering is sparse. While this may typically correspond to a set of contiguous integers, it is not necessary. For example, a set of names ordered alphabetically, the set of orbitals for an hydrogen atoms, the possible energies for a quantum harmonic oscillator, these are all discrete quantities even if the label we use is not an integer.
+We can now define a discrete quantity as one for which the ordering is sparse. While this may typically correspond to a set of contiguous integers, it is not necessary. For example, a set of names ordered alphabetically, the set of orbitals for a hydrogen atom, the possible energies for a quantum harmonic oscillator, these are all discrete quantities even if the label we use is not an integer.
 
-The natural question now is: under what conditions the possibilities of a domain are ordered like the integers? The answer is straight forward: when the references within the domain have a sparse order. That is, between two references we can only put finitely many ordered references.
+The natural question now is: under what conditions are the possibilities of a domain ordered like the integers? The answer is straightforward: when the references within the domain have a sparse order. That is, between two references we can only put finitely many ordered references.
 
 \begin{mathSection}
 \begin{defn}
@@ -1950,15 +1950,15 @@ The natural question now is: under what conditions the possibilities of a domain
 	\end{enumerate}
 \end{thrm}
 \begin{proof}
-	For (1) to (2), let $\edomain_X$ be an experimental domain with a natural sparse order. Pick an ordered set $(\mathcal{Q}, \leq)$ that is order isomorphic to the possibilities and let $q: X \to \mathcal{Q}$ be an order isomorphism. By \ref{3_thrm_property_ordering} $\edomain_X$ is fully characterized by $(\mathcal{Q}, \leq, q)$. Since the order on $X$ is sparse, $X$ will be order isomorphic to a contiguous set of integers and so will $\mathcal{Q}$. Therefore $\mathcal{Q}$ has a sparse order as well and is therefore a discrete quantity.
+	For (1) to (2), let $\edomain_X$ be an experimental domain with a natural sparse order and let $X$ be its possibilities. Pick an ordered set $(\mathcal{Q}, \leq)$ that is order isomorphic to the possibilities and let $q: X \to \mathcal{Q}$ be an order isomorphism. By \ref{3_thrm_property_ordering} $\edomain_X$ is fully characterized by $(\mathcal{Q}, \leq, q)$. Since the order on $X$ is sparse, $X$ will be order isomorphic to a contiguous set of integers and so will $\mathcal{Q}$. Therefore $\mathcal{Q}$ has a sparse order as well and is therefore a discrete quantity.
 	
 	For (2) to (3), let $\edomain_X$ be an experimental domain fully characterized by $\mathcal{Q}$. Then by \ref{3_thrm_property_ordering} and by \ref{3_thrm_reference_ordering} it is generated by a set of refinable aligned strict references. Let $\refStmt_1$ and $\refStmt_2$ be two references aligned with the domain such that $\refStmt_1 < \refStmt_2$. Then the after statement of $\refStmt_1$ will be of the form $``x > q^{-1}(q_1)"$, the before statement of $\refStmt_2$ will be of the form $``x < q^{-1}(q_2)"$ for some $q_1, q_2 \in \mathcal{Q}$ such that $q_1 < q_2$. Let $\refStmt : \mathcal{Q} \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(q_i) = (``x < q^{-1}(q_i)", ``x \geq q^{-1}(q_i)" \AND ``x \leq q^{-1}(q_i)", ``x > q^{-1}(q_i)")$. Let $C = \{\refStmt_1\} \cup \{\refStmt(q_i) \, | \, q_i \in \mathcal{Q}, q_1 < q_i < q_2  \} \cup \{ \refStmt_2 \}$. This is the longest chain between $\refStmt_1$ and $\refStmt_2$ and it is finite because $\mathcal{Q}$ has a sparse ordering. The set of references that generate the domain, then, must have a sparse ordering.
 	
-	For (3) to (1), let $\edomain_X$ be an experimental domain generated by a set of refinable aligned strict references with a sparse order. By \ref{3_thrm_reference_ordering} $\edomain_X$ has a natural order. Let $\refStmt : X \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(x_i) = (``x < x_i", ``x \geq x_i" \AND ``x \leq x_i", ``x > x_i")$. Let $R=\{ \refStmt(x_i) \, | \, x_i \in X \}$. Then $R$ is an order isomorphism between $X$ and $R$. As the order on $R$ is sparse then the order on $X$ is sparse as well.
+	For (3) to (1), let $\edomain_X$ be an experimental domain generated by a set of refinable aligned strict references with a sparse order. By \ref{3_thrm_reference_ordering} $\edomain_X$ has a natural order. Let $\refStmt : X \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(x_i) = (``x < x_i", ``x \geq x_i" \AND ``x \leq x_i", ``x > x_i")$. Let $R=\{ \refStmt(x_i) \, | \, x_i \in X \}$. Then $R$ is order isomorphic to $X$. As the order on $R$ is sparse then the order on $X$ is sparse as well.
 \end{proof}
 \end{mathSection}
 
-There is a special relationship between discrete quantities and decidability, the ability to test experimentally both the truthfulness and falsehood of a statement. Consider the examples above of discrete quantities: in each case we can experimentally test whether we have a particular value or not. For example, we are always able to tell whether an element has three protons or not.\footnote{Recall that this is not the case with continuous quantities. Because of uncertainty of measurement, we are able to exclude that a given particle has exactly zero mass but it is not possible to conclusively show that it has zero mass.} It turns out that whenever we have a domain consisting of only decidable statements, we can always create a discrete quantity that fully characterizes the experimental domain.
+There is a special relationship between discrete quantities and decidability, the ability to test experimentally both the truthfulness and falsehood of a statement. Consider the examples above of discrete quantities: in each case we can experimentally test whether we have a particular value or not. For example, we are always able to tell whether there are exactly three apples on the table or not.\footnote{Recall that this is not the case with continuous quantities. Because of finite precision, we are able to exclude that a given particle has exactly zero mass but it is not possible to conclusively show that it has zero mass.} It turns out that whenever we have a domain consisting of only decidable statements, we can always create a discrete quantity that fully characterizes the experimental domain.
 
 
 \begin{mathSection}
@@ -1981,7 +1981,7 @@ There is a special relationship between discrete quantities and decidability, th
 	
 \end{mathSection}
 
-Note that, since any discrete order leads to a decidable domain and a discrete topology, any reordering of the possibilities will give the same exact domain. This means that, while we can always assign a natural order, the order itself may not necessarily be meaningful. For example, we can always take a finite group of objects and arbitrarily assign each a unique integer to identify them. In the discrete case the domain itself is not enough to pick a unique order, though the set of aligned references that are used to generate the domain is.
+Note that, since any discrete order leads to a decidable domain and a discrete topology, any reordering of the possibilities will give the same exact domain. This means that, while we can always assign a natural order, the order itself may not necessarily be meaningful. For example, we can always take a finite group of objects and arbitrarily assign each a unique integer to identify it. In the discrete case the domain itself is not enough to pick a unique order, though the set of aligned references that are used to generate the domain is.
 
 Also note that for the link between decidability and discrete quantities to apply, it is crucial the quantity is measurable: that we can actually experimentally ascertain its values. Consider the domain with the possibilities \statement{there is no extra-terrestrial life} and \statement{there is extra-terrestrial life}. We can arbitrarily label 0 the former and 1 the latter. But since we cannot verify the first statement, we cannot really ``measure'' 0. In that case, the domain is fully identified by the discrete quantity, but not fully characterized.
 
