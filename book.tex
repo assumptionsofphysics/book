@@ -140,12 +140,12 @@ Consider assertions like \statement{jazz is marvelous} or \statement{green and r
 
 \begin{mathSection}
 \begin{defn}
-	The \textbf{Boolean domain} is the set $\mathbb{B} = \{\FALSE, \TRUE\}$ of all possible truth values.
+	The \textbf{Boolean domain} is the set $\Bool = \{\FALSE, \TRUE\}$ of all possible truth values.
 \end{defn}
 
 
 \begin{axiom}\label{ax_statement}
-	A \textbf{statement} $\stmt$ is an assertion that is either true or false. Formally, a statement is an element of the set $\mathcal{S}$ of all statements upon which is defined a function $\truth: \mathcal{S} \to \mathbb{B}$ that returns the truth value for each element.
+	A \textbf{statement} $\stmt$ is an assertion that is either true or false. A \textbf{logical context} $\logCtx$ is a collection of statements with well defined logical relationships. Formally, a logical context $\logCtx$ is a collection of elements called statements upon which is defined a function $\truth: \logCtx \to \Bool$.
 \end{axiom}
 
 \end{mathSection}
@@ -159,33 +159,26 @@ To keep track of this sort of situation, each statement in our framework not onl
 Some statements will only be allowed one truth value. We will call a tautology a statement, like \statement{that cat is an animal}, that can only be true and a contradiction a statement, \statement{that cat is a swan}, that can only be false.
 
 \begin{mathSection}
-	\begin{defn}
-	Given a collection of statements $\{\stmt_i\}^n_{i=1}$, a \textbf{consistent truth assignment} is a collection of truth values $\{t_i\}^n_{i=1}$ such that it is logically consistent to simultaneously suppose that $\truth(\stmt_i) = t_i$ for all $1 \leq i \leq n$. That is, from those assumptions it cannot be proven that $\truth(\stmt_i) \neq t_i$ for any $1 \leq i \leq n$.  This definition generalizes to the case of infinite, possibly uncountable, collections.
-\end{defn}
-	
-\begin{axiom}\label{ax_possibilities}
-	The \textbf{possibilities} of a statement $\stmt$ are the possible truth values allowed by the content of the statement. Formally, on the set $\mathcal{S}$ of all statements is also defined a function $\possFn: \mathcal{S} \to \{\{\FALSE, \TRUE\},\{\FALSE\},\{\TRUE\}\}$ such that:
-	\begin{itemize}
-		\item $\truth(\stmt) \in \possFn(\stmt)$ for all $\stmt \in \mathcal{S}$. This remains valid in every consistent truth assignment.
-		\item for any collection of statements $\{\stmt_i\}^n_{i=1}$, for any $1 \leq j \leq n$ and for any $t \in \possFn(\stmt_j)$ there exists a consistent truth assignment $\{t_i\}^n_{i=1}$ such that $t_j = t$. This generalizes to the case of infinite, possibly uncountable, indexed families.
-	\end{itemize}
+\begin{axiom}\label{ax_possible_assignemetns}
+	A \textbf{possible assignment} for a logical context $\logCtx$ is a map $a : \logCtx \to \Bool$ that assigns a truth value to each statement in a way consistent with the content of the statements. Formally, each logical context comes equipped with a set $\pAss \subseteq \Bool^{\logCtx}$ such that $\truth \in \pAss$. A map $a : \logCtx \to \Bool$ is a possible assignment for $\logCtx$ if $a \in \pAss$.
 \end{axiom}
 
-\begin{coro}
-	If $\{t_i\}^n_{i=1}$ is a consistent truth assignment for $\{\stmt_i\}^n_{i=1}$, then $t_i \in \possFn(\stmt_i)$ for all $1 \leq i \leq n$.
-\end{coro}
-\begin{proof}
-	Since $\{t_i\}^n_{i=1}$ is a possible truth assignment for $\{\stmt_i\}^n_{i=1}$, we can let $\truth(\stmt_i) = t_i$ for all $1 \leq i \leq n$. Since $\truth(\stmt_i) \in \possFn(\stmt_i)$ for all $\stmt_i$, then it must also be that $t_i \in \possFn(\stmt_i)$ for all $1 \leq i \leq n$.
-\end{proof}
+\begin{defn}
+	Let $S \subseteq \logCtx$ be a set of statements. Then $a : S \to \Bool$ is a possible assignment for $S$ if there exists $\bar{a} \in \pAss$ such that $\bar{a}(\stmt) = a(\stmt)$ for all $\stmt \in S$. Let $\stmt \in \logCtx$ be a statement. Then $t \in \Bool$ is a possible assignment for $\stmt$ if there exists $\bar{a} \in \pAss$ such that $\bar{a}(\stmt) = t$.
+\end{defn}
 
-	\begin{defn}
-		A \textbf{tautology} $\tautology$ is a statement that must be true simply because of its content. That is, $\possFn(\tautology) = \{\TRUE\}$.
-	\end{defn}
+\begin{defn}
+	A \textbf{tautology} $\tautology$ is a statement that must be true simply because of its content. That is, $a(\tautology) = \TRUE$ for all possible assignments $a \in \pAss$.
+\end{defn}
+
+\begin{defn}
+	A \textbf{contradiction} $\contradiction$ is a statement that must be false simply because of its content. That is, $a(\contradiction) = \FALSE$ for all possible assignments $a \in \pAss$.
+\end{defn}
 	
-	\begin{defn}
-		A \textbf{contradiction} $\contradiction$ is a statement that must be false simply because of its content. That is, $\possFn(\contradiction) = \{\FALSE\}$.
-	\end{defn}
-	
+\begin{defn}
+	A statement is \textbf{contingent} if it is neither a contradiction nor a tautology.
+\end{defn}
+
 \end{mathSection}
 
 Next we want to keep track of statements whose truths are a function of the truth of other statements. Consider \statement{that animal is a cat} and \statement{that animal is not a cat}: if the first one is true then the second is false and vice-versa. In this sense, the second statement is a function of the first. Therefore, in general, a statement is a function of other statements if its truth is determined by the truth values of the other statements.
@@ -197,9 +190,9 @@ At first one may expect that the possibilities of the final statement will be de
 \begin{mathSection}
 
 	\begin{axiom}\label{ax_functions_of_statement}
-		We can always construct a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally: given an arbitrary truth function $f_{\mathbb{B}} : \mathbb{B}^n \to \mathbb{B}$ there exists a function $f : \mathcal{S}^n \to \mathcal{S}$ such that
-		$$\truth(f(\stmt_1, ..., \stmt_n)) = f_{\mathbb{B}}(\truth(\stmt_1), ..., \truth(\stmt_n))$$
-		and the same relationship remains valid in every consistent truth assignment. This also holds in the case of infinite, possibly uncountable, arguments.
+		We can always construct a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally, let $\Lambda$ be an index set. Given an arbitrary function $f_{\Bool} : \Bool^\Lambda \to \Bool$ there exists a function $f : \logCtx^\Lambda \to \logCtx$ such that
+		$$a(f(\{\stmt_\lambda\}_{\lambda \in \Lambda})) = f_{\Bool}(\{a(\stmt_\lambda)\}_{\lambda \in \Lambda})$$
+		for every possible assignment $a \in \mathcal{T}$.
 	\end{axiom}
 \end{mathSection}
 
@@ -223,15 +216,15 @@ Most languages typically already provide similar operations, as the examples sho
 
 \begin{mathSection}
 	\begin{defn}
-		The \textbf{negation or logical NOT} is the function $\NOT : \mathbb{B} \to \mathbb{B}$ that takes a truth value and returns its opposite. That is: $\NOT \TRUE = \FALSE$ and $\NOT \FALSE = \TRUE$. We also call negation $\NOT: \mathcal{S} \to \mathcal{S}$ the related function on statements.
+		The \textbf{negation or logical NOT} is the function $\NOT : \Bool \to \Bool$ that takes a truth value and returns its opposite. That is: $\NOT \TRUE = \FALSE$ and $\NOT \FALSE = \TRUE$. We also call negation $\NOT: \mathcal{S} \to \mathcal{S}$ the related function on statements.
 	\end{defn}
 	
 	\begin{defn}
-		The \textbf{conjunction or logical AND} is the function $\AND : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ that returns $\TRUE$ only if all the arguments are $\TRUE$. That is: $\TRUE \AND \TRUE = \TRUE$ and $\TRUE \AND \FALSE =\FALSE \AND \TRUE =\FALSE \AND \FALSE = \FALSE$. We also call conjunction $\AND : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ the related function on statements.
+		The \textbf{conjunction or logical AND} is the function $\AND : \Bool \times \Bool \to \Bool$ that returns $\TRUE$ only if all the arguments are $\TRUE$. That is: $\TRUE \AND \TRUE = \TRUE$ and $\TRUE \AND \FALSE =\FALSE \AND \TRUE =\FALSE \AND \FALSE = \FALSE$. We also call conjunction $\AND : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ the related function on statements.
 	\end{defn}
 	
 	\begin{defn}
-		The \textbf{disjunction or logical OR} is the function $\OR : \mathbb{B} \times \mathbb{B} \to \mathbb{B}$ that returns $\FALSE$ only if all the arguments are $\FALSE$. That is: $\FALSE \OR \FALSE = \FALSE$ and $\TRUE \OR \FALSE =\FALSE \OR \TRUE =\TRUE \OR \TRUE = \TRUE$.  We also call disjunction $\OR : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ the related function on statements.
+		The \textbf{disjunction or logical OR} is the function $\OR : \Bool \times \Bool \to \Bool$ that returns $\FALSE$ only if all the arguments are $\FALSE$. That is: $\FALSE \OR \FALSE = \FALSE$ and $\TRUE \OR \FALSE =\FALSE \OR \TRUE =\TRUE \OR \TRUE = \TRUE$.  We also call disjunction $\OR : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ the related function on statements.
 	\end{defn}
 
 	\begin{prop}
@@ -246,18 +239,8 @@ Now we have all the elements to define when two statements have the same logical
 \begin{mathSection}
 
 \begin{defn}
-	Two statements $\stmt_1$ and $\stmt_2$ are \textbf{equivalent} $\stmt_1 \equiv \stmt_2$ if they must be equally true or false simply because of their content. Formally, $\stmt_1 \equiv \stmt_2$ if and only if $(\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)$ is a tautology.
+	Two statements $\stmt_1$ and $\stmt_2$ are \textbf{equivalent} $\stmt_1 \equiv \stmt_2$ if they must be equally true or false simply because of their content. Formally, $\stmt_1 \equiv \stmt_2$ if and only if $a(\stmt_1)=a(\stmt_2)$ for all possible assignments $a \in \mathcal{A}_{\mathcal{S}}$.
 \end{defn}
-
-\begin{coro}
-	If $\stmt_1 \equiv \stmt_2$ then $\truth(\stmt_1) = \truth(\stmt_2)$ and $\possFn(\stmt_1) = \possFn(\stmt_2)$.
-\end{coro}
-
-\begin{proof}
-	If $\stmt_1 \equiv \stmt_2$, then $\truth((\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)) \in \possFn((\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)) = \{\TRUE\}$. By \ref{ax_functions_of_statement} $\truth((\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2))= (\truth(\stmt_1) \AND \truth(\stmt_2) ) \OR (\NOT\truth(\stmt_1) \AND \NOT\truth(\stmt_2)) = \TRUE$. This is true if and only if $\truth(\stmt_1) = \truth(\stmt_2)$.
-	
-	Consider a consistent truth assignment $\{t_1, t_2\}$ for the sequence of two equivalent statements $\{\stmt_1, \stmt_2\}$. We have $t_1=t_2$ since the truth values are the same. We also have $t_1 \in \possFn(\stmt_1)$ and $t_2 \in \possFn(\stmt_2)$. Since every possibility must be part of a consistent truth assignment, we must have $\possFn(\stmt_1) = \possFn(\stmt_2)$.
-\end{proof}
 
 \end{mathSection}
 
@@ -284,21 +267,31 @@ There are a number of useful properties that statement equivalence satisfies.
 
 \begin{mathSection}
 
-\begin{prop}
+\begin{coro}
 	All tautologies are equivalent. All contradictions are equivalent.
-\end{prop}
+\end{coro}
 \begin{proof}
-	Let $\tautology_1, \tautology_2 \in \mathcal{S}$ be two tautologies. The only consistent truth assignment for the sequence of statements $\{\tautology_1, \tautology_2, (\tautology_1 \AND \tautology_2) \OR (\NOT\tautology_1 \AND \NOT\tautology_2)\}$ is $\{\TRUE, \TRUE, \TRUE \}$. Therefore $\possFn((\tautology_1 \AND \tautology_2) \OR (\NOT\tautology_1 \AND \NOT\tautology_2)) = \{\TRUE\}$ and $\tautology_1 \equiv \tautology_2$.
+	Let $\tautology_1, \tautology_2 \in \logCtx$ be two tautologies. Then for every possible assignment $a \in \pAss$ we have $a(\tautology_1) = \TRUE = a(\tautology_2)$ and therefore $\tautology_1 \equiv \tautology_2$ by definition.
 	
-	Let $\contradiction_1, \contradiction_2 \in \mathcal{S}$ be two contradictions. The only consistent truth assignment for the sequence of statements $\{\contradiction_1, \contradiction_2, (\contradiction_1 \AND \contradiction_2) \OR (\NOT\contradiction_1 \AND \NOT\contradiction_2)\}$ is $\{\FALSE, \FALSE, \TRUE \}$. Therefore $\possFn((\contradiction_1 \AND \contradiction_2) \OR (\NOT\contradiction_1 \AND \NOT\contradiction_2)) = \{\TRUE\}$ and $\contradiction_1 \equiv \contradiction_2$.
+	Let $\contradiction_1, \contradiction_2 \in \logCtx$ be two contradictions. Then for every possible assignment $a \in \pAss$ we have $a(\contradiction_1) = \FALSE = a(\contradiction_2)$ and therefore $\contradiction_1 \equiv \contradiction_2$ by definition.
 \end{proof}
 
-\begin{prop}\label{prop_equivalent_is_iff}
-	Let $\stmt_1, \stmt_2 \in \mathcal{S}$ be two statements such that it can be formally proven that $\truth(\stmt_1) = \TRUE$ if and only if $\truth(\stmt_2) = \TRUE$. Then $\stmt_1 \equiv \stmt_2$.
-\end{prop}
-
+\begin{coro}
+	Two statements $\stmt_1$ and $\stmt_2$ are equivalent if and only if $(\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2) \equiv \tautology$.
+\end{coro}
 \begin{proof}
-	Consider a consistent truth assignment $\{t_1, t_2, t_3\}$ for the sequence of statements $\{\stmt_1, \stmt_2, (\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)\}$. Since it can be proven that $\truth(\stmt_1) = \TRUE$ if and only if $\truth(\stmt_2) = \TRUE$ we must have that $t_1=t_2$. Since $t_3$ can be calculated from $t_1$ and $t_2$, the consistent truth assignment is either $\{\TRUE, \TRUE, \TRUE\}$ or $\{\FALSE, \FALSE, \TRUE\}$. As there is no assignment for $t_3=\FALSE$, then $\possFn((\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)) = \{\TRUE\}$. Therefore $\stmt_1 \equiv \stmt_2$ by definition.
+	Let $a \in \pAss$ and $\stmt = ( \stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)$. We have $a(\stmt) = (a(\stmt_1) \AND a(\stmt_2)) \OR (\NOT a(\stmt_1) \AND \NOT a(\stmt_2))$. We have the following truth table
+	\begin{center}
+	\begin{tabular}{c|c|c}
+		$\stmt_1$ & $\stmt_2$ & $\stmt$\\
+		\hline
+		T & T & T \\
+		T & F & F \\
+		F & T & F \\
+		F & F & T\\
+	\end{tabular}
+	\end{center}
+	Note that the assignments for which $a(\stmt_1) = a(\stmt_2)$ are exactly the assignments for which $a(\stmt) = \TRUE$. Therefore $\stmt_1 \equiv \stmt_2$ if and only if $\stmt$ is a tautology.
 \end{proof}
 
 \begin{coro}
@@ -311,26 +304,26 @@ There are a number of useful properties that statement equivalence satisfies.
 	and is therefore an \textbf{equivalence relationship}.
 \end{coro}
 \begin{proof}
-	Because statement equivalence implies truth equivalence, in all three cases the left side is true if and only if the right side is true. Therefore the statements are equivalent by \ref{prop_equivalent_is_iff}.
+	Statement equivalence is defined in terms of truth equality within all possible assignment and will inherit reflexivity, symmetry and transitivity from it.
 \end{proof}
 
-	\begin{coro}\label{boolean_properties}
-		The set of all statements $\mathcal{S}$ satisfies the following properties:
-		\begin{itemize}
-			\item associativity: $a \OR (b \OR c) \equiv (a \OR b) \OR c$, $a \AND (b \AND c) \equiv (a \AND b) \AND c$
-			\item commutativity: $a \OR b \equiv b \OR a$, $a \AND b \equiv b \AND a$
-			\item absorption: $a \OR (a \AND b) \equiv a$, $a \AND (a \OR b) \equiv a$
-			\item identity: $a \OR \contradiction \equiv a
-			$, $a \AND \tautology \equiv a$
-			\item distributivity: $a \OR (b \AND c) \equiv (a \OR b) \AND (a \OR c)$, $a \AND (b \OR c) \equiv (a \AND b) \OR (a \AND c)$
-			\item complements: $a \OR \NOT a \equiv \tautology$, $a \AND \NOT a \equiv \contradiction$
-			\item De Morgan: $\NOT a \OR \NOT b \equiv \NOT (a \AND b)$, $\NOT a \AND \NOT b \equiv \NOT (a \OR b)$
-		\end{itemize}
-		This, by definition, means $\mathcal{S}$ is a \textbf{Boolean algebra}.
-	\end{coro}
-	\begin{proof}
-		The left and right expressions for each equivalence correspond to the same truth function applied to the same statements. Therefore, the left side is true if and only if the right side is true and they are therefore equivalent by \eqref{prop_equivalent_is_iff}.
-	\end{proof}
+\begin{coro}\label{boolean_properties}
+	A logical context $\logCtx$ satisfies the following properties:
+	\begin{itemize}
+		\item associativity: $a \OR (b \OR c) \equiv (a \OR b) \OR c$, $a \AND (b \AND c) \equiv (a \AND b) \AND c$
+		\item commutativity: $a \OR b \equiv b \OR a$, $a \AND b \equiv b \AND a$
+		\item absorption: $a \OR (a \AND b) \equiv a$, $a \AND (a \OR b) \equiv a$
+		\item identity: $a \OR \contradiction \equiv a
+		$, $a \AND \tautology \equiv a$
+		\item distributivity: $a \OR (b \AND c) \equiv (a \OR b) \AND (a \OR c)$, $a \AND (b \OR c) \equiv (a \AND b) \OR (a \AND c)$
+		\item complements: $a \OR \NOT a \equiv \tautology$, $a \AND \NOT a \equiv \contradiction$
+		\item De Morgan: $\NOT a \OR \NOT b \equiv \NOT (a \AND b)$, $\NOT a \AND \NOT b \equiv \NOT (a \OR b)$
+	\end{itemize}
+	Therefore $\mathcal{S}$ is a \textbf{Boolean algebra} by definition.
+\end{coro}
+\begin{proof}
+	The left and right expressions for each equivalence correspond to the same truth function applied to the same statements. Therefore, the left side is true if and only if the right side is true and they are therefore equivalent by definition.
+\end{proof}
 \end{mathSection}
 
 These operations and properties define the \textbf{algebra of statements}. While we started from a slightly different premise, the relationships we found are the logical identities of classical logic. These are exactly what we need to make sure the truth values of all our statements are consistent.
@@ -347,24 +340,25 @@ The second will be true whenever the first is true. In this case we say the firs
 \begin{mathSection}
 
 \begin{defn}\label{def_statement_narrowness_and_compatibility}
-	Given two statement $\stmt_1$ and $\stmt_2$, we say that:
+	Given two statements $\stmt_1$ and $\stmt_2$, we say that:
 	\begin{itemize}
-		\item $\stmt_1$ \textbf{is narrower than} $\stmt_2$ (noted $\stmt_1 \narrower \stmt_2$) if $\stmt_2$ is true whenever $\stmt_1$ is true simply because of their content. That is, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$.
+		\item $\stmt_1$ \textbf{is narrower than} $\stmt_2$ (noted $\stmt_1 \narrower \stmt_2$) if $\stmt_2$ is true whenever $\stmt_1$ is true simply because of their content. That is, for all $a \in \pAss$ if $a(\stmt_1)=\TRUE$ then $a(\stmt_2)=\TRUE$.
 		\item $\stmt_1$ \textbf{is broader than} $\stmt_2$ (noted $\stmt_1 \broader \stmt_2$) if $\stmt_2 \narrower \stmt_1$.
-		\item $\stmt_1$ \textbf{is compatible to} $\stmt_2$ (noted $\stmt_1 \comp \stmt_2$) if their content allows them to be true at the same time. That is, $\stmt_1 \AND \stmt_2 \nequiv \contradiction$.
-
+		\item $\stmt_1$ \textbf{is compatible to} $\stmt_2$ (noted $\stmt_1 \comp \stmt_2$) if their content allows them to be true at the same time. That is, there exists $a \in \pAss$ such that $a(\stmt_1)=a(\stmt_2)=\TRUE$.
 	\end{itemize}
 	The negation of these properties will be noted by $\nnarrower$, $\nbroader$ , $\ncomp$ respectively.
 \end{defn}
 \begin{defn}\label{def_independent_statements}
-	The elements of a set of statements $S \subseteq \mathcal{S}$ are said to be \textbf{independent} (noted $\stmt_1 \indep \stmt_2$ for a set of two) if their content is such that any combination of their possibilities is allowed. That is, $\possFn(f(S)) = f(\bigtimes\limits_{\stmt \in S} \possFn(\stmt))$ for any truth function $f : \mathbb{B}^{|S|} \to \mathbb{B}$. The negation of independence, will be noted by $\nindep$.
+	The elements of a set of statements $S \subseteq \mathcal{S}$ are said to be \textbf{independent} (noted $\stmt_1 \indep \stmt_2$ for a set of two) if the assignment of any subset of statements does not depend on the assignment of the others. That is, a set of statements $S \subseteq \mathcal{S}$ is independent if given a family  $\{t_{\stmt}\}_{\stmt \in S}$ such that each $t_{\stmt} \in \Bool$ is a possible assignment for the respective $\stmt$ we can always find $a \in \pAss$ such that $a(\stmt) = t_{\stmt}$ for all $\stmt \in S$.
 \end{defn}
 
 \begin{prop}\label{prop_narrowness_properties}
 	The above operations obey the following relationships:
 	\begin{enumerate}[label=(\roman*)]
+		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$
 		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \stmt_2 \equiv \stmt_1$
 		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \OR \stmt_2 \equiv \stmt_2$
+		\item 	$\stmt_1 \comp \stmt_2$ if and only if $\stmt_1 \AND \stmt_2 \nequiv \contradiction$
 		\item 	$\stmt_1 \ncomp \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$
 		\item 	$\stmt_1 \narrower \stmt_1 \OR \stmt_2$
 		\item 	$\stmt_1 \AND \stmt_2 \narrower \stmt_1$
@@ -373,51 +367,68 @@ The second will be true whenever the first is true. In this case we say the firs
 \end{prop}
 
 \begin{proof}
-	For (i), consider $\stmt_1 \AND \stmt_2 \equiv \stmt_1 \AND \stmt_2 \OR \contradiction$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \stmt_2 ) \OR (\stmt_1 \AND \NOT \stmt_2) \equiv \stmt_1 \AND (\stmt_2 \OR \NOT \stmt_2) \equiv \stmt_1 \AND \tautology \equiv \stmt_1$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
+	For (i), consider the following truth table 
+\begin{center}
+	\begin{tabular}{c|c|c}
+		$\stmt_1$ & $\stmt_2$ & $\stmt_1 \AND \NOT \stmt_2$\\
+		\hline
+		T & T & F \\
+		T & F & T \\
+		F & T & F \\
+		F & F & F \\
+	\end{tabular}
+\end{center}
+	The assignment for which $a(\stmt_1) = \TRUE$ and $a(\stmt_2) = \FALSE$ is exactly the assignment for which $a(\stmt_1 \AND \NOT \stmt_2) = \TRUE$. Therefore $\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2$ is a contradiction.
 	
-	For (ii), consider $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \AND \tautology \equiv (\stmt_1 \OR \stmt_2) \AND (\NOT \stmt_2 \OR \stmt_2) \equiv (\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $(\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2 \equiv \contradiction \OR \stmt_2 \equiv \stmt_2$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_2$. The same logic can be applied in reverse.
+	For (ii), consider $\stmt_1 \AND \stmt_2 \equiv \stmt_1 \AND \stmt_2 \OR \contradiction$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \stmt_2 ) \OR (\stmt_1 \AND \NOT \stmt_2) \equiv \stmt_1 \AND (\stmt_2 \OR \NOT \stmt_2) \equiv \stmt_1 \AND \tautology \equiv \stmt_1$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
+	
+	For (iii), consider $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \AND \tautology \equiv (\stmt_1 \OR \stmt_2) \AND (\NOT \stmt_2 \OR \stmt_2) \equiv (\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $(\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2 \equiv \contradiction \OR \stmt_2 \equiv \stmt_2$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_2$. The same logic can be applied in reverse.
+	
+	For (iv), consider the following truth table 
+\begin{center}
+	\begin{tabular}{c|c|c}
+		$\stmt_1$ & $\stmt_2$ & $\stmt_1 \AND \stmt_2$\\
+		\hline
+		T & T & T \\
+		T & F & F \\
+		F & T & F \\
+		F & F & F \\
+	\end{tabular}
+\end{center}
+The assignment for which $a(\stmt_1) = a(\stmt_2) = \TRUE$ is exactly the assignment for which $a(\stmt_1 \AND \stmt_2) = \TRUE$. Therefore $\stmt_1 \comp \stmt_2$ if and only if $\stmt_1 \AND \stmt_2$ is not a contradiction.
 
-	For (iii), consider $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1 \AND \NOT \stmt_2 \OR \contradiction$. Since $\stmt_1 \ncomp \stmt_2$, $\stmt_1 \AND \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \NOT \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \NOT \stmt_2 ) \OR (\stmt_1 \AND \stmt_2) \equiv \stmt_1 \AND (\NOT \stmt_2 \OR \stmt_2) \equiv \stmt_1 \AND \tautology \equiv \stmt_1$. Therefore $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
+	For (v), consider $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1 \AND \NOT \stmt_2 \OR \contradiction$. Since $\stmt_1 \ncomp \stmt_2$, $\stmt_1 \AND \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \NOT \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \NOT \stmt_2 ) \OR (\stmt_1 \AND \stmt_2) \equiv \stmt_1 \AND (\NOT \stmt_2 \OR \stmt_2) \equiv \stmt_1 \AND \tautology \equiv \stmt_1$. Therefore $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
 	
-	For (iv), we have $\stmt_1 \AND \NOT (\stmt_1 \OR \stmt_2) \equiv \stmt_1 \AND \NOT \stmt_1 \AND \NOT \stmt_2 \equiv \contradiction \AND \NOT \stmt_2 \equiv \contradiction$. Therefore $\stmt_1 \narrower \stmt_1 \OR \stmt_2$.
+	For (vi), we have $\stmt_1 \AND \NOT (\stmt_1 \OR \stmt_2) \equiv \stmt_1 \AND \NOT \stmt_1 \AND \NOT \stmt_2 \equiv \contradiction \AND \NOT \stmt_2 \equiv \contradiction$. Therefore $\stmt_1 \narrower \stmt_1 \OR \stmt_2$.
 	
-	For (v), we have $\stmt_1 \AND \stmt_2 \AND \NOT \stmt_1 \equiv \stmt_1 \AND \NOT \stmt_1 \AND \stmt_2 \equiv \contradiction \AND \stmt_2 \equiv \contradiction$. Therefore $\stmt_1 \AND \stmt_2 \narrower \stmt_1$.
+	For (vii), we have $\stmt_1 \AND \stmt_2 \AND \NOT \stmt_1 \equiv \stmt_1 \AND \NOT \stmt_1 \AND \stmt_2 \equiv \contradiction \AND \stmt_2 \equiv \contradiction$. Therefore $\stmt_1 \AND \stmt_2 \narrower \stmt_1$.
 	
-	For (vi), suppose $\stmt_1 \narrower \stmt_2$. We have $\NOT \stmt_1 \OR \stmt_2 \equiv \NOT \stmt_1 \OR ( \stmt_1 \OR \stmt_2 ) \equiv (\NOT \stmt_1 \OR \stmt_1) \OR \stmt_2 \equiv \tautology \OR \stmt_2 \equiv \tautology$. Conversely, suppose $\NOT \stmt_1 \OR \stmt_2 \equiv \tautology$. We have $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \OR \tautology \equiv \stmt_1 \OR \stmt_2 \OR (\NOT \stmt_1 \OR \stmt_2) \equiv (\stmt_1 \OR \NOT \stmt_1) \OR \stmt_2 \equiv \tautology \OR \stmt_2 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$.
-\end{proof}
-
-\begin{prop}\label{prop_narrowness_is_if}
-	Let $\stmt_1, \stmt_2 \in \mathcal{S}$ be two statements such that it can be formally proven that if $\truth(\stmt_1) = \TRUE$ then $\truth(\stmt_2) = \TRUE$. Then $\stmt_1 \narrower \stmt_2$.
-\end{prop}
-
-\begin{proof}
-	Consider a consistent truth assignment $\{t_1, t_2, t_3\}$ for the sequence of statements $\{\stmt_1, \stmt_2, \stmt_1 \AND \NOT\stmt_2\}$. Since it can be proven that if $\truth(\stmt_1) = \TRUE$ then $\truth(\stmt_2) = \TRUE$, and since $t_3$ can be calculated from $t_1$ and $t_2$, the consistent truth assignment is either $\{\TRUE, \TRUE, \FALSE\}$, $\{\FALSE, \TRUE, \FALSE\}$ or $\{\FALSE, \FALSE, \FALSE\}$. As there is no assignment for $t_3=\TRUE$, then $\possFn(\stmt_1 \AND \NOT\stmt_2) = \{\FALSE\}$. Therefore $\stmt_1 \narrower \stmt_2$ by definition.
+	For (viii), suppose $\stmt_1 \narrower \stmt_2$. We have $\NOT \stmt_1 \OR \stmt_2 \equiv \NOT \stmt_1 \OR ( \stmt_1 \OR \stmt_2 ) \equiv (\NOT \stmt_1 \OR \stmt_1) \OR \stmt_2 \equiv \tautology \OR \stmt_2 \equiv \tautology$. Conversely, suppose $\NOT \stmt_1 \OR \stmt_2 \equiv \tautology$. We have $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \OR \tautology \equiv \stmt_1 \OR \stmt_2 \OR (\NOT \stmt_1 \OR \stmt_2) \equiv (\stmt_1 \OR \NOT \stmt_1) \OR \stmt_2 \equiv \tautology \OR \stmt_2 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$.
 \end{proof}
 
 \begin{prop}
 	Statement narrowness satisfies the following properties:
 	\begin{itemize}
-		\item reflexivity: $s \narrower s$
-		\item antisymmetry: if $s_1 \narrower s_2$ and  $s_2 \narrower s_1$ then $s_1 \equiv s_2$
-		\item transitivity: if $s_1 \narrower s_2$ and $s_2 \narrower s_3$ then $s_1 \narrower s_3$
+		\item reflexivity: $\stmt \narrower \stmt$
+		\item antisymmetry: if $\stmt_1 \narrower \stmt_2$ and  $\stmt_2 \narrower \stmt_1$ then $\stmt_1 \equiv \stmt_2$
+		\item transitivity: if $\stmt_1 \narrower \stmt_2$ and $\stmt_2 \narrower \stmt_3$ then $\stmt_1 \narrower \stmt_3$
 	\end{itemize}
 	and is therefore a \textbf{partial order}.
 \end{prop}
 \begin{proof}
-	For reflexivity, since if $\truth(\stmt) = \TRUE$ then we must have $\truth(\stmt) = \TRUE$ then $s \narrower s$ by \eqref{prop_narrowness_is_if}.
+	For reflexivity, $\stmt \AND \NOT \stmt \equiv \contradiction$ and therefore $s \narrower s$ by \ref{prop_narrowness_properties}.
 	
-	For antisymmetry, suppose $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$. Then $\stmt_1 \AND \stmt_2 \equiv \stmt_1$ since $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \AND \stmt_2 \equiv \stmt_2$ since $\stmt_2 \narrower \stmt_1$. Therefore $\stmt_1 \equiv \stmt_2$. Conversely, suppose $\stmt_1 \equiv \stmt_2$. Then $\stmt_1 \AND \stmt_2 \equiv \stmt_1 \equiv \stmt_2$. Therefore $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$.
+	For antisymmetry, $\stmt_1 \AND \stmt_2 \equiv \stmt_1$ since $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \AND \stmt_2 \equiv \stmt_2$ since $\stmt_2 \narrower \stmt_1$. Therefore $\stmt_1 \equiv \stmt_2$. Conversely, suppose $\stmt_1 \equiv \stmt_2$. Then $\stmt_1 \AND \stmt_2 \equiv \stmt_1 \equiv \stmt_2$. Therefore $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$.
 	
-	For transitivity, let $\{t_1, t_2, t_3, t_4\}$ be a consistent truth assignment for the sequence of statements $\{\stmt_1, \stmt_2, \stmt_3, \stmt_1 \AND \NOT\stmt_3\}$.  Since $s_1 \narrower s_2$ and $s_2 \narrower s_3$, the consistent truth assignment must be one of the following: $\{\TRUE, \TRUE, \TRUE, \FALSE\}$, $\{\FALSE, \TRUE, \TRUE, \FALSE\}$, $\{\FALSE, \FALSE, \TRUE, \FALSE\}$, $\{\FALSE, \FALSE, \FALSE, \FALSE\}$.
-	Since in all cases $t_4=\FALSE$ then $\possFn(\stmt_1 \AND \NOT\stmt_3) = \{\FALSE\}$. Therefore $\stmt_1 \narrower \stmt_3$ by definition.
+	For transitivity, we have $\stmt_1 \equiv \stmt_1 \AND \stmt_2 \equiv \stmt_1 \AND \stmt_2 \AND \stmt_3 \equiv \stmt_1 \AND \stmt_3$ and therefore $\stmt_1 \narrower \stmt_3$.
 \end{proof}
 
 \begin{prop}
-	Every subset $S \subseteq \stmtSet$ of statements has a supremum. That is, there exists an element $\bar{\stmt} \in \stmtSet$ such that $\stmt \narrower \bar{\stmt}$ for all $\stmt \in S$. This, by definition, means the $\stmtSet$ is a \textbf{complete} Boolean algebra and, as a consequence, that the distributivity and De Morgan laws in \ref{boolean_properties} hold in the infinite case.
+	Every subset $S \subseteq \logCtx$ of statements has a supremum. That is, there exists an element $\bar{\stmt} \in \logCtx$ such that $\stmt \narrower \bar{\stmt}$ for all $\stmt \in S$. This, by definition, means the $\logCtx$ is a \textbf{complete} Boolean algebra and, as a consequence, that the distributivity and De Morgan laws in \ref{boolean_properties} hold in the infinite case.
 \end{prop}
 
 \begin{proof}
-	Let $S \subseteq \stmtSet$ be an arbitrary set of statements. Consider $\bar{\stmt}=\bigOR\limits_{\stmt[e] \in S} \stmt[e]$. This statement exists by \ref{ax_functions_of_statement}. Let $\stmt \in S$. Using the properties in \ref{boolean_properties} we have $\stmt \OR \bar{\stmt} \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in S} \stmt[e] \big) \equiv \stmt \OR \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \bigOR\limits_{\stmt[e] \in S} \stmt[e] = \bar{\stmt}$. By \ref{prop_narrowness_properties} we have $\stmt \narrower \bar{\stmt}$ for any $\stmt \in S$. Therefore any $S \subseteq \stmtSet$ admits a supremum $\bar{\stmt}$.
+	Let $S \subseteq \logCtx$ be an arbitrary set of statements. Consider $\bar{\stmt}=\bigOR\limits_{\stmt[e] \in S} \stmt[e]$. This statement exists by \ref{ax_functions_of_statement}. Let $\stmt \in S$. Using the properties in \ref{boolean_properties} we have $\stmt \OR \bar{\stmt} \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in S} \stmt[e] \big) \equiv \stmt \OR \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \bigOR\limits_{\stmt[e] \in S} \stmt[e] = \bar{\stmt}$. By \ref{prop_narrowness_properties} we have $\stmt \narrower \bar{\stmt}$ for any $\stmt \in S$. Therefore any $S \subseteq \logCtx$ admits a supremum $\bar{\stmt}$.
 	
 	A complete Boolean algebra is one such that every subset admits a supremum, therefore the algebra of statements is complete by definition. For a complete Boolean algebra infinite distributivity and De Morgan laws hold, therefore they will hold in the algebra of statements as well.
 \end{proof}
@@ -439,19 +450,20 @@ We finish this section by showing how every truth function can be naturally expr
 Each of the cases is the conjunction of all arguments where each one appears only once, negated or not. We call these expressions minterms. A function can always be expressed as the disjunction of all the minterms for which the function is true. This is called its disjunctive normal form because it is a canonical way to express the function in terms of disjunctions.
 
 \begin{mathSection}
-	\begin{defn}\label{def_minterm}
-		Let $\{t_1, ..., t_n\} \subseteq \mathbb{B}^n$ be a set of truth values. A \textbf{minterm} of $\{t_1, ..., t_n\}$ is a conjunction where each element appears only once, either negated or not. That is, it can be written as $m = \bigAND \limits_{i=1}^n (\NOT)^{a_{i}} \, t_i$ where $a_{i} \in \mathbb{B}$, $\NOT ^ \TRUE \, t_i = t_i$ and $\NOT ^ \FALSE \, t_i = \NOT t_i$. In this notation, $m = \TRUE$ if and only if $t_i = a_i$ for all $i=1...n$. This extends to arbitrary sets of truth values. Similarly, we call a minterm of a set of statements a conjunction where each statement appears only once, either negated or not.
+	\begin{defn}\label{def_dependence}
+		Let $\bar{\stmt} \in \logCtx$ be a statement and $S \subseteq \logCtx$ be a set of statements. We say $\stmt$ \textbf{depends on} $S$ if we can find a function $f_\Bool : \Bool^S \to \Bool$ such that for every possible assignment $a \in \pAss$ we have $a(\bar{\stmt}) = f_\Bool (\{a(\stmt)\}_{\stmt \in S})$.
 	\end{defn}
+\begin{defn}\label{def_minterm}
+	Let $S \subseteq \logCtx$ be a set of statements. A \textbf{minterm} of $S$ is a conjunction where each element appears once and only once, either negated or not. That is, it is a statement $\stmt[m] \in \logCtx$ that can be written as $\stmt[m] \equiv \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ where $a : S \to \Bool$, $\NOT ^ \TRUE \, \stmt = \stmt$ and $\NOT ^ \FALSE \, \stmt = \NOT \stmt$. In this notation, in a given $a_0 \in \pAss$ we have $a_0(\stmt[m]) = \TRUE$ if and only if $a(\stmt) = a_0(\stmt)$ for all $\stmt \in S$.
+\end{defn}
 	
 	\begin{prop}\label{prop_disjunctive_normal_form}
-		Any function $f : \mathbb{B}^n \to \mathbb{B}$ that takes $n$ truth values and returns a truth value, which we call a \textbf{truth function}, can be expressed in its \textbf{disjunctive normal form} as a disjuction of minterms of the arguments. Formally, $f(t_1, ..., t_n) =\bigOR \limits_{i=1}^m \left( \bigAND \limits_{j=1}^n (\NOT)^{a_{ij}} \, t_j \right)$ where $m \in \mathbb{N}$ and  $a_{ij} \in \mathbb{B}$. This extends to functions of arbitrary arguments. Similarly, we call disjunctive normal form of a function of statements the analogous construction in terms of statements.
+		Let $\bar{\stmt} \in \logCtx$ be a statement that depends on a set of statements $S \subseteq \logCtx$. Then we can express $\bar{\stmt}$ in its \textbf{disjunctive normal form} as a disjuction of minterms of $S$. That is, $\bar{\stmt} \equiv \bigOR \limits_{a \in A} \left( \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt \right)$ where $I$ is an index set and $A \subseteq \Bool^S$ is set of assignments for $S$ for which $\bar{\stmt}$ is true.
 	\end{prop}
 	\begin{proof}
-		We first show that this can be done for a function that returns $\TRUE$ for a unique combination of values. Let $a_1, ..., a_n \in \mathbb{B}$ be $n$ truth values. Let $f_1: \mathbb{B}^n \to \mathbb{B}$ be a function such that $f_1(t_1, ..., t_n) = \TRUE$ if and only if $t_j = a_j$ for all $j=1...n$. Consider the minterm $\bigAND \limits_{j=1}^n (\NOT)^{a_{j}} \, t_j$. It will be $\TRUE$ if and only if $t_j \equal a_j$ for all $j=1...n$. Then we have $f_1(t_1, ..., t_n) = \bigAND \limits_{j=1}^n (\NOT)^{a_{j}} \, t_j$ since both functions return the same values for the same arguments.
-		
-		Now we generalize the result for arbitrary functions. Let $f : \mathbb{B}^n \to \mathbb{B}$ be a truth function. Let $m \in \mathbb{N}$ be the number of value combinations for which $f(t_1, ..., t_n) = \TRUE$. For each value combination $i=1...m$ let $a_{ij} \in \mathbb{B}$ be the sequence of values. Then $f_i = \bigAND \limits_{j=1}^n (\NOT)^{a_{ij}} \, t_j$ is the minterm for each value combination. Consider $\bigOR \limits_{i=1}^m f_i$. This function returns $\TRUE$ if and only if the arguments match one of the value combinations for which $f$ returns $\TRUE$. Then we have $f(t_1, ..., t_n) =\bigOR \limits_{i=1}^m \left( \bigAND \limits_{j=1}^n (\NOT)^{a_{ij}} \, t_j \right)$ since they return the same values for the same arguments.
-		
-		This procedure can be generalized to the case where the number of arguments of $f$ and the number of minterms is infinite.
+		We first show that this can be done for a function that returns $\TRUE$ for a unique combination of values. Let $a : S \to \Bool$ be an assignment for $S$. Let $f_\Bool: \Bool^S \to \Bool$ be the function such that $f_\Bool(\bar{a}) = \TRUE$ if and only if $\bar{a} = a$. Consider the minterm $\stmt[m]_a = \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ and an assignment $\bar{a} : \logCtx \to \Bool$ for the whole context. We have that $\bar{a}(\stmt[m]_a) = \TRUE$ if and only if $\bar{a}(\stmt) = a(\stmt)$ for all $\stmt \in S$. Now suppose $\bar{\stmt} \in \logCtx$ depends on $S$ through the function $f_\Bool$. Then $\bar{\stmt}$ and $\stmt[m]_a$ will be equal over all possible assignments and therefore $\bar{\stmt} \equiv \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$.
+
+		Now we generalize the result for arbitrary functions. Let $f_\Bool : \Bool^S \to \Bool$ be the function through which $\bar{\stmt}$ depends on $S$. Let $A = \{ a \in \Bool^S \, | \, f_\Bool(a) = \TRUE \}$. Let $\stmt[m]_a = \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ be the minterm associated with an assignment $a \in A$. Consider $\bar{\stmt[m]} = \bigOR \limits_{a \in A} \stmt[m]_a$ and an assignment $\bar{a} : \logCtx \to \Bool$ for the whole context. We have that $\bar{a}(\bar{\stmt[m]}) = \TRUE$ if and only if $\bar{a}(\stmt) = a(\stmt)$ for some $a \in A$ and for all $\stmt \in S$. Then $\bar{\stmt}$ and $\bar{\stmt[m]}$ will have equal assignment over all possible assignments and therefore $\bar{\stmt} \equiv \bigOR \limits_{a \in A} \left( \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt \right)$
 	\end{proof}
 \end{mathSection}
 
@@ -469,7 +481,7 @@ So we have to narrow the scope to those and only those statements that can be ve
 
 \begin{mathSection}
 \begin{axiom}\label{ax_verifiable_statements}
-	A \textbf{verifiable statement} is a statement that, if true, can be shown to be so experimentally. Formally, a statement $\stmt$ is verifiable if it is part of the subset $\stmt \in \vstmtSet \subset \stmtSet$ of all verifiable statements.
+	A \textbf{verifiable statement} is a statement that, if true, can be shown to be so experimentally. Formally, each logical context $\logCtx$ contains a set of statements $\vstmtSet \subseteq \logCtx$ which are called verifiable.
 \end{axiom}
 \begin{justification}
 	To give a better justification for this and later axioms, we introduce the following pseudo-mathematical concepts. An \textbf{experimental test} $\expt$ is a repeatable procedure (i.e. it can be restarted and stopped at any time) that anybody can execute and will always either terminate successfully, terminate unsuccessfully or never terminate. We can assume it to be an element of the set $\mathcal{E}$ of all experimental tests upon which is defined a function $\result: \mathcal{E} \to \{\SUCCESS, \FAILURE, \UNDEF\}$. The idea is that if a statement is verifiable we can find an experimental test $\expt$ that always succeeds if the statement is true, and the statement is true if the experiment always succeeds.
@@ -1103,15 +1115,15 @@ What we have ended up with is a conceptual framework that captures the necessary
 	\hline 
 	$\NOT \stmt$ & negation (logical NOT) & the statement whose truth value is always opposite \\ 
 	\hline 
-	$\tautology$ & tautology & a statement that can only be true (i.e. it is true in all truth assignements) \\ 
+	$\tautology$ & tautology & a statement that can only be true (i.e. it is true in all possible assignements) \\ 
 	\hline 
-	$\contradiction$ & contradiction & a statement that can never be true (i.e. it is false in all truth assignements) \\ 
+	$\contradiction$ & contradiction & a statement that can never be true (i.e. it is false in all possible assignements) \\ 
 	\hline 
 	$\stmt_1 \AND \stmt_2$ & conjunction (logical AND) & the statement that is true only if all statements are true \\ 
 	\hline 
 	$\stmt_1 \OR \stmt_2$ & disjunction (logical OR) & the statement that is true if any of the statements is true \\ 
 	\hline 
-	$\stmt_1 \equiv \stmt_2$ & equivalence & whether each statement is a logical consequence of the other (i.e. they must have the same value in every truth assignment) \\ 
+	$\stmt_1 \equiv \stmt_2$ & equivalence & whether each statement is a logical consequence of the other (i.e. they must have the same value in every possible assignment) \\ 
 	\hline 
 	$\stmt_1 \narrower \stmt_2$ & narrower than & whether the first statement is more specific than the second (i.e. in every truth assignment, if the first is true than the second must be also true) \\ 
 	\hline 
