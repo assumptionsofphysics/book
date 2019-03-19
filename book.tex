@@ -233,19 +233,19 @@ Most languages, natural or symbolic, typically already provide similar operation
 
 \begin{mathSection}
 	\begin{defn}
-		The \textbf{negation or logical NOT} is the function $\NOT : \Bool \to \Bool$ that takes a truth value and returns its opposite. That is: $\NOT \TRUE = \FALSE$ and $\NOT \FALSE = \TRUE$. We also call negation $\NOT: \mathcal{S} \to \mathcal{S}$ the related function on statements.
+		The \textbf{negation or logical NOT} is the function $\NOT : \Bool \to \Bool$ that takes a truth value and returns its opposite. That is: $\NOT \TRUE = \FALSE$ and $\NOT \FALSE = \TRUE$. We also call negation $\NOT: \logCtx \to \logCtx$ the related function on statements.
 	\end{defn}
 	
 	\begin{defn}
-		The \textbf{conjunction or logical AND} is the function $\AND : \Bool \times \Bool \to \Bool$ that returns $\TRUE$ only if all the arguments are $\TRUE$. That is: $\TRUE \AND \TRUE = \TRUE$ and $\TRUE \AND \FALSE =\FALSE \AND \TRUE =\FALSE \AND \FALSE = \FALSE$. We also call conjunction $\AND : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ the related function on statements.
+		The \textbf{conjunction or logical AND} is the function $\AND : \Bool \times \Bool \to \Bool$ that returns $\TRUE$ only if all the arguments are $\TRUE$. That is: $\TRUE \AND \TRUE = \TRUE$ and $\TRUE \AND \FALSE =\FALSE \AND \TRUE =\FALSE \AND \FALSE = \FALSE$. We also call conjunction $\AND : \logCtx \times \logCtx \to \logCtx$ the related function on statements.
 	\end{defn}
 	
 	\begin{defn}
-		The \textbf{disjunction or logical OR} is the function $\OR : \Bool \times \Bool \to \Bool$ that returns $\FALSE$ only if all the arguments are $\FALSE$. That is: $\FALSE \OR \FALSE = \FALSE$ and $\TRUE \OR \FALSE =\FALSE \OR \TRUE =\TRUE \OR \TRUE = \TRUE$.  We also call disjunction $\OR : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ the related function on statements.
+		The \textbf{disjunction or logical OR} is the function $\OR : \Bool \times \Bool \to \Bool$ that returns $\FALSE$ only if all the arguments are $\FALSE$. That is: $\FALSE \OR \FALSE = \FALSE$ and $\TRUE \OR \FALSE =\FALSE \OR \TRUE =\TRUE \OR \TRUE = \TRUE$.  We also call disjunction $\OR : \logCtx \times \logCtx \to \logCtx$ the related function on statements.
 	\end{defn}
 
 	\begin{prop}
-	The set of all statements $\mathcal{S}$ is closed under negation, arbitrary conjunction and arbitrary disjunction.
+	A logical context $\logCtx$ is closed under negation, arbitrary conjunction and arbitrary disjunction.
 \end{prop}
 \begin{proof}
 	Negation, arbitrary conjunction and arbitrary disjunction are particular truth functions. Their output always exists by axiom \eqref{ax_functions_of_statement}.
@@ -258,7 +258,7 @@ Now we have all the elements to define when two statements have the same logical
 \begin{mathSection}
 
 \begin{defn}
-	Two statements $\stmt_1$ and $\stmt_2$ are \textbf{equivalent} $\stmt_1 \equiv \stmt_2$ if they must be equally true or false simply because of their content. Formally, $\stmt_1 \equiv \stmt_2$ if and only if $a(\stmt_1)=a(\stmt_2)$ for all possible assignments $a \in \mathcal{A}_{\mathcal{S}}$.
+	Two statements $\stmt_1$ and $\stmt_2$ are \textbf{equivalent} $\stmt_1 \equiv \stmt_2$ if they must be equally true or false simply because of their content. Formally, $\stmt_1 \equiv \stmt_2$ if and only if $a(\stmt_1)=a(\stmt_2)$ for all possible assignments $a \in \pAss$.
 \end{defn}
 
 \end{mathSection}
@@ -337,7 +337,7 @@ There are a number of useful properties that statement equivalence satisfies.
 		\item complements: $a \OR \NOT a \equiv \tautology$, $a \AND \NOT a \equiv \contradiction$
 		\item De Morgan: $\NOT a \OR \NOT b \equiv \NOT (a \AND b)$, $\NOT a \AND \NOT b \equiv \NOT (a \OR b)$
 	\end{itemize}
-	Therefore $\mathcal{S}$ is a \textbf{Boolean algebra} by definition.
+	Therefore $\logCtx$ is a \textbf{Boolean algebra} by definition.
 \end{coro}
 \begin{proof}
 	The left and right expressions for each equivalence correspond to the same truth function applied to the same statements. Therefore, the left side is true if and only if the right side is true and they are therefore equivalent by definition.
@@ -367,7 +367,7 @@ The second will be true whenever the first is true. In this case we say the firs
 	The negation of these properties will be noted by $\nnarrower$, $\nbroader$ , $\ncomp$ respectively.
 \end{defn}
 \begin{defn}\label{def_independent_statements}
-	The elements of a set of statements $S \subseteq \mathcal{S}$ are said to be \textbf{independent} (noted $\stmt_1 \indep \stmt_2$ for a set of two) if the assignment of any subset of statements does not depend on the assignment of the others. That is, a set of statements $S \subseteq \mathcal{S}$ is independent if given a family  $\{t_{\stmt}\}_{\stmt \in S}$ such that each $t_{\stmt} \in \Bool$ is a possible assignment for the respective $\stmt$ we can always find $a \in \pAss$ such that $a(\stmt) = t_{\stmt}$ for all $\stmt \in S$.
+	The elements of a set of statements $S \subseteq \logCtx$ are said to be \textbf{independent} (noted $\stmt_1 \indep \stmt_2$ for a set of two) if the assignment of any subset of statements does not depend on the assignment of the others. That is, a set of statements $S \subseteq \logCtx$ is independent if given a family  $\{t_{\stmt}\}_{\stmt \in S}$ such that each $t_{\stmt} \in \Bool$ is a possible assignment for the respective $\stmt$ we can always find $a \in \pAss$ such that $a(\stmt) = t_{\stmt}$ for all $\stmt \in S$.
 \end{defn}
 
 \begin{prop}\label{prop_narrowness_properties}
@@ -553,7 +553,7 @@ Note that, since the test always terminates, we can switch failure to success an
 	\begin{justification}
 		Note that the informal definition is slightly different from the formal one. In the first one we have a single statement associated with a single experimental test that always terminates, either successfully or unsuccessfully depending on the truth of the statement. In the second we have two statements, one the negation of the other, and two experimental tests, each of them only guaranteed to terminate successfully if the respective statement is true. We can give a pseudo-proof, though, to show that these are equivalent.
 
-		Let $\stmt \in \mathcal{S}$ be a decidable statement and $\expt \in \mathcal{E}$ an experimental test that verifies whether the statement is true or false. Consider the procedure $\expt_\NOT(\expt)$ defined as follows:
+		Let $\stmt \in \logCtx$ be a decidable statement and $\expt \in \mathcal{E}$ an experimental test that verifies whether the statement is true or false. Consider the procedure $\expt_\NOT(\expt)$ defined as follows:
 		\begin{enumerate}
 			\item run test $\expt$
 			\item if $\expt$ is unsuccessful terminate successfully
@@ -561,7 +561,7 @@ Note that, since the test always terminates, we can switch failure to success an
 		\end{enumerate}
 		Since $\expt$ is repeatable and can be executed by anybody, $\expt_\NOT(\expt)$ is also repeatable and can be executed by anybody. Since $\stmt$ is decidable, $\expt$ always terminates and therefore $\expt_\NOT(\expt)$ always terminates.  Therefore $\expt_\NOT(\expt)$ is an experimental test such that $\truth(\stmt)=\FALSE$ if and only if $\result(\expt_\NOT(\expt))=\SUCCESS$. Which means $\truth(\NOT\stmt)=\TRUE$ if and only if $\result(\expt_\NOT(\expt))=\SUCCESS$ and $\NOT\stmt$ is verifiable.
 		
-		Let $\stmt \in \mathcal{S}$ be a verifiable statement such that $\NOT\stmt$ is also verifiable. Let $\expt, \expt_\NOT \in \mathcal{E}$ be their respective experimental tests. We have to be careful as $\expt$ and $\expt_\NOT$ may not terminate. Consider the procedure $\hat{\expt}$ defined as follows:
+		Let $\stmt \in \logCtx$ be a verifiable statement such that $\NOT\stmt$ is also verifiable. Let $\expt, \expt_\NOT \in \mathcal{E}$ be their respective experimental tests. We have to be careful as $\expt$ and $\expt_\NOT$ may not terminate. Consider the procedure $\hat{\expt}$ defined as follows:
 		\begin{enumerate}
 			\item initialize $n$ to 1
 			\item for each $i=1..n$
@@ -777,11 +777,11 @@ A possibility represents a complete answer for a scientific question. Only one o
 \end{proof}
 
 \begin{prop}[No other possibilities]
-	All statements that determine and only determine the truth value of all statements in a theoretical domain $\tdomain$ are possibilities of $\edomain$. Formally, there is no statement $\stmt \in \stmtSet$ that has all the properties of a possibility except that $\stmt \notin \tdomain$.
+	All statements that determine and only determine the truth value of all statements in a theoretical domain $\tdomain$ are possibilities of $\edomain$. Formally, there is no statement $\stmt \in \logCtx$ that has all the properties of a possibility except that $\stmt \notin \tdomain$.
 \end{prop}
 
 \begin{proof}
-	Let $x \in \mathcal{S}$ be a statement that determines and only determines all truth values of all statements in a theoretical domain $\tdomain$. This is equivalent to determining the truth values and only the truth values of all elements of a basis $\basis \subseteq \edomain$. As we can find a countable basis, the statement $x$ is equivalent to the countable conjunction of statements of $\basis$ or their negation. Therefore $x \in \tdomain$ as it is generated by the statements of the basis by negation and countable conjunction. But a statement in $\tdomain$ that determines all truth values of the statements in $\tdomain$ is a possibility by definition. Therefore $x$ is a possibility.
+	Let $x \in \logCtx$ be a statement that determines and only determines all truth values of all statements in a theoretical domain $\tdomain$. This is equivalent to determining the truth values and only the truth values of all elements of a basis $\basis \subseteq \edomain$. As we can find a countable basis, the statement $x$ is equivalent to the countable conjunction of statements of $\basis$ or their negation. Therefore $x \in \tdomain$ as it is generated by the statements of the basis by negation and countable conjunction. But a statement in $\tdomain$ that determines all truth values of the statements in $\tdomain$ is a possibility by definition. Therefore $x$ is a possibility.
 \end{proof}
 \end{mathSection}
 
@@ -823,7 +823,7 @@ With our definitions in mind, we can answer the following fundamental question: 
 	\end{thrm}
 	
 	\begin{proof}
-		Let $\basis = \{\obs[e]_i\}_{i=1}^{\infty} \subseteq \edomain$ be a countable basis. Let $2^{\mathbb{N}}$ denote the set of infinite binary sequences. We define the function $F:X\to\mathbb{B}^{\mathbb{N}}$ such that $F(x) = \{F(x)_i\}_{i=1}^{\infty}$ is given by: 
+		Let $\basis = \{\obs[e]_i\}_{i=1}^{\infty} \subseteq \edomain$ be a countable basis. Let $2^{\mathbb{N}}$ denote the set of infinite binary sequences. We define the function $F:X\to\Bool^{\mathbb{N}}$ such that $F(x) = \{F(x)_i\}_{i=1}^{\infty}$ is given by: 
 		$$
 		F(x)_i = 
 		\begin{cases}
@@ -1140,14 +1140,14 @@ What we have ended up with is a conceptual framework that captures the necessary
 \begin{tabular}{p{0.2\textwidth} p{0.3\textwidth} p{0.5\textwidth}}
 	& Name & Meaning  \\ 
 	\hline 
-	$\mathbb{B}$  & Boolean domain & the set of possible truth values \\ 
-	&  & i.e. $\mathbb{B} = \{\TRUE, \FALSE\}$ \\ 
+	$\Bool$  & Boolean domain & the set of possible truth values \\ 
+	&  & i.e. $\Bool = \{\TRUE, \FALSE\}$ \\ 
 	\hline 
 	$\logCtx$ & logical context & a set of statements with well defined logical relationships \\ 
 	\hline 
-	$\stmt \in \stmtSet$ & statement & an assertion with a well defined truth value \\ 
+	$\stmt \in \logCtx$ & statement & an assertion with a well defined truth value \\ 
 	\hline 
-	$\truth : \stmtSet \to \mathbb{B}$ & the truth function & returns whether a statement is true or not  \\ 
+	$\truth : \logCtx \to \Bool$ & the truth function & returns whether a statement is true or not  \\ 
 	\hline 
 	$\pAss \subseteq \Bool^\logCtx$& possible assignments & the logically consistent truth value combinations that can be assigned to the statements \\ 
 	\hline 
