@@ -138,12 +138,12 @@ As a starting point, we need to define what science is: the systematic study of 
 
 Consider assertions like \statement{jazz is marvelous} or \statement{green and red go well together}. These are not objective: there is no agreed upon definition or procedure for what constitutes marvelous music or good color combination. Because of their nature, they can't be the subject of scientific inquiry. This does not mean that marvelous music or good color combinations do not exist or are not worth studying.\footnote{In fact, one can argue that most of the things that make life worth living (e.g. love, friendship, arts, purpose and so on) defy objective characterization and, therefore, that science gives us certain truth about trifling matters.} What the principle tells us is simply that if we choose to do science, we are limiting ourselves to those assertions that are either true or false (i.e. non-contradictory) for everybody (i.e. universal): assertions that have a single truth value. We call these assertions statements: they are the basic building blocks of a scientific description as only these can be studied scientifically.
 
-Logical consistence, though, is not just a property of individual statements. Consider the following two sentences:
+Logical consistency, though, is not just a property of individual statements. Consider the following two sentences:
 \begin{description}
 	\item \statement{the next sentence is true}
 	\item \statement{the previous sentence is false}
 \end{description}
-Each assertion, by itself, would be fine but their combination leads to a logical inconsistency. For this reason we group statements into logical contexts, a set of statements that, all together, are non-contradictory and have well defined logical relationships.
+Each assertion, by itself, would be fine but their combination makes it impossible to assign truth values to both in a way that is logically consistent. For this reason we group statements into logical contexts, sets of statements for which it is possible to assign truth values to all in a way that is logically consistent.
 
 \begin{mathSection}
 \begin{defn}
@@ -174,9 +174,9 @@ We want each logical context to keep track not only of the truth value of each s
 \end{center}
 Each line represents an assignment for all statements, each represented by a column. The set of all assignments is the set of all functions from $\logCtx$ to $\Bool$, which in set theory notation is $\Bool^\logCtx$, and corresponds to all possible permutations. Some assignments, like the one in the first line, are not consistent with the content of the statements. We will call possible the ones that are allowed and impossible the ones that aren't. Naturally, the truth must be one of the possible assignments. As the context itself needs to tell us which assignments are possible, we can imagine it comes equipped with the set $\pAss \subseteq \Bool^\logCtx$ of all possible assignments for that context.\footnote{In the same way that we do not try to capture how statements are constructed, we are not going to capture how logical consistency is established. We just assume a mechanism is available and therefore one can check whether an assignment is possible or not.}
 
-Some statements may be allowed to either be true or false while others may only be allowed one option. We will call tautology a statement, like \statement{that cat is an animal}, that can only be true and contradiction a statement, \statement{that cat is a swan}, that can only be false. We will call contingent statement one, like \statement{that animal is a cat}, that can be either true or false as their truth is contingent on the assignment.
+Some statements may be allowed to either be true or false while others may only be allowed one option. We will call tautology a statement, like \statement{that cat is an animal}, that can only be true. We will call contradiction a statement, like \statement{that cat is a swan}, that can only be false. We will call contingent statement one, like \statement{that animal is a cat}, that can be either true or false as their truth is contingent on the assignment.
 
-Note that the semantics, the meaning of the statements, plays an important role in defining the possible assignments but, in general, does not define the truth values.\footnote{In other formalism the semantics is said to define the truth values, not in ours.} For example, even if the meaning of \statement{the next race is going to be won by Secretariat} is clear, and so is its logical relationship to \statement{the next race is going to be lost by Secretariat}, we may be none the wiser about its truthfulness. 
+Note that the semantics, the meaning of the statements, plays an important role in defining the possible assignments but, in general, does not define the truth values.\footnote{In other formalisms the semantics is said to define the truth values, not in ours.} For example, even if the meaning of \statement{the next race is going to be won by Secretariat} is clear, and so is its logical relationship to \statement{the next race is going to be lost by Secretariat}, we may be none the wiser about its truthfulness. 
 
 \begin{mathSection}
 \begin{defn}
@@ -211,7 +211,7 @@ Since statements are intangible, there are no limits to the number of arguments 
 
 \begin{mathSection}
 	\begin{defn}\label{def_dependence}
-	Let $\bar{\stmt} \in \logCtx$ be a statement and $S \subseteq \logCtx$ be a set of statements. We say $\stmt$ \textbf{depends on} $S$ (or that it is a function of $S$) if we can find a function $f_\Bool : \Bool^S \to \Bool$ such that for every possible assignment $a \in \pAss$ we have $a(\bar{\stmt}) = f_\Bool (\{a(\stmt)\}_{\stmt \in S})$.
+	Let $\bar{\stmt} \in \logCtx$ be a statement and $S \subseteq \logCtx$ be a set of statements. We say $\bar{\stmt}$ \textbf{depends on} $S$ (or that it is a function of $S$) if we can find a function $f_\Bool : \Bool^S \to \Bool$ such that for every possible assignment $a \in \pAss$ we have $a(\bar{\stmt}) = f_\Bool (\{a(\stmt)\}_{\stmt \in S})$.
 \end{defn}
 
 	\begin{axiom}\label{ax_functions_of_statement}
@@ -330,7 +330,7 @@ There are a number of useful properties that statement equivalence satisfies.
 	and is therefore an \textbf{equivalence relationship}.
 \end{coro}
 \begin{proof}
-	Statement equivalence is defined in terms of truth equality within all possible assignment and will inherit reflexivity, symmetry and transitivity from it.
+	Statement equivalence is defined in terms of truth equality within all possible assignments and will inherit reflexivity, symmetry and transitivity from it.
 \end{proof}
 
 \begin{coro}\label{boolean_properties}
@@ -461,7 +461,7 @@ The assignment for which $a(\stmt_1) = a(\stmt_2) = \TRUE$ is exactly the assign
 
 \end{mathSection}
 
-It should be noted that statement narrowness captures more than just the idea of one statement being more specific than another. Consider \statement{this harp seal is white} and \statement{this harp seal is less than one year old}. Since harp seals have white fur only for their first month, the first one can never be true while the second is not. Therefore \statement{this harp seal is white} $\narrower$ \statement{this harp seal is less than one year old}. By the same token, we also have \statement{I lighted the fuse} $\narrower$ \statement{the bomb will go off}. That is, narrowness can also capture causal relationships, which is essential if we want to develop a basic theory of scientific investigation.\footnote{We considered using the term implication directly, but it seems that it leads to confusion. Implication in classical logic is something different: it is simply another truth function. Moreover, saying that a contradiction is narrower than all other statements sounds better than saying that a contradiction implies all other statements.} Intuitively, a statement is narrower than another if it provides more information when true. If we experimenally verified the narrower statement, then we already know that the broader one is also verified.
+It should be noted that statement narrowness captures more than just the idea of one statement being more specific than another. Consider \statement{this harp seal is white} and \statement{this harp seal is less than one year old}. Since harp seals have white fur only for their first month, the first one can never be true while the second is not. Therefore \statement{this harp seal is white} $\narrower$ \statement{this harp seal is less than one year old}. By the same token, we also have \statement{I lighted the fuse} $\narrower$ \statement{the bomb will go off}. That is, narrowness can also capture causal relationships, which is essential if we want to develop a basic theory of scientific investigation.\footnote{We considered using the term implication directly, but it seems that it leads to confusion. Implication in classical logic is something different: it is simply another truth function. Moreover, saying that a contradiction is narrower than all other statements sounds better than saying that a contradiction implies all other statements.} Intuitively, a statement is narrower than another if it provides more information when true. If we experimentally verified the narrower statement, then we already know that the broader one is also verified.
 
 It should also be noted that independence is not transitive and pair-wise independence is not sufficient. Consider the following statements for an ideal gas:
 \begin{enumerate}
