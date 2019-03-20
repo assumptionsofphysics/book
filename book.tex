@@ -469,11 +469,11 @@ Each of the cases is the conjunction of all independent statements where each on
 
 \begin{mathSection}
 \begin{defn}\label{def_minterm}
-	Let $S \subseteq \logCtx$ be a set of statements. A \textbf{minterm} of $S$ is a conjunction where each element appears once and only once, either negated or not. That is, it is a statement $\stmt[m] \in \logCtx$ that can be written as $\stmt[m] \equiv \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ where $a : S \to \Bool$, $\NOT ^ \TRUE \, \stmt = \stmt$ and $\NOT ^ \FALSE \, \stmt = \NOT \stmt$. In this notation, in a given $a_0 \in \pAss$ we have $a_0(\stmt[m]) = \TRUE$ if and only if $a(\stmt) = a_0(\stmt)$ for all $\stmt \in S$.
+	Let $S \subseteq \logCtx$ be a set of statements. A \textbf{minterm} of $S$ is a conjunction where each element appears once and only once, either negated or not. That is, it is a statement $\stmt[m] \in \logCtx$ that can be written as $\stmt[m] \equiv \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ where $a : S \to \Bool$, $\NOT ^ \TRUE \, \stmt = \stmt$ and $\NOT ^ \FALSE \, \stmt = \NOT \stmt$. In this notation, in a given $a_0 \in \Bool^\logCtx$ we have $a_0(\stmt[m]) = \TRUE$ if and only if $a_0(\stmt) = a(\stmt)$ for all $\stmt \in S$.
 \end{defn}
 	
 	\begin{prop}\label{prop_disjunctive_normal_form}
-		Let $\bar{\stmt} \in \logCtx$ be a statement that depends on a set of statements $S \subseteq \logCtx$. Then we can express $\bar{\stmt}$ in its \textbf{disjunctive normal form} as a disjuction of minterms of $S$. That is, $\bar{\stmt} \equiv \bigOR \limits_{a \in A} \left( \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt \right)$ where $I$ is an index set and $A \subseteq \Bool^S$ is set of assignments for $S$ for which $\bar{\stmt}$ is true.
+		Let $\bar{\stmt} \in \logCtx$ be a statement that depends on a set of statements $S \subseteq \logCtx$. Then we can express $\bar{\stmt}$ in its \textbf{disjunctive normal form} as a disjuction of minterms of $S$. That is, $\bar{\stmt} \equiv \bigOR \limits_{a \in A} \left( \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt \right)$ where $A \subseteq \Bool^S$ is the set of assignments for $S$ for which $\bar{\stmt}$ is true.
 	\end{prop}
 	\begin{proof}
 		We first show that this can be done for a function that returns $\TRUE$ for a unique combination of values. Let $a : S \to \Bool$ be an assignment for $S$. Let $f_\Bool: \Bool^S \to \Bool$ be the function such that $f_\Bool(\bar{a}) = \TRUE$ if and only if $\bar{a} = a$. Consider the minterm $\stmt[m]_a = \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ and an assignment $\bar{a} : \logCtx \to \Bool$ for the whole context. We have that $\bar{a}(\stmt[m]_a) = \TRUE$ if and only if $\bar{a}(\stmt) = a(\stmt)$ for all $\stmt \in S$. Now suppose $\bar{\stmt} \in \logCtx$ depends on $S$ through the function $f_\Bool$. Then $\bar{\stmt}$ and $\stmt[m]_a$ will be equal over all possible assignments and therefore $\bar{\stmt} \equiv \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$.
@@ -482,7 +482,7 @@ Each of the cases is the conjunction of all independent statements where each on
 	\end{proof}
 \end{mathSection}
 
-With these tools in place we are in a position to formulate models that are universal and non-contradictory. These models will be a collection of statements with a well defined content and well defined possible cases, whose truth value will be discovered experimentally.
+With these tools in place we are in a position to formulate models that are universal and non-contradictory. These models will be a collection of statements with a well defined content and well defined possible cases. Each statement's truth value will be discovered experimentally.
 
 \section{Verifiable statements and experimental domains}
 
