@@ -1289,7 +1289,7 @@ More precisely, consider the verifiable statement $\obs_Y=$\statement{the height
 		Formally, we simply define causal relationships to be continuous but we still need a physical justification. An experimental test for the verifiable set $U_Y$ will indirectly test that the true possibility of $Y$ was in the set $f^{-1}(U_Y)$. This means that $f^{-1}(U_Y)$ can be associated with an experimental test and is therefore a verifiable set. If we want to be consistent, then, we need to make sure $f^{-1}(U_Y)$ is in the natural topology for $\edomain_X$.
 	\end{justification}
 	\begin{coro}
-		A \textbf{causal relationship} between two domains is unique if it exists.
+		A causal relationship between two domains is unique if it exists.
 	\end{coro}\label{prop_causal_relationship_unique}
 	\begin{proof}
 		Suppose $f_1 : X \to Y$ and $f_2 : X \to Y$ are two causal relationships. Let $x \in X$. We have $x \narrower f_1(x)$ and $x \narrower f_2(x)$. This means $f_1(x) \comp f_2(x)$. But these are two possibilities of the same domain, so they are either incompatible or are the same possibilities. Therefore $f_1(x) \equiv f_2(x)$ for all $x \in X$. The causal relationships are the same.
@@ -1486,52 +1486,133 @@ Now that we have seen how to describe relationships between domains, we should a
 
 The main result of this section is to show that, given two related experimental domains, we can always mathematically construct from them another experimental domain for which the possibilities are continuous functions between the possibilities of the original domains. This means that, since we can recursively create relationship domains about relationship domains, the universe of discourse of our mathematical framework is closed. Yet, the availability of the experimental tests (i.e. whether the statements we construct are actually verifiable) is not guaranteed.
 
-Suppose we have a way to verify experimentally statements of the type \statement{if the temperature of the mercury column is between 24 and 25 Celsius then its height is between 24 and 25 millimeters}. That is, we can verify that whenever $\stmt_X=$\statement{the temperature of the mercury column is between 24 and 25 Celsius} is verified, then $\stmt_Y=$\statement{the height of the mercury column is between 24 and 25 millimeters} is verified. In that case, we can explore the connection between the two domains within different ranges at ever increasing precision. This means we can narrow the range of possible functions in the same way that we can narrow the range of possible values for a quantity. In other words, those types of statements form an experimental domain where each possibility corresponds to a possible continuous function between the two initial experimental domains.
+First of all we have to clarify within our framework what it means to experimentally verify a relationship. Suppose $\edomain_X$ is the domain for the state of a light switch, up or down being the two possibilities, and $\edomain_Y$ is the domain for the state of the light, which can be on or off. Suppose we could have three cases: the one where the switch is wired correctly, up corresponding to on, the one where the switch is wired incorrectly, up corresponding to off, and the one where the switch is not actually wired to the light, the two domains are independent. Each of these cases is represented by a different set of logical relationships, a different set of possible assignments.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c|c}
+\multicolumn{2}{c|}{X} & \multicolumn{2}{c}{Y} \\
+	up & down & on & off \\
+	\hline
+	T & F & T & F \\
+	F & T & F & T \\
+\end{tabular}
+\caption{Case 1: switch wired correctly to the light}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c|c}
+	\multicolumn{2}{c|}{X} & \multicolumn{2}{c}{Y} \\
+	up & down & on & off \\
+	\hline
+	T & F & F & T \\
+	F & T & T & F \\
+\end{tabular}
+\caption{Case 2: switch wired incorrectly to the light}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c|c|c|c}
+		\multicolumn{2}{c|}{X} & \multicolumn{2}{c}{Y} \\
+		up & down & on & off \\
+		\hline
+		T & F & T & F \\
+		T & F & F & T \\
+		F & T & T & F \\
+		F & T & F & T \\
+	\end{tabular}
+	\caption{Case 3: switch not wired to the light}
+\end{table}
+
+Each case, then, is a different model: a different logical context. To experimentally verify which model is the right one means verifying statements of the type \statement{it is possible for the switch to be up while the light is on}. This does not correspond to \statement{the switch is up} $\AND$ \statement{the light is on} but to \statement{the switch is up} $\comp$ \statement{the light is on}. These are statements about the table and they cannot be columns of the table itself. What we need to create is a metacontext, in which each line corresponds to one choice of model, to one context.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{r|c|c|c|c}
+		& up $\comp$ on & down $\comp$ on & up $\comp$ off & down $\comp$ off \\
+		\hline
+		Case 1 & T & F & F & T \\
+		Case 2 & F & T & T & F \\
+		Case 3 & T & T & T & T \\
+	\end{tabular}
+	\caption{Possible assignments for the metacontext}
+\end{table}
+
+Each line will tell us what statements are compatible and given the truth values of the line we can reconstruct the model. The verifiable statements that distinguish between different models, therefore, live in this metacontext and so will the experimental domain for the relationships.
 
 \begin{mathSection}
-	\begin{axiom}\label{def_implication_of_statement}
-	Given two statements, we can always construct another one that is true only if the first statement is narrower than the second. Formally, the set of all statements $\mathcal{S}$ is equipped with a function $\narrower : \mathcal{S} \times \mathcal{S} \to \mathcal{S}$ such that $\truth(\mathbin{\narrower}(\stmt_1, \stmt_2))) = \TRUE$ if and only if $\stmt_1 \narrower \stmt_2$.
-	\end{axiom}
-	\begin{prop}
-		We can also construct statements about the equality, compatibility and independence of other statements. Formally, we can construct  $\equiv : \stmtSet \times \stmtSet \to \stmtSet$, $\comp : \stmtSet \times \stmtSet \to \stmtSet$ and  $\indep : \stmtSet^n \to \stmtSet$ such that the resulting statements are true if and only if the corresponding relationship between the arguments is satisfied.
-	\end{prop}
-	\begin{proof}
-		For equivalence, we can set $\mathbin{\equiv}(\stmt_1, \stmt_2) = \mathbin{\narrower}(\stmt_1, \stmt_2) \AND \mathbin{\narrower}(\stmt_2, \stmt_1)$. By the anti-symmetry of narrowness shown in \ref{prop_narrowness_properties} we can prove that the truth of the right side must correspond to the truth of the left side and vice-versa.
-		
-		For compatibility, we can set $\mathbin{\comp}(\stmt_1, \stmt_2) = \NOT \mathbin{\narrower}(\stmt_1, \NOT \stmt_2)$. We have $\stmt_1 \comp \stmt_2$ is true if and only if $\stmt_1 \ncomp \stmt_2$ is false which by (iii) in \ref{prop_narrowness_properties} is false if and only if $\stmt_1\AND \NOT \stmt_2 = \stmt_1$ is false which by (i) in \ref{prop_narrowness_properties} is false if and only if $\stmt_1 \narrower \NOT \stmt_2$ is false.
-		
-		For independence, the resulting statement is the conjunction of all the compatibility statements for all the possible combinations of the arguments with negation or not. For example, $\mathbin{\indep}(\stmt_1, \stmt_2) = \mathbin{\comp}(\stmt_1, \stmt_2)\AND\mathbin{\comp}(\stmt_1, \NOT \stmt_2)\AND\mathbin{\comp}(\NOT\stmt_1, \stmt_2)\AND\mathbin{\comp}(\NOT\stmt_1, \NOT\stmt_2)$. If all the combinations are compatible, then all possible truth assignments are consistent truth assignments and therefore the statements are independent.
-	\end{proof}
 	\begin{defn}
-		Let $\edomain_X$ and $\edomain_Y$ be two experimental domains such that the second is dependent on the first. Let $\basis_X \subseteq \edomain_X$,  $\basis_Y \subseteq \edomain_Y$ be the two countable basis of the respective domains. Suppose the statements of the form
-		$\mathbin{\narrower}(\obs[e]_x, \obs[e]_y)$, where $\obs[e]_x \in \basis_X$ and $ \obs[e]_y \in \basis_Y$, are verifiable. Then the \textbf{relationship domain} $\edomain_{C(X,Y)}$ is the experimental domain generated by the said verifiable statements.
+		Let $\logCtx_1$ and $\logCtx_2$ be two logical contexts. Let $S_1 \subseteq \logCtx_1$ and $S_2 \subseteq \logCtx_2$ be sets of statements. We say $f : S_1 \to S_2$ is a \textbf{logic homomorphism} if it preserves the logical structure. That is:
+		\begin{itemize}
+			\item possible assignments on $S_2$ correspond to possible assignments on $S_1$: if $a_2 \in \pAss[S_2]$ then there exists $a_1 \in \pAss[S_1]$ such that $a_1(\stmt) = a_2(f(\stmt))$ for all $\stmt \in S_1$
+			\item a verifiable statement of $S_1$ is mapped to a verifiable statement in $S_2$
+		\end{itemize}
+		Additionally, if there exists a logic homomophism $g : S_2 \to S_1$ such that $f \circ g = \Id_{S_1}$ and $g \circ f = \Id_{S_2}$ then $f$ is a \textbf{logic isomoprhism} and $g$ is the \textbf{inverse} of $f$.
+	\end{defn}
+
+\begin{coro}
+	Let $h : S_1 \to S_2$ be a logic homomorphism, then for every $\hat{\stmt} \in S_1$, $\hat{S} \subseteq S_1$ and $f_\Bool : \Bool^{\hat{S}} \to \Bool$ such that $a_1(\hat{\stmt}) = f_\Bool(\{ a_1(\stmt) \}_{\stmt \in \hat{S}})$ for all $a_1 \in \pAss[S_1]$, then $a_2(h(\hat{\stmt})) = f_\Bool(\{ a_2(h(\stmt)) \}_{\stmt \in \hat{S}})$ for all $a_2 \in \pAss[S_2]$. In particular:
+	\begin{itemize}
+		\item $h(\NOT \stmt) \equiv \NOT h(\stmt)$ for all $\stmt \in S_1$
+		\item $h(\bigAND_{\stmt \in S} \stmt) \equiv \bigAND_{\stmt \in S} h(\stmt)$ for all $S \subseteq S_1$
+		\item $h(\bigOR_{\stmt \in S} \stmt) \equiv \bigOR_{\stmt \in S} h(\stmt)$ for all $S \subseteq S_1$
+	\end{itemize}
+\end{coro}
+
+\begin{proof}
+	If $a_1(\hat{\stmt}) = f_\Bool(\{ a_1(\stmt) \}_{\stmt \in \hat{S}})$ for all $a_1 \in \pAss[S_1]$ then, by the first property of logic homomorphisms, there is no $a_2 \in \pAss[S_2]$ such that $a_2(h(\hat{\stmt})) \neq f_\Bool(\{ a_2(h(\stmt)) \}_{\stmt \in \hat{S}})$. Therefore $a_2(h(\hat{\stmt})) = f_\Bool(\{ a_2(h(\stmt)) \}_{\stmt \in \hat{S}})$ for all $a_2 \in \pAss[S_2]$.
+	
+	In particular, since the relationship hold for any arbitrary $f_\Bool$, it will hold for negation, arbitrary conjunction and arbitrary disjunction.
+\end{proof}
+
+\begin{defn}
+	Let $\edomain_X, \edomain_Y \subseteq \logCtx$ be two experimental domains. The \textbf{relationship metacontext}  $\logCtx_{C(X,Y)}$ between $\edomain_X$ and $\edomain_Y$ over $\{ \logCtx_i \}_{i \in I}$ is defined by following construction. Let $I$ be an index set. Let $\{ \logCtx_i \}_{i \in I}$ be an indexed set of logical contexts, let $\{ \edomain_{X_i} \}_{i \in I}$ and $\{ \edomain_{Y_i} \}_{i \in I}$ be two indexed set of experimental domains such that $\edomain_{X_i}, \edomain_{Y_i} \subseteq \logCtx_i$ for all $i \in I$. Let $\{f_{i}\}_{i \in I}$ be a set of logic isomorphisms such that $f_{i} : \edomain_{X} \to \edomain_{X_i}$. Let $\{g_{i}\}_{i \in I}$ be a set of logic isomorphisms such that $g_{i} : \edomain_{Y} \to \edomain_{Y_i}$.
+	
+	Let $S = \edomain_{X} \times \edomain_{Y}$ and \statement{$\stmt_x \comp \stmt_y$} be the notation of an element of $S$ for some $\stmt_x \in \edomain_{X}$ and $\stmt_y \in \edomain_{Y}$. For each $i \in I$, let $a_i \in \Bool^S$ be such that  $a_i(``\stmt_x \comp \stmt_y") = \TRUE$ if and only if $f_{i}(\stmt_x) \comp g_{i}(\stmt_y)$. Define $\pAss = \{ a_i \, | \, \forall i \in I \}$. Assume $a_i \neq a_j$ if $i \neq j$; if not, given a subset of $I$ that lead to the same possible assignment, remove all elements but one. Pick $t \in I$ and define $\truth = a_t$.
+	
+	Given an arbitrary function $f_\Bool : \Bool^S \to \Bool$, we can extend the set $S$ with a new element for which the possible assignments are calculated according to the function. The relationship context $\logCtx_{C(X,Y)}$ is the closure of $S$ under all possible functions $f_\Bool \in \Bool^S$.
+	
+	Let $S_v \subseteq S$ be set of statements \statement{$\stmt_x \narrower \stmt_y$}=\statement{$\stmt_x \ncomp \NOT \stmt_y$}=$\NOT$\statement{$\stmt_x \comp \NOT \stmt_y$} such that $\stmt_x \in \edomain_{X}$ and $\stmt_y \in \edomain_{Y}$ are verifiable. The set of verifiable statements $\vstmtSet \subseteq \logCtx$ for the relationship context is the set of statements generated by $S_v$ using finite conjunction and countable disjunctions.
+\end{defn}
+\begin{justification}
+	By constructions, the relationship context satisfies the axioms for a logical context. We have a set of elements and a set of possible assignments of which one is the truth, this satisfies axioms \ref{ax_statement} and \ref{ax_possible_assignemetns}. Some of the statements are verifiable and satisfy \ref{ax_verifiable_statements}. Closure for axioms \ref{ax_functions_of_statement}, \ref{ax_verifiable_AND} and \ref{ax_verifiable_OR} are satisfied by constructions. We need to clarify why and what cases this construct makes physical sense.
+	
+	The set $\{ \logCtx_i \}_{i \in I}$ consists of different contexts, each containing a copy of the domains $\edomain_X$ and $\edomain_Y$ with a different relationship between them. For example, if $\edomain_X$ is the domain for a light switch, up or down being the possibilities, and $\edomain_Y$ is the domain for the light, being on or off, in one context the two domain may have a causal relationship (i.e. the switch is wired to the light), in another they may have a different causal relationship (i.e. the switch is wired in the wrong way), and in yet another they may be independent (i.e. switch is not wired with the light). The logic isomorphisms $\{f_{i}\}_{i \in I}$ and $\{g_{i}\}_{i \in I}$ allow us relate the statements that represent the same  assertion in the different contexts.
+	
+	Note that while mathematically we can always construct the relationship metacontext, it may not exist in reality. Specifically, there is nothing that guarantees that statements of the form \statement{$\stmt_x \narrower \stmt_y$} are actually verifiable.
+\end{justification}
+\end{mathSection}
+
+Now that we have the right context, we have to understand what is the right basis to generate the experimental domain. Suppose we have a way to verify experimentally statements of the type \statement{the temperature of the mercury column is between 24 and 25 Celsius}$\narrower$\statement{the height of the mercury column is between 24 and 25 millimeters}. That is, we can verify that whenever $\stmt_X=$\statement{the temperature of the mercury column is between 24 and 25 Celsius} is verified, then $\stmt_Y=$\statement{the height of the mercury column is between 24 and 25 millimeters} is verified. In that case, we can explore the connection between the two domains within different ranges at ever increasing precision. This means we can narrow the range of possible functions in the same way that we can narrow the range of possible values for a quantity. These types of statements, then, form an experimental domain where each possibility corresponds to a possible continuous function between the two initial experimental domains.
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\logCtx_{C(X,Y)}$ be the relationship metacontext between $\edomain_X$ and $\edomain_Y$ over $\{ \logCtx_i \}_{i \in I}$. Let $\edomain_{Y_i} \subseteq \edomain_{X_i}$ for all $i \in I$. Let $\basis_X \subseteq \edomain_X$,  $\basis_Y \subseteq \edomain_Y$ be the two countable basis of the respective domains and let $\basis = \{ ``\stmt[e]_x \narrower \stmt[e]_y" \, | \,  \stmt[e]_x \in \basis_X, \stmt[e]_y \in \basis_Y\}$. Then the \textbf{relationship domain} $\edomain_{C(X,Y)}$ is the experimental domain generated by $\basis$.
 	\end{defn}
 	\begin{proof}
 		The only thing that needs to be checked is that the basis that generates $\edomain_{C(X,Y)}$ is countable. Since $\basis_X$ and $\basis_Y$ are countable, the set of statements of the form $\mathbin{\narrower}(\obs[e]_x, \obs[e]_y)$ with $\obs[e]_x \in \basis_X$ and $ \obs[e]_y \in \basis_Y$ is also countable.
 	\end{proof}
 \begin{prop}
-	The possibilities for a relationship domain $\edomain_{C(X,Y)}$ coincide with the possible experimental relationships between $X$ and $Y$. That is, for each possibility $z$ of $\edomain_{C(X,Y)}$ there exists a continuous function $f_z : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} \mathbin{\narrower}(x, f_z(x))$.
+	The possibilities for a relationship domain $\edomain_{C(X,Y)}$ coincide with the possible experimental relationships between $X$ and $Y$. That is, for each possibility $z$ of $\edomain_{C(X,Y)}$ there exists a continuous function $f_z : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} ``x \narrower f_z(x)"$ and an $i \in I$ such that $g_i \circ f_z \circ f_i^{-1}$ is the causal relationship between $\edomain_{X_i}$ and $\edomain_{Y_i}$.
 \end{prop}
 \begin{proof}
-	First we show that for each possibility $z$ of the relationship domain there exists a set $P_z \subseteq X \times Y$ such that $z \equiv \left( \bigAND\limits_{(x,y) \in P_z} \mathbin{\comp}(x, y) \right) \AND \left( \bigAND\limits_{(x,y) \nin P_z} \mathbin{\ncomp}(x, y) \right)$. Let $z$ be a possibility of a relationship domain. This will be a minterm of the basis therefore $z \equiv minterm(\mathbin{\narrower}(\basis_X, \basis_Y))$ where $\basis_X$ and $\basis_Y$ are countable bases for the respective domains. Let $x \in X$ and $y \in Y$ be two possibilities and consider the statement $\mathbin{\comp}(x,y)$. If we suppose $z$ to be true, then we will know the truth value for all statements of the form $\mathbin{\narrower}(e_x, e_y)$ where $(e_x, e_y) \in \basis_X \times \basis_Y$. But $x \ncomp y$ if and only if there exists at least one pair $(e_x, e_y) \in \basis_X \times \basis_Y$ such that $x \narrower e_x \narrower e_y$ and $y \ncomp e_y$. Therefore supposing $z$ to be true determines the truth of $x \ncomp y$, so we either have $z \narrower \mathbin{\comp}(x,y)$ or $z \narrower \NOT \mathbin{\comp}(x,y)$. Let $P_z = \{ (x,y) \in X \times Y \, | \, z \narrower \mathbin{\comp}(x,y) \}$ and $\hat{z} = \left( \bigAND\limits_{(x,y) \in P_z} \mathbin{\comp}(x, y) \right) \AND \left( \bigAND\limits_{(x,y) \nin P_z} \NOT \mathbin{\comp}(x, y) \right)$. Then $z \narrower \hat{z}$.
+	First we show that for each possibility $z$ of the relationship domain there exists a set $P_z \subseteq X \times Y$ such that $z \equiv \bigAND\limits_{(x,y) \in P_z} ``x \comp y"  \AND \bigAND\limits_{(x,y) \nin P_z} ``x \ncomp y"$. Let $z$ be a possibility of a relationship domain. This will be a minterm of the basis therefore $z \equiv minterm(\basis)$. Let $x \in X$ and $y \in Y$ be two possibilities and consider the statement $``x \comp y"$. If $z$ is true in a possible assignment, then the truth value for all statements of the form $``e_x \narrower e_y"$ where $(e_x, e_y) \in \basis_X \times \basis_Y$ will be set. But $x \ncomp y$ if and only if there exists at least one pair $(e_x, e_y) \in \basis_X \times \basis_Y$ such that $x \narrower e_x \narrower e_y$ and $y \ncomp e_y$. Therefore if $z$ is true in an assignment it will tell us whether $x \ncomp y$ is true or not, so we either have $z \narrower ``x \comp y"$ or $z \narrower \NOT ``x \comp y"$. Let $P_z = \{ (x,y) \in X \times Y \, | \, z \narrower ``x \comp y" \}$ and $\hat{z} = \bigAND\limits_{(x,y) \in P_z} ``x \comp y" \AND  \bigAND\limits_{(x,y) \nin P_z} \NOT ``x \comp y" $. Then $z \narrower \hat{z}$.
 	
-	Conversely, if we suppose $\hat{z}$ to be true, then we will know the truth value for all statements of the form $\mathbin{\comp}(x,y)$ where $(x,y) \in X \times Y$. Let $(e_x, e_y) \in \basis_X \times \basis_Y$ and consider the statement $\mathbin{\narrower}(e_x, e_y)$. We have $e_x \narrower e_y$ if and only if there is no pair $(x,y)$ such that $x \narrower e_x$, $y \ncomp e_y$ and $x \comp y$. Therefore supposing $\hat{z}$ to be true determines the truth of $e_x \narrower e_y$, so we either have $\hat{z} \narrower \mathbin{\narrower}(e_x,e_y)$ or $\hat{z} \narrower \NOT \mathbin{\narrower}(e_x,e_y)$. As $z$ is a minterm of statements of the form $\mathbin{\narrower}(e_x, e_y)$, we'll either have $\hat{z} \narrower z$ or $\hat{z} \ncomp z$. Since $z \narrower \hat{z}$,  $\hat{z} \comp z$ and therefore $\hat{z} \narrower z$. Since 
-	we also have $z \narrower \hat{z}$, then we have $z \equiv \hat{z}$.
+	Conversely, if we suppose $\hat{z}$ to be true in an assignment, then we will know the truth assignment for all statements of the form $``x \comp y"$ where $(x,y) \in X \times Y$. Let $(e_x, e_y) \in \basis_X \times \basis_Y$ and consider the statement $``e_x \narrower e_y"$. We have $e_x \narrower e_y$ if and only if there is no pair $(x,y)$ such that $x \narrower e_x$, $y \ncomp e_y$ and $x \comp y$. Therefore if $\hat{z}$ is true in an assignment it will tell us whether $e_x \narrower e_y$ is true or not, so we either have $\hat{z} \narrower ``e_x \narrower e_y"$ or $\hat{z} \narrower \NOT ``e_x \narrower e_y"$. As $z$ is a minterm of statements of the form $``e_x \narrower e_y"$, we'll either have $\hat{z} \narrower z$ or $\hat{z} \ncomp z$. Since $z \narrower \hat{z}$,  $\hat{z} \comp z$ and therefore $\hat{z} \narrower z$. Since we also have $z \narrower \hat{z}$, then we have $z \equiv \hat{z}$.
 	
-	Now we want to show that for each possibility $z$ there is a function $f_z : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} \mathbin{\narrower}(x, f_z(x))$. Let $z$ be a possibility of a relationship domain such that $\edomain_Y \subseteq \edomain_X$. Let $P_z \subseteq X \times Y$ be defined as above. If $z$ is a possibility, then $P_z$ must contain at least one pair for each $x \in X$. Suppose it didn't. Then, if $z$ were true, there would be a particular $x$ such that $x \ncomp y$ for all $y \in Y$. This means $x \ncomp \bigOR\limits_{y \in Y} y \equiv \tautology$ and therefore $x \equiv \contradiction$. But this can't be because $x$ is a possibility. Therefore we cannot suppose $z$ to be true, which means $z$ is a contradiction. But this also can't be because $z$ was a possibility. Therefore $P_z$ must contain at least one pair for each $x \in X$. Similarly, $P_z$ must contain only one pair for each $x \in X$. Suppose it didn't. Then, if $z$ were true, there would be a particular $x \in X$ such that $x \comp y_1$ and $x \comp y_2$ for two possibilities $y_1, y_2 \in Y$. But since $\edomain_Y$ depends on $\edomain_X$ there is a causal relationship $f : X \to Y$ such that $x \narrower f(x)$. This would mean that $f(x)$ is compatible with two distinct possibilities, which can't be: $f(x)$ is a possibility of $Y$ and cannot be compatible with both $y_1$ and $y_2$. Therefore we cannot suppose $z$ to be true, which means $z$ is a contradiction. But this can't be because $z$ was a possibility. Therefore $P_z$ must contain only one pair for each $x \in X$. This means we can define $f_z : X \to Y$ as the function such that $(x, f_z(x)) \in P_z$. Note that, given $x \in X$ and  $y \in Y$, $x \narrower y$ if and only if $y$ is the only possibility in $Y$ such that $x \comp y$. Therefore we can write $f_z : X \to Y$ such that $z\equiv \left( \bigAND\limits_{(x,y) \in P_z} \mathbin{\comp}(x, y) \right) \AND \left( \bigAND\limits_{(x,y) \nin P_z} \mathbin{\ncomp}(x, y) \right)\equiv\bigAND\limits_{x\in X} \mathbin{\narrower}(x, f_z(x))$.
-	
-	Lastly, we need to show that $f_z$ is continuous for each possibility $z$. Let $z$ be a possibility. Then, if $z$ were true, we would find that $f_z$ is a causal relationship. But by \ref{prop_causal_relationship_unique} it must match  $f$ which is a continuous function. Therefore $f_z$ must be continuous.
-	
+	Now we want to show that for each possibility $z$ there is a function $f_z : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} ``x \narrower f_z(x)"$. We note that statements of the form $``\stmt_x \comp \stmt_y$ are precisely the statements used to generate the relationship metacontext. Statements of the form $``x \comp y"$, where $x \in X$ and $y \in Y$, are enough to determine the truth value of statements of the form $``\stmt_x \comp \stmt_y$. Therefore for each possibility $z$ there is be one and only one possible truth assignment in which $z$ is true. That is, each $x$ correspond to particular logical context $\logCtx_i$. Since in that context $\edomain_{Y_i} \subseteq \edomain_{X_i}$ there will be a causal relationship $f_i : X_i \to Y_i$ such that $x_i \narrower f_i (x_i)$ which means $x_i \comp y_i$ if and only if $y_i = f_i(x_i)$. Since causal relationships are unique and the possible assignments are distinct, to each $z$ will correspond a unique $f_z : X \to Y$ such that $g_i \circ f_z \comp f^{-1}_i = f_i$ and $z\equiv\bigAND\limits_{x\in X} ``x \narrower f_z(x)"$. Moreover $f_z$ is continuous since $f_i$ and $g_i$ are logical isomorphisms.
 \end{proof}
 \end{mathSection}
 
-Note that the definition for the relationship domain simply says that one can be constructed provided we have a way to verify such if/then statements. It does not guarantee that this is actually possible. So when can we do it? Or better, what do we need in practice to be able to build the necessary confidence? Let's think how we would test the relationship between temperature and height of a mercury column. We would prepare different mercury samples with different values of temperatures in many different conditions, measure height and temperature with different devices, repeat many times, ask someone else to do it independently, compare results, and so on. At some point we will have explored enough of the possible cases, checked and tried anything that could invalidate the result and we will have the confidence to say that \statement{if the temperature of the mercury column is between 24 and 25 Celsius then its height is between 24 and 25 millimeters}. We should stress that the procedure is not at all to observe a few values and then generalize. It is the ability to prepare and control the system in many different conditions and our inability to violate the relationship that gives us the confidence needed to reach the conclusion.
+Note that the definition for the metacontext simply declares some statements to be verifiable: it does not guarantee that this is actually possible. So when can we do it? Or better, what do we need in practice to be able to build the necessary confidence? Let's think how we would test the relationship between temperature and height of a mercury column. We would prepare different mercury samples with different values of temperatures in many different conditions, measure height and temperature with different devices, repeat many times, ask someone else to do it independently, compare results, and so on. At some point we will have explored enough of the possible cases, checked and tried anything that could invalidate the result and we will have the confidence to say that \statement{if the temperature of the mercury column is between 24 and 25 Celsius then its height is between 24 and 25 millimeters}. We should stress that the procedure is not at all to observe a few values and then generalize. It is not mere induction. It is the ability to prepare and control the system in many different conditions and our inability to violate the relationship that gives us the confidence needed to reach the conclusion.
 
 Suppose, in fact, that we want to experimentally verify the link between inflation and money supply. As long as we cannot create new countries in different economic conditions, the only thing we can do is gather data for as many nations as we can throughout history.\footnote{Computer simulations can sometimes alleviate this problem, though they are only as good as the model one uses.} Since we cannot purposely explore different conditions and we can't even replicate older ones, the best we can do is show that there was a correlation between those specific values. It is the inability to freely and fully explore the problem space that may not enable us to experimentally verify the causal relationship.\footnote{In this sense, experimental sciences allow for more rigorous results than observational sciences precisely because it is more feasible to experimentally test relationships between domains.}
 
 The point is that we cannot give a general purpose algorithm for how to construct experimental tests for the relationships starting from the experimental tests of the individual domains. We cannot formalize in general what it means that we have explored the space ``enough" to consider the relationship verified, no more than we can formalize when the data collected is ``enough" to consider a statement verified or when a statement is specific ``enough" to consider the semantics well defined. This is where the practice of experimental science comes in.
 
-But, while we may not know in general whether we can experimentally verify a relationship between two specific domains, we do know that the relationship domain can always be constructed in principle and therefore our mathematical framework is complete. That is: we can take two experimental domains (e.g. $\edomain_t$ for time and $\edomain_x$ for position), construct a relationship domain between them (e.g. $\edomain_{x(t)}$ for trajectories in space), then take another experimental domain (e.g. $\edomain_{(q,p)}$ for the states) and construct another relationship domain between the two (e.g. $\edomain_{(q,p)\to x(t)}$ for the relationship between states and trajectories). Our general mathematical theory of experimental science is therefore closed, since we can recursively create relationship domains about relationship domains indefinitely while remaining within its bounds. In other words, Experimentally distinguishable objects and their relationships will never lie outside of the theory.
+But, while we may not know in general whether we can experimentally verify a relationship between two specific domains, we do know that the relationship domain can always be constructed in principle and therefore our mathematical framework is complete. That is: we can take two experimental domains (e.g. $\edomain_t$ for time and $\edomain_x$ for position), construct a relationship domain between them (e.g. $\edomain_{x(t)}$ for trajectories in space), then take another experimental domain (e.g. $\edomain_{(q,p)}$ for the states) and construct another relationship domain between the two (e.g. $\edomain_{(q,p)\to x(t)}$ for the relationship between states and trajectories). Our general mathematical theory of experimental science is therefore closed, since we can recursively create relationship domains about relationship domains indefinitely while remaining within its bounds. In other words, experimentally distinguishable objects and their relationships will never lie outside of the theory.
 
 
 \section{Summary}
