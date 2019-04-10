@@ -203,14 +203,22 @@ Since statements are intangible, there are no limits to the number of arguments 
 
 \begin{mathSection}
 	\begin{defn}\label{def_dependence}
-	Let $\bar{\stmt} \in \logCtx$ be a statement and $S \subseteq \logCtx$ be a set of statements. We say $\bar{\stmt}$ \textbf{depends on} $S$ (or that it is a function of $S$) if we can find a function $f_\Bool : \Bool^S \to \Bool$ such that for every possible assignment $a \in \pAss$ we have $a(\bar{\stmt}) = f_\Bool (\{a(\stmt)\}_{\stmt \in S})$.
+	Let $\bar{\stmt} \in \logCtx$ be a statement and $S \subseteq \logCtx$ be a set of statements. Then $\bar{\stmt}$ \textbf{depends on} $S$ (or that it is a function of $S$)  if we can find a $f_\Bool : \Bool^S \to \Bool$ such that
+	$$a(\bar{\stmt}) = f_\Bool (\{a(\stmt)\}_{\stmt \in S})$$
+	for every possible assignment $a \in \pAss$. We say $\hat{s}$ depends on $S$ \textbf{through} $f_\Bool$.
 \end{defn}
 
 	\begin{axiom}\label{ax_functions_of_statement}
-		We can always construct a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally, let $S \subseteq \logCtx$ be a set of statements and $f_{\Bool} : \Bool^S \to \Bool$ an arbitrary function from an assignment of $S$ to a truth value. Then we can always find a statement $\bar{\stmt} \in \logCtx$ such that
-		$$a(\bar{\stmt}) = f_{\Bool}(\{a(\stmt)\}_{\stmt \in S})$$
-		for every possible assignment $a \in \pAss$.
+		We can always construct a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally, let $S \subseteq \logCtx$ be a set of statements and $f_{\Bool} : \Bool^S \to \Bool$ an arbitrary function from an assignment of $S$ to a truth value. Then we can always find a statement $\bar{\stmt} \in \logCtx$ that depends on $S$ through $f_{\Bool}$.
 	\end{axiom}
+\begin{coro}
+	Functions on truth values induce functions on statements. Formally, let $I$ be an index set and $f_\Bool : \Bool^I \to \Bool$ be a function. There exists a function $f : \logCtx^I \to \logCtx$ such that
+	$$a(f(\{\stmt_i\}_{i \in I})) = f_{\Bool}(\{a(\stmt_i)\}_{i \in I})$$
+	for every indexed set $\{\stmt_i\}_{i \in I} \subseteq \logCtx$ and possible assignment $a \in \pAss$.
+\end{coro}
+\begin{proof}
+	Given $I$ and $f_\Bool : \Bool^I \to \Bool$ we can construct $f : \logCtx^I \to \logCtx$ as follows. Given an indexed set $\{\stmt_i\}_{i \in I} \in \logCtx^I$, let $S \subseteq \logCtx$ be the set of elements in the indexed set and define $\bar{f}_\Bool : \Bool^S \to \Bool$ such that $\bar{f}_\Bool(\{a(\stmt)\}_{\stmt \in S}) = f_{\Bool}(\{a(\stmt_i)\}_{i \in I})$. Then by axiom \ref{ax_functions_of_statement} we can find a statement $\bar{\stmt}$ that depends on $S$ through $\bar{f}_\Bool$ and we can set $f(\{\stmt_i\}_{i \in I}) = \bar{\stmt}$. We have $a(f(\{\stmt_i\}_{i \in I})) = f_{\Bool}(\{a(\stmt_i)\}_{i \in I})$ for all indexed sets and for all possible assignments.
+\end{proof}
 \end{mathSection}
 
 To better characterize truth functions, we borrow ideas and definitions from Boolean algebra which is the branch of algebra that operates on truth values. Boolean algebra is fundamental in logic and computer science, since every digital circuit ultimately is implemented on two-state systems (e.g. high/low voltage, up/down magnetization).  The most fundamental elements in that algebra are the following three simple operations: negation (i.e.~logical NOT), conjunction (i.e.~logical AND) and disjunction (i.e.~logical OR).
@@ -473,12 +481,12 @@ Each of the cases is the conjunction of all independent statements where each on
 \end{defn}
 	
 	\begin{prop}\label{prop_disjunctive_normal_form}
-		Let $\bar{\stmt} \in \logCtx$ be a statement that depends on a set of statements $S \subseteq \logCtx$. Then we can express $\bar{\stmt}$ in its \textbf{disjunctive normal form} as a disjuction of minterms of $S$. That is, $\bar{\stmt} \equiv \bigOR \limits_{a \in A} \left( \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt \right)$ where $A \subseteq \Bool^S$ is the set of assignments for $S$ for which $\bar{\stmt}$ is true.
+		Let $\bar{\stmt} \in \logCtx$ be a statement that depends on a set of statements $S \subseteq \logCtx$ through $f_\Bool : \Bool^S \to \Bool$. Then we can express $\bar{\stmt}$ in its \textbf{disjunctive normal form} as a disjuction of minterms of $S$, that is $\bar{\stmt} \equiv \bigOR \limits_{a \in A} \left( \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt \right)$ where $A \subseteq \Bool^S$ is a set of assignments for $S$. In this notation, in a given $a_0 \in \Bool^\logCtx$ we have $a_0(\bar{\stmt}) = \TRUE$ if and only if there is an $a \in A$ such that $a_0(\stmt) = a(\stmt)$ for all $\stmt \in S$.
 	\end{prop}
 	\begin{proof}
-		We first show that this can be done for a function that returns $\TRUE$ for a unique combination of values. Let $a : S \to \Bool$ be an assignment for $S$. Let $f_\Bool: \Bool^S \to \Bool$ be the function such that $f_\Bool(\bar{a}) = \TRUE$ if and only if $\bar{a} = a$. Consider the minterm $\stmt[m]_a = \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ and an assignment $\bar{a} : \logCtx \to \Bool$ for the whole context. We have that $\bar{a}(\stmt[m]_a) = \TRUE$ if and only if $\bar{a}(\stmt) = a(\stmt)$ for all $\stmt \in S$. Now suppose $\bar{\stmt} \in \logCtx$ depends on $S$ through the function $f_\Bool$. Then $\bar{\stmt}$ and $\stmt[m]_a$ will be equal over all possible assignments and therefore $\bar{\stmt} \equiv \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$.
+		We first show that this can be done for a function $f_\Bool$ that returns $\TRUE$ for only one assignment. Let $a : S \to \Bool$ be an assignment for $S$ and suppose $f_\Bool: \Bool^S \to \Bool$ is such that $f_\Bool(\bar{a}) = \TRUE$ if and only if $\bar{a} = a$. Now consider the minterm $\stmt[m]_a = \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ and an assignment $\bar{a} : \logCtx \to \Bool$ for the whole context. We have that $\bar{a}(\stmt[m]_a) = \TRUE$ if and only if $\bar{a}(\stmt) = a(\stmt)$ for all $\stmt \in S$. Then $\bar{a}(\bar{\stmt}) = \bar{a}(\stmt[m]_a)$ for all possible assignments $\bar{a} \in \pAss$ and therefore $\bar{\stmt} \equiv \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$.
 
-		Now we generalize the result for arbitrary functions. Let $f_\Bool : \Bool^S \to \Bool$ be the function through which $\bar{\stmt}$ depends on $S$. Let $A = \{ a \in \Bool^S \, | \, f_\Bool(a) = \TRUE \}$. Let $\stmt[m]_a = \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ be the minterm associated with an assignment $a \in A$. Consider $\bar{\stmt[m]} = \bigOR \limits_{a \in A} \stmt[m]_a$ and an assignment $\bar{a} : \logCtx \to \Bool$ for the whole context. We have that $\bar{a}(\bar{\stmt[m]}) = \TRUE$ if and only if $\bar{a}(\stmt) = a(\stmt)$ for some $a \in A$ and for all $\stmt \in S$. Then $\bar{\stmt}$ and $\bar{\stmt[m]}$ will have equal assignment over all possible assignments and therefore $\bar{\stmt} \equiv \bigOR \limits_{a \in A} \left( \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt \right)$
+		Now we generalize the result for arbitrary functions. Let $f_\Bool : \Bool^S \to \Bool$ be a generic function. Let $A = \{ a \in \Bool^S \, | \, f_\Bool(a) = \TRUE \}$. Let $\stmt[m]_a = \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ be the minterm associated with an assignment $a \in A$. Consider $\bar{\stmt[m]} = \bigOR \limits_{a \in A} \stmt[m]_a$ and an assignment $\bar{a} : \logCtx \to \Bool$ for the whole context. We have that $\bar{a}(\bar{\stmt[m]}) = \TRUE$ if and only if $\bar{a}(\stmt) = a(\stmt)$ for some $a \in A$ and for all $\stmt \in S$. Then $\bar{a}(\bar{\stmt}) = \bar{a}(\stmt[m]_a)$ for all possible assignments $\bar{a} \in \pAss$ and therefore $\bar{\stmt} \equiv \bigOR \limits_{a \in A} \left( \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt \right)$
 	\end{proof}
 \end{mathSection}
 
@@ -498,7 +506,7 @@ Note that tautology and contradiction are trivially verifiable since we know a p
 
 \begin{mathSection}
 \begin{axiom}\label{ax_verifiable_statements}
-	A \textbf{verifiable statement} is a statement that, if true, can be shown to be so experimentally. Formally, each logical context $\logCtx$ contains a set of statements $\vstmtSet \subseteq \logCtx$ whose elements are said verifiable. Moreover, we have the following properties:
+	A \textbf{verifiable statement} is a statement that, if true, can be shown to be so experimentally. Formally, each logical context $\logCtx$ contains a set of statements $\vstmtSet \subseteq \logCtx$ whose elements are said to be verifiable. Moreover, we have the following properties:
 	\begin{itemize}
 		\item every tautology $\tautology \in \logCtx$ is verifiable
 		\item every contradiction $\contradiction \in \logCtx$ is verifiable
@@ -750,7 +758,7 @@ To sum up, verifiable statements are the only ones that, perhaps under some simp
 While the theoretical domain contains more statements, it does not contain more information. That is, if we knew which verifiable statements are true and which aren't, we would automatically know which theoretical statements would be true or not. So it is not adding extra cases. It is essentially completing the list of answers by adding a ``no" if only ``yes" can be experimentally verified and vice-versa. To see that this is true, we can show that a basis for an experimental domain $\edomain$ is also a basis for its theoretical domain $\tdomain$. That is, all verifiable and theoretical statements can be expressed as functions of the same basis. The difference is that a theoretical statement can be a function of the negation of the element of a basis.
 
 \begin{mathSection}
-\begin{prop}
+\begin{prop}\label{prop_basis_for_theoretical_domain}
 	The truth values of the statements of a basis $\basis$ for an experimental domain $\edomain$ are enough to determine the truth values for all statements in the associated theoretical domain $\tdomain$. More formally, all statements in the theoretical domain $\tdomain$ can be generated by negation, countable conjunction and countable disjunction from a basis $\basis$ of $\edomain$.
 \end{prop}
 
@@ -778,7 +786,7 @@ A possibility represents a complete answer for a scientific question. Only one o
 \end{prop}
 
 \begin{proof}
-	Let $\basis \subseteq \edomain$ be a basis for $\edomain$. Let $x$ be a minterm of $\basis$. Any theoretical statement $\stmt \in \tdomain$ can be expressed as the disjunction of minterms of $\basis$ by \ref{prop_disjunctive_normal_form}. $x$ is either within the minterms needed to express $\stmt$, or not. If it is, $x \AND \stmt \equiv x$ and therefore $x \narrower \stmt$. If it's not, $x \AND \NOT \stmt \equiv x$ and therefore $x \ncomp \stmt$. Therefore a minterm is either narrower or incompatible with all theoretical statements and, if it is not a contradiction, it is a possibility by definition.
+	Let $\basis \subseteq \edomain$ be a basis for $\edomain$. Let $x$ be a minterm of $\basis$. Any theoretical statement $\stmt \in \tdomain$ can be expressed as the disjunction of minterms of $\basis$ by \ref{prop_disjunctive_normal_form} and by \ref{prop_basis_for_theoretical_domain}. $x$ is either within the minterms needed to express $\stmt$, or not. If it is, $x \AND \stmt \equiv x$ and therefore $x \narrower \stmt$. If it's not, $x \AND \NOT \stmt \equiv x$ and therefore $x \ncomp \stmt$. Therefore a minterm is either narrower or incompatible with all theoretical statements and, if it is not a contradiction, it is a possibility by definition.
 	
 	Conversely, suppose $x \in \tdomain$ is a possibility. As it is a theoretical statement, it can be expressed as a disjunction of minterms of a basis $\basis$. Suppose it is the disjunction of more than one minterm. Then each minterm would be narrower than $x$, which cannot be. $x$ must be expressed by a single minterm. Therefore any possibility is a minterm.
 \end{proof}
@@ -820,7 +828,7 @@ To sum up the mathematical structure of the domain, consider the following table
 		T & F & ... & F & F & ... & T & T & ... & F & F & F & T & ... \\
 	\end{tabular}
 \end{center}
-On the left we find the basis elements $\stmt[b] \in \basis$. From these, through finite conjunction and countable disjunction we construct all verifiable statements $\stmt \in \edomain$. From these, through negation, countable conjunction and countable disjunction, we construct all theoretical statements $\bar{\stmt} \in \tdomain$. Within these we find the possibilities $x \in X$. Each line corresponds to a possible truth assignment in the domain. Each possibility is true in one and only one possible assignment. The mathematical structure, then, is simply there to keep track of the logical relationships between all the statements, which assignments are possible and which statements are verifiable.
+On the left we find the basis elements $\stmt[b] \in \basis$. From these, through finite conjunction and countable disjunction we construct all verifiable statements $\stmt \in \edomain$. From these, through negation, countable conjunction and countable disjunction, we construct all theoretical statements $\bar{\stmt} \in \tdomain$. Within these we find the possibilities $x \in X$. Each row corresponds to a possible truth assignment in the domain. Each possibility is true in one and only one possible assignment. The mathematical structure, then, is simply there to keep track of the logical relationships between all the statements, which assignments are possible and which statements are verifiable.
 
 With our definitions in mind, we can answer the following fundamental question: what is the maximum number of possibilities that an experimental domain can have? In other words: what is the maximum number of cases among which we can distinguish experimentally? As we saw before, a possibility is a statement that defines the truth values of a basis. Since a basis is countable, we can uniquely identify a possibility by a countable sequence of $\TRUE$ or $\FALSE$. Note that a real number expressed in a binary basis (e.g. 0.10110001...) will also be uniquely identified by such a sequence: the cardinality of the possibility is at most the one of the continuum.
 
@@ -967,7 +975,7 @@ There is a link between the basis of an experimental domain and a sub-basis of a
 		Let $X$ be the set of possibilities of an experimental domain $\edomain$. Let $\basis \subseteq \edomain$ be a basis for the domain, then the collection of verifiable sets $U(\basis)\cup\{X\}$ forms a sub-basis for the natural topology of $X$.
 	\end{prop}
 	\begin{proof}
-		Since every verifiable statement of a domain can be generated by finite conjunction and countable disjucntion from a basis $\basis \subseteq \edomain$, its corresponding verifiable set can be generated by finite intersection and countable union from the verifiable sets $U(\basis)$ corresponding to the basis. Note that the tautology, though, is not necessarily the union of $U(\basis)$: if the domain is not complete, the residual possibility is not contained in any verifiable sets. Therefore $U(\basis)\cup\{X\}$ can generate all verifiable sets, including the one for the tautology, and is a sub-basis.
+		Since every verifiable statement of a domain can be generated by finite conjunction and countable disjunction from a basis $\basis \subseteq \edomain$, its corresponding verifiable set can be generated by finite intersection and countable union from the verifiable sets $U(\basis)$ corresponding to the basis. Note that the tautology, though, is not necessarily the union of $U(\basis)$: if the domain is not complete, the residual possibility is not contained in any verifiable sets. Therefore $U(\basis)\cup\{X\}$ can generate all verifiable sets, including the one for the tautology, and is a sub-basis.
 	\end{proof}
 	\begin{prop}
 		The natural topology for the possibilities of an experimental domain is second-countable.
