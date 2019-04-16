@@ -203,9 +203,9 @@ Since statements are intangible, there are no limits to the number of arguments 
 
 \begin{mathSection}
 	\begin{defn}\label{def_dependence}
-	Let $\bar{\stmt} \in \logCtx$ be a statement and $S \subseteq \logCtx$ be a set of statements. Then $\bar{\stmt}$ \textbf{depends on} $S$ (or that it is a function of $S$)  if we can find a $f_\Bool : \Bool^S \to \Bool$ such that
+	Let $\bar{\stmt} \in \logCtx$ be a statement and $S \subseteq \logCtx$ be a set of statements. Then $\bar{\stmt}$ \textbf{depends on} $S$ (or it is a function of $S$)  if we can find an $f_\Bool : \Bool^S \to \Bool$ such that
 	$$a(\bar{\stmt}) = f_\Bool (\{a(\stmt)\}_{\stmt \in S})$$
-	for every possible assignment $a \in \pAss$. We say $\hat{s}$ depends on $S$ \textbf{through} $f_\Bool$.
+	for every possible assignment $a \in \pAss$. We say $\bar{s}$ depends on $S$ \textbf{through} $f_\Bool$.
 \end{defn}
 
 	\begin{axiom}\label{ax_functions_of_statement}
@@ -486,7 +486,7 @@ Each of the cases is the conjunction of all independent statements where each on
 	\begin{proof}
 		We first show that this can be done for a function $f_\Bool$ that returns $\TRUE$ for only one assignment. Let $a : S \to \Bool$ be an assignment for $S$ and suppose $f_\Bool: \Bool^S \to \Bool$ is such that $f_\Bool(\bar{a}) = \TRUE$ if and only if $\bar{a} = a$. Now consider the minterm $\stmt[m]_a = \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ and an assignment $\bar{a} : \logCtx \to \Bool$ for the whole context. We have that $\bar{a}(\stmt[m]_a) = \TRUE$ if and only if $\bar{a}(\stmt) = a(\stmt)$ for all $\stmt \in S$. Then $\bar{a}(\bar{\stmt}) = \bar{a}(\stmt[m]_a)$ for all possible assignments $\bar{a} \in \pAss$ and therefore $\bar{\stmt} \equiv \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$.
 
-		Now we generalize the result for arbitrary functions. Let $f_\Bool : \Bool^S \to \Bool$ be a generic function. Let $A = \{ a \in \Bool^S \, | \, f_\Bool(a) = \TRUE \}$. Let $\stmt[m]_a = \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ be the minterm associated with an assignment $a \in A$. Consider $\bar{\stmt[m]} = \bigOR \limits_{a \in A} \stmt[m]_a$ and an assignment $\bar{a} : \logCtx \to \Bool$ for the whole context. We have that $\bar{a}(\bar{\stmt[m]}) = \TRUE$ if and only if $\bar{a}(\stmt) = a(\stmt)$ for some $a \in A$ and for all $\stmt \in S$. Then $\bar{a}(\bar{\stmt}) = \bar{a}(\stmt[m]_a)$ for all possible assignments $\bar{a} \in \pAss$ and therefore $\bar{\stmt} \equiv \bigOR \limits_{a \in A} \left( \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt \right)$
+		Now we generalize the result for arbitrary functions. Let $f_\Bool : \Bool^S \to \Bool$ be a generic function. Let $A = \{ a \in \Bool^S \, | \, f_\Bool(a) = \TRUE \}$. Let $\stmt[m]_a = \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ be the minterm associated with an assignment $a \in A$. Consider $\bar{\stmt[m]} = \bigOR \limits_{a \in A} \stmt[m]_a$ and an assignment $\bar{a} : \logCtx \to \Bool$ for the whole context. We have that $\bar{a}(\bar{\stmt[m]}) = \TRUE$ if and only if $\bar{a}(\stmt) = a(\stmt)$ for some $a \in A$ and for all $\stmt \in S$. Then $\bar{a}(\bar{\stmt}) = \bar{a}(\bar{\stmt[m]})$ for all possible assignments $\bar{a} \in \pAss$ and therefore $\bar{\stmt} \equiv \bigOR \limits_{a \in A} \left( \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt \right)$
 	\end{proof}
 \end{mathSection}
 
