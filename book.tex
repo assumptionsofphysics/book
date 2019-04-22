@@ -556,6 +556,9 @@ Note that, since the test always terminates, we can switch failure to success an
 
 \begin{mathSection}
 	\begin{defn}
+		A \textbf{falsifiable statement} is a statement that, if false, can be shown to be so experimentally. Formally, a statement $\stmt$ is falsifiable if its negation $\NOT\stmt \in \vstmtSet$ is a verifiable statement.
+	\end{defn}
+	\begin{defn}
 		A \textbf{decidable statement} is a statement that can be shown to be either true or false experimentally. Formally, a statement $\stmt$ is decidable if $\stmt \in \vstmtSet$ and $\NOT\stmt \in \vstmtSet$. We note $\dstmtSet$ the set of all decidable statements.
 	\end{defn}
 	\begin{justification}
@@ -741,7 +744,7 @@ Because of the De Morgan properties in \ref{boolean_properties}, we can express 
 	\end{prop}
 	
 	\begin{proof}
-		Any countable conjunction $\mathsf{s} = \bigAND\limits_{i=1}^{\infty} \mathsf{s}_i$ is equivalent to the negation of disjunction of the negation: $\mathsf{s} = \NOT\bigOR\limits_{i=1}^{\infty} \NOT\mathsf{s}_i$. As the theoretical domain is closed under negation and countable disjunction, so it is closed under countable conjunction.  
+		Any countable conjunction $\stmt = \bigAND\limits_{i=1}^{\infty} \stmt_i$ is equivalent to the negation of disjunction of the negation: $\stmt = \NOT\bigOR\limits_{i=1}^{\infty} \NOT\stmt_i$. As the theoretical domain is closed under negation and countable disjunction, so it is closed under countable conjunction.  
 	\end{proof}
 
 	\begin{defn}\label{def_approximately_verifiable}
@@ -749,9 +752,61 @@ Because of the De Morgan properties in \ref{boolean_properties}, we can express 
 	\end{defn}
 \end{mathSection}
 
-Note that not all theoretical statements can be approximated with a sequence of verifiable statements. Consider $\stmt=$\statement{the mass of the photon is rational as expressed in eV}. It is the disjunction of all possibilities with rational numbers, which is countable, and therefore is a theoretical statement. Any finite precision version of this statement will always cover all possible values since any finite range will include infinitely many rational (and irrational) numbers. This means we cannot construct a sequence of finite precision verifiable statements that, in the limit, will correspond to $\stmt$. It also means we predict non termination when trying to experimentally verify $\stmt$ or its negation. Therefore we have to be cautious in giving physical significance to all theoretical statements as the prediction for some is that they may not be established experimentally.
+Note that we are closed under countable operations and not arbitrary. Therefore there could be statements that can be constructed from verifiable statements that are not even theoretical statements. One such statement, for example, could be constructed given a set $U$ of possible mass values for a particle that is uncountable, has an uncountable complement, and where the elements are picked arbitrarily and not according to a simple rule.\footnote{Mathematically, we are looking for a set of real numbers that is not a Borel set.} The statement \statement{the mass of the particle expressed in eV is in the set $U$} can only be tested by checking each value individually. But since the set is uncountable and a procedure can only be made of countable steps, it will be impossible to construct a test for such a statement.
 
-Also note that we are closed under countable operations and not arbitrary. Therefore there could be statements that can be constructed from verifiable statements that are not even theoretical statements. Consider a set $U$ of possible mass values for a particle that is uncountable, has an uncountable complement, and where the elements are picked arbitrarily and not according to a simple rule.\footnote{Mathematically, we are looking for a set of real numbers that is not a Borel set.} The statement \statement{the mass of the particle expressed in eV is in the set $U$} can only be tested by checking each value individually. But since the set is uncountable and a procedure can only be made of countable steps, it will be impossible to construct a test for such a statement. It's not that the procedure to test may not terminate, like for a theoretical statement: it's that we can't even write the procedure in the first place.
+A theoretical statement, then, is one for which we can at least conceive an experimental test. This may not always terminate if the statement is true or it may not always terminate if the statement is false, but at least we have one. The statements that depend on the experimental domain but are not part of the theoretical domain do not even hypothetically allow for a procedure, regardless of the fact that it can terminate, and therefore we do not consider them part of our scientific discourse, even theoretically.
+
+In general, given a theoretical statement $\bar{\stmt}$, we would like to characterize what experimental test can be associated to it. Ideally, we want the experimental test for that statement that terminates, successfully or unsuccessfully, in the most cases. Consider all the verifiable statements that are narrower than $\bar{\stmt}$. If we take their disjunction we get the broadest verifiable statement that is still narrower than $\bar{\stmt}$. We call this the verifiable part of $\bar{\stmt}$, noted $\ver(\bar{\stmt})$. Testing $\ver(\bar{\stmt})$ means running the test that is guaranteed to terminate successfully in the broadest situations in which $\bar{\stmt}$ is true. In fact, if $\bar{\stmt}$ is itself verifiable then $\ver(\bar{\stmt})$ will be exactly $\bar{\stmt}$.
+
+Conversely, consider all the verifiable statements that are incompatible with $\bar{\stmt}$. If we take their disjunction we get the broadest verifiable statement that is still incompatible with $\bar{\stmt}$. We call this the falsifiable part of $\bar{\stmt}$, noted $\fal(\bar{\stmt})$. Testing $\fal(\bar{\stmt})$ means running the test that is guaranteed to terminate successfully in the broadest situations in which $\bar{\stmt}$ is false. In fact, if $\bar{\stmt}$ is itself falsifiable then $\fal(\bar{\stmt})$ will be exactly $\NOT\bar{\stmt}$.
+
+To each theoretical statement, then, we associate the experimental test constructed by returning successfully if the test for the verifiable part succeeds and returning unsuccessfully if the test for the falsifiable part succeeds. We will not be able to terminate if either of those doesn't terminate, which will correspond to the statement $\NOT \ver(\bar{\stmt}) \AND \NOT \fal(\bar{\stmt})$ being true. We call this the undecidable part of $\bar{\stmt}$, noted $\und(\bar{\stmt})$.
+
+In light of this, consider $\stmt=$\statement{the mass of the photon is rational as expressed in eV}. It is the disjunction of all possibilities with rational numbers, which is countable, and therefore is a theoretical statement. Since we can only experimentally verify finite precision intervals, each verifiable statement will include infinitely many rational (and irrational) numbers. Therefore no verifiable statement is narrower than $\stmt$ and therefore $\ver(\stmt) \equiv \contradiction$. But for the same reason no verifiable statement is incompatible with  $\stmt$ and therefore $\fal(\stmt) \equiv \contradiction$. Which means $\und(\bar{\stmt}) \equiv \tautology$. This means that the experimental test for $\stmt$ will never terminate either successfully or unsuccessfully. We call this type of statements undecidable as we will never be able to experimentally test anything about them.
+
+Similar to undecidable statements, we could have statements that can just never be verified experimentally (i.e.~$\ver(\stmt) \equiv \contradiction$) or just never falsified (i.e.~$\fal(\stmt) \equiv \contradiction$). The possible presence of these types of statements means we have to be cautious in giving physical significance to all theoretical statements, as the only thing we may be able to say about some is that nothing can be said about them.
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\bar{\stmt} \in \tdomain$ be a theoretical statement. We call the \textbf{verifiable part} $\ver(\bar{\stmt}) = \bigOR_{\stmt \in \edomain \, | \, \stmt \narrower \bar{\stmt}} \stmt$ the broadest verifiable statement that is narrower than $\bar{\stmt}$. We call the \textbf{falsifiable part} $\fal(\bar{\stmt}) = \bigOR_{\stmt \in \edomain \, | \, \stmt \ncomp \bar{\stmt}} \stmt$ the broadest verifiable statement that is incompatible with $\bar{\stmt}$. We call the \textbf{undecidable part} $\und(\bar{\stmt}) = \NOT \ver(\bar{\stmt}) \AND \NOT \fal(\bar{\stmt})$ the broadest statement incompatible with both the verifiable and the falsifiable part.
+	\end{defn}
+
+\begin{coro}
+	The verifiable, falsifiable and undecidable part partition the tautology. That is, for every $\bar{\stmt} \in \tdomain$ we have $\tautology \equiv \ver(\bar{\stmt}) \OR \und(\bar{\stmt}) \OR \fal(\bar{\stmt})$ while $\ver(\bar{\stmt}) \ncomp \und(\bar{\stmt})$, $\ver(\bar{\stmt}) \ncomp \fal(\bar{\stmt})$ and $\und(\bar{\stmt}) \ncomp \fal(\bar{\stmt})$.
+\end{coro}
+	
+\begin{proof}
+	We have $\und(\bar{\stmt}) = \NOT \ver(\bar{\stmt}) \AND \NOT \fal(\bar{\stmt}) \equiv \NOT (\ver(\bar{\stmt}) \OR \fal(\bar{\stmt}))$. Therefore $\tautology \equiv \und(\bar{\stmt}) \OR \NOT \und(\bar{\stmt}) \equiv \und(\bar{\stmt}) \OR \ver(\bar{\stmt}) \OR \fal(\bar{\stmt})$.
+	
+	Since $\ver(\bar{\stmt}) \narrower \bar{\stmt}$ and $\fal(\bar{\stmt}) \ncomp \bar{\stmt}$ we have $\ver(\bar{\stmt}) \ncomp \fal(\bar{\stmt})$. Since $\und(\bar{\stmt}) \equiv \NOT \ver(\bar{\stmt}) \AND \NOT \fal(\bar{\stmt}) \narrower \NOT \ver(\bar{\stmt})$ and therefore $\und(\bar{\stmt}) \ncomp \ver(\bar{\stmt})$. Similarly, we have $\und(\bar{\stmt}) \narrower \NOT \fal(\bar{\stmt})$ and therefore $\und(\bar{\stmt}) \ncomp \fal(\bar{\stmt})$.
+\end{proof}
+	
+\begin{coro}
+	A theoretical statement $\bar{\stmt} \in \tdomain$ is verifiable if and only if $\bar{\stmt} \equiv \ver(\bar{\stmt})$. It is falsifiable if and only if $\NOT\bar{\stmt} \equiv \fal(\bar{\stmt})$. If is decidable if and only if $\und(\bar{\stmt}) \equiv \contradiction$.
+\end{coro}
+\begin{proof}
+	Let $\bar{\stmt}$ be a verifiable statement. Then $\bar{\stmt}$ itself is the broadest verifiable statement compatible with itself and therefore $\bar{\stmt} \equiv \ver(\bar{\stmt})$. Conversely, let $\bar{\stmt} \equiv \ver(\bar{\stmt})$, then $\bar{\stmt}$ is equivalent to a verifiable statement and is therefore verifiable.
+	
+	Let $\bar{\stmt}$ be a falsifiable statement. Then $\NOT\bar{\stmt}$ itself is the broadest verifiable statement incompatible with $\bar{\stmt}$ and therefore $\NOT\bar{\stmt} \equiv \fal(\bar{\stmt})$. Conversely, let $\NOT\bar{\stmt} \equiv \fal(\bar{\stmt})$, then $\NOT\bar{\stmt}$ is equivalent to a verifiable statement and $\bar{\stmt}$ is therefore falsifiable.
+	
+	Let $\bar{\stmt}$ be a decidable statement. Then $\und(\bar{\stmt}) = \NOT \ver(\bar{\stmt}) \AND \NOT \fal(\bar{\stmt}) \equiv \NOT \bar{\stmt} \AND \NOT \NOT \bar{\stmt} \equiv \NOT \bar{\stmt} \AND \bar{\stmt} \equiv \contradiction$. Conversely, let $\und(\bar{\stmt}) \equiv \contradiction$. Then $\ver(\bar{\stmt})$ and $\fal(\bar{\stmt})$ are two incompatible statements whose disjunction is a tautology. This means $\ver(\bar{\stmt}) \equiv \NOT \fal(\bar{\stmt})$. Since $\NOT \fal(\bar{\stmt}) \equiv \ver(\bar{\stmt}) \narrower \bar{\stmt} \narrower \NOT \fal(\bar{\stmt}) \equiv \ver(\bar{\stmt})$ then $\bar{\stmt} \equiv \ver(\bar{\stmt})$ and $\NOT\bar{\stmt} \equiv \fal(\bar{\stmt})$. Therefore $\bar{\stmt}$ is decidable.	
+\end{proof}
+
+\begin{coro}
+	The undecidable part $\und(\bar{\stmt})$ of any theoretical statement $\bar{\stmt}$ is a falsifiable statement.
+\end{coro}
+
+\begin{proof}
+	Since $\und(\bar{\stmt}) \equiv \NOT (\ver(\bar{\stmt}) \OR \fal(\bar{\stmt}))$ then it is the negation of a verifiable statement and is therefore falsifiable.
+\end{proof}
+
+\begin{defn}
+	A theoretical statement $\bar{\stmt} \in \tdomain$ is \textbf{undecidable} if $\und(\bar{\stmt}) \equiv \tautology$.
+\end{defn}
+
+\end{mathSection}
+
+
 
 To sum up, verifiable statements are the only ones that, perhaps under some simplifying assumption, we can think of as tangible scientific objects (e.g. the idea that we can measure mass with finite precision). From these we construct theoretical statements that represent our idealizations (e.g. the infinitely precise value for the mass of a particle or the idea that said value is a rational number expressed in a particular unit). And then there are statements that are not even physically meaningful as they have no well defined experimental consequences.\footnote{It will be a recurrent theme of this work to make a precise distinction between mathematical objects that represent physical entities (e.g. verifiable statements), those that represent idealizations of physical entities (e.g. theoretical statements) and those that do not have scientific standing (e.g. statements that are neither verifiable nor theoretical). The particular status of real numbers will be explored more precisely when discussing arbitrary precision quantities.}
 
