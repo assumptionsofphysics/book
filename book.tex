@@ -810,10 +810,10 @@ In particular, we want to be able to understand in which situation two statement
 For two statements $\bar{\stmt}_1$ and $\bar{\stmt}_2$ to be experimentally distinguishable, then, we need to have a third statement $\bar{\stmt}$ whose verifiable part is broader than one (e.g. $\bar{\stmt}_1$) and whose falsifiable part is broader than the other (e.g. $\bar{\stmt}_2$). This way if $\bar{\stmt}$ is found to be true experimentally, we know that $\bar{\stmt}_1$ may be true and $\bar{\stmt}_2$ must be false; if $\bar{\stmt}$ is found to be false experimentally, we know that $\bar{\stmt}_1$ must be false and $\bar{\stmt}_2$ may be true; if the test for $\bar{\stmt}$ does not terminate, then both statements must be false so we are in neither of both cases.
 
 \begin{mathSection}
-\begin{defn}
+\begin{defn}\label{1_def_experimentally_distinguishable}
 	Let $\bar{\stmt}_1, \bar{\stmt}_2 \in \tdomain$ be two theoretical statement. We say they are \textbf{experimentally distinguishable} if we can find a theoretical statement $\bar{\stmt} \in \tdomain$ such that $\bar{\stmt}_1 \narrower \ver(\bar{\stmt})$ and $\bar{\stmt}_2 \narrower \fal(\bar{\stmt})$.
 \end{defn}
-\begin{prop}
+\begin{prop}\label{1_prop_experimentally_distinguishable_is_disjoint_approximations}
 	Two theoretical statements $\bar{\stmt}_1, \bar{\stmt}_2 \in \tdomain$ are experimentally distinguishable if and only if we can find two verifiable statements $\stmt_1, \stmt_2 \in \tdomain$ such that $\stmt_1 \ncomp \stmt_2$, $\bar{\stmt}_1 \narrower \stmt_1$ and $\bar{\stmt}_2 \narrower \stmt_2$.
 \end{prop}
 \begin{proof}
@@ -1019,6 +1019,9 @@ In the following table we summarize how statement operations and relationships a
 		$\stmt_1 \AND \stmt_2$ & (Conjunction) & $U(\stmt_1) \cap U(\stmt_2)$ & (Intersection) \\ 
 		$\stmt_1 \OR \stmt_2$ & (Disjunction) & $U(\stmt_1) \cup U(\stmt_2)$ & (Union) \\ 
 		$\NOT \stmt$ & (Negation) & $U(\stmt)^C$ & (Complement) \\ 
+		$\ver(\stmt)$ & (Verifiable part) & $\interior(U(\stmt))$ & (Interior) \\ 
+		$\fal(\stmt)$ & (Falsifiable part) & $\exterior(U(\stmt))$ & (Exterior) \\ 
+		$\und(\stmt)$ & (Undecidable part) & $\partial(U(\stmt))$ & (Boundary) \\ 
 		$\stmt_1 \equiv \stmt_2$ & (Equivalence) & $U(\stmt_1) = U(\stmt_2)$ & (Equality) \\ 
 		$\stmt_1 \narrower \stmt_2$ & (Narrower than) & $U(\stmt_1) \subseteq U(\stmt_2)$ & (Subset) \\ 
 		$\stmt_1 \broader \stmt_2$ & (Broader than) & $U(\stmt_1) \supseteq U(\stmt_2)$ & (Superset) \\ 
@@ -1055,12 +1058,16 @@ There is a link between the basis of an experimental domain and a sub-basis of a
 \end{proof}
 \end{mathSection}
 
-Another important property to classify topological spaces is the degree of separation of their elements: how well one can use verifiable sets to tell points and sets apart. A Kolmogorov space is one in which for every pair of points there is always a verifiable set that contains one but not the other. This property is significant because it allows all points to be distinguished through verifiable sets. A Hausdorff space is one in which for every pair of points there are always two disjoint verifiable sets each containing one. It is significant because it implies the uniqueness of limits of sequences of points.
+Another important property to classify topological spaces is the degree of separation of their elements: how well one can use verifiable sets to tell points and sets apart. A Kolmogorov, or $\mathsf{T}_0$, space is one in which for every pair of points there is always a verifiable set that contains one but not the other. This property is significant because it allows all points to be distinguished through verifiable sets. A Fr\'echet, or $\mathsf{T}_1$, space is one in which for every pair of point we can find two verifiable sets each containing only one. In a Hausdorff, or $\mathsf{T}_2$, space the two verifiable sets containing the points are disjoint. This implies the uniqueness of limits of sequences of points.
 
 \begin{mathSection}
 	\begin{defn}
 		A topology for $X$ is \textbf{Kolmogorov} (or $\mathsf{T}_0$) if for every two elements $x_1, x_2 \in X$ there exists a verifiable set $U \in \mathsf{T}_X$ containing one element but not the other. That is: either $x_1 \in U$ while $x_2 \notin U$ or $x_1 \notin U$ while $x_2 \in U$.
 	\end{defn}
+	\begin{defn}
+	A topology for $X$ is \textbf{Fr\'echet} (or $\mathsf{T}_1$) if for every two elements $x_1, x_2 \in X$ there exist two, not necessarily disjoint, verifiable sets $U_1, U_2 \in \mathsf{T}_X$ each containing one element. That is: $x_1 
+	\in U_1$ and $x_2 \in U_2$.
+\end{defn}
 	\begin{defn}
 	A topology for $X$ is \textbf{Hausdorff} (or $\mathsf{T}_2$) if for every two elements $x_1, x_2 \in X$ there exist two disjoint verifiable sets $U_1, U_2 \in \mathsf{T}_X$ each containing one element. That is: $U_1 \cap U_2 = \emptyset$, $x_1 
 	\in U_1$ and $x_2 \in U_2$.
@@ -1068,9 +1075,11 @@ Another important property to classify topological spaces is the degree of separ
 
 \end{mathSection}
 
-How do these properties relate to experimental domains? Consider two possibilities for a domain, for example \statement{that is a cat} and \statement{that is a swan}. We can always find a verifiable statement, such as \statement{that animal has feathers}, that we can use to distinguish one possibility from the other. This means that, given two different possibilities, we can always find a verifiable set that contains one and not the other: the natural topology for any set of possibilities is always Kolmogorov.
+How do these properties relate to experimental domains? Consider two possibilities for a domain, for example \statement{that is a cat} and \statement{that is a swan}. We can always find a verifiable statement, such as \statement{that animal has feathers}, that we can use to distinguish one possibility from the other. This means that, given two different possibilities, we can always find a verifiable set that contains one and not the other: the natural topology for any set of possibilities is always $\mathsf{T}_0$.
 
-Now suppose two possibilities are approximately verifiable as we defined in Definition \ref{def_approximately_verifiable}. For example, \statement{the mass of the photon is exactly 0 eV} or \statement{the mass of the photon is exactly $10^{-20}$ eV}. We can find two verifiable statements \statement{the mass of the photon is less than $10^{-25}$ eV} and \statement{the mass of the photon is more than $10^{-25}$ eV} that are incompatible with each other, but each compatible with one possibility. This means that, given two approximately verifiable possibilities, we can find two disjoint (i.e.~incompatible) verifiable sets each containing one possibility: if all possibilities are approximately verifiable then the natural topology is Hausdorff.
+Now suppose two possibilities are approximately verifiable as we defined in Definition \ref{def_approximately_verifiable}. For example, \statement{the mass of the photon is exactly 0 eV} or \statement{the mass of the photon is exactly $10^{-20}$ eV}. We can find two verifiable statements \statement{the mass of the photon is less than $10^{-25}$ eV} and \statement{the mass of the photon is more than $10^{-25}$ eV} each compatible with only one possibility. This means that, given two approximately verifiable possibilities, we can find two verifiable sets each containing only one possibility: if all possibilities are approximately verifiable then the natural topology is $\mathsf{T}_1$.
+
+Now suppose two possibilities are experimentally distinguishable as we defined in Definition \ref{1_def_experimentally_distinguishable}. Then, by \ref{1_prop_experimentally_distinguishable_is_disjoint_approximations}, we can find two disjoint approximations. In the example before, the two verifiable statements were in fact incompatible. This means that, given two approximately verifiable possibilities, we can find two disjoint verifiable sets each containing only one possibility: if all possibilities experimentally distinguishable then the natural topology is $\mathsf{T}_2$.
 
 \begin{mathSection}
 	\begin{prop}
@@ -1079,14 +1088,22 @@ Now suppose two possibilities are approximately verifiable as we defined in Defi
 \begin{proof}
 	Let $X$ be the set of possibilities for an experimental domain $\edomain$. Let $x_1, x_2 \in X$ be two distinct possibilities. Each of them can be expressed as a minterm of a basis $\basis \subseteq \edomain$. Since the two possibilities are distinct, there must exist a verifiable statement $\obs[e] \in \basis$ that appears negated in one conjunction but not the other. That is, $\obs[e]$ is compatible with only one possibility. Since the verifiable set associated with a verifiable statement contains only the possibilities compatible with said statement, the verifiable set of $\obs[e]$ either contains $x_1$ or $x_2$ but not both. The topology is therefore Kolmogorov (or $\mathsf{T}_0$).
 \end{proof}
-	\begin{prop}
-	The natural topology of a set of possibilities is Hausdorff (or $\mathsf{T}_2$) if and only if all possibilities are approximately verifiable.
+\begin{prop}
+	The natural topology of a set of possibilities is Fr\'echet (or $\mathsf{T}_1$) if and only if all possibilities are approximately verifiable.
 \end{prop}
 \begin{proof}
-	Suppose all possibilities in $X$ for an experimental domain $\edomain_X$ are approximately verifiable. Let $x_1, x_2 \in X$ be two possibilities, then we can find two sequences of verifiable statements $\{\obs_i^1\}_{i=1}^\infty, \{\obs_j^2\}_{j=1}^\infty \in \edomain_X$ such that $x_1=\bigAND\limits_{i=1}^\infty \obs_i^1$ and $x_2=\bigAND\limits_{j=1}^\infty \obs_j^2$. We can assume the sequences are monotone with respect to narrowness, that is $\obs_{i+1}^1 \narrower \obs_i^1$, as we can always create a monotone sequence from one that is not by taking the sequence of finite conjunction, that is $\hat{\obs}_k^1=\bigAND\limits_{i=1}^k \obs_i^1$. If $x_1 \neq x_2$, then $x_1 \AND x_2 \equiv \contradiction$ since different possibilities are incompatible. Therefore we must have $\obs_i^1 \AND \obs_j^2 \equiv \contradiction$ from some $i,j \geq 1$ or the limits would not be incompatible. In terms of verifiable sets we have $U(\obs_i^1) \cap U(\obs_j^2) = \emptyset$. For any two distinct possibilities we can find two disjoint verifiable sets each containing one: the natural topology is Hausdorff.
+	Suppose all possibilities in $X$ for an experimental domain $\edomain_X$ are approximately verifiable. Let $x_1, x_2 \in X$ be two possibilities, then we can find two sequences of verifiable statements $\{\obs_i^1\}_{i=1}^\infty, \{\obs_j^2\}_{j=1}^\infty \in \edomain_X$ such that $x_1=\bigAND\limits_{i=1}^\infty \obs_i^1$ and $x_2=\bigAND\limits_{j=1}^\infty \obs_j^2$. We can assume the sequences are monotone with respect to narrowness, that is $\obs_{i+1}^1 \narrower \obs_i^1$, as we can always create a monotone sequence from one that is not by taking the sequence of finite conjunction, that is $\hat{\obs}_k^1=\bigAND\limits_{i=1}^k \obs_i^1$. If $x_1 \neq x_2$, then $x_1 \AND x_2 \equiv \contradiction$ since different possibilities are incompatible. Therefore we must have $x_1 \AND \stmt_j^2 \equiv \contradiction$ and $\stmt_i^1 \AND x_2 \equiv \contradiction$ from some $i,j \geq 1$ or the limits would not be incompatible. In terms of verifiable sets we have $x_2 \notin U(\obs_i^1)$ and $x_1 \notin U(\obs_j^2)$. For any two distinct possibilities we can find two verifiable sets each containing one: the natural topology is $\mathsf{T}_1$.
 
-	Conversely, suppose the natural topology $\mathsf{T}_X$ for the possibilities $X$ for an experimental domain $\edomain_X$ is Hausdorff. Let $x \in X$ be a possibility. Consider the collection, not necessarily countable, of all verifiable sets $\{U_i\}_{i \in I} \subset \mathsf{T}_X$ such that they contain $x$. Consider their intersection $U_x = \bigcap\limits_{i \in I} U_i$. It will contain $x$ since all $U_i$ contain $x$. It will not contain anything else: since the topology is Hausdorff, for every other possibility $\hat{x}$ there is always an open set $U_i$ that does not contain it. Therefore $U_x = \{x\}$. Because the natural topology is second countable, we can find a countable basis $\basis$ and rewrite the arbitrary intersection into $\{x\} = \bigcap\limits_{i=1}^\infty V_i$ a countable intersection of elements $V_i \in \basis$ of the basis. Let $\{\obs_i\}_{i=1}^\infty$ be the sequence of verifiable statements such that $U(\obs_i) = V_i$ for every $i$. Then $x=\bigAND\limits_{i=1}^\infty \obs_i$ which means $x$ is approximately verifiable.
+	Conversely, suppose the natural topology $\mathsf{T}_X$ for the possibilities $X$ for an experimental domain $\edomain_X$ is $\mathsf{T}_1$. Let $x \in X$ be a possibility. Consider the collection, not necessarily countable, of all verifiable sets $\{U_i\}_{i \in I} \subset \mathsf{T}_X$ such that they contain $x$. Consider their intersection $U_x = \bigcap\limits_{i \in I} U_i$. It will contain $x$ since all $U_i$ contain $x$. It will not contain anything else: since the topology is $\mathsf{T}_1$, for every other possibility $\hat{x}$ there is always an open set $U_i$ that does not contain it. Therefore $U_x = \{x\}$. Because the natural topology is second countable, we can find a countable basis $\basis$ and rewrite the arbitrary intersection into $\{x\} = \bigcap\limits_{i=1}^\infty V_i$ a countable intersection of elements $V_i \in \basis$ of the basis. Let $\{\obs_i\}_{i=1}^\infty$ be the sequence of verifiable statements such that $U(\obs_i) = V_i$ for every $i$. Then $x=\bigAND\limits_{i=1}^\infty \obs_i$ which means $x$ is approximately verifiable.
 
+\end{proof}
+\begin{prop}
+	The natural topology of a set of possibilities is Hausdorff (or $\mathsf{T}_2$) if and only if all possibilities are pairwise experimentally distinguishable.
+\end{prop}
+\begin{proof}
+	Suppose all possibilities in $X$ for an experimental domain $\edomain_X$ are pairwise experimentally distinguishable. Then, by \ref{1_prop_experimentally_distinguishable_is_disjoint_approximations}, given two possibilities $x_1, x_2 \in X$ we can find two verifiable statements $\stmt_1, \stmt_2 \in \edomain_X$ such that $\stmt_1 \ncomp \stmt_2$, $x_1 \narrower \stmt_1$ and $x_2 \narrower \stmt_2$. In terms of verifiable sets we have $U(\stmt_1) \cap U(\stmt_2) = \emptyset$, $x_1 \in U(\stmt_1)$ and $x_2 \in U(\stmt_2)$. The topology is $\mathsf{T}_2$.
+	
+	Conversely, suppose the natural topology $\mathsf{T}_X$ for the possibilities $X$ for an experimental domain $\edomain_X$ is $\mathsf{T}_1$. Given two possibilities $x_1, x_2 \in X$ we can find two verifiable sets $U_1, U_2 \in \mathsf{T}_X$ such that $U_1 \cap U_2 = \emptyset$, $x_1 \in U_1$ and $x_2 \in U_2$. Since $U_1, U_2 \in \mathsf{T}_X$, we can find two corresponding verifiable statements $\stmt_1, \stmt_2 \in \edomain_X$ such that $U(\stmt_1) = U_1$ and $U(\stmt_2) = U_2$. We have $\stmt_1 \ncomp \stmt_2$, $x_1 \narrower \stmt_1$ and $x_2 \narrower \stmt_2$ and by \ref{1_prop_experimentally_distinguishable_is_disjoint_approximations} the possibilities are pairwise experimentally distinguishable.
 \end{proof}
 \end{mathSection}
 
