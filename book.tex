@@ -2372,6 +2372,48 @@ We defined discrete quantities as the ones that can be associated with integers 
 
 It is important to note that the requirements for continuous quantities cannot really be physically realized. Continuous quantities, then, should really be thought as an idealization: the limit of an infinite process of subdivision. To go past the idealization, either we lose the idea of having infinitely many references between two, in which case we revert to discrete quantities, or we lose the ordering altogether.
 
+\chapter{Precision}
+
+\def\eqgran{\doteq}
+\def\finer{\leqdot}
+\def\coarser{\geqdot}
+\def\sfiner{\lessdot}
+\def\scoarser{\gtrdot}
+
+
+\begin{axiom}
+	Equivalence relationship $\eqgran : \logCtx \times \logCtx \to \Bool$ defined on the context such that if $\stmt_1 \equiv \stmt_2$ then $\stmt_1 \eqgran \stmt_2$. We say two statements $\stmt_1 \eqgran \stmt_1$ are \textbf{equigranular}.
+\end{axiom}
+
+\begin{defn}
+	Define $\finer : \logCtx \times \logCtx \to \Bool$. We say $\stmt_1 \finer \stmt_2$ \textbf{is finer} if we can find $\stmt_3 \eqgran \stmt_1$ and $\stmt_4 \eqgran \stmt_2$ such that $\stmt_3 \narrower \stmt_4$. We say $\stmt_1 \coarser \stmt_2$ \textbf{is coarser} if $\stmt_2 \finer \stmt_1$.
+\end{defn}
+
+\begin{prop}
+	$\finer$ is a partial order.
+\end{prop}
+
+\begin{coro}
+	$\stmt_1 \narrower \stmt_2$ implies $\stmt_1 \finer \stmt_2$.
+\end{coro}
+
+\begin{defn}
+	$\stmt_1, \stmt_2 \in \logCtx$ are \textbf{comparable} if $\stmt_1 \finer \stmt_2$ or $\stmt_1 \coarser \stmt_2$.
+\end{defn}
+
+\begin{thrm}
+	Let $\edomain$ be an experimental domain where all statements are comparable to each other. Then given $\stmt[u] \in \tdomain$ we can find $\mu_{\stmt[u]} : \tdomain \to \mathbb{R}$ such that:
+	\begin{itemize}
+		\item $\mu_{\stmt[u]}(\stmt[u]) = 1$
+		\item $\mu_{\stmt[u]}(\stmt_1) \leq \mu_{\stmt[u]}(\stmt_2)$ if and only if $\stmt_1 \finer \stmt_2$
+		\item if $\stmt_1 \ncomp \stmt_2$ then $\mu_{\stmt[u]}(\stmt_1 \OR \stmt_2) =  \mu_{\stmt[u]}(\stmt_1) + \mu_{\stmt[u]}(\stmt_2)$
+	\end{itemize}
+\end{thrm}
+\begin{proof}
+	This can be posed as a question on measurable spaces. Imposing a measure on a sigma algebra tells us which sets are equal size. Can this be reversed? That is, if we impose which sets are equal size (compatibly with set inclusion), can we get a measure?
+\end{proof}
+
+
 \appendix
 
 \chapter{Reference sheets for math and physics}
