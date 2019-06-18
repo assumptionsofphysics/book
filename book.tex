@@ -2580,6 +2580,32 @@ Suppose two systems come into contact. The entropy of each one constraint by its
 
 Define temperature $\frac{1}{T_1} = \frac{\partial I_1}{\partial E_1}$: at equilibrium the two systems have the same temperature. Note that temperature cannot be zero since the information entropy at equilibrium is a function of the energy, and not the other way around.
 
+\subsection{Classical mechanics on 2n+1}
+The one dimensional case works with differential calculus. We have $\eta^a=\{q,p,t\}$, $S^a=\{\frac{dq}{dt},\frac{dp}{dt},\frac{dt}{dt}\}$ and $\theta_a=\{p,0,-H\}$. The equations are $S=-curl(\theta)$ and $L=\theta \cdot S$. In fact, $curl(\theta)=\{\partial_p \theta_t - \partial_t \theta_p, \partial_t \theta_q - \partial_q \theta_t, \partial_q \theta_p - \partial_p \theta_q\} = \{ -\partial_p H , \partial_q H , 1 \}$ and $L = \frac{dq}{dt}p - \frac{dt}{dt}H$.
+
+To generalize, $\eta^a=\{q^i,p_i,t\}$, $S^a=\{\frac{dq^i}{dt},\frac{dp_i}{dt},\frac{dt}{dt}\}$ and $\theta_a=\{p_i,0,-H\}$. The Lagrangian is still $L=\theta \cdot S = S^a \theta_a = \frac{dq^i}{dt}p_i - \frac{dt}{dt}H$. Equation should be $d\theta(S, \cdot ) = 0$. In fact, $d\theta = \partial_a \theta_b e^a \wedge e^b = (\partial_a \theta_b - \partial_b \theta_a) e^a \otimes e^b$.
+\begin{equation*}
+(d\theta)_{ab} = \begin{bmatrix}
+0 & \delta^j_i & - \partial_{q^i} H \\
+-\delta^i_j & 0 & - \partial_{p_i} H \\
+\partial_{q^j} H & \partial_{p_j} H & 0
+\end{bmatrix}
+\end{equation*}
+We find
+\begin{align*}
+S^a (d\theta)_{ab} e^b &= 0 \\
+&= (S^{q^i}(d\theta)_{q^ib} + S^{p_i}(d\theta)_{p_ib} + S^{t}(d\theta)_{tb}) e^b \\
+&= (S^{q^i}(d\theta)_{q^iq^j} + S^{p_i}(d\theta)_{p_iq^j} + S^{t}(d\theta)_{tq^j}) e^{q^j} + \\
+& (S^{q^i}(d\theta)_{q^ip_j} +  S^{p_i}(d\theta)_{p_ip_j} + S^{t}(d\theta)_{tp_j}) e^{p_j} + \\
+& (S^{q^i}(d\theta)_{q^it} + S^{p_i}(d\theta)_{p_it} + S^{t}(d\theta)_{tt}) e^t \\
+&= (-S^{p_i}\delta^i_j + S^{t}\partial_{q^j} H ) e^{q^j} + \\
+& (S^{q^i}\delta^j_i +  S^{t}\partial_{p_j} H) e^{p_j} + \\
+& (-S^{q^i} \partial_{q^i} H - S^{p_i} \partial_{p_i} H) e^t \\
+S^{p_j} &= S^{t} \partial_{q^j} H \\
+S^{q^j} &= - S^{t}\partial_{p_j} H \\
+-S^{q^i} \partial_{q^i} H - S^{p_i} \partial_{p_i} H &= S^{t}\partial_{p_i} H \partial_{q^i} H - S^{t} \partial_{q^i} H \partial_{p_i} H = 0
+\end{align*}
+
 \subsection{Closed two form for Hamiltonian mechanics}
 
 We have to better understand why the two form $\omega$ has to be closed. One idea: consider $\frac{\omega^n}{n!}$. This gives us the volume in phase space. It's a $2n$-form in a $2n$-dimensional space. It's exterior derivative $\frac{\partial\omega^n}{n!}=0$ because its rank exceeds the dimensionality of the space. We have $\frac{\partial\omega^n}{n!}=\frac{\omega^{n-1}}{(n-1)!}\wedge\partial\omega=0$. Since $\omega$ cannot be degenerate, $\partial \omega$ must be zero. Does that work?
