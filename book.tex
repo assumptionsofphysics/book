@@ -1656,10 +1656,10 @@ Each line will tell us what statements are compatible and given the truth values
 			\item possible assignments on $S_2$ correspond to possible assignments on $S_1$: if $a_2 \in \pAss[S_2]$ then there exists $a_1 \in \pAss[S_1]$ such that $a_1(\stmt) = a_2(f(\stmt))$ for all $\stmt \in S_1$
 			\item a verifiable statement of $S_1$ is mapped to a verifiable statement in $S_2$
 		\end{itemize}
-		Additionally, if there exists a logic homomophism $g : S_2 \to S_1$ such that $f \circ g = \Id_{S_1}$ and $g \circ f = \Id_{S_2}$ then $f$ is a \textbf{logic isomoprhism} and $g$ is the \textbf{inverse} of $f$.
+		Additionally, if there exists a logic homomorphism $g : S_2 \to S_1$ such that $f \circ g = \Id_{S_1}$ and $g \circ f = \Id_{S_2}$ then $f$ is a \textbf{logic isomorphism} and $g$ is the \textbf{inverse} of $f$. Two logic isomorphisms $f : S_1 \to S_2$ and $g : S_1 \to S_2$ are equivalent if $f(\stmt)\equiv g(\stmt)$ for all $\stmt \in S_1$.
 	\end{defn}
 
-\begin{coro}
+\begin{coro}\label{3_coro_logic_homomorphism_preserves_boolean}
 	Let $h : S_1 \to S_2$ be a logic homomorphism, then for every $\hat{\stmt} \in S_1$, $\hat{S} \subseteq S_1$ and $f_\Bool : \Bool^{\hat{S}} \to \Bool$ such that $a_1(\hat{\stmt}) = f_\Bool(\{ a_1(\stmt) \}_{\stmt \in \hat{S}})$ for all $a_1 \in \pAss[S_1]$, then $a_2(h(\hat{\stmt})) = f_\Bool(\{ a_2(h(\stmt)) \}_{\stmt \in \hat{S}})$ for all $a_2 \in \pAss[S_2]$. In particular:
 	\begin{itemize}
 		\item $h(\NOT \stmt) \equiv \NOT h(\stmt)$ for all $\stmt \in S_1$
@@ -1671,13 +1671,22 @@ Each line will tell us what statements are compatible and given the truth values
 \begin{proof}
 	If $a_1(\hat{\stmt}) = f_\Bool(\{ a_1(\stmt) \}_{\stmt \in \hat{S}})$ for all $a_1 \in \pAss[S_1]$ then, by the first property of logic homomorphisms, there is no $a_2 \in \pAss[S_2]$ such that $a_2(h(\hat{\stmt})) \neq f_\Bool(\{ a_2(h(\stmt)) \}_{\stmt \in \hat{S}})$. Therefore $a_2(h(\hat{\stmt})) = f_\Bool(\{ a_2(h(\stmt)) \}_{\stmt \in \hat{S}})$ for all $a_2 \in \pAss[S_2]$.
 	
-	In particular, since the relationship hold for any arbitrary $f_\Bool$, it will hold for negation, arbitrary conjunction and arbitrary disjunction.
+	In particular, since the relationship holds for any arbitrary $f_\Bool$, it will hold for negation, arbitrary conjunction and arbitrary disjunction.
 \end{proof}
 
+\begin{prop}
+	Let $\logCtx_1$ and $\logCtx_2$ be two logical contexts. Let $S_1 \subseteq \logCtx_1$ and $S_2 \subseteq \logCtx_2$ be sets of statements and $f : S_1 \to S_2$ a logic homomorphism. Let $\bar{S}_1 \subseteq \logCtx_1$ and $\bar{S}_2 \subseteq \logCtx_2$ be the closure of $S_1$ and $S_2$ respectively under arbitrary conjunction, arbitrary disjunction and negation. Then if there exists a logic homomorphism $\bar{f} : \bar{S}_1 \to \bar{S}_2$ such that $\bar{f}(\stmt_1) \equiv f(\stmt_1)$ for all $\stmt_1 \in S_1$ it is unique.
+\end{prop}
+
+\begin{proof}
+	Let $\tstmt_1 \in \bar{S}_1$ but $\tstmt_1 \notin S_1$. Then $\tstmt_1$ depends on $S_1$ through some $g_\Bool : \Bool^{S_1} \to \Bool$. Let $\bar{f}_1 : \bar{S}_1 \to \bar{S}_2$ and $\bar{f}_2 : \bar{S}_1 \to \bar{S}_2$ be two logic homomorphisms such that $\bar{f}_1(\stmt_1) \equiv \bar{f}_2(\stmt_1) \equiv f(\stmt_1)$ for all $\stmt_1 \in S_1$. Then by \ref{3_coro_logic_homomorphism_preserves_boolean} both $\bar{f}_1(\tstmt_1)$ and $\bar{f}_2(\tstmt_1)$ depend on $S_2$ through $g_\Bool$. This means that in every possible assignment $a \in \pAss[\bar{S}_2]$ we have $a(\bar{f}_1(\tstmt_1)) = a(\bar{f}_2(\tstmt_1))$  and therefore $\bar{f}_1(\tstmt_1) \equiv \bar{f}_2(\tstmt_1)$. Then $\bar{f}_1$ and $\bar{f}_2$ are equivalent.
+\end{proof}
+
+
 \begin{defn}
-	Let $\edomain_X, \edomain_Y \subseteq \logCtx$ be two experimental domains. The \textbf{relationship metacontext}  $\logCtx_{C(X,Y)}$ between $\edomain_X$ and $\edomain_Y$ over $\{ \logCtx_i \}_{i \in I}$ is defined by following construction. Let $I$ be an index set. Let $\{ \logCtx_i \}_{i \in I}$ be an indexed set of logical contexts, let $\{ \edomain_{X_i} \}_{i \in I}$ and $\{ \edomain_{Y_i} \}_{i \in I}$ be two indexed set of experimental domains such that $\edomain_{X_i}, \edomain_{Y_i} \subseteq \logCtx_i$ for all $i \in I$. Let $\{f_{i}\}_{i \in I}$ be a set of logic isomorphisms such that $f_{i} : \edomain_{X} \to \edomain_{X_i}$. Let $\{g_{i}\}_{i \in I}$ be a set of logic isomorphisms such that $g_{i} : \edomain_{Y} \to \edomain_{Y_i}$.
+	Let $\edomain_X, \edomain_Y \subseteq \logCtx$ be two experimental domains. The \textbf{relationship metacontext}  $\logCtx_{C(X,Y)}$ between $\edomain_X$ and $\edomain_Y$ over $\{ \logCtx_i \}_{i \in I}$ is defined by following construction. Let $I$ be an index set. Let $\{ \logCtx_i \}_{i \in I}$ be an indexed set of logical contexts, let $\{ \edomain_{X_i} \}_{i \in I}$ and $\{ \edomain_{Y_i} \}_{i \in I}$ be two indexed sets of experimental domains such that $\edomain_{X_i}, \edomain_{Y_i} \subseteq \logCtx_i$ for all $i \in I$. Let $\{f_{i}\}_{i \in I}$ be a set of logic isomorphisms such that $f_{i} : \edomain_{X} \to \edomain_{X_i}$. Let $\{g_{i}\}_{i \in I}$ be a set of logic isomorphisms such that $g_{i} : \edomain_{Y} \to \edomain_{Y_i}$.
 	
-	Let $S = \edomain_{X} \times \edomain_{Y}$ and \statement{$\stmt_x \comp \stmt_y$} be the notation of an element of $S$ for some $\stmt_x \in \edomain_{X}$ and $\stmt_y \in \edomain_{Y}$. For each $i \in I$, let $a_i \in \Bool^S$ be such that  $a_i(``\stmt_x \comp \stmt_y") = \TRUE$ if and only if $f_{i}(\stmt_x) \comp g_{i}(\stmt_y)$. Define $\pAss = \{ a_i \, | \, \forall i \in I \}$. Assume $a_i \neq a_j$ if $i \neq j$; if not, given a subset of $I$ that lead to the same possible assignment, remove all elements but one. Pick $t \in I$ and define $\truth = a_t$.
+	Let $S = \edomain_{X} \times \edomain_{Y}$ and \statement{$\stmt_x \comp \stmt_y$} be the notation of an element of $S$ for some $\stmt_x \in \edomain_{X}$ and $\stmt_y \in \edomain_{Y}$. For each $i \in I$, let $a_i \in \Bool^S$ be such that  $a_i(``\stmt_x \comp \stmt_y") = \TRUE$ if and only if $f_{i}(\stmt_x) \comp g_{i}(\stmt_y)$. Define $\pAss = \{ a_i \, | \, \forall i \in I \}$. Assume $a_i \neq a_j$ if $i \neq j$; if not, given a subset of $I$ that leads to the same possible assignment, remove all elements but one. Pick $t \in I$ and define $\truth = a_t$.
 	
 	Given an arbitrary function $f_\Bool : \Bool^S \to \Bool$, we can extend the set $S$ with a new element for which the possible assignments are calculated according to the function. The relationship context $\logCtx_{C(X,Y)}$ is the closure of $S$ under all possible functions $f_\Bool \in \Bool^S$.
 	
@@ -1702,7 +1711,7 @@ Now that we have the right context, we have to understand what is the right basi
 		The only thing that needs to be checked is that the basis that generates $\edomain_{C(X,Y)}$ is countable. Since $\basis_X$ and $\basis_Y$ are countable, the set of statements of the form $\mathbin{\narrower}(\obs[e]_x, \obs[e]_y)$ with $\obs[e]_x \in \basis_X$ and $ \obs[e]_y \in \basis_Y$ is also countable.
 	\end{proof}
 \begin{prop}
-	The possibilities for a relationship domain $\edomain_{C(X,Y)}$ coincide with the possible experimental relationships between $X$ and $Y$. That is, for each possibility $z$ of $\edomain_{C(X,Y)}$ there exists a continuous function $f_z : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} ``x \narrower f_z(x)"$ and an $i \in I$ such that $g_i \circ f_z \circ f_i^{-1}$ is the causal relationship between $\edomain_{X_i}$ and $\edomain_{Y_i}$.
+	The possibilities for a relationship domain $\edomain_{C(X,Y)}$ coincide with the possible experimental relationships between $X$ and $Y$. That is, for each possibility $z$ of $\edomain_{C(X,Y)}$ there exists a continuous function $f_z : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} ``x \narrower f_z(x)"$ and an $i \in I$ such that $\bar{g}_i(f_z(\bar{f}_i^{-1}(x_i))) \equiv f_c (x_i)$ for all $x_i \in X_i$ where $f_c$ is the causal relationship between $\edomain_{X_i}$ and $\edomain_{Y_i}$.
 \end{prop}
 \begin{proof}
 	First we show that for each possibility $z$ of the relationship domain there exists a set $P_z \subseteq X \times Y$ such that $z \equiv \bigAND\limits_{(x,y) \in P_z} ``x \comp y"  \AND \bigAND\limits_{(x,y) \nin P_z} ``x \ncomp y"$. Let $z$ be a possibility of a relationship domain. This will be a minterm of the basis therefore $z \equiv minterm(\basis)$. Let $x \in X$ and $y \in Y$ be two possibilities and consider the statement $``x \comp y"$. If $z$ is true in a possible assignment, then the truth value for all statements of the form $``e_x \narrower e_y"$ where $(e_x, e_y) \in \basis_X \times \basis_Y$ will be set. But $x \ncomp y$ if and only if there exists at least one pair $(e_x, e_y) \in \basis_X \times \basis_Y$ such that $x \narrower e_x \narrower e_y$ and $y \ncomp e_y$. Therefore if $z$ is true in an assignment it will tell us whether $x \ncomp y$ is true or not, so we either have $z \narrower ``x \comp y"$ or $z \narrower \NOT ``x \comp y"$. Let $P_z = \{ (x,y) \in X \times Y \, | \, z \narrower ``x \comp y" \}$ and $\hat{z} = \bigAND\limits_{(x,y) \in P_z} ``x \comp y" \AND  \bigAND\limits_{(x,y) \nin P_z} \NOT ``x \comp y" $. Then $z \narrower \hat{z}$.
