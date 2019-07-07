@@ -1459,6 +1459,7 @@ We can construct the combined domain $\edomain_X \times \edomain_Y$ by taking al
 The third one is a contradiction: the patient cannot be dead and in a coma. Therefore the combined domain has only three possibilities. The possibilities of the combined domain are, in general, the subset of all possible combinations (i.e. the scalar product) of the possibilities of the domains we are combining: those that do not lead to contradictions.
 
 \begin{mathSection}
+%TODO: Choose a different symbols for domain combination. Introduce somewhere "projections" as maps between domains. Show that domain combination is both the product and coproduct.
 	
 	\begin{defn}
 		Let $\{\edomain_{X_i}\}_{i=1}^{\infty}$ be a countable set of experimental domains. The \textbf{combined experimental domain} $\edomain_{X} = \bigtimes\limits_{i=1}^{\infty} \edomain_{X_i}$ is the experimental domain generated from all statements in $\{\edomain_{X_i}\}_{i=1}^{\infty}$ by finite conjunction and countable disjunction.
@@ -1693,7 +1694,7 @@ Each line will tell us what statements are compatible and given the truth values
 \begin{defn}
 	Let $\edomain_X, \edomain_Y \subseteq \logCtx$ be two experimental domains. The \textbf{relationship metacontext}  $\logCtx_{C(X,Y)}$ between $\edomain_X$ and $\edomain_Y$ over $\{ \logCtx_i \}_{i \in I}$ is defined by following construction. Let $I$ be an index set. Let $\{ \logCtx_i \}_{i \in I}$ be an indexed set of logical contexts, let $\{ \edomain_{X_i} \}_{i \in I}$ and $\{ \edomain_{Y_i} \}_{i \in I}$ be two indexed sets of experimental domains such that $\edomain_{X_i}, \edomain_{Y_i} \subseteq \logCtx_i$ for all $i \in I$. Let $\{f_{i}\}_{i \in I}$ be a set of logic isomorphisms such that $f_{i} : \edomain_{X} \to \edomain_{X_i}$. Let $\{g_{i}\}_{i \in I}$ be a set of logic isomorphisms such that $g_{i} : \edomain_{Y} \to \edomain_{Y_i}$.
 	
-	Let $S = \edomain_{X} \times \edomain_{Y}$ and \statement{$\stmt_x \comp \stmt_y$} be the notation of an element of $S$ for some $\stmt_x \in \edomain_{X}$ and $\stmt_y \in \edomain_{Y}$. For each $i \in I$, let $a_i \in \Bool^S$ be such that  $a_i(``\stmt_x \comp \stmt_y") = \TRUE$ if and only if $f_{i}(\stmt_x) \comp g_{i}(\stmt_y)$. Define $\pAss = \{ a_i \, | \, \forall i \in I \}$. Assume $a_i \neq a_j$ if $i \neq j$; if not, given a subset of $I$ that leads to the same possible assignment, remove all elements but one. Pick $t \in I$ and define $\truth = a_t$.
+	Let $S$ be the set of ordered pairs of $\edomain_{X}$ and $\edomain_{Y}$ and \statement{$\stmt_x \comp \stmt_y$} be the notation of an element of $S$ for some $\stmt_x \in \edomain_{X}$ and $\stmt_y \in \edomain_{Y}$. For each $i \in I$, let $a_i \in \Bool^S$ be such that  $a_i(``\stmt_x \comp \stmt_y") = \TRUE$ if and only if $f_{i}(\stmt_x) \comp g_{i}(\stmt_y)$. Define $\pAss = \{ a_i \, | \, \forall i \in I \}$. Assume $a_i \neq a_j$ if $i \neq j$; if not, given a subset of $I$ that leads to the same possible assignment, remove all elements but one. Pick $t \in I$ and define $\truth = a_t$.
 	
 	Given an arbitrary function $f_\Bool : \Bool^S \to \Bool$, we can extend the set $S$ with a new element for which the possible assignments are calculated according to the function. The relationship context $\logCtx_{C(X,Y)}$ is the closure of $S$ under all possible functions $f_\Bool \in \Bool^S$.
 	
