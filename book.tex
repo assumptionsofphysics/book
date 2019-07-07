@@ -1410,7 +1410,14 @@ More precisely, consider the verifiable statement $\obs_Y=$\statement{the height
 		Now we show that a causal relationship implies dependence between domains. Suppose we have a causal relationship $f: X \to Y$ between $\edomain_X$ and $\edomain_Y$. Let $y \in Y$ be a possibility for $\edomain_Y$. Consider  $f^{-1}(\{y\})$: this is the set of all possibilities in $X$ that are compatible with $y$ which is, by definition, the theoretical set of $y$. Therefore we have $y \equiv \bigOR\limits_{x \in f^{-1}(\{y\})} x$. Now consider a verifiable statement $\obs_Y \in \edomain_Y$. We have $\obs_Y \equiv \bigOR\limits_{y \in U_Y(\obs_Y)} y \equiv \bigOR\limits_{y \in U_Y(\obs_Y)} \bigOR\limits_{x \in f^{-1}(\{y\})} x \equiv \bigOR\limits_{x \in f^{-1}(U_Y(\obs_Y))} x$. Because $f$ is continuous, the reverse image of a verifiable set is a verifiable set. Therefore there is an $\obs_X \in \edomain_X$ such that $U_X(\obs_X) = f^{-1}(U_Y(\obs_Y))$. The two verifiable statements $\obs_X \equiv \bigOR\limits_{x \in U_X(\obs_X)} x \equiv \obs_Y$ are equivalent. For each $\obs_Y \in \edomain_Y$ we can find an equivalent $\obs_X \in \edomain_X$ so $\edomain_Y$ depends on $\edomain_X$.
 	\end{proof}
 
-TODO: Corollary: two domains are equivalent iff the possibilities are homeo (i.e. I can go back and forth with a continuous function)
+\begin{coro}
+	Two experimental domains $\edomain_{X}$ and $\edomain_{Y}$ are equivalent if and only if there exists a homeomorphism $f : X \to Y$ between the possibilities such that $x \equiv f(x)$.
+\end{coro}
+\begin{proof}
+	Let $\edomain_{X}$ and $\edomain_{Y}$ be two equivalent experimental domains. Then we can find the causal relationship $f : X \to Y$ and $g : Y \to X$. We have $x \narrower f(x) \narrower g(f(x))$. Since $g(f(x)) \in X$ is a possibility, and since $x$ is the only possibility compatible with itself, we must have $x \equiv g(f(x))$. Therefore $g$ is the inverse of $f$ and it is continuous. Therefore $f$ is a homeomorphism. We also have $x \narrower f(x) \narrower x$, therefore $f(x) \equiv x$.
+	
+	Now let $f : X \to Y$ be a homeomorphism between the possibilities of $\edomain_{X}$ and $\edomain_{Y}$ such that $x \equiv f(x)$. Then $f$ is a causal relationship and $\edomain_{Y}$ depends on $\edomain_{X}$. Let $g$ be the inverse of $f$, which is continuous since $f$ is a homeomorphism. We have $y \equiv f(g(y)) \equiv g(y)$. Then $g$ is also a causal relationship and $\edomain_{X}$ depends on $\edomain_{Y}$. Therefore $\edomain_{X} \equiv \edomain_{Y}$.
+\end{proof}
 \end{mathSection}
 
 Since for each inference relationship we have a causal relationship and vice-versa, we will simply use the term \textbf{experimental relationship} to describe the link between the two domains.
