@@ -2399,34 +2399,140 @@ We defined discrete quantities as the ones that can be associated with integers 
 
 It is important to note that the requirements for continuous quantities cannot really be physically realized. Continuous quantities, then, should really be thought of as an idealization: the limit of an infinite process of subdivision. To go past the idealization, either we lose the idea of having infinitely many references between two, in which case we revert to discrete quantities, or we lose the ordering altogether.
 
-\chapter{Precision}
+\chapter{Level of detail}
 
 \def\eqgran{\doteq}
 \def\finer{\leqdot}
+\def\nfiner{\nleqdot}
 \def\coarser{\geqdot}
 \def\sfiner{\lessdot}
 \def\scoarser{\gtrdot}
 
+\section{Granularity}
 
-\begin{axiom}
-	Equivalence relationship $\eqgran : \logCtx \times \logCtx \to \Bool$ defined on the context such that if $\stmt_1 \equiv \stmt_2$ then $\stmt_1 \eqgran \stmt_2$. We say two statements $\stmt_1 \eqgran \stmt_1$ are \textbf{equigranular}.
+Statement narrowness allows us to say that the statement \statement{the temperature is between 22 and 23 Celsius} is more precise than \statement{the temperature is between 20 and 25 Celsius} but it does not tell us how it compares to \statement{the temperature is between 23 and 25 Celsius}. That is, it can compare only statements that are fully contained in one another, and not statements that are overlapping or incompatible. Ideally, we want to say that \statement{the temperature is between 23 and 25 Celsius} is coarser than \statement{the temperature is between 22 and 23 Celsius}. Saying that the first statements, in fact, is true constrains us to more possibilities than saying that the second is true. It would seem we simply need to keep track quantity intervals or possibility counts, but this does not work in the general case.
+
+We may think that, at least in the discrete case, we could simply count the possibilities compatible with each statement: the more possibilities, the more the statement is coarser. This also does not always work. For example, suppose we have a bowl that can contain apples. The domain that counts how many apples are in the bowl will have \statement{there are 2 apples in the bowl} and \statement{there are 5 apples in the bowl} as possibilities. We would be tempted to say they provide the same level of description. Now suppose we extend the domain to count how many of the apples are green. This will have \statement{there are 2 apples in the bowl 1 of which is green} and \statement{there are 5 apples in the bowl 3 of which are green} as possibilities. We would be tempted to say that these too provide the same level of description as each other. But because the two quantities are not independent (i.e. you cannot have more green apples than apples in the bowl) this cannot work. The statement \statement{there are 2 apples in the bowl} would be equivalent to the disjunctions of 3 possibilities in the combined domain: 0, 1 or 2 green apples. The statement \statement{there are 5 apples in the bowl} would be equivalent to the disjunction of 6 possibilities in the combined domain: 0, 1, 2, 3, 4 or 5 green apples. Therefore, it would seem that the second statement covers twice as many cases of the first, so it should be coarser than the first. But if we counted the possibilities in the first domain they were equigranular.
+
+In the continuous case, simply using the cardinality of the possibilities would lead us to say that \statement{the temperature is between 22 and 23 Celsius} and \statement{the temperature is between 20 and 25 Celsius} give us similar description: the both correspond to continuously many possibilities. We may think that using the numeric interval would work, but this also fails in unexpected ways. For example, we may be tempted to say that \statement{the horizontal position of the ball is between 0 and 1 meters} and \statement{the vertical position of the ball is between 0 and 1 meters} provide the same level of description, that they are, as we'll say, equigranular. But suppose the ball is constrained by walls, such that the horizontal position must be within 0 and 1 meters. Then, in this case, the first statement will always be true and tells us nothing about the system. Saying \statement{the vertical position of the ball is between 0 and 1 meters} will be equivalent to saying \statement{the vertical position of the ball is between 0 and 1 meters and the horizontal position is between 0 and 1 meters}. In this case, the first statement is narrower than the second and therefore must correspond to a finer description. As another example, suppose we give the position of a ball in polar coordinates over an infinite plane. The statement \statement{the radial distance is between 0 and 100 meters} corresponds to a circle of radius one. The statement \statement{the angle is between 0 and $\pi$} corresponds to half a plane. The first statement, then, is infinitely finer than the second, even though the numerical values seem to have a finite ratio. Numerical interval, then, don't tell the whole story and can be misleading.
+
+The point is that comparing the granularity of two statements cannot be defined simply on the concepts we have already introduced. It depends on the semantic content and the relationships defined by the context. It requires an additional axiom.
+
+We will assume that each logical context $\logCtx$ allows us to compare two statements $\stmt_1$ and $\stmt_2$ and say whether the description of one is finer, more detailed, provides more information, than the other. In that case, we would write $\stmt_1 \finer \stmt_2$ meaning the first statement is finer than the second. The finer statement will be the ``smaller'' one. Note that we can still have two statements, like \statement{this animal is a cat} and \statement{the speed of that particle is between 2 and 3 $m/s$}, that are not comparable: neither is finer than the other.
+
+If two statements are comparable by narrowness, fineness should faithfully reflect the relationship. Therefore, if $\stmt_1$ is narrower than $\stmt_2$ than its description is at a finer level of detail and therefore $\stmt_1$ is also finer than $\stmt_2$. Conversely, if $\stmt_1$ is strictly narrower than $\stmt_2$, then $\stmt_2$ cannot be finer $\stmt_1$. We require fineness to be transitive: if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_3$ then $\stmt_1 \finer \stmt_3$. These are the only requirements we need to add to our framework.
+
+% TODO: not clear we need this. We also require it to respect negation: if one description is finer than another, then the 
+
+\begin{mathSection}
+\begin{axiom}\label{4_axiom_fineness}
+	Given two statements $\stmt_1, \stmt_2 \in \logCtx$ we say $\stmt_1$ is \textbf{finer} than $\stmt_2$ (noted $\stmt_1 \finer \stmt_2$) if the description it provides is at least at the same level of detail. Formally, a logical context $\logCtx$ comes equipped with a binary relationship $\finer : \logCtx \times \logCtx \to \Bool$ such that:
+	\begin{itemize}
+		\item it reflects narrowness; that is, if $\stmt_1 \narrower \stmt_2$ then $\stmt_1 \finer \stmt_2$ and if $\stmt_2 \sbroader \stmt_1$ then $\stmt_2 \nfiner \stmt_1$
+		\item it is compatible with negation; that is, if $\stmt_1 \finer \stmt_2$ then $\NOT \stmt_2 \finer \NOT \stmt_1$
+		\item it is transitive if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_3$ then $\stmt_1 \finer \stmt_3$.
+	\end{itemize}
 \end{axiom}
+\end{mathSection}
 
+From this new axiom we define equigranularity, the notion that two statements provide the same level of description, the same information. We can show that equigranularity is an equivalance relationship which is less restrictive than statement equivalence. That is, two equivalent statements, like \statement{the temperature is between 0 and 1 Celsius} and \statement{the temperature is between 273.15 and 274.15 Kelvin}, are also equigranular but two equigranular statements, like \statement{the temperature is between 0 and 1 Celsius} and \statement{the temperature is between 1 and 2 Celsius}, are not equivalent.
+
+We can also show that fineness is a partial order, not just on the statements, but on equivalent and equigranular classes. We can imagine partitioning the logical context into groups of statements that are equigranular, and fineness will provide a partial order for those sets. If we partition the logical context into groups of equivalent statement, each group will fall into an equigranular group, and will therefore be ordered by fineness as well.
+
+\begin{mathSection}
 \begin{defn}
-	Define $\finer : \logCtx \times \logCtx \to \Bool$. We say $\stmt_1 \finer \stmt_2$ \textbf{is finer} if we can find $\stmt_3 \eqgran \stmt_1$ and $\stmt_4 \eqgran \stmt_2$ such that $\stmt_3 \narrower \stmt_4$. We say $\stmt_1 \coarser \stmt_2$ \textbf{is coarser} if $\stmt_2 \finer \stmt_1$.
+	Two statements are said \textbf{equigranular} (noted $\stmt_1 \eqgran \stmt_2$) if the description they provide is at the same level of detail. Formally, $\stmt_1 \eqgran \stmt_2$ if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_1$.
 \end{defn}
 
 \begin{prop}
-	$\finer$ is a partial order.
+	Statement equigranularity satisfies the following properties:
+	\begin{itemize}
+		\item reflexivity: $\stmt \eqgran \stmt$
+		\item symmetry: if $\stmt_1 \eqgran \stmt_2$ then $\stmt_2 \eqgran \stmt_1$
+		\item transitivity: if $\stmt_1 \eqgran \stmt_2$ and $\stmt_2 \eqgran \stmt_3$ then $\stmt_1 \eqgran \stmt_3$
+	\end{itemize}
+	and is therefore an equivalence relationship.
 \end{prop}
+\begin{proof}
+	For reflexivity, we have $\stmt \narrower \stmt$ which implies $\stmt \finer \stmt$ and therefore $\stmt \eqgran \stmt$. For symmetry, $\stmt_1 \eqgran \stmt_2$ implies $\stmt_1 \finer \stmt_2 \finer \stmt_1$ which also implies $\stmt_2 \eqgran \stmt_1$. For transitivity, suppose $\stmt_1 \eqgran \stmt_2$ and $\stmt_2 \eqgran \stmt_3$. Then $\stmt_1 \finer \stmt_2 \finer \stmt_3 \finer \stmt_2 \finer \stmt_1$ which means $\stmt_1 \eqgran \stmt_3$. 
+\end{proof}
 
 \begin{coro}
-	$\stmt_1 \narrower \stmt_2$ implies $\stmt_1 \finer \stmt_2$.
+	Statement equigranularity is also an equivalence relationships among equivalence classes of statements. That is, $\stmt_1 \eqgran \stmt_2$ for all $\stmt_1,\stmt_2 \in \logCtx$ such that $\stmt_1 \equiv \stmt_2$.
 \end{coro}
+\begin{proof}
+	Suppose $\stmt_1 \equiv \stmt_2$. Then $\stmt_1 \narrower \stmt_2 \narrower \stmt_1$ which means $\stmt_1 \finer \stmt_2 \finer \stmt_1$ and $\stmt_1 \eqgran \stmt_2$.
+\end{proof}
 
-\begin{defn}
-	$\stmt_1, \stmt_2 \in \logCtx$ are \textbf{comparable} if $\stmt_1 \finer \stmt_2$ or $\stmt_1 \coarser \stmt_2$.
-\end{defn}
+\begin{prop}
+	Statement fineness satisfies the following properties:
+	\begin{enumerate}
+		\item reflexivity: $\stmt \finer \stmt$
+		\item antisymmetry: if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_1$ then $\stmt_1 \eqgran \stmt_2$
+		\item transitivity: if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_3$ then $\stmt_1 \finer \stmt_3$
+	\end{enumerate}
+	and is therefore a partial order.
+\end{prop}
+\begin{proof}
+	For reflexivity we have $\stmt \narrower \stmt$ and therefore $\stmt \finer \stmt$. Antisymmetry is assured by the definition of equigranularity. Transitivity is assured by \ref{4_axiom_fineness}.
+\end{proof}
+
+\begin{coro}
+	Statement fineness is a partial order for equivalence classes of statements. That is, if  If $\stmt_1 \finer \stmt_2$ then $\stmt_3 \finer \stmt_4$ for all $\stmt_3 \equiv \stmt_1$ and $\stmt_4 \equiv \stmt_2$. Statement fineness is monotonic with respect to statement narrowness. That is, $\stmt_1 \narrower \stmt_2$ implies $\stmt_1 \finer \stmt_2$.
+\end{coro}
+\begin{proof}
+	Suppose $\stmt_1 \finer \stmt_2$. Let $\stmt_3 \equiv \stmt_1$ and $\stmt_4 \equiv \stmt_2$. Then $\stmt_3 \eqgran \stmt_1$ and $\stmt_4 \eqgran \stmt_2$. We have $\stmt_3 \finer \stmt_1 \finer \stmt_2 \finer \stmt_4$. Therefore $\stmt_3 \finer \stmt_4$. Monotonicity is guaranteed by \ref{4_axiom_fineness}.
+\end{proof}
+\end{mathSection}
+
+This seemingly simple axiom is what allows us to open the door to disparate concepts such as geometry (comparing level of detail in terms of areas and volumes), information theory (comparing level of detail in terms of bits), probability theory (quantifying unknowns) and determinism and reversibility (how the level of detail changes through evolution).
+
+Notes:
+
+Problem 1. Can't simply count possible assignments. Each line may not have the same weight: one context may contain ``there are 2 or 3 apples on the table'' and ``there are 4 apples on the table'' as narrowest contingent statements. The first description is coarser than the second. Can't compare infinities: each point in finite volumes and finite areas correspond to at least a possible assignment, which means they would have the same cardinality.
+
+Problem 2. Will want space and time to be comparable under kinematic assumption. Will need to compare accuracy without narrowness/equivalence relationships. Accuracy must be a prime construct (not built on narrowness/equivalence).
+
+Problem 3. Units do not necessarily transfer to accuracy in a straight-forward way. Say $x\in \mathbb{R}$ and $y \in (-1, +1)$. A finite interval in $y$ is an infinite area while finite interval in $x$ is finite area. Two units in $y$ gives a tautology, which is the whole of $x$ and not two units in $x$. Similar problem on a plane with polar coordinates.
+
+This has more to do with densities not being comparable.
+Consider \statement{the temperature of the gas is between 20 and 25 Celsius} and \statement{the pressure of the gas is between 100 and 200 kPa}. These are measurements of different physical quantities that do not have a canonical way to be converted into each. We cannot say which ones provide a finer descriptions. They are not comparable, so it would seem only interval of commensurable units can be compared. But consider \statement{the position of the ball is between 3 and 4 meters} and \statement{the ball reached the mark between 2 and 3 seconds}. These are measurements of different physical quantities but we have a way to convert them. Since any object cannot exceed the speed of light, roughly 300,000 kilometers per seconds, we can say that describing the time of arrival within a one second corresponds to describing the position within 300,000 meters. So, in a way, we can say that the first statement provides a finer description than the second. Whether two statements are comparable, then, depends on their semantic content and what relationship we have established within the theory. It requires additional physical information that is not merely its units.
+
+The issue is that typically one thinks of a unit on one direction as per unit of the other directions. Regardless of constraints, we can divide the plane in squares of one meter in the vertical and horizontal directions. Even when talking about distances, we are typically thinking of a volume that has one significant size in one dimension and small in the other (e.g. a rod or a ruler). So one is, in the end, comparing volume densities along a direction. This way of thinking is useful but hides a series of implicit assumptions that were taken along the way, specifically the idea that the volume was a good place to stop and that densities can be properly defined. When comparing granularity of statements, therefore, we are not comparing the statements based on a unit system we have developed. We are comparing the statement themselves, establishing relationships from which we can build, if appropriate conditions apply, a unit system.
+
+
+Requirements:
+\begin{description}
+	\item[8] If $\stmt_1 \narrower \stmt_2$ then $\stmt_1 \finer \stmt_2$.
+	\item[10] If $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_3$ then $\stmt_1 \finer \stmt_3$.
+	\item[12] If $\stmt_1 \finer \stmt_2$ then $\NOT \stmt_2 \finer \NOT \stmt_1$.
+	\item[13] If $\stmt_2 \sbroader \stmt_1$ then $\stmt_2 \nfiner \stmt_1$.
+	\item[11] If $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_1$ then $\stmt_1 \eqgran \stmt_3$.
+	\item[4] If $\stmt_1 \equiv \stmt_2$ then $\stmt_1 \eqgran \stmt_2$
+	\item[1] $\eqgran$ is an equivalence relationship
+	\item[2] $\stmt_1 \narrower \stmt_2 \eqgran \stmt_3 \narrower \stmt_4 \eqgran \stmt_1$ then $\stmt_1 \eqgran \stmt_2$
+	\item[5] $\finer$ is a partial order
+	\item[6] If there exists $\stmt_3, \stmt_4 \in \logCtx$ such that $\stmt_3 \eqgran \stmt_1$,  $\stmt_4 \eqgran \stmt_2$ and $\stmt_3 \narrower \stmt_4$ then $\stmt_1 \finer \stmt_2$
+	\item[7] If $\stmt_1 \eqgran \stmt_2$ then $\NOT \stmt_1 \eqgran \NOT \stmt_2$.
+	\item[9] If $\stmt_1 \nfiner \stmt_2$ then $\stmt_1 \nnarrower \stmt_2$.
+	\item[3] If $\stmt_1 \snarrower \stmt_2$ then $\stmt_3 \nsbroader \stmt_4$ for all  $\stmt_3 \eqgran \stmt_1$,  $\stmt_4 \eqgran \stmt_2$
+\end{description}
+
+Strawman:
+\begin{itemize}
+	\item Take 8, 10, 12 and 13 axiomatically
+	\item Define eqgran with 11
+	\item 3 cannot be proven
+	\item Prove 4 from 8 and 11
+	\item Prove 1 from 4, 11, 10
+	\item Prove 2 from 8 and 11
+	\item Prove 5 from 8, 11, 10
+	\item Prove 6 from 8, 11
+	\item Prove 7 from 12
+	\item Prove 9 from 8
+	\item Prove 4 from 13, 11, 10
+\end{itemize}
+
 
 \begin{thrm}
 	Let $\edomain$ be an experimental domain where all statements are comparable to each other. Then given $\stmt[u] \in \tdomain$ we can find $\mu_{\stmt[u]} : \tdomain \to \mathbb{R}$ such that:
@@ -2439,6 +2545,17 @@ It is important to note that the requirements for continuous quantities cannot r
 \begin{proof}
 	This can be posed as a question on measurable spaces. Imposing a measure on a sigma algebra tells us which sets are equal size. Can this be reversed? That is, if we impose which sets are equal size (compatibly with set inclusion), can we get a measure?
 \end{proof}
+
+\begin{coro}
+	The measure $\mu_{\stmt[u]}$ is unique only if all possibilities are equigranular.
+\end{coro}
+\begin{proof}
+	The issue is that if the possibilities are only comparable, then we can't tell how much the measure of one should be bigger than the other since we can't find finer statements to measure the difference. Therefore we can change the value associated to the possibilities without breaking the ordering. If all possibilities are equigranular, then the finest statements must be given all the same size.
+\end{proof}
+
+We can quantify the accuracy numerically only if the possibilities of the domain are equigranular.
+
+
 
 \appendix
 
