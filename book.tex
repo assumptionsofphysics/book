@@ -2410,6 +2410,10 @@ It is important to note that the requirements for continuous quantities cannot r
 
 \section{Granularity}
 
+So far we have studied the properties and construction that can be defined on top of logical consistency and experimental verifiability. We will now  introduce another primary attribute of statements, the idea that we can compare the level of detail for the description they provide.
+
+We will see that the granularity, the level of detail provided by a statement, cannot be defined in terms of the concepts we previously introduced. We will therefore introduce a new axiom which will allow us to determine which statements provide a finer description and which statement provide the same granularity.
+
 Statement narrowness allows us to say that the statement \statement{the temperature is between 22 and 23 Celsius} is more precise than \statement{the temperature is between 20 and 25 Celsius} but it does not tell us how it compares to \statement{the temperature is between 23 and 25 Celsius}. That is, it can compare only statements that are fully contained in one another, and not statements that are overlapping or incompatible. Ideally, we want to say that \statement{the temperature is between 23 and 25 Celsius} is coarser than \statement{the temperature is between 22 and 23 Celsius}. Saying that the first statements, in fact, is true constrains us to more possibilities than saying that the second is true. It would seem we simply need to keep track quantity intervals or possibility counts, but this does not work in the general case.
 
 We may think that, at least in the discrete case, we could simply count the possibilities compatible with each statement: the more possibilities, the more the statement is coarser. This also does not always work. For example, suppose we have a bowl that can contain apples. The domain that counts how many apples are in the bowl will have \statement{there are 2 apples in the bowl} and \statement{there are 5 apples in the bowl} as possibilities. We would be tempted to say they provide the same level of description. Now suppose we extend the domain to count how many of the apples are green. This will have \statement{there are 2 apples in the bowl 1 of which is green} and \statement{there are 5 apples in the bowl 3 of which are green} as possibilities. We would be tempted to say that these too provide the same level of description as each other. But because the two quantities are not independent (i.e. you cannot have more green apples than apples in the bowl) this cannot work. The statement \statement{there are 2 apples in the bowl} would be equivalent to the disjunctions of 3 possibilities in the combined domain: 0, 1 or 2 green apples. The statement \statement{there are 5 apples in the bowl} would be equivalent to the disjunction of 6 possibilities in the combined domain: 0, 1, 2, 3, 4 or 5 green apples. Therefore, it would seem that the second statement covers twice as many cases of the first, so it should be coarser than the first. But if we counted the possibilities in the first domain they were equigranular.
@@ -2533,6 +2537,17 @@ Strawman:
 	\item Prove 4 from 13, 11, 10
 \end{itemize}
 
+\begin{defn}
+	An experimental domain $\edomain_X$ is uniform if all possibilities are equigranular. That is, $x_1 \eqgran x_2$ for all $x_1, x_2 \in X$.
+\end{defn}
+
+\begin{prop}
+	Let $\edomain$ be a uniform experimental domain. Let $\stmt_1 \in \tdomain$ be a statement compatible with infinitely many possibilities. Then we can find $\stmt_2, \stmt_3 \in \tdomain$ such that $\stmt_2 \ncomp \stmt_3$, $\stmt_2 \eqgran \stmt_3$ and $\stmt_1 \equiv \stmt_2 \OR \stmt_3$.
+\end{prop}
+
+\begin{proof}
+	
+\end{proof}
 
 \begin{thrm}
 	Let $\edomain$ be an experimental domain where all statements are comparable to each other. Then given $\stmt[u] \in \tdomain$ we can find $\mu_{\stmt[u]} : \tdomain \to \mathbb{R}$ such that:
