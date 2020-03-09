@@ -2448,6 +2448,13 @@ We can also show that fineness is a partial order, not just on the statements, b
 	Two statements are said \textbf{equigranular} (noted $\stmt_1 \eqgran \stmt_2$) if the description they provide is at the same level of detail. Formally, $\stmt_1 \eqgran \stmt_2$ if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_1$.
 \end{defn}
 
+\begin{coro}
+	If $\stmt_1 \eqgran \stmt_2$ then $\NOT \stmt_1 \eqgran \NOT \stmt_2$.
+\end{coro}
+\begin{proof}
+	From $\stmt_1 \eqgran \stmt_2$ we have $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_1$ by definition. From \ref{4_axiom_fineness} we have $\NOT \stmt_2 \finer \NOT \stmt_1$ and $\NOT \stmt_1 \finer \NOT \stmt_2$ and therefore $\NOT \stmt_1 \eqgran \NOT \stmt_2$.
+\end{proof}
+
 \begin{prop}
 	Statement equigranularity satisfies the following properties:
 	\begin{itemize}
@@ -2482,10 +2489,17 @@ We can also show that fineness is a partial order, not just on the statements, b
 \end{proof}
 
 \begin{coro}
-	Statement fineness is a partial order for equivalence classes of statements. That is, if  If $\stmt_1 \finer \stmt_2$ then $\stmt_3 \finer \stmt_4$ for all $\stmt_3 \equiv \stmt_1$ and $\stmt_4 \equiv \stmt_2$. Statement fineness is monotonic with respect to statement narrowness. That is, $\stmt_1 \narrower \stmt_2$ implies $\stmt_1 \finer \stmt_2$.
+	Statement fineness is a partial order for equivalence classes of statements. That is, if  If $\stmt_1 \finer \stmt_2$ then $\stmt_3 \finer \stmt_4$ for all $\stmt_3 \equiv \stmt_1$ and $\stmt_4 \equiv \stmt_2$.
 \end{coro}
 \begin{proof}
-	Suppose $\stmt_1 \finer \stmt_2$. Let $\stmt_3 \equiv \stmt_1$ and $\stmt_4 \equiv \stmt_2$. Then $\stmt_3 \eqgran \stmt_1$ and $\stmt_4 \eqgran \stmt_2$. We have $\stmt_3 \finer \stmt_1 \finer \stmt_2 \finer \stmt_4$. Therefore $\stmt_3 \finer \stmt_4$. Monotonicity is guaranteed by \ref{4_axiom_fineness}.
+	Suppose $\stmt_1 \finer \stmt_2$. Let $\stmt_3 \equiv \stmt_1$ and $\stmt_4 \equiv \stmt_2$. Then $\stmt_3 \eqgran \stmt_1$ and $\stmt_4 \eqgran \stmt_2$. We have $\stmt_3 \finer \stmt_1 \finer \stmt_2 \finer \stmt_4$. Therefore $\stmt_3 \finer \stmt_4$.
+\end{proof}
+
+\begin{coro}
+	Statement fineness is monotonic with respect to statement narrowness. That is, $\stmt_1 \narrower \stmt_2$ implies $\Id(\stmt_1) \finer \Id(\stmt_2)$ where $\Id : \logCtx \to \logCtx$ is the identity function over $\logCtx$.
+\end{coro}
+\begin{proof}
+	Monotonicity is guaranteed by \ref{4_axiom_fineness}.
 \end{proof}
 \end{mathSection}
 
@@ -2504,38 +2518,6 @@ Consider \statement{the temperature of the gas is between 20 and 25 Celsius} and
 
 The issue is that typically one thinks of a unit on one direction as per unit of the other directions. Regardless of constraints, we can divide the plane in squares of one meter in the vertical and horizontal directions. Even when talking about distances, we are typically thinking of a volume that has one significant size in one dimension and small in the other (e.g. a rod or a ruler). So one is, in the end, comparing volume densities along a direction. This way of thinking is useful but hides a series of implicit assumptions that were taken along the way, specifically the idea that the volume was a good place to stop and that densities can be properly defined. When comparing granularity of statements, therefore, we are not comparing the statements based on a unit system we have developed. We are comparing the statement themselves, establishing relationships from which we can build, if appropriate conditions apply, a unit system.
 
-
-Requirements:
-\begin{description}
-	\item[8] If $\stmt_1 \narrower \stmt_2$ then $\stmt_1 \finer \stmt_2$.
-	\item[10] If $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_3$ then $\stmt_1 \finer \stmt_3$.
-	\item[12] If $\stmt_1 \finer \stmt_2$ then $\NOT \stmt_2 \finer \NOT \stmt_1$.
-	\item[13] If $\stmt_2 \sbroader \stmt_1$ then $\stmt_2 \nfiner \stmt_1$.
-	\item[11] If $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_1$ then $\stmt_1 \eqgran \stmt_3$.
-	\item[4] If $\stmt_1 \equiv \stmt_2$ then $\stmt_1 \eqgran \stmt_2$
-	\item[1] $\eqgran$ is an equivalence relationship
-	\item[2] $\stmt_1 \narrower \stmt_2 \eqgran \stmt_3 \narrower \stmt_4 \eqgran \stmt_1$ then $\stmt_1 \eqgran \stmt_2$
-	\item[5] $\finer$ is a partial order
-	\item[6] If there exists $\stmt_3, \stmt_4 \in \logCtx$ such that $\stmt_3 \eqgran \stmt_1$,  $\stmt_4 \eqgran \stmt_2$ and $\stmt_3 \narrower \stmt_4$ then $\stmt_1 \finer \stmt_2$
-	\item[7] If $\stmt_1 \eqgran \stmt_2$ then $\NOT \stmt_1 \eqgran \NOT \stmt_2$.
-	\item[9] If $\stmt_1 \nfiner \stmt_2$ then $\stmt_1 \nnarrower \stmt_2$.
-	\item[3] If $\stmt_1 \snarrower \stmt_2$ then $\stmt_3 \nsbroader \stmt_4$ for all  $\stmt_3 \eqgran \stmt_1$,  $\stmt_4 \eqgran \stmt_2$
-\end{description}
-
-Strawman:
-\begin{itemize}
-	\item Take 8, 10, 12 and 13 axiomatically
-	\item Define eqgran with 11
-	\item 3 cannot be proven
-	\item Prove 4 from 8 and 11
-	\item Prove 1 from 4, 11, 10
-	\item Prove 2 from 8 and 11
-	\item Prove 5 from 8, 11, 10
-	\item Prove 6 from 8, 11
-	\item Prove 7 from 12
-	\item Prove 9 from 8
-	\item Prove 4 from 13, 11, 10
-\end{itemize}
 
 \begin{defn}
 	An experimental domain $\edomain_X$ is uniform if all possibilities are equigranular. That is, $x_1 \eqgran x_2$ for all $x_1, x_2 \in X$.
