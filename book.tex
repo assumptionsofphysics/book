@@ -2449,6 +2449,10 @@ We can also show that fineness is a partial order, not just on the statements, b
 
 \begin{mathSection}
 \begin{defn}
+	Two statements are \textbf{comparable} if the level of detail of their description can be compared. Formally, $\stmt_1$ and $\stmt_2$ are comparable if $\stmt_1 \finer \stmt_2$ or $\stmt_2 \finer \stmt_1$. Given a set of statement $S \subseteq \logCtx$ and an element $\stmt[u] \in S$, we define $S^{\stmt[u]} = \{ \stmt \in S \, | \, \stmt \text{ comparable to } \stmt[u] \}$.
+\end{defn}
+	
+\begin{defn}
 	Two statements are said \textbf{equigranular} (noted $\stmt_1 \eqgran \stmt_2$) if the description they provide is at the same level of detail. Formally, $\stmt_1 \eqgran \stmt_2$ if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_1$.
 \end{defn}
 
@@ -2515,8 +2519,19 @@ Also: partial order allows for some quantities to not be comparable.
 
 \section{Next}
 
+The general idea is that if two domains are such that each point can go to any other point through a relationship, then all points and all verifiable statements are granularity-comparable.
+
 \begin{defn}
-	An experimental domain $\edomain_X$ is uniform if all possibilities are equigranular. That is, $x_1 \eqgran x_2$ for all $x_1, x_2 \in X$.
+	An experimental domain $\edomain_X$ is \textbf{uniform} if all possibilities are equigranular. That is, $x_1 \eqgran x_2$ for all $x_1, x_2 \in X$.
+\end{defn}
+
+\begin{defn}
+	Let $\stmt[u] \in \tdomain_X$ and let $\tdomain_X^{\stmt[u]}$ be the set of comparable statements. A \textbf{measure} on $\tdomain_X$ with unit $\stmt[u]$ is a map $\mu_{\stmt[u]} : \tdomain \to \mathbb{R}$ such that:
+	\begin{itemize}
+		\item $\mu_{\stmt[u]}(\stmt[u]) = 1$
+		\item $\mu_{\stmt[u]}(\stmt_1) \leq \mu_{\stmt[u]}(\stmt_2)$ if $\stmt_1 \finer \stmt_2$
+		\item if $\stmt_1 \ncomp \stmt_2$ then $\mu_{\stmt[u]}(\stmt_1 \OR \stmt_2) =  \mu_{\stmt[u]}(\stmt_1) + \mu_{\stmt[u]}(\stmt_2)$
+	\end{itemize}
 \end{defn}
 
 \begin{prop}
@@ -2547,6 +2562,12 @@ Also: partial order allows for some quantities to not be comparable.
 \end{proof}
 
 We can quantify the accuracy numerically only if the possibilities of the domain are equigranular.
+
+Notes: we want to say we can define a measure on a set of comparable statements. In particular, we want all possibilities to be comparable, or we will not be able to say whether we can have a relationship between the points. In fact, if two possibilities are not comparable, the cannot be put in a causal relationship. We want verifiable statements to be comparable, or they cannot be put into an inference relationship.
+
+The fact that each possibility is comparable with each verifiable statement is a consequence that every verifiable statement is narrower than at least one possibility.
+
+
 
 
 
