@@ -2444,6 +2444,26 @@ If two statements are comparable by narrowness, fineness should faithfully refle
 		\item it is transitive if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_3$ then $\stmt_1 \finer \stmt_3$.
 	\end{itemize}
 \end{axiom}
+
+\begin{prop}
+	Statement fineness satisfies the following properties:
+	\begin{enumerate}
+		\item reflexivity: $\stmt \finer \stmt$
+		\item transitivity: if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_3$ then $\stmt_1 \finer \stmt_3$
+	\end{enumerate}
+	and is therefore a preorder.
+\end{prop}
+\begin{proof}
+	For reflexivity we have $\stmt \narrower \stmt$ and therefore $\stmt \finer \stmt$. Transitivity is assured by axiom \ref{4_axiom_fineness}.
+\end{proof}
+
+\begin{coro}
+	Statement fineness is monotonic with respect to statement narrowness. That is, $\stmt_1 \narrower \stmt_2$ implies $\Id(\stmt_1) \finer \Id(\stmt_2)$ where $\Id : \logCtx \to \logCtx$ is the identity function over $\logCtx$.
+\end{coro}
+\begin{proof}
+	Monotonicity is guaranteed by axiom \ref{4_axiom_fineness}.
+\end{proof}
+
 \end{mathSection}
 
 From this new axiom we define equigranularity, the notion that two statements provide the same level of description, the same information. We can show that equigranularity is an equivalance relationship which is less restrictive than statement equivalence. That is, two equivalent statements, like \statement{the temperature is between 0 and 1 Celsius} and \statement{the temperature is between 273.15 and 274.15 Kelvin}, are also equigranular but two equigranular statements, like \statement{the temperature is between 0 and 1 Celsius} and \statement{the temperature is between 1 and 2 Celsius}, are not equivalent.
@@ -2486,32 +2506,13 @@ We can also show that fineness is a partial order, not just on the statements, b
 	Suppose $\stmt_1 \equiv \stmt_2$. Then $\stmt_1 \narrower \stmt_2 \narrower \stmt_1$ which means $\stmt_1 \finer \stmt_2 \finer \stmt_1$ and $\stmt_1 \eqgran \stmt_2$.
 \end{proof}
 
-\begin{prop}
-	Statement fineness satisfies the following properties:
-	\begin{enumerate}
-		\item reflexivity: $\stmt \finer \stmt$
-		\item antisymmetry: if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_1$ then $\stmt_1 \eqgran \stmt_2$
-		\item transitivity: if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_3$ then $\stmt_1 \finer \stmt_3$
-	\end{enumerate}
-	and is therefore a partial order.
-\end{prop}
-\begin{proof}
-	For reflexivity we have $\stmt \narrower \stmt$ and therefore $\stmt \finer \stmt$. Antisymmetry is assured by the definition of equigranularity. Transitivity is assured by \ref{4_axiom_fineness}.
-\end{proof}
-
 \begin{coro}
-	Statement fineness is a partial order for equivalence classes of statements. That is, if  If $\stmt_1 \finer \stmt_2$ then $\stmt_3 \finer \stmt_4$ for all $\stmt_3 \equiv \stmt_1$ and $\stmt_4 \equiv \stmt_2$.
+	Statement fineness induces a partial order over the equigranular classes of statements. That is, let $\logCtx_{/\eqgran}$ be quotient of $\logCtx$ by $\eqgran$, let $[\stmt] \in \logCtx_{/\eqgran}$ denote the equivalence class for $\stmt \in \logCtx$. Define $[\stmt_1] \finer [\stmt_2]$ if and only if $\stmt_1 \finer \stmt_2$. Then $\finer : \logCtx_{/\eqgran} \times \logCtx_{/\eqgran} \to \Bool$ is a partial order.
 \end{coro}
 \begin{proof}
-	Suppose $\stmt_1 \finer \stmt_2$. Let $\stmt_3 \equiv \stmt_1$ and $\stmt_4 \equiv \stmt_2$. Then $\stmt_3 \eqgran \stmt_1$ and $\stmt_4 \eqgran \stmt_2$. We have $\stmt_3 \finer \stmt_1 \finer \stmt_2 \finer \stmt_4$. Therefore $\stmt_3 \finer \stmt_4$.
+	For reflexivity, $[\stmt] \finer [\stmt]$ since $\stmt \finer \stmt$. For anti-symmetry, suppose $[\stmt_1] \finer [\stmt_2]$ and $[\stmt_2] \finer [\stmt_1]$, then $\stmt_1 \finer \stmt_2 \finer \stmt_1$ and therefore $\stmt_1 \eqgran \stmt_2$ which means $[\stmt_1] = [\stmt_2]$. For transitivity, $[\stmt_1] \finer [\stmt_2] \finer [\stmt_3]$ means $\stmt_1 \finer \stmt_2 \finer \stmt_3$, and therefore $\stmt_1 \finer \stmt_3$ and $[\stmt_1] = [\stmt_3]$.
 \end{proof}
 
-\begin{coro}
-	Statement fineness is monotonic with respect to statement narrowness. That is, $\stmt_1 \narrower \stmt_2$ implies $\Id(\stmt_1) \finer \Id(\stmt_2)$ where $\Id : \logCtx \to \logCtx$ is the identity function over $\logCtx$.
-\end{coro}
-\begin{proof}
-	Monotonicity is guaranteed by \ref{4_axiom_fineness}.
-\end{proof}
 \end{mathSection}
 
 This seemingly simple axiom is what allows us to open the door to disparate concepts such as geometry (comparing level of detail in terms of areas and volumes), information theory (comparing level of detail in terms of bits), probability theory (fraction of possibilities that correspond to one statement) and determinism and reversibility (how the level of detail changes through evolution). What we'll see is that all these different mathematical tools in the end are characterizing granularity in different situations.
