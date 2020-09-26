@@ -82,7 +82,7 @@ The upshot is that one only needs to read the latest version of this work to be 
 
 The standard of rigor mathematicians have developed for their field is not sufficient for the purpose of this project. Mathematics only deals with formal systems, whose starting points are a set of definitions and rules that are taken as is. At that point, correctness of the premise cannot be established, only self-consistency. Therefore mathematics fails to deal with the most delicate and interesting parts of the foundations of physics: the physical assumptions and how they are encoded into the formal framework. We therefore need rules and standards for rigorously handling the informal parts of the framework and, since there are no guidelines for this, we set our own standard.
 
-We call an \textbf{axiom} a proposition that brings new objects or new properties of established objects within the formal framework. A \textbf{definition}, instead, is proposition that further characterizes objects and properties already present in the formal. \textbf{An axiom or definition is well posed only when it is clear what the objects represent physically and what aspects are captured mathematically.} Therefore each axiom and definition is composed of two parts. The first characterizes the objects and properties within the informal system, tells us what they represent physically. The second part, typically preceded by ``Formally'', characterized the part that is captured by the formal system. Each axiom and definition must be followed by a \textbf{justification} that explains why the elements in the informal system must be mapped into the formal system in the way proposed. As this argument spans both the formal and informal system, this cannot be a mathematical proof in the modern sense. In particular, the justification for an axiom must argue why those objects must exist.
+We call an \textbf{axiom} a proposition that brings new objects or new properties of established objects within the formal framework. A \textbf{definition}, instead, is proposition that further characterizes objects and properties already present in the formal. \textbf{An axiom or definition is well posed only when it is clear what the objects represent physically and what aspects are captured mathematically.} Therefore each axiom and definition is composed of two parts. The first characterizes the objects and properties within the informal system, tells us what they represent physically. The second part, typically preceded by ``Formally'', characterized the part that is captured by the formal system. Each axiom and definition must be followed by a \textbf{justification} that explains why the elements in the informal system must be mapped into the formal system in the way proposed. As this argument spans both the formal and informal system, this cannot be a mathematical proof in the modern sense. In particular, the justification for an axiom must argue why those objects must exist. Some definitions are purely formal and as such do not require justifications.
 
 \textbf{The above standard makes sure we have a perfect identification between formal and informal objects.} All mathematical symbols correspond to physical objects and all the relevant physical concepts are captured by the math. All subsequent propositions and proofs, then, can be carried out in the formal system, where it is easier to check for consistency and precision. However, all the proofs can, if need be, translated into the informal language and given physical meaning.
 
@@ -154,7 +154,7 @@ As a consequence of this connection, we can build a more precise, intuitive and 
 
 Statements, like \statement{the mass of the electron is $511 \pm 0.5$ keV} or \statement{that animal is a cat}, will be the cornerstone of our general mathematical theory of experimental science. In this section we will outline the basic definitions that allow us to combine statements into other statements (e.g. \statement{that animal is black} and \statement{that animal a cat} gives \statement{that animal is a black cat}) and to compare their content (e.g. \statement{the mass of the electron is $511 \pm 0.5$ keV} and \statement{the mass of the electron is $0.511 \pm 0.0005$ MeV} are equivalent).
 
-We will start from a somewhat different starting point than what is customary in order to address a few issues. The first is that we need to develop a formal framework to handle the relationship of statements that are not themselves formally defined.\footnote{This is the main reason we cannot simply use the tools of mathematical logic.} The second issue is that the truth values in our context are in general found experimentally, not through deduction. The role of the logic framework is to keep track of the consistency between the possible hypothetical cases. That is, we need relationships that capture the idea of causal relationship, that one is true because the other is true, and not merely by coincidence. For example, in standard logic ``the moon is a satellite of earth" implies ``5 is prime". We remind the reader that the mathematical sections, highlighted with a green bar on the side, can be skipped without loss of conceptual understanding in case one is not interested in all the details. 
+We will start from a somewhat different starting point than what is customary in order to address a few issues. The first is that we need to develop a formal framework to handle the relationship of statements that are not themselves formally defined.\footnote{This is the main reason we cannot simply use the tools of mathematical logic.} The second issue is that the truth values in our context are in general found experimentally, not through deduction. The role of the logic framework is to keep track of the consistency between the possible hypothetical cases. That is, we need relationships that capture the idea of causal relationship, that one is true because the other is true, and not merely by coincidence.\footnote{In contrast, in standard logic ``the moon is a satellite of earth" implies ``5 is prime".} We remind the reader that the mathematical sections, highlighted with a green bar on the side, can be skipped without loss of conceptual understanding in case one is not interested in all the details. 
 
 As a starting point, we need to define what science is: the systematic study of the physical world through observation and experimentation. We therefore introduce the principle of scientific objectivity that will guide us throughout this work. This states that science is universal, non-contradictory and evidence based.
 
@@ -182,6 +182,20 @@ Each assertion, by itself, would be fine but their combination makes it impossib
 	A \textbf{statement} $\stmt$ is an assertion that is either true or false. A \textbf{logical context} $\logCtx$ is a collection of statements with well defined logical relationships. Formally, a logical context $\logCtx$ is a collection of elements called statements upon which is defined a function $\truth: \logCtx \to \Bool$.
 \end{axiom}
 
+\begin{justification}
+	As science is universal and non-contradictory, it must deal with assertions that have clear meaning, well-defined logical relationships and are associated with a unique truth value. A priori, we only assume these objects exist, simply because we can't proceed if we don't. A posteriori, we see that a particular set of statements works in practice, which shows that science could indeed be done with those statements. We are therefore justified to assume the existence of sets of assertions that have the aforementioned properties. We call logical contexts such group of assertions and we represent it formally as a set $\logCtx$. We call statement each assertion within a logical context and represent it formally with an element $\stmt$. We say $\stmt \in \logCtx$ if the statement $\stmt$ belongs to the logical context $\logCtx$.
+	
+	Given a context, we are also justified to assume the existence of a function $\truth : \logCtx \to \Bool$ such that $\truth(\stmt) = \TRUE$ for all $\stmt \in \logCtx$ that are true for everybody and $\truth(\stmt) = \FALSE$ for all $\stmt \in \logCtx$ that are false for everybody. In fact, note that no $\stmt \in \logCtx$ can be both true and false for everybody as it would be contradictory. Note that no $\stmt \in \logCtx$ can be both true for some and false for others as it would not be universal. Note that no $\stmt \in \logCtx$ can be neither true nor false for everybody. Suppose it were. Then it's truth can never be, even potentially, settled with experimental evidence. Therefore either $\truth(\stmt) = \TRUE$ or $\truth(\stmt) = \FALSE$ for all $\stmt \in \logCtx$.
+
+	Note that the statement is the concept asserted, not the words used to express the concept. A sentence in a particular language is neither necessary nor sufficient to define a statement. Consider the English language and take the sentence \statement{Snoopy is a dog}. The truth will depend on whether or not a fictional character qualifies as a dog. The sentence, by itself, is not enough to determine the truth value. Conversely, take the idea that a particular animal is a dog. We can express the concept in Italian as \statement{quell'animale \`e un cane} without using an English sentence. Therefore English sentences are neither necessary nor sufficient to express a statement. This will be true of any other language. Therefore, the basic notion of statement is considered prime, 
+	independent of its expression. Moreover, all statements are considered equally prime.
+	
+	Also note that logical consistency is not a property of an individual statement. Consider the two statements: \statement{the next sentence is true} and \statement{the previous sentence is false}. The two statements together are not logically consistent as assuming one to be true leads to a proof for it to be false and vice-versa. If we changed the latter statement to \statement{the previous sentence is true} then both statements would be true and logically consistent. Therefore logical consistency is defined on the logical context, and each statement has to be defined as belonging to a context.
+	
+	Finally, note that the existence of a truth function on the context imposes logical consistency on the logical context without worrying about the details of how this is achieved.
+	
+\end{justification}
+
 \end{mathSection}
 
 The idea of statements has their origin in the philosophical tradition of classical logic, \statement{Socrates is a man} being a classic example. Any language can be used to form them, formal or natural, as indeed any language is used in practice. This means we are not going to care what particular syntax (i.e.~symbols and grammar rules) is used.\footnote{In general, statements in this context are not necessarily well formed formulas, predicates or similar concepts in the context of mathematical or propositional logic. Scientific investigation in the broad sense of learning from experimentation predates math and formal languages: information about agriculture, astronomy, metallurgy, botany and the like were collected and used even before the written word. Moreover, cognitive scientists have shown that children start using deliberate experimentation at a very young age to understand the world around them, even before their speech is fully developed. Ultimately, that knowledge is encoded in the language of electrical and biochemical signals. Formal languages are indeed extremely helpful in that they allow us to be more precise and to better keep track of possible inconsistencies, but ultimately one always needs natural language to give meaning and context to the mathematical symbols.} In fact, even a grammatically incorrect statement is fine as long as the intent is clear. On the other hand, we are going to care about the semantics of the statements (i.e.~their content and meaning). Therefore we will consider \statement{Socrates is a man} and \statement{Socrate e' un uomo} to be the same statement because they provide the same assertion but in different languages.
@@ -201,34 +215,51 @@ We want each logical context to keep track not only of the truth value of each s
 \end{center}
 Each line represents an assignment for all statements, each represented by a column. The set of all assignments is the set of all functions from $\logCtx$ to $\Bool$, which in set theory notation is $\Bool^\logCtx$, and corresponds to all possible permutations. Some assignments, like the one in the first line, are not consistent with the content of the statements. We will call possible the ones that are allowed and impossible the ones that aren't. Naturally, the truth must be one of the possible assignments. As the context itself needs to tell us which assignments are possible, we can imagine it comes equipped with the set $\pAss \subseteq \Bool^\logCtx$ of all possible assignments for that context.\footnote{In the same way that we do not try to capture how statements are constructed, we are not going to capture how logical consistency is established. We just assume a mechanism is available and therefore one can check whether an assignment is possible or not.}
 
-Some statements may be allowed to either be true or false while others may only be allowed one option. We will call tautology a statement that can only be true, like \statement{that cat is an animal}. We will call contradiction a statement that can only be false, like \statement{that cat is a swan}. We will call a contingent statement one that can be either true or false as its truth is contingent on the assignment, like \statement{that animal is a cat}.
+Some statements may be allowed to either be true or false while others may only be allowed one option. We will call certainty a statement that can only be true, like \statement{that cat is an animal}. We will call impossibility a statement that can only be false, like \statement{that cat is a swan}. We will call a contingent statement one that can be either true or false as its truth is contingent on the assignment, like \statement{that animal is a cat}.
 
 Note that the semantics, the meaning of the statements, plays an important role in defining the possible assignments but, in general, does not define the truth values.\footnote{In other formalisms the semantics is said to define the truth values, not in ours.} For example, even if the meaning of \statement{the next race is going to be won by Secretariat} is clear, and so is its logical relationship to \statement{the next race is going to be lost by Secretariat}, we may be none the wiser about its truthfulness. 
 
 \begin{mathSection}
 \begin{defn}
-	An \textbf{assignment} for a logical context $\logCtx$ is a map $a : \logCtx \to \Bool$ that assigns a truth value to each statement. Formally, an assignment is simply a map $a \in \Bool^\logCtx$. An assignment for a set of statements $S \subseteq \logCtx$ is a map $a : S \to \Bool$ while an assignment for a statement $\stmt \in \logCtx$ is a truth value $t \in \Bool$.
+	Given a set of statements, an \textbf{assignment} associates a truth value with each statement. Formally, an assignment for a logical context $\logCtx$ is a map $a : \logCtx \to \Bool$, an element of $\Bool^\logCtx$. An assignment for a set of statements $S \subseteq \logCtx$ is a map $a : S \to \Bool$ while an assignment for a statement $\stmt \in \logCtx$ is a truth value $t \in \Bool$.
 \end{defn}
+
+\begin{justification}
+	Given that an assignment for a set $S \subseteq \logCtx$ associates a truth value to each statement, it is identified by a map $a : S \to \Bool$. The assignment for a single statement is given by a single truth value $t \in \Bool$.
+\end{justification}
 
 \begin{axiom}[Axiom of possibility]\label{ax_possible_assignemetns}
 	A \textbf{possible assignment} for a logical context $\logCtx$ is a map $a : \logCtx \to \Bool$ that assigns a truth value to each statement in a way consistent with the content of the statements. Formally, each logical context comes equipped with a set $\pAss \subseteq \Bool^{\logCtx}$ such that $\truth \in \pAss$. A map $a : \logCtx \to \Bool$ is a possible assignment for $\logCtx$ if $a \in \pAss$.
 \end{axiom}
 
+\begin{justification}
+	The meaning associated to each statement in the context may prevent some assignments to be logically consistent. Consider, for example, the statements \statement{that animal is a cat} and \statement{that animal is a dog}. Given that an animal cannot be both a cat and a dog, an assignment that associated true to both statement would not be logically consistent. Given that the context must give clear meaning to all statements, it must be able to clarify whether an assignment $a \in \Bool^{\logCtx}$ is consistent with the meaning of all statements. We call these possible assignments.
+	
+	For each logical context, then, we are justified to assume the existence of a set $\pAss \subseteq \Bool^{\logCtx}$ such that $a \in \pAss$ if and only if $a$ is a possible assignement.
+\end{justification}
+
 \begin{defn}
 	Let $S \subseteq \logCtx$ be a set of statements. Then $a : S \to \Bool$ is a possible assignment for $S$ if there exists $\bar{a} \in \pAss$ such that $\bar{a}(\stmt) = a(\stmt)$ for all $\stmt \in S$. Let $\stmt \in \logCtx$ be a statement. Then $t \in \Bool$ is a possible assignment for $\stmt$ if there exists $\bar{a} \in \pAss$ such that $\bar{a}(\stmt) = t$.
 \end{defn}
 
-\begin{defn}
-	A \textbf{tautology} $\tautology$ is a statement that must be true simply because of its content. That is, $a(\tautology) = \TRUE$ for all possible assignments $a \in \pAss$.
-\end{defn}
+\begin{justification}
+	Let $S \in \logCtx$ be a set of statements. If $a : S \to \Bool$ is a possible assignment then there must be a way to assign the remaining statements in the domain in a way that is logically consistent. Therefore there must be an $\bar{a} \in \pAss$ such that $\bar{a}(\stmt) = a(\stmt)$ for all $\stmt \in S$. Similarly, if $t \in \Bool$ is a possible assignment for $\stmt$ if there exists $\bar{a} \in \pAss$ such that $\bar{a}(\stmt) = t$. This justifies the definition.
+\end{justification}
 
 \begin{defn}
-	A \textbf{contradiction} $\contradiction$ is a statement that must be false simply because of its content. That is, $a(\contradiction) = \FALSE$ for all possible assignments $a \in \pAss$.
-\end{defn}
+	Statements are categorized based on their possible assignments.
 	
-\begin{defn}
-	A statement is \textbf{contingent} if it is neither a contradiction nor a tautology.
+	\begin{itemize}
+		\item A certain statement, or \textbf{certainty}, is a statement $\certainty$ that must be true simply because of its content. Formally, $a(\certainty) = \TRUE$ for all possible assignments $a \in \pAss$.
+		\item An impossible statement, or \textbf{impossibility}, is a statement $\impossibility$ that must be false simply because of its content. Formally, $a(\impossibility) = \FALSE$ for all possible assignments $a \in \pAss$.
+		\item A statement is \textbf{contingent} if it is neither certain nor impossible.
+	\end{itemize}
+	
 \end{defn}
+
+\begin{justification}
+	Since a certainty must be true, no possible assignment can assign it to be false. Therefore $a(\certainty) = \TRUE$ for all $a \in \pAss$. Similarly, an impossibility must be false and no possible assignment can assign it to be true. Therefore $a(\impossibility) = \FALSE$ for all $a \in \pAss$. This justifies the definitions.
+\end{justification}
 
 \end{mathSection}
 
@@ -246,6 +277,10 @@ Since statements are intangible, there are no limits to the number of arguments 
 	\begin{axiom}[Axiom of closure]\label{ax_functions_of_statement}
 		We can always find a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally, let $S \subseteq \logCtx$ be a set of statements and $f_{\Bool} : \Bool^S \to \Bool$ an arbitrary function from an assignment of $S$ to a truth value. Then we can always find a statement $\bar{\stmt} \in \logCtx$ that depends on $S$ through $f_{\Bool}$.
 	\end{axiom}
+\begin{justification}
+	Let $S \subseteq \logCtx$ be a set of statements and let $f_{\Bool} : \Bool^S \to \Bool$ be an arbitrary function. Consider the statement \statement{this statement is true if the function $f_{\Bool}$ applied to the truth values of $S$ is true}. This statement has a well defined meaning that assigns a truth value that is the same for everybody. It is therefore logically consistent will all other statements in $\logCtx$. We are therefore justified to assume it is in the content, for, if it isn't, it can be added without problem. 
+\end{justification}
+
 \begin{coro}
 	Functions on truth values induce functions on statements. Formally, let $I$ be an index set and $f_\Bool : \Bool^I \to \Bool$ be a function. There exists a function $f : \logCtx^I \to \logCtx$ such that
 	$$a(f(\{\stmt_i\}_{i \in I})) = f_{\Bool}(\{a(\stmt_i)\}_{i \in I})$$
@@ -296,13 +331,15 @@ Most languages, natural or symbolic, typically already provide similar operation
 
 Now we have all the elements to define when two statements have the same logical content. Consider the two statements \statement{that animal is a bird} and \statement{that animal has feathers}: since all birds and only birds have feathers they give us the same information. Consider \statement{the mass of the electron is $511 \pm 0.5$ keV} and \statement{the mass of the electron is $0.511 \pm 0.0005$ MeV}: they represent the same measurement but in different units. So, how can we express the fact that two statements $\stmt_1$ and $\stmt_2$ give us the same information? The idea is that they can never be assigned opposite truth values. If we assigned true to the first, then the second must be true as well. If we assigned false to the first, then the second must be false.\footnote{This technique allows us to do something analogous to model theory. Two statements are equivalent if their truth is equal for all consistent truth assignments, which in our framework play the part of the models of model theory. But in our context the assignments are only hypothetical: there isn't a model in which \statement{this is a cat} and another in which \statement{this is a dog}. There is only one truth value, the one we find experimentally.}
 
-% That is: either $\stmt_1 \AND \stmt_2$ is true or $\NOT\stmt_1 \AND \NOT\stmt_2$ is true for all consistent truth assignments. In other words $(\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)$ can only be true: it's a tautology.
-
 \begin{mathSection}
 
 \begin{defn}
 	Two statements $\stmt_1$ and $\stmt_2$ are \textbf{equivalent} $\stmt_1 \equiv \stmt_2$ if they must be equally true or false simply because of their content. Formally, $\stmt_1 \equiv \stmt_2$ if and only if $a(\stmt_1)=a(\stmt_2)$ for all possible assignments $a \in \pAss$.
 \end{defn}
+
+\begin{justification}
+	If two statements must be equally true or false simply because of their content, then their value must be the same in all possible assignments, which justifies the definition.
+\end{justification}
 
 \end{mathSection}
 
@@ -335,16 +372,16 @@ There are a number of useful properties that statement equivalence satisfies.
 \begin{mathSection}
 
 \begin{coro}
-	All tautologies are equivalent. All contradictions are equivalent.
+	All certainties are equivalent. All impossibilities are equivalent.
 \end{coro}
 \begin{proof}
-	Let $\tautology_1, \tautology_2 \in \logCtx$ be two tautologies. Then for every possible assignment $a \in \pAss$ we have $a(\tautology_1) = \TRUE = a(\tautology_2)$ and therefore $\tautology_1 \equiv \tautology_2$ by definition.
+	Let $\certainty_1, \certainty_2 \in \logCtx$ be two certainties. Then for every possible assignment $a \in \pAss$ we have $a(\certainty_1) = \TRUE = a(\certainty_2)$ and therefore $\certainty_1 \equiv \certainty_2$ by definition.
 	
-	Let $\contradiction_1, \contradiction_2 \in \logCtx$ be two contradictions. Then for every possible assignment $a \in \pAss$ we have $a(\contradiction_1) = \FALSE = a(\contradiction_2)$ and therefore $\contradiction_1 \equiv \contradiction_2$ by definition.
+	Let $\impossibility_1, \impossibility_2 \in \logCtx$ be two impossibilities. Then for every possible assignment $a \in \pAss$ we have $a(\impossibility_1) = \FALSE = a(\impossibility_2)$ and therefore $\impossibility_1 \equiv \impossibility_2$ by definition.
 \end{proof}
 
 \begin{coro}
-	Two statements $\stmt_1$ and $\stmt_2$ are equivalent if and only if $(\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2) \equiv \tautology$.
+	Two statements $\stmt_1$ and $\stmt_2$ are equivalent if and only if $(\stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2) \equiv \certainty$.
 \end{coro}
 \begin{proof}
 	Let $a \in \pAss$ and $\stmt = ( \stmt_1 \AND \stmt_2) \OR (\NOT\stmt_1 \AND \NOT\stmt_2)$. We have $a(\stmt) = (a(\stmt_1) \AND a(\stmt_2)) \OR (\NOT a(\stmt_1) \AND \NOT a(\stmt_2))$. We have the following truth table
@@ -358,7 +395,7 @@ There are a number of useful properties that statement equivalence satisfies.
 		F & F & T\\
 	\end{tabular}
 	\end{center}
-	Note that the assignments for which $a(\stmt_1) = a(\stmt_2)$ are exactly the assignments for which $a(\stmt) = \TRUE$. Therefore $\stmt_1 \equiv \stmt_2$ if and only if $\stmt$ is a tautology.
+	Note that the assignments for which $a(\stmt_1) = a(\stmt_2)$ are exactly the assignments for which $a(\stmt) = \TRUE$. Therefore $\stmt_1 \equiv \stmt_2$ if and only if $\stmt$ is a certainty.
 \end{proof}
 
 \begin{coro}
@@ -380,10 +417,10 @@ There are a number of useful properties that statement equivalence satisfies.
 		\item associativity: $a \OR (b \OR c) \equiv (a \OR b) \OR c$, $a \AND (b \AND c) \equiv (a \AND b) \AND c$
 		\item commutativity: $a \OR b \equiv b \OR a$, $a \AND b \equiv b \AND a$
 		\item absorption: $a \OR (a \AND b) \equiv a$, $a \AND (a \OR b) \equiv a$
-		\item identity: $a \OR \contradiction \equiv a
-		$, $a \AND \tautology \equiv a$
+		\item identity: $a \OR \impossibility \equiv a
+		$, $a \AND \certainty \equiv a$
 		\item distributivity: $a \OR (b \AND c) \equiv (a \OR b) \AND (a \OR c)$, $a \AND (b \OR c) \equiv (a \AND b) \OR (a \AND c)$
-		\item complements: $a \OR \NOT a \equiv \tautology$, $a \AND \NOT a \equiv \contradiction$
+		\item complements: $a \OR \NOT a \equiv \certainty$, $a \AND \NOT a \equiv \impossibility$
 		\item De Morgan: $\NOT a \OR \NOT b \equiv \NOT (a \AND b)$, $\NOT a \AND \NOT b \equiv \NOT (a \OR b)$
 	\end{itemize}
 	Therefore $\logCtx$ is a \textbf{Boolean algebra} by definition.
@@ -422,14 +459,14 @@ The second will be true whenever the first is true. In this case we say the firs
 \begin{prop}\label{prop_narrowness_properties}
 	The above operations obey the following relationships:
 	\begin{enumerate}[label=(\roman*)]
-		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$
+		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2 \equiv \impossibility$
 		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \stmt_2 \equiv \stmt_1$
 		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \OR \stmt_2 \equiv \stmt_2$
-		\item 	$\stmt_1 \comp \stmt_2$ if and only if $\stmt_1 \AND \stmt_2 \nequiv \contradiction$
+		\item 	$\stmt_1 \comp \stmt_2$ if and only if $\stmt_1 \AND \stmt_2 \nequiv \impossibility$
 		\item 	$\stmt_1 \ncomp \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$
 		\item 	$\stmt_1 \narrower \stmt_1 \OR \stmt_2$
 		\item 	$\stmt_1 \AND \stmt_2 \narrower \stmt_1$
-		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\NOT \stmt_1 \OR \stmt_2 \equiv \tautology$
+		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\NOT \stmt_1 \OR \stmt_2 \equiv \certainty$
 	\end{enumerate}	
 \end{prop}
 
@@ -445,11 +482,11 @@ The second will be true whenever the first is true. In this case we say the firs
 		F & F & F \\
 	\end{tabular}
 \end{center}
-	The assignment for which $a(\stmt_1) = \TRUE$ and $a(\stmt_2) = \FALSE$ is exactly the assignment for which $a(\stmt_1 \AND \NOT \stmt_2) = \TRUE$. Therefore $\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2$ is a contradiction.
+	The assignment for which $a(\stmt_1) = \TRUE$ and $a(\stmt_2) = \FALSE$ is exactly the assignment for which $a(\stmt_1 \AND \NOT \stmt_2) = \TRUE$. Therefore $\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2$ is impossible.
 	
-	For (ii), consider $\stmt_1 \AND \stmt_2 \equiv \stmt_1 \AND \stmt_2 \OR \contradiction$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \stmt_2 ) \OR (\stmt_1 \AND \NOT \stmt_2) \equiv \stmt_1 \AND (\stmt_2 \OR \NOT \stmt_2) \equiv \stmt_1 \AND \tautology \equiv \stmt_1$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
+	For (ii), consider $\stmt_1 \AND \stmt_2 \equiv \stmt_1 \AND \stmt_2 \OR \impossibility$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \impossibility$. We have $\stmt_1 \AND \stmt_2 \OR \impossibility \equiv ( \stmt_1 \AND \stmt_2 ) \OR (\stmt_1 \AND \NOT \stmt_2) \equiv \stmt_1 \AND (\stmt_2 \OR \NOT \stmt_2) \equiv \stmt_1 \AND \certainty \equiv \stmt_1$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
 	
-	For (iii), consider $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \AND \tautology \equiv (\stmt_1 \OR \stmt_2) \AND (\NOT \stmt_2 \OR \stmt_2) \equiv (\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \contradiction$. We have $(\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2 \equiv \contradiction \OR \stmt_2 \equiv \stmt_2$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_2$. The same logic can be applied in reverse.
+	For (iii), consider $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \AND \certainty \equiv (\stmt_1 \OR \stmt_2) \AND (\NOT \stmt_2 \OR \stmt_2) \equiv (\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \impossibility$. We have $(\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2 \equiv \impossibility \OR \stmt_2 \equiv \stmt_2$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_2$. The same logic can be applied in reverse.
 	
 	For (iv), consider the following truth table 
 \begin{center}
@@ -462,15 +499,15 @@ The second will be true whenever the first is true. In this case we say the firs
 		F & F & F \\
 	\end{tabular}
 \end{center}
-The assignment for which $a(\stmt_1) = a(\stmt_2) = \TRUE$ is exactly the assignment for which $a(\stmt_1 \AND \stmt_2) = \TRUE$. Therefore $\stmt_1 \comp \stmt_2$ if and only if $\stmt_1 \AND \stmt_2$ is not a contradiction.
+The assignment for which $a(\stmt_1) = a(\stmt_2) = \TRUE$ is exactly the assignment for which $a(\stmt_1 \AND \stmt_2) = \TRUE$. Therefore $\stmt_1 \comp \stmt_2$ if and only if $\stmt_1 \AND \stmt_2$ is not impossible.
 
-	For (v), consider $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1 \AND \NOT \stmt_2 \OR \contradiction$. Since $\stmt_1 \ncomp \stmt_2$, $\stmt_1 \AND \stmt_2 \equiv \contradiction$. We have $\stmt_1 \AND \NOT \stmt_2 \OR \contradiction \equiv ( \stmt_1 \AND \NOT \stmt_2 ) \OR (\stmt_1 \AND \stmt_2) \equiv \stmt_1 \AND (\NOT \stmt_2 \OR \stmt_2) \equiv \stmt_1 \AND \tautology \equiv \stmt_1$. Therefore $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
+	For (v), consider $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1 \AND \NOT \stmt_2 \OR \impossibility$. Since $\stmt_1 \ncomp \stmt_2$, $\stmt_1 \AND \stmt_2 \equiv \impossibility$. We have $\stmt_1 \AND \NOT \stmt_2 \OR \impossibility \equiv ( \stmt_1 \AND \NOT \stmt_2 ) \OR (\stmt_1 \AND \stmt_2) \equiv \stmt_1 \AND (\NOT \stmt_2 \OR \stmt_2) \equiv \stmt_1 \AND \certainty \equiv \stmt_1$. Therefore $\stmt_1 \AND \NOT \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
 	
-	For (vi), we have $\stmt_1 \AND \NOT (\stmt_1 \OR \stmt_2) \equiv \stmt_1 \AND \NOT \stmt_1 \AND \NOT \stmt_2 \equiv \contradiction \AND \NOT \stmt_2 \equiv \contradiction$. Therefore $\stmt_1 \narrower \stmt_1 \OR \stmt_2$.
+	For (vi), we have $\stmt_1 \AND \NOT (\stmt_1 \OR \stmt_2) \equiv \stmt_1 \AND \NOT \stmt_1 \AND \NOT \stmt_2 \equiv \impossibility \AND \NOT \stmt_2 \equiv \impossibility$. Therefore $\stmt_1 \narrower \stmt_1 \OR \stmt_2$.
 	
-	For (vii), we have $\stmt_1 \AND \stmt_2 \AND \NOT \stmt_1 \equiv \stmt_1 \AND \NOT \stmt_1 \AND \stmt_2 \equiv \contradiction \AND \stmt_2 \equiv \contradiction$. Therefore $\stmt_1 \AND \stmt_2 \narrower \stmt_1$.
+	For (vii), we have $\stmt_1 \AND \stmt_2 \AND \NOT \stmt_1 \equiv \stmt_1 \AND \NOT \stmt_1 \AND \stmt_2 \equiv \impossibility \AND \stmt_2 \equiv \impossibility$. Therefore $\stmt_1 \AND \stmt_2 \narrower \stmt_1$.
 	
-	For (viii), suppose $\stmt_1 \narrower \stmt_2$. We have $\NOT \stmt_1 \OR \stmt_2 \equiv \NOT \stmt_1 \OR ( \stmt_1 \OR \stmt_2 ) \equiv (\NOT \stmt_1 \OR \stmt_1) \OR \stmt_2 \equiv \tautology \OR \stmt_2 \equiv \tautology$. Conversely, suppose $\NOT \stmt_1 \OR \stmt_2 \equiv \tautology$. We have $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \OR \tautology \equiv \stmt_1 \OR \stmt_2 \OR (\NOT \stmt_1 \OR \stmt_2) \equiv (\stmt_1 \OR \NOT \stmt_1) \OR \stmt_2 \equiv \tautology \OR \stmt_2 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$.
+	For (viii), suppose $\stmt_1 \narrower \stmt_2$. We have $\NOT \stmt_1 \OR \stmt_2 \equiv \NOT \stmt_1 \OR ( \stmt_1 \OR \stmt_2 ) \equiv (\NOT \stmt_1 \OR \stmt_1) \OR \stmt_2 \equiv \certainty \OR \stmt_2 \equiv \certainty$. Conversely, suppose $\NOT \stmt_1 \OR \stmt_2 \equiv \certainty$. We have $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \OR \certainty \equiv \stmt_1 \OR \stmt_2 \OR (\NOT \stmt_1 \OR \stmt_2) \equiv (\stmt_1 \OR \NOT \stmt_1) \OR \stmt_2 \equiv \certainty \OR \stmt_2 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$.
 \end{proof}
 
 \begin{prop}
@@ -483,7 +520,7 @@ The assignment for which $a(\stmt_1) = a(\stmt_2) = \TRUE$ is exactly the assign
 	and is therefore a \textbf{partial order}.
 \end{prop}
 \begin{proof}
-	For reflexivity, $\stmt \AND \NOT \stmt \equiv \contradiction$ and therefore $s \narrower s$ by \ref{prop_narrowness_properties}.
+	For reflexivity, $\stmt \AND \NOT \stmt \equiv \impossibility$ and therefore $s \narrower s$ by \ref{prop_narrowness_properties}.
 	
 	For antisymmetry, $\stmt_1 \AND \stmt_2 \equiv \stmt_1$ since $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \AND \stmt_2 \equiv \stmt_2$ since $\stmt_2 \narrower \stmt_1$. Therefore $\stmt_1 \equiv \stmt_2$. Conversely, suppose $\stmt_1 \equiv \stmt_2$. Then $\stmt_1 \AND \stmt_2 \equiv \stmt_1 \equiv \stmt_2$. Therefore $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$.
 	
@@ -502,7 +539,7 @@ The assignment for which $a(\stmt_1) = a(\stmt_2) = \TRUE$ is exactly the assign
 
 \end{mathSection}
 
-It should be noted that statement narrowness captures more than just the idea of one statement being more specific than another. Consider \statement{this harp seal is white} and \statement{this harp seal is less than one year old}. Since harp seals have white fur only for their first month, the first one can never be true while the second is not. Therefore \statement{this harp seal is white} $\narrower$ \statement{this harp seal is less than one year old}. By the same token, we also have \statement{I lighted the fuse} $\narrower$ \statement{the bomb will go off}. That is, narrowness can also capture causal relationships, which is essential if we want to develop a basic theory of scientific investigation.\footnote{We considered using the term implication directly, but it seems that it leads to confusion. Implication in classical logic is something different: it is simply another truth function. Moreover, saying that a contradiction is narrower than all other statements sounds better than saying that a contradiction implies all other statements.} Intuitively, a statement is narrower than another if it provides at least as much or more information when true. If we experimentally verified the narrower statement, then we already know that the broader one is also verified.
+It should be noted that statement narrowness captures more than just the idea of one statement being more specific than another. Consider \statement{this harp seal is white} and \statement{this harp seal is less than one year old}. Since harp seals have white fur only for their first month, the first one can never be true while the second is not. Therefore \statement{this harp seal is white} $\narrower$ \statement{this harp seal is less than one year old}. By the same token, we also have \statement{I lighted the fuse} $\narrower$ \statement{the bomb will go off}. That is, narrowness can also capture causal relationships, which is essential if we want to develop a basic theory of scientific investigation.\footnote{We considered using the term implication directly, but it seems that it leads to confusion. Implication in classical logic is something different: it is simply another truth function. Moreover, saying that an impossibility is narrower than all other statements sounds better than saying that an impossibility implies all other statements.} Intuitively, a statement is narrower than another if it provides at least as much or more information when true. If we experimentally verified the narrower statement, then we already know that the broader one is also verified.
 
 It should also be noted that independence is not transitive and pair-wise independence is not sufficient. Consider the following statements for an ideal gas:
 \begin{enumerate}
