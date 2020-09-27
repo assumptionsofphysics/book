@@ -580,21 +580,21 @@ Limiting the scope of our discussion to objects and properties that are well def
 
 So we have to narrow the scope to those and only those statements that can be verified experimentally. That is, we have to provide an experimental test: a repeatable experimental procedure (i.e.~evidence based) that anyone (i.e.~universal) can in principle execute and obtain consistent results (i.e.~non-contradictory). This is both the power and the limit of scientific inquiry: it gives us a way to construct a coherent description of the physical world but it is limited to those aspects that can be reliably studied experimentally.
 
-Note that tautology and contradiction are trivially verifiable since we know a priori that they are true and false respectively. Also note that if we have two statements that are equivalent, having a test that verifies one means we have a test that verifies the other as well. For example, since \statement{that animal is a bird} is equivalent to \statement{that animal has feathers}, checking whether the animal has feathers is equivalent to checking whether the animal is a bird. The subtlety here is that the evidence may be indirect and it is only the relationship between statements (i.e.~the theoretical model) that guarantees the validity of the verification. This should not worry us, though, because in this strict sense most experimental data is indirect. It comes from a chain of inductions (e.g. the pulse of light is produced, bounces off a moving target and changes frequency due to the Doppler effect, the light signal is transduced to an electronic signal which finally is displayed on the device) and therefore needs a theoretical framework to be properly understood.
+Note that certainty and impossibility are trivially verifiable since we know a priori that they are true and false respectively. Also note that if we have two statements that are equivalent, having a test that verifies one means we have a test that verifies the other as well. For example, since \statement{that animal is a bird} is equivalent to \statement{that animal has feathers}, checking whether the animal has feathers is equivalent to checking whether the animal is a bird. The subtlety here is that the evidence may be indirect and it is only the relationship between statements (i.e.~the theoretical model) that guarantees the validity of the verification. This should not worry us, though, because in this strict sense most experimental data is indirect. It comes from a chain of inductions (e.g. the pulse of light is produced, bounces off a moving target and changes frequency due to the Doppler effect, the light signal is transduced to an electronic signal which finally is displayed on the device) and therefore needs a theoretical framework to be properly understood.
 
 \begin{mathSection}
 \begin{axiom}[Axiom of verifiability]\label{ax_verifiable_statements}
 	A \textbf{verifiable statement} is a statement that, if true, can be shown to be so experimentally. Formally, each logical context $\logCtx$ contains a set of statements $\vstmtSet \subseteq \logCtx$ whose elements are said to be verifiable. Moreover, we have the following properties:
 	\begin{itemize}
-		\item every tautology $\tautology \in \logCtx$ is verifiable
-		\item every contradiction $\contradiction \in \logCtx$ is verifiable
+		\item every certainty $\certainty \in \logCtx$ is verifiable
+		\item every impossibility $\impossibility \in \logCtx$ is verifiable
 		\item a statement equivalent to a verifiable statement is verifiable
 	\end{itemize}
 \end{axiom}
 \begin{justification}
-	To give a better justification for this and later axioms, we introduce the following pseudo-mathematical concepts. To each logical context $\logCtx$ we associate a set $\exptSet$. We call each element $\expt \in \exptSet$ an \textbf{experimental test} which corresponds to a repeatable procedure (i.e.~it can be restarted and stopped at any time) that anybody can execute and will always terminate successfully, terminate unsuccessfully or never terminate. The output of the test will depend on the truth values of the statements; therefore we can assume we have a function $\result: \mathcal{E} \times \pAss \to \{\SUCCESS, \FAILURE, \UNDEF\}$. The idea is that if a statement $\stmt$ is verifiable we can find an experimental test $\expt$ that always succeeds if the statement is true, and the statement is true if the experiment always succeeds. That is, for all $a \in \pAss$, $\result(\expt, a) = \SUCCESS$ if and only if $a(\stmt) = \TRUE$.
+	To give a better justification for this and later axioms, we introduce the following pseudo-mathematical concepts. As science is evidence based, for each logical context $\logCtx$ we must have at our disposal a set of \textbf{experimental tests}, which we indicate with $\exptSet$. Each element $\expt \in \exptSet$ is a repeatable procedure (i.e.~it can be restarted and stopped at any time) that anybody can execute and will always terminate successfully, terminate unsuccessfully or never terminate. As the tests must provide evidence, the output of the test must depend on the truth values of the statements; therefore we can assume we have a function $\result: \mathcal{E} \times \pAss \to \{\SUCCESS, \FAILURE, \UNDEF\}$. For a statement $\stmt$ to be verifiable, there must be an experimental test $\expt$ that succeeds if and only if the statement is true. That is, for all $a \in \pAss$, $\result(\expt, a) = \SUCCESS$ if and only if $a(\stmt) = \TRUE$.
 	
-	Tautologies and contradictions are considered verifiable though they don't really need to be checked experimentally. They correspond to trivial tests that always terminate successfully or unsuccessfully respectively. As for equivalence and verifiability, suppose we have two equivalent statement and an experimental test for the first one. Since the statements are equivalent, the test will succeed if and only if the second statement is true, so it constitutes a test for the second statement as well.
+	Certainties and impossibilities can be associated with trivial tests that always terminate successfully or unsuccessfully respectively. This justifies assuming them to be verifiable. As for equivalence and verifiability, let $\stmt_1, \stmt_2 \in \logCtx$ and suppose $\stmt_1$ is verifiable. This means there is a test $\expt \in \exptSet$ such that $\result(\expt, a) = \SUCCESS$ if and only if $a(\stmt_1) = \TRUE$. Since the statements are equivalent, $a(\stmt_1) = \TRUE$ if and only if $a(\stmt_2) = \TRUE$. Therefore $\result(\expt, a) = \SUCCESS$ if and only if $a(\stmt_2) = \TRUE$. We are therefore justified to assume $\stmt_2$ is verifiable.
 	
 	Precisely defining experimental tests as procedures will present the same type of problems in defining statements or logical consistency, therefore we leave them as primary concepts. But as primary concepts they only complicate the formal framework without adding insights, therefore we use them only as part of the justifications for the axioms.
 \end{justification}
@@ -622,6 +622,10 @@ In the same vein we are able to confirm experimentally that \statement{the mass 
 	\begin{remark}
 	The \textbf{negation or logical NOT} of a verifiable statement is not necessarily a verifiable statement.
 	\end{remark}
+
+	\begin{justification}
+		A statement $\stmt \in \logCtx$ is verifiable if we can find $\expt \in \exptSet$ such that $\result(\expt, a) = \SUCCESS$ if and only if $a(\stmt) = \TRUE$ for all $a \in \pAss$. This means that for some $a \in \pAss$ we may have $a(\stmt) = \FALSE$ and $\result(\expt, a) = \UNDEF$. That is, the test is not guaranteed to terminate if the statement is false. Therefore we cannot, in general, use $\expt$ to construct a statement that terminates whenever $\stmt$ is false. Therefore we are not justified, in general, to assume that the negation of a verifiable statement is verifiable.
+	\end{justification}
 \end{mathSection}
 
 While this is true in general, we can still test the negation of many verifiable statements. Consider the statement \statement{this swan is black}. It allows the following experimental test:
@@ -636,40 +640,46 @@ Note that, since the test always terminates, we can switch failure to success an
 	\begin{defn}
 		A \textbf{falsifiable statement} is a statement that, if false, can be shown to be so experimentally. Formally, a statement $\stmt$ is falsifiable if its negation $\NOT\stmt \in \vstmtSet$ is a verifiable statement.
 	\end{defn}
-	\begin{defn}
-		A \textbf{decidable statement} is a statement that can be shown to be either true or false experimentally. Formally, a statement $\stmt$ is decidable if $\stmt \in \vstmtSet$ and $\NOT\stmt \in \vstmtSet$. We denote $\dstmtSet \subseteq \vstmtSet$ the set of all decidable statements.
-	\end{defn}
 	\begin{justification}
-		Note that the informal definition is slightly different from the formal one. In the first one we have a single statement associated with a single experimental test that always terminates, either successfully or unsuccessfully depending on the truth of the statement. In the second we have two statements, one the negation of the other, and two experimental tests, each of them only guaranteed to terminate successfully if the respective statement is true. We can give a pseudo-proof, though, to show that these are equivalent.
-
-		Let $\stmt \in \logCtx$ be a decidable statement and $\expt \in \mathcal{E}$ an experimental test that verifies whether the statement is true or false. Consider the procedure $\expt_\NOT(\expt)$ defined as follows:
+		Note that the informal definition is based on experimentally showing that the statement is false, while the formal definition is based on the falsifiable statement to be the negation of a verifiable one. We have to show they are equivalent.
+		
+		For a statement $\stmt \in \logCtx$ to be falsifiable, there must be an experimental test $\expt \in \exptSet$ that fails if and only if the statement is false. That is, for all $a \in \pAss$, $\result(\expt, a) = \FAILURE$ if and only if $a(\stmt) = \FALSE$.
+		
+		Let $\expt \in \exptSet$ be an experimental test and consider $\expt_\NOT(\expt)$ defined as follows:
 		\begin{enumerate}
 			\item run test $\expt$
 			\item if $\expt$ is unsuccessful terminate successfully
 			\item if $\expt$ is successful terminate unsuccessfully.
 		\end{enumerate}
-		Since $\expt$ is repeatable and can be executed by anybody, $\expt_\NOT(\expt)$ is also repeatable and can be executed by anybody. Since $\stmt$ is decidable, $\expt$ always terminates and therefore $\expt_\NOT(\expt)$ always terminates.  Therefore $\expt_\NOT(\expt)$ is an experimental test such that $\truth(\stmt)=\FALSE$ if and only if $\result(\expt_\NOT(\expt))=\SUCCESS$. Which means $\truth(\NOT\stmt)=\TRUE$ if and only if $\result(\expt_\NOT(\expt))=\SUCCESS$ and $\NOT\stmt$ is verifiable.
+		Since $\expt$ is repeatable and can be executed by anybody, $\expt_\NOT(\expt)$ is also repeatable and can be executed by anybody. Therefore we are justified to assume $\expt_\NOT(\expt) \in \exptSet$.
 		
-		Let $\stmt \in \logCtx$ be a verifiable statement such that $\NOT\stmt$ is also verifiable. Let $\expt, \expt_\NOT \in \mathcal{E}$ be their respective experimental tests. We have to be careful as $\expt$ and $\expt_\NOT$ may not terminate. Consider the procedure $\hat{\expt}$ defined as follows:
+		Now let $\stmt$ be a verifiable statement, then we can find $\expt \in \exptSet$ such that $\result(\expt, a) = \SUCCESS$ if and only if $a(\stmt) = \TRUE$. We also have $\result(\expt_\NOT(\expt), a) = \FAILURE$ if and only if $\result(\expt, a) = \SUCCESS$ and $a(\NOT\stmt) = \FALSE$ if and only if $a(\stmt) = \TRUE$. Therefore for all $a \in \pAss$, $\result(\expt_\NOT(\expt), a) = \FAILURE$ if and only if $a(\NOT\stmt) = \FALSE$. Which means $\NOT\stmt$ is falsifiable if and only if $\stmt$ is verifiable. This justifies the definition.
+	\end{justification}
+	\begin{defn}
+		A \textbf{decidable statement} is a statement that can be shown to be either true or false experimentally. Formally, a statement $\stmt$ is decidable if $\stmt \in \vstmtSet$ and $\NOT\stmt \in \vstmtSet$. We denote $\dstmtSet \subseteq \vstmtSet$ the set of all decidable statements.
+	\end{defn}
+	\begin{justification}
+		Note that the informal definition is based on experimentally showing that the statement is either true or false, while the formal definition is based on both the decidable statement and its negation to be verifiable. We have to show they are equivalent.
+		
+		Let $\stmt \in \logCtx$ be a decidable statement and $\expt \in \mathcal{E}$ an experimental test that verifies whether the statement is true or false. That is, $\result(\expt, a) = \SUCCESS$ if and only if $a(\stmt) = \TRUE$ and $\result(\expt, a) = \FAILURE$ if and only if $a(\stmt) = \FALSE$ for all $a \in \pAss$. Then $\stmt$ is verifiable. We also have $\result(\expt_\NOT(\expt), a) = \SUCCESS$ if and only if $a(\NOT\stmt) = \TRUE$. Therefore $\stmt$ is also verifiable.
+
+		Conversely, let $\stmt \in \logCtx$ be a verifiable statement such that $\NOT\stmt$ is also verifiable. Let $\expt, \expt_\NOT \in \mathcal{E}$ be their respective experimental tests. We have to be careful as $\expt$ and $\expt_\NOT$ may not terminate. Consider the procedure $\hat{\expt}(\expt, \expt_\NOT)$ defined as follows:
 		\begin{enumerate}
 			\item initialize $n$ to 1
-			\item for each $i=1..n$
-			\begin{enumerate}
-				\item run the test $\expt$ for $n$ seconds
-				\item if $\expt$ is successful, return successfully
-				\item run the test $\expt_\NOT$ for $n$ seconds
-				\item if $\expt_\NOT$ is successful, return unsuccessfully
-			\end{enumerate}
+			\item run the test $\expt$ for $n$ seconds
+			\item if $\expt$ is successful, return successfully
+			\item run the test $\expt_\NOT$ for $n$ seconds
+			\item if $\expt_\NOT$ is successful, return unsuccessfully
 			\item increment $n$ and go to step 2
 		\end{enumerate}
-	    The procedure is repeatable and can be executed by anybody. Both $\expt$ and $\expt_\NOT$ are eventually run an arbitrarily long amount of time. If $\stmt$ is true, $\expt$ will eventually terminate successfully and $\hat{\expt}$ will do so as well. If $\stmt$ is false, $\expt_\NOT$ will eventually terminate successfully making $\hat{\expt}$ terminate unsuccessfully. Therefore $\stmt$ is decidable.
+	    The procedure is repeatable and can be executed by anybody therefore $\hat{\expt}(\expt, \expt_\NOT) \in \exptSet$. Both $\expt$ and $\expt_\NOT$ are eventually run an arbitrarily long amount of time therefore $\result(\hat{\expt}(\expt, \expt_\NOT), a) \in \{\SUCCESS, \FAILURE \}$, that is the test will always terminate. We have $\result(\hat{\expt}(\expt, \expt_\NOT), a) = \SUCCESS $ if and only if $\result(\expt, a) = \SUCCESS$ if and only if $a(\stmt) = \TRUE$. We also have $\result(\hat{\expt}(\expt, \expt_\NOT), a) = \FAILURE$ if and only if $\result(\expt_\NOT, a) = \SUCCESS$ if and only if $a(\NOT\stmt) = \TRUE$ if and only if $a(\stmt) = \FALSE$. Therefore $\stmt$ is decidable. This justifies the definition.
 	\end{justification}
 
 \begin{coro}
-	Tautologies and contradictions are decidable statements.
+	Certainties and impossibilities are decidable statements.
 \end{coro}
 \begin{proof}
-	Let $\tautology \in \logCtx$ be a tautology and $\contradiction \in \logCtx$ be a contradiction. By \ref{ax_verifiable_statements} they are verifiable statements. We also have $\tautology \equiv \NOT \contradiction$ therefore they are decidable by definition.
+	Let $\certainty \in \logCtx$ be a certainty and $\impossibility \in \logCtx$ be an impossibility. By \ref{ax_verifiable_statements} they are verifiable statements. We also have $\certainty \equiv \NOT \impossibility$ therefore they are decidable by definition.
 \end{proof}
 
 \end{mathSection}
@@ -683,16 +693,17 @@ Combining verifiable statements with conjunction (i.e.~the logical AND) is more 
 	The conjunction of a finite collection of verifiable statements is a verifiable statement. Formally, let $\{\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ be a finite collection of verifiable statements. Then the conjunction $\bigAND\limits_{i=1}^{n} \stmt_i \in \vstmtSet$ is a verifiable statement.
 	\end{axiom}
 	\begin{justification}
-		Mathematically, we are simply assuming that the finite conjunction exists, so in principle there is nothing to prove. However, we want to show that the axiom is well justified in practice.
+		Let $\{\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ be a finite collection of verifiable statements. Then we can find a corresponding set of experimental tests $\{\expt_i\}_{i=1}^{n} \subseteq \exptSet$ such that $\result(\expt_i, a) = \SUCCESS$ if and only if $a(\stmt_i) = \TRUE$ for all $a \in \pAss$.
 		
-		Let $\{\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ be a finite collection of verifiable statements. Then we can find a corresponding set of experimental tests $\{\expt_i\}_{i=1}^{n} \subseteq \exptSet$ that terminate successfully if and only if the statements are true. Let $\bigAND\limits_{i=1}^{n} \expt_i$ be the experimental procedure defined as follows:
+		Let $\bigAND\limits_{i=1}^{n} \expt_i$ be the experimental procedure defined as follows:
 		\begin{enumerate}
 			\item for each $i=1..n$ run the test $\mathsf{e}_i$
-			\item if all tests terminate successfully then terminate successfully.
+			\item if all tests terminate successfully then terminate successfully
+			\item terminate unsuccessfully.
 		\end{enumerate}
-		The experimental procedure so defined is repeatable, can be executed by anybody and terminates successfully if and only if all $\mathsf{e}_i$ terminate successfully. This means it terminates successfully if and only if all $\{\stmt_i\}_{i=1}^{n}$ are true, which is when $\bigAND\limits_{i=1}^{n} \stmt_i$ is true. This means the experimental procedure defined above is a suitable test for the conjunction so the conjunction is verifiable.
+		The experimental procedure so defined is repeatable, can be executed by anybody, therefore $\bigAND\limits_{i=1}^{n} \expt_i \in \exptSet$. We have, for every $a \in pAss$, $\result(\bigAND\limits_{i=1}^{n} \expt_i, a) = \SUCCESS$ if and only if $\result(\expt_i, a) = \SUCCESS$ for all $i$ if and only if $a(\stmt_i) = \TRUE$ for all $i$ if and only if $a(\bigAND\limits_{i=1}^{n}\stmt_i) = \TRUE$. Therefore $\bigAND\limits_{i=1}^{n}\stmt_i$ is a verifiable statement. We are therefore justified to assume that the finite conjunction of verifiable statements is a verifiable statement.
 		
-		Note that this cannot be generalized to infinite collections as the procedure would not be guaranteed to terminate.
+		Note that this cannot be generalized to infinite collections as the procedure would not be guaranteed to terminate. In fact, if the only way to test the infinite conjunction is to test each statement individually, then we are guaranteed to take infinite time and the test will never terminate. Therefore we are not justified to assume the infinite conjunction of verifiable statement is verifiable.
 	\end{justification}
 \end{mathSection}	
 
@@ -703,10 +714,10 @@ Combining verifiable statements with disjunction (i.e.~the logical OR) is also s
 	The disjunction of a countable collection of verifiable statements is a verifiable statement. Formally, let $\{\stmt_i\}_{i=1}^{\infty} \subseteq \vstmtSet$ be a countable collection of verifiable statements. Then the disjunction $\bigOR\limits_{i=1}^{\infty} \stmt_i \in \vstmtSet$ is a verifiable statement.
 	\end{axiom}
 	\begin{justification}
-		Mathematically, we are simply assuming that the countable disjunction exists, so in principle there is nothing to prove. However, we want to show that the axiom is well justified in practice.
+		Let $\{\stmt_i\}_{i=1}^{\infty} \subseteq \vstmtSet$ be a countable collection of verifiable statements. Then we can find a corresponding set of experimental tests $\{\expt_i\}_{i=1}^{\infty} \subseteq \exptSet$ such that $\result(\expt_i, a) = \SUCCESS$ if and only if $a(\stmt_i) = \TRUE$ for all $a \in \pAss$.
 		
-		In this case, we have to be careful to handle tests that may not terminate. Let $\{\stmt_i\}_{i=1}^{\infty} \subseteq \vstmtSet$ be a countable collection of verifiable statements. Then we can find a corresponding set of experimental tests $\{\expt_i\}_{i=1}^{\infty} \subseteq \exptSet$ that terminate successfully if and only if the statements are true.
-		Let $\bigOR\limits_{i=1}^{\infty} \expt_i$ be the experimental procedure defined as follows:
+		
+		In this case, we have to be careful to handle tests that may not terminate. Let $\bigOR\limits_{i=1}^{\infty} \expt_i$ be the experimental procedure defined as follows:
 		\begin{enumerate}
 			\item initialize $n$ to 1
 			\item for each $i=1..n$
@@ -716,9 +727,9 @@ Combining verifiable statements with disjunction (i.e.~the logical OR) is also s
 			\end{enumerate}
 			\item increment $n$ and go to step 2
 		\end{enumerate}
-		The procedure will eventually run all tests for an arbitrarily long amount of time. Suppose there exists an $i \geq 1$ such that $\mathsf{e}_i$ will terminate successfully. Then the above procedure will eventually run that test for a time long enough and terminate successfully. This means the procedure will terminate if and only if at least one of $\{\stmt_i\}_{i=1}^{\infty}$ is true, which is when $\bigOR\limits_{i=1}^{\infty} \stmt_i$ is true. This means the experimental procedure defined above is a suitable test for the disjunction so the disjunction is verifiable. 
+		The experimental procedure so defined is repeatable, can be executed by anybody, therefore $\bigOR\limits_{i=1}^{\infty} \expt_i \in \exptSet$. The procedure will eventually run all tests for an arbitrarily long amount of time. Therefore, for every $a \in pAss$, $\result(\bigOR\limits_{i=1}^{\infty} \expt_i, a) = \SUCCESS$ if and only if $\result(\expt_i, a) = \SUCCESS$ for some $i$ if and only if $a(\stmt_i) = \TRUE$ for some $i$ if and only if $a(\bigOR\limits_{i=1}^{\infty}\stmt_i) = \TRUE$. Therefore $\bigOR\limits_{i=1}^{\infty}\stmt_i$ is a verifiable statement. We are therefore justified to assume that the countable disjunction of verifiable statements is a verifiable statement.
 
-		Note that this cannot be generalized to more than countable infinity as the procedure would not be guaranteed to eventually run all tests.
+		Note that this cannot be generalized to uncountable infinite collections as the procedure would not be guaranteed to eventually run all tests. In fact, suppose the only way to test the uncountable disjunction is to test each statement individually. We would then need to, at least, run all of them for a finite time, say one minute. Even assuming arbitrary long time, we would only have countably many minutes at our disposal. Since the set of tests is uncountable, we are not going to be able to run each test for one minute. Therefore we are not justified to assume the uncountable disjunction of verifiable statement is verifiable.
 	\end{justification}
 	\begin{prop}\label{prop_decidable_AND_OR}
 		The conjunction and disjunction of a finite collection of decidable statements are decidable. Formally, let $\{\stmt_i\}_{i=1}^{n} \subseteq \dstmtSet$ be a finite collection of decidable statements. Then the conjunction $\bigAND\limits_{i=1}^{n} \stmt_i \in \dstmtSet$ and the disjuction $\bigOR\limits_{i=1}^{n} \stmt_i \in \dstmtSet$ are decidable statements.
@@ -746,7 +757,7 @@ Taken as a whole, finite conjunction and countable disjunction define the \textb
 	\caption{Comparing algebras of statements.}
 \end{table}
 
-Before we continue, it is interesting and useful to stop and understand the interplay between scientific and mathematical constructs.\footnote{It took us many many confusing years to fully understand where the scientific argument ends and the mathematical argument begins, what makes sense to assume physically and what makes sense to prove rigorously. Part of the confusion is that this line is not objective but it is based on what is considered ``precise" by a mathematician, which has evolved considerably through the centuries. The rule we follow is: in the mathematical formalism the only objects that can be left unspecified are the elements of a set.} Technically, \ref{ax_statement}, \ref{ax_possible_assignemetns}, \ref{ax_functions_of_statement}, \ref{ax_verifiable_statements}, \ref{ax_verifiable_AND} and \ref{ax_verifiable_OR} are the axioms of our mathematical formalism for statements. Note that the actual content of the statements, the methodology for which an assignment is deemed possible and the procedures for experimental verification are not formally defined: the math simply uses symbols to label and identify them. The only assumptions are that statements exist (organized in logical contexts with possible assignments, one of which is the true one), that some of them are verifiable and that they admit the associated algebra. The mathematical formalism does not know what the symbols actually represent: they may as well be pieces of cardboard painted black or white. The math can only derive consequence given the premise, but it does not know whether the premise makes actual sense. In other words, the way that we are making the framework precise is not by making everything precise: it is by omitting the details that are not amenable to a precise specification.
+Before we continue, it is interesting and useful to stop and understand the interplay between scientific and mathematical constructs.\footnote{It took us many many confusing years to fully understand where the scientific argument ends and the mathematical argument begins, what makes sense to assume physically and what makes sense to prove rigorously. Part of the confusion is that this line is not objective but it is based on what is considered ``precise" by a mathematician, which has evolved considerably through the centuries. The rule we follow is: in the mathematical formalism the only objects that can be left unspecified are the elements of a set.} Technically, \ref{ax_statement}, \ref{ax_possible_assignemetns}, \ref{ax_functions_of_statement}, \ref{ax_verifiable_statements}, \ref{ax_verifiable_AND} and \ref{ax_verifiable_OR} are the axioms of our mathematical formalism for statements. Note that the actual content of the statements, the methodology for which an assignment is deemed possible and the procedures for experimental verification are not formally defined: the math simply uses symbols to label and identify them. The only assumptions are that statements exist (organized in logical contexts with possible assignments, one of which is the true one), that some of them are verifiable and that they admit the associated algebra. The mathematical formalism does not know what the symbols actually represent: they may as well be pieces of cardboard painted black or white. The math can only derive consequence given the premise, but it does not know whether the premise makes actual sense. In other words, the way that we are making the framework mathematically precise is not by making everything mathematically precise: it is by omitting the details that are not amenable to a precise specification.
 
 We should stress this for a couple of reasons. First, the part that is not formalized is \emph{the most important part}. Discovering new science is exactly finding new things to study (i.e.~new statements), new connections between known objects (i.e.~new logical relationships) or devising new measurement techniques (i.e.~new experimental tests). The content of the statements, their semantic relationships and the procedure of the experimental tests \emph{is} the actual science. Everything that follows is, in a sense, the trivial bit and that is why it can be done generally. Which leads to the second reason: understanding whether statements and verifiable statements \emph{actually} follow the algebras we defined is crucial. The math just takes it at face value, it does not prove it. The justifications for our axioms, then, are the most critical part of this work and they are not mathematical proofs. If we botch them, we'll have a nice, consistent, rich but meaningless mathematical framework. Lastly, it has to be clear that something gets lost in the formalization. The mathematical framework cannot carry all the physics content: we removed the most important part! Different systems may have the same mathematical description, so the scientific content can never be entirely reconstructed from the math. That is why we always have to carefully bring it along.
 
@@ -766,16 +777,34 @@ Since some depend on others, we do not need to actually run all the tests. Once 
 	\begin{defn}
 		Given a set $\edomain$ of verifiable statements, $\basis \subseteq \edomain$ is a \textbf{basis} if the truth values of $\basis$ are enough to deduce the truth values of the set. Formally, all elements of $\edomain$ can be generated from $\basis$ using finite conjunction and countable disjunction.
 	\end{defn}
+% Canary
 \end{mathSection}
 
-Note that once we have tested the basis, we have tested any other verifiable statement that can be constructed from it. In the example before, once we tested the first four we have implicitly tested \statement{that animal is a black duck}. It is also true that contradictions and tautologies don't really need to be tested. We already know that \statement{that animal is a duck and a swan} is false. The idea, then, is to group verifiable statements into experimental domains that can be seen as all the experimental information one can gather for a particular subject. These will include the tautology, the contradiction and any other verifiable statement that can be constructed from a basis. The basis, though, has to be countable so that, by running one test at a time, we can hope to eventually reach any element.
+Note that once we have tested the basis, we have tested any other verifiable statement that can be constructed from it. In the example before, once we tested the first four we have implicitly tested \statement{that animal is a black duck}. It is also true that impossibilities and certainties don't really need to be tested. We already know that \statement{that animal is a duck and a swan} is false. The idea, then, is to group verifiable statements into experimental domains that can be seen as all the experimental information one can gather for a particular subject. These will include the certainty, the impossibility and any other verifiable statement that can be constructed from a basis. The basis, though, has to be countable so that, by running one test at a time, we can hope to eventually reach any element.
 
 \begin{mathSection}
 \begin{defn}
-	An \textbf{experimental domain} $\edomain$ represents all the experimental evidence that can be acquired about a scientific subject in an indefinite amount of time. Formally, it is a set of statements, closed under finite conjunction and countable disjunction, that includes precisely the tautology, the contradiction, and a set of verifiable statements that can be generated from a countable basis.
+	An \textbf{experimental domain} $\edomain$ represents a set of verifiable statements that can be tested and possibly verified  in an indefinite amount of time. Formally, it is a set of statements, closed under finite conjunction and countable disjunction, that includes precisely the certainty, the impossibility, and a set of verifiable statements that can be generated from a countable basis.
 \end{defn}
 \begin{justification}
-	As usual, let's make sure the formal definition is consistent with the informal one. The set consists only of verifiable statements. Verifiable statements that can be constructed from other verifiable statements represent experimental evidence about the same subject, therefore it is appropriate that the experimental domain is closed under finite conjunction and countable disjunction. Given that each test terminates successfully in a finite amount of time, we can only test a countable set in an indefinite amount of time. Therefore, if the experimental domain didn't allow for a countable basis, we would always have verifiable statements we would never be able to test.
+	In principle, indefinite is different from infinite. Having infinite time at our disposal literally means that we can go on forever, which we can't do. Having indefinite time means that, while at some point we have to stop, we have to be prepared to keep going on because we don't know when we'll stop. In practice, in both cases we have to make a plan for an infinite amount of time. In the indefinite case, our plan will be cut short.
+	
+	As we have already argued, we cannot run uncountably many tests in infinite time. Let $E \subset \exptSet$ be an uncountable set of experimental tests. Let $t_0$ be the amount ot time that the shortest test will take to run. Each test must at least run for $t_0$ time. Given that each test will succeed in finite non-zero time, at best $t_0$ is a finite number. We can divide time into slots of $t_0$ time. The slots will be countable. As $E$ is uncountable, we cannot associate each test to a slot. We cannot test uncountably many tests.
+	
+	We can, however, test countably many tests. Let $\basis = \{\expt_i\}_{i=1}^{\infty} \in \exptSet$ be a countable set of tests, we can proceed as follows:
+	\begin{enumerate}
+		\item initialize $n$ to 1
+		\item for each $i=1..n$
+		\begin{enumerate}
+			\item run the test $\mathsf{e}_i$ for $n$ seconds
+		\end{enumerate}
+		\item increment $n$ and go to step 2
+	\end{enumerate}	
+	This will run all tests for an indefinite amount of time.
+	
+	Now let $\edomain \subseteq \logCtx$ be the set of statements generated by $\basis$ using finite conjunction and countable disjunction. Then $\edomain \subseteq \vstmtSet$ is a set of verifiable statements. Furthermore, testing $\basis$ will eventually verify each true statement in $\edomain$.
+	
+	Therefore we are justified to assume that a set $\edomain \subseteq \vstmtSet$ of verifiable statements that can be tested and possibly tested in an indefinite amount of time must have a countable basis. We are also justified to assume that it contains the certainty and the impossibility as these are two verifiable statements, and two verifiable statements can always be added to a countable basis and keep it countable.
 \end{justification}
 \end{mathSection}
 
