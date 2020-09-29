@@ -1092,7 +1092,7 @@ Let's go back to our verifiable statements and possibilities. For example, consi
 This is something that works in general. In Proposition \ref{prop_disjunctive_normal_form} we saw that, if a statement is a function of other statements, it can be expressed as the disjunction of minterms of the arguments. A verifiable statement is a function of basis, so it can be expressed as the disjunction of minterms of a basis. But we have also seen that the minterms of a basis are the possibilities, so each verifiable statement can be expressed as the disjunction of possibilities.
 
 
-Therefore each statement in the experimental domain defines a set of possibilities, which we call a verifiable set. Since tautology and contradiction are in the domain, the empty set and the full set of possibilities are verifiable sets. Since we can take finite conjunction and countable disjunction of verifiable statements, we can take finite intersection and countable union of verifiable sets. The collection of all verifiable sets forms a topology on the set of possibilities.
+Therefore each statement in the experimental domain defines a set of possibilities, which we call a verifiable set. Since certainty and impossibility are in the domain, the empty set and the full set of possibilities are verifiable sets. Since we can take finite conjunction and countable disjunction of verifiable statements, we can take finite intersection and countable union of verifiable sets. The collection of all verifiable sets forms a topology on the set of possibilities.
 
 \begin{mathSection}
 	
@@ -1104,9 +1104,9 @@ Therefore each statement in the experimental domain defines a set of possibiliti
 	A statement $\stmt \in \edomain$ is equivalent to the disjunction of the possibilities in its verifiable set $U(\stmt)$. That is, $\stmt \equiv \bigOR\limits_{x \in U(\stmt)} x$.
 \end{prop}
 \begin{proof}
-	First we show each statement is the disjunction of some set of possibilities. Let $\edomain$ be an experimental domain, $\stmt \in \edomain$ a verifiable statement and $\basis \subseteq \edomain$ a basis. Since $\stmt$ is a function of the basis, it can be expressed as a disjunction of minterms of $\basis$. The minterms of $\basis$ that are contradictions can be ignored since $\stmt \OR \contradiction \equiv \stmt$. But the minterms of $\basis$ that are not contradictions are possibilities of $\edomain$ so $\stmt=\bigOR\limits_{x \in U} x$ for some $U \subseteq X$.
+	First we show each statement is the disjunction of some set of possibilities. Let $\edomain$ be an experimental domain, $\stmt \in \edomain$ a verifiable statement and $\basis \subseteq \edomain$ a basis. Since $\stmt$ is a function of the basis, it can be expressed as a disjunction of minterms of $\basis$. The minterms of $\basis$ that are impossible can be ignored since $\stmt \OR \impossibility \equiv \stmt$. But the minterms of $\basis$ that are not impossible are possibilities of $\edomain$ so $\stmt=\bigOR\limits_{x \in U} x$ for some $U \subseteq X$.
 	
-	Now we show it is the disjunction of its verifiable set. Let $x \in X$ be a possibility and consider $x \AND \stmt$. If $x\in U$ then $x \AND \stmt = x \AND \bigOR\limits_{\hat{x} \in U} \hat{x} = \bigOR\limits_{\hat{x} \in U} ( x \AND \hat{x}) \equiv x \nequiv \contradiction$. Therefore $x \comp \stmt$. If $x \notin U$ then $x \AND \stmt \equiv \contradiction$. Therefore $x \ncomp \stmt$. This means $U=U(\stmt)$ as it contains and only contains all the possibilities compatible with $\stmt$.
+	Now we show it is the disjunction of its verifiable set. Let $x \in X$ be a possibility and consider $x \AND \stmt$. If $x\in U$ then $x \AND \stmt = x \AND \bigOR\limits_{\hat{x} \in U} \hat{x} = \bigOR\limits_{\hat{x} \in U} ( x \AND \hat{x}) \equiv x \nequiv \impossibility$. Therefore $x \comp \stmt$. If $x \notin U$ then $x \AND \stmt \equiv \impossibility$. Therefore $x \ncomp \stmt$. This means $U=U(\stmt)$ as it contains and only contains all the possibilities compatible with $\stmt$.
 \end{proof}
 
 \begin{prop}
@@ -1114,7 +1114,7 @@ Therefore each statement in the experimental domain defines a set of possibiliti
 \end{prop}
 
 \begin{proof}
-	The verifiable sets for the tautology and the contradiction correspond to the full set and empty set respectively. Formally, $U(\tautology) = \{ x \in X \, | \, x \comp \tautology\} = X$ while $U(\contradiction) = \{ x \in X \, | \, x \comp \contradiction\} = \emptyset$. Therefore $X, \emptyset \in U(\edomain)$ since $\tautology, \contradiction \in \edomain$.
+	The verifiable sets for the certainty and the impossibility correspond to the full set and empty set respectively. Formally, $U(\certainty) = \{ x \in X \, | \, x \comp \certainty\} = X$ while $U(\impossibility) = \{ x \in X \, | \, x \comp \impossibility\} = \emptyset$. Therefore $X, \emptyset \in U(\edomain)$ since $\certainty, \impossibility \in \edomain$.
 
 	The finite intersection of verifiable sets corresponds to the verifiable set of the finite conjunction and therefore it is a verifiable set. Formally, $U(\stmt_1\AND\stmt_2) = \{ x \in X \, | \, x \comp (\stmt_1\AND\stmt_2)\} =  \{ x \in X \, | \, x \comp \stmt_1 \, and \, x \comp \stmt_2\} = \{ x \in X \, | \, x \comp \stmt_1\} \cap \{ x \in X \, | \, x \comp \stmt_2\} = U(\stmt_1) \cap U(\stmt_2)$.
 
@@ -1126,7 +1126,7 @@ Therefore each statement in the experimental domain defines a set of possibiliti
 
 Mainly for historical reasons, the sets in a topology are called open sets. The complements of open sets are called closed sets. In metric spaces, such as the Euclidean space with the standard topology, these will map to the standard notion of open and closed intervals. But, in general, they do not and this may lead to confusion. For example, if we take the integers with their standard topology, any subset is both open and closed.
 
-Given that we are only interested in the natural topologies of possibilities, we are going to refer to the sets in our topology as verifiable sets and we will occasionally call refutable sets their complements. For example, when counting apples a subset of the integers is both verifiable and refutable: we can test whether the apple count is within or outside that set of possible numbers. While this terminology does not follow math convention, we find it more intuitive and meaningful in the context of this work.
+Given that we are only interested in the natural topologies of possibilities, we are going to refer to the sets in our topology as verifiable sets and we will occasionally call falsifiable sets their complements. For example, when counting apples a subset of the integers is both verifiable and falsifiable: we can test whether the apple count is within or outside that set of possible numbers. While this terminology does not follow math convention, we find it more intuitive and meaningful in the context of this work.
 
 We can also re-express the semantic relationships between statements in terms of set operations on the verifiable sets. For example, \statement{that animal is a cat} is narrower than \statement{that animal is a mammal} because the set of possibilities for which the first is true is a subset of the possibilities for which the second is true. Conversely, \statement{that animal is a cat} and \statement{that animal is a dog} are incompatible because the set of possibilities in which both are true is empty.
 
@@ -1169,7 +1169,7 @@ There is a link between the basis of an experimental domain and a sub-basis of a
 		Let $X$ be the set of possibilities of an experimental domain $\edomain$. Let $\basis \subseteq \edomain$ be a basis for the domain, then the collection of verifiable sets $U(\basis)\cup\{X\}$ forms a sub-basis for the natural topology of $X$.
 	\end{prop}
 	\begin{proof}
-		Since every verifiable statement of a domain can be generated by finite conjunction and countable disjunction from a basis $\basis \subseteq \edomain$, its corresponding verifiable set can be generated by finite intersection and countable union from the verifiable sets $U(\basis)$ corresponding to the basis. Note that the tautology, though, is not necessarily the union of $U(\basis)$: if the domain is not complete, the residual possibility is not contained in any verifiable sets. Therefore $U(\basis)\cup\{X\}$ can generate all verifiable sets, including the one for the tautology, and is a sub-basis.
+		Since every verifiable statement of a domain can be generated by finite conjunction and countable disjunction from a basis $\basis \subseteq \edomain$, its corresponding verifiable set can be generated by finite intersection and countable union from the verifiable sets $U(\basis)$ corresponding to the basis. Note that the certainty, though, is not necessarily the union of $U(\basis)$: if the domain is not complete, the residual possibility is not contained in any verifiable sets. Therefore $U(\basis)\cup\{X\}$ can generate all verifiable sets, including the one for the certainty, and is a sub-basis.
 	\end{proof}
 	\begin{prop}
 		The natural topology for the possibilities of an experimental domain is second-countable.
@@ -1217,7 +1217,7 @@ Now suppose two possibilities are experimentally distinguishable as we defined i
 \end{prop}
 \begin{proof}
 	% TODO: Could be shorten since it is sufficient to just prove one side (I.e. given x,y in X, find U containing x but not y. No need to find another set for y. Because the points were arbitrary there is no loss of generality).
-	Suppose all possibilities in $X$ for an experimental domain $\edomain_X$ are approximately verifiable. Let $x_1, x_2 \in X$ be two possibilities, then we can find two sequences of verifiable statements $\{\stmt_i^1\}_{i=1}^\infty, \{\stmt_j^2\}_{j=1}^\infty \in \edomain_X$ such that $x_1=\bigAND\limits_{i=1}^\infty \stmt_i^1$ and $x_2=\bigAND\limits_{j=1}^\infty \stmt_j^2$. We can assume the sequences are monotone with respect to narrowness, that is $\stmt_{i+1}^1 \narrower \stmt_i^1$, as we can always create a monotone sequence from one that is not by taking the sequence of finite conjunction, that is $\hat{\stmt}_k^1=\bigAND\limits_{i=1}^k \stmt_i^1$. If $x_1 \neq x_2$, then $x_1 \AND x_2 \equiv \contradiction$ since different possibilities are incompatible. Therefore we must have $x_1 \AND \stmt_j^2 \equiv \contradiction$ and $\stmt_i^1 \AND x_2 \equiv \contradiction$ from some $i,j \geq 1$ or the limits would not be incompatible. In terms of verifiable sets we have $x_2 \notin U(\stmt_i^1)$ and $x_1 \notin U(\stmt_j^2)$. For any two distinct possibilities we can find two verifiable sets each containing one: the natural topology is $\mathsf{T}_1$.
+	Suppose all possibilities in $X$ for an experimental domain $\edomain_X$ are approximately verifiable. Let $x_1, x_2 \in X$ be two possibilities, then we can find two sequences of verifiable statements $\{\stmt_i^1\}_{i=1}^\infty, \{\stmt_j^2\}_{j=1}^\infty \in \edomain_X$ such that $x_1=\bigAND\limits_{i=1}^\infty \stmt_i^1$ and $x_2=\bigAND\limits_{j=1}^\infty \stmt_j^2$. We can assume the sequences are monotone with respect to narrowness, that is $\stmt_{i+1}^1 \narrower \stmt_i^1$, as we can always create a monotone sequence from one that is not by taking the sequence of finite conjunction, that is $\hat{\stmt}_k^1=\bigAND\limits_{i=1}^k \stmt_i^1$. If $x_1 \neq x_2$, then $x_1 \AND x_2 \equiv \impossibility$ since different possibilities are incompatible. Therefore we must have $x_1 \AND \stmt_j^2 \equiv \impossibility$ and $\stmt_i^1 \AND x_2 \equiv \impossibility$ from some $i,j \geq 1$ or the limits would not be incompatible. In terms of verifiable sets we have $x_2 \notin U(\stmt_i^1)$ and $x_1 \notin U(\stmt_j^2)$. For any two distinct possibilities we can find two verifiable sets each containing one: the natural topology is $\mathsf{T}_1$.
 
 	Conversely, suppose the natural topology $\mathsf{T}_X$ for the possibilities $X$ for an experimental domain $\edomain_X$ is $\mathsf{T}_1$. Let $x \in X$ be a possibility. Consider the collection, not necessarily countable, of all verifiable sets $\{U_i\}_{i \in I} \subset \mathsf{T}_X$ such that they contain $x$. Consider their intersection $U_x = \bigcap\limits_{i \in I} U_i$. It will contain $x$ since all $U_i$ contain $x$. It will not contain anything else: since the topology is $\mathsf{T}_1$, for every other possibility $\hat{x}$ there is always an open set $U_i$ that does not contain it. Therefore $U_x = \{x\}$. Because the natural topology is second countable, we can find a countable basis $\basis$ and rewrite the arbitrary intersection into $\{x\} = \bigcap\limits_{i=1}^\infty V_i$ a countable intersection of elements $V_i \in \basis$ of the basis. Let $\{\stmt_i\}_{i=1}^\infty$ be the sequence of verifiable statements such that $U(\stmt_i) = V_i$ for every $i$. Then $x=\bigAND\limits_{i=1}^\infty \stmt_i$ which means $x$ is approximately verifiable.
 
@@ -1261,7 +1261,7 @@ In the previous section we saw how each verifiable statement can be expressed as
 	\end{prop}
 	
 	\begin{proof}
-	The theoretical sets for the tautology and the contradiction correspond to the full set and empty set respectively. Formally, $A(\tautology) = \{ x \in X \, | \, x \comp \tautology\} = X$ while $A(\contradiction) = \{ x \in X \, | \, x \comp \contradiction\} = \emptyset$. Therefore $X, \emptyset \in A(\tdomain)$ since $\tautology, \contradiction \in \tdomain$.
+	The theoretical sets for the certainty and the impossibility correspond to the full set and empty set respectively. Formally, $A(\certainty) = \{ x \in X \, | \, x \comp \certainty\} = X$ while $A(\impossibility) = \{ x \in X \, | \, x \comp \impossibility\} = \emptyset$. Therefore $X, \emptyset \in A(\tdomain)$ since $\certainty, \impossibility \in \tdomain$.
 
 	The complement of a theoretical set corresponds to the theoretical set of the negation and therefore it is a theoretical set. Formally, $A(\stmt)^C = \{ x \in X \, | \, x \ncomp \stmt\} =  \{ x \in X \, | \, x \comp \NOT\stmt\} = A(\NOT\stmt)$.
 
@@ -1322,7 +1322,7 @@ Decidable domains have special characteristics and are easier to study. Since we
 	
 	To prove 3 from 2, suppose $\edomain_X$ coincides with its theoretical domain $\tdomain_X$. As each possibility is a theoretical statement, it is also a verifiable statement.
 	
-	To prove 4 from 3, suppose the possibilities are verifiable. Note that the possibilities can generate all other statements through disjunction. To show $X$ is countable, consider a countable basis $\basis \subseteq \edomain_X$. Because the possibilities are verifiable statements, they can be generated from $\basis$ by finite conjunction and countable disjunction. Moreover, since the possibilities are the narrowest statements that are not contradictions, they can be generated from $\basis$ using finite conjunction only. Since $\basis$ is countable and $X$ is generated by $\basis$ through finite conjunction, $X$ can be at most countable. Therefore $X$ is a countable basis.
+	To prove 4 from 3, suppose the possibilities are verifiable. Note that the possibilities can generate all other statements through disjunction. To show $X$ is countable, consider a countable basis $\basis \subseteq \edomain_X$. Because the possibilities are verifiable statements, they can be generated from $\basis$ by finite conjunction and countable disjunction. Moreover, since the possibilities are the narrowest statements that are not impossible, they can be generated from $\basis$ using finite conjunction only. Since $\basis$ is countable and $X$ is generated by $\basis$ through finite conjunction, $X$ can be at most countable. Therefore $X$ is a countable basis.
 	
 	To prove 1 from 4, suppose the possibilities $X$ form a countable basis. Then each possibility is verifiable and so is their countable union. The negation of a verifiable statement can be expressed as the countable union of possibilities, and is therefore verifiable. All statements in the experimental domain are decidable and therefore the domain is decidable.
 \end{proof}
@@ -1378,9 +1378,9 @@ What we have ended up with is a conceptual framework that captures the necessary
 	\hline 
 	$\pAss \subseteq \Bool^\logCtx$& possible assignments & the logically consistent truth value combinations that can be assigned to the statements \\ 
 	\hline 
-	$\tautology$ & tautology & a statement that can only be true (i.e.~it is true in all possible assignments) \\ 
+	$\certainty$ & certainty & a statement that can only be true (i.e.~it is true in all possible assignments) \\ 
 	\hline 
-	$\contradiction$ & contradiction & a statement that can never be true (i.e.~it is false in all possible assignments) \\ 
+	$\impossibility$ & impossibility & a statement that can never be true (i.e.~it is false in all possible assignments) \\ 
 	\hline 
 	& contingent statement & a statement that can be either true or false depending on the possible assignment \\ 
 	\hline 
@@ -1404,7 +1404,7 @@ What we have ended up with is a conceptual framework that captures the necessary
 	\hline 
 	$\stmt \in \vstmtSet$ & verifiable statement & a statement that can be validated experimentally\\ 
 	\hline 
-	$\edomain$ & experimental domain & a set of verifiable statement that can be tested in an indefinite amount of time (i.e.~a set of statements closed under finite conjunction and countable disjunction, that precisely contains the tautology, the contradiction and a set of verifiable statements generated by a countable basis) \\ 
+	$\edomain$ & experimental domain & a set of verifiable statement that can be tested in an indefinite amount of time (i.e.~a set of statements closed under finite conjunction and countable disjunction, that precisely contains the certainty, the impossibility and a set of verifiable statements generated by a countable basis) \\ 
 	\hline 
 	$\basis \in \edomain$ & basis & a set of verifiable statements from which all others can be constructed\\ 
 			
