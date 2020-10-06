@@ -299,7 +299,7 @@ Since statements are intangible, there are no limits to the number of arguments 
 		We can always find a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally, let $S \subseteq \logCtx$ be a set of statements and $f_{\Bool} : \Bool^S \to \Bool$ an arbitrary function from an assignment of $S$ to a truth value. Then we can always find a statement $\bar{\stmt} \in \logCtx$ that depends on $S$ through $f_{\Bool}$.
 	\end{axiom}
 \begin{justification}
-	Let $S \subseteq \logCtx$ be a set of statements and let $f_{\Bool} : \Bool^S \to \Bool$ be an arbitrary function. Consider the statement \statement{this statement is true if the function $f_{\Bool}$ applied to the truth values of $S$ is true}. This statement has a well defined meaning that assigns a truth value that is the same for everybody. It is therefore logically consistent will all other statements in $\logCtx$. We are therefore justified to assume it is in the content, for, if it isn't, it can be added without problem. 
+	Let $S \subseteq \logCtx$ be a set of statements and let $f_{\Bool} : \Bool^S \to \Bool$ be an arbitrary function. Consider the statement \statement{this statement is true if the function $f_{\Bool}$ applied to the truth values of $S$ is true}. This statement has a well defined meaning that assigns a truth value that is the same for everybody. It is therefore logically consistent with all other statements in $\logCtx$. We are therefore justified to assume it is in the context, for, if it is not, it can be added without problem. 
 \end{justification}
 
 \begin{coro}
@@ -688,9 +688,9 @@ Note that, since the test always terminates, we can switch failure to success an
 		\begin{enumerate}
 			\item initialize $n$ to 1
 			\item run the test $\expt$ for $n$ seconds
-			\item if $\expt$ is successful, return successfully
+			\item if $\expt$ is successful, terminate successfully
 			\item run the test $\expt_\NOT$ for $n$ seconds
-			\item if $\expt_\NOT$ is successful, return unsuccessfully
+			\item if $\expt_\NOT$ is successful, terminate unsuccessfully
 			\item increment $n$ and go to step 2
 		\end{enumerate}
 	    The procedure is repeatable and can be executed by anybody therefore $\hat{\expt}(\expt, \expt_\NOT) \in \exptSet$. Both $\expt$ and $\expt_\NOT$ are eventually run an arbitrarily long amount of time therefore $\result(\hat{\expt}(\expt, \expt_\NOT), a) \in \{\SUCCESS, \FAILURE \}$, that is the test will always terminate. We have $\result(\hat{\expt}(\expt, \expt_\NOT), a) = \SUCCESS $ if and only if $\result(\expt, a) = \SUCCESS$ if and only if $a(\stmt) = \TRUE$. We also have $\result(\hat{\expt}(\expt, \expt_\NOT), a) = \FAILURE$ if and only if $\result(\expt_\NOT, a) = \SUCCESS$ if and only if $a(\NOT\stmt) = \TRUE$ if and only if $a(\stmt) = \FALSE$. Therefore $\stmt$ is decidable. This justifies the definition.
@@ -722,9 +722,9 @@ Combining verifiable statements with conjunction (i.e.~the logical AND) is more 
 			\item if all tests terminate successfully then terminate successfully
 			\item terminate unsuccessfully.
 		\end{enumerate}
-		The experimental procedure so defined is repeatable, can be executed by anybody, therefore $\bigAND\limits_{i=1}^{n} \expt_i \in \exptSet$. We have, for every $a \in pAss$, $\result(\bigAND\limits_{i=1}^{n} \expt_i, a) = \SUCCESS$ if and only if $\result(\expt_i, a) = \SUCCESS$ for all $i$ if and only if $a(\stmt_i) = \TRUE$ for all $i$ if and only if $a(\bigAND\limits_{i=1}^{n}\stmt_i) = \TRUE$. Therefore $\bigAND\limits_{i=1}^{n}\stmt_i$ is a verifiable statement. We are therefore justified to assume that the finite conjunction of verifiable statements is a verifiable statement.
+		The experimental procedure so defined is repeatable, can be executed by anybody, therefore $\bigAND\limits_{i=1}^{n} \expt_i \in \exptSet$. We have, for every $a \in \pAss$, $\result(\bigAND\limits_{i=1}^{n} \expt_i, a) = \SUCCESS$ if and only if $\result(\expt_i, a) = \SUCCESS$ for all $i$ if and only if $a(\stmt_i) = \TRUE$ for all $i$ if and only if $a(\bigAND\limits_{i=1}^{n}\stmt_i) = \TRUE$. Therefore $\bigAND\limits_{i=1}^{n}\stmt_i$ is a verifiable statement. We are therefore justified to assume that the finite conjunction of verifiable statements is a verifiable statement.
 		
-		Note that this cannot be generalized to infinite collections as the procedure would not be guaranteed to terminate. In fact, if the only way to test the infinite conjunction is to test each statement individually, then we are guaranteed to take infinite time and the test will never terminate. Therefore we are not justified to assume the infinite conjunction of verifiable statement is verifiable.
+		Note that this cannot be generalized to infinite collections as the procedure would not be guaranteed to terminate. In fact, if the only way to test the infinite conjunction is to test each statement individually, then we are guaranteed to take infinite time and the test will never terminate. Therefore we are not justified to assume the infinite conjunction of verifiable statements is verifiable.
 	\end{justification}
 \end{mathSection}	
 
@@ -748,9 +748,9 @@ Combining verifiable statements with disjunction (i.e.~the logical OR) is also s
 			\end{enumerate}
 			\item increment $n$ and go to step 2
 		\end{enumerate}
-		The experimental procedure so defined is repeatable, can be executed by anybody, therefore $\bigOR\limits_{i=1}^{\infty} \expt_i \in \exptSet$. The procedure will eventually run all tests for an arbitrarily long amount of time. Therefore, for every $a \in pAss$, $\result(\bigOR\limits_{i=1}^{\infty} \expt_i, a) = \SUCCESS$ if and only if $\result(\expt_i, a) = \SUCCESS$ for some $i$ if and only if $a(\stmt_i) = \TRUE$ for some $i$ if and only if $a(\bigOR\limits_{i=1}^{\infty}\stmt_i) = \TRUE$. Therefore $\bigOR\limits_{i=1}^{\infty}\stmt_i$ is a verifiable statement. We are therefore justified to assume that the countable disjunction of verifiable statements is a verifiable statement.
+		The experimental procedure so defined is repeatable, can be executed by anybody, therefore $\bigOR\limits_{i=1}^{\infty} \expt_i \in \exptSet$. The procedure will eventually run all tests for an arbitrarily long amount of time. Therefore, for every $a \in \pAss$, $\result(\bigOR\limits_{i=1}^{\infty} \expt_i, a) = \SUCCESS$ if and only if $\result(\expt_i, a) = \SUCCESS$ for some $i$ if and only if $a(\stmt_i) = \TRUE$ for some $i$ if and only if $a(\bigOR\limits_{i=1}^{\infty}\stmt_i) = \TRUE$. Therefore $\bigOR\limits_{i=1}^{\infty}\stmt_i$ is a verifiable statement. We are therefore justified to assume that the countable disjunction of verifiable statements is a verifiable statement.
 
-		Note that this cannot be generalized to uncountable infinite collections as the procedure would not be guaranteed to eventually run all tests. In fact, suppose the only way to test the uncountable disjunction is to test each statement individually. We would then need to, at least, run all of them for a finite time, say one minute. Even assuming arbitrary long time, we would only have countably many minutes at our disposal. Since the set of tests is uncountable, we are not going to be able to run each test for one minute. Therefore we are not justified to assume the uncountable disjunction of verifiable statement is verifiable.
+		Note that this cannot be generalized to uncountable infinite collections as the procedure would not be guaranteed to eventually run all tests. In fact, suppose the only way to test the uncountable disjunction is to test each statement individually. We would then need to, at least, run all of them for a finite time, say one minute. Even assuming arbitrary long time, we would only have countably many minutes at our disposal. Since the set of tests is uncountable, we are not going to be able to run each test for one minute. Therefore we are not justified to assume the uncountable disjunction of verifiable statements is verifiable.
 	\end{justification}
 	\begin{prop}\label{prop_decidable_AND_OR}
 		The conjunction and disjunction of a finite collection of decidable statements are decidable. Formally, let $\{\stmt_i\}_{i=1}^{n} \subseteq \dstmtSet$ be a finite collection of decidable statements. Then the conjunction $\bigAND\limits_{i=1}^{n} \stmt_i \in \dstmtSet$ and the disjuction $\bigOR\limits_{i=1}^{n} \stmt_i \in \dstmtSet$ are decidable statements.
@@ -808,11 +808,11 @@ Note that once we have tested the basis, we have tested any other verifiable sta
 	An \textbf{experimental domain} $\edomain$ represents a set of verifiable statements that can be tested and possibly verified  in an indefinite amount of time. Formally, it is a set of statements, closed under finite conjunction and countable disjunction, that includes precisely the certainty, the impossibility, and a set of verifiable statements that can be generated from a countable basis.
 \end{defn}
 \begin{justification}
-	In principle, indefinite is different from infinite. Having infinite time at our disposal literally means that we can go on forever, which we can't do. Having indefinite time means that, while at some point we have to stop, we have to be prepared to keep going on because we don't know when we'll stop. In practice, in both cases we have to make a plan for an infinite amount of time. In the indefinite case, our plan will be cut short.
+	In principle, indefinite is different from infinite. Having infinite time at our disposal literally means that we can go on forever, which we cannot do. Having indefinite time means that, while at some point we have to stop, we have to be prepared to keep going on because we do not know when we will stop. In practice, in both cases we have to make a plan for an infinite amount of time. In the indefinite case, our plan will be cut short.
 	
 	As we have already argued, we cannot run uncountably many tests in infinite time. Let $E \subset \exptSet$ be an uncountable set of experimental tests. Let $t_0$ be the amount ot time that the shortest test will take to run. Each test must at least run for $t_0$ time. Given that each test will succeed in finite non-zero time, at best $t_0$ is a finite number. We can divide time into slots of $t_0$ time. The slots will be countable. As $E$ is uncountable, we cannot associate each test to a slot. We cannot test uncountably many tests.
 	
-	We can, however, test countably many tests. Let $\basis = \{\expt_i\}_{i=1}^{\infty} \in \exptSet$ be a countable set of tests, we can proceed as follows:
+	We can, however, test countably many tests. Let $\basis = \{\expt_i\}_{i=1}^{\infty} \in \exptSet$ be a countable set of tests. Ee can proceed as follows:
 	\begin{enumerate}
 		\item initialize $n$ to 1
 		\item for each $i=1..n$
@@ -825,7 +825,7 @@ Note that once we have tested the basis, we have tested any other verifiable sta
 	
 	Now let $\edomain \subseteq \logCtx$ be the set of statements generated by $\basis$ using finite conjunction and countable disjunction. Then $\edomain \subseteq \vstmtSet$ is a set of verifiable statements. Furthermore, testing $\basis$ will eventually verify each true statement in $\edomain$.
 	
-	Therefore we are justified to assume that a set $\edomain \subseteq \vstmtSet$ of verifiable statements that can be tested and possibly tested in an indefinite amount of time must have a countable basis. We are also justified to assume that it contains the certainty and the impossibility as these are two verifiable statements, and two verifiable statements can always be added to a countable basis and keep it countable.
+	Therefore we are justified to assume that a set $\edomain \subseteq \vstmtSet$ of verifiable statements that can be tested in an indefinite amount of time must have a countable basis. We are also justified to assume that it contains the certainty and the impossibility as these are two verifiable statements, and two verifiable statements can always be added to a countable basis and keep it countable. This justifies the definition.
 \end{justification}
 \end{mathSection}
 
