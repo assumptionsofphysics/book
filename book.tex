@@ -2696,15 +2696,24 @@ Here we note some thoughts and idea about open problems and possible extension t
 
 \subsection{Homogeneity of an experimental domain}
 
-It may be interesting to characterize some notion of homogeneity that makes all possibilities in a domain ``equally verifiable'', that no possibilities is ``special'' compared to the others in terms of experimental verifiability. For example:
+It may be interesting to characterize some notion of homogeneity that makes all possibilities in a domain ``equally verifiable'', that no possibility is ``special'' compared to the others in terms of experimental verifiability. For example:
 \begin{itemize}
 	\item the ``extra-terrestrial life" domain is not homogeneous because one possibility can be verified while the other cannot
-	\item the integer and real are the only linearly ordered domains where all contingent statement are the same experimentally: all decidable and none decidable
-	\item phase transitions are special, as knowing whether a system is in a mixed state is decidable
+	\item the integers and reals are the only linearly ordered quantities where all contingent statement are the same experimentally: all decidable and none decidable
+	\item phase transitions are special, as knowing whether a system is in a mixed state is decidable, so a domain with phase transitions is not homogeneous
 \end{itemize}
 
-It is not clear how this notion should be implemented and how exactly would be useful. It may give a reason to expect a complete domain (the residual possibility is the only one that is not compatible with any contingent statement) and also that all possibilities are approximately verifiable.
+It is not clear how this notion should be implemented and how exactly would be useful. It may give a reason to expect a complete domain (the residual possibility is the only one that is not compatible with any contingent statement, so the domain would not be homogeneous) and also that all possibilities are approximately verifiable (if one is be able to prove that, in any domain, at least one possibility is approximately verifiable).
 
+\subsection{Predictive relationships}
+
+Another way to characterize relationships between domains could be in terms of predictions, what statements of one domain can tell about the other. That is, we give a theoretical statement on one and look for the best prediction (i.e. narrowest theoretical statement broader than the original) for the other.
+
+For example, if a domain is independent from another, any theoretical statement should predict the certainty on the other. If a domain is dependent on another, any theoretical statement should predict an equivalent statement.
+
+A possible approach. Let $\edomain_X$ and $\edomain_Y$ be two experimental domains and $\tdomain_X$ and $\tdomain_Y$ their respective theoretical domains. Now we construct the function $\pi: \tdomain_X \to \tdomain_Y$ such that given $\stmt_X \in \tdomain_x$ and $\stmt_Y \in \tdomain_Y$ such that $\stmt_X \narrower \stmt_Y$ we always have $\stmt_X \narrower \pi(\stmt_X) \narrower \stmt_Y$. In other words, it should map to the narrowest broader statement in $\tdomain_Y$.
+
+In principle, we can even extend $\pi : \logCtx \to \tdomain_Y$ to be defined on the whole context. In that case, $\pi$ can be proven to be a projection. This map should be able to characterize the relationship between domains. For example, if $\pi(\tdomain_X) = \{ \certainty, \impossibility \}$ then the domains should be independent. If $\pi(\tdomain_X) = \tdomain_Y$ the domains should be dependent.
 
 \chapter{Physical theories}
 
@@ -2948,12 +2957,6 @@ The fact that each possibility is comparable with each verifiable statement is a
 \section{Side tracks}
 
 This chapter lists ideas to be explored further. These are problems left open as they are not critical for the foundation of the work, but are nonetheless interesting. Some of these may very well turn out to be dead ends or not as interesting as they sound.
-
-\subsection{Chapter 2 - predictive relationships}
-
-Another way to characterize experimental relationships should be in terms of predictions. That is, we give a prediction (i.e. a theoretical statement) for the independent domain and this should correspond to the best prediction (i.e. theoretical statement) for the dependent domain. The idea is to find the correct mathematical representation for this.
-
-A possible approach. Let $\edomain_X$ and $\edomain_y$ be two experimental domains and $\tdomain_X$ and $\tdomain_Y$ their respective theoretical domains. Let them be experimentally consistent, such that if a theoretical statement is in both domains, then it is verifiable for both or for neither. Suppose that a prediction for $\edomain_X$ gives us a prediction for $\edomain_Y$. That is, we are given a function $\pi: \tdomain_X \to \tdomain_Y$ such that $\pi(\tdomain_X) = \tdomain_Y$ and given $\stmt_X \in \tdomain_x$ and $\stmt_Y \in \tdomain_Y$ such that $\stmt_X \narrower \stmt_Y$ we always have $\stmt_X \narrower \pi(\stmt_X) \narrower \stmt_Y$. Under these assumption, can we prove that $\pi$ is a projection and that $\edomain_Y \subseteq \edomain_X$?
 
 \subsection{Chapter 2 - structure preserving maps and experimental relationships}
 
