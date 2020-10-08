@@ -2751,7 +2751,12 @@ This means that the measure we put on the possibilities cannot represent the pre
 
 \section{Classical Hamiltonian mechanics}
 
+\subsection{Closed two form for Hamiltonian mechanics}
+
+To understand why the classical phase space must be a symplectic manifold, let $\mathcal{M}$ be the state space of classical particles. Invariant densities can only be assigned to infinitesimal areas. Therefore we need a two-form $\omega$ that assigns an infinitesimal area to each infinitesimal surface. Because degrees of freedom are, at least locally, independent, the total number of states in a volume is the product of the possible configurations of each degree of freedom. This means the volume form is given by $\omega^n$. This cannot be degenerate, or some volumes would not contain states. Therefore $\omega$ itself cannot be degenerate. As the degrees of freedom are independent, the number of states on a surface does not change if we translate it across independent degrees of freedom. If we imagine a parallelopiped, the integral over the surface must be zero (integral over opposite sides are equal and opposite).
+
 \subsection{Geometry of Hamiltonian/Lagrangian}
+
 The one dimensional case works with standard 3D differential calculus. We have $\xi^a=\{q,p,t\}$, $S^a=\{\frac{dq}{dt},\frac{dp}{dt},\frac{dt}{dt}\}$ and $\theta_a=\{p,0,-H\}$. The equations are $S=-curl(\theta)$ and $L=\theta \cdot S$. In fact, $curl(\theta)=\{\partial_p \theta_t - \partial_t \theta_p, \partial_t \theta_q - \partial_q \theta_t, \partial_q \theta_p - \partial_p \theta_q\} = \{ -\partial_p H , \partial_q H , 1 \}$ and $L = \frac{dq}{dt}p - \frac{dt}{dt}H$.
 
 To generalize, we can set $\xi^a=\{q^i,p_i,t\}$, $S^a=\{\frac{dq^i}{dt},\frac{dp_i}{dt},\frac{dt}{dt}\}$ and $\theta_a=\{p_i,0,-H\}$. The Lagrangian is still $L=\theta \cdot S = S^a \theta_a = \frac{dq^i}{dt}p_i - \frac{dt}{dt}H$. Equation should be $d\theta(S, \cdot ) = 0$. In fact, $d\theta = \partial_a \theta_b e^a \wedge e^b = (\partial_a \theta_b - \partial_b \theta_a) e^a \otimes e^b$.
@@ -2779,6 +2784,52 @@ S^{q^j} &= - S^{t}\partial_{p_j} H \\
 Note that the third expression is not a new equation: is identical to zero given the first two equations.
 
 \section{Classical massive particles under scalar potential forces}
+
+
+\subsection{Directional degrees of freedom}
+
+Suppose we have a degree of freedom that is associated with a direction in space. Choosing a direction in space is the same as choosing a point on a sphere. Since degrees of freedom must be two-dimensional, the sphere must be two-dimensional. Furthermore, the only sphere that can be a symplectic manifold is the two dimensional sphere. This also means the space is three dimensional.
+
+To find a pair of conjugate variables, consider the solid angle $d\Omega=\sin \varphi_z d\varphi_z d\theta^{xy}$ where $\varphi_z$ is the azimuthal angle. This is a quantity that is dimensionless and that is proportional to the number of possible directions. Therefore we can use it as a measure for the number of degrees of freedom. We can express the two form for our space as $\omega(d\theta^{xy}, d\varphi_z) = \hbar d\Omega = \hbar\sin \varphi_z d\varphi_z d\theta^{xy} = d(- \hbar \cos \varphi_z ) \wedge d\theta^{xy} = d\theta^{xy} \wedge d(\hbar \cos \varphi_z )$. Set $S_z= \hbar \cos \varphi_z$ the component of the normalized vector multiplied by $\hbar$. We have that $\omega(d\theta^{xy}, dS_z) = d\theta^{xy} \wedge dS_z$ therefore $\theta^{xy}$ and $S_z$ are conjugate variables. Which means $\{ \theta^{xy}, S_z \} = 1$
+
+We can now write all the components of the vector in terms of the conjugate variables.
+\begin{align*}
+S_x &= \hbar \sin \varphi_z \cos \theta^{xy} = \sqrt{\hbar^2 - S_z^2} \cos \theta^{xy}  \\
+S_y &= \hbar \sin \varphi_z \sin \theta^{xy} = \sqrt{\hbar^2 - S_z^2} \sin \theta^{xy}\\
+S_z &= \hbar \cos \varphi_z = S_z
+\end{align*}
+These relationship can be used to calculate the Poisson brackets across components. One can then study the motion under a simple linear Hamiltonian $H = B^i S_i$.
+
+What needs to be understood is how this generalizes to the relativistic case.
+
+
+
+\section{Open questions and possible extensions}
+
+\subsection{Curvature for particle dynamics}
+
+The assumption of kinematic equivalence already gives us relativistic Hamiltonians. Does it also give us a relationship between the curvature and the forces acting on the particles?
+
+The setup is the following. Suppose we have two vectors in the extended phase space $d\xi^a = [dq^\alpha, 0]$ and $d\nu^a = [0, dp_\alpha]$. Using the symplectic form we have the invariant $d\xi^a \omega_{ab}d\nu^b = dq^\alpha dp_\alpha$. Under the kinematic assumption we have $dq^\alpha = dx^\alpha$ $dp_\alpha = mg_{\alpha\beta}du^\beta + q A_\alpha$. We have $d\xi^a \omega_{ab}d\nu^b = dx^\alpha g_{\alpha\beta} du^\beta$.
+
+Since the two terms have to match at each point and the symplectic form has the same components at each point, can we constrain the change of the components of $g_{\alpha\beta}$? The general idea would be that components of $g_{\alpha\beta}$ may have to change in space/time coordinately with $A_\alpha$ as to make $d\xi^a \omega_{ab}d\nu^b = dq^\alpha dp_\alpha$ remain the same. Note that derivatives in $q^\alpha$ are taken at constant $p_\alpha$ while derivatives in $x^\alpha$ are taking at constant $u^\alpha$.
+
+\subsection{Thermodynamics}
+
+At some point we'll have to recover/justify thermodynamics. The idea is to study non-deterministic evolution, as opposed to deterministic/reversible evolution which gives Hamiltonian mechanics. We still have a reducible system, so the state is a distribution over the state of the parts. Deterministic and reversible processes conserve information entropy. Non-deterministic processes increase information entropy. Non-reversible processes decrease information entropy. Deterministic and reversible processes lead to Hamiltonian mechanics. Non-deterministic processes lead to max entropy.
+
+Suppose you have a non-deterministic process. Either because it is influenced by an external system or because of unknown internal degrees of freedom. Since the evolution is non-deterministic, information entropy increases.
+
+Suppose you have a constraint, i.e. conservation of energy. The constraints limits what states can be explored by the system. The non-deterministic evolution will push the state to the ones that have higher information entropy. If the constraint bounds the maximum information entropy to a finite value, the system will tend to those states.
+
+Suppose the constraint is such that there is a unique state that corresponds to the maximum entropy. Then the non-deterministic process will push the system into that state state, no matter what the process is. That is: the constrain is the enough to determine the final state. We call this state equilibrium.
+
+Suppose the only constraint on the system is the total energy (how do we justify this?). Suppose for each value of energy there is an equilibrium state. Then the entropy $I=I(E)$ is a function of $E$.
+
+Suppose two systems come into contact. The entropy of each one constraint by its total energy. $I_1=I_1(E_1)$ and $I_2=I_2(E_2)$. The entropy sums $I=I_1+I_2$ if the systems are independent degrees of freedom. The energy sums $E=E_1+E_2$ (why? under what conditions the Hamiltonian of the whole is the sum of the Hamiltonian of the parts?). Suppose the system undergoes non-deterministic evolution and they can exchange energy. $I$ is maximized under the constraint of the total energy. The equilibrium is reached when $\frac{\partial I}{\partial E_1} = 0$ and $\frac{\partial I}{\partial E_2} = 0$ on the constraint. That is: $\frac{\partial I}{\partial E_1} = \frac{\partial I_1}{\partial E_1} +\frac{\partial I_2}{\partial E_2} \frac{\partial E_2}{\partial E_1} = \frac{\partial I_1}{\partial E_1} -\frac{\partial I_2}{\partial E_2}=0$. We have $\frac{\partial I_1}{\partial E_1} = \frac{\partial I_2}{\partial E_2}$.
+
+Define temperature $\frac{1}{T_1} = \frac{\partial I_1}{\partial E_1}$: at equilibrium the two systems have the same temperature. Note that temperature cannot be zero since the information entropy at equilibrium is a function of the energy, and not the other way around.
+
 
 
 
@@ -3009,101 +3060,6 @@ The fact that each possibility is comparable with each verifiable statement is a
 	\hline 
 		
 \end{tabular} 
-
-
-\chapter{Exploratory section}
-
-\subsection{Thermodynamics}
-
-At some point we'll have to recover/justify thermodynamics. The idea is to study non-deterministic evolution, as opposed to deterministic/reversible evolution which gives Hamiltonian mechanics. We still have a reducible system, so the state is a distribution over the state of the parts. Deterministic and reversible processes conserve information entropy. Non-deterministic processes increase information entropy. Non-reversible processes decrease information entropy. Deterministic and reversible processes lead to Hamiltonian mechanics. Non-deterministic processes lead to max entropy.
-
-Suppose you have a non-deterministic process. Either because it is influenced by an external system or because of unknown internal degrees of freedom. Since the evolution is non-deterministic, information entropy increases.
-
-Suppose you have a constraint, i.e. conservation of energy. The constraints limits what states can be explored by the system. The non-deterministic evolution will push the state to the ones that have higher information entropy. If the constraint bounds the maximum information entropy to a finite value, the system will tend to those states.
-
-Suppose the constraint is such that there is a unique state that corresponds to the maximum entropy. Then the non-deterministic process will push the system into that state state, no matter what the process is. That is: the constrain is the enough to determine the final state. We call this state equilibrium.
-
-Suppose the only constraint on the system is the total energy (how do we justify this?). Suppose for each value of energy there is an equilibrium state. Then the entropy $I=I(E)$ is a function of $E$.
-
-Suppose two systems come into contact. The entropy of each one constraint by its total energy. $I_1=I_1(E_1)$ and $I_2=I_2(E_2)$. The entropy sums $I=I_1+I_2$ if the systems are independent degrees of freedom. The energy sums $E=E_1+E_2$ (why? under what conditions the Hamiltonian of the whole is the sum of the Hamiltonian of the parts?). Suppose the system undergoes non-deterministic evolution and they can exchange energy. $I$ is maximized under the constraint of the total energy. The equilibrium is reached when $\frac{\partial I}{\partial E_1} = 0$ and $\frac{\partial I}{\partial E_2} = 0$ on the constraint. That is: $\frac{\partial I}{\partial E_1} = \frac{\partial I_1}{\partial E_1} +\frac{\partial I_2}{\partial E_2} \frac{\partial E_2}{\partial E_1} = \frac{\partial I_1}{\partial E_1} -\frac{\partial I_2}{\partial E_2}=0$. We have $\frac{\partial I_1}{\partial E_1} = \frac{\partial I_2}{\partial E_2}$.
-
-Define temperature $\frac{1}{T_1} = \frac{\partial I_1}{\partial E_1}$: at equilibrium the two systems have the same temperature. Note that temperature cannot be zero since the information entropy at equilibrium is a function of the energy, and not the other way around.
-
-\subsection{Closed two form for Hamiltonian mechanics}
-
-We have to better understand why the two form $\omega$ has to be closed. One idea: consider $\frac{\omega^n}{n!}$. This gives us the volume in phase space. It's a $2n$-form in a $2n$-dimensional space. It's exterior derivative $\frac{\partial\omega^n}{n!}=0$ because its rank exceeds the dimensionality of the space. We have $\frac{\partial\omega^n}{n!}=\frac{\omega^{n-1}}{(n-1)!}\wedge\partial\omega=0$. Since $\omega$ cannot be degenerate, $\partial \omega$ must be zero. Does that work?
-
-\subsection{Better notation for differential calculus}
-
-To really understand/derive the correct physical relationships we'll need to use differential geometry. The standard vector calculus does not generalize and does not lead to the correct way of thinking. The notation used in differential geometry (for vectors and covectors) and their definitions (i.e. space of derivations, space of real functions of derivations) makes no physical sense. We need to define better concepts and notation that fit the physics better.
-
-In terms of concepts, the main idea is to start from the integral operators and see the differential operators as the limit of recursive subdivisions. This is the opposite of what is typically done, but is what is closer to the physics. That is: mass over a finite region is what we measure and the density is the limit for which we make the region shrink. Same thing for a vector: a finite curve is what we have and the idea that we can divide it into infinitesimal parts, each described by a vector, is a limit. Since we start from a different point, some theorems get reversed.
-
-For example, given an $n$-dimensional space, we will have a function $F$ from an $m$-dimensional sub-space to a real number. These functions are going to be linear, in the sense that if the function applied to the union of disjoint region is equal to the sum of the function of the individual regions: $F(\bigcup X_i) = \sum F(X_i)$ if $X_i \cap X_j = \emptyset$. So, for example, $F(\emptyset) = F(\emptyset \cup \emptyset) = F(\emptyset) + F(\emptyset) = 0$ always. We want to be able to show that $F=\int f(dx^m)$ where $f$ is an $m$-form. Stokes theorem should be reversed. That is, we start by saying that if we have a function on $m$-dimensional subspace we can always create one that is $m+1$ dimensional by applying the $m$ dimensional to the boundary. That is $F_{(m+1)}(U) = F_{(m)}(\partial U)$. We then show/define the corresponding $f_{(m+1)} $ as the exterior derivative of $f_{m}$. Already we have $F_{(m+2)}(U) = F_{(m+1)}(\partial U) = F_{(m)}(\partial \partial U) = F_{(m+2)}(\emptyset) = 0$ since a boundary has no boundary. So double exterior derivative is the zero form. This is the generalization of $curl(grad)=0$ and $div(curl)=0$. 
-
-Here is a first stab at the notation.
-
-Exterior product: $\theta_1 \wedge \theta_2$. Anti-symmetric: rotating 180 degrees is the same as reflection.
-
-Base vector along $i-th$ component: $e_i$. Generic form for vector: $v = v^i e_i$.
-
-Base one-form for $i-th$ component: $e^i$. Base one-form returns one if the base vector is along the same component. Zero otherwise. $e^i(e_j) = \delta^i_j$.  Generic form for one-form: $\theta = \theta_i e^i$. Generic one form applied to generic vector: $\theta(v) = \theta_i e^i(v) = \theta_i v^j e^i(e_j) = \theta_i v^j \delta^i_j = \theta_i v^i$.
-
-Generic form for n-form: $\theta = \theta_{i_1...i_n}e^{i_1}\wedge ... \wedge e^{i_n}$.
-
-Exterior derivative: $\partial \theta = \partial_{i_1} \theta_{i_2...i_{n+1}}e^{i_1}\wedge ... \wedge e^{i_{n+1}}$. $\partial \partial \theta = \partial_{i_1} \partial_{i_2} \theta_{i_3...i_{n+1}}e^{i_1}\wedge^{i_2}\wedge^{i_3}\wedge ... \wedge e^{i_{n+1}} = - \partial_{i_1} \partial_{i_2} \theta_{i_3...i_{n+1}}e^{i_2}\wedge^{i_1}\wedge^{i_3}\wedge ... \wedge e^{i_{n+1}} = - \partial_{i_2} \partial_{i_1} \theta_{i_3...i_{n+1}}e^{i_2}\wedge^{i_1}\wedge^{i_3}\wedge ... \wedge e^{i_{n+1}} = 0$.
-
-In three dimensions. Exterior derivative of zero form $f$: $\partial f = \partial_x f e^x + \partial_y f e^y + \partial_z f e^z$. Exterior derivative of one-form $\theta$: $\partial \theta = \partial_x \theta_x e^x \wedge e^x + \partial_y \theta_x e^y \wedge e^x + \partial_z \theta_x e^z \wedge e^x + \partial_x \theta_y e^x \wedge e^y + \partial_y \theta_y e^y \wedge e^y + \partial_z \theta_y e^z \wedge e^y + \partial_z \theta_x e^x \wedge e^z + \partial_y \theta_z e^y \wedge e^z + \partial_z \theta_z e^z \wedge e^z = (\partial_x \theta_y - \partial_y \theta_x) e^x \wedge e^y + (\partial_y \theta_z - \partial_z \theta_y) e^y \wedge e^z + (\partial_z \theta_x - \partial_x \theta_z) e^z \wedge e^x$. Exterior derivative of two-form $\omega$: $\partial \theta = \partial_x \theta_{yz} e^x \wedge e^y \wedge e^z + \partial_y \theta_{zx} e^y \wedge e^z \wedge e^x + \partial_z \theta_{xy} e^z \wedge e^x \wedge e^y = (\partial_x \theta_{yz} + \partial_y \theta_{zx} + \partial_z \theta_{xy}) e^x \wedge e^y \wedge e^z$.
-
-Connection between axial vector and two-form: $B^x = \omega_{yz}, B^y = \omega_{zx}, B^z = \omega_{xy}$.
-
-Another reason why we should not use $df$ for exterior derivative. $f$ can be consider a point in a function space or a function from the $X$ to $\mathbb{R}$. We can take $df$ to be the differential (i.e. infinitesimal change) of the function in the function space while $\partial f$ the exterior derivative. Using $df$ as the exterior derivative would be misleading.
-
-\subsection{Angular momentum and spin}
-
-To derive the Dirac equation, we need to have a good way to motivate spin. The idea is to say that spin is the degree of freedom that captures a direction in space. Many things work, but there are a number of open issues which makes it unclear (for example) how to make it relativistic.
-
-First, what works. Suppose you have one d.o.f. for spatial direction. Degrees of freedom must be two dimensional. This means that we can only use two variables to specify a direction. This means the space is three dimensional.
-
-Next, we need to find conjugate variable. Consider the solid angle $d\Omega=\sin \varphi_z d\varphi_z d\theta_{xy}$ where $\varphi_z$ is the azimuthal angle. This is a quantity that is dimensionless and that is proportional to the number of possible directions. Therefore we can use it as a measure for the number of degrees of freedom. We can the two form for our space as $\omega(d\theta_{xy}, d\varphi_z) = \hbar d\Omega = \hbar\sin \varphi_z d\varphi_z d\theta_{xy} = d(- \hbar \cos d\varphi_z ) \wedge d\theta_{xy} = d\theta_{xy} \wedge d(\hbar \cos \varphi_z )$. Set $S_z= \hbar \cos \varphi_z$ the component of the normalized vector multiplied by $\hbar$. We have that $\omega(d\theta_{xy}, dS_z) = d\theta_{xy} \wedge dS_z$ therefore $\theta_{xy}$ and $S_z$ are conjugate variables.
-
-The question is: how do those two quantities change under coordinate transformations?
-
-A simple answer should be: they should change like angular momentum. So we study that change and we should be fine. Except that in phase space angular momentum does not really change like a vector or a covector.
-
-Suppose we have $(q^x, q^y, q^z)$ and $(p_x, p_y, p_z)$. Note that we are assuming Cartesian, so we already have limited the applicability. Change to spherical coordinates $(r,\theta,\varphi) = (\sqrt{(q^x)^2 + (q^y)^2 + (q^z)^2 }, \arccos \frac{z}{r}, \arctan \frac{y}{z})$. Conjugate momentum becomes:
-\begin{align*}
-	q^x &= r \sin \varphi \cos \theta \\
-	q^y &= r \sin \varphi \sin \theta \\
-	q^z &= r \cos \varphi \\
-	p_r&= \frac{\partial q^x}{\partial r} p_x + \frac{\partial q^y}{\partial r} p_y + \frac{\partial q^z}{\partial r} p_z \\
-	&= \frac{1}{\sqrt{(q^x)^2 + (q^y)^2 + (q^z)^2 }} (q^x p_x + q^y p_y + q^z p_z) \\
-	p_\theta&= \frac{\partial q^x}{\partial \theta} p_x + \frac{\partial q^y}{\partial \theta} p_y + \frac{\partial q^z}{\partial \theta} p_z \\
-	&= - r \sin \varphi \sin \theta p_x + r \sin \varphi \cos \theta p_y + 0 p_z \\
-	&= - q^y p_x + q^x p_y \\
-	p_\varphi&= \frac{\partial q^x}{\partial \varphi} p_x + \frac{\partial q^y}{\partial \varphi} p_y + \frac{\partial q^z}{\partial \varphi} p_z \\
-	&= r \cos \varphi \cos \theta p_x + r \cos \varphi \sin \theta p_y - r \sin \varphi p_z \\
-	&= q^z \frac{q^x}{\sqrt{(q^x)^2 + (q^y)^2}} p_x + q^z \frac{q^y}{\sqrt{(q^x)^2 + (q^y)^2}} p_y - \sqrt{(q^x)^2 + (q^y)^2} p_z \\
-\end{align*}
-
-The conjugate of $\theta$ is angular momentum. The first problem is that here angular momentum is simply a component within a vector. The other components of the vector are not angular momentum. The second problem is that $q^x p_y - q^y p_x$ is neither invariant, covariant or contravariant. This is radically different from $x v^y - y v^x$ where we use velocity instead of momentum. This has better transformation rules but velocity and momentum are not the same. This is not going to help us understand how spin should transform. The last problem is that we could create an "angular-momentum of angular momentum". That is, we can make the spherical coordinate of the spherical coordinates and we'd have $r p_\theta - \theta p_r$. Is that an angular momentum?
-
-The issue seems to be that angular momentum is only vaguely related to actual momentum. The best way to look at it should be: I have a group of generators for rotations along different directions. How do they combine? So, I have a rotation along the $x$ axis and a rotation along the $y$ axis: how do they compose? But again, seems somewhat ill defined. These are going to be global rotations on the whole space. What group of rotation is possible depends on the topology of the space. For example, on a sphere a rotation along the pole is the same as a translation along the equator. How can this all be constructed in a way that does not lead into contradictions?
-
-This may have already the math worked out:
-\begin{verbatim}
- https://www.researchgate.net/publication/299636714_Kinematical_Theory_of_
- Elementary_Spinning_Particles_Lecture_Notes
-\end{verbatim}
-
-\subsection{General relativity for particles}
-
-The assumption of kinematic equivalence already gives us relativistic Hamiltonians. Does it also give us a relationship between the curvature and the forces acting on the particles?
-
-The setup is the following. Suppose we have two vectors in the extended phase space $d\xi^a = [dq^\alpha, 0]$ and $d\nu^a = [0, dp_\alpha]$. Using the symplectic form we have the invariant $d\xi^a \omega_{ab}d\nu^b = dq^\alpha dp_\alpha$. Under the kinematic assumption we have $dq^\alpha = dx^\alpha$ $dp_\alpha = mg_{\alpha\beta}du^\beta + q A_\alpha$. We have $d\xi^a \omega_{ab}d\nu^b = dx^\alpha g_{\alpha\beta} du^\beta$.
-
-Since the two terms have to match at each point and the symplectic form has the same components at each point, can we constrain the change of the components of $g_{\alpha\beta}$? The general idea would be that components of $g_{\alpha\beta}$ may have to change in space/time coordinately with $A_\alpha$ as to make $d\xi^a \omega_{ab}d\nu^b = dq^\alpha dp_\alpha$ remain the same. Note that derivatives in $q^\alpha$ are taken at constant $p_\alpha$ while derivatives in $x^\alpha$ are taking at constant $u^\alpha$.
-
 
 
 \backmatter
