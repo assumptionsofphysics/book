@@ -2727,13 +2727,60 @@ We need to understand how this can be achieved for other structures, such as mea
 
 It should be possible to better characterize the space of all possible combined domains. As we show in \ref{2_prop_relationship_domain_is_space_of_continuous_functions} that the space of the possible experimental relationships is the space of continuous functions, there should be an analogue for the space of all possible combined domains. For example, one should be able to show that the combined domain is an immersion within the product topology. Is that the only constraint? How can that be characterized? Can we create an experimental domain to distinguish them?
 
+\subsection{Limited precision}
+
+One area we could explore for new physical ideas is what happens if we assume that the precision cannot be arbitrarily decrease. How is it different from the continuous case? Here are some preliminary ideas.
+
+The limited precision case can't simply lead to a discrete topology. The standard topology of the real is not the limit of the integer topology since it is not discrete. Most likely, the limited precision case will need to have uncountable possibilities so that the limit to arbitrary precision can work well.
+
+The main cause of confusion is that, in the continuous case, whether the precision of two statements overlap determine whether the statements are compatible. For example, ``the position is between 0 and 1 meters" and ``the position is between 2 and 3 meters" are both incompatible and not overlapping. This cannot be the case for limited precision. The possibilities themselves must be incompatible with each other but some of them must overlap, or we'd simply have a discrete topology. That is, suppose that 1 unit is the precision limit, the statements ``the position is between 0 and 1" and ``the position is between 0.5 and 1.5" are incompatible because if we verify one we cannot verify the other. If we could verify them both, we would measure at a smaller precision. So, overlapping cannot be defined in terms of incompatibility.
+
+Whether two statements overlap cannot be determined through incompatibility but must be recovered from the precision of the disjunction. Suppose we have following arbitrary precision statements.
+\begin{description}
+	\item $\stmt_1=$\statement{the position is between 0 and 1 meter}
+	\item $\stmt_2=$\statement{the position is between 0.5 and 1.5 meter}
+	\item $\stmt_3=$\statement{the position is between 2 and 3 meter}
+\end{description}
+The precision associated to all statements will be one meter. The precision for $\stmt_1\OR\stmt_2$ will be one meter and a half while the precision for $\stmt_1\OR\stmt_3$ will be two meters. That is: the precision for non overlapping statements sums. It may even be the case that if the precision sums, statements must be incompatible but the converse is what fails.
+
+This means that the measure we put on the possibilities cannot represent the precision anymore. That is, $d\mu \neq dx$. We can imagine a relationship like $dx^2 = d\mu^2 + 1$. This would both make the precision go to 1 when the measure go to 0 and $dx \simeq d\mu$ for large $\mu$.
+
 \chapter{Physical theories}
 
 \section{Classical phase space}
 
 \section{Classical Hamiltonian mechanics}
 
+\subsection{Geometry of Hamiltonian/Lagrangian}
+The one dimensional case works with standard 3D differential calculus. We have $\xi^a=\{q,p,t\}$, $S^a=\{\frac{dq}{dt},\frac{dp}{dt},\frac{dt}{dt}\}$ and $\theta_a=\{p,0,-H\}$. The equations are $S=-curl(\theta)$ and $L=\theta \cdot S$. In fact, $curl(\theta)=\{\partial_p \theta_t - \partial_t \theta_p, \partial_t \theta_q - \partial_q \theta_t, \partial_q \theta_p - \partial_p \theta_q\} = \{ -\partial_p H , \partial_q H , 1 \}$ and $L = \frac{dq}{dt}p - \frac{dt}{dt}H$.
+
+To generalize, we can set $\xi^a=\{q^i,p_i,t\}$, $S^a=\{\frac{dq^i}{dt},\frac{dp_i}{dt},\frac{dt}{dt}\}$ and $\theta_a=\{p_i,0,-H\}$. The Lagrangian is still $L=\theta \cdot S = S^a \theta_a = \frac{dq^i}{dt}p_i - \frac{dt}{dt}H$. Equation should be $d\theta(S, \cdot ) = 0$. In fact, $d\theta = \partial_a \theta_b e^a \wedge e^b = (\partial_a \theta_b - \partial_b \theta_a) e^a \otimes e^b$.
+\begin{equation*}
+(d\theta)_{ab} = \begin{bmatrix}
+0 & \delta^j_i & - \partial_{q^i} H \\
+-\delta^i_j & 0 & - \partial_{p_i} H \\
+\partial_{q^j} H & \partial_{p_j} H & 0
+\end{bmatrix}
+\end{equation*}
+We find
+\begin{align*}
+d\theta(S, \cdot )  &= S^a (d\theta)_{ab} e^b = 0 \\
+&= (S^{q^i}(d\theta)_{q^ib} + S^{p_i}(d\theta)_{p_ib} + S^{t}(d\theta)_{tb}) e^b \\
+&= (S^{q^i}(d\theta)_{q^iq^j} + S^{p_i}(d\theta)_{p_iq^j} + S^{t}(d\theta)_{tq^j}) e^{q^j} + \\
+& (S^{q^i}(d\theta)_{q^ip_j} +  S^{p_i}(d\theta)_{p_ip_j} + S^{t}(d\theta)_{tp_j}) e^{p_j} + \\
+& (S^{q^i}(d\theta)_{q^it} + S^{p_i}(d\theta)_{p_it} + S^{t}(d\theta)_{tt}) e^t \\
+&= (-S^{p_i}\delta^i_j + S^{t}\partial_{q^j} H ) e^{q^j} + \\
+& (S^{q^i}\delta^j_i +  S^{t}\partial_{p_j} H) e^{p_j} + \\
+& (-S^{q^i} \partial_{q^i} H - S^{p_i} \partial_{p_i} H) e^t \\
+S^{p_j} &= S^{t} \partial_{q^j} H \\
+S^{q^j} &= - S^{t}\partial_{p_j} H \\
+-S^{q^i} \partial_{q^i} H - S^{p_i} \partial_{p_i} H &= S^{t}\partial_{p_i} H \partial_{q^i} H - S^{t} \partial_{q^i} H \partial_{p_i} H = 0
+\end{align*}
+Note that the third expression is not a new equation: is identical to zero given the first two equations.
+
 \section{Classical massive particles under scalar potential forces}
+
+
 
 \iffalse
 
@@ -2966,42 +3013,6 @@ The fact that each possibility is comparable with each verifiable statement is a
 
 \chapter{Exploratory section}
 
-\section{Side tracks}
-
-This chapter lists ideas to be explored further. These are problems left open as they are not critical for the foundation of the work, but are nonetheless interesting. Some of these may very well turn out to be dead ends or not as interesting as they sound.
-
-
-\subsection{Chapter 2 - limited precision}
-
-What type of space we have once we recognize that precision can't be arbitrary? How is it different from the continuous case? There are a few issues that are already identified.
-
-The limited precision case can't simply lead to a discrete topology. The standard topology of the real is not the limit of the integer topology since it is not discrete. Most likely, the limited precision case will need to have uncountable possibilities so that the limit to arbitrary precision can work well.
-
-The main cause of confusion is that, in the continuous case, overlapping of the precision and compatibility of the statements is the same. So ``position is between 0 and 1 meters" and ``position is between 2 and 3 meters" are both incompatible and not overlapping. This cannot be the case for limited precision. The possibilities themselves must be incompatible with each other but some of them must overlap. That is, suppose that 1 unit is the precision limit, the statements ``the position is between 0 and 1" and ``the position is between 0.5 and 1.5" are incompatible because if we measure one we cannot measure the other. If we could measure them both, we would measure at a smaller precision. So, overlapping cannot be defined in terms of incompatibility.
-
-We can define overlapping in terms of precision: suppose we have following arbitrary precision statements.
-\begin{description}
-	\item $\stmt_1=$\statement{the position is between 0 and 1 meter}
-	\item $\stmt_2=$\statement{the position is between 0.5 and 1.5 meter}
-	\item $\stmt_3=$\statement{the position is between 2 and 3 meter}
-\end{description}
-
-The precision associated to all statements will be one meter. The precision for $\stmt_1\OR\stmt_2$ will be one meter and a half while the precision for $\stmt_1\OR\stmt_3$ will be two meters. That is: the precision for non overlapping statements sums. In the limited precision case, we can still recognize if two statement are not overlapping by checking the precision of the disjunction. It it simply sums, they do not overlap.
-
-This has far reaching consequences. The measure associated to the real numbers is really the precision. Since we are saying that two incompatible statements are not necessarily non overlapping, we are saying that the ``measure" we define for limited precision does not sum if the open sets are disjoint. That is: it is not a measure mathematically. This means that many concepts built on top of the measure (e.g. probability, integration) may need to be revisited as well.
-
-\section{Main track}
-
-This chapter includes partially developed ideas toward the main goal of the work. Some of these may very well turn out to be dead ends.
-
-\subsection{Sequences/probability}
-
-One thing we'll need to recover/justify is probability theory. We already have sigma algebras, so we are not that far. One possible ideas is to link convergence of a sequence of truth values with the value of probability.
-
-Here's a possible approach. A source is a sequence of truth values $s=\{t_i\}$. Two sources $s=\{t_i\}$ and $s=\{u_i\}$ are similar $s_1 \sim s_2$ if given $\epsilon > 0$ we can find an $N \in \mathbb{N}$ such that for all $a,b>N$ we have $\left| \frac{1}{a} \sum\limits_{i=1}^a t_i - \frac{1}{b} \sum\limits_{i=1}^b u_i \right| < \epsilon$. That is, at some point the number of truths from one is close to the number of truths of the other. A source is stable if it self-similar $s \sim s$. The average of a stable source converges as it satisfies the Cauchy condition. That average we call the probability.
-
-This means that if we have a sequence of experimental domains, all constructed the same, we can create a sequence for each verifiable statement and assign a probability to all. Then we can prove that the probability is a measure and it sums to 1.
-
 \subsection{Thermodynamics}
 
 At some point we'll have to recover/justify thermodynamics. The idea is to study non-deterministic evolution, as opposed to deterministic/reversible evolution which gives Hamiltonian mechanics. We still have a reducible system, so the state is a distribution over the state of the parts. Deterministic and reversible processes conserve information entropy. Non-deterministic processes increase information entropy. Non-reversible processes decrease information entropy. Deterministic and reversible processes lead to Hamiltonian mechanics. Non-deterministic processes lead to max entropy.
@@ -3017,32 +3028,6 @@ Suppose the only constraint on the system is the total energy (how do we justify
 Suppose two systems come into contact. The entropy of each one constraint by its total energy. $I_1=I_1(E_1)$ and $I_2=I_2(E_2)$. The entropy sums $I=I_1+I_2$ if the systems are independent degrees of freedom. The energy sums $E=E_1+E_2$ (why? under what conditions the Hamiltonian of the whole is the sum of the Hamiltonian of the parts?). Suppose the system undergoes non-deterministic evolution and they can exchange energy. $I$ is maximized under the constraint of the total energy. The equilibrium is reached when $\frac{\partial I}{\partial E_1} = 0$ and $\frac{\partial I}{\partial E_2} = 0$ on the constraint. That is: $\frac{\partial I}{\partial E_1} = \frac{\partial I_1}{\partial E_1} +\frac{\partial I_2}{\partial E_2} \frac{\partial E_2}{\partial E_1} = \frac{\partial I_1}{\partial E_1} -\frac{\partial I_2}{\partial E_2}=0$. We have $\frac{\partial I_1}{\partial E_1} = \frac{\partial I_2}{\partial E_2}$.
 
 Define temperature $\frac{1}{T_1} = \frac{\partial I_1}{\partial E_1}$: at equilibrium the two systems have the same temperature. Note that temperature cannot be zero since the information entropy at equilibrium is a function of the energy, and not the other way around.
-
-\subsection{Classical mechanics on 2n+1}
-The one dimensional case works with differential calculus. We have $\eta^a=\{q,p,t\}$, $S^a=\{\frac{dq}{dt},\frac{dp}{dt},\frac{dt}{dt}\}$ and $\theta_a=\{p,0,-H\}$. The equations are $S=-curl(\theta)$ and $L=\theta \cdot S$. In fact, $curl(\theta)=\{\partial_p \theta_t - \partial_t \theta_p, \partial_t \theta_q - \partial_q \theta_t, \partial_q \theta_p - \partial_p \theta_q\} = \{ -\partial_p H , \partial_q H , 1 \}$ and $L = \frac{dq}{dt}p - \frac{dt}{dt}H$.
-
-To generalize, $\eta^a=\{q^i,p_i,t\}$, $S^a=\{\frac{dq^i}{dt},\frac{dp_i}{dt},\frac{dt}{dt}\}$ and $\theta_a=\{p_i,0,-H\}$. The Lagrangian is still $L=\theta \cdot S = S^a \theta_a = \frac{dq^i}{dt}p_i - \frac{dt}{dt}H$. Equation should be $d\theta(S, \cdot ) = 0$. In fact, $d\theta = \partial_a \theta_b e^a \wedge e^b = (\partial_a \theta_b - \partial_b \theta_a) e^a \otimes e^b$.
-\begin{equation*}
-(d\theta)_{ab} = \begin{bmatrix}
-0 & \delta^j_i & - \partial_{q^i} H \\
--\delta^i_j & 0 & - \partial_{p_i} H \\
-\partial_{q^j} H & \partial_{p_j} H & 0
-\end{bmatrix}
-\end{equation*}
-We find
-\begin{align*}
-S^a (d\theta)_{ab} e^b &= 0 \\
-&= (S^{q^i}(d\theta)_{q^ib} + S^{p_i}(d\theta)_{p_ib} + S^{t}(d\theta)_{tb}) e^b \\
-&= (S^{q^i}(d\theta)_{q^iq^j} + S^{p_i}(d\theta)_{p_iq^j} + S^{t}(d\theta)_{tq^j}) e^{q^j} + \\
-& (S^{q^i}(d\theta)_{q^ip_j} +  S^{p_i}(d\theta)_{p_ip_j} + S^{t}(d\theta)_{tp_j}) e^{p_j} + \\
-& (S^{q^i}(d\theta)_{q^it} + S^{p_i}(d\theta)_{p_it} + S^{t}(d\theta)_{tt}) e^t \\
-&= (-S^{p_i}\delta^i_j + S^{t}\partial_{q^j} H ) e^{q^j} + \\
-& (S^{q^i}\delta^j_i +  S^{t}\partial_{p_j} H) e^{p_j} + \\
-& (-S^{q^i} \partial_{q^i} H - S^{p_i} \partial_{p_i} H) e^t \\
-S^{p_j} &= S^{t} \partial_{q^j} H \\
-S^{q^j} &= - S^{t}\partial_{p_j} H \\
--S^{q^i} \partial_{q^i} H - S^{p_i} \partial_{p_i} H &= S^{t}\partial_{p_i} H \partial_{q^i} H - S^{t} \partial_{q^i} H \partial_{p_i} H = 0
-\end{align*}
 
 \subsection{Closed two form for Hamiltonian mechanics}
 
