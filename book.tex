@@ -846,7 +846,7 @@ Unfortunately, not all possibilities are verifiable statements. Consider the sta
 What happens is that while the negation of a verifiable statement is not always a verifiable statement, it is still a statement that can be used to characterize the outcome of some experimental test. While we cannot verify non-termination of an experimental test, we can still predict it. To be able to find all possibilities, then, we have to create the set of statements that can be used to make predictions which include negations. We call this set the theoretical domain and theoretical statements its elements.
 
 \begin{mathSection}
-\begin{defn}
+\begin{defn}\label{1_def_theoretical_domain}
 	The \textbf{theoretical domain} $\tdomain$ of an experimental domain $\edomain$ is the set of statements constructed from $\edomain$ to which we can associate a prediction. We call \textbf{theoretical statement} a statement that is part of a theoretical domain. More formally, $\tdomain$ is the set of all statements generated from $\edomain$ using negation, finite conjunction and countable disjunction.
 \end{defn}
 \begin{justification}
@@ -983,7 +983,7 @@ Having defined what a theoretical domain is, we can finally define what the poss
 
 \begin{mathSection}
 
-\begin{defn}
+\begin{defn}\label{1_def_possibilities}
 	A \textbf{possibility} for an experimental domain $\edomain$ is a statement $x \in \tdomain$ that, when true, determines the truth value for all statements in the theoretical domain. Formally, $x \nequiv \impossibility$ and for each $\mathsf{s} \in \tdomain$, either $x \narrower \mathsf{s}$ or $x \ncomp \mathsf{s}$. The \textbf{full possibilities}, or simply the \textbf{possibilities}, $X$ for $\edomain$ are the collection of all possibilities.
 \end{defn}
 
@@ -1538,7 +1538,7 @@ More precisely, consider the verifiable statement $\stmt_Y=$\statement{the heigh
 	\begin{proof}
 		Suppose $f_1 : X \to Y$ and $f_2 : X \to Y$ are two causal relationships. Let $x \in X$. We have $x \narrower f_1(x)$ and $x \narrower f_2(x)$. This means $f_1(x) \comp f_2(x)$. But these are two possibilities of the same domain, so they are either incompatible or are the same possibilities. Therefore $f_1(x) \equiv f_2(x)$ for all $x \in X$. The causal relationships are the same.
 	\end{proof}
-	\begin{thrm}[Experimental Relationship Theorem]
+	\begin{thrm}[Experimental Relationship Theorem]\label{2_thrm_experimental_relationship}
 		Inference and causal relationships are equivalent. More formally, let $\edomain_X$ and $\edomain_Y$ be two experimental domains. An inference relationship $\erel: \edomain_Y \to \edomain_X$ exists between them if and only if a causal relationship $f: X \to Y$ also exists.
 	\end{thrm}
 	\begin{proof}
@@ -1861,7 +1861,7 @@ Now that we have the right context, we have to understand what is the right basi
 	\begin{proof}
 		The only thing that needs to be checked is that the basis that generates $\edomain_{C(X,Y)}$ is countable. Since $\basis_X$ and $\basis_Y$ are countable, the set of statements of the form $\mathbin{\narrower}(\stmt[e]_x, \stmt[e]_y)$ with $\stmt[e]_x \in \basis_X$ and $ \stmt[e]_y \in \basis_Y$ is also countable.
 	\end{proof}
-\begin{prop}
+\begin{prop}\label{2_prop_relationship_domain_is_space_of_continuous_functions}
 	The possibilities for a relationship domain $\edomain_{C(X,Y)}$ coincide with the possible experimental relationships between $X$ and $Y$. That is, for each possibility $z$ of $\edomain_{C(X,Y)}$ there exists a continuous function $f_z : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} ``x \narrower f_z(x)"$ and an $i \in I$ such that $\bar{g}_i(f_z(\bar{f}_i^{-1}(x_i))) \equiv f_c (x_i)$ for all $x_i \in X_i$ where $f_c$ is the causal relationship between $\edomain_{X_i}$ and $\edomain_{Y_i}$.
 \end{prop}
 \begin{proof}
@@ -2715,6 +2715,18 @@ A possible approach. Let $\edomain_X$ and $\edomain_Y$ be two experimental domai
 
 In principle, we can even extend $\pi : \logCtx \to \tdomain_Y$ to be defined on the whole context. In that case, $\pi$ can be proven to be a projection. This map should be able to characterize the relationship between domains. For example, if $\pi(\tdomain_X) = \{ \certainty, \impossibility \}$ then the domains should be independent. If $\pi(\tdomain_X) = \tdomain_Y$ the domains should be dependent.
 
+\subsection{Defining structures on experimental domain}
+
+Some mathematical structures are defined on points (i.e. vector spaces, ordering) and others on their $\sigma$-algebras. In our context, verifiable statements are the only elements that are actually physical, therefore it would be nice to always define the structures on the experimental domain (i.e. the topology) and show that it induces a unique structure on the theoretical statements and possibilities (and vice-versa).
+
+We have already implemented this approach in a couple of areas. Theoretical domains are constructed from experimental domains (see \ref{1_def_theoretical_domain}) and so are the possibilities (see \ref{1_def_possibilities}). Theorem \ref{2_thrm_experimental_relationship} shows that causal relationship on the possibilities is equivalent to an inference relationship on the verifiable domain. Theorem \ref{3_thrm_domain_ordering_theorem} shows that ordering of the possibilities is equivalent to the ordering of the basis according to narrowness.
+
+We need to understand how this can be achieved for other structures, such as measures, metrics, groups, vector spaces, inner products, ...
+
+\subsection{Space of possible combined domains}
+
+It should be possible to better characterize the space of all possible combined domains. As we show in \ref{2_prop_relationship_domain_is_space_of_continuous_functions} that the space of the possible experimental relationships is the space of continuous functions, there should be an analogue for the space of all possible combined domains. For example, one should be able to show that the combined domain is an immersion within the product topology. Is that the only constraint? How can that be characterized? Can we create an experimental domain to distinguish them?
+
 \chapter{Physical theories}
 
 \section{Classical phase space}
@@ -2958,25 +2970,6 @@ The fact that each possibility is comparable with each verifiable statement is a
 
 This chapter lists ideas to be explored further. These are problems left open as they are not critical for the foundation of the work, but are nonetheless interesting. Some of these may very well turn out to be dead ends or not as interesting as they sound.
 
-\subsection{Chapter 2 - structure preserving maps and experimental relationships}
-
-Theorem \ref{thrm_domain_equivalence_is_isomorphism} shows the connection between domain equivalence and isomorphism. Is there a way to have a similar conclusion for domain dependence and homomorphism?
-
-\subsection{Chapter 2 - defining structures on experimental domain instead of possibilities}
-
-Some mathematical structures are defined on the points (i.e. vector spaces, ordering) and others on $\sigma$-algebra. In our context, verifiable statements are the only elements that are actually physical, therefore it would be nice to always define the structures on the experimental domain and show that it induces a unique structure on the theoretical statements and possibilities (and vice-versa).
-
-For example, we could define a partial ordering on the finite precision statements, and show that, under suitable conditions, it gives us an ordering on the possibilities.
-
-\subsection{Chapter 2 - space of possible combined domains}
-
-It should be possible to better characterize the space of all possible combined domains. As we show that the space of the possible experimental relationships is the space of continuous functions, there should be an analogue for the space of all possible combined domains. For example, one should be able to show that the combined domain is an immersion within the product topology. Is that the only constraint? How can that be characterized? Can we create an experimental domain to distinguish them?
-
-\subsection{Chapter 2 - continuous quantities}
-
-It should be possible to define the requirement for arbitrary precision more abstractly, and therefore more generally. The general idea should be that if we have arbitrary precision it would mean that for each verifiable statement one can always find a set of narrower statements whose disjunction is the original statement. With the correct starting point one should then be able to arbitrarily assign pairs rational numbers to the bounds.
-
-It may be necessary to require an ordering. This could be defined on the verifiable statements themselves. The idea would be to keep the basis of contiguous intervals. And then assign a partial ordering to those elements that are incompatible, which means they do not overlap. That is: if we have two contiguous intervals that do not overlap we can tell which is before the other.
 
 \subsection{Chapter 2 - limited precision}
 
