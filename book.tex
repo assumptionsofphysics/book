@@ -2749,11 +2749,29 @@ This means that the measure we put on the possibilities cannot represent the pre
 
 \section{Classical phase space}
 
+Classical phase space is recovered under the:
+\begin{assump}[Infinitesimal reducibility]
+	The state of the system is reducible to the state of its infinitesimal parts. That is, giving the state of the whole system is equivalent to giving the state of its parts, which is equivalent to giving the state of its parts and so on.
+\end{assump}
+
+Let $\mathcal{C}$ the state space for the whole system. We call particle the limit of the recursive subdivision. Let $\mathcal{S}$ the state space for the particles. Then for each $c \in \mathcal{C}$ we can find one and only one $\rho_c : \mathcal{S} \to \mathbb{R} $ that describes the state of its parts. That is, the state of the whole is a distribution over the infinitesimal parts.
+
+If $\mathcal{S}$ is a manifold, $\int_U \rho_c d\mathcal{S}$ gives us the fraction of the system whose parts are in the region $U$ of the state space.
+
+The critical issue is that, on a manifold, $\rho_c$ must transform both as a scalar function (the value must depend on the point and not on the coordinates) and a density. Classical phase space (i.e. a symplectic manifold) is the only space that have this structure.
+
+We call state variables a set of quantities $\xi^a$ (i.e. coordinates in manifold terminology) that fully identify a state. We call coordinate $q \in \xi^a$ a particular variable that defines a unit. Suppose the particle state space is such that one coordinate is sufficient to define the unit system. That is, $\xi^a = \{ q, k^i \}$. We need to make sure that we can arbitrarily change the unit without changing $\rho_c$. We also have to make sure that $q$ fully defines the units for all state variables. How many $k^i$ can we have?
+
+Suppose we change unit $\hat{q}=\hat{q}(q)$. Call the new units $\hat{\xi}^b = \{ \hat{q}, \hat{k}^i\}$. We have $\rho_c(\hat{\xi}^b)=\rho_c(s(\hat{\xi}^b))=\rho_c(s(\xi^a))=\rho_c(\xi^a) = \left|\frac{\partial \hat{\xi}^b}{\partial \xi^a} \right| \rho_c(\hat\xi^b)$. Therefore the Jacobian $\left|\frac{\partial \hat{\xi}^b}{\partial \xi^a} \right|$ must be equal to 1. Note that, since $\hat{q}$ depends only on $q$, $\left|\frac{\partial \hat{\xi}^b}{\partial \xi^a} \right| = \left|\frac{\partial \hat q}{\partial q} \right|\left|\frac{\partial \hat{k}^b}{\partial k^a} \right|$. Suppose there is only one variable. Then we would have $\left|\frac{\partial \hat q}{\partial q} \right| = 1$. But this would mean the unit change cannot be arbitrary. Therefore we must have two or more variables and therefore $\left|\frac{\partial \hat{k}^b}{\partial k^a} \right| = \left|\frac{\partial q}{\partial \hat q} \right|$. This puts a constraint only on the determinant of the transformation. Suppose there are three or more variable. This constraint is not enough to recover the transformation uniquely and therefore $\hat q$  would not fully define the units for all other state variable. This means there must be two variable: $q$ and a single $k$. Coordinate independent areas and densities can only be defined on a two-dimensional manifold.
+
+To generalize, define two coordinate as independent if changing the units for one does not change the units for the other. Suppose our particle state space $\mathcal{S}$ is such that its units are fully defined by $n$ independent coordinates $q^i$. Suppose you change the first $q^1$ without changing the others. Then we will find a variable $k_1$ that changes as before so that the densities are invariant. Now change the second coordinate $q^2$ in the same way while also fixing $k_1$. Then we find a correspond $k_2$. In the end, we will find that $\mathcal{S}$ is $2n$-dimensional and the state variables are $\xi^a = \{ q^i, k_i \}$. We call independent degree of freedom such a pair of variables.
+
+We can now show that $\mathcal{S}$ is a symplectic manifold. Invariant densities can only be assigned to infinitesimal areas. Therefore we need a two-form $\omega$ that assigns an infinitesimal area to each infinitesimal surface. Because degrees of freedom are, at least locally, independent, the total number of states in a volume is the product of the possible configurations of each degree of freedom. This means the volume form is given by $\omega^n$. This cannot be degenerate, or some volumes would not contain states. Therefore $\omega$ itself cannot be degenerate. As the degrees of freedom are independent, the number of states on a surface does not change if we translate it across independent degrees of freedom. If we imagine a parallelopiped, the integral over the surface must be zero (integral over opposite sides are equal and opposite). By convention, we set $\omega = \hbar dq^i \wedge dk_i = dq^i \wedge dp_i$ where $p_i = \hbar k_i$.
+
 \section{Classical Hamiltonian mechanics}
 
 \subsection{Closed two form for Hamiltonian mechanics}
 
-To understand why the classical phase space must be a symplectic manifold, let $\mathcal{M}$ be the state space of classical particles. Invariant densities can only be assigned to infinitesimal areas. Therefore we need a two-form $\omega$ that assigns an infinitesimal area to each infinitesimal surface. Because degrees of freedom are, at least locally, independent, the total number of states in a volume is the product of the possible configurations of each degree of freedom. This means the volume form is given by $\omega^n$. This cannot be degenerate, or some volumes would not contain states. Therefore $\omega$ itself cannot be degenerate. As the degrees of freedom are independent, the number of states on a surface does not change if we translate it across independent degrees of freedom. If we imagine a parallelopiped, the integral over the surface must be zero (integral over opposite sides are equal and opposite).
 
 \subsection{Geometry of Hamiltonian/Lagrangian}
 
