@@ -2766,11 +2766,28 @@ Suppose we change unit $\hat{q}=\hat{q}(q)$. Call the new units $\hat{\xi}^b = \
 
 To generalize, define two coordinate as independent if changing the units for one does not change the units for the other. Suppose our particle state space $\mathcal{S}$ is such that its units are fully defined by $n$ independent coordinates $q^i$. Suppose you change the first $q^1$ without changing the others. Then we will find a variable $k_1$ that changes as before so that the densities are invariant. Now change the second coordinate $q^2$ in the same way while also fixing $k_1$. Then we find a correspond $k_2$. In the end, we will find that $\mathcal{S}$ is $2n$-dimensional and the state variables are $\xi^a = \{ q^i, k_i \}$. We call independent degree of freedom such a pair of variables.
 
-We can now show that $\mathcal{S}$ is a symplectic manifold. Invariant densities can only be assigned to infinitesimal areas. Therefore we need a two-form $\omega$ that assigns an infinitesimal area to each infinitesimal surface. Because degrees of freedom are, at least locally, independent, the total number of states in a volume is the product of the possible configurations of each degree of freedom. This means the volume form is given by $\omega^n$. This cannot be degenerate, or some volumes would not contain states. Therefore $\omega$ itself cannot be degenerate. As the degrees of freedom are independent, the number of states on a surface does not change if we translate it across independent degrees of freedom. If we imagine a parallelopiped, the integral over the surface must be zero (integral over opposite sides are equal and opposite). By convention, we set $\omega = \hbar dq^i \wedge dk_i = dq^i \wedge dp_i$ where $p_i = \hbar k_i$.
+We can now show that $\mathcal{S}$ is a symplectic manifold. Invariant densities can only be assigned to infinitesimal areas. Therefore we need a two-form $\omega$ that assigns an infinitesimal area to each infinitesimal surface, so that we can define the integrals $\int_{\Sigma} \rho_c \omega(d\Sigma)$. Because degrees of freedom are, at least locally, independent, the total number of states in a volume is the product of the possible configurations of each degree of freedom. This means the volume form is given by $\omega^n$. This cannot be degenerate, or some volumes would not contain states. Therefore $\omega$ itself cannot be degenerate. As the degrees of freedom are independent, the number of states on a surface does not change if we translate it across independent degrees of freedom. If we imagine a parallelopiped, the integral over the surface must be zero (integral over opposite sides are equal and opposite). By convention, we set $\omega = \hbar dq^i \wedge dk_i = dq^i \wedge dp_i$ where $p_i = \hbar k_i$.
+
+The conclusion is that, under the infinitesimal reducibility assumption, the state space of the system is a coordinate invariant distribution over the state space of the infinitesimal parts. If the state space of the particles is a manifold, then it is a symplectic manifold, which is the only type of manifold that supports coordinate invariant distributions.
 
 \section{Classical Hamiltonian mechanics}
 
-\subsection{Closed two form for Hamiltonian mechanics}
+Having recovered the state space, the law of evolution can be recovered with the following:
+\begin{assump}[Deterministic and reversible evolution]
+	Given the present state of the system, all future (determinism) and past (reversibility) states are uniquely identified.
+\end{assump}
+
+In our case, this goes to both the state of the whole and to the state of the parts. That is, given an initial state $s_0$ there will be one and only one evolution $s(t)$ such that $s(t_0) = t_0$. Moreover, if $\rho(s(t_0), t_0)$ is the density associated to the initial particle at the initial time, we must have that $\rho(s(t), t) = \rho(s(t_0), t_0)$ the density remains the same throughout the evolution. That is, all particles that start with the initial state must end up in the same final state and vice-versa.
+
+Now consider the integration $\int_{\Sigma} \rho_c \omega(d\Sigma)$. The region $\Sigma$ will be mapped to a new region, but the fraction of the system found in both will be the same. If $rho_c$ has to remain as well during the evolution, then $\omega$ will also need to remain the same. That is, the areas in phase space must be mapped to areas of equal size and independent degrees of freedom must be mapped to independent degrees of freedom (or volumes would not be mapped to volumes). The evolution is a symplectomorphism and corresponds to Hamiltonian evolution. Intuitively, this is the inverse of Liousville's theorem: instead of positing Hamiltonian evolution and find conservation of areas and volumes, deterministic and reversible evolution imposes the conservation of areas and volumes which leads to Hamiltonian evolution.
+
+There are other results we have already obtained, such as:
+\begin{itemize}
+	\item phase space is the only space upon which information entropy is coordinate independence
+	\item Hamiltonian evolution is precisely the evolution that preserves information entropy
+	\item we can construct a classical analogue of the uncertainty principle
+	\item the extension to relavistic mechanics only requires proper handling of the time coordinate (and no additional assumptions)
+\end{itemize}
 
 
 \subsection{Geometry of Hamiltonian/Lagrangian}
