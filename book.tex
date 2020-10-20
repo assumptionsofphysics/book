@@ -2555,13 +2555,17 @@ It is important to note that the requirements for continuous quantities cannot r
 
 \chapter{General theory}
 
-This chapter presents the areas that still needs to be covered to conclude the general theory and a summary of the preliminary work done on them. The strategy  Refer to the preface for a layout and scope of each part.
+This chapter presents the areas that still need to be covered to conclude the general mathematical theory of experimental science and a summary of the preliminary work done on them.
+
+\section{Experimental verifiability}
+
+This first part is already well developed and has been presented in chapters one to three. Possible improvements are discussion in section \ref{sec:general_theory_extensions}.
 
 %At this point we envision three parts. The most basic one deals with experimental verifiability, which has been presented in this book and, though there may be areas for improvement, is very well developed. The second part deals with information granularity. This needs to characterize how different statement compare to each other in terms of granularity of the description, of their information content. In the same way that the first part recovered topological and algebraic structures, this part is intended to recover measure theoric and geometrical structures. Lastly, the third part deals with processes and states. This needs to characterize how statements organized in time and how related statements can be organized to identify states of systems. This part needs to recover a notion of entropy, state spaces and the basic definitions of determinism and reversibility.
 
 \section{Informational granularity}
 
-The general goal of this part is to recover elements of measure theory, differential geometry, probability theory and information theory. The central theme is the ability to compare and then quantify the granularity of the description provided by different statements. The idea is to have a single unified structure which can, in some cases, be expressed in part with the usual frameworks.
+The general goal of this part is to recover elements of measure theory, differential geometry, probability theory and information theory. The central theme is the ability to compare and then quantify the granularity of the description provided by different statements. The idea is to have a single unified structure which can be, in some cases, reduced to the more familiar mathematical structures.
 
 \subsection{Statement fineness}
 
@@ -2570,30 +2574,30 @@ Conceptually, we want to be able to compare two statements to see which one prov
 Note that a theoretical domain $\tdomain$ comes with a partial order $\narrower$ that indicates whether one statement gives a \textbf{narrower}, more specific, description than the other. For example:
 \begin{itemize}
 	\item \statement{The position of the object is between 0 and 1 meters} $\narrower$ \statement{The position of the object is between 0 and 1 kilometers}
-	\item \statement{The fair dice landed on 1} $\narrower$ \statement{The fair dice landed on 1 or 2}
-	\item \statement{The first bit is 0 and the second bit is 2} $\narrower$ \statement{The first bit is 0}
+	\item \statement{The fair die landed on 1} $\narrower$ \statement{The fair die landed on 1 or 2}
+	\item \statement{The first bit is 0 and the second bit is 1} $\narrower$ \statement{The first bit is 0}
 \end{itemize}
-In these cases, the first statements has to be ``contained'' in the second, which is more general.
+In these cases, the first statements are ``contained'' in the second ones, which are more general.
 
-We need to define an additional preorder $\finer : \tdomain \times \tdomain \to \mathbb{B}$ that compare two statements and tells us if the first provides a description with finer granularity than the second. Saying $\stmt_1 \finer \stmt_2$ means that the description provided by $\stmt_1$ is \textbf{finer}, gives more information, is more precise, than the description provided by $\stmt_2$. For example:
+We need to define an additional preorder $\finer : \tdomain \times \tdomain \to \mathbb{B}$ that compares two statements and tells us if the first provides a description with finer granularity than the second. Saying $\stmt_1 \finer \stmt_2$ means that the description provided by $\stmt_1$ is \textbf{finer}, gives more information, is more precise, than the description provided by $\stmt_2$. For example:
 \begin{itemize}
 	\item \statement{The position of the object is between 0 and 1 meters} $\finer$ \statement{The position of the object is between 2 and 3 kilometers}
-	\item \statement{The fair dice landed on 1} $\finer$ \statement{The fair dice landed on 3 or 4}
-	\item \statement{The first bit is 0 and the second bit is 2} $\finer$ \statement{The third bit is 0}
+	\item \statement{The fair die landed on 1} $\finer$ \statement{The fair die landed on 3 or 4}
+	\item \statement{The first bit is 0 and the second bit is 1} $\finer$ \statement{The third bit is 0}
 \end{itemize}
-In these cases, the first statement may not be contained or overlap with the second. The existence of this operator and its property would be an additional axioms.
+In these cases, the first statement may not be contained or overlap with the second. The existence of this operator and its property would be an additional axiom. Fineness is a preorder, rather than an order, because it does not satisfy antisymmetry: if $\stmt_1 \finer \stmt_2$ and $\stmt_2 \finer \stmt_1$ then it is not necessarily true that $\stmt_1 \equiv \stmt_2$. In that case, we will say that the two statements are \textbf{equigranular}, noted $\stmt_1 \eqgran \stmt_2$.
 
-Note how statements about geometry, probability and information all satisfy the same concept. In fact, each of these structure will generate a preorder on the statements. The general question is what are the necessary and sufficient conditions on the preorder to be able to recover those structures.
+Note how statements about geometry, probability and information all satisfy the same concept. In fact, each of these structures will generate a preorder on the statements. The general question is what are the necessary and sufficient conditions on the preorder to be able to recover those structures.
 
 \subsection{Measure theory}
 
-Conceptually, a measure allows to assign a size to a set. For us, a theoretical set is really a statement, so we want to assign sizes to statements that represent the coarseness of the description they provide.
+Conceptually, a measure allows one to assign a size to a set. For us, a theoretical set is really a statement, so we want to assign sizes to statements that represent the coarseness of the description they provide.
 
-The construction should, roughly, proceed as follows. Let $\tdomain_X$ be a theoretical domain. We select a unit statement $\stmt[u] \in \tdomain_X$. We define, in some way, the set $\tdomain_{\stmt[u]} \subseteq \tdomain_X$ which contains all statements that are comparable to $\stmt[u]$. We then try and construct a measure $\mu_{\stmt[u]} : \tdomain_{\stmt[u]} \to \mathbb{R}$ such that $\mu_{\stmt[u]}(\stmt[u]) = 1$. By a measure, we mean that $\mu_{\stmt[u]}$ is additive over incompatible statements (i.e. disjoint sets of possibilities). That is, given if $\stmt_1 \ncomp \stmt_2$, we have $\mu_{\stmt[u]}(\stmt_1 \OR \stmt_2) = \mu_{\stmt[u]}(\stmt_1) + \mu_{\stmt[u]}(\stmt_2)$. We want the measure to respect the fineness ordering, to be monotonic. That is, if $\stmt_1 \finer \stmt_2$ then $\mu_{\stmt[u]}(\stmt_1) \leq \mu_{\stmt[u]}(\stmt_2)$.
+The construction should, roughly, proceed as follows. Let $\tdomain_X$ be a theoretical domain. We select a unit statement $\stmt[u] \in \tdomain_X$. We define, in some way, the set $\tdomain_{\stmt[u]} \subseteq \tdomain_X$ which contains all statements that are comparable to $\stmt[u]$. We then try and construct a measure $\mu_{\stmt[u]} : \tdomain_{\stmt[u]} \to \mathbb{R}$ such that $\mu_{\stmt[u]}(\stmt[u]) = 1$. By a measure, we mean that $\mu_{\stmt[u]}$ is additive over incompatible statements (i.e. disjoint sets of possibilities). That is, if $\stmt_1 \ncomp \stmt_2$, we have $\mu_{\stmt[u]}(\stmt_1 \OR \stmt_2) = \mu_{\stmt[u]}(\stmt_1) + \mu_{\stmt[u]}(\stmt_2)$. We want the measure to respect the fineness preorder, to be monotonic. That is, if $\stmt_1 \finer \stmt_2$ then $\mu_{\stmt[u]}(\stmt_1) \leq \mu_{\stmt[u]}(\stmt_2)$.
 
 Note that we have essentially one measure for each equivalence class defined by fineness. This is intended. One reason a single measure is not sufficient for our work is because we need to compare statements of ``different infinities''. If we have a single measure, we can only compare objects with a finite measure. All objects with zero measure (or infinite measure) are indistinguishable. For example, we want to say:
 \begin{itemize}
-	\item $\stmt_1$ = \statement{The horizontal position of the object is exactly 0 meter}
+	\item $\stmt_1$ = \statement{The horizontal position of the object is exactly 0 meters}
 	\item $\stmt_2$ = \statement{The horizontal position of the object is exactly 1 or 2 meters}
 	\item $\stmt_3$ = \statement{The horizontal position of the object is between 0.5 and 1.5 meters}
 	\item $\stmt_4$ = \statement{The horizontal position of the object is between 1.5 and 3.5 meters}
@@ -2601,11 +2605,11 @@ Note that we have essentially one measure for each equivalence class defined by 
 	\item $\stmt_1 \ncoarser \stmt_2 \ncoarser \stmt_3 \ncoarser \stmt_4$
 \end{itemize}
 
-Fineness may also capture the concept of physical dimension. In fact, two description of the same units are ``finitely comparable'' in the sense that one gives a finer description of the other of a finite factor. Descriptions of different unites are either ``infinitely comparable'' (i.e. areas are always bigger than lengths) or not comparable (i.e. position and momentum). Take phase space, points should be comparables and in fact should be equigranular $\eqgran$ so that we can compare sets of finite points. Areas are also comparable to each other, and are comparable to points. However, vertical lines (i.e. ranges in momentum alone) are not comparable to horizontal lines (i.e. ranges in position alone). Symplectic geometry, in fact, gives a size to areas and not to lines. Mathematically, this should be clarified when one is trying to define the domain of the measure $\tdomain_{\stmt[u]}$.
+Fineness may also capture the concept of physical dimension. In fact, two descriptions in the same units are ``finitely comparable'' in the sense that one gives a finer description than the other by a finite factor. Descriptions of different units are either ``infinitely comparable'' (e.g. areas are always bigger than lengths) or not comparable (e.g. position and momentum). Consider a two dimensional phase space of a classical system. Points should be comparable and in fact should be equigranular $\eqgran$ so that we can compare sets of finitely many points. Areas are also comparable to each other, and are comparable to points (i.e. they are infinitely bigger). However, vertical lines (i.e. ranges in momentum alone) are not comparable to horizontal lines (i.e. ranges in position alone). Symplectic geometry, in fact, gives a size to areas and not to lines. Mathematically, this should be clarified when one is trying to define the domain of the measure $\tdomain_{\stmt[u]}$.
 
 \subsection{Probability}
 
-Conceptually, probability is recovered as a measure restricted to particular subset. The idea is that you take two statements, such as \statement{the die landed on 2} given that \statement{the die has 6 sides and it is fair}, and you ask what fractions of the possibilities compatible with the second is also compatible with the first. This defines the conditional probability.
+Conceptually, probability is recovered as a measure restricted to a particular subset. The idea is that you take two statements, such as \statement{the die landed on 2} given that \statement{the die has 6 sides and it is fair}, and you ask what fraction of the possibilities compatible with the second is also compatible with the first. This defines the conditional probability.
 
 Let $\stmt_1, \stmt_2 \in \tdomain$ be two theoretical statements. Then the probability of $\stmt_2$ given $\stmt_1$ is
 \begin{equation}
@@ -2613,7 +2617,7 @@ P(\stmt_2 | \stmt_1) = \mu_{\stmt_1}(\stmt_1 \AND \stmt_2) = \frac{\mu_{\stmt[u]
 \end{equation}
 which quantifies the fraction of possibilities compatible with $\stmt_1$ that are also compatible with $\stmt_2$.
 
-If we take the certainty $\certainty$ as a unit, we have a probability measure for the whole space. However, since we can take different statements per unit, we will be able to distinguish between the following cases:
+If we take the certainty $\certainty$ as a unit, we have a probability measure for the whole space. However, since we can take different statements as a unit, we will be able to distinguish between the following cases:
 \begin{itemize}
 	\item $P($\statement{n is odd} $|$\statement{n is picked fairly from all integers}$)=1/2$
 	\item $P($\statement{n is between 0 and 9} $|$\statement{n is picked fairly from all integers}$)=0$
@@ -2623,9 +2627,9 @@ If we take the certainty $\certainty$ as a unit, we have a probability measure f
 
 \subsection{Differential geometry/geometric measure theory}
 
-Conceptually, we want to assign quantities to regions instead of points. If we assume these quantities are additive, the idea is that we can decompose them into the sum infinitesimal contributions at each point. Therefore the differential objects exists as the limit of infinitesimal decomposition. This, again, reflect the overall spirit of the project that wants us to start from physically well defined entities (in this case the quantities associates with finite regions) and derive the theoretical ones (in this case the infinitesimal contributions that are integrated).
+Conceptually, we want to assign quantities to regions instead of points. If we assume these quantities are additive, the idea is that we can decompose them into the sum of infinitesimal contributions at each point. Therefore the differential objects exist as the limit of infinitesimal decomposition. This, again, reflects the overall spirit of the project that compels us to start from physically well defined entities (in this case the quantities associated with finite regions) and derive the theoretical ones (in this case the infinitesimal contributions that are integrated).
 
-Let $\tdomain_X$ be a theoretical domain and $U \in \Sigma_X$ a theoretical set. This represents the regions where we take our measurement. Let $\tdomain_Y$ be a theoretical domain and $R \in \Sigma_Y$ a theoretical set. This represents the possible values found. Our starting point are statements like:
+Let $\tdomain_X$ be a theoretical domain and $U \in \Sigma_X$ a theoretical set. This represents the region associated to our measurement. Let $\tdomain_Y$ be a theoretical domain and $R \in \Sigma_Y$ a theoretical set. This represents the possible values found. Our starting point consists of statements like:
 \begin{itemize}
 	\item \statement{the amount of mass inside volume $U$ is within range $R$}
 	\item \statement{the force applied to surface $U$ is within range $R$}
@@ -2633,15 +2637,15 @@ Let $\tdomain_X$ be a theoretical domain and $U \in \Sigma_X$ a theoretical set.
 \end{itemize}
 These are finite precision statements of a quantity associated to a region of finite size.
 
-The first step is to group statement within the same region, and show how the possibilities for each of that domain reduce to statements like:
+The first step is to group statements within the same region $U$ into subdomains $\tdomain_{U\to Y}$. We can then show how the possibilities for each $\tdomain_{U\to Y}$ reduce to statements like:
 \begin{itemize}
 	\item \statement{the amount of mass inside volume $U$ is precisely $y$}
 	\item \statement{the force applied to surface $U$ is precisely $y$}
 	\item \statement{the energy used to move the object along the line $U$ is precisely $y$}
 \end{itemize}
-These are infinite precision statements of a quantity associated to a region of finite size. We define $S \subseteq \Sigma_X$ the type of regions (i.e. volumes vs surfaces vs lines) upon which the functional is defined and therefore we have a functional $f : S \to Y$ which tells us the exact value of the quantity in each region.
+These are infinite precision statements of a quantity associated to a region of finite size. We define $S \subseteq \Sigma_X$ as the type of region (i.e. volumes vs surfaces vs lines) upon which the functional is defined and therefore we have a functional $f : S \to Y$ which tells us the exact value of the quantity in each region.
 
-Then we study the case where $f$ is a real linear k-functional, meaning:
+Then we study the case where $f$ is a real linear $k$-functional, meaning:
 \begin{itemize}
 	\item the possibilities $X$ are identified by a set of real values; that is, $X$ with the natural topology is a manifold
 	\item the domain is all $k$-dimensional surfaces $S^k$; that is, the submanifolds of dimension $k$
@@ -2649,15 +2653,15 @@ Then we study the case where $f$ is a real linear k-functional, meaning:
 	\item the functional is additive over disjoint sets; that is, $F(U_1 \cup U_2) = F(U_1) + F(U_2)$ if $U_1 \cap U_2 = \emptyset$
 	\item the functional commutes with the limit; that is, $\lim\limits_{i \to \infty} F(U_i) = F(\lim\limits_{i \to \infty} U_i)$
 \end{itemize}
-Under these conditions (and possibly others) one can express the functional as a sum of infinitesimal contributions. That is, $f(U) = \int_U \omega(dU)$, where $\omega$ represents a suitable k-form.
+Under these conditions (and possibly others) one can express the functional as a sum of infinitesimal contributions. That is, $f(U) = \int_U \omega(dU)$, where $\omega$ represents a suitable $k$-form.
 
-Note that there isn't a unique way to perform this decomposition. For example, if $f(U)$ is the total mass in the volume, $\omega(dU)$ is the density in the infinitesimal volume. If we change the density at a single point, the integral does not change and only the integral is physical. These are the type of issues that still need to be solved.
+Note that there is not a unique way to perform this decomposition. For example, if $f(U)$ is the total mass in the volume, $\omega(dU)$ is the density in the infinitesimal volume. If we change the density at a single point, the integral does not change and only the integral is physical. These are the types of issues that still need to be solved.
 
-\textbf{Stokes theorem and exterior derivatives.} One interesting application of this viewpoint is that we can understand things like the Stokes theorem, exterior derivative and the difference between closed and exact forms directly on the finite functionals.
+\textbf{Stokes' theorem and exterior derivatives.} One interesting application of this viewpoint is that we can understand things like Stokes' theorem, exterior derivative and the difference between closed and exact forms directly on the finite functionals.
 
-Let $\partial : S^k \to S^{k-1}$ be the boundary operator that, given a surface $\sigma^k$, returns the boundary $\partial \sigma^k$ which is of dimension $k-1$. We have $\partial\partial\sigma$ for any surface of any dimensionality.
+Let $\partial : S^k \to S^{k-1}$ be the boundary operator that, given a surface $\sigma^k$, returns the boundary $\partial \sigma^k$ which is of dimension $k-1$. We have $\partial\partial\sigma = \emptyset$ for any surface of any dimensionality.
 
-Let $F_k$ be the space of linear k-functionals. We can define the boundary functional operator $\partial : F_k \to F_{k+1}$ such that $\partial f(\sigma) = f(\partial \sigma)$. That is, given a functional that act on $k$-surfaces we can always construct one that acts on $k+1$-surfaces by taking the boundary of the $k+1$-surface and giving it to the first functional. Note that $\partial\partial f(\sigma) = \partial f(\partial\sigma) =  f(\partial\partial\sigma) = f(\emptyset) = 0$, so the boundary functional of the boundary functional is the null functional, the one that returns zero for every surface. What we should be able to prove is that if $\omega$ is the k-form associated with $f$, $d\omega$ is the $k+1$-form associated with $\partial f$. In other words, the Stokes theorem essentially becomes a definition of the boundary functional and the derivation of the expression for $d\omega$.
+Let $F_k$ be the space of linear $k$-functionals. We can define the boundary functional operator $\partial : F_k \to F_{k+1}$ such that $\partial f(\sigma) = f(\partial \sigma)$. That is, given a functional that acts on $k$-surfaces we can always construct one that acts on $k+1$-surfaces by taking the boundary of the $k+1$-surface and giving it to the first functional. Note that $\partial\partial f(\sigma) = \partial f(\partial\sigma) =  f(\partial\partial\sigma) = f(\emptyset) = 0$, so the boundary functional of the boundary functional is the null functional, the one that returns zero for every $k$-surface. What we should be able to prove is that if $\omega$ is the $k$-form associated with $f$, $d\omega$ is the $k+1$-form associated with $\partial f$. In other words, Stokes' theorem essentially becomes a definition of the boundary functional and the calculation of the expression for $d\omega$.
 
 We say a surface is contractible if it can be reduced to a point with a continuous transformation. A functional is closed if it is zero for all closed contractible surfaces. It is exact if it is zero for all closed surfaces. All boundary functionals are exact since $\partial f (\partial \sigma) =  f (\partial\partial \sigma) = 0$. The form associated to a closed functional will be closed while the form associated to an exact functional will be exact.
 
@@ -2669,42 +2673,42 @@ The general goal of this part is to give general definitions of states and proce
 
 A process is an experimental domain $\edomain[P]$ that contains all the possible statements of the systems under study for all possible times. We call evolutions the possibilities $E$ of the domain, as they represent the complete description of all systems at all times.
 
-We define a time parameter $t \in T \subseteq \mathbb{R}$. We group all statements relative to a system of interest at a particular time into a time domain $\edomain_t$. We call snapshots the possibilities $X_t$ of each time domain. A possible trajectory is a sequence $\{x_t\}_{t \in T}$ such that $x_t \in X_t$ for all $t \in T$ and $e \narrower \bigAND\limits_{t \in T} x_t$ from some $e \in E$. That is, there is an evolution for which the system will be described by that sequence of snapshots.
+We define a time parameter $t \in T \subseteq \mathbb{R}$. We group all statements relative to a system of interest at a particular time into a time domain $\edomain_t$. We call snapshots the possibilities $X_t$ of each time domain. A possible trajectory is a sequence $\{x_t\}_{t \in T}$ such that $x_t \in X_t$ for all $t \in T$ and $e \narrower \bigAND\limits_{t \in T} x_t$ for some $e \in E$. That is, there is an evolution for which the system will be described by that sequence of snapshots.
 
 A process is deterministic if for all possible trajectories $x_{t_0} \narrower x_{t_1}$ for all $t_0 \leq t_1$. A process is reversible if for all possible trajectories $x_{t_1} \narrower x_{t_0}$ for all $t_0 \leq t_1$. Recall that narrowness between the possibilities of two domains means there is an experimental relationship. Therefore, if the process is deterministic, we can write a causal relationship $f : X_{t_0} \to X_{t_1}$ such that $x_0 \narrower f(x_0)$.
 
-Once we derive a measure $\mu_{\stmt[u]} : \tdomain[P]_{\stmt[u]} \to \mathbb{R}$, we can define the evolution entropy as $\log \mu_{\stmt[u]}$. As the measure is multiplicative for independent systems, the evolution entropy will be additive making it an extensive property. The evolution entropy of a system at a time is defined to be the evolution entropy $\log \mu_{\stmt[u]}(x_t)$ of the snapshot at that time. Under a deterministic process, the evolution entropy can never decrease: $\log \mu_{\stmt[u]}(x_{t_0}) \leq \log \mu_{\stmt[u]}(x_{t_1})$ since $x_{t_0} \narrower x_{t_1}$ for all $t_0 \leq t_1$ and therefore $\mu_{\stmt[u]}(x_{t_0}) \leq \mu_{\stmt[u]}(x_{t_1})$. If the process is also deterministic, then $\log \mu_{\stmt[u]}(x_{t_0}) = \log \mu_{\stmt[u]}(x_{t_1})$.
+Once we derive a measure $\mu_{\stmt[u]} : \tdomain[P]_{\stmt[u]} \to \mathbb{R}$, we can define the evolution entropy as $\log \mu_{\stmt[u]}$. As the measure is multiplicative for independent systems, the evolution entropy will be additive making it an extensive property. The evolution entropy of a system at a time is defined to be the evolution entropy $\log \mu_{\stmt[u]}(x_t)$ of the snapshot at that time. Under a deterministic process, the evolution entropy can never decrease: $\log \mu_{\stmt[u]}(x_{t_0}) \leq \log \mu_{\stmt[u]}(x_{t_1})$ since $x_{t_0} \narrower x_{t_1}$ for all $t_0 \leq t_1$ and therefore $\mu_{\stmt[u]}(x_{t_0}) \leq \mu_{\stmt[u]}(x_{t_1})$. If the process is also reversible, then $\log \mu_{\stmt[u]}(x_{t_0}) = \log \mu_{\stmt[u]}(x_{t_1})$.
 
 These definitions give a very general setting to describe a process and already find a quantity that cannot decrease during deterministic evolution.
 
 \subsection{States}
 
-Conceptually, states represent description of the system, and only about the system, regardless of time. Therefore the states space is not a set of statements, but ``template'' for a set of statements that can be ``instantiated'' at different time.
+Conceptually, states represent description of the system, and only of the system, regardless of time. Therefore the state space is not a set of statements, but a ``template'' for a set of statements that can be ``instantiated'' at different times.
 
 The idea is that a state space $\mathcal{S}$ comes equipped with a function $\iota : \mathcal{S} \times T \to \tdomain[P]$ such that $\iota(\mathcal{S}, t) = \tdomain_t$. That is, it maps the state space and its statements to the particular time domain that represents the system at that particular time. Specifically, states of the system will be mapped to snapshots of the system.
 
-The structure of the state space will not be, in general, isomorphic to each particular time domain. This means that, in general, states In a particular process at a particular time some states may not be accessible, so some states will be mapped to an impossibility. Or there may be correlations between the system and the other, so the snapshot will be provide more information (will be narrower) than the states themselves.
+The structure of the state space will not be, in general, isomorphic to each particular time domain. In a particular process at a particular time some states may not be accessible, so some states will be mapped to an impossibility. Or there may be correlations with other system, so the snapshot will provide more information (will be narrower) than the states themselves.
 
-The relationships define on the state space will be equivalent to the one in the time domain if and only if the time domain of the system is independent to the time domain of the other systems. In other words: the state space represents the system and its properties when the system is independent. This also means that, to be able to define a system, we need to have a process that renders it independent from other systems.
+The relationships defined on the state space will be equivalent to the ones in the time domain if and only if the time domain of the system is independent from the time domain of the other systems. In other words: the state space represents the system and its properties when the system is independent. This also means that, to be able to define a system, we need to have a process that renders it independent from other systems.
 
-When the system is independent from all other, the description is coarser than in the case of when there are correlations. Note that to a coarser description is associated a higher process entropy. Processes that renders the system independent are exactly the ones that maximize the process entropy. We can associate a state entropy to each state, which is the process entropy associated to that description when the system is independent.
+When the system is independent from all others, the description is coarser than in the case of when there are correlations. Note that to a coarser description is associated a higher process entropy. Processes that render the system independent are exactly the ones that maximize the process entropy. We can associate a state entropy to each state, which is the process entropy associated to that description when the system is independent.
 
-While it is still not clear what can be derived and what must be imposed, the overall goal is to understand what are the assumptions needed to construct state spaces. One result should be that processes that isolate the system are implicitly needed, which forms the basis of requiring entropy maximization. All states are therefore equilibria of those processes (i.e. symmetries of the group of processes). Conceptually, this maps well with all branches of physics as all state spaces come equipped with some structure which, in the end, is connected to entropy/probability.
+While it is still not clear what can be derived and what must be imposed, the overall goal is to understand what assumptions are needed to construct state spaces. One result should be that processes that isolate the system are implicitly needed, which forms the basis of requiring entropy maximization. All states are therefore equilibria of those processes (i.e. symmetries of the group of processes). Conceptually, this maps well with all branches of physics as all state spaces come equipped with some structure which, in the end, is connected to entropy/probability/measure.
 
-\section{Open questions and possible extensions}
+\section{Open questions and possible extensions}\label{sec:general_theory_extensions}
 
-Here we note some thoughts and idea about open problems and possible extension to the general theory.
+Here we note some thoughts and ideas about open problems and possible extensions to the general theory.
 
 \subsection{Homogeneity of an experimental domain}
 
 It may be interesting to characterize some notion of homogeneity that makes all possibilities in a domain ``equally verifiable'', that no possibility is ``special'' compared to the others in terms of experimental verifiability. For example:
 \begin{itemize}
 	\item the ``extra-terrestrial life" domain is not homogeneous because one possibility can be verified while the other cannot
-	\item the integers and reals are the only linearly ordered quantities where all contingent statement are the same experimentally: all decidable and none decidable
+	\item the integers and reals are the only linearly ordered quantities where all contingent statements are the same experimentally: all decidable and none decidable
 	\item phase transitions are special, as knowing whether a system is in a mixed state is decidable, so a domain with phase transitions is not homogeneous
 \end{itemize}
 
-It is not clear how this notion should be implemented and how exactly would be useful. It may give a reason to expect a complete domain (the residual possibility is the only one that is not compatible with any contingent statement, so the domain would not be homogeneous) and also that all possibilities are approximately verifiable (if one is be able to prove that, in any domain, at least one possibility is approximately verifiable).
+It is not clear how this notion should be implemented and how exactly it would be useful. It may give a reason to expect a complete domain (the residual possibility is the only one that is not compatible with any contingent verifiable statement, so the domain would not be homogeneous) and also that all possibilities are approximately verifiable (if one is able to prove that, in any domain, at least one possibility is approximately verifiable).
 
 \subsection{Predictive relationships}
 
@@ -2716,7 +2720,7 @@ A possible approach. Let $\edomain_X$ and $\edomain_Y$ be two experimental domai
 
 In principle, we can even extend $\pi : \logCtx \to \tdomain_Y$ to be defined on the whole context. In that case, $\pi$ can be proven to be a projection. This map should be able to characterize the relationship between domains. For example, if $\pi(\tdomain_X) = \{ \certainty, \impossibility \}$ then the domains should be independent. If $\pi(\tdomain_X) = \tdomain_Y$ the domains should be dependent.
 
-\subsection{Defining structures on experimental domain}
+\subsection{Defining structures on experimental domains}
 
 Some mathematical structures are defined on points (i.e. vector spaces, ordering) and others on their $\sigma$-algebras. In our context, verifiable statements are the only elements that are actually physical, therefore it would be nice to always define the structures on the experimental domain (i.e. the topology) and show that it induces a unique structure on the theoretical statements and possibilities (and vice-versa).
 
@@ -2726,17 +2730,17 @@ We need to understand how this can be achieved for other structures, such as mea
 
 \subsection{Space of possible combined domains}
 
-It should be possible to better characterize the space of all possible combined domains. As we show in \ref{2_prop_relationship_domain_is_space_of_continuous_functions} that the space of the possible experimental relationships is the space of continuous functions, there should be an analogue for the space of all possible combined domains. For example, one should be able to show that the combined domain is an immersion within the product topology. Is that the only constraint? How can that be characterized? Can we create an experimental domain to distinguish them?
+It should be possible to better characterize the space of all possible combined domains. As we show in \ref{2_prop_relationship_domain_is_space_of_continuous_functions} that the space of the possible experimental relationships is the space of topologically continuous functions, there should be an analogue for the space of all possible combined domains. For example, one should be able to show that the combined domain is an immersion within the product topology. Is that the only constraint? How can that be characterized? Can we create an experimental domain to distinguish them?
 
 \subsection{Limited precision}
 
-One area we could explore for new physical ideas is what happens if we assume that the precision cannot be arbitrarily decrease. How is it different from the continuous case? Here are some preliminary ideas.
+One area we could explore for new physical ideas is what happens if we assume that the precision cannot be arbitrarily decreased. How is it different from the continuous case? Here are some preliminary ideas.
 
-The limited precision case can't simply lead to a discrete topology. The standard topology of the real is not the limit of the integer topology since it is not discrete. Most likely, the limited precision case will need to have uncountable possibilities so that the limit to arbitrary precision can work well.
+The limited precision case cannot simply lead to a discrete topology. The standard topology of the reals is not the limit of the integer topology since it is not discrete. Most likely, the limited precision case will need to have uncountable possibilities so that the limit to arbitrary precision can work well.
 
-The main cause of confusion is that, in the continuous case, whether the precision of two statements overlap determine whether the statements are compatible. For example, ``the position is between 0 and 1 meters" and ``the position is between 2 and 3 meters" are both incompatible and not overlapping. This cannot be the case for limited precision. The possibilities themselves must be incompatible with each other but some of them must overlap, or we'd simply have a discrete topology. That is, suppose that 1 unit is the precision limit, the statements ``the position is between 0 and 1" and ``the position is between 0.5 and 1.5" are incompatible because if we verify one we cannot verify the other. If we could verify them both, we would measure at a smaller precision. So, overlapping cannot be defined in terms of incompatibility.
+The main cause of confusion is that, in the continuous case, whether the precision of two statements overlap determines whether the statements are compatible. For example, ``the position is between 0 and 1 meters" and ``the position is between 2 and 3 meters" are both incompatible and not overlapping. This cannot be the case for limited precision. The possibilities themselves must be incompatible with each other but some of them must overlap, or we would simply have a discrete topology. That is, suppose that 1 unit is the precision limit, the statements ``the position is between 0 and 1" and ``the position is between 0.5 and 1.5" are incompatible because if we verify one we cannot verify the other. If we could verify them both, we would measure at a smaller precision. So, overlapping cannot be defined in terms of incompatibility.
 
-Whether two statements overlap cannot be determined through incompatibility but must be recovered from the precision of the disjunction. Suppose we have following arbitrary precision statements.
+Whether two statements overlap cannot be determined through incompatibility but must be recovered from the precision of the disjunction. Suppose we have the following arbitrary precision statements.
 \begin{description}
 	\item $\stmt_1=$\statement{the position is between 0 and 1 meter}
 	\item $\stmt_2=$\statement{the position is between 0.5 and 1.5 meter}
@@ -2744,7 +2748,7 @@ Whether two statements overlap cannot be determined through incompatibility but 
 \end{description}
 The precision associated to all statements will be one meter. The precision for $\stmt_1\OR\stmt_2$ will be one meter and a half while the precision for $\stmt_1\OR\stmt_3$ will be two meters. That is: the precision for non overlapping statements sums. It may even be the case that if the precision sums, statements must be incompatible but the converse is what fails.
 
-This means that the measure we put on the possibilities cannot represent the precision anymore. That is, $d\mu \neq dx$. We can imagine a relationship like $dx^2 = d\mu^2 + 1$. This would both make the precision go to 1 when the measure go to 0 and $dx \simeq d\mu$ for large $\mu$.
+This means that the measure we put on the possibilities cannot represent the precision anymore. That is, $d\mu \neq dx$. We can imagine a relationship like $dx^2 = d\mu^2 + 1$. This would both make the precision go to 1 when the measure goes to 0 and $dx \simeq d\mu$ for large $\mu$.
 
 \chapter{Physical theories}
 
