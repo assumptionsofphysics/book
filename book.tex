@@ -2752,48 +2752,64 @@ This means that the measure we put on the possibilities cannot represent the pre
 
 \chapter{Physical theories}
 
-\section{Classical phase space}
+\section{Classical mechanics and infinitesimal reducibility}
+
+Classical mechanics can be recovered from three assumptions as shown in the following diagram that can be used as a guide throughout this section.
+
+\begin{figure}[h]
+	\includegraphics[width=\columnwidth]{images/ClassicalDiagram.png}
+\end{figure}
+
+The three assumptions lie on the left column. Each assumption leads to one or two key insights that progressively lead to the physical concepts in the middle column. Each of these is then mapped to its corresponding formal framework on the right.
+
+\subsection{Classical phase space}
 
 Classical phase space is recovered under the:
 \begin{assump}[Infinitesimal reducibility]
-	The state of the system is reducible to the state of its infinitesimal parts. That is, giving the state of the whole system is equivalent to giving the state of its parts, which is equivalent to giving the state of its parts and so on.
+	The state of the system is reducible to the state of its infinitesimal parts. That is, giving the state of the whole system is equivalent to giving the state of its parts, which in turn is equivalent to giving the state of its subparts and so on.
 \end{assump}
 
-Let $\mathcal{C}$ be the state space for the whole system. We call particle the limit of recursive subdivision. Let $\mathcal{S}$ be the state space for the particles. Then for each $c \in \mathcal{C}$ we can find one and only one $\rho_c : \mathcal{S} \to \mathbb{R} $ that describes the state of its parts. That is, the state of the whole is a distribution over the infinitesimal parts.
+Under this assumption, the state of the whole is a distribution over the states of the parts. More precisely, let $\mathcal{C}$ be the state space for the whole system. We call particle the limit of recursive subdivision. Let $\mathcal{S}$ be the state space for the particles. Then for each $c \in \mathcal{C}$ we can find one and only one $\rho_c : \mathcal{S} \to \mathbb{R} $ that describes the state of its parts. That is, the state of the whole is a distribution over the infinitesimal parts. If $\mathcal{S}$ is a manifold, $\int_U \rho_c d\mathcal{S}$ gives us the fraction of the system whose parts are in the region $U$ of the state space.
 
-If $\mathcal{S}$ is a manifold, $\int_U \rho_c d\mathcal{S}$ gives us the fraction of the system whose parts are in the region $U$ of the state space.
+The next step takes the rest of the section. We need to show that $\mathcal{S}$ has the structure of phase space, with its conjugate variables. Mathematically, $\mathcal{S}$ is a symplectic manifold. The key insight is that, on a manifold, $\rho_c$ must transform both as a scalar function (the value must depend on the point and not on the coordinates) and as a density. Classical phase space is the only space that allows these invariant distributions.
 
-The critical issue is that, on a manifold, $\rho_c$ must transform both as a scalar function (the value must depend on the point and not on the coordinates) and a density. Classical phase space (i.e. a symplectic manifold) is the only space that have this structure. Let's see why.
+The key concept is to keep track of the unit system, so we need precise terminology. We call state variables a set of quantities $\xi^a$ that fully identify a state.\footnote{In mathematical terminology, these are the coordinates of the manifold.} That is, we can write each state $s(\xi^a)$ as a function of the state variables. We call coordinate $q \in \xi^a$ a particular variable that defines a unit. The key problem is to understand how many coordinates we can have for a given set of state variables.
 
-We call state variables a set of quantities $\xi^a$ (i.e. coordinates in manifold terminology) that fully identify a state. We call coordinate $q \in \xi^a$ a particular variable that defines a unit. Suppose the particle state space is such that one coordinate is sufficient to define the unit system. That is, $\xi^a = \{ q, k^i \}$. We need to make sure that we can arbitrarily change the unit without changing $\rho_c$. We also have to make sure that $q$ fully defines the units for all state variables. How many $k^i$ can we have?
+We start with the simplest case, where one coordinate is sufficient to define the unit system, which means the following four conditions:
+\begin{enumerate}[noitemsep]
+	\item the state variables can be written as $\xi^a = \{ q, k^i \}$
+	\item we can arbitrarily change coordinate to $\hat{q}=\hat{q}(q)$
+	\item a change of coordinate induces a unique change over the remaining state variables $\hat{k}^j = \hat{k}^j(q, k^i)$
+	\item the density is the same regardless of the coordinates used.
+\end{enumerate}
 
-Suppose we change unit $\hat{q}=\hat{q}(q)$. Call the new units $\hat{\xi}^b = \{ \hat{q}, \hat{k}^i\}$. We have $\rho_c(\hat{\xi}^b)=\rho_c(s(\hat{\xi}^b))=\rho_c(s(\xi^a))=\rho_c(\xi^a) = \left|\frac{\partial \hat{\xi}^b}{\partial \xi^a} \right| \rho_c(\hat\xi^b)$. Therefore the Jacobian $\left|\frac{\partial \hat{\xi}^b}{\partial \xi^a} \right|$ must be equal to 1. Note that, since $\hat{q}$ depends only on $q$, $\left|\frac{\partial \hat{\xi}^b}{\partial \xi^a} \right| = \left|\frac{\partial \hat q}{\partial q} \right|\left|\frac{\partial \hat{k}^b}{\partial k^a} \right|$. Suppose there is only one variable. Then we would have $\left|\frac{\partial \hat q}{\partial q} \right| = 1$. But this would mean the unit change cannot be arbitrary. Therefore we must have two or more variables and therefore $\left|\frac{\partial \hat{k}^b}{\partial k^a} \right| = \left|\frac{\partial q}{\partial \hat q} \right|$. This puts a constraint only on the determinant of the transformation. Suppose there are three or more variable. This constraint is not enough to recover the transformation uniquely and therefore $\hat q$  would not fully define the units for all other state variable. This means there must be two variable: $q$ and a single $k$. Coordinate independent areas and densities can only be defined on a two-dimensional manifold.
+Now we show that there can only be one $k^i$. Suppose we change unit $\hat{q}=\hat{q}(q)$. Call the new units $\hat{\xi}^b = \{ \hat{q}, \hat{k}^j\}$. We have $\rho_c(\hat{\xi}^b)=\rho_c(s(\hat{\xi}^b))=\rho_c(s(\xi^a))=\rho_c(\xi^a) = \left|\frac{\partial \hat{\xi}^b}{\partial \xi^a} \right| \rho_c(\hat\xi^b)$. Therefore the Jacobian $\left|\frac{\partial \hat{\xi}^b}{\partial \xi^a} \right|$ must be equal to 1. Note that, since $\hat{q}$ depends only on $q$, $\left|\frac{\partial \hat{\xi}^b}{\partial \xi^a} \right| = \left|\frac{\partial \hat q}{\partial q} \right|\left|\frac{\partial \hat{k}^j}{\partial k^i} \right|$. Suppose there is only one variable. Then we would have $\left|\frac{\partial \hat q}{\partial q} \right| = 1$. But this would mean the unit change cannot be arbitrary. Therefore we must have two or more variables and therefore $\left|\frac{\partial \hat{k}^b}{\partial k^a} \right| = \left|\frac{\partial q}{\partial \hat q} \right|$. This puts a constraint only on the determinant of the transformation. Suppose there are three or more variables. This constraint is not enough to recover the transformation uniquely and therefore $\hat q$  would not fully define the units for all other state variables. This means there must be two variables: $q$ and a single $k$. Coordinate independent areas and densities can only be defined on a two-dimensional manifold.
 
-To generalize, we say two coordinates are independent if changing the units for one does not change the units for the other. Suppose our particle state space $\mathcal{S}$ is such that its units are fully defined by $n$ independent coordinates $q^i$. Suppose you change the first coordinate $q^1$ without changing the others. Then we will find a variable $k_1$ that changes as before so that the densities are invariant. Now change the second coordinate $q^2$ in the same way while also fixing $k_1$. Then we find a correspond $k_2$. In the end, we will find that $\mathcal{S}$ is $2n$-dimensional and the state variables are $\xi^a = \{ q^i, k_i \}$. We define an independent degree of freedom the space charted by a pair of such variables.
+Now we generalize to multiple coordinates. We say two coordinates are independent if changing the units for one does not induce a change of units for the other. Now suppose our particle state space $\mathcal{S}$ is such that its units are fully defined by $n$ independent coordinates $q^i$. Suppose you change the first coordinate $q^1$ without changing the others. Then we will find a variable $k_1$ that changes as before so that the densities are invariant. Now change the second coordinate $q^2$ in the same way while also fixing $k_1$. Then we find a corresponding $k_2$. We can proceed in the same way until we exhaust all coordinates, which must also mean that there are no state variables left. We find that $\mathcal{S}$ is $2n$-dimensional, and the state variables are $\xi^a = \{ q^i, k_i \}$. We define an independent degree of freedom as the space charted by a pair of such variables.
 
-We can now show that $\mathcal{S}$ is a symplectic manifold. Invariant densities can only be assigned to infinitesimal areas. Therefore we need a two-form $\omega$ that assigns an infinitesimal area to each infinitesimal surface, so that we can define the integrals of the form $\int_{\Sigma} \rho_c \omega(d\Sigma)$. Because degrees of freedom are, at least locally, independent, the total number of states in a volume is the product of the possible configurations of each degree of freedom. This means the volume form is given by $\omega^n$. This cannot be degenerate, or some volumes would not contain states. Therefore $\omega$ itself cannot be degenerate. As the degrees of freedom are independent, the number of states on a surface does not change if we translate it across independent degrees of freedom. If we imagine a parallelopiped, the integral over the surface must be zero (integral over opposite sides are equal and opposite). Therefore $\mathcal{S}$ must come equipped with a two-form $\omega$ that is closed and not degenerate and therefore is a symplectic manifold. By convention, we set $\omega = \hbar dq^i \wedge dk_i = dq^i \wedge dp_i$ where $p_i = \hbar k_i$.
+We can dress the result a bit more formally, and show that $\mathcal{S}$ is a symplectic manifold. To characterize marginal distributions on each degree of freedom, we want to define integrals of the form $\int_{\Sigma} \rho_c \omega(d\Sigma)$ such that the density $\rho_c$ is invariant. Therefore we need a two-form $\omega$ that assigns an infinitesimal area to each infinitesimal surface, and we need $\omega$ to be invariant. Because degrees of freedom are, at least locally, independent, the total number of states in a volume is the product of the possible configurations of each degree of freedom. This means the volume form is proportional to $\omega^n$. This cannot be degenerate (i.e.~it must be nonzero for each infinitesimal volume), or some regions of the particle state space would not contain states, which is a contradiction. Therefore $\omega$ itself cannot be degenerate. As the degrees of freedom are independent, the number of states on a surface does not change if we translate it across independent degrees of freedom. If we imagine a parallelepiped, the integral over the surface must be zero (integrals over opposite sides are equal and opposite). Therefore $\mathcal{S}$ must come equipped with a two-form $\omega$ that is closed and not degenerate and therefore $\mathcal{S}$ is a symplectic manifold. By convention, we set $\omega = \hbar dq^i \wedge dk_i = dq^i \wedge dp_i$ where $p_i = \hbar k_i$.
 
 The conclusion is that, under the infinitesimal reducibility assumption, the state space of the system is a coordinate invariant distribution over the state space of the infinitesimal parts. If the state space of the particles is a manifold, then it is a symplectic manifold, which is the only type of manifold that supports coordinate invariant distributions.
 
-\section{Classical Hamiltonian mechanics}
+\subsection{Classical Hamiltonian mechanics}
 
 Having recovered the classical state space, the law of evolution can be recovered with the following:
 \begin{assump}[Deterministic and reversible evolution]
 	Given the present state of the system, all future (determinism) and past (reversibility) states are uniquely identified.
 \end{assump}
 
-In our case, this goes to both the state of the whole and to the state of the parts. That is, given an initial state $s_0$ there will be one and only one evolution $s(t)$ such that $s(t_0) = t_0$. Moreover, if $\rho(s(t_0), t_0)$ is the density associated to the initial particle at the initial time, we must have that $\rho(s(t), t) = \rho(s(t_0), t_0)$ the density remains the same throughout the evolution. That is, all particles that start with the initial state must end up in the same final state and vice-versa.
+We first apply the assumptions to the motion of a single particle. Let $\lambda : \mathbb{R} \to \mathcal{S}$ be the evolution over time of the state of a particle. Under the assumption, this will be uniquely identified by the initial state $s_0 = \lambda(t_0)$ at the initial time $t_0$. Secondly, we apply the assumption to the density in the sense that all the particles that start with the same initial state must end up in the same final state and vice-versa. That is, if $\rho(\lambda(t_0), t_0)$ is the density associated to the initial particle at the initial time, we must have that $\rho(\lambda(t), t) = \rho(\lambda(t_0), t_0)$: the density must remain the same throughout the evolution.
 
-Now consider the integration $\int_{\Sigma} \rho_c \omega(d\Sigma)$. The region $\Sigma$ will be mapped to a new region, but the fraction of the system found in both will be the same. If both the integral and $\rho_c$ have to remain during the evolution, then $\omega$ will also need to remain the same. That is, the areas in phase space must be mapped to areas of equal size and independent degrees of freedom must be mapped to independent degrees of freedom (or volumes would not be mapped to equal volumes). The evolution is a symplectomorphism and corresponds to Hamiltonian evolution. Intuitively, this is the inverse of Liousville's theorem: instead of positing Hamiltonian evolution and finding conservation of areas and volumes, deterministic and reversible evolution imposes the conservation of areas and volumes which leads to Hamiltonian evolution.
+Now consider the integral $\int_{\Sigma} \rho \omega(d\Sigma)$. Both the region and the density will be mapped in time to $\hat{\Sigma}$ and $\hat{\rho}$ respectively. The fraction of the system found in the new region will have to be the same as the one found in the old region. That is, $\int_{\Sigma} \rho \omega(d\Sigma) = \int_{\hat{\Sigma}} \rho \hat{\omega}(d\hat{\Sigma})$. Since both the integral and the density have to remain constant during the evolution, then $\omega$ will need to remain the same. That is, the areas in phase space must be mapped to areas of equal size and independent degrees of freedom must be mapped to independent degrees of freedom (or volumes would not be mapped to equal volumes). The evolution is a symplectomorphism and corresponds to Hamiltonian evolution. Intuitively, this is the inverse of Liouville's theorem: instead of positing Hamiltonian evolution and finding conservation of areas and volumes, deterministic and reversible evolution imposes the conservation of areas and volumes which leads to Hamiltonian evolution.
+
+The argument can also be constructed through statistical concepts (i.e.~determinism and reversibility means conservation of variance), thermodynamic concepts (i.e.~determinism and reversibility means only the state of the system is important for the evolution; the system is therefore isolated and must conserve energy) or information theoretic consideration (i.e.~under deterministic and reversible evolution the amount of information does not change, so information entropy has to be conserved).
 
 Other notable results:
 \begin{itemize}
-	\item phase space is the only space upon which information entropy is coordinate independence
-	\item Hamiltonian evolution is precisely the evolution that preserves information entropy
+	\item phase space is the only space upon which information entropy is coordinate independent and Hamiltonian evolution is precisely the evolution that preserves information entropy
 	\item we can construct a classical analogue of the uncertainty principle
 	\item the extension to relavistic mechanics only requires proper handling of the time coordinate (and no additional assumptions)
 \end{itemize}
-
 
 \subsection{Geometry of Hamiltonian/Lagrangian}
 
@@ -2829,7 +2845,7 @@ The equation $d\theta(S, \cdot ) = \omega(S, \cdot ) = 0$ tells us that the disp
 
 The interesting aspect is that a pseudo-Lagrangian with the associated action principle always exists even in the case where it cannot be expressed as a function of $q$ and $\dot q$. That is, an action principle always works for trajectories in $\{q(t), p(t)\}$.
 
-\section{Classical massive particles under potential forces}
+\subsection{Classical massive particles under potential forces}
 
 Having recovered classical Hamiltonian mechanics, we can further restrict the law of evolution with the following:
 
@@ -2837,34 +2853,44 @@ Having recovered classical Hamiltonian mechanics, we can further restrict the la
 	The kinematics of the system (i.e. trajectories in physical space-time) is enough to recover its dynamics (i.e. evolutions in state space).
 \end{assump}
 
-If we focus on the parts, this means that for every evolution in phase space there should be one and only one trajectory. Note that each space variable $x^i$ is a coordinate, a state variable that defines a unit. In fact, the trajectories can be fully described by those units and only those units. So we can say that $q^i=x^i$, each $q^i$ will be paired with a conjugate $p_i$ and each state $\{q^i, p_i\}$ will be mapped to one and only one trajectory. At each point $x^i$, then, must pass infinitely many trajectories, one for each combination of $\{p_i\}$. Since the trajectories are differentiable in $x^i$, we can define a velocity $v^i = d_t x^i$. If the equations of motions were such that $v^i=v^i(q^i)$, then kinematic equivalence would fail as the full trajectory would be determined only by $q^i$. So we must have $v^i=v^i(q^i, p_i)$. The relationship must be invertible or kinematic equivalence would fail. At any given time, then, we must the following relationship:
+
+First, as before, we apply the assumption to the particles, which means that for every evolution in phase space there should be one and only one trajectory. Note that each space variable $x^i$ is a coordinate, i.e. a state variable that defines a unit. In fact, the trajectories can be fully described by those units and only those units. So we can say that $q^i=x^i$, each $q^i$ will be paired with a conjugate $p_i$ and each state $\{q^i, p_i\}$ will be mapped to one and only one trajectory. At each point $x^i$, then, infinitely many trajectories must pass, one for each combination of $\{p_i\}$. Since the trajectories are differentiable in $x^i$, we can define a velocity $v^i = d_t x^i$. If the equations of motion were such that $v^i=v^i(q^i)$, then kinematic equivalence would fail as the full trajectory would be determined only by $q^i$. So we must have $v^i=v^i(q^i, p_i)$. The relationship must be invertible or kinematic equivalence would fail. At any given time, then, we must have the following relationship:
 \begin{equation}
 \begin{aligned}
 x^i &= q^i \\
-v^i &= d_t x^i = v^i(q^j, p_k)
+v^j &= d_t x^j = v^j(q^i, p_k)
 \end{aligned}
 \end{equation}
 
-If we look at the whole distribution, we have $\rho(q^i, p_j) = |J| \rho(x^i, v^j) = \left|\frac{\partial v^i}{\partial p_j}\right| \rho(x^i, v^j)$ since
+Let us call weak equivalence the notion that $v^j(q^i, p_k)$ must be invertible at every $q^i$ and therefore we can write $p_k= p_k(x^i, v^j)$ as a function of position and velocity. In this case, the Jacobian matrix  $\frac{\partial v^j}{\partial p_k}$ must be invertible. Since $v^j = d_t q^j = \frac{\partial H}{\partial p_j}$, the Hessian $\frac{\partial^2 H}{\partial p_k \partial p_j}$ must be nonzero everywhere, and therefore must have the same sign which we take to be positive. In this case, and only in this case, we can construct a Lagrangian from a Hamiltonian:
 \begin{equation}
-|J| = \begin{bmatrix}
-\frac{\partial x^i}{\partial q^j} & \frac{\partial v^i}{\partial q^j} \\
-\frac{\partial x^i}{\partial p_j} & \frac{\partial v^i}{\partial p_j}
-\end{bmatrix}
-= \begin{bmatrix}
-\delta^i_j & \frac{\partial v^i}{\partial q^j} \\
-0 & \frac{\partial v^i}{\partial p_j}
-\end{bmatrix}
-= \left|\frac{\partial v^i}{\partial p_j}\right|.
+L(x^i, v^j) = v^k p_k (x^i, v^j) - H(q^i(x^i), p_k(x^i, v^j))
 \end{equation}
-Note that while the value given by $\rho(q^i, p_j)$ is coordinate independent, the value given by $\rho(x^i, v^j)$ depends on the choice of coordinate through $\left|\frac{\partial v^i}{\partial p_j}\right|$. If $x^i$ truly sets the unit system by itself, then $\left|\frac{\partial v^i}{\partial p_j}\right|$ must be a function of position only. Similar considerations will also hold for marginal distributions (i.e. distribution on a subset of the coordinates) which means all components of $\frac{\partial v^i}{\partial p_j}$ must be a function of position only. We set:
+These are also exactly the cases where the Lagrangian, using the principle of minimal action, leads to a unique solution.
+
+Now we look at the whole distribution and how it can be expressed as a function of position and velocity. We have $\rho(q^i, p_j) = |J| \rho(x^i, v^j) = \left|\frac{\partial v^i}{\partial p_j}\right| \rho(x^i, v^j)$ since
+\begin{equation}
+\begin{aligned}
+|J| &= \begin{vmatrix}
+\frac{\partial x^i}{\partial q^j} & \frac{\partial x^i}{\partial p_j} \\
+\frac{\partial v^i}{\partial q^j} & \frac{\partial v^i}{\partial p_j}
+\end{vmatrix}
+= \begin{vmatrix}
+\delta^i_j & 0 \\
+\frac{\partial v^i}{\partial q^j} & \frac{\partial v^i}{\partial p_j}
+\end{vmatrix} \\
+&= \left|\delta^i_j\right| \left|\frac{\partial v^i}{\partial p_j}\right| - \left|0\right| \left|\frac{\partial v^i}{\partial q^j}\right|
+= \left|\frac{\partial v^i}{\partial p_j}\right|.
+\end{aligned}
+\end{equation}
+Note that while the value given by $\rho(q^i, p_j)$ is coordinate independent, the value given by $\rho(x^i, v^j)$ depends on the choice of coordinate through $\left|\frac{\partial v^i}{\partial p_j}\right|$. If $x^i$ truly sets the unit system by itself, then $\left|\frac{\partial v^i}{\partial p_j}\right|$ must be a function of position only. Similar considerations will also hold for marginal distributions (i.e.~distributions on a subset of the coordinates) which means all components of $\frac{\partial v^i}{\partial p_j}$ must be a function of position only. We set:
 \begin{equation}
 \begin{aligned}
 \frac{\partial v^i}{\partial p_j} = \frac{1}{m} g^{ij} \\
 \frac{\partial p_j}{\partial v^i} = m g_{ji}
 \end{aligned}
 \end{equation}
-where $m$ is the unit conversion constant between velocity and conjugate momentum while $g_ij$ represents the linear dependency.
+where $m$ is the unit conversion constant between velocity and conjugate momentum while $g_{ij}$ represents the linear dependency.
 
 If we integrate, we have:
 \begin{equation}
@@ -2875,7 +2901,7 @@ p_j = m g_{ji} v^i + A_j
 \end{equation}
 where $A_j$ are arbitrary functions. Note that:
 \begin{equation}
-v^i = d_t q^i = \frac{\partial H }{\partial P} = \frac{1}{m} g^{ij}(p_j - A_j) \\
+v^i = d_t q^i = \frac{\partial H }{\partial p_i} = \frac{1}{m} g^{ij}(p_j - A_j) \\
 \end{equation}
 We integrate yet again and find:
 \begin{equation}
