@@ -18,6 +18,9 @@
 \urlstyle{same}
 % ---------------------------
 
+\DeclareMathOperator{\tr}{tr}
+
+
 \begin{document}
 	
 % Set theory (expected) \in, \subset, injective/surjective, cartesian product
@@ -2794,7 +2797,7 @@ The conclusion is that, under the infinitesimal reducibility assumption, the sta
 \subsection{Classical Hamiltonian mechanics}
 
 Having recovered the classical state space, the law of evolution can be recovered with the following:
-\begin{assump}[Deterministic and reversible evolution]
+\begin{assump}[Deterministic and reversible evolution]\label{assump_detrev}
 	Given the present state of the system, all future (determinism) and past (reversibility) states are uniquely identified.
 \end{assump}
 
@@ -2911,34 +2914,105 @@ where V is another arbitrary function. We recognize this as the Hamiltonian for 
 
 Kinematic equivalence, then, severely constrains the Hamiltonian and gives a physical justification as to why Hamiltonian of that forms are the most important at a fundamental level. They are the ones where all the dynamics is contained in purely kinematic degrees of freedom.
 
-\section{Irreducibility}
+\section{Quantum mechanics and irreducibility}
 
-Quantum state space is recovered under the:
+Quantum mechanics can be recovered swapping reducibility with irreducibility as shown in the following diagram that can be used as a guide throughout this section.
+
+\begin{figure}[h]
+	\includegraphics[width=\columnwidth]{images/QuantumDiagram.png}
+\end{figure}
+
+The assumptions lie on the left column. Each assumption leads to one or two key insights that progressively lead to the physical concepts in the middle column. Each of these is then mapped to its corresponding formal framework on the right. Note that ``quasi-static process'' and ``conserved density'' both independently lead to the same result of ``unitary evolution''.
+
+\subsection{Irreducibility}
+
+The state space of quantum mechanics can be recovered under the:
+
 \begin{assump}[Irreducibility]
 	The state of the system is irreducible. That is, giving the state of the whole system says nothing about the state of its parts.
 \end{assump}
 
-The idea is that the state space $\mathcal{C}$ of the whole system will be associated to a random variable that represents picking a part of the system. Random variables form a linear space, which means $\mathcal{C}$ comes equipped with an addition operator $+$. Since all parts are equally undefined, we must have a uniform distribution over the parts. As noted before, symplectic manifolds are the only manifolds on which we can define an invariant distribution. As we cannot say anything about the state of the parts, the dimensionality of this manifold must be irrelevant. For symplicity, we choose a two-dimensional one. Therefore we are interested in the space of uniform distributions over a two random variables $A$ and $B$.
+Under this assumption the state of the system is automatically an ensemble over the state of the parts as preparation of the whole leaves the parts unspecified. For the same reason, the entropy of these ensembles must be the same, or some ensembles would provide more or less information about the parts. The whole task, then, is to characterize these ensembles without making specific assumptions on the parts.
 
-As the points themselves are not physically distinguishable, there are only few parameters that we are interested in. One is size of the system $\mu = \int \rho dA \wedge dB$. The density $rho$ is not really physically accessible, therefore we can set it to $1$ by redefining $A$ and $B$. Since only linear transformations will preserve the uniform distribution, we look to those. The exact values of $A$ and $B$ are also not physically accessible, therefore translations are discarded. Stretching of the distribution will correspond to an increase of the size of the system, which is physically accessible. However, only the stretching of the area is of interest. Rotations only change the correlations would in principle not be physically accessible. However, under addition correlations result in different changes of the variance and, indirectly, the size of the system. and therefore are physically interesting. The space of transformations is therefore given by two parameters $a$ and $b$ such that:
+Let $\mathcal{C}$ be the state space of the irreducible system. Let us call fragment a part of the irreducible system. The state of a fragment will be associated with a random variable uniformly distributed over the possible fragment states. As discussed in the context of classical mechanics(CITE), distributions over states must be invariant and symplectic manifolds are the only manifolds over which invariant distributions can be defined. As we cannot say anything about the state of the fragments, the dimensionality of this manifold must be irrelevant as long as it is even dimensional. For simplicity, we can choose a two-dimensional one. Therefore we are interested in the space of bi-dimensional uniform distributions formed by a pair of two random variables $A$ and $B$.
+
+The values of the variables themselves are not relevant, as they are not physically accessible by assumption. However, the size of the system $\mu = \int \rho dA \wedge dB$ is relevant. Without loss of generality, we can rescale $A$ and $B$ such that the density $\rho$ is not only uniform but unitary: $\rho = 1$. This way the size of the system is directly proportional to the area covered by the random variables. In other words: the more fragments there are, the more each fragment can swap its state with another without changing the whole, the more uncertainty there is on the state of the fragment, the higher the variance of the random variables.
+
+Since only linear transformations will preserve the uniform distribution, we look to those. These are translations, stretches and rotations. Translations do not lead to other physically distinguishable states since the exact values of $A$ and $B$ are not physically accessible. Stretching of the distribution will correspond to an increase of the size of the system, which is physically accessible. However, only the stretching of the area is of interest. So, without loss of generality, we can set $\sigma_A = \sigma_B = \sigma$ and we have $\mu \propto \sigma^2$. Rotations just change the correlations which, by themselves, are not physically accessible. However, under addition the correlations still result in differences in variance and, indirectly, the size of the system, and therefore are physically interesting. The space of transformations is therefore given by two parameters $a$ and $b$ such that:
 \begin{equation}
 \begin{aligned}
 C &= a A + b B \\
 D &= -b A + a B
 \end{aligned}
 \end{equation}
-Equivalently, we can use the complex number $c = a + \imath b$ to characterize the transformations. Putting these ideas together leads us to conclude that the state space $\mathcal{C}$ is a complex vector space.
+Equivalently, we can use the complex number $c = a + \imath b$ to characterize the transformation, which we can note as $\tau(c)$. The increase/decrease in size is given by $a^2 + b^2 = (a - \imath b) (a + \imath b) = c^* c$ and the change in correlation is given by the Pearson correlation coefficient $\rho_{A,\tau(c) A} = \cos \arg c$.
 
-We can define a scalar product $\langle \cdot | \cdot \rangle$ where the square norm induced corresponds to the size of the system (or equivalently to the strength of the random variable) and the phase difference corresponds to the correlations (more precisely, $\cos \Delta \phi $ is the Pearson correlation coefficient $\rho_{X,Y}$). To see this, note the formal equivalence between the variance and norm rules under linear composition:
+Putting it all together, we can characterize the state space $\mathcal{C}$ with a complex vector space. The linear combination represents the mixing of the different stochastic descriptions. Two vectors that only differ by a total phase are physically equivalent since a global change of correlation does not change the distribution.
+
+We can define a scalar product $\langle \cdot | \cdot \rangle$ where the square norm induced corresponds to the size of the system (or equivalently to the strength of the random variable) and the phase difference corresponds to the correlations (the Pearson correlation coefficient). To see this, note the formal equivalence between the variance and norm rules under linear composition:
 \begin{equation}
 \begin{aligned}
 \sigma^2_{X+Y} &= \sigma^2_{X} + \sigma^2_{Y} + 2 \, \sigma_{X} \sigma_{Y} \rho_{X,Y} \\
-|\psi+\phi|^2&=|\psi|^2 + |\phi|^2 + 2 |\psi||\phi|\cos(\Delta \phi)
+|\psi+\phi|^2&=|\psi|^2 + |\phi|^2 + 2 |\psi||\phi|\cos(\Delta \theta)
 \end{aligned}
 \end{equation}
-In similar fashion, one can recover the rules for linear operators corresponding to quantities and their expectation.
+The quadratic form, again, reflects the fact that the size of the system is proportional to the variance of a random variable. Since the size of the system is fixed, we use unitary vectors to represent actual states. The state of the system, then, is represented by a ray in a complex inner product space.
 
-The projection can be recovered by requesting a process with equilibria that does not distort the expectation of a quantity (i.e. the expectation remains unchanged). The Schroedinger equation can be recovered by imposing deterministic and reversible evolution. Note that the second can also be seen as a quasi-static process constructed on the first (i.e. a projection at each time step that make an infinitesimal change).
+Lastly, we need to define an expectation operator that returns the average value for each physical quantity. This operator will have to be linear under linear combination of quantities:
+\begin{equation}
+E[aX + bY | \psi] = aE[X | \psi] + bE[Y | \psi].
+\end{equation}
+It will not be linear under linear combination of states:
+\begin{equation}
+E[X | \psi + \phi] \neq E[X | \psi] + E[X | \phi].
+\end{equation}
+Yet, it will have to be proportional to the increase in size and invariant under a total change in correlation: $E[X | \tau(c) \psi] = c^*c E[X | \psi]$. This leads us to associate to each physical quantity a linear Hermitian operator $X$ where $E[X | \psi] = \langle \psi | X | \psi \rangle$. An eigenstate $\psi_0$ of $X$ corresponds to a state where all the elements of the ensemble have exactly the same value. That is, $E[(X - \bar{x})^2 | \psi_0] = 0$.
+
+Note that an inner product space can always be completed into a Hilbert space. This may, however, bring in objects that may not correspond to physical objects (i.e. infinite expectation for some quantities). In general, we believe it is better to regard the (possibly incomplete) inner product space as the physical state space and regard the completion as a mathematical device for calculation. For example, the Schwartz space seems more physically meaningful than the standard $L^2$ space as it gives finite expectation of all polynomials of position and momentum and, moreover, it is closed under Fourier transform.
+
+\subsection{Process with equilibria}
+
+The first type of process we consider is one with equilibria. The measurement process is recovered as a special case.
+
+\begin{assump}[Process with equilibria]
+	Given an initial ensemble (i.e.~mixed state), the final ensemble is uniquely determined and remains the same if the process is applied again.
+\end{assump}
+
+Under this assumption, the process can be characterized by a projection operator. Let $\rho_1$ be the density matrix that characterizes a mixed state. Since the final mixed state must be uniquely determined by $\rho_1$, it will be $\mathcal{P}(\rho_1)$ for some operator $\mathcal{P}$. Similarly, if $\rho_2$ is another initial mixed state, its final operator will be $\mathcal{P}(\rho_2)$. Note that, given any observable $X$ the expectation $E[X|\rho_1] = \tr(X\rho_1)$ is the trace of $X\rho_1$. Similarly $E[X|\mathcal{P}(\rho_1)] = \tr(X \mathcal{P}(\rho_1))$.
+
+We can always create statistical mixtures of the ensembles and we must have $E[X|a \rho_1 + b \rho_2] = a E[X|\rho_1] + b E[X|\rho_2]$ since these are classical mixtures. But since these are classical mixtures, the final state will also need to obey $E[X|a \mathcal{P}(\rho_1) + b \mathcal{P}(\rho_2)] = a E[X|\mathcal{P}(\rho_1)] + b E[X|\mathcal{P}(\rho_2)]$ for all possible $X$. Which means $\mathcal{P}(a \rho_1 + b \rho_2) = a \mathcal{P}(\rho_1) + b \mathcal{P}(\rho_2)$ Therefore the operator $\mathcal{P}$ is a linear operator. Moreover, the process applied twice must lead to the same result, which means $\mathcal{P}(\mathcal{P}(\rho)) = \mathcal{P}(\rho)$ for any $\rho$. That is, $\mathcal{P}^2 = \mathcal{P}$. Therefore $\mathcal{P}$ is a projection.
+
+Suppose, now, that we want to measure a quantity $X$. We want the final outcome, the final ensemble, to be determined by the initial state, the initial ensemble. We also want the measurement to be consistent in the sense that, if it is repeated immediately after, it should yield the same result. Therefore the process will be a projection. We will also want that the process does not distort the quantity. That is, $E[X|\rho] = E[X|\mathcal{P}(\rho)]$. This means that the eigenstates of $X$ will correspond to equilibria of the process. Moreover, subsequent measurements must give the same value, not just the same mixture. That is, if $X_1$ is the random variable after the first instance of the process and $X_2$ is the random variable after the second instance, $P(X_2 = x| X_1 = x ) = 1$. This means that $E[(X - \bar{x})^2|\mathcal{P}(\rho)] = 0$ which means the eigenstates of $X$ are the only equilibria.
+
+The measurement process is therefore simply a special case of a process with equilibria.
+
+\subsection{Deterministic and reversible evolution}
+
+The second type of process we consider is one that is deterministic and reversible, which is the same as assumption \ref{assump_detrev}.
+
+Under this assumption, the process can be characterized by unitary evolution (i.e.~the Schrodinger equation). There are multiple different ways to see this. The first relates to the more general idea that all deterministic and reversible processes must be isomorphisms in the category of states. Since the state space is an inner product space, the isomorphism is unitary evolution.
+
+The second, is that if there is a set of quantities $X_0$ at time $t_0$ that fully identify the state (i.e. the state is the only eigenstate of those quantities), then there must be a corresponding set of quantities $X_1$ that fully identify the state at time $t_1$. This means that the evolution maps basis to basis. Moreover, given the linearity of statistical mixtures, this will also mean that a statistical distribution over $X_0$ will have to map to the same distribution over $X_1$. Therefore the evolution must map linear combinations of that basis to the same linear combination. The evolution is a linear operator. Since the total size of the irreducible system cannot change, the operator must be unitary.
+
+The third, is by constructing a quasi-static process from processes with equilibria, much like one does in thermodynamics.  The idea is that we have an infinitesimal time step, an initial state $\psi_t$ and a final state $\psi_{t+dt}$. We want $P(\psi_{t+dt} | \psi_t ) = 1$. This means that $|\langle \psi_{t+dt} | \psi_{t} \rangle|^2 = 1$. This can happen only if the difference between initial and final states is infinitesimal. That is, $\langle \psi_{t+dt} | \psi_{t} \rangle = 1 + \imath \epsilon dt$ where $\epsilon$ is a real number. Therefore, by convention, we can write $| \psi_{t+dt} \rangle = I + \frac{H dt}{\imath \hbar} | \psi_{t} \rangle$ where $H$ is a Hermitian operator.
+
+Putting these perspectives together, time evolution is a unitary operator which can be written as $U=e^{\frac{H\Delta t}{\imath \hbar}}$. If we start in an eigenstate of $X$, that is $X | \psi_t \rangle = x_0 | \psi_t \rangle$ we will end in an eigenstate $\hat{X} | \psi_{t + \Delta t} \rangle = x_0 | \psi_{t + \Delta t} \rangle$ of another operator $\hat{X} = e^{\frac{H\Delta t}{\imath \hbar}} X e^{- \frac{H\Delta t}{\imath \hbar}}$.
+
+In fact:
+\begin{equation}
+\begin{aligned}
+e^{\frac{H\Delta t}{\imath \hbar}} X e^{- \frac{H\Delta t}{\imath \hbar}}| \psi_{t + \Delta t} \rangle
+&= e^{\frac{H\Delta t}{\imath \hbar}} X e^{- \frac{H\Delta t}{\imath \hbar}} U | \psi_t \rangle \\
+&= e^{\frac{H\Delta t}{\imath \hbar}} X e^{- \frac{H\Delta t}{\imath \hbar}} e^{\frac{H\Delta t}{\imath \hbar}} | \psi_t \rangle \\
+&= e^{\frac{H\Delta t}{\imath \hbar}} X  | \psi_t \rangle \\
+&= e^{\frac{H\Delta t}{\imath \hbar}} x_0  | \psi_t \rangle \\
+&= x_0 U | \psi_t \rangle \\
+&= x_0 | \psi_{t + \Delta t} \rangle
+\end{aligned}
+\end{equation}
+This is consistent with assuming there is a quasi-static process that, at every $t$, has equilibria identified by $e^{\frac{H (t - t_0)}{\imath \hbar}} X e^{- \frac{H (t - t_0)}{\imath \hbar}}$. Note that, unlike thermodynamics, the equilibria during the evolution are not set by external constraints but by the system itself. That is, $X$ depends on the initial state of the system.
+
+In this light, the measurement processes and the unitary processes can be seen as particular cases of the same type of processes, those with equilibria, which are defined as a black-box from initial to final state. This is consistent with the irreducibility assumption as the inability to describe the dynamics of the parts implicitly assumes that the dynamics of the parts is at equilibrium and sets a time-scale under which the further description of the system (i.e. non-equilibrium dynamics) would require describing the internal dynamics.
 
 \section{Open questions and possible extensions}
 
@@ -2969,20 +3043,44 @@ Since the two terms have to match at each point and the symplectic form has the 
 
 \subsection{Thermodynamics}
 
-At some point we'll have to recover/justify thermodynamics. The idea is to study non-deterministic evolution, as opposed to deterministic/reversible evolution which gives Hamiltonian mechanics. We still have a reducible system, so the state is a distribution over the state of the parts. Deterministic and reversible processes conserve information entropy. Non-deterministic processes increase information entropy. Non-reversible processes decrease information entropy. Deterministic and reversible processes lead to Hamiltonian mechanics. Non-deterministic processes lead to max entropy.
+The current thoughts to recover thermodynamics are based on the work on states and processes within the general theory, which tells us that we can define state spaces only for systems that can, at least in some processes, be described independently from the rest. The process entropy, which in general defined only for a specific process, can be abstract and become associated with the states themselves. Therefore we have an equation of state $S(\xi^a)$ where $\xi^a$ are a set of variables that fully identify the state. Moreover, one find that the state entropy is additive under system composition of independent systems.
 
-Suppose you have a non-deterministic process. Either because it is influenced by an external system or because of unknown internal degrees of freedom. Since the evolution is non-deterministic, information entropy increases.
+In a process with equilibria different evolutions must converge to the same final state, which means the processes entropy increases and is maximized at equilibria. This gives the general idea that entropy increases during an irreversible processes. These results are therefore valid in general, no matter what type of system is being described.
 
-Suppose you have a constraint, i.e. conservation of energy. The constraints limits what states can be explored by the system. The non-deterministic evolution will push the state to the ones that have higher information entropy. If the constraint bounds the maximum information entropy to a finite value, the system will tend to those states.
+To find thermodynamics specifically, we need an additional set of assumptions. First, all states are equilibria. Second, all state variables $\xi^a$ are additive under system composition. Third, one of the them, which we call internal energy $U$, is conserved under any evolution, including irreversible evolution. We can then write the equation of state as $S(U, x^i)$ and define the following quantities:
+\begin{equation}
+\begin{aligned}
+\frac{\partial S}{\partial U} &= \beta = \frac{1}{k_B T} \\
+\frac{\partial S}{\partial x^i} &= - \beta X_i
+\end{aligned}
+\end{equation}
+We can then express the differentials as:
+\begin{equation}
+\begin{aligned}
+dS &= \frac{\partial S}{\partial U} dU + \frac{\partial S}{\partial x^i} dx^i &= \beta dU - \beta X_i x^i \\
+dU & = T k_B dS + X_i dx^i
+\end{aligned}
+\end{equation}
+This is essentially Gibbs approach to thermodynamics.
 
-Suppose the constraint is such that there is a unique state that corresponds to the maximum entropy. Then the non-deterministic process will push the system into that state state, no matter what the process is. That is: the constrain is the enough to determine the final state. We call this state equilibrium.
+To recover the laws, we need a few more definitions. We define a reservoir $R$ as a system for which the internal energy $U_R$ is the only state variable and the state entropy $S_R$ is a linear function of $U_R$. That is, $\frac{\partial S_R}{\partial U_R} = \beta_R = \frac{1}{k_B T_R}$ is a constant. We call heat $Q=-\Delta U_R$ the energy lost by the reservoir during a transition.
 
-Suppose the only constraint on the system is the total energy (how do we justify this?). Suppose for each value of energy there is an equilibrium state. Then the entropy $I=I(E)$ is a function of $E$.
+We define a purely mechanical system $M$ as a system for which the state entropy is zero for each state. That is, $S_M(U_M, x^I_M) = 0$. We call work $W = \Delta U_M$ the energy acquired by a purely mechanical work during a transition.
 
-Suppose two systems come into contact. The entropy of each one constraint by its total energy. $I_1=I_1(E_1)$ and $I_2=I_2(E_2)$. The entropy sums $I=I_1+I_2$ if the systems are independent degrees of freedom. The energy sums $E=E_1+E_2$ (why? under what conditions the Hamiltonian of the whole is the sum of the Hamiltonian of the parts?). Suppose the system undergoes non-deterministic evolution and they can exchange energy. $I$ is maximized under the constraint of the total energy. The equilibrium is reached when $\frac{\partial I}{\partial E_1} = 0$ and $\frac{\partial I}{\partial E_2} = 0$ on the constraint. That is: $\frac{\partial I}{\partial E_1} = \frac{\partial I_1}{\partial E_1} +\frac{\partial I_2}{\partial E_2} \frac{\partial E_2}{\partial E_1} = \frac{\partial I_1}{\partial E_1} -\frac{\partial I_2}{\partial E_2}=0$. We have $\frac{\partial I_1}{\partial E_1} = \frac{\partial I_2}{\partial E_2}$.
-
-Define temperature $\frac{1}{T_1} = \frac{\partial I_1}{\partial E_1}$: at equilibrium the two systems have the same temperature. Note that temperature cannot be zero since the information entropy at equilibrium is a function of the energy, and not the other way around.
-
+Now, consider a composite system made a generic system $A$, a reservoir $R$ and a purely mechanical system $M$. Consider a transition where we go to a new equilibrium. Since energy is additive under system composition, let us call $U$ the total energy. Since energy is conserved we have:
+\begin{equation}
+\begin{aligned}
+\Delta U &= 0 = \Delta U_A + \Delta U_R +\Delta U_M = \Delta U_A - Q + W \\
+\Delta U_A &= Q - W
+\end{aligned}
+\end{equation}
+Since entropy is extensive, let us call $U$ the total entropy. Since the process is going to an equilibria, the entropy can only increase. We have:
+\begin{equation}
+\begin{aligned}
+0 &\leq \Delta S = \Delta S_A + \Delta S_R +\Delta S_M = \Delta S_A + \beta_R \Delta U_R + 0 = \Delta S_A + \frac{-Q}{k_B T_R} \\
+k_B \Delta S_A &\geq \frac{Q}{T_R}
+\end{aligned}
+\end{equation}
 
 
 
