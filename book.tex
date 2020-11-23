@@ -286,6 +286,14 @@ Note that the semantics, the meaning of the statements, plays an important role 
 	Since a certainty must be true, no possible assignment can assign it to be false. Therefore $a(\certainty) = \TRUE$ for all $a \in \pAss$. Similarly, an impossibility must be false and no possible assignment can assign it to be true. Therefore $a(\impossibility) = \FALSE$ for all $a \in \pAss$. This justifies the definitions.
 \end{justification}
 
+\begin{coro}
+	A statement $\stmt \in \logCtx$ can only be exactly one of the following: impossible, contingent, certain.
+\end{coro}
+
+\begin{proof}
+	Let $\stmt \in \logCtx$ be a statement. If it is contingent, by definition, it is neither certain nor impossible. If it is not contingent, it is either certain or impossible. If $\stmt$ is certain, then $a(\stmt) = \TRUE$ for all possible assignments $a \in \pAss$. This means $a(\stmt) \neq \FALSE$ for all possible assignments $a \in \pAss$ and therefore $\stmt$ is not impossible. If $\stmt$ is impossible, then $a(\stmt) = \FALSE$ for all possible assignments $a \in \pAss$. This means $a(\stmt) \neq \TRUE$ for all possible assignments $a \in \pAss$ and therefore $\stmt$ is not certain.
+\end{proof}
+
 \end{mathSection}
 
 Next we want to keep track of statements whose truth depends on the truth of other statements. Consider \statement{that animal is a cat} and \statement{that animal is not a cat}: if the first one is true then the second is false and vice-versa. In this sense, the second statement depends on the first. Therefore, in general, a statement depends on other statements if its truth is determined by the truth values of the other statements in every possible assignment.
