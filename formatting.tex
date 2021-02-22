@@ -1,130 +1,16 @@
 \usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm,headsep=10pt,letterpaper]{geometry} % Page margins
 
-% Theorem definitions using amsthm
-
-\usepackage{amsthm}
-\usepackage{amsmath}
-\usepackage{amssymb}
-
-% For more complicated table formatting
-\usepackage{multirow}
-\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-
-% Remove line spaces between items of enumerate and itemize
-\usepackage{enumitem}
-\setlist{noitemsep}
-
-
-% Adds double bracket symbols
-\usepackage{stmaryrd}
+\input{include/basicstyle}
+\input{include/logic}
+\input{include/theorems}
 
 % Latex symbol guide at http://mirrors.ibiblio.org/CTAN/info/symbols/comprehensive/symbols-letter.pdf
 
-% LOGIC symbols
-% -------------
-
-% Allows to create negation symbols
-\usepackage{MnSymbol}
-
-% General math symbols
-\DeclareMathOperator{\Id}{Id} % Identity function
-
-% Boolean symbols and algebra
-\def\Bool{\mathbb{B}}
-\def\TRUE{\textsc{true}}
-\def\FALSE{\textsc{false}}
-\def\AND{\wedge}
-\def\bigAND{\bigwedge}
-\def\OR{\vee}
-\def\bigOR{\bigvee}
-\def\NOT{\neg}
-
-% Logical context and related symbols
-\def\logCtx{\mathcal{S}}
-\def\vstmtSet{\mathcal{S}_\textsf{v}}
-\def\dstmtSet{\mathcal{S}_\textsf{d}}
-\newcommand{\pAss}[1][\mathcal{S}] {\mathcal{A}_{#1}}
-\DeclareMathOperator{\truth}{truth}
-
-% Experimental test symbols
-\newcommand{\exptSet}{\mathcal{E}}
-\newcommand{\expt}[1][e] {\mathsf{#1}}
-\DeclareMathOperator{\result}{result}
-\def\SUCCESS{\textsc{success}}
-\def\FAILURE{\textsc{failure}}
-\def\UNDEF{\textsc{undefined}}
-
-% Statements
-\def\tautology{\top} % Tautology
-\def\contradiction{\bot} % Contradiction
-\def\certainty{\top} % Tautology
-\def\impossibility{\bot} % Contradiction
-\newcommand{\stmt}[1][s] {\mathsf{#1}} % Statement
-\newcommand{\tstmt}[1][s] {\bar{\mathsf{#1}}} % Theoretical statement
-
-
-% Relationships between statements
-\def\comp{\doublefrown} % Compatibility
-\def\ncomp{\ndoublefrown} 
-\def\narrower{\preccurlyeq} % Narrowness
-\def\nnarrower{\npreccurlyeq}
-\def\snarrower{\prec}
-\def\nsnarrower{\nprec}
-\def\broader{\succcurlyeq} % Broadness
-\def\nbroader{\nsucccurlyeq}
-\def\sbroader{\succ}
-\def\nsbroader{\nsucc}
-\def\indep{\upmodels} % Independent
-\def\nindep{\nupmodels}
-
-% Experimental domains and related symbols
-\newcommand{\edomain}[1][D] {\mathcal{#1}} % Experimental domain
-\newcommand{\tdomain}[1][D] {\bar{\mathcal{#1}}} % Theoretical domain
-\newcommand{\basis}[1][B] {\mathcal{#1}} % Basis
-\newcommand{\resPoss}[1][x] {\mathring{#1}} % Residual possibility
-\newcommand{\estPoss}[1][x] {\dot{#1}} % Established possibility
-
-
-% Formatting for experimental relationships
-\newcommand{\erel}[1][r] {#1}
-
-% Formatting for sentence statements
-\newcommand{\statement}[1] {\emph{``#1"}}
-
-% Formatting for reference
-\newcommand{\refStmt}[1][r]{\textbf{#1}}
-
-\DeclareMathOperator{\ver}{ver}
-\DeclareMathOperator{\fal}{fal}
-\DeclareMathOperator{\und}{und}
-
-\DeclareMathOperator{\interior}{int}
-\DeclareMathOperator{\exterior}{ext}
 
 \usepackage{xcolor} % Required for specifying colors by name
 \definecolor{sectionNumbers}{RGB}{44, 103, 0}
 
 
-\renewcommand\thesubsection{\thesection.\Alph{subsection}}
-\renewcommand{\theequation}{\thechapter.\arabic{equation}}
-
-\newtheorem{assump}{Assumption}
-\renewcommand*{\theassump}{\Roman{assump}}
-
-\newtheorem{axiom}[equation]{Axiom}
-\newtheorem{defn}[equation]{Definition}
-\newtheorem{prop}[equation]{Proposition}
-\newtheorem{coro}[equation]{Corollary}
-\newtheorem{thrm}[equation]{Theorem}
-
-%\theoremstyle{definition}
-
-\newenvironment{remark}{\emph{Remark}.}{}
-\newenvironment{rationale}{\emph{Rationale}.}{\qed}
-\newenvironment{justification}{\emph{Justification}.}{\qed}
-\renewenvironment{proof}{\emph{Proof}.}{\qed}
 
 % Style for math section
 \RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
