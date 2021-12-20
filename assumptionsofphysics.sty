@@ -1,0 +1,164 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{assumptionsofphysics}[2021/03/31 Macros and commands for the Assumptions of Physics project]
+
+% Math packages
+\RequirePackage{amsthm}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+
+% For more complicated table formatting
+\RequirePackage{multirow}
+\RequirePackage{tabularx}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% Remove line spaces between items of enumerate and itemize
+\RequirePackage{enumitem}
+\setlist{noitemsep}
+
+% Adds double bracket symbols
+\RequirePackage{stmaryrd}
+
+% Allows to create negation symbols
+\RequirePackage{MnSymbol}
+
+% Redeclaration for section numbering
+% -----------------------------------
+
+\DeclareOption{sectionnum}{
+	% Usual (decimal) numbering
+	\renewcommand{\thesection}{\arabic{section}}
+	\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+	\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+	
+	% Fix references
+	\makeatletter
+	\renewcommand{\p@subsection}{}
+	\renewcommand{\p@subsubsection}{}
+	\makeatother
+}
+
+\ProcessOptions\relax
+
+% Theorem styles
+% --------------
+
+\newtheorem{assump}{Assumption}
+\renewcommand*{\theassump}{\Roman{assump}}
+
+\newtheorem{axiom}[equation]{Axiom}
+\newtheorem{defn}[equation]{Definition}
+\newtheorem{prop}[equation]{Proposition}
+\newtheorem{coro}[equation]{Corollary}
+\newtheorem{thrm}[equation]{Theorem}
+\newtheorem{conj}[equation]{Conjecture}
+\newtheorem{desid}[equation]{Desideratum}
+
+\newenvironment{remark}{\emph{Remark}.}{}
+\newenvironment{rationale}{\emph{Rationale}.}{\qed}
+\newenvironment{justification}{\emph{Justification}.}{\qed}
+\newenvironment{example}{\emph{Example}.}{}
+\renewenvironment{proof}{\emph{Proof}.}{\qed}
+
+
+% General math symbols
+% --------------------
+
+\DeclareMathOperator{\Id}{Id} % Identity function
+
+% LOGIC symbols
+% -------------
+
+% Boolean symbols and algebra
+\def\Bool{\mathbb{B}}
+\def\TRUE{\textsc{true}}
+\def\FALSE{\textsc{false}}
+\def\AND{\wedge}
+\def\bigAND{\bigwedge}
+\def\OR{\vee}
+\def\bigOR{\bigvee}
+\def\NOT{\neg}
+
+% Logical context and related symbols
+\def\logCtx{\mathcal{S}}
+\def\vstmtSet{\mathcal{S}_\textsf{v}}
+\def\dstmtSet{\mathcal{S}_\textsf{d}}
+\newcommand{\pAss}[1][\mathcal{S}] {\mathcal{A}_{#1}}
+\DeclareMathOperator{\truth}{truth}
+
+% Experimental test symbols
+\newcommand{\exptSet}{\mathcal{E}}
+\newcommand{\expt}[1][e] {\mathsf{#1}}
+\DeclareMathOperator{\result}{result}
+\def\SUCCESS{\textsc{success}}
+\def\FAILURE{\textsc{failure}}
+\def\UNDEF{\textsc{undefined}}
+
+% Statements
+\def\certainty{\top} % Certainty
+\def\impossibility{\bot} % Impossibility
+\newcommand{\stmt}[1][s] {\mathsf{#1}} % Statement
+\newcommand{\tstmt}[1][s] {\bar{\mathsf{#1}}} % Theoretical statement
+\newcommand{\statement}[1] {\emph{``#1"}} % Sentence statements
+
+% Relationships between statements
+\def\comp{\doublefrown} % Compatibility
+\def\ncomp{\ndoublefrown} 
+\def\narrower{\preccurlyeq} % Narrowness
+\def\nnarrower{\npreccurlyeq}
+\def\snarrower{\prec}
+\def\nsnarrower{\nprec}
+\def\broader{\succcurlyeq} % Broadness
+\def\nbroader{\nsucccurlyeq}
+\def\sbroader{\succ}
+\def\nsbroader{\nsucc}
+\def\indep{\upmodels} % Independence
+\def\nindep{\nupmodels}
+
+% Experimental domains and related symbols
+\newcommand{\edomain}[1][D] {\mathcal{#1}} % Experimental domain
+\newcommand{\tdomain}[1][D] {\bar{\mathcal{#1}}} % Theoretical domain
+\newcommand{\basis}[1][B] {\mathcal{#1}} % Basis
+\newcommand{\resPoss}[1][x] {\mathring{#1}} % Residual possibility
+\newcommand{\estPoss}[1][x] {\dot{#1}} % Established possibility
+\DeclareMathOperator{\ver}{ver} % Verifiable part
+\DeclareMathOperator{\fal}{fal} % Falsifiable part
+\DeclareMathOperator{\und}{und} % Undecidable part
+
+% Experimental relationships symbols
+% ----------------------------------
+
+\newcommand{\erel}[1][r] {#1} % Experimental relationship
+
+% Properties and quantities
+% ------------------------
+
+\newcommand{\refStmt}[1][r]{\textbf{#1}} % reference
+
+% Topology symbols
+% ----------------
+
+\DeclareMathOperator{\interior}{int} % Set interior
+\DeclareMathOperator{\exterior}{ext} % Set exterior
+
+% Informational granularity symbols
+% ---------------------------------
+
+% Level of detail
+\def\eqgran{\doteq} % Equigranularity
+\def\finer{\leqdot} % Fineneess
+\def\sfiner{\lessdot}
+\def\nfiner{\nleqdot}
+\def\nsfiner{\nlessdot}
+\def\coarser{\geqdot} % Coarseness
+\def\scoarser{\gtrdot}
+\def\ncoarser{\ngeqdot}
+\def\nscoarser{\ngtrdot}
+
+% Unit defined ordering
+\def\lequ{\leq_{\stmt[u]}}
+\def\gequ{\geq_{\stmt[u]}}
+\newcommand{\equ}[1][u] {=_{\stmt[#1]}}
+\def\ltu{<_{\stmt[u]}}
+\def\nequ{\neq_{\stmt[u]}}
