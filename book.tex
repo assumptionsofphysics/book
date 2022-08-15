@@ -4,6 +4,7 @@
 
 
 \input{formatting} % Loads the book formatting
+\usepackage{tikz}
 
 \newif\ifdraft
 
@@ -1255,6 +1256,32 @@ There is a link between the basis of an experimental domain and a sub-basis of a
 \end{mathSection}
 
 Another important property to classify topological spaces is the degree of separation of their elements: how well one can use verifiable sets to tell points and sets apart. A Kolmogorov, or $\mathsf{T}_0$, space is one in which for every pair of points there is always a verifiable set that contains one but not the other. This property is significant because it allows all points to be distinguished through verifiable sets. A Fr\'echet, or $\mathsf{T}_1$, space is one in which for every pair of points we can find two verifiable sets each containing only one. In a Hausdorff, or $\mathsf{T}_2$, space the two verifiable sets containing the points are disjoint. This implies the uniqueness of limits of sequences of points.
+
+\begin{center}
+	\begin{tikzpicture}[scale = 0.3]
+		\draw[black,thick,dashed] (4,0) circle (3); 
+		\node at (4,0) {$\cdot$};
+		\node at (8,5) {$\mathsf{T}_0$};
+		\node at (11,0) {$\cdot$};
+		
+		\draw[black,thick,dashed] (20.75,0) circle (3);
+		\node at (20.75,0) {$\cdot$};
+		\node at (23, 5) {$\mathsf{T}_1$};
+		\draw[black,thick,dashed] (25.25,0) circle (3);
+		\node at (25.25,0) {$\cdot$};
+		
+		\begin{scope}
+			\clip (20.75,0) circle (3);
+			\fill[black!10] (25.25,0) circle (3);
+		\end{scope}
+		
+		\draw[black,thick,dashed] (34,0) circle (3);
+		\node at (34,0) {$\cdot$};
+		\node at (38,5) {$\mathsf{T}_2$};
+		\draw[black,thick,dashed] (42,0) circle (3);
+		\node at (42,0) {$\cdot$};
+	\end{tikzpicture}
+\end{center}
 
 \begin{mathSection}
 	\begin{defn}
