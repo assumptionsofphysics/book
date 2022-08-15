@@ -1858,6 +1858,111 @@ A special case is when combining two independent domains. For example, the domai
 
 In terms of topology, the possibilities of the combined domain are the Cartesian product of the possibilities of the original domains and their natural topology is the product topology.\footnote{Note that the topology is quite naturally the product topology and not the box topology. The box topology would require countable conjunction and is therefore discarded. The fact that the correct topology is the one most natural to define confirms again the appropriateness of our framework.}
 
+\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}
+%		\draw[step=1cm,white,very thin] (-2,-1) grid (16,10);
+		
+		\draw[->] (-1,3) -- (4,3);
+		\draw[->] (-1,3) -- (-1,7.1);
+		
+		\node at (-1,7.4) {F};
+		\node at (3.7,2.7) {M};
+		
+		\begin{scope}
+			\clip (-1,3) rectangle (4,7);
+			\fill[gray!10!white] (-1,3) rectangle (4,7);
+		\end{scope}
+		
+		\begin{scope}
+			\clip (-1,5) rectangle (4,5.5);
+			\fill[gray!30!white] (-1,5) rectangle (4,5.5);
+		\end{scope}
+		
+		\begin{scope}
+			\clip (0.5,3) rectangle (1,7);
+			\fill[gray!30!white] (0.5,3) rectangle (1,7);
+		\end{scope}
+		
+		\begin{scope}
+			\clip (0.5,5) rectangle (1,5.5);
+			\fill[gray!70!white] (0.5,5) rectangle (1,5.5);
+		\end{scope}
+		
+		\draw[dashed, black] (-1,5)--(4,5);
+		\draw[dashed, black] (-1,5.5)--(4,5.5);
+		
+		\draw[dashed,black] (0.5,3) -- (0.5,7);
+		\draw[dashed,black] (1,3) -- (1,7);
+		
+		
+		\draw[->] (-1,3) -- (4,3);
+		\draw[->] (-1,3) -- (-1,7.1);
+		
+		
+		\draw[->] (8,3) -- (13.1,3);
+		\draw[->] (8,3) -- (8,7.1);
+		
+		\draw[black,ultra thick] (-1,5) -- (-1,5.5);
+		\draw[black,ultra thick] (0.5,3) -- (1,3);
+		
+		\node at (11.5,2.3) {M};
+		\node at (8.2,7.4) {P};
+		
+		\begin{scope}
+			\clip (8,3) -- (8,4.5) -- (9.89,4.5) -- (8,3);
+			\fill[gray!10!white] (8,3) -- (8,4.5) -- (9.89,4.5) -- (8,3);
+		\end{scope}
+		\begin{scope}
+			\clip (8,5) -- (10.5,5) -- (13,7) -- (8,7) -- (8,5);
+			\fill[gray!10!white] (8,5) -- (10.5,5) -- (13,7) -- (8,7) -- (8,5);
+		\end{scope}
+		
+		\begin{scope}
+			\clip (8,4.5) -- (8,5) -- (10.5,5) -- (9.8,4.5) -- (8,4.5);
+			\fill[gray!10!white] (8,4.5) -- (8,5) -- (10.5,5) -- (9.8,4.5) -- (8,4.5);
+		\end{scope}
+		
+		\draw[->] (8,3) -- (8,7.1);
+		
+		\draw[->] (8,3) -- (13,7);
+		
+		\begin{scope}
+			\clip (8,4.5) -- (8,5) -- (10.5,5) -- (9.89,4.5) -- (8,4.5);
+			\fill[gray!70!white] (8,4.5) -- (8,5) -- (10.5,5) -- (9.89,4.5) -- (8,4.5);
+		\end{scope}
+		
+		\draw[black] (8,4.5) -- (9.89,4.5);
+		\draw[black] (8,5) -- (10.5,5);	
+		
+		\draw[black, ultra thick] (8,3) -- (10.5,3);	
+		\draw[black,ultra thick] (8,4.5) -- (8,5);
+		
+		\draw[gray,dashed] (10.5,3) -- (10.5,5);
+		
+		\draw[gray,dashed] (8,5.8) -- (11.5,5.8);
+		
+		\draw[black,ultra thick] (11.5,3) -- (12,3);
+		\draw[black,ultra thick] (8,5.8) -- (8,7);
+		\begin{scope}
+			\clip (11.5,5.8) -- (11.5,7) -- (12,7) -- (12,6.2) -- (11.5,5.8);
+			\fill[gray!70!white] (11.5,5.8) -- (11.5,7) -- (12,7) -- (12,6.2) -- (11.5,5.8);
+		\end{scope}
+		
+		\draw[gray,dashed] (11.5,3) -- (11.5,5.8);
+		\draw[gray,dashed] (12,3) -- (12,6.2); 
+		\draw[black] (11.5,5.8) -- (11.5,7);
+		\draw[black] (12,6.2) -- (12,7);
+		
+		
+		\node at (1.5,8) {Number of Males vs. Females};
+		\node at (10.5,8) { Number of Males vs. Total Population};
+\end{tikzpicture}
+	\caption{Domain independence and projections. Given a population, the number of male and female members form independent domains: knowing something about one value tells us nothing about the other. Pictorially, a constrain on one size give us a vertical or horizontal band, which projected on the other axis, gives us the full axis (i.e. the certainty). On the other hand, the total population and the number of males are not independent domains: given the total population, the number of males cannot exceed that number; given the number of males, the total population cannot be lower than that number. Pictorially, we see that the combined domain does not span the whole plane. A constrain on one domain gives us, when projected a constrain on the other domain.} \label{fig:2_relationships}
+\end{figure}
+
+
+
 \begin{mathSection}
 	\begin{defn}
 		The experimental domains of a countable set $\{\edomain_{X_i}\}_{i=1}^{\infty}$ are \textbf{independent} if taking one verifiable statement $\stmt_i \in \edomain_{X_i}$ from each domain always gives an independent set of statements.
