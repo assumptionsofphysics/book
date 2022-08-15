@@ -319,8 +319,25 @@ Since statements are intangible, there are no limits to the number of arguments 
 	\begin{defn}\label{def_dependence}
 	Let $\bar{\stmt} \in \logCtx$ be a statement and $S \subseteq \logCtx$ be a set of statements. Then $\bar{\stmt}$ \textbf{depends on} $S$ (or it is a function of $S$)  if we can find an $f_\Bool : \Bool^S \to \Bool$ such that
 	$$a(\bar{\stmt}) = f_\Bool (\{a(\stmt)\}_{\stmt \in S})$$
-	for every possible assignment $a \in \pAss$. We say $\bar{s}$ depends on $S$ \textbf{through} $f_\Bool$.
+	for every possible assignment $a \in \pAss$. We say $\bar{s}$ depends on $S$ \textbf{through} $f_\Bool$. The relationship is illustrated by the following diagram:
 \end{defn}
+
+\begin{center}
+	\begin{tabular}{  c  c  c | c |  c | c  c  c  c  }
+		\multicolumn{2}{c}{} & \multicolumn{4}{c}{$\overbrace{\rule{2.2cm}{0pt}}^{S \subseteq \logCtx}$} \\
+		
+		{  } & {  }  & $\stmt_1$ & $\stmt_2$ & $\stmt_3$ & ... & {  } & $\bar{\stmt}$ &    \\
+		\cline{3-6}
+		\cline{8-8}
+		\multirow{4}{0.5cm}{$\pAss \left\{ \parbox[][2cm]{0cm}{} \right.$} & $a_1$ & T & T & F & ... & \multirow{2}*{$f_\Bool$}  & T & $a_1(\bar{\stmt})=f_\Bool$({T,T,F}) \\
+		
+		& $a_2$ &	T & F & T & ... & \multirow{2}*{$\overrightarrow{\rule{2.2cm}{0pt}}$} & T & $a_2(\bar{\stmt})=f_\Bool$({T,F,T})  \\
+		
+		& $a_3$ &	T & F & F & ... & \multirow{2}*{$\stmt_1$ AND ($\stmt_2$ OR $\stmt_3$) } & F & $a_3(\bar{\stmt})=f_\Bool$({T,F,F})  \\
+		
+		& $...$ &	... & ... & ... & ... & {   } & ... & $f_\Bool$({...,...,...})  \\
+	\end{tabular}
+\end{center}
 
 	\begin{axiom}[Axiom of closure]\label{ax_functions_of_statement}
 		We can always find a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally, let $S \subseteq \logCtx$ be a set of statements and $f_{\Bool} : \Bool^S \to \Bool$ an arbitrary function from an assignment of $S$ to a truth value. Then we can always find a statement $\bar{\stmt} \in \logCtx$ that depends on $S$ through $f_{\Bool}$.
