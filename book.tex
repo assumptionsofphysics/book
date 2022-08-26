@@ -30,6 +30,8 @@
 
 \DeclareMathOperator{\tr}{tr}
 
+\usetikzlibrary{positioning,calc,arrows,arrows.meta, shapes}
+
 
 \begin{document}
 	
@@ -1456,50 +1458,52 @@ Note, though, that discrete does not imply finite or vice-versa. The domain for 
 
 In this first chapter we have laid down the foundations for our general mathematical theory of experimental science. We have seen how it is grounded in the logic of verifiable statements, which is more limited than the logic of pure statements as it has to deal with the practical constraints introduced by the termination of the tests.
 
+
+\begin{center}
+	\begin{tikzpicture}
+		\node[draw, minimum width=10.5cm, minimum height=5.3cm, rounded corners=5mm] (bdx) {};
+		\node[align=center, below] at ([yshift=-1mm]bdx.north) {\textbf{Theoretical statements} \\statements associated with an experimental test};
+		\node[align=center, above left] at (bdx.157) {$\tdomain_X$};
+		\node[align=center, above] at (bdx.north) {\textbf{Statements} ($\AND$ $\OR$ $\NOT$ $\impossibility$ $\certainty$)};
+		
+		\node[ellipse, draw, minimum width=5cm, minimum height=3.5cm, align=center, inner xsep=-2mm] (vs) at ([xshift=-1.85cm, yshift=-5mm]bdx) {\textbf{Verifiable statements}\\[1mm]
+			if true, test always\\
+			succeeds};
+		\node[align=center, above left] at (vs.145) {$\edomain_X$};
+		\node[ellipse, draw, minimum width=4.2cm, minimum height=2.7cm, align=center,inner xsep=0mm] (poss) at ([xshift=2.25cm,yshift=-7mm]bdx) {\textbf{Possibilities}\\[1mm]
+			experimentally\\
+			distinguishable\\
+			cases
+		};
+		\node[align=center, above right] at (poss.90-55) {$X$};
+		
+		\node[draw, minimum width=4.8cm, minimum height=3cm, rounded corners=5mm, anchor=north west] (sx) at ([yshift=-5mm]bdx.south west) {};
+		\node[align=center, above] at ([xshift=-3mm,yshift=0.5mm]sx.-115) {\textbf{Borel sets}};
+		\node[align=center, above left] at (sx.155) {$\Sigma_X$};
+		
+		\node[ellipse, minimum width=3cm, minimum height=2cm, draw] (os) at ([xshift=3mm,yshift=1mm]sx) {\textbf{Open sets}};
+		\node[align=center, above left] at (os.150) {$\mathsf{T}_X$};
+		\node[ellipse, minimum width=2.8cm, minimum height=1.8cm, draw] (point) at([yshift=-1mm]os-|poss)  {\textbf{Points}};
+		\node[align=center, below=3.6cm] at (bdx.south) {\textbf{Sets} ($\cup$ $\cap$ $\complement$ $X$ $\emptyset$)};
+		\node[align=center, above right] at (point.90-55) {$X$};
+		
+		\coordinate (z) at (bdx.south);
+		\draw[stealth'-stealth'] (sx.130)--(z-|sx.130);
+		\draw[stealth'-stealth'] (vs.south) to (os.90);
+		\draw[stealth'-stealth'] (poss.south) to (point);
+		\draw[stealth'-stealth'] ([xshift=2mm]sx.east)--+(8mm,0);
+		
+		\draw[gray, dashed, thick] (-6,-2.75)--+(11.5,0);
+	\end{tikzpicture}
+\end{center}
+
+
 We saw that we can group verifiable statements into experimental domains which must have a countable basis to allow us to test any statement within an indefinite amount of time. We saw how to construct theoretical domains to find all the theoretical statements that we can use as predictions. And we saw how the possibilities are those statements that, if true, give a complete prediction for all statements in the domain.
 
 We have seen that, because of the disjunctive normal form, each verifiable and theoretical statement is equivalent to a set of possibilities and how logic operations and relationships become set operations and relationships. As such, the experimental and theoretical domains respectively provide a natural topology and $\sigma$-algebra for the possibilities.
 
 What we have ended up with is a conceptual framework that captures the necessary elements of scientific practice and codifies them into a symbolic representation with a well defined meaning. There is no guesswork as to what the points of our spaces are: they are the possibilities, statements that provide a complete prediction for the domain. We do not have to provide an ``interpretation" as to what the sets of a topology represent: they correspond to verifiable statements. All the objects have a clear definition and meaning from the start, we know which ones are necessary and to what extent they are physical or idealized. This will provide a much more solid foundation to the rest of the work, which will ultimately allow us to understand much better the fundamental physical theories and the connections between them and to other areas of scientific thought.
 
-\begin{center}
-	\begin{tikzpicture} 
-		\draw[step=1cm,white,very thin] (0,-1) grid (15,14);
-		\node at (7.5,13.5 ) {\Large \bfseries Statements ($\AND$ $\OR$ $\NOT$ $\impossibility$ $\certainty$)};
-		\node[draw, white, align=center, text=black] at (7.5, 12.3) { \large \bfseries Theoretical statements \\  statements associated with an experimental test};
-		\draw [rounded corners=1.5cm] (1,6) rectangle (14,13);
-		\node at (1,13) {\LARGE $\tdomain_X$};
-		
-		\node at (2.5,11.2) {\LARGE $\edomain_X$};
-		\node[draw, white, align=center, text=black] at (4.8,9) { \large \bfseries Verifiable statements \\  if true, test always \\  succeeds};
-		\draw (9.98,9) ellipse (2.5cm and 1.8cm);
-		\node at (12,10.5) {\LARGE $X$};
-		\node[draw, white, align=center, text=black] at (9.98,9) { \large \bfseries Possibilities \\  experimentally \\  distinguishable \\  cases};
-		\draw (5,9) ellipse (3.2cm and 2.5cm);
-		
-		
-		\draw [rounded corners=1.5cm] (1,0) rectangle (8,5);
-		\node[draw, white, align=center, text=black] at (5,2) {\large \bfseries Open sets};
-		\draw (5,2) ellipse (2.2 cm and 1.8 cm);
-		\node at (1,4.7) {\LARGE $\Sigma_X$};
-		\node at (3,3.5) {\LARGE $\mathsf{T}_X$};
-		\node[draw, white, align=center, text=black] at (3.3,4.5) {\large \bfseries Borel Sets};
-		
-		\node at (7.5,-0.5) {\Large \bfseries Sets ($\cup$ $\cap$ $\complement$ $X$ $\emptyset$)};
-		\draw (12,3.5) ellipse (2cm and 1.5cm);
-		\node at (14,4.5) {\LARGE $X$};
-		\node[draw,white,align=center,text=black] at (12,3.5) {\large \bfseries Points};
-		
-		
-		\draw[gray,dashed] (0,5.5) -- (15,5.5);
-		
-		\draw[stealth-stealth] (3,5) -- (3,6);
-		\draw[stealth-stealth] (5,3.8) -- (5,6.5);
-		\draw[stealth-stealth] (12,5) -- (10,7.2);
-		\node at (9,3.5) {\HUGE $\leftrightarrow$};
-		
-	\end{tikzpicture}
-\end{center}
 
 
 \newpage
@@ -1634,7 +1638,7 @@ An inference relationship is essentially an injection that preserves equivalence
 		\draw[thick,->] (-1,3) -- (6,3);
 		\draw[thick,->] (-1,3) -- (-1,7.1);
 		
-		\node at (-0.5,7.4) {$\rho$ ($g/mm^3$)};
+		\node at (-0.5,7.4) {$\rho$ ($mg/cm^3$)};
 		\node at (2,2.3) {T($^\circ C$)};
 		
 		\node at (2,2.7) {4};
@@ -1861,8 +1865,6 @@ In terms of topology, the possibilities of the combined domain are the Cartesian
 \begin{figure}[h]
 	\centering
 	\begin{tikzpicture}
-%		\draw[step=1cm,white,very thin] (-2,-1) grid (16,10);
-		
 		\draw[->] (-1,3) -- (4,3);
 		\draw[->] (-1,3) -- (-1,7.1);
 		
@@ -1876,24 +1878,24 @@ In terms of topology, the possibilities of the combined domain are the Cartesian
 		
 		\begin{scope}
 			\clip (-1,5) rectangle (4,5.5);
-			\fill[gray!30!white] (-1,5) rectangle (4,5.5);
+			\fill[gray!50!white] (-1,5) rectangle (4,5.5);
 		\end{scope}
 		
 		\begin{scope}
 			\clip (0.5,3) rectangle (1,7);
-			\fill[gray!30!white] (0.5,3) rectangle (1,7);
+			\fill[gray!50!white] (0.5,3) rectangle (1,7);
 		\end{scope}
 		
 		\begin{scope}
 			\clip (0.5,5) rectangle (1,5.5);
-			\fill[gray!70!white] (0.5,5) rectangle (1,5.5);
+			\fill[gray!50!white] (0.5,5) rectangle (1,5.5);
 		\end{scope}
 		
-		\draw[dashed, black] (-1,5)--(4,5);
-		\draw[dashed, black] (-1,5.5)--(4,5.5);
+		\draw[black] (-1,5)--(4,5);
+		\draw[black] (-1,5.5)--(4,5.5);
 		
-		\draw[dashed,black] (0.5,3) -- (0.5,7);
-		\draw[dashed,black] (1,3) -- (1,7);
+		\draw[black] (0.5,3) -- (0.5,7);
+		\draw[black] (1,3) -- (1,7);
 		
 		
 		\draw[->] (-1,3) -- (4,3);
@@ -1906,7 +1908,7 @@ In terms of topology, the possibilities of the combined domain are the Cartesian
 		\draw[black,ultra thick] (-1,5) -- (-1,5.5);
 		\draw[black,ultra thick] (0.5,3) -- (1,3);
 		
-		\node at (11.5,2.3) {M};
+		\node at (12.8,2.7) {M};
 		\node at (8.2,7.4) {P};
 		
 		\begin{scope}
@@ -1925,17 +1927,22 @@ In terms of topology, the possibilities of the combined domain are the Cartesian
 		
 		\draw[->] (8,3) -- (8,7.1);
 		
-		\draw[->] (8,3) -- (13,7);
 		
 		\begin{scope}
 			\clip (8,4.5) -- (8,5) -- (10.5,5) -- (9.89,4.5) -- (8,4.5);
-			\fill[gray!70!white] (8,4.5) -- (8,5) -- (10.5,5) -- (9.89,4.5) -- (8,4.5);
+			\fill[gray!50!white] (8,4.5) -- (8,5) -- (10.5,5) -- (9.89,4.5) -- (8,4.5);
 		\end{scope}
+		\begin{scope}
+			\clip (11.5,5.8) -- (11.5,7) -- (12,7) -- (12,6.2) -- (11.5,5.8);
+			\fill[gray!50!white] (11.5,5.8) -- (11.5,7) -- (12,7) -- (12,6.2) -- (11.5,5.8);
+		\end{scope}
+	
+		\draw[->] (8,3) -- (13,7);
 		
 		\draw[black] (8,4.5) -- (9.89,4.5);
 		\draw[black] (8,5) -- (10.5,5);	
 		
-		\draw[black, ultra thick] (8,3) -- (10.5,3);	
+		\draw[black, ultra thick, dashed] (8,3) -- (10.5,3);	
 		\draw[black,ultra thick] (8,4.5) -- (8,5);
 		
 		\draw[gray,dashed] (10.5,3) -- (10.5,5);
@@ -1943,22 +1950,18 @@ In terms of topology, the possibilities of the combined domain are the Cartesian
 		\draw[gray,dashed] (8,5.8) -- (11.5,5.8);
 		
 		\draw[black,ultra thick] (11.5,3) -- (12,3);
-		\draw[black,ultra thick] (8,5.8) -- (8,7);
-		\begin{scope}
-			\clip (11.5,5.8) -- (11.5,7) -- (12,7) -- (12,6.2) -- (11.5,5.8);
-			\fill[gray!70!white] (11.5,5.8) -- (11.5,7) -- (12,7) -- (12,6.2) -- (11.5,5.8);
-		\end{scope}
+		\draw[black,ultra thick,dashed] (8,5.8) -- (8,7);
 		
-		\draw[gray,dashed] (11.5,3) -- (11.5,5.8);
-		\draw[gray,dashed] (12,3) -- (12,6.2); 
+		\draw[gray] (11.5,3) -- (11.5,5.8);
+		\draw[gray] (12,3) -- (12,6.2); 
 		\draw[black] (11.5,5.8) -- (11.5,7);
 		\draw[black] (12,6.2) -- (12,7);
 		
 		
-		\node at (1.5,8) {Number of Males vs. Females};
-		\node at (10.5,8) { Number of Males vs. Total Population};
+		\node at (1.5,8) {Number of Males vs.~Females};
+		\node at (10.5,8) { Number of Males vs.~Total Population};
 \end{tikzpicture}
-	\caption{Domain independence and projections. Given a population, the number of male and female members form independent domains: knowing something about one value tells us nothing about the other. Pictorially, a constrain on one size give us a vertical or horizontal band, which projected on the other axis, gives us the full axis (i.e. the certainty). On the other hand, the total population and the number of males are not independent domains: given the total population, the number of males cannot exceed that number; given the number of males, the total population cannot be lower than that number. Pictorially, we see that the combined domain does not span the whole plane. A constrain on one domain gives us, when projected a constrain on the other domain.} \label{fig:2_relationships}
+	\caption{Domain independence and projections. Given a population, the number of male and female members form independent domains: knowing something about one value tells us nothing about the other. Pictorially, a constraint on one side gives us a vertical or horizontal band, which projected on the other axis, gives us the full axis (i.e.~the certainty). On the other hand, the total population and the number of males are not independent domains: given the total population, the number of males cannot exceed that number; given the number of males, the total population cannot be lower than that number. Pictorially, we see that the combined domain does not span the whole plane. A constraint on one domain gives us, when projected, a constraint on the other domain.} \label{fig:2_relationships}
 \end{figure}
 
 
@@ -3069,25 +3072,53 @@ The precision associated to all statements will be one meter. The precision for 
 
 This means that the measure we put on the possibilities cannot represent the precision anymore. That is, $d\mu \neq dx$. We can imagine a relationship like $dx^2 = d\mu^2 + 1$. This would both make the precision go to 1 when the measure goes to 0 and $dx \simeq d\mu$ for large $\mu$.
 
-\chapter{Physical theories}
+\include{differential-topology}
 
-\section{Classical mechanics and infinitesimal reducibility}
+\chapter{Classical mechanics}
 
-Classical mechanics can be recovered from three assumptions as shown in diagram \ref{fig_classical_diagram}, which can be used as a guide throughout this section.
+The goal of this chapter is to fully characterize and rederive classical mechanics in all its formulations: Newtonian, Lagrangian and Hamiltonian. We will see that each formulation assumes slightly different premises, and therefore applies to a different set of systems.
 
-\begin{figure}[h]
-	\includegraphics[width=\columnwidth]{images/ClassicalDiagram.png}
-	\caption{Assumptions for classical mechanics}\label{fig_classical_diagram}
-\end{figure}
+There are three fundamental assumptions in classical mechanics, which characterize the relationship between different types of descriptions. They are:
+\begin{description}
+	\item[Infinitesimal reducibility:] describing the whole is equivalent describing all the parts. This is a fundamental assumption in classical mechanics in that all formulation of classical mechanics necessitate this premise. As a consequence of this assumption we get the structure of classical phase space.
+	\item[Determinism and reversible evolution:] identifying past states is equivalent to identifying future states. This assumption, together with the previous one, fully characterize Hamiltonian systems. The dynamics provided by Lagrangian systems also satisfies this assumption. Newtonian mechanics satisfies this assumption only if the forces are conservative.
+	\item[Kinematic equivalence:] describing the state is equivalent to describing the spatial trajectory. Not all Hamilotnian system satisfy this assumption, while all Lagrangian and Newtonian systems do.
+\end{description}
 
-The three assumptions lie on the left column. Each assumption leads to one or two key insights that progressively lead to the physical concepts in the middle column. Each of these is then mapped to its corresponding formal framework on the right.
+What one finds, then, is that Hamiltonian mechanics describes infinitesimal reducible systems under deterministic and reversible evolution. Lagrangian mechanics describes exactly those Hamiltonian systems for which kinematic equivalence is satistfied. Newtonian systems describes infinitesimal reducible systems for which kinematic equivalence is satisfied and for which an inertial frame exists.
 
-\subsection{Classical phase space}
+%\begin{figure}[h]
+%	\includegraphics[width=\columnwidth]{images/ClassicalDiagram.png}
+%	\caption{Assumptions for classical mechanics}\label{fig_classical_diagram}
+%\end{figure}
+
+\section{Infinitesimal reducibility and classical systems}
+
+The first objective is to characterize conceptually what is the subject of classical physics: what systems does it describe? The defining feature of classical systems is that they can be thought to be made of infinitesimally small parts, and that the description of the whole is equivalent to the description of the parts. Whether we are studying planets, beads on a wire, heat transport in metals or air, fluid turbulence or electromagnetic radiation, we can think of these objects as a continuum of parts, and their full characterization will tell us how each part moves and interacts with the other.
+
+%TODO: Divisible vs reducible vs decomposable - Candide for "Boxed" discussion?
+
+Let us start with a simple example. Suppose we want to study the motion of a ball. We can throw it, see how it moves, how it rotates. We can also take a red marker, make a dot on the ball and study the motion of the ball. Studying the motion of the ball is the same as studying the motion of all possible red dots we could make on the ball. We say that the ball is reducible, meaning that the study of the object can be reduced to the study of its parts.
+
+Let us now give a counter-example. Suppose we want to study the motion of an electron. We can accelerate it and track its trajectory. But this time we cannot take a red marker and mark a part of it, so that we can track it independently from the rest. If we use a photon to probe it, the photon will always interact with the whole electron. We say the electron is irreducible, meaning we the study of the object cannot be reduced to the study of its parts.
+
+We need to stress two important aspects of reducibility. First of all it is an assumption: it is something we take to be true in our model, regardless of whether it is literally true in the physical world. For example, we treat a classical fluid as infinitesimally reducible even though we know that he fluid is made of discrete molecules. Conversely, we may treat a proton as a single quantum particle, as a single irreducible system, even though we know that it has substructure.
+
+Secondly, the assumption is contingent to the situation. 
+
+not about the system itself, but about the available of processes to study the system. That is we can ta
+
+ As long as the processes we are studying are not sensitive to this idealization, our assumption will hold and the system will behave as a continuum.  If the processes we are studying are of sufficiently low energy, they will be unable to extract any information about the substructure, and therefore the system will behave as a single unit.
+
+
+
 
 Classical phase space is recovered under the:
 \begin{assump}[Infinitesimal reducibility]
 	The state of the system is reducible to the state of its infinitesimal parts. That is, giving the state of the whole system is equivalent to giving the state of its parts, which in turn is equivalent to giving the state of its subparts and so on.
 \end{assump}
+
+\subsection{Classical phase space}
 
 Under this assumption, the state of the whole is a distribution over the states of the parts. More precisely, let $\mathcal{C}$ be the state space for the whole system. We call particle the limit of recursive subdivision. Let $\mathcal{S}$ be the state space for the particles. Then for each $c \in \mathcal{C}$ we can find one and only one $\rho_c : \mathcal{S} \to \mathbb{R} $ that describes the state of its parts. That is, the state of the whole is a distribution over the infinitesimal parts. If $\mathcal{S}$ is a manifold, $\int_U \rho_c d\mathcal{S}$ gives us the fraction of the system whose parts are in the region $U$ of the state space.
 
@@ -3232,6 +3263,10 @@ H = \frac{1}{2m} (p_j - A_j) g^{ij}(p_j - A_j) + V \\
 where V is another arbitrary function. We recognize this as the Hamiltonian for massive particles under potential forces.
 
 Kinematic equivalence, then, severely constrains the Hamiltonian and gives a physical justification as to why Hamiltonian of that forms are the most important at a fundamental level. They are the ones where all the dynamics is contained in purely kinematic degrees of freedom.
+
+
+\chapter{Other Physical theories}
+
 
 \section{Quantum mechanics and irreducibility}
 
