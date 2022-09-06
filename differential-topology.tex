@@ -1,0 +1,205 @@
+\chapter{Differentiability}
+
+The main idea is to just use the vector space structure of $\mathbb{R}^n$ to define a notion of differential. And then recover differentiability as maps that preserve that notion. Given that I am using only the vector space structure, let’s just consider vector spaces. I would not be surprised if something along these lines has already been done.
+
+\section{Differentials}
+
+Review notation. Let $V$ be a real vector space. If $v \in V$ is a non-zero vector, then $v_{/ \mathbb{R}}$ is the ray corresponding to the vector. (The fact that the field is $\mathbb{R}$ should not be important)
+
+\begin{defn}
+A differential $dV$ is a sequence of vector pairs $(v_i, w_i)_{i=1}^{\infty}$ such that:
+\begin{enumerate}
+	\item the limit of each side goes to zero: $\lim\limits_{i \to \infty} v_i = 0$ and $\lim\limits_{i \to \infty} w_i = 0$
+	\item one of the following holds
+	\begin{enumerate}
+		\item the limit of the ray of the difference converges: $\lim\limits_{i \to \infty} (w_i - v_i)_{/ \mathbb{R}}$ exists
+		\item the difference becomes zero: there exists a $k$ such that $w_i - v_i=0$ for all $i>k$
+	\end{enumerate}
+\end{enumerate}
+Intuitively, a differential is a sequence of differences whose limit have a well-defined direction.
+\end{defn}
+
+\begin{defn}
+	Given two differentials $dV^1 = (v^1_i, w^1_i)_{i=1}^{\infty}$ and $dV^2 = (v^2_i, w^2_i)_{i=1}^{\infty}$ and two real numbers $a,b \in \mathbb{R}$, the linear combination $a dV^1 + b dV^2$ is defined to be the pair-wise sum of the sequence. That is, $(v^1_i+ v^2_i, w^1_i+ w^2_i)_{i=1}^{\infty}$.
+\end{defn}
+
+\begin{conj}
+	The linear combination of differentials is a differential.
+\end{conj}
+\begin{remark}
+	I would expect this to work because the limit of the sum becomes the sum of the limit if the limits converge, which they do. The difficulty (for me at least) is that we are taking the limits of objects in one space (vectors) but they are objects in another space (the projective space). But since the function from vector to ray is continuous, I would expect things to work.
+\end{remark}
+
+If the conjecture works, we now have too many objects, and we want to define an equivalence between them.
+
+\begin{defn}
+	We say two differentials are equally oriented if the limit of the difference is the same. We say that two differentials $dV^1$ and $dV^2$ are equivalent if $a dV^1 + b dV^3$ is equally oriented to $a dV^2 + bdV^3$ for all $a, b in \\mathbb{R}$ and for all differentials $dV^3$.
+\end{defn}
+\begin{conj}
+	The equivalence classes of differentials is a vector space of equal dimension of V.
+\end{conj}
+\begin{remark}
+	The fact that it is a vector space works if the previous conjecture works. If I am not mistaken, it should come out that a ray in the space of differentials will correspond to a ray of V, therefore the dimensionality should match.
+\end{remark}
+
+\begin{defn}
+	Let $V$ and $W$ be two vector spaces. We say that a map $f: V \to W$ is differentiable if it maps differentials of $V$ to differentials of $W$. That is, if $dV=(v_i, w_i)_{i=1}{\infty}$ is a differential of $V$, then $f(dV)= (f(v_i), f(w_i))_{i=1}{\infty}$ is a differential of $W$.
+\end{defn}
+\begin{conj}
+	If $V$ and $W$ are $R^n$ and $R^m$ respectively, this reduces to the standard notion of differentiability.
+\end{conj}
+
+\section{Linear functionals}
+
+Review notation. Let $M$ be a differentiable manifold of dimension $n$.
+
+\begin{defn}
+	A $k$-surface is a $k$-dimensional smooth submanifold of $M$. We denote by $S^k$ the set of all  $k$-surfaces of dimension $k$ and by $S = \bigcup_{k=0}^n S^k$ the set of all smooth surfaces of all dimensions.
+\end{defn}
+
+\begin{defn}
+	Given a $k$-surface $\sigma^k \in S^k$, the \textbf{boundary} of $\sigma^k$, denoted by $\partial\sigma^k \in S^{k-1}$ is the limit of varied coordinates. The \textbf{boundary operator} $\partial : S \to S$ is a map from a $k$-surface to its boundary. A surface is \textbf{closed} if has no boundary.
+\end{defn}
+
+\begin{coro}
+	Boundary of smooth surfaces are smooth surfaces. Boundaries do not have boundaries. That is, $\partial\partial \sigma^k = \emptyset$ for all $\sigma^k \in S^k$.
+\end{coro}
+
+
+\begin{defn}
+	A \textbf{$k$-functional} is a linear function of $k$-surfaces. That is, it is a function $f_k : S^k \to \mathbb{R}$ with the following properties:
+	\begin{description}
+		\item[Linear] $f_k(\sigma^k_1 \cup \sigma^k_2) = f_k(\sigma^k_1) + f_k(\sigma^k_2)$ for every $\sigma^k_1, \sigma^k_2 \in S^k$ such that $\sigma^k_1 \cap \sigma^k_2 = \emptyset$
+		\item[No contribution from boundary] $f_k(\sigma^k) = f_k(\sigma^k \setminus \partial \sigma^k)$ for every $\sigma^k \in S^k$
+		\item[Commutes with the limit] $\lim\limits_{i \to \infty} f_k(\sigma_i^k) = f_k(\lim\limits_{i \to \infty}\sigma_i^k)$
+	\end{description}
+	We denote by $F_k$ the set of all $k$-functionals of dimension $k$ and by $F = \bigcup_{k=0}^nF_k$ is the set of all $k$-functionals.
+\end{defn}
+
+\begin{coro}
+	Any $k$-functional applied to the empty set returns zero. That is, for any $f_k \in F$, $f_k(\emptyset) = 0$.
+\end{coro}
+
+\begin{defn}
+	The \textbf{zero $k$-functional}, noted $0_k \in F_k$, is the $k$-functional that always returns zero. That is, $0_k(\sigma^k) = 0$ for all $\sigma^k \in S^k$.
+\end{defn}
+
+
+\begin{defn}
+	Given a $k$-functional $f_k \in F_k$, the \textbf{boundary functional} $\partial f_k \in F_{k+1}$ is a $(k+1)$-functional that applies $f_k$ on the boundary. That is, $\partial f_k(\sigma^{k+1}) = f_k(\partial \sigma^{k+1})$. 
+\end{defn}
+
+\begin{coro}
+	The boundary functional of the boundary functional is the zero functional. That is, for any $k$-functional $f_k \in F$, $\partial \partial f_k = 0_{k+2}$.
+\end{coro}
+
+\begin{proof}
+	$\partial \partial f_k (\sigma ^{f+2}) = \partial f_k (\partial \sigma ^{f+2}) = f_k (\partial \partial \sigma ^{f+2}) = f_k(\emptyset) = 0$
+\end{proof}
+
+\begin{defn}
+	A $k$-surface $\sigma^k \in S^k$ is \textbf{contractible} if it can be continuously shrunk to a point. That is, the inclusion map $\iota : \sigma^k \to X$ is null-homotopic.
+\end{defn}
+
+\begin{defn}
+	An \textbf{exact functional} is a $k$-functional that returns zero on all closed $k$-surfaces. That is, $f_k(\sigma^k) = 0$ for all $\sigma^k \in S^k$ such that $\partial\sigma^k = \emptyset$. A \textbf{closed functional} returns zero on all contractible closed surfaces.
+\end{defn}
+
+\begin{remark}
+	Names are chosen to agree with exact/closed forms... Should we find better names?
+\end{remark}
+
+\begin{prop}
+	Let $f \in F_k$ be an exact $k$-functional. Then there exists some $(k-1)$-functional $g \in F_{k-1}$ such that $f = \partial g$. We say $g$ is the \textbf{potential} of $f$.
+\end{prop}
+
+\begin{remark}
+	The aim here is to prove the theorem on finite surfaces, without using standard differentiable calculus.
+	
+	As a model, we should use the standard proof used in physics for irrotational fields. Suppose we have an exact 1-functional, that is it gives zero for all closed lines. Then, one can show that two lines that share the same boundary must have the same value. Then pick a point and assign zero to that point. To any other point, assign the value given by the functional over a line that starts at the zero point and ends that the new point. The potential is given by those assignments.
+	
+	The way to generalize is to realize that a $k$-surface is half a boundary of a $k+1$-surface. For example, a point is half a boundary of a line, which constitutes of 2 points. The boundary of a surface is a closed line, which can be understood as two lines that share the same boundary, but opposite orientation. Like the line integral can be understood as ``going from`` one point (i.e. half boundary) to the other, the surface integral can be understood as ``going from'' one line (i.e. half boundary) to the other.
+	
+	For example, suppose we have an exact 2-functional, that is it gives zero for all closed surfaces. Then two surfaces that share the same boundary have the same value. Pick a reference point. Pick a family of lines such that they all start from the reference point, all end at different point (covering the whole space) and never form two paths to the same point. For example, in local coordinates, change one coordinate at a time (i.e. first increase the x, then increase the y, then the z, ...). Now pick a scalar function (a (2 - 2)-form) and assign to each line the difference at the boundary (this arbitrary choice is the equivalent of choosing the constant function in the previous case, and effectively maps to the choice of gauge). Given any other line, we can use the family to find two lines to form a closed loop. A closed loop identifies, which can now be given a value based on the 2-functional.
+	
+	This should be generalizable with the following sketch. Take a set of surfaces $R \subset S^{k-1}$, called references, that:
+	\begin{enumerate}
+		\item includes the empty surface $\emptyset$
+		\item the union of a family of surface is in $R$
+		\item subsurface of a surface is in $R$
+		\item no two surfaces share the same boundary.
+	\end{enumerate}
+	(Note: some care needs to be done with the definition for $k=1$) Therefore, for any $\sigma^{k-1} \in S^{k-1}$ we find a unique $R(\sigma^{k-1}) \in R$ such that $\partial R(\sigma^{k-1}) = \partial \sigma^{k-1}$. That is, for any surface we find a reference surface with the same boundary, and together $\partial \sigma^{k-1} \cup R(\sigma^{k-1})$ they form a closed surface. Since $f$ is exact, $f(\sigma^k)$ depends only on the boundary of $\sigma^k$: two surfaces with equal boundary can be joined together to form a surface with no boundary, for which $f$ is zero. Therefore we can define $\hat{f}_{k-1} : S^{k-1} \to \mathbb{R}$ such that $\hat{f}_{k-1}(\sigma^{k-1}) = f_k(\hat{\sigma}^{k})$ where $\hat{\sigma}^{k}$ is any surface such that $\partial \hat{\sigma}^{k} = \sigma^{k-1}$. Now take an exact functional $v \in F_{k-1}$. Define $g \in F_{k-1}$ such that $g(\sigma^{k-1}) = \hat{f}_{k-1}(\sigma^{k-1} \cup R(\sigma^{k-1})) + v(R(\sigma^{k-1}))$. We have $\partial g(\sigma^{k}) = g(\partial \sigma^{k}) = \hat{f}_{k-1}(\partial \sigma^{k} \cup R(\partial \sigma^{k})) + v(R(\partial \sigma^{k}))$. Since $\partial \partial \sigma^k = \emptyset$, $R(\partial \sigma^{k}) = \emptyset$ because that is the only surface in $R$ with an empty boundary. Therefore $\partial g(\sigma^k) = \hat{f}_{k-1}(\partial \sigma^k \cup \emptyset) + v(\emptyset) = \hat{f}_{k-1}(\partial \sigma^k) = f_k(\sigma^k)$. Which means $\partial g = f$.
+\end{remark}
+
+
+\iffalse
+
+\section{Differential forms}
+
+This section needs to show that vectors and differential forms are infinitesimal counterparts of surfaces and functional. 
+
+
+\begin{defn}
+	TODO: Define a \textbf{$k$-vector} $v^k \in V^k$ as an infinitesimal parallelepiped. We note $V^k$ as the set of all vectors of rank k and $V = \bigcup_{k=0}^n V^k$ as the set of all $k$-vectors. 
+\end{defn}
+
+
+\begin{defn}
+	The \textbf{wedge product} $\wedge : V^k\times V^j \to V^{k+j}$ returns the $(k+j)$-vector that represents the parallelopiped formed by the sides represented by the given $k$-vector and $j$-vector. 
+\end{defn}
+
+
+\begin{remark}
+	Notation for a generic vector. Infinitesimal displacement $dP$ is a vector and can be expressed as: $dP = dx \frac{\partial P}{\partial x^i}$. We can set $e_i = \frac{\partial P}{\partial x^i}$ so $dP = dx^i e_i$.
+	
+	Every infinitesimal $k$-surface $d\sigma^k$ can be expressed, in terms of the wedge product, as $d\sigma^k= dx^{i_1}dx^{i_2}...dx^{i_k}\frac{\partial P}{\partial x^1} \wedge \frac{\partial P}{\partial x^2} \wedge ... \wedge \frac{\partial P}{\partial x^k} = dx^{i_1}dx^{i_2}...dx^{i_k} e_1 \wedge e_2 \wedge ... \wedge e_k$.
+	
+	Suppose we have a $k$-surface in terms of $k$ coordinates $s^j$. We will have a differentiable function $x^i = x^i(s^j)$ that maps the parametrization of the $k$-surface into the manifold. At each point $P$, we can write $dx^i = \frac{\partial x^i}{\partial s^j} ds^j$. Therefore we have $d\sigma^k = dx^{i_1}dx^{i_2}...dx^{i_k} e_1 \wedge e_2 \wedge ... \wedge e_k$.
+	
+	For example:
+	\begin{align*}
+		x^i &= \{x,y,z\} \\
+		s^j &= \{\varphi, \theta\} \\
+		x &= \sin \varphi \cos \theta \\ 
+		y &= \sin \varphi \sin \theta \\ 
+		z &= \cos \varphi \\ 
+		d\sigma &= d\varphi d\theta (e_\varphi \wedge e_\theta) \\
+		&=d\varphi d\theta \left(\frac{\partial x}{\partial \varphi} e_x + \frac{\partial y}{\partial \varphi} e_y + \frac{\partial z}{\partial \varphi} e_z\right) \wedge \left(\frac{\partial x}{\partial \theta} e_x + \frac{\partial y}{\partial \theta} e_y + \frac{\partial z}{\partial \theta} e_z\right) \\
+		&=d\varphi d\theta (
+\frac{\partial x}{\partial \varphi} e_x \wedge \frac{\partial x}{\partial \theta} e_x +
+\frac{\partial x}{\partial \varphi} e_x \wedge \frac{\partial y}{\partial \theta} e_y +
+\frac{\partial x}{\partial \varphi} e_x \wedge \frac{\partial z}{\partial \theta} e_z + \\
+&\frac{\partial y}{\partial \varphi} e_y \wedge \frac{\partial x}{\partial \theta} e_x +
+\frac{\partial y}{\partial \varphi} e_y \wedge \frac{\partial y}{\partial \theta} e_y +
+\frac{\partial y}{\partial \varphi} e_y \wedge \frac{\partial z}{\partial \theta} e_z + \\
+&\frac{\partial z}{\partial \varphi} e_z \wedge \frac{\partial x}{\partial \theta} e_x +
+\frac{\partial z}{\partial \varphi} e_z \wedge \frac{\partial y}{\partial \theta} e_y + 
+\frac{\partial z}{\partial \varphi} e_z \wedge \frac{\partial z}{\partial \theta} e_z ) \\
+		&=d\varphi d\theta ((
+\frac{\partial x}{\partial \varphi} \frac{\partial y}{\partial \theta} - \frac{\partial y}{\partial \varphi}\frac{\partial x}{\partial \theta}) e_x \wedge e_y + \\
+& (\frac{\partial y}{\partial \varphi} \frac{\partial z}{\partial \theta} - \frac{\partial z}{\partial \varphi} \frac{\partial y}{\partial \theta}) e_y \wedge e_z + \\
+&\frac{\partial z}{\partial \varphi} \frac{\partial x}{\partial \theta} - \frac{\partial x}{\partial \varphi} \frac{\partial z}{\partial \theta}) e_z \wedge e_x ) \\
+		&=d\varphi d\theta ((
+\cos \varphi \cos \theta \sin \varphi \cos \theta - \cos \varphi \sin \theta \sin \varphi (-\sin \theta)) e_x \wedge e_y + \\
+& (\cos \varphi \sin \theta  0 - (- \sin \varphi) \sin \varphi \cos \theta) e_y \wedge e_z + \\
+& - \sin \varphi \sin \varphi (-\sin \theta) - \cos \varphi \cos \theta 0) e_z \wedge e_x ) \\
+		&=d\varphi d\theta (\cos \varphi \sin \varphi e_x \wedge e_y +
+\sin^2 \varphi \cos \theta e_y \wedge e_z +
+\sin^2 \varphi \sin \theta e_z \wedge e_x )
+	\end{align*}
+\end{remark}
+
+\begin{defn}
+	A \textbf{$k$-form} $\omega_k : V^k \to \mathbb{R}$ is a linear function of a vector. We note $\Omega_k$ as the set of all $k$-forms of dimension k and $\Omega = \cup_{k=0}^n\Omega_k$ as the set of all forms. 
+\end{defn}
+
+\begin{prop}
+	TODO Show that every k-functional has a corresponding k-form, such that for $f_k = \int_{\sigma^k} \omega_k(d\sigma^k)$. In words, a linear functional applied over a k-surface is the same as an integral of a k-form over the infinitesimal parallelepipedes of that k-surface. 
+\end{prop}
+
+\fi
+
+
+
+
