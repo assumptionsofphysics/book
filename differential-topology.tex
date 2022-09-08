@@ -4,50 +4,40 @@ The main idea is to just use the vector space structure of $\mathbb{R}^n$ to def
 
 \section{Differentials}
 
-Review notation. Let $V$ be a real vector space. If $v \in V$ is a non-zero vector, then $v_{/ \mathbb{R}}$ is the ray corresponding to the vector. (The fact that the field is $\mathbb{R}$ should not be important)
-
 \begin{defn}
-A differential $dV$ is a sequence of vector pairs $(v_i, w_i)_{i=1}^{\infty}$ such that:
-\begin{enumerate}
-	\item the limit of each side goes to zero: $\lim\limits_{i \to \infty} v_i = 0$ and $\lim\limits_{i \to \infty} w_i = 0$
-	\item one of the following holds
-	\begin{enumerate}
-		\item the limit of the ray of the difference converges: $\lim\limits_{i \to \infty} (w_i - v_i)_{/ \mathbb{R}}$ exists
-		\item the difference becomes zero: there exists a $k$ such that $w_i - v_i=0$ for all $i>k$
-	\end{enumerate}
-\end{enumerate}
-Intuitively, a differential is a sequence of differences whose limit have a well-defined direction.
+Let $V$ be a real vector space and $v \in V$ a vector. A differential $dV|_v$ is a sequence of vector $\{v_i\}_{i=1}^{\infty}$ that can be understood, in the limit, as a recursive subdivision that tends to $v$. That is, the limit $\lim\limits_{i \to \infty} \frac{v_i}{(1/2)^i} = \hat{v}$ exists. Two differentials are equivalent if the respective limits converge to the same vector.
 \end{defn}
 
-\begin{defn}
-	Given two differentials $dV^1 = (v^1_i, w^1_i)_{i=1}^{\infty}$ and $dV^2 = (v^2_i, w^2_i)_{i=1}^{\infty}$ and two real numbers $a,b \in \mathbb{R}$, the linear combination $a dV^1 + b dV^2$ is defined to be the pair-wise sum of the sequence. That is, $(v^1_i+ v^2_i, w^1_i+ w^2_i)_{i=1}^{\infty}$.
-\end{defn}
+\begin{prop}
+	The space of all differentials at $v$ is a vector space of the same dimensionality as $V$.
+\end{prop}
 
-\begin{conj}
-	The linear combination of differentials is a differential.
-\end{conj}
+\begin{proof}
+	First we show that the differentials form a vector space. A linear combination $a dV^1 + b dV^2$ of two differentials is a differential since we have:
+	$$\lim\limits_{i \to \infty} \frac{a v_i^1 + b v_i^2}{(1/2)^i} = a\lim\limits_{i \to \infty} \frac{v_i^1}{(1/2)^i} + b\lim\limits_{i \to \infty} \frac{v_i^2}{(1/2)^i} = a \hat{v}^1 + b \hat{v}^2$$.
+	All properties of linear combinations of differentials become properties of the limit vectors, which means the differentials will satisfy the basic definitions of a vector space.
+	
+	Now we show that the dimensionality is the same. Take a basis $e_j$ for the vector space. For each basis vector we can define the sequence $d(e_j) = \{(1/2)^i e_j\}_{i=1}^{\infty}$. These sequences are differentials since
+	$$\lim\limits_{i \to \infty} \frac{(1/2)^i e_j}{(1/2)^i} = \lim\limits_{i \to \infty} e_j = e_j.$$
+	The span of these differentials cover all possible convergence limits and therefore all convergence classes. Any differential is therefore equivalent to a linear combination of the basis.
+\end{proof}
+
 \begin{remark}
-	I would expect this to work because the limit of the sum becomes the sum of the limit if the limits converge, which they do. The difficulty (for me at least) is that we are taking the limits of objects in one space (vectors) but they are objects in another space (the projective space). But since the function from vector to ray is continuous, I would expect things to work.
-\end{remark}
-
-If the conjecture works, we now have too many objects, and we want to define an equivalence between them.
-
-\begin{defn}
-	We say two differentials are equally oriented if the limit of the difference is the same. We say that two differentials $dV^1$ and $dV^2$ are equivalent if $a dV^1 + b dV^3$ is equally oriented to $a dV^2 + bdV^3$ for all $a, b in \\mathbb{R}$ and for all differentials $dV^3$.
-\end{defn}
-\begin{conj}
-	The equivalence classes of differentials is a vector space of equal dimension of V.
-\end{conj}
-\begin{remark}
-	The fact that it is a vector space works if the previous conjecture works. If I am not mistaken, it should come out that a ray in the space of differentials will correspond to a ray of V, therefore the dimensionality should match.
+	If we pick $\mathbb{R}$ as a our vector space, we can use $1$ as the basis and define the differential $dx=\{(1/2)^i 1\}_{i=1}^{\infty}=\{(1/2)^i\}_{i=1}^{\infty}$. In $\mathbb{R}^n$, $d(e_j)$ can then be written as $dx^j e_j$. That is, the limit is expressed only as a limit of the component.
 \end{remark}
 
 \begin{defn}
-	Let $V$ and $W$ be two vector spaces. We say that a map $f: V \to W$ is differentiable if it maps differentials of $V$ to differentials of $W$. That is, if $dV=(v_i, w_i)_{i=1}{\infty}$ is a differential of $V$, then $f(dV)= (f(v_i), f(w_i))_{i=1}{\infty}$ is a differential of $W$.
+	Let $V$ and $W$ be two vector spaces. We say that a map $f: V \to W$ is differentiable if it maps differentials of $V$ to differentials of $W$. That is, if $dV|_v=\{v_i\}_{i=1}^{\infty}$ is a differential of $V$ at $v$, then $dW|_{f(v)} = \{f(v_i +v) - f(v)\}_{i=1}^{\infty}$ is a differential of $W$ at $f(v)$.
 \end{defn}
-\begin{conj}
-	If $V$ and $W$ are $R^n$ and $R^m$ respectively, this reduces to the standard notion of differentiability.
-\end{conj}
+
+\begin{prop}
+	Let $f:\mathbb{R} \to \mathbb{R}$ and let it be differentiable according to the above definition. Then it is differentiable in the standard definition (i.e. existence of the derivative).
+\end{prop}
+\begin{proof}
+	We start with a non-zero differential $dx|_x = \{x^i\}_{i=1}^{\infty}$ at $x$, which means $\lim\limits_{i \to \infty} \frac{x_i}{(1/2)^i} = \hat{x}$ exists and is not zero. The map induces the differential $dy|_{f(x)} = \{f(x_i +x) - f(x)\}_{i=1}^{\infty}$, which means $\lim\limits_{i \to \infty} \frac{f(x_i +x) - f(x)}{(1/2)^i} = \hat{y}$ converges. We can write:
+	$$ \lim\limits_{i \to \infty} \frac{f(x_i +x) - f(x)}{(1/2)^i} = \lim\limits_{i \to \infty} \frac{f(x_i +x) - f(x)}{x_i}\frac{x_i}{(1/2)^i}.$$
+	We have a convergent sequence that is a product of two sequences, one that is convergent. This means that $\lim\limits_{i \to \infty} \frac{f(x_i +x) - f(x)}{x_i}$ converges as well.
+\end{proof}
 
 \section{Linear functionals}
 
