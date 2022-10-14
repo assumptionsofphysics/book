@@ -1,43 +1,147 @@
-\chapter{Differentiability}
+\chapter{Differential geometry}
 
-The main idea is to just use the vector space structure of $\mathbb{R}^n$ to define a notion of differential. And then recover differentiability as maps that preserve that notion. Given that I am using only the vector space structure, let’s just consider vector spaces. I would not be surprised if something along these lines has already been done.
+\section{Differentiability}
 
-\section{Differentials}
+The main idea is to just use the vector space structure of $\mathbb{R}^n$ to define a notion of differential, and then recover differentiability as maps that preserve that notion.
+
+\subsubsection{Differentials}
+
+We define differentials as equivalence classes of those sequences for which, in the limit, each element is roughly half of the previous element.
 
 \begin{defn}
-Let $V$ be a real vector space and $v \in V$ a vector. A differential $dV|_v$ is a sequence of vector $\{v_i\}_{i=1}^{\infty}$ that can be understood, in the limit, as a recursive subdivision that tends to $v$. That is, the limit $\lim\limits_{i \to \infty} \frac{v_i}{(1/2)^i} = \hat{v}$ exists. Two differentials are equivalent if the respective limits converge to the same vector.
+Let $V$ be a vector space and let $2=1+1$ be the sum of the unit of the field with itself. A \textbf{halving sequence} is a sequence of vectors that can be written as $\{(1/2)^i v\}_{i=1}^{\infty}$ for some $v \in V$.
 \end{defn}
 
 \begin{prop}
-	The space of all differentials at $v$ is a vector space of the same dimensionality as $V$.
+	The space of all halving sequences is isomorphic to $V$.
 \end{prop}
 
 \begin{proof}
-	First we show that the differentials form a vector space. A linear combination $a dV^1 + b dV^2$ of two differentials is a differential since we have:
-	$$\lim\limits_{i \to \infty} \frac{a v_i^1 + b v_i^2}{(1/2)^i} = a\lim\limits_{i \to \infty} \frac{v_i^1}{(1/2)^i} + b\lim\limits_{i \to \infty} \frac{v_i^2}{(1/2)^i} = a \hat{v}^1 + b \hat{v}^2$$.
-	All properties of linear combinations of differentials become properties of the limit vectors, which means the differentials will satisfy the basic definitions of a vector space.
+	By construction, for each vector $v \in V$ there is one and only one halving sequence. The map from the vector to each halving sequence induces a vector space structure and therefore the space of all halving sequences is isomorphic to $V$.
+\end{proof}
+
+\begin{defn}
+A sequence of vectors $\{v_i\}_{i=1}^{\infty}$ convergences to the halving sequence of $v$ if 
+$$ \lim\limits_{i \to \infty} \frac{v_i}{(1/2)^i} = v.$$
+Given a vector $v$, the \textbf{differential} $dv$ is the set of all sequences of vectors that converge to the halving sequence of $v$. The \textbf{differential space} of $V$, noted $dV$, is the space of all differentials.
+\end{defn}
+
+\begin{prop}
+The space of all halving sequences is isomorphic to the differential space of $V$, which means $V$ and $dV$ are isomorphic.
+\end{prop}
+
+\begin{proof}
+	Note that the halving sequence of $v$ converges to the halving sequence of $v$. In fact:
+	$$ \lim\limits_{i \to \infty} \frac{v_i}{(1/2)^i} = \lim\limits_{i \to \infty} \frac{(1/2)^i v}{(1/2)^i} = \lim\limits_{i \to \infty} v = v.$$ Therefore we have a bijection between halving sequences and differentials.
 	
-	Now we show that the dimensionality is the same. Take a basis $e_j$ for the vector space. For each basis vector we can define the sequence $d(e_j) = \{(1/2)^i e_j\}_{i=1}^{\infty}$. These sequences are differentials since
-	$$\lim\limits_{i \to \infty} \frac{(1/2)^i e_j}{(1/2)^i} = \lim\limits_{i \to \infty} e_j = e_j.$$
-	The span of these differentials cover all possible convergence limits and therefore all convergence classes. Any differential is therefore equivalent to a linear combination of the basis.
+	Convergence to halving sequences preserves linear combination in the following sense: if $\{v_i\}_{i=1}^{\infty} \in dv$ and $\{w_i\}_{i=1}^{\infty} \in dw$, then $\{a v_i + b w_i\}_{i=1}^{\infty} \in d(av+bw)$. In fact:
+	$$\lim\limits_{i \to \infty} \frac{a v_i + b w_i}{(1/2)^i} = a\lim\limits_{i \to \infty} \frac{v_i}{(1/2)^i} + b\lim\limits_{i \to \infty} \frac{w_i}{(1/2)^i} = a v + b w$$. This means that the space of halving sequences is isomorphic to the space of differentials.
+	
+	Since the space of halving sequences is isomorphic to both the vector space $V$ and the space of differentials $dV$, then $V$ and $dV$ are isomorphic.
+\end{proof}
+
+\begin{prop}
+	Let $v \in V$ and let $dv \in dV$ be the differential corresponding to the halving sequence of $v$. Any sequence $\{v_i\}_{i=1}^{\infty} \in dv$ can be written as $v_i = (1/2)^i(v + w_i)$ where $\lim\limits_{i \to \infty} w_i = 0$.
+\end{prop}
+
+\begin{proof}
+	Note that we can write $v_i = (1/2)^i v + (1/2)^i \left( \frac{v_i}{(1/2)^i} - v\right)$ for all $i$. We can set $w_i = \frac{v_i}{(1/2)^i} - v$ and write $v_i = (1/2)^i(v + w_i)$. We have:
+	$$\lim\limits_{i \to \infty} \frac{v_i}{(1/2)^i} = \lim\limits_{i \to \infty} \frac{(1/2)^i v}{(1/2)^i} + \lim\limits_{i \to \infty} \frac{(1/2)^i w_i}{(1/2)^i} = \lim\limits_{i \to \infty} v + \lim\limits_{i \to \infty} w_i$$
+	The sequence on the left converges to $v$, the first sequence on the right converges to $v$, therefore the second sequence on the right converges to zero.
 \end{proof}
 
 \begin{remark}
-	If we pick $\mathbb{R}$ as a our vector space, we can use $1$ as the basis and define the differential $dx=\{(1/2)^i 1\}_{i=1}^{\infty}=\{(1/2)^i\}_{i=1}^{\infty}$. In $\mathbb{R}^n$, $d(e_j)$ can then be written as $dx^j e_j$. That is, the limit is expressed only as a limit of the component.
+	Let $x$ be a variable over $\mathbb{R}$. We can express the differential $dx=\{(1/2)^i x\}_{i=1}^{\infty}$. In $\mathbb{R}^n$, we can express the differential in two ways. First as $dX = \{(1/2)^i X\}_{i=1}^{\infty} = d\lambda X$, that is a vector multiplied by a differential for a real parameter lambda. Second as $\{(1/2)^i x^j e_j\}_{i=1}^{\infty} = dx^j e_j$, that is one differential for each component multiplied by the base vectors of $X$. When we write $x+dx$, the choice of value $x$ and differential $dx$ is independent, Therefore we can have $x+dx=\{3 + (1/2)^i 2\}_{i=1}^{\infty}$ or $x+dx=\{\pi + (1/2)^i e\}_{i=1}^{\infty}$.
 \end{remark}
 
+
+\subsubsection{Differentiability}
+
+We now define differentiability as the property of a function between vector spaces to induce a linear map between differentials. OPEN QUESTION: is linearity an additional property, or can it be derived from the existence of the map? That is, can a map between vector spaces induce a non-linear map between differentials? It would seem that it would break the equivalence class.
+
 \begin{defn}
-	Let $V$ and $W$ be two vector spaces. We say that a map $f: V \to W$ is differentiable if it maps differentials of $V$ to differentials of $W$. That is, if $dV|_v=\{v_i\}_{i=1}^{\infty}$ is a differential of $V$ at $v$, then $dW|_{f(v)} = \{f(v_i +v) - f(v)\}_{i=1}^{\infty}$ is a differential of $W$ at $f(v)$.
+	Let $V$ and $W$ be two vector spaces. We say that a map $f: V \to W$ is \textbf{differentiable} at $v \in V$ if it induces a linear map from differentials of $V$ to differentials of $W$. That is, there exists a linear map $\left.\frac{df}{dV} \right|_v : dV \to dW$ called \textbf{derivative} such that, given a differential $dv \in dV$, $\{f(v +v_i) - f(v)\}_{i=1}^{\infty} \in \frac{df}{dV}(dv)$  for all $\{v_i\}_{i=1}^{\infty} \in dv$.
 \end{defn}
 
 \begin{prop}
-	Let $f:\mathbb{R} \to \mathbb{R}$ and let it be differentiable according to the above definition. Then it is differentiable in the standard definition (i.e. existence of the derivative).
+	Let $f:\mathbb{R} \to \mathbb{R}$. Then the standard analytical notions of differentiability and derivative coincide.
 \end{prop}
 \begin{proof}
-	We start with a non-zero differential $dx|_x = \{x^i\}_{i=1}^{\infty}$ at $x$, which means $\lim\limits_{i \to \infty} \frac{x_i}{(1/2)^i} = \hat{x}$ exists and is not zero. The map induces the differential $dy|_{f(x)} = \{f(x_i +x) - f(x)\}_{i=1}^{\infty}$, which means $\lim\limits_{i \to \infty} \frac{f(x_i +x) - f(x)}{(1/2)^i} = \hat{y}$ converges. We can write:
-	$$ \lim\limits_{i \to \infty} \frac{f(x_i +x) - f(x)}{(1/2)^i} = \lim\limits_{i \to \infty} \frac{f(x_i +x) - f(x)}{x_i}\frac{x_i}{(1/2)^i}.$$
-	We have a convergent sequence that is a product of two sequences, one that is convergent. This means that $\lim\limits_{i \to \infty} \frac{f(x_i +x) - f(x)}{x_i}$ converges as well.
+	Let $x \in \mathbb{R}$ and $dx=\{x_i\}_{i=1}^{\infty} \in d\mathbb{R}$. We can write:
+	$$ \lim\limits_{i \to \infty} \frac{f(x +x_i) - f(x)}{(1/2)^i} = \lim\limits_{i \to \infty} \frac{f(x +x_i) - f(x)}{x_i}\frac{x_i}{(1/2)^i}.$$
+	We can see that the sequence on the left is equal to the product of two sequences. The sequence on the left converges because the map is differentiable. The second sequence to the right converges because $dx$ is a differential. This means that the first sequence to the right must also converge. That is,  $\lim\limits_{i \to \infty} \frac{f(x_i +x) - f(x)}{x_i}$ converges. But since $x_i$ is a sequence that goes to zero, this evaluates the derivative. Therefore the derivative exists.
+	
+	Conversely, suppose we do not know that $\{f(v_i +v) - f(v)\}_{i=1}^{\infty}$ is a differential. We still have that the left sequence is a product of the two sequence on the right. These must both converge because the derivative exist and $dx$ is a differential. This means that the sequence on the left must also converge and therefore $f$ is differentiable in the new sense.
 \end{proof}
+
+\begin{remark}
+	To convince ourselves that the equivalence class actually works, let us calculate the derivative of $x^2$ at a generic point $x_0$ with a generic differential $dx = \{(1/2)^i(k + w_i)\}$.
+	$$ \lim\limits_{i \to \infty} \frac{(x_0 + (1/2)^i(k + w_i))^2 - x_0^2}{(1/2)^i(k + w_i)} = \lim\limits_{i \to \infty} \frac{x_0^2 + 2 x_0 (1/2)^i(k + w_i) + (1/2)^{2i}(k + w_i) - x_0^2}{(1/2)^i(k + w_i)}.$$
+	$$= \lim\limits_{i \to \infty} \frac{2 x_0 (1/2)^i(k + w_i) + (1/2)^{2i}(k + w_i)}{(1/2)^i(k + w_i)}$$
+	$$= \lim\limits_{i \to \infty} \frac{2 x_0 (k + w_i) + (1/2)^{i}(k + w_i)}{(k + w_i)}$$
+	Note that $k$ is constant, while $w_i$ and terms multiplied by $(1/2)^{i}$ converge to zero. The sequence then converges to $2x_0$, which is indeed the correct result.
+	
+	What this shows is that higher orders here are simply halving sequences that proceed with a higher power: at each step we divide by two not once, but as many times corresponding to the order.
+\end{remark}
+
+\begin{remark}
+	Consider the $n$ vectors of components
+	$$ \left[\begin{array}{c} 1\\ 1\\ 1\\ ...\\ 1 \end{array}\right] 
+	\left[\begin{array}{c} 1\\ 1/2\\ 1/4\\ ...\\ (1/2)^{(n-1)1} \end{array}\right]
+	\left[\begin{array}{c} 1\\ 1/4\\ 1/16\\ ...\\ (1/2)^{(n-1)2} \end{array}\right]
+	\left[\begin{array}{c} ...\\ ...\\ ...\\ ...\\ ... \end{array}\right]
+	\left[\begin{array}{c} 1\\ (1/2)^{1(n-1)}\\ (1/2)^{2(n-1)}\\ ...\\ (1/2)^{(n-1)(n-1)} \end{array}\right].$$
+	They are all linearly independent, and therefore they form a basis. That is, any sequence of $n$ elements can be written as $v_i = \sum c_j (1/2)^{ij}$. If we take the limit as $n$ goes to infinity, this does not work: all the sequences $\{(1/2)^{ij}\}_{i=0}^\infty$ converge for any $j$, but it is not true that all sequences converge. In the light of our definition of differentials in terms of halving sequences, is smooth of order zero if it converges, and therefore we can assign the zeroth coefficient $c_0$. It is smooth of first order if it is a differential, and therefore we can assign the first coefficient $c_1$. And so on. An infinitely smooth sequence is one that can be expressed with the infinite sum.
+	
+	Since in our definitions $dx$ and $df$ are sequences, $df = \sum c_j dx^j$ maps to the Taylor expansion. If the function is not infinitely smooth, it means that, at some point, one of the sequences at higher order does not converge. An infinitely smooth function retains, in a sense, the property that the halving sequences of all orders provide a basis for all sequences.
+\end{remark}
+
+
+\begin{prop}[Chain rule]
+	Let $U$, $V$ and $W$ be three vector spaces. Let $f : U \to V$ and $g : V \to W$ be two differentiable maps and $h = g \circ f$ their composition. Then $\frac{dh}{dU} = \frac{dg}{dV} \circ \frac{df}{dU}$.
+\end{prop}
+
+\begin{proof}
+	Given that $f$ and $g$ are differentiable, a differential of $U$ will be mapped to a differential of $V$ which will be mapped to a differential of $W$. The composite map $h$ will map a differential of $U$ to a differential of $W$ and therefore it is differentiable and the derivative exists. The differential returned by $h$ will be the one returned by $g$ and $f$ combined, therefore the derivative of $h$ is the function combination of the derivatives of $g$ and $f$.
+\end{proof}
+
+\begin{remark}
+	The chain rule in this framework is just function combination. Given that these are linear function, it reduces to multiplication of the derivative on $\mathbb{R}$ and on matrix multipliciation on $\mathbb{R}^N$.
+\end{remark}
+
+
+\subsubsection{Partial derivatives}
+
+Partial derivatives are recovered studying how differentials behave under vector space composition. If $f : V \to W$ is differentiable and $V = V_1 \times V_2$, we can ask for the map from a differential of $V_1$ to a differential of $W$ through $f$. This is exactly a variation of $V$ that keeps $V_2$ constant. Conceptually, given that $dv = (dv_1, dv_2)$ and the derivative is linear, we have $dw = \frac{df}{dV} dv = \frac{df}{dV} (dv_1, dv_2) = \frac{df}{dV} (dv_1, 0) + \frac{df}{dV} (0, dv_2) = \frac{df}{dV_1} dv_1 + \frac{df}{dV_2} dv_2$.
+	
+Suppose that $V = V_1 \times V_2$, then $dV = dV_1 \times dV_2$. This means that we can decompose a differential $dv= dv_1 + dv_2$ as the sum of two differentials in the respective spaces (mapped into the composite through the injection map). Suppose that $W = W_1 \times W_2$ and $f : V \to W$ is differentiable. Then we also have $dw= dw_1 + dw_2$ and we can study of $f$ maps differentials of $V_1$ and $V_2$ to differentials of $W_1$ and $W_2$. We will find $dw = dw_1 + dw_2 = \frac{dw_1}{dV} dv + \frac{dw_2}{dV} dv = \frac{\partial w_1}{\partial V_1} dv_1 + \frac{\partial w_1}{\partial V_2} dv_2 + \frac{\partial w_2}{\partial V_1} dv_1 + \frac{\partial w_2}{\partial V_2} dv_2$. If $U = \mathbb{R}^n$ and $V = \mathbb{R}^m$ we find the usual definitions.
+
+\begin{prop}[Direct product and direct sum]
+	The differential space $dV$ of the direct product $V=\prod V_i$ of a family of vector spaces $V_i$ is the direct product $\prod dV_i$ of the respective differential spaces. The same is true for the direct sum.
+\end{prop}
+
+\begin{proof}
+	Let $v \in V$ and consider its halving sequence $\{(1/2)^i v\}_{i=1}^{\infty}$. Given that $V$ is a direct product, $v=(v_j)$ we have $\{(1/2)^i (v_j)\}_{i=1}^{\infty} = \{((1/2)^i v_j)\}_{i=1}^{\infty}$. Conversely, if we pick one vector for each space $V_j$ and construct their respective halving sequences, this becomes a halving sequence of a vector $v \in V$. Therefore the space of halving sequences over $V$ is the direct product of the halving sequences over the respective $V_j$. Given that the spaces of halving sequences are isomorphic to the respective differential spaces, the differential space of the direct product is the direct product of the differential spaces.
+	
+	The same argument works for direct sum.
+\end{proof}
+
+\begin{defn}
+	Let $V$ and $W$ be two vector spaces and let $V=\prod V_i$ be the direct product of a family of vector spaces $V_i$. Let $f: V \to W$ be a differentiable map. The \textbf{partial derivative} of $f$ with respect to $W_i$, noted $\frac{\partial f}{\partial V_i}$, is the map from a differential of $V_i$ to the differential of $W$ through $f$. That is, $\frac{\partial f}{\partial V_i} (dv_i) = \frac{\partial f}{\partial V} \left( (0, ..., 0, dv_i, 0, ...) \right)$.
+\end{defn}
+
+\begin{prop}
+	Let $f:\mathbb{R}^m \to \mathbb{R}^n$. Then the standard analytical notions of differentiability and partial derivatives coincide with the new ones.
+\end{prop}
+
+\begin{proof}
+\end{proof}
+
+
+\begin{remark}
+	Partial derivatives should be recoverable through vector space composition. Suppose that $V = V_1 \times V_2$, then $dV = dV_1 \times V_2$. This means that we can decompose a differential $dv= dv_1 + dv_2$ as the sum of two differentials in the respective spaces (mapped into the composite through the injection map). Suppose that $W = W_1 \times W_2$ and $f : V \to W$ is differentiable. Then we also have $dw= dw_1 + dw_2$ and we can study of $f$ maps differentials of $V_1$ and $V_2$ to differentials of $W_1$ and $W_2$. We will find $dw = dw_1 + dw_2 = \frac{dw_1}{dV} dv + \frac{dw_2}{dV} dv = \frac{\partial w_1}{\partial V_1} dv_1 + \frac{\partial w_1}{\partial V_2} dv_2 + \frac{\partial w_2}{\partial V_1} dv_1 + \frac{\partial w_2}{\partial V_2} dv_2$. If $U = \mathbb{R}^n$ and $V = \mathbb{R}^m$ we find the usual definitions.
+\end{remark}
+
 
 \section{Linear functionals}
 
