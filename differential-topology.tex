@@ -4,96 +4,158 @@
 
 The main idea is to just use the vector space structure of $\mathbb{R}^n$ to define a notion of differential, and then recover differentiability as maps that preserve that notion.
 
-\subsubsection{Differentials}
+\subsubsection{Differential}
 
-We define differentials as equivalence classes of those sequences for which, in the limit, each element is roughly half of the previous element.
+We define the differential as a sequence that converges to zero along a specific direction.
 
-\begin{defn}
-Let $V$ be a vector space and let $2=1+1$ be the sum of the unit of the field with itself. A \textbf{halving sequence} is a sequence of vectors that can be written as $\{(1/2)^i v\}_{i=1}^{\infty}$ for some $v \in V$.
+\begin{defn}[Convergence envelope]
+	A \textbf{convergence envelope} is a sequence of non-zero elements of $\mathbb{R}$ that converges to $0$.
+\end{defn}
+
+\iffalse
+
+\begin{defn}[Convergence at the same rate]
+	Let $\{a_i\}_{i=1}^{\infty}$ and $\{b_i\}_{i=1}^{\infty}$ be two convergence envelopes. We say that they \textbf{converge at the same rate} if 
+	$$ \lim\limits_{i \to \infty} \frac{a_i}{b_i} = 1.$$
 \end{defn}
 
 \begin{prop}
-	The space of all halving sequences is isomorphic to $V$.
+	Convergence at the same rate is an equivalence relation.
 \end{prop}
 
 \begin{proof}
-	By construction, for each vector $v \in V$ there is one and only one halving sequence. The map from the vector to each halving sequence induces a vector space structure and therefore the space of all halving sequences is isomorphic to $V$.
+	For reflexivity:
+	$$ \lim\limits_{i \to \infty} \frac{a_i}{a_i} = \lim\limits_{i \to \infty} 1 = 1.$$
+	For symmetry:
+	$$ \lim\limits_{i \to \infty} \frac{b_i}{a_i} = \lim\limits_{i \to \infty} \frac{1}{\frac{a_i}{b_i}} = \frac{ \lim\limits_{i \to \infty} 1}{\lim\limits_{i \to \infty} \frac{a_i}{b_i}} = \frac{1}{1} = 1.$$
+	For transitivity:
+	$$ \lim\limits_{i \to \infty} \frac{a_i}{c_i} = \lim\limits_{i \to \infty} \frac{a_i}{b_i}\frac{b_i}{c_i} = \lim\limits_{i \to \infty} \frac{a_i}{b_i} \lim\limits_{i \to \infty} \frac{b_i}{c_i} = 1 \cdot 1 = 1.$$
 \end{proof}
 
+\begin{defn}[Convergence class]
+	A \textbf{convergence class} is an equivalence class of sequences that converge at the same rate.
+\end{defn}
+\fi
+
 \begin{defn}
-A sequence of vectors $\{v_i\}_{i=1}^{\infty}$ convergences to the halving sequence of $v$ if 
-$$ \lim\limits_{i \to \infty} \frac{v_i}{(1/2)^i} = v.$$
-Given a vector $v$, the \textbf{differential} $dv$ is the set of all sequences of vectors that converge to the halving sequence of $v$. The \textbf{differential space} of $V$, noted $dV$, is the space of all differentials.
+	Let $V$ be a real vector space. A \textbf{differential} $dv$ is a sequence of vectors $\{v_i\}_{i=1}^{\infty}$ such that there exists a vector $t \in V$ and a convergence envelope $\{a_i\}_{i=1}^{\infty}$ such that 
+	$$ \lim\limits_{i \to \infty} \frac{v_i}{a_i} = t.$$
+	We call $t$ the \textbf{tangent vector} of the differential and $\{a_i\}_{i=1}^{\infty}$ its \textbf{convergence envelope}. We note $dv[a_i \, t]$ the differential with its tangent vector and convergence envelope.
 \end{defn}
 
 \begin{prop}
-The space of all halving sequences is isomorphic to the differential space of $V$, which means $V$ and $dV$ are isomorphic.
+	Let $dv$ be a differential. It can be expressed as
+	$$ v_i = a_i t_i = a_i(t + w_i)$$
+	where $\{t_i\}_{i=1}^{\infty}$ is a sequence of vectors that converges to $t$ and $w_i$ is a sequence of vectors such that converges to $0$.
 \end{prop}
 
 \begin{proof}
-	Note that the halving sequence of $v$ converges to the halving sequence of $v$. In fact:
-	$$ \lim\limits_{i \to \infty} \frac{v_i}{(1/2)^i} = \lim\limits_{i \to \infty} \frac{(1/2)^i v}{(1/2)^i} = \lim\limits_{i \to \infty} v = v.$$ Therefore we have a bijection between halving sequences and differentials.
+For the first expression, we can write $t_i = \frac{v_i}/{a_i}$. Given the definition of differential, that sequence converges to $t$.	
 	
-	Convergence to halving sequences preserves linear combination in the following sense: if $\{v_i\}_{i=1}^{\infty} \in dv$ and $\{w_i\}_{i=1}^{\infty} \in dw$, then $\{a v_i + b w_i\}_{i=1}^{\infty} \in d(av+bw)$. In fact:
-	$$\lim\limits_{i \to \infty} \frac{a v_i + b w_i}{(1/2)^i} = a\lim\limits_{i \to \infty} \frac{v_i}{(1/2)^i} + b\lim\limits_{i \to \infty} \frac{w_i}{(1/2)^i} = a v + b w$$. This means that the space of halving sequences is isomorphic to the space of differentials.
-	
-	Since the space of halving sequences is isomorphic to both the vector space $V$ and the space of differentials $dV$, then $V$ and $dV$ are isomorphic.
+For the second expression, we can write $v_i = a_i v + a_i \left( \frac{v_i}{a_i} - v\right)$ for all $i$. We can set $w_i = \frac{v_i}{a_i} - v$ and write $v_i = a_i(v + w_i)$. We have:
+$$\lim\limits_{i \to \infty} \frac{v_i}{a_i} = \lim\limits_{i \to \infty} \frac{a_i v}{a_i} + \lim\limits_{i \to \infty} \frac{a_i w_i}{a_i} = \lim\limits_{i \to \infty} v + \lim\limits_{i \to \infty} w_i$$
+The sequence on the left converges to $v$, the first sequence on the right converges to $v$, therefore the second sequence on the right converges to zero.
 \end{proof}
 
 \begin{prop}
-	Let $v \in V$ and let $dv \in dV$ be the differential corresponding to the halving sequence of $v$. Any sequence $\{v_i\}_{i=1}^{\infty} \in dv$ can be written as $v_i = (1/2)^i(v + w_i)$ where $\lim\limits_{i \to \infty} w_i = 0$.
+	Differentials respect the following property
+	$$ dv[a_i \, kt] = dv[k a_i \, t].$$
+	That is, a differential with tangent vector $kt$ and convergence envelope $\{a_i\}_{i=1}^{\infty}$ is also a differential with tangent vector $t$ and convergence envelope $\{ka_i\}_{i=1}^{\infty}$.
 \end{prop}
 
 \begin{proof}
-	Note that we can write $v_i = (1/2)^i v + (1/2)^i \left( \frac{v_i}{(1/2)^i} - v\right)$ for all $i$. We can set $w_i = \frac{v_i}{(1/2)^i} - v$ and write $v_i = (1/2)^i(v + w_i)$. We have:
-	$$\lim\limits_{i \to \infty} \frac{v_i}{(1/2)^i} = \lim\limits_{i \to \infty} \frac{(1/2)^i v}{(1/2)^i} + \lim\limits_{i \to \infty} \frac{(1/2)^i w_i}{(1/2)^i} = \lim\limits_{i \to \infty} v + \lim\limits_{i \to \infty} w_i$$
-	The sequence on the left converges to $v$, the first sequence on the right converges to $v$, therefore the second sequence on the right converges to zero.
+	We have $v_i = a_i (k t_i) = (k a_i) t_i$.
 \end{proof}
 
-\begin{remark}
-	Let $x$ be a variable over $\mathbb{R}$. We can express the differential $dx=\{(1/2)^i x\}_{i=1}^{\infty}$. In $\mathbb{R}^n$, we can express the differential in two ways. First as $dX = \{(1/2)^i X\}_{i=1}^{\infty} = d\lambda X$, that is a vector multiplied by a differential for a real parameter lambda. Second as $\{(1/2)^i x^j e_j\}_{i=1}^{\infty} = dx^j e_j$, that is one differential for each component multiplied by the base vectors of $X$. When we write $x+dx$, the choice of value $x$ and differential $dx$ is independent, Therefore we can have $x+dx=\{3 + (1/2)^i 2\}_{i=1}^{\infty}$ or $x+dx=\{\pi + (1/2)^i e\}_{i=1}^{\infty}$.
-\end{remark}
+\iffalse
 
+\begin{prop}
+	Let $\{v_i\}_{i=1}^{\infty}$ be a directionally convergent sequence with tangent vector $v$ and rate of convergence $\{a_i\}_{i=1}^{\infty}$. Let $\{b_i\}_{i=1}^{\infty}$ be a convergence envelope that converges at the same rate of $\{a_i\}_{i=1}^{\infty}$. Then $\{v_i\}_{i=1}^{\infty}$ is also a directionally convergent sequence with tangent vector $v$ and rate of convergence $\{b_i\}_{i=1}^{\infty}$.
+\end{prop}
+
+\begin{proof}
+	Note that 
+	$$ \lim\limits_{i \to \infty} \frac{v_i}{b_i} = \lim\limits_{i \to \infty} \frac{v_i}{a_i}\frac{a_i}{b_i} = \lim\limits_{i \to \infty} \frac{v_i}{a_i} \lim\limits_{i \to \infty} \frac{a_i}{b_i} = \lim\limits_{i \to \infty} \frac{v_i}{a_i}.$$
+	Therefore all convergence envelopes that converge at the same rate will yield the same results.
+\end{proof}
+
+\fi
 
 \subsubsection{Differentiability}
 
-We now define differentiability as the property of a function between vector spaces to induce a linear map between differentials. OPEN QUESTION: is linearity an additional property, or can it be derived from the existence of the map? That is, can a map between vector spaces induce a non-linear map between differentials? It would seem that it would break the equivalence class.
+We define a map to be differentiable if it maps differentials to differentials with the same convergence envelope.
 
 \begin{defn}
-	Let $V$ and $W$ be two vector spaces. We say that a map $f: V \to W$ is \textbf{differentiable} at $v \in V$ if it induces a linear map from differentials of $V$ to differentials of $W$. That is, there exists a linear map $\left.\frac{df}{dV} \right|_v : dV \to dW$ called \textbf{derivative} such that, given a differential $dv \in dV$, $\{f(v +v_i) - f(v)\}_{i=1}^{\infty} \in \frac{df}{dV}(dv)$  for all $\{v_i\}_{i=1}^{\infty} \in dv$.
+	Let $V$ and $W$ be two vector spaces and let $v_0 \in V$. Given a map $f: V \to W$, the \textbf{differential} of $f$ is the map $df(v_i, dv)$ that given a convergent sequence $\{v_i\}_{i=1}^{\infty}$ and a differential $dv$ returns the sequence $\{f(v_i + a_i t_i) - f(v_i)\}_{i=1}^{\infty}$. The map is \textbf{differentiable} at $v$ if there exists a map $\left.\frac{df}{dV} \right|_{v}: V \to W$, called \textbf{derivative} such that $df(v_i, dv[a_i \, t]) = dw[a_i \, \left.\frac{df}{dV} \right|_{v} (t)]$. That is, $df$ maps differentials of $V$ to differentials of $W$ that have the same convergence envelope and a tangent vector that depends only on the original tangent vector.
 \end{defn}
+
+\begin{prop}
+	A map $f : V \to W$ is differentiable at $v$ if and only if the limit
+	$$ \lim\limits_{i \to \infty} \frac{f(v_i + a_i t_i) - f(v_i)}{a_i} = \left.\frac{df}{dV} \right|_{v} (t)$$
+	converges for sequences $\{v_i\}_{i=1}^{\infty}$ that converge to $v$, $\{a_i\}_{i=1}^{\infty}$ that converge to $0$ with $a_i \neq 0$ for all $i$ and $\{t_i\}_{i=1}^{\infty}$ that converges to some $t$.
+\end{prop}
+
+\begin{proof}
+	The expression is simply applying the definition of differential to $df$.
+\end{proof}
+
+\begin{remark}
+	This definition of differentiability implies Hadamard differentiability and Gateaux differentiability. This means that, for normed vector spaces, it also implies Frechet differentiability. Unlike Hadamard and Gateaux, it implies linearity, which therefore is not an extra condition.
+\end{remark}
+
+\begin{prop}
+	The derivative must be a linear function.
+\end{prop}
+
+\begin{proof}
+	Recall that $dv[a_i \, kt] = dv[k a_i \, t]$, therefore $dw[a_i \, \left.\frac{df}{dV} \right|_{v} (kt)] = df(v_i, dv[a_i \, kt]) = df(v_i, dv[ka_i \, t]) = dw[ka_i \, \left.\frac{df}{dV} \right|_{v} (t)] = dw[a_i \, k \left.\frac{df}{dV} \right|_{v} (t)]$. Therefore $\left.\frac{df}{dV} \right|_{v} (kt) = k \left.\frac{df}{dV} \right|_{v} (t)$.
+	
+	We also have $dw[a_i \, \left.\frac{df}{dV} \right|_{v} (t+u)] = df(v_i, dv[a_i \, t + u]) = \{f(v_i + a_i (t_i + u_i)) - f(v_i)\}_{i=1}^{\infty} = \{f(v_i + a_i (t_i + u_i)) - f(v_i + a_i t_i) + f(v_i + a_i t_i) - f(v_i)\}_{i=1}^{\infty} = \{f((v_i + a_i t_i) + a_i u_i) - f(v_i + a_i t_i)\}_{i=1}^{\infty} + \{f(v_i + a_i t_i) - f(v_i)\}_{i=1}^{\infty} = df(v_i + a_i t_i, dv[a_i \, u]) + df(v_i, dv[a_i \, t]) = dw[a_i \, \left.\frac{df}{dV} \right|_{v} (u)]+dw[a_i \, \left.\frac{df}{dV} \right|_{v} (v)] = dw[a_i \, \left.\frac{df}{dV} \right|_{v} (u) + \left.\frac{df}{dV} \right|_{v} (v)]$.
+\end{proof}
 
 \begin{prop}
 	Let $f:\mathbb{R} \to \mathbb{R}$. Then the standard analytical notions of differentiability and derivative coincide.
 \end{prop}
 \begin{proof}
-	Let $x \in \mathbb{R}$ and $dx=\{x_i\}_{i=1}^{\infty} \in d\mathbb{R}$. We can write:
-	$$ \lim\limits_{i \to \infty} \frac{f(x +x_i) - f(x)}{(1/2)^i} = \lim\limits_{i \to \infty} \frac{f(x +x_i) - f(x)}{x_i}\frac{x_i}{(1/2)^i}.$$
-	We can see that the sequence on the left is equal to the product of two sequences. The sequence on the left converges because the map is differentiable. The second sequence to the right converges because $dx$ is a differential. This means that the first sequence to the right must also converge. That is,  $\lim\limits_{i \to \infty} \frac{f(x_i +x) - f(x)}{x_i}$ converges. But since $x_i$ is a sequence that goes to zero, this evaluates the derivative. Therefore the derivative exists.
+	The standard notion of differentiability at $v \in \mathbb{R}$ requires the limit
+	$$ \lim\limits_{h \to 0} \frac{f(v + h) - f(v)}{h} $$
+	to exist. This is equivalent to requiring that the limit
+	$$ \lim\limits_{i \to \infty} \frac{f(v + h_i) - f(v)}{h_i} $$
+	exist exists for all sequences $\{h_i\}_{i=1}^{\infty}$ that converge to zero with $h_i \neq 0$ for all $i$.
 	
-	Conversely, suppose we do not know that $\{f(v_i +v) - f(v)\}_{i=1}^{\infty}$ is a differential. We still have that the left sequence is a product of the two sequence on the right. These must both converge because the derivative exist and $dx$ is a differential. This means that the sequence on the left must also converge and therefore $f$ is differentiable in the new sense.
+	Our notion of differentiability at $v \in \mathbb{R}$ requires the limit
+	$$ \lim\limits_{i \to \infty} \frac{f(v_i + a_i t_i) - f(v_i)}{a_i} = \left.\frac{df}{dV} \right|_{v} (t)$$
+	to exist for all sequences $\{v_i\}_{i=1}^{\infty}$ that converge to $v$, $\{a_i\}_{i=1}^{\infty}$ that converge to $0$ with $a_i \neq 0$ for all $i$, and $\{t_i\}_{i=1}^{\infty}$ that converges to some $t$.
+	
+	Suppose $f$ is differentiable in the new sense. Choose $t_i = 1$ and $v_i = v$ for all $i$ we have
+	$$ \lim\limits_{i \to \infty} \frac{f(v + a_i) - f(v)}{a_i} = \left.\frac{df}{dV} \right|_{v} (1)$$
+	for all $\{a_i\}_{i=1}^{\infty}$ that converge to $0$ with $a_i \neq 0$ for all $i$. Therefore $f$ is differential in the standard sense.
+	
+	Suppose $f$ is differentiable in the standard sense. Assuming, for now, that all sequences that appear at the denominator are never zero, we have
+	\begin{align*}
+	\lim\limits_{i \to \infty} \frac{f(v_i + a_i t_i) - f(v_i)}{a_i} &= \lim\limits_{i \to \infty} \frac{f(v + (v_i - v) + a_i t_i) - f(v + (v_i - v))}{a_i} \\
+	&= \lim\limits_{i \to \infty} \frac{f(v + (v_i - v) + a_i t_i) - f(v) + f(v) - f(v + (v_i - v))}{a_i} \\
+	&= \lim\limits_{i \to \infty} \left[\frac{f(v + (v_i - v) + a_i t_i) - f(v)}{a_i}
+	- \frac{f(v + (v_i - v)) - f(v)}{a_i} \right]\\
+	&= \lim\limits_{i \to \infty} \left[ \frac{f(v + (v_i - v) + a_i t_i) - f(v)}{(v_i - v) + a_i t_i} \frac{(v_i - v) + a_i t_i}{a_i} \right. \\
+	&- \left.\frac{f(v + (v_i - v)) - f(v)}{(v_i - v)}  \frac{(v_i - v)}{a_i} \right] \\
+	&=  \left.\frac{df}{dv} \right|_{v} \lim\limits_{i \to \infty} \left[ \frac{(v_i - v) + a_i t_i}{a_i} -  \frac{(v_i - v)}{a_i}\right] = \left.\frac{df}{dv} \right|_{v} \lim\limits_{i \to \infty} t_i = \left.\frac{df}{dv} \right|_{v} t \\
+	\end{align*}
 \end{proof}
 
 \begin{remark}
-	To convince ourselves that the equivalence class actually works, let us calculate the derivative of $x^2$ at a generic point $x_0$ with a generic differential $dx = \{(1/2)^i(k + w_i)\}$.
-	$$ \lim\limits_{i \to \infty} \frac{(x_0 + (1/2)^i(k + w_i))^2 - x_0^2}{(1/2)^i(k + w_i)} = \lim\limits_{i \to \infty} \frac{x_0^2 + 2 x_0 (1/2)^i(k + w_i) + (1/2)^{2i}(k + w_i) - x_0^2}{(1/2)^i(k + w_i)}.$$
-	$$= \lim\limits_{i \to \infty} \frac{2 x_0 (1/2)^i(k + w_i) + (1/2)^{2i}(k + w_i)}{(1/2)^i(k + w_i)}$$
-	$$= \lim\limits_{i \to \infty} \frac{2 x_0 (k + w_i) + (1/2)^{i}(k + w_i)}{(k + w_i)}$$
-	Note that $k$ is constant, while $w_i$ and terms multiplied by $(1/2)^{i}$ converge to zero. The sequence then converges to $2x_0$, which is indeed the correct result.
-	
-	What this shows is that higher orders here are simply halving sequences that proceed with a higher power: at each step we divide by two not once, but as many times corresponding to the order.
+	Let us calculate the derivative of $x^2$ at a generic point $x$ with a generic differential $dx = \{a_i t_i\}$.
+	$$ \lim\limits_{i \to \infty} \frac{(x_i + a_i t_i)^2 - x_i^2}{a_i} = \lim\limits_{i \to \infty} \frac{x_i^2 + 2 x_i a_i t_i + a_i^2t_i^2 - x_i^2}{a_i} = \lim\limits_{i \to \infty} \frac{2 x_i a_i t_i + a_i^2t_i^2}{a_i}$$
+	$$= \lim\limits_{i \to \infty} 2 x_i t_i + a_i t_i^2=2xt$$
+	This shows that higher orders here are simply higher powers of $a_i$.
 \end{remark}
 
 \begin{remark}
-	Consider the $n$ vectors of components
-	$$ \left[\begin{array}{c} 1\\ 1\\ 1\\ ...\\ 1 \end{array}\right] 
-	\left[\begin{array}{c} 1\\ 1/2\\ 1/4\\ ...\\ (1/2)^{(n-1)1} \end{array}\right]
-	\left[\begin{array}{c} 1\\ 1/4\\ 1/16\\ ...\\ (1/2)^{(n-1)2} \end{array}\right]
-	\left[\begin{array}{c} ...\\ ...\\ ...\\ ...\\ ... \end{array}\right]
-	\left[\begin{array}{c} 1\\ (1/2)^{1(n-1)}\\ (1/2)^{2(n-1)}\\ ...\\ (1/2)^{(n-1)(n-1)} \end{array}\right].$$
-	They are all linearly independent, and therefore they form a basis. That is, any sequence of $n$ elements can be written as $v_i = \sum c_j (1/2)^{ij}$. If we take the limit as $n$ goes to infinity, this does not work: all the sequences $\{(1/2)^{ij}\}_{i=0}^\infty$ converge for any $j$, but it is not true that all sequences converge. In the light of our definition of differentials in terms of halving sequences, is smooth of order zero if it converges, and therefore we can assign the zeroth coefficient $c_0$. It is smooth of first order if it is a differential, and therefore we can assign the first coefficient $c_1$. And so on. An infinitely smooth sequence is one that can be expressed with the infinite sum.
+	Consider a sequence $v_i$. Suppose it converges to $v$. We can write the differential $v_i - v$. Now suppose it is a differential. Then we can find $a_i$ such that $\frac{v_i - v}{a_i} = t_i$ converge to $t$. We can write $t_i - t$. Suppose this is also a differential with the same convergence envelope. Then $\frac{t_i - t}{a_i} = c_i$ converges to some $c$.
 	
-	Since in our definitions $dx$ and $df$ are sequences, $df = \sum c_j dx^j$ maps to the Taylor expansion. If the function is not infinitely smooth, it means that, at some point, one of the sequences at higher order does not converge. An infinitely smooth function retains, in a sense, the property that the halving sequences of all orders provide a basis for all sequences.
+	Putting all together, we can write $v_i = a_i^0 v + a_i^1 t + a_i^2 c + a_i^3 w_i$ where $w_i = c_i - c$. $v$, $t$ and $c$ represent repsectively the zeroth, first and second order term of the sequence. $w_i$ is the higher order.
+	
+	Suppose the index $i$ does not span to infinity, but ends at some finite $n$. Then the $n$ sequences $a_i^j$ with $0 \leq k < n$ are linearly independent. Then we can write the finite sequence $v_i$ as $v_i = \sum c_j a_i^j$. If we take the limit as $n$ goes to infinity, this does not work: all the sequences $\{a_i^j\}_{i=0}^\infty$ converge for any $j$, therefore we can only write sequences that converge. An infinitely smooth sequence, then, is one that can be expressed with the infinite sum. An infinitely smooth function retains, in a sense, the property that it can be decomposed like a finite sequence.
 \end{remark}
 
 
@@ -111,6 +173,8 @@ We now define differentiability as the property of a function between vector spa
 
 
 \subsubsection{Partial derivatives}
+
+TODO: still old version
 
 Partial derivatives are recovered studying how differentials behave under vector space composition. If $f : V \to W$ is differentiable and $V = V_1 \times V_2$, we can ask for the map from a differential of $V_1$ to a differential of $W$ through $f$. This is exactly a variation of $V$ that keeps $V_2$ constant. Conceptually, given that $dv = (dv_1, dv_2)$ and the derivative is linear, we have $dw = \frac{df}{dV} dv = \frac{df}{dV} (dv_1, dv_2) = \frac{df}{dV} (dv_1, 0) + \frac{df}{dV} (0, dv_2) = \frac{df}{dV_1} dv_1 + \frac{df}{dV_2} dv_2$.
 	
