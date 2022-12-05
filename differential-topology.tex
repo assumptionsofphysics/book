@@ -1,4 +1,45 @@
-\chapter{Differential geometry}
+\documentclass[11pt,letterpaper,fleqn]{memoir}
+
+\input{formatting} % Loads the book formatting
+\usepackage{tikz}
+
+% Adding pdf index and links within the document
+% Custom formatting to remove default red boxes
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	urlcolor=blue,
+	linkcolor=blue
+}
+\urlstyle{same}
+% ---------------------------
+
+
+\begin{document}
+	
+\tableofcontents* 
+	
+\cleardoublepage 
+\mainmatter
+
+\chapter{Infinitesimal reducibility}
+
+\section{Multivectors}
+
+Blurb: vector spaces define only the notion of parallelism and ratio between two vectors that are parallel. With just this notion we can define $k$-vectors to define, instead of linear direction, planar direction and so on.
+
+A vector space defines a notion of direction and ratios between displacements along the same direction. On top of this, we can define a notion of planar direction, a $2$-vector, and similarly a $k$-dimensional directional, a $k$-vector.
+
+\begin{defn}
+	TODO: find a nice definition for the exterior algebra of vectors.
+	$\wedge : V^n \times V^m \to V^{n+m}$ such that:
+	\begin{description}
+	\item[Bilinear] $a \wedge(b + c) = a \wedge b + a \wedge c$ and $(b + c) \wedge a= b \wedge a + c \wedge a$
+	\item[Associative] $a \wedge (b \wedge c) = (a \wedge b) \wedge c$
+	\item[Antisymmetric] $a \wedge a = 0$
+	\end{description}
+	
+\end{defn}
 
 \section{Differentiability}
 
@@ -9,7 +50,7 @@ The main idea is to just use the vector space structure of $\mathbb{R}^n$ to def
 We define the differential as a sequence that converges to zero along a specific direction.
 
 \begin{defn}[Convergence envelope]
-	A \textbf{convergence envelope} is a sequence of non-zero elements of $\mathbb{R}$ that converges to $0$.
+	A \textbf{convergence envelope} $\{a_i\}_{i=1}^{\infty}$ is a sequence of non-zero elements of $\mathbb{R}$ that converges to $0$.
 \end{defn}
 
 \iffalse
@@ -38,7 +79,7 @@ We define the differential as a sequence that converges to zero along a specific
 \fi
 
 \begin{defn}
-	Let $V$ be a real vector space. A \textbf{differential} $dv$ is a sequence of vectors $\{v_i\}_{i=1}^{\infty}$ such that there exists a vector $t \in V$ and a convergence envelope $\{a_i\}_{i=1}^{\infty}$ such that 
+	Let $V$ be a real vector space. A \textbf{differential} $dv$ is a sequence of vectors $\{v_i\}_{i=1}^{\infty}$ such that there exists a vector $t \in V$ and a convergence envelope $\{a_i\}_{i=1}^{\infty}$ for which 
 	$$ \lim\limits_{i \to \infty} \frac{v_i}{a_i} = t.$$
 	We call $t$ the \textbf{tangent vector} of the differential and $\{a_i\}_{i=1}^{\infty}$ its \textbf{convergence envelope}. We note $dv[a_i \, t]$ the differential with its tangent vector and convergence envelope.
 \end{defn}
@@ -46,25 +87,35 @@ We define the differential as a sequence that converges to zero along a specific
 \begin{prop}
 	Let $dv$ be a differential. It can be expressed as
 	$$ v_i = a_i t_i = a_i(t + w_i)$$
-	where $\{t_i\}_{i=1}^{\infty}$ is a sequence of vectors that converges to $t$ and $w_i$ is a sequence of vectors such that converges to $0$.
+	where $\{t_i\}_{i=1}^{\infty}$ is a sequence of vectors that converges to $t$ and $w_i$ is a sequence of vectors that converges to $0$.
 \end{prop}
 
 \begin{proof}
-For the first expression, we can write $t_i = \frac{v_i}/{a_i}$. Given the definition of differential, that sequence converges to $t$.	
+For the first expression, we can write $t_i = \frac{v_i}{a_i}$. Given the definition of differential, that sequence converges to $t$.	
 	
-For the second expression, we can write $v_i = a_i v + a_i \left( \frac{v_i}{a_i} - v\right)$ for all $i$. We can set $w_i = \frac{v_i}{a_i} - v$ and write $v_i = a_i(v + w_i)$. We have:
-$$\lim\limits_{i \to \infty} \frac{v_i}{a_i} = \lim\limits_{i \to \infty} \frac{a_i v}{a_i} + \lim\limits_{i \to \infty} \frac{a_i w_i}{a_i} = \lim\limits_{i \to \infty} v + \lim\limits_{i \to \infty} w_i$$
-The sequence on the left converges to $v$, the first sequence on the right converges to $v$, therefore the second sequence on the right converges to zero.
+For the second expression, we can write $v_i = a_i t + a_i \left(t_i - t\right)$ for all $i$. We can set $w_i = t_i - t$ and write $v_i = a_i(t + w_i)$. We have:
+$$\lim\limits_{i \to \infty} t_i = \lim\limits_{i \to \infty} t + \lim\limits_{i \to \infty} w_i $$
+The sequence on the left converges to $t$, the first sequence on the right converges to $t$, therefore the second sequence on the right converges to zero.
 \end{proof}
 
 \begin{prop}
 	Differentials respect the following property
 	$$ dv[a_i \, kt] = dv[k a_i \, t].$$
-	That is, a differential with tangent vector $kt$ and convergence envelope $\{a_i\}_{i=1}^{\infty}$ is also a differential with tangent vector $t$ and convergence envelope $\{ka_i\}_{i=1}^{\infty}$.
+	for any $k \in \mathbb{R}$. That is, a differential with tangent vector $kt$ and convergence envelope $\{a_i\}_{i=1}^{\infty}$ is also a differential with tangent vector $t$ and convergence envelope $\{ka_i\}_{i=1}^{\infty}$.
 \end{prop}
 
 \begin{proof}
 	We have $v_i = a_i (k t_i) = (k a_i) t_i$.
+\end{proof}
+
+\begin{prop}
+	Differentials with the same convergence envelope form a vector space. That is
+	$$ b \, dv[a_i \, t] + c \, dv[a_i \, u] = dv[a_i \, (bt+cu)].$$
+	for any $t,u \in V$ and $b,c \in \mathbb{R}$.
+\end{prop}
+
+\begin{proof}
+	We have $b a_i t_i + c a_i u_i = a_i (b t_i + c u_i)$.
 \end{proof}
 
 \iffalse
@@ -86,13 +137,13 @@ The sequence on the left converges to $v$, the first sequence on the right conve
 We define a map to be differentiable if it maps differentials to differentials with the same convergence envelope.
 
 \begin{defn}
-	Let $V$ and $W$ be two vector spaces and let $v_0 \in V$. Given a map $f: V \to W$, the \textbf{differential} of $f$ is the map $df(v_i, dv)$ that given a convergent sequence $\{v_i\}_{i=1}^{\infty}$ and a differential $dv$ returns the sequence $\{f(v_i + a_i t_i) - f(v_i)\}_{i=1}^{\infty}$. The map is \textbf{differentiable} at $v$ if there exists a map $\left.\frac{df}{dV} \right|_{v}: V \to W$, called \textbf{derivative} such that $df(v_i, dv[a_i \, t]) = dw[a_i \, \left.\frac{df}{dV} \right|_{v} (t)]$. That is, $df$ maps differentials of $V$ to differentials of $W$ that have the same convergence envelope and a tangent vector that depends only on the original tangent vector.
+	Let $V$ and $W$ be two vector spaces. Given a map $f: V \to W$, the \textbf{differential} of $f$ is the map $df(v_i, dv)$ that given a sequence $\{v_i\}_{i=1}^{\infty}$ that converges to some $v \in V$ and a differential $dv$ returns the sequence $\{f(v_i + a_i t_i) - f(v_i)\}_{i=1}^{\infty}$. The map is \textbf{differentiable} at $v$ if there exists a map $\left.\frac{df}{dV} \right|_{v}: V \to W$, called \textbf{derivative} such that $df(v_i, dv[a_i \, t]) = dw[a_i \, \left.\frac{df}{dV} \right|_{v} (t)]$. That is, $df$ maps differentials of $V$ to differentials of $W$ that have the same convergence envelope and a tangent vector that depends only on the original tangent vector.
 \end{defn}
 
 \begin{prop}
 	A map $f : V \to W$ is differentiable at $v$ if and only if the limit
 	$$ \lim\limits_{i \to \infty} \frac{f(v_i + a_i t_i) - f(v_i)}{a_i} = \left.\frac{df}{dV} \right|_{v} (t)$$
-	converges for sequences $\{v_i\}_{i=1}^{\infty}$ that converge to $v$, $\{a_i\}_{i=1}^{\infty}$ that converge to $0$ with $a_i \neq 0$ for all $i$ and $\{t_i\}_{i=1}^{\infty}$ that converges to some $t$.
+	converges for all sequences $\{v_i\}_{i=1}^{\infty}$ that converge to $v$, $\{a_i\}_{i=1}^{\infty}$ that converge to $0$ with $a_i \neq 0$ for all $i$ and $\{t_i\}_{i=1}^{\infty}$ that converge to some $t$.
 \end{prop}
 
 \begin{proof}
@@ -110,7 +161,41 @@ We define a map to be differentiable if it maps differentials to differentials w
 \begin{proof}
 	Recall that $dv[a_i \, kt] = dv[k a_i \, t]$, therefore $dw[a_i \, \left.\frac{df}{dV} \right|_{v} (kt)] = df(v_i, dv[a_i \, kt]) = df(v_i, dv[ka_i \, t]) = dw[ka_i \, \left.\frac{df}{dV} \right|_{v} (t)] = dw[a_i \, k \left.\frac{df}{dV} \right|_{v} (t)]$. Therefore $\left.\frac{df}{dV} \right|_{v} (kt) = k \left.\frac{df}{dV} \right|_{v} (t)$.
 	
-	We also have $dw[a_i \, \left.\frac{df}{dV} \right|_{v} (t+u)] = df(v_i, dv[a_i \, t + u]) = \{f(v_i + a_i (t_i + u_i)) - f(v_i)\}_{i=1}^{\infty} = \{f(v_i + a_i (t_i + u_i)) - f(v_i + a_i t_i) + f(v_i + a_i t_i) - f(v_i)\}_{i=1}^{\infty} = \{f((v_i + a_i t_i) + a_i u_i) - f(v_i + a_i t_i)\}_{i=1}^{\infty} + \{f(v_i + a_i t_i) - f(v_i)\}_{i=1}^{\infty} = df(v_i + a_i t_i, dv[a_i \, u]) + df(v_i, dv[a_i \, t]) = dw[a_i \, \left.\frac{df}{dV} \right|_{v} (u)]+dw[a_i \, \left.\frac{df}{dV} \right|_{v} (v)] = dw[a_i \, \left.\frac{df}{dV} \right|_{v} (u) + \left.\frac{df}{dV} \right|_{v} (v)]$.
+	We also have
+	\begin{align*}
+		dw[a_i \, \left.\frac{df}{dV} \right|_{v} (t+u)] &= df(v_i, dv[a_i \, t + u]) = \{f(v_i + a_i (t_i + u_i)) - f(v_i)\}_{i=1}^{\infty} \\
+		&= \{f(v_i + a_i (t_i + u_i)) - f(v_i + a_i t_i) + f(v_i + a_i t_i) - f(v_i)\}_{i=1}^{\infty} \\
+		&= \{f((v_i + a_i t_i) + a_i u_i) - f(v_i + a_i t_i)\}_{i=1}^{\infty} + \{f(v_i + a_i t_i) - f(v_i)\}_{i=1}^{\infty} \\
+		&= df(v_i + a_i t_i, dv[a_i \, u]) + df(v_i, dv[a_i \, t]) \\
+		&= dw[a_i \, \left.\frac{df}{dV} \right|_{v} (u)]+dw[a_i \, \left.\frac{df}{dV} \right|_{v} (t)] \\
+		&= dw[a_i \, \left.\frac{df}{dV} \right|_{v} (u) + \left.\frac{df}{dV} \right|_{v} (t)]
+	\end{align*}
+
+	\textbf{Alternative proof.} Since, if the derivative exists, it depends only on the tangent vector, it is sufficient to prove that the derivative is linear for particular sequences. It will then have to depend linearly on all sequences with the same tangent vector.
+	
+	First we show that the derivative for the zero vector must be zero. Since the sequence of vectors $\{0\}_{i=1}^{\infty}$ is a sequence convergent to $0$, $\{a_i 0\}_{i=1}^{\infty}$ is a differential with $0$ as tangent vector. We have 
+	\begin{align*}
+	\left.\frac{df}{dV} \right|_{v} (0) &= \lim\limits_{i \to \infty} \frac{f(v_i + a_i 0) - f(v_i)}{a_i} 
+	= \lim\limits_{i \to \infty} \frac{f(v_i ) - f(v_i)}{a_i} = \lim\limits_{i \to \infty} 0 = 0
+	\end{align*}
+	
+	Let $\{a_i t_i\}_{i=1}^{\infty}$ and $\{a_i u_i\}_{i=1}^{\infty}$ be two differentials such that $t_i \to t$ and $u_i \to u$, and $b,c \in \mathbb{R}$. Suppose $b$ is zero. Then
+	\begin{align*}		
+	\left.\frac{df}{dV} \right|_{v} (b t + c u) &= \left.\frac{df}{dV} \right|_{v} (0 + c u) = \left.\frac{df}{dV} \right|_{v} (c u) = 0 + \left.\frac{df}{dV} \right|_{v} (c u) = \left.\frac{df}{dV} \right|_{v} (0) + \left.\frac{df}{dV} \right|_{v} (c u)  \\
+	&= \left.\frac{df}{dV} \right|_{v} (b t) + \left.\frac{df}{dV} \right|_{v} (c u)
+	\end{align*}
+	
+	If $b$ and $c$ are different from zero, we have
+	\begin{align*}		
+	\left.\frac{df}{dV} \right|_{v} (b t + c u) &= \lim\limits_{i \to \infty} \frac{f(v_i + a_i (b t_i + c u_i)) - f(v_i)}{a_i} \\
+	&= \lim\limits_{i \to \infty} \frac{f(v_i + c a_i u_i + b a_i t_i) - f(v_i + c a_i u_i) + f(v_i + c a_i u_i) - f(v_i)}{a_i} \\
+	&= \lim\limits_{i \to \infty} \frac{f((v_i + c a_i u_i) + b a_i t_i) - f(v_i + c a_i u_i)}{a_i}
+	+ \lim\limits_{i \to \infty} \frac{ f(v_i + c a_i u_i) - f(v_i)}{a_i} \\
+	&= \lim\limits_{i \to \infty} \frac{f((v_i + c a_i u_i) + b a_i t_i) - f(v_i + c a_i u_i)}{b a_i} b
+	+ \lim\limits_{i \to \infty} \frac{ f(v_i + c a_i u_i) - f(v_i)}{c a_i} c \\
+	&= b \left.\frac{df}{dV} \right|_{v} (t) + c \left.\frac{df}{dV} \right|_{v} (u)
+	\end{align*}
+	
 \end{proof}
 
 \begin{prop}
@@ -206,8 +291,35 @@ Suppose that $V = V_1 \times V_2$, then $dV = dV_1 \times dV_2$. This means that
 	Partial derivatives should be recoverable through vector space composition. Suppose that $V = V_1 \times V_2$, then $dV = dV_1 \times V_2$. This means that we can decompose a differential $dv= dv_1 + dv_2$ as the sum of two differentials in the respective spaces (mapped into the composite through the injection map). Suppose that $W = W_1 \times W_2$ and $f : V \to W$ is differentiable. Then we also have $dw= dw_1 + dw_2$ and we can study of $f$ maps differentials of $V_1$ and $V_2$ to differentials of $W_1$ and $W_2$. We will find $dw = dw_1 + dw_2 = \frac{dw_1}{dV} dv + \frac{dw_2}{dV} dv = \frac{\partial w_1}{\partial V_1} dv_1 + \frac{\partial w_1}{\partial V_2} dv_2 + \frac{\partial w_2}{\partial V_1} dv_1 + \frac{\partial w_2}{\partial V_2} dv_2$. If $U = \mathbb{R}^n$ and $V = \mathbb{R}^m$ we find the usual definitions.
 \end{remark}
 
+\section{Linear functionals (on vector spaces)}
 
-\section{Linear functionals}
+\begin{defn}
+	Let $V$ be a vector space. A $k$-differential is a differential of  $k$-vectors.
+\end{defn}
+
+\begin{defn}
+	Let $V$ be a vector space. A differentiable $k$-surface of $V$ is a region $\sigma^k$ such that given $k+1$ sequences $\{ \{ {v}^j_i \}_{i=1}^{\infty}\}_{j=0}^{k}$ such that is ${v}^j_i \in \sigma^k$ for all $i$ and $j$, and that ${v}^j_i \to v$ for all $j$, the sequence $\{ ({v}^1_i - {v}^0_i) \wedge ({v}^2_i - {v}^0_i) \wedge ... \wedge ({v}^k_i - {v}^0_i) \}_{i=1}^{\infty}\}_{j=0}^{k}$ is a $k$-differential. Moreover, there exists one $k$-differential so constructed that has a non-zero tangent $k$-vector and all other $k$-differential have either the same tangent $k$-vector or the zero $k$-vector.
+\end{defn}
+
+\begin{remark}
+	The idea that this is enough to fix the dimensionality of the surface. In fact, if a neighborhood is lower dimensional, all tangent $K$-vectors must be zero; if a neighborhood is high dimensional, there will be two tangent $k$-vector that are different.
+\end{remark}
+
+\begin{defn}
+	A $k$-functional is a map $f_k : S^k \to \mathbb{R}$ such that,  given a family $\{ \sigma^k_i\}_{i=1}^{\infty}$ for which $\sigma^k_i \cap \sigma^k_j = \emptyset$ for all $i$ and $j$, $f_k(\bigcup \sigma^k_i) = \sum f_k(\sigma^k_i)$.
+\end{defn}
+
+\begin{defn}
+	A $k$-functional $f_k : S^k \to \mathbb{R}$ is differentiable at $v$ if for every sequence $\{v_i\}_{i=1}^{\infty}$ that converges to $v$ and for every differential $\{a_i {t}^1_i \wedge {t}^2_i \wedge ... \wedge {t}^k_i \}_{i=1}^{\infty}$, the sequence $\{f_k(v_i, a_i {t}^1_i \wedge {t}^2_i \wedge ... \wedge {t}^k_i) \}_{i=1}^{\infty}$ is a differential with envelope $a_i$.
+\end{defn}
+
+Notes: similar ``derivatives'' applied to different objects.
+\begin{itemize}
+	\item Standard derivative: $f : X \to \mathbb{R} - (\{v_i\}, \{a_i t_i\}) \to \{f(v_i +a_i t_i) - f(v_i)\} = a_i \left. \frac{df}{dx} \right|_{v}(t)$
+	\item Line functional: $w : \Lambda \to \mathbb{R} - (\{v_i\}, \{a_i t_i\}) \to \{w(l(v_i, a_i t_i))\} = a_i \left. \frac{dw}{d\lambda} \right|_{v}(t)$
+\end{itemize}
+
+\section{Linear functionals (on manifolds)}
 
 Review notation. Let $M$ be a differentiable manifold of dimension $n$.
 
@@ -358,6 +470,4 @@ This section needs to show that vectors and differential forms are infinitesimal
 
 \fi
 
-
-
-
+\end{document}
