@@ -8,8 +8,45 @@ What reverse physics shows is that the central assumption underneath classical m
 
 \section{Formulations of classical mechanics}
 
+There are currently three main formulations of classical mechanics, so the first task is to understand exactly what is the relationship between them. It turns out that these formulations are not exactly equivalent, in the sense that there are systems that can be described by one and not the other. More precisely, the set of Lagrangian systems is exactly the intersection of Newtonian and Hamiltonian systems.
+
+We should start with a brief review of the equations, but let us make a comment about notation. Different conventions are used across the formulations, within the same formulation and depending on context (e.g. relativity, symplectic geometry). Given that we need to span all these different cases, and given that the different notations clash with each other, we will make a synthesis that will hopefully feel familiar enough. We will introduce it as we introduce the different formulation, and leave the motivation of our choices in footnotes.
+
 \subsection{Newtonian mechanics}
+
+For all formulations, the system is modeled as a collection of point particles, though we will mostly focus on the single particle case. For a Newtonian system, the state of the system at a particular time $t$ is described by the position $x^i$ and velocity $v^i$ of all its constituents. Each particle has its mass $m$, not necessarily constant in time, and, for each particle, we define kinetic momentum as $\Pi^i = m v^i$.\footnote{We will use the letter $t$ for the time variable, $x$ for position and $v$ for velocity, which is a very common notation in Newtonian mechanics. However, we will keep using the same letters in Lagrangian mechanics as well, instead of $q$ and $\dot{q}$, for consistency. Given that the distinction between kinetic and conjugate momentum is an important one, we will note $\Pi$ the first and $p$ the second. The Roman letters $i,j,k,...$ will be used to span the spatial components, while we will use the Greek letters $\alpha, \beta, \gamma, ...$ to span space-time components. Unlike some texts, $x^i$ do not represent Cartesian coordinates, and therefore they should be understood already as generalized coordinates.}
+
+The evolution of our system is given by the Newton's second law:
+\begin{equation}\label{rp-cm-NewtonsSecondLaw}
+	F^i(x^j, v^k, t) = \frac{d \Pi^i}{dt}.
+\end{equation}
+Mathematically, if the forces $F^i$ are Lipschitz continuous, then the solution is unique. That is, given position and velocity at a given time, we can predict the position and velocity at future times. We will assume a system Newtonian has this property.
+
+An important aspect of Newtonian mechanics is that the equations are not invariant under coordinate transformation. To distinguish between apparent forces (i.e. those dependent on the choice of frame) and the real ones, we assume the existence of inertial frames. In an inertial frame there are no apparent forces, and therefore a free system (i.e. no forces) with constant mass proceeds in a linear uniform motion, or stays still.
 
 \subsection{Lagrangian mechanics}
 
+The state for a Lagrangian system is also given by position $x^i$ and velocity $v^i$. The dynamics is specified by a single function $L(x^i, v^j, t)$ called Lagrangian. For each spatial trajectory $x^i(t)$ we define the action as $\mathcal{A}[x^i(t)] = \int_{t_0}^{t_1} L(x(t), d_t x(t), t) dt$.\footnote{For derivatives, we will use the shorthand $d_t$ for $\frac{d}{dt}$ and $\partial_{x^i}$ for $\frac{\partial}{\partial x^i}$. } The trajectory taken by the system is the one that makes the action stationary:
+\begin{equation}
+\delta \mathcal{A}[x^i(t)] = \delta \int_{t_0}^{t_1} L\left(x(t), d_t x(t), t\right) dt=0
+\end{equation}
+The evolution can alternatively be specified by the Euler-Lagrange equations:
+\begin{equation}
+	\partial_{x^i}L=d_t \partial_{v^i} L.
+\end{equation}
+
+Note that not all Lagrangians lead to a unique solution. For example, $L=0$ will give the same action for all trajectories and therefore, strictly speaking, all trajectories are possible. The stationary action leads to a unique solution if and only if the Lagrangian is hyperregular, which means the Hessian matrix $\partial_{v^i}\partial_{v^j} L$ is invertible. Like in the Newtonian case, we will assume Lagrangian systems satisfy this property.
+
+Unlike Newton's second law, both the Lagrangian and the Euler-Lagrange equations are invariant under coordinate transformations. This means that Lagrangian mechanics is particularly suited to study the symmetries of the system.
+
 \subsection{Hamiltonian mechanics}
+
+In Hamiltonian mechanics, the state of the system is given by position $q^i$ and conjugate momentum $p_i$. The dynamics is specified by a single function $H(q^i, p_j, t)$ called Hamiltonian.\footnote{We use a different symbol for position in Hamiltonian mechanics because, while it is true that $q^i = x^i$, it is also true that $\partial_{q^i} \neq \partial_{x^i}$: the first derivative is taken at constant conjugate momentum while the second is taken at constant velocity. This creates absolute confusion when mixing and comparing Lagrangian and Hamiltonian concepts, which our notation completely avoids.} The evolution is given by Hamilton's equations:
+\begin{equation}
+	\begin{aligned}
+		d_t q^i = \partial_{p_i} H \\
+		d_t p_i = - \partial_{q^i} H \\
+	\end{aligned}
+\end{equation}
+
+Hamilton's equations are also invariant. The Hamiltonian itself is a scalar function which is often considered (mistakenly as we'll see later) invariant. This formulation is the most suitable for statistical mechanics as volumes of phase space correctly count the number of possible configurations.
