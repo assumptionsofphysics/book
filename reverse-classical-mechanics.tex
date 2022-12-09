@@ -8,9 +8,7 @@ What reverse physics shows is that the central assumption underneath classical m
 
 \section{Formulations of classical mechanics}
 
-There are currently three main formulations of classical mechanics, so the first task is to understand exactly what is the relationship between them. It turns out that these formulations are not exactly equivalent, in the sense that there are systems that can be described by one and not the other. More precisely, the set of Lagrangian systems is exactly the intersection of Newtonian and Hamiltonian systems.
-
-We should start with a brief review of the equations, but let us make a comment about notation. Different conventions are used across the formulations, within the same formulation and depending on context (e.g. relativity, symplectic geometry). Given that we need to span all these different cases, and given that the different notations clash with each other, we will make a synthesis that will hopefully feel familiar enough. We will introduce it as we introduce the different formulation, and leave the motivation of our choices in footnotes.
+In this section we will briefly review the three main formulations of classical mechanics. Our task is not to present them in detail, but rather to provide a brief summary of the equations so that we can proceed with the comparison. Note that different conventions are used across formulations, within the same formulation and among different contexts (e.g. relativity, symplectic geometry). Given that we need to span all these different cases, and given that the different notations clash with each other, we will make a synthesis that will hopefully feel familiar enough.
 
 \subsection{Newtonian mechanics}
 
@@ -31,7 +29,7 @@ The state for a Lagrangian system is also given by position $x^i$ and velocity $
 \delta \mathcal{A}[x^i(t)] = \delta \int_{t_0}^{t_1} L\left(x(t), d_t x(t), t\right) dt=0
 \end{equation}
 The evolution can alternatively be specified by the Euler-Lagrange equations:
-\begin{equation}
+\begin{equation}\label{rp-cm-EulerLagrange}
 	\partial_{x^i}L=d_t \partial_{v^i} L.
 \end{equation}
 
@@ -49,4 +47,46 @@ In Hamiltonian mechanics, the state of the system is given by position $q^i$ and
 	\end{aligned}
 \end{equation}
 
+TODO Conditions for uniqueness. Hamiltonian must be at least differentiable.
+
 Hamilton's equations are also invariant. The Hamiltonian itself is a scalar function which is often considered (mistakenly as we'll see later) invariant. This formulation is the most suitable for statistical mechanics as volumes of phase space correctly count the number of possible configurations.
+
+\section{Inequivalence of formulations}
+
+It is often stated in physics books that all three formulations of classical mechanics are equivalence. We will look at this claim in detail, and conclude that this is not the case: there are systems that can be described by one formulation and not another. More precisely, the set of Lagrangian systems is exactly the intersection of Newtonian and Hamiltonian systems.
+
+We will consider two formalism equivalent if they can be applied exactly to the same systems. That is, Newtonian and Lagrangian mechanics are equivalent if any system that can be described using Newtonian mechanics can also be described by Lagrangian mechanics and vice-verse. In general, in physics great emphasis is put on systems that can indeed be studied by all three, leaving the impression that this always doable.\footnote{If one asks the average physicist whether Newtonian and Hamiltonian mechanics, the answer will be most of the time enthusiastically positive. If one then asks to provide the Hamiltonian for a damped harmonic oscillator, the typical reaction is annoyance to the nonsensical question (damped harmonic oscillator do not conserve energy), followed by a realization and partial retraction of the previous claim. The moral of the story is to never take these claims at face value.} However, just with a cursory glance, we realize that this can't possibly be the case.
+
+The dynamics of a Newtonian system, in fact, is specified by three independently chosen functions of position and velocity, the forces applied to each degree of freedom. On the other hand, the dynamics of Lagrangian and Hamiltonian systems are specified by a single function of position and velocity/momentum, the Lagrangian the Hamiltonian. Intuitively, there are more choices in the dynamics for Newtonian systems than for Lagrangian and Hamiltonian.
+
+Now, the reality is a bit trickier because the mathematical expression of the forces is not enough to fully characterize the physical system. We need to know in which frame we are, what coordinates are being used and the mass of the system, which is potentially a function of time. On the Lagrangian side, note that the Euler-Lagrange equations are homogeneous in $L$. This means that multiplying $L$ by a constant leads to the same solutions, meaning that the same system can be described by more than one Lagrangian. The converse is also true: if one system is half as massive and is subjected to a force field half as intense, the resulting Lagrangian is also simply rescaled by a constant factor. Therefore the map between Lagrangians and Lagrangian system is not one-to-one: is many-to-may. This is why we should never look simply at mathematical structure if we want to fully understand the physics.
+
+Regardless, our task is at the moment much simpler: we only need to show that there are Newtonian systems not expressible by Lagrangian or Hamiltonian mechanics. We can therefore limit ourselves to systems with a specific constant mass $m$ in an inertial frame. Every possible expression of the force is allowed and will lead to a unique expression of the acceleration $a^i=F^i(x^i, v^i, t)/m$ which means a unique set of possible trajectories for each expression of the force. Now, we can think of trying to write a Lagrangian for each of those systems. Assuming that this is possible, the acceleration $a^i=F^i[L]/m$ is going to be some functional of that Lagrangian, which, given the Euler-Lagrange equations \ref{rp-cm-EulerLagrange} must be continuous: for small variation of the Lagrangian we must have a small variation of the equations of motion and therefore of the acceleration. But a continuous map from the space of a single function (i.e. the Lagrangian) and the space of multiple functions (i.e. those that specify the forces) does not exist, and therefore there must be at least one Netwonian system with constant mass expressed in an inertial frame that is not describable using Lagrangian mechanics. The same argument applies for Hamiltonian mechanics, since the dynamics in this case is also described by a single function in the same number of arguments. We therefore reach the following conclusion:
+\begin{equation}
+	\textrm{Not all Netwonian systems are Lagrangian and/or Hamiltonian.}
+\end{equation}
+
+We now want to understand whether all Lagrangian systems are Newtonian. Given what we discussed, we cannot expect to reconstruct the mass and force uniquely from the expression of the Lagrangian. We consider the mass and the frame fixed by the problem, together with the Lagrangian, and therefore we must only see whether we can indeed find a unique expression for the acceleration. From the Euler-Lagrange equations \ref{rp-cm-EulerLagrange} we can write
+\begin{equation}
+	\begin{aligned}
+	\partial_{x^i}L&=d_t \partial_{v^i} L=\partial_{q^j} \partial_{v^i} L \, d_t q^j + \partial_{v^k} \partial_{v^i} L \, d_t v^k = \partial_{q^j} \partial_{v^i} L \, v^j + \partial_{v^k} \partial_{v^i} L \, a^k \\
+	\partial_{v^k} &\partial_{v^i} L \, a^k = \partial_{x^i}L - \partial_{q^j} \partial_{v^i} L \, v^j .
+	\end{aligned}
+\end{equation}
+To be able to write the acceleration explicitly, we must be able to invert the Hessian matrix $\partial_{v^k} \partial_{v^i} L$. As we said before, this is exactly the condition for which the principle of stationary actions leads to a unique solution, and we can better understand why. If it is not invertible at a point, the determinant is zero and therefore one eigenvalue is zero. There is therefore a direction of the acceleration for which we have no constraint: it can be anything. This exactly means that we have no unique solution.
+
+What we find, then, is that for any Lagrangian system, which we assume to have a unique solution, we can explicitly write the acceleration as a function of position, velocity and time. Therefore
+\begin{equation}
+	\textrm{All Lagrangian systems are Newtonian.}
+\end{equation}
+
+Now we turn our attention to Hamiltonian mechanics, and see whether we can the acceleration explicitly. We have
+\begin{equation}
+	\begin{aligned}
+		a^i &= d_t v^i = d_t d_t q^i = d_t \partial_{p_i} H = \partial_{q^j} \partial_{p_i} H d_t q^j + \partial_{p_k} \partial_{p_i} H d_t p_k \\
+		&= \partial_{q^j} \partial_{p_i} H \partial_{p_j} H - \partial_{p_k} \partial_{p_i} H \partial_{q^k} H.
+	\end{aligned}
+\end{equation}
+This tells us that the acceleration is always an explicit function, but it is, in general, an explicit function of position and momentum, not of position and velocity. 
+
+which shows that a variable mass system can be mathematically transformed into a constant mass system with a different force. While physically these are different systems, both cases require that we are able to write the acceleration as an explicit function of position, velocity and time. Once 
