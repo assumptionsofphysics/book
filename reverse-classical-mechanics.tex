@@ -59,9 +59,9 @@ We will consider two formalism equivalent if they can be applied exactly to the 
 
 The dynamics of a Newtonian system, in fact, is specified by three independently chosen functions of position and velocity, the forces applied to each degree of freedom. On the other hand, the dynamics of Lagrangian and Hamiltonian systems are specified by a single function of position and velocity/momentum, the Lagrangian the Hamiltonian. Intuitively, there are more choices in the dynamics for Newtonian systems than for Lagrangian and Hamiltonian.
 
-Now, the reality is a bit trickier because the mathematical expression of the forces is not enough to fully characterize the physical system. We need to know in which frame we are, what coordinates are being used and the mass of the system, which is potentially a function of time. On the Lagrangian side, note that the Euler-Lagrange equations are homogeneous in $L$. This means that multiplying $L$ by a constant leads to the same solutions, meaning that the same system can be described by more than one Lagrangian. The converse is also true: if one system is half as massive and is subjected to a force field half as intense, the resulting Lagrangian is also simply rescaled by a constant factor. Therefore the map between Lagrangians and Lagrangian system is not one-to-one: is many-to-may. This is why we should never look simply at mathematical structure if we want to fully understand the physics.
+Now, the reality is a bit trickier because the mathematical expression of the forces is not enough to fully characterize the physical system. We need to know in which frame we are, what coordinates are being used and the mass of the system, which is potentially a function of time. On the Lagrangian side, note that the Euler-Lagrange equations are homogeneous in $L$. This means that multiplying $L$ by a constant leads to the same solutions, meaning that the same system can be described by more than one Lagrangian. The converse is also true: if one system is half as massive and is subjected to a force field half as intense, the resulting Lagrangian is also simply rescaled by a constant factor. Therefore the map between Lagrangians and Lagrangian system is not one-to-one: is many-to-may. This is why we should never look simply at mathematical structures if we want to fully understand the physics.
 
-Regardless, our task is at the moment much simpler: we only need to show that there are Newtonian systems not expressible by Lagrangian or Hamiltonian mechanics. We can therefore limit ourselves to systems with a specific constant mass $m$ in an inertial frame. Every possible expression of the force is allowed and will lead to a unique expression of the acceleration $a^i=F^i(x^i, v^i, t)/m$ which means a unique set of possible trajectories for each expression of the force. Now, we can think of trying to write a Lagrangian for each of those systems. Assuming that this is possible, the acceleration $a^i=F^i[L]/m$ is going to be some functional of that Lagrangian, which, given the Euler-Lagrange equations \ref{rp-cm-EulerLagrange} must be continuous: for small variation of the Lagrangian we must have a small variation of the equations of motion and therefore of the acceleration. But a continuous map from the space of a single function (i.e. the Lagrangian) and the space of multiple functions (i.e. those that specify the forces) does not exist, and therefore there must be at least one Netwonian system with constant mass expressed in an inertial frame that is not describable using Lagrangian mechanics. The same argument applies for Hamiltonian mechanics, since the dynamics in this case is also described by a single function in the same number of arguments. We therefore reach the following conclusion:
+Regardless, our task is at the moment much simpler: we only need to show that there are Newtonian systems not expressible by Lagrangian or Hamiltonian mechanics. We can therefore limit ourselves to systems with a specific constant mass $m$ in an inertial frame. Every possible expression of the force is allowed and will lead to a unique expression of the acceleration $a^i=F^i(x^i, v^i, t)/m$ which means a unique set of possible trajectories for each expression of the force. Now, we can think of trying to write a Lagrangian for each of those systems. Assuming that this is possible, the acceleration $a^i=F^i[L]/m$ is going to be some functional of that Lagrangian, which, given the Euler-Lagrange equations \ref{rp-cm-EulerLagrange} must be continuous: for small variation of the Lagrangian we must have a small variation of the equations of motion and therefore of the acceleration. But a surjective continuous map from the space of a single function (i.e. the Lagrangian) and the space of multiple functions (i.e. those that specify the forces) does not exist, and therefore there must be at least one Netwonian system with constant mass expressed in an inertial frame that is not describable using Lagrangian mechanics. The same argument applies for Hamiltonian mechanics, since the dynamics in this case is also described by a single function in the same number of arguments. We therefore reach the following conclusion:
 \begin{equation}
 	\textrm{Not all Netwonian systems are Lagrangian and/or Hamiltonian.}
 \end{equation}
@@ -73,20 +73,80 @@ We now want to understand whether all Lagrangian systems are Newtonian. Given wh
 	\partial_{v^k} &\partial_{v^i} L \, a^k = \partial_{x^i}L - \partial_{q^j} \partial_{v^i} L \, v^j .
 	\end{aligned}
 \end{equation}
-To be able to write the acceleration explicitly, we must be able to invert the Hessian matrix $\partial_{v^k} \partial_{v^i} L$. As we said before, this is exactly the condition for which the principle of stationary actions leads to a unique solution, and we can better understand why. If it is not invertible at a point, the determinant is zero and therefore one eigenvalue is zero. There is therefore a direction of the acceleration for which we have no constraint: it can be anything. This exactly means that we have no unique solution.
+To be able to write the acceleration explicitly, we must be able to invert the Hessian matrix $\partial_{v^k} \partial_{v^i} L$. As we said before, this is exactly the condition for which the principle of stationary actions leads to a unique solution, and we can better understand why. If it is not invertible at a point, the determinant is zero and therefore one eigenvalue is zero. The corresponding eigenvector correspond to a direction for which the equation tells us nothing, and therefore a variation of the acceleration in that direction will not change the action. This is why the invertibility of the Hessian is required to obtain unique solutions.
 
 What we find, then, is that for any Lagrangian system, which we assume to have a unique solution, we can explicitly write the acceleration as a function of position, velocity and time. Therefore
 \begin{equation}
 	\textrm{All Lagrangian systems are Newtonian.}
 \end{equation}
 
-Now we turn our attention to Hamiltonian mechanics, and see whether we can the acceleration explicitly. We have
+Now we turn our attention to Hamiltonian mechanics and, similarly, we ask whether we can express the acceleration as a function of position and velocity. We have
 \begin{equation}
 	\begin{aligned}
 		a^i &= d_t v^i = d_t d_t q^i = d_t \partial_{p_i} H = \partial_{q^j} \partial_{p_i} H d_t q^j + \partial_{p_k} \partial_{p_i} H d_t p_k \\
 		&= \partial_{q^j} \partial_{p_i} H \partial_{p_j} H - \partial_{p_k} \partial_{p_i} H \partial_{q^k} H.
 	\end{aligned}
 \end{equation}
-This tells us that the acceleration is always an explicit function, but it is, in general, an explicit function of position and momentum, not of position and velocity. 
+This tells us that the acceleration is always an explicit function, but it is, in general, an explicit function of position and momentum, not of position and velocity. To do that, we need to be able to express the momentum as a function of position and velocity. Note that Hamilton's equations already give a way to express the velocity in terms of position and momentum, we just need that expression to be invertible, which means the Jacobian must be invertible. We have:
+\begin{equation}
+	\left|\partial_{p_i} v^j\right| = \left|\partial_{p_i}\partial_{p_j} H\right| \neq 0 .
+\end{equation}
+To be able to express momentum as a function of position and velocity, then, we need the Hessian of the Hamiltonian to be invertible, to have non-zero determinant.
 
-which shows that a variable mass system can be mathematically transformed into a constant mass system with a different force. While physically these are different systems, both cases require that we are able to write the acceleration as an explicit function of position, velocity and time. Once 
+Note that we had no requirement for the Hamiltonian. For example, $H=0$ leads to $d_t q^i = 0$ and $d_t p_i = 0$, which both position and momentum are constants of motion. The Hessian, being the zero matrix, is not invertible, and in fact we cannot write momentum as a function of position and velocity: velocity is always zero in all cases. Though this case may not be physically interesting, it leads to unique solutions: it is a perfectly valid Hamiltonian system. While it is instructive to always check the trivial mathematical case, let us go through a more physically meaningful case.
+
+\textbf{Photon as a particle}. If we want to treat the photon as a classical particle, we can write the Hamiltonian by expressing the energy as a function of momentum
+\begin{equation}
+	H=\hbar | \omega| = c \hbar |k| = c |p|.
+\end{equation}
+If we apply Hamilton's equations, we have
+\begin{equation}
+	\begin{aligned}
+		d_t q^i &= c \frac{p^i}{|p|} \\
+		d_t p_i &= 0.
+	\end{aligned}
+\end{equation}
+That is, the norm of the velocity is always $c$ and the momentum decides the direction, and the momentum does not change in time. This is indeed the motion of a free photon. One can confirm, through tedious calculation, that the determinant of the Hessian is indeed zero, yet it is easier and more physically instructive to see that we cannot reconstruct the momentum from the velocity. Relativistically, all photons travel along the geodesics at the same speed, therefore two photons that differ only by the magnitude of the momentum will travel the same path.
+
+Let us give a name to this extra condition.
+\renewcommand{\theassump}{KE}%
+\begin{assump}[Kinematic Equivalence]\label{assum_kineq}
+	The kinematics of the system is enough to reconstruct its dynamics and vice-versa.
+\end{assump}
+\renewcommand{\theassump}{\Roman{assump}}%
+By kinematics we means the motion in space and time and by dynamics we mean the state and its evolution in phase space. We will need to analyze the difference between the two more in detail, but we should first finish our comparison between the different formulations.
+
+Summing up, we find that
+\begin{equation}
+	\textrm{Not all Hamiltonian systems are Newtonian: only those for which  \ref{assum_kineq} is valid.}
+\end{equation}
+
+
+We now need to compare Lagrangian and Hamiltonian systems. The task is a lot easier because we already have a precise way to connect the two. If we are given a Lagrangian $L$, we define the conjugate momentum $p_i = \partial_{v^i} L$ and the Hamiltonian $H = p_i v^i - L$. If we are given a Hamiltonian $H$, we can define a Lagrangian $L = p_i v^i - H$. The only detail that need to be understood is whether this can be done for all Lagrangian and Hamiltonian systems.
+
+While these expression are always define, what needs to be checked is whether we can change variables; whether we can write the Lagrangian in terms of position and velocity and the Hamiltonian in terms of position and momentum. Going from a Hamiltonian to a Lagrangian, it again means that we can write momentum as a function of velocity, and therefore assumptions \ref{assum_kineq}. This makes sense: if all Lagrangian systems are Newtonian, and \ref{assum_kineq} was required for a Hamiltonian system to be Newtonian, then it also required for a Hamiltonian system to be Lagrangian. But the connection is stronger: \ref{assum_kineq} is the only assumption we need to be able to write a Lagrangian from a Hamiltonian.
+
+Going from a Lagrangian to a Hamiltonian, it means that we can write velocity as a function of position and momentum. Note that since we define conjugate momentum as the derivative of the Lagrangian, we can already express momentum as a function of position and velocity, which means we are simply asking that expression to be invertible. This is, again, assumption \ref{assum_kineq}, just in the opposite direction. We must have
+\begin{equation}
+	0 \neq \left| \partial_{v^i} p_j \right| = \left| \partial_{v_i} \partial_{v_j} L \right|.
+\end{equation}
+This means that assumption \ref{assum_kineq} is exactly the invertibility of the Hessian, the condition for unique solution of the Lagrangian. In fact, we can write
+\begin{equation}
+	\left| \partial_{v_i} \partial_{v_j} L \right| = \left| \partial_{v^i} p_j \right| = \left| \partial_{p_i} v^j \right|^{-1} = \left|\partial_{p_i}\partial_{p_j} H\right|^{-1}.
+\end{equation}
+
+This means that every Lagrangian admits a Hamiltonian, but not every Hamiltonian admits a Lagrangian. Only the Hamiltonian systems for which \ref{assum_kineq} is valid will also be Lagrangian system, with a guaranteed unique solution given that \ref{assum_kineq} is exactly the assumption needed for that as well. Therefore we conclude that
+\begin{equation}
+	\textrm{Lagrangian systems are exactly those Hamiltonian systems for which \ref{assum_kineq} is valid.}
+\end{equation}
+
+The relationship between the different formulations, then, can be summarized with the following Venn diagram.
+
+TODO: Venn diagram of the different formulations
+
+Lagrangian mechanics is exactly the intersection of Newtonian mechanics and Lagrangian mechanics.
+
+We have found that \ref{assum_kineq} is a constitutive assumption of Lagrangian mechanics, and that it clearly marks which Hamiltonian systems are Newtonian/Lagrangian. By constitutive assumption we mean an assumption that must be taken, either explicitly or implicitly, for a theory to be valid. But what makes a system Hamiltonian and what makes a system Newtonian? Can we find a full set of constitutive assumptions for classical mechanics?
+
+\section{Kinematics vs dynamics}
+
