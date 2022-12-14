@@ -40,7 +40,7 @@ Unlike Newton's second law, both the Lagrangian and the Euler-Lagrange equations
 \subsection{Hamiltonian mechanics}
 
 In Hamiltonian mechanics, the state of the system is given by position $q^i$ and conjugate momentum $p_i$. The dynamics is specified by a single function $H(q^i, p_j, t)$ called Hamiltonian.\footnote{We use a different symbol for position in Hamiltonian mechanics because, while it is true that $q^i = x^i$, it is also true that $\partial_{q^i} \neq \partial_{x^i}$: the first derivative is taken at constant conjugate momentum while the second is taken at constant velocity. This creates absolute confusion when mixing and comparing Lagrangian and Hamiltonian concepts, which our notation completely avoids.} The evolution is given by Hamilton's equations:
-\begin{equation}
+\begin{equation}\label{rp-cm-HamiltonEq}
 	\begin{aligned}
 		d_t q^i = \partial_{p_i} H \\
 		d_t p_i = - \partial_{q^i} H \\
@@ -150,3 +150,140 @@ We have found that \ref{assum_kineq} is a constitutive assumption of Lagrangian 
 
 \section{Kinematics vs dynamics}
 
+We have seen the importance between kinematics and dynamics. In this section we will explore this link more deeply and come to the following conclusion: the kinematics of a system is not enough to reconstruct its dynamics. 
+
+Let us first review exactly what the kinematics and dynamics are. Given a system, its kinematics is the description of its motion in space and time. Position, velocity, and acceleration are kinematic variable because they describe the motion. Kinematics is what Galileo studied and started to give a rigorous account of. The dynamics, instead, describes the cause of such motion. Force, mass, momentum, energy are dynamic quantities as they are used to describe why a body moves in a particular way. Dynamics is what Newton introduced and his second law, expressed as $F=ma$, clearly shows the link.
+
+Since the link between the two concepts seems in important given the constitutive role of \ref{assum_kineq} in Lagrangian mechanics. Moreover, while both Newtonian and Hamiltonian mechanics are dynamical theories, in the sense that quantities like force and momentum are intrinsic parts of the theory, Lagrangian mechanics seems to be a purely kinematic theory, as it is described only by kinematic variables like position and velocity. Therefore it seems useful to characterize the kinematics-dynamics link as much as possible. Let us do it with an example.
+
+Suppose we are given the following equation:
+\begin{equation}\label{rp-cm-frictionEquation}
+	m a = - b v .
+\end{equation}
+The equation is in terms of kinematics variable and completely specifies the kinematics of the system based on the initial conditions $x_0$ and $v_0$.
+The solution is
+\begin{equation}
+	\begin{aligned}
+	x(t)&= x_0 + v_0 \frac{m}{b} \left( 1 - e^{-\frac{b}{m}t}\right) \\
+	v(t)&= v_0 e^{-\frac{b}{m}t} \\
+	a(t)&= - \frac{b}{m} e^{-\frac{b}{m}t}
+	\end{aligned}
+\end{equation}
+Can we reconstruct the forces acting on this system?
+
+The obvious answer seems to be that the constant $m$ represents the mass of the system and $F = -bv$ the force. This is the case of a particle under linear drag:  the system is subjected to a frictional force that is proportional and opposite to the velocity. If we set the Lagrangian
+\begin{equation}\label{rp-cm-frictionLagrangian}
+	L = \frac{1}{2} m v^2 e^{\frac{b}{m}t}.
+\end{equation}
+and apply the Euler-Lagrange equation \ref{rp-cm-EulerLagrange} we have
+\begin{equation}
+	\begin{aligned}
+	\partial_x L &= 0 = d_t \partial_v L = d_t \left(m v e^{\frac{b}{m}t} \right)=mae^{\frac{b}{m}t} - \frac{b}{m} m v e^{\frac{b}{m}t} = e^{-\frac{b}{m}t}(ma + bv) \\
+	ma &= - bv.
+	\end{aligned}
+\end{equation}
+Therefore we have a Lagrangian. We can also find a Hamiltonian
+\begin{equation}
+	\begin{aligned}
+	p &= \partial_v L = m v e^{\frac{b}{m}t} \\
+		v &= \frac{p}{m} e^{-\frac{b}{m}t} \\
+		H &= p v - L = p \frac{p}{m} e^{-\frac{b}{m}t} - \frac{1}{2} m \left( \frac{p}{m} e^{-\frac{b}{m}t} \right)^2 e^{\frac{b}{m}t} = \frac{p^2}{m}  e^{-\frac{b}{m}t} - \frac{1}{2} \frac{p^2}{m}  e^{-\frac{b}{m}t} \\ 
+		&=\frac{1}{2} \frac{p^2}{m}  e^{-\frac{b}{m}t}
+	\end{aligned}
+\end{equation}
+and apply Hamilton's equations \ref{rp-cm-HamiltonEq}
+\begin{equation}
+	\begin{aligned}
+		d_t q &= \partial_p H = \frac{p}{m}  e^{-\frac{b}{m}t} \\
+		d_t p &= - \partial_q H = 0. 
+	\end{aligned}
+\end{equation}
+The second equation tells us momentum is constant, and therefore the first equation reduced to simply the derivative of position. We have
+\begin{equation}
+	\begin{aligned}
+	q(t) &= q_0 + \frac{p_0}{b} \left( 1 - e^{-\frac{b}{m}t}\right) \\
+	p(t) &= p_0.
+	\end{aligned}
+\end{equation}
+
+The kinematics works perfectly, but the dynamics seems off. First of all, based on the physics, one would expect the conjugate momentum to be
+\begin{equation}
+	p(t)=m v(t) = m v_0 e^{-\frac{b}{m}t}.
+\end{equation}
+However, conjugate momentum is constant, and not decreasing. For the energy, we would expect the Hamiltonian to match the kinetic energy
+\begin{equation}
+	E(t)=\frac{1}{2} m v^2(t) = \frac{1}{2} m v_0^2 e^{-2\frac{b}{m}t}
+\end{equation}
+but if we express the Hamiltonian in terms of velocity we have
+\begin{equation}
+	H(t)=\frac{1}{2} \frac{p^2}{m} e^{-\frac{b}{m}t} = \frac{1}{2} \frac{1}{m} \left( m v(t) e^{\frac{b}{m}t} \right)^2 e^{-\frac{b}{m}t}= \frac{1}{2} m v^2(t) e^{\frac{b}{m}t} = \frac{1}{2} m v_0^2 e^{-\frac{b}{m}t}.
+\end{equation}
+That is, the energy decreases more slowly than it should. This is not good.
+
+Now, it is true that conjugate momentum in not the same as kinetic momentum. But the difference, as we will see much more clearly later, is caused by non-inertial non-Cartesian coordinate systems and/or the presence of vector potential forces.\footnote{The relationship is $p_i = m g_{ij} v^j + q A_i$. This reduces to $p_i = m v^i$ if and only if we are in an inertial frame with Cartesian coordinates (i.e. $g_{ij}=\delta_{ij}$) and no forces $A_i = 0$} We are not at all in that case. Also, note that at time $t=0$ the momentum and the energy do match to what we expect, but not after. Therefore imagine a situation where friction is non-negligible only in a particular region. We would expect $p=mv$ to be valid before it enters, but not when it comes out. But wouldn't it come out in another region where we would expect $p=mv$ to work?
+
+As it is typical of reverse physics, let's start assuming that things should work in a reasonable way, and see whether we got the connection between physics and math right. Recall that we started just with an equation, and we then interpreted $m$ to be the mass of the system. Let's just assume that $m$ is a constant with units of mass and define the actual mass of the system as the ratio between conjugate momentum and velocity. We have 
+\begin{equation}
+	\begin{aligned}
+	\hat{m}(t) &= m e^{\frac{b}{m}t} \\
+	p(t) &= mv(t)e^{\frac{b}{m}t} = \hat{m}(t) v(t) \\
+	H(t) &= \frac{1}{2} \frac{p^2(t)}{m}  e^{-\frac{b}{m}t} = \frac{1}{2} \frac{p^2(t)}{\hat{m}} = \frac{1}{2} \hat{m}(t) v^2(t) = E(t)
+	\end{aligned}
+\end{equation}
+Everything actually works perfectly. But why?
+
+Let us expand Newton's second law for a variable mass system. We have:
+\begin{equation}
+	\begin{aligned}
+		F^i &= d_t (\hat{m}v^i) = d_t \hat{m} \, v^i + \hat{m} a^i \\
+		\hat{m} a^i &= F^i - d_t \hat{m} v^i
+	\end{aligned}
+\end{equation}
+In particular, for our one dimensional case, let us set $F=0$ and substitute $\hat{m}$
+\begin{equation}
+	\begin{aligned}
+		m e^{\frac{b}{m}t} a &= 0 - d_t m e^{\frac{b}{m}t} v = -\frac{b}{m} m e^{\frac{b}{m}t} v \\
+		ma &= -bv.
+	\end{aligned}
+\end{equation}
+Therefore the same equation, the same kinematics, applies to a variable mass system that increases the mass over time. You can imagine, for example, a body that is absorbing mass from all directions, so that the balance of forces on the body is zero. The body, then, is not slowing down because of friction. It is slowing down because energy and momentum are conserved, and if the mass is increasing, the velocity must be decreasing.
+
+In Newtonian mechanics, we can readily distinguish these two cases because we have to be explicit about forces and masses. In Hamiltonian mechanics things are a bit more difficult because, as we will see later more precisely, conjugate momentum is not exactly kinetic momentum and the Hamiltonian is not exactly energy. Yet, conjugate momentum and Hamiltonian are not kinematic quantities, they are dynamic quantity and therefore we can see that these would be different in different cases. In Lagrangian mechanics this is more difficult to see because it looks like a purely kinematic theory, while it is not: the Lagrangian itself is not a purely kinematic entity. We can use it to reconstruct conjugate momentum and the Hamiltonian, and we can do see if \ref{assum_kineq} is valid. If Lagrangian mechanics were a purely kinematic theory, and told us nothing about forces, energy and momentum, it would not be a complete formulation of classical mechanics.
+
+So we have seen that the same kinematic equation can describe a constant mass dissipative system or variable mass non-dissipative system. Is that it? Recall that we mentioned that kinetic and conjugate momentum will differ in non-inertial frames. Let us look again at Newtown's second law and suppose we make a change of time variable while keeping the position variables unchanged
+\begin{equation}
+	\begin{aligned}
+		\hat{t}&=\hat{t}(t) \\
+		F^i &= d_t  (m \, v^i) = d_t  (m \, d_t x^i) = d_t \hat{t} \, d_{\hat{t}}  (m \, d_t \hat{t} \, d_{\hat{t}} x^i) \\ &= d_t \hat{t} \, d_{\hat{t}}  (\hat{m} \, d_{\hat{t}} x^i) = d_t \hat{t} \, d_{\hat{t}}  (\hat{m} \, \hat{v}^i) = d_t \hat{t} \hat{F}^i \\
+		\hat{m} &= m \, d_t \hat{t}.
+	\end{aligned}
+\end{equation}
+This tells us that the second observer will see an effective mass rescaled exactly by the ratio of the time variables. Note that this is exactly what happens in special relativity: the clock for a boosted observer is dilated by a factor of $\gamma$ which is the exactly the factor used in the relativistic mass.\footnote{It may be surprising to see a pseudo-relativistic effect showing up given that no assumption on space-time has been made. As we will see, these types of connections between different theories come up often in reverse physics.} If $t$ is the time variable for an inertial frame and $t(\hat{t})$ is a non-linear function, the resulting frame will be non-inertial and the observer will see and effective variable mass system.
+
+We should try to see, then, whether we can understand our original problem as someone observing a free particle from a non-inertial frame. If we compare the trajectory in an inertial observer $x(t) = x_0 + v_0 t$ with the above solution $x(\hat{t}) = x_0 + v_0 \frac{m}{b}\left(1-e^{-\frac{b}{m}\hat{t}}\right)$, it's clear that we should set
+\begin{equation}
+	t = \frac{m}{b} \left(1-e^{-\frac{b}{m}\hat{t}}\right).
+\end{equation}
+The rescaling of the mass, then, is not due by a truly variable mass, but a variable effective mass due to the slowing down of the clock. The body slows down because the non-inertial time is slowing down and the body appears to stop because the clock becomes infinitely slow. While this might sound like a contrived case, these are exactly the type of situation a fully relativistic theory (i.e. one that works for all definitions of time and space variables) needs to take into account.
+
+We can verify that this gives us the correct effective mass
+\begin{equation}
+	\begin{aligned}
+	d_{\hat{t}} t  &=d_{\hat{t}} \left( \frac{m}{b} (1-e^{-\frac{b}{m}\hat{t}}) \right) =\frac{m}{b} d_{\hat{t}} (1-e^{-\frac{b}{m}\hat{t}}) = - \frac{m}{b} d_{\hat{t}} e^{-\frac{b}{m}\hat{t}} = + \frac{m}{b} \frac{b}{m} e^{-\frac{b}{m}\hat{t}} = e^{-\frac{b}{m}\hat{t}} \\
+	\hat{m} &= m d_t \hat{t} = m (d_{\hat{t}} t)^{-1} = m e^{\frac{b}{m}\hat{t}}.
+	\end{aligned}
+\end{equation}
+And we can verify that we get the same equation by plugging in the time transformation in Newton's second law with a zero force
+\begin{equation}
+	\begin{aligned}
+		0 &= d_t  (m \, v) = d_t  (m \, d_t x) = d_t \hat{t} \, d_{\hat{t}}  (m \, d_t \hat{t} \, d_{\hat{t}} x) \\ &= e^{\frac{b}{m}\hat{t}} \, d_{\hat{t}}  (m e^{\frac{b}{m}\hat{t}} \, \hat{v}) = e^{\frac{b}{m}\hat{t}} \left( m \frac{b}{m} e^{\frac{b}{m}\hat{t}} \hat{v} + m e^{\frac{b}{m}\hat{t}} \hat{a} \right)  = e^{2\frac{b}{m}\hat{t}} \left( b \hat{v} + m \hat{a} \right) \\
+		m \hat{a} &= - b \hat{v}.
+	\end{aligned}
+\end{equation}
+So we have yet another system that have the same kinematics but different dynamics. The expressions for momentum and energy, however, do match because the system in the non-inertial frame does look like a variable mass system. We have not found a way to distinguish the two cases.
+
+Whether Lagrangian and Hamiltonian mechanics suitably describe variable mass systems is an open issue in reverse physics and we will leave it unaddressed for now. The fact that in this example things seem to work does not mean that it does when everything else is connected. As we will see in later chapter, there are implicit connection between Lagrangian/Hamiltonian mechanics on one side and thermodynamics, statistical mechanics and special relativity on the other. We would need to make sure that all of these connection hold both in principle and in details. Therefore, for now, we will restrict ourselves to constant mass systems.
+
+Let's recap what we learned. The biggest point is that we can't simply look at the kinematics and understand what the system is. The different formulations have different way to relate the dynamics and the kinematics. Newtonian mechanics is the most clear about the dynamics as it makes us clearly spell out what is going on. This, however, comes at a cost: the equations are not coordinate invariant. The second law, in fact, is valid only for inertial frames with Cartesian coordinates. It is only in these frames, in fact, that a body will proceed in uniform motion if no forces are applied to it. If we are in polar coordinates, for example, the trajectory expressed in radius $\rho$ and angle $\theta$ will not be uniform. Even the notion of force is, if one looks closely, a bit ambivalent. In principle, we want to write both the second law $F=ma$ and the expression for work $dW = F dx$. If $dW$ is invariant under change of position variables, the force should be a covector and therefore $dW = F_i dx^i$. But since the acceleration $a$ will change like a vector, we also have $F^i = m a^i$. The notion of force in the second law and in the infinitesimal work are slightly different, and they coincide only if we are in an inertial frame and Cartesian coordinates.
+
+On the other side, Hamiltonian and Lagrangian mechanics are coordinate independent: the laws remain the same if we change position variables. This makes them more useful in many contexts. Lagrangian mechanics is more useful when trying to study the symmetries of the system. Hamiltonian mechanics is more useful for statistical mechanics and to better separate degrees of freedom. However, this comes at a price. Hamiltonian and Lagrangian mechanics apply in fewer cases than Newtonian mechanics. As we saw, linear drag may look like it has a valid Hamiltonian/Lagrangian, but it doesn't. For quadratic drag or friction due to normal force, one cannot find a suitable trick, and is forced to use Rayleigh’s dissipation functions which modify the Euler-Lagrange equations. This is not a coincidence: while Newtonian mechanics links kinematics and dynamics by choosing a particular frame, Hamiltonian and Lagrangian mechanics do so by fixing a type of system. It is the implicit knowledge of the type of system that allows to reconstruct the dynamics just by looking at the kinematics. What we need to understand, then, is what exactly is this restriction.
