@@ -287,3 +287,80 @@ Whether Lagrangian and Hamiltonian mechanics suitably describe variable mass sys
 Let's recap what we learned. The biggest point is that we can't simply look at the kinematics and understand what the system is. The different formulations have different way to relate the dynamics and the kinematics. Newtonian mechanics is the most clear about the dynamics as it makes us clearly spell out what is going on. This, however, comes at a cost: the equations are not coordinate invariant. The second law, in fact, is valid only for inertial frames with Cartesian coordinates. It is only in these frames, in fact, that a body will proceed in uniform motion if no forces are applied to it. If we are in polar coordinates, for example, the trajectory expressed in radius $\rho$ and angle $\theta$ will not be uniform. Even the notion of force is, if one looks closely, a bit ambivalent. In principle, we want to write both the second law $F=ma$ and the expression for work $dW = F dx$. If $dW$ is invariant under change of position variables, the force should be a covector and therefore $dW = F_i dx^i$. But since the acceleration $a$ will change like a vector, we also have $F^i = m a^i$. The notion of force in the second law and in the infinitesimal work are slightly different, and they coincide only if we are in an inertial frame and Cartesian coordinates.
 
 On the other side, Hamiltonian and Lagrangian mechanics are coordinate independent: the laws remain the same if we change position variables. This makes them more useful in many contexts. Lagrangian mechanics is more useful when trying to study the symmetries of the system. Hamiltonian mechanics is more useful for statistical mechanics and to better separate degrees of freedom. However, this comes at a price. Hamiltonian and Lagrangian mechanics apply in fewer cases than Newtonian mechanics. As we saw, linear drag may look like it has a valid Hamiltonian/Lagrangian, but it doesn't. For quadratic drag or friction due to normal force, one cannot find a suitable trick, and is forced to use Rayleigh’s dissipation functions which modify the Euler-Lagrange equations. This is not a coincidence: while Newtonian mechanics links kinematics and dynamics by choosing a particular frame, Hamiltonian and Lagrangian mechanics do so by fixing a type of system. It is the implicit knowledge of the type of system that allows to reconstruct the dynamics just by looking at the kinematics. What we need to understand, then, is what exactly is this restriction.
+
+\section{Reversing Hamiltonian mechanics}
+
+We now turn our attention to Hamiltonian mechanics and try to understand exactly what types of systems it focuses on. We will find seven equivalent formulations of Hamiltonian mechanics that link ideas from vector calculus, differential geometry, statistical mechanics, thermodynamics, information theory and plain statistics. The overall result is that Hamiltonian mechanics focuses on systems that are deterministic and reversible. We will see how the physical significance of that assumption differ from mathematically naive characterizations.
+
+To simply our discussion, we will concentrate on a single degree of freedom. The first characterization is of course in terms of the equations
+\begin{equation}
+	\begin{aligned}
+		d_t q &= \partial_p H \\
+		d_t p &= - \partial_q H.
+	\end{aligned}
+\end{equation}
+We want to think of phase space as a space with two coordinates, like we would for physical space. Since the term coordinates depends on the space (i.e. manifold) one is considering, we will refer to the collection of position and momentum as state variables and will note them as $\xi^a = [q, p]$. We can not define the displacement field
+\begin{equation}\label{rp-cm-displacement1d}
+	S^a = d_t \xi^a = [d_t q, d_t p]
+\end{equation}
+which is a vector field that defines the evolution of the system in time. Hamilton's equation, then, can be expressed as
+\begin{equation}\label{rp-cm-displacementCurl1d}
+	\tag{HM-1}
+	\begin{aligned}
+		S^q &= \partial_p H \\
+		S^p &= - \partial_q H.
+	\end{aligned}
+\end{equation}
+Geometrically, this tells us that the displacement field is the gradient of the Hamiltonian rotated by a right angle.\footnote{The notion of angle is technically ill-defined on phase space, but this slight imprecision makes it easier to get the point across.} Since the gradient is the only perpendicular direction to the regions at constant energy, a right angle rotation will give us a tangent to those regions, making it geometrically evident why the value of the Hamiltonian is a constant of motion.
+
+Equation \ref{rp-cm-displacementCurl1d} looks very similar to a curl, except that it is expressed in two dimensions. In vector calculus, a vector field is the curl of another field if and only if its divergence is zero.\footnote{We will leave for now topological requirements as they would be a distraction from the overall point.} This holds here as well. In fact
+\begin{equation}
+	\partial_a S^a = \partial_q S^q + \partial_p S^p = \partial_q \partial_p H - \partial_p \partial_q H = 0.
+\end{equation}
+Geometrically, this means that the flow of $S^a$ over a closed region $\oint S^a \times d\xi^a = \oint S^q dp - S^p dq = 0$ is always zero.
+
+Moreover, each divergenceless field in two dimension admits a stream function $H$ such that \ref{rp-cm-displacementCurl1d}. Geometrically, we can construct $H$ in the following way. Take a reference point $O$ and assign $H(O) = 0$. For any other point $P$, consider the flow of $S$ through any two lines that connect $O$ and $P$ given that the flow through the region contoured by those lines must be zero, the flow through each line must be equal. Therefore the flow through a line that connect $O$ and $P$ only depends on the points, it is path independent. We can assign $H(P) = - \int_{OP} S^a \times d\xi^a$. We can see that the differentials agree
+\begin{equation}
+	dH = \partial_q H dq + \partial_p H dp = - S^a \times d\xi^a = S^p dq - S^q dp
+\end{equation}
+and this will be a valid stream function. Therefore, at least in this simple case, we can understand the different of the Hamiltonian between two points as the flow of the displacement field between them.
+
+We conclude that the following condition
+\begin{equation}\label{rp-cm-divergenceless1d}
+	\tag{HM-2}
+	\partial_a S^a = 0
+\end{equation}
+is equivalent to \ref{rp-cm-displacementCurl1d}.
+
+Having looked at the flow through a region, we turn our attention to how regions themselves are transported by the flow. Liouville's theorem states that volumes of phase space are preserved during Hamiltonian evolution, which in our case will be simply the area of the $q-p$ plane. Mathematically, a transformation is colume preserving is the Jacobian of the transformation is unitary
+\begin{equation}\label{rp-cm-unitaryJacobian1d}
+	\tag{HM-3}
+	\begin{aligned}
+		dQ dP &= \left|J\right| dq dp = \left|\begin{array}{ c c }
+		\partial_q Q & \partial_p Q \\
+		\partial_q P & \partial_p P \\
+		\end{array} \right| dq dp = 1 \\
+		\left| J \right| &= 1.
+	\end{aligned}	
+\end{equation}
+If $Q$ and $P$ represent the evolution of $q$ and $p$ after an infinitesimal time step $\delta t$, we have
+\begin{equation}
+	\begin{aligned}
+	Q &= q + S^q \delta t \\ 
+	P &= p + S^p \delta t \\ 
+	dQ dP &= (dq + \partial_q S^q dq \delta t) (dp + \partial_p S^p dp \delta t) = dqdp + \left(\partial_q S^q \partial_p S^p \right) dq dp \delta t + O(\delta t^2). 
+	\end{aligned}
+\end{equation}
+Note that the first order term is proportional to the divergence of the displacement field, therefore the Jacobian determinant is equal to one if and only if the displacement is divergenceless. In other words, \ref{rp-cm-divergenceless1d} and \ref{rp-cm-unitaryJacobian1d} are equivalent conditions, and we have a third way to characterize Hamiltonian evolution.
+
+It is useful to look more closely at the definition of the Poisson bracket
+\begin{equation}
+	\{f, g\} = \partial_q f \, \partial_p g - \partial_p f \, \partial_q g = \left|\begin{array}{ c c }
+		\partial_q f & \partial_p f \\
+		\partial_q g & \partial_p g \\
+	\end{array} \right|.
+\end{equation}
+For a single degree of freedom, the Poisson bracket coincide with the Jacobian determinant. It essentially tells us how the volume changes if we change state variable from $[q, p]$ to $[f, g]$. Canonical coordinates and transformations, then, are those that do not change the units of area.
+
+
+
