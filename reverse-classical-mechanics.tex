@@ -284,7 +284,7 @@ So we have yet another system that have the same kinematics but different dynami
 
 Whether Lagrangian and Hamiltonian mechanics suitably describe variable mass systems is an open issue in reverse physics and we will leave it unaddressed for now. The fact that in this example things seem to work does not mean that it does when everything else is connected. As we will see in later chapter, there are implicit connection between Lagrangian/Hamiltonian mechanics on one side and thermodynamics, statistical mechanics and special relativity on the other. We would need to make sure that all of these connection hold both in principle and in details. Therefore, for now, we will restrict ourselves to constant mass systems.
 
-Let's recap what we learned. The biggest point is that we can't simply look at the kinematics and understand what the system is. The different formulations have different way to relate the dynamics and the kinematics. Newtonian mechanics is the most clear about the dynamics as it makes us clearly spell out what is going on. This, however, comes at a cost: the equations are not coordinate invariant. The second law, in fact, is valid only for inertial frames with Cartesian coordinates. It is only in these frames, in fact, that a body will proceed in uniform motion if no forces are applied to it. If we are in polar coordinates, for example, the trajectory expressed in radius $\rho$ and angle $\theta$ will not be uniform. Even the notion of force is, if one looks closely, a bit ambivalent. In principle, we want to write both the second law $F=ma$ and the expression for work $dW = F dx$. If $dW$ is invariant under change of position variables, the force should be a covector and therefore $dW = F_i dx^i$. But since the acceleration $a$ will change like a vector, we also have $F^i = m a^i$. The notion of force in the second law and in the infinitesimal work are slightly different, and they coincide only if we are in an inertial frame and Cartesian coordinates.
+Let's recap what we learned. The biggest point is that we can't simply look at the kinematics and understand what the system is. The different formulations have different way to relate the dynamics and the kinematics. Newtonian mechanics is the most clear about the dynamics as it makes us clearly spell out what is going on. This, however, comes at a cost: the equations are not coordinate invariant. The second law, in fact, is valid only for inertial frames with Cartesian coordinates. It is only in these frames, in fact, that a body will proceed in uniform motion if no forces are applied to it. If we are in polar coordinates, for example, the trajectory expressed in radius $\rho$ and angle $\theta$ will not be linear. Even the notion of force is, if one looks closely, a bit ambivalent. In principle, we want to write both the second law $F=ma$ and the expression for work $dW = F dx$. If $dW$ is invariant under change of position variables, the force should be a covector and therefore $dW = F_i dx^i$. But since the acceleration $a$ will change like a vector, we also have $F^i = m a^i$. The notion of force in the second law and in the infinitesimal work are slightly different, and they coincide only if we are in an inertial frame and Cartesian coordinates.
 
 On the other side, Hamiltonian and Lagrangian mechanics are coordinate independent: the laws remain the same if we change position variables. This makes them more useful in many contexts. Lagrangian mechanics is more useful when trying to study the symmetries of the system. Hamiltonian mechanics is more useful for statistical mechanics and to better separate degrees of freedom. However, this comes at a price. Hamiltonian and Lagrangian mechanics apply in fewer cases than Newtonian mechanics. As we saw, linear drag may look like it has a valid Hamiltonian/Lagrangian, but it doesn't. For quadratic drag or friction due to normal force, one cannot find a suitable trick, and is forced to use Rayleigh’s dissipation functions which modify the Euler-Lagrange equations. This is not a coincidence: while Newtonian mechanics links kinematics and dynamics by choosing a particular frame, Hamiltonian and Lagrangian mechanics do so by fixing a type of system. It is the implicit knowledge of the type of system that allows to reconstruct the dynamics just by looking at the kinematics. What we need to understand, then, is what exactly is this restriction.
 
@@ -332,26 +332,42 @@ We conclude that the following condition
 \end{equation}
 is equivalent to \ref{rp-cm-displacementCurl1d}.
 
-Having looked at the flow through a region, we turn our attention to how regions themselves are transported by the flow. Liouville's theorem states that volumes of phase space are preserved during Hamiltonian evolution, which in our case will be simply the area of the $q-p$ plane. Mathematically, a transformation is colume preserving is the Jacobian of the transformation is unitary
-\begin{equation}\label{rp-cm-unitaryJacobian1d}
-	\tag{HM-3}
+Having looked at the flow through a region, we turn our attention to how regions themselves are transported by the flow. Liouville's theorem states that volumes of phase space are preserved during Hamiltonian evolution, which in our case will be simply the area of the $q-p$ plane. To see this, let us review the transformation rules for infinitesimal volumes:
+\begin{equation}\label{rp-cm-volumeTransformation1d}
 	\begin{aligned}
-		dQ dP &= \left|J\right| dq dp = \left|\begin{array}{ c c }
-		\partial_q Q & \partial_p Q \\
-		\partial_q P & \partial_p P \\
-		\end{array} \right| dq dp = 1 \\
-		\left| J \right| &= 1.
+		\hat{\xi^i} &= \hat{\xi^i}(\xi^j) \\
+		d\hat{\xi}^n &= \left| \partial_{\xi^j} \hat{\xi^i} \right| d\xi^n \\
+		d\hat{q} d\hat{p} &= \left|\begin{array}{ c c }
+			\partial_q \hat{q} & \partial_p \hat{q} \\
+			\partial_q \hat{p} & \partial_p \hat{p} \\
+		\end{array} \right| dq dp \\
 	\end{aligned}	
 \end{equation}
-If $Q$ and $P$ represent the evolution of $q$ and $p$ after an infinitesimal time step $\delta t$, we have
+
+Mathematically, a transformation is volume preserving if the determinant of the Jacobian $\partial_{\xi^j} \hat{\xi^i}$ is unitary. If $\hat{q}$ and $\hat{p}$ represent the evolution of $q$ and $p$ after an infinitesimal time step $\delta t$, we have
 \begin{equation}
 	\begin{aligned}
-	Q &= q + S^q \delta t \\ 
-	P &= p + S^p \delta t \\ 
-	dQ dP &= (dq + \partial_q S^q dq \delta t) (dp + \partial_p S^p dp \delta t) = dqdp + \left(\partial_q S^q \partial_p S^p \right) dq dp \delta t + O(\delta t^2). 
+	\hat{q} &= q + S^q \delta t \\ 
+	\hat{p} &= p + S^p \delta t \\ 
+	d\hat{q} d\hat{p} &= (dq + \partial_q S^q dq \delta t) (dp + \partial_p S^p dp \delta t) = dqdp + \left(\partial_q S^q \partial_p S^p \right) dq dp \delta t + O(\delta t^2). 
 	\end{aligned}
 \end{equation}
-Note that the first order term is proportional to the divergence of the displacement field, therefore the Jacobian determinant is equal to one if and only if the displacement is divergenceless. In other words, \ref{rp-cm-divergenceless1d} and \ref{rp-cm-unitaryJacobian1d} are equivalent conditions, and we have a third way to characterize Hamiltonian evolution.
+Note that the first order term is proportional to the divergence of the displacement field, therefore the Jacobian determinant is equal to one if and only if the displacement is divergenceless. In other words,
+\begin{equation}\label{rp-cm-unitaryJacobian1d}
+	\tag{HM-3}
+	\left| \partial_{\xi^j} \hat{\xi}^i \right| = 1.
+\end{equation}
+and \ref{rp-cm-divergenceless1d} are equivalent conditions, and we have a third way to characterize Hamiltonian evolution.
+
+
+Note that densities will transform in the opposite way of areas precisely because a density is a quantity divided an infinitesimal area. That is,
+\begin{equation}\label{rp-cm-densityTransformation1d}
+	\begin{aligned}
+		\rho(\xi^j) &= \left| \partial_{\xi^j} \hat{\xi^i} \right| \hat{\rho}(\hat{\xi}^i).
+	\end{aligned}	
+\end{equation}
+This means that the same condition, unitarity of the Jacobian, means that both areas and densities are transported unchanged by the evolution. That is, the density at an initial state is equal to the density at the corresponding final state.
+
 
 It is useful to look more closely at the definition of the Poisson bracket
 \begin{equation}
@@ -377,9 +393,54 @@ Note that by reversible here we mean that given the final state we can reconstru
 
 As we saw, a dissipative system, like a particle under linear drag, is not a Hamiltonian system. We can now understand why that is true in general. A dissipative system will have an attractor: a point or a region to which the system will tend to given enough time. This means that, in time, the area around the attractor must shrink, but this is exactly what Hamiltonian systems cannot do. Therefore Hamiltonian systems cannot have attractors, they cannot be dissipative. The converse is also true: they can't have unstable points or regions from which the system always goes away from.
 
-However, the motion of a particle under linear drag would seem reversible, in the sense that we are able to, given the final position and momentum, reconstruct the initial values. This would seem to contradict \ref{rp-cm-detrev1d}: it is a reversible system but it is not Hamiltonian. Mathematically, the points are indeed one-to-one, but physically that means nothing. Mathematically, a one meter distance has also the same number of points of a one centimeter distance, yet the first is bigger. This tells us, again, that focusing on just the points leads to the wrong physical result. In practical terms, if we see a particle that has already stopped moving we can't really tell when it did so. So there is clearly something problematic in claiming that a system under friction is reversible. But maybe we'll find a better characterization later.
+Now, the motion of a particle under linear drag would seem reversible, in the sense that we are able to, given the final position and momentum, reconstruct the initial values. Mathematically, it maps points one-to-one and would seem to satisfy \ref{rp-cm-detrev1d}, even though it is not a Hamiltonian system. This is a perfect example of how focusing on just the points leads to the wrong physical intuition. Physically, we would say that a one meter range of position allows for more configurations than a one centimeter range, even though technically they have the same number of points. If we understand that states are infinitesimal areas of phase space, we can see that a dissipative systems, though it does map the center points of infinitesimal areas one-to-one, it does not map the full infinitesimal area one-to-one.\footnote{Mathematically, this argument is not precise but this is not how we evaluate physical arguments: we evaluate them by checking whether they lead to the right intuition and whether they agree with others. Taking these intuitions and making them mathematically precise will be preview of physical mathematics.} In this sense dissipative systems fail to be reversible.
 
+TODO: argument on first law of thermodynamics?
 
+The idea that a dissipative system is not reversible sounds true on thermodynamic grounds. However, we should be clear that this is a different notion: thermodynamic reversibility is not the ability to reconstruct the initial state, but rather the existence of a process that can undo the change. Alternatively, a process is  thermodynamically reversible if it conserves thermodynamic entropy, which is a more precise characterization.\footnote{The actual existence of a reverse process is not something that can always be guaranteed.} The fundamental assumptions of statistical mechanics tells us that the thermodynamic entropy $S = \log W$ is the logarithm of the count of states, which corresponds to volume in phase space. Conservation of areas of phase space, then, is equivalent to conservation of entropy. Therefore
+\begin{equation}\label{rp-cm-thermorev1d}
+	\tag{HM-5}
+	\text{The evolution is deterministic and thermodynamic reversible.}	
+\end{equation}
+is yet another characterization of Hamiltonian mechanics.
 
+However, there is another type of entropy that is also fundamental in both statistical mechanics: the Gibbs/Shannon entropy $I[\rho(\xi^i)]=\int \rho \log \rho \, d\xi^n$ which is defined for each distribution $\rho(\xi^i)$. Recalling the transformation rules for both volumes \ref{rp-cm-volumeTransformation1d} and densities \ref{rp-cm-densityTransformation1d}, we have
+\begin{equation}
+	\begin{aligned}
+	I[\rho(\xi^j)] &= - \int \rho(\xi^j) \log \rho(\xi^j) \, d\xi^n \\
+&= - \int  \hat{\rho}(\hat{\xi}^i) \left| \partial_{\xi^j} \hat{\xi^i} \right| \log \left( \hat{\rho}(\hat{\xi}^i) \left| \partial_{\xi^j} \hat{\xi^i} \right| \right) \, d\xi^n \\
+&= - \int \hat{\rho}(\hat{\xi}^i) \log \left( \hat{\rho}(\hat{\xi}^i) \left| \partial_{\xi^j} \hat{\xi^i} \right| \right) \, d\hat{\xi}^n \\
+&= - \int \hat{\rho}(\hat{\xi}^i) \log \hat{\rho}(\hat{\xi}^i) \, d\hat{\xi}^n - \int \hat{\rho}(\hat{\xi}^i) \log \left| \partial_{\xi^j} \hat{\xi^i} \right| \, d\hat{\xi}^n \\
+&= I[\hat{\rho}(\hat{\xi}^i)] - \int \hat{\rho}(\hat{\xi}^i) \log \left| \partial_{\xi^j} \hat{\xi^i} \right| \, d\hat{\xi}^n.
+	\end{aligned}
+\end{equation}
+Information entropy, then, remains constant if and only if the logarithm of the Jacobian determinant is zero, which means the Jacobian determinant is one. Therefore
+\begin{equation}\label{rp-cm-information1d}
+	\tag{HM-6}
+	\text{The evolution conserved information entropy}	
+\end{equation}
+is equivalent to \ref{rp-cm-unitaryJacobian1d} and is yet another characterization of Hamiltonian mechanics.
 
+The fact that determinism and reversibility is equivalent to conservation of information entropy should not be, in retrospect, surprising. Given a distribution, its information entropy quantifies the average amount of information needed to specify a particular element chosen according to that distribution. If the evolution is deterministic and reversible, giving the initial state is equivalent to giving the final state and therefore the information to describe one or the other must be the same. Determinism and reversibility, then, can be understood in information theoretic terms as description of how easy is to predict or reconstruct future and past states.
 
+Lastly, given that entropy is often associated with uncertainty, it may be useful to understand how Hamiltonian evolution affects uncertainty. Given a multivariate distribution, the uncertainty is characterized by the covariance matrix
+\begin{equation}
+	cov(\xi^i, \xi^j) = \left[\begin{array}{ c c }
+		\sigma^2_q & cov_{q, p} \\
+		cov_{p, q} & \sigma^2_p \\
+	\end{array} \right].
+\end{equation}
+The determinant gives us a coordinate independent quantity to characterize the uncertainty. If the distribution is narrow enough, we can use a linear transformation to see how the uncertainty evolves after an infinitesimal time step $\delta t$. We have
+\begin{equation}
+	\left| cov(\hat{\xi}^i, \hat{\xi}^j) \right| = \left| \partial_{\xi^k} \hat{\xi}^i  cov(\xi^k, \xi^l) \partial_{\xi^l} \hat{\xi}^j  \right| = \left| \partial_{\xi^k} \hat{\xi}^i \right| \left| cov(\xi^k, \xi^l) \right| \left| \partial_{\xi^l} \hat{\xi}^j  \right|.
+\end{equation}
+which means the uncertainty remains unchanged if and only if the Jacobian is unitary. So
+\begin{equation}\label{rp-cm-uncertainty1d}
+	\tag{HM-7}
+	\text{The evolution conserved information entropy}	
+\end{equation}
+is equivalent to \ref{rp-cm-unitaryJacobian1d} and another characterization of Hamiltonian mechanics.
+
+We have found seven equivalent characterizations that link Hamiltonian mechanics, vector calculus, differential geometry, statistical mechanics, thermodynamics, information theory and plain statistics. Though we only talked about the case of a single degree of freedom, it gives us a much better idea of what systems Hamiltonian mechanics is supposed to describe, those that undergo deterministic and reversible evolution. We can see how this concept is implemented mathematically: it is not simply a one-to-one map between points, but between infinitesimal regions. This means that areas, thermodynamic entropy and information entropy are conserved. Looking at it differently, the map between past and future has to be done at the same level of uncertainty. But the most important lesson is that the foundations of classical mechanics are not disconnected from the foundations of all other disciplines we connected. Therefore we will have to understand as much as possible those connections as well.
+
+For example, we have shown that determinism and reversibility implies the existence and conservation of energy in the form of the Hamiltonian. This may sound a bit surprising, but we can actually make a reasonable argument for it with idea that are already established in physics. If a system is deterministic and reversible it means it's evolution depends only on the state of the system, and therefore does not depend on anything else. A system whose evolution does not depend on anything else is isolated, and from thermodynamic we know that an isolated system conserves energy. Therefore what we have found is simply a stronger version of the law of conservation of energy.
