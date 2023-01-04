@@ -371,9 +371,9 @@ is equivalent to \ref{rp-cm-displacementCurl1d}.
 Having looked at the flow through a region, we turn our attention to how regions themselves are transported by the flow. Liouville's theorem states that volumes of phase space are preserved during Hamiltonian evolution, which in our case will be simply the area of the $q-p$ plane. To see this, let us review the transformation rules for infinitesimal volumes:
 \begin{equation}\label{rp-cm-volumeTransformation1d}
 	\begin{aligned}
-		\hat{\xi}^b &= \hat{\xi}^b(\xi^a) \\
-		d\hat{\xi}^b &= \partial_a \hat{\xi}^b d\xi^a \\
-		d\hat{\xi}^n &= \left| \partial_a \hat{\xi}^b \right| d\xi^n \\
+		\hat{\xi}^a &= \hat{\xi}^a(\xi^b) \\
+		d\hat{\xi}^a &= \partial_b \hat{\xi}^a d\xi^b \\
+		d\hat{\xi}^n &= \left| \partial_b \hat{\xi}^a \right| d\xi^n \\
 		d\hat{q} d\hat{p} &= \left|\begin{array}{ c c }
 			\partial_q \hat{q} & \partial_p \hat{q} \\
 			\partial_q \hat{p} & \partial_p \hat{p} \\
@@ -381,22 +381,22 @@ Having looked at the flow through a region, we turn our attention to how regions
 	\end{aligned}	
 \end{equation}
 
-Mathematically, a transformation is volume preserving if the determinant of the Jacobian $\partial_{a} \hat{\xi}^b$ is unitary. If $\hat{q}$ and $\hat{p}$ represent the evolution of $q$ and $p$ after an infinitesimal time step $\delta t$, we have
+Mathematically, a transformation is volume preserving if the determinant of the Jacobian $\partial_b \hat{\xi}^a$ is unitary. If $\hat{q}$ and $\hat{p}$ represent the evolution of $q$ and $p$ after an infinitesimal time step $\delta t$, we have
 \begin{equation}
 	\begin{aligned}
 	\hat{q} &= q + S^q \delta t \\ 
 	\hat{p} &= p + S^p \delta t \\ 
-	\partial_{a} \hat{\xi}^b &= \left[\begin{array}{ c c }
+	\partial_b \hat{\xi}^a &= \left[\begin{array}{ c c }
 		1 + \partial_q S^q \delta t & \partial_p S^q \delta t \\
 		\partial_q S^p \delta t & 1 + \partial_p S^p \delta t \\
 	\end{array} \right] \\
-	\left|\partial_{a} \hat{\xi}^b\right| &= (1 + \partial_q S^q \delta t) (1 + \partial_p S^p \delta t) - \partial_p S^q \, \partial_q S^p \, \delta t^2  = 1 + \left(\partial_q S^q + \partial_p S^p \right) \delta t + O(\delta t^2). 
+	\left|\partial_b \hat{\xi}^a\right| &= (1 + \partial_q S^q \delta t) (1 + \partial_p S^p \delta t) - \partial_p S^q \, \partial_q S^p \, \delta t^2  = 1 + \left(\partial_q S^q + \partial_p S^p \right) \delta t + O(\delta t^2). 
 	\end{aligned}
 \end{equation}
 Note that the first order term is proportional to the divergence of the displacement field, therefore the Jacobian determinant is equal to one if and only if the displacement is divergenceless. In other words,
 \begin{equation}\label{rp-cm-conservedAreas1d}
 	\tag{HM-3}
-	\text{Areas are conserved: } \; \left| \partial_a \hat{\xi}^b \right| = 1.
+	\text{Areas are conserved: } \; \left| \partial_b \hat{\xi}^a \right| = 1.
 \end{equation}
 and \ref{rp-cm-divergenceless1d} are equivalent conditions, and we have a third way to characterize Hamiltonian evolution.
 
@@ -413,13 +413,13 @@ the previous equivalence means that $\omega = \hat{\omega}$, that is $\omega$ re
 While condition \ref{rp-cm-conservedAreas1d} is expressed in terms of areas, similar considerations will work for densities because a density is a quantity divided an infinitesimal area. In fact densities
 \begin{equation}\label{rp-cm-densityTransformation1d}
 	\begin{aligned}
-		\left| \partial_{\xi^a} \hat{\xi}^b \right| \hat{\rho}(\hat{\xi}^b) &= \rho(\xi^a).
+		\left| \partial_b \hat{\xi}^a \right| \hat{\rho}(\hat{\xi}^a) &= \rho(\xi^b).
 	\end{aligned}	
 \end{equation}
-transform in an equal and opposite way. The unitarity of the Jacobian determinant, them, is equivalent to requiring that the density at an initial state is always equal to the density at the corresponding final state. Both areas and densities are transported unchanged by Hamiltonian evolution. Therefore
+transform in an equal and opposite way with respect to areas (i.e. the Jacobian determinant is on the other side of the equality). The unitarity of the Jacobian determinant, them, is equivalent to requiring that the density at an initial state is always equal to the density at the corresponding final state. Both areas and densities are transported unchanged by Hamiltonian evolution. Therefore
 \begin{equation}\label{rp-cm-conservedDensities1d}
 	\tag{HM-4}
-	\text{Densities are conserved: } \; \left| \partial_a \hat{\xi}^b \right| = 1.
+	\text{Densities are conserved: } \; \left| \partial_b \hat{\xi}^a \right| = 1.
 \end{equation}
 is yet another equivalent characterization.
 
