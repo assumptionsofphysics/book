@@ -304,16 +304,16 @@ On the other side, Hamiltonian and Lagrangian mechanics are coordinate independe
 
 \section{Reversing Hamiltonian mechanics}
 
-We now turn our attention to Hamiltonian mechanics and try to understand exactly what types of systems it focuses on. We will find seven equivalent formulations of Hamiltonian mechanics that link ideas from vector calculus, differential geometry, statistical mechanics, thermodynamics, information theory and plain statistics. The overall result is that Hamiltonian mechanics focuses on systems that are deterministic and reversible. We will see how the physical significance of that assumption differ from mathematically naive characterizations.
+We now turn our attention to Hamiltonian mechanics and try to understand exactly what types of systems it focuses on. We will find eight equivalent formulations of Hamiltonian mechanics that link ideas from vector calculus, differential geometry, statistical mechanics, thermodynamics, information theory and plain statistics. The overall result is that Hamiltonian mechanics focuses on systems that are deterministic and reversible. We will see how the physical significance of that assumption differ from mathematically naive characterizations.
 
-To simplify our discussion, we will concentrate on a single degree of freedom. The first characterization is of course in terms of the equations
+To simplify our discussion, we will concentrate on a single degree of freedom. The first characterization of Hamiltonian mechanics is naturally in terms of the equations
 \begin{equation}
 	\begin{aligned}
 		d_t q &= \partial_p H \\
 		d_t p &= - \partial_q H.
 	\end{aligned}
 \end{equation}
-We want to think of phase space as a space with two coordinates, like we would for physical space. Since the term coordinates depends on the space (i.e. manifold) one is considering, we will refer to the collection of position and momentum as state variables and will note them as $\xi^a = [q, p]$. We can now define the displacement field
+We will want to treat phase space as a generic space two-dimensional space (i.e. manifold), like we would for plane in physical space. Since the term coordinates is a bit too generic, we will refer to the collection of position and momentum as state variables and will note them as $\xi^a = [q, p]$. We can now define the displacement field
 \begin{equation}\label{rp-cm-displacement1d}
 	S^a = d_t \xi^a = [d_t q, d_t p]
 \end{equation}
@@ -325,32 +325,55 @@ which is a vector field that defines the evolution of the system in time. Hamilt
 		S^p &= - \partial_q H.
 	\end{aligned}
 \end{equation}
-Geometrically, this tells us that the displacement field is the gradient of the Hamiltonian rotated by a right angle.\footnote{The notion of angle is technically ill-defined in phase space, but this slight imprecision makes it easier to get the point across.} Since the gradient is the only perpendicular direction to the regions at constant energy, a right angle rotation will give us a tangent to those regions, making it geometrically evident why the value of the Hamiltonian is a constant of motion.
+
+To bring out the geometric meaning of the equations, we introduce the matrix
+\begin{equation}\label{rp-cm-symplectic1d}
+	\tag{SF-1}
+	\omega_{ab} = \left[\begin{array}{cc}
+		\omega_{qq} & \omega_{qp} \\
+		\omega_{pq} & \omega_{pp} 
+	\end{array} \right]= \left[\begin{array}{cc}
+		0 & -1 \\
+		1 & 0 
+	\end{array} \right]
+\end{equation}
+which rotates a vector by a right angle.\footnote{The notion of angle is technically ill-defined in phase space, but this slight imprecision makes it easier to get the point across.} That is, if $v^a = [v^q, v^p]$, then $\omega_{ab} v^a = [v^p, - v^q]$. We can rewrite equation \ref{rp-cm-displacementCurl1d} as
+\begin{equation}\label{rp-cm-displacementCurlS1d}
+	\begin{aligned}
+		\omega_{ab} S^b &= \partial_a H 
+	\end{aligned}
+\end{equation}
+which tells us that the displacement field is the gradient of the Hamiltonian rotated by a right angle. Since the gradient is the only perpendicular direction to the regions at constant energy, a right angle rotation will give us a tangent to those regions, making it geometrically evident why the value of the Hamiltonian is a constant of motion.
 
 Equation \ref{rp-cm-displacementCurl1d} looks very similar to a curl, except that it is expressed in two dimensions. In vector calculus, a vector field is the curl of another field if and only if its divergence is zero.\footnote{We will leave for now topological requirements as they would be a distraction from the overall point.} This holds here as well. First, we can verify that
 \begin{equation}
 	\partial_a S^a = \partial_q S^q + \partial_p S^p = \partial_q \partial_p H - \partial_p \partial_q H = 0.
 \end{equation}
-Geometrically, this means that the flow of $S^a$ through a closed region $\oint S^a \times d\xi^a = \oint S^q dp - S^p dq = 0$ is always zero.
-
-Moreover, each divergenceless field in two dimension admits a stream function $H$ such that \ref{rp-cm-displacementCurl1d}. Geometrically, we can construct $H$ in the following way. Take a reference point $O$ and assign $H(O) = 0$. For any other point $P$, consider the flow of $S$ through any two lines that connect $O$ and $P$ given that the flow through the region contoured by those lines must be zero, the flow through each line must be equal. Therefore the flow through a line that connect $O$ and $P$ only depends on the points, it is path independent. We can assign $H(P) = - \int_{OP} S^a \times d\xi^a$. We can see that the differentials agree
+Geometrically, this means that the flow of $S^a$ through a closed region $\oint \left( S^q dp - S^p dq \right) = 0$ is always zero. Note that, since we are in a two dimensional space, a hyper-surface has dimension $n-1 = 2-1 = 1$ and therefore hyper-surfaces are lines. The integral through a boundary is effectively a line integral along the boundary with the field rotated 90 degrees. Therefore we have 
 \begin{equation}
-	dH = \partial_q H dq + \partial_p H dp = - S^a \times d\xi^a = S^p dq - S^q dp
+	\oint \left( S^p dq - S^q dp \right) = \oint \omega_{ab} S^b d\xi^a = \oint \partial_a H d\xi^a = \oint dH = 0.
 \end{equation}
-and this will be a valid stream function. Therefore, at least in this simple case, we can understand the different of the Hamiltonian between two points as the flow of the displacement field between them.
+That is, the line integral of the rotated displacement field is the line integral of the gradient of $H$, which is zero over a closed curve. So we see that $\omega$ plays again a fundamental role in characterizing the geometry.
+
+Conversely, we can see that each divergenceless field in two dimension admits a stream function $H$ that satisfies \ref{rp-cm-displacementCurl1d}. Geometrically, we can construct $H$ in the following way. Take a reference point $O$ and assign $H(O) = 0$. For any other point $P$, consider the flow of $S$ through any two lines that connect $O$ and $P$ given that the flow through the region contoured by those lines must be zero, the flow through each line must be equal. Therefore the flow through a line that connect $O$ and $P$ only depends on the points, it is path independent. We can assign $H(P) = \int_{OP} \left( S^p dq - S^q dp \right) = \int_{OP} \omega_{ab}  S^b d\xi^a$. We can see that the differentials agree
+\begin{equation}
+	dH = \partial_q H dq + \partial_p H dp = \partial_a H d \xi^a = S^p dq - S^q dp = \omega_{ab} S^b d\xi^a
+\end{equation}
+and this will be a valid stream function. Geometrically, at least for the one dimensional degree of freedom, we can understand the difference of the Hamiltonian between two points as the flow of the displacement field between them.
 
 We conclude that the following condition
 \begin{equation}\label{rp-cm-divergenceless1d}
 	\tag{HM-2}
-	\partial_a S^a = 0
+	\text{The displacement field is divergenceless: } \; \partial_a S^a = 0
 \end{equation}
 is equivalent to \ref{rp-cm-displacementCurl1d}.
 
 Having looked at the flow through a region, we turn our attention to how regions themselves are transported by the flow. Liouville's theorem states that volumes of phase space are preserved during Hamiltonian evolution, which in our case will be simply the area of the $q-p$ plane. To see this, let us review the transformation rules for infinitesimal volumes:
 \begin{equation}\label{rp-cm-volumeTransformation1d}
 	\begin{aligned}
-		\hat{\xi^i} &= \hat{\xi^i}(\xi^j) \\
-		d\hat{\xi}^n &= \left| \partial_{\xi^j} \hat{\xi^i} \right| d\xi^n \\
+		\hat{\xi}^b &= \hat{\xi}^b(\xi^a) \\
+		d\hat{\xi}^b &= \partial_a \hat{\xi}^b d\xi^a \\
+		d\hat{\xi}^n &= \left| \partial_a \hat{\xi}^b \right| d\xi^n \\
 		d\hat{q} d\hat{p} &= \left|\begin{array}{ c c }
 			\partial_q \hat{q} & \partial_p \hat{q} \\
 			\partial_q \hat{p} & \partial_p \hat{p} \\
@@ -358,30 +381,47 @@ Having looked at the flow through a region, we turn our attention to how regions
 	\end{aligned}	
 \end{equation}
 
-Mathematically, a transformation is volume preserving if the determinant of the Jacobian $\partial_{\xi^j} \hat{\xi^i}$ is unitary. If $\hat{q}$ and $\hat{p}$ represent the evolution of $q$ and $p$ after an infinitesimal time step $\delta t$, we have
+Mathematically, a transformation is volume preserving if the determinant of the Jacobian $\partial_{a} \hat{\xi}^b$ is unitary. If $\hat{q}$ and $\hat{p}$ represent the evolution of $q$ and $p$ after an infinitesimal time step $\delta t$, we have
 \begin{equation}
 	\begin{aligned}
 	\hat{q} &= q + S^q \delta t \\ 
 	\hat{p} &= p + S^p \delta t \\ 
-	d\hat{q} d\hat{p} &= (dq + \partial_q S^q dq \delta t) (dp + \partial_p S^p dp \delta t) = dqdp + \left(\partial_q S^q + \partial_p S^p \right) dq dp \delta t + O(\delta t^2). 
+	\partial_{a} \hat{\xi}^b &= \left[\begin{array}{ c c }
+		1 + \partial_q S^q \delta t & \partial_p S^q \delta t \\
+		\partial_q S^p \delta t & 1 + \partial_p S^p \delta t \\
+	\end{array} \right] \\
+	\left|\partial_{a} \hat{\xi}^b\right| &= (1 + \partial_q S^q \delta t) (1 + \partial_p S^p \delta t) - \partial_p S^q \, \partial_q S^p \, \delta t^2  = 1 + \left(\partial_q S^q + \partial_p S^p \right) \delta t + O(\delta t^2). 
 	\end{aligned}
 \end{equation}
 Note that the first order term is proportional to the divergence of the displacement field, therefore the Jacobian determinant is equal to one if and only if the displacement is divergenceless. In other words,
-\begin{equation}\label{rp-cm-unitaryJacobian1d}
+\begin{equation}\label{rp-cm-conservedAreas1d}
 	\tag{HM-3}
-	\left| \partial_{\xi^j} \hat{\xi}^i \right| = 1.
+	\text{Areas are conserved: } \; \left| \partial_a \hat{\xi}^b \right| = 1.
 \end{equation}
 and \ref{rp-cm-divergenceless1d} are equivalent conditions, and we have a third way to characterize Hamiltonian evolution.
 
+We can reframe the same requirement in a slightly different way. Given two vectors $v^a$ and $w^a$, the area of the parallelogram they form is $v^q w^p - v^p w^q$. This can be rewritten as $v^a \omega_{ab} w^b$, which means we can think of $\omega$ as a tensor that, given two vectors, returns the area of the parallelogram they form. If we denote $\hat{v}^a = \partial_b \hat{\xi}^a \, v^b$ and $\hat{w}^a = \partial_b \hat{\xi}^a \, w^b$ the transformed vectors, the invariance of the area can be written as
+\begin{equation}
+	v^a \omega_{ab} w^b = \hat{v}^c \omega_{cd} \hat{w}^d.
+\end{equation}
+Since
+\begin{equation}
+	\hat{v}^c \omega_{cd} \hat{w}^d = v^a \, \partial_a \hat{\xi}^c \omega_{cd} \partial_b \hat{\xi}^d \, w^b = v^a \, \partial_a \hat{\omega}_{ab} w^b
+\end{equation}
+the previous equivalence means that $\omega = \hat{\omega}$, that is $\omega$ remains unchanged. In other words, preserving the area for all possible pairs of vector is the same as preserving the tensor $\omega$ that returns the areas. Therefore, once again, $\omega$ plays a very important geometric role.
 
-Note that densities will transform in the opposite way of areas precisely because a density is a quantity divided an infinitesimal area. That is,
+While condition \ref{rp-cm-conservedAreas1d} is expressed in terms of areas, similar considerations will work for densities because a density is a quantity divided an infinitesimal area. In fact densities
 \begin{equation}\label{rp-cm-densityTransformation1d}
 	\begin{aligned}
-		\rho(\xi^j) &= \left| \partial_{\xi^j} \hat{\xi^i} \right| \hat{\rho}(\hat{\xi}^i).
+		\left| \partial_{\xi^a} \hat{\xi}^b \right| \hat{\rho}(\hat{\xi}^b) &= \rho(\xi^a).
 	\end{aligned}	
 \end{equation}
-This means that the same condition, unitarity of the Jacobian, means that both areas and densities are transported unchanged by the evolution. That is, the density at an initial state is equal to the density at the corresponding final state.
-
+transform in an equal and opposite way. The unitarity of the Jacobian determinant, them, is equivalent to requiring that the density at an initial state is always equal to the density at the corresponding final state. Both areas and densities are transported unchanged by Hamiltonian evolution. Therefore
+\begin{equation}\label{rp-cm-conservedDensities1d}
+	\tag{HM-4}
+	\text{Densities are conserved: } \; \left| \partial_a \hat{\xi}^b \right| = 1.
+\end{equation}
+is yet another equivalent characterization.
 
 It is useful to look more closely at the definition of the Poisson bracket
 \begin{equation}
@@ -390,72 +430,92 @@ It is useful to look more closely at the definition of the Poisson bracket
 		\partial_q g & \partial_p g \\
 	\end{array} \right|.
 \end{equation}
-For a single degree of freedom, the Poisson bracket coincide with the Jacobian determinant. It essentially tells us how the volume changes if we change state variable from $[q, p]$ to $[f, g]$. Canonical coordinates and transformations, then, are those that do not change the units of area.
+For a single degree of freedom, the Poisson bracket coincide with the Jacobian determinant, where $f$ and $g$ are the two new variables. It essentially tells us how the volume changes if we change state variable from $[q, p]$ to $[f, g]$. Canonical coordinates and transformations, then, are those that do not change the units of area. The Poisson bracket can be expressed as
+\begin{equation}
+	\{f, g\} = \partial_a f \omega^{ab} \partial_b g 
+\end{equation}
+where 
+\begin{equation}
+	\omega^{ab} = \left[\begin{array}{cc}
+		\omega^{qq} & \omega^{qp} \\
+		\omega^{pq} & \omega^{pp} 
+	\end{array} \right]= \left[\begin{array}{cc}
+		0 & 1 \\
+		-1 & 0 
+	\end{array} \right]
+\end{equation}
+is the inverse of $\omega_{ab}$. That is $\omega_{ab} \omega^{bc} = \delta_a^c$. So, again, we see how $\omega$ plays a fundamental geomatrical role.
 
-The three characterizations \ref{rp-cm-displacementCurl1d}, \ref{rp-cm-divergenceless1d} and \ref{rp-cm-unitaryJacobian1d} are all in terms of the mathematical description. While these are useful, the final goal of reverse physics is to find physical assumptions, not equivalent mathematical definitions. So it is time to step back and try to understand what the math is really about.
+The four characterizations \ref{rp-cm-displacementCurl1d}, \ref{rp-cm-divergenceless1d}, \ref{rp-cm-conservedAreas1d} and \ref{rp-cm-conservedDensities1d} are all in terms of the mathematical description. While these are useful, the final goal of reverse physics is to find physical assumptions, not just equivalent mathematical definitions. So it is time to step back and try to understand what the math is really about.
 
-Let us first reflect to what we just found out: the defining characteristic of Hamiltonian mechanics is not the transport of points, but the transport of areas. If classical Hamiltonian mechanics were really about and only about point particles, there would be no reason for it to be characterized by \ref{rp-cm-divergenceless1d} or \ref{rp-cm-unitaryJacobian1d}. In fact, there would be no reason for the equations of motions \ref{rp-cm-displacementCurl1d} to be differentiable. Differentiable equations are exactly needed if we need to define the transport of areas, or of densities defined on those areas. Classical point particles, then, are more aptly thought not as points, but as infinitesimal regions of phase space, as distributions so peaked that only the mean value is important.
+Let us first reflect to what we just found out: the defining characteristic of Hamiltonian mechanics is not the transport of points, but the transport of areas and densities. If classical Hamiltonian mechanics were really about and only about point particles, there would be no reason for it to be characterized by \ref{rp-cm-divergenceless1d}, \ref{rp-cm-conservedAreas1d} or \ref{rp-cm-conservedDensities1d}. In fact, there would be no reason for the equations of motions \ref{rp-cm-displacementCurl1d} to be differentiable. Differentiable equations are exactly needed if we need to define the transport of areas, or of densities defined on those areas. Classical point particles, then, are more aptly thought not as points, but as infinitesimal regions of phase space, as distributions so peaked that only the mean value is important.
 
-This, in retrospect, matches how classical mechanics is used in practice: planets, cannonballs, pendulums, beads on a wire, all the objects we study with classical mechanics are not point-like object. They can be thought as point-like if their size is negligible compared to the scale of the problem. If the distance between two celestial bodies is smaller than the sum of their radius, the point particle approximation clearly fails. This is also consistent with fluid-dynamics and continuous mechanics, where we are literally studying the motion of infinitesimal parts of a material. It is interesting to see echoes of these considerations present in the mathematics, and we will investigate this link in more detail later. At the moment, this insight is just motivation to look at things differently and more broadly.
+This, in retrospect, matches how classical mechanics is used in practice: planets, cannonballs, pendulums, beads on a wire, all the objects we study with classical mechanics are not point-like object. They can be thought as point-like if their size is negligible compared to the scale of the problem. If the distance between two celestial bodies is smaller than the sum of their radii, the point particle approximation clearly fails. This is also consistent with fluid-dynamics and continuous mechanics, where we are literally studying the motion of infinitesimal parts of a material. It is interesting to see echoes of these considerations present in the mathematics.\footnote{We will want to investigate this link in more detail later.}
 
-If we do that, we realize that in statistical mechanics we already have a physical interpretation for volumes of regions phase space: they represent the number of states. Hamiltonian mechanics, then, maps regions while preserving the number of states. This means that, for each initial state there is one and only one final state, which leads to the following condition
+If we look at physics more broadly, we realize that in statistical mechanics we already have a physical interpretation for volumes of regions phase space: they represent the number of states. Hamiltonian mechanics, then, maps regions while preserving the number of states. This means that, for each initial state there is one and only one final state, which leads to the following condition
 \begin{equation}\label{rp-cm-detrev1d}
-	\tag{HM-4}
+	\tag{HM-5}
 	\text{The evolution is deterministic and reversible.}	
 \end{equation}
-Note that by reversible here we mean that given the final state we can reconstruct the initial state. Given that areas measure the number of states, \ref{rp-cm-detrev1d} is equivalent to \ref{rp-cm-unitaryJacobian1d}, which means this is another characterization of Hamiltonian mechanics.
+Note that by reversible here we mean that given the final state we can reconstruct the initial state. Given that areas measure the number of states, \ref{rp-cm-detrev1d} is equivalent to \ref{rp-cm-conservedAreas1d}, which means this is another characterization of Hamiltonian mechanics. We can also see a connection to \ref{rp-cm-conservedDensities1d}. If we assign a density to an initial state, and we claim that all and only the elements that start in that initial state will end in a particular final state, we will expect the density of the corresponding final state to match. That is, if the evolution is deterministic and reversible it may shuffle around a distribution, but it will never be able to spread it or concentrate it.
 
-As we saw, a dissipative system, like a particle under linear drag, is not a Hamiltonian system. We can now understand why that is true in general. A dissipative system will have an attractor: a point or a region to which the system will tend to given enough time. This means that, in time, the area around the attractor must shrink, but this is exactly what Hamiltonian systems cannot do. Therefore Hamiltonian systems cannot have attractors, they cannot be dissipative. The converse is also true: they can't have unstable points or regions from which the system always goes away from.
+This makes us understand, at a conceptual level, why a dissipative system, like a particle under linear drag, is not a Hamiltonian system. A dissipative system will have an attractor: a point or a region to which the system will tend to given enough time. This means that, in time, the area around the attractor must shrink, the density will concentrate over the attractor, but this is exactly what Hamiltonian systems cannot do. Therefore Hamiltonian systems cannot have attractors, they cannot be dissipative. The converse is also true: they can't have unstable points or regions from which the system always goes away from.
 
 Now, the motion of a particle under linear drag may seem reversible, in the sense that we are able to, given the final position and momentum, reconstruct the initial values. Mathematically, it maps points one-to-one and would seem to satisfy \ref{rp-cm-detrev1d}, even though it is not a Hamiltonian system. This is a perfect example of how focusing on just the points leads to the wrong physical intuition. Physically, we would say that a one meter range of position allows for more configurations than a one centimeter range, even though technically they have the same number of points. If we understand that states are infinitesimal areas of phase space, we can see that a dissipative systems, though it does map the center points of infinitesimal areas one-to-one, it does not map the full infinitesimal area one-to-one. In this sense dissipative systems fail to be reversible.
 
-Let that sink in: we found that, if the system is deterministic and reversible, it admits a Hamiltonian, a notion of energy, and that energy is conserved over time. This may seem like a surprising and unexpected result. In retrospect, we can make an argument for it based on familiar physics consideration. If a system is deterministic and reversible it means that its evolution only depends on the state of the system itself. This means that it does not depend on the state of anything else. A system whose evolution does not depend on anything else is and isolated system. Therefore a deterministic and reversible system is isolated, and from thermodynamic we know that an isolated system conserves energy. It should not be surprising, then, that a deterministic and reversible system conserves energy. However, we found that not only it conserves energy, it defines it. Therefore this link between mechanics and thermodynamics is actually deeper than we may think at first, and we should explore it more.
+Let that sink in: we found that, if the system is deterministic and reversible, it admits a Hamiltonian, a notion of energy, and that energy is conserved over time. This may seem like a surprising and unexpected result. In retrospect, we can make an argument for it based on familiar physics consideration. If a system is deterministic and reversible it means that its evolution only depends on the state of the system itself. This means that it does not depend on the state of anything else. A system whose evolution does not depend on anything else is an isolated system. Therefore a deterministic and reversible system is isolated, and from thermodynamic we know that an isolated system conserves energy. It should not be surprising, then, that a deterministic and reversible system conserves energy. However, we found that not only it conserves energy, it defines it. Therefore this link between mechanics and thermodynamics is actually deeper than we may think at first, and we should explore it more.
 
-The idea that a dissipative system is not reversible sounds true on thermodynamic grounds. But thermodynamic reversibility is not the ability to reconstruct the initial state, but rather the existence of a process that can undo the change. Alternatively, a process is  thermodynamically reversible if it conserves thermodynamic entropy, which is a more precise characterization.\footnote{The actual existence of a reverse process is not something that can always be guaranteed.} We should not, then, confuse the two notions of reversibility but we can easily show the tow are related. The fundamental assumption of statistical mechanics tells us that the thermodynamic entropy $S = \log W$ is the logarithm of the count of states, which corresponds to volume in phase space. Conservation of areas of phase space, then, is equivalent to conservation of entropy. Therefore
+The idea that a dissipative system is not reversible sounds true on thermodynamic grounds. But thermodynamic reversibility is not the ability to reconstruct the initial state, but rather the existence of a process that can undo the change. Alternatively, a process is  thermodynamically reversible if it conserves thermodynamic entropy, which is a more precise characterization.\footnote{The actual existence of a reverse process is not something that can always be guaranteed.} We should not, then, confuse the two notions of reversibility but we can easily show their relationship. The fundamental assumption of statistical mechanics tells us that the thermodynamic entropy $S = \log W$ is the logarithm of the count of states, which corresponds to volume in phase space. Conservation of areas of phase space, then, is equivalent to conservation of entropy. Therefore
 \begin{equation}\label{rp-cm-thermorev1d}
-	\tag{HM-5}
+	\tag{HM-6}
 	\text{The evolution is deterministic and thermodynamic reversible.}	
 \end{equation}
 is yet another characterization of Hamiltonian mechanics.
 
-However, there is another type of entropy that is also fundamental in both statistical mechanics and information theory: the Gibbs/Shannon entropy $I[\rho(\xi^i)]=\int \rho \log \rho \, d\xi^n$ which is defined for each distribution $\rho(\xi^i)$. Recalling the transformation rules for both volumes \ref{rp-cm-volumeTransformation1d} and densities \ref{rp-cm-densityTransformation1d}, we have
+However, there is another type of entropy that is also fundamental in both statistical mechanics and information theory: the Gibbs/Shannon entropy $I[\rho(\xi^a)]=\int \rho \log \rho \, d\xi^n$ which is defined for each distribution $\rho(\xi^a)$. Recalling the transformation rules for both volumes \ref{rp-cm-volumeTransformation1d} and densities \ref{rp-cm-densityTransformation1d}, we have
 \begin{equation}
 	\begin{aligned}
-	I[\rho(\xi^j)] &= - \int \rho(\xi^j) \log \rho(\xi^j) \, d\xi^n \\
-&= - \int  \hat{\rho}(\hat{\xi}^i) \left| \partial_{\xi^j} \hat{\xi^i} \right| \log \left( \hat{\rho}(\hat{\xi}^i) \left| \partial_{\xi^j} \hat{\xi^i} \right| \right) \, d\xi^n \\
-&= - \int \hat{\rho}(\hat{\xi}^i) \log \left( \hat{\rho}(\hat{\xi}^i) \left| \partial_{\xi^j} \hat{\xi^i} \right| \right) \, d\hat{\xi}^n \\
-&= - \int \hat{\rho}(\hat{\xi}^i) \log \hat{\rho}(\hat{\xi}^i) \, d\hat{\xi}^n - \int \hat{\rho}(\hat{\xi}^i) \log \left| \partial_{\xi^j} \hat{\xi^i} \right| \, d\hat{\xi}^n \\
-&= I[\hat{\rho}(\hat{\xi}^i)] - \int \hat{\rho}(\hat{\xi}^i) \log \left| \partial_{\xi^j} \hat{\xi^i} \right| \, d\hat{\xi}^n.
+	I[\rho(\xi^a)] &= - \int \rho(\xi^a) \log \rho(\xi^a) \, d\xi^n \\
+&= - \int  \hat{\rho}(\hat{\xi}^b) \left| \partial_a \hat{\xi^b} \right| \log \left( \hat{\rho}(\hat{\xi}^b) \left| \partial_a \hat{\xi^b} \right| \right) \, d\xi^n \\
+&= - \int \hat{\rho}(\hat{\xi}^b) \log \left( \hat{\rho}(\hat{\xi}^b) \left| \partial_a \hat{\xi^b} \right| \right) \, d\hat{\xi}^n \\
+&= - \int \hat{\rho}(\hat{\xi}^b) \log \hat{\rho}(\hat{\xi}^b) \, d\hat{\xi}^n - \int \hat{\rho}(\hat{\xi}^b) \log \left| \partial_a \hat{\xi^b} \right| \, d\hat{\xi}^n \\
+&= I[\hat{\rho}(\hat{\xi}^b)] - \int \hat{\rho}(\hat{\xi}^b) \log \left| \partial_a \hat{\xi^b} \right| \, d\hat{\xi}^n.
 	\end{aligned}
 \end{equation}
 Information entropy, then, remains constant if and only if the logarithm of the Jacobian determinant is zero, which means the Jacobian determinant is one. Therefore
 \begin{equation}\label{rp-cm-information1d}
-	\tag{HM-6}
+	\tag{HM-7}
 	\text{The evolution conserves information entropy}	
 \end{equation}
-is equivalent to \ref{rp-cm-unitaryJacobian1d} and is yet another characterization of Hamiltonian mechanics.
+is equivalent to \ref{rp-cm-conservedAreas1d} and is yet another characterization of Hamiltonian mechanics.
 
 The fact that determinism and reversibility is equivalent to conservation of information entropy should not be, in retrospect, surprising. Given a distribution, its information entropy quantifies the average amount of information needed to specify a particular element chosen according to that distribution. If the evolution is deterministic and reversible, giving the initial state is equivalent to giving the final state and therefore the information to describe one or the other must be the same. Determinism and reversibility, then, can be understood as the informational equivalence between past and future descriptions.
 
 Lastly, given that entropy is often associated with uncertainty, it may be useful to understand how Hamiltonian evolution affects uncertainty. Given a multivariate distribution, the uncertainty is characterized by the covariance matrix
 \begin{equation}
-	cov(\xi^i, \xi^j) = \left[\begin{array}{ c c }
+	cov(\xi^a, \xi^b) = \left[\begin{array}{ c c }
 		\sigma^2_q & cov_{q, p} \\
 		cov_{p, q} & \sigma^2_p \\
 	\end{array} \right].
 \end{equation}
 The determinant gives us a coordinate independent quantity to characterize the uncertainty. If the distribution is narrow enough, we can use the linearized transformation to see how the uncertainty evolves after an infinitesimal time step $\delta t$. We have
 \begin{equation}
-	\left| cov(\hat{\xi}^i, \hat{\xi}^j) \right| = \left| \partial_{\xi^k} \hat{\xi}^i  cov(\xi^k, \xi^l) \partial_{\xi^l} \hat{\xi}^j  \right| = \left| \partial_{\xi^k} \hat{\xi}^i \right| \left| cov(\xi^k, \xi^l) \right| \left| \partial_{\xi^l} \hat{\xi}^j  \right|.
+	\left| cov(\hat{\xi}^c, \hat{\xi}^d) \right| = \left| \partial_a \hat{\xi}^c  \, cov(\xi^a, \xi^b) \, \partial_b \hat{\xi}^d  \right| = \left| \partial_a \hat{\xi}^c \right| \left| cov(\xi^a, \xi^b) \right| \left| \partial_b \hat{\xi}^d  \right|.
 \end{equation}
 which means the uncertainty remains unchanged if and only if the Jacobian is unitary. So
 \begin{equation}\label{rp-cm-uncertainty1d}
 	\tag{HM-7}
 	\text{The evolution conserves the uncertainty of peaked distributions}	
 \end{equation}
-is equivalent to \ref{rp-cm-unitaryJacobian1d} and another characterization of Hamiltonian mechanics.
+is equivalent to \ref{rp-cm-conservedAreas1d} and another characterization of Hamiltonian mechanics.
 
-This connection gives us yet another insight on the nature of determinism and reversibility in physics. Given that all physically meaningful descriptions are finite precision, a system is deterministic and reversible in a physically meaningful sense if and only if the past/future descriptions can be reconstructed/predicted at the same level of precision. This gives us another perspective as to why areas must be conserved.
+This connection gives us yet another insight on the nature of determinism and reversibility in physics. Given that all physically meaningful descriptions are finite precision, a system is deterministic and reversible in a physically meaningful sense if and only if the past/future descriptions can be reconstructed/predicted at the same level of precision. This gives us another perspective as to why areas and densities must be conserved.
 
-We have found seven equivalent characterizations that link Hamiltonian mechanics, vector calculus, differential geometry, statistical mechanics, thermodynamics, information theory and plain statistics. Though we only talked about the case of a single degree of freedom, it gives us a much better idea of what systems Hamiltonian mechanics is supposed to describe, those that undergo deterministic and reversible evolution. We can see how this concept is implemented mathematically: it is not simply a one-to-one map between points. Classical particles should be more properly thought of as infinitesimal regions of phase space. Conceptually, the count of states, the thermodynamic entropy and information entropy are all conserved, and are all equivalent characterizations of determinism and reversibility. In terms of physical measurement, past and future states are given at the same level of uncertainty. But the most important lesson is that the foundations of classical mechanics are not disconnected from the foundations of all other disciplines we connected. Therefore we will have to understand as much as possible those connections as well.
+We have found eight equivalent characterizations that link Hamiltonian mechanics, vector calculus, differential geometry, statistical mechanics, thermodynamics, information theory and plain statistics. Though we only talked about the case of a single degree of freedom, it gives us a much better idea of what systems Hamiltonian mechanics is supposed to describe, those that satisfy the following
+\renewcommand{\theassump}{DR}
+\begin{assump}[Determinism and Reversibility]\label{assum_detrev}
+	The system undergoes deterministic and reversible evolution.
+\end{assump}
+\renewcommand{\theassump}{\Roman{assump}}
+We can see how this concept is implemented mathematically: it is not simply a one-to-one map between points. Classical particles should be more properly thought of as infinitesimal regions of phase space. Conceptually, the count of states, the thermodynamic entropy and information entropy are all conserved, and are all equivalent characterizations of determinism and reversibility. In terms of physical measurement, past and future states are given at the same level of uncertainty. But the most important lesson is that the foundations of classical mechanics are not disconnected from the foundations of all other disciplines we connected. Therefore we will have to understand as much as possible those connections as well.
 
