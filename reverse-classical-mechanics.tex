@@ -314,7 +314,7 @@ On the other side, Hamiltonian and Lagrangian mechanics are coordinate independe
 
 \section{Reversing Hamiltonian mechanics}
 
-We now turn our attention to Hamiltonian mechanics and try to understand exactly what types of systems it focuses on. We will find eight equivalent formulations of Hamiltonian mechanics that link ideas from vector calculus, differential geometry, statistical mechanics, thermodynamics, information theory and plain statistics. The overall result is that Hamiltonian mechanics focuses on systems that are deterministic and reversible. We will see how the physical significance of that assumption differ from mathematically naive characterizations.
+We now turn our attention to Hamiltonian mechanics and try to understand exactly what types of systems it focuses on. We will find twelve equivalent formulations of Hamiltonian mechanics that link ideas from vector calculus, differential geometry, statistical mechanics, thermodynamics, information theory and plain statistics. The overall result is that Hamiltonian mechanics focuses on systems that are assumed to be deterministic and reversible. We will see how the physical significance of that assumption differs from mathematically naive characterizations.
 
 To simplify our discussion, we will first concentrate on a single degree of freedom. The first characterization of Hamiltonian mechanics is naturally in terms of the equations
 \begin{equation}\label{rp-cm-hsd-condEquations}
@@ -328,7 +328,7 @@ We will want to treat phase space as a generic two-dimensional space (i.e. manif
 \begin{equation}\label{rp-cm-displacement1d}
 	S^a = d_t \xi^a = [d_t q, d_t p]
 \end{equation}
-which is a vector field that defines the evolution of the system in time. Hamilton's equation, then, can be expressed as
+which is a vector field that defines the evolution of the system in time. Hamilton's equations, then, can be expressed as
 \begin{equation}\label{rp-cm-hsd-displacementCurl}
 	\begin{aligned}
 		S^q &= \partial_p H \\
@@ -347,16 +347,14 @@ To bring out the geometric meaning of the equations, we introduce the matrix
 		-1 & 0 
 	\end{array} \right]
 \end{equation}
-which rotates a vector by a right angle.\footnote{The notion of angle is technically ill-defined in phase space, but this slight imprecision makes it easier to get the point across.} That is, if $v^a = [v^q, v^p]$, then $v_a = v^b \omega_{ba}  = [-v^p, v^q]$.\footnote{The notation is purposely similar to how indexes are raised and lowered in general relativity by the metric tensor $g_{\alpha\beta}$, since $\omega_{ab}$ plays a similar geometric role in phase space. One should be careful, however, that $\omega_{ab}$ is not symmetric, so it matters which side is contracted.
-
-In terms of symplectic geometry, the rotated displacement field $S_a$ corresponds to interior production of the displacement field with the symplect form, usually noted as $\iota_S \omega$ or $S \lrcorner \, \omega$.} We can rewrite equation \ref{rp-cm-hsd-condEquations} as
+which rotates a vector by a right angle.\footnote{The notion of angle is technically ill-defined in phase space, but this slight imprecision makes it easier to get the point across.} That is, if $v^a = [v^q, v^p]$, then $v_a = v^b \omega_{ba}  = [-v^p, v^q]$.\footnote{The notation is purposely similar to how indexes are raised and lowered in general relativity by the metric tensor $g_{\alpha\beta}$, since $\omega_{ab}$ plays a similar geometric role in phase space. One should be careful, however, that $\omega_{ab}$ is not symmetric, so it matters which side is contracted. In terms of symplectic geometry, the rotated displacement field $S_a$ corresponds to the interior product of the displacement field with the symplectic form, usually noted as $\iota_S \omega$ or $S \lrcorner \, \omega$.} We can rewrite equation \ref{rp-cm-hsd-condEquations} as
 \begin{equation}\label{rp-cm-hsd-condGeneralizedEquations}
 	\tag{HM-1G}
 	\begin{aligned}
 		S_a = S^b \omega_{ba} &= \partial_a H 
 	\end{aligned}
 \end{equation}
-which tells us that the displacement field is the gradient of the Hamiltonian rotated by a right angle. Since the gradient is the only perpendicular direction to the regions at constant energy, a right angle rotation will give us a tangent to those regions, making it geometrically evident that the value of the Hamiltonian is a constant of motion. Condition \ref{rp-cm-hsd-condGeneralizedEquations} is just a re-expression of \ref{rp-cm-hsd-condEquations}. Though it is useful, we want to find different mathematical conditions which turn out to be equivalent to the equations.
+which tells us that the displacement field is the gradient of the Hamiltonian rotated by a right angle. Since the gradient is the only perpendicular direction to the regions at constant energy, a right angle rotation will give us a tangent to those regions, making it geometrically evident that the value of the Hamiltonian is a constant of motion. (TODO: add picture and consider reviewing the text) Condition \ref{rp-cm-hsd-condGeneralizedEquations} is just a re-expression of \ref{rp-cm-hsd-condEquations}. Though it is useful, we want to find different mathematical conditions which turn out to be equivalent to the equations.
 
 We start by noting that the displacement field as expressed by \ref{rp-cm-hsd-displacementCurl} looks very similar to a curl of $H$, except that it is a two dimensional version. In vector calculus, a vector field is the curl of another field if and only if its divergence is zero.\footnote{We will leave for now topological requirements as they would be a distraction from the overall point.} This holds here as well. First, we can verify that
 \begin{equation}
@@ -368,7 +366,7 @@ Geometrically, this means that the flow of $S^a$ through a closed region $\oint 
 \end{equation}
 That is, the flow of the displacement field is the line integral of the gradient of $H$, which is zero over a closed curve.
 
-Conversely, we can see that each divergenceless field in two dimension admits a stream function $H$ that satisfies \ref{rp-cm-hsd-condEquations}. Geometrically, we can construct $H$ in the following way. Take a reference point $O$ and assign $H(O) = 0$. For any other point $P$, consider the flow of $S$ through any two lines that connect $O$ and $P$ given that the flow through the region contoured by those lines must be zero, the flow through each line must be equal. Therefore the flow through a line that connect $O$ and $P$ only depends only on the points, it is path independent. We can assign $H(P) = - \int_{OP} \left( S^p dq - S^q dp \right)$. If we expand the differential of $H$ we have
+Conversely, we can see that each divergenceless field in two dimensions admits a stream function $H$ that satisfies \ref{rp-cm-hsd-condEquations}. Geometrically, we can construct $H$ in the following way. Take a reference point $O$ and assign $H(O) = 0$. For any other point $P$, consider the flow of $S$ through any two lines that connect $O$ and $P$. Given that the flow through the region contoured by those lines must be zero, the flow through each line must be equal. Therefore the flow through a line that connects $O$ and $P$ only depends on the points, it is path independent. We can assign $H(P) = - \int_{OP} \left( S^p dq - S^q dp \right)$. If we expand the differential of $H$ we have
 \begin{equation}
 	dH = \partial_q H dq + \partial_p H dp = - \left(S^p dq - S^q dp \right).
 \end{equation}
@@ -386,7 +384,7 @@ Having looked at the flow through a region, we turn our attention to how regions
 	\begin{aligned}
 		\hat{\xi}^a &= \hat{\xi}^a(\xi^b) \\
 		d\hat{\xi}^a &= \partial_b \hat{\xi}^a d\xi^b \\
-		d\hat{\xi}^n &= \left| \partial_b \hat{\xi}^a \right| d\xi^n \\
+		d\hat{\xi}^1 \cdots d\hat{\xi}^n &= \left| \partial_b \hat{\xi}^a \right| d\xi^1 \cdots d\xi^n \\
 		d\hat{q} d\hat{p} &= \left|\begin{array}{ c c }
 			\partial_q \hat{q} & \partial_p \hat{q} \\
 			\partial_q \hat{p} & \partial_p \hat{p} \\
@@ -416,9 +414,9 @@ and condition
 	\tag{HM-4}
 	\text{Volumes are conserved through the evolution: } \; d\hat{\xi}^n = d\xi^n.
 \end{equation}
-are equivalent to \ref{rp-cm-hsd-condDivergenceDisplacement}. We have a third and a fourth way to characterize Hamiltonian evolution.
+are equivalent to \ref{rp-cm-hsd-condDivergenceDisplacement}. We have found a third and a fourth way to characterize Hamiltonian evolution.
 
-While condition \ref{rp-cm-hsd-condConservedVolume} is expressed in terms of areas, similar considerations will work for densities because a density is a quantity divided an infinitesimal area. In fact densities
+While condition \ref{rp-cm-hsd-condConservedVolume} is expressed in terms of areas, similar considerations will work for densities because a density is a quantity divided by an infinitesimal area. In fact densities
 \begin{equation}\label{rp-cm-densityTransformation1d}
 	\begin{aligned}
 		\left| \partial_b \hat{\xi}^a \right| \hat{\rho}(\hat{\xi}^a) &= \rho(\xi^b).
@@ -431,7 +429,7 @@ transform in an equal and opposite way with respect to areas (i.e. the Jacobian 
 \end{equation}
 is yet another equivalent characterization.
 
-To get a yet different perspective, we can reframe these argument in terms of $\omega_{ab}$ and $S_a$. Given two vectors $v^a$ and $w^a$, the area of the parallelogram they form is $v^q w^p - v^p w^q$. This can be rewritten as $v^a \omega_{ab} w^b$, which means we can think of $\omega_{ab}$ as a tensor that, given two vectors, returns the area of the parallelogram they form.\footnote{More properly, it is a two-form.} If we denote $\hat{v}^a = \partial_b \hat{\xi}^a \, v^b$ and $\hat{w}^a = \partial_b \hat{\xi}^a \, w^b$ the transformed vectors, the invariance of the area can be written as
+To get a yet different perspective, we can reframe these arguments in terms of $\omega_{ab}$ and $S_a$. Given two vectors $v^a$ and $w^a$, the area of the parallelogram they form is $v^q w^p - v^p w^q$. This can be rewritten as $v^a \omega_{ab} w^b$, which means we can think of $\omega_{ab}$ as a tensor that, given two vectors, returns the area of the parallelogram they form.\footnote{More properly, it is a two-form.} If we denote $\hat{v}^a = \partial_b \hat{\xi}^a \, v^b$ and $\hat{w}^a = \partial_b \hat{\xi}^a \, w^b$ the transformed vectors, the invariance of the area can be written as
 \begin{equation}
 	v^a \omega_{ab} w^b = \hat{v}^c \omega_{cd} \hat{w}^d.
 \end{equation}
@@ -439,7 +437,7 @@ Since
 \begin{equation}
 	\hat{v}^c \omega_{cd} \hat{w}^d = v^a \, \partial_a \hat{\xi}^c \omega_{cd} \, \partial_b \hat{\xi}^d \, w^b = v^a \, \hat{\omega}_{ab} w^b
 \end{equation}
-the previous equivalence means that $\omega_{ab} = \hat{\omega}_{ab}$, that is $\omega_{ab}$ remains unchanged. In other words, preserving the area for all possible pairs of vector is the same as preserving the tensor $\omega_{ab}$ that returns the areas. We now see that $\omega_{ab}$ plays such an important geometric role that
+the previous equivalence means that $\omega_{ab} = \hat{\omega}_{ab}$, that is $\omega_{ab}$ remains unchanged. In other words, preserving the area for all possible pairs of vectors is the same as preserving the tensor $\omega_{ab}$ that returns the areas. We now see that $\omega_{ab}$ plays such an important geometric role that
 \begin{equation}\label{rp-cm-hsd-condConservedSymplectic}
 	\tag{HM-6}
 	\text{The evolution leaves $\omega_{ab}$ invariant: } \; \hat{\omega}_{ab} = \omega_{ab}.
@@ -454,7 +452,7 @@ It is useful to look more closely at the definition of the Poisson bracket
 		\partial_q g & \partial_p g \\
 	\end{array} \right|.
 \end{equation}
-For a single degree of freedom, the Poisson bracket coincide with the Jacobian determinant, where $f$ and $g$ are the two new variables. It essentially tells us how the volume changes if we change state variable from $[q, p]$ to $[f, g]$. Canonical coordinates and transformations, then, are those that do not change the units of area. The Poisson bracket can be expressed\footnote{To see how our definitions and notation map to that used in differential geometry, let us define $\partial^a H = \omega^{ab} \partial_a H$. Note that $\partial^a H$ corresponds to the Hamiltonian vector field of $H$ usually noted $X_H$. The Poisson bracket is usually defined as $\omega(X_f, X_g)$. In our notation this becomes $\partial^a f \omega_{ab} \partial^b g = \omega^{ac} \partial_c f \omega_{ab} \omega^{bd} \partial_d g = \omega^{ac} \partial_c f \delta_a^d \partial_d g = \omega^{ac} \partial_c f \partial_a g$. One can see how the notation mimics the Einstein notation of general relativity and avoids the introduction of ad-hoc symbols.} as
+For a single degree of freedom, the Poisson bracket coincides with the Jacobian determinant, where $f$ and $g$ are the two new variables. It essentially tells us how the volume changes if we change state variable from $[q, p]$ to $[f, g]$. Canonical coordinates and transformations, then, are those that do not change the units of area. The Poisson bracket can be expressed\footnote{To see how our definitions and notation map to that used in differential geometry, let us define $\partial^a H = \omega^{ab} \partial_a H$. Note that $\partial^a H$ corresponds to the Hamiltonian vector field of $H$ usually noted $X_H$. The Poisson bracket is usually defined as $\omega(X_f, X_g)$. In our notation this becomes $\partial^a f \omega_{ab} \partial^b g = \omega^{ac} \partial_c f \omega_{ab} \omega^{bd} \partial_d g = \omega^{ac} \partial_c f \delta_a^d \partial_d g = \omega^{ac} \partial_c f \partial_a g$. One can see how the notation mimics the Einstein notation of general relativity and avoids the introduction of ad-hoc symbols.} as
 \begin{equation}
 	\{f, g\} = - \partial_a f \omega^{ab} \partial_b g = \partial_b g \omega^{ba} \partial_a f
 \end{equation}
@@ -473,11 +471,11 @@ is the inverse of $\omega_{ab}$. The invariance of the Poisson brackets is equiv
 	\tag{HM-7}
 	\text{The evolution leaves the Poisson brackets invariant}
 \end{equation}
-is yet another equivalent characterization. So, again, we see how $\omega_{ab}$ plays a fundamental geomatrical role.
+is yet another equivalent characterization. So, again, we see how $\omega_{ab}$ plays a fundamental geometrical role.
 
 We can also write rewrite the flow of the displacement field
 \begin{equation}
-	\int \left( S^p dq - S^q dp \right) = \int S^a \omega_{ab} d\xi^b = \int S_a d\xi^a
+	\int \left( S^p dq - S^q dp \right) = \int S^a \omega_{ab} d\xi^b = \int S_b d\xi^b
 \end{equation}
 as the line integral of the rotated displacement field $S_a$. We can do that because in two dimension the flow through a boundary is effectively a line integral along the boundary with the field rotated 90 degrees. This means that the following condition
 \begin{equation}\label{rp-cm-hsd-condCurlRotatedDisplacement}
