@@ -362,13 +362,13 @@ We start by noting that the displacement field as expressed by \ref{rp-cm-hsd-di
 \end{equation}
 Geometrically, this means that the flow of $S^a$ through a closed region $\oint \left( S^q dp - S^p dq \right) = 0$ is always zero. Note that, since we are in a two dimensional space, a hyper-surface has dimension $n-1 = 2-1 = 1$ and therefore hyper-surfaces are lines. Therefore we have 
 \begin{equation}
-	\oint \left( S^p dq - S^q dp \right) = \oint \left( -\partial_q H dq - \partial_p H dp \right) = - \oint dH = 0.
+	\oint \left( S^q dp - S^p dq \right) = \oint \left( \partial_p H dp + \partial_q H dq \right) = \oint dH = 0.
 \end{equation}
 That is, the flow of the displacement field is the line integral of the gradient of $H$, which is zero over a closed curve.
 
-Conversely, we can see that each divergenceless field in two dimensions admits a stream function $H$ that satisfies \ref{rp-cm-hsd-condEquations}. Geometrically, we can construct $H$ in the following way. Take a reference point $O$ and assign $H(O) = 0$. For any other point $P$, consider the flow of $S$ through any two lines that connect $O$ and $P$. Given that the flow through the region contoured by those lines must be zero, the flow through each line must be equal. Therefore the flow through a line that connects $O$ and $P$ only depends on the points, it is path independent. We can assign $H(P) = - \int_{OP} \left( S^p dq - S^q dp \right)$. If we expand the differential of $H$ we have
+Conversely, we can see that each divergenceless field in two dimensions admits a stream function $H$ that satisfies \ref{rp-cm-hsd-condEquations}. Geometrically, we can construct $H$ in the following way. Take a reference point $O$ and assign $H(O) = 0$. For any other point $P$, consider the flow of $S$ through any two lines that connect $O$ and $P$. Given that the flow through the region contoured by those lines must be zero, the flow through each line must be equal. Therefore the flow through a line that connects $O$ and $P$ only depends on the points, it is path independent. We can assign $H(P) = \int_{OP} \left( S^q dp - S^p dq \right)$. If we expand the differential of $H$ we have
 \begin{equation}
-	dH = \partial_q H dq + \partial_p H dp = - \left(S^p dq - S^q dp \right).
+	dH = \partial_q H dq + \partial_p H dp = - S^p dq + S^q dp.
 \end{equation}
 If we equate the components, we recover \ref{rp-cm-hsd-condEquations}. Geometrically, at least for the one dimensional degree of freedom, we can understand the difference of the Hamiltonian between two points as the flow of the displacement field between them.
 
@@ -475,7 +475,7 @@ is yet another equivalent characterization. So, again, we see how $\omega_{ab}$ 
 
 We can also write rewrite the flow of the displacement field
 \begin{equation}
-	\int \left( S^p dq - S^q dp \right) = \int S^a \omega_{ab} d\xi^b = \int S_b d\xi^b
+	\int \left( S^q dp - S^p dq \right) = \int S^a \omega_{ab} d\xi^b = \int S_b d\xi^b
 \end{equation}
 as the line integral of the rotated displacement field $S_a$. We can do that because in two dimension the flow through a boundary is effectively a line integral along the boundary with the field rotated 90 degrees. This means that the following condition
 \begin{equation}\label{rp-cm-hsd-condCurlRotatedDisplacement}
@@ -634,7 +634,7 @@ Let's see what happens to condition \ref{rp-cm-hsd-condConservedSymplectic}, the
 	\partial_a &(\omega_{bc} S^c) - \partial_b ( \omega_{ac} S^c) = 0.
 	\end{aligned}
 \end{equation}
-If we set $S_a = \omega_{ab} S^b$,\footnote{Note that we are using $\omega$ to contract down an index much like we use the metric tensor $g$ to change from covariant and controvariant components in relativity/Riemmanian geometry. The geometric meaning, though still not clear, is naturally different because we are physically in different spaces: phase space vs physical space-time.} we have the more compact form
+In terms of the rotated displacement field $S_a$ we have the more compact form
 \begin{equation}
 	\partial_a S_b - \partial_b S_a = 0.
 \end{equation}
@@ -646,7 +646,7 @@ Note that Hamilton's equations state that the rotated displacement field is the 
 \end{equation}
 which simply verifies that the curl of the gradient is zero. Conversely, if $S_a$ is curl-free, then it admits a scalar potential $H$ such that
 \begin{equation}
-	S_a = \omega_{ab} S^b = \partial_a H
+	S_a = S^b \omega_{ba} = \partial_a H
 \end{equation}
 which recovers Hamilton's equations. Therefore \ref{rp-cm-hmd-condEquations}, \ref{rp-cm-hsd-condCurlRotatedDisplacement} and \ref{rp-cm-hsd-condConservedSymplectic} are equivalent.
 
@@ -769,4 +769,89 @@ To conclude, we now have a mathematically and physically precise way to characte
 
 \section{Reversing Lagrangian mechanics}
 
-Our understanding of Hamiltonian mechanics is now far super to that of Lagrangian mechanics: we have a good sense of how the geometry of the space work and what it represents physically. Conceptually, we already know that Lagrangian mechanics is Hamiltonian mechanics plus assumption \ref{assum_kineq}. We know want to use that insight to get a better understanding of Lagrangian mechanics. In particular, we want to understand what a Lagrangian actually represents and what the principle of least action represent.
+Now that we have a good geometrical and physical feel for Hamiltonian mechanics, we will analyze Lagrangian mechanics more in detail. Conceptually, we already know that Lagrangian mechanics is Hamiltonian mechanics plus assumption \ref{assum_kineq}. We will see that the displacement field admits a vector potential and the Lagrangian is the scalar product between that potential and the displacement field itself. Moreover, we will see that the principle of least action is geometrically equivalent to asking for paths that are always tangent to the displacement field.
+
+The first question we want to have a clear answer for is: what does the Lagrangian represent physically? It is typically introduced as the different between kinetic and potential energy. However, this does not work in general. Take the Lagrangian for a particle with charge $\mathfrak{q}$ under an electromagnetic field with electric potential $V$ and magnetic potential $A_i$.
+\begin{equation}
+	L = \frac{1}{2} m |v^i|^2 + \mathfrak{q} v^i A_i -\mathfrak{q} V.
+\end{equation}
+The first term is clearly potential energy, the last clearly potential energy, but what about the middle term? It depends on velocity, so it would appear to be a kinetic term, but it also depends on the potential. It's both and neither. What the energy of an electromagnetic field: should we consider that kinetic or potential?
+
+Another problem in understanding what the Lagrangian represents is that it is not unique. Now, a similar problem exists for the Hamiltonian, in the sense that we can sum an arbitrary constant to any Hamiltonian without changing the equations of motions. Physically, this tells us that there is an arbitrariness of the zero of energy. However, the degeneracy for a Lagrangian is far worse. For example, let $f(x^i,t)$ be an arbitrary function of position and time. We can set
+\begin{equation}
+	L' = L + \partial_{x^i} f(x^i, t) v^i + \partial_t f(x^i, t).
+\end{equation}
+We have 
+\begin{equation}
+	\begin{aligned}
+		\partial_{x^i}L' - d_t \partial_{v^i} L' &= \partial_{x^i} L + \partial_{x^i} \partial_{x^j} f v^j + \partial_{x^i} \partial_t f - d_t \left( \partial_{v^i} L + \partial_{x^i} f \right) \\
+		&= \partial_{x^i} L - d_t \partial_{v^i} L + \partial_{x^i} \partial_{x^j} f v^j + \partial_{x^i} \partial_t f - \partial_{x^j}\partial_{x^i} f d_t x^j - \partial_t \partial_{x^i} f d_t t \\
+		&= \partial_{x^i} L - d_t \partial_{v^i} L + \partial_{x^i} \partial_{x^j} f v^j + \partial_{x^i} \partial_t f - \partial_{x^j}\partial_{x^i} f v^j - \partial_t \partial_{x^i} f \\
+		&= \partial_{x^i} L - d_t \partial_{v^i} L.
+	\end{aligned}
+\end{equation}
+That is, the equation of motions given by $L'$ are the same as the ones given by $L$. Therefore the actual value, or the difference of values, of the Lagrangian is physically meaningless. This makes the question even more puzzling: what is the Lagrangian?
+
+Given that we have a good understanding of Hamiltonian mechanics, let's work on the equations that link the two. We have
+\begin{equation}
+	\begin{aligned}
+		L &= p_i v^i - H \\
+		&= p_i d_t q^i - H d_t t \\
+		&= 
+		\begin{bmatrix}
+			p_i & 0 & -H
+		\end{bmatrix} 
+	\raisebox{-1.2em}{$
+		\begin{bmatrix}
+			d_t q^i \\
+			d_t p_i \\
+			d_t t
+		\end{bmatrix}
+		$}.
+	\end{aligned}
+\end{equation}
+The Lagrangian, then, can be understood as the scalar product of two vectors. The second one looks like the displacement vector, however it is the displacement vector not just in phase space, but in phase space extended by time. Let us, then, redefine $\xi^a = [q^i, p_i , t]$ to include the time variable, and have
+\begin{equation}
+	\begin{aligned}
+		S^a &= d_t \xi^a = \begin{bmatrix}
+			d_t q^i & d_t p_i & d_t t
+		\end{bmatrix} \\
+		\theta_a &= \begin{bmatrix}
+			p_i & 0 & - H
+		\end{bmatrix} \\
+		L &= \theta_a S^a.
+	\end{aligned}
+\end{equation}
+
+We now need to generalize $\omega_{ab}$ as well. Looking at equation \ref{rp-cm-hsd-condGeneralizedEquations}, the idea is to put the gradient of the Hamiltonian in the time component. If we set
+\begin{equation}\label{rp-cm-lm-contactForm}
+	\tag{CF}
+	\omega_{ab} = \left[\begin{array}{ccc}
+		\omega_{q^i q^j} & \omega_{q^i p_j} & \omega_{q^i t} \\
+		\omega_{p_i q^j} & \omega_{p_i p_j} & \omega_{p_i t} \\
+		\omega_{t q^j} & \omega_{t p_j} & \omega_{t t} 
+	\end{array} \right]= \left[\begin{array}{ccc}
+		0 & I_n & \partial_{q^i} H \\
+		- I_n & 0 & \partial_{p_i} H \\
+		- \partial_{q^j} H & -\partial_{p_j} H & 0
+	\end{array} \right] ,
+\end{equation}
+we have
+\begin{equation}
+	\begin{aligned}
+		S^a \omega_{a q^j} &= S^{q^i}\omega_{q^i q^j} + S^{p_i}\omega_{p_i q^j} + S^{t} \omega_{t q^j} \\
+		&= - S^{p_j} - S^{t} \partial_{q^j} H = - S^{p_j} -  \partial_{q^j} H = 0 \\
+		S^a \omega_{a p_j} &= S^{q^i}\omega_{q^i p_j} + S^{p_i}\omega_{p_i p_j} + S^{t} \omega_{t p_j} \\
+		&= S^{q^j} - S^{t} \partial_{p_j} H = S^{q^j} -  \partial_{p_j} H = 0 \\
+		S^a \omega_{a t} &= S^{q^i}\omega_{q^i t} + S^{p_i}\omega_{p_i t} + S^{t} \omega_{t t} \\
+		&= S^{q^i} \partial_{q^i} H + S^{p_i} \partial_{p_i} H \\
+		&= \partial_{p_i} H \partial_{q^i} H - \partial_{q^i} H \partial_{p_i} H = 0.
+	\end{aligned}
+\end{equation}
+This means that, on the phase space extended by time, Hamilton's equations become
+\begin{equation}\label{rp-cm-lm-ExtPSEquation}
+	\tag{HM-1E}
+	S_a = S^b \omega_{ba} = 0.
+\end{equation}
+Note that while the position and momentum components of $S_a$ still perform a rotation, the time component does not. So we can't understand $S_a$ as a rotated displacement. Recall that $v^a \omega_{ab} w^b = v_b w^b$ quantified the number of states in the parallelepiped formed by $v^a$ and $w^b$. If $v_b w^b = 0$, then the parallelepiped does not identify states on an independent d.o.f.. For each vector $v^a$, the vector $v_a$ identifies the direction that forms an independent d.o.f. with $v^a$. If we only have position and momentum, we can see that you get the direction rotated by ninety degrees along each d.o.f.. If we extend phase space with time, time does not add a new independent degree of freedom. In fact, the direction given by the displacement field $S^a$ should give us no new independent states: there should be no direction $v^b$ in phase space such that $S^a \omega_{ab} v^b \neq 0$. In other words, $S_a$ must be zero and this is what equation \ref{rp-cm-lm-ExtPSEquation} says.
+
