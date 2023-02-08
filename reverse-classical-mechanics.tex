@@ -857,5 +857,44 @@ This means that, on the phase space extended by time, Hamilton's equations becom
 	\tag{HM-1E}
 	S_a = S^b \omega_{ba} = 0.
 \end{equation}
-Note that while the position and momentum components of $S_a$ still perform a rotation, the time component does not. So we can't understand $S_a$ as a rotated displacement. Recall that $v^a \omega_{ab} w^b = v_b w^b$ quantified the number of states in the parallelepiped formed by $v^a$ and $w^b$. If $v_b w^b = 0$, then the parallelepiped does not identify states on an independent d.o.f.. For each vector $v^a$, the vector $v_a$ identifies the direction that forms an independent d.o.f. with $v^a$. If we only have position and momentum, we can see that you get the direction rotated by ninety degrees along each d.o.f.. If we extend phase space with time, time does not add a new independent degree of freedom. In fact, the direction given by the displacement field $S^a$ should give us no new independent states: there should be no direction $v^b$ in phase space such that $S^a \omega_{ab} v^b \neq 0$. In other words, $S_a$ must be zero and this is what equation \ref{rp-cm-lm-ExtPSEquation} says.
+Note that while the position and momentum components of $S_a$ still perform a rotation, the time component does not. So we can't understand $S_a$ as a rotated displacement. Recall that $v^a \omega_{ab} w^b = v_b w^b$ quantified the number of states in the parallelepiped formed by $v^a$ and $w^b$. If $v_b w^b = 0$, then the parallelepiped does not identify states on an independent d.o.f.. For each vector $v^a$, the vector $v_a$ identifies the direction that forms an independent d.o.f. with $v^a$. If we only have position and momentum, we can see that you get the direction rotated by ninety degrees along each d.o.f.. If we extend phase space with time, time does not add a new independent degree of freedom. In fact, the direction given by the displacement field $S^a$ should give us no new independent states: there should be no direction $v^b$ in phase space such that $S^a \omega_{ab} v^b \neq 0$. In other words, $S_b = S^a \omega_{ab}$ must be zero and this is what equation \ref{rp-cm-lm-ExtPSEquation} says.
 
+We still need to understand what $\theta_a$ is. If we compare it to  $\omega_{ab}$, we note that the first has the Hamiltonian as component, while the second has its derivative. Given that $\omega_{ab}$ is anti-symmetric, we may want to calculate the anti-symmetrized derivative of $\theta_a$, the generalized curl. We have
+\begin{equation}
+	\begin{aligned}
+		\partial_a \theta_b - \partial_b \theta_a &=
+		\left[\begin{array}{ccc}
+			\partial_{q^i} \theta_{q^j} - \partial_{q^j} \theta_{q^i} & \partial_{q^i} \theta_{p_j} - \partial_{p_j} \theta_{q^i} & \partial_{q^i} \theta_{t} - \partial_{t} \theta_{q^i} \\
+			\partial_{p_i} \theta_{q^j} - \partial_{q^j} \theta_{p_i} & \partial_{p_i} \theta_{p_j} - \partial_{p_j} \theta_{p_i} & \partial_{p_i} \theta_{t} - \partial_{t} \theta_{p_i} \\
+			\partial_{t} \theta_{q^j} - \partial_{q^j} \theta_{t} &
+			\partial_{t} \theta_{p_j} - \partial_{p_j} \theta_{t} &
+			\partial_{t} \theta_{t} - \partial_{t} \theta_{t} 
+		\end{array} \right] \\
+		&= \left[\begin{array}{ccc}
+			\partial_{q^i} p_j - \partial_{q^j} p_i & \partial_{q^i} 0 - \partial_{p_j} p_i & \partial_{q^i} (-H) - \partial_{t} p_i \\
+			\partial_{p_i} p_j - \partial_{q^j} 0 & \partial_{p_i} 0 - \partial_{p_j} 0 & \partial_{p_i} (-H) - \partial_{t} 0 \\
+			\partial_{t} p_j - \partial_{q^j} (-H) &
+			\partial_{t} 0 - \partial_{p_j} (-H) &
+			\partial_{t} (-H) - \partial_{t} (-H) 
+		\end{array} \right] \\
+		&= \left[\begin{array}{ccc}
+		0 - 0 & 0 - \delta_i^j & - \partial_{q^i} H - 0 \\
+		\delta^i_j - 0 &  0 - 0 & - \partial_{p_i} H - 0 \\
+		0 + \partial_{q^j} H &
+		0 + \partial_{p_j} H &
+		- \partial_{t} H + \partial_{t} H 
+	\end{array} \right] \\
+		&= \left[\begin{array}{ccc}
+			0 & -\delta_i^j & - \partial_{q^i} H \\
+			\delta^i_j &  0 & - \partial_{p_i} H \\
+			\partial_{q^j} H &
+			\partial_{p_j} H &
+			0
+		\end{array} \right].
+	\end{aligned}
+\end{equation}
+This means that
+\begin{equation}
+	\omega_{ab} = - (\partial_a \theta_b - \partial_b \theta_a),
+\end{equation}
+the form $\omega_{ab}$ is the curl of $- \theta_a$.
