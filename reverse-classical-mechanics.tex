@@ -771,9 +771,195 @@ The issue here is that the case of independent variables is maximal as it posits
 
 This conclusion is yet another example of why just looking at the math is not enough. Two physical conditions taken separately may each impose one mathematical condition, but it is not necessarily true that imposing them together will only impose the conjunction of the two mathematical conditions. More than a problem with math in general, we believe it is an indication that the math we currently use is not the ``physically correct'' one as it does not seem to be capturing the entirety of the physical conditions. 
 
-Note that, in principle, we could ask the evolution to preserve the independence of d.o.f. without requiring \ref{assum_detrev}. As we saw, fixing all independent d.o.f. fixes $\omega_{ab}$ up to a scalar factor, which could change during the evolution. The volume would stretch or shrink depending on the factor, stretching or shrinking each d.o.f. by the same amount. An example of this would be a particle under linear drag in three dimensions. Since a faster moving object will be subjected to a greater frictional force, a spread in momentum $\Delta p$ will become smaller in time, and will tend to zero as time increases. Given that the friction coefficient is the same for all directions, all degrees of freedom will shrink at the same rate. If we understand the volume as entropy, this tells us that the only way we can add or remove entropy to/from a system while preserving the independence of the degrees of freedom is by dividing that entropy contribution equally among each d.o.f.. In other words, preservation of d.o.f. gives us a sort of equipartition of entropy change. It is again striking to find these connections between disciplines at such a basic level.
+Note that, in principle, we could ask the evolution to preserve the independence of d.o.f. without requiring \ref{assum_detrev}. As we saw, fixing all independent d.o.f. fixes $\omega_{ab}$ up to a scalar factor, which could change during the evolution. The volume would stretch or shrink depending on the factor, stretching or shrinking each d.o.f. by the same amount. An example of this would be a particle under linear drag in three dimensions. Since a faster moving object will be subjected to a greater frictional force, a spread in momentum $\Delta p$ will become smaller in time, and will tend to zero as time increases. Given that the friction coefficient is the same for all directions, all degrees of freedom will shrink at the same rate. If we understand the volume as entropy, this tells us that the only way we can add or remove entropy to/from a system while preserving the independence of the degrees of freedom is by dividing that entropy contribution equally among each d.o.f.. In other words, preservation of d.o.f. independence gives us a sort of equipartition of entropy change. It is again striking to find these connections between disciplines at such a basic level.
 
-To conclude, we now have a mathematically and physically precise way to characterize Hamiltonian evolution. We had found that Hamiltonian mechanics did not apply to all cases, and now we know exactly to which cases it applies: deterministic and reversible systems described by finitely many independent degrees of freedom. 
+To conclude, we now have a mathematically and physically precise way to characterize Hamiltonian evolution. We had found that Hamiltonian mechanics did not apply to all cases, and now we know exactly to which cases it applies: systems described by finitely many independent degrees of freedom undergoing deterministic and reversible evolution.
+
+\section{Reversing differential topology}
+
+In the previous sections, we saw that elements of differential geometry started appearing: we employed a generalization of curl and we used the form $\omega_{ab}$ to lower indexes, much like one does in general relativity with the metric tensor $g_{ab}$. Since we will use these tools more and more, we should take a detour and understand the physical significance of the tools themselves. We will see that to reach the full potential of reverse physics, we need to apply the same techniques to not just the equations themselves, but to the mathematical tools we use to formulate them.
+
+The main reason we are forced to abandon vector calculus in favor of differential topology and geometry is that vector calculus does not generalize to an arbitrary dimensional space. Special and general relativity, for example, live on a four-dimensional space-time; Hamiltonian and Lagrangian mechanics live in phase-space, which is even larger as we can have an arbitrarily large number of degrees of freedom. Given that our goal is ultimately physics, we will start from the expressions of vector calculus, see their limitations, and construct generalized ones. We warn the reader that already is familiar with differential topology that what we will obtain is not exactly the notation and concepts used by mathematicians. We will discuss this difference at the end of the section.
+
+The first tool we need go generalize is that of line, surface and volume integral. For example, the mass $m$ within a region $V$ can be understood as the sum of the contributions of a mass density $\rho$ within each infinitesimal volume $dV$:
+\begin{equation}
+	m(V) = \iiint_V \rho dV.
+\end{equation}
+Similarly, the magnetic flux $\Phi$ through a surface $\Sigma$ can be understood as the sum of the contributions of the magnetic field $\vec{B}$ over each infinitesimal $\vec{d\Sigma}$:
+\begin{equation*}
+	\Phi(\Sigma) = \iint_\Sigma \vec{B} \cdot \vec{d\Sigma}.
+\end{equation*}
+Lastly, the work $W$ over a path $\lambda$ can be understood as the sum of the contributions of a force field $\vec{f}$ over each infinitesimal line $\vec{d\gamma}$:
+\begin{equation*}
+	W(\gamma) = \int_\gamma \vec{f} \cdot \vec{d\gamma}.
+\end{equation*}
+
+Note the pattern: the functionals $W$, $\Phi$ and $m$ all take a region of space while $\vec{f}$, $\vec{B}$ and $\rho$ act on infinitesimal regions. However the pattern is not completely consistent. In the one dimensional case, we have the product between a vector representing the force and a vector representing the displacement along the line. In the two dimensional case we the product between a pseudo-vector representing the magnetic force and a vector representing the normal to the surface element. In the three dimensional case we have the product between a pseudo-scalar representing the density and a scalar representing the volume of the infinitesimal region. Note that each operation is ad-hoc. Moreover, a surface has a single perpendicular direction only in two dimensions. Lastly, they all require a notion of product between vector, an inner product, which is only defined on Riemannian spaces, those that define a metric tensor. That is, those spaces in which angles and distances are well defined. In physics we are so used to work with spaces that have an inner product that it may seem that all spaces provide one, but that is not the case. In phase space, there is no way to compare differences in position with differences in momentum, therefore we do not have a metric to take a scalar product. In general, if we imagine the space that represents all possible outcomes of a blood test, this will form a manifold as each test can be fully described by a finite set of continuous quantities. In this space, there is no natural notion of distance and angles between directions.
+
+Suppose we understood $f$, $B$ and $\rho$ not as above, but as functions of infinitesimal regions. We could simply write
+\begin{equation*}
+	\begin{aligned}
+		W(\gamma) &= \int_\gamma f(d\gamma) \\
+		\Phi(\Sigma) &= \iint_\Sigma B(d\Sigma) \\
+		m(V) &= \iiint_V \rho(dV).
+	\end{aligned}
+\end{equation*}
+This pattern is more straight-forward, and clearly generalized. We call these functions of infinitesimal regions $k$-form, where $k$ is the dimensionality of the infinitesimal region they take as an argument. The force, in this notation, is a one-form (or covector) as it takes one dimensional infinitesimal regions (i.e. vectors); the magnetic field is a two-form; the density is a three-form. We can also say that a scalar field, like the temperature, is a zero-form.
+
+Given that the $k$-form act over infinitesimal regions, they can be further described. First, they will be linear functions of the infinitesimal regions. Second, note that each infinitesimal region can be understood as a parallelepiped, and a parallelepiped is fully identified by its sides. Therefore, a $k$-form can be understood as acting on a set of infinitesimal displacements, the sides of the parallelepiped, that matches the dimensionality of the form. A one-form will take one displacement, a two-form two displacements and so on. Lastly, all forms must be anti-symmetric because switching the order of the sides does not change the parallelepiped, but it changes its orientation.
+
+We can write displacements and forms in terms of components and basis 
+\begin{equation}
+	\begin{aligned}
+	dP &= dx^i e_i \\
+		f &= f_i e^i \\
+		B &= B_{ij} e^i \otimes e^i \\
+		\rho &= \rho_{ijk} e^i \otimes e^j \otimes e^k.
+	\end{aligned}
+\end{equation}
+Therefore, our integrals can be written as
+\begin{equation}
+	\begin{aligned}
+		W(\lambda) &= \int_\lambda f_i \, dx^i \\
+		\Phi(\Sigma) &= \iint_\Sigma B_{ij} \, dx_1^i \, dx_2^j \\
+		m(V) &= \iiint_V \rho_{ijk} \, dx_1^i \, dx_2^j \, dx_3^k.
+	\end{aligned}
+\end{equation}
+Each form, then, is a fully anti-symmetric covariant tensor. The $B^x$ component of the magnetic field, then, becomes the $B_{yz}$ component. That is, instead of being the component that gives us the magnetic flux along the $x$ direction, it is the component gives us the flux along the $yz$ plane. The function $\rho_{xyz}$ is not the value of the mass density at a point, but rather the value of the density over the $xyz$ volume.
+
+With that in mind, we can rewrite the integrals in terms of parametrizations of the surfaces and the components of the forms along said parametrization. We have
+\begin{equation}
+	\begin{aligned}
+		W(\lambda) &= \int_\lambda F_i dx^i = \int_{a_u}^{b_u} F_i \partial_u x^i du = \int_{a_u}^{b_u} F_u du \\
+		\Phi(\Sigma) &= \iint_\Sigma B_{ij} \, dx_1^i \, dx_2^j = \int_{a_u}^{b_u} \int_{a_v}^{b_v} B_{ij} \, \partial_u x_1^i du \, \partial_v x_2^j dv = \int_{a_u}^{b_u} \int_{a_v}^{b_v} B_{uv} du dv \\
+		m(V) &= \iiint_V \rho_{ijk} \, dx_1^i \, dx_2^j \, dx_3^k = \int_{a_u}^{b_u} \int_{a_v}^{b_v} \int_{a_w}^{b_w} \rho_{ijk} \,  \partial_u x_1^i du \, \partial_v x_2^j dv \, \partial_w x_3^k dw \\
+		&= \int_{a_u}^{b_u} \int_{a_v}^{b_v} \int_{a_w}^{b_w} \rho_{uvw} du dv dw.
+	\end{aligned}
+\end{equation}
+This expressions are useful to write the integrals in terms of terms of a single integral of $k$ variables.
+
+We now have expressions that are easier to generalize. If we note $S^k$ the space of all the $k$ dimensional subregions, a $k$-functional $F_f : S^k \to \mathbb{R}$ is an additive functional that takes a $k$-surface $\sigma^k$ and returns a number. This can be expressed as
+\begin{equation}
+	\begin{aligned}
+		F_k(\sigma^k) &= \int_\sigma \omega_k (d\sigma^k) = \int_{\sigma^k} \omega_{i_1 i_2 \cdots i_k} \, dx_1^{i_1} \, dx_2^{i_2} \, \cdots \, dx_k^{i_k} \\
+		&= \int_{a_{u_1}}^{b_{u_1}} \int_{a_{u_2}}^{b_{u_2}} \cdots \int_{a_{u_k}}^{b_{u_k}} \omega_{u_1 u_2 \cdots u_k} \, du_1 \, du_2 \, \cdots \, du_k.
+	\end{aligned}
+\end{equation}
+the integral of a $k$-form $\omega_k : V^k \to \mathbb{R}$ that takes an infinitesimal $k$-surface $d\sigma^k$, defined by a set of $k$ vectors, and returns a number. We now have a way to express local objects and integrals in a generalized way.
+
+In the spirit of reverse physics, we ask: what are the physical assumptions that are required to use these mathematical objects? Note that we do not measure directly mass density $\rho$: we measure mass $m$ within a finite region $V$, the size of the finite region $V$, and we calculate the mass density by dividing the first with the second. The mass $\rho$  is the limit for which the region $V$ shrinks to a point. Same with the other quantities. We do not measure a force $f$ directly, but rather the work that force performs, for example, by deforming a spring. In other words, we measure the finite value of the functional $F$ over a finite region $\sigma$, and the form $\omega$ returns the limit of $F$ for infinitesimal regions. Note that it is crucial for $F$ to be additive, that is, if $\sigma_1$ and $\sigma_2$ are two disjoint regions, $F(\sigma_1 \cup \sigma_2) = F(\sigma_1) + F(\sigma_2)$. Physically, it means that the contribution of each sub-region is independent from the other, because if this isn't the case, we cannot assign a unique value to each region. While they may seem a relatively harmless assumption, it may not hold in general. For example, suppose we have a system distributed in space. Given the mass/energy equivalence, the mass is an additive functional only if the interaction between the parts can be neglected. In fact, if the interaction energy at the boundary is so large that it is of the same scale of the mass within the regions, then it is not true that the total mass is simply the mass within each region. Therefore, if we write the mass density $\rho$, we have implicitly assumed that the interaction energy between parts can be neglected. While this is going to be true in a large number of cases, it is something we have to keep in mind. The functional $F$, in fact, is a more general physical object as it may exists even though infinitesimal additivity fails.
+
+If the functional $F$ respects the limits, in the sense that small variations of the region results in small variations of the value of the functional, then we can express the functional $F$ as the integral of a form $\omega$.\footnote{Mathematically, one needs to be precise as to what these small variations are, and what is the space of regions. Effectively, we need to define what it means for $k$-surfaces to be differentials. We leave this for another section.} Note that the standard mathematical definitions are inverted to what makes physical sense. Mathematically, we first define the forms and then its integration, and we may worry whether the integral exists or diverges; physically, we first define the functional of finite regions and find the form as a limit on additional physical assumptions. This is important because, as we said before, it tells us that it is the functional that survives when the assumption fails, not the form. It also means that, if we want to get a robust physical intuition, we should concentrate on the functional, the finite object, rather than the forms, the infinitesimal objects.
+
+As we saw before, we also need to generalize the differential operators gradient, curl and divergence. Suppose that $T$ is a scalar field, like the temperature. Then we have the following relationship
+\begin{equation}\label{rp-cm-dg-gradientTheorem}
+	\int_{\lambda} \vec{\nabla} T \cdot d\vec{\lambda} = T(B) - T(A).
+\end{equation}
+That is, the integral of the gradient of $T$ along $\lambda$ gives us the difference of $T$ evaluated at the endpoints, the boundary of the line. If $\vec{f}$ is a vector field, like the force, we have
+\begin{equation}\label{rp-cm-dg-curlTheorem}
+	\int_{\Sigma} \vec{\nabla} \times f \cdot d\vec{\Sigma} = \int_{\lambda = \partial \Sigma} \vec{f} \cdot d\vec{\lambda} = W(\lambda)
+\end{equation}
+That is, the integral of the curl of $\vec{f}$ over a surface $\Sigma$ is equal to the line integral of $\vec{f}$ over the boundary. If $\vec{B}$ is a pseudo-vector field, like the magnetic field, we have
+\begin{equation}\label{rp-cm-dg-divergenceTheorem}
+	\int_{V} \vec{\nabla} \cdot \vec{B} \, dV = \int_{\Sigma = \partial V} \vec{B} \cdot d\vec{\Sigma} = \Phi(\Sigma).
+\end{equation}
+That is, the integral of the divergence of $\vec{B}$ over a region $V$ is equal to the surface integral of $\vec{B}$ over the boundary. Note the pattern: the integral of the differential operator applied to the bulk becomes the integral of the original object over the boundary.
+
+Let us understand how this works in terms of functionals. Suppose we have a $k$-functional $F_k : S^k \to \mathbb{R}$. To each $k$-surface $\sigma^k$ we can associate a number $F_k(\sigma^k)$. Now, suppose we are given a $(k+1)$-surface $\sigma^{k+1}$. While $F_k$ cannot act on $\sigma^{k+1}$, the boundary $\partial \sigma^{k+1}$ is a $k$-surface, therefore we can evaluate $F_k(\partial \sigma^{k+1})$. Therefore, we can define the $(k+1)$-functional $\partial F_k$ such that $\partial F_k (\sigma^{k+1}) = F_k(\partial \sigma^{k+1})$, which we call the exterior functional of $F_k$.\footnote{Mathematically, we would have to prove that $\partial F_k$ is a functional. Again, these mathematical details are left for another section. For now, we are more interested in the conceptual understanding.} Since the exterior functional is an additive functional, it will have a corresponding form that acts on the infinitesimal region. Conceptually, the gradient of $T$ is the one-form that corresponds to the boundary functional of $T$; the curl of $\vec{f}$ is the two-form that corresponds to the boundary functional of the work $W$, the line integral of $\vec{f}$; the divergence of $\vec{B}$ is the three-form that corresponds to the boundary functional of the magnetic flux $\Phi$, the surface integral of $\vec{B}$. The problem is, again, that the gradient, curl and divergence are not expressed in a way that is easy to generalize.
+
+Given that all three operators are in terms of $\nabla$, which in components is written $\partial_i$, we would like to write something along the lines of 
+\begin{equation}\label{rp-cm-dg-generalizedStokes}
+	\begin{aligned}
+		\partial F_k(\sigma^{k+i}) &=\int_{\sigma^{k+i}} \partial_{i_0} \wedge \omega_{i_1 i_2 \cdots i_k} dx^{i_0} dx^{i_1} dx^{i_2} \cdots dx^{i_k} \\
+		&= \int_{\partial \sigma^{k+i}} \omega_{i_1 i_2 \cdots i_k} dx^{i_1} dx^{i_2} \cdots dx^{i_k} = F_k(\partial \sigma^{k+i}).
+	\end{aligned}
+\end{equation}
+The operation $\wedge$, which we call exterior product, must be such that we recover something consistent to the previous operations. That is, we need
+\begin{equation}
+	\begin{aligned}
+		\partial_i \wedge T &= \partial_i T \\
+		\partial_i \wedge F_j &= \partial_i F_j - \partial_j F_i \\
+		\partial_i \wedge B_{jk} &= \partial_{i} B_{jk} + \partial_{j} B_{ki} + \partial_{k} B_{ij} 
+	\end{aligned}
+\end{equation}
+What we can see is that, in each expression, we are taking the derivative with respect to each index. The pattern generalizes in the following way
+\begin{equation}
+	\begin{aligned}
+		\partial_{i_0} \wedge \omega_{i_1 i_2 \cdots i_k} &= \partial_{i_0} \omega_{i_1 i_2 \cdots i_k} + (-1)^{k} \partial_{i_1} \omega_{i_2 \cdots i_k i_0} + (-1)^{2k} \partial_{i_2} \omega_{i_3 \cdots i_k i_0 i_1} + \cdots \\
+		&+ (-1)^{k^2} \partial_{i_k} \omega_{i_0 i_1 \cdots i_{k-1}} \\
+		&= \sum_{j=0}^{j=k} (-1)^{jk} \partial_{i_{j \bmod k}} \omega_{i_{j+1 \bmod k} i_{j+2 \bmod k} \cdots i_{j+k \bmod k}}.
+	\end{aligned}
+\end{equation}
+
+Mathematically, we can understand the expression as the requirement of the resulting form to be anti-symmetric. Since all permutations must be accounted for, and since the form will already take into account the permutations among its indexes, we need one term for each derivation in each index, making sure to use the correct orientation. We can do that in different way, but here we use of cyclic permutations to . Geometrically, we can imagine integrating along a parallelepiped, which becomes
+\begingroup
+\allowdisplaybreaks
+\begin{align*}
+		\int_{\sigma^{k+1}} \partial \wedge \omega_k (d\sigma^{k+1}) &= \int_{\sigma^{k+1}} \partial_{i_0} \wedge \omega_{i_1 i_2 \cdots i_k} \, dx_1^{i_1} \, dx_2^{i_2} \, \cdots \, dx_k^{i_k} \\
+		&= \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_k}}^{b_{u_k}} (\partial_{u_0} \omega_{u_1 u_2 \cdots u_k} \\
+		&+ (-1)^{k} \partial_{u_1} \omega_{u_2 \cdots u_k u_0} + \cdots 
+		+ (-1)^{k^2} \partial_{u_k} \omega_{u_0 u_1 \cdots u_{k-1}} )du_0 \,du_1 \, du_2 \, \cdots \, du_k \\
+		&= \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_k}}^{b_{u_k}} \int_{a_{u_0}}^{b_{u_0}} du_0 \partial_{u_0} \omega_{u_1 u_2 \cdots u_k} \,du_1 \, du_2 \, \cdots \, du_k \\
+		&+ (-1)^{k} \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_2}}^{b_{u_2}} \cdots \int_{a_{u_k}}^{b_{u_k}} \int_{a_{u_1}}^{b_{u_1}} du_1 \partial_{u_1}  \omega_{u_1 u_2 \cdots u_k} \,du_0 \, du_2 \, \cdots \, du_k \\
+		&+ \cdots + (-1)^{k^2} \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_{k}}}^{b_{u_k}} du_k  \partial_{u_k} \omega_{u_0 u_1 \cdots u_{k-1}} \,du_0 \, du_1 \, \cdots \, du_{k-1} \\
+		&= \left[ \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_k}}^{b_{u_k}} \omega_{u_1 u_2 \cdots u_k} \,du_1 \, du_2 \, \cdots \, du_k \right]_{a_{u_0}}^{b_{u_0}} \\
+		&+ (-1)^{k} \left[ \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_2}}^{b_{u_2}} \cdots \int_{a_{u_k}}^{b_{u_k}}\omega_{u_1 u_2 \cdots u_k} \,du_0 \, du_2 \, \cdots \, du_k \right]_{a_{u_1}}^{b_{u_1}} \\
+		&+ \cdots + (-1)^{k^2} \left[ \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_{k-1}}}^{b_{u_{k-1}}} \omega_{u_0 u_1 \cdots u_{k-1}} \,du_0 \, du_1 \, \cdots \, du_{k-1} \right]_{a_{u_{k}}}^{b_{u_k}} \\
+		&= \int_{\partial \sigma^{k+1}} \omega_k (d\partial\sigma^{k+1}).
+\end{align*}
+\endgroup
+What happens is that each direction of integration will match a derivative in the same direction, and therefore will reduce to the integration of $\omega$ on opposing sides. This happens for each direction, and therefore the whole integral will reduce to the integration of $\omega$ on the surface of the parallelepiped. We have verified that equation \ref{rp-cm-dg-generalizedStokes}, which is known as the generalized Stokes' theorem, indeed works and it includes, as particular cases, the gradient theorem \ref{rp-cm-dg-gradientTheorem}, the curl theorem \ref{rp-cm-dg-curlTheorem} and the divergence theorem \ref{rp-cm-dg-divergenceTheorem}.
+
+In vector calculus, we have the following expressions
+\begin{equation}
+	\begin{aligned}
+		&\vec{\nabla} \times \vec{\nabla} T = 0 \\
+		&\vec{\nabla} \cdot \vec{\nabla} \times \vec{f} = 0.
+	\end{aligned}
+\end{equation}
+To generalize them, we note that the exterior product $\wedge$ is an anti-commutative and associative operation. Therefore we have
+\begin{equation}
+	\begin{aligned}
+		\partial_{i} \wedge \partial_{j} \wedge \omega_{l_1 l_2 \cdots l_{k}} &= (\partial_i \partial_j - \partial_j \partial_i) \wedge \omega_{l_1 l_2 \cdots l_{k}} = 0 \wedge \omega_{l_1 l_2 \cdots l_{k}} = 0.
+	\end{aligned}
+\end{equation}
+In other words, the exterior derivative applied twice returns zero. To understand the geometrical significance of the generalized relationship, recall that the exterior derivative of the form is associated with the exterior functional. We should, then, look at what happens when we construct the exterior functional of an exterior functional. We have
+\begin{equation}
+	\begin{aligned}
+		\partial \partial F_k (\sigma^{k+2}) &= \partial F_k (\partial \sigma^{k+2}) = F_k (\partial \partial \sigma^{k+2}) = F_k(\emptyset) = 0.
+	\end{aligned}
+\end{equation}
+In words, the exterior of the exterior functional of $F_k$ equals $F_k$ applied to the boundary of the boundary. Now, the boundary of a boundary is always the empty set, and any functional applied to the empty set must be zero. In fact, since functionals are additive, we must have
+\begin{equation}
+	\begin{aligned}
+		F_k(\sigma_k) &= F_k(\sigma_k \cup \emptyset) = F_k(\sigma_k) + F_k(\emptyset).
+	\end{aligned}
+\end{equation}
+This shows how studying differential relationship in terms of finite functionals can give a more geometrically meaningful picture.
+
+The last element of vector calculus we need to generalize is the idea of potential. That is,
+\begin{equation}
+	\begin{aligned}
+		\vec{\nabla} \times \vec{f} = 0 &\Rightarrow \vec{f} = \nabla V \\
+		\vec{\nabla} \cdot \vec{B} = 0 &\Rightarrow \vec{B} = \nabla \times \vec{A} .
+	\end{aligned}
+\end{equation}
+These are generalized by the following formula
+\begin{equation}
+	\begin{aligned}
+		\partial_i \wedge \omega_{l_1 l_2 \cdots l_{k}} = 0 &\Rightarrow   \omega_{l_1 l_2 \cdots l_{k}} = \partial_{l_1} \wedge \theta_{l_2 \cdots l_{k}} .
+	\end{aligned}
+\end{equation}
+That is, if the exterior derivative of a $k$-form is zero, then there exists a $(k-1)$-form whose exterior derivative is the original $k$-form.
+
+Technically, closed forms (i.e. those whose exterior derivative is zero) are not necessarily exact forms (i.e. those that are the exterior derivative of another form). This is true only on contractible regions (i.e. those regions that can be continuously shrunk to a point, that do not have holes). We can understand the difference better by looking at the corresponding functionals. An exact form corresponds to a functional that returns zero for any closed surface. A closed form, however, is guaranteed to return zero only on closed surfaces that are contractible. For example, it may return non-zero over a closed surface that encloses a hole. Therefore, all exact forms are closed, but not all closed forms are exact. However, if we restrict ourselves to a contractible region, the two definitions are the same.
+
+To sum up, we have generalized the idea of integration over $k$-dimensional submanifolds of an $n$-dimensional space, which leads to the idea of $k$-functionals over finite regions and $k$-forms over the infinitesimal ones; we have seen that the finite functionals are physically more fundamental than the infinitesimal forms; we have seen how $k$-functionals induce $k+1$-functionals by acting on the boundaries of the $k+1$ dimensional regions; we have seen that the exterior derivative gives us the form associated to the exterior functionals, and that this operations generalizes the notion of gradient, curl and divergence. While this does not exhaust all that can be done in differential topology and differential geometry, this is enough for what we need to use in the following sections.
+
+We should note that our notation and definitions do not quite match the ones typically use in math textbooks. The issue is that said notation and definitions do not match what we need to physically capture, and therefore it would be a mistake to employ them. Let us briefly see why. First of all, vectors are typically defined as directional derivative. That is, a vector $v = v^i \partial_i$ is an operator that acts on scalar functions. A velocity, which we typically think of as a vector, is not a derivation. A covector $\theta = \theta_i dx^i $ is a map from a vector to a scalar number. Conjugate momentum, which we typically think of as a covector, is not a map. A differential $dx^i$ is a covector, and it is the exterior derivative of the coordinate $x^i$. This is not how we think of differentials in the context of integration. In fact, consider the expression $\int f_i dx^i$. To write it in terms of invariant objects, we would have $f = f_i e^i$ and $dX = dx^i e_i$ and therefore $\int f( dX )$. Therefore the differential $dX$ is a vector, where the $dx^i$ are the contravariant components, while $f$ is a map from a vector $dX$ to the differential $df$, which is what is integrated. Therefore the differential is the vector, while the force is the covector. The map does not work conceptually. Moreover, in differential topology there is a notion of a single tangent space where all vectors live. However, let us take a look at the units. Consider the basis $\partial_i$. Given that coordinates are expressed in different units, we cannot simply sum derivatives along different directions. For example, in polar coordinates $\partial_r$ may have units of inverse meters while $\partial_\theta$ of inverse radians. Worse of all, a directional derivative is taken with respect to a parameter, which also will have units and physical dimension. For example, if $v$ represents a velocity, the components $v^i$ would also depends on the units of velocity. Again, vectors that are defined with parameters that are of different units cannot be summed. But worst of all, the tangent space of a manifold should not depend, and in fact even know, of units that are not defined by its own coordinates.
+
+The takeaway message here is the following: the mathematical tools we inherit from mathematics are not necessarily designed to capture the physical relationships we need to capture. If we want to have meaningful physical theories, which is ultimately the goal of reverse physics, we need to revisit the mathematical tools we use to formulate them.
+
 
 \section{Reversing Lagrangian mechanics}
 
@@ -901,4 +1087,133 @@ This means that
 \begin{equation}
 	\omega_{ab} = - (\partial_a \theta_b - \partial_b \theta_a),
 \end{equation}
-the form $\omega_{ab}$ is the curl of $- \theta_a$.
+the form $\omega_{ab}$ is the curl of $- \theta_a$ generalized to $n$ dimensions. In this sense, $\theta_a$ can be understood as a vector potential of $\omega$.
+
+Given that the extended phase space for a single degree of freedom is three dimensional, this case can be understood with standard vector calculus. In this case, we have
+\begin{equation}
+	\begin{aligned}
+	\theta_a &= \begin{bmatrix}
+		p & 0 & - H
+	\end{bmatrix} \\
+\omega_{ab} &= \left[\begin{array}{ccc}
+	0 & 1 & \partial_{q} H \\
+	- 1 & 0 & \partial_{p} H \\
+	- \partial_{q} H & -\partial_{p} H & 0
+\end{array} \right]
+= \left[\begin{array}{ccc}
+	0 & S_t & - S_p \\
+	- S_t & 0 & S_q \\
+	S_p & - S_q & 0
+\end{array} \right] = \epsilon_{abc}S^c
+	\end{aligned}
+\end{equation}
+where $\epsilon_{abc}$ is the fully anti-symmetric Levi-Civita symbol which returns the sign of the permutation of the variables (i.e. $\epsilon_{qpt} = \epsilon_{ptq} = \epsilon_{tqp} = 1$ while $\epsilon_{tpq} = \epsilon_{pqt} = \epsilon_{qtp} = -1$). We then have the following relationship
+\begin{equation}
+	\begin{aligned}
+	\epsilon_{abc}S^c &= - (\partial_a \theta_b - \partial_b \theta_a) \\
+	S^c &= - \nabla_a \times \theta_b \\
+	\end{aligned}
+\end{equation}
+This is the same relationship we would have between the magnetic field $B^i$ and its vector potential $A_i$. Therefore the same vector calculus apply: $S^a$ is divergenceless, admits a vector potential and the flow of the displacement over a closed surface is zero. We can understand this as assumption \ref{assum_detrev} implemented in the extended phase space. What is peculiar, however, is that the vector potential $\theta_a$ is fully characterized by a single arbitrary component, the time component. Why is that?
+
+Suppose that we know that $S^a$ is a divergenceless field, we say that it is minus the curl of a potential
+\begin{equation}
+	\theta_a = \begin{bmatrix}
+	\theta_q & \theta_p & \theta_t
+\end{bmatrix} .
+\end{equation}
+Vector potentials are defined up to the gradient of an arbitrary function, up to a gauge, and therefore we can set, without loss of generality, the momentum component to zero
+\begin{equation}
+	\theta_a = \begin{bmatrix}
+		\theta_q & 0 & \theta_t
+	\end{bmatrix} .
+\end{equation}
+Now, the displacement field $S^a$ is particular in that its time component $S^t = d_t t = 1$ is unitary. That is, states flow at the same rate in time. Therefore we must have
+\begin{equation}
+	S^t = - (\partial_q \theta_p - \partial_p \theta_q) = \partial_p \theta_q = 1.
+\end{equation}
+Integrating the relationship we find that $\theta_q = p + c$, where $c$ is an arbitrary constant that we can set to zero without loss of generality. We have
+\begin{equation}
+	\theta_a = \begin{bmatrix}
+		p & 0 & \theta_t
+	\end{bmatrix}.
+\end{equation}
+At this point, we simply rename the last component to $-H$ and have
+\begin{equation}
+	\theta_a = \begin{bmatrix}
+		p & 0 & -H
+	\end{bmatrix}.
+\end{equation}
+The form of the vector potential, then, is set by the fact that the flow of $S^a$ is both divergenceless and uniform along the time direction.
+
+This argument tells us very simply what happens in the case of a single degree of freedom, but, as we have seen before, the divergenceless of $S^a$ is not enough to characterize Hamiltonian mechanics in the general case. It is instructive to understand how it generalizes, to see that it recover only part of the picture. To do that we are now forced to introduce a couple of basic elements of differential topology because we really need to understand how gradient, curl and divergence generalize.\footnote{We are going to use concepts and notation that is more straightforward for those with a physics background. The general idea is that vectors represent linear displacements and infinitesimal regions. Tensors, and forms in particular, are linear functions of displacements and infinitesimal regions.}
+
+Suppose that $T$ is a scalar field, like the temperature. Then we have the following relationship
+\begin{equation}
+	\int_{\lambda} \vec{\nabla} T \cdot d\vec{\lambda} = T(B) - T(A).
+\end{equation}
+That is, the integral of the gradient of $T$ along $\lambda$ gives us the difference of $F$ evaluated at the endpoints, the boundary of the line. If $\vec{F}$ is a vector field, like the force, we have
+\begin{equation}
+	\int_{\Sigma} \vec{\nabla} \times F \cdot d\vec{\Sigma} = \int_{\lambda = \partial \Sigma} \vec{F} \cdot d\vec{\lambda}
+\end{equation}
+That is, the integral of the curl of $\vec{F}$ over a surface $\Sigma$ is equal to the line integral of $\vec{F}$ over the boundary. If $\vec{B}$ is a vector field, like the magnetic field, we have
+\begin{equation}
+	\int_{V} \vec{\nabla} \cdot \vec{B} \, dV = \int_{\Sigma = \partial V} \vec{B} \cdot d\vec{\Sigma}.
+\end{equation}
+That is, the integral of the divergence of $\vec{B}$ over a region $V$ is equal to the surface integral of $\vec{B}$ over the boundary.
+
+Note the pattern: the integral of the differential operator applied to the bulk becomes the integral of the original object over the boundary. This relationship is what differential geometry generalizes. The trick is to understand that $\vec{B}$ is not really a vector, it is a pseudo-vector. It acts differently under parity precisely because we integrate it over surfaces, not lines. Therefore, instead of thinking it as a vector $B^i$ we can more properly characterize it as an anti-symmetric tensor $B_{ij}$. In this form, the pattern of the expressions becomes more streamlined
+\begin{equation}
+	\begin{aligned}
+		T(P) & \\
+		W(\lambda) &= \int_\lambda F_i dx^i = \int_{u_1}^{u_2} F_i \partial_u x^i du = \int_{u_1}^{u_2} F_u du \\
+		\Phi(\Sigma) &= \int_\Sigma B_{ij} dx^i dx^j = \int_{u_1}^{u_2} \int_{v_1}^{v_2} B_{ij} \partial_u x^i \partial_v x^j du dv = \int_{u_1}^{u_2} \int_{v_1}^{v_2} B_{uv} du dv.
+	\end{aligned}
+\end{equation}
+Note that we give the expression both in coordinates $x^i$ of the manifold, and the coordinates of the $k$-surface for integration. These can be generalized to a generic $k$-dimensional surface $\sigma_k$ and a generic tensor $\theta_{i_1 i_2 \cdots i_k}$
+\begin{equation}
+	F(\sigma_k) = \int_{\sigma_k} \theta_{i_1 i_2 \cdots i_k} dx^{i_1} dx^{i_2} \cdots dx^{i_k} = \int_{u_1}^{u_2}\int_{v_1}^{v_2}\cdots\int_{w_1}^{w_2} \theta_{u v \cdots w} du dv \cdots dw.
+\end{equation}
+These tensors are called forms, and they must be fully anti-symmetric to match the transformation rules of the $k$-dimensional parallelepipeds they act on.
+
+Note that the gradient, the curl and the divergence always increase the region of integration by one dimension. This is because they take forms that act on the boundary, and return forms that act in the bulk. The idea is that we can construct an operator called exterior derivative, which we will note $\nabla_{i_0} \theta_{i_1 i_2 \cdots i_k}$ such that
+\begin{equation}
+	\int_{\sigma_{k+i}} \nabla_{i_0} \theta_{i_1 i_2 \cdots i_k} dx^{i_0} dx^{i_1} dx^{i_2} \cdots dx^{i_k} = \int_{\partial \sigma_{k+i}} \theta_{i_1 i_2 \cdots i_k} dx^{i_1} dx^{i_2} \cdots dx^{i_k}.
+\end{equation}
+The expression in terms of terms of components works in the following way
+\begin{equation}
+	\begin{aligned}
+		\nabla_i T &= \partial_i T \\
+		\nabla_i F_j &= \partial_i F_j - \partial_j F_i \\
+		\nabla_i B_{jk} &= \partial_{i} B_{jk} + \partial_{j} B_{ki} + \partial_{k} B_{ij} \\
+		\nabla_i \theta_{jkl} &= \partial_{i} \theta_{jkl} - \partial_{j} \theta_{kli} + \partial_{k} \theta_{lij} - \partial_{l} \theta_{ijk} \\
+	\end{aligned}
+\end{equation}
+Note how we have a derivative in each index in each direction, and how the exterior derivative applied to odd dimensional forms (i.e. one and three) have alternating signs. The alternating sign is a consequence of the anti-symmetry of the form.
+
+The other result is that the exterior derivative applied twice is always zero, that is $\nabla_i \nabla_j \theta_{k\cdots} = 0$. This generalizes the fact that the curl of the gradient is zero and that the divergence of the curl is zero. And that if the exterior derivative of a form is zero, then it can be expressed as the exterior derivative of a lower dimensional form. Therefore, if the exterior derivative of a four-form is zero $\nabla_i \omega_{jklm} = 0$, then it can be there is a three-form potential $\omega_{jklm} = \nabla_j \theta_{klm}$. This generalizes the idea that a curl-free field has a scalar potential or that a divergence-free field (which is more properly a two-form) has a vector potential (which is more properly a one-form).
+
+The details of the math are not important here, but the concepts they represent. The three key ideas are
+\begin{enumerate}
+	\item $k$-forms are objects that are integrated over a $k$-dimensional surface and return a number
+	\item the exterior derivative $\nabla_i$ takes a $k$-form and returns a $k+1$-form that applies the original form on the boundary
+	\item if a $k$-form has a zero exterior derivative, then there is a $(k-1)$-form, a potential, such that the $k$-form is the exterior derivative of the $(k-1)$-form. 
+\end{enumerate}
+
+The key here is $S^a$ is something we want to integrate over hyper-surfaces to calculate a flow. Then, more properly, we should not understand $S^a$ as a $n-1$ form. In the single degree of freedom , $\omega_{ab}$ is exactly that form: we have a three dimensional space so an $(n-1)$-form is a two-form. The idea is that $\omega_{qp}$ represents the flow through a surface at constant position and momentum, which is the flow along time, which is the flow along time $S^t$. The same goes for the other components.
+
+In the general case, then, we would need a form $\Omega_{a_1 a_2 \cdots a_{n-1}}$ to represent the flow of states in the extended phase space. The exterior derivative of this flow is zero, which generalizes the idea that the divergence  $\omega{ab}$ 
+
+% We want to have a differential operator that does that in general. Since $\nabla = \partial_i$, we are looking for something like $\partial_{i_0} \theta_{i_1 i_2 \cdots i_k}$. This does not quite work as this takes the derivative in only one direction. When we integrate, we would find the difference between the boundaries on one dimension alone. If we imagine integrating along a parallelepiped, we need to a derivative along each dimension and, for each dimensions, evaluate the difference of the form along facing sides. The sum of all the sides becomes the surface integral on the boundary. Let's use $\nabla_i$ for this operations, we have:
+%\begin{equation}
+%	\begin{aligned}
+%		\int_\lambda \nabla_i T dx^i &= \int_\lambda \partial_{i} T dx^i = \int_{A}^{B} \partial_u T du = \int_{A}^{B} dT = T(B) - T(A) \\
+%		\int_\Sigma \nabla_i F_{j} dx^i dx^j &= \int_\Sigma ( \partial_{i} F_{j} - \partial_{j} F_{i}) dx^i dx^j =\int_{u_1}^{u^2} \int_{v_1}^{v^2} ( \partial_u F_v - \partial_v F_u) du dv \\
+%		&= \left.\int_{v_1}^{v^2} F_{j} dv^j \right|_{u_1}^{u^2} - \left.\int_{u_1}^{u^2} F_{i} du^i \right|_{v_1}^{v^2} = \int_{\partial \Sigma} F_i dx^i \\
+%		\int_V \nabla_i B_{jk} dx^i dx^j dx^k &= \int_V (\partial_{i} B_{jk} + \partial_{j} B_{ki} + \partial_{k} B_{ij}) dx^i dx^j dx^k \\
+%		&= \int_{u_1}^{u^2} \int_{v_1}^{v^2} \int_{w_1}^{w^2} (\partial_{u} B_{vw} + \partial_{v} B_{wu} + \partial_{w} B_{uv}) du dv dw\\
+%		&= \int_{\partial V} B_{ij} dx^i dy^j
+%	\end{aligned}
+%\end{equation}
+%What happens is that the operator $\nabla_i$, which is called exterior derivative in differential geometry, applies a derivative in each direction by rotating the indexes. Because of the anti-symmetric nature of forms, we have to take care of the sign. A cycle in $k$ indexes corresponds to $k-1$ swaps. Since each swap corresponding to a minus sign because of the anti-symmetry, if $k$ is odd we end up with even minus signs, which means no sign change, while 
+
