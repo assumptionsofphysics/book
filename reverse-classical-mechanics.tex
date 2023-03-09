@@ -888,7 +888,7 @@ The operation $\wedge$, which we call exterior product, must be such that we rec
 		\partial_i \wedge B_{jk} &= \partial_{i} B_{jk} + \partial_{j} B_{ki} + \partial_{k} B_{ij} 
 	\end{aligned}
 \end{equation}
-These would be the expressions we need to recover the gradient, curl and divergence respectively. Let us study them to see the pattern. Fist of all, each expression takes a $k$-form and returns a $(k+1)$-form by adding a derivation along each index. Given that we have a derivation for each index, the number of terms matches the number of indexes of the final form, which is $k+1$. Each terms changes index by taking a cyclic permutation. Recall that the forms are anti-symmetric, therefore each permutation of two indexes introduces a minus sing. A cyclic permutation of $k+1$ elements corresponds to $k$ pair swaps. If $k+1$ is odd, then, each cyclic permutations will correspond to an even number of sign switches, which cancel out. The pattern, then, generalizes in the following way
+These would be the expressions we need to recover the gradient, curl and divergence respectively. Let us study them to see the pattern. Fist of all, each expression takes a $k$-form and returns a $(k+1)$-form by adding a derivation along each index. Given that we have a derivation for each index, the number of terms matches the number of indexes of the final form, which is $k+1$. Each term changes index by taking a cyclic permutation. Recall that the forms are anti-symmetric, therefore each permutation of two indexes introduces a minus sign. A cyclic permutation of $k+1$ elements corresponds to $k$ pair swaps. If $k+1$ is odd, then, each cyclic permutation will correspond to an even number of sign switches, which cancel out. The pattern, then, generalizes in the following way
 \begin{equation}
 	\begin{aligned}
 		\partial_{i_0} \wedge \omega_{i_1 i_2 \cdots i_k} &= \partial_{i_0} \omega_{i_1 i_2 \cdots i_k} + (-1)^{k} \partial_{i_1} \omega_{i_2 \cdots i_k i_0} + (-1)^{2\cdot k} \partial_{i_2} \omega_{i_3 \cdots i_k i_0 i_1} + \cdots \\
@@ -896,28 +896,28 @@ These would be the expressions we need to recover the gradient, curl and diverge
 		&= \sum_{j=0}^{j=k} (-1)^{j\cdot k} \partial_{i_{j \bmod k+1}} \omega_{i_{j+1 \bmod k+1} i_{j+2 \bmod k+1} \cdots i_{j+k \bmod k+1}}.
 	\end{aligned}
 \end{equation}
-This gives us a fully anti-symmetric tensor which matches the gradient, curl and divergence in the simple cases.\footnote{In principle, we could write the expression in different equivalent ways. Here we used cyclic permutations as it gives a more elegant expression.} We call this operation exterior derivative.
+The use of $\mod k+1$ in the generalized expression makes sure that the index jumps from $i_k$ to $i_0$. This gives us a fully anti-symmetric tensor which matches the gradient, curl and divergence in the simple cases.\footnote{In principle, we could write the expression in different equivalent ways. Here we used cyclic permutations as it gives a more elegant expression.} This operation is called the exterior derivative.
 
-While we have the expression for the exterior derivative, we would like to understand why and how does the expression work. Geometrically, we can imagine integrating along a parallelepiped, which becomes
+While we have the expression for the exterior derivative, we would like to understand why and how the expression works. Geometrically, we can imagine integrating along a parallelepiped, which becomes
 \begingroup
 \allowdisplaybreaks
 \begin{align*}
-		\int_{\sigma^{k+1}} \partial \wedge \omega_k (\sigma^{k+1}) &= \int_{\sigma^{k+1}} \partial_{i_0} \wedge \omega_{i_1 i_2 \cdots i_k} \, dx_0^{i_0} \, dx_1^{i_1} \, \cdots \, dx_k^{i_k} \\
+		\int_{\sigma^{k+1}} (\partial \wedge \omega_k) (d\sigma^{k+1}) &= \int_{\sigma^{k+1}} \partial_{i_0} \wedge \omega_{i_1 i_2 \cdots i_k} \, dx_0^{i_0} \, dx_1^{i_1} \, \cdots \, dx_k^{i_k} \\
 		&= \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_k}}^{b_{u_k}} (\partial_{u_0} \omega_{u_1 u_2 \cdots u_k} + (-1)^{k} \partial_{u_1} \omega_{u_2 \cdots u_k u_0} \\
 		&+ \cdots 
-		+ (-1)^{k^2} \partial_{u_k} \omega_{u_0 u_1 \cdots u_{k-1}} )du_0 \,du_1 \, du_2 \, \cdots \, du_k \\
+		+ (-1)^{k \cdot k} \partial_{u_k} \omega_{u_0 u_1 \cdots u_{k-1}} )du_0 \,du_1 \, du_2 \, \cdots \, du_k \\
 		&= \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_k}}^{b_{u_k}} \int_{a_{u_0}}^{b_{u_0}} du_0 \partial_{u_0} \omega_{u_1 u_2 \cdots u_k} \,du_1 \, du_2 \, \cdots \, du_k \\
-		&+ (-1)^{k} \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_2}}^{b_{u_2}} \cdots \int_{a_{u_k}}^{b_{u_k}} \int_{a_{u_1}}^{b_{u_1}} du_1 \partial_{u_1}  \omega_{u_1 u_2 \cdots u_k} \,du_0 \, du_2 \, \cdots \, du_k \\
-		&+ \cdots + (-1)^{k^2} \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_{k}}}^{b_{u_k}} du_k  \partial_{u_k} \omega_{u_0 u_1 \cdots u_{k-1}} \,du_0 \, du_1 \, \cdots \, du_{k-1} \\
+		&+ (-1)^{k} \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_2}}^{b_{u_2}} \cdots \int_{a_{u_k}}^{b_{u_k}} \int_{a_{u_1}}^{b_{u_1}} du_1 \partial_{u_1}  \omega_{u_2 \cdots u_k u_0} \,du_0 \, du_2 \, \cdots \, du_k \\
+		&+ \cdots + (-1)^{k \cdot k} \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_{k}}}^{b_{u_k}} du_k  \partial_{u_k} \omega_{u_0 u_1 \cdots u_{k-1}} \,du_0 \, du_1 \, \cdots \, du_{k-1} \\
 		&= \left[ \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_k}}^{b_{u_k}} \omega_{u_1 u_2 \cdots u_k} \,du_1 \, du_2 \, \cdots \, du_k \right]_{a_{u_0}}^{b_{u_0}} \\
 		&+ (-1)^{k} \left[ \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_2}}^{b_{u_2}} \cdots \int_{a_{u_k}}^{b_{u_k}}\omega_{u_2 \cdots u_k u_0} \,du_0 \, du_2 \, \cdots \, du_k \right]_{a_{u_1}}^{b_{u_1}} \\
-		&+ \cdots + (-1)^{k^2} \left[ \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_{k-1}}}^{b_{u_{k-1}}} \omega_{u_0 u_1 \cdots u_{k-1}} \,du_0 \, du_1 \, \cdots \, du_{k-1} \right]_{a_{u_{k}}}^{b_{u_k}} \\
+		&+ \cdots + (-1)^{k \cdot k} \left[ \int_{a_{u_0}}^{b_{u_0}} \int_{a_{u_1}}^{b_{u_1}} \cdots \int_{a_{u_{k-1}}}^{b_{u_{k-1}}} \omega_{u_0 u_1 \cdots u_{k-1}} \,du_0 \, du_1 \, \cdots \, du_{k-1} \right]_{a_{u_{k}}}^{b_{u_k}} \\
 		&= \int_{\partial \sigma^{k+1}} \omega_k (d\partial\sigma^{k+1}).
 \end{align*}
 \endgroup
-What happens is that each direction of integration will match a derivative in the same direction, and therefore will reduce to the integration of $\omega$ on opposing sides of the parallelepiped. This happens for each direction, and therefore the whole integral will reduce to the integration of $\omega$ on the surface of the parallelepiped. We have verified that equation \ref{rp-cm-dg-generalizedStokes}, which is known as the generalized Stokes' theorem, indeed works and it includes, as particular cases, the gradient theorem \ref{rp-cm-dg-gradientTheorem}, the curl theorem \ref{rp-cm-dg-curlTheorem} and the divergence theorem \ref{rp-cm-dg-divergenceTheorem}.
+What happens is that each direction of integration will match a derivative in the same direction, and therefore will reduce to the integration of $\omega$ on opposing sides of the parallelepiped. This happens for each direction, and therefore the whole integral will reduce to the integration of $\omega$ on the surface of the parallelepiped. We have verified that equation \ref{rp-cm-dg-generalizedStokes}, which is known as the generalized Stokes theorem, indeed works and it includes, as particular cases, the gradient theorem \ref{rp-cm-dg-gradientTheorem}, the curl theorem \ref{rp-cm-dg-curlTheorem} and the divergence theorem \ref{rp-cm-dg-divergenceTheorem}.
 
-Another elements of vector calculus are the following identities
+Another aspect of vector calculus is given by the following identities
 \begin{equation}
 	\begin{aligned}
 		&\vec{\nabla} \times \vec{\nabla} T = 0 \\
@@ -930,7 +930,7 @@ To generalize them, we note that the exterior product $\wedge$ is an anti-commut
 		\partial_{i} \wedge \partial_{j} \wedge \omega_{l_1 l_2 \cdots l_{k}} &= (\partial_i \partial_j - \partial_j \partial_i) \wedge \omega_{l_1 l_2 \cdots l_{k}} = 0 \wedge \omega_{l_1 l_2 \cdots l_{k}} = 0.
 	\end{aligned}
 \end{equation}
-In other words, the exterior derivative applied twice returns zero, no matter on what form it is applied. Given that the curl is the exterior derivative applied to one forms and the gradient is the exterior derivative applied to zero form, the fact that the curl of the gradient is zero is simply an application of the more general property. The same applies for the divergence of the curl. As we saw, the mathematically the property is easy enough to verify, but we get no insight in its meaning. To understand the geometrical significance of the generalized relationship, recall that the exterior derivative of the form is associated with the exterior functional. We should, then, look at what happens when we construct the exterior functional of an exterior functional. We have
+In other words, the exterior derivative applied twice returns zero, no matter on what form it is applied. Given that the curl is the exterior derivative applied to one forms and the gradient is the exterior derivative applied to zero forms, the fact that the curl of the gradient is zero is simply an application of the more general property. The same applies for the divergence of the curl. As we saw, mathematically the property is easy enough to verify, but we get no insight into its meaning. To understand the geometrical significance of the generalized relationship, recall that the exterior derivative of the form is associated with the exterior functional. We should, then, look at what happens when we construct the exterior functional of an exterior functional. We have
 \begin{equation}
 	\begin{aligned}
 		\partial \partial F_k (\sigma^{k+2}) &= \partial F_k (\partial \sigma^{k+2}) = F_k (\partial \partial \sigma^{k+2}) = F_k(\emptyset) = 0.
@@ -939,16 +939,16 @@ In other words, the exterior derivative applied twice returns zero, no matter on
 In words, the exterior of the exterior functional of $F_k$ equals $F_k$ applied to the boundary of the boundary. However, the boundary of a boundary is always the empty set, and any functional applied to the empty set must be zero. In fact, since functionals are additive, we must have
 \begin{equation}
 	\begin{aligned}
-		F_k(\sigma_k) &= F_k(\sigma_k \cup \emptyset) = F_k(\sigma_k) + F_k(\emptyset).
+		F_k(\sigma^k) &= F_k(\sigma^k \cup \emptyset) = F_k(\sigma^k) + F_k(\emptyset).
 	\end{aligned}
 \end{equation}
-Therefore, we can see that the identity $\partial \wedge \partial \wedge \omega = 0$ for every form $\omega$ is ultimately a direct consequence that $\partial \partial U = \emptyset$ for every set $U$.\footnote{Note that we are talking about the boundary of a manifold, not the boundary of a set in the topological sense.} This shows how studying differential relationship in terms of finite functionals can give a more geometrically meaningful picture.
+Therefore, we can see that the identity $\partial \wedge \partial \wedge \omega = 0$ for every form $\omega$ is ultimately a direct consequence that $\partial \partial U = \emptyset$ for every set $U$.\footnote{Note that we are talking about the boundary of a manifold, not the boundary of a set in the topological sense.} This shows how studying differential relationships in terms of finite functionals can give a more geometrically meaningful picture.
 
-The last element of vector calculus we need to generalize is the idea of potential. That is,
+The last element of vector calculus we need to generalize is the idea of potentials. That is,
 \begin{equation}
 	\begin{aligned}
-		\vec{\nabla} \times \vec{f} = 0 &\Rightarrow \vec{f} = \nabla V \\
-		\vec{\nabla} \cdot \vec{B} = 0 &\Rightarrow \vec{B} = \nabla \times \vec{A} .
+		\vec{\nabla} \times \vec{f} = 0 &\Rightarrow \vec{f} = \vec{\nabla} V \\
+		\vec{\nabla} \cdot \vec{B} = 0 &\Rightarrow \vec{B} = \vec{\nabla} \times \vec{A} .
 	\end{aligned}
 \end{equation}
 These are generalized by the following formula
@@ -960,9 +960,9 @@ These are generalized by the following formula
 That is, if the exterior derivative of a $k$-form is zero, then there exists a $(k-1)$-form whose exterior derivative is the original $k$-form.\footnote{
 Technically, closed forms (i.e. those whose exterior derivative is zero) are not necessarily exact forms (i.e. those that are the exterior derivative of another form). This is true only on contractible regions (i.e. those regions that can be continuously shrunk to a point, that do not have holes). While this is a subtle mathematical point, we can understand it by looking at the corresponding functionals. An exact form corresponds to a functional that returns zero for any closed surface. A closed form, however, is guaranteed to return zero only on closed surfaces that are contractible, that can be continuously shrunk to a point. For example, the functional associated with a closed form may return non-zero over a closed surface that encloses a hole, something the functional associated with an exact form cannot do. Therefore, all exact forms are closed, but not all closed forms are exact. However, if we restrict ourselves to a contractible region, the two definitions are the same.}
 
-To sum up, we have generalized the idea of integration over $k$-dimensional submanifolds of an $n$-dimensional space, which leads to the idea of $k$-functionals over finite regions and $k$-forms over the infinitesimal ones; we have seen that the finite functionals are physically more fundamental than the infinitesimal forms. We have seen how $k$-functionals induce $(k+1)$-functionals by acting on the boundaries of the $k+1$ dimensional regions. We have seen that the exterior derivative gives us the form associated to the exterior functionals, and that this operations generalizes the notion of gradient, curl and divergence. While this does not exhaust all that can be done in differential topology and differential geometry, this is enough for what we need to use in the following sections.
+To sum up, we have generalized the idea of integration over $k$-dimensional submanifolds of an $n$-dimensional space, which leads to the idea of $k$-functionals over finite regions and $k$-forms over the infinitesimal ones; we have seen that the finite functionals are physically more fundamental than the infinitesimal forms. We have seen how $k$-functionals induce $(k+1)$-functionals by acting on the boundaries of the $k+1$ dimensional regions. We have seen that the exterior derivative gives us the form associated to the exterior functionals, and that this operation generalizes the notion of gradient, curl and divergence. While this does not exhaust all that can be done in differential topology and differential geometry, this is enough for what we need to use in the following sections.
 
-Those already familiar with differential topology will have noticed that our notation and definitions do not quite match the ones typically use in math textbooks. The issue is that said notation and definitions do not match what we need to physically capture, and therefore it would be a mistake to employ them. Let us briefly see why. First of all, vectors are typically defined as directional derivative. That is, a vector $v = v^i \partial_i$ is an operator that acts on scalar functions. A velocity, which we typically think of as a vector, is not a derivation. A covector $\theta = \theta_i dx^i $ is a map from a vector to a scalar number. Conjugate momentum, which we typically think of as a covector, is not a map. A differential $dx^i$ is a covector, and it is the exterior derivative of the coordinate $x^i$. This means that differentials are maps such that $dx^i(\partial_{x^j}) = \delta^i_j$. In physics, this is not how we think of differentials and integration. In fact, consider the expression $\int f_i dx^i$. To write it in terms of invariant objects, we would have $f = f_i e^i$ and $dX = dx^i e_i$, where $e^i$ and $e_i$ are the basis and co-basis respectively, so that we obtain $\int f( dX ) = \int f^i e_i(dx^i e_i) = \int f_i dx^i$. Therefore the differential $dX$ is a vector, where the $dx^i$ are the contravariant components, while $f$ is a map from a vector $dX$ to the differential $df$, which is what is integrated. Therefore the differential is the vector, while the force is the covector. The map does not work conceptually. Moreover, in differential topology there is a notion of a single tangent space where all vectors live, which is not compatible with the idea of units. Consider the basis $\partial_i$. Given that coordinates are expressed in different units, we cannot simply sum derivatives along different directions. For example, in polar coordinates $\partial_r$ may have units of inverse meters while $\partial_\theta$ of inverse radians. Worse of all, a directional derivative is taken with respect to a parameter, which also will have units and physical dimension. For example, if $v$ represents a velocity, the components $v^i$ would also depends on the units of space and time. This would mean that units of vectors, the tangent space of a manifold, depend not only on the physical dimensions of the space, but also on the physical dimensions of all possible parameters along which we may want to define a derivation. This would means that the tangent space is not definable only in terms of the units of the manifold itself, and therefore is not defined just in terms of the manifold itself.
+Those already familiar with differential topology will have noticed that our notation and definitions do not quite match the ones typically used in math textbooks. The issue is that said notation and definitions do not match what we need to physically capture, and therefore it would be a mistake to employ them. Let us briefly see why. First of all, in the context of differential topology vectors are defined as directional derivative. That is, a vector $v = v^i \partial_i$ is an operator that acts on scalar functions. A velocity, which in physics we think of as a vector, is not a derivation. In differential topology, a covector $\theta = \theta_i dx^i $ is defined as a map from a vector to a scalar number. Conjugate momentum, whose components change as a covector, is not a map. In differential topology, a differential $dx^i$ is a covector, and it is the exterior derivative of the coordinate $x^i$. This means that differentials are maps such that $dx^i(\partial_{x^j}) = \delta^i_j$. In physics, this is not how we think of differentials and integration. In fact, consider the expression $\int f_i dx^i$. To write it in terms of invariant objects, we would have $f = f_i e^i$ and $dx = dx^i e_i$, where $e^i$ and $e_i$ are the basis and co-basis respectively, and therefore $e^i(e_j) = \delta^i_j$. So we obtain $\int f( dx ) = \int f_i e^i(dx^j e_j) = \int f_i dx^i$. Therefore, in physics, the differential $dx$ is more properly thought of as a vector, where the $dx^i$ are the contravariant components, while $f$ as a map from a vector $dx$ to the differential $df$, which is what is integrated. Therefore the differential is the vector, while the force is the covector. This is in contrast to the use in differential topology. Moreover, in differential topology there is a notion of a single tangent space where all vectors live, which is not compatible with the idea of units. Consider the basis $\partial_i$. Given that coordinates are expressed in different units, we cannot simply sum derivatives along different directions. For example, in polar coordinates $\partial_r$ may have units of inverse meters while $\partial_\theta$ of inverse radians. Worst of all, a directional derivative is taken with respect to a parameter, which will also have units and physical dimension. For example, if $v$ represents a velocity, the components $v^i$ would also depend on the units of space and time. This would mean that units of vectors, the tangent space of a manifold, depend not only on the physical dimensions of the space, but also on the physical dimensions of all possible parameters along which we may want to define a derivation. This would mean that the tangent space is not definable only in terms of the units of the manifold itself, and therefore is not defined just in terms of the manifold itself.
 
 The takeaway message here is the following: the mathematical tools we inherit from mathematics are not necessarily designed to capture the physical relationships we need to capture. Mathematicians only care about formal definitions, regardless of what, or if, they represent physically. In physics we do not have this luxury. If we want to have meaningful physical theories, which is ultimately the goal of reverse physics, we need to revisit the mathematical tools we use to formulate them.
 
@@ -1164,7 +1164,7 @@ The form of the vector potential, then, is set by the fact that the flow of $S^a
 
 This argument tells us very simply what happens in the case of a single degree of freedom, but, as we have seen before, the divergenceless of $S^a$ is not enough to characterize Hamiltonian mechanics in the general case. In fact we saw that we needed two conditions: determinism and reversibility, which is equivalent to the divergencelessness of $S^a$, and the independence of degrees of freedom. To generalize, then, we should find a generalized mathematical and physical conditions such $\omega_{ab}$ admits $\theta_a$ as potential.
 
-\subsubsection{Potential of the flow - 1 d.o.f. case}
+\subsubsection{Potential of the flow - multiple d.o.f. case}
 
 If we compare \ref{rp-cm-lm-contactForm} with \ref{rp-cm-hmd-symplecticForm}, we find that within non-temporal direction the form is identical. Therefore, we can still understand it as quantifying the number of configurations within each d.o.f. and the degree of independence across d.o.f., while adding the idea that the displacement field does not contribute new configurations. Mathematically, the displacement field is the only direction in which the form $\omega_{ab}$ is degenerate. Let us see what those components tell us in terms of the potential. We have:
 \begin{equation}\label{rp-cm-lm-potenialConditions}
@@ -1292,4 +1292,16 @@ In the general case, then, we would need a form $\Omega_{a_1 a_2 \cdots a_{n-1}}
 %	\end{aligned}
 %\end{equation}
 %What happens is that the operator $\nabla_i$, which is called exterior derivative in differential geometry, applies a derivative in each direction by rotating the indexes. Because of the anti-symmetric nature of forms, we have to take care of the sign. A cycle in $k$ indexes corresponds to $k-1$ swaps. Since each swap corresponding to a minus sign because of the anti-symmetry, if $k$ is odd we end up with even minus signs, which means no sign change, while 
+
+\section{Reversing Newtonian mechanics}
+
+Predictable and retrodictable?
+
+\section{Relativistic mechanics}
+
+Motivation: add space-time coordinate transformations.
+
+Fully extended phase-space.
+
+\section{Reversing phase-space}
 
