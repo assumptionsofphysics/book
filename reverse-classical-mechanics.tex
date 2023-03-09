@@ -980,7 +980,7 @@ The first question we want to have a clear answer for is: what does the Lagrangi
 The first term is clearly potential energy, the last clearly potential energy, but what about the middle term? It depends on velocity, so it would appear to be a kinetic term, but it also depends on the potential. It's both and neither. What about the energy of an electromagnetic field: should we consider that kinetic or potential? The characterization of Lagrangian as difference between kinetic and potential energy, then, works for some systems but not in general.
 
 Another problem in understanding what the Lagrangian represents is that it is not unique. Now, a similar problem exists for the Hamiltonian, in the sense that we can sum an arbitrary constant to any Hamiltonian without changing the equations of motions. Physically, this tells us that there is an arbitrariness of the zero of energy. However, the degeneracy for a Lagrangian is far worse. For example, let $f(x^i,t)$ be an arbitrary function of position and time. We can set
-\begin{equation}
+\begin{equation}\label{rp-cm-lm-gaugeChange}
 	L' = L + \partial_{x^i} f(x^i, t) v^i + \partial_t f(x^i, t).
 \end{equation}
 We have 
@@ -1028,7 +1028,7 @@ The Lagrangian, then, can be understood as the scalar product of two vectors. Th
 
 We also need to generalize $\omega_{ab}$ to the extended phase space. Looking at equation \ref{rp-cm-hsd-condGeneralizedEquations}, the idea is to put the gradient of the Hamiltonian in the time component. If we set
 \begin{equation}\label{rp-cm-lm-contactForm}
-	\tag{CF}
+	\tag{SF-E}
 	\omega_{ab} = \left[\begin{array}{ccc}
 		\omega_{q^i q^j} & \omega_{q^i p_j} & \omega_{q^i t} \\
 		\omega_{p_i q^j} & \omega_{p_i p_j} & \omega_{p_i t} \\
@@ -1127,10 +1127,16 @@ where $\epsilon_{abc}$ is the fully anti-symmetric Levi-Civita symbol which retu
 \begin{equation}\label{rp-cm-lm-displacementFormComponents}
 	\begin{aligned}
 	\epsilon_{abc}S^c &= \omega_{ab} = - \partial_a \wedge \theta_b = - (\partial_a \theta_b - \partial_b \theta_a) \\
-	S^c &= - \partial_a \times \theta_b \\
+	\vec{S} &= - \vec{\nabla} \times \vec{\theta_b} \\
 	\end{aligned}
 \end{equation}
-This is the same relationship we would have between the magnetic field $B^i$ and its vector potential $A_i$. Therefore the same vector calculus apply: $S^a$ is divergenceless, admits a vector potential and the flow of the displacement over a closed surface is zero. We can understand this as assumption \ref{assum_detrev} implemented in the extended phase space. What is peculiar, however, is that the vector potential $\theta_a$ is fully characterized by a single arbitrary component, the time component. The vector potential $A_i$, instead, is characterized by two arbitrary components. Why is that?
+Apart from the minus, this is the same relationship we would have between the magnetic field $B^i$ and its vector potential $A_i$. Therefore the same vector calculus apply: $S^a$ is divergenceless, admits a vector potential and the flow of the displacement over a closed surface is zero. We can understand this as assumption \ref{assum_detrev} implemented in the extended phase space. Moreover, we have the following relationship:
+\begin{equation}
+	\int_{\Sigma} \omega_{ab} dx_1^a dx_1^b = \int_{\Sigma} \epsilon_{abc}S^c dx_1^a dx_1^b
+\end{equation}
+That is, the integral of the form $\omega_{ab}$ corresponds to the surface integral of the displacement field $S^a$.\footnote{Note that, strictly speaking, while $\omega_{ab}$ is a tensor, $\epsilon_{abc}$ and $S^a$ are not. Relationship \ref{rp-cm-lm-displacementFormComponents}, then, is valid only if we chose position, momentum and time as variables. Yet, as we will see much later, we can change the position variable and time variable and still have the same expression by redifining momentum and energy appropriately.} In phase space extended by time, then, $\omega_{ab}$ quantifies both the number of states over a surface and the flow of $S^a$ through the surface. Under assumption \ref{assum_detrev} this works because we have one and only one evolution for each state, therefore quantifying the number of evolutions that intersect a given surface is the same as quantifying the number of states that flow through them.
+
+One striking feature of the vector potential $\theta_a$ is that it is fully characterized by a single arbitrary component, the time component $-H$. The vector potential $A_i$, instead, is characterized by two arbitrary components. Why is that?
 
 Suppose that we know that $S^a$ is a divergenceless field, we say that it is minus the curl of a potential
 \begin{equation}
@@ -1162,9 +1168,62 @@ At this point, we simply rename the last component to $-H$ and have
 \end{equation}
 The form of the vector potential, then, is set by the fact that the flow of $S^a$ is both divergenceless and uniform along the time direction.
 
-This argument tells us very simply what happens in the case of a single degree of freedom, but, as we have seen before, the divergenceless of $S^a$ is not enough to characterize Hamiltonian mechanics in the general case. In fact we saw that we needed two conditions: determinism and reversibility, which is equivalent to the divergencelessness of $S^a$, and the independence of degrees of freedom. To generalize, then, we should find a generalized mathematical and physical conditions such $\omega_{ab}$ admits $\theta_a$ as potential.
+This discussion tells us exactly what $\theta_a$ is in the case of a single degree of freedom: it is the potential of the displacement field $S^a$ or, equivalently, of the form $\omega_{ab}$. Since we are in the single degree of freedom, assumption \ref{assum_detrev} is enough to recover Hamiltonian mechanics, and this is the same in the extended phase space formulation.
 
-\subsubsection{Potential of the flow - multiple d.o.f. case}
+\subsubsection{Lagrangian and action}
+
+Now that we have seen what $\theta_a$ is, we can go back to the Lagrangian and the action. Suppose that we have a path $\gamma$, not necessarily an actual evolution, but that traverses all time once and only once. That is, we can write
+\begin{equation}
+	\begin{aligned}
+		\gamma &= [q^i(t), p_i(t), t] \\
+		d\gamma &= d_t \xi^a \, dt.
+	\end{aligned}
+\end{equation}
+and use the time variable as its affine parameter. Note that, in this case, the displacement is along the generic path $\gamma$, which is not necessarily an actual evolution, and therefore it is not necessary that $d_t \xi^a = S^a$. That equation is satisfied if and only if $\gamma$ is an actual evolution of the system. Regardless of whether that's true, we can write:
+\begin{equation}
+	\begin{aligned}
+		L &= p_i v^i - H = \theta_a d_t \xi^a \\
+		\mathcal{A}[\gamma] &= \int_\gamma L dt =  \int_\gamma \theta_a d_t \xi^a dt = \int_\gamma \theta_a d\xi^a = \int_\gamma \theta d\gamma
+	\end{aligned}
+\end{equation}
+This tells us that
+\begin{equation}
+	\parbox{5in}{The action along a path $\gamma$ is the line integral of the vector potential $\theta_a$ of the form $\omega_{ab}$.}
+\end{equation} 
+We now have a precise geometrical characterization of the action and of the Lagrangian. As for the physics, it tells us conclusively that both the Lagrangian and the action, by themselves, are unphysical. That is, the value of the Lagrangian at a given position, velocity and time, or the value of the action for a given path is not a physically meaningful value. The vector potential is not a physical quantity: it depends on a choice of gauge, which does not correspond to a physically well-defined object.
+
+We are now in the position to understand why, as we have seen before, the Lagrangian for a given system is not unique: it depends on the vector potential, and the vector potential is not uniquely defined. We can see how the change of Lagrangian \ref{rp-cm-lm-gaugeChange} corresponds to redefining the vector potential as
+\begin{equation}
+	\theta'_{a} = \theta_a + \partial_a f(q^i,t).
+\end{equation}
+We have
+\begin{equation}
+	\begin{aligned}
+		L &= \theta_a d_t \xi^a \\
+		L' &= \theta'_a d_t \xi^a = \theta_a d_t \xi^a + \partial_a f d_t \xi^a = L + \partial_{q^i} f \, d_t {q^i} + \partial_t f \, d_t t \\
+		&= L + \partial_{x^i} f(x^i, t) v^i + \partial_t f(x^i, t).
+	\end{aligned}
+\end{equation}
+which is the same expression we had in \ref{rp-cm-lm-gaugeChange}.
+
+But if the action and the Lagrangian are unphysical, how can we use them to derive the laws of evolution, which are clearly physical? Note that the laws are not expressed in terms of the action, but in terms of the variation of the action. Let $\gamma'$, then, be a small variation of the path $\gamma$ with the same endpoint. Note that $\gamma$ and $\gamma'$ form a closed loop. Take a surface $\Sigma$ that is enclosed by that boundary, we can use Stoke's theorem:
+\begin{equation}
+	\begin{aligned}
+		\delta \mathcal{A}[\gamma] &= \delta \int_\gamma L dt = \delta \int_\gamma \theta_a d\xi^a = \int_{\Sigma} \partial_a \wedge \theta_b  d\xi^a d\eta^b \\
+		&= - \int_{\Sigma} \omega_{ab} d\xi^a d\eta^b, 
+	\end{aligned}
+\end{equation}
+where $d\eta^b$ is the displacement of the point from $\gamma$ to the variation $\gamma'$. The variation of the action, then, corresponds to the integral of $\omega_{ab}$, which is physical. Geometrically, it corresponds to the flow of the evolutions through the surface enclosed by the path and its variation. Note that, because the flow is divergenceless, it does not matter which surface is chosen, since all surfaces that share the same boundaries will correspond to the same flow. This is a striking observation: while the action is unphysical, its variation is physical.
+
+We now are in a perfect position to fully understand the principle of stationary action. This states that actual evolutions are given by paths for which the variation is zero. That is, $\int_{\Sigma} \omega_{ab} d\xi^a d\eta^b$ has to be zero for all possible $d\eta^b$. This means we must have $\omega_{ab} d\xi^a = 0$. Since $S^a$ is the only degenerate direction for $\omega_{ab}$, we must have $d\xi^a = S^a dt$. In other words, the paths that make the action stationary are exactly the paths whose tangent vector applied to $\omega_{ab}$ return zero.
+
+Geometrically, if a path $\gamma$ is an evolution, it is always be tangent to the displacement field $S^a$. If we make a small variation $\gamma'$, the two paths will enclose a tiny strip $\Sigma$ which will be tangent to $S^a$ as well. Therefore the flow of $S^a$ through $\Sigma$ will be zero. Given that the flow through $\Sigma$ is minus the variation of the action, the variation of the action for all evolutions will be zero. Conversely, if a path is not an evolution, at some point its tangent will be different from the displacement field. Therefore we will be able to find a variation $\gamma'$ for which the surface $\Sigma$ will ``catch'' some flow. Therefore we will have a variation of the path for which the variation of the action is non-zero. In other words, the action principle is a geometrically roundabout way to ask for those paths that are always tangent to the displacement field $S^a$, which is divergenceless and has constant flow in time.
+
+Note that the geometrical and physical interpretation we have given to the Lagrangian and the action lives in the extended phase space, which is part of the Hamiltonian formulation. In fact, the only place where we need assumption \ref{assum_kineq} is when we want to write $p_i d_t q^i - H$ as a function of velocity instead of momentum. The integral of the vector potential and its variation, in fact, can still be written even in terms of momentum, and therefore the geometrical and physical characterization of the principle of stationary action applies for all Hamiltonian systems, not just the Lagrangian subset. In other words, the principle of stationary action is really more a property of Hamiltonian mechanics than Lagrangian mechanics. The only difference is that in Lagrangian mechanics, since assumption \ref{assum_kineq} applies, it can be expressed purely in terms of kinematic variables.
+
+\subsubsection{Multiple d.o.f.}
+
+The above discussion capture all the important elements of Lagrangian mechanics and the action principle even if it is limited to the single d.o.f. case. Still, we should generalize to the multiple d.o.f. case. Note that the equations we wrote for the Lagrangian and the action are already in generalized form. The only thing that we need to do is derive the expression for the vector potential $\theta_a$ in the general case.
 
 If we compare \ref{rp-cm-lm-contactForm} with \ref{rp-cm-hmd-symplecticForm}, we find that within non-temporal direction the form is identical. Therefore, we can still understand it as quantifying the number of configurations within each d.o.f. and the degree of independence across d.o.f., while adding the idea that the displacement field does not contribute new configurations. Mathematically, the displacement field is the only direction in which the form $\omega_{ab}$ is degenerate. Let us see what those components tell us in terms of the potential. We have:
 \begin{equation}\label{rp-cm-lm-potenialConditions}
@@ -1211,87 +1270,7 @@ This means that the overall flow is conserved, but the independence of d.o.f. is
 \end{equation}
 This tells us that the total state count becomes the product of the configurations along each degree of freedom.
 
-\subsubsection{Lagrangian and action}
-
-Now that we have seen how the geometry works in the extended phase space, we can go back to the Lagrangian and the action. Suppose that we have a path $\gamma$, not necessarily an actual evolution. It still has the feature that it traverses all time once and only once, and therefore we can write
-\begin{equation}
-	\begin{aligned}
-		\gamma &= [q^i(t), p_i(t), t] \\
-		d\gamma &= d_t \xi^a \, dt.
-	\end{aligned}
-\end{equation}
-Note that, in this case, the displacement is along the generic path $\gamma$, which is not necessarily an actual evolution, and therefore it is not necessary that $S^a = d_t \xi^a$. We have:
-\begin{equation}
-	\begin{aligned}
-		L &= p_i v^i - H = \theta_a d_t \xi^a \\
-		\mathcal{A}[\gamma] &= \int_\gamma L dt =  \int_\gamma \theta_a d_t \xi^a dt = \int_\gamma \theta_a d\xi^a = \int_\gamma \theta d\gamma
-	\end{aligned}
-\end{equation}
-This tells us that the action is simply the line integral of the vector potential $\theta_a$ of the form $\omega_{ab}$. But the vector potential is not a physical quantity: it depends on a choice of gauge, which does not correspond to a physically well-defined object. The value of the action, and therefore of the Lagrangian, is not itself physically meaningful. So, how is it that we can use something that, in principle, is unphysical to derive the physical laws?
-
-Note that the laws are not expressed in terms of the action, but in terms of the variation of the action. Let $\gamma'$, then, be a small variation of the path $\gamma$ with the same endpoint. Note that $\gamma$ and $\gamma'$ form a closed loop. Take a surface $\Sigma$ that is enclosed by that boundary, we can use Stoke's theorem:
-\begin{equation}
-	\begin{aligned}
-		\delta \mathcal{A}[\gamma] &= \delta \int_\gamma L dt = \delta \int_\gamma \theta_a d\xi^a = \int_{d\Sigma} \partial_b \wedge \theta_a  d\xi^a d\eta^b = \int_{d\Sigma} \partial_b \wedge \theta_a d\xi^a d\eta^b, 
-	\end{aligned}
-\end{equation}
-where $d\eta^b$ is the displacement of the point from $\gamma$ to the variation $\gamma'$. Now, suppose that we want 
-
-Intuitively, deterministic and reversible evolution is responsible for the fact that $S^a$ is a degenerate direction of $\omega_{ab}$. In fact, if the number of states is not conserved in time, the displacement 
-
-
- Having introduced the wedge product, we can write the second conditions as
-That is, $\Omega_{a_1 \cdots a_{2n}}$ is the form that counts the number of states on an hyper-volume of the extended phase-space while $\omega_{ab}$ is the form that counts the number of configurations for each independent degree of freedom. The mathematical statement tells us that the volume is equal to the product of the sides, which, as we saw, is equivalent to stating that the whole space is characterized by independent degrees of freedom.
-
-To generalize, then, we need to understand two things then. First is the relationship between the displacement field $S^a$ and $\omega_{ab}$ and then the relationship between the properties $\omega_{ab}$ must have such that it has it admits $\theta_a$ as covector potential.
-
-As we said before, the displacement should not give us new independent configurations, therefore
-\begin{equation}\label{rp-cp-lm-displacementPerpForm}
-	\begin{aligned}
-	&S^{a_1} \Omega_{a_1 \cdots a_{2n}} = 0 \\
-	&S^a \omega_{ab} = 0.
-	\end{aligned}
-\end{equation}
-Note that, if \ref{rp-cm-lm-dofIndependenceForm} is satisfied, the previous two conditions are equivalent. However, this is not the only condition we want. In fact, we want the flow of $S^a$ to be in terms of the count of states. Therefore we want
-\begin{equation}
-	\epsilon_{a_1 \cdots a_{2n}a_{2n+1}} S^{a_{2n+1}} = \Omega_{a_1 \cdots a_{2n}},
-\end{equation}
-where $\epsilon$ is again the fully anti-symmetric Levi-Civita symbol. Note that, in the one d.o.f. case, the above reduces to \ref{rp-cm-lm-displacementFormComponents}. This condition automatically imply \ref{rp-cp-lm-displacementPerpForm} because
-\begin{equation}
-	\begin{aligned}
-		S^{a_1} \Omega_{a_1 \cdots a_{2n}} &= S^{a_1}\epsilon_{a_1 \cdots a_{2n}a_{2n+1}} S^{a_{2n+1}} = S^{a_{2n+1}}\epsilon_{a_1 \cdots a_{2n}a_{2n+1}} S^{a_1} \\
-		&= - S^{a_{2n+1}}\epsilon_{a_{2n+1} \cdots a_{2n}a_1} S^{a_1} = 0.
-	\end{aligned}
-\end{equation}
-Since $\epsilon$ is fully anti-symmetric, contracting it with the same vector twice gives us zero. Geometrically, $\epsilon$ gives us the volume element measures in coordinates, but if two sides of a parallelepiped coincide, the volume is zero.
-
-To calculate the flow of $S^a$, then, we can use
-\begin{equation}
-	\int \epsilon_{a_1 \cdots a_{2n}a_{2n+1}} S^{a_{2n+1}} d\xi^{a_1}\cdots d\xi^{a_n} = \int \Omega_{a_1 \cdots a_{2n}} d\xi^{a_1}\cdots d\xi^{a_n}
-\end{equation}
-This means that defining the flow of $S^a$ implies defining the form $\Omega_{a_1 \cdots a_{2n}}$. In terms of covariance, note that $\Omega_{a_1 \cdots a_{2n}}$ is a $2n$ form, a fully anti-symmetric tensor. However, $\epsilon_{a_1 \cdots a_{2n+1}}$ is not a form. It returns the volume as measured in each specific coordinates. For example, in two dimensional polar coordinates, it will return the volume in units of distance times angle. However, note that $S^a$ is special in terms of units as well. In fact, recall that $S^a=d_t \xi^a$. Time here has two roles: as the coordinate $\xi^t$ and as the affine parameter for the curve that represent an evolution. Therefore, technically, $S^a$ on the extended phase space is not a vector either. While $\epsilon_{a_1 \cdots a_{2n+1}}$ and $S^a$ are not tensors by themselves, their contraction is.
-
-
-
-Subsequently, requiring the flow of $S^a$ is zero over each hypersurface, that the evolution is deterministic and reversible, tells us $\Omega_{a_1 \cdots a_{2n}}$ is an exact form and admits a vector potential. Additionally, requiring $\Omega_{a_1 \cdots a_{2n}} = \bigwedge^n \omega_{ab}$, that the system is described by independent d.o.f., gives us the $\omega_{ab}$ which is going to be 
-
-
-The key here is $S^a$ is something we want to integrate over hyper-surfaces to calculate a flow. Then, more properly, we should not understand $S^a$ as a $n-1$ form. In the single degree of freedom , $\omega_{ab}$ is exactly that form: we have a three dimensional space so an $(n-1)$-form is a two-form. The idea is that $\omega_{qp}$ represents the flow through a surface at constant position and momentum, which is the flow along time, which is the flow along time $S^t$. The same goes for the other components.
-
-In the general case, then, we would need a form $\Omega_{a_1 a_2 \cdots a_{n-1}}$ to represent the flow of states in the extended phase space. The exterior derivative of this flow is zero, which generalizes the idea that the divergence  $\omega{ab}$ 
-
-% We want to have a differential operator that does that in general. Since $\nabla = \partial_i$, we are looking for something like $\partial_{i_0} \theta_{i_1 i_2 \cdots i_k}$. This does not quite work as this takes the derivative in only one direction. When we integrate, we would find the difference between the boundaries on one dimension alone. If we imagine integrating along a parallelepiped, we need to a derivative along each dimension and, for each dimensions, evaluate the difference of the form along facing sides. The sum of all the sides becomes the surface integral on the boundary. Let's use $\nabla_i$ for this operations, we have:
-%\begin{equation}
-%	\begin{aligned}
-%		\int_\lambda \nabla_i T dx^i &= \int_\lambda \partial_{i} T dx^i = \int_{A}^{B} \partial_u T du = \int_{A}^{B} dT = T(B) - T(A) \\
-%		\int_\Sigma \nabla_i F_{j} dx^i dx^j &= \int_\Sigma ( \partial_{i} F_{j} - \partial_{j} F_{i}) dx^i dx^j =\int_{u_1}^{u^2} \int_{v_1}^{v^2} ( \partial_u F_v - \partial_v F_u) du dv \\
-%		&= \left.\int_{v_1}^{v^2} F_{j} dv^j \right|_{u_1}^{u^2} - \left.\int_{u_1}^{u^2} F_{i} du^i \right|_{v_1}^{v^2} = \int_{\partial \Sigma} F_i dx^i \\
-%		\int_V \nabla_i B_{jk} dx^i dx^j dx^k &= \int_V (\partial_{i} B_{jk} + \partial_{j} B_{ki} + \partial_{k} B_{ij}) dx^i dx^j dx^k \\
-%		&= \int_{u_1}^{u^2} \int_{v_1}^{v^2} \int_{w_1}^{w^2} (\partial_{u} B_{vw} + \partial_{v} B_{wu} + \partial_{w} B_{uv}) du dv dw\\
-%		&= \int_{\partial V} B_{ij} dx^i dy^j
-%	\end{aligned}
-%\end{equation}
-%What happens is that the operator $\nabla_i$, which is called exterior derivative in differential geometry, applies a derivative in each direction by rotating the indexes. Because of the anti-symmetric nature of forms, we have to take care of the sign. A cycle in $k$ indexes corresponds to $k-1$ swaps. Since each swap corresponding to a minus sign because of the anti-symmetry, if $k$ is odd we end up with even minus signs, which means no sign change, while 
+The geometrical and physical understanding of the action and the Lagrangian are the same as in the single d.o.f. case: the action is the line integral of the vector potential $\theta_a$ and the variation of the action is minus the surface integral of $\omega_{ab}$ between the path and its variation. The only difference is that this corresponds not to the flow of total states, but to the flow of configurations for a single degree of freedom. Still, the flow is zero only if the path is everywhere tangent to the displacement field $S^a$, and therefore if the path is an actual evolution of the system.
 
 \section{Reversing Newtonian mechanics}
 
