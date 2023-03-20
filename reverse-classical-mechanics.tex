@@ -50,7 +50,7 @@ We will again want these equations to yield a unique solution, which means the H
 
 Hamilton's equations are invariant as well. The Hamiltonian itself is a scalar function which is often considered (mistakenly as we'll see later) invariant. This formulation is the most suitable for statistical mechanics as volumes of phase space correctly count the number of possible configurations.
 
-\section{Inequivalence of formulations}
+\section{Inequivalence of formulations}\label{rp-cm-inequivalenceOfFormulations}
 
 It is often stated in physics books that all three formulations of classical mechanics are equivalent. We will look at this claim in detail, and conclude that this is not the case: there are systems that can be described by one formulation and not another. More precisely, the set of Lagrangian systems is exactly the intersection of Newtonian and Hamiltonian systems.
 
@@ -969,7 +969,67 @@ The takeaway message here is the following: the mathematical tools we inherit fr
 
 \section{Reversing Lagrangian mechanics}
 
-Now that we have a good geometrical and physical feel for Hamiltonian mechanics, and that we have a general understanding of what the tools of differential topology describe physically, we will analyze Lagrangian mechanics more in detail. Conceptually, we already know that Lagrangian mechanics is Hamiltonian mechanics plus assumption \ref{assum_kineq}. We will see that the displacement field admits a vector potential and the Lagrangian is the scalar product between that potential and the displacement field itself. The principle of least action, instead, is geometrically equivalent to asking for paths that are always tangent to the displacement field. Moreover, the principle of least action is really a property of Hamiltonian evolution, and it does not strictly require \ref{assum_kineq}.
+Now that we have a good geometrical and physical feel for Hamiltonian mechanics, and that we have a general understanding of what the tools of differential topology describe physically, we will analyze Lagrangian mechanics more in detail. Conceptually, we already know that Lagrangian mechanics is Hamiltonian mechanics plus assumption \ref{assum_kineq}. We will see that the displacement field admits a vector potential and the Lagrangian is the scalar product between that potential and the displacement field itself. The principle of least action, instead, is geometrically equivalent to asking for paths that are always tangent to the displacement field. Moreover, the principle of least action is better understood as a property of Hamiltonian evolution, and assumption \ref{assum_kineq} is only required to express it in terms of velocity instead of momentum.
+
+\subsubsection{Kinematic assumption revisited}
+
+As we saw in section \ref{rp-cm-inequivalenceOfFormulations}, Lagrangian mechanics is the subset of Hamiltonian mechanics for which assumption \ref{assum_kineq} is valid, which means Lagrangian mechanics is equivalent to assuming \ref{assum_detrev}, \ref{assum_indep} and \ref{assum_kineq}. For the first two assumptions, we found a host of equivalent mathematical, geometrical and physical formulations. Let's see what can we find of \ref{assum_kineq}.
+
+First of all, let us summarize the conditions we have already found. Hamilton's equation always imposes that the velocity is a function of the state variable:
+\begin{equation}
+	v^i = d_t q^i = \partial_{p_i} H.
+\end{equation}
+At fixed position, the Jacobian of the transformation is therefore the Hessian of the Hamiltonian
+\begin{equation}
+	\partial_{p_i} v^j = \partial_{p_i}\partial_{p_j} H.
+\end{equation}
+There condition
+\begin{equation}\label{rp-cm-lm-condVelocityFromMomentum}
+	\tag{KE-1}
+	\parbox{5in}{At every position, the relationship between momentum and velocity is invertible and differentiable}
+\end{equation}
+and condition
+\begin{equation}\label{rp-cm-lm-condHyperregularity}
+	\tag{KE-2}
+	\parbox{5in}{At every point, the Hessian of the Hamiltonian is non-singular (hyperregularity of $H$): $|\partial_{p_i}\partial_{p_j} H|\neq 0$}
+\end{equation}
+are equivalent to each other. The non-singularity of the Hessian can also be understood as strict monotonicity of the derivative along momentum. Therefore 
+\begin{equation}\label{rp-cm-lm-condConcavity}
+	\tag{KE-3}
+	\parbox{5in}{The Hamiltonian is twice differential and concave (or convex) in momentum}
+\end{equation}
+is another equivalent condition.
+
+Note that the relationship between velocity and momentum is not just invertible, but differentiable as well. This may seem like an additional condition from \ref{assum_kineq}, but recall that the dynamics is not in terms of points, but rather cells of phase-space and density distributions. Therefore we should calculate the Jacobian determinant of the transformation from state variables to kinematic variable. We have
+\begin{equation}
+	\begin{aligned}
+		|J| &= \begin{vmatrix}
+			\partial_{q^j} x^i & \partial_{p_j} x^i  \\
+			\partial_{q^j} v^i & \partial_{p_j} v^i
+		\end{vmatrix}
+		= \begin{vmatrix}
+			\delta^i_j & 0 \\
+			\partial_{q^j} v^i & \partial_{p_j} v^i
+		\end{vmatrix} 
+		= \left|\delta^i_j\right| \left|\partial_{p_j} v^i\right| - |0| \left|\partial_{q^j} v^i\right| = \left|\partial_{p_j} v^i\right|.
+	\end{aligned}
+\end{equation}
+The Jacobian determinant of the change of variable, then, coincide of the Jacobian determinant of relationship between velocity and momentum at constant position. Therefore the following conditions
+\begin{align}
+	\tag{KE-4}\label{rp-cm-lm-condJacobianNonSingular}
+	&\parbox{5in}{The Jacobian of the transformation between state variables and kinematic variables is non-singular} \\
+	\tag{KE-5}\label{rp-cm-lm-condDensities}
+	&\parbox{5in}{Densities over phase space can be expressed in terms of position and velocity: $\rho(x^i, v^j) |J| = \rho(q^i, p_j)$} \\
+	\tag{KE-6}\label{rp-cm-lm-condAreas}
+	&\parbox{5in}{Areas and volumes in phase space can be expressed in kinematic variables: $dx^1 \cdots dx^n \, dv^1 \cdots dv^n = |J| \, dq^1 \cdots dq^n \, dp_1 \cdots dp_n$} \\
+	\tag{KE-7}\label{rp-cm-lm-condSymplectic}
+	&\parbox{5in}{The symplectic form $\omega_{ab}$ can be expressed in kinematic variables} \\
+	\tag{KE-8}\label{rp-cm-lm-condDisplacement}
+	&\parbox{5in}{The displacement field $S^a$ can be expressed in kinematic variables}
+\end{align}
+are all equivalent to each other and to assumptions \ref{assum_kineq}.
+
+The insight is that differentiability between state variables and kinematic variables is required to be able to express the objects we used to characterize the deterministic and reversible dynamics. The only physical requirement, then, is to be able to express the dynamics in terms of the kinematics, which is exactly what assumption \ref{assum_kineq} already requires.
 
 \subsubsection{On the physical meaning of the Lagrangian}
 
@@ -1272,6 +1332,98 @@ This tells us that the total state count becomes the product of the configuratio
 
 The geometrical and physical understanding of the action and the Lagrangian are the same as in the single d.o.f. case: the action is the line integral of the vector potential $\theta_a$ and the variation of the action is minus the surface integral of $\omega_{ab}$ between the path and its variation. The only difference is that this corresponds not to the flow of total states, but to the flow of configurations for a single degree of freedom. Still, the flow is zero only if the path is everywhere tangent to the displacement field $S^a$, and therefore if the path is an actual evolution of the system.
 
+\section{Full kinematic equivalence and massive particles}
+
+In the previous section we recovered Lagrangian mechanics by formulating the principle of stationary action in Hamiltonian form, and then used assumption \ref{assum_kineq} simply to express it in terms of the kinematic variable. This is the weakest use of the assumption, as it simply assumes we can map dynamic variables to kinematic variables point-by-point. However, while reversing Hamiltonian mechanics we saw that it is infinitesimal cells of phase space, not the points, that are physically significant. The full version of assumption \ref{assum_kineq}, then, requires us to map cells, areas and distributions between dynamic and kinematic variables as well. This requires the map between velocity and conjugate momentum to be linear, which in turns fixes the dynamics to the one of massive particles under scalar and vector potential forces.
+
+Assumption \ref{assum_kineq} imposes, at every position, an invertible relationship $p_i = p_i(q^j, v^j)$ between momentum and velocity which, at first glance, can be arbitrary. We should note, however, that both velocity and momentum are linear objects, and therefore it would seem natural to require a linear relationship between the two. Though we do not have a clear physical reason to impose this restriction, let's see what would it impose.
+
+If the relationship between momentum and velocity at every point is linear, we have that the Jacobian is only a function of position. Moreover, since it is a linear map between a vector and a covector, the map must be a tensor. We have
+\begin{equation}\label{rp-cm-lm-metricTensor}
+	\partial_{v^i} p_j = m g_{ij}
+\end{equation}
+where $m$ is a constant that transforms units of velocity to units of momentum while $g_{ij}$ is the actual linear map. Since $p_j = \partial_{v^j} L$, we have
+\begin{equation}
+	m g_{ij} = \partial_{v^i} p_j = \partial_{v^i} \partial_{v^j} L = \partial_{v^j} \partial_{v^i} L  = \partial_{v^j} p_i =  m g_{ji}
+\end{equation}
+and find that the tensor $g_{ij}$ is symmetric.
+
+If we integrate equation \ref{rp-cm-lm-metricTensor} we have
+\begin{equation}
+	p_i = m g_{ij} v^j + A_i
+\end{equation}
+where $A_i$ are arbitrary functions of positions. Since $g_{ij}$ and $A_i$ are functions of position only, we can see that, if we fix position, the relationship is a line where $mg_{ij}$ is the slope and $A_j$ the value of momentum for zero velocity. Note that
+\begin{equation}
+	v^i = d_t q^i = \partial_{p_i} H = \frac{1}{m} g^{ij}(p_j - A_j).
+\end{equation}
+If we integrate again we find
+\begin{equation}
+	H = \frac{1}{2m}(p_i - A_i)g^{ij}(p_j - A_j) + V
+\end{equation}
+where $V$ is yet another arbitrary function. This is exactly the Hamiltonian for a massive particle under scalar and vector potential forces: $m$ is the mass, $g_{ij}$ is the metric tensor, $A_i$ is a vector potential and $V$ is the scalar potential.\footnote{Note that we have not separated the charge from the potentials.} Additionally, if we impose the above Hamiltonian, we find that a linear relationship between conjugate momentum and velocity. Therefore condition
+\begin{equation}\label{rp-cm-fke-condLinearRelationship}
+	\tag{FKE-1}
+	\parbox{5in}{There is a linear relationship between conjugate momentum and velocity.}
+\end{equation}
+and condition
+\begin{equation}\label{rp-cm-fke-condMassiveParticle}
+	\tag{FKE-2}
+	\parbox{5in}{The system under study is a massive particle under scalar and vector potential forces.}
+\end{equation}
+are equivalent. At this point, having seen enough of reverse physics, it should be clear that this can't simply be a coincidence. Let's try and find other equivalent characterizations.
+
+Since $m g_{ij}$ is the Jacobian between velocity and momentum, and the Jacobian determinant of the transformation from state variables to kinematic variables was equal to the Jacobian determinant of the relationship between velocity and momentum, we find
+\begin{equation}
+	\begin{aligned}
+		\partial_{p_i} v^j &= \frac{1}{m}g^{ij} \\
+		|J| &= |\partial_{p_i} v^j | = \frac{|g^{ij}|}{m} = \frac{1}{m \,|g_{ij}|}. 
+	\end{aligned}
+\end{equation}
+We therefore have that the following conditions
+\begin{align}
+	\tag{FKE-3}\label{rp-cm-fke-condJacobianOfPosition}
+	&\parbox{5in}{The Jacobian of the transformation between state variables and kinematic variables is a non-singular function of position only} \\
+	\tag{FKE-4}\label{rp-cm-fke-condDensitiesOfPosition}
+	&\parbox{5in}{Densities over phase space can be expressed in terms of position and velocity by rescaling the value at each point: $\rho(x^i, v^j) |J(x^i)| = \rho(q^i, p_j)$} \\
+	\tag{FKE-5}\label{rp-cm-fke-condAreasOfPosition}
+	&\parbox{5in}{Areas and volumes in phase space can be expressed in kinematic variables, and the transformation depends on position only: $dx^1 \cdots dx^n \, dv^1 \cdots dv^n = |J(x^i)| \, dq^1 \cdots dq^n \, dp_1 \cdots dp_n$} \\
+	\tag{FKE-6}\label{rp-cm-fke-condSymplecticOfPosition}
+	&\parbox{5in}{The symplectic form $\omega_{ab}$ can be expressed in kinematic variables, and its components are a function of position only}
+\end{align}
+are equivalent to each other and equivalent to \ref{rp-cm-fke-condLinearRelationship} and \ref{rp-cm-fke-condMassiveParticle}.
+
+To understand what these conditions, let us look at how densities and areas map from state variables to kinematic variables. Since there is a factor of a Jacobian determinant between the corresponding expressions, if, given two states, the density is the same as expressed in position and momentum, it will not be necessarily the same as expressed in position and velocity. Position and momentum have a special property in that volumes and areas are uniform in those coordinates, and therefore comparing densities in those variables is simply a matter of comparing the value of the density. Canonical coordinates are exactly those state variables for which this property holds. Kinematic variables are, in general, non-canonical. But the linearity between velocity and momentum imposes imposes a lesser of this property: it makes it so that, at least at the same position, we can compare areas and density. Therefore if we have $\rho_{xv}(x^i, v_1^j) = \rho_{xv}(x^i, v_2^j)$, the density for two different values of velocity at the same point matches, then we really have the same density of states. Therefore
+\begin{equation}
+	\tag{FKE-7}\label{rp-cm-fke-condDensityVelocity}
+	\parbox{5in}{Density expressed in velocity at the same point are proportional to the density over states}
+\end{equation}
+is another equivalent condition.
+
+In this formulation, one starts to wonder whether the lack of this property would make physical sense. We can understand that non-linear transformation of position, since they change the relationship between volumes and differences in spatial coordinates, would make it more complicated to understand whether two densities at two different points are the same. However, a non-linear change for velocity does not make sense, as the velocity itself is defined by infinitesimal changes of position.
+
+mean in terms of distributions, suppose we have a density $\rho(q^i, p_j)$ defined over a finite region of phase space that is constant along momentum. That is, $\rho(q^i, p^1_j) = \rho(q^i, p^2_j)$ for all $p^1_j$ and $p^2_j$. If we express it in velocity we have
+\begin{equation}
+	\begin{aligned}
+		\rho_{xv}(x^i, v_1^j) &= m |g_{ij}| \rho_{qp}(q^i, m g_{ij}v_1^j + A_i) = m |g_{ij}| \rho_{qp}(q^i, m g_{ij}v_2^j + A_i) \\
+		&= \rho_{xv}(x^i, v_2^j).
+	\end{aligned}
+\end{equation}
+Therefore if we have a linear map between velocity and momentum, uniform distributions along momentum correspond to uniform distributions along velocity. The converse is also true: if uniform distributions along momentum correspond to uniform distributions along velocity, then, the Jacobian of the transformation cannot depend on either, and it must depend on position only. Therefore
+\begin{equation}
+	\tag{FKE-7}\label{rp-cm-fke-condJacobianOfPosition}
+	\parbox{5in}{Uniform distributions along momentum correspond to uniform distributions along velocity}
+\end{equation}
+is another equivalent characterization of \ref{rp-cm-fke-condLinearRelationship}.
+
+Still looking 
+
+
+% For FKE
+% Locally inertial
+% Locally p = mv
+% Invariance under "translation" in momemtum
+
+
 \section{Reversing Newtonian mechanics}
 
 Predictable and retrodictable?
@@ -1283,4 +1435,6 @@ Motivation: add space-time coordinate transformations.
 Fully extended phase-space.
 
 \section{Reversing phase-space}
+
+Gauge transformations
 
