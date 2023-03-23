@@ -1399,9 +1399,9 @@ To understand what these conditions, let us look at how densities and areas map 
 \end{equation}
 is another equivalent condition.
 
-In this formulation, one starts to wonder whether the lack of this property would make physical sense. We can understand that non-linear transformation of position, since they change the relationship between volumes and differences in spatial coordinates, would make it more complicated to understand whether two densities at two different points are the same. However, a non-linear change for velocity does not make sense, as the velocity itself is defined by infinitesimal changes of position.
+In this formulation, one starts to wonder whether the lack of this property would make physical sense. We can understand that non-linear transformation of position, since they stretch and shrink space differently at different points, would make it more complicated to understand whether two densities at two different points are the same. On the other hand, velocity is defined locally over infinitesimal changes of positions, therefore non-linear changes in velocity do not arise when changing units and coordinates.
 
-mean in terms of distributions, suppose we have a density $\rho(q^i, p_j)$ defined over a finite region of phase space that is constant along momentum. That is, $\rho(q^i, p^1_j) = \rho(q^i, p^2_j)$ for all $p^1_j$ and $p^2_j$. If we express it in velocity we have
+Another way of looking at it is the following. Suppose we have a density $\rho(q^i, p_j)$ defined over a finite region of phase space that is constant along momentum. That is, $\rho(q^i, p^1_j) = \rho(q^i, p^2_j)$ for all $p^1_j$ and $p^2_j$. Assuming we have a linear relationship between momentum and velocity we have
 \begin{equation}
 	\begin{aligned}
 		\rho_{xv}(x^i, v_1^j) &= m |g_{ij}| \rho_{qp}(q^i, m g_{ij}v_1^j + A_i) = m |g_{ij}| \rho_{qp}(q^i, m g_{ij}v_2^j + A_i) \\
@@ -1410,18 +1410,28 @@ mean in terms of distributions, suppose we have a density $\rho(q^i, p_j)$ defin
 \end{equation}
 Therefore if we have a linear map between velocity and momentum, uniform distributions along momentum correspond to uniform distributions along velocity. The converse is also true: if uniform distributions along momentum correspond to uniform distributions along velocity, then, the Jacobian of the transformation cannot depend on either, and it must depend on position only. Therefore
 \begin{equation}
-	\tag{FKE-7}\label{rp-cm-fke-condJacobianOfPosition}
+	\tag{FKE-8}\label{rp-cm-fke-condUniformDistributions}
 	\parbox{5in}{Uniform distributions along momentum correspond to uniform distributions along velocity}
 \end{equation}
-is another equivalent characterization of \ref{rp-cm-fke-condLinearRelationship}.
+is another equivalent characterization of \ref{rp-cm-fke-condLinearRelationship}. Failure of this condition, then, would mean that physical states are not uniformely distributed over velocity at the same position, and some velocities correspond to higher state densities than others. This does not sound like something that would mesh well with the principle of relativity.
 
-Still looking 
+We can go one step further. Suppose we can find a coordinate system for which $g_{ij}$ over a finite region is the identity matrix $\delta_{ij}$. Physically, this corresponds to a Cartesian coordinate system in an inertial frame. In this frame, $|g_{ij}| = 1$ and therefore densities over kinematic variables differ from densities over phase space by a constant of proportionality: the mass. We have the following characterization of mass
+\begin{equation}
+	\tag{IM}
+	\parbox{5in}{Inertial mass tells us how many states are there per unit of areas of position/velocity in an inertial (Cartesian) frame.}
+\end{equation}
+This characterization of mass works even for massless particles, while the standard one does not. In fact, if we define mass to be the resistance of a body to acceleration, we would expect a zero mass body to be extremely easy to accelerate, while this is not the case: a massless particle travels at the same constant speed and cannot be accelerated at all. On the other hand, as we saw before, massless particles do not satisfy \ref{assum_kineq}, and therefore the state cannot be reconstructed from position and velocity: areas of position/velocity correspond to zero states. So why are more massive bodies harder to accelerate? The more massive the body, the more states per unit of velocity, and therefore reaching the same velocity means going through more states. If we understand a force as a change of state per unit time, then we have an intuitive explanation that matches the new characterization.
 
+Note that we focused on Cartesian coordinates, not just inertial frames. That is not a coincidence: the motion appears linear and uniform only in these coordinates. That is, trajectories obey the linear expression $x^i = v^i t + x_0^i$ only in Cartesian coordinates. The first law of Newton, the fact that in an inertial frame a body travels in linear and uniform motion, implicitly implies the existence of Cartesian coordinates. But, in light of what we have seen before, it also implies the existence of mass. In fact, we can, in true Reverse Physics spirit, turn this on its head. Suppose that we have a particle that always moves in a straight line. The velocity will remain the same; the distance between two particles moving at the same velocity will also remain the same. Therefore consider a region of the position/velocity plane shaped like a parallelogram where two sides are at constant velocity. The area would be the length of those sides $\Delta x$ times the height, which will be given by the difference in velocity $\Delta v$. As time evolves, the sides at constant velocity will move but will remain at the same velocity. The parallelogram will remain a parallelogram with the same height and base: the area is conserved. The system is definitely deterministic and reversible, position and velocity identify all states and already provide an area that is conserved over time. It must be, then, that the count of states is proportional, and therefore we have the relationship $p=mv$. In other words, the existence of inertial frames already tells us that mass, as characterized above, must exist.
 
-% For FKE
-% Locally inertial
-% Locally p = mv
-% Invariance under "translation" in momemtum
+The above discussion links the linearity between velocity and momentum to the existence of inertial frames. Therefore
+\begin{equation}
+	\tag{FKE-8}\label{rp-cm-fke-condInertial}
+	\parbox{5in}{At each position, there exist a local inertial frame}
+\end{equation}
+is equivalent to \ref{rp-cm-fke-condLinearRelationship}. To see that only local inertial frames, instead of extended of to a finite region, note that a change of position coordinates fully determines the change of both position and velocity. Therefore a change of coordinate can neither introduce nor remove a velocity dependency from the expression $\partial_{v^i} p_i$. If $\partial_{v^i} p_i = g_{ij}$ has no velocity dependency, we can always find local spatial coordinates such that $g_{ij}=\delta_{ij}$. Therefore, $\partial_{v^i} p_i$ has no velocity dependency if and only if we can find a local inertial (Cartesian) frame.
+
+This insight tells why, in the previous section, we had a hard time to understand how mass exactly was mapped to Hamiltonian and Lagrangian mechanics. Hamiltonian mechanics applies even when \ref{rp-cm-lm-condVelocityFromMomentum} is not satisfied, therefore \ref{rp-cm-fke-condLinearRelationship} does not apply either. Lagrangian mechanics allows us to describe systems that satisfy \ref{rp-cm-lm-condVelocityFromMomentum} but not \ref{rp-cm-fke-condLinearRelationship}. In principle, the Euler-Lagrange equations will give us equations in terms of the acceleration, which can be then plugged in Newtonian mechanics to get the same trajectories. However, it is not clear at this point what is the physical significance of the dynamic variables (e.g. mass, energy and momentum) one takes from Lagrangian mechanics. Given that mass and inertia play such a fundamental role in physics, and for other reasons we will see later, we believe that \ref{rp-cm-fke-condLinearRelationship} is actually physically necessary once \ref{assum_kineq} is assumed. Therefore we call \ref{rp-cm-fke-condLinearRelationship} full kinematic equivalence, and we call \ref{rp-cm-lm-condVelocityFromMomentum} weak kinematic equivalence. Both of these are implementations of assumption \ref{assum_kineq}, though we believe \ref{rp-cm-fke-condLinearRelationship} to be the complete consequence of the physical assumption.
 
 
 \section{Reversing Newtonian mechanics}
