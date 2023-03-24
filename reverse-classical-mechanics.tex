@@ -969,13 +969,13 @@ The takeaway message here is the following: the mathematical tools we inherit fr
 
 \section{Reversing Lagrangian mechanics}
 
-Now that we have a good geometrical and physical feel for Hamiltonian mechanics, and that we have a general understanding of what the tools of differential topology describe physically, we will analyze Lagrangian mechanics more in detail. Conceptually, we already know that Lagrangian mechanics is Hamiltonian mechanics plus assumption \ref{assum_kineq}. We will see that the displacement field admits a vector potential and the Lagrangian is the scalar product between that potential and the displacement field itself. The principle of least action, instead, is geometrically equivalent to asking for paths that are always tangent to the displacement field. Moreover, the principle of least action is better understood as a property of Hamiltonian evolution, and assumption \ref{assum_kineq} is only required to express it in terms of velocity instead of momentum.
+Now that we have a good geometrical and physical feel for Hamiltonian mechanics, and that we have a general understanding of what the tools of differential topology describe physically, we will analyze Lagrangian mechanics more in detail. Conceptually, we already know that Lagrangian mechanics is Hamiltonian mechanics plus assumption \ref{assum_kineq}. We will see that the flow admits a vector potential and the Lagrangian is the scalar product between that potential and the displacement along the path. The principle of least action, instead, is geometrically equivalent to asking for paths that are always tangent to the displacement field. Moreover, the principle of least action is better understood as a property of Hamiltonian evolution, and assumption \ref{assum_kineq} is only required to express the product between potential and displacement in terms of velocity instead of momentum.
 
 \subsubsection{Kinematic assumption revisited}
 
 As we saw in section \ref{rp-cm-inequivalenceOfFormulations}, Lagrangian mechanics is the subset of Hamiltonian mechanics for which assumption \ref{assum_kineq} is valid, which means Lagrangian mechanics is equivalent to assuming \ref{assum_detrev}, \ref{assum_indep} and \ref{assum_kineq}. For the first two assumptions, we found a host of equivalent mathematical, geometrical and physical formulations. Let's see what can we find of \ref{assum_kineq}.
 
-First of all, let us summarize the conditions we have already found. Hamilton's equation always imposes that the velocity is a function of the state variable:
+First of all, let us summarize the conditions we have already found. Hamilton's equations always impose that the velocity is a function of the state variables:
 \begin{equation}
 	v^i = d_t q^i = \partial_{p_i} H.
 \end{equation}
@@ -984,18 +984,18 @@ At fixed position, the Jacobian of the transformation is therefore the Hessian o
 	\partial_{p_i} v^j = \partial_{p_i}\partial_{p_j} H.
 \end{equation}
 There condition
-\begin{equation}\label{rp-cm-lm-condVelocityFromMomentum}
-	\tag{KE-1}
+\begin{equation}\label{rp-cm-wke-condVelocityFromMomentum}
+	\tag{WKE-1}
 	\parbox{5in}{At every position, the relationship between momentum and velocity is invertible and differentiable}
 \end{equation}
 and condition
-\begin{equation}\label{rp-cm-lm-condHyperregularity}
-	\tag{KE-2}
+\begin{equation}\label{rp-cm-wke-condHyperregularity}
+	\tag{WKE-2}
 	\parbox{5in}{At every point, the Hessian of the Hamiltonian is non-singular (hyperregularity of $H$): $|\partial_{p_i}\partial_{p_j} H|\neq 0$}
 \end{equation}
 are equivalent to each other. The non-singularity of the Hessian can also be understood as strict monotonicity of the derivative along momentum. Therefore 
-\begin{equation}\label{rp-cm-lm-condConcavity}
-	\tag{KE-3}
+\begin{equation}\label{rp-cm-wke-condConcavity}
+	\tag{WKE-3}
 	\parbox{5in}{The Hamiltonian is twice differential and concave (or convex) in momentum}
 \end{equation}
 is another equivalent condition.
@@ -1016,30 +1016,30 @@ Note that the relationship between velocity and momentum is not just invertible,
 \end{equation}
 The Jacobian determinant of the change of variable, then, coincide of the Jacobian determinant of relationship between velocity and momentum at constant position. Therefore the following conditions
 \begin{align}
-	\tag{KE-4}\label{rp-cm-lm-condJacobianNonSingular}
+	\tag{WKE-4}\label{rp-cm-wke-condJacobianNonSingular}
 	&\parbox{5in}{The Jacobian of the transformation between state variables and kinematic variables is non-singular} \\
-	\tag{KE-5}\label{rp-cm-lm-condDensities}
+	\tag{WKE-5}\label{rp-cm-wke-condDensities}
 	&\parbox{5in}{Densities over phase space can be expressed in terms of position and velocity: $\rho(x^i, v^j) |J| = \rho(q^i, p_j)$} \\
-	\tag{KE-6}\label{rp-cm-lm-condAreas}
+	\tag{WKE-6}\label{rp-cm-wke-condAreas}
 	&\parbox{5in}{Areas and volumes in phase space can be expressed in kinematic variables: $dx^1 \cdots dx^n \, dv^1 \cdots dv^n = |J| \, dq^1 \cdots dq^n \, dp_1 \cdots dp_n$} \\
-	\tag{KE-7}\label{rp-cm-lm-condSymplectic}
+	\tag{WKE-7}\label{rp-cm-wke-condSymplectic}
 	&\parbox{5in}{The symplectic form $\omega_{ab}$ can be expressed in kinematic variables} \\
-	\tag{KE-8}\label{rp-cm-lm-condDisplacement}
+	\tag{WKE-8}\label{rp-cm-wke-condDisplacement}
 	&\parbox{5in}{The displacement field $S^a$ can be expressed in kinematic variables}
 \end{align}
-are all equivalent to each other and to assumptions \ref{assum_kineq}.
+are all equivalent to each other and to condition \ref{rp-cm-wke-condVelocityFromMomentum}.
 
 The insight is that differentiability between state variables and kinematic variables is required to be able to express the objects we used to characterize the deterministic and reversible dynamics. The only physical requirement, then, is to be able to express the dynamics in terms of the kinematics, which is exactly what assumption \ref{assum_kineq} already requires.
 
 \subsubsection{On the physical meaning of the Lagrangian}
 
-The first question we want to have a clear answer for is: what does the Lagrangian represent physically? It is typically introduced as the difference between kinetic and potential energy. However, this does not work in general. Take the Lagrangian for a particle with charge $\mathfrak{q}$ under an electromagnetic field with electric potential $V$ and magnetic potential $A_i$.
+A key problem is to understand what the Lagrangian represents physically. It is typically introduced as the difference between kinetic and potential energy. However, this does not work in general. Take the Lagrangian for a particle with charge $\mathfrak{q}$ under an electromagnetic field with electric potential $V$ and magnetic potential $A_i$.
 \begin{equation}
 	L = \frac{1}{2} m |v^i|^2 + \mathfrak{q} v^i A_i -\mathfrak{q} V.
 \end{equation}
-The first term is clearly potential energy, the last clearly potential energy, but what about the middle term? It depends on velocity, so it would appear to be a kinetic term, but it also depends on the potential. It's both and neither. What about the energy of an electromagnetic field: should we consider that kinetic or potential? The characterization of Lagrangian as difference between kinetic and potential energy, then, works for some systems but not in general.
+The first term is clearly kinetic energy, the last clearly potential energy, but what about the middle term? It depends on velocity, so it would appear to be a kinetic term, but it also depends on the potential. It's both and neither. The characterization of Lagrangian as difference between kinetic and potential energy, then, works for some systems but not in general and it is best abandoned.
 
-Another problem in understanding what the Lagrangian represents is that it is not unique. Now, a similar problem exists for the Hamiltonian, in the sense that we can sum an arbitrary constant to any Hamiltonian without changing the equations of motions. Physically, this tells us that there is an arbitrariness of the zero of energy. However, the degeneracy for a Lagrangian is far worse. For example, let $f(x^i,t)$ be an arbitrary function of position and time. We can set
+Another problem in understanding what the Lagrangian represents is that it is not unique. Now, a similar problem exists for the Hamiltonian, in the sense that we can sum an arbitrary constant to any Hamiltonian without changing the equations of motions. However, the degeneracy for a Lagrangian is far worse. For example, let $f(x^i,t)$ be an arbitrary function of position and time. We can set
 \begin{equation}\label{rp-cm-lm-gaugeChange}
 	L' = L + \partial_{x^i} f(x^i, t) v^i + \partial_t f(x^i, t).
 \end{equation}
@@ -1074,7 +1074,7 @@ Given that we have a good understanding of Hamiltonian mechanics, let's work on 
 		$}.
 	\end{aligned}
 \end{equation}
-The Lagrangian, then, can be understood as the scalar product of two vectors. The second one looks like the displacement vector, however it is the displacement vector not just in phase space, but in phase space extended by time. Let us, then, redefine $\xi^a = [q^i, p_i , t]$ to include the time variable, and have
+The Lagrangian, then, can be understood as the scalar product of two vectors. The second one is the displacement along the path, however it is the displacement not just in position and momentum, but over time as well. The correct setting to understand Lagrangian mechanics, then, is phase space extended by the time variable. If we redefine $\xi^a = [q^i, p_i , t]$ to include the time variable, we have
 \begin{equation}
 	\begin{aligned}
 		S^a &= d_t \xi^a = \begin{bmatrix}
@@ -1120,7 +1120,7 @@ Note that while the position and momentum components of $S_a$ still perform a ro
 
 \subsubsection{Potential of the flow - 1 d.o.f. case}
 
-We still need to understand what $\theta_a$ is. If we compare it to  $\omega_{ab}$, we note that the first has the Hamiltonian as component, while the second has its derivative. Given that $\omega_{ab}$ is anti-symmetric, it is a two-form, we may want to calculate the anti-symmetrized derivative of $\theta_a$, the exterior derivative. We have
+We wrote the Lagrangian $L = \theta_a d_t \xi^a$ in terms of $\theta_a$ and $d_t \xi^a$, but we have yet to understand what $\theta_a$ is. If we compare it to  $\omega_{ab}$, we note that the first has the Hamiltonian as component, while the second has its derivative. Given that $\omega_{ab}$ is anti-symmetric, it is a two-form, we may want to calculate the anti-symmetrized derivative of $\theta_a$, the exterior derivative. We have
 \begin{equation}
 	\begin{aligned}
 		\partial_a \theta_b - \partial_b \theta_a &=
@@ -1165,7 +1165,7 @@ This means that
 \end{equation}
 the form $\omega_{ab}$ is minus the exterior derivative of $- \theta_a$. In other words, $\omega_{ab}$ has a null exterior derivative and $\theta_a$ is its potential.
 
-Given that the extended phase space for a single degree of freedom is three dimensional, we can use standard vector calculus for a simple physical understanding. In this case, we have
+Given that the extended phase space for a single degree of freedom is three dimensional, we can use standard vector calculus for gain more understanding. In this case, we have
 \begin{equation}
 	\begin{aligned}
 	\theta_a &= \begin{bmatrix}
@@ -1190,13 +1190,13 @@ where $\epsilon_{abc}$ is the fully anti-symmetric Levi-Civita symbol which retu
 	\vec{S} &= - \vec{\nabla} \times \vec{\theta_b} \\
 	\end{aligned}
 \end{equation}
-Apart from the minus, this is the same relationship we would have between the magnetic field $B^i$ and its vector potential $A_i$. Therefore the same vector calculus apply: $S^a$ is divergenceless, admits a vector potential and the flow of the displacement over a closed surface is zero. We can understand this as assumption \ref{assum_detrev} implemented in the extended phase space. Moreover, we have the following relationship:
+Apart from the minus, this is the same relationship we would have between the magnetic field $B^i$ and its vector potential $A_i$. Therefore the same concepts from vector calculus apply: $S^a$ is divergenceless, admits a vector potential and the flow of the displacement over a closed surface is zero. We can understand this as assumption \ref{assum_detrev} implemented in the extended phase space. Moreover, we have the following relationship:
 \begin{equation}
 	\int_{\Sigma} \omega_{ab} dx_1^a dx_1^b = \int_{\Sigma} \epsilon_{abc}S^c dx_1^a dx_1^b
 \end{equation}
 That is, the integral of the form $\omega_{ab}$ corresponds to the surface integral of the displacement field $S^a$.\footnote{Note that, strictly speaking, while $\omega_{ab}$ is a tensor, $\epsilon_{abc}$ and $S^a$ are not. Relationship \ref{rp-cm-lm-displacementFormComponents}, then, is valid only if we chose position, momentum and time as variables. Yet, as we will see much later, we can change the position variable and time variable and still have the same expression by redifining momentum and energy appropriately.} In phase space extended by time, then, $\omega_{ab}$ quantifies both the number of states over a surface and the flow of $S^a$ through the surface. Under assumption \ref{assum_detrev} this works because we have one and only one evolution for each state, therefore quantifying the number of evolutions that intersect a given surface is the same as quantifying the number of states that flow through them.
 
-One striking feature of the vector potential $\theta_a$ is that it is fully characterized by a single arbitrary component, the time component $-H$. The vector potential $A_i$, instead, is characterized by two arbitrary components. Why is that?
+One striking feature of the vector potential $\theta_a$ is that it is fully characterized by a single arbitrary component, the time component $-H$. The vector potential $A_i$, instead, is characterized by two arbitrary components. What are the exact physical conditions that allows that to happen?
 
 Suppose that we know that $S^a$ is a divergenceless field, we say that it is minus the curl of a potential
 \begin{equation}
@@ -1230,16 +1230,22 @@ The form of the vector potential, then, is set by the fact that the flow of $S^a
 
 This discussion tells us exactly what $\theta_a$ is in the case of a single degree of freedom: it is the potential of the displacement field $S^a$ or, equivalently, of the form $\omega_{ab}$. Since we are in the single degree of freedom, assumption \ref{assum_detrev} is enough to recover Hamiltonian mechanics, and this is the same in the extended phase space formulation.
 
+We also learned another thing: the Hamiltonian is the time component of the potential, therefore it is not a scalar. That is, if we made a change in the time variable $\hat{t} = \hat{t}(t)$, we would have
+\begin{equation}
+	\hat{H} = - \theta_{\hat{t}} = - d_{\hat{t}} t \,  \theta_t = d_{\hat{t}} t \, H.
+\end{equation}
+It transforms like a scalar only under purely spatial change of variables.
+
 \subsubsection{Lagrangian and action}
 
-Now that we have seen what $\theta_a$ is, we can go back to the Lagrangian and the action. Suppose that we have a path $\gamma$, not necessarily an actual evolution, but that traverses all time once and only once. That is, we can write
+Now that we have seen what $\theta_a$ is, we can go back to the Lagrangian and the action. Suppose that we have a path $\gamma$, not necessarily an actual evolution, that proceeds along the time variable. That is, we can write
 \begin{equation}
 	\begin{aligned}
 		\gamma &= [q^i(t), p_i(t), t] \\
 		d\gamma &= d_t \xi^a \, dt.
 	\end{aligned}
 \end{equation}
-and use the time variable as its affine parameter. Note that, in this case, the displacement is along the generic path $\gamma$, which is not necessarily an actual evolution, and therefore it is not necessary that $d_t \xi^a = S^a$. That equation is satisfied if and only if $\gamma$ is an actual evolution of the system. Regardless of whether that's true, we can write:
+where we used the time variable as its affine parameter. Note that, in this case, the displacement is along the generic path $\gamma$, which is not necessarily an actual evolution. Therefore $d_t \xi^a = S^a$ if and only if $\gamma$ is an actual evolution of the system. For a generic path we can write:
 \begin{equation}
 	\begin{aligned}
 		L &= p_i v^i - H = \theta_a d_t \xi^a \\
@@ -1269,21 +1275,21 @@ which is the same expression we had in \ref{rp-cm-lm-gaugeChange}.
 But if the action and the Lagrangian are unphysical, how can we use them to derive the laws of evolution, which are clearly physical? Note that the laws are not expressed in terms of the action, but in terms of the variation of the action. Let $\gamma'$, then, be a small variation of the path $\gamma$ with the same endpoint. Note that $\gamma$ and $\gamma'$ form a closed loop. Take a surface $\Sigma$ that is enclosed by that boundary, we can use Stoke's theorem:
 \begin{equation}
 	\begin{aligned}
-		\delta \mathcal{A}[\gamma] &= \delta \int_\gamma L dt = \delta \int_\gamma \theta_a d\xi^a = \int_{\Sigma} \partial_a \wedge \theta_b  d\xi^a d\eta^b \\
+		\delta \mathcal{A}[\gamma] &= \delta \int_\gamma L dt = \delta \int_\gamma \theta_a d\xi^a = \int_\gamma \theta_a d\xi^a - \int_{\gamma'} \theta_a d\xi^a = \int_{\Sigma} \partial_a \wedge \theta_b  d\xi^a d\eta^b \\
 		&= - \int_{\Sigma} \omega_{ab} d\xi^a d\eta^b, 
 	\end{aligned}
 \end{equation}
-where $d\eta^b$ is the displacement of the point from $\gamma$ to the variation $\gamma'$. The variation of the action, then, corresponds to the integral of $\omega_{ab}$, which is physical. Geometrically, it corresponds to the flow of the evolutions through the surface enclosed by the path and its variation. Note that, because the flow is divergenceless, it does not matter which surface is chosen, since all surfaces that share the same boundaries will correspond to the same flow. This is a striking observation: while the action is unphysical, its variation is physical.
+where $d\eta^b$ is the displacement of the point from $\gamma$ to the variation $\gamma'$. The variation of the action, then, corresponds to the surface integral of $\omega_{ab}$, which is physical. Geometrically, it corresponds to the flow of the evolutions through the surface enclosed by the path and its variation. Note that, because the flow is divergenceless, it does not matter which surface is chosen, since all surfaces that share the same boundaries will correspond to the same flow. This is a striking observation: while the action is unphysical, its variation is physical.
 
 We now are in a perfect position to fully understand the principle of stationary action. This states that actual evolutions are given by paths for which the variation is zero. That is, $\int_{\Sigma} \omega_{ab} d\xi^a d\eta^b$ has to be zero for all possible $d\eta^b$. This means we must have $\omega_{ab} d\xi^a = 0$. Since $S^a$ is the only degenerate direction for $\omega_{ab}$, we must have $d\xi^a = S^a dt$. In other words, the paths that make the action stationary are exactly the paths whose tangent vector applied to $\omega_{ab}$ return zero.
 
-Geometrically, if a path $\gamma$ is an evolution, it is always be tangent to the displacement field $S^a$. If we make a small variation $\gamma'$, the two paths will enclose a tiny strip $\Sigma$ which will be tangent to $S^a$ as well. Therefore the flow of $S^a$ through $\Sigma$ will be zero. Given that the flow through $\Sigma$ is minus the variation of the action, the variation of the action for all evolutions will be zero. Conversely, if a path is not an evolution, at some point its tangent will be different from the displacement field. Therefore we will be able to find a variation $\gamma'$ for which the surface $\Sigma$ will ``catch'' some flow. Therefore we will have a variation of the path for which the variation of the action is non-zero. In other words, the action principle is a geometrically roundabout way to ask for those paths that are always tangent to the displacement field $S^a$, which is divergenceless and has constant flow in time.
+Geometrically, if a path $\gamma$ is an evolution, it is always be tangent to the displacement field $S^a$. If we make a small variation $\gamma'$, the two paths will enclose an infinitesimally large strip $\Sigma$ which will be tangent to $S^a$ as well. Therefore the flow of $S^a$ through $\Sigma$ will be zero. Given that the flow through $\Sigma$ is minus the variation of the action, the variation of the action for all evolutions will be zero. Conversely, if a path is not an evolution, at some point its tangent will be different from the displacement field. Therefore we will be able to find a variation $\gamma'$ for which the surface $\Sigma$ will ``catch'' some flow. Therefore we will have a variation of the path for which the variation of the action is non-zero. In other words, the action principle is a geometrically roundabout way to ask for those paths that are always tangent to the displacement field $S^a$, which is divergenceless and has constant flow in time.
 
 Note that the geometrical and physical interpretation we have given to the Lagrangian and the action lives in the extended phase space, which is part of the Hamiltonian formulation. In fact, the only place where we need assumption \ref{assum_kineq} is when we want to write $p_i d_t q^i - H$ as a function of velocity instead of momentum. The integral of the vector potential and its variation, in fact, can still be written even in terms of momentum, and therefore the geometrical and physical characterization of the principle of stationary action applies for all Hamiltonian systems, not just the Lagrangian subset. In other words, the principle of stationary action is really more a property of Hamiltonian mechanics than Lagrangian mechanics. The only difference is that in Lagrangian mechanics, since assumption \ref{assum_kineq} applies, it can be expressed purely in terms of kinematic variables.
 
 \subsubsection{Multiple d.o.f.}
 
-The above discussion capture all the important elements of Lagrangian mechanics and the action principle even if it is limited to the single d.o.f. case. Still, we should generalize to the multiple d.o.f. case. Note that the equations we wrote for the Lagrangian and the action are already in generalized form. The only thing that we need to do is derive the expression for the vector potential $\theta_a$ in the general case.
+The above discussion captures all the important elements of Lagrangian mechanics and the action principle even if it is limited to the single d.o.f. case. Still, we should generalize to the multiple d.o.f. case. Note that the equations we wrote for the Lagrangian and the action are already in generalized form. The only thing that we need to do is derive the expression for the vector potential $\theta_a$ in the general case.
 
 If we compare \ref{rp-cm-lm-contactForm} with \ref{rp-cm-hmd-symplecticForm}, we find that within non-temporal direction the form is identical. Therefore, we can still understand it as quantifying the number of configurations within each d.o.f. and the degree of independence across d.o.f., while adding the idea that the displacement field does not contribute new configurations. Mathematically, the displacement field is the only direction in which the form $\omega_{ab}$ is degenerate. Let us see what those components tell us in terms of the potential. We have:
 \begin{equation}\label{rp-cm-lm-potenialConditions}
@@ -1313,11 +1319,11 @@ Since $\omega_{ab}$ admits a potential, its exterior derivative is zero. We also
 \end{equation}
 is an equivalent characterization of Hamiltonian mechanics in the extended phase space.
 
-The above condition must imply both \ref{assum_detrev} and \ref{assum_detrev}. We can break down the two contributions in the following way. Assumption \ref{assum_detrev} tells us we have a way to measure the flow of the evolutions over a hyper-surface, which corresponds to a $n-1$-form $\Omega_{a_1 \cdots a_{2n}}$ such that:
+The above condition must imply both \ref{assum_detrev} and \ref{assum_indep}. We can break down the two contributions in the following way. Assumption \ref{assum_detrev} tells us we have a way to measure the flow of the evolutions over a hyper-surface, which corresponds to a $n-1$-form $\Omega_{a_1 \cdots a_{2n}}$ such that:
 \begin{equation}
 	S^{a_1} \Omega_{a_1 \cdots a_{2n}} = 0.
 \end{equation}
-If the space is charted with position, momentum and time, we can write:
+If the space is charted by position, momentum and time, we can write:
 \begin{equation}
 	\begin{aligned}
 	&\Omega_{a_1 \cdots a_{2n}} = \epsilon_{a_1 \cdots a_{2n}a_{2n+1}} S^{a_{2n+1}} \\
@@ -1334,15 +1340,17 @@ The geometrical and physical understanding of the action and the Lagrangian are 
 
 \section{Full kinematic equivalence and massive particles}
 
-In the previous section we recovered Lagrangian mechanics by formulating the principle of stationary action in Hamiltonian form, and then used assumption \ref{assum_kineq} simply to express it in terms of the kinematic variable. This is the weakest use of the assumption, as it simply assumes we can map dynamic variables to kinematic variables point-by-point. However, while reversing Hamiltonian mechanics we saw that it is infinitesimal cells of phase space, not the points, that are physically significant. The full version of assumption \ref{assum_kineq}, then, requires us to map cells, areas and distributions between dynamic and kinematic variables as well. This requires the map between velocity and conjugate momentum to be linear, which in turns fixes the dynamics to the one of massive particles under scalar and vector potential forces.
+In the previous section we recovered Lagrangian mechanics by formulating the principle of stationary action in Hamiltonian form, and then used assumption \ref{assum_kineq} in form \ref{rp-cm-wke-condVelocityFromMomentum} simply to express it in terms of the kinematic variable. This is the weakest use of the assumption, as it only assumes we have an invertible map between velocity and momentum. However, we will find that this is not enough to define a meaningful count of configurations over kinematic variables, which requires states to be uniformly distributed over velocity. This leads to a stronger version of assumption \ref{assum_kineq}, which requires the map between velocity and conjugate momentum to be linear, which in turns fixes the dynamics to the one of massive particles under scalar and vector potential forces.
 
-Assumption \ref{assum_kineq} imposes, at every position, an invertible relationship $p_i = p_i(q^j, v^j)$ between momentum and velocity which, at first glance, can be arbitrary. We should note, however, that both velocity and momentum are linear objects, and therefore it would seem natural to require a linear relationship between the two. Though we do not have a clear physical reason to impose this restriction, let's see what would it impose.
+\subsection{Linear map between linear spaces}
+
+Condition \ref{rp-cm-wke-condVelocityFromMomentum} imposes, at every position, an invertible relationship $p_i = p_i(q^j, v^j)$ between momentum and velocity which can be arbitrary. Note that both velocity and momentum are linear objects, and therefore it would seem natural to require a linear relationship between the two. Though we do not have a clear physical reason to impose this restriction, let's see what would it entail.
 
 If the relationship between momentum and velocity at every point is linear, we have that the Jacobian is only a function of position. Moreover, since it is a linear map between a vector and a covector, the map must be a tensor. We have
 \begin{equation}\label{rp-cm-lm-metricTensor}
 	\partial_{v^i} p_j = m g_{ij}
 \end{equation}
-where $m$ is a constant that transforms units of velocity to units of momentum while $g_{ij}$ is the actual linear map. Since $p_j = \partial_{v^j} L$, we have
+where $m$ is a constant that transforms units of velocity to units of momentum while $g_{ij}$ is the actual linear map in terms of spatial coordinates. Since $p_j = \partial_{v^j} L$, we have
 \begin{equation}
 	m g_{ij} = \partial_{v^i} p_j = \partial_{v^i} \partial_{v^j} L = \partial_{v^j} \partial_{v^i} L  = \partial_{v^j} p_i =  m g_{ji}
 \end{equation}
@@ -1370,7 +1378,7 @@ and condition
 	\tag{FKE-2}
 	\parbox{5in}{The system under study is a massive particle under scalar and vector potential forces.}
 \end{equation}
-are equivalent. At this point, having seen enough of reverse physics, it should be clear that this can't simply be a coincidence. Let's try and find other equivalent characterizations.
+are equivalent. At this point, having seen enough of reverse physics, it should be clear that this can't simply be a coincidence and it warrants more exploration.
 
 Since $m g_{ij}$ is the Jacobian between velocity and momentum, and the Jacobian determinant of the transformation from state variables to kinematic variables was equal to the Jacobian determinant of the relationship between velocity and momentum, we find
 \begin{equation}
@@ -1379,7 +1387,7 @@ Since $m g_{ij}$ is the Jacobian between velocity and momentum, and the Jacobian
 		|J| &= |\partial_{p_i} v^j | = \frac{|g^{ij}|}{m} = \frac{1}{m \,|g_{ij}|}. 
 	\end{aligned}
 \end{equation}
-We therefore have that the following conditions
+Recall that the existence of a non-singular Jacobian is what allowed to express all differential objects (e.g. densities, phase space areas/volumes, symplectic form) in terms of kinematic variables. This forces those expressions to be in terms of position only. We therefore have that the following conditions
 \begin{align}
 	\tag{FKE-3}\label{rp-cm-fke-condJacobianOfPosition}
 	&\parbox{5in}{The Jacobian of the transformation between state variables and kinematic variables is a non-singular function of position only} \\
@@ -1392,7 +1400,7 @@ We therefore have that the following conditions
 \end{align}
 are equivalent to each other and equivalent to \ref{rp-cm-fke-condLinearRelationship} and \ref{rp-cm-fke-condMassiveParticle}.
 
-To understand what these conditions, let us look at how densities and areas map from state variables to kinematic variables. Since there is a factor of a Jacobian determinant between the corresponding expressions, if, given two states, the density is the same as expressed in position and momentum, it will not be necessarily the same as expressed in position and velocity. Position and momentum have a special property in that volumes and areas are uniform in those coordinates, and therefore comparing densities in those variables is simply a matter of comparing the value of the density. Canonical coordinates are exactly those state variables for which this property holds. Kinematic variables are, in general, non-canonical. But the linearity between velocity and momentum imposes imposes a lesser of this property: it makes it so that, at least at the same position, we can compare areas and density. Therefore if we have $\rho_{xv}(x^i, v_1^j) = \rho_{xv}(x^i, v_2^j)$, the density for two different values of velocity at the same point matches, then we really have the same density of states. Therefore
+To understand better these conditions, consider a density $\rho_{qp}$ over phase space and its expression $\rho_{xv}$ over kinematic variables. Since there is a factor of a Jacobian determinant between the two, if the density takes the same value between two states as expressed in position and momentum, the density as defined over position and velocity will not necessarily have the same value. Position and momentum have a special property in that the density of states is uniform in terms of those variables, and therefore comparing densities in those variables is simply a matter of comparing the value of the density. Canonical coordinates are exactly those state variables for which this property holds. Kinematic variables are, in general, non-canonical. But the linearity between velocity and momentum imposes imposes a lesser version of this property: it makes it so that, at least at the same position, we can compare areas and density. Therefore if we have $\rho_{xv}(x^i, v_1^j) = \rho_{xv}(x^i, v_2^j)$, the density for two different values of velocity at the same point matches, then we really have the same density of states. Therefore
 \begin{equation}
 	\tag{FKE-7}\label{rp-cm-fke-condDensityVelocity}
 	\parbox{5in}{Density expressed in velocity at the same point are proportional to the density over states}
@@ -1400,6 +1408,8 @@ To understand what these conditions, let us look at how densities and areas map 
 is another equivalent condition.
 
 In this formulation, one starts to wonder whether the lack of this property would make physical sense. We can understand that non-linear transformation of position, since they stretch and shrink space differently at different points, would make it more complicated to understand whether two densities at two different points are the same. On the other hand, velocity is defined locally over infinitesimal changes of positions, therefore non-linear changes in velocity do not arise when changing units and coordinates.
+
+\subsection{Mass and inertial frames}
 
 Another way of looking at it is the following. Suppose we have a density $\rho(q^i, p_j)$ defined over a finite region of phase space that is constant along momentum. That is, $\rho(q^i, p^1_j) = \rho(q^i, p^2_j)$ for all $p^1_j$ and $p^2_j$. Assuming we have a linear relationship between momentum and velocity we have
 \begin{equation}
@@ -1420,19 +1430,20 @@ We can go one step further. Suppose we can find a coordinate system for which $g
 	\tag{IM}
 	\parbox{5in}{Inertial mass tells us how many states are there per unit of areas of position/velocity in an inertial (Cartesian) frame.}
 \end{equation}
-This characterization of mass works even for massless particles, while the standard one does not. In fact, if we define mass to be the resistance of a body to acceleration, we would expect a zero mass body to be extremely easy to accelerate, while this is not the case: a massless particle travels at the same constant speed and cannot be accelerated at all. On the other hand, as we saw before, massless particles do not satisfy \ref{assum_kineq}, and therefore the state cannot be reconstructed from position and velocity: areas of position/velocity correspond to zero states. So why are more massive bodies harder to accelerate? The more massive the body, the more states per unit of velocity, and therefore reaching the same velocity means going through more states. If we understand a force as a change of state per unit time, then we have an intuitive explanation that matches the new characterization.
+This characterization of mass works even for massless particles, while the standard one does not. In fact, if we define mass to be the resistance of a body to acceleration, we would expect a zero mass body to be extremely easy to accelerate, while this is not the case: a massless particle travels at the same constant speed and cannot be accelerated at all. On the other hand, as we saw before, massless particles do not satisfy \ref{assum_kineq}, and therefore the state cannot be reconstructed from position and velocity: areas of position/velocity correspond to zero states. So why are more massive bodies harder to accelerate? The more massive the body, the more states per unit of velocity, and therefore reaching the same velocity means going through more states. If we understand force as a change of state per unit time, then we have an intuitive explanation that matches the new characterization.
 
-Note that we focused on Cartesian coordinates, not just inertial frames. That is not a coincidence: the motion appears linear and uniform only in these coordinates. That is, trajectories obey the linear expression $x^i = v^i t + x_0^i$ only in Cartesian coordinates. The first law of Newton, the fact that in an inertial frame a body travels in linear and uniform motion, implicitly implies the existence of Cartesian coordinates. But, in light of what we have seen before, it also implies the existence of mass. In fact, we can, in true Reverse Physics spirit, turn this on its head. Suppose that we have a particle that always moves in a straight line. The velocity will remain the same; the distance between two particles moving at the same velocity will also remain the same. Therefore consider a region of the position/velocity plane shaped like a parallelogram where two sides are at constant velocity. The area would be the length of those sides $\Delta x$ times the height, which will be given by the difference in velocity $\Delta v$. As time evolves, the sides at constant velocity will move but will remain at the same velocity. The parallelogram will remain a parallelogram with the same height and base: the area is conserved. The system is definitely deterministic and reversible, position and velocity identify all states and already provide an area that is conserved over time. It must be, then, that the count of states is proportional, and therefore we have the relationship $p=mv$. In other words, the existence of inertial frames already tells us that mass, as characterized above, must exist.
+Note that we focused on Cartesian coordinates, not just inertial frames. That is not a coincidence: the motion for a free particles appears linear and uniform only in these coordinates. That is, trajectories obey the linear expression $x^i = v^i t + x_0^i$ only in Cartesian coordinates. The first law of Newton, the fact that in an inertial frame a body travels in linear and uniform motion, implicitly implies the existence of Cartesian coordinates. But, in light of what we have seen before, it also implies the existence of mass. In fact, we can, in true Reverse Physics spirit, turn this on its head. Suppose that the motion of free particles is linear and uniform. The velocity will remain the same along an evolution; the distance between two particles moving at the same velocity over the same line will also remain the same. Therefore consider the plane charted by  position and velocity along a particular direction. Take a parallelogram where two sides are at constant velocity: its area would be the length of those sides $\Delta x$ times the height, which will be given by the difference in velocity $\Delta v$. As time evolves, the sides at constant velocity will move but will remain at the same velocity. The parallelogram will remain a parallelogram with the same height and base: the area is conserved. Now, clearly this is a deterministic and reversible system. Position and velocity identify all states and already provide an area that is conserved over time. It must be, then, that the count of states is proportional, and therefore we have the relationship $p_i=mv^i$. In other words, once we assumed the existence of inertial frames, we have already implicitly introduced the idea of inertial mass as characterized above.
 
 The above discussion links the linearity between velocity and momentum to the existence of inertial frames. Therefore
 \begin{equation}
 	\tag{FKE-8}\label{rp-cm-fke-condInertial}
 	\parbox{5in}{At each position, there exist a local inertial frame}
 \end{equation}
-is equivalent to \ref{rp-cm-fke-condLinearRelationship}. To see that only local inertial frames, instead of extended of to a finite region, note that a change of position coordinates fully determines the change of both position and velocity. Therefore a change of coordinate can neither introduce nor remove a velocity dependency from the expression $\partial_{v^i} p_i$. If $\partial_{v^i} p_i = g_{ij}$ has no velocity dependency, we can always find local spatial coordinates such that $g_{ij}=\delta_{ij}$. Therefore, $\partial_{v^i} p_i$ has no velocity dependency if and only if we can find a local inertial (Cartesian) frame.
+is equivalent to \ref{rp-cm-fke-condLinearRelationship}. Note that here we are claiming that only local inertial frames are needed. To see that, note that a change of position coordinates fully determines the change of both position and velocity. Therefore a change of coordinate can neither introduce nor remove a velocity dependency from the expression $\partial_{v^i} p_i$. If $\partial_{v^i} p_i = g_{ij}$ has no velocity dependency, we can always find local spatial coordinates such that $g_{ij}=\delta_{ij}$. Therefore, $\partial_{v^i} p_i$ has no velocity dependency if and only if we can find a local inertial (Cartesian) frame.
 
-This insight tells why, in the previous section, we had a hard time to understand how mass exactly was mapped to Hamiltonian and Lagrangian mechanics. Hamiltonian mechanics applies even when \ref{rp-cm-lm-condVelocityFromMomentum} is not satisfied, therefore \ref{rp-cm-fke-condLinearRelationship} does not apply either. Lagrangian mechanics allows us to describe systems that satisfy \ref{rp-cm-lm-condVelocityFromMomentum} but not \ref{rp-cm-fke-condLinearRelationship}. In principle, the Euler-Lagrange equations will give us equations in terms of the acceleration, which can be then plugged in Newtonian mechanics to get the same trajectories. However, it is not clear at this point what is the physical significance of the dynamic variables (e.g. mass, energy and momentum) one takes from Lagrangian mechanics. Given that mass and inertia play such a fundamental role in physics, and for other reasons we will see later, we believe that \ref{rp-cm-fke-condLinearRelationship} is actually physically necessary once \ref{assum_kineq} is assumed. Therefore we call \ref{rp-cm-fke-condLinearRelationship} full kinematic equivalence, and we call \ref{rp-cm-lm-condVelocityFromMomentum} weak kinematic equivalence. Both of these are implementations of assumption \ref{assum_kineq}, though we believe \ref{rp-cm-fke-condLinearRelationship} to be the complete consequence of the physical assumption.
+So we found that \ref{rp-cm-fke-condLinearRelationship} is linked to inertia and the existence of inertial frames, but in what sense is it linked to assumption \ref{assum_kineq}? Suppose one gave us all the kinematics of a system, which are fully defined by the reference frame and all possible trajectories. Velocity, as a quantity, is fully defined in terms of position and time. Now, assumption \ref{assum_kineq} tells us we must be able to recover the full dynamics. We must be able, for example, to convert a distribution over kinematic variables over dynamic variables. This is essentially a change of units of the density $\rho$ from position/velocity to position/momentum. But if velocity is a derived quantity, fully defined by position, then it should be the case that the transformation rule of $\rho$ is only a function of position. In this sense, \ref{rp-cm-fke-condLinearRelationship} can be understood as a consequence of \ref{assum_kineq}.
 
+While we believe this argument is convincing, we do not view it as definitive. The issue is that mathematical structure are devoid of the concept of units and of the type of definitional dependence we used. What does it mean, in a precise way, that velocity is a derived unit from position and time? What does it mean that temperature is a derived unit from energy and entropy? Covariance and controvariance capture some hint in terms of variance (i.e. how do units of velocity (or momentum) change if I change units of position?) but this is sufficient only when some initial relationship is assumed. The question of whether the weak form of assumption \ref{assum_kineq} makes physical sense is ultimately of question of how velocity and momentum are defined with respect to position. This requires conceptual and mathematical tools we do not have.
 
 \section{Reversing Newtonian mechanics}
 
