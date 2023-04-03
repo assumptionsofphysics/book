@@ -969,11 +969,11 @@ The takeaway message here is the following: the mathematical tools we inherit fr
 
 \section{Reversing Lagrangian mechanics}
 
-Now that we have a good geometrical and physical feel for Hamiltonian mechanics, and that we have a general understanding of what the tools of differential topology describe physically, we will analyze Lagrangian mechanics more in detail. Conceptually, we already know that Lagrangian mechanics is Hamiltonian mechanics plus assumption \ref{assum_kineq}. We will see that the flow admits a vector potential and the Lagrangian is the scalar product between that potential and the displacement along the path. The principle of least action, instead, is geometrically equivalent to asking for paths that are always tangent to the displacement field. Moreover, the principle of least action is better understood as a property of Hamiltonian evolution, and assumption \ref{assum_kineq} is only required to express the product between potential and displacement in terms of velocity instead of momentum.
+Now that we have a good geometric and physical feel for Hamiltonian mechanics, and that we have a general understanding of what the tools of differential topology describe physically, we will analyze Lagrangian mechanics more in detail. Conceptually, we already know that Lagrangian mechanics is Hamiltonian mechanics plus assumption \ref{assum_kineq}. We will see that the flow admits a vector potential and the Lagrangian is the scalar product between that potential and the displacement along the path. The principle of least action is geometrically equivalent to asking for paths that are always tangent to the displacement field. Moreover, the principle of least action is better understood as a property of Hamiltonian evolution, and assumption \ref{assum_kineq} is only required to express the product between potential and displacement in terms of velocity instead of momentum.
 
 \subsubsection{Kinematic assumption revisited}
 
-As we saw in section \ref{rp-cm-inequivalenceOfFormulations}, Lagrangian mechanics is the subset of Hamiltonian mechanics for which assumption \ref{assum_kineq} is valid, which means Lagrangian mechanics is equivalent to assuming \ref{assum_detrev}, \ref{assum_indep} and \ref{assum_kineq}. For the first two assumptions, we found a host of equivalent mathematical, geometrical and physical formulations. Let's see what can we find of \ref{assum_kineq}.
+As we saw in section \ref{rp-cm-inequivalenceOfFormulations}, Lagrangian mechanics is the subset of Hamiltonian mechanics for which assumption \ref{assum_kineq} is valid, which means Lagrangian mechanics is equivalent to assuming \ref{assum_detrev}, \ref{assum_indep} and \ref{assum_kineq}. For the first two assumptions, we found a host of equivalent mathematical, geometric and physical formulations. Let's see what can we find for \ref{assum_kineq}.
 
 First of all, let us summarize the conditions we have already found. Hamilton's equations always impose that the velocity is a function of the state variables:
 \begin{equation}
@@ -983,7 +983,7 @@ At fixed position, the Jacobian of the transformation is therefore the Hessian o
 \begin{equation}
 	\partial_{p_i} v^j = \partial_{p_i}\partial_{p_j} H.
 \end{equation}
-There condition
+Therefore condition
 \begin{equation}\label{rp-cm-wke-condVelocityFromMomentum}
 	\tag{WKE-1}
 	\parbox{5in}{At every position, the relationship between momentum and velocity is invertible and differentiable}
@@ -1000,7 +1000,7 @@ are equivalent to each other. The non-singularity of the Hessian can also be und
 \end{equation}
 is another equivalent condition.
 
-Note that the relationship between velocity and momentum is not just invertible, but differentiable as well. This may seem like an additional condition from \ref{assum_kineq}, but recall that the dynamics is not in terms of points, but rather cells of phase-space and density distributions. Therefore we should calculate the Jacobian determinant of the transformation from state variables to kinematic variable. We have
+Note that the relationship between velocity and momentum is not just invertible, but differentiable as well. This may seem like an additional condition from \ref{assum_kineq}, but recall that the dynamics is not in terms of points, but rather cells of phase-space and density distributions. In order to express those geometric elements in terms of the kinematic variables, we must make sure that the Jacobian determinant of the transformation from state variables to kinematic variables is well-defined and non-zero. We have
 \begin{equation}
 	\begin{aligned}
 		|J| &= \begin{vmatrix}
@@ -1014,7 +1014,7 @@ Note that the relationship between velocity and momentum is not just invertible,
 		= \left|\delta^i_j\right| \left|\partial_{p_j} v^i\right| - |0| \left|\partial_{q^j} v^i\right| = \left|\partial_{p_j} v^i\right|.
 	\end{aligned}
 \end{equation}
-The Jacobian determinant of the change of variable, then, coincide of the Jacobian determinant of relationship between velocity and momentum at constant position. Therefore the following conditions
+The Jacobian determinant of the change of variables, then, coincides with the Jacobian determinant of the relationship between velocity and momentum at constant position. Therefore the following conditions
 \begin{align}
 	\tag{WKE-4}\label{rp-cm-wke-condJacobianNonSingular}
 	&\parbox{5in}{The Jacobian of the transformation between state variables and kinematic variables is non-singular} \\
@@ -1033,26 +1033,26 @@ The insight is that differentiability between state variables and kinematic vari
 
 \subsubsection{On the physical meaning of the Lagrangian}
 
-A key problem is to understand what the Lagrangian represents physically. It is typically introduced as the difference between kinetic and potential energy. However, this does not work in general. Take the Lagrangian for a particle with charge $\mathfrak{q}$ under an electromagnetic field with electric potential $V$ and magnetic potential $A_i$.
+A key problem is to understand what the Lagrangian represents physically. It is often introduced as the difference between kinetic and potential energy. However, this does not work in general. Take the Lagrangian for a particle with charge $\mathfrak{q}$ under an electromagnetic field with electric potential $V$ and magnetic potential $A_i$.
 \begin{equation}
 	L = \frac{1}{2} m |v^i|^2 + \mathfrak{q} v^i A_i -\mathfrak{q} V.
 \end{equation}
 The first term is clearly kinetic energy, the last clearly potential energy, but what about the middle term? It depends on velocity, so it would appear to be a kinetic term, but it also depends on the potential. It's both and neither. The characterization of Lagrangian as difference between kinetic and potential energy, then, works for some systems but not in general and it is best abandoned.
 
-Another problem in understanding what the Lagrangian represents is that it is not unique. Now, a similar problem exists for the Hamiltonian, in the sense that we can sum an arbitrary constant to any Hamiltonian without changing the equations of motions. However, the degeneracy for a Lagrangian is far worse. For example, let $f(x^i,t)$ be an arbitrary function of position and time. We can set
+Another problem in understanding what the Lagrangian represents is that it is not unique. Now, a similar problem exists for the Hamiltonian, in the sense that we can sum an arbitrary constant to any Hamiltonian without changing the equations of motion. However, the degeneracy for a Lagrangian is far worse. For example, let $f(x^i,t)$ be an arbitrary function of position and time. We can set
 \begin{equation}\label{rp-cm-lm-gaugeChange}
 	L' = L + \partial_{x^i} f(x^i, t) v^i + \partial_t f(x^i, t).
 \end{equation}
-We have 
+We can see how the Euler-Lagrange equations \ref{rp-cm-EulerLagrange} are affected
 \begin{equation}
 	\begin{aligned}
-		\partial_{x^i}L' - d_t \partial_{v^i} L' &= \partial_{x^i} L + \partial_{x^i} \partial_{x^j} f v^j + \partial_{x^i} \partial_t f - d_t \left( \partial_{v^i} L + \partial_{x^i} f \right) \\
+		0 =\partial_{x^i}L' - d_t \partial_{v^i} L' &= \partial_{x^i} L + \partial_{x^i} \partial_{x^j} f v^j + \partial_{x^i} \partial_t f - d_t \left( \partial_{v^i} L + \partial_{x^i} f \right) \\
 		&= \partial_{x^i} L - d_t \partial_{v^i} L + \partial_{x^i} \partial_{x^j} f v^j + \partial_{x^i} \partial_t f - \partial_{x^j}\partial_{x^i} f d_t x^j - \partial_t \partial_{x^i} f d_t t \\
 		&= \partial_{x^i} L - d_t \partial_{v^i} L + \partial_{x^i} \partial_{x^j} f v^j + \partial_{x^i} \partial_t f - \partial_{x^j}\partial_{x^i} f v^j - \partial_t \partial_{x^i} f \\
 		&= \partial_{x^i} L - d_t \partial_{v^i} L.
 	\end{aligned}
 \end{equation}
-That is, the equation of motions given by $L'$ are the same as the ones given by $L$. Therefore the actual value, or the difference of values, of the Lagrangian is physically meaningless. This makes the question even more puzzling: what is the Lagrangian?
+That is, the equations of motion given by $L'$ are the same as the ones given by $L$. Therefore the actual value, or the difference of values, of the Lagrangian is physically meaningless. This makes the question even more puzzling: what is the Lagrangian?
 
 \subsubsection{The extended phase space}
 
@@ -1079,7 +1079,12 @@ The Lagrangian, then, can be understood as the scalar product of two vectors. Th
 	\begin{aligned}
 		S^a &= d_t \xi^a = \begin{bmatrix}
 			d_t q^i & d_t p_i & d_t t
-		\end{bmatrix} \\
+		\end{bmatrix}.
+	\end{aligned}
+\end{equation}
+We can then define the new vector $\theta_a$ in terms of its components
+\begin{equation}
+	\begin{aligned}
 		\theta_a &= \begin{bmatrix}
 			p_i & 0 & - H
 		\end{bmatrix}.
@@ -1094,8 +1099,8 @@ We also need to generalize $\omega_{ab}$ to the extended phase space. Looking at
 		\omega_{p_i q^j} & \omega_{p_i p_j} & \omega_{p_i t} \\
 		\omega_{t q^j} & \omega_{t p_j} & \omega_{t t} 
 	\end{array} \right]= \left[\begin{array}{ccc}
-		0 & I_n & \partial_{q^i} H \\
-		- I_n & 0 & \partial_{p_i} H \\
+		0 & \delta^i_j & \partial_{q^i} H \\
+		- \delta_i^j & 0 & \partial_{p_i} H \\
 		- \partial_{q^j} H & -\partial_{p_j} H & 0
 	\end{array} \right] ,
 \end{equation}
@@ -1120,7 +1125,7 @@ Note that while the position and momentum components of $S_a$ still perform a ro
 
 \subsubsection{Potential of the flow - 1 d.o.f. case}
 
-We wrote the Lagrangian $L = \theta_a d_t \xi^a$ in terms of $\theta_a$ and $d_t \xi^a$, but we have yet to understand what $\theta_a$ is. If we compare it to  $\omega_{ab}$, we note that the first has the Hamiltonian as component, while the second has its derivative. Given that $\omega_{ab}$ is anti-symmetric, it is a two-form, we may want to calculate the anti-symmetrized derivative of $\theta_a$, the exterior derivative. We have
+We wrote the Lagrangian $L = \theta_a d_t \xi^a$ in terms of $\theta_a$ and $d_t \xi^a$, but we have yet to understand what $\theta_a$ is. If we compare it to  $\omega_{ab}$, we note that the first has the Hamiltonian as a component, while the second has its derivative. Given that $\omega_{ab}$ is anti-symmetric, it is a two-form, we may want to calculate the anti-symmetrized derivative of $\theta_a$, the exterior derivative. We have
 \begin{equation}
 	\begin{aligned}
 		\partial_a \theta_b - \partial_b \theta_a &=
@@ -1163,9 +1168,9 @@ This means that
 \end{bmatrix},
 	\end{aligned}
 \end{equation}
-the form $\omega_{ab}$ is minus the exterior derivative of $- \theta_a$. In other words, $\omega_{ab}$ has a null exterior derivative and $\theta_a$ is its potential.
+the form $\omega_{ab}$ is minus the exterior derivative of $\theta_a$. In other words, $\omega_{ab}$ has a null exterior derivative and $\theta_a$ is its potential.
 
-Given that the extended phase space for a single degree of freedom is three dimensional, we can use standard vector calculus for gain more understanding. In this case, we have
+Given that the extended phase space for a single degree of freedom is three dimensional, we can use standard vector calculus to gain more understanding. In this case, we have
 \begin{equation}
 	\begin{aligned}
 	\theta_a &= \begin{bmatrix}
@@ -1190,27 +1195,27 @@ where $\epsilon_{abc}$ is the fully anti-symmetric Levi-Civita symbol which retu
 	\vec{S} &= - \vec{\nabla} \times \vec{\theta_b} \\
 	\end{aligned}
 \end{equation}
-Apart from the minus, this is the same relationship we would have between the magnetic field $B^i$ and its vector potential $A_i$. Therefore the same concepts from vector calculus apply: $S^a$ is divergenceless, admits a vector potential and the flow of the displacement over a closed surface is zero. We can understand this as assumption \ref{assum_detrev} implemented in the extended phase space. Moreover, we have the following relationship:
+Apart from the minus, this is the same relationship we would have between the magnetic field $B^i$ and its vector potential $A_i$. Therefore the same concepts from vector calculus apply: $S^a$ is divergenceless, admits a vector potential, and the flow of the displacement over a closed surface is zero. We can understand this as assumption \ref{assum_detrev} implemented in the extended phase space. Moreover, we have the following relationship:
 \begin{equation}
-	\int_{\Sigma} \omega_{ab} dx_1^a dx_1^b = \int_{\Sigma} \epsilon_{abc}S^c dx_1^a dx_1^b
+	\int_{\Sigma} \omega_{ab} dx_1^a dx_2^b = \int_{\Sigma} \epsilon_{abc}S^c dx_1^a dx_2^b
 \end{equation}
 That is, the integral of the form $\omega_{ab}$ corresponds to the surface integral of the displacement field $S^a$.\footnote{Note that, strictly speaking, while $\omega_{ab}$ is a tensor, $\epsilon_{abc}$ and $S^a$ are not. Relationship \ref{rp-cm-lm-displacementFormComponents}, then, is valid only if we chose position, momentum and time as variables. Yet, as we will see much later, we can change the position variable and time variable and still have the same expression by redifining momentum and energy appropriately.} In phase space extended by time, then, $\omega_{ab}$ quantifies both the number of states over a surface and the flow of $S^a$ through the surface. Under assumption \ref{assum_detrev} this works because we have one and only one evolution for each state, therefore quantifying the number of evolutions that intersect a given surface is the same as quantifying the number of states that flow through them.
 
-One striking feature of the vector potential $\theta_a$ is that it is fully characterized by a single arbitrary component, the time component $-H$. The vector potential $A_i$, instead, is characterized by two arbitrary components. What are the exact physical conditions that allows that to happen?
+One striking feature of the vector potential $\theta_a$ is that it is fully characterized by a single arbitrary component, the time component $-H$. The magnetic vector potential $A_i$, instead, is characterized by two arbitrary components. What are the exact physical conditions that allow that to happen?
 
-Suppose that we know that $S^a$ is a divergenceless field, we say that it is minus the curl of a potential
+Suppose that $S^a$ is a divergenceless field, then we can write it as minus the curl of a potential
 \begin{equation}
 	\theta_a = \begin{bmatrix}
 	\theta_q & \theta_p & \theta_t
 \end{bmatrix} .
 \end{equation}
-Vector potentials are defined up to the gradient of an arbitrary function, up to a gauge, since $\nabla \times (\theta + \nabla f) = \nabla \times \theta$. We can choose $f$ such that $\partial_p f = - \theta_p$, and therefore we can set, without loss of generality, the momentum component to zero
+Vector potentials are defined up to the gradient of an arbitrary function (i.e. up to a gauge), since $\nabla \times (\theta + \nabla f) = \nabla \times \theta$. We can choose $f$ such that $\partial_p f = - \theta_p$, and therefore we can set, without loss of generality, the momentum component to zero
 \begin{equation}
 	\theta_a = \begin{bmatrix}
 		\theta_q & 0 & \theta_t
 	\end{bmatrix} .
 \end{equation}
-So far, this procedure can be applied to any potential of a divergenceless field. However, the displacement field $S^a$ is particular in that its time component $S^t = d_t t = 1$ is unitary. That is, states flow at the same rate in time. Therefore we must have
+So far, this procedure can be applied to any potential of a divergenceless field. However, the displacement field $S^a$ is particular in that its time component $S^t = d_t t = 1$ is unitary. That is, states flow at a uniform rate in time. Therefore we must have
 \begin{equation}
 	S^t = - (\partial_q \theta_p - \partial_p \theta_q) = \partial_p \theta_q = 1.
 \end{equation}
@@ -1228,7 +1233,7 @@ At this point, we simply rename the last component to $-H$ and have
 \end{equation}
 The form of the vector potential, then, is set by the fact that the flow of $S^a$ is both divergenceless and uniform along the time direction.
 
-This discussion tells us exactly what $\theta_a$ is in the case of a single degree of freedom: it is the potential of the displacement field $S^a$ or, equivalently, of the form $\omega_{ab}$. Since we are in the single degree of freedom, assumption \ref{assum_detrev} is enough to recover Hamiltonian mechanics, and this is the same in the extended phase space formulation.
+This discussion tells us exactly what $\theta_a$ is in the case of a single degree of freedom: it is the potential of the displacement field $S^a$ or, equivalently, of the form $\omega_{ab}$. Since we are in the single degree of freedom case, assumption \ref{assum_detrev} is enough to recover Hamiltonian mechanics, and this is the same in the extended phase space formulation.
 
 We also learned another thing: the Hamiltonian is the time component of the potential, therefore it is not a scalar. That is, if we made a change in the time variable $\hat{t} = \hat{t}(t)$, we would have
 \begin{equation}
@@ -1242,21 +1247,21 @@ Now that we have seen what $\theta_a$ is, we can go back to the Lagrangian and t
 \begin{equation}
 	\begin{aligned}
 		\gamma &= [q^i(t), p_i(t), t] \\
-		d\gamma &= d_t \xi^a \, dt.
+		d\gamma &= d \xi^a = d_t \xi^a \, dt.
 	\end{aligned}
 \end{equation}
 where we used the time variable as its affine parameter. Note that, in this case, the displacement is along the generic path $\gamma$, which is not necessarily an actual evolution. Therefore $d_t \xi^a = S^a$ if and only if $\gamma$ is an actual evolution of the system. For a generic path we can write:
 \begin{equation}
 	\begin{aligned}
 		L &= p_i v^i - H = \theta_a d_t \xi^a \\
-		\mathcal{A}[\gamma] &= \int_\gamma L dt =  \int_\gamma \theta_a d_t \xi^a dt = \int_\gamma \theta_a d\xi^a = \int_\gamma \theta d\gamma
+		\mathcal{A}[\gamma] &= \int_\gamma L dt =  \int_\gamma \theta_a d_t \xi^a dt = \int_\gamma \theta_a d \xi^a = \int_\gamma \theta d\gamma
 	\end{aligned}
 \end{equation}
 This tells us that
 \begin{equation}
 	\parbox{5in}{The action along a path $\gamma$ is the line integral of the vector potential $\theta_a$ of the form $\omega_{ab}$.}
 \end{equation} 
-We now have a precise geometrical characterization of the action and of the Lagrangian. As for the physics, it tells us conclusively that both the Lagrangian and the action, by themselves, are unphysical. That is, the value of the Lagrangian at a given position, velocity and time, or the value of the action for a given path is not a physically meaningful value. The vector potential is not a physical quantity: it depends on a choice of gauge, which does not correspond to a physically well-defined object.
+We now have a precise geometric characterization of the action and of the Lagrangian. As for the physics, it tells us conclusively that both the Lagrangian and the action, by themselves, are unphysical. That is, the value of the Lagrangian at a given position, velocity and time, or the value of the action for a given path is not a physically meaningful value. The vector potential is not a physical quantity: it depends on a choice of gauge, which does not correspond to a physically well-defined object.
 
 We are now in the position to understand why, as we have seen before, the Lagrangian for a given system is not unique: it depends on the vector potential, and the vector potential is not uniquely defined. We can see how the change of Lagrangian \ref{rp-cm-lm-gaugeChange} corresponds to redefining the vector potential as
 \begin{equation}
@@ -1272,20 +1277,20 @@ We have
 \end{equation}
 which is the same expression we had in \ref{rp-cm-lm-gaugeChange}.
 
-But if the action and the Lagrangian are unphysical, how can we use them to derive the laws of evolution, which are clearly physical? Note that the laws are not expressed in terms of the action, but in terms of the variation of the action. Let $\gamma'$, then, be a small variation of the path $\gamma$ with the same endpoint. Note that $\gamma$ and $\gamma'$ form a closed loop. Take a surface $\Sigma$ that is enclosed by that boundary, we can use Stoke's theorem:
+But if the action and the Lagrangian are unphysical, how can we use them to derive the laws of evolution, which are clearly physical? Note that the laws are not expressed in terms of the action, but in terms of the variation of the action. Let $\gamma'$, then, be a small variation of the path $\gamma$ with the same endpoints. Note that $\gamma$ and $\gamma'$ form a closed loop. Take a surface $\Sigma$ that is enclosed by that boundary, we can use Stokes' theorem:
 \begin{equation}
 	\begin{aligned}
-		\delta \mathcal{A}[\gamma] &= \delta \int_\gamma L dt = \delta \int_\gamma \theta_a d\xi^a = \int_\gamma \theta_a d\xi^a - \int_{\gamma'} \theta_a d\xi^a = \int_{\Sigma} \partial_a \wedge \theta_b  d\xi^a d\eta^b \\
+		\delta \mathcal{A}[\gamma] &= \delta \int_\gamma L dt = \delta \int_\gamma \theta_a d\xi^a = \int_\gamma \theta_a d\xi^a - \int_{\gamma'} \theta_a d\xi^a = \oint_{\partial\Sigma} \theta_a d\xi^a = \int_{\Sigma} \partial_a \wedge \theta_b  d\xi^a d\eta^b \\
 		&= - \int_{\Sigma} \omega_{ab} d\xi^a d\eta^b, 
 	\end{aligned}
 \end{equation}
-where $d\eta^b$ is the displacement of the point from $\gamma$ to the variation $\gamma'$. The variation of the action, then, corresponds to the surface integral of $\omega_{ab}$, which is physical. Geometrically, it corresponds to the flow of the evolutions through the surface enclosed by the path and its variation. Note that, because the flow is divergenceless, it does not matter which surface is chosen, since all surfaces that share the same boundaries will correspond to the same flow. This is a striking observation: while the action is unphysical, its variation is physical.
+where $d\eta^b$ is the displacement of a point from $\gamma$ to the corresponding point on the variation $\gamma'$. The variation of the action, then, corresponds to the surface integral of $\omega_{ab}$, which is physical. Geometrically, it corresponds to the flow of the evolutions through the surface enclosed by the path and its variation. Note that, because the flow is divergenceless, it does not matter which surface is chosen, since all surfaces that share the same boundaries will correspond to the same flow. This is a striking observation: while the action is unphysical, its variation is physical.
 
 We now are in a perfect position to fully understand the principle of stationary action. This states that actual evolutions are given by paths for which the variation is zero. That is, $\int_{\Sigma} \omega_{ab} d\xi^a d\eta^b$ has to be zero for all possible $d\eta^b$. This means we must have $\omega_{ab} d\xi^a = 0$. Since $S^a$ is the only degenerate direction for $\omega_{ab}$, we must have $d\xi^a = S^a dt$. In other words, the paths that make the action stationary are exactly the paths whose tangent vector applied to $\omega_{ab}$ return zero.
 
-Geometrically, if a path $\gamma$ is an evolution, it is always be tangent to the displacement field $S^a$. If we make a small variation $\gamma'$, the two paths will enclose an infinitesimally large strip $\Sigma$ which will be tangent to $S^a$ as well. Therefore the flow of $S^a$ through $\Sigma$ will be zero. Given that the flow through $\Sigma$ is minus the variation of the action, the variation of the action for all evolutions will be zero. Conversely, if a path is not an evolution, at some point its tangent will be different from the displacement field. Therefore we will be able to find a variation $\gamma'$ for which the surface $\Sigma$ will ``catch'' some flow. Therefore we will have a variation of the path for which the variation of the action is non-zero. In other words, the action principle is a geometrically roundabout way to ask for those paths that are always tangent to the displacement field $S^a$, which is divergenceless and has constant flow in time.
+Geometrically, if a path $\gamma$ is an evolution, it will always be tangent to the displacement field $S^a$. If we make a small variation $\gamma'$, the two paths will enclose an infinitesimal strip $\Sigma$ which will be tangent to $S^a$ as well. Therefore the flow of $S^a$ through $\Sigma$ will be zero. Given that the flow through $\Sigma$ is minus the variation of the action, the variation of the action for all evolutions will be zero. Conversely, if a path is not an evolution, at some point its tangent will be different from the displacement field. Therefore we will be able to find a variation $\gamma'$ for which the surface $\Sigma$ will ``catch'' some flow. That is, we will have a variation of the path for which the variation of the action is non-zero. In other words, the action principle is a geometrically roundabout way to ask for those paths that are always tangent to the displacement field $S^a$, which is divergenceless and has constant flow in time.
 
-Note that the geometrical and physical interpretation we have given to the Lagrangian and the action lives in the extended phase space, which is part of the Hamiltonian formulation. In fact, the only place where we need assumption \ref{assum_kineq} is when we want to write $p_i d_t q^i - H$ as a function of velocity instead of momentum. The integral of the vector potential and its variation, in fact, can still be written even in terms of momentum, and therefore the geometrical and physical characterization of the principle of stationary action applies for all Hamiltonian systems, not just the Lagrangian subset. In other words, the principle of stationary action is really more a property of Hamiltonian mechanics than Lagrangian mechanics. The only difference is that in Lagrangian mechanics, since assumption \ref{assum_kineq} applies, it can be expressed purely in terms of kinematic variables.
+Note that the geometric and physical interpretation we have given to the Lagrangian and the action lives in the extended phase space, which is part of the Hamiltonian formulation. In fact, the only place where we need assumption \ref{assum_kineq} is when we want to write $p_i d_t q^i - H$ as a function of velocity instead of momentum. The integral of the vector potential and its variation, in fact, can still be written even in terms of momentum, and therefore the geometric and physical characterization of the principle of stationary action applies for all Hamiltonian systems, not just the Lagrangian subset. In other words, the principle of stationary action is really more a property of Hamiltonian mechanics than Lagrangian mechanics. The only difference is that in Lagrangian mechanics, since assumption \ref{assum_kineq} applies, it can be expressed purely in terms of kinematic variables.
 
 \subsubsection{Multiple d.o.f.}
 
@@ -1447,9 +1452,9 @@ While we believe this argument is convincing, we do not view it as definitive. T
 
 \section{Reversing Newtonian mechanics}
 
-TODO: intro paragraph. We saw that Newtonian mechanics is bigger than Lagrangian. What systems? Predictable and retrodictable.
+Now that we analyzed both Hamiltonian mechanics and Lagrangian mechanics, let us briefly go back to Newtonian mechanics. We will see that we can consider assumptions \ref{assum_kineq} as the only assumption taken by Newtonian mechanics, though there are some details that we still need to leave open.
 
-We saw all systems that satisfy assumptions \ref{assum_detrev}, \ref{assum_indep} and \ref{assum_kineq} are Lagrangian systems and are, leaving the question of mass aside, Newtonian system in the sense that the acceleration is a function of position and velocity. We also saw that some dissipative systems, like a particle under friction, do not satisfy \ref{assum_detrev} though are Newtonian systems. So now the questions is whether the other two are necessary and/or sufficient assumptions.
+We have seen that all systems that satisfy assumptions \ref{assum_detrev}, \ref{assum_indep} and \ref{assum_kineq} are Lagrangian systems and are, leaving the question of mass aside, Newtonian system in the sense that the acceleration is a function of position and velocity. We also saw that some dissipative systems, like a particle under friction, do not satisfy \ref{assum_detrev} though are Newtonian systems. So now the questions is whether the other two are necessary and/or sufficient assumptions.
 
 In its weakest form, we saw that \ref{assum_kineq} requires an invertible and differentiable map between kinematic variables and state variables. Moreover, while the evolution is not deterministic and reversible, and therefore it will not necessarily conserve the count of states, we will still need to map finitely map states to finitely many states. This means that the Jacobian of the evolution must be finite and non-zero, therefore the evolution is differentiable and an acceleration must be well defined. This shows that, under \ref{assum_kineq}, we must be able to define an acceleration and that this, in general, is a function of position and velocity. What the argument didn't tell us, however, is whether the acceleration is only a function position and velocity.
 
