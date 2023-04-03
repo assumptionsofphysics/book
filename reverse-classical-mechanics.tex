@@ -1466,6 +1466,77 @@ To sum up, there are still two points that are unclear to complete our Reverse P
 
 \section{Relativistic mechanics}
 
+In this section we analyze what happens if we consider change of coordinates that mix space and time. We will see that relativistic elements appear even if a notion of metric tensor is not yet introduced, and the particle/anti-particle duality emerges. Moreover, under the strong kinematic equivalence special relativity is recovered.
+
+When casting Hamiltonian mechanics on the phase space extended by time, we saw that the Hamiltonian is the time component of the vector potential $\theta_a$, which means the Hamiltonian is not invariant. It would be interesting to study how Hamiltonian mechanics works under a generic change of space-time coordinates, but we are presented with a problem: in the standard formulation, time is a parameter (i.e. we have $q^i(t)$); in the formulation extended by time, time has a double of role of parameter and variable (i.e. we have $t(t)$). What we need to do is to have a separate variable for the parameter of the evolution, which we will note as $s$. We can group the space-time variables as
+\begin{equation}
+	q^\alpha = \{t, q^i\}.
+\end{equation}
+A trajectory in space-time will be noted as $q^\alpha(s)$.
+
+Now we have to understand how to deal with energy. Previously, the Hamiltonian was simply a function of position and momentum. If we only perform coordinate transformations that mix spatial coordinates, and leave time unchanged, the Hamiltonian is invariant and its expression remains in terms of the transformed position and momentum. But if we mix space and time coordinate or make a generic transformation, the Hamiltonian will in general become time-dependent. This means that, during the evolution, energy will not be constant but will need to increase and decrease. Another, more physical, way to look at it is that , energy, like momentum, is not an absolute quantity but it's a relative quantity with respect to an observer. If we imagine an observer that is accelerating and decelerating, in the same way that he will see the momentum change, he will see the energy change as well. In the same way that momentum is sensitive to changes of units along the corresponding spatial direction, energy is sensitive to change of time units. This means that we have to introduce an energy variable $E$ which we group with the momentum variables and, since $-H$ was the time component of $\theta_a$, we write
+\begin{equation}
+	p_\alpha = \{-E, p_i\}.
+\end{equation}
+so that $p_\alpha$ is a covector.
+
+We have essentially added a temporal degree of freedom, and with that addition, the equations will look like standard Hamiltonian mechanics for multiple degrees of freedom. We have
+\begin{equation}
+	\begin{aligned}
+		\xi^a &= \begin{bmatrix}
+			q^\alpha & p_\alpha 
+		\end{bmatrix} \\
+		S^a &= d_S \xi^a = \begin{bmatrix}
+			d_s q^\alpha & d_s p_\alpha
+		\end{bmatrix} \\
+	\end{aligned}
+\end{equation}
+We define the form $\omega_{ab}$
+\begin{equation}\label{rp-cm-rel-symplecticForm}
+	\tag{SF-FE}
+	\begin{aligned}
+		\theta_a &= \begin{bmatrix}
+	p_\alpha & 0 
+\end{bmatrix} \\
+	\omega_{ab} &= \partial_a \wedge \theta_b = \left[\begin{array}{cc}
+		\omega_{q^\alpha q^\beta} & \omega_{q^\alpha p_\beta} \\
+		\omega_{p_\alpha q^\beta} & \omega_{p_\alpha p_\beta} 
+	\end{array} \right]= \left[\begin{array}{cc}
+		0 & I_n \\
+		- I_n & 0 
+	\end{array} \right].
+	\end{aligned}
+\end{equation}
+and the equations of motion will be
+\begin{equation}
+	S^a \omega_{ab} = \partial_b \mathcal{H}.
+\end{equation}
+The function $\mathcal{H}$ is called Hamiltonian constraint. Typically, the constraint is chosen such that $\mathcal{H}=0$.
+
+At first glance, the mathematical structure looks the same, but there are a few details that makes it quite different. This is one of those cases where a more compact mathematical notation hides the physics. First of all, the temporal degree of freedom does not add configurations in the same way that an independent degree of freedom does. If we start with standard phase space and add time, we are not adding new independent configuration. If we have deterministic and reversible motion, given the state at one time, we know the state at all times. So, while adding time allows to talk about all states at all times, and the same state at different times is not the same configuration of the system, we are not really adding new states because in the extended phase space the full description of the system becomes a complete evolution: the set of states the system takes at all times. In phase space extended by time, this was captured by the fact that the form $\omega_{ab}$ applied to the displacement field is zero. If we now add energy, the conjugate of time, things are even more constrained. The energy, in fact, is a function of the state of the system at a particular time. The addition of energy, then, should add no configuration at all. The Hamiltonian constraint, then, does not only tell us how states evolves, but fixes the relationship between $E$ and the other state variables. In standard Hamiltonian mechanics, the Hamiltonian $H$ gives a value of energy that is conserved by the system during the evolution, but the system can be in different states with different energy. The Hamiltonian constraint, instead, is a quantity that is not only conserved by the system during the evolution, but it is always the same for the same system. We will see that the Hamiltonian constraint is related to mass when proper time is chosen as evolution parameter. Therefore the space of states is not really the full $2n+2$ dimensional manifold charted by time, position, energy and momentum, but it the $2n+1$ dimensional sub-manifold that is given by $\mathcal{H}=0$.
+
+Now that it is clear that $(t, -E)$ do not constitute and independent degree of freedom, we should understand the significance of the minus sign. As we saw, it was needed so that $p_\alpha$ is a covector, but that does not tell us anything in terms of the geometry. What we are really saying is that an infinitesimal rectangle of size $dt$ and $dE$ has a negative contribution to the count of states. Shouldn't it have no contribution at all? To understand this puzzle, we have to really understand the link between the geometry and the physical ...
+
+We saw that orthogonality in phase space means d.o.f. independence. If we have two independent d.o.f. we can write:
+\begin{equation}\label{rp-cm-rel-spatialPythagoras}
+	\omega(dq^1 + dq^2, dp_1 + dp_2) = dq^1 dp_1 + dq^2 dp_2.
+\end{equation}
+In our four dimensional space, we have right triangle-like structures where the two sides are the areas in each d.o.f. and the hypotenuse is the area determined by $\omega$. The above expression, then, can be understood as an areal version of Pythagoras's theorem. Now, because spatial and temporal degrees of freedom are not independent, they are not orthogonal, the above expression does not work. The naive consideration would simply be to disregard the temporal degree of freedom, since time does not contribute new states, and set
+\begin{equation}
+	\omega(dq + dt, dp + dE) = dq \, dp.
+\end{equation}
+However, this does not work. Based on the expressions derived before, we have
+\begin{equation}
+	\omega(dq + dt, dp + dE) = dq \, dp - dt \, dE.
+\end{equation}
+We can rearrange this expression as
+\begin{equation}\label{rp-cm-rel-spacetimePythagoras}
+	dq \, dp = \omega(dq + dt, dp + dE) + dt \, dE.
+\end{equation}
+Now, compare \ref{rp-cm-rel-spatialPythagoras} with \ref{rp-cm-rel-spacetimePythagoras}. In the second expression, the area in the spatial d.o.f. is the hypotenuse, while the area on the temporal d.o.f. and the count of states given by $\omega$ are the sides. This tells us that we do not count states along the spatial d.o.f., but rather along the surface that is always orthogonal to the temporal d.o.f. and, in retrospect, this makes sense. When we say that time does not contribute new states, we are exactly saying that states should be counted on surfaces perpendicular to those defined at constant $(q, p)$, which, given that the spatial and the temporal d.o.f are not independent, are not those at constant $(t,E)$, where $dq$ and $dp$ are defined. The surfaces at constant $(q,p)$, instead, are exactly the surfaces where we define $dt$ and $dE$. Therefore the correct perpendicular relationship is between temporal d.o.f. and surface over the count of states is defined.
+
+
+
 Motivation: add space-time coordinate transformations.
 
 Fully extended phase-space.
