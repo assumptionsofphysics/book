@@ -1384,7 +1384,7 @@ and condition
 are equivalent. At this point, having seen enough of reverse physics, it should be clear that this can't simply be a coincidence and it warrants more exploration.
 
 Since $m g_{ij}$ is the Jacobian between velocity and momentum, and the Jacobian determinant of the transformation from state variables to kinematic variables was equal to the Jacobian determinant of the relationship between velocity and momentum, we find
-\begin{equation}
+\begin{equation}\label{rp-cm-fke-metricTensorDeterminantIsJacobianForDensities}
 	\begin{aligned}
 		\partial_{p_i} v^j &= \frac{1}{m}g^{ij} \\
 		|J| &= |\partial_{p_i} v^j | = \frac{|g^{ij}|}{m} = \frac{1}{m \,|g_{ij}|}. 
@@ -1702,7 +1702,7 @@ We introduce the following two expressions
 	\end{aligned}
 \end{equation}
 We have
-\begin{equation}
+\begin{equation}\label{rp-cm-rm-kinematicSymplecticForm}
 	\begin{aligned}
 		\theta_a &= [m g_{\alpha\beta} u^{\beta} + q A_{\alpha} 0] \\
 		\omega_{ab} &= \left[ \begin{matrix}
@@ -1810,9 +1810,9 @@ Given that $g_{\alpha\beta}$ is a symmetric tensor that depends only on space-ti
 		p_i &= m \, g_{ii} \, \lambda \, d_t x^i = \lambda m \, g_{ii} \, v^i.
 	\end{aligned}
 \end{equation}
-Dimensional analysis on the spatial components tells us that already work in the sense that $g_{ii}$ must be pure numbers, under the assumption that $s$ has dimensions of time. For the time component, instead, dimensional analysis tells us that $g_{00}$ must be the square of a velocity. As we saw before, solution with positive energy are those for which $s$ and $\lambda$ are aligned, therefore $g_{00}$ must be a negative quantity. Therefore we set $g_{00} = - c^2$, and we recognize $c$ as the speed of light.
+Dimensional analysis on the spatial components tells us that already work in the sense that $g_{ii}$ must be pure numbers, under the assumption that $s$ has dimensions of time. For the time component, instead, dimensional analysis tells us that $g_{00}$ must be the square of a velocity. As we saw before, solution with positive energy are those for which $s$ and $\lambda$ are aligned, therefore $g_{00}$ must be a negative quantity. Therefore we set $g_{00} = - c^2$, and we recognize $c$ as the speed of light. Note that, technically, the constant does not play at all a role of speed in this discussion, just as a conversion factor from the temporal component of the four-velocity to the energy.
 
-We can change units so that $g_{00} = -1$ and $g_{ii}=1$. For the spatial components, it is just a matter of rescaling the units. For time, units need to be changed as well by setting $p_{0} = -E/c$ and $x^{0} = ct$. Note that the product of the two remains of the same unit, and the two are still conjugate as space variables. Therefore we have shown that, at every point, we can find a set of space-time coordinates such as $g_{\alpha\beta} = \eta_{\alpha\beta}$ where $\eta_{\alpha\beta}$ is the Minkowki metric.
+We can change units so that $g_{00} = -1$ and $g_{ii}=1$. For the spatial components, it is just a matter of rescaling the units. For time, units need to be changed as well by setting $p_{0} = -E/c$ and $x^{0} = ct$. Note that the product of the two remains of the same unit, and the two are still conjugate as space variables. Therefore we have shown that, at every point, we can find a set of space-time coordinates such as $g_{\alpha\beta} = \eta_{\alpha\beta}$ where $\eta_{\alpha\beta}$ is the Minkowki metric. If we use proper time as the affine parameter $s$, then $\lambda$ becomes $\gamma  = \frac{1}{\sqrt{1 + \left(\frac{v^2}{c^2}\right)}}$
 
 \subsection{The failure of Galilean relativity}
 
@@ -1859,8 +1859,23 @@ The new vector potential is still a constant field, therefore the forces do not 
 
 We are convinced there should be a more satisfying way to see both geometrically and physically how the failure plays out. Yet, this will have to suffice for now.
 
+\subsection{Metric tensor revisited}
+
+As we saw, the metric tensor appear not as defining the distances in space-time but rather as the linear relationship between velocity and conjugate momentum. It does, however, end up playing an important geometrical role: in \ref{rp-cm-rm-kinematicSymplecticForm} we see that the metric tensor times the mass is the off diagonal component of the form $\omega_{ab}$. Therefore, if we have a range of positions $dx^\alpha$ and a range of velocities $dv^\beta$, the number of configuration they identify is given by $dx^\alpha m g_{\alpha\beta} dv^\beta$. In other words,
+\begin{insight}
+	the metric tensor allows us to count states in terms of the kinematic variables.
+\end{insight}
+
+This corroborates what we saw in \ref{rp-cm-fke-metricTensorDeterminantIsJacobianForDensities}: the determinant of the metric tensor is the Jacobian determinant that allows us to express densities over phase space as densities over kinematic variables. In relativity, the square root of the metric tensor appears to create an invariant volume element. That is $\int f \, \sqrt{|g_{\alpha\beta}|} \, dx^0 dx^1 dx^2 dx^3$ integrates an invariant scalar function $f$. However, if we integrate over the kinematic variables we have $\int f \, |g_{\alpha\beta}| \, dx^0 \cdots dx^3 du^0 \cdots du^3$. The determinant of the metric tensor, then, is more directly giving us the size of a volume taken over kinematic variables, not in phase-space.
+
+Why is it, then, that defining volumes over kinematic quantities fixes the geometry of space time. Note that both differentials of space and velocities transform like vectors. Therefore if $dx^\alpha g_{\alpha\beta} dv^\beta$ is invariant, then $dx^\alpha g_{\alpha\beta} dx^\beta$ will also be invariant. The geometry of spate-time, then, is set by the geometry of phase-space.
+
+There are other interesting open questions to explore to better understand this relationship. For example, in relativity, one does put spatial and time variables on the same plane. However, we saw that the primary role of the metric tensor is so that we deal with distributions and integration, and these work differently in space and time. Consider, in fact, a distribution $\rho(x^i, v^j, t)$. This would represent the evolution over time of a distribution over kinematic variables. At each time, the distribution has to integrate to one, assuming it is normalized, which means the units of $\rho$ are $\left[\frac{1}{d^3v^3}\right]$, the inverse of the cube of distance times velocity. Note that every observer has to see the same thing: a normalized distribution at each moment in time. Additionally, this has to happen no matter what $\rho$ is. An open question in reverse physics, then, is whether imposing this requirement is already enough to recover parts of relativity.
 
 \section{Reversing phase-space}
 
-Gauge transformations
+All our discussion so far has concentrated on the evolution of a classical system, either in terms of its dynamics and its kinematics. It assumed that the state of a classical particle is fully identified by a pair of variables. In this section we will see how a new assumption, that of infinitesimal reducibility, is enough to recover the structure of classical phase space and is therefore the constitutive assumption of classical mechanics.
 
+We have seen that \ref{assum_detrev} and \ref{assum_indep} are the constitutive assumptions of Hamiltonian mechanics, in the sense that they fully characterize what an Hamiltonian system is. The addition of \ref{assum_kineq} recovers Lagrangian mechanics, and the full version gives us massive particles under potential forces. The relativistic version of the theories comes out without additional assumptions simply by properly dividing the roles of time as a variable from time as a parameter. But in all this discussion we assumed, without questioning, that states are identified by pairs of variables: position/velocity or position/momentum. Is this coincidence or there is an underlying reason for it?
+
+Let us go back to the single d.o.f. case, and consider the plane as charted by the position $q$ and momentum $p$. We saw that for each subregion, the area as measured by those two variables give us the count of states. 
