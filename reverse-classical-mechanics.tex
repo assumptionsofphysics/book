@@ -1876,6 +1876,159 @@ There are other interesting open questions to explore to better understand this 
 
 All our discussion so far has concentrated on the evolution of a classical system, either in terms of its dynamics and its kinematics. It assumed that the state of a classical particle is fully identified by a pair of variables. In this section we will see how a new assumption, that of infinitesimal reducibility, is enough to recover the structure of classical phase space and is therefore the constitutive assumption of classical mechanics.
 
-We have seen that \ref{assum_detrev} and \ref{assum_indep} are the constitutive assumptions of Hamiltonian mechanics, in the sense that they fully characterize what an Hamiltonian system is. The addition of \ref{assum_kineq} recovers Lagrangian mechanics, and the full version gives us massive particles under potential forces. The relativistic version of the theories comes out without additional assumptions simply by properly dividing the roles of time as a variable from time as a parameter. But in all this discussion we assumed, without questioning, that states are identified by pairs of variables: position/velocity or position/momentum. Is this coincidence or there is an underlying reason for it?
+We have seen that \ref{assum_detrev} and \ref{assum_indep} are the constitutive assumptions of Hamiltonian mechanics, in the sense that they fully characterize Hamiltonian evolution. The addition of \ref{assum_kineq} recovers Lagrangian mechanics, and the full version gives us massive particles under potential forces. The relativistic version of the theories comes out without additional assumptions simply by properly dividing the roles of time as a variable from time as a parameter. But in all this discussion we assumed, without questioning, that states are identified by pairs of variables: position/velocity or position/momentum. Is this a coincidence or there is an underlying reason for it? What are the constitutive assumptions for a classical system itself?
 
-Let us go back to the single d.o.f. case, and consider the plane as charted by the position $q$ and momentum $p$. We saw that for each subregion, the area as measured by those two variables give us the count of states. 
+Let us go back to the single d.o.f. case, and consider the plane as charted by the position $q$ and momentum $p$. We saw that for each subregion, the area as measured by those two variables give us the count of states. This is a special feature of conjugate variables. If we take position and velocity in a non-inertial frame, the variables are not conjugate and the area as calculated in those units does not map to a count of states: as we saw we need the mass and the Jacobian of the velocity/momentum transformation (i.e. the metric tensor) for the proper computation. Note that the count of states must be a coordinate invariant quantity. If it weren't, the entropy of the system would be an ill defined quantity, and so would be the notion of reversibility as conservation of entropy.
+
+Now, in probability theory the entropy of a continuous distribution is actually not, in general, invariant under change of variables. This is linked to a more general problem that makes probability theory ``problematic'' on the continuous. In classical probability, one uses the ``principle of indifference'' to assign probability to outcomes for which there is no justifiable preference. For example, if we have a fair die, meaning that the die itself and the mechanism for throwing it do not have a preference for any side, the principle tells us to assign equal probability to all sides. If the die has 6 sides, we assign probability $1/6$ for each side. All of probability theory that is linked to combinatorics works like this.
+
+On the continuous things are not so simple. Suppose we have a factory that produces boxes at random, with side from $1m$ to $3m$. Suppose the factory does not have preference for the size of the boxes, so we assume a uniform distribution for the side from $1m$ and $3m$, which gives us an expectation of $2m$. However, we could have equally said that the factory does not have a preference for the total volume, and assign a uniform distribution for the volume from $1m^3$ to $27 m^3$, which gives us an expectation of $14 m^3$. The problem is that $(2m)^3 = 8 m^3 \neq 14 m^3$. That is, the principle of indifference does not give unique answers over the continuum. The obvious, in retrospect, problem is that $x \to x^3$ is a non-linear transformation, and uniform distribution do not remain uniform under non-linear transformations.
+
+Given that we want our laws to be invariant under generalized coordinate transformations, the principle of indifference seems, in general, to have a problem with the principle of relativity. If we have a uniform distribution over states for one observer, we would expect another observer to also have a uniform distribution over states. The states may be called differently, but we want the shape of the distribution to depend on the states themselves, not the variables we use to label those states. Yet, distribution on the continuum do not work, in general, like that. We reach the following
+\begin{insight}
+	The principle of indifference and the principle of probability are, in general, in conflict on the continuum.
+\end{insight}
+
+
+Going back to entropy, if we have a distribution over one continuous variable $\rho(x)$ and we have a coordinate transformation $y = y(x)$, we saw that the entropy changes according to the following rule
+\begin{equation}
+	I[\rho(y)] = I[\rho(x)] - \int \rho(x)\log|d_y x| dx.
+\end{equation}
+If the transformation is non-linear, the Jacobian will be different from point to point, and different observer may see different distribution at different level of entropy: observer $X$ may see that $\rho_1$ has higher entropy than $\rho_2$ while observer $Y$ may see the opposite. Therefore one may see the entropy increase while another may see the entropy decrease. This is certainly not good.
+
+Now, we saw that during Hamiltonian evolution the Jacobian determinant was unitary, as Hamiltonian evolution conserves entropy. This gives us a hint: maybe we should simply have that, during coordinate transformations, the Jacobian is unitary. In our single variable example, if $y = y(x)$, we simply have to impose $d_y x = 1$. Unfortunately, this is too restrictive. This would mean that the only transformation allows are of the form $y=x+x_0$, where $x_0$ is an arbitrary constant. That is, we can only translate by a constant, and not even rescale units, say from $m$ to $km$, as that would introduce a coefficient in from of $x$. This clearly is not sufficient.
+
+However, during Hamiltonian evolution the unitary Jacobian is on the joint transformation of position and momentum, on two variables. Therefore, suppose we perform a generic coordinate transformation, meaning the new position depends only on the old position, and impose a unitary Jacobian. We have
+\begin{equation}
+	\begin{aligned}
+		\hat{q} &= \hat{q}(q) \\
+		\hat{p} &= \hat{p}(q, p) \\
+		|J| &= \begin{vmatrix}
+			\partial_{q} \hat{q} & \partial_{p} \hat{q}  \\
+			\partial_{q} \hat{p} & \partial_{p} \hat{p}
+		\end{vmatrix}
+		= \begin{vmatrix}
+			d_{q} \hat{q} & 0 \\
+			\partial_{q} \hat{p} & \partial_{p} \hat{p}
+		\end{vmatrix} 
+		= d_{q} \hat{q} \, \partial_{p} \hat{p} - 0 \, \partial_{q} \hat{p} = d_{q} \hat{q} \, \partial_{p} \hat{p} = 1 \\
+		\partial_{p} \hat{p} &= (d_{q} \hat{q})^{-1} = d_{\hat{q}} q.
+	\end{aligned}
+\end{equation}
+Therefore a change in position induces an opposite change in momentum. If we have two variables instead of one, we have the freedom to change one arbitrarily, and if we change the other in ``the opposite way'', the Jacobian is unitary, areas are conserved. This is a neat trick. But is it really a mathematical trick or there is more to it?
+
+Let's understand what is going on physically. A change in the position variable is a change of unit. If it's a linear change
+\begin{equation}
+	\hat{q} = a q
+\end{equation}
+then we are changing the unit everywhere in the same way. For example, $q$ is in meters, $\hat{q}$ in kilometers and $a = 1/1000$: while the distance is the same, the numerical value changes. If the change is non-linear, then the unit gets stretched differently. For example, $q$ may be the longitude from the prime meridian,\footnote{Note that position variables need not be expressed in units of distance.} $\hat{q}$ the distance traveled on the surface from the prime meridian, and given that earth is not flat, $a$ is not a constant and would depend at every point on the steepness of the path. It is important to understand that physically, that's all that a change of variable is: we change the quantity we use to identify each case.
+
+Above we found that conjugate momentum, under a linear change, transforms as
+\begin{equation}
+	\hat{p} = \frac{1}{a} p.
+\end{equation}
+We then have
+\begin{equation}
+	\Delta \hat{q} \Delta \hat{p} = a \Delta q \frac{1}{a} \Delta p = \Delta q \Delta p
+\end{equation}
+and therefore the area remains the same. For a non-linear change, we have
+\begin{equation}
+	d \hat{q} d \hat{p} = d_q \hat{q} \, dq \, d_{\hat{q}} q \, dp = dq \, dp
+\end{equation}
+therefore the infinitesimal areas remain the same. To understand what that means physically, we need to understand exactly how the units for momentum work, and how kinetic and conjugate momentum are different.
+
+Kinetic momentum $\Pi = mv = m d_t x$ and therefore has units of $\left[ \frac{m q}{t} \right]$. Therefore if we change position from meters to kilometers, the units of kinetic momentum go from kilograms times meters over time to kilograms times kilometers over time. That is, for a linear transformation,
+\begin{equation}
+	\hat{\Pi} = m d_t \hat{q} = a m d_t q  = a \Pi.
+\end{equation}
+So we have to conclude, maybe surprisingly at first, that kinetic momentum does not have the same units of conjugate momentum.
+
+Units of momentum change in the opposite way, therefore they must be proportional to the inverse of the units of position. It is best to understand units of conjugate momentum, then, as units of areas of phase space areas over units of distance. That is, $p$ is measured in number of states per unit of $q$. By convention, we measure phase space areas in units of angular momentum, which is a bit misleading. Let's then indicate with $h$ the unit we use to measure the count of states and set
+\begin{equation}
+	\begin{aligned}
+		p = h \nu
+	\end{aligned}
+\end{equation}
+The new variable $\nu$ has units of inverse $q$, which makes it obvious that $\Delta q \Delta k\nu$ is invariant: if one is meters, the other is inverse meters; if one is kilometers, the other is inverse kilometers; if one is angle, the other is inverse angle.
+
+Now, if position is expressed in angles, conjugate momentum will be expressed in units of areas of phase space, and therefore angular momentum. Therefore we have a connection between angular momentum and phase space areas. However, if we change the angle from radians to degrees, $\nu$ will change units and so will conjugate momentum, but not $h$. That is, even in that case is improper to say the count of states is expressed in angular momentum. The count of states is expressed in whatever units we want. We have the units we have because, in a inertial Cartesian coordinate frame, we can use kinetic momentum times distance can be used to count the configurations of the system. However the fact that these units correspond to the same units of angular momentum does not mean that there is similarity between the physical quantities.\footnote{In general, units keep track of some aspects of physical quantities, but not everything. For example, one can show that, dimensionally, pressure is equal to energy over volume. This relationship is actually useful when describing fluids. On the other hand, energy density is another useful quantity to, for example, measure the capacity of batteries. There is no relationship between the energy density of a battery and its pressure. Another puzzle: if one multiplies radians and meters, what is the resulting unit? Consider the area of the side of a cylinder section $\theta r h$ where $\theta$ is the angular size of the section, $r$ is the radius and $h$ is the height of the cylinder. If we multiply $\theta$ and $r$, we get the length of the arc, which is a distance: we get meters. However, if we multiply $\theta$ and $h$, we do not get a length, we have an angle times length: we get meters times radians. The issue is that an angle is really a ratio between the length of the arc and the length of the radius. Only a multiplication by the correct radius will give back a distance. }
+
+Before we go too far, let's see if this reasoning extends to the general case. This time we want to preserve the area on all independent degrees of freedom, that is we want to preserve $\omega_{ab}$. We want to write the transformed $\hat{\omega}_{ab}$ and set it equal to the original one. We have
+\begin{equation}
+	\begin{aligned}
+	\hat{\omega}_{ab} &=\left[\begin{array}{cc}
+		\omega_{\hat{q}^i \hat{q}^j} & \omega_{\hat{q}^i \hat{p}_j} \\
+		\omega_{\hat{p}_i \hat{q}^j} & \omega_{\hat{p}_i \hat{p}_j} 
+	\end{array} \right] = \left[\begin{array}{cc}
+	\partial_{q^k} \hat{q}^i & \partial_{p_k} \hat{q}^i \\
+\partial_{q^k} \hat{p}_i & \partial_{p_k} \hat{p}_i 
+\end{array} \right]
+\left[\begin{array}{cc}
+	\omega_{q^k q^l} & \omega_{q^k p_l} \\
+	\omega_{p_k q^l} & \omega_{p_k p_l} 
+\end{array} \right]
+\left[\begin{array}{cc}
+	\partial_{q^l} \hat{q}^j & \partial_{q^l} \hat{p}_j \\
+	\partial_{p_l} \hat{q}^j & \partial_{p_l} \hat{p}_j 
+\end{array} \right]\\
+&= \left[\begin{array}{cc}
+	\partial_{q^k} \hat{q}^i & 0 \\
+	\partial_{q^k} \hat{p}_i & \partial_{p_k} \hat{p}_i 
+\end{array} \right]
+\left[\begin{array}{cc}
+	0 & \delta_{kl} \\
+	- \delta_{kl} & 0 
+\end{array} \right]
+\left[\begin{array}{cc}
+	\partial_{q^l} \hat{q}^j & \partial_{q^l} \hat{p}_j \\
+	0 & \partial_{p_l} \hat{p}_j 
+\end{array} \right] \\
+&= \left[\begin{array}{cc}
+	0 & \partial_{q^l} \hat{q}^i \\
+	- \partial_{p_l} \hat{p}_i  & \partial_{q^l} \hat{p}_i 
+\end{array} \right]
+\left[\begin{array}{cc}
+	\partial_{q^l} \hat{q}^j & \partial_{q^l} \hat{p}_j \\
+	0 & \partial_{p_l} \hat{p}_j 
+\end{array} \right] \\
+&= \left[\begin{array}{cc}
+	0 & \partial_{q^l} \hat{q}^i \partial_{p_l} \hat{p}_j  \\
+	- \partial_{p_l} \hat{p}_i \partial_{q^l} \hat{q}^j  & 
+	- \partial_{p_l} \hat{p}_i \partial_{q^l} \hat{p}_j +  \partial_{q^l} \hat{p}_i \partial_{p_l} \hat{p}_j 
+\end{array} \right] = \left[\begin{array}{cc}
+0 & \delta_{ij} \\
+- \delta_{ij} & 0 
+\end{array} \right]
+\end{aligned}
+\end{equation}
+
+The constraints coming for the off diagonal terms are the same, and they are
+\begin{equation}
+	\begin{aligned}
+		\partial_{q^l} \hat{q}^i \partial_{p_l} \hat{p}_j = \delta_{ij}.
+	\end{aligned}
+\end{equation}
+In matrix terms, we are taking the product of two matrices and equating it to the identity matrix. Therefore the two matrices are the inverse of each other:
+\begin{equation}
+	\begin{aligned}
+		\partial_{p_l} \hat{p}_j = (\partial_{q^l} \hat{q}^j)^{-1} = \partial_{\hat{q}^j} q^l.
+	\end{aligned}
+\end{equation}
+Which means that the change of position variables induces a change of momentum
+\begin{equation}
+	\hat{p}_j = \partial_{\hat{q}^j} q^i \, p_i,
+\end{equation}
+which makes momentum a covector.
+
+The second constraint comes from the bottom diagonal term. Using the newly found transformation rules, we have
+\begin{equation}
+	- \partial_{p_l} \hat{p}_i \partial_{q^l} \hat{p}_j +  \partial_{q^l} \hat{p}_i \partial_{p_l} \hat{p}_j = - \partial_{\hat{q}^i} q^l \partial_{q^l} \hat{p}_j +  \partial_{q^l} \hat{p}_i \partial_{\hat{q}^j} q^l = - \partial_{\hat{q}^i} \hat{p}_j + \partial_{\hat{q}^j} \hat{p}_i = 0.
+\end{equation}
+This constraint is satisfied simply because position and momentum are different state variable, and partial derivatives along one variable are taken keeping the others constant.
+
+We found that, in phase, we can indeed take arbitrary transformations of the position variables and, by asking the form $\omega_{ab}$ to be invariant, we recover the transformation law of momentum. Each component of momentum has to be expressed in inverse units of the respective position components. This means that uniform distribution over phase space are mapped to uniform distributions, the density at each point is coordinate invariant and the entropy is the same for all observers. We reach the following
+\begin{insight}
+	The structure of phase space makes the principle of relativity and the principle of indifference compatible.
+\end{insight}
+
+The invariance of $\omega_{ab}$ under change of spatial coordinates means 
