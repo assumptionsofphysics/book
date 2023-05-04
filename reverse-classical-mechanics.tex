@@ -999,7 +999,7 @@ are equivalent to each other. The non-singularity of the Hessian can also be und
 is another equivalent condition.
 
 Note that the relationship between velocity and momentum is not just invertible, but differentiable as well. This may seem like an additional condition from \ref{assum_kineq}, but recall that the dynamics is not in terms of points, but rather cells of phase-space and density distributions. In order to express those geometric elements in terms of the kinematic variables, we must make sure that the Jacobian determinant of the transformation from state variables to kinematic variables is well-defined and non-zero. We have
-\begin{equation}
+\begin{equation}\label{rp-cm-lm-JacobianMomentumVelocity}
 	\begin{aligned}
 		|J| &= \begin{vmatrix}
 			\partial_{q^j} x^i & \partial_{p_j} x^i  \\
@@ -1294,7 +1294,7 @@ Note that the geometric and physical interpretation we have given to the Lagrang
 
 The above discussion captures all the important elements of Lagrangian mechanics and the action principle even if it is limited to the single d.o.f. case. Still, we should generalize to the multiple d.o.f. case. Note that the equations we wrote for the Lagrangian and the action are already in generalized form. The only thing that we need to do is derive the expression for the vector potential $\theta_a$ in the general case.
 
-If we compare \ref{rp-cm-lm-contactForm} with \ref{rp-cm-hmd-symplecticForm}, we find that within non-temporal direction the form is identical. Therefore, we can still understand it as quantifying the number of configurations within each d.o.f. and the degree of independence across d.o.f., while adding the idea that the displacement field does not contribute new configurations. Mathematically, the displacement field is the only direction in which the form $\omega_{ab}$ is degenerate. Let us see what those components tell us in terms of the potential. We have:
+If we compare \ref{rp-cm-lm-contactForm} with \ref{rp-cm-hmd-symplecticForm}, we find that the non-temporal components of the form are identical. Therefore, we can still understand it as quantifying the number of configurations within each d.o.f. and the degree of independence across d.o.f., while adding the idea that the displacement field does not contribute new configurations. Mathematically, the displacement field identifies the only direction in which the form $\omega_{ab}$ is degenerate. Let us see what the non-temporal components tell us in terms of the potential. We have:
 \begin{equation}\label{rp-cm-lm-potenialConditions}
 	\begin{aligned}
 		\omega(e^{q^i}, e^{p_j}) &= (-\partial\theta)_{q^i p_j} = -(\partial_{q^i}\theta_{p_j} - \partial_{p_j}\theta_{q^i}) = \delta^i_j \\
@@ -1313,41 +1313,43 @@ Note that the components for the first degree of freedom do not depend on the ot
 
 We can then use, again, our gauge freedom with a function that does not depend on the first two variables to set $\theta_{p_2} = 0$. And, with the same reasoning, we will be able to set $\theta_{q^2} = p_2$. And then, again, find that the first two degrees of freedom do not depend on the others, etc. This will exhaust all d.o.f. and we can set $\theta_t = -H$ as before. This will find \ref{rp-cm-lm-formPotential}.
 
-To recap, we have found that the expression of \ref{rp-cm-lm-contactForm} is equivalent to assuming \ref{assum_detrev} and \ref{assum_indep} and is also equivalent to \ref{rp-cm-lm-formPotential}. Note that the expression of $\omega_{ab}$ and $\theta_a$ are in terms of specific coordinates, while the fact that $\omega_{ab}$ is the exterior derivative of $\theta_a$, instead, is coordinate independent. However, there is a characterization of $\omega_{ab}$ that is fully coordinate independent.
+To recap, we have found that the expression of \ref{rp-cm-lm-contactForm} are equivalent to assuming \ref{assum_detrev} and \ref{assum_indep} and is also equivalent to \ref{rp-cm-lm-formPotential}. Note that the expression of $\omega_{ab}$ and $\theta_a$ are in terms of specific coordinates, while the fact that $\omega_{ab}$ is the exterior derivative of $\theta_a$, instead, is coordinate independent. However, there is a characterization of $\omega_{ab}$ that is fully coordinate independent.
 
-Since $\omega_{ab}$ admits a potential, its exterior derivative is zero. We also have that the displacement field identify the only degenerate direction. That is, if $v^a\omega_{ab} = 0$ then $v^a = f S^a$ for some scalar function $f$. Physically, this means that temporal displacement is the only direction that does not provide independent configurations. It turns out that these are enough conditions to find canonical coordinates $[ q^i, p_i, t]$ such that we can express $\omega_{ab}$ as \ref{rp-cm-lm-contactForm}.\footnote{This result is known as the Darboux's theorem. Unfortunately we haven't been able to find a proof that is short and/or physically significant, though we suspect such a proof should exist.} Therefore
+Since $\omega_{ab}$ admits a potential, its exterior derivative is zero. We also have that the displacement field identifies the only degenerate direction. That is, if $v^a\omega_{ab} = 0$ then $v^a = f S^a$ for some scalar function $f$. Physically, this corresponds to saying that temporal displacement is the only direction that does not provide independent configurations: as we said before, time does not provide new possible configurations for the system. It turns out that these are enough conditions to find canonical coordinates $[ q^i, p_i, t]$ such that we can express $\omega_{ab}$ as \ref{rp-cm-lm-contactForm}.\footnote{This result is known as Darboux's theorem. Unfortunately we haven't been able to find a proof that is short and/or physically significant, though we suspect such a proof should exist.} Therefore
 \begin{equation}\label{rp-cm-lm-condSymplecticFormDef}
 	\tag{HM-12}
-	\parbox{5in}{The two-form $\omega_{ab}$ that quantifies independent configurations is closed \\ (i.e. zero exterior derivative)  and its only direction of degeneracy \\ is identified by the displacement field $S^a$}
+	\parbox{5in}{The two-form $\omega_{ab}$ that quantifies independent configurations is closed \\ (i.e. has zero exterior derivative)  and its only direction of degeneracy \\ is identified by the displacement field $S^a$}
 \end{equation}
 is an equivalent characterization of Hamiltonian mechanics in the extended phase space.
 
-The above condition must imply both \ref{assum_detrev} and \ref{assum_indep}. We can break down the two contributions in the following way. Assumption \ref{assum_detrev} tells us we have a way to measure the flow of the evolutions over a hyper-surface, which corresponds to a $n-1$-form $\Omega_{a_1 \cdots a_{2n}}$ such that:
+The above condition must imply both \ref{assum_detrev} and \ref{assum_indep}. We can break down the two contributions in the following way. Suppose we have a system with $n$ independent degrees of freedom, meaning the extended phase-space is of dimension $N=2n+1$. Assumption \ref{assum_detrev} tells us we have a way to measure the flow of the evolutions over a hyper-surface, which corresponds to an $(N-1)$-form $\Omega_{a_1 \cdots a_{2n}}$ such that:
 \begin{equation}
 	S^{a_1} \Omega_{a_1 \cdots a_{2n}} = 0.
 \end{equation}
-If the space is charted by position, momentum and time, we can write:
+This is just stating that, given that $\Omega_{a_1 \cdots a_{2n}}$ measures the flow through an infinitesimal $2n$-dimensional parallelepiped, if one of the sides is along the direction of flow $S^a$ then the flow will be parallel to the parallelepiped. If the space is charted by position, momentum and time, we can write:
 \begin{equation}
 	\begin{aligned}
 	&\Omega_{a_1 \cdots a_{2n}} = \epsilon_{a_1 \cdots a_{2n}a_{2n+1}} S^{a_{2n+1}} \\
-	&\int \epsilon_{a_1 \cdots a_{2n}a_{2n+1}} S^{a_{2n+1}} d\xi^{a_1}\cdots d\xi^{a_n} = \int \Omega_{a_1 \cdots a_{2n}} d\xi^{a_1}\cdots d\xi^{a_n}.
+	&\int \epsilon_{a_1 \cdots a_{2n}a_{2n+1}} S^{a_{2n+1}} d\xi^{a_1}\cdots d\xi^{a_{2n}} = \int \Omega_{a_1 \cdots a_{2n}} d\xi^{a_1}\cdots d\xi^{a_{2n}}.
 	\end{aligned}
 \end{equation}
-This means that the overall flow is conserved, but the independence of d.o.f. is not. Note that, under \ref{assum_detrev}, we have one and only one evolution for each state, therefore measuring the flow of evolutions is equivalent to measuring the number of states that travel through the surface. If we add \ref{assum_indep}, then we can write:
+On the right side, we see that we are really integrating the flow $S^a$ through the hypersurface defined by the differentials $d\xi^{a_i}$, which corresponds to the integral of $\Omega_{a_1 \cdots a_{2n}}$ through the hypersurface. Note that, under \ref{assum_detrev}, we have one and only one evolution for each state, therefore measuring the flow of evolutions is equivalent to measuring the number of states that travel through the surface.
+
+As we said, this setup was motivated by assumption \ref{assum_detrev} alone. If we add \ref{assum_indep}, then we can write:
 \begin{equation}
-	\Omega_{a_1 \cdots a_{2n}} = \omega_{a_1 a_2} \wedge \cdots \wedge \omega_{a_{2n-1} a_{2n}}.
+	\Omega_{a_1 \cdots a_{2n}} = \omega_{a_1 a_2} \wedge \omega_{a_3 a_4} \wedge \cdots \wedge \omega_{a_{2n-1} a_{2n}}.
 \end{equation}
 This tells us that the total state count becomes the product of the configurations along each degree of freedom.
 
-The geometrical and physical understanding of the action and the Lagrangian are the same as in the single d.o.f. case: the action is the line integral of the vector potential $\theta_a$ and the variation of the action is minus the surface integral of $\omega_{ab}$ between the path and its variation. The only difference is that this corresponds not to the flow of total states, but to the flow of configurations for a single degree of freedom. Still, the flow is zero only if the path is everywhere tangent to the displacement field $S^a$, and therefore if the path is an actual evolution of the system.
+The geometric and physical understanding of the action and the Lagrangian are the same as in the single d.o.f. case: the action is the line integral of the vector potential $\theta_a$ and the variation of the action is minus the surface integral of $\omega_{ab}$ between the path and its variation. The only difference is that this corresponds not to the flow of total states, but to the flow of configurations for a single degree of freedom. Still, the flow is zero only if the path is everywhere tangent to the displacement field $S^a$, and therefore if the path is an actual evolution of the system.
 
 \section{Full kinematic equivalence and massive particles}
 
-In the previous section we recovered Lagrangian mechanics by formulating the principle of stationary action in Hamiltonian form, and then used assumption \ref{assum_kineq} in form \ref{rp-cm-wke-condVelocityFromMomentum} simply to express it in terms of the kinematic variable. This is the weakest use of the assumption, as it only assumes we have an invertible map between velocity and momentum. However, we will find that this is not enough to define a meaningful count of configurations over kinematic variables, which requires states to be uniformly distributed over velocity. This leads to a stronger version of assumption \ref{assum_kineq}, which requires the map between velocity and conjugate momentum to be linear, which in turns fixes the dynamics to the one of massive particles under scalar and vector potential forces.
+In the previous section we recovered Lagrangian mechanics by formulating the principle of stationary action in Hamiltonian form, and then used assumption \ref{assum_kineq} in form \ref{rp-cm-wke-condVelocityFromMomentum} simply to express it in terms of the kinematic variables. This is the weakest use of the assumption, as it only assumes we have an invertible map between velocity and momentum. However, we will find that this is not enough to define a meaningful count of configurations over kinematic variables, which requires states to be uniformly distributed over velocity. This leads to a stronger version of assumption \ref{assum_kineq}, which requires the map between velocity and conjugate momentum to be linear, which in turn fixes the dynamics to the one of massive particles under scalar and vector potential forces.
 
 \subsection{Linear map between linear spaces}
 
-Condition \ref{rp-cm-wke-condVelocityFromMomentum} imposes, at every position, an invertible relationship $p_i = p_i(q^j, v^j)$ between momentum and velocity which can be arbitrary. Note that both velocity and momentum are linear objects, and therefore it would seem natural to require a linear relationship between the two. Though we do not have a clear physical reason to impose this restriction, let's see what would it entail.
+Condition \ref{rp-cm-wke-condVelocityFromMomentum} imposes, at every position, an invertible relationship $p_i = p_i(q^j, v^j)$ between conjugate momentum and velocity which can be arbitrary. Note that both velocity and momentum are linear objects, and therefore it would seem natural to require a linear relationship between the two. Though we do not have, at this point, a clear physical reason to impose this restriction, let's see what it would entail.
 
 If the relationship between momentum and velocity at every point is linear, we have that the Jacobian is only a function of position. Moreover, since it is a linear map between a vector and a covector, the map must be a tensor. We have
 \begin{equation}\label{rp-cm-lm-metricTensor}
@@ -1363,7 +1365,7 @@ If we integrate equation \ref{rp-cm-lm-metricTensor} we have
 \begin{equation}
 	p_i = m g_{ij} v^j + A_i
 \end{equation}
-where $A_i$ are arbitrary functions of positions. Since $g_{ij}$ and $A_i$ are functions of position only, we can see that, if we fix position, the relationship is a line where $mg_{ij}$ is the slope and $A_j$ the value of momentum for zero velocity. Note that
+where $A_i$ are arbitrary functions of position. Since $g_{ij}$ and $A_i$ are functions of position only, we can see that, if we fix position, the relationship is a line where $mg_{ij}$ is the slope and $A_i$ the value of momentum for zero velocity. Note that
 \begin{equation}
 	v^i = d_t q^i = \partial_{p_i} H = \frac{1}{m} g^{ij}(p_j - A_j).
 \end{equation}
@@ -1371,46 +1373,47 @@ If we integrate again we find
 \begin{equation}
 	H = \frac{1}{2m}(p_i - A_i)g^{ij}(p_j - A_j) + V
 \end{equation}
-where $V$ is yet another arbitrary function. This is exactly the Hamiltonian for a massive particle under scalar and vector potential forces: $m$ is the mass, $g_{ij}$ is the metric tensor, $A_i$ is a vector potential and $V$ is the scalar potential.\footnote{Note that we have not separated the charge from the potentials.} Additionally, if we impose the above Hamiltonian, we find that a linear relationship between conjugate momentum and velocity. Therefore condition
+where $V$ is yet another arbitrary function. This is exactly the Hamiltonian for a massive particle under scalar and vector potential forces: $m$ is the mass, $g_{ij}$ is the metric tensor, $A_i$ is a vector potential and $V$ is the scalar potential.\footnote{Note that we have not separated the charge from the potentials.} Therefore, we saw that imposing a linear relationship between velocity and conjugate momentum gives us massive particles under potential forces.
+
+Conversely, if we start by imposing the above Hamiltonian for massive particles under potential forces, we find a linear relationship between conjugate momentum and velocity. Therefore condition
 \begin{equation}\label{rp-cm-fke-condLinearRelationship}
 	\tag{FKE-1}
-	\parbox{5in}{There is a linear relationship between conjugate momentum and velocity.}
+	\parbox{5in}{There is a linear relationship between conjugate momentum and velocity}
 \end{equation}
 and condition
 \begin{equation}\label{rp-cm-fke-condMassiveParticle}
 	\tag{FKE-2}
-	\parbox{5in}{The system under study is a massive particle under scalar and vector potential forces.}
+	\parbox{5in}{The system under study is a massive particle under scalar and vector potential forces}
 \end{equation}
 are equivalent. At this point, having seen enough of reverse physics, it should be clear that this can't simply be a coincidence and it warrants more exploration.
 
-Since $m g_{ij}$ is the Jacobian between velocity and momentum, and the Jacobian determinant of the transformation from state variables to kinematic variables was equal to the Jacobian determinant of the relationship between velocity and momentum, we find
+Recall, that in \ref{rp-cm-lm-JacobianMomentumVelocity} we saw that the Jacobian determinant of the transformation from state variables to kinematic variables was equal to the Jacobian determinant of the relationship between velocity and momentum. Since $m g_{ij}$ is the Jacobian between velocity and momentum, we find
 \begin{equation}\label{rp-cm-fke-metricTensorDeterminantIsJacobianForDensities}
 	\begin{aligned}
 		\partial_{p_i} v^j &= \frac{1}{m}g^{ij} \\
-		|J| &= |\partial_{p_i} v^j | = \frac{|g^{ij}|}{m} = \frac{1}{m \,|g_{ij}|}. 
+		|J| &= |\partial_{p_i} v^j | = \frac{|g^{ij}|}{m} = \frac{|g_{ij}|^{-1}}{m} = \frac{1}{m \,|g_{ij}|}. 
 	\end{aligned}
 \end{equation}
-Recall that the existence of a non-singular Jacobian is what allowed to express all differential objects (e.g. densities, phase space areas/volumes, symplectic form) in terms of kinematic variables. This forces those expressions to be in terms of position only. We therefore have that the following conditions
+Recall that the existence of a non-singular Jacobian is what allowed us to express all differential objects (e.g. densities, phase space areas/volumes, the symplectic form) in terms of kinematic variables. This forces those expressions to be in terms of position only. We therefore have that the following conditions are equivalent to each other and equivalent to \ref{rp-cm-fke-condLinearRelationship} and \ref{rp-cm-fke-condMassiveParticle}.
 \begin{align}
 	\tag{FKE-3}\label{rp-cm-fke-condJacobianOfPosition}
-	&\parbox{5in}{The Jacobian of the transformation between state variables and kinematic variables is a non-singular function of position only} \\
+	&\parbox{5in}{The Jacobian of the transformation between state variables and kinematic variables is a non-singular function of position only.} \\
 	\tag{FKE-4}\label{rp-cm-fke-condDensitiesOfPosition}
-	&\parbox{5in}{Densities over phase space can be expressed in terms of position and velocity by rescaling the value at each point: $\rho(x^i, v^j) |J(x^i)| = \rho(q^i, p_j)$} \\
+	&\parbox{5in}{Densities over phase space can be expressed in terms of position and velocity by rescaling the value at each point: $\rho(x^i, v^j) |J(x^i)| = \rho(q^i, p_j)$.} \\
 	\tag{FKE-5}\label{rp-cm-fke-condAreasOfPosition}
-	&\parbox{5in}{Areas and volumes in phase space can be expressed in kinematic variables, and the transformation depends on position only: $dx^1 \cdots dx^n \, dv^1 \cdots dv^n = |J(x^i)| \, dq^1 \cdots dq^n \, dp_1 \cdots dp_n$} \\
+	&\parbox{5in}{Areas and volumes in phase space can be expressed in kinematic variables, and the transformation depends on position only: $dx^1 \cdots dx^n \, dv^1 \cdots dv^n = |J(x^i)| \, dq^1 \cdots dq^n \, dp_1 \cdots dp_n$.} \\
 	\tag{FKE-6}\label{rp-cm-fke-condSymplecticOfPosition}
-	&\parbox{5in}{The symplectic form $\omega_{ab}$ can be expressed in kinematic variables, and its components are a function of position only}
+	&\parbox{5in}{The symplectic form $\omega_{ab}$ can be expressed in kinematic variables, and its components are a function of position only. (TODO: not true)}
 \end{align}
-are equivalent to each other and equivalent to \ref{rp-cm-fke-condLinearRelationship} and \ref{rp-cm-fke-condMassiveParticle}.
 
-To understand better these conditions, consider a density $\rho_{qp}$ over phase space and its expression $\rho_{xv}$ over kinematic variables. Since there is a factor of a Jacobian determinant between the two, if the density takes the same value between two states as expressed in position and momentum, the density as defined over position and velocity will not necessarily have the same value. Position and momentum have a special property in that the density of states is uniform in terms of those variables, and therefore comparing densities in those variables is simply a matter of comparing the value of the density. Canonical coordinates are exactly those state variables for which this property holds. Kinematic variables are, in general, non-canonical. But the linearity between velocity and momentum imposes imposes a lesser version of this property: it makes it so that, at least at the same position, we can compare areas and density. Therefore if we have $\rho_{xv}(x^i, v_1^j) = \rho_{xv}(x^i, v_2^j)$, the density for two different values of velocity at the same point matches, then we really have the same density of states. Therefore
+To understand better these conditions, consider a density $\rho_{qp}$ over phase space and its expression $\rho_{xv}$ over kinematic variables. Since there is a factor of a Jacobian determinant between the two, if the density takes the same value between two states as expressed in position and momentum, the density as defined over position and velocity will not necessarily have the same value. Position and momentum have a special property in that the density of states is uniform in terms of those variables, and therefore comparing densities in those variables is simply a matter of comparing the value of the density. Canonical coordinates are exactly those state variables for which this property holds. While kinematic variables are, in general, not canonical, the linearity between velocity and momentum imposes a lesser version of this property: it makes it so that, at least at the same position, we can compare areas and densities. Therefore if density for two different values of velocity at the same point matches, $\rho_{xv}(x^i, v_1^j) = \rho_{xv}(x^i, v_2^j)$, then we really have the same density of states. Therefore
 \begin{equation}
 	\tag{FKE-7}\label{rp-cm-fke-condDensityVelocity}
-	\parbox{5in}{Density expressed in velocity at the same point are proportional to the density over states}
+	\parbox{5in}{Density expressed in velocity at the same position is proportional to the density over states}
 \end{equation}
 is another equivalent condition.
 
-In this formulation, one starts to wonder whether the lack of this property would make physical sense. We can understand that non-linear transformation of position, since they stretch and shrink space differently at different points, would make it more complicated to understand whether two densities at two different points are the same. On the other hand, velocity is defined locally over infinitesimal changes of positions, therefore non-linear changes in velocity do not arise when changing units and coordinates.
+In this formulation, one starts to wonder whether the lack of this property would make physical sense. We can understand that non-linear transformations of position, since they stretch and shrink space differently at different points, would make it more complicated to understand whether two densities at two different points are the same. On the other hand, velocity is defined locally over infinitesimal changes of position, therefore non-linear changes in velocity do not arise when changing units and coordinates.
 
 \subsection{Mass and inertial frames}
 
@@ -1877,6 +1880,8 @@ There are other interesting open questions to explore to better understand this 
 All our discussion so far has concentrated on the evolution of a classical system, either in terms of its dynamics and its kinematics. It assumed that the state of a classical particle is fully identified by a pair of variables. In this section we will see how a new assumption, that of infinitesimal reducibility, is enough to recover the structure of classical phase space and is therefore the constitutive assumption of classical mechanics.
 
 We have seen that \ref{assum_detrev} and \ref{assum_indep} are the constitutive assumptions of Hamiltonian mechanics, in the sense that they fully characterize Hamiltonian evolution. The addition of \ref{assum_kineq} recovers Lagrangian mechanics, and the full version gives us massive particles under potential forces. The relativistic version of the theories comes out without additional assumptions simply by properly dividing the roles of time as a variable from time as a parameter. But in all this discussion we assumed, without questioning, that states are identified by pairs of variables: position/velocity or position/momentum. Is this a coincidence or there is an underlying reason for it? What are the constitutive assumptions for a classical system itself?
+
+\subsection{Invariance over the continuum}
 
 Let us go back to the single d.o.f. case, and consider the plane as charted by the position $q$ and momentum $p$. We saw that for each subregion, the area as measured by those two variables give us the count of states. This is a special feature of conjugate variables. If we take position and velocity in a non-inertial frame, the variables are not conjugate and the area as calculated in those units does not map to a count of states: as we saw we need the mass and the Jacobian of the velocity/momentum transformation (i.e. the metric tensor) for the proper computation. Note that the count of states must be a coordinate invariant quantity. If it weren't, the entropy of the system would be an ill defined quantity, and so would be the notion of reversibility as conservation of entropy.
 
