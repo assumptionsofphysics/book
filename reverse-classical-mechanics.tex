@@ -1403,7 +1403,7 @@ Recall that the existence of a non-singular Jacobian is what allowed us to expre
 	\tag{FKE-5}\label{rp-cm-fke-condAreasOfPosition}
 	&\parbox{5in}{Areas and volumes in phase space can be expressed in kinematic variables, and the transformation depends on position only: $dx^1 \cdots dx^n \, dv^1 \cdots dv^n = |J(x^i)| \, dq^1 \cdots dq^n \, dp_1 \cdots dp_n$.} \\
 	\tag{FKE-6}\label{rp-cm-fke-condSymplecticOfPosition}
-	&\parbox{5in}{The symplectic form $\omega_{ab}$ can be expressed in kinematic variables, and its components are a function of position only. (TODO: not true)}
+	&\parbox{5in}{The symplectic form $\omega_{ab}$ can be expressed in kinematic variables, and its components are linear function of velocity.}
 \end{align}
 
 To understand better these conditions, consider a density $\rho_{qp}$ over phase space and its expression $\rho_{xv}$ over kinematic variables. Since there is a factor of a Jacobian determinant between the two, if the density takes the same value between two states as expressed in position and momentum, the density as defined over position and velocity will not necessarily have the same value. Position and momentum have a special property in that the density of states is uniform in terms of those variables, and therefore comparing densities in those variables is simply a matter of comparing the value of the density. Canonical coordinates are exactly those state variables for which this property holds. While kinematic variables are, in general, not canonical, the linearity between velocity and momentum imposes a lesser version of this property: it makes it so that, at least at the same position, we can compare areas and densities. Therefore if density for two different values of velocity at the same point matches, $\rho_{xv}(x^i, v_1^j) = \rho_{xv}(x^i, v_2^j)$, then we really have the same density of states. Therefore
@@ -1954,11 +1954,27 @@ Units of momentum change in the opposite way, therefore they must be proportiona
 		p = h \nu
 	\end{aligned}
 \end{equation}
-The new variable $\nu$ has units of inverse $q$, which makes it obvious that $\Delta q \Delta k\nu$ is invariant: if one is meters, the other is inverse meters; if one is kilometers, the other is inverse kilometers; if one is angle, the other is inverse angle.
+The new variable $\nu$ has units of inverse $q$, which makes it obvious that $\Delta q \Delta \nu$ is invariant: if one is meters, the other is inverse meters; if one is kilometers, the other is inverse kilometers; if one is angle, the other is inverse angle.
 
 Now, if position is expressed in angles, conjugate momentum will be expressed in units of areas of phase space, and therefore angular momentum. Therefore we have a connection between angular momentum and phase space areas. However, if we change the angle from radians to degrees, $\nu$ will change units and so will conjugate momentum, but not $h$. That is, even in that case is improper to say the count of states is expressed in angular momentum. The count of states is expressed in whatever units we want. We have the units we have because, in a inertial Cartesian coordinate frame, we can use kinetic momentum times distance can be used to count the configurations of the system. However the fact that these units correspond to the same units of angular momentum does not mean that there is similarity between the physical quantities.\footnote{In general, units keep track of some aspects of physical quantities, but not everything. For example, one can show that, dimensionally, pressure is equal to energy over volume. This relationship is actually useful when describing fluids. On the other hand, energy density is another useful quantity to, for example, measure the capacity of batteries. There is no relationship between the energy density of a battery and its pressure. Another puzzle: if one multiplies radians and meters, what is the resulting unit? Consider the area of the side of a cylinder section $\theta r h$ where $\theta$ is the angular size of the section, $r$ is the radius and $h$ is the height of the cylinder. If we multiply $\theta$ and $r$, we get the length of the arc, which is a distance: we get meters. However, if we multiply $\theta$ and $h$, we do not get a length, we have an angle times length: we get meters times radians. The issue is that an angle is really a ratio between the length of the arc and the length of the radius. Only a multiplication by the correct radius will give back a distance. }
 
-Before we go too far, let's see if this reasoning extends to the general case. This time we want to preserve the area on all independent degrees of freedom, that is we want to preserve $\omega_{ab}$. We want to write the transformed $\hat{\omega}_{ab}$ and set it equal to the original one. We have
+We have seen that we cannot define a unit invariant uniform distribution over a single continuous variable, but we can do that over two variables, if one has inverse units with respect to the first. Is this the only case? What happens if we use three or more variables? Suppose that $q$ is the only unit that defines our unit system. Then under unit change $\hat{q} = \hat{q}(q)$ the units of all other variables must be uniquely defined. The only additional constraint is that the measure of states is invariant. How many total variables must the state have? We saw there must be more than one variable, or we cannot change the unit arbitrarily. Now suppose that we have three or more additional variables. Given that we have only two constraints, the unit change and the area conservation, these are not enough to fully determine the transformation, and therefore the units of all variables. Therefore it is not true the units of $q$ fully determine the units of all variables. This tells us that, to satisfy the principle of relativity and the principle of indifference at the same time, a state space for a system that is fully characterized by a single unit, we must have exactly one additional quantity, conjugate momentum, that changes covariantly under unit change.
+
+\subsection{Multiple degrees of freedom}
+
+We saw how things work for a single degree of freedom, let's see how they generalize. The idea is that we want to be able to define frame invariant uniform distributions not only on the total count of states, but also on the configurations over each degree of freedom by itself and any combination. For example, if we had three d.o.f. $x$, $y$ and $z$, must be able to define unit invariant uniform distributions over $x$, $y$ and $z$ independently, over the subspaces defined by $xy$, $yz$ and $xz$ and over the total volume $xyz$.
+
+We saw that $q$ and $p$ did not have the same physical status: the first defines an independent unit while the second doesn't. This leads to the following
+\begin{insight}
+	The variables $q^i$ define the unit system.
+\end{insight}
+Given that we want to construct the most general argument, we will take the above insight as the defining property for the $q^i$s. That is, we will no longer regard $q^i$ as position variables, but instead as those state variables that define the units for all state variables. If we are only studying motion in space, clearly the position variables define all the units, therefore the $q^i$s will reduce to position variables. However, if we include other properties (e.g. the direction of magnetization of an object), they will still need to define a unit, regardless of whether they identify a position. With this in mind, when we talk about unit change $\hat{q}^i = \hat{q}^i(q^j)$, in general this may mix variable much like a change of spatial coordinates would.
+
+Now, if the degrees of freedom are truly independent, changing the units of one must leave the other unaffected. Therefore, if we have three degrees of freedom, we must have three variables $q^x$, $q^y$ and $q^z$ that define the units of each degrees. Suppose we change $q^x$ to $\hat{q}^x$ while leaving the others unchanged. Given the premise and what we discussed above, there must be another variable $p_x$ with inverse units. This must be an additional variable given that $q^y$ and $q^z$ must have different units. Given that the d.o.f. are independent, we should also be able to fix the value of both $q^x$ and $p_x$ and obtain a subspace identified by all the remaining variable. Now suppose that we change $q^y$ by itself. By the same logic, there must be another variable $p_y$. This must have units of inverse $q^y$, and therefore cannot be any of the variables we already have. We repeat again the logic and we find another variable $p_x$. There cannot be another variable, as these cannot have units that depend on $q^x$, $q^y$ and $q^z$ and those all the units  We therefore find that if we have $n$ degrees of freedom, we must have $2n$ state variables: the $q^i$ that define the units and the conjugate quantities $p_i$ expressed in inverse units.
+
+We now want to introduce a form $\omega_{ab}$ that returns the count of independent configuration for an infinitesimal parallelogram. We can now use the same arguments that we gave discussion assumption \ref{assum_indep}. The number of independent configuration identified by a parallelogram within the same degree of freedom will be given by the area of the parallelogram. On the other hand, a parallelogram across degrees of freedom, for example formed by $\Delta q^x$ and $\Delta p_y$, will not properly identify independent configurations. Note, in fact, that their product is not unit invariant. This means $\omega_{ab}$ must match the familiar form. In short, assumptions \ref{assum_indep} plus the principle of relativity gives us the structure of phase space.
+
+At this point, we know how the $p_i$ change under individual change of units, we do not know how they change if we mix the unit variables. Note that, whatever new units we may choose, we can always express displacements in terms of the old units. If we want uniform distribution to map to uniform distributions, we will need the form to remain the same: $\hat{\omega}_{ab} = \omega_{ab}$. We have
 \begin{equation}
 	\begin{aligned}
 	\hat{\omega}_{ab} &=\left[\begin{array}{cc}
@@ -2007,7 +2023,7 @@ Before we go too far, let's see if this reasoning extends to the general case. T
 \end{aligned}
 \end{equation}
 
-The constraints coming for the off diagonal terms are the same, and they are
+The constraints coming from the off diagonal terms are the same, and they are
 \begin{equation}
 	\begin{aligned}
 		\partial_{q^l} \hat{q}^i \partial_{p_l} \hat{p}_j = \delta_{ij}.
@@ -2031,9 +2047,89 @@ The second constraint comes from the bottom diagonal term. Using the newly found
 \end{equation}
 This constraint is satisfied simply because position and momentum are different state variable, and partial derivatives along one variable are taken keeping the others constant.
 
-We found that, in phase, we can indeed take arbitrary transformations of the position variables and, by asking the form $\omega_{ab}$ to be invariant, we recover the transformation law of momentum. Each component of momentum has to be expressed in inverse units of the respective position components. This means that uniform distribution over phase space are mapped to uniform distributions, the density at each point is coordinate invariant and the entropy is the same for all observers. We reach the following
+By imposing the preservation of the form $\omega_{ab}$ under an arbitrary change of units, we recovered the transformation law of momentum as a covector. We should now check that the converse is true as well. Suppose we have a manifold charted by $q^i$ and $p_i$ such that, when we change units $\hat{q}^i = \hat{q}^i(q^j)$, conjugate momentum changes like a covector $\hat{p}_i = \partial_{\hat{q}^i} q^j \, p_j$. We have
+\begin{equation}
+	\begin{aligned}
+		\hat{\omega}_{ab} &=\left[\begin{array}{cc}
+			\omega_{\hat{q}^i \hat{q}^j} & \omega_{\hat{q}^i \hat{p}_j} \\
+			\omega_{\hat{p}_i \hat{q}^j} & \omega_{\hat{p}_i \hat{p}_j} 
+		\end{array} \right] = \left[\begin{array}{cc}
+			\partial_{q^k} \hat{q}^i & \partial_{p_k} \hat{q}^i \\
+			\partial_{q^k} \hat{p}_i & \partial_{p_k} \hat{p}_i 
+		\end{array} \right]
+		\left[\begin{array}{cc}
+			\omega_{q^k q^l} & \omega_{q^k p_l} \\
+			\omega_{p_k q^l} & \omega_{p_k p_l} 
+		\end{array} \right]
+		\left[\begin{array}{cc}
+			\partial_{q^l} \hat{q}^j & \partial_{q^l} \hat{p}_j \\
+			\partial_{p_l} \hat{q}^j & \partial_{p_l} \hat{p}_j 
+		\end{array} \right]\\
+		&= \left[\begin{array}{cc}
+			\partial_{q^k} \hat{q}^i & 0 \\
+			\partial_{q^k} \hat{p}_i & \partial_{\hat{q}^i} q^k 
+		\end{array} \right]
+		\left[\begin{array}{cc}
+			0 & \delta_{kl} \\
+			- \delta_{kl} & 0 
+		\end{array} \right]
+		\left[\begin{array}{cc}
+			\partial_{q^l} \hat{q}^j & \partial_{q^l} \hat{p}_j \\
+			0 & \partial_{\hat{q}^j} q^l 
+		\end{array} \right] \\
+		&= \left[\begin{array}{cc}
+			0 & \partial_{q^l} \hat{q}^i \\
+			- \partial_{\hat{q}^i} q^l  & \partial_{q^l} \hat{p}_i 
+		\end{array} \right]
+		\left[\begin{array}{cc}
+			\partial_{q^l} \hat{q}^j & \partial_{q^l} \hat{p}_j \\
+			0 & \partial_{\hat{q}^j} q^l 
+		\end{array} \right] \\
+		&= \left[\begin{array}{cc}
+			0 & \partial_{q^l} \hat{q}^i \partial_{\hat{q}^j} q^l   \\
+			- \partial_{\hat{q}^i} q^l \partial_{q^l} \hat{q}^j  & 
+			- \partial_{\hat{q}^i} q^l \partial_{q^l} \hat{p}_j +  \partial_{q^l} \hat{p}_i \partial_{\hat{q}^j} q^l 
+		\end{array} \right] \\
+		&= \left[\begin{array}{cc}
+			0 & \partial_{\hat{q}^j} \hat{q}^i   \\
+			- \partial_{\hat{q}^i} \hat{q}^j  & 
+			- \partial_{\hat{q}^i}  \hat{p}_j +  \partial_{\hat{q}^j} \hat{p}_i 
+		\end{array} \right] = \left[\begin{array}{cc}
+			0 & \delta_{ij} \\
+			- \delta_{ij} & 0 
+		\end{array} \right]
+	\end{aligned}
+\end{equation}
+
+Taken all together, we found the following conditions to be equivalent.
+\begin{align}
+	\tag{REL-1}\label{rp-cm-ir-condIndifference}
+	&\parbox{5in}{The state space allows to define unit invariant uniform distributions} \\
+	\tag{REL-2}\label{rp-cm-ir-condInvarianceSF}
+	&\parbox{5in}{The form $\omega_{ab}$ is invariant under change of units} \\
+	\tag{REL-3}\label{rp-cm-ir-condConjugateQuantities}
+	&\parbox{5in}{States are identified by unit variables and conjugate momentum, which changes as a covector under changes of units.}
+\end{align}
+
+The invariance of the form $\omega_{ab}$ under unit changes means that all those properties that where invariant under Hamiltonian evolution are also invariant under unit changes. This means not only the count of states, the density assigned to each state and the entropy is coordinate invariant, but also the fact the system can be decomposed into independent d.o.f. regardless of the units used, regardless of the observer. We can therefore amend the conditions we found in the past. 
+\begin{align}
+	\tag{REL-4}\label{rp-cm-ir-condIndepDof}
+	&\parbox{5in}{The system is decomposable into independent d.o.f. regardless of the unit system} \\
+	\tag{REL-5}\label{rp-cm-ir-condIndepDistr}
+	&\parbox{5in}{The system allows statistically independent distributions over each d.o.f. regardless of the unit system} \\
+	\tag{REL-6}\label{rp-cm-ir-condIndepEntropy}
+	&\parbox{5in}{The system allows informationally independent distributions over each d.o.f. regardless of the unit system} \\
+	\tag{REL-7}\label{rp-cm-ir-condIndepUncertainty}
+	&\parbox{5in}{The system allows peaked distributions where the uncertainty is the product of the uncertainty regardless of the units}
+\end{align}
+
+Phase space and its structure, then, are neither a coincidence nor a choice. Phase space is the only space that allows us to define key concepts, like uniform distributions or reversibility, in an invariant way, which would otherwise be ill-defined over the continuum. In other words
 \begin{insight}
-	The structure of phase space makes the principle of relativity and the principle of indifference compatible.
+	The structure of phase space is exactly the structure needed to define state densities, thermodynamic entropy, information entropy and statistical uncertainty over continuous quantities in a way that satisfies the principle of relativity.
 \end{insight}
 
-The invariance of $\omega_{ab}$ under change of spatial coordinates means 
+\subsection{The principle of relativity}
+
+Note that this is a stronger use of the principle of relativity as it is more restricted and yet more fruitful. It's a more restricted use because we have only used it for transformations at equal time, between two observers that share the same clock. Moreover, we haven't required anything about the law of motion: just that core physical quantities, like entropy or density per state, are observer invariant. What we get in return is that the structure of classical states, something that is typically not justified, yet it is implied by the typical application of the principle of relativity. The idea that we have inertial frames, or that boosted observer can see the same laws, presupposes that the state of a classical system is determined by two sets of quantities, position/velocity or position/momentum. Therefore we got something more fundamental out of our use of the principle of relativity.
+
+We also have clarified exactly why position and momentum form better state variables than position and velocity: these are the variables in which densities are frame invariant, the volume properly counts number of states. Moreover, the units of conjugate momentum do not depend on the units of time, therefore they provide true separation between the temporal degree of freedom and the other degrees.  We can also better understand why \ref{rp-cm-fke-condLinearRelationship} is the proper expression of assumption \ref{assum_kineq}. If $q^i$ define units of the system, conversion between units of momentum and units of velocity should only depend on $q^i$. That is, the Jacobian of the transformation between position and velocity should be a function of $q^i$ alone, which is an equivalent formulation of \ref{rp-cm-fke-condLinearRelationship}. Therefore, while the more general constraint \ref{rp-cm-wke-condVelocityFromMomentum} has no mathematical inconsistency, it is inconsistent on physics grounds: on one side we request the state space such that $q^i$ fully determines the units, but on the other side we let the conversion from dynamics to kinematics variables required by \ref{assum_kineq} not be fully determined by the variables that define the units.
