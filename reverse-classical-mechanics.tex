@@ -1474,61 +1474,57 @@ To sum up, there are still two points that are unclear to complete our Reverse P
 
 \section{Relativistic mechanics}
 
-In this section we analyze what happens if we consider change of coordinates that mix space and time. We will see that relativistic elements appear even if a notion of metric tensor is not yet introduced, and the particle/anti-particle duality emerges. Moreover, under the strong kinematic equivalence special relativity is recovered.
+In this section we analyze what happens if we consider change of coordinates that mix space and time. We will see that relativistic elements appear even if a notion of metric tensor is not introduced, and the particle/anti-particle duality emerges. Moreover, under the full kinematic equivalence special relativity is recovered.
 
 \subsection{Hamiltonian mechanics on the extended phase space}
 
-The Hamiltonian formalism is invariant under generic change of spatial variables, but if we want to introduce generic changes of coordinates that mix space and time coordinates we have a problem. In the standard formulation, time is the parameter of the evolution $q^i(t)$, meaning that we can mix $q^i$ while leaving $t$ alone. In the formulation extended by time, time has a double of role of parameter and variable. That is, we write $q^i(t)$ and $t(t)$. Therefore mixing $q^i$ with $t$ will affect the evolution parameter as well. What we need to do is to separate variable the time variable form the parameter of the evolution. We can group the space-time variables as
-\begin{equation}
-	q^\alpha = \{t, q^i\}.
-\end{equation}
-We introduce an affine parameter $S$, and therefore a trajectory in space-time will be noted as $q^\alpha(s)$. Under a change of coordinate, $q^\alpha$ will mix but the affine parameter $s$ will not change.
+% Final TODO: check that we use square braket consistently (and the coma?) for vectors
 
-Now we have to understand how to deal with time, we have to understand how to deal with energy. As we saw before, the Hamiltonian is no longer invariant under transformation that affect time. Moreover, even if we start with a time-independent Hamiltonian, it will not remain so under a generic coordinate transformation that mix time and space. This means that, during the evolution, energy will not be constant but will need to increase and decrease. Another, more physical, way to look at it is that energy, like momentum, is not an absolute quantity but it's a relative quantity with respect to an observer. If we imagine an observer that is accelerating and decelerating, in the same way that he will see momentum change, he will see the energy change as well. In the same way that momentum is sensitive to changes of units along the corresponding spatial direction, energy is sensitive to change of time units. To be able to characterize these relationship better, we introduce an energy variable $E$ which we group with the momentum variables and, since $-H$ was the time component of $\theta_a$, we write
+The Hamiltonian formalism is invariant under generic change of spatial variables, but if we want to introduce generic changes of variables that mix space and time we have a problem. In the standard formulation, time is the parameter of the evolution $q^i(t)$, meaning that we can mix the spatial variables $q^i$ while leaving $t$ alone. In the formulation extended by time, time has a double of role of parameter and variable. That is, we write $q^i(t)$ and $t(t)$. Therefore mixing $q^i$ with $t$ will affect the evolution parameter as well. What we need to do is to separate the time variable from the parameter of the evolution. We can group the space-time variables as
 \begin{equation}
-	p_\alpha = \{-E, p_i\}.
+	q^\alpha = [t, q^i].
+\end{equation}
+We introduce an affine parameter $s$, and therefore a trajectory in space-time will be noted as $q^\alpha(s)$. Under a change of coordinate, the variables $q^\alpha$ will mix but the affine parameter $s$ will not change.
+
+Now we have understood how to deal with time, we have to understand how to deal with energy. As we saw before, the Hamiltonian is no longer invariant under transformations that affect time. Moreover, even if we start with a time-independent Hamiltonian, it will not remain so under a generic coordinate transformation that mixes time and space. This means that, during the evolution, energy will not be constant but will need to increase and decrease. Another, more physical, way to look at it is that energy, like momentum, is not an absolute quantity but rather a relative quantity with respect to an observer. If we imagine an observer that is accelerating and decelerating, in the same way that he will see momentum change, he will see the energy change as well. In the same way that momentum is sensitive to changes of units along the corresponding spatial direction, energy is sensitive to change of time units. To be able to characterize these relationships better, we introduce an energy variable $E$ which we group with the momentum variables and, since $-H$ was the time component of the potential $\theta_a$, we write
+\begin{equation}
+	p_\alpha = [-E, p_i]
 \end{equation}
 so that $p_\alpha$ is a covector.
 
 What we did is add a temporal degree of freedom, and with that addition, the equations look a lot like standard Hamiltonian mechanics for multiple degrees of freedom. We have
 \begin{equation}
 	\begin{aligned}
-		\xi^a &= \begin{bmatrix}
-			q^\alpha & p_\alpha 
-		\end{bmatrix} \\
-		S^a &= d_s \xi^a = \begin{bmatrix}
-			d_s q^\alpha & d_s p_\alpha
-		\end{bmatrix} \\
+		\xi^a &= [q^\alpha \ p_\alpha ] \\
+		S^a &= d_s \xi^a = [d_s q^\alpha \ d_s p_\alpha] \\
 	\end{aligned}
 \end{equation}
-We define the forms $\theta_a$ and $\omega_{ab}$
+We define the potential $\theta_a$\footnote{Recall that when phase space was extended with just time, we had $\theta_a = [\theta_{q^i} \ \theta_{p_i} \ \theta_t] = [p_i \ 0 \ -H]$. Now that it is also extended with energy, we have $\theta_a = [\theta_t \ \theta_{q^i} \ \theta_{-E} \ \theta_{p_i} ] = [-E \ p_i \ 0 \ 0] = [\theta_{q^\alpha} \ \theta_{p_\alpha} ] = [p_\alpha \ 0]$. } and the form $\omega_{ab}$
 \begin{equation}\label{rp-cm-rel-symplecticForm}
 	\tag{SF-FE}
 	\begin{aligned}
-		\theta_a &= \begin{bmatrix}
-	p_\alpha & 0 
-\end{bmatrix} \\
+		\theta_a &= [p_\alpha \ 0] \\
 	\omega_{ab} &= \partial_a \wedge \theta_b = \left[\begin{array}{cc}
 		\omega_{q^\alpha q^\beta} & \omega_{q^\alpha p_\beta} \\
 		\omega_{p_\alpha q^\beta} & \omega_{p_\alpha p_\beta} 
 	\end{array} \right]= \left[\begin{array}{cc}
 		0 & I_n \\
 		- I_n & 0 
-	\end{array} \right].
+	\end{array} \right],
 	\end{aligned}
 \end{equation}
 and the equations of motion will be
 \begin{equation}
 	S^a \omega_{ab} = \partial_b \mathcal{H}.
 \end{equation}
-The function $\mathcal{H}$ is called Hamiltonian constraint. Typically, the constraint is chosen such that
+The function $\mathcal{H}$ is called the Hamiltonian constraint. Typically, the constraint is chosen such that
 \begin{equation}
 	\mathcal{H}=0.
 \end{equation}
 
 \subsection{Relativistic free particle}
 
-Given that this formulation is probably unfamiliar to most, let us see how it works for a free particle in a Cartesian (and inertial) reference frame. In this case, it is more convenient to use $q^0=ct$ as time variable, which, given \ref{cp-rm-lm-energyTimeComponent}, means using $p_0=-E/c$ for the energy. The Hamiltonian constraint is
+Given that this formulation is probably unfamiliar to most, let us see how it works for a free particle in a Cartesian (and inertial) reference frame. In this case, it is more convenient to use $q^0=ct$ as the time variable, which, given \ref{cp-rm-lm-energyTimeComponent}, means using $p_0=-E/c$ for the energy. The Hamiltonian constraint is
 \begin{equation}
 	\mathcal{H} = \frac{1}{2m} \left(p_\alpha \eta^{\alpha\beta} p_\beta + m^2c^2  \right) = \frac{1}{2m} \left(p_i \delta^{ij} p_j - (E/c)^2 + m^2c^2  \right),
 \end{equation}
@@ -1548,12 +1544,12 @@ Therefore we have
 \end{equation}
 We recognize $u^\alpha$ as the four-velocity, and the affine parameter $s$ as proper time. With this in mind, we can rewrite the Hamiltonian constraint as
 \begin{equation}
-	\mathcal{H} = \frac{1}{2m} \left( mu^\alpha \eta_{\alpha\beta} mu^\beta + mc^2 \right) = \frac{1}{2} m |u|^2 + \frac{1}{2} m c^2,
+	\mathcal{H} = \frac{1}{2m} \left( mu^\alpha \eta_{\alpha\beta} mu^\beta + m^2c^2 \right) = \frac{1}{2} m |u|^2 + \frac{1}{2} m c^2,
 \end{equation}
-which look like a kinetic energy term constructed from the four-velocity. Setting $\mathcal{H}$ to zero, then, means setting the norm squared of the four-velocity to $-c^2$, which is consistent with special relativity. It also means that 
+which looks like a kinetic energy term constructed from the four-velocity. Setting $\mathcal{H}$ to zero, then, means setting the norm squared of the four-velocity to $-c^2$, which is consistent with special relativity. It also means that 
 \begin{equation}
 	\begin{aligned}
-		(E/c^2)^2 &= m^2c^2 + p_i p^i \\
+		(-E/c)^2 &= m^2c^2 + p_i p^i \\
 		E &= \pm \sqrt{c^2 |p_i|^2 + (mc^2)^2 }.
 	\end{aligned}
 \end{equation}
@@ -1561,7 +1557,7 @@ That is, the Hamiltonian constraint sets the relationship between energy and mom
 
 \subsection{The geometry of extended phase space}
 
-Note that while the mathematical structure looks the same at first glance, it has important differences. Let's concentrate on the Hamiltonian constraint. In standard Hamiltonian mechanics, the Hamiltonian $H$ gives a value of energy that is conserved by the system during the evolution, but the system can be in different states with different energy. The Hamiltonian constraint $\mathcal{H}$, instead, is a quantity that is not only conserved by the system during the evolution, it is always the same for the given system. In the example above, the Hamiltonian constraint essentially is a constraint on the mass of the system. Therefore the space of states is not really the full $2n+2$ dimensional manifold charted by time, position, energy and momentum, but it is the $2n+1$ dimensional sub-manifold that is given by $\mathcal{H}=0$. The constraint lowers the dimensionality by imposing a relationship between energy and the other state variables. The Hamiltonian constraint, then, plays a double role: as a generator of the evolution over the affine parameter $s$ and as an equation of state of the system.\footnote{Note that to apply the constraint to a distribution, one can simply write $\mathcal{H} \rho = 0$. This means that $\rho$ can be different than zero only over the region where $\mathcal{H}$ is zero, and therefore $\rho$ is non-zero only for those points that satisfy the Hamiltonian constraint. Moreover, note that in the case of a free particle in a Cartesian frame, the Hamiltonian constraint $\mathcal{H} \rho = 0$ is the classical analogue of the Klein-Gordon $\left( \frac{\hbar^2}{c^2} \partial_t^2 - \hbar^2 \nabla^2 + m^2c^2 \right) \psi = 0$.}
+Note that while the mathematical structure of the extended phase space looks the same at first glance as the one of standard phase space, it has important differences. Let's concentrate on the Hamiltonian constraint. In standard Hamiltonian mechanics, the Hamiltonian $H$ gives a value of energy that is conserved by the system during the evolution, but the system can be in different states with different energy. The Hamiltonian constraint $\mathcal{H}$, instead, is a quantity that is not only conserved by the system during the evolution, it is always the same for the given system. In the example above, the Hamiltonian constraint essentially is a constraint on the mass of the system. Therefore the space of states is not really the full $2n+2$ dimensional manifold charted by time, position, energy and momentum, but it is the $2n+1$ dimensional sub-manifold that is given by the constraint $\mathcal{H}=0$. The constraint lowers the dimensionality by imposing a relationship between energy and the other state variables. The Hamiltonian constraint, then, plays a double role: as a generator of the evolution over the affine parameter $s$ and as an equation of state of the system.\footnote{Note that to apply the constraint to a distribution $\rho$, one can simply write $\mathcal{H} \rho = 0$. This means that $\rho$ can be different from zero only over the region where $\mathcal{H}$ is zero, and therefore $\rho$ is non-zero only for those points that satisfy the Hamiltonian constraint. Moreover, note that in the case of a free particle in a Cartesian frame, the Hamiltonian constraint $\mathcal{H} \rho = 0$ is the classical analogue of the Klein-Gordon equation $\left( \frac{\hbar^2}{c^2} \partial_t^2 - \hbar^2 \nabla^2 + m^2c^2 \right) \psi = 0$.}
 
 Since over valid states we will have both $\mathcal{H}=0$ and $E=H$, we can write
 \begin{equation}
@@ -1583,7 +1579,7 @@ Therefore $\lambda$ is the rate of change between time and the affine parameter.
 		d_t E &= d_t s \, d_s E = d_t s \, \partial_{t} \mathcal{H} = \frac{1}{\lambda} \left(\partial_{t} \lambda (H - E) + \lambda \partial_{t} H \right) = \partial_t H
 	\end{aligned}
 \end{equation}
-Therefore if we set $\mathcal{H} = H - E$, the affine parameter will have to match time up to a constant, and therefore the formulations are equivalent.
+Therefore if we set $\mathcal{H} = H - E$, the affine parameter will have to be equal to time up to an arbitrary additive constant, and therefore the formulations are equivalent.
 
 The expression above seems to imply that the Hamiltonian constraint always has to correspond to one Hamiltonian. This is not the case. Suppose we have
 \begin{equation}
@@ -1601,14 +1597,14 @@ Given that the solutions for energy have opposite sign, one finds
 \end{equation}
 in agreement with what we found before.
 
-Note that, for a free particle, similarly to what one finds in quantum field theory, we have both positive and negative energy solutions. Given that $d_s t = E/m$, what happens is the affine parameters is anti-aligned with respects to time. For the negative energy solutions, then, $s$ will be minus proper time instead of proper time.\footnote{This is a much more precise version of the claim that anti-particles ``travel backwards in time''. They do not. What happens is that the function $t(s)$ is parameterized in the opposite direction. However, the affine parameter $s$ is not physically significant.}
+Note that for a free particle, similarly to what one finds in quantum field theory, we have both positive and negative energy solutions. Given that $d_s t = E/mc^2$, what happens is the affine parameter is anti-aligned with respect to time. For the negative energy solutions, then, $s$ will be minus proper time instead of proper time.\footnote{This is a much more precise version of the claim that anti-particles ``travel backwards in time''. They do not. What happens is that the function $t(s)$ is parameterized in the opposite direction. However, the affine parameter $s$ is not physically significant.}
 
-In general, $d_s t$ may be positive or negative, which correspond to the affine parameter aligned or anti-aligned with respect to time. Note that, since $d_s t$ cannot be equal two zero, therefore states for which $d_s t > 0$ can never be connected with states for which $d_s < 0$. Therefore these two types of states must always live in different regions of the extended phase space. In analogy with what happens in quantum field theory, we call particle states those for which $d_s t > 0$ and anti-particle states those for which $d_s t < 0$. We therefore we find the following
+In general, $d_s t$ may be positive or negative, which corresponds to the affine parameter being aligned or anti-aligned with respect to time. Note that since $d_s t$ cannot be equal to zero, therefore states for which $d_s t > 0$ can never be connected with states for which $d_s t < 0$. Therefore these two types of states must always exist in different regions of the extended phase space. In analogy with what happens in quantum field theory, we call particle states those for which $d_s t > 0$ and anti-particle states those for which $d_s t < 0$. We therefore find the following
 \begin{insight}
-	A frame invariant notion of determinism and reversibility (i.e. generalized coordinate transformation in Hamiltonian mechanics) gives us the notion of anti-particles, even in classical particle mechanics.
+	A frame-invariant notion of determinism and reversibility (i.e. allowing generalized coordinate transformations in Hamiltonian mechanics) gives us the notion of anti-particles, even in classical particle mechanics.
 \end{insight}
 
-Now that we got a better feel for this version of Hamiltonian mechanics, let's go back to explore its geometry and physical significance. Looking at $\omega_{ab}$ it may seem that adding the temporal degree of freedom means just adding another independent d.o.f., but that is not the case. If we start with standard phase space and add time, we are not adding new independent configurations: if we have deterministic and reversible motion, given the state at one time, we know the state at all times. So, while adding time allows us to talk about all states at all times, we are not really adding new states because states are defined and counted at equal time. In phase space extended by time only, this was captured by the fact that the form $\omega_{ab}$ applied to the displacement field always gives zero. If we now add energy, the conjugate of time, things are even more constrained. The energy, in fact, is a function of the state of the system at a particular time. The addition of energy, then, adds no configuration at all.
+Now that we got a better feel for what the Hamiltonian constraint is and how it works, let's go back to explore the geometry and physical significance of the extended phase space. Looking at $\omega_{ab}$ it may seem that adding the temporal degree of freedom means just adding another independent d.o.f., but that is not the case. If we start with standard phase space and add time, we are not adding new independent configurations: if we have deterministic and reversible motion, given the state at one time, we know the state at all times. So, while adding time allows us to talk about all states at all times, we are not really adding new states because states are defined and counted at equal time. In phase space extended by time only, this was captured by the fact that the form $\omega_{ab}$ applied to the displacement field always gives zero. If we now add energy, the conjugate of time, things are even more constrained. The energy, in fact, is a function of the state of the system at a particular time. The addition of energy, then, adds no configurations at all.
 
 Now that it is clear that $(t, -E)$ do not constitute an independent degree of freedom, we should understand the significance of the minus sign. As we saw, it was needed so that $p_\alpha$ is a covector, but that does not tell us anything in terms of the geometry. What we are really saying is that an infinitesimal rectangle of size $dt$ and $dE$ has a negative contribution to the count of states. Shouldn't it have no contribution at all?
 
@@ -1616,24 +1612,24 @@ We saw that orthogonality in phase space means d.o.f. independence. If we have t
 \begin{equation}\label{rp-cm-rel-spatialPythagoras}
 	\omega(dq^1 + dq^2, dp_1 + dp_2) = dq^1 dp_1 + dq^2 dp_2.
 \end{equation}
-The above expression, then, can be understood as an areal version of Pythagoras's theorem: instead of summing the square distances, we are summing areas directly. That is, given the orthogonality of the independent d.o.f., we have a right triangle-like structure where the two sides are the areas in each d.o.f. and the hypotenuse is the area determined by $\omega$.  Now, because spatial and temporal degrees of freedom are not independent, they are not orthogonal, the above expression cannot be the correct one.
+The above expression, then, can be understood as an areal version of Pythagoras's theorem: instead of summing the square distances, we are summing areas directly. That is, given the orthogonality of the independent d.o.f., we have a right triangle-like structure where the two sides are the areas in each d.o.f. and the hypotenuse is the area determined by $\omega$.  Now, because spatial and temporal degrees of freedom are not independent, i.e. they are not orthogonal, the form of the above expression cannot be the correct one for the temporal d.o.f..
 
 The naive consideration would simply be to disregard the temporal degree of freedom, since time does not contribute new states, and set
 \begin{equation}
 	\omega(dq + dt, dp + dE) = dq \, dp.
 \end{equation}
-However, this does not work either. This would say that the temporal d.o.f. does not identify states at all, which is not the case. Suppose we study a single degree of freedom of a free particle. Let's assume that, for $t=0$, $x=0$. We have
+However, this does not work either. This would say that the temporal d.o.f. does not identify states at all, which is not the case. Suppose we study a free particle with one degree of freedom. Let's assume that for $t=0$, $q=0$. We have
 \begin{equation}
 	\begin{aligned}
 	q &= \frac{p}{m} t \\
 	E &= \frac{p^2}{2m}.
 	\end{aligned}
 \end{equation}
-If we avoid crossing the region where momentum change sign, the relationship is bijective. Therefore time and energy can be used to identify, and therefore count, states. The issue is that those states are not new states, they are the same ones that are identified, and counted, but position and momentum.
+If we look at the region where momentum is positive, the relationship is bijective. Therefore time and energy can be used to identify, and therefore count, states. The issue is that those states are not new states, they are the same ones that are identified, and counted, by position and momentum.
 
 If we look at the expressions derived before, we have
 \begin{equation}
-	\omega(dq + dt, dp + dE) = dq \, dp - dt \, dE.
+	\omega(dq + dt, dp + dE) = dq \, dp + dt \, d(-E) = dq \, dp - dt \, dE.
 \end{equation}
 We can rearrange this expression as
 \begin{equation}\label{rp-cm-rel-spacetimePythagoras}
@@ -1641,9 +1637,9 @@ We can rearrange this expression as
 \end{equation}
 Now, compare \ref{rp-cm-rel-spatialPythagoras} with \ref{rp-cm-rel-spacetimePythagoras}. In the second expression, the area in the spatial d.o.f. is the hypotenuse, while the area on the temporal d.o.f. and the count of states given by $\omega$ are the sides. That is, while the temporal d.o.f. and the spatial d.o.f. are not orthogonal, the temporal d.o.f. is orthogonal to the surface where states are counted. If we have a region defined at equal time, for example, the count of states reduces to the count of spatial configurations, which makes sense. In the general case, the differentials $dt$ and $dE$ are defined over surfaces at constant $(q, p)$, while the differentials $dq$ and $dp$ are defined over surfaces at constant $(t,E)$. These, as we said, are not orthogonal. This means that the area identified by $dq$ and $dp$ may have a non-zero projection over the temporal degree of freedom. Given that the state count should be defined at equal time, the area given by $dq \, dp$ does not always properly count states. If we want the count of states to be defined at equal time, this needs to be done on the surface that is orthogonal to the surface where $dt$ and $dE$ are defined, which therefore forms a right triangle-like structure with the spatial and temporal degrees of freedom.
 
-The minus sign for the energy, then, has both a geometrical and physical meaning. If we used $E$ instead of $-E$ as the variable, the minus sign would show up in the form $\omega_{ab}$, which would probably be better as it would make the geometrical feature more clear. However, $p_\alpha = \{ E, p_i\}$ would not match the definition used in relativity and it would not form a covector, so it would be confusing in a different way. If there is a better overall notation and grouping, we haven't yet found it. At any rate, we have found that
+The minus sign for the energy, then, has both a geometrical and physical meaning. If we used $E$ instead of $-E$ as the variable, the minus sign would show up in the form $\omega_{ab}$, which would probably be better as it would make the geometrical feature more clear. However, $p_\alpha = [ E \ p_i]$ would not match the definition used in relativity and it would not form a covector, so it would be confusing in a different way. If there is a better overall notation and grouping, we haven't yet found it. At any rate, we have found that
 \begin{insight}
-	A frame invariant notion of determinism and reversibility (i.e. generalized coordinate transformation in Hamiltonian mechanics) gives elements of special relativity (i.e. energy/momentum four-vector), even without the notion of a metric tensor.
+	A frame-invariant notion of determinism and reversibility (i.e. allowing generalized coordinate transformations in Hamiltonian mechanics) gives elements of special relativity (i.e. energy-momentum four-vector), even without the notion of a metric tensor.
 \end{insight}
 
 What is interesting is that we didn't need to add any further assumption: \ref{assum_detrev} and \ref{assum_indep} are sufficient. The only thing we needed to add was the ability to make generalized space-time transformations.
