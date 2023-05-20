@@ -1770,7 +1770,7 @@ To find the equations for motions, we first calculate the Poisson brackets betwe
 \end{equation}
 \begin{equation}
 \begin{aligned}
-		\{x^\alpha, u^\beta\} &= \{q^\alpha, \frac{1}{m} g^{\beta\gamma}(p_\gamma - \mathfrak{q} A_\gamma)\} = \{q^\alpha, \frac{1}{m} g^{\beta\gamma} p_\gamma\} - \{q^\alpha, \frac{q}{m} g^{\beta\gamma} A_\gamma\} \\
+		\{x^\alpha, u^\beta\} &= \{q^\alpha, \frac{1}{m} g^{\beta\gamma}(p_\gamma - \mathfrak{q} A_\gamma)\} = \{q^\alpha, \frac{1}{m} g^{\beta\gamma} p_\gamma\} - \{q^\alpha, \frac{\mathfrak{q}}{m} g^{\beta\gamma} A_\gamma\} \\
 		&= \frac{1}{m} g^{\alpha\beta} \\
 \end{aligned}
 \end{equation}
@@ -2152,6 +2152,12 @@ Phase space and its structure, then, are neither a coincidence nor a choice. Pha
 
 Note how all this structure comes out from simply keeping track of unit dependence between variables. This should sound familiar, as unit dependence was our final argument as to why assumption \ref{assum_kineq} should be implemented in its full form \ref{rp-cm-fke-condLinearRelationship}. In fact, we saw that its full form was equivalent to assuming that the change of variables from dynamical to kinematic variables depended only on position, on $q^i$. Note that we have recovered the structure of phase space precisely by defining the coordinates as those variables that define the units. This insight lead us to recover phase space, and it is the insight that forces us to take the full form of the kinematic assumption. Therefore, while taking the weak form \ref{rp-cm-wke-condVelocityFromMomentum} of the assumption leads to no mathematical inconsistencies, at this point it would be physically inconsistent: on one side, the units of the coordinates determine both the units of velocity and of momentum; on the other side, they do not determine how to transform between them. The fact that we can write a mathematically consistent model that is physically inconsistent is yet other evidence that we need a better mathematical specification of our physical theories.
 
+We are also now in a position to answer another question: why are the laws of physics second order? That is, why it is that external forces specify the acceleration of the system. Note that, once the structure of phase space is derived, we know that, under \ref{assum_kineq}, position and velocity fully determine the state, and, during the evolution, the change of state is fully determined by the acceleration. In other words, the laws of physics are second order exactly because the state is given by variable pairs. Since we have an explanation as to why the state space must obey that structure, that same explanation tells us why the laws are second order Therefore, we have
+\begin{insight}
+	The principle of relativity requires laws to be second order.
+\end{insight}
+
+
 \subsection{Invariance under relative motion}
 
 So far, we have applied the principle of relativity only to transformations that leave time unchanged. For completion, let us apply it to the more usual case, when space and time coordinates are mixed. Consider phase space extended by time only. If we do not mix space and time variables, we keep the equal time surfaces the same. Therefore we are only requiring that areas, density and entropy over each slice remains the same. Moreover, we have no requirement to relate what happens on two different surfaces at equal time. That is, we will the structure of phase space at each time, but there is no connection between these structures at different times.
@@ -2169,19 +2175,126 @@ We close, then, with the following
 	Hamiltonian evolution over phase space is exactly the structure needed to needed to define state densities, thermodynamic entropy, information entropy and statistical uncertainty over continuous quantities in a way that satisfies the principle of relativity.
 \end{insight}
 
-\section{Seemingly unrelated questions}
+\section{Directional degree of freedom}
 
-It should be hopefully clear how the use of the principle of relativity in this section is different yet more powerful than the typical one. Usually, one imposes the principle of relativity between inertial frames, or at least locally inertial, so that the laws are invariant. We are instead applying to the state space, so that critical quantities, such as densities over states and the count of states, are the same for all observers. This is clearly a precondition to the laws being invariant. In fact, note that the definition of an inertial frames assumes that an isolated body travels in uniform motion. This implicitly assumes that states are described by variable pairs, position and velocity, and, as we saw, it also assumes the full form of \ref{assum_kineq}. Both of these assumptions are mandated by our use of the principle of relativity over the state space.
+When recovering the structure of phase space, we only relied on the premise that $q^i$ define the units. We are now going to use that premise to define a directional degree of freedom, that is a degree of freedom that identifies a direction in space. We will see that, since a DOF must be composed of two variables, the only directional DOF that are possible are those in three dimensional space.
 
-Note that, once the structure of phase space is derived, we know that, under \ref{assum_kineq}, position and velocity fully determine the state. Therefore, during the evolution, the change of state is fully determined by the acceleration. Therefore, we have
-\begin{insight}
-	The principle of relativity requires laws to be second order.
-\end{insight}
+While the spatial and temporal DOFs are of fundamental importance given that every object must be located in space and time, directional DOFs are also fundamental. In general, objects are not completely spherical symmetric and can be distinguished by their orientation. Even fundamental particles can have an intrinsic orientation, due to their spin, which can be detected and manipulated through magnetic forces.
 
-Also note that we specifically defined the coordinate $q^i$ not as position, but simply as those variables that define units. Now, suppose we want to define a directional degree of freedom, that is 
+Suppose, for example, we have magnetic dipole. The vector
+\begin{equation}
+	\mu_i = \frac{\mathfrak{q}}{2m} L_i
+\end{equation}
+describes the direction and magnitude of the magnetic moment. The Hamiltonian is given by
+\begin{equation}
+	H = - \mu_i B^i = - \frac{\mathfrak{q}}{2m} L_i B^i.
+\end{equation}
+To write the actual equations, we need to know what the conjugate variables of $L_i$ are or, equivalently, the form $\omega_{ab}$ or the Poisson brackets. Typically, one is given the Poisson brackets, therefore we will start from those. They are
+\begin{equation}
+	\{L_i, L_j\} = L_k \epsilon_{ijk}.
+\end{equation}
+In Hamiltonian mechanics, we can write the evolution of any quantity $f(q^i, p_i)$ as
+\begin{equation}
+	d_t f = \partial_{q^i} f d_t q^i + \partial_{p_i} f d_t p_i = \partial_{q^i} f \partial_{p_i} H + \partial_{p_i} f (-\partial_{q^i} H) = \{f, H\}.
+\end{equation}
+Therefore we have
+\begin{equation}
+	\begin{aligned}
+	d_t L_i &= \{L_i, H\} = \left\{ L_i, - \frac{\mathfrak{q}}{2m} L_j B^j \right\}  = - \frac{\mathfrak{q}}{2m} B^j\{L_i, L_j\} = - \frac{\mathfrak{q}}{2m} B^j L_k \epsilon_{ijk}\\
+	d_t \vec{L} &= - \frac{\mathfrak{q}}{2m} \vec{B} \times \vec{L} .
+	\end{aligned}
+\end{equation}
+If we assume that the magnetic field is oriented along the $z$ axis, we have
+\begin{equation}
+	\begin{aligned}
+		d_t L_x &= - \frac{\mathfrak{q}}{2m} B^z L_y \epsilon_{xzy} = \frac{\mathfrak{q}}{2m} B^z L_y \\
+		d_t L_y &= - \frac{\mathfrak{q}}{2m} B^z L_x \epsilon_{yzx} = - \frac{\mathfrak{q}}{2m} B^z L_x \\
+		d_t L_z &= - \frac{\mathfrak{q}}{2m} B^z L_i \epsilon_{zzi} = 0.
+	\end{aligned}
+\end{equation}
+If we integrate, assuming $L_i = L^0_i$ at time $t=0$, we have
+\begin{equation}
+	\begin{aligned}
+		\omega &= - \frac{\mathfrak{q}}{2m} B^z \\
+		L_x & = L_x^0 \cos \omega t + L_y^0 \sin \omega t \\
+		L_y & = - L_x^0 \sin \omega t + L_y^0 \cos \omega t \\
+		L_z &= L_z^0
+	\end{aligned}
+\end{equation}
+which gives us the Larmor precession of the magnetic moment. This is clearly a Hamiltonian system, it obeys Hamilton's equations, but it seems to have three variables, the components of $L_i$, instead of two. Shouldn't we have conjugate pairs?
+
+Note that the norm $L$ of the vector is a constant of motion, only the angle changes. We can then write $L_i = L n_i$ where $n_i$ is a unitary vector. The state space can be understood as the space of all possible unitary vectors, which is the surface of a 2-sphere. The size of an area $A$ over the surface of a sphere of radius $r$ can be measured using the solid angle
+\begin{equation}
+	\Omega = \frac{A}{r^2},
+\end{equation}
+which is already a unit independent quantity. The infinitesimal solid angle can be written in terms of the polar angle $\varphi$ and the azimuthal angle $\theta$
+\begin{equation}
+	d\Omega = \sin \varphi d\varphi d\theta.
+\end{equation}
+The two variables are not conjugate, as the area is not simply the product of the differentials. However, we can write
+\begin{equation}
+	d\Omega = d(\cos \varphi) d\theta = dn_z d\theta^{xy},
+\end{equation}
+which means that the angle along a plane and the component orthogonal to the plane are conjugate. If we pick the variable $\theta^{xy}$ as the coordinate $q$ and $L_z$ as the conjugate $p$, we have two variables with the right geometrical relationship and with the right units. Therefore
+\begin{equation}
+	\begin{aligned}
+		\omega_{\theta^{xy}L_z} &= - \omega_{\theta^{xy}L_z} = 1 \\
+		\{\theta^{xy}, L_z \} &= - \{L_z, \theta^{xy}\} = 1
+	\end{aligned}
+\end{equation}
+
+We can recover $L_i$ with the following expressions
+\begin{equation}
+	\begin{aligned}
+		L_x &= \cos \theta^{xy} \sqrt{L^2 - L_z^2} \\
+		L_y &= \sin \theta^{xy} \sqrt{L^2 - L_z^2} \\
+		L_z &= L_z.
+	\end{aligned}
+\end{equation}
+We can also recover the Poisson brackets for the components
+\begin{equation}
+	\begin{aligned}
+		\{L_x, L_y\} &= \partial_{\theta^{xy}} L_x \partial_{L_{z}} L_y - \partial_{L_{z}} L_x \partial_{\theta^{xy}} L_y \\
+		&= - \sin \theta^{xy} \sqrt{L^2 - L_z^2} \sin \theta^{xy} \left(\frac{- L_z}{\sqrt{L^2 - L_z^2}}\right) \\
+		& - \cos \theta^{xy} \left(\frac{- L_z}{\sqrt{L^2 - L_z^2}}\right) \cos \theta^{xy} \sqrt{L^2 - L_z^2} \\
+		&= \sin^2 \theta^{xy} L_z + \cos^2 \theta^{xy} L_z = L_z
+	\end{aligned}
+\end{equation}
+\begin{equation}
+	\begin{aligned}
+		\{L_y, L_z\} &= \partial_{\theta^{xy}} L_y \partial_{L_{z}} L_z - \partial_{L_{z}} L_y \partial_{\theta^{xy}} L_z \\
+		&= \cos \theta^{xy} \sqrt{L^2 - L_z^2} - 0 = L_x
+	\end{aligned}
+\end{equation}
+\begin{equation}
+	\begin{aligned}
+		\{L_z, L_x\} &= \partial_{\theta^{xy}} L_z \partial_{L_{z}} L_x - \partial_{L_{z}} L_z \partial_{\theta^{xy}} L_x \\
+		&= 0 - (- \sin \theta^{xy} \sqrt{L^2 - L_z^2}) = L_y
+	\end{aligned}
+\end{equation}
+
+We can verify that Hamilton's equation work as before. If the magnetic field is aligned along the $z$ direction, we have
+\begin{equation}
+	\begin{aligned}
+		H &= - \frac{\mathfrak{q}}{2m} L_z B^z \\
+		d_t \theta^{xy} &= \partial_{L_z} H = - \frac{\mathfrak{q}}{2m} L_z \\
+		d_t L_z &= - \partial_{\theta^{xy}} H = 0.
+	\end{aligned}
+\end{equation}
+Integrating
+\begin{equation}
+	\begin{aligned}
+		L_z &= L_z^0 \\
+		\theta^{xy} &= \omega t \\
+	\end{aligned}
+\end{equation}
+
+
 
 \section{Discussion}
 TODO: for later discussion on assumptions
+
+It should be hopefully clear how the use of the principle of relativity in this section is different yet more powerful than the typical one. Usually, one imposes the principle of relativity between inertial frames, or at least locally inertial, so that the laws are invariant. We are instead applying to the state space, so that critical quantities, such as densities over states and the count of states, are the same for all observers. This is clearly a precondition to the laws being invariant. In fact, note that the definition of an inertial frames assumes that an isolated body travels in uniform motion. This implicitly assumes that states are described by variable pairs, position and velocity, and, as we saw, it also assumes the full form of \ref{assum_kineq}. Both of these assumptions are mandated by our use of the principle of relativity over the state space.
 
 Given the fundamental status of the principle of relativity, and the relationship to assumption \ref{assum_detrev}, is the latter more fundamental than we may have originally thought? Suppose we want to construct a coordinate system. Operationally, this means devising a system of rods and clock so that we can correlate an event with our spatial and time references. It is clear that this system has to be prepared at a particular time, therefore we need some guarantee that, as time evolves, the spatial and temporal references will have regular spatial and temporal relationships. But this implicitly requires the existence of at least some deterministic and reversible process that can be used to distribute our references in space and time. For example, if we leave a mark at a particular position, we may expect the mark to remain there; if the clock ticks uniformly in time, we may expect it to do so going forward. If have access to no deterministic process, no such system can be constructed. If the processes are not reversible, the precision of our reference system will have to degrade. As we saw, in fact, conservation of uncertainty was the hallmark of deterministic and reversible evolution.
 
