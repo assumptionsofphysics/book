@@ -964,14 +964,14 @@ Technically, closed forms (i.e. those whose exterior derivative is zero) are not
 
 To sum up, we have generalized the idea of integration over $k$-dimensional submanifolds of an $n$-dimensional space, which leads to the idea of $k$-functionals over finite regions and $k$-forms over the infinitesimal ones; we have seen that the finite functionals are physically more fundamental than the infinitesimal forms. We have seen how $k$-functionals induce $(k+1)$-functionals by acting on the boundaries of the $k+1$ dimensional regions. We have seen that the exterior derivative gives us the form associated to the exterior functionals, and that this operation generalizes the notion of gradient, curl and divergence. While this does not exhaust all that can be done in differential topology and differential geometry, this is enough for what we need to use in the following sections.
 
-Those already familiar with differential topology will have noticed that our notation and definitions do not quite match the ones typically used in math textbooks. The issue is that said notation and definitions do not match what we need to physically capture, and therefore it would be a mistake to employ them. Let us briefly see why. First of all, in the context of differential topology vectors are defined as directional derivative. That is, a vector $v = v^i \partial_i$ is an operator that acts on scalar functions. A velocity, which in physics we think of as a vector, is not a derivation. In differential topology, a covector $\theta = \theta_i dx^i $ is defined as a map from a vector to a scalar number. Conjugate momentum, whose components change as a covector, is not a map. In differential topology, a differential $dx^i$ is a covector, and it is the exterior derivative of the coordinate $x^i$. This means that differentials are maps such that $dx^i(\partial_{x^j}) = \delta^i_j$. In physics, this is not how we think of differentials and integration. In fact, consider the expression $\int f_i dx^i$. To write it in terms of invariant objects, we would have $f = f_i e^i$ and $dx = dx^i e_i$, where $e^i$ and $e_i$ are the basis and co-basis respectively, and therefore $e^i(e_j) = \delta^i_j$. So we obtain $\int f( dx ) = \int f_i e^i(dx^j e_j) = \int f_i dx^i$. Therefore, in physics, the differential $dx$ is more properly thought of as a vector, where the $dx^i$ are the contravariant components, while $f$ as a map from a vector $dx$ to the differential $df$, which is what is integrated. Therefore the differential is the vector, while the force is the covector. This is in contrast to the use in differential topology. Moreover, in differential topology there is a notion of a single tangent space where all vectors live, which is not compatible with the idea of units. Consider the basis $\partial_i$. Given that coordinates are expressed in different units, we cannot simply sum derivatives along different directions. For example, in polar coordinates $\partial_r$ may have units of inverse meters while $\partial_\theta$ of inverse radians. Worst of all, a directional derivative is taken with respect to a parameter, which will also have units and physical dimension. For example, if $v$ represents a velocity, the components $v^i$ would also depend on the units of space and time. This would mean that units of vectors, the tangent space of a manifold, depend not only on the physical dimensions of the space, but also on the physical dimensions of all possible parameters along which we may want to define a derivation. This would mean that the tangent space is not definable only in terms of the units of the manifold itself, and therefore is not defined just in terms of the manifold itself.
+Those already familiar with differential topology will have noticed that our notation and definitions do not quite match the ones typically used in math textbooks. The issue is that said notation and definitions do not match what we need to physically capture, and therefore it would be a mistake to employ them. Let us briefly see why. First of all, in the context of differential topology vectors are defined as directional derivatives. That is, a vector $v = v^i \partial_i$ is an operator that acts on scalar functions. A velocity, which in physics we think of as a vector, is not a directional derivative. In differential topology, a covector $\theta = \theta_i dx^i $ is defined as a map from a vector to a scalar number. Conjugate momentum, whose components change as a covector, is not a map. In differential topology, a differential $dx^i$ is a covector, and it is the exterior derivative of the coordinate $x^i$. This means that differentials are maps such that $dx^i(\partial_{x^j}) = \delta^i_j$. In physics, this is not how we think of differentials and integration. In fact, consider the expression $\int f_i dx^i$. To write it in terms of invariant objects, we would have $f = f_i e^i$ and $dx = dx^i e_i$, where $e^i$ and $e_i$ are the co-basis and basis respectively, and therefore $e^i(e_j) = \delta^i_j$. So we obtain $\int f( dx ) = \int f_i e^i(dx^j e_j) = \int f_i dx^i = \int df$. Therefore, in physics, the differential $dx$ is more properly thought of as a vector, where the $dx^i$ are the contravariant components, while $f$ as a map from a vector $dx$ to the differential $df$, which is what is integrated. Therefore the differential is the vector, while the force is the covector. This is in contrast to the use in differential topology. Moreover, in differential topology there is a notion of a single tangent space where all vectors live, which is not compatible with the idea of units. Consider the basis $\partial_i$. Given that coordinates are expressed in different units, we cannot simply sum derivatives along different directions. For example, in polar coordinates $\partial_r$ may have units of inverse meters while $\partial_\theta$ of inverse radians. Worst of all, a directional derivative is taken with respect to a parameter, which will also have units and physical dimension. For example, if $v$ represents a velocity, the components $v^i$ would also depend on the units of space and time. This would mean that units of vectors, the tangent space of a manifold, depend not only on the physical dimensions of the space, but also on the physical dimensions of all possible parameters along which we may want to define a directional derivative. This would mean that the tangent space is not definable only in terms of the units of the manifold itself, and therefore is not defined just in terms of the manifold itself.
 
 The takeaway message here is the following: the mathematical tools we inherit from mathematics are not necessarily designed to capture the physical relationships we need to capture. Mathematicians only care about formal definitions, regardless of what, or if, they represent physically. In physics we do not have this luxury. If we want to have meaningful physical theories, which is ultimately the goal of reverse physics, we need to revisit the mathematical tools we use to formulate them.
 
 
 \section{Reversing Lagrangian mechanics}
 
-Now that we have a good geometric and physical feel for Hamiltonian mechanics, and that we have a general understanding of what the tools of differential topology describe physically, we will analyze Lagrangian mechanics more in detail. Conceptually, we already know that Lagrangian mechanics is Hamiltonian mechanics plus assumption \ref{assum_kineq}. We will see that the flow admits a vector potential and the Lagrangian is the scalar product between that potential and the displacement along the path. The principle of least action is geometrically equivalent to asking for paths that are always tangent to the displacement field. Moreover, the principle of least action is better understood as a property of Hamiltonian evolution, and assumption \ref{assum_kineq} is only required to express the product between potential and displacement in terms of velocity instead of momentum.
+Now that we have a good geometric and physical feel for Hamiltonian mechanics, and that we have a general understanding of what the tools of differential topology describe physically, we will analyze Lagrangian mechanics more in detail. Conceptually, we already know that Lagrangian mechanics is Hamiltonian mechanics plus assumption \ref{assum_kineq}. We will see that the flow of states in phase space admits a vector potential and the Lagrangian is the scalar product between that potential and the displacement along the path. The principle of least action is geometrically equivalent to asking for paths that are always tangent to the displacement field. Moreover, the principle of least action is better understood as a property of Hamiltonian evolution, and assumption \ref{assum_kineq} is only required to express the product between potential and displacement in terms of velocity instead of momentum.
 
 \subsubsection{Kinematic assumption revisited}
 
@@ -998,7 +998,7 @@ and condition
 are equivalent to each other. The non-singularity of the Hessian can also be understood as strict monotonicity of the derivative along momentum. Therefore 
 \begin{equation}\label{rp-cm-wke-condConcavity}
 	\tag{WKE-3}
-	\parbox{5in}{The Hamiltonian is twice differential and concave (or convex) in momentum}
+	\parbox{5in}{The Hamiltonian is twice differentiable and concave (or convex) in momentum}
 \end{equation}
 is another equivalent condition.
 
@@ -1016,20 +1016,20 @@ Note that the relationship between velocity and momentum is not just invertible,
 		= \left|\delta^i_j\right| \left|\partial_{p_j} v^i\right| - |0| \left|\partial_{q^j} v^i\right| = \left|\partial_{p_j} v^i\right|.
 	\end{aligned}
 \end{equation}
-The Jacobian determinant of the change of variables, then, coincides with the Jacobian determinant of the relationship between velocity and momentum at constant position. Therefore the following conditions
+The Jacobian determinant of the change of variables, then, coincides with the Jacobian determinant of the relationship between velocity and momentum at constant position. Therefore the following conditions are all equivalent to each other and to condition \ref{rp-cm-wke-condVelocityFromMomentum}.
 \begin{align}
 	\tag{WKE-4}\label{rp-cm-wke-condJacobianNonSingular}
-	&\parbox{5in}{The Jacobian of the transformation between state variables and kinematic variables is non-singular} \\
+	&\parbox{5in}{The Jacobian of the transformation between state variables and kinematic variables is non-singular.} \\
 	\tag{WKE-5}\label{rp-cm-wke-condDensities}
-	&\parbox{5in}{Densities over phase space can be expressed in terms of position and velocity: $\rho(x^i, v^j) |J| = \rho(q^i, p_j)$} \\
+	&\parbox{5in}{Densities over phase space can be expressed in terms of position and velocity: $\rho(x^i, v^j) |J| = \rho(q^i, p_j)$.} \\
 	\tag{WKE-6}\label{rp-cm-wke-condAreas}
-	&\parbox{5in}{Areas and volumes in phase space can be expressed in kinematic variables: $dx^1 \cdots dx^n \, dv^1 \cdots dv^n = |J| \, dq^1 \cdots dq^n \, dp_1 \cdots dp_n$} \\
+	&\parbox{5in}{Areas and volumes in phase space can be expressed in kinematic variables: $dx^1 \cdots dx^n \, dv^1 \cdots dv^n = |J| \, dq^1 \cdots dq^n \, dp_1 \cdots dp_n$.} \\
 	\tag{WKE-7}\label{rp-cm-wke-condSymplectic}
-	&\parbox{5in}{The symplectic form $\omega_{ab}$ can be expressed in kinematic variables} \\
+	&\parbox{5in}{The symplectic form $\omega_{ab}$ can be expressed in kinematic variables.} \\
 	\tag{WKE-8}\label{rp-cm-wke-condDisplacement}
-	&\parbox{5in}{The displacement field $S^a$ can be expressed in kinematic variables}
+	&\parbox{5in}{The displacement field $S^a$ can be expressed in kinematic variables.}
 \end{align}
-are all equivalent to each other and to condition \ref{rp-cm-wke-condVelocityFromMomentum}.
+
 
 The insight is that differentiability between state variables and kinematic variables is required to be able to express the objects we used to characterize the deterministic and reversible dynamics. The only physical requirement, then, is to be able to express the dynamics in terms of the kinematics, which is exactly what assumption \ref{assum_kineq} already requires.
 
@@ -1076,7 +1076,7 @@ Given that we have a good understanding of Hamiltonian mechanics, let's work on 
 		$}.
 	\end{aligned}
 \end{equation}
-The Lagrangian, then, can be understood as the scalar product of two vectors. The second one is the displacement along the path, however it is the displacement not just in position and momentum, but over time as well. The correct setting to understand Lagrangian mechanics, then, is phase space extended by the time variable. If we redefine $\xi^a = [q^i, p_i , t]$ to include the time variable, we have
+The Lagrangian, then, can be understood as the scalar product of two vectors. The second one is the displacement along the path, however it is the displacement not just in position and momentum, but over time as well. The correct setting to understand Lagrangian mechanics, then, is phase space extended by the time variable. If we redefine $\xi^a = [q^i \ p_i \ t]$ to include the time variable, we have
 \begin{equation}
 	\begin{aligned}
 		S^a &= d_t \xi^a = \begin{bmatrix}
@@ -1161,16 +1161,16 @@ We wrote the Lagrangian $L = \theta_a d_t \xi^a$ in terms of $\theta_a$ and $d_t
 		\end{array} \right].
 	\end{aligned}
 \end{equation}
-This means that
+This means that the form $\omega_{ab}$ is minus the exterior derivative of $\theta_a$:
 \begin{equation}\label{rp-cm-lm-formPotential}
 	\begin{aligned}
 	\omega_{ab} &= - (\partial_a \theta_b - \partial_b \theta_a) = - \partial_a \wedge \theta_b \\
 \theta_a &= \begin{bmatrix}
 	p_i & 0 & - H
-\end{bmatrix},
+\end{bmatrix}.
 	\end{aligned}
 \end{equation}
-the form $\omega_{ab}$ is minus the exterior derivative of $\theta_a$. In other words, $\omega_{ab}$ has a null exterior derivative and $\theta_a$ is its potential.
+In other words, $\omega_{ab}$ has a null exterior derivative and $\theta_a$ is its potential.
 
 Given that the extended phase space for a single degree of freedom is three dimensional, we can use standard vector calculus to gain more understanding. In this case, we have
 \begin{equation}
@@ -1201,7 +1201,7 @@ Apart from the minus, this is the same relationship we would have between the ma
 \begin{equation}
 	\int_{\Sigma} \omega_{ab} dx_1^a dx_2^b = \int_{\Sigma} \epsilon_{abc}S^c dx_1^a dx_2^b
 \end{equation}
-That is, the integral of the form $\omega_{ab}$ corresponds to the surface integral of the displacement field $S^a$.\footnote{Note that, strictly speaking, while $\omega_{ab}$ is a tensor, $\epsilon_{abc}$ and $S^a$ are not. Relationship \ref{rp-cm-lm-displacementFormComponents}, then, is valid only if we chose position, momentum and time as variables. Yet, as we will see much later, we can change the position variable and time variable and still have the same expression by redifining momentum and energy appropriately.} In phase space extended by time, then, $\omega_{ab}$ quantifies both the number of states over a surface and the flow of $S^a$ through the surface. Under assumption \ref{assum_detrev} this works because we have one and only one evolution for each state, therefore quantifying the number of evolutions that intersect a given surface is the same as quantifying the number of states that flow through them.
+That is, the integral of the form $\omega_{ab}$ corresponds to the surface integral of the displacement field $S^a$.\footnote{Note that, strictly speaking, while $\omega_{ab}$ is a tensor, $\epsilon_{abc}$ and $S^a$ are not. Relationship \ref{rp-cm-lm-displacementFormComponents}, then, is valid only if we chose position, momentum and time as variables. Yet, as we will see much later, we can change the position variable and time variable and still have the same expression by redefining momentum and energy appropriately.} In phase space extended by time, then, $\omega_{ab}$ quantifies both the number of states over a surface and the flow of $S^a$ through the surface. Under assumption \ref{assum_detrev} this works because we have one and only one evolution for each state, therefore quantifying the number of evolutions that intersect a given surface is the same as quantifying the number of states that flow through them.
 
 One striking feature of the vector potential $\theta_a$ is that it is fully characterized by a single arbitrary component, the time component $-H$. The magnetic vector potential $A_i$, instead, is characterized by two arbitrary components. What are the exact physical conditions that allow that to happen?
 
