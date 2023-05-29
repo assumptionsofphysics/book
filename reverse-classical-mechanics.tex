@@ -2179,9 +2179,11 @@ We close, then, with the following
 
 When recovering the structure of phase space, we only relied on the premise that $q^i$ define the units. We are now going to use that premise to define a directional degree of freedom, that is a degree of freedom that identifies a direction in space. We will see that, since a DOF must be composed of two variables, the only directional DOF that are possible are those in three dimensional space.
 
-While the spatial and temporal DOFs are of fundamental importance given that every object must be located in space and time, directional DOFs are also fundamental. In general, objects are not completely spherical symmetric and can be distinguished by their orientation. Even fundamental particles can have an intrinsic orientation, due to their spin, which can be detected and manipulated through magnetic forces.
+\subsubsection{Magnetic dipole}
 
-Suppose, for example, we have magnetic dipole. The vector
+Spatial and temporal DOFs are of fundamental importance given that every object must be located in space and time. We now want to focus our attention to a different type of DOF, one that captures a direction in space. In general, objects are not completely spherical symmetric and can be distinguished by their orientation. This is also true for fundamental particles, as their intrinsic angular momentum, their sping, gives them an orientation that can be detected and manipulated through magnetic forces.
+
+To study this case, let's consider a magnetic dipole. The vector
 \begin{equation}
 	\mu_i = \frac{\mathfrak{q}}{2m} L_i
 \end{equation}
@@ -2216,14 +2218,14 @@ If we integrate, assuming $L_i = L^0_i$ at time $t=0$, we have
 \begin{equation}
 	\begin{aligned}
 		\omega &= - \frac{\mathfrak{q}}{2m} B^z \\
-		L_x & = L_x^0 \cos \omega t + L_y^0 \sin \omega t \\
-		L_y & = - L_x^0 \sin \omega t + L_y^0 \cos \omega t \\
+		L_x & = L_x^0 \cos \omega t - L_y^0 \sin \omega t \\
+		L_y & = L_x^0 \sin \omega t + L_y^0 \cos \omega t \\
 		L_z &= L_z^0
 	\end{aligned}
 \end{equation}
 which gives us the Larmor precession of the magnetic moment. This is clearly a Hamiltonian system, it obeys Hamilton's equations, but it seems to have three variables, the components of $L_i$, instead of two. Shouldn't we have conjugate pairs?
 
-Note that the norm $L$ of the vector is a constant of motion, only the angle changes. We can then write $L_i = L n_i$ where $n_i$ is a unitary vector. The state space can be understood as the space of all possible unitary vectors, which is the surface of a 2-sphere. The size of an area $A$ over the surface of a sphere of radius $r$ can be measured using the solid angle
+Note that the norm $L$ of the vector is a constant of motion, only the angle changes. We can then write $L_i = L n_i$ where $n_i$ is a unitary vector. The state space can be understood as the space of all possible vectors with the same magnitude, which is the surface of a 2-sphere. The size of an area $A$ over the surface of a sphere of radius $r$ can be measured using the solid angle
 \begin{equation}
 	\Omega = \frac{A}{r^2},
 \end{equation}
@@ -2238,7 +2240,7 @@ The two variables are not conjugate, as the area is not simply the product of th
 which means that the angle along a plane and the component orthogonal to the plane are conjugate. If we pick the variable $\theta^{xy}$ as the coordinate $q$ and $L_z$ as the conjugate $p$, we have two variables with the right geometrical relationship and with the right units. Therefore
 \begin{equation}
 	\begin{aligned}
-		\omega_{\theta^{xy}L_z} &= - \omega_{\theta^{xy}L_z} = 1 \\
+		\omega_{\theta^{xy}L_z} &= - \omega_{L_z\theta^{xy}} = 1 \\
 		\{\theta^{xy}, L_z \} &= - \{L_z, \theta^{xy}\} = 1
 	\end{aligned}
 \end{equation}
@@ -2281,15 +2283,52 @@ We can verify that Hamilton's equation work as before. If the magnetic field is 
 		d_t L_z &= - \partial_{\theta^{xy}} H = 0.
 	\end{aligned}
 \end{equation}
-Integrating
+Given initial conditions $L_z^0$ and $\theta^{xy}_0$, we have
 \begin{equation}
 	\begin{aligned}
-		L_z &= L_z^0 \\
-		\theta^{xy} &= \omega t \\
+		L_x &= L_x^0 \\
+		\theta^{xy} &= \omega t + \theta^{xy}_0 \\
+		L_x^0 &= \cos(\theta^{xy}_0)\sqrt{L^2 + (L_z^0)^2} \\
+		L_y^0 &= \sin(\theta^{xy}_0)\sqrt{L^2 + (L_z^0)^2} \\
+		L_x &= \cos\theta^{xy} \sqrt{L^2 - L_z^2} = \cos(\omega t + \theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} \\
+		&= \cos(\omega t)\cos(\theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} - \sin(\omega t)\sin(\theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} \\
+		&= L_x^0 \cos \omega t - L_y^0 \sin \omega t \\
+		L_y &= \sin\theta^{xy} \sqrt{L^2 - L_z^2} = \sin(\omega t + \theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} \\
+		&= \sin(\omega t)\cos(\theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} + \cos(\omega t)\sin(\theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} \\
+		&= L_x^0 \sin \omega t + L_y^0 \cos \omega t \\
 	\end{aligned}
 \end{equation}
+which recovers the precession.
 
+Let us sum up what we learned. The magnetic dipole is described by a single DOF, where the conjugate variables are the angle over a plane and the component of the angular momentum perpendicular to the plane. A constant force does not correspond to a constant angular acceleration, but to a constant velocity. Now the question is how and to what extend can this all be generalized.
 
+% Final TODO: units of action for units of state counting?
+
+\subsection{Generalizing to directional quantities}
+
+The above treatment for angular momentum works unaltered for the spin, the intrinsic angular momentum, of a particle. But suppose that we have to keep track of a generic direction in space. The angle over a plane is a natural variable to use. As we saw before, if our coordinate $q$ is dimensionless, then the conjugate $p$ must have dimensions of action, of angular momentum. Therefore in all cases where we are keeping track of a direction in space that forms and independent DOF, angle and angular momentum will be the conjugate quantities. If the directional quantity to be studied is not an angular momentum, there will be a coefficient of proportionality between the quantity and angular momentum.
+
+Having understood that any directional DOF must be in terms of angles and angular momentum, the question is whether the space should be exactly the same in all cases. In a spatial DOF, the coordinate $q$ determined position while the conjugate $p$ determined velocity; a force, then, is related to the change of velocity, an acceleration. For the magnetic dipole, both variables, angle and angular momentum, determine the three dimensional direction of the vector; a constant force imparts a constant angular velocity instead of a constant acceleration. That is, the angular velocity is not part of the state.
+
+For a rotating rigid body, the situation seems different. We do have an angle, an angular velocity and the angular momentum is the angular velocity times the moment of inertia, much like conjugate momentum, in a Cartesian inertial frame, is mass times velocity. Given that angular momentum is conserved, angular velocity is conserved and a force needs to be used to change the velocity, the acceleration. Therefore, at force glance, the situation seems different from the magnetic dipole. On the other hand, we are dealing with an angular momentum in both cases, therefore the situation can't be that different.
+
+The issue here is that there are two directions: one is the direction on the rotating plane that is actually rotating, the other is the direction of the axis of rotation, perpendicular to the plane. Note that the ability to discern the first assumes the ability to discern parts of the rigid body. If the object is too small with respect to our resolution, the angle cannot be defined. On the other hand, even if we study the overall object, we would still be able to discern the direction and magnitude of the angular momentum by performing a rotation. In fact, if the rotation is performed along a direction different from the direction of the angular momentum, a torque will need to be applied to perform the rotation. The greater the angular momentum, the greater the torque. We are now in a case similar to the magnetic dipole, were a constant force is needed to impart a constant velocity.
+
+Can we make a general argument that would apply to any type of directional quantity? Suppose we have an object at rest, which can be oriented in a particular direction. The position and orientation at a particular time are independent variables, in all senses: we can choose units independently, we can choose from all possible configuration of each variable and a choice for one variable does not constrain the choice for another variable. The velocity and the angular velocity, however, are not independent. Suppose, in fact, that we change coordinates to a non-inertial rotating frame, or that we perform an active constant rotation on the object. In both cases, the rotation would apply to both the spatial and rotational DOF. The issue is that there is a definitional dependency between the spatial variables and the directional variables. A change in angular direction can be due to an actual change in direction in the same frame, or just by a change of frame. If we want the directional DOF to be truly independent from the spatial one, then it should just identify the initial direction, which is always an independent choice. Therefore all the variables of the directional DOF describe the direction, and not the velocity. Given that the force tells us how the variables change in time, the force would tell us how the direction changes. We reach the following
+\begin{insight}
+	An independent directional DOF must keep track only of the direction.
+\end{insight}
+
+In our magnetic dipole example, it is obvious that angular momentum keeps track of a direction in three dimensional space. This lead to two conjugate variables, because a direction in three dimensions can be parametrized with two quantities. However, the structure of phase space requires two quantities for each DOF. Is this a coincidence? As we said before, identified a direction in three dimension is equivalent to identifying a point on a 2-sphere. If we had an $n$-dimensional space, a direction would correspond to a point on an $(n-1)$-sphere. That sphere would have to allow a description in terms of conjugate variables with a suitable $\omega_{ab}$. It is a result of symplectic geometry that the 2-sphere is the only sphere to allow that structure. Therefore
+\begin{insight}
+	Independent directional DOF can only exist in a three dimensional space.
+\end{insight}
+
+In other words, three dimensional space is special as it is the only space that allows us to talk about directions as forming an independent degree of freedom. This is yet another example of how simple unassuming premises have a significant effect.\footnote{It is likely that the argument can be run more formally with current math, though we haven't the time to investigate.}
+
+\section{Reversing differentiability}
+
+We have seen that the structure of phase space (i.e. the symplectic structure) is exactly the structure needed to describe density, count of states and entropy in a coordinate invariant way.
 
 \section{Discussion}
 TODO: for later discussion on assumptions
