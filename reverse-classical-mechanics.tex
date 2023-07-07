@@ -15,7 +15,7 @@ As a guide to the chapter, here is the list of main points in the order in which
 	\item Kinematics, in general, is not enough to reconstruct dynamics
 	\item Hamiltonian mechanics (one DOF) is equivalent to DR
 	\item Hamiltonian mechanics (multiple DOF) is equivalent to DR plus IND
-	\item Differential calculus and its generalization, differential topology, study quantities that depends on geometrical shapes (i.e. lines, surfaces, volumes) that are infinitesimally additive
+	\item Differential calculus and its generalization, differential topology, study infinitesimally additive quantities that depends on geometrical shapes (i.e. lines, surfaces, volumes)
 	\item The principle of least action is a consequence of DR, IND and KE
 	\item Massive particles under potential forces are a consequence of DR, IND and KE
 	\item Newtonian mechanics is a consequence of KE
@@ -73,6 +73,8 @@ Hamilton's equations are invariant as well. The Hamiltonian itself is a scalar f
 
 It is often stated in physics books that all three formulations of classical mechanics are equivalent. We will look at this claim in detail, and conclude that this is not the case: there are systems that can be described by one formulation and not another. More precisely, the set of Lagrangian systems is exactly the intersection of Newtonian and Hamiltonian systems.
 
+\subsection{Testing equivalence}
+
 We will consider two formalisms equivalent if they can be applied to exactly the same systems. That is, Newtonian and Lagrangian mechanics are equivalent if any system that can be described using Newtonian mechanics can also be described by Lagrangian mechanics and vice-versa. In general, in physics great emphasis is put on systems that can indeed be studied by all three, leaving the impression that this is always doable.\footnote{If one asks the average physicist whether Newtonian and Hamiltonian mechanics are equivalent, the answer most of the time will be  enthusiastically positive. If one then asks for the Hamiltonian for a damped harmonic oscillator, the typical reaction is annoyance due to the nonsensical question (damped harmonic oscillators do not conserve energy), followed by a realization and partial retraction of the previous claim. The moral of the story is to never take these claims at face value.} However, just with a cursory glance, we realize that this can't possibly be the case.
 
 The dynamics of a Newtonian system, in fact, is specified by three independently chosen functions of position and velocity, the forces applied to each degree of freedom. On the other hand, the dynamics of Lagrangian and Hamiltonian systems is specified by a single function of position and velocity/momentum, the Lagrangian/Hamiltonian. Intuitively, there are more choices in the dynamics for Newtonian systems than for Lagrangian and Hamiltonian.
@@ -83,6 +85,8 @@ Regardless, our task is at the moment much simpler: we only need to show that th
 \begin{insight}
 	Not all Newtonian systems are Lagrangian and/or Hamiltonian.
 \end{insight}
+
+\subsection{Newtonian vs Lagrangian/Hamiltonian}
 
 We now want to understand whether all Lagrangian systems are Newtonian. Given what we discussed, we cannot expect to reconstruct the mass and force uniquely from the expression of the Lagrangian. We consider the mass and the frame fixed by the problem, together with the Lagrangian, and therefore we must only see whether we can indeed find a unique expression for the acceleration. From the Euler-Lagrange equations \ref{rp-cm-EulerLagrange} we can write
 \begin{equation}
@@ -113,6 +117,8 @@ To be able to express momentum as a function of position and velocity, then, we 
 
 Note that we had no such requirement for the Hamiltonian. For example, $H=0$ leads to equations $d_t q^i = 0$ and $d_t p_i = 0$, which have unique solutions: both position $q^i(t) = k_{q^i}$ and momentum $p_i(t) = k_{p_i}$ are constants of motion. The Hessian, being the zero matrix, is not invertible, and in fact we cannot write momentum as a function of position and velocity: velocity $d_t q^i$ is always zero in all cases while conjugate momentum can be any value $k_{p_i}$. Though this case may not be physically interesting, it is a perfectly valid Hamiltonian system and shows that we should always check the trivial mathematical case. However, let us go through a more physically meaningful case.
 
+TODO: add photon phase space diagram
+
 \textbf{Photon as a particle}. If we want to treat the photon as a classical particle, we can write the Hamiltonian by expressing the energy as a function of momentum
 \begin{equation}
 	H=\hbar | \omega| = c \hbar |k| = c |p|.
@@ -139,6 +145,7 @@ Summing up, we find that
 	Not all Hamiltonian systems are Newtonian: only those for which  \ref{assum_kineq} is valid.
 \end{insight}
 
+\subsection{Lagrangian vs Newtonian}
 
 We now need to compare Lagrangian and Hamiltonian systems. The task is a lot easier because we already have a precise way to connect the two. If we are given a Lagrangian $L$, we define the conjugate momentum $p_i = \partial_{v^i} L$ and the Hamiltonian $H = p_i v^i - L$. If we are given a Hamiltonian $H$, we can define a Lagrangian $L = p_i v^i - H$ and a velocity $v^i = d_t q^i = \partial_{p_i} H$. The only detail that needs to be understood is whether this can be done for all Lagrangian and Hamiltonian systems.
 
@@ -156,6 +163,8 @@ This means that every Lagrangian admits a Hamiltonian, but not every Hamiltonian
 \begin{insight}
 	Lagrangian systems are exactly those Hamiltonian systems for which \ref{assum_kineq} is valid.
 \end{insight}
+
+\subsection{Relationship between formulations}
 
 The relationship between the different formulations, then, can be summarized with the following Venn diagram.
 
