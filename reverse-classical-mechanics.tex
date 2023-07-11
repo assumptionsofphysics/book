@@ -2430,6 +2430,79 @@ Assumption \ref{assum_infirr} is, therefore, the constitutive assumption of clas
 
 We have found all the constitutive assumptions of all formulations of classical mechanics. We know are guaranteed that every result of classical mechanics is, one way or the other, explained by those assumptions. These are the only physical ideas that are strictly required to understand all the general aspects of classical mechanics. There is nothing else. Therefore the goal of reverse physics for classical mechanics is reached.
 
+\subsection{Classical uncertainty principle}
+
+Before concluding, let us turn again to the problem of zero measure on individual particle states. As we said, a distribution over phase space can be made arbitrarily narrow and, in the limit of a $\delta$-function, the support will be a single point. Since the entropy is the logarithm of the phase space volume, which is zero for a single state, the entropy of a $\delta$-function is minus infinity.
+
+Negative entropy is not compatible with the third law of thermodynamics, which states that the entropy must be non-negative. Therefore, on thermodynamics ground, the spread of a distribution cannot be made infinitesimal. This means that any distribution that is physically meaningful must have a finite spread in position and momentum. Conceptually, this sounds very close to the uncertainty principle of quantum mechanics, so it's worth looking at it better.
+
+First of all, since we saw that units have an important role, consider the expression for thermodynamics entropy $S=k \log W$ where $k_B$ is the Boltzmann constant and $W$ is a volume of phase space. Given that a logarithm must take pure numbers, the expression is dimensionally incorrect. To correct it, we should take
+\begin{equation}
+	S = k_B \log \frac{W}{W_0}
+\end{equation}
+where $W_0$ can be understood as the volume for which the thermodynamic entropy is zero. As we saw, units of momentum are units of configurations, of areas in phase space, over units of position. Therefore we can choose units of momentum such that $W_0$ is, numerically, one, but not dimensionally. To keep track of the value and units of $W_0$ separately, then, let's write
+\begin{equation}
+	W_0 = w_0 \textbf{1}^{qp}
+\end{equation}
+where $w_0$ is the pure numeric value and $\textbf{1}^{qp}$ is the product of the units of $q$ and $p$. If we substitute in the above expression, we find
+\begin{equation}
+	S = k \log \frac{W}{w_0 \textbf{1}^{qp}} = k \log \frac{W}{\textbf{1}^{qp}} - k \log w_0 = k \log W - k \log w_0
+\end{equation}
+where $\log W$ is the logarithm of the numeric value of $W$. This clearly show that changing $w_0$, the numeric value of $W_0$, changes the zero for the entropy.
+
+To make the Gibbs-Shannon entropy consistent with the previous definition, we must set
+\begin{equation}
+	I = - k_B \int \rho \log W_0 \rho \; dq dp.
+\end{equation}
+If we take a uniform distribution $\rho_U$ over a region $U$ with volume $W$, we find:
+\begin{equation}
+	\begin{aligned}
+		I &= - k_B \int \rho_U \log W_0 \rho_U \; dq dp = - k_B \int_{U} \frac{1}{W} \log \frac{W_0}{W} \; dq dp \\
+		&= k_B \log \frac{W}{W_0} \int_{U} \frac{1}{W} \; dq dp = k_B \log \frac{W}{W_0}
+	\end{aligned}
+\end{equation}
+Similarly to before, we find
+\begin{equation}
+	\begin{aligned}
+	I &= - k_B \int \rho \log W_0 \rho \; dq dp = - k_B \int \rho \log \rho \textbf{1}^{qp} \; dq dp - k_B \int \rho \log w_0 \; dq dp \\
+	&= - k_B \int \rho \log \rho \textbf{1}^{qp} \; dq dp - k_B \log w_0 \\
+	&= - k_B \int \rho \log \rho \; dq dp - k_B \log w_0
+	\end{aligned}
+\end{equation}
+which again shows that $w_0$ changes the zero for entropy.
+
+We are now ready to study the relationship between spreads in classical phase space and entropy. We want to find the distribution $\rho$ zero entropy that minimizes the uncertainty. To do that, we setup a minimization problem using Lagrange multipliers. We want to minimize the product of the variance $\sigma_q^2 \sigma_p^2 \equiv \int (q-\mu_q)^2 \rho \, dqdp \int (p-\mu_p)^2 \rho \, dqdp$ under two constraints: $\rho$ integrates to 1 and its entropy is zero. We have: 
+\begin{align*}
+	L = &\int (q-\mu_q)^2 \rho \, dqdp \int (p-\mu_p)^2 \rho \, dqdp \\
+	&+ \lambda_1(\int \rho dqdp - 1) \\ &+ \lambda'_2(- k_B \int \rho \ln W_0 \rho \, dqdp - 0)\\
+	= &\int (q-\mu_q)^2 \rho \, dqdp \int (p-\mu_p)^2 \rho \, dqdp \\
+&+ \lambda_1(\int \rho dqdp - 1) \\ &+ \lambda_2(- \int \rho \ln \rho \, dqdp - \log w_0)\\
+	\delta L = &\int \delta \rho [(q-\mu_q)^2 \sigma_p^2 + \sigma_q^2 (p-\mu_p)^2 + \\ &\lambda_1 - \lambda_2 \ln \rho - \lambda_2 ] dqdp = 0 \\
+	\lambda_2 \ln \rho = &\lambda_1 - \lambda_2 + (q-\mu_q)^2 \sigma_p^2 + \sigma_q^2 (p-\mu_p)^2 \\
+	\rho = &e^{\frac{\lambda_1 - \lambda_2}{\lambda_2}}e^{\frac{(q-\mu_q)^2 \sigma_p^2}{\lambda_2}}e^{\frac{\sigma_q^2 (p-\mu_p)^2}{\lambda_2}}
+\end{align*}
+We solve the multipliers and have:
+\begin{align*}
+	\rho_{\mathcal{c}} = &\frac{1}{ 2 \pi \sigma_q \sigma_p} e^{-\frac{(q-\mu_q)^2}{2\sigma_q^2}} e^{-\frac{(p-\mu_p)^2}{2\sigma_p^2}} \\
+	I[\rho] &= 0 = \ln 1 = \ln \left(\frac{2\pi e}{W_0} \sigma_q\sigma_p \right) \\
+	\sigma_q \sigma_p &= \frac{W_0}{2 \pi e}
+\end{align*}
+We have found that any distribution $\rho(q,p)$ with non-negative entropy (i.e. that satisfies the third law of thermodynamics) satisfies the inequality
+\begin{equation}\label{rp-cm-classicalUncertaintyPrinciple}
+	\sigma_q \sigma_p \geq \frac{W_0}{2 \pi e}.
+\end{equation}
+Moreover, inequality is saturated (i.e. becomes an equality) for Gaussian distributions.
+
+Compare this with the Heisenberg uncertainty principle of quantum mechanics, which tells that the every state satisfies the inequality
+\begin{equation}
+	\sigma_q \sigma_p \geq \frac{\hbar}{2},
+\end{equation}
+which is saturated by Gaussian states. Given the parallel, we call equation \ref{rp-cm-classicalUncertaintyPrinciple} the classical uncertainty principle. Note that the classical uncertainty principle has a clear physical explanation: the third law of thermodynamics. Given that all quantum states have non-negative entropy, the same explanation can be taken for quantum mechanics as well.
+
+This result also tells us the problem with Maxwell's demon. In this setup, a gas is separated into two chambers with a door. A demon that sees the exact position and momentum of all particle can open the door letting particle go only from one specific side to the other, decreasing the entropy of the system. But knowing the exact position of all particle corresponds to having access to a state of minus infinite entropy, which is forbidden by the third law. Naturally, if we have access to a source of minus infinite entropy, we can always decrease the entropy of any system by a finite amount without violating the second law: given that minus infinity minus a finite amount is equal to infinity, the entropy is technically not decreasing.
+
+This final result should really make it clear that the foundations of statistical mechanics and thermodynamics are not separate from the foundations of classical mechanics and quantum mechanics. In any theory, states are better understood as ensemble, and pure states should be understood as the most precise ensemble that can be prepared in the theory.
+
 \section{Summary}
 \begin{figure}
 	\centering
@@ -2449,7 +2522,7 @@ We have found all the constitutive assumptions of all formulations of classical 
 	\end{tikzpicture}
 	\caption {TODO: This is the caption}
 \end{figure}
-Let's step back and sum up all that we learned by applying the Reverse Physics approach to classical mechanics. If we start from scratch, the first assumption that we need to set is Infinitesimal Reducibility \ref{assum_infirr}. This tells us that the domain of classical physics is those objects that can be thought of as being made of arbitrarily small parts. For these objects, specifying the state of the whole system is equivalent to specifying the state of all the infinitesimal parts. In this context, a particle is an infinitesimal part, the limit of recursive reduction of parts into smaller parts. Mathematically, the assumption tells us that the state space of the particles is a differentiable manifold, together with a volume measure that defines the count of states for each region. The state space of a classical object is a distribution over such manifold.
+Let's step back and sum up all that we learned by applying the reverse physics approach to classical mechanics. If we start from scratch, the first assumption that we need to set is Infinitesimal Reducibility \ref{assum_infirr}. This tells us that the domain of classical physics is those objects that can be thought of as being made of arbitrarily small parts. For these objects, specifying the state of the whole system is equivalent to specifying the state of all the infinitesimal parts. In this context, a particle is an infinitesimal part, the limit of recursive reduction of parts into smaller parts. Mathematically, the assumption tells us that the state space of the particles is a differentiable manifold, together with a volume measure that defines the count of states for each region. The state space of a classical object is a distribution over such manifold.
 
 We then add assumption \ref{assum_indep} that states that the system is decomposable into independent degrees of freedom. This means that not only we are able to count states over regions of state space, but we must be able to count configurations along each DOF. Moreover, the count of configuration over multiple DOFs must be the product of the count over each DOF. The only way to obtain this structure, so that the count is defined independently on the units used to describe states, is for the manifold to be even dimensional, and for any state variable $q^i$ that defines an independent unit, there is a conjugate state variable $p_i$ whose units are count of states over units of the corresponding $q^i$. Mathematically, this gives us the structure of a symplectic manifold, where the symplectic form $\omega_{ab}$ count the configurations over the infinitesimal parallelogram defined by two vectors.
 
