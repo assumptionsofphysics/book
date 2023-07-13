@@ -117,7 +117,49 @@ To be able to express momentum as a function of position and velocity, then, we 
 
 Note that we had no such requirement for the Hamiltonian. For example, $H=0$ leads to equations $d_t q^i = 0$ and $d_t p_i = 0$, which have unique solutions: both position $q^i(t) = k_{q^i}$ and momentum $p_i(t) = k_{p_i}$ are constants of motion. The Hessian, being the zero matrix, is not invertible, and in fact we cannot write momentum as a function of position and velocity: velocity $d_t q^i$ is always zero in all cases while conjugate momentum can be any value $k_{p_i}$. Though this case may not be physically interesting, it is a perfectly valid Hamiltonian system and shows that we should always check the trivial mathematical case. However, let us go through a more physically meaningful case.
 
-TODO: add photon phase space diagram
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		
+		\pgfplotsset{ticks=none}
+		\begin{axis}[axis lines=middle,
+			xlabel=$q$,
+			xlabel style={below=5pt, fill=white},
+			ylabel=$p$,
+			ylabel style={above=2pt, right=4pt},
+			domain=-1.5:1.5,
+			ymin=-1.8, ymax=1.8,]
+			\foreach \yvalue in {-1.5,-1,-0.5, 0.5, 1, 1.5} {
+				\addplot[blue,-stealth,samples=5,
+				quiver={
+					u={y/abs(y)},
+					v={0},
+					scale arrows=0.2},
+				] {\yvalue};
+				\addplot[black,samples=2,opacity=0.2,domain=-1.8:1.8]{\yvalue};
+				\addplot[black,samples=2,opacity=0.1.5,domain=-1.8:1.8]{\yvalue};}
+			\addplot[scatter, only marks, mark size=3pt, samples=5, mark=x, color=green]{0};
+		\end{axis}
+		
+		\pgfplotsset{ticks=none}
+		\begin{axis}[
+			xshift=7.5cm,
+			width=5cm,
+			height=7.25cm,				
+			axis lines=middle,
+			xlabel=$H$,
+			xlabel style={below=5pt, fill=white},
+			ylabel=$p$,
+			ylabel style={above=2pt, right=4pt},
+			domain=0:1,
+			xmin=0, xmax=1,
+			ymin=-1, ymax=1,]
+			\addplot[black,samples=2,domain=0:1]{x};
+			\addplot[black,samples=2,domain=0:1]{-x};
+		\end{axis}
+	\end{tikzpicture}
+	\caption {TODO: This is the caption}
+\end{figure}
 
 \textbf{Photon as a particle}. If we want to treat the photon as a classical particle, we can write the Hamiltonian by expressing the energy as a function of momentum
 \begin{equation}
