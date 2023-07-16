@@ -2072,10 +2072,10 @@ In matrix terms, we are taking the product of two matrices and equating it to th
 	\end{aligned}
 \end{equation}
 Which means that the change of position variables induces a change of momentum
-\begin{equation}
-	\hat{p}_j = \partial_{\hat{q}^j} q^i \, p_i + f_i(q_i),
+\begin{equation}\label{rp-cm-momentumUnderUnitChange}
+	\hat{p}_j = \partial_{\hat{q}^j} q^i \, p_i + A_i(q_i),
 \end{equation}
-where $f_i$ are arbitrary functions, which we can set to zero without loss of generality.\footnote{The arbitrary functions change the value of zero momentum at every point. While this is mathematically possible, it would make no physical sense to change the meaning of zero momentum under a coordinate change.} This makes momentum a covector.
+where $A_i$ are arbitrary functions, which we can set to zero without loss of generality.\footnote{The arbitrary functions change the value of zero momentum at every point. While this is mathematically possible, it would make no physical sense to change the meaning of zero momentum under a coordinate change. We will see later how this is related to gauge transformations.} This makes momentum a covector.
 
 The second constraint comes from the bottom diagonal term. Using the newly found transformation rules, we have
 \begin{equation}
@@ -2209,6 +2209,64 @@ We close, then, with the following
 \begin{insight}
 	Hamiltonian evolution over phase space is exactly the structure needed to needed to define state densities, thermodynamic entropy, information entropy and statistical uncertainty over continuous quantities in a way that satisfies the principle of relativity.
 \end{insight}
+
+\subsection{Gauge transformations}
+
+Throughout all this work we have seen that position $q^i$ and momentum $p_i$ are the true state variables: they allow us to identify states uniquely in all circumstances, properly count them and define densities that are invariant under coordinate changes and are defined at a particular instant in time. On the other hand, kinematic variable $x^i$ and $v^i$ identify states only under \ref{assum_kineq}, they properly count states and define densities only in Cartesian inertial frames for systems subject to no forces and velocity is technically defined over two infinitesimally close instants in time. Yet, under assumption \ref{assum_kineq}, the information content of the two sets of variables are the same. Moreover, position and velocity are the variables that are more directly linked to experimentation: while we can measure velocity and kinetic momentum directly, conjugate momentum is not a direct observable.
+
+We now pose the question: if velocity is the variable we actually measure, is conjugate momentum even uniquely defined? That is, is it possible to change momentum in a way that leave velocity, and therefore the trajectories, unchanged? Since the position does not change, the new state variables can be written as $(q, \hat{p})$ where the new conjugate momentum $\hat{p}_i = \hat{p}_i(q^j, p_k)$ is a function of the old variables. We want the new variables to be conjugate, therefore we must have
+\begin{equation}
+	\begin{aligned}
+		\{q^i, q^j\} &= 0 \\
+		\{q^i, \hat{p}_j\} &= \delta^i_j \\
+		\{\hat{p}_i, \hat{p}_j\} &= 0 .
+	\end{aligned}
+\end{equation}
+Using the second equation we find
+\begin{equation}
+	\begin{aligned}
+		\delta^i_j =\{q^i, \hat{p}_j\} &= \frac{\partial q^i}{\partial q^k} \frac{\partial \hat{p}_j}{\partial p_k} - \frac{\partial q^i}{\partial p_k} \frac{\partial \hat{p}_j}{\partial q^k} \\
+		&= \delta^i_k \frac{\partial \hat{p}_j}{\partial p_k} - 0 \frac{\partial \hat{p}_j}{\partial q^k} \\
+		\frac{\partial \hat{p}_j}{\partial p_i} &= \delta^i_j
+	\end{aligned}
+\end{equation}
+Integrating this last equation yields
+\begin{equation}\label{rp-cm-gaugeChange}
+	\begin{aligned}
+		\hat{p}_j = p_j + A_j(q^i)
+	\end{aligned}
+\end{equation}
+where $A_j$ are arbitrary functions of position. Using the third Poisson bracket, we have:
+\begin{equation}
+	\begin{aligned}
+		0 = \{\hat{p}_i, \hat{p}_j\} &= \{p_i + A_i, p_j + A_j\} \\
+		&= \{p_i, p_j \} + \{p_i , A_j\} + \{A_i, p_j \} + \{A_i, A_j\} \\
+		&= 0 - \{A_j, p_i\} + \{A_i, p_j \} + 0 \\
+		&= - \frac{\partial A_j}{\partial q^i} + \frac{\partial A_i}{\partial q^j} \\
+		&= curl(A_j). \\
+	\end{aligned}
+\end{equation}
+This $A_j$ is a curl free field, it admits a scalar potential $f(q^i)$. Therefore the general transformation is of the form
+\begin{equation}
+	\begin{aligned}
+		\hat{p}_j = p_j + \partial_j f(q^i).
+	\end{aligned}
+\end{equation}
+In other words, conjugate momentum is defined up to a gauge, in the same way that the electromagnetic potential is defined up to a gauge. In fact, these are essentially the same gauges.
+
+Recall the expression
+\begin{equation}
+	u^{\alpha} = \frac{1}{m} g^{\alpha\beta}(p_{\beta} - \mathfrak{q} A_{\beta}).
+\end{equation}
+If the four-velocity $u^{\alpha}$ and metric tensor $g^{\alpha\beta}$ are gauge independent, and the electromagnetic four-potential $A_\beta$ is gauge dependent, then it must be that conjugate momentum $p_\beta$ must be gauge dependent in the exact opposite way such that their difference is gauge independent. Another way to see this, suppose we have a charged particle but the electromagnetic field is zero. In an inertial frame, we would write
+\begin{equation}
+	p_i = m v^i.
+\end{equation}
+But this not only requires us to use Cartesian coordinates, it also requires us to have chosen the gauge for the magnetic field such that $A_i = 0$. Choosing a gauge for momentum, then, is the same as choosing a gauge for the magnetic field.
+
+If we look again at equation \ref{rp-cm-gaugeChange}, note that what the gauge does is redefine the zero momentum at each point. The gradient of $f$ represent the value of the old zero. The new zeros must form a curl free field because the new conjugate momentum still need to form independent DOFs. Recall that when recovering phase space, in equation \ref{rp-cm-momentumUnderUnitChange}, saw that change of units of position left unspecified a potential change for zero momentum. The gauge freedom is exactly that change.
+
+This tells us, in a more direct way, why assumptions \ref{assum_kineq} requires gauge theories. Given that the true observables are the kinematic variables, conjugate momentum is defined only up to curl-free field that represent arbitrary definition of zero momentum. Given that the vector potential of the interaction field tells us how the zero momentum is mapped to zero velocity, this inherits the same arbitrariness. The same relationship will be there in quantum mechanics, where the arbitrariness of the zero momentum will be implemented in the arbitrariness of absolute phases.
 
 \subsection{Entropy and dissipative evolution}
 
