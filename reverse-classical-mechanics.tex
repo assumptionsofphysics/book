@@ -15,13 +15,13 @@ As a guide to the chapter, here is the list of main points in the order in which
 	\item Kinematics, in general, is not enough to reconstruct dynamics
 	\item Hamiltonian mechanics (one DOF) is equivalent to DR
 	\item Hamiltonian mechanics (multiple DOF) is equivalent to DR plus IND
-	\item Differential calculus and its generalization, differential topology, study infinitesimally additive quantities that depends on geometrical shapes (i.e. lines, surfaces, volumes)
+	\item Differential calculus and its generalization, differential topology, study infinitesimally additive quantities that depend on geometric shapes (i.e. lines, surfaces, volumes)
 	\item The principle of least action is a consequence of DR, IND and KE
 	\item Massive particles under potential forces are a consequence of DR, IND and KE
 	\item Special relativity is a consequence of DR, IND and KE
-	\item Phase space is the only structure that makes distribution, counting state and entropy frame invariant
+	\item Phase space is the only structure that makes distributions, state counting and entropy frame invariant
 	\item Newtonian mechanics is a consequence of KE
-	\item Thee dimensional spaces are the only spaces for which distributions over directions are frame invariant
+	\item Three dimensional spaces are the only spaces for which distributions over directions are frame invariant
 	\item Classical particle states as points in phase space are equivalent to IR
 \end{enumerate}
 
@@ -120,7 +120,7 @@ Note that we had no such requirement for the Hamiltonian. For example, $H=0$ lea
 \begin{figure}
 	\centering
 	\begin{tikzpicture}
-		
+		%TODO: different thickness/color for the Hamiltonian and the axis
 		\pgfplotsset{ticks=none}
 		\begin{axis}[axis lines=middle,
 			xlabel=$q$,
@@ -158,7 +158,7 @@ Note that we had no such requirement for the Hamiltonian. For example, $H=0$ lea
 			\addplot[black,samples=2,domain=0:1]{-x};
 		\end{axis}
 	\end{tikzpicture}
-	\caption {TODO: This is the caption}
+	\caption {On the left, the phase space diagram for a photon treated as a point particle. The Hamiltonian $H=c|p|$, on the right, is proportional to the modulus of $p$. Since $H$ is not differentiable when $p=0$, those states are excluded, consistent with the physics. The displacement field has only a $q$ component, which is $+c$ above the horizontal axis and $-c$ below the horizontal axis. }
 \end{figure}
 
 \textbf{Photon as a particle}. If we want to treat the photon as a classical particle, we can write the Hamiltonian by expressing the energy as a function of momentum
@@ -208,9 +208,9 @@ This means that every Lagrangian admits a Hamiltonian, but not every Hamiltonian
 
 \subsection{Relationship between formulations}
 
-The relationship between the different formulations, then, can be summarized with the following Venn diagram.
+The relationship between the different formulations, then, can be summarized with the Venn diagram in figure \ref{rp-cm-fig-vennDiagramEarly}.
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\begin{tikzpicture}
 		\node[ellipse, minimum width=10cm, minimum height=5cm, draw, left] (ns){};
@@ -221,15 +221,17 @@ The relationship between the different formulations, then, can be summarized wit
 		\node [align=center, right] at ([xshift=14
 		mm]hs.west) {Lagrangian \\systems};
 	\end{tikzpicture}
-	\caption {TODO: This is the caption}
+	\caption {Not all Hamiltonian systems are Newtonian and not all Newtonian systems are Hamiltonian. All Lagrangian systems are both Newtonian and Hamiltonian.}\label{rp-cm-fig-vennDiagramEarly}
 \end{figure}
-Lagrangian mechanics is exactly the intersection of Newtonian mechanics and Hamiltonian mechanics.
+
 
 We have found that \ref{assum_kineq} is a constitutive assumption of Lagrangian mechanics, and that it clearly marks which Hamiltonian systems are Newtonian/Lagrangian. By constitutive assumption we mean an assumption that must be taken, either explicitly or implicitly, for a theory to be valid. But what makes a system Hamiltonian and what makes a system Newtonian? Can we find a full set of constitutive assumptions for classical mechanics?
 
 \section{Kinematics vs dynamics}
 
-We have seen the importance between kinematics and dynamics. In this section we will explore this link more deeply and come to the following conclusion: the kinematics of a system is not enough to reconstruct its dynamics. 
+We have seen the importance of the connection between kinematics and dynamics. In this section we will explore this link more deeply and come to the following conclusion: the kinematics of a system is not enough to reconstruct its dynamics. 
+
+\subsection{Particle under linear drag}
 
 Let us first review exactly what the kinematics and dynamics are. Given a system, its kinematics is the description of its motion in space and time. Position, velocity, and acceleration are kinematic variables because they describe the motion. Kinematics is what Galileo studied and started to give a rigorous account of. The dynamics, instead, describes the cause of such motion. Force, mass, momentum, energy are dynamic quantities as they are used to describe why a body moves in a particular way. Dynamics is what Newton introduced and his second law, expressed as $F=ma$, clearly shows the link.
 
@@ -249,6 +251,13 @@ The solution is
 	\end{aligned}
 \end{equation}
 Can we reconstruct the forces acting on this system?
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+	\end{tikzpicture}
+	\caption {TODO: F1}
+\end{figure}
 
 The obvious answer seems to be that the constant $m$ represents the mass of the system and $F = -bv$ the force. This is the case of a particle under linear drag:  the system is subjected to a frictional force that is proportional and opposite to the velocity. If we set the Lagrangian
 \begin{equation}\label{rp-cm-frictionLagrangian}
@@ -299,7 +308,16 @@ but if we express the Hamiltonian in terms of velocity we have
 \end{equation}
 That is, the energy decreases more slowly than it should. This is not good.
 
-Now, it is true that conjugate momentum is not the same as kinetic momentum. But the difference, as we will see much more clearly later, is caused by non-inertial non-Cartesian coordinate systems and/or the presence of vector potential forces.\footnote{The relationship is $p_i = m g_{ij} v^j + \mathfrak{q} A_i$. This reduces to $p_i = m v^i$ if and only if we are in an inertial frame with Cartesian coordinates (i.e. $g_{ij}=\delta_{ij}$) and no forces $A_i = 0$} We are not at all in that case. Also, note that at time $t=0$ the momentum and the energy do match what we expect, but not after. Therefore imagine a situation where friction is non-negligible only in a particular region. We would expect $p=mv$ to be valid before it enters, but not when it comes out. But wouldn't it come out in another region where we would expect $p=mv$ to work? This is strange. How should we proceed?
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+	\end{tikzpicture}
+	\caption {TODO: F2}
+\end{figure}
+
+Now, it is true that conjugate momentum is not the same as kinetic momentum. But the difference, as we will see much more clearly later, is caused by non-inertial non-Cartesian coordinate systems and/or the presence of vector potential forces.\footnote{The relationship is $p_i = m g_{ij} v^j + \mathfrak{q} A_i$. This reduces to $p_i = m v^i$ if and only if we are in an inertial frame with Cartesian coordinates (i.e. $g_{ij}=\delta_{ij}$) and no forces $A_i = 0$} We are not at all in that case. Also, note that at time $t=0$ the momentum and the energy do match our expectation, but not after. Therefore imagine a situation where friction is non-negligible only in a particular region. We would expect $p=mv$ to be valid before it enters, but not when it comes out. But wouldn't it come out in another region where we would expect $p=mv$ to work? This is strange. How should we proceed?
+
+\subsection{Variable mass system}
 
 As it is typical in reverse physics, we will assume that things work in a reasonable way and that we simply have the wrong connection between physics and math. Recall that we started just with an equation, and we then interpreted $m$ to be the mass of the system. Let's just assume that $m$ is a constant with units of mass and define the actual mass of the system as the ratio between conjugate momentum and velocity. Looking back at \ref{rp-cm-kd-momentumHamiltonian}, we have 
 \begin{equation}
@@ -310,6 +328,13 @@ As it is typical in reverse physics, we will assume that things work in a reason
 	\end{aligned}
 \end{equation}
 Now everything actually works perfectly: the relationship between velocity and conjugate momentum is respected, the Hamiltonian matches the kinetic energy. We just have a variable mass system. How and why does this work exactly?
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+	\end{tikzpicture}
+	\caption {TODO: F3}
+\end{figure}
 
 Let us expand Newton's second law for a variable mass system.\footnote{Note that, in general, the variable mass system should take into account the momentum gained or lost by the system when the mass is acquired or ejected. In our case, we are assuming that no momentum is lost, which means that either the mass is acquired/ejected uniformly from all directions or it is just an apparent change that depends on the change of coordinates.} We have:
 \begin{equation}
@@ -325,11 +350,13 @@ In particular, for our one dimensional case, let us set $F=0$ and substitute $\h
 		ma &= -bv.
 	\end{aligned}
 \end{equation}
-Therefore the same equation, the same kinematics, applies to a variable mass system that increases the mass over time. You can imagine, for example, a body that is absorbing mass from all directions, so that the balance of forces on the body is zero. The body, then, is not slowing down because of friction. It is slowing down because energy and momentum are conserved, and if the mass is increasing, the velocity must be decreasing.
+Therefore the same equation, the same kinematics, applies to a variable mass system that increases the mass over time. You can imagine, for example, a body that is absorbing mass from all directions, so that the balance of forces on the body is zero. The body, then, is not slowing down because of friction. It is slowing down because momentum is conserved, and if the mass is increasing, the velocity must be decreasing at the same rate. The energy, on the other hand, will decrease because the square of the velocity will decrease faster than the mass increases.
 
 In Newtonian mechanics, we can readily distinguish these two cases because we have to be explicit about forces and masses. In Hamiltonian mechanics things are a bit more difficult because, as we will see later more precisely, conjugate momentum is not exactly kinetic momentum and the Hamiltonian is not exactly energy. Yet, conjugate momentum and the Hamiltonian are not kinematic quantities, they are dynamic quantities and therefore we can see that these would be different in different cases. In Lagrangian mechanics this is even more difficult to see because it looks like a purely kinematic theory, while it is not: the Lagrangian itself is not a purely kinematic entity. As we saw, Lagrangian mechanics implicitly assumes \ref{assum_kineq}, which is a condition on the dynamics as well, and the Lagrangian itself is used to reconstruct conjugate momentum and the Hamiltonian. Moreover, if Lagrangian mechanics were a purely kinematic theory, and told us nothing about forces, energy or momentum, it would not be a complete formulation of classical mechanics.
 
-So we have seen that the same kinematic equation can describe a constant mass dissipative system or variable mass non-dissipative system. Is that it? Not quite. Recall that we mentioned that kinetic and conjugate momentum will differ in non-inertial frames. Note that we implicitly assumed that $x$ and $t$ represented the variable for an inertial observer, in the same way that we originally assumed $m$ was the mass of the system. Could the same equation, then, be describing yet another system but in a non-inertial frame?
+So we have seen that the same kinematic equation can describe a constant mass dissipative system or a variable mass system. Is that it? Not quite. Recall that we mentioned that kinetic and conjugate momentum will differ in non-inertial frames. Note that we implicitly assumed that $x$ and $t$ represented the variables for an inertial observer, in the same way that we originally assumed $m$ was the mass of the system. Could the same equation, then, be describing yet another system but in a non-inertial frame?
+
+\subsection{Non-inertial motion}
 
 Let's compare the motion of a particle traveling at constant velocity in an inertial frame, using $t$ as the time variable, and the motion of a particle decelerating exponentially, using $\hat{t}$ as the time variable
 \begin{equation}
@@ -381,13 +408,15 @@ And we can verify that we get the same equation by plugging in the time transfor
 \end{equation}
 Note that the expressions for momentum and energy will match the previous case because the system in the non-inertial frame looks like a variable mass system.
 
+\subsection{The relationship between kinematics and dynamics}
+
 This last case highlights a more subtle issue. In the two previous cases we were in the same inertial frame, we saw the same trajectory, the same kinematics, but we couldn't tell whether we were looking at a fixed mass system under linear drag or a variable mass system: we couldn't tell the dynamics. Now, we have the same system, a constant mass particle under no forces, described in two different frames, one inertial and one not. The motion of the system will naturally have different representations in the different frames, but this does not mean the motion or the causes of motion are different: it's the same object. Therefore we have the same kinematics even though we have different expressions for the same trajectory. The expression $x(t)$, then, is not enough to define the kinematics if we do not know exactly what $x$ and $t$ represent physically, if the frame is not given.
 
-While typically one proceeds by defining the frame first and then the dynamics (i.e. the forces acting on the system), here we have followed a different approach: we first defined the dynamics (i.e. constant mass system under no forces) and then found the frame that matches the given kinematics (i.e. the trajectory or the relationship between velocity and acceleration). Given that Lagrangian and Hamiltonian mechanics are frame invariant, an intrinsic characterization of the system itself is exactly what we should be looking for. Saying, for example, that a system is subjected to no forces or to a linear drag is not frame invariant because forces are not frame invariant.
+While typically one proceeds by defining the frame first and then the dynamics (i.e. the forces acting on the system), here we have followed a different approach: we first defined the dynamics (i.e. constant mass system under no forces) and then found the frame that matched the given kinematics (i.e. the trajectory or the relationship between velocity and acceleration). Given that Lagrangian and Hamiltonian mechanics are frame invariant, an intrinsic characterization of the system itself is exactly what we should be looking for. Saying, for example, that a system is subjected to no forces or to a linear drag is not frame invariant because forces are not frame invariant.
 
 It is clear that the type of apparent variable mass due to non-inertial frames is unavoidable if we want to have a consistent theory with invariant laws. Therefore both Lagrangian and Hamiltonian mechanics must include these cases. However, it is not exactly clear what to do for true variable mass systems. From a cursory look, it would seem that everything is fine and there is no harm in including them. Yet again, from a cursory look we seemed to have a Lagrangian for a particle under linear drag. As we will see later, there are implicit connections between Lagrangian/Hamiltonian mechanics on one side and thermodynamics, statistical mechanics and special relativity on the other. Given that it is not clear to us whether these connections hold or not,\footnote{For example, areas of phase space are connected to entropy. Does this connection hold with a variable mass system?} we will concentrate on the constant mass case from now on.
 
-Let's recap what we learned. The biggest point is that we can't simply look at the kinematics and understand the causes of motion. The different formulations have different ways to relate the dynamics and the kinematics. Newtonian mechanics is the most clear about the dynamics as it makes us clearly spell out what is going on. This, however, comes at a cost: the equations are not covariant, meaning they have a different expression in different frames. The second law, in fact, is valid only for inertial frames with Cartesian coordinates. It is only in these frames, in fact, that a body will proceed in uniform motion if no forces are applied to it. If we are in polar coordinates, for example, the trajectory expressed in radius $\rho$ and angle $\theta$ will not be linear. Even the notion of force is, if one looks closely, a bit ambiguous. In principle, we want to write both the second law $F=ma$ and the expression for work $dW = F dx$. If $dW$ is invariant under change of position variables, the force should be a covector and therefore $dW = F_i dx^i$. But since the acceleration $a$ will change like a vector, we also have $F^i = m a^i$. The notion of force in the second law and in the infinitesimal work are slightly different, and they coincide only if we are in an inertial frame and Cartesian coordinates.
+Let's recap what we learned. The biggest point is that we can't simply look at the kinematics and understand the causes of motion. The different formulations have different ways to relate the dynamics and the kinematics. Newtonian mechanics is the most clear about the dynamics as it makes us clearly spell out what is going on. This, however, comes at a cost: the equations are not covariant, meaning they have a different expression in different frames. The second law, in fact, is valid only for inertial frames with Cartesian coordinates. It is only in these frames, in fact, that a body will proceed in uniform motion if no forces are applied to it. If we are in polar coordinates, for example, the trajectory expressed in radius $r$ and angle $\theta$ will not be linear. Even the notion of force is, if one looks closely, a bit ambiguous. In principle, we want to write both the second law $F=ma$ and the expression for work $dW = F dx$. If $dW$ is invariant under change of position variables, the force should be a covector and therefore $dW = F_i dx^i$. But since the acceleration $a$ will change like a vector, we also have $F^i = m a^i$. The notion of force in the second law and in the infinitesimal work are slightly different, and they coincide only if we are in an inertial frame and Cartesian coordinates.
 
 On the other side, Hamiltonian and Lagrangian mechanics are coordinate independent: the laws remain the same if we change position variables. This makes them more useful in many contexts. Lagrangian mechanics is more useful when trying to study the symmetries of the system. Hamiltonian mechanics is more useful for statistical mechanics and to better separate degrees of freedom. However, this comes at a price. Hamiltonian and Lagrangian mechanics apply in fewer cases than Newtonian mechanics. As we saw, linear drag may look like it has a valid Hamiltonian/Lagrangian, but it doesn't. For quadratic drag or friction due to normal force, one cannot find a suitable trick, and is forced to use Rayleigh’s dissipation functions which modify the Euler-Lagrange equations. This is not a coincidence: while Newtonian mechanics links kinematics and dynamics by choosing a particular frame, Hamiltonian and Lagrangian mechanics do so by fixing a type of system. It is the implicit knowledge of the type of system that allows us to reconstruct the dynamics just by looking at the kinematics in an unknown frame. What we need to understand, then, is what exactly is this restriction.
 
