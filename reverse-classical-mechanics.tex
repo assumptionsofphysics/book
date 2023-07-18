@@ -175,11 +175,11 @@ If we apply Hamilton's equations, we have
 That is, the norm of the velocity is always $c$, the momentum decides its direction, and the momentum itself does not change in time. This is indeed the motion of a free photon. One can confirm, through tedious calculation, that the determinant of the Hessian is indeed zero, yet it is easier and more physically instructive to see that we cannot reconstruct the momentum from the velocity. Relativistically, all photons travel along the geodesics at the same speed, therefore two photons that differ only by the magnitude of the momentum will travel the same path.
 
 Hamiltonian systems that are also Newtonian, then, need to satisfy this extra condition, so let us give it a name.
-\renewcommand{\theassump}{KE}%
+\renewcommand{\theassump}{KE}
 \begin{assump}[Kinematic Equivalence]\label{assum_kineq}
-	The kinematics of the system is enough to reconstruct its dynamics and vice-versa. That is, knowing the motion of the system is equivalent to knowing its state and evolution.
+	The kinematics of the system is sufficient to reconstruct its dynamics and vice-versa. That is, specifying the motion of the system is equivalent to specifying its state and evolution.
 \end{assump}
-\renewcommand{\theassump}{\Roman{assump}}%
+\renewcommand{\theassump}{\Roman{assump}}
 By kinematics we mean the motion in space and time and by dynamics we mean the state and its time evolution in phase space. We will need to analyze the difference between the two more in detail, but we should first finish our comparison between the different formulations.
 
 Summing up, we find that
@@ -660,7 +660,7 @@ This connection gives us yet another insight on the nature of determinism and re
 We have found twelve equivalent characterizations that link Hamiltonian mechanics, vector calculus, differential geometry, statistical mechanics, thermodynamics, information theory and plain statistics. Though we only talked about the case of a single degree of freedom, it gives us a much better idea of what systems Hamiltonian mechanics is supposed to describe, those that satisfy the following
 \renewcommand{\theassump}{DR}
 \begin{assump}[Determinism and Reversibility]\label{assum_detrev}
-	The system undergoes deterministic and reversible evolution. That is, given the state of the system at a particular time, the future evolution can be predicted and the past evolution can be reconstructed.
+	The system undergoes deterministic and reversible evolution. That is, specifying the state of the system at a particular time is equivalent to specifying the state at a future (determinism) or past (reversibility) time.
 \end{assump}
 \renewcommand{\theassump}{\Roman{assump}}
 We can see how this concept is implemented mathematically: it is not simply a one-to-one map between points. Classical particles should be more properly thought of as infinitesimal regions of phase space. Conceptually, the count of states, the thermodynamic entropy and information entropy are all conserved, and are all equivalent characterizations of determinism and reversibility. In terms of physical measurement, past and future states are given at the same level of uncertainty. But the most important lesson is that the foundations of classical mechanics are not disconnected from the foundations of all other disciplines we encountered. A full understanding of classical mechanics means understanding those connections as well.
@@ -1518,7 +1518,7 @@ Recall that the existence of a non-singular Jacobian is what allowed us to expre
 	\tag{FKE-VOL}\label{rp-cm-fke-condAreasOfPosition}
 	&\eqtext{Areas and volumes in phase space can be expressed in kinematic variables, and the transformation depends on position only: $dx^1 \cdots dx^n \, dv^1 \cdots dv^n = |J(x^i)| \, dq^1 \cdots dq^n \, dp_1 \cdots dp_n$.} \\
 	\tag{FKE-SYMP}\label{rp-cm-fke-condSymplecticOfPosition}
-	&\eqtext{The symplectic form $\omega_{ab}$ can be expressed in kinematic variables, and its components are linear function of velocity.}
+	&\eqtext{The symplectic form $\omega_{ab}$ can be expressed in kinematic variables, and its components are a linear function of velocity.}
 \end{align}
 
 To understand better these conditions, consider a density $\rho_{qp}$ over phase space and its expression $\rho_{xv}$ over kinematic variables. Since there is a factor of a Jacobian determinant between the two, if the density takes the same value between two states as expressed in position and momentum, the density as defined over position and velocity will not necessarily have the same value. Position and momentum have a special property in that the density of states is uniform in terms of those variables, and therefore comparing densities in those variables is simply a matter of comparing the value of the density. Canonical coordinates are exactly those state variables for which this property holds. While kinematic variables are, in general, not canonical, the linearity between velocity and momentum imposes a lesser version of this property: it makes it so that, at least at the same position, we can compare areas and densities. Therefore if density for two different values of velocity at the same point matches, $\rho_{xv}(x^i, v_1^j) = \rho_{xv}(x^i, v_2^j)$, then we really have the same density of states. Therefore
@@ -1936,7 +1936,7 @@ We can change units so that $g_{00} = -1$ and $g_{ii}=1$. For the spatial compon
 
 \subsection{The failure of Galilean relativity}
 
-Given that our assumptions led directly to relativistic mechanics, non-relativistic mechanics must fail to satisfy the strong kinematic assumption. We currently do not have a complete understanding of all the details, though we offer here what we have found.
+Given that our assumptions led directly to relativistic mechanics, non-relativistic mechanics must fail to satisfy the strong kinematic assumption. We have not identified the exact reason of the failure, though we have identified an interesting issue.
 
 Galilean space-time transformations correspond to
 \begin{equation}
@@ -1977,42 +1977,50 @@ we end up in another inertial frame where
 \end{equation}
 The new vector potential is still a constant field, therefore the forces do not change. Still, the spatial components have a different value than the time ones, therefore the direction of momentum is corrected.
 
-We are convinced there should be a more satisfying way to see both geometrically and physically how the failure plays out. Yet, this will have to suffice for now.
+What we find, then, is that Galilean transformations do not preserve the relationship between kinetic momentum and conjugate momentum. To recover the original relationship, one has to perform a gauge transformation. But this is contrary to the expectation that the laws are the same for all inertial frames. There are likely other deeper issues at play, which we hope to uncover in the future.
+
+%TODO: determine use of TODO, XXX, FIXME
+
+%XXX: try doing the same thing for potential energy: should find that velocity depends on position, and not just momentum.
 
 \subsection{Metric tensor revisited}
 
-As we saw, the metric tensor appear not as defining the distances in space-time but rather as the linear relationship between velocity and conjugate momentum. It does, however, end up playing an important geometrical role: in \ref{rp-cm-rm-kinematicSymplecticForm} we see that the metric tensor times the mass is the off diagonal component of the form $\omega_{ab}$. Therefore, if we have a range of positions $dx^\alpha$ and a range of velocities $dv^\beta$, the number of configuration they identify is given by $dx^\alpha m g_{\alpha\beta} dv^\beta$. In other words,
+As we saw, the metric tensor appears not as defining the distances in space-time but rather as the linear relationship between velocity and conjugate momentum. It does, however, end up playing an important geometric role: in \ref{rp-cm-rm-kinematicSymplecticForm} we see that the metric tensor times the mass is the off diagonal component of the form $\omega_{ab}$. Therefore, if we have a range of positions $dx^\alpha$ and a range of velocities $dv^\beta$, the number of configurations they identify is given by $dx^\alpha m g_{\alpha\beta} dv^\beta$. In other words,
 \begin{insight}
 	the metric tensor allows us to count states in terms of the kinematic variables.
 \end{insight}
 
-This corroborates what we saw in \ref{rp-cm-fke-metricTensorDeterminantIsJacobianForDensities}: the determinant of the metric tensor is the Jacobian determinant that allows us to express densities over phase space as densities over kinematic variables. In relativity, the square root of the metric tensor appears to create an invariant volume element. That is $\int f \, \sqrt{|g_{\alpha\beta}|} \, dx^0 dx^1 dx^2 dx^3$ integrates an invariant scalar function $f$. However, if we integrate over the kinematic variables we have $\int f \, |g_{\alpha\beta}| \, dx^0 \cdots dx^3 du^0 \cdots du^3$. The determinant of the metric tensor, then, is more directly giving us the size of a volume taken over kinematic variables, not in phase-space.
+This corroborates what we saw in \ref{rp-cm-fke-metricTensorDeterminantIsJacobianForDensities}: the determinant of the metric tensor is the Jacobian determinant that allows us to express densities over phase space as densities over kinematic variables. In relativity, the square root of the determinant of the metric tensor appears to create an invariant volume element. That is, $\int_U \, \sqrt{|g_{\alpha\beta}|} \, dx^0 dx^1 dx^2 dx^3$ defines the volume of space-time region $U$. However, we can also define an invariant volume element over the space of kinematic variables. That is, $\int_V \, |g_{\alpha\beta}| \, dx^0 \cdots dx^3 du^0 \cdots du^3$ defines the volume of the position-velocity space. The determinant of the metric tensor, then, is more directly giving us the size of a volume taken in position-velocity space instead of space-time. This also connects the ability to specify distributions in terms of kinematic variables since, as we saw in \ref{rp-cm-fke-condDensitiesOfPosition}, the Jacobian determinant of the transformation between position and velocity is proportional to $|g_{\alpha\beta}|$.
 
-Why is it, then, that defining volumes over kinematic quantities fixes the geometry of space time. Note that both differentials of space and velocities transform like vectors. Therefore if $dx^\alpha g_{\alpha\beta} dv^\beta$ is invariant, then $dx^\alpha g_{\alpha\beta} dx^\beta$ will also be invariant. The geometry of spate-time, then, is set by the geometry of phase-space.
+Why is it, then, that defining volumes over kinematic quantities fixes the geometry of space-time? Note that both velocities and differentials of space transform like vectors since $du^\alpha = dx^\alpha / d\tau$. Therefore if $dx^\alpha g_{\alpha\beta} du^\beta$ is invariant, then $dx^\alpha g_{\alpha\beta} dx^\beta$ will also be invariant. The geometry of space-time, then, is set by the geometry of phase-space.
 
-There are other interesting open questions to explore to better understand this relationship. For example, in relativity, one does put spatial and time variables on the same plane. However, we saw that the primary role of the metric tensor is so that we deal with distributions and integration, and these work differently in space and time. Consider, in fact, a distribution $\rho(x^i, v^j, t)$. This would represent the evolution over time of a distribution over kinematic variables. At each time, the distribution has to integrate to one, assuming it is normalized, which means the units of $\rho$ are $\left[\frac{1}{d^3v^3}\right]$, the inverse of the cube of distance times velocity. Note that every observer has to see the same thing: a normalized distribution at each moment in time. Additionally, this has to happen no matter what $\rho$ is. An open question in reverse physics, then, is whether imposing this requirement is already enough to recover parts of relativity.
+There are other interesting open questions to explore to better understand this relationship. For example, in relativity, one does put spatial and time variables on the same plane. However, we saw that the primary role of the metric tensor is so that we deal with distributions and integration, and these work differently in space and time. Consider, in fact, a distribution $\rho(x^i, v^j, t)$. This would represent the evolution over time of a distribution over kinematic variables. At each time, the distribution has to integrate to one, assuming it is normalized, which means the units of $\rho$ are $\left[\frac{1}{[x]^3[v]^3}\right]$, the inverse of the cube of distance times velocity. Note that every observer has to see the same thing: a normalized distribution at each moment in time. Additionally, this has to happen no matter what $\rho$ is. An open question in reverse physics, then, is whether imposing this requirement is already enough to recover parts of relativity.
 
 \section{Reversing phase-space}
 
-In this section we will find the assumptions required to rederive the structure of phase space. The principle of relativity will play a key role as the structure of classical phase space is the only structure that allows us to define densities and entropy in a way that is observer independent.
+In this section we will find the assumptions required to rederive the structure of phase space. The principle of relativity will play a key role as the structure of classical phase space is the only structure that allows us to define densities and entropy in a way that is coordinate invariant.
+
+%TODO: check consistent use of "coordinate invariant"
 
 \subsection{Properties of phase space}
 
-We have seen that \ref{assum_detrev} and \ref{assum_indep} are the constitutive assumptions of Hamiltonian mechanics, in the sense that they fully characterize Hamiltonian evolution. The addition of \ref{assum_kineq} in its full version, recovers both Lagrangian mechanics and massive particles under potential forces. The relativistic version of the theories comes out without additional assumptions simply by properly dividing the roles of time as a variable from time as a parameter. But in all this discussion we assumed, without questioning, that states are identified by pairs of variables: position/velocity or position/momentum. Is this a coincidence or there is an underlying reason for it? Can we find assumptions from which the structure of phase space itself can be recovered?
+We have seen that \ref{assum_detrev} and \ref{assum_indep} are the constitutive assumptions of Hamiltonian mechanics, in the sense that they fully characterize Hamiltonian evolution. The addition of \ref{assum_kineq} in its full version recovers both Lagrangian mechanics and massive particles under potential forces. The relativistic version of the theories comes out without additional assumptions simply by properly dividing the role of time as a variable from time as a parameter. But in all this discussion we assumed, without questioning, that states are identified by pairs of variables: position-velocity or position-momentum. Is this a coincidence or is there an underlying reason for it? Can we find assumptions from which the structure of phase space itself can be recovered?
 
-Since we are interested in the structure of phase space itself, and not its evolution, let's go back to its original version, without the extension to time or the temporal DOF. Throughout the whole discussion, conjugate momentum $p_i$ has been written with the index down, tacitly assuming it to be a covector. This means it obeys the following transformation rules under coordinate changes:
+Since we are interested in the structure of phase space itself, let's go back to its original version, without the extension to time or the temporal DOF. Throughout the whole discussion, conjugate momentum $p_i$ has been written with the index down, tacitly assuming it to be a covector. This means it obeys the following transformation rules under coordinate changes:
 \begin{equation}
 	\begin{aligned}
  \hat{q}^i &= \hat{q}^i(q^j) \\
  \hat{p}_i &= \partial_{\hat{q}^i} q^j  \, p_j
 	\end{aligned}
 \end{equation}
-In presence of a metric tensor, when assumption \ref{assum_kineq} is valid, the difference between vector and covector blurs, as we can always transform one into the other, but this is not the general case. We have, therefore, this condition
+When a metric tensor is defined, that is when assumption \ref{assum_kineq} is valid, the difference between vector and covector blurs, as we can always transform one into the other, but this is not the general case. We have, therefore, this condition
 \begin{equation}
 	\tag{PS-COV}\label{rp-cm-ps-condMomentumCovector}
-	\eqtext{Conjugate momentum $p_i$ changes like a covector under changes of coordinates $q^i$.}
+	\eqtext{Conjugate momentum $p_i$ changes like a covector under changes of coordinates $q^i$}
 \end{equation}
-which characterizes the relationship between $q^i$ and $p_i$. We want to stress that these changes of coordinates do not mix time. Therefore we are only talking about different observers at equal time that use different spatial coordinates.
+which characterizes the relationship between $q^i$ and $p_i$. We want to stress that these changes of coordinates do not mix space and time variables. Therefore we are only talking different choices of spatial coordinates at equal time.
+
+%TODO: observer -> choice of coordinates?
 
 Given that the form $\omega_{ab}$ plays a fundamental role, as it defines the geometry of phase space in terms of state count, let's see how it transforms during a coordinate change. We have:
 \begin{equation}
@@ -2067,17 +2075,52 @@ Given that the form $\omega_{ab}$ plays a fundamental role, as it defines the ge
 		\end{array} \right]
 	\end{aligned}
 \end{equation}
-For the last step, we are taking partial derivation of the new variables with respect to the new variables. The derivative is equal to one if we are taking the partial derivative with respect to the same variable and zero otherwise. That is condition
+For the last step, we are taking partial derivatives of the new variables with respect to the new variables. The derivative is equal to one if we are taking the partial derivative with respect to the same variable and zero otherwise. We find that condition
 \begin{equation}
 	\tag{PS-SYMP}\label{rp-cm-ps-condInvarianceSF}
-	\eqtext{The form $\omega_{ab}$ is invariant under changes of coordinates $q^i$.}
+	\eqtext{The form $\omega_{ab}$ is invariant under changes of coordinates $q^i$}
 \end{equation}
 is implied by \ref{rp-cm-ps-condMomentumCovector}.
 
-As usual, we ask whether the converse is true. That is, suppose we perform a change of coordinates $\hat{q}^i = \hat{q}^i(q^j)$ for which $\omega_{ab}$ is invariant. Does this pose restrictions on how conjugate momentum changes? Using what we found before, we have
+As usual, we ask whether the converse is true. That is, suppose we perform a change of coordinates $\hat{q}^i = \hat{q}^i(q^j)$ for which $\omega_{ab}$ is invariant. Does this pose restrictions on how conjugate momentum changes? We have
 \begin{equation}
 	\begin{aligned}
-		\hat{\omega}_{ab} &= \left[\begin{array}{cc}
+		\hat{\omega}_{ab} &=\left[\begin{array}{cc}
+			\omega_{\hat{q}^i \hat{q}^j} & \omega_{\hat{q}^i \hat{p}_j} \\
+			\omega_{\hat{p}_i \hat{q}^j} & \omega_{\hat{p}_i \hat{p}_j} 
+		\end{array} \right] = \left[\begin{array}{cc}
+			\partial_{q^k} \hat{q}^i & \partial_{p_k} \hat{q}^i \\
+			\partial_{q^k} \hat{p}_i & \partial_{p_k} \hat{p}_i 
+		\end{array} \right]
+		\left[\begin{array}{cc}
+			\omega_{q^k q^l} & \omega_{q^k p_l} \\
+			\omega_{p_k q^l} & \omega_{p_k p_l} 
+		\end{array} \right]
+		\left[\begin{array}{cc}
+			\partial_{q^l} \hat{q}^j & \partial_{q^l} \hat{p}_j \\
+			\partial_{p_l} \hat{q}^j & \partial_{p_l} \hat{p}_j 
+		\end{array} \right]\\
+		&= \left[\begin{array}{cc}
+			\partial_{q^k} \hat{q}^i & 0 \\
+			\partial_{q^k} \hat{p}_i & \partial_{p_k} \hat{p}_i 
+		\end{array} \right]
+		\left[\begin{array}{cc}
+			0 & \delta_{kl} \\
+			- \delta_{kl} & 0 
+		\end{array} \right]
+		\left[\begin{array}{cc}
+			\partial_{q^l} \hat{q}^j & \partial_{q^l} \hat{p}_j \\
+			0 & \partial_{p_l} \hat{p}_j 
+		\end{array} \right] \\
+		&= \left[\begin{array}{cc}
+			0 & \partial_{q^l} \hat{q}^i \\
+			- \partial_{p_l} \hat{p}_i  & \partial_{q^l} \hat{p}_i 
+		\end{array} \right]
+		\left[\begin{array}{cc}
+			\partial_{q^l} \hat{q}^j & \partial_{q^l} \hat{p}_j \\
+			0 & \partial_{p_l} \hat{p}_j 
+		\end{array} \right] \\
+		&= \left[\begin{array}{cc}
 			0 & \partial_{q^l} \hat{q}^i \partial_{p_l} \hat{p}_j  \\
 			- \partial_{p_l} \hat{p}_i \partial_{q^l} \hat{q}^j  & 
 			- \partial_{p_l} \hat{p}_i \partial_{q^l} \hat{p}_j +  \partial_{q^l} \hat{p}_i \partial_{p_l} \hat{p}_j 
@@ -2100,62 +2143,66 @@ In matrix terms, we are taking the product of two matrices and equating it to th
 		\partial_{p_l} \hat{p}_j = (\partial_{q^l} \hat{q}^j)^{-1} = \partial_{\hat{q}^j} q^l.
 	\end{aligned}
 \end{equation}
-Which means that the change of position variables induces a change of momentum
+This means that the change of position variables induces a change of momentum
 \begin{equation}\label{rp-cm-momentumUnderUnitChange}
-	\hat{p}_j = \partial_{\hat{q}^j} q^i \, p_i + A_i(q_i),
+	\hat{p}_j = \partial_{\hat{q}^j} q^i \, p_i + A_j(q^k),
 \end{equation}
-where $A_i$ are arbitrary functions, which we can set to zero without loss of generality.\footnote{The arbitrary functions change the value of zero momentum at every point. While this is mathematically possible, it would make no physical sense to change the meaning of zero momentum under a coordinate change. We will see later how this is related to gauge transformations.} This makes momentum a covector.
+where $A_j$ are arbitrary functions, which we can set to zero without loss of generality.\footnote{The arbitrary functions change the value of zero momentum, potentially at every point in a different way. While this is mathematically possible, it would make no physical sense that a coordinate change would induce a change in the zero reference for momentum. We will see later how this is related to gauge transformations.} This makes momentum a covector.
 
 The second constraint comes from the bottom diagonal term. Using the newly found transformation rules, we have
 \begin{equation}
 	- \partial_{p_l} \hat{p}_i \partial_{q^l} \hat{p}_j +  \partial_{q^l} \hat{p}_i \partial_{p_l} \hat{p}_j = - \partial_{\hat{q}^i} q^l \partial_{q^l} \hat{p}_j +  \partial_{q^l} \hat{p}_i \partial_{\hat{q}^j} q^l = - \partial_{\hat{q}^i} \hat{p}_j + \partial_{\hat{q}^j} \hat{p}_i = 0.
 \end{equation}
-This constraint is satisfied simply because position and momentum are different state variables, and partial derivatives along one variable are taken keeping the others constant. By imposing the preservation of the form $\omega_{ab}$ under an arbitrary change of units, we recovered the transformation law of momentum as a covector. Therefore conditions \ref{rp-cm-ps-condMomentumCovector} and \ref{rp-cm-ps-condInvarianceSF} are equivalent.
+This constraint is satisfied simply because position and momentum are different state variables, and partial derivatives along one variable are taken keeping the others constant. By imposing the preservation of the form $\omega_{ab}$ under an arbitrary change of coordinates, we recovered the transformation law of momentum as a covector. Therefore conditions \ref{rp-cm-ps-condMomentumCovector} and \ref{rp-cm-ps-condInvarianceSF} are equivalent.
 
-The invariance of the form $\omega_{ab}$ under coordinate changes means that all those properties that where invariant under Hamiltonian evolution are also invariant under coordinate changes. Therefore condition
+The invariance of the form $\omega_{ab}$ under coordinate changes means that all those properties that were invariant under Hamiltonian evolution are also invariant under equal time coordinate changes. Therefore condition
 \begin{equation}
 	\tag{PS-POI}\label{rp-cm-ps-condInvariancePoisson}
-	\eqtext{The Poisson brackets are invariant change of coordinates} \\
+	\eqtext{The Poisson brackets are invariant under equal time coordinate changes} \\
 \end{equation}
 is equivalent to \ref{rp-cm-ps-condInvarianceSF}.
 
-Conditions
+%TODO: equal time with hyphen?
+
+The following conditions are equivalent to each other and are implied by \ref{rp-cm-ps-condInvarianceSF}, but do not imply it.
 \begin{align}
 	\tag{PSI-DEN}\label{rp-cm-ps-condInvarianceIndepDensities}
-	&\eqtext{The system allows statistically independent distributions over each DOF under any choice of coordinate $q^i$} \\
+	&\eqtext{The system allows statistically independent distributions over each DOF under any choice of coordinates $q^i$} \\
 	\tag{PSI-INFO}\label{rp-cm-ps-condInvarianceIndepEntropy}
-	&\eqtext{The system allows informationally independent distributions over each DOF under any choice of coordinate $q^i$} \\
+	&\eqtext{The system allows informationally independent distributions over each DOF under any choice of coordinates $q^i$} \\
 	\tag{PSI-UNC}\label{rp-cm-ps-condInvarianceIndepUncertainty}
-	&\eqtext{The system allows peaked distributions where the uncertainty is the product of the uncertainty under any choice of coordinate $q^i$}
+	&\eqtext{The system allows peaked distributions where the uncertainty is the product of the uncertainty on each DOF under any choice of coordinates $q^i$}
 \end{align}
-are equivalent to each other, are implied by \ref{rp-cm-ps-condInvarianceSF}, but do not imply it. Physically, these corresponds to the independence of DOFs, which is assumption \ref{assum_indep}. The only difference is that the assumption must be valid for all equal time observers, which is just an application of the principle of relativity.
+Physically, these correspond to the independence of DOFs, which is assumption \ref{assum_indep}. The only difference is that the assumption must be valid for all equal time coordinate changes, which is just an application of the principle of relativity.
 
-Lastly, conditions
+Lastly, the following conditions are all equivalent but independent of the PSI conditions and are implied by \ref{rp-cm-ps-condInvarianceSF}, but do not imply it.
 \begin{align}
 	\tag{PSV-VOL}\label{rp-cm-ps-condInvariantVolume}
-	&\eqtext{Phase space volumes are invariant under changes of coordinates $q^i$} \\
+	&\eqtext{Phase space volumes are invariant under equal time changes of coordinates $q^i$} \\
 	\tag{PSV-JAC}\label{rp-cm-ps-condUnitaryJacobian}
-	&\eqtext{The Jacobian for the transformation induced by a changes of coordinates $q^i$ is unitary} \\
+	&\eqtext{The Jacobian for the transformation induced by equal time changes of coordinates $q^i$ is unitary} \\
 	\tag{PSV-DEN}\label{rp-cm-ps-condConservedDensities}
-	&\eqtext{Densities over phase space are invariant under changes of coordinates $q^i$} \\
+	&\eqtext{Densities over phase space are invariant under equal time changes of coordinates $q^i$} \\
 	\tag{PSV-THER}\label{rp-cm-ps-condInvariantEntropy}
-	&\eqtext{Thermodynamic entropy is invariant under changes of coordinates $q^i$} \\
+	&\eqtext{Thermodynamic entropy is invariant under equal time changes of coordinates $q^i$} \\
 	\tag{PSV-INFO}\label{rp-cm-ps-condInvariantInformation}
-	&\eqtext{Information entropy is invariant under changes of coordinates $q^i$} \\
+	&\eqtext{Information entropy is invariant under equal time changes of coordinates $q^i$} \\
 	\tag{PSV-UNC}\label{rp-cm-ps-condInvariantUncertainty}
-	&\eqtext{Uncertainty of peaked distributions is invariant under changes of coordinates $q^i$}
+	&\eqtext{Uncertainty of peaked distributions is invariant under equal time changes of coordinates $q^i$}
 \end{align}
-are all equivalent but independent of the PSI conditions, are implied by \ref{rp-cm-ps-condInvarianceSF}, but do not imply it. Physically, these correspond to requiring that the count of states is the same for all equal time observers. In the same way that conservation of $\omega_{ab}$ in time was equivalent to assumptions \ref{assum_detrev} and \ref{assum_indep} combined, any PSV condition together with any PSI condition will be equivalent to any PS condition. That is, the phase space structure corresponds to invariance of state count plus independence of DOFs.
+Physically, these correspond to requiring that the count of states is the same under all choices of coordinates at a given time. In the same way that conservation of $\omega_{ab}$ in time was equivalent to assumptions \ref{assum_detrev} and \ref{assum_indep} combined, any PSV condition together with any PSI condition will be equivalent to any PS condition. That is, the phase space structure corresponds to invariance of state count plus independence of DOFs.
 
-It should be evident that all these properties are necessary if we want to have a physically meaningful state space. If state count, densities, entropy, independence of DOF would not be properties that all equal time observer can agree on, there would be no notion of an objective state to begin with, and it would be pointless to even talk about isolation, determinism, thermodynamic and so on. All these properties, then, are constitutive assumptions for any state space, as without them there are no well defined states. Having established that phase space has all these properties, do these properties define phase space? That is, suppose the states of our system are identified by a finite number of continuous quantities, meaning that the state space is a manifold, does the invariance of those properties constrain that space to be phase space?
+It should be evident that all these properties are necessary if we want to have a physically meaningful state space. If state count, densities, entropy, independence of DOFs were not properties that all equal time observers could agree on, there would be no notion of an objective state to begin with, and it would be pointless to even talk about isolation, determinism, thermodynamics and so on. All these properties, then, are constitutive assumptions for any state space, as without them there are no well defined states. Having established that phase space has all these properties, do these properties define phase space? That is, suppose the states of our system are identified by a finite number of continuous quantities, meaning that the state space is a manifold; does the invariance of those properties constrain that space to be phase space?
 
 \subsection{Invariance over the continuum}
 
 To simplify the matter, let us consider the case of a single DOF. One way to define the problem is to ask that if a distribution is uniform for one observer, it should be uniform for all equal time observers. Uniform distributions are important in statistical mechanics since the macrostate of an isolated system is assumed to be a uniform distribution over all possible microstates that satisfy a few constraints, such as the value of the energy, the number of particles and so on. This is very similar to the ``principle of indifference'' in classical probability, which assigns equal probabilities to outcomes for which there is no justifiable preference.
 
-For example, if we have a fair die, meaning that the die itself and the mechanism for throwing it do not have a preference for any side, the principle tells us to assign equal probability to all sides.\footnote{The principle of indifference is often stated in terms of degree of belief: it is the agent that has no reason to prefer one outcome over the other. We state it in more objective terms: the system and preparation procedure do not have a preference. If an agent believes a die to be fair, while in fact the die is loaded, the principle of indifference gives wrong empirical results, and therefore, for us, it does not apply.} If the die has 6 sides, we assign probability $1/6$ for each side. The part of probability theory that is linked to combinatorics works like this. Note that what number we use to label each side of the die, or whether we use something else, like for playing cards for a poker die, is irrelevant for the probability assignment. Therefore, when applied to discrete variables, the principle of indifference is invariant under relabeling.
+For example, if we have a fair die, meaning that the die itself and the mechanism for throwing it do not have a preference for any side, the principle tells us to assign equal probability to all sides.\footnote{The principle of indifference is often stated in terms of degree of belief: it is the agent that has no reason to prefer one outcome over the other. We state it in more objective terms: the system and preparation procedure do not have a preference. If an agent believes a die to be fair, while in fact the die is loaded, the principle of indifference gives wrong empirical results, and therefore, for us, it does not apply.} If the die has 6 sides, we assign probability $1/6$ for each side. The part of probability theory that is linked to combinatorics works like this. Note that what number we use to label each side of the die, or whether we use something else (e.g. for poker dice, images of playing cards) is irrelevant for the probability assignment. Therefore, when applied to discrete variables, the principle of indifference is invariant under relabeling.
 
-If we try to apply the same idea on the continuous, however, things are not as simple. Suppose we have a factory that produces boxes at random, with side from $1m$ to $3m$. Furthermore, let's assume that the manufacturing procedure does not have preference for the size of the boxes. Using the principle of indifference, we assume a uniform distribution for the side from $1m$ and $3m$, which gives us an expectation of $2m$. However, we could have equally said that the factory does not have a preference for the total volume, and assign a uniform distribution for the volume from $1m^3$ to $27 m^3$, which gives us an expectation of $14 m^3$. The problem is that $(2m)^3 = 8 m^3 \neq 14 m^3$. That is, the principle of indifference does not give unique answers over the continuum. The obvious, in retrospect, problem is that $x \to x^3$ is a non-linear transformation, and uniform distribution do not remain uniform under non-linear transformations. Another way to frame it, on the continuum we do not have a probability, but a probability density, which has units of probability over unit of the variable. In the first case the units were probability over meters while in the second probability over meters cubed. The density, then, is unit dependent, it depends on the variable.
+%TODO: understand what to do for units
+
+If we try to apply the same idea on the continuum, however, things are not as simple. Suppose we have a factory that produces boxes at random, with side from $1m$ to $3m$. Furthermore, let's assume that the manufacturing procedure does not have a preference for the size of the boxes. Using the principle of indifference, we assume a uniform distribution for the side from $1m$ to $3m$. However, we could have equally said that the factory does not have a preference for the total volume, and assign a uniform distribution for the volume from $1m^3$ to $27 m^3$. The problem is that $x \to x^3$ is a non-linear transformation, and uniform distributions do not remain uniform under non-linear transformations. Another way to frame it, on the continuum we do not have a probability, but a probability density, which has units of probability over units of the variable. In the first case the units were probability over meters while in the second probability over meters cubed. The density, then, is unit dependent, it depends on the variable.
 
 This is essentially our problem:
 \begin{insight}
@@ -2172,18 +2219,18 @@ How does phase space solve the problem? Phase space is defined by two variables,
 \end{equation}
 which means
 \begin{equation}
-	d \hat{q} d \hat{p} = d_q \hat{q} \, dq \, d_{\hat{q}} q \, dp = dq \, dp.
+	d \hat{q} d \hat{p} = d_q \hat{q} \, dq \, d_{\hat{q}} q \, dp = d_q q \, dq \, dp = dq \, dp.
 \end{equation}
-The area is conserved under a generic change of $q$ precisely because $p$ changes in the opposite way.\footnote{In statistical mechanics, it is often said that Liouville's theorem justifies the use of conjugate variables. Liouville's theorem states that under Hamiltonian mechanics the density, or equivalently the state volume is conserved, which corresponds to assumption \ref{assum_detrev}. As we mentioned before, the conservation of volume under time would not be physically meaningful if first volume would not be an objective quantity. Therefore Liouville's theorem does \emph{not} justify the use of conjugate variables: it is the invariance under coordinate transformation that does. }
+The area is conserved under a generic change of $q$ precisely because $p$ changes in the opposite way.\footnote{In statistical mechanics, it is often said that Liouville's theorem justifies the use of phase space volume as state count. Liouville's theorem states that under Hamiltonian evolution the density, or equivalently the phase space volume is conserved, which corresponds to assumption \ref{assum_detrev}. As we mentioned before, the conservation of volume in time would not be physically meaningful if the volume were not first an objective quantity. Therefore Liouville's theorem does \emph{not} justify the use of phase space volume as state count: it is the invariance under equal time coordinate changes that does. }
 
-While the math is clear, what is the physics behind this? Why does conjugate momentum magically change when we change position? This is better understood if we think in kinematic variables: position and velocity. Why would velocity change when we change position? Because units of velocity are units of position over time. If we redefine units of position, we will redefine units of velocity as well. As we said before, the mathematical tools we currently used do not capture all the physical elements, and unit dependence is something that mathematics currently fails to capture. The defining role of coordinates varaibles $q^i$, then, is not that they describe position, but rather the following:
+While the math is clear, what is the physics behind this? Why does conjugate momentum magically change when we change position? This is better understood if we think in kinematic variables: position and velocity. Why would velocity change when we change position? Because units of velocity are units of position over time. If we redefine units of position, we will redefine units of velocity as well. As we said before, the mathematical tools we currently use do not capture all the physical elements, and unit dependence is something that mathematics currently fails to capture. The defining role of coordinate variables $q^i$, then, is not that they describe position, but rather the following:
 \begin{insight}
 	The coordinate variables $q^i$ define the unit system.
 \end{insight}
 
-What are the units of conjugate momentum, then? Given that the product $dq dp$ is invariant and it measures the count of configuration for one DOF, $p_i$ must have units of configurations divided by units of the corresponding $q^i$. By convention, we measure phase space areas in units of angular momentum, by units of action $h$, but why do we do that? Suppose that we track position by an angle in radians $q^\theta$, conjugate momentum $p_\theta$ will be expressed in units of area of phase space, and therefore angular momentum. This is the connection between angular momentum and phase space areas: the conjugate of a dimensionless quantity must have the same physical dimensions of areas of phase space. However, if we change the angle from radians to degrees, conjugate momentum will be units of $h$ over degrees. That is, it is improper to say the count of states is expressed in units of angular momentum. Moreover, while two quantities that represent the same physical quantity must have the same physical dimension, the converse is not true.\footnote{In general, units and physical dimensions keep track of some aspects of physical quantities, but not everything. For example, one can show that, dimensionally, pressure is equal to energy over volume. This relationship is actually useful when describing fluids. On the other hand, energy density is another useful quantity to, for example, measure the capacity of batteries. There is no relationship between the energy density of a battery and its pressure. Another puzzle: if one multiplies radians and meters, what is the resulting unit? Consider the area of the side of a cylinder section $\theta r h$ where $\theta$ is the angular size of the section, $r$ is the radius and $h$ is the height of the cylinder. If we multiply $\theta$ and $r$, we get the length of the arc, which is a distance: we get meters. However, if we multiply $\theta$ and $h$, we do not get a length, we have an angle times length: we get meters times radians. The issue is that an angle is really a ratio between the length of the arc and the length of the radius. Only a multiplication by the correct radius will give back a distance.} Ultimately, areas in phase space are measured with those units because, in an inertial Cartesian coordinate frame, linear kinetic momentum times distance can be used to count the configurations of the system.
+What are the units of conjugate momentum, then? Given that the product $dq dp$ is invariant and it measures the count of configurations for one DOF, $p_i$ must have units of configurations divided by units of the corresponding $q^i$. By convention, we measure phase space areas in units of angular momentum, in units of action $h$, but why do we do that? Suppose that we track position by an angle in radians $q^\theta$. Conjugate momentum $p_\theta$ will be expressed in units of area of phase space, and therefore angular momentum. This is the connection between angular momentum and phase space areas: the conjugate of a dimensionless quantity must have the same physical dimensions of areas of phase space. However, if we change the angle from radians to degrees, conjugate momentum will be units of $h$ over degrees. That is, it is improper to say the count of states is expressed in units of angular momentum. Moreover, while two quantities that represent the same physical quantity must have the same physical dimension, the converse is not true.\footnote{In general, units and physical dimensions keep track of some aspects of physical quantities, but not everything. For example, one can show that, dimensionally, pressure is equal to energy over volume. This relationship is actually useful when describing fluids. On the other hand, energy density is another useful quantity to, for example, measure the capacity of batteries. There is no relationship between the energy density of a battery and its pressure. Another puzzle: if one multiplies radians and meters, what is the resulting unit? Consider the area of the side of a cylinder section $\theta r h$ where $\theta$ is the angular size of the section, $r$ is the radius and $h$ is the height of the cylinder. If we multiply $\theta$ and $r$, we get the length of the arc, which is a distance: we get meters. However, if we multiply $\theta$ and $h$, we do not get a length, we have an angle times length: we get meters times radians. The issue is that an angle is really a ratio between the length of the arc and the length of the radius. Only a multiplication by the correct radius will give back a distance.} Ultimately, areas in phase space are measured with those units because, in an inertial Cartesian coordinate frame, linear kinetic momentum times distance can be used to count the configurations of the system, as we saw when discussing the full kinematic equivalence.
 
-To recap, we saw that we cannot define a coordinate invariant density over a single continuous variable, but we can do that over two variables, if one has inverse units with respect to the first. Is this the only case? What happens if we use three or more variables? Suppose that $q$ is the only variable that defines the unit system for a set of states, meaning that all other variables have derived units. Then under unit change $\hat{q} = \hat{q}(q)$ the units of all other variables must be uniquely defined. Suppose that we add a single additional constraint, that the measure of states is invariant. How many total variables can the state space have? We saw there must be more than one variable, or we cannot change the unit arbitrarily. Now suppose that we have three or more variables. Given that we have only two constraints, the choice of unit change and the area conservation, these are not enough to fully determine the transformation of all variables, and therefore the units of all variables. Therefore it would not be true the units of $q$ fully determine the units of all variables. This tells us that, to satisfy the principle of relativity and have coordinate invariant densities at the same time, a state space for a system that is fully characterized by a single unit, must have exactly one additional quantity, conjugate momentum, that changes covariantly under unit change. We reach the following
+To recap, we saw that we cannot define a coordinate invariant density over a single continuous variable, but we can do that over two variables, if one has inverse units with respect to the first. Is this the only case? What happens if we use three or more variables? Suppose that $q$ is the only variable that defines the unit system for a set of states, meaning that all other variables have derived units. Then under unit change $\hat{q} = \hat{q}(q)$ the units of all other variables must be uniquely defined. Suppose that we add a single additional constraint, that the measure of states is invariant. How many total variables can the state space have? We saw there must be more than one variable, or we cannot change the unit arbitrarily. Now suppose that we have three or more variables. Given that we have only two constraints, the choice of unit change and the area conservation, these are not enough to fully determine the transformation of all variables, and therefore the units of all variables. Therefore it would not be true the units of $q$ fully determine the units of all variables. This tells us that, to have densities that are invariant under equal time coordinate changes, a state space for a system that is fully characterized by a single unit must have exactly one additional quantity, conjugate momentum, that changes covariantly under unit change. We reach the following
 \begin{insight}
 	Degrees of freedom are two dimensional because only these allow coordinate invariant densities and count of configurations.
 \end{insight}
@@ -2552,7 +2599,7 @@ Lastly, both $f$ and $\mu$ must not depend on the choice of state variables. The
 Condition \ref{rp-cm-ir-condDistributionOverPhaseSpace} is therefore equivalent to condition \ref{rp-cm-ir-condMadeOfInfinitesimalParts}. Classical mechanics describes exactly those systems that follow
 \renewcommand{\theassump}{IR}
 \begin{assump}[Infinitesimal Reducibility]\label{assum_infirr}
-	The system is infinitesimally reducible. That is, the state of the whole is equivalent to the state of its infinitesimal parts.
+	The state of the system is reducible to the state of its infinitesimal parts. That is, specifying the state of the whole system is equivalent to specifying the state of its parts, which in turn is equivalent to specifying the state of its subparts and so on.
 \end{assump}
 \renewcommand{\theassump}{\Roman{assump}}
 Assumption \ref{assum_infirr} is, therefore, the constitutive assumption of classical mechanics. Assumptions \ref{assum_infirr}, \ref{assum_indep} and \ref{assum_detrev} are the constitutive assumption of the Hamiltonian formulation. Assumptions \ref{assum_infirr}, \ref{assum_indep} and \ref{assum_kineq} are the constitutive assumptions of Newtonian mechanics.  Assumptions \ref{assum_infirr}, \ref{assum_indep}, \ref{assum_detrev} and \ref{assum_kineq} are the constitutive assumptions of Lagrangian mechanics. 
@@ -2637,19 +2684,19 @@ This final result should really make it clear that the foundations of statistica
 	\centering
 	\begin{tikzpicture}
 		\node[draw, minimum width=15cm, minimum height=8.75cm] (csx) {};
-		\node[below right] at ([xshift=2mm,yshift=-2mm]csx.north west) {IR: Classical systems};
+		\node[below right] at ([xshift=2mm,yshift=-2mm]csx.north west) {\ref{assum_infirr}: Classical systems};
 		\node[draw, minimum width=13cm, minimum height=7cm, rounded corners=5mm, above] (inx) at ([yshift=0.25cm]csx.south) {};
-		\node[below right] at ([xshift=4mm,yshift=-3mm]inx.north west) {IND: DOF independence};
+		\node[below right] at ([xshift=4mm,yshift=-3mm]inx.north west) {\ref{assum_indep}: Classical phase space};
 		
 		\node[ellipse, minimum width=10cm, minimum height=5cm, draw, right] (ns) at ([xshift=1cm,yshift=-0.75cm]inx.west) {};
-		\node [align=left, above] at ([xshift=-1mm,yshift=1mm]ns.north west) {KE: Newtonian \\systems};
+		\node [align=left, above] at ([xshift=-1mm,yshift=1mm]ns.north west) {\ref{assum_kineq}: Newtonian \\systems};
 		
 		\node[ellipse, minimum width=6cm, minimum height=4.5cm, draw] (hs) at ([xshift=-1.7cm]ns.east){};
-		\node [align=right, above right] at ([xshift=-1mm, yshift=-4mm]hs.north) {DS: Hamiltonian\\ systems};
+		\node [align=right, above right] at ([xshift=-1mm, yshift=-4mm]hs.north) {\ref{assum_detrev}: Hamiltonian\\ systems};
 		\node [align=center, right] at ([xshift=14
-		mm]hs.west) {KE+DS: \\Lagrangian \\systems};
+		mm]hs.west) {\ref{assum_kineq}+\ref{assum_detrev}: \\Lagrangian \\systems};
 	\end{tikzpicture}
-	\caption {TODO: This is the caption}
+	\caption {Relationship between the constitutive assumptions and the different formulations of classical mechanics. All classical systems satisfy infinitesimal reducibility. The independence of DOF recovers classical phase space. An ideal gas, with state variables $[P \, V \, T]$ is an example of a classical system that does not satisfy IND. Another example is a systems with non-holonomic constraints. Newtonian system are fully characterized by spatial trajectories. Hamiltonian systems are characterized by deterministic and reversible dynamics. Lagrangian systems are characterized by both.}
 \end{figure}
 Let's step back and sum up all that we learned by applying the reverse physics approach to classical mechanics. If we start from scratch, the first assumption that we need to set is Infinitesimal Reducibility \ref{assum_infirr}. This tells us that the domain of classical physics is those objects that can be thought of as being made of arbitrarily small parts. For these objects, specifying the state of the whole system is equivalent to specifying the state of all the infinitesimal parts. In this context, a particle is an infinitesimal part, the limit of recursive reduction of parts into smaller parts. Mathematically, the assumption tells us that the state space of the particles is a differentiable manifold, together with a volume measure that defines the count of states for each region. The state space of a classical object is a distribution over such manifold.
 
