@@ -619,6 +619,10 @@ On the other side, Hamiltonian and Lagrangian mechanics are coordinate independe
 
 We now turn our attention to Hamiltonian mechanics and try to understand exactly what types of systems it focuses on. We will find twelve equivalent formulations of Hamiltonian mechanics that link ideas from vector calculus, differential geometry, statistical mechanics, thermodynamics, information theory and plain statistics. The overall result is that Hamiltonian mechanics focuses on systems that are assumed to be deterministic and reversible. We will see how the physical significance of that assumption differs from mathematically naive characterizations.
 
+\subsection{Mathematical characterizations}
+
+%TODO: finalize syntax for vectors (no commas?)
+
 To simplify our discussion, we will first concentrate on a single degree of freedom. The first characterization of Hamiltonian mechanics is naturally in terms of the equations
 \begin{equation}\label{rp-cm-hsd-condEquations}
 	\tag{HM-1D}
@@ -681,7 +685,7 @@ Conversely, we can see that each divergenceless field in two dimensions admits a
 \begin{equation}
 	dH = \partial_q H dq + \partial_p H dp = - S^p dq + S^q dp.
 \end{equation}
-If we equate the components, we recover \ref{rp-cm-hsd-condEquations}. Geometrically, at least for the one dimensional degree of freedom, we can understand the difference of the Hamiltonian between two states as the flow of the displacement field between them.
+If we equate the components, we recover \ref{rp-cm-hsd-condEquations}. Geometrically, at least for the one dimensional case, we can understand the difference of the Hamiltonian between two states as the flow of the displacement field between them.
 
 \begin{figure}[h]
 	\centering
@@ -783,7 +787,7 @@ It is useful to look more closely at the definition of the Poisson bracket
 		\partial_q g & \partial_p g \\
 	\end{array} \right|.
 \end{equation}
-For a single degree of freedom, the Poisson bracket coincides with the Jacobian determinant, where $f$ and $g$ are the two new variables. It essentially tells us how the volume changes if we change state variables from $[q, p]$ to $[f, g]$. Canonical coordinates and transformations, then, are those that do not change the units of area. The Poisson bracket can be expressed\footnote{To see how our definitions and notation map to that used in differential geometry, let us define $\partial^a H = \omega^{ab} \partial_a H$. Note that $\partial^a H$ corresponds to the Hamiltonian vector field of $H$ usually noted $X_H$. The Poisson bracket is usually defined as $\omega(X_f, X_g)$. In our notation this becomes $\partial^a f \, \omega_{ab} \partial^b g = \omega^{ac} \partial_c f \omega_{ab} \omega^{bd} \partial_d g = \omega^{ac} \partial_c f \delta_a^d \partial_d g = \omega^{ac} \partial_c f \partial_a g$. One can see how the notation mimics the Einstein notation of general relativity and avoids the introduction of ad-hoc symbols.} as
+For a single degree of freedom, the Poisson bracket coincides with the Jacobian determinant, where $f$ and $g$ are the two new variables. It essentially tells us how the volume changes if we change state variables from $[q, p]$ to $[f, g]$. Canonical transformations, then, are those that do not change the units of area. The Poisson bracket can be expressed\footnote{To see how our definitions and notation map to that used in differential geometry, let us define $\partial^a H = \omega^{ab} \partial_a H$. Note that $\partial^a H$ corresponds to the Hamiltonian vector field of $H$ usually noted $X_H$. The Poisson bracket is usually defined as $\omega(X_f, X_g)$. In our notation this becomes $\partial^a f \, \omega_{ab} \partial^b g = \omega^{ac} \partial_c f \omega_{ab} \omega^{bd} \partial_d g = \omega^{ac} \partial_c f \delta_a^d \partial_d g = \omega^{ac} \partial_c f \partial_a g$. One can see how the notation mimics the Einstein notation of general relativity and avoids the introduction of ad-hoc symbols.} as
 \begin{equation}
 	\{f, g\} = - \partial_a f \omega^{ab} \partial_b g = \partial_b g \omega^{ba} \partial_a f
 \end{equation}
@@ -816,6 +820,8 @@ as the line integral of the rotated displacement field $S_a$. We can do that bec
 is equivalent to condition \ref{rp-cm-hsd-condDivergenceDisplacement}.\footnote{Those familiar with relativistic electromagnetism will recognize the expression $\partial_a S_b - \partial_b S_a$ as the generalization of the curl. More properly, it is the exterior derivative applied to a one-form.} In fact, we can read equation \ref{rp-cm-hsd-condGeneralizedEquations} as saying that the rotated displacement field is the gradient of the scalar potential $H$.
 
 We can see that we have found plenty of alternative characterizations of Hamilton's equations \ref{rp-cm-hsd-condEquations} (or \ref{rp-cm-hsd-condGeneralizedEquations}). Conditions  \ref{rp-cm-hsd-condDivergenceDisplacement}, \ref{rp-cm-hsd-condUnitaryJacobian}, \ref{rp-cm-hsd-condConservedVolume} and \ref{rp-cm-hsd-condConservedDensity} relate more directly to the displacement field $S^a$, while conditions \ref{rp-cm-hsd-condConservedSymplectic}, \ref{rp-cm-hsd-condConservedPoisson} and \ref{rp-cm-hsd-condCurlRotatedDisplacement} relate more directly to $\omega_{ab}$ and the rotated displacement field $S_a$. Nonetheless, they are all in terms of the mathematical description. While these are useful, the final goal of reverse physics is to find physical assumptions, not just equivalent mathematical definitions. So it is time to step back and try to understand what the math is really about.
+
+\subsection{Physical characterizations}
 
 Let us first reflect on what we just found out: the defining characteristic of Hamiltonian mechanics is not the transport of points, but the transport of areas and densities. If classical Hamiltonian mechanics were really about and only about point particles, there would be no reason for it to be characterized by \ref{rp-cm-hsd-condDivergenceDisplacement}, \ref{rp-cm-hsd-condConservedVolume} or \ref{rp-cm-hsd-condConservedDensity}. In fact, there would be no reason for the equations of motion \ref{rp-cm-hsd-condEquations} to be differentiable. Differentiable equations are exactly needed if we need to define the Jacobian, the transport of areas, or of densities defined on those areas. Classical point particles, then, are more aptly conceived not as points, but as infinitesimal regions of phase space, as distributions so peaked that only the mean value is important.
 
@@ -856,7 +862,7 @@ Information entropy, then, remains constant if and only if the logarithm of the 
 	\tag{DR-INFO}
 	\eqtext{The evolution conserves information entropy}	
 \end{equation}
-is equivalent to \ref{rp-cm-hsd-condConservedVolume} and is yet another characterization of Hamiltonian mechanics.
+is equivalent to \ref{rp-cm-hsd-condUnitaryJacobian} and is yet another characterization of Hamiltonian mechanics.
 
 The fact that determinism and reversibility is equivalent to conservation of information entropy should not be, in retrospect, surprising. Given a distribution, its information entropy quantifies the average amount of information needed to specify a particular element chosen according to that distribution. If the evolution is deterministic and reversible, giving the initial state is equivalent to giving the final state and therefore the information to describe one or the other must be the same. Determinism and reversibility, then, can be understood as the informational equivalence between past and future descriptions.
 
@@ -876,7 +882,7 @@ which means the uncertainty remains unchanged if and only if the Jacobian is uni
 	\tag{DR-UNC}
 	\eqtext{The evolution conserves the uncertainty of peaked distributions}	
 \end{equation}
-is equivalent to \ref{rp-cm-hsd-condConservedVolume} and is another characterization of Hamiltonian mechanics.
+is equivalent to \ref{rp-cm-hsd-condUnitaryJacobian} and is another characterization of Hamiltonian mechanics.
 
 \begin{figure}[h]
 	\centering
@@ -886,6 +892,8 @@ is equivalent to \ref{rp-cm-hsd-condConservedVolume} and is another characteriza
 \end{figure}
 
 This connection gives us yet another insight on the nature of determinism and reversibility in physics. Given that all physically meaningful descriptions are finite precision, a system is deterministic and reversible in a physically meaningful sense if and only if the past/future descriptions can be reconstructed/predicted at the same level of precision. This gives us another perspective as to why areas and densities must be conserved.
+
+\subsection{Assumption of determinism and reversibility}
 
 We have found twelve equivalent characterizations that link Hamiltonian mechanics, vector calculus, differential geometry, statistical mechanics, thermodynamics, information theory and plain statistics. Though we only talked about the case of a single degree of freedom, it gives us a much better idea of what systems Hamiltonian mechanics is supposed to describe, those that satisfy the following
 \renewcommand{\theassump}{DR}
