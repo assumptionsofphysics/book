@@ -255,6 +255,70 @@ Can we reconstruct the forces acting on this system?
 \begin{figure}
 	\centering
 	\begin{tikzpicture}
+		\def\xi{0.25};
+		\def\vi{1.25};
+		\def\m{1};
+		\def\b{1};
+		\pgfplotsset{ticks=none}
+		\begin{axis}[
+			width=5.3cm,
+			height=4.5cm,				
+			axis lines=middle,
+			axis line style={-},
+			clip=false,
+			xlabel=$t$,
+			xlabel style={below=5pt},
+			ylabel=$x$,
+			ylabel style={above=2pt, left},
+			xmin=0,xmax=4,
+			ymin=0,ymax=2,
+			domain=0:4,
+			]
+			\addplot[black,samples=20]{\xi + \vi*(\m/\b)*(1-exp((-\b/\m)*x))}
+			node [pos=0,left] {$x_0$};
+			\addplot[black,samples=2,dashed,opacity=0.5] {1.5}
+			node [pos=0,left,opacity=1] {$x_0+ \frac{m}{b}v_0$};
+		\end{axis}
+		
+		\begin{axis}[
+			xshift=5cm,
+			width=5.3cm,
+			height=4.5cm,				
+			axis lines=middle,
+			axis line style={-},
+			clip=false,
+			xlabel=$t$,
+			xlabel style={below=5pt},
+			ylabel=$v$,
+			ylabel style={above=2pt, left},
+			xmin=0,xmax=4,
+			ymin=0,ymax=1.7,
+			domain=0:4,
+			]
+			\addplot[black,samples=20]{\vi*exp((-\b/\m)*x))}
+			node [pos=0,left] {$v_0$};
+			
+		\end{axis}
+		
+		\begin{axis}[
+			xshift=10cm,
+			width=5.3cm,
+			height=4.5cm,				
+			axis lines=middle,
+			axis line style={-},
+			clip=false,
+			xlabel=$t$,
+			xlabel style={below=5pt},
+			ylabel=$a$,
+			ylabel style={above=2pt, left},
+			xmin=0,xmax=4,
+			ymin=-1.4,ymax=0.4,
+			domain=0:4,
+			]
+			\addplot[black,samples=20]{-\vi*(\b/\m)*exp((-\b/\m)*x))}
+			node [pos=0,left] {$-\frac{b}{m}v_0$};
+			
+		\end{axis}
 	\end{tikzpicture}
 	\caption {TODO: F1}
 \end{figure}
@@ -311,6 +375,76 @@ That is, the energy decreases more slowly than it should. This is not good.
 \begin{figure}
 	\centering
 	\begin{tikzpicture}
+		\def\qi{0.25};
+		\def\pi{1.25};
+		\def\vi{1.25};
+		\def\m{1};
+		\def\b{1};
+		\pgfplotsset{ticks=none}
+		\begin{axis}[
+			width=5.3cm,
+			height=4.5cm,				
+			axis lines=middle,
+			axis line style={-},
+			clip=false,
+			xlabel=$t$,
+			xlabel style={below=5pt},
+			ylabel=$q$,
+			ylabel style={above=2pt, left},
+			xmin=0,xmax=4,
+			ymin=0,ymax=2,
+			domain=0:4,
+			]
+			\addplot[black,samples=20]{\qi + (\pi/\b)*(1-exp((-\b/\m)*x))}
+			node [pos=0,left] {$q_0$};
+			\addplot[black,samples=2,dashed,opacity=0.5] {1.5}
+			node [pos=0,left,opacity=1] {$q_0+\frac{1}{b}p_0$};
+		\end{axis}
+		\begin{axis}[
+			xshift=5cm,
+			width=5.3cm,
+			height=4.5cm,				
+			axis lines=middle,
+			axis line style={-},
+			clip=false,
+			xlabel=$t$,
+			xlabel style={below=5pt},
+			ylabel=$p$,
+			ylabel style={above=2pt, left},
+			xmin=0,xmax=4,
+			ymin=0,ymax=1.7,
+			domain=0:4,
+			]
+			\addplot[black,samples=20]{\m*\vi*exp((-\b/\m)*x)}
+			node [pos=0.5,above=5pt] {$mv(t)$};
+			\addplot[black,samples=20]{\pi}
+			node [pos=0,left] {$p_0$}
+			node [pos=0.5,above] {$p(t)$};
+			
+		\end{axis}
+		
+		\begin{axis}[
+			xshift=10cm,
+			width=5.3cm,
+			height=4.5cm,				
+			axis lines=middle,
+			axis line style={-},
+			clip=false,
+			xlabel=$t$,
+			xlabel style={below=5pt},
+			ylabel=$E$,
+			ylabel style={above=2pt, left},
+			xmin=0,xmax=4,
+			ymin=0,ymax=1,
+			domain=0:4,
+			]
+			\addplot[black,samples=20]{0.5*\m*pow(\vi,2)*exp((-\b/\m)*2*x))}
+			node [pos=0.3,below,left=1pt] {$E(t)$};
+			\addplot[black,samples=20]{0.5*\m*pow(\vi,2)*exp((-\b/\m)*x))}
+			node [pos=0,left] {$\frac{p_0^2}{2m}$}
+			node [pos=0.4,above=5pt] {$H(t)$};
+			
+		\end{axis}
 	\end{tikzpicture}
 	\caption {TODO: F2}
 \end{figure}
@@ -332,6 +466,67 @@ Now everything actually works perfectly: the relationship between velocity and c
 \begin{figure}
 	\centering
 	\begin{tikzpicture}
+		\def\qi{0.25};
+		\def\pi{1.25};
+		\def\vi{1.25};
+		\def\m{1};
+		\def\b{1};
+		\pgfplotsset{ticks=none}
+		\begin{axis}[
+			width=5.3cm,
+			height=4.5cm,				
+			axis lines=middle,
+			axis line style={-},
+			clip=false,
+			xlabel=$t$,
+			xlabel style={below=5pt},
+			ylabel=$\hat{m}$,
+			ylabel style={above=2pt, left},
+			xmin=0,xmax=4,
+			ymin=0,ymax=2,
+			domain=0:4,
+			]
+			\addplot[black,samples=20,domain=0:4]{\m*exp((\b/\m)*x)/30}
+			node [pos=0,left] {$m$};
+		\end{axis}
+		\begin{axis}[
+			xshift=5cm,
+			width=5.3cm,
+			height=4.5cm,				
+			axis lines=middle,
+			axis line style={-},
+			clip=false,
+			xlabel=$t$,
+			xlabel style={below=5pt},
+			ylabel=$p$,
+			ylabel style={above=2pt, left},
+			xmin=0,xmax=4,
+			ymin=0,ymax=1.7,
+			domain=0:4,
+			]
+			\addplot[black,samples=20]{\pi}
+			node [pos=0,left] {$p_0$};		
+		\end{axis}
+		
+		\begin{axis}[
+			xshift=10cm,
+			width=5.3cm,
+			height=4.5cm,				
+			axis lines=middle,
+			axis line style={-},
+			clip=false,
+			xlabel=$t$,
+			xlabel style={below=5pt},
+			ylabel=$E$,
+			ylabel style={above=2pt, left},
+			xmin=0,xmax=4,
+			ymin=0,ymax=1,
+			domain=0:4,
+			]
+			\addplot[black,samples=20]{0.5*\m*pow(\vi,2)*exp((-\b/\m)*x))}
+			node [pos=0,left] {$\frac{p_0^2}{2m}$};
+			
+		\end{axis}
 	\end{tikzpicture}
 	\caption {TODO: F3}
 \end{figure}
