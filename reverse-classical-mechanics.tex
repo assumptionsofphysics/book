@@ -2613,25 +2613,23 @@ Given that position determines the unit system, condition \ref{rp-cm-fke-condUni
 
 Note that, in principle, a more complete account of Newtonian mechanics could be given. This has not been pursued given how Lagrangian and Hamiltonian mechanics play a much bigger role in field theories and in quantum mechanics.
 
-%Final TODO: make sure we actually did that
-
 \section{Directional degree of freedom}
 
-When recovering the structure of phase space, we only relied on the premise that $q^i$ define the units. We are now going to use that premise to define a directional degree of freedom, that is a degree of freedom that identifies a direction in space. We will see that, since a DOF must be composed of two variables, the only directional DOF that are possible are those in three dimensional space.
+When recovering the structure of phase space, we only relied on the premise that $q^i$ define the units. We are now going to use that premise to define a directional degree of freedom, that is a degree of freedom that identifies a direction in space. We will see that, since a DOF must be composed of two variables, the only directional DOFs that are possible are those in three dimensional space.
 
 \subsubsection{Magnetic dipole}
 
-Spatial and temporal DOFs are of fundamental importance given that every object must be located in space and time. We now want to focus our attention to a different type of DOF, one that captures a direction in space. In general, objects are not completely spherical symmetric and can be distinguished by their orientation. This is also true for fundamental particles, as their intrinsic angular momentum, their sping, gives them an orientation that can be detected and manipulated through magnetic forces.
+Spatial and temporal DOFs are of fundamental importance given that every object must be located in space and time. We now want to focus our attention on a different type of DOF, one that captures a direction in space. In general, objects are not completely spherically symmetric and can be distinguished by their orientation. This is also true for fundamental particles, as their intrinsic angular momentum, their spin, gives them an orientation that can be detected and manipulated through magnetic forces.
 
-To study this case, let's consider a magnetic dipole. The vector
+To study this case, let's consider a magnetic dipole. The magnetic moment $\mu_i$ can be written as
 \begin{equation}
-	\mu_i = \frac{\mathfrak{q}}{2m} L_i
+	\mu_i = \frac{\mathfrak{q}}{2m} L_i,
 \end{equation}
-describes the direction and magnitude of the magnetic moment. The Hamiltonian is given by
+where $\mathfrak{q}$ is the electric charge, $m$ is the mass and $L_i$ the angular momentum. The Hamiltonian for a magnetic dipole subjected to a magnetic field $B^i$ is given by
 \begin{equation}
 	H = - \mu_i B^i = - \frac{\mathfrak{q}}{2m} L_i B^i.
 \end{equation}
-To write the actual equations, we need to know what the conjugate variables of $L_i$ are or, equivalently, the form $\omega_{ab}$ or the Poisson brackets. Typically, one is given the Poisson brackets, therefore we will start from those. They are
+To write the equations of motion, we need to know what the conjugate variables of $L_i$ are or, equivalently, the form $\omega_{ab}$ or the Poisson brackets. Typically, one is given the Poisson brackets, therefore we will start from those. They are
 \begin{equation}
 	\{L_i, L_j\} = L_k \epsilon_{ijk}.
 \end{equation}
@@ -2646,7 +2644,7 @@ Therefore we have
 	d_t \vec{L} &= - \frac{\mathfrak{q}}{2m} \vec{B} \times \vec{L} .
 	\end{aligned}
 \end{equation}
-If we assume that the magnetic field is oriented along the $z$ axis, we have
+Without loss of generality, we can assume that the magnetic field is oriented along the $z$ axis. We have
 \begin{equation}
 	\begin{aligned}
 		d_t L_x &= - \frac{\mathfrak{q}}{2m} B^z L_y \epsilon_{xzy} = \frac{\mathfrak{q}}{2m} B^z L_y \\
@@ -2658,12 +2656,12 @@ If we integrate, assuming $L_i = L^0_i$ at time $t=0$, we have
 \begin{equation}
 	\begin{aligned}
 		\omega &= - \frac{\mathfrak{q}}{2m} B^z \\
-		L_x & = L_x^0 \cos \omega t - L_y^0 \sin \omega t \\
-		L_y & = L_x^0 \sin \omega t + L_y^0 \cos \omega t \\
-		L_z &= L_z^0
+		L_x(t) & = L_x^0 \cos \omega t - L_y^0 \sin \omega t \\
+		L_y(t) & = L_x^0 \sin \omega t + L_y^0 \cos \omega t \\
+		L_z(t) &= L_z^0
 	\end{aligned}
 \end{equation}
-which gives us the Larmor precession of the magnetic moment. This is clearly a Hamiltonian system, it obeys Hamilton's equations, but it seems to have three variables, the components of $L_i$, instead of two. Shouldn't we have conjugate pairs?
+which gives us the Larmor precession of the magnetic moment. This is clearly a Hamiltonian system, it obeys Hamilton's equations, but it seems to have three variables, the components of $L_i$, instead of an even number. Shouldn't we have conjugate pairs?
 
 Note that the norm $L$ of the vector is a constant of motion, only the angle changes. We can then write $L_i = L n_i$ where $n_i$ is a unit vector. The state space can be understood as the space of all possible vectors with the same magnitude, which is the surface of a 2-sphere. The size of an area $A$ over the surface of a sphere of radius $r$ can be measured using the solid angle
 \begin{equation}
@@ -2675,9 +2673,13 @@ which is already a unit independent quantity. The infinitesimal solid angle can 
 \end{equation}
 The two variables are not conjugate, as the area is not simply the product of the differentials. However, we can write
 \begin{equation}
-	d\Omega = d(\cos \varphi) d\theta = dn_z d\theta^{xy},
+	d\Omega = d(-\cos \varphi) d\theta.
 \end{equation}
-which means that the angle along a plane and the component orthogonal to the plane are conjugate. If we pick the variable $\theta^{xy}$ as the coordinate $q$ and $L_z$ as the conjugate $p$, we have two variables with the right geometrical relationship and with the right units. Therefore
+The $\cos \varphi$ is simply the component along the $z$ direction, while $\theta$ is the angle on the $x$-$y$ plane. Changing the orientation of the solid angle, and relabeling for clarity $\theta=\theta^{xy}$ we have
+\begin{equation}
+	d\Omega = dn_z d\theta^{xy},
+\end{equation}
+which means that the angle on a plane and the component orthogonal to the plane are conjugate. If we pick the variable $\theta^{xy}$ as the coordinate $q$ and $L_z$ as the conjugate $p$, we have two variables with the right geometric relationship and with the right units. Therefore
 \begin{equation}
 	\begin{aligned}
 		\omega_{\theta^{xy}L_z} &= - \omega_{L_z\theta^{xy}} = 1 \\
@@ -2715,32 +2717,32 @@ We can also recover the Poisson brackets for the components
 	\end{aligned}
 \end{equation}
 
-We can verify that Hamilton's equation work as before. If the magnetic field is aligned along the $z$ direction, we have
+We can verify that Hamilton's equations work as before. If the magnetic field is aligned along the $z$ direction, we have
 \begin{equation}
 	\begin{aligned}
 		H &= - \frac{\mathfrak{q}}{2m} L_z B^z \\
-		d_t \theta^{xy} &= \partial_{L_z} H = - \frac{\mathfrak{q}}{2m} L_z \\
+		d_t \theta^{xy} &= \partial_{L_z} H = - \frac{\mathfrak{q}}{2m} B^z \\
 		d_t L_z &= - \partial_{\theta^{xy}} H = 0.
 	\end{aligned}
 \end{equation}
-Given initial conditions $L_z^0$ and $\theta^{xy}_0$, we have
+Given initial conditions $\theta^{xy}_0$ and $L_z^0$, we have
 \begin{equation}
 	\begin{aligned}
-		L_x &= L_x^0 \\
-		\theta^{xy} &= \omega t + \theta^{xy}_0 \\
+		L_z(t) &= L_z^0 \\
+		\theta^{xy}(t) &= \omega t + \theta^{xy}_0 \\
 		L_x^0 &= \cos(\theta^{xy}_0)\sqrt{L^2 + (L_z^0)^2} \\
 		L_y^0 &= \sin(\theta^{xy}_0)\sqrt{L^2 + (L_z^0)^2} \\
-		L_x &= \cos\theta^{xy} \sqrt{L^2 - L_z^2} = \cos(\omega t + \theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} \\
+		L_x(t) &= \cos\theta^{xy}(t) \sqrt{L^2 - L_z^2(t)} = \cos(\omega t + \theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} \\
 		&= \cos(\omega t)\cos(\theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} - \sin(\omega t)\sin(\theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} \\
 		&= L_x^0 \cos \omega t - L_y^0 \sin \omega t \\
-		L_y &= \sin\theta^{xy} \sqrt{L^2 - L_z^2} = \sin(\omega t + \theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} \\
+		L_y(t) &= \sin\theta^{xy}(t) \sqrt{L^2 - L_z^2(t)} = \sin(\omega t + \theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} \\
 		&= \sin(\omega t)\cos(\theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} + \cos(\omega t)\sin(\theta^{xy}_0) \sqrt{L^2 - (L_z^0)^2} \\
 		&= L_x^0 \sin \omega t + L_y^0 \cos \omega t \\
 	\end{aligned}
 \end{equation}
 which recovers the precession.
 
-Let us sum up what we learned. The magnetic dipole is described by a single DOF, where the conjugate variables are the angle over a plane and the component of the angular momentum perpendicular to the plane. A constant force does not correspond to a constant angular acceleration, but to a constant velocity. Now the question is how and to what extent can this all be generalized.
+Let us sum up what we learned. The magnetic dipole is described by a single DOF, where the conjugate variables are the angle on a plane and the component of the angular momentum perpendicular to the plane. A constant force does not correspond to a constant angular acceleration, but to a constant angular velocity. Now the question is how and to what extent this can all be generalized.
 
 % Final TODO: units of action for units of state counting?
 
