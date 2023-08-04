@@ -1,0 +1,70 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\begin{document}
+\begin{tikzpicture}[scale=0.85]
+	\def\m{2};
+	\def\k{0.4};
+	\begin{axis}[
+		axis equal,
+		view={0}{90},
+		axis background/.style={fill=white},
+		xlabel=$q$,
+		ylabel=$p$,
+		ylabel style={rotate=-90,right, above=2pt},
+		]
+		\addplot3 [surf, domain=-8.5:8.5, y domain=-7:7.1, shader=flat,samples=30,
+		colormap={whitered}{rgb255=(255,255,255) rgb255=(255,50,50)}] {(y^2)/(2*\m) + 0.5*\k*(x^2)};
+		\addplot3 [
+		contour lua={levels={1,3,5},labels=false},thick,
+		contour/draw color={gray}] {(y^2)/(2*\m) + 0.5*\k*(x^2)};
+		\addplot[blue,
+		quiver={u=\k*x,v=y/\m},
+		-stealth,
+		samples=9,domain=0:2*pi, variable=\t,
+		] ({sqrt(2/\k)*cos(\t r)},{sqrt(2*\m)*sin(\t r)});
+		\addplot[blue,
+		quiver={u=\k*x,v=y/\m},
+		-stealth,
+		samples=9,domain=27.5:387.5, variable=\t,
+		] ({sqrt(2*3/\k)*cos(\t)},{sqrt(2*3*\m)*sin(\t)});
+		\addplot[blue,
+		quiver={u=\k*x,v=y/\m},
+		-stealth,
+		samples=9,domain=0:2*pi, variable=\t,
+		] ({sqrt(2*5/\k)*cos(\t r)},{sqrt(2*5*\m)*sin(\t r)});
+	\end{axis}
+	
+	\begin{axis}[
+		xshift=8cm,
+		axis equal,
+		view={0}{90},
+		axis background/.style={fill=white},
+		xlabel=$q$,
+		ylabel=$p$,
+		ylabel style={rotate=-90, right, above=2pt},
+		]
+		\addplot3 [surf, domain=-8.5:8.5, y domain=-7:7.1, shader=flat,samples=30,
+		colormap={whitered}{rgb255=(255,255,255) rgb255=(255,50,50)}] {(y^2)/(2*\m) + 0.5*\k*(x^2)};
+		\addplot3 [
+		contour lua={levels={1,3,5},labels=false},thick,
+		contour/draw color={gray}] {(y^2)/(2*\m) + 0.5*\k*(x^2)};
+		\addplot[blue,
+		quiver={u=y/\m,v=-\k*x},
+		-stealth,
+		samples=9,domain=0:2*pi, variable=\t,
+		] ({sqrt(2/\k)*cos(\t r)},{sqrt(2*\m)*sin(\t r)});
+		\addplot[blue,
+		quiver={u=y/\m,v=-\k*x},
+		-stealth,
+		samples=9,domain=27.5:387.5, variable=\t,
+		] ({sqrt(2*3/\k)*cos(\t)},{sqrt(2*3*\m)*sin(\t)});
+		\addplot[blue,
+		quiver={u=y/\m,v=-\k*x},
+		-stealth,
+		samples=9,domain=0:2*pi, variable=\t,
+		] ({sqrt(2*5/\k)*cos(\t r)},{sqrt(2*5*\m)*sin(\t r)});
+	\end{axis}
+\end{tikzpicture}
+\end{document}
