@@ -134,16 +134,17 @@ Reverse physics looks at the main physical theories, like classical mechanics, t
 
 The standard of rigor in this part is necessarily more relaxed as we do not have a guarantee that sufficiently mature mathematical tools exist to carry out the argument in a precise fashion. For example, we have found that the idea of a unit system is linked in a fundamental way to the notion of state spaces, yet we lack a fully developed mathematical framework to model units and their dependency. The goal is to test the ideas conceptually, find those that are broad enough and necessary enough to then justify investing further time in a more rigorous approach.
 
-The following are examples of the type of assumptions we have found to be good starting points.
+The following are examples of the type of assumptions we have found to be good starting points to rederive the different theories.
 
 \begin{description}
-	\item[Determinism and reversibility:] ``The system undergoes deterministic and reversible evolution." Mathematically, the physical properties of the system determine which category, in the mathematical sense, is used to describe the state space and deterministic, and reversible evolution will be an isomorphism in the category (i.e.~a bijective map that preserves the physical properties of the system). Therefore the law of evolution is not just a bijective map, but is also a linear transformation, a differentiable map or an isometry depending on the context.
+	\item[Determinism and reversibility:] ``The system undergoes deterministic and reversible evolution." Mathematically, the physical properties of the system determine which category, in the mathematical sense, is used to describe the state space, and deterministic and reversible evolution will be an isomorphism in the category (i.e.~a bijective map that preserves the physical properties of the system). Therefore the law of evolution is not just a bijective map, but is also a linear transformation, a differentiable map or an isometry depending on the context.
 	
-	\item[Infinitesimal reducibility:] ``Specifying the state of the whole system is equivalent to specifying the state of all its infinitesimal parts." For example, we can study the motion of a ball, but we can also mark a spot in red and study the motion of the mark. Knowing the evolution of the whole ball means knowing the evolution of any arbitrary spot and vice-versa. Mathematically, the state of the whole will be a distribution over the state space of the parts. It will need to be a distribution whose value is invariant under coordinate transformations. The state space of the infinitesimal parts, then, comes equipped with an invariant two-form upon which we can define such a distribution. The state space is therefore a symplectic manifold and the deteministic and reversible evolution is a symplectomorphism. That is, the infinitesimal parts follow classical Hamiltonian mechanics. Proper handling of the time variable will give us a relativistic version of the framework without extra assumptions.
+	\item[Infinitesimal reducibility:] ``Specifying the state of the whole system is equivalent to specifying the state of all its infinitesimal parts." For example, we can study the motion of a ball, but we can also mark a spot in red and study the motion of the mark. Knowing the evolution of the whole ball means knowing the evolution of any arbitrary spot and vice-versa. Mathematically, the state of the whole will be a distribution over the state space of the parts. It will need to be a distribution whose value is invariant under coordinate transformations. The state space of the infinitesimal parts, then, comes equipped with an invariant two-form upon which we can define such a distribution. The state space is therefore a symplectic manifold, that is,
+	the states of the infinitesimal parts are described by pairs of conjugate variables, which recovers phase space. If the previous assumption holds, deteministic and reversible evolution is a symplectomorphism, that is,  deterministic and reversible evolution follows classical Hamiltonian mechanics. Proper handling of the time variable will give us a relativistic version of the framework without extra assumptions.
 	
-	\item[Irreducibility:] ``Knowing the state of the whole system tells us nothing about its infinitesimal parts." For example, we can study the state of an electron by scattering photons off of it. But whenever a photon interacts with the electron, it interacts with the whole electron. There is no way to mark a part of an electron and study it independently from the rest. Mathematically, the state of the electron will be a distribution that evolves deterministically where the motion of each infinitesimal part evolves randomly. A complex vector space will be the appropriate tool to keep track of the internal chaotic motion leading to quantum mechanics.
+	\item[Irreducibility:] ``Specifying the state of the whole system tells us nothing about its infinitesimal parts." For example, we can study the state of an electron by scattering photons off of it. But whenever a photon interacts with the electron, it interacts with the whole electron. There is no way to mark a part of an electron and study it independently from the rest. Mathematically, the state of the electron will be a distribution that evolves deterministically where the motion of each infinitesimal part cannot be further described.
 	
-	\item[Kinematic equivalence:] ``Knowing the state of the system is equivalent to knowing its trajectory and vice-versa." This means that we will have to be able to transfer a distribution over state variables (i.e.~position and momentum) into a distribution over kinematic variables (i.e.~position and velocity). Mathematically, the symplectic two-form will induce a symmetric tensor over the tangent space for position. This will give us a metric and will also allow us to reformulate the laws of motion according to Lagrangian mechanics. Because the transformation is linear, we are able to constrain the Hamiltonian to the one for massive particles under scalar and vector potential forces.
+	\item[Kinematic equivalence:] ``Specifying the motion of the system is equivalent to specifying its state and evolution." This means that we will have to be able to re-express a distribution over kinematic variables (i.e.~position and velocity) into a distribution over state variables (i.e.~position and momentum) and vice-versa. Mathematically, the symplectic two-form will induce a symmetric tensor over the tangent space for position. This will give us a metric and will also allow us to reformulate the laws of motion according to Lagrangian mechanics. Because the transformation is linear, we are able to constrain the Hamiltonian to the one for massive particles under scalar and vector potential forces.
 \end{description}
 
 
@@ -170,7 +171,7 @@ We call an \textbf{axiom} a proposition that brings new objects or new propertie
 
 \section*{Current plan and status}
 
-In this version we have added a chapter on classical mechanics to the reverse physics part. We plan to follow that with a chapter on thermodynamics and statistical mechanics. For physical mathematics, the work is slowed down by the fact that general mathematical tools for the informational granularity appear to be missing. In particular, if we want state counting in quantum mechanics to be consistent with statistical mechanics and information theory, we need to a different notion of measure.
+In this version we have added a reverse physics part with a chapter on classical mechanics. We plan to follow that with a chapter on thermodynamics and statistical mechanics. For physical mathematics, the work is slowed down by the fact that general mathematical tools for the informational granularity appear to be missing. In particular, if we want state counting in quantum mechanics to be consistent with statistical mechanics and information theory, a more general notion of measure is needed.
 
 \section*{Changelog}
 
@@ -2894,13 +2895,13 @@ It is important to note that the requirements for continuous quantities cannot r
 
 \section{Classical mechanics}
 
-The work on classical mechanics is considered mostly concluded, in the sense that suitable initial assumptions have been identified. There are still a few open issues, such as the case of variable mass, the generalization of directional DOF to the relativistic case, or clarifying the nature or the generalization to infinite DOFs (i.e. field theories).
+The work on classical mechanics is considered mostly concluded, in the sense that suitable initial assumptions have been identified. There are still a few open issues, such as the case of variable mass, the generalization of the directional DOF to the relativistic case, or clarifying the nature or the generalization to infinite DOFs (i.e. field theories).
 
 \subsection{Curvature for particle dynamics}
 
 The assumption of kinematic equivalence already gives us relativistic Hamiltonians. Does it also give us a relationship between the curvature of the metric tensor and the forces acting on the particles?
 
-The setup is the following. Suppose we have two vectors in the extended phase space $d\xi^a = \{dq^\alpha, 0\}$ and $d\nu^a = \{0, dp_\alpha\}$. Using the symplectic form we have the invariant $d\xi^a \omega_{ab}d\nu^b = dq^\alpha dp_\alpha$. Under the kinematic assumption we have $dq^\alpha = dx^\alpha$ and $dp_\alpha = mg_{\alpha\beta}du^\beta + q A_\alpha$. We have $d\xi^a \omega_{ab}d\nu^b = dx^\alpha m g_{\alpha\beta} du^\beta + dx^\alpha q A_\alpha$.
+The setup is the following. Suppose we have two vectors in the extended phase space $d\xi^a = \{dq^\alpha, 0\}$ and $d\nu^a = \{0, dp_\alpha\}$. Using the symplectic form we have the invariant $d\xi^a \omega_{ab}d\nu^b = dq^\alpha dp_\alpha$. Under the kinematic assumption we have $dq^\alpha = dx^\alpha$ and $dp_\alpha = mg_{\alpha\beta}du^\beta + \mathfrak{q} A_\alpha$. We have $d\xi^a \omega_{ab}d\nu^b = dx^\alpha m g_{\alpha\beta} du^\beta + dx^\alpha \mathfrak{q} A_\alpha$.
 
 Since the two terms have to match at each point and the symplectic form has the same components at each point, can we constrain the change of the components of $g_{\alpha\beta}$? The general idea would be that components of $g_{\alpha\beta}$ may have to change in space/time coordinately with $A_\alpha$ as to make $d\xi^a \omega_{ab}d\nu^b = dq^\alpha dp_\alpha$ remain the same. Note that derivatives in $q^\alpha$ are taken at constant $p_\alpha$ while derivatives in $x^\alpha$ are taken at constant $u^\alpha$.
 
@@ -2910,13 +2911,13 @@ Since the two terms have to match at each point and the symplectic form has the 
 
 The key to recover thermodynamics is finding a definition of entropy that applies in very general cases and recovers the usual definition. Instead of using the logarithm of the count of states, we use the logarithm of the count of possible evolutions. That is, the ways a system can evolve under a specific process. The entropy of the system is automatically relativistic (i.e. we are essentially counting ``worldlines'' of the overall system in its state space) and is process dependent (i.e. contextual).
 
-In the case of deterministic and reversible evolution, the count of states is equivalent to the count of evolutions, and therefore the usual definition is recovered. In the case of statistical steady state over continuous time, that is when the probability distribution stabilizes, the states will traverse infinitely many states within a small time difference $dt$. The count of evolutions, then, can be shown to reduce to the permutations of infinite sequences which recovers the Gibbs/Shannon entropy.
+In the case of deterministic and reversible evolution, the count of states is equivalent to the count of evolutions, and therefore the usual definition is recovered. In the case of stochastic steady state over continuous time, that is when the probability distribution stabilizes, the states will traverse infinitely many states within a small time difference $dt$. The count of evolutions, then, can be shown to reduce to the permutations of infinite sequences which recovers the Gibbs/Shannon entropy.
 
-As for the behavior of entropy, the idea is that for a specific process, the state at a particular time identifies a set of possible evolutions. This would be the entropy of that states. Over the continuum, where states are points, the entropy would become a density of the count of evolution. In essence, the entropy of a system at a particular time tells us how much or how little the evolution is constrained. In other words, it tells us how much the system is expected to fluctuate.  As time evolves, the state changes, and the count of evolution changes as well. If the evolution is deterministic, the evolutions can never split, in the sense that all the evolutions that end up in a particular state must all go to another state. This means that for a deterministic process the count can never decrease. If the evolution is deterministic and reversible, then the count must stay the same. This recovers the feature of entropy to be a non-decreasing quantity, which is conserved during reversible processes.
+As for the behavior of entropy, the idea is that for a specific process, the state at a particular time identifies a set of possible evolutions. This would be the entropy of that state. Over the continuum, where states are points, the entropy would become a density of the count of evolutions. In essence, the entropy of a system at a particular time tells us how much or how little the evolution is constrained. In other words, it tells us how much the system is expected to fluctuate.  As time evolves, the state changes, and the count of evolutions changes as well. If the evolution is deterministic, the evolutions can never split, in the sense that all the evolutions that end up in a particular state must all go to another state. This means that for a deterministic process the count can never decrease. If the evolution is deterministic and reversible, then the count must stay the same. This recovers the feature of entropy to be a non-decreasing quantity, which is conserved during reversible processes.
 
-If the evolution allows equilibria, the evolutions will concentrate on states of equilibria. Given that states cannot go out of equilibrium once it has been reached, the count of evolution is maximized at equilibrium. This recovers another feature of entropy.
+If the evolution allows equilibria, the evolutions will concentrate around states of equilibria. Given that states cannot go out of equilibrium once it has been reached, the count of evolutions is maximized at equilibrium. This recovers another feature of entropy.
 
-Lastly, if two systems are independent, the way one evolves does not constrain the other. The total count of evolutions, then, is simply the product of the count of evolutions of the two systems. Since the entropy is the logarithm of the count of evolution, it sums over independent systems. This recovers the last property of entropy.
+Lastly, if two systems are independent, the way one evolves does not constrain the other. The total count of evolutions, then, is simply the product of the count of evolutions of the two systems. Since the entropy is the logarithm of the count of evolutions, it sums over independent systems. This recovers the last property of entropy.
 
 \subsection{Equation of state}
 
@@ -2963,7 +2964,7 @@ Since entropy is extensive, let us call $S$ the total entropy. Since the process
 
 \section{Quantum mechanics and irreducibility}
 
-Quantum mechanics can be recovered swapping reducibility with irreducibility as shown in diagram \ref{fig_quantum_diagram}, which can be used as a guide throughout this section.
+Quantum mechanics can be recovered by swapping reducibility with irreducibility as shown in diagram \ref{fig_quantum_diagram}, which can be used as a guide throughout this section.
 
 \begin{figure}[h]
 	\includegraphics[width=\columnwidth]{images/QuantumDiagram.png}
@@ -3150,7 +3151,7 @@ We want to construct a notion of differentials and differentiability that is the
 
 The idea is to define differentiability on the vector space structure alone. That is, given two vector spaces $V$ and $W$, a map $f: V \to W$ is differentiable if it becomes linear in the neighborhood. We would first define a differential as a sequence of vectors $\{v_i\}_{i=1}^{\infty} \in V$ such that there exists a vector $t \in V$ and a sequence of non-zero elements $\{a_i\}_{i=1}^{\infty} \in \mathbb{R}$ that converges to $0$ for which
 $$ \lim\limits_{i \to \infty} \frac{v_i}{a_i} = t.$$
-We call $t$ the \textbf{tangent vector} of the differential and $\{a_i\}_{i=1}^{\infty}$ its \textbf{convergence envelope}. Note that, given a sequence, these are not unique. We note $dv[a_i \, t]$ the differential with its tangent vector and convergence envelope. One can show that every differential can be written as $v_i = a_i t_i$ where $t_i$ converges to $t$.
+We call $t$ the \textbf{tangent vector} of the differential and $\{a_i\}_{i=1}^{\infty}$ its \textbf{convergence envelope}. Note that, given a sequence $v_i$, these are not unique. We note $dv[a_i \, t]$ the differential with its tangent vector and convergence envelope. One can show that every differential can be written as $v_i = a_i t_i$ where $t_i$ converges to $t$.
 
 We can now study how a map $f: V \to W$ maps differentials. Given a sequence  $\{v_i\}_{i=1}^{\infty} \in V$, we can define $w_i = f(v_i)$. If, additionally, we have a differential $dv[a_i \, t]$, we can define the sequence $\{w_i\}_{i=1}^{\infty} = \{f(v_i + a_i t_i) - f(v_i)\}_{i=1}^{\infty}$. Now, the observation here is that if the map is linear, the sequence $\{w_i\}_{i=1}^{\infty}$ will be a differential with tangent vector $f(t)$ and convergence envelope $a_i$. But any map that is locally linear will have the same property, given that differentials are local objects. Therefore we say $f$ is differentiable at $v \in V$ if there exists a map $d_v f |_{v_0} : V \to W$ such that $\{w_i\}_{i=1}^{\infty} = dw[a_i \, d_v f |_{v_0}(t)]$.
 
@@ -3158,7 +3159,7 @@ From a preliminary study, this would work on any vector space, regardless of dim
 
 \subsection{Differential geometry/geometric measure theory}
 
-In the Reverse Physics chapter about classical mechanics we have seen that forms can be understood as modeling additive functionals of subregions. We need to connect those ideas to the rest of the formal framework.
+In the reverse physics chapter about classical mechanics we have seen that forms can be understood as modeling additive functionals of subregions. We need to connect those ideas to the rest of the formal framework.
 
 Conceptually, we want to assign quantities to regions instead of points. If we assume these quantities are additive, the idea is that we can decompose them into the sum of infinitesimal contributions at each point. Therefore the differential objects exist as the limit of infinitesimal decomposition. This, again, reflects the overall spirit of the project that compels us to start from physically well defined entities (in this case the quantities associated with finite regions) and derive the theoretical ones (in this case the infinitesimal contributions that are integrated).
 
@@ -3532,7 +3533,8 @@ Additional subject-matter advisors (Phil): \\ \textit{\footnotesize review promp
 Diagrams and figures: \\ \textit{\footnotesize contributed one or more} & Matteo Carcassi (Ch. I.1), Saja Gherri (Ch. II.1,II.2) \\
 & \\
 & \\
-Test readers: \\ \textit{\footnotesize review prompted corrections and clarifications} & Uriah Israel, Dan McCusker, Micah Johnson, Everardo Olide, Chami Amarasinghe, Sean Kelly, Andre Antoine \\
+Test readers: \\ \textit{\footnotesize reviewed a full chapter or more} & Chami Amarasinghe, Andre Antoine, Saja Gherri, Uriah Israel, Micah Johnson, Sean Kelly, Dan McCusker, Everardo Olide \\
+Additional test readers: \\ \textit{\footnotesize review prompted corrections and clarifications} & Josce Kooistra, Armin Nikkhah Shirazi, Ayla Rodriguez, Alex Takla, Allan Vanzandt \\
 & \\
 & \\
 
