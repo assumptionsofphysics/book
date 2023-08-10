@@ -120,7 +120,6 @@ Note that we had no such requirement for the Hamiltonian. For example, $H=0$ lea
 \begin{figure}
 	\centering
 	\begin{tikzpicture}
-		%TODO: different thickness/color for the Hamiltonian and the axis
 		\pgfplotsset{ticks=none}
 		\begin{axis}[axis lines=middle,
 			xlabel=$q$,
@@ -154,8 +153,8 @@ Note that we had no such requirement for the Hamiltonian. For example, $H=0$ lea
 			domain=0:1,
 			xmin=0, xmax=1,
 			ymin=-1, ymax=1,]
-			\addplot[black,samples=2,domain=0:1]{x};
-			\addplot[black,samples=2,domain=0:1]{-x};
+			\addplot[black,thick,samples=2,domain=0:1]{x};
+			\addplot[black,thick,samples=2,domain=0:1]{-x};
 		\end{axis}
 	\end{tikzpicture}
 	\caption {On the left, the phase space diagram for a photon treated as a point particle. The Hamiltonian $H=c|p|$, on the right, is proportional to the modulus of $p$. Since $H$ is not differentiable when $p=0$, those states are excluded, consistent with the physics. The displacement field has only a $q$ component, which is $+c$ above the horizontal axis and $-c$ below the horizontal axis. } \label{fig_rp_cm_photon}
@@ -505,7 +504,8 @@ Now everything actually works perfectly: the relationship between velocity and c
 			domain=0:4,
 			]
 			\addplot[black,samples=20]{\pi}
-			node [pos=0,left] {$p_0$};		
+			node [pos=0,left] {$p_0$}
+			node [pos=0.5,above] {$p(t) = \hat{m}(t)v(t) $};
 		\end{axis}
 		
 		\begin{axis}[
@@ -524,13 +524,13 @@ Now everything actually works perfectly: the relationship between velocity and c
 			domain=0:4,
 			]
 			\addplot[black,samples=20]{0.5*\m*pow(\vi,2)*exp((-\b/\m)*x))}
-			node [pos=0,left] {$\frac{p_0^2}{2m}$};
+			node [pos=0,left] {$\frac{p_0^2}{2m}$}
+			node [pos=0.2,above,right=5pt] {$H(t) = E(t)$};
 			
 		\end{axis}
 	\end{tikzpicture}
 	\caption {Showing how $L = \frac{1}{2} m v^2 e^{\frac{b}{m}t}$ and $H =\frac{1}{2} \frac{p^2}{m} e^{-\frac{b}{m}t}$ can be interpreted as the Lagrangian and Hamiltonian of a variable mass system. The mass is increasing exponentially in time, while both conjugate and kinetic momentum remain constant. This means the velocity will need to decrease. The energy decreases at the same rate as the Hamiltonian. } \label{fig_rp_cm_dragVariableMass}
 \end{figure}
-%TODO: improve figure.
 
 Let us expand Newton's second law for a variable mass system.\footnote{Note that, in general, the variable mass system should take into account the momentum gained or lost by the system when the mass is acquired or ejected. In our case, we are assuming that no momentum is lost, which means that either the mass is acquired/ejected uniformly from all directions or it is just an apparent change that depends on the change of coordinates.} We have:
 \begin{equation}
