@@ -1,0 +1,98 @@
+\documentclass[tikz]{standalone}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\begin{document}
+	\begin{tikzpicture}[
+		declare function={mu1=-1;},
+		declare function={mu2=2;},
+		declare function={sigma=0.5;},
+		declare function={ratio=1.75;},
+		declare function={normal(\m,\s)=1/(2*\s*sqrt(pi))*exp(-(x-\m)^2/(2*\s^2));},
+		]
+		\def\a{3};
+		\def\b{6};
+		\def\d{2};
+		\def\g{5};
+		\def\f{7};
+		\def\c{-3};
+		\def\m{2}'
+		\def\sk{0.4};
+		
+		
+		\begin{axis}[compat=1.18,
+			ticks=none,
+			width=7.5cm,
+			height=7.5cm,
+			axis equal,
+			axis lines = middle,
+			view={0}{90},
+			axis background/.style={fill=white},
+			xlabel=$q$,
+			ylabel=$p$,
+			ylabel style={left},
+			]
+			\def\alpha{0};
+			\def\j{2.3};
+			\def\k{2.3};
+			\addplot3[
+			contour lua={levels={0},labels=false},thick, samples=50,
+			contour/draw color={gray}]
+			{\a*(cos(\alpha r)*(x-\j)+sin(\alpha r)*(y-\k))^4+\d*(cos(\alpha r)*(x-\j)+sin(\alpha r)*(y-\k))^2*(-sin(\alpha r)*(x-\j)+cos(\alpha r)*(y-\k))^2+\f*(cos(\alpha r)*(x-\j)+sin(\alpha r)*(y-\k))*(-sin(\alpha r)*(x-\j)+cos(\alpha r)*(y-\k))^2+\g*(cos(\alpha r)*(x-\j)+sin(\alpha r)*(y-\k))^2*(-sin(\alpha r)*(x-\j)+cos(\alpha r)*(y-\k))+\b*(-sin(\alpha r)*(x-\j)+cos(\alpha r)*(y-\k))^4+\c};
+			
+			
+			\def\alpha{-3.14/2};
+			\def\j{2.3};
+			\def\k{-2.3};
+			\addplot3[
+			contour lua={levels={0},labels=false},thick, samples=50,
+			contour/draw color={gray}]
+			{\a*(cos(\alpha r)*(x-\j)+sin(\alpha r)*(y-\k))^4+\d*(cos(\alpha r)*(x-\j)+sin(\alpha r)*(y-\k))^2*(-sin(\alpha r)*(x-\j)+cos(\alpha r)*(y-\k))^2+\f*(cos(\alpha r)*(x-\j)+sin(\alpha r)*(y-\k))*(-sin(\alpha r)*(x-\j)+cos(\alpha r)*(y-\k))^2+\g*(cos(\alpha r)*(x-\j)+sin(\alpha r)*(y-\k))^2*(-sin(\alpha r)*(x-\j)+cos(\alpha r)*(y-\k))+\b*(-sin(\alpha r)*(x-\j)+cos(\alpha r)*(y-\k))^4+\c};
+			
+			\addplot[blue,
+			quiver={u=y/\m,v=-\sk*x,scale arrows=0.5},
+			-stealth,
+			samples=9,domain=0:2*pi, variable=\t,
+			] ({0.5*sqrt(2/\sk)*cos(\t r)},{0.5*sqrt(2*\m)*sin(\t r)});
+			\addplot[blue,
+			quiver={u=y/\m,v=-\sk*x,scale arrows=0.5},
+			-stealth,
+			samples=9,domain=27.5:387.5, variable=\t,
+			] ({sqrt(2/\sk)*cos(\t)},{sqrt(2*\m)*sin(\t)});
+			\addplot[blue,
+			quiver={u=y/\m,v=-\sk*x,scale arrows=0.5},
+			-stealth,
+			samples=9,domain=0:2*pi, variable=\t,
+			] ({1.5*sqrt(2/\sk)*cos(\t r)},{1.5*sqrt(2*\m)*sin(\t r)});
+			\addplot[blue,
+			quiver={u=y/\m,v=-\sk*x,scale arrows=0.5},
+			-stealth,
+			samples=9,domain=27.5:387.5, variable=\t,
+			] ({2*sqrt(2/\sk)*cos(\t)},{2*sqrt(2*\m)*sin(\t)});
+		\end{axis}
+		\begin{axis}[
+			ticks=none,
+			xshift=6cm,
+			yshift=-1cm,
+			width=11.5cm,
+			axis lines=middle,
+			view={50}{50},
+			ymax=3,
+			xlabel=$q$,
+			ylabel=$p$,
+			ylabel style={right=8pt},
+			samples=26
+			]
+			\addplot3 [domain=-3:1,samples=31, samples y=0, thick, smooth] (x,-2,{normal(mu1,sigma)});
+			\addplot3 [domain=-4:0,samples=31, samples y=0, thick, smooth] (-1,x,{normal(mu1-1,sigma)});
+			\addplot3 [domain=-1:4,samples=31, samples y=0, thick, smooth] (x,1,{normal(mu2,sigma*ratio)*ratio});
+			\addplot3 [domain=0:2,samples=31, samples y=0, thick, smooth] (2,x,{normal(mu2-1,sigma/ratio)/ratio});
+			\node (start1) at (axis cs:-1,-2,0.57) {};
+			\node (end1) at (axis cs:2,1,0.57) {};
+			\node (start2) at (axis cs:-0.9,-2.5,0.2) {};
+			\node (end2) at (axis cs:2.65,0.85,0.2) {};
+			\draw[blue,-stealth] (start1)--(end1);
+			\draw[blue,-stealth] (start2)--(end2);
+		\end{axis}
+	\end{tikzpicture}
+\end{document}
