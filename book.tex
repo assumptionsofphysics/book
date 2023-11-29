@@ -168,7 +168,7 @@ In this version we have added a reverse physics part with a chapter on classical
 \section*{Changelog}
 
 \begin{description}
-	\item 2023/10/1: Ver 2.0 - Divided the work into two main parts: Reverse Physics and Physical mathematics. Added chapter on reversing classical mechanics. Minor updates on the logic section.
+	\item 2023/10/01: Ver 2.0 - Divided the work into two main parts: Reverse Physics and Physical mathematics. Added chapter on reversing classical mechanics. Minor updates on the logic section.
 	\item 2021/03/08: Ver 1.0 - Updated the first three chapters with minor changes: renamed tautology to certainty and contradiction to impossibility as they characterize better their role in the framework; made more formal justifications for the basic axioms and some of the basic definitions; causal relationships are now proved to be continuous instead of assumed to be continuous. Added Part II to include the results that are not yet fully formalized, to give a sense of the future scope of the work.
 	\item 2019/07/07: Ver 0.3 - Reviewed first two chapters to clarify the idea of possible assignments and how contexts for function spaces are constructed.
 	\item 2019/02/22: Ver 0.2 - Consolidated third chapter on properties, quantities and ordering.
@@ -253,7 +253,7 @@ Each assertion, by itself, would be fine but their combination makes it impossib
 
 
 \begin{axiom}[Axiom of context]\label{ax_statement}
-	A \textbf{statement} $\stmt$ is an assertion that is either true or false. A \textbf{logical context} $\logCtx$ is a collection of statements with well defined logical relationships. Formally, a logical context $\logCtx$ is a collection of elements called statements upon which is defined a function $\truth: \logCtx \to \Bool$.
+	A \textbf{statement} $\stmt$ is an assertion that is either true or false. A \textbf{logical context} $\logCtx$ is the collection of all those statements that share a common semantics and have, therefore, well defined logical relationships. Formally, a logical context $\logCtx$ is a collection of elements called statements upon which is defined a function $\truth: \logCtx \to \Bool$.
 \end{axiom}
 
 \begin{justification}
@@ -377,8 +377,12 @@ Since statements are intangible, there are no limits to the number of arguments 
 		We can always find a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally, let $S \subseteq \logCtx$ be a set of statements and $f_{\Bool} : \Bool^S \to \Bool$ an arbitrary function from an assignment of $S$ to a truth value. Then we can always find a statement $\bar{\stmt} \in \logCtx$ that depends on $S$ through $f_{\Bool}$.
 	\end{axiom}
 \begin{justification}
-	Let $S \subseteq \logCtx$ be a set of statements and let $f_{\Bool} : \Bool^S \to \Bool$ be an arbitrary function. Consider the statement \statement{this statement is true if the function $f_{\Bool}$ applied to the truth values of $S$ is true}. This statement has a well defined meaning that assigns a truth value that is the same for everybody. It is therefore logically consistent with all other statements in $\logCtx$. We are therefore justified to assume it is in the context, for, if it is not, it can be added without problem. 
+	Let $S \subseteq \logCtx$ be a set of statements and let $f_{\Bool} : \Bool^S \to \Bool$ be an arbitrary function. Consider the statement $\bar{\stmt}=$\statement{this statement is true if and only if the function $f_{\Bool}$ applied to the truth values of $S$ is true}. The meaning of $\bar{\stmt}$ is determined by the meaning of the statements in $S$, and, for every possible assignment $a \in \pAss$, $\bar{\stmt}$ is assigned the truth value $f_\Bool (\{a(\stmt)\}_{\stmt \in S})$ that is the same for everybody. Therefore $\bar{\stmt}$ shares a common semantics with the statements in $S$, and has a well-defined logical relationship with all other statements in $\logCtx$. Given that a context, by definition, contains all such statements, we are justified to assume $\bar{\stmt} \in \logCtx$.
 \end{justification}
+
+\begin{remark}
+	If it can be proven that the closure can always be performed, that proof, together with the definition of closure, would replace the axiom. This would be preferable but, given that the closure would be on possibly infinite elements, this is a delicate problem that we have not addressed yet.
+\end{remark}
 
 \begin{coro}
 	Functions on truth values induce functions on statements. Formally, let $I$ be an index set and $f_\Bool : \Bool^I \to \Bool$ be a function. There exists a function $f : \logCtx^I \to \logCtx$ such that
