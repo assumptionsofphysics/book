@@ -87,45 +87,29 @@ As in the classical infinite case, the maximally mixed state is not in the conve
 TODO: It is not clear what is the correct space for the infinite dimensional case. The Hilbert space contains pure states that have infinite expectation values. Schwartz spaces do not have this problem, but the order of the basis seems relevant as the rate of convergence is defined with that in mind. A reorder of the basis, in fact, can change the rate of convergence. Take, for example, a series that converges faster than any polynomial. Now construct a series by adding a zero term in between every non-zero term. The series will also converge faster than any polynomial. Now rearrange the zero so that the terms get more and more spread out. At some point, the rate of convergence of the series will change. It is unclear what is the relationship between the topology of these limits points and the convex/entropic structure. Related question is whether $S(\mathbb{R})$ and $S(\mathbb{R}^2)$ isomorphic as extreme points of a convex set.
 
 
-\section{Ensemble spaces, convex spaces and convex sets}
+\section{Convex spaces}
 
-Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab/show/convex+space} and \url{https://arxiv.org/abs/0903.5522}. Note that we are not interested in convex spaces per se, but their use in modeling ensembles. Therefore, as is customary in the physical mathematics approach of Assumptions of Physics, we are going to be using a terminology that is specific to the problem at hand. However, nothing is settled about the terminology.
+Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab/show/convex+space} and \url{https://arxiv.org/abs/0903.5522}. The notation and terminology will be slightly different to better map to physics ideas. 
 
 \begin{defn}
-	For a real number $p \in [0,1]$, $\bar{p} = 1-p$.
+	Given a real number $p \in [0,1]$, its complement is defined as $\bar{p} = 1-p$.
 \end{defn}
 
 \begin{defn}
-	An \textbf{ensemble} represents infinite copies, taken at once, of the output of a process. An \textbf{ensemble space} is a collection of ensembles that describe the same system under all processes. Formally, an ensemble space $\Ens$ is a set of elements, called ensembles, equipped with an operation $+ : [0, 1] \times \Ens \times \Ens \to \Ens$ called \textbf{mixing}, typically noted with the infix notation $p \ens_1 + \bar{p} \ens_2$, with the following properties:
+	A \textbf{convex space} $\Ens$ is a set of elements equipped with an operation $+ : [0, 1] \times \Ens \times \Ens \to \Ens$ called \textbf{mixing}, noted with the infix notation $p \ens_1 + \bar{p} \ens_2$, with the following properties:
 	\begin{itemize}
 		\item \textbf{Identity}: $1 \ens_1 + 0 \ens_2 = \ens_1$
 		\item \textbf{Idempotence}:  $p \ens_1 + \bar{p} \ens_1 = \ens_1$ for all $p \in [0,1]$
 		\item \textbf{Commutativity}: $p \ens_1 + \bar{p} \ens_2 = \bar{p} \ens_2 + p \ens_1$ for all $p \in [0,1]$
 		\item \textbf{Associativity}: $p_1 \ens_1 + \bar{p_1}\left(\overline{\left(\frac{p_3}{\bar{p_1}}\right)}\ens_2 + \frac{p_3}{\bar{p_1}}\ens_3\right) =  \bar{p_3}\left(\frac{p_1}{\bar{p_3}} \ens_1 +  \overline{\left(\frac{p_1}{\bar{p_3}}\right)}\ens_2\right) + p_3 \ens_3$ for all $p_1, p_3 \in [0,1]$
 	\end{itemize}
-	Given symmetry and associativity, we can write $p_1 \ens_1 + p_2 \ens_2 + p_3 \ens_3$ where $p_2 = \bar{p_1}\overline{\left(\frac{p_3}{\bar{p_1}}\right)} = \bar{p_3}\overline{\left(\frac{p_1}{\bar{p_3}}\right)} = 1 - p_1 - p_3$. We can also extend to \textbf{convex combinations} $\sum p_i \ens_i$ where $\sum_i p_i = 1$.
+	Given symmetry and associativity, we can write $p_1 \ens_1 + p_2 \ens_2 + p_3 \ens_3$ where $p_2 = \bar{p_1}\overline{\left(\frac{p_3}{\bar{p_1}}\right)} = \bar{p_3}\overline{\left(\frac{p_1}{\bar{p_3}}\right)} = 1 - p_1 - p_3 = \overline{\left(p_1 + p_3\right)}$. We can also extend to \textbf{convex combinations} $\sum p_i \ens_i$ where $\sum_i p_i = 1$.
 \end{defn}
-\begin{justification}
-	Let $\ens_1$ and $\ens_2$ be the ensembles that represent the output of two different processes $P_1$ and $P_2$. Let a selector $S_p$ be a process that outputs two symbols, the first with probability $p$ and the second with probability $\bar{p}$. Then we can create another process $P$ that, depending on the selector, outputs either the output of $P_1$ and $P_2$. Therefore we are justifying in assuming the mixing operation among ensembles.
-	
-	If $p=1$, the output of $P$ will always be the output of $P_1$. This justifies the identity. If $P_1$ and $P_2$ are the same process, then, again, the output of $P$ will always be the output of $P_1$. This justifies the idempotence. As long as the same probability is matched to the same output, the process $P$ is identical. This justifies the symmetry. If we are mixing three processes $P_1$, $P_2$ and $P_3$, as long as the final probabilities are the same, it does not matter if we mix $P_1$ and $P_2$ first or $P_2$ and $P_1$. This justifies associativity.
-\end{justification}
 
-\begin{remark}
-	All classical and quantum cases fit this definition.
-\end{remark}
-
-\begin{coro}
-	An ensemble space is a convex space.
-\end{coro}
 
 \begin{defn}
 	Let $\Ens$ be an ensemble space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in [0,1]$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$ and each $\ens_i$ is a \textbf{component} of $\ens[\rho]$. Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$.
 \end{defn}
-
-\begin{remark}
-	While most of the literature on convex spaces focus on ``combinations'', the inverse ``decomposition'' is crucial. For example, whether a convex space is a vector space depends on properties of decomposition.
-\end{remark}
 
 \begin{defn}
 	An ensemble space is \textbf{complemented} if all $p$-complements are unique.
@@ -140,8 +124,80 @@ Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab
 \end{proof}
 
 \begin{remark}
-	Note that all classical and quantum cases are complemented and therefore embedded into real vector spaces. It is not yet clear whether an ensemble space must be complemented or not. It is difficult to justify as it is a claim on existence of more refined ensembles. It may very well be that this is just an assumption on the decomposition, which may fail is new physical conditions.
+	Note that all classical and quantum cases are complemented and therefore embed into real vector spaces. It is not yet clear whether an ensemble space must be complemented or not. It is difficult to justify as it is a claim on existence of more refined ensembles. It may very well be that this is just an assumption on the decomposition, which may fail is new physical conditions.
 \end{remark}
+
+
+\section{Entropy}
+
+In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy defines the geometric structure of the space in the sense that the geometric structure can be recovered by knowing the entropy of mixtures. It is not yet clear exactly how much of that structure is already present in the convex structure and, in general, what are the most basic axioms that an entropy should satisfy.
+
+\begin{defn}
+	Given the coefficients $\{p_i\} \in [0,1]$ such that $\sum p_i = 1$, the \textbf{entropy of the coefficients} (also known as Shannon entropy) is defined as $I(\{p_i\}) = - \sum p_i \log p_i $.
+\end{defn}
+
+\begin{ext}
+	Given a convex set $\Ens$, an \textbf{entropy} function $S : \Ens \to \mathbb{R}$ with the following properties
+	\begin{itemize}
+		\item \textbf{Continuity}
+		\item \textbf{Strict concavity}: $S(p_1\rho_1 + p_2 \rho_2) \geq p_1 S(\rho_1) + p_2 S(\rho_2)$ with the equality holding if and only if $\rho_1 = \rho_2$
+		\item \textbf{Upper variability bound}: $S(p_1\rho_1 + p_2 \rho_2) \leq I(p_1, p_2) + p_1 S(\rho_1) + p_2 S(\rho_2)$; if the equality holds, then $\rho_1$ is not a component of $\rho_2$ and vice-versa (i.e. one cannot reach the other through convex combination); 
+	\end{itemize}
+\end{ext}
+
+\begin{remark}
+	Note that the bounds for entropy can also be written as
+	$$ 0 \leq S(p_1\rho_1 + p_2 \rho_2) - (p_1 S(\rho_1) + p_2 S(\rho_2)) \leq I(p_1, p_2).$$
+	The term in the middle compares the entropy of the mixture to the average entropy of the components. It essentially tells us that the entropy can only increase during the mixture, and it can only increase up to the entropy of the coefficients.
+	
+	Note that if an ensemble can be decomposed in multiple ways, the decomposition such that the entropy of the weights is minimal provides the least upper bound.
+	
+	TODO: In \url{https://arxiv.org/abs/1912.02012} we showed how the Shannon entropy quantifies the variability of elements within a distribution. It would be more elegant if we would be able to rederive $I$ from requirements on convex spaces instead of distributions in particular.
+	
+	TODO: Does the existence of an entropy function put a limit on the convex space? For example, a line is convex space with no extreme points. We can parameterize the space with a variable $x$ such that the mixture of two ensembles is identified by the average $x$. Entropy can be written as $S(x)$. Since $S(x)$ is strictly concave over an infinite range, it will tend to minus infinity either when $x$ tends to infinity or minus infinity. Can we keep the increase in entropy bounded regardless of the distance between the two points being mixed? 
+\end{remark}
+
+\begin{remark}
+	We can define
+	$$JSD(\rho_1, \rho_2) = S\left(\frac{1}{2}\rho_1 + \frac{1}{2} \rho_2\right) - \left(\frac{1}{2} S(\rho_1) + \frac{1}{2} S(\rho_2)\right).$$
+	Both in the classical and quantum case, this corresponds to the Jensen-Shannon divergence \url{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}. It is connected to the Fisher-Rao metric \url{https://en.wikipedia.org/wiki/Fisher_information_metric#Relation_to_the_Jensen%E2%80%93Shannon_divergence} and its square root is a distance function.
+	
+	The question is whether the bounds above are enough to make the square root of the $JSD$ a distance function in the general case.
+\end{remark}
+
+\section{Ensemble spaces}
+
+\begin{defn}
+	An \textbf{ensemble} represents infinite copies, taken at once, of the output of a process. An \textbf{ensemble space} is a collection of ensembles that describe the same system under all processes. Formally, an ensemble space $\Ens$ is a convex set $(\Ens, +)$ together with an entropy function $S : \Ens \to \mathbb{R}$.
+\end{defn}
+\begin{justification}
+	
+	The convex structure captures the ability to create a mixture merely by selecting between different processes.
+	
+	Let $\ens_1$ and $\ens_2$ be the ensembles that represent the output of two different processes $P_1$ and $P_2$. Let a selector $S_p$ be a process that outputs two symbols, the first with probability $p$ and the second with probability $\bar{p}$. Then we can create another process $P$ that, depending on the selector, outputs either the output of $P_1$ and $P_2$. Therefore we are justifying in assuming the mixing operation among ensembles.
+	
+	If $p=1$, the output of $P$ will always be the output of $P_1$. This justifies the identity. If $P_1$ and $P_2$ are the same process, then, again, the output of $P$ will always be the output of $P_1$. This justifies the idempotence. As long as the same probability is matched to the same output, the process $P$ is identical. This justifies the symmetry. If we are mixing three processes $P_1$, $P_2$ and $P_3$, as long as the final probabilities are the same, it does not matter if we mix $P_1$ and $P_2$ first or $P_2$ and $P_1$. This justifies associativity.
+	
+	The entropy quantify the variability of the elements within the ensemble.
+	
+	The entropy must be continuous as small changes in the ensemble should produce small changes in the variability. It should be strictly concave as mixing different ensembles will increase the variability. Mixing the same ensemble, however, should not increase the variability. The variability increase is maximal when the two ensembles are completely distinct. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. In this case, neither ensemble can be achieved by mixing the other with something else as the ensembles are completely distinct. Note that the converse is not true: the inability to create a mixture from one to the other does not necessarily mean that the ensembles are completely distinct; it may mean that finer ensembles are not available (as in the case of quantum mechanics).
+	
+\end{justification}
+
+\begin{defn}
+	Two ensembles $x, y \in X$ are \textbf{distinct} if they saturate the upper variability bound (i.e. $S(p_1\rho_1 + p_2 \rho_2) - (p_1 S(\rho_1) + p_2 S(\rho_2)) = I(p_1, p_2)$).
+\end{defn}
+
+\begin{justification}
+	As discussed in the previous justification, the increase of variability is maximal when the ensembles have no elements in common.
+\end{justification}
+
+\begin{remark}
+	Two classical distributions are distinct if and only if their support is disjoint. Two quantum states are distinct if and only if they are the mixture of states that belong to orthogonal subspaces.
+	
+	Physically, two disjoint ensembles are distinct in the sense that they will never produce overlapping results. The increase in variability is maximal and is given only by the coefficients.
+\end{remark}
+
 
 \begin{defn}
 	An ensemble is \textbf{decomposable} if it is the mixture of two or more components. An ensemble space is \textbf{infinitesimally decomposable} if all ensembles are decomposable. It is \textbf{finitely decomposable} if all ensembles can be decomposed into components that are not decomposable.
@@ -150,12 +206,6 @@ Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab
 \begin{remark}
 	The non-decomposable ensembles are exactly the extreme points of the convex space.
 \end{remark}
-
-
-
-\subsection{Physical examples}
-
-These are the examples that we need to keep in mind, which will need to be fully characterized in terms of convex spaces and their properties.
 
 
 \section{Convex subspaces}
@@ -225,89 +275,4 @@ Since the goal is to use convex spaces to create a unified theory for all types 
 	
 	In quantum mechanics, subspaces correspond to the projective spaces of subspaces of the complex vector space.
 \end{remark}
-
-
-\section{Entropy}
-
-In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy defines the geometric structure of the space. Convex combinations also define geometric features, precisely because the entropy can be calculated from the probabilities, at least in the classical discrete case and quantum. On the continuum, we also know that being able to define a frame invariant entropy is what leads to requiring the symplectic structure. Moreover, the space of distributions over position and velocity is isomorphic, as a convex space, to the space of distributions over position and momentum. Therefore, it does not seem that, in the classical continuous case, the convex space structure is enough. Exactly what geometric information is and is not in the convex structure and the entropy is something that needs to be understood.
-
-\begin{defn}
-	Given the coefficients $\{p_i\} \in [0,1]$ such that $\sum p_i = 1$, the \textbf{entropy of the coefficients} is defined as $I(\{p_i\}) = - \sum p_i \log p_i $.
-\end{defn}
-
-\begin{ext}
-	An ensemble space is equipped with an \textbf{entropy} function $S : X \to \mathbb{R}$ with the following properties
-	\begin{itemize}
-		\item \textbf{Continuity}
-		\item \textbf{Strict concavity}: $S(p_1\rho_1 + p_2 \rho_2) \geq p_1 S(\rho_1) + p_2 S(\rho_2)$ with the equality holding if and only if $\rho_1 = \rho_2$
-		\item \textbf{Coefficient bound}: $S(p_1\rho_1 + p_2 \rho_2) \leq I(p_1, p_2) + p_1 S(\rho_1) + p_2 S(\rho_2)$
-	\end{itemize}
-\end{ext}
-
-\begin{remark}
-	Note that the bounds for entropy can also be written as
-	$$ 0 \leq S(p_1\rho_1 + p_2 \rho_2) - (p_1 S(\rho_1) + p_2 S(\rho_2)) \leq I(p_1, p_2).$$
-	The term in the middle compares the entropy of the mixture to the average entropy of the components. It essentially tells us that the entropy can only increase during the mixture, and it can only increase up to the entropy of the coefficients.
-	
-	Note that if an ensemble can be decomposed in multiple ways, the decomposition such that the entropy of the weights is minimal provides the least upper bound.
-	
-	TODO: The Shannon entropy can be recovered in the discrete case with 3 minimal requirements. Are the above constraints enough to recover a unique entropy function (up to a constant) that matches the right entropy in the discrete/continuum/quantum cases? If not, is this just a question on requirements on entropy or also requirements on the space?
-	
-	TODO: Does the existence of an entropy function put a limit on the convex space? For example, a line is convex space with no extreme points. We can parameterize the space with a variable $x$ such that the mixture of two ensembles is identified by the average $x$. Entropy can be written as $S(x)$. Since $S(x)$ is strictly concave over an infinite range, it will tend to minus infinity either when $x$ tends to infinity or minus infinity. The entropy A function cannot be strictly concave 
-\end{remark}
-
-\begin{remark}
-	We can define
-	$$JSD(\rho_1, \rho_2) = S\left(\frac{1}{2}\rho_1 + \frac{1}{2} \rho_2\right) - \left(\frac{1}{2} S(\rho_1) + \frac{1}{2} S(\rho_2)\right).$$
-	Both in the classical and quantum case, this corresponds to the Jensen-Shannon divergence \url{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}. It is connected to the Fisher-Rao metric \url{https://en.wikipedia.org/wiki/Fisher_information_metric#Relation_to_the_Jensen%E2%80%93Shannon_divergence} and its square root is a distance function.
-	
-	The question is whether the bounds above are enough to make the square root of the $JSD$ a distance function in the general case.
-\end{remark}
-
-\begin{defn}
-	Two mixtures $x, y \in X$ are \textbf{disjoint} if $S(p_1\rho_1 + p_2 \rho_2) - (p_1 S(\rho_1) + p_2 S(\rho_2)) = I(p_1, p_2)$.
-\end{defn}
-
-\begin{remark}
-	Two classical distributions are disjoint if and only if their support is disjoint. Two quantum states are disjoint if and only if they are the mixture of states that belong to disjoint subspaces.
-	
-	Physically, two disjoint ensembles are distinct in the sense that they will never produce overlapping results.
-\end{remark}
-
-\begin{prop}
-	The thermodynamic entropy is an entropy over an ensemble space.
-\end{prop}
-\begin{justification}
-	TODO This can be easily done in terms of information theory and statistical mechanics. An argument based on thermodynamics would be better.
-\end{justification}
-
-\begin{remark}
-	Note that $JSD(\rho_1, \rho_2 = )S(p_1\rho_1 + p_2 \rho_2) - (p_1 S(\rho_1) + p_2 S(\rho_2))$ is the Jensen Shannon divergence (\url{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}). The square root is a distance function, and therefore makes the convex space a metric space.
-\end{remark}
-
-\subsection{Physical examples}
-
-We review the physical examples in terms of the entropy.
-
-\subsubsection{Classical case - discrete}
-
-The entropy is given by $-\sum p_i \log p_i$ for both finite and countable cases. Therefore the entropy for each pure state is assumed to be zero. The entropy of the maximally mixed state is $\log n$ where $n$ is the number of pure states. The entropy increase as we go from pure states to the maximally mixed state. The level sets (i.e. the fibers) of the entropy form a series of concentric "shells".
-
-TODO: Check that the entropy is finite for all convex combinations. Check that it diverges as we go to a limit point that is not in the ensemble space.
-
-TODO: Is it important that all pure states have zero entropy?
-
-\subsubsection{Classical case - continuous}
-
-The entropy is given by $- \int \rho \log \rho d\mu$ where $\mu$ is the Liouville measure and $\rho$ is the probability density over canonical coordinates. If a different measure is used, or if the coordinates are not canonical, the formula gives the wrong result.
-
-The entropy can be used to check whether two ensembles are overlapping and define the size of the support. That is: take $\rho \in X$; construct the set $\text{dis}(\rho)$ of all the ensembles that are disjoint from $\rho$; now construct the set $\text{con}(\rho)$ of all ensembles that are disjoint from all elements of $\text{dis}(\rho)$. These will be the set of ensembles that share the supports. Find the supremum of $\text{dis}(\rho)$ in terms of the entropy. If it doesn't exists, the support is infinite. If it does, the support is finite and the measure is $2^{\sup S(\text{con}(\rho))}$.
-
-TODO: Study the shell of zero entropy states. For example, it should not be path connected: all uniform distributions with support of the same finite size (in terms of Liouville measure) will have the same entropy. The region, however, need not be contiguous. Since we cannot continuously transform a single region into two disjoint regions, there will be different distributions at zero entropy that cannot be transformed continuously.
-
-\subsubsection{Quantum case}
-
-In quantum mechanics, the entropy is the von Neumann entropy for both finite and infinite dimension. The entropy for the maximally mixed state is $\log n$ where $n$ is the dimensionality of the Hilbert space.
-
-TODO: How exactly do the bounds of entropy interact with multiple decomposition?
 
