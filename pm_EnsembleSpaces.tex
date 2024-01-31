@@ -8,6 +8,7 @@
 \newcommand\mix{\mathrm{mix}}
 \newcommand\component{\mathrm{comp}}
 \newcommand\cospan{\mathrm{cospan}}
+\newcommand\dist{\mathrm{dist}}
 
 \newcommand{\ens}[1][e] {\mathsf{#1}} % Ensemble
 \newcommand{\Ens}[1][E] {\mathcal{#1}} % Ensemble space
@@ -86,7 +87,6 @@ As in the classical infinite case, the maximally mixed state is not in the conve
 
 TODO: It is not clear what is the correct space for the infinite dimensional case. The Hilbert space contains pure states that have infinite expectation values. Schwartz spaces do not have this problem, but the order of the basis seems relevant as the rate of convergence is defined with that in mind. A reorder of the basis, in fact, can change the rate of convergence. Take, for example, a series that converges faster than any polynomial. Now construct a series by adding a zero term in between every non-zero term. The series will also converge faster than any polynomial. Now rearrange the zero so that the terms get more and more spread out. At some point, the rate of convergence of the series will change. It is unclear what is the relationship between the topology of these limits points and the convex/entropic structure. Related question is whether $S(\mathbb{R})$ and $S(\mathbb{R}^2)$ isomorphic as extreme points of a convex set.
 
-
 \section{Convex spaces}
 
 Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab/show/convex+space} and \url{https://arxiv.org/abs/0903.5522}. The notation and terminology will be slightly different to better map to physics ideas. 
@@ -108,7 +108,11 @@ Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab
 
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in [0,1]$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$ and each $\ens_i$ is a \textbf{component} of $\ens[\rho]$. Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$.
+	Let $\Ens$ be a convex space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in [0,1]$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$ and each $\ens_i$ is a \textbf{component} of $\ens[\rho]$. Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$.
+\end{defn}
+
+\begin{defn}
+	Let $\Ens$ be a convex space and $\ens_1, \ens_2 \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens_3 \in \Ens$ such that $\ens_1 = p_1 \ens_3 + \bar{p_1} \ens_4$ and $\ens_2 = p_2 \ens_3 + \bar{p_2} \ens_5$ for some $\ens_3, \ens_4 \in \Ens$ and $p_1, p_2 \in [0,1]$.
 \end{defn}
 
 \begin{defn}
@@ -171,7 +175,6 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	An \textbf{ensemble} represents infinite copies, taken at once, of the output of a process. An \textbf{ensemble space} is a collection of ensembles that describe the same system under all processes. Formally, an ensemble space $\Ens$ is a convex set $(\Ens, +)$ together with an entropy function $S : \Ens \to \mathbb{R}$.
 \end{defn}
 \begin{justification}
-	
 	The convex structure captures the ability to create a mixture merely by selecting between different processes.
 	
 	Let $\ens_1$ and $\ens_2$ be the ensembles that represent the output of two different processes $P_1$ and $P_2$. Let a selector $S_p$ be a process that outputs two symbols, the first with probability $p$ and the second with probability $\bar{p}$. Then we can create another process $P$ that, depending on the selector, outputs either the output of $P_1$ and $P_2$. Therefore we are justifying in assuming the mixing operation among ensembles.
@@ -200,6 +203,15 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 
 
 \begin{defn}
+	An ensemble space $\Ens$ is \textbf{reducible} (or \textbf{classical}) if two ensembles $\ens_1, \ens_2 \in \Ens$ are distinct if only if they do not have a common component.
+\end{defn}
+
+\begin{remark}
+	The above property should ultimately be responsible of the single decomposition in terms of pure states.
+\end{remark}
+
+
+\begin{defn}
 	An ensemble is \textbf{decomposable} if it is the mixture of two or more components. An ensemble space is \textbf{infinitesimally decomposable} if all ensembles are decomposable. It is \textbf{finitely decomposable} if all ensembles can be decomposed into components that are not decomposable.
 \end{defn}
 
@@ -208,71 +220,73 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \end{remark}
 
 
-\section{Convex subspaces}
-
-Since the goal is to use convex spaces to create a unified theory for all types of mechanics, we need a construction that generalizes the notion of support/subspaces of ensembles.
+\section{Ensemble subspaces}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. We say that $X$ is a \textbf{subspace} of $\Ens$ if it contains all the mixtures and all the components of its elements. That is, for every $\ens_1, \ens_2, \ens_3$ and $p \in (0,1)$ such that $p\ens_1 + \bar{p} \ens_2 = \ens_3$ we have:
+	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. Then $\dist(X) \subseteq \Ens$ is the the set of all ensembles that are distinct from all elements of $X$. An \textbf{ensemble subspace} is a subset $X \in \Ens$ such that $X = \dist(\dist(X))$.
+\end{defn}
+
+\section{Lessons learned}
+
+\subsection{Subspaces from convex structure}
+
+\begin{insight}
+	Convex structure, by itself, cannot define subspaces.
+\end{insight}
+
+Initially, we tried recovering the notion of subspaces purely from the convex structure. We did make some progress in the finite dimensional case, but ultimately this does not work. The ultimate problem is that it cannot be generalized to the classical continuous case. The problem of rate of convergence is described below in the example. Even if that problem is fixed, there would be nothing to determine the dimensionality of $U$, and we could create convex maps that ``stretch'' the space.
+
+The attempt was the following:
+
+\begin{defn}
+	Let $\Ens$ be a convex space and $X \subseteq \Ens$ be a subset. We say that $X$ is a \textbf{subspace} of $\Ens$ if it contains all the convex combinations and all the components of its elements. That is, for every $\ens_1, \ens_2, \ens_3 \in \Ens$ and $\lambda \in (0,1)$ such that $p \ens_1 + \bar{p} \ens_2 = \ens_3$ we have:
 	\begin{itemize}
-	\item $\ens_1, \ens_2 \in X$ implies $\ens_3 \in X$
-	\item $\ens_3 \in X$ implies $\ens_1, \ens_2 \in X$
-\end{itemize}
+		\item $\ens_1, \ens_2 \in X$ implies $\ens_3 \in X$
+		\item $\ens_3 \in X$ implies $\ens_1, \ens_2 \in X$
+	\end{itemize}
 \end{defn}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$.  The \textbf{convex span} of $X$, noted $\cospan(X)$, is the smallest subspace containing $X$.
+	Let $\Ens$ be a convex space and $X \subseteq \Ens$.  The \textbf{convex span} of $X$, noted $\cospan(X)$, is the smallest subspace containing $X$.
 \end{defn}
 
 \begin{remark}
-	As defined, the convex span of two elements will include all their possible mixtures (i.e. the segment that connects them), all possible decompositions (i.e. all lines that pass through them) plus, recursively, all other mixtures and decompositions that can be reached from those. Physically, the idea is that not all ensembles, pure states in particular, cannot be physically realized. Therefore, the inclusion of pure states in our convex space stems from a theoretical idealization useful to decompose and strudy the problem. It makes sense, then, that a subspace comes with all its idealizations.
+	As defined, the convex span of two elements will include all their possible mixtures (i.e. the segment that connects them), all possible decompositions (i.e. all lines that pass through them) plus, recursively, all other mixtures and decompositions that can be reached from those. Physically, the idea is that not all ensembles, pure states in particular, cannot be physically realized. Therefore, the inclusion of pure states in our convex space stems from a theoretical idealization useful to decompose and study the problem. It makes sense, then, that a subspace comes with all its idealizations.
 \end{remark}
 
 \begin{example} Classical discrete subspaces.
 	Let $S$ be a set of $n$ possible discrete states and let $\Ens$ the space of probability distributions over the set $S$ (i.e. $\Ens$ is an $n$-simplex and $S$ are its extreme points). A subspace $X$ of $\Ens$ is a convex hull of a subset $U$ of $S$. That is, a subspace of $\Ens$ is the space of probability distributions over a subset of the cases. Geometrically, it is one of the sides (possibly recursively) of the simplex.
 	
 	To see this, first note that the convex hull $X$ of any subset $U$ of extreme points $S$ is a subspace. In fact, it will contain all convex combinations of $U$, and any element can only be decomposed in convex combinations of $U$. Second, note that only convex hulls of a subset of extreme points can be a subspace. In fact, any element of $\Ens$ can be expressed as a non-trivial convex combination of a set of extreme points $U$. Therefore, if an element is present in a subspace $X$, then $U \subset X$, which means all elements of the convex hull of $U$ are in $X$.
-	
-	TODO: This does not seem to generalize to the infinite case, as we do not have closure on infinite convex combinations.
 \end{example}
+
+\begin{remark}
+	The definition does not entirely work in the continuous case. Let $S$ be a symplectic manifold and let $\Ens$ be the space of probability distributions over $S$ (i.e. the space of continuous functions over $S$ that are integrable and integrate to one). We would like to have a definition for which a subspace of $\Ens$ is a set of functions whose support is a subset of an open region $U \subseteq S$. That is, a subspace contains all probability distributions defined over a subset of the cases. One problem is that continuity forces the function to go to zero on the boundary of $U$, and the speed of the convergence cannot be change with a finite convex combination. That is, the convex combination of functions that go down like an exponential will also go down like an exponential. The issue seems to be related to finding the correct closure for infinite convex combinations in the definition of convex space.
+\end{remark}
 
 \begin{example} Quantum subspaces.
 	Let $\mathcal{H}$ be an $n$-dimensional Hilbert space and let $\Ens$ be the space of density matrices (i.e. positive semi-definite self-adjoint operators with trace one). A subspace $X$ of $\Ens$ is the space of density matrices of a subspace $U$ of $\mathcal{H}$. That is, a subspace of $\Ens$ is the space of mixed states over a subspace of pure states.
 	
 	To see this, first note that the space of density matrices $X$ of a subspace $U$ of $\mathcal{H}$ is a subspace of $\Ens$. In fact, $X$ it will contain all convex combinations of its elements. Moreover, any element $x \in X$ can only be decomposed in a convex combination of pure states of $U$. Therefore any convex decomposition of $x$ has all its elements in $X$. Second, note that only the space of density matrices $X$ of a subspace $U$ of $\mathcal{H}$ is a subspace of $\Ens$. In fact, any element $x$ of $\Ens$ can be expressed as a non-trivial convex combination of orthogonal pure states, its eigenstates. These elements will span a subspace $U$ of $\mathcal{H}$. From those elements, we can construct an equal mixture which represents the maximally mixed states and, mathematically, is the identity operator $I/m$ divided by the number of elements $m \leq n$ of $U$. The equal mixture of any orthogonal basis of $U$ will also give the maximally mixed state. Therefore, given an element $x$, any subspace that contain $x$ will also contain a basis of $U$, the maximally mixed state $I/n$, all possible basis of $U$, which means all the pure states, and finally all convex combinations of the pure states, which means all possible density matrices, all possible mixed states.
-	
-	TODO: This does not seem to generalize to the infinite case, as we do not have closure on infinite convex combinations.
 \end{example}
 
-\begin{remark}
-	TODO: Ideally, the definition would generalize to the classical continuous case. Let $S$ be a symplectic manifold and let $\Ens$ be the space of probability distributions over $S$ (i.e. the space of continuous functions over $S$ that are integrable and integrate to one). We would like to have a definition for which a subspace of $\Ens$ is a set of functions whose support is a subset of an open region $U \subseteq S$. That is, a subspace contains all probability distributions defined over a subset of the cases. One problem is that continuity forces the function to go to zero on the boundary of $U$, and the speed of the convergence cannot be change with a finite convex combination. That is, the convex combination of functions that go down like an exponential will also go down like an exponential.
-\end{remark}
-
-\begin{remark}
-	TODO: An open question is whether there is a relationship between an ensemble space being complemented (i.e. the embedding of the convex space into a vector space) and features of the convex span.
-\end{remark}
-
 \begin{defn}
-	Two subspaces $X_1, X_2 \subseteq \Ens$ are \textbf{orthogonal} if they are disjoint. That is, $X_1 \cap X_2 = \emptyset$. Two ensembles $\ens_1, \ens_2 \in \Ens$ are \textbf{disjoint} if they belong to two orthogonal subspaces. That is, $\cospan(\ens_1) \cap \cospan(\ens_2) = \emptyset$.
+	A convex space $\mathcal{E}$ is \textbf{closed} if it contains all its extreme points.
 \end{defn}
 
-\begin{remark}
-	Two classical distributions are disjoint if and only if their support is disjoint. Two quantum states are disjoint if and only if they are the mixture of states that belong to disjoint subspaces.
-	
-	Physically, two disjoint ensembles are distinct in the sense that they will never produce overlapping results.
-\end{remark}
-
-\begin{remark}
-	TODO: The definitions that follows work only for finitely decomposable spaces (i.e. all extreme points are in the space). Ideally, we want definitions that works for all cases in the same way.
-\end{remark}
-
 \begin{defn}
-	A \textbf{pure state} is an ensemble that is not decomposable. Given a subspaces $X \in \Ens$ be a subspace, it's \textbf{dimension}, noted $\dim(X)$, is the minimum number of pure states $x_i \in X$ such that $\cospan(x_i) = X$.
+	Let $\mathcal{E}$ be a convex space and $X \subset \mathcal{E}$ be a subspace of $\mathcal{E}$. The \textbf{dimension} of $X$, noted $\dim(X)$, is the minimum number of extreme points whose convex span is $X$.
 \end{defn}
 
-\begin{remark}
-	In the classical discrete case, the subspaces are the simplexes. The dimensionality of the subspace is the number of vertices of the simplex (i.e. dimensionality of the simplex plus one). That is, a single pure state is a subspace of dimension one; a line segment is a subspace of dimension two; and so on.
-	
-	In quantum mechanics, subspaces correspond to the projective spaces of subspaces of the complex vector space.
-\end{remark}
+\begin{conj}
+	Let $\mathcal{E}$ be closed convex space of finite dimensions. Then:
+	\begin{itemize}
+		\item $\mathcal{E}$ is a simplex if and only if every two dimensional subspace is a line segment
+		\item the set of extreme points of $\mathcal{E}$ is a complex projective space if and only if every two dimensional subspace is a two dimensional sphere ($\mathcal{E}$ is the space of density matrices).
+	\end{itemize}
+\end{conj}
 
+\begin{remark}
+	The only if is easy to show based on the discussion above. The if part does not actually work. Take 6 points in a 4 dimensional euclidean space such that the form two triangles that intersect at a single point. All two dimensional convex spaces will be segments. However, the whole convex hull is not a simplex. 
+\end{remark}
+\end{document}
