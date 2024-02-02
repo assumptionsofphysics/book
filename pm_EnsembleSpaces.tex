@@ -210,6 +210,41 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	The above property should ultimately be responsible of the single decomposition in terms of pure states.
 \end{remark}
 
+\begin{prop}
+	Let $\ens_1, \ens_2 \in \Ens$. Let $S_1 = S(\ens_1)$ and $S_2 = S(\ens_2)$. Let $\ens = p \ens_1 + \bar{p} \ens_2$ for some $p \in [0,1]$ and $S = S(\ens)$. Then $2^S \leq 2^{S_1} + 2^{S_2}$, with the equality if and only if $\ens_1$ and $\ens_2$ are distinct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
+\end{prop}
+
+\begin{proof}
+	If $p$ is fixed, the upper bound is saturated only if $\ens_1$ and $\ens_2$ are distinct by definition. The entropy maximum for the mixed ensemble can only be achieved when the elements are distinct, for some value of $p$.
+	
+	Now fix $S_1$ and $S_2$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression.
+	\begin{equation}
+		\begin{aligned}
+			0 = \frac{dS}{dp} &= \frac{d}{dp} S(\ens) =\frac{d}{dp} \left( - p \log p - \bar{p} \log \bar{p} + p S_1 + \bar{p} S_2 \right) \\
+			&= - \log p - 1 + \log \bar{p} + 1 + S_1 - S_2 \\
+			\log \frac{p}{\bar{p}} &= \log 2^{S_1} - \log 2^{S_2} \\
+			\log \frac{p}{1-p} &= \log \frac{2^{S_1}}{2^{S_2}}  \\
+			p 2^{S_2} &= (1-p) 2^{S_1}  \\
+			p (2^{S_1} + 2^{S_2}) &= 2^{S_1}  \\
+			p &= \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}  \\
+		\end{aligned}
+	\end{equation}
+	Having found the value of $p$ that maximizes the entropy, we can calculate it.
+	\begin{equation}
+	\begin{aligned}
+		\bar{p} &= 1- \frac{2^{S_1}}{2^{S_1} + 2^{S_2}} = \frac{2^{S_2}}{2^{S_1} + 2^{S_2}} \\
+		S &= S(\ens) = - p \log p - \bar{p} \log \bar{p} + p S_1 + \bar{p} S_2  \\
+		&= - \frac{2^{S_1}}{2^{S_1} + 2^{S_2}} \log \frac{2^{S_1}}{2^{S_1} + 2^{S_2}} - \frac{2^{S_2}}{2^{S_1} + 2^{S_2}} \log \frac{2^{S_2}}{2^{S_1} + 2^{S_2}} \\
+		&+ \frac{2^{S_1}}{2^{S_1} + 2^{S_2}} \log 2^{S_1} + \frac{2^{S_2}}{2^{S_1} + 2^{S_2}} \log 2^{S_2} \\
+		&= \frac{2^{S_1}}{2^{S_1} + 2^{S_2}} \log \left( 2^{S_1} + 2^{S_2} \right) + \frac{2^{S_2}}{2^{S_1} + 2^{S_2}} \log \left( 2^{S_1} + 2^{S_2} \right) \\
+		&= \frac{2^{S_1} + 2^{S_2}}{2^{S_1} + 2^{S_2}} \log \left( 2^{S_1} + 2^{S_2} \right) \\
+		\log 2^S &= \log \left( 2^{S_1} + 2^{S_2} \right) \\
+		2^S &=  2^{S_1} + 2^{S_2}  \\
+	\end{aligned}
+\end{equation}
+	
+\end{proof}
+
 
 \begin{defn}
 	An ensemble is \textbf{decomposable} if it is the mixture of two or more components. An ensemble space is \textbf{infinitesimally decomposable} if all ensembles are decomposable. It is \textbf{finitely decomposable} if all ensembles can be decomposed into components that are not decomposable.
