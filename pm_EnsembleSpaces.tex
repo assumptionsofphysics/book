@@ -258,7 +258,54 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \section{Ensemble subspaces}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. Then $\dist(X) \subseteq \Ens$ is the the set of all ensembles that are distinct from all elements of $X$. An \textbf{ensemble subspace} is a subset $X \in \Ens$ such that $X = \dist(\dist(X))$.
+	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. The \textbf{distinct complement} $X^\perp \subseteq \Ens$ is the the set of all ensembles that are distinct from all elements of $X$. An \textbf{ensemble subspace} is a subset $X \in \Ens$ such that $X = (X^\perp)^\perp$.
+\end{defn}
+
+To show that the above definition works to define a notion of subspace, it is useful to prove a more general result. The idea is that we can define a general notion of subspace by only defining a relationship of ``different subspace'' between the elements. This will give us a more general tool to investigate possible different notion of subspaces.
+
+\begin{defn}
+	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Given a subset $U \subseteq X$, we define the \textbf{$R$-complement} to be
+	$$ U^{RC} = \{ a \in X \, | \, \forall b \in U, aRb  \}. $$
+\end{defn}
+
+\begin{prop}
+	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Then:
+	\begin{enumerate}
+		\item $U \subseteq (U^{RC})^{RC}$
+		\item $U^{RC} \subseteq ((U^{RC})^{RC})^{RC}$
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	1. By expanding the definition of complement, we have $(U^{RC})^{RC}=\{ a \in X \, | \, \forall b \in U^{RC}, aRb \} = \{ a \in X \, | \, \forall b \in \{ c \in X \, | \, \forall d \in U, cRd  \}, aRb \} = \{ a \in X \, | \, \forall b \in X \, s.t. (\forall d \in U, bRd), aRb \}$.
+	
+	Let $a \in U$ and let $b \in X$ such that $\forall d \in U, bRd$. Since $a \in U$ and $bRd$ for all $b \in U$, we have $bRa$ in particular. Since $R$ is symmetric, $aRb$. Given that $b$ was arbitrary, we conclude that $\forall b \in X \, s.t. (\forall d \in U, bRd), aRb$. Therefore $a \in (U^{RC})^{RC}$ by definition of complement. Given that $a$ was arbitrary, $U \in (U^{RC})^{RC}$.
+	
+	2. We again expand the definition and have $((U^{RC})^{RC})^{RC} = \{ a \in X \, | \, \forall b \in (U^{RC})^{RC}, aRb \}$.
+	
+	Let $x \in ((U^{RC})^{RC})^{RC}$. Then $\forall b \in (U^{RC})^{RC}, xRb$ by definition of the complement. Since by 1. $U \subset (U^{RC})^{RC}$, we can restrict the previous expression to only the elements of $U$, and therefore $\forall b \in U, xRb$. But this means that $x \in U^{RC}$ by definition of the complement. Since $x$ was arbitrary, $((U^{RC})^{RC})^{RC} \subseteq U^{RC}$. But by 1., we also have $U^{RC} \subseteq ((U^{RC})^{RC})^{RC}$ since $U^{RC}$ is just a set onto which we can apply the complement twice . By two-way containment, we have $U^{RC} = ((U^{RC})^{RC})^{RC}$.
+\end{proof}
+
+\begin{conj}\label{pm_ensmblespaces_symirreflproperties}
+	Let $X$ be a set and $R \subseteq X \times X$ a symmetric and irreflexive relation. Then
+	\begin{enumerate}
+	\item $U \cap U^{RC} = \emptyset$
+	\item $X^{RC} = \emptyset$ and $X = \emptyset^{RC}$
+	\item $\bigcap_{i \in I} (U_i^{RC})^{RC} = ((\bigcap_{i \in I} U_i)^{RC})^{RC}$
+\end{enumerate}
+\end{conj}
+
+\begin{conj}
+	Let $X$ be a set and $R \subseteq X \times X$ a symmetric and irreflexive relation. Let $\mathfrak{L} = \{ U \subseteq X \, | \, U = (U^{RC})^{RC} \}$. Then $\mathfrak{L}$ is a topped $\bigcap$-structure on $X$ and therefore is also a complete lattice.
+\end{conj}
+\begin{proof}
+	The proof assumes \ref{pm_ensmblespaces_symirreflproperties} to be true.
+	
+	The set $\mathfrak{L}$ is a collections of subsets of $X$. Let $\{U_i\}_{i \in I} \subseteq \mathfrak{L}$ be a non-empty family. Then $\bigcap_{i \in I} U_i = \bigcap_{i \in I} (U_i^{RC})^{RC} = ((\bigcap_{i \in I} U_i)^{RC})^{RC}$. Therefore $\bigcap_{i \in I} U_i \in \mathfrak{L}$ by the third property of \ref{pm_ensmblespaces_symirreflproperties}. This means $\mathfrak{L}$ is an $\bigcap$-structure. Using the second property of \ref{pm_ensmblespaces_symirreflproperties}, $X = \emptyset^{RC} = (X^{RC})^{RC}$. Therefore $\mathfrak{L}$ is a topped $\bigcap$-structure. This also means that it is a complete lattice.
+\end{proof}
+
+\begin{defn}
+	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ an ensemble subspace. The \textbf{dimension} of the subspaces is defined as $\dim(X) = \sup(\{S(\ens) \, | \, \ens \in X\})$.
 \end{defn}
 
 \section{Lessons learned}
