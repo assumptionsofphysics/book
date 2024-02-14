@@ -39,7 +39,7 @@ TODO: Understand the space of the limits. There should be at least one point for
 
 Each ensemble $e$ has a single decomposition $e = \sum p_i g_i$ in terms of pure states. The entropy is given by $-\sum p_i \log p_i$ for both finite and countable cases. Therefore the entropy for each pure state is assumed to be zero. The entropy of the maximally mixed state is $\log n$ where $n$ is the number of pure states. The entropy increase as we go from pure states to the maximally mixed state. The level sets (i.e. the fibers) of the entropy form a series of concentric ``shells''.
 
-Note that the entropy is not finite for all convergent $p_i$ (i.e. infinite convex combinations). For details, see \url{https://arxiv.org/pdf/1212.5630.pdf}. Given that we will want the entropy to exist and be finite for all ensembles, this means that simply generalizing the convex space to all probability measures (like in \url{https://ncatlab.org/nlab/show/superconvex+space} does not seem physically warranted.
+Note that the entropy is not finite for all convergent $p_i$ (i.e. infinite convex combinations). For details, see \url{https://arxiv.org/pdf/1212.5630.pdf}. Given that we will want the entropy to exist and be finite for all ensembles, this means that simply generalizing the convex space to all probability measures (like in \url{https://ncatlab.org/nlab/show/superconvex+space} ) does not seem physically warranted.
 
 The fact that all pure states have the same entropy is an additionally hypothesis that cannot work in general. To see this, consider the case where the state is defined by the number of molecules for two substances. This space is the product of two independent variable $n_a$ and $n_b$. If we have a uniform distribution over $N_a$ cases of $n_a$ and $N_b$ cases of $n_b$, the total number of cases is $N_a N_b$. Therefore the entropy of the joint state is the sum of the entropy of the marginals. However, if we pair $n_a$ with the total number of molecules $n_{(a+b)}$ we have a problem. The issue that variable $n_{(a+b)}$ corresponds to a variable number of joint cases.
 
@@ -108,19 +108,27 @@ Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab
 
 
 \begin{defn}
-	Let $\Ens$ be a convex space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in [0,1]$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$ and each $\ens_i$ is a \textbf{component} of $\ens[\rho]$. Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$.
+	Let $\Ens$ be a convex space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in (0,1)$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$ and each $\ens_i$ is a \textbf{component} of $\ens[\rho]$. Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$ with $p \in (0,1)$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$.
 \end{defn}
 
 \begin{defn}
-	Let $\Ens$ be a convex space and $\ens_1, \ens_2 \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens_3 \in \Ens$ such that $\ens_1 = p_1 \ens_3 + \bar{p_1} \ens_4$ and $\ens_2 = p_2 \ens_3 + \bar{p_2} \ens_5$ for some $\ens_3, \ens_4 \in \Ens$ and $p_1, p_2 \in [0,1]$.
+	Let $\Ens$ be a convex space and $\ens_1, \ens_2 \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens_3 \in \Ens$ such that $\ens_1 = p_1 \ens_3 + \bar{p_1} \ens_4$ and $\ens_2 = p_2 \ens_3 + \bar{p_2} \ens_5$ for some $\ens_3, \ens_4 \in \Ens$ and $p_1, p_2 \in (0,1)$.
 \end{defn}
 
+\begin{coro}
+	Let $\Ens$ be a convex space and $\ens_1, \ens_2 \in \Ens$ such that $\ens_1$ is a component of $\ens_2$. Then $\ens_1$ and $\ens_2$ have a common component.
+\end{coro}
+
+\begin{proof}
+	By idempotence, we can write $\ens_1 = p_1 \ens_1 + \bar{p_1} \ens_1$ for some $p_1 \in (0,1)$. Since $\ens_1$ is a component of $\ens_2$, we can write $\ens_2 = p_2 \ens_1 + \bar{p_2} \ens_3$ for some $p \in (0, 1)$ and $\ens_3 \in \Ens$. Therefore $\ens_1$ and $\ens_2$ have a common component.
+\end{proof}
+
 \begin{defn}
-	An ensemble space is \textbf{complemented} if all $p$-complements are unique.
+	A convex space is \textbf{complemented} if all $p$-complements are unique.
 \end{defn}
 
 \begin{prop}
-	An ensemble space embeds into a real vector space with convex combination as linear combination if and only if it is complemented.
+	A convex space embeds into a real vector space with convex combination as linear combination if and only if it is complemented.
 \end{prop}
 \begin{proof}
 	Theorem 4 in \url{https://arxiv.org/abs/1105.1270} states that a convex space embeds into a real vector space with $c_\lambda(x,y) = \lambda x + \bar{\lambda}y$ if and only if
@@ -140,18 +148,18 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	Given the coefficients $\{p_i\} \in [0,1]$ such that $\sum p_i = 1$, the \textbf{entropy of the coefficients} (also known as Shannon entropy) is defined as $I(\{p_i\}) = - \sum p_i \log p_i $.
 \end{defn}
 
-\begin{ext}
+\begin{defn}
 	Given a convex set $\Ens$, an \textbf{entropy} function $S : \Ens \to \mathbb{R}$ with the following properties
 	\begin{itemize}
 		\item \textbf{Continuity}
-		\item \textbf{Strict concavity}: $S(p_1\rho_1 + p_2 \rho_2) \geq p_1 S(\rho_1) + p_2 S(\rho_2)$ with the equality holding if and only if $\rho_1 = \rho_2$
-		\item \textbf{Upper variability bound}: $S(p_1\rho_1 + p_2 \rho_2) \leq I(p_1, p_2) + p_1 S(\rho_1) + p_2 S(\rho_2)$; if the equality holds, then $\rho_1$ is not a component of $\rho_2$ and vice-versa (i.e. one cannot reach the other through convex combination); 
+		\item \textbf{Strict concavity}: $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$ with the equality holding if and only if $\ens_1 = \ens_2$
+		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$ 
 	\end{itemize}
-\end{ext}
+\end{defn}
 
 \begin{remark}
 	Note that the bounds for entropy can also be written as
-	$$ 0 \leq S(p_1\rho_1 + p_2 \rho_2) - (p_1 S(\rho_1) + p_2 S(\rho_2)) \leq I(p_1, p_2).$$
+	$$ 0 \leq S(p_1\ens_1 + p_2 \ens_2) - (p_1 S(\ens_1) + p_2 S(\ens_2)) \leq I(p_1, p_2).$$
 	The term in the middle compares the entropy of the mixture to the average entropy of the components. It essentially tells us that the entropy can only increase during the mixture, and it can only increase up to the entropy of the coefficients.
 	
 	Note that if an ensemble can be decomposed in multiple ways, the decomposition such that the entropy of the weights is minimal provides the least upper bound.
@@ -163,7 +171,7 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 
 \begin{remark}
 	We can define
-	$$JSD(\rho_1, \rho_2) = S\left(\frac{1}{2}\rho_1 + \frac{1}{2} \rho_2\right) - \left(\frac{1}{2} S(\rho_1) + \frac{1}{2} S(\rho_2)\right).$$
+	$$JSD(\ens_1, \ens_2) = S\left(\frac{1}{2}\ens_1 + \frac{1}{2} \ens_2\right) - \left(\frac{1}{2} S(\ens_1) + \frac{1}{2} S(\ens_2)\right).$$
 	Both in the classical and quantum case, this corresponds to the Jensen-Shannon divergence \url{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}. It is connected to the Fisher-Rao metric \url{https://en.wikipedia.org/wiki/Fisher_information_metric#Relation_to_the_Jensen%E2%80%93Shannon_divergence} and its square root is a distance function.
 	
 	The question is whether the bounds above are enough to make the square root of the $JSD$ a distance function in the general case.
@@ -188,12 +196,20 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \end{justification}
 
 \begin{defn}
-	Two ensembles $x, y \in X$ are \textbf{distinct} if they saturate the upper variability bound (i.e. $S(p_1\rho_1 + p_2 \rho_2) - (p_1 S(\rho_1) + p_2 S(\rho_2)) = I(p_1, p_2)$).
+	Two ensembles $\ens_1, \ens_2 \in \Ens$ are \textbf{distinct} if they saturate the upper variability bound (i.e. $S(p_1\ens_1 + p_2 \ens_2) - (p_1 S(\ens_1) + p_2 S(\ens_2)) = I(p_1, p_2)$).
 \end{defn}
 
 \begin{justification}
 	As discussed in the previous justification, the increase of variability is maximal when the ensembles have no elements in common.
 \end{justification}
+
+\begin{prop}
+	Let $\ens_1, \ens_2 \in \Ens$ be two distinct ensembles. The $\ens_1$ is not a component of $\ens_2$.
+\end{prop}
+
+\begin{proof}
+	Let $\ens_1, \ens_2 \in \Ens$ be two distinct ensembles and suppose $\ens_1$ is a component of $\ens_2$. Then we can find $\ens_3 \in \Ens$ and $\lambda \in (0,1)$ such that $\ens_2 = \lambda \ens_1 + \bar{\lambda} \ens_3$ is a mixture of $\ens_1$ and $\ens_2$. Now consider $S(p \ens_1 + \bar{p} \ens_3)$ as a function of $p$. This must be a strictly concave function. Moreover, if $p \geq \lambda$ we can write $p \ens_1 + \bar{p} \ens_3 = \left(p - \frac{\bar{p} \lambda}{\bar{\lambda}}\right) \ens_1 + \frac{\bar{p}}{\bar{\lambda}} (\lambda \ens_1 + \bar{\lambda} \ens_3) = q \ens_1 + \bar{q} \ens_2$ where $q = \left(p - \frac{\bar{p} \lambda}{\bar{\lambda}}\right)$. Therefore, for $p \geq \lambda$, $S(p \ens_1 + \bar{p} \ens_3) = S(q \ens_1 + \bar{q} \ens_2)  = I(q,\bar{q})$. However, $I(q,\bar{q})$ has a vertical asymptote for $q=0$ and therefore $S(p \ens_1 + \bar{p} \ens_3)$ must have a vertical asymptote for $p=\lambda$. But a strictly concave function cannot have a vertical asymptote in the middle, and therefore $\ens_1$ cannot be a component of $\ens_2$.
+\end{proof}
 
 \begin{remark}
 	Two classical distributions are distinct if and only if their support is disjoint. Two quantum states are distinct if and only if they are the mixture of states that belong to orthogonal subspaces.
@@ -201,14 +217,55 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	Physically, two disjoint ensembles are distinct in the sense that they will never produce overlapping results. The increase in variability is maximal and is given only by the coefficients.
 \end{remark}
 
+\begin{conj}
+	Distinct elements cannot have common components.
+\end{conj}
+
+\begin{remark}
+	This is true both in classical and quantum mechanics. It is not clear whether it can be proven as the previous proposition. If it can't be proven, it most likely should be added to the definition of entropy. Note that, since this specifies the behavior of entropy along a plane (i.e. among three distinct ensembles), it may be the feature that guarantees the entropy to be the square of a distance function.
+\end{remark}
+
+
+\begin{defn}
+	A \textbf{discrete finite classical} ensemble space is a simplex with the standard convex structure and the Shannon entropy.
+\end{defn}
+
+\begin{defn}
+	A \textbf{continuous classical} ensemble space is the convex space given by the probability distributions (i.e. probability measures) over phase space (i.e. a symplectic manifold) that allow a probability density (i.e. the probability measures are absolutely continuous with respect to the Liouville measure). The entropy is given by the Shannon/Gibbs entropy calculated using the probability density (i.e. the Radon-Nikodym derivative between the probability measure and the Liouville measure).
+\end{defn}
+
+\begin{defn}
+	A \textbf{quantum} ensemble space is the convex space given by the density operators (i.e. positive semi-definite self-adjoint operators with trace one) of a Hilbert space equipped with the von Neumann entropy.
+\end{defn}
 
 \begin{defn}
 	An ensemble space $\Ens$ is \textbf{reducible} (or \textbf{classical}) if two ensembles $\ens_1, \ens_2 \in \Ens$ are distinct if only if they do not have a common component.
 \end{defn}
 
+\begin{justification}
+	Note that in all ensemble spaces, distinct ensembles do not have a common component. Therefore the definition adds the opposite implication: if they do not have a common component, they are distinct. Therefore, this excludes the case where one has ensembles that do not have a common component and are not distinct.
+	
+	Conceptually, an ensemble space is reducible if we can turn coarser descriptions into finer, distinct, descriptions. The above case represents two ensembles that are not distinct, but no smaller, more refined, ensemble can be prepared that represents the common part. That is, we cannot refine the ensembles in three distinct ones: one that is only part of the first, one that is only part of the second and one that is part of both. In other words, we cannot reduce the coarser description of the system into finer distinct descriptions. In this case, the coarser description is irreducible, and should not be present for a reducible ensemble space. This justifies the definition.
+	
+	As we prove below, that case does not exist in classical mechanics, but exists in quantum mechanics. This justifies calling the property classical.
+\end{justification}
+
 \begin{remark}
 	The above property should ultimately be responsible of the single decomposition in terms of pure states.
 \end{remark}
+
+\begin{prop}
+	Continuous and discrete finite classical ensemble spaces are reducible.
+\end{prop}
+
+\begin{defn}
+	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of finitely many elements. In both cases, the upper bound of the entropy is maximized if and only if the measures being combined have disjoint support. This means that two ensembles are distinct if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measure with disjoint support are exactly ensembles that do not have a common component. Therefore, in both cases, the ensemble space is reducible.
+\end{defn}
+
+\begin{defn}
+	An ensemble is \textbf{decomposable} if it is the mixture of two or more components. An ensemble space is \textbf{infinitesimally decomposable} if all ensembles are decomposable.
+\end{defn}
+
 
 \begin{prop}
 	Let $\ens_1, \ens_2 \in \Ens$. Let $S_1 = S(\ens_1)$ and $S_2 = S(\ens_2)$. Let $\ens = p \ens_1 + \bar{p} \ens_2$ for some $p \in [0,1]$ and $S = S(\ens)$. Then $2^S \leq 2^{S_1} + 2^{S_2}$, with the equality if and only if $\ens_1$ and $\ens_2$ are distinct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
@@ -246,9 +303,18 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \end{proof}
 
 
-\begin{defn}
-	An ensemble is \textbf{decomposable} if it is the mixture of two or more components. An ensemble space is \textbf{infinitesimally decomposable} if all ensembles are decomposable. It is \textbf{finitely decomposable} if all ensembles can be decomposed into components that are not decomposable.
-\end{defn}
+\begin{conj}
+	An ensemble space $\Ens$ is a finite discrete classical ensemble space if and only if the following properties are all satisfied
+	\begin{enumerate}
+		\item $\Ens$ is reducible (i.e. classical)
+		\item every state with zero entropy is non-decomposable
+		\item the entropy is bounded
+	\end{enumerate}
+\end{conj}
+
+\begin{proof}
+	Let us first show that all finite discrete classical 
+\end{proof}
 
 \begin{remark}
 	The non-decomposable ensembles are exactly the extreme points of the convex space.
@@ -258,7 +324,7 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \section{Ensemble subspaces}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. The \textbf{distinct complement} $X^\perp \subseteq \Ens$ is the the set of all ensembles that are distinct from all elements of $X$. An \textbf{ensemble subspace} is a subset $X \in \Ens$ such that $X = (X^\perp)^\perp$.
+	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. The \textbf{distinct complement} $X^\perp \subseteq \Ens$ is the set of all ensembles that are distinct from all elements of $X$. An \textbf{ensemble subspace} is a subset $X \in \Ens$ such that $X = (X^\perp)^\perp$.
 \end{defn}
 
 To show that the above definition works to define a notion of subspace, it is useful to prove a more general result. The idea is that we can define a general notion of subspace by only defining a relationship of ``different subspace'' between the elements. This will give us a more general tool to investigate possible different notion of subspaces.
@@ -272,7 +338,7 @@ To show that the above definition works to define a notion of subspace, it is us
 	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Then:
 	\begin{enumerate}
 		\item $U \subseteq (U^{RC})^{RC}$
-		\item $U^{RC} \subseteq ((U^{RC})^{RC})^{RC}$
+		\item $U^{RC} = ((U^{RC})^{RC})^{RC}$
 	\end{enumerate}
 \end{prop}
 
@@ -301,12 +367,16 @@ To show that the above definition works to define a notion of subspace, it is us
 \begin{proof}
 	The proof assumes \ref{pm_ensmblespaces_symirreflproperties} to be true.
 	
-	The set $\mathfrak{L}$ is a collections of subsets of $X$. Let $\{U_i\}_{i \in I} \subseteq \mathfrak{L}$ be a non-empty family. Then $\bigcap_{i \in I} U_i = \bigcap_{i \in I} (U_i^{RC})^{RC} = ((\bigcap_{i \in I} U_i)^{RC})^{RC}$. Therefore $\bigcap_{i \in I} U_i \in \mathfrak{L}$ by the third property of \ref{pm_ensmblespaces_symirreflproperties}. This means $\mathfrak{L}$ is an $\bigcap$-structure. Using the second property of \ref{pm_ensmblespaces_symirreflproperties}, $X = \emptyset^{RC} = (X^{RC})^{RC}$. Therefore $\mathfrak{L}$ is a topped $\bigcap$-structure. This also means that it is a complete lattice.
+	The set $\mathfrak{L}$ is a collections of subsets of $X$. Let $\{U_i\}_{i \in I} \subseteq \mathfrak{L}$ be a non-empty family. Then $\bigcap_{i \in I} U_i = \bigcap_{i \in I} (U_i^{RC})^{RC} = ((\bigcap_{i \in I} U_i)^{RC})^{RC}$ by the third property of \ref{pm_ensmblespaces_symirreflproperties}. Therefore $\bigcap_{i \in I} U_i \in \mathfrak{L}$. This means $\mathfrak{L}$ is an $\bigcap$-structure. Using the second property of \ref{pm_ensmblespaces_symirreflproperties}, $X = \emptyset^{RC} = (X^{RC})^{RC}$. Therefore $\mathfrak{L}$ is a topped $\bigcap$-structure. This also means that it is a complete lattice.
 \end{proof}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ an ensemble subspace. The \textbf{dimension} of the subspaces is defined as $\dim(X) = \sup(\{S(\ens) \, | \, \ens \in X\})$.
+	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ an ensemble subspace. The \textbf{dimension} of the subspaces is defined as $\dim(X) = \sup(\{2^{S(\ens)} \, | \, \ens \in X\})$.
 \end{defn}
+
+\begin{prop}
+	
+\end{prop}
 
 \section{Lessons learned}
 
