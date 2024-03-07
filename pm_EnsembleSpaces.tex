@@ -173,14 +173,6 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	TODO: Does the existence of an entropy function put a limit on the convex space? For example, a line is convex space with no extreme points. We can parameterize the space with a variable $x$ such that the mixture of two ensembles is identified by the average $x$. Entropy can be written as $S(x)$. Since $S(x)$ is strictly concave over an infinite range, it will tend to minus infinity either when $x$ tends to infinity or minus infinity. Can we keep the increase in entropy bounded regardless of the distance between the two points being mixed? 
 \end{remark}
 
-\begin{remark}
-	We can define
-	$$JSD(\ens_1, \ens_2) = S\left(\frac{1}{2}\ens_1 + \frac{1}{2} \ens_2\right) - \left(\frac{1}{2} S(\ens_1) + \frac{1}{2} S(\ens_2)\right).$$
-	Both in the classical and quantum case, this corresponds to the Jensen-Shannon divergence \url{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}. It is connected to the Fisher-Rao metric \url{https://en.wikipedia.org/wiki/Fisher_information_metric#Relation_to_the_Jensen%E2%80%93Shannon_divergence} and its square root is a distance function.
-	
-	The question is whether the bounds above are enough to make the square root of the $JSD$ a distance function in the general case.
-\end{remark}
-
 \section{Ensemble spaces}
 
 \begin{defn}
@@ -324,6 +316,101 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	The non-decomposable ensembles are exactly the extreme points of the convex space.
 \end{remark}
 
+\section{Entropic geometry}
+
+We now show that entropy imposes a geometric structure on the ensemble space.
+
+\begin{defn}
+	Given two ensembles $\ens_1, \ens_2 \in \Ens$, the \textbf{mixing entropy}, also called Jensen-Shannon divergence, is the increase in entropy associated to their mixture. That is:
+	$$MS(\ens_1, \ens_2) = S\left(\frac{1}{2}\ens_1 + \frac{1}{2} \ens_2\right) - \left(\frac{1}{2} S(\ens_1) + \frac{1}{2} S(\ens_2)\right).$$
+\end{defn}
+
+\begin{prop}
+	In discrete and continuous classical cases, the mixing entropy coincides with the Jensen-Shannon divergence. In quantum spaces it coincindes with the quantum Jensen-Shannon divergence.
+\end{prop}
+
+\begin{proof}
+	Looking at the definitions, for example at \url{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}, one can see that
+	$$ JSD(e_1, e_2) = S\left(\frac{1}{2}e_1 + \frac{1}{2}e_2)\right)  - \frac{1}{2} \left(S(e_1) + S(e_2)\right)) = MS(e_1, e_2)$$.
+	The same is true for the quantum case:
+	$$ QJSD(e_1, e_2) = S\left(\frac{1}{2}e_1 + \frac{1}{2}e_2)\right)  - \frac{1}{2} \left(S(e_1) + S(e_2)\right)) = MS(e_1, e_2)$$.
+\end{proof}
+
+\begin{defn}
+	A \textbf{geometric} ensemble space is an ensemble space that is complemented and has a twice differentiable entropy with respect to the mixing coefficients.
+\end{defn}
+
+\begin{coro}
+	A geometric ensemble space is a smooth vector space.
+\end{coro}
+
+\begin{proof}
+	Since a geometric ensemble space is complemented, it embeds into a real vector space. The differentiable structure is imposed by require that any parameter used to define families of ensembles must be twice differentiable with respect to the entropy.
+\end{proof}
+
+\begin{remark}
+	These requirements are useful to leverage all definitions of differential geometry, which require a local vector space structure and differentiability. It may be the case that convex structure of the ensemble space is enough, and that the differentiability of the entropy can be derived by showing the continuity of the mixing entropy.
+	
+	For now, we are going to assume the above. This is already a generalization as we work with a generic vector space and not a manifold. The hope is that this can be a rigorous foundations for classical and quantum field theories.
+\end{remark}
+
+\begin{defn}
+	Given an ensemble $\ens \in \Ens$, the \textbf{tangent space} at $\ens$, noted $T_{\ens}$, is the space of all infinitesimal variations $\delta \ens$. The \textbf{norm} of a variation $\delta \ens \in T_{\ens}$ is given by
+	$$ \lVert \delta \ens \rVert_{\ens} = \sqrt{ MS(\ens, \ens + \delta \ens) }.$$
+	The \textbf{metric tensor} (i.e. the inner product between two variations $\delta \ens_1 , \delta \ens_2 \in T_{\ens}$ ) is given by
+	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert_{\ens}^2 - \lVert \delta \ens_1 \rVert_{\ens}^2 - \lVert \delta \ens_2 \rVert_{\ens}^2 \right).$$
+\end{defn}
+
+\begin{thrm}
+	Let $\Ens$ be a geometric ensemble space. Then
+	$$ \lVert \delta \ens \rVert_{\ens}^2 = - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2}(\delta \ens , \delta \ens) $$
+	and 
+	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = - \frac{1}{8} \frac{\partial^2 S}{\partial \ens ^2}( \delta \ens_1, \delta \ens_2 ).$$
+	Let $V \subseteq \Ens$ be a finite dimensional subregion. Then $V$ is a Riemmanian manifold with $g_{\ens}$ as the metric tensor and $\lVert \cdot \rVert_{\ens}$ as the norm.
+\end{thrm}
+
+\begin{proof}
+	To recover the first two expression, we simply have to calculate the leading term. Since the entropy is twice differentiable, we can expand it as
+\begin{equation}
+	\begin{aligned}
+		S(\ens + \delta \ens) &= S(\ens) + \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3).
+	\end{aligned}
+\end{equation}
+Expanding the definition of $MS$, we have
+\begin{equation}
+	\begin{aligned}
+		MS(\ens, \ens + \delta \ens) &= S\left(\frac{1}{2} \left( \ens + (\ens + \delta \ens) \right)\right) - \frac{1}{2} \left(S(\ens) + S(\ens+\delta \ens) \right) \\
+		&=  S\left(\ens + \frac{1}{2} \delta \ens \right) - \frac{1}{2} S(\ens) - \frac{1}{2} S(\ens+\delta \ens) \\
+		&= S(\ens) + \frac{\partial S}{\partial \ens} \frac{1}{2}\delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \frac{1}{2}\delta \ens \frac{1}{2}\delta \ens + O(\delta \ens ^3) \\
+		&- \frac{1}{2} S(\ens) - \frac{1}{2} \left( S(\ens) + \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3) \right) \\
+		&= S(\ens) + \frac{1}{2} \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens \\
+		&- S(\ens) - \frac{1}{2} \frac{\partial S}{\partial \ens} \delta \ens - \frac{1}{4} \frac{\partial^2 S}{\partial \ens^2} + O(\delta \ens ^3) \\
+		&= - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3).
+	\end{aligned}
+\end{equation}
+
+Therefore
+$$ \lVert \delta \ens \rVert^2 = MS(\ens, \ens + \delta \ens) = - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} (\delta \ens, \delta \ens).$$
+
+We can now substitute the norm to the definition of metric tensor. We have
+\begin{equation}
+	\begin{aligned}
+		\langle \delta \ens_1, \delta \ens_2 \rangle &= \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert^2 - \lVert \delta \ens_1 \rVert^2 - \lVert \delta \ens_2 \rVert^2 \right) \\
+		&= \frac{1}{2} \left( - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1 + \delta \ens_2, \delta \ens_1 + \delta \ens_2) + \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) +\frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right) \\
+		&= - \frac{1}{16} \left(  \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_2) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right. \\
+		&-  \left. \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) - \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right) \\
+		&= - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_2) \\
+	\end{aligned}
+\end{equation}
+
+	Let us now take a finite dimensional region $V \subseteq \Ens$. Since $V$ is a finite dimensional subregion of a real vector space, it will be a manifold. It will have a smooth structure inherited from the ensemble space.
+	
+	Let us now show that $g$ is a metric tensor. Restricted to $V$, $g|_V$ is the Hessian of the entropy $S$. Therefore it is a symmetric rank two tensor which means a symmetric bilinear function of the arguments. Since the entropy is strictly concave, the Hessian is negative definite and therefore $g$ is positive definite. Therefore $(V, g|_V)$ is a Riemmanian manifold.
+\end{proof}
+
+\begin{remark}
+	We have shown that, under very general conditions, a generalized ensemble space is a geometric space, where the notion of distance and angle are fully defined by the entropy. That is, all geometric structures in physics are entropy structures.
+\end{remark}
 
 \section{Ensemble subspaces}
 
