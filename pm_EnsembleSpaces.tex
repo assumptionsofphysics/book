@@ -9,6 +9,7 @@
 \newcommand\component{\mathrm{comp}}
 \newcommand\cospan{\mathrm{cospan}}
 \newcommand\dist{\mathrm{dist}}
+\newcommand\tr{\mathrm{tr}}
 
 \newcommand\vspan{\mathrm{span}}
 \newcommand\cl{\mathrm{cl}}
@@ -23,73 +24,95 @@ Here we summarize the work in progress for a general theory of states and proces
 
  Conceptually, we want to argue that physical theories are, and can only be, about ensembles. At a practical level, most of the time we can only prepare and measure statistical properties as we do not have infinite control over all systems. The cases where properties can be prepared with one hundred percent reliability can still be understood as a ensembles of identical preparations, though one can argue for an ensemble of external conditions or internal dynamics. At a conceptual level, the goal of physics is to write laws that apply all the time: every time that one prepares a system according to a particular procedure, let's it evolve in particular conditions, he will obtain a particular result. That is, the idea of repeatability of experimental results implicitly assumes that the objects of scientific inquiry are not single instances, but the infinite collections of all reproducible instances.
 
-\section{Working examples}
+\section{Models and examples}
 
-A general theory of ensembles will need to be able to recover classical spaces and quantum spaces under appropriate physically meaningful assumptions. There are two aspects that are common to all cases, that can be suitably generalized: statistical mixing and entropy. It is useful, then, to review the cases we need to recover. For now, we will leave field theories out of this treatment.
+A general theory of ensembles will need to be able to recover classical and quantum spaces under appropriate physically meaningful assumptions. Here we review these cases and give the appropriate mathematical definitions, highlighting potential issues, as they serve as models and examples.
 
-\subsection{Classical case - discrete}
+There are two aspects that are common to all cases and will be the target of generalization: statistical mixing (captured by a convex structure) and entropy (captured by a strictly convex function).
 
-\subsubsection{Convex structure}
+\subsection{Discrete classical theory}
 
-The space of classical distributions over a discrete space corresponds to a simplex (\url{https://en.wikipedia.org/wiki/Simplex}). In the finite case, the pure states $\mathcal{G} = \{g_i\}_{i=1}^{n} \subset \Ens$ are finitely many and each ensemble $e = \sum p_i g_i$ is uniquely identified by a decomposition of pure states. Effectively, each ensemble is a probability distribution over the pure states. Mathematically, each point of the space is a convex combination of the vertices. The simplex has a center point, which corresponds to the maximally mixed state, a uniform distribution over all pure states.
+\begin{defn}
+	The ensemble space of a \textbf{discrete classical theory} is a simplex with the standard convex structure and the Shannon entropy. The simplex can have finitely or countably many vertices.
+	
+	That is, a discrete classical ensemble space is a set $\Ens$ containing $n$ points $\{s_i\}^n_{i=1}$ and for which every element $\ens \in \Ens$ is characterized by a unique convex combination $\ens = \sum_i p_i s_i$ such that $\sum_i p_i = 1$. The space is closed under convex combinations of finitely many elements. The entropy is given by $S(\ens) = - \sum_i p_i \log p_i$.
+\end{defn}
 
-The countably infinite case is a bit different because not all infinite sequences $\{p_i\} \in [0,1]$ converge. As we cannot create a uniform distribution over infinitely many cases, there is no center point. Effectively, there is ``hole'' in the middle. More precisely, the space is not topologically closed in the sense it does not contain all the limit points.
+\begin{remark}
+	The correct closure under convex combinations of countably many elements is not clear.
+\end{remark}
 
-The uncountably infinite case is not physically relevant (i.e. no second countable discrete topology, cases are not experimentally decidable).
+\subsubsection{Finite case}
 
-TODO: Understand the space of the limits. There should be at least one point for each sequence $\{p_i\}$ that converges to a finite $p < 1$. Intuitively, we can keep that part of the distribution constant while we spread the rest uniformly to all cases. Each should reach a different limit point.
+The space of classical distributions over a discrete space corresponds to a simplex (\url{https://en.wikipedia.org/wiki/Simplex}). In the finite case, the pure states $\mathcal{S} = \{s_i\}_{i=1}^{n} \subset \Ens$ are finitely many and each ensemble $\ens = \sum p_i s_i$ is uniquely identified by a decomposition of pure states. Effectively, each ensemble is a probability distribution over the pure states. Mathematically, each point of the space is a convex combination of the vertices. The simplex has a center point, which corresponds to the maximally mixed state, a uniform distribution over all pure states. 
 
-\subsubsection{Entropic structure}
-
-Each ensemble $e$ has a single decomposition $e = \sum p_i g_i$ in terms of pure states. The entropy is given by $-\sum p_i \log p_i$ for both finite and countable cases. Therefore the entropy for each pure state is assumed to be zero. The entropy of the maximally mixed state is $\log n$ where $n$ is the number of pure states. The entropy increase as we go from pure states to the maximally mixed state. The level sets (i.e. the fibers) of the entropy form a series of concentric ``shells''.
-
-Note that the entropy is not finite for all convergent $p_i$ (i.e. infinite convex combinations). For details, see \url{https://arxiv.org/pdf/1212.5630.pdf}. Given that we will want the entropy to exist and be finite for all ensembles, this means that simply generalizing the convex space to all probability measures (like in \url{https://ncatlab.org/nlab/show/superconvex+space} ) does not seem physically warranted.
+The entropy is given by Shannon entropy $-\sum_i p_i \log p_i$. This means that the entropy of each pure state is zero and the entropy of the maximally mixed state is $\log n$ where $n$ is the number of pure states. The entropy increase as we go from pure states to the maximally mixed state. The level sets (i.e. the fibers) of the entropy form a series of concentric ``shells''.
 
 The fact that all pure states have the same entropy is an additionally hypothesis that cannot work in general. To see this, consider the case where the state is defined by the number of molecules for two substances. This space is the product of two independent variable $n_a$ and $n_b$. If we have a uniform distribution over $N_a$ cases of $n_a$ and $N_b$ cases of $n_b$, the total number of cases is $N_a N_b$. Therefore the entropy of the joint state is the sum of the entropy of the marginals. However, if we pair $n_a$ with the total number of molecules $n_{(a+b)}$ we have a problem. The issue that variable $n_{(a+b)}$ corresponds to a variable number of joint cases.
 
-\subsection{Classical case - continuous}
+\subsubsection{Countable case}
 
-\subsubsection{Convex structure}
+The countable case is not well-defined mathematically.
 
-In the continuous case, the space of ensembles is the space of integrable functions over a symplectic manifold (e.g.  over phase space) that integrate to one. That is, if $X$ is a symplectic manifold, then $\Ens = L^1(X, \mu)$ where $\mu=\int \omega^n$ is the Liouville measure. The pure states are the space of delta distributions $\mathcal{G} = \{\delta_x\}_{x \in X}$, but they are not in  $\Ens$: they are limit points. If we imagine a uniform distribution over a region of the symplectic manifold, we now have two limits that are not part of the ensemble space: the limit with infinite support, and the limit of zero support. In some sense, a distribution can be understood as a convex integral of the zero support limits: $\rho(x) = \int_X \rho(y) \delta_x(y) d\mu$. Even in this case, each ensemble can be understood as a probability distribution (density in this case) over all pure states. The symplectic nature of the manifold is require to assign a frame invariant density to states and a frame invariant notion of independence between DOFs.
+The obvious extensions is to include all countable sequences $\{p_i\} \in [0,1]$ that converge to one. That is, the space of all probability measures over a countable discrete space. Since we cannot create a uniform distribution over infinitely many cases, there is no center point. Effectively, there is ``hole'' in the middle. More precisely, the space is not topologically closed in the sense it does not contain all the limit points.
 
-TODO: We have already shown that that the ability to define frame-independent probability densities on pure states is linked to the existence symplectic structure. The notion of independence of DOF should be connected to a notion of product of convex spaces. As defined below, the entropic structure is defined already in a frame independent way (at least at constant time). There may be a way to make the argument tighter from a mathematical perspective.
+[TODO] It may be useful to characterize this ``hole'' and the limit points. There should be at least one point for each sequence $\{p_i\}$ that converges to a finite $p < 1$. Intuitively, we can keep that part of the distribution constant while we spread the rest uniformly to all cases. Each should reach a different limit point.
 
-TODO: The pure states are not part of the space: they are limits. Technically, they are not extreme points. We should have a definition of pure states that recovers all notions of pure states.
+However, the space of all probability measure is too large. Note that the entropy is not finite for all convergent $p_i$ (i.e. infinite convex combinations). For details, see \url{https://arxiv.org/pdf/1212.5630.pdf}. Given that we want the entropy to exist and be finite for all ensembles, this generalization (like in \url{https://ncatlab.org/nlab/show/superconvex+space} ) does not seem physically warranted.
 
-\subsubsection{Entropic structure}
+Also note that expectation values are not guaranteed to be finite either, and requiring a particular observable to be finite further restricts the space. This restriction may be desirable for another reason: a discrete ensemble space has no notion of the ordering of the pure states. Physically, this would mean that the state with 1, 100, or 1 trillion particles are ``equally distant''. Requiring the expectation of the number of particles to be finite, should effectively encode the ordering in the rate of convergence of the probability distributions.
+
+\subsubsection{No uncountable case}
+
+The uncountably infinite case is not physically relevant (i.e. no second countable discrete topology, cases are not experimentally decidable). Also note that any set of real numbers whose sum is finite can have only countably many non-zero elements. To understand why, note that there can only be finitely many terms above any particular positive value if their sum is to remain finite. Effectively, the uncountable case would be stitching together infinitely many countable cases.
+
+\subsection{Continuous classical theory}
+
+\begin{defn}
+	The ensemble space of a \textbf{continuous classical theory} is the convex space given by the probability distributions (i.e. probability measures) over phase space (i.e. a symplectic manifold) that allow a continuous probability density (i.e. the Radon-Nikodym derivative exists - the probability measures are absolutely continuous with respect to the Liouville measure - and is continuous). The entropy is given by the Shannon/Gibbs entropy calculated using the probability density (i.e. the Radon-Nikodym derivative between the probability measure and the Liouville measure).
+\end{defn}
+
+In the continuous case, the space of ensembles is the space of continuous integrable functions over a symplectic manifold (e.g.  over phase space) that integrate to one. That is, if $X$ is a symplectic manifold, then $\Ens = L^1(X, \mu) \cap C(X)$ where $\mu=\int \omega^n$ is the Liouville measure. The space does not include the pure states, as they correspond to the space of delta distributions $\mathcal{G} = \{\delta_x\}_{x \in X}$: they are limit points. In some sense, a distribution can be understood as a convex integral of pure states: $\rho(x) = \int_X \rho(y) \delta_x(y) d\mu$. Even in this case, each ensemble can be understood as a probability distribution (density in this case) over all pure states. The symplectic nature of the manifold is required to assign a frame invariant density to states and a frame invariant notion of independence between DOFs, as we saw in the classical mechanics section of reverse physics.
+
+The fact that pure states not part of the space, but limits, means we need a more sophisticated definition of pure states and simply the extreme points of the convex space of ensembles.
 
 The entropy is given by $- \int \rho \log \rho d\mu$ where $\mu$ is the Liouville measure and $\rho$ is the probability density over canonical coordinates. If a different measure is used, or if the coordinates are not canonical, the formula gives the wrong result.
 
-Unlike the classical discrete case, subspaces and dimensionality of subspaces cannot be defined without the entropy. The issue is that we need a measure on the set of ``extreme points'', and the convex structure cannot provide it. The entropy, however, does as the supremum of the entropy for all distributions with support $U$ is $\log \mu(U)$.
+Similarly to the infinite discrete case, the entropy can be infinite and expectation values can be infinite. The added complication is the frame invariance: it would not make sense to have the expectation for position in one frame to be finite while infinite in another. Requiring all functions of position/momentum to have finite expectation restricts the distributions to those with finite support. Requiring all polynomial functions of positions/momentum to have finite expectation restricts the distributions to those that decay faster than any polynomial.
 
-The entropy can be used to both identify subspaces and recover the Liouville measure. Take $\rho \in X$; construct the set $\text{dis}(\rho)$ of all the ensembles that are disjoint from $\rho$; now construct the set $\text{con}(\rho)$ of all ensembles that are disjoint from all elements of $\text{dis}(\rho)$. These will be the set of ensembles that share the supports. Find the supremum of $\text{dis}(\rho)$ in terms of the entropy. If it doesn't exists, the support is infinite. If it does, the support is finite and the measure is $2^{\sup S(\text{con}(\rho))}$.
+Unlike the discrete classical case, subspaces and dimensionality of subspaces cannot be defined without the entropy. The issue is that we need a measure on the set of pure states, and the convex structure cannot provide it. The entropy, however, does as the supremum of the entropy for all distributions with support $U$ is $\log \mu(U)$. As we will see, the entropy can be used to both identify subspaces and recover the Liouville measure.
 
-TODO: Study the shell of zero entropy states. For example, it should not be path connected: all uniform distributions with support of the same finite size (in terms of Liouville measure) will have the same entropy. The region, however, need not be contiguous. Since we cannot continuously transform a single region into two disjoint regions, there will be different distributions at zero entropy that cannot be transformed continuously.
+Note that we exclude discontinuous distributions as starting from the space of discontinuous distributions does not allow one to recover the topology of the base space. Suppose, in fact, to have the space of all distributions over the real line that integrate to one. Now imagine switching the interval $[0, 1)$ with the interval $[1, 2)$. This is an isomorphism on the space of discontinuous distributions. Therefore given the space of distribution, we cannot recover the topology of the real line. Now take the space of continuous functions that integrate to one. Take those with support $[0,1) \cup [2,3)$. This is the set of convex combinations of the distributions with support $[0,1)$ and $[2,3)$ precisely because the sets are not contiguous and the distributions will have to go to zero at the boundary. However, the distributions with support $[0,1)$ are not just the convex combinations of those with support $[0,0.5)$ and $[0.5,1)$ because this will include the continuous function that have a non-zero value at $0.5$.
 
-
-\subsection{Quantum case - finite dimensional}
-
-\subsubsection{Convex structure}
-
-For a qubit, the Bloch ball is the space of ensembles $\Ens$. That is, let $\mathcal{H}$ be a two dimensional Hilbert space. The interior of the block sphere correspond to mixtures (i.e. the space of positive semi-definite Hermitian operators with trace one $M(\mathcal{H})$) while the surface corresponds to the pure states $\mathcal{G}$ (i.e. $\{ |\psi\> \<\psi| \}_{\psi \in \mathcal{H}}$). In this case, there is no single decomposition. The general finite dimensional case works similarly. Note that the space is exactly characterized by knowing which different mixtures provide the same ensemble.
-
-The multiple decompositions make the ensemble space behave in a way that is a hybrid between the classical discrete and continuous. Pure states are properly a part of the state, as in the discrete case, and we can describe each mixture in terms of finitely many states. However, the pure state are a continuum, therefore we can also define probability densities over the space, convex integrals. For example, for a single qubit, the maximally mixed state (the center of the sphere) can be equally described as the equal mixture of two opposite states (e.g. spin up and spin down, or spin left and spin right). However, it can also be described as the equal mixture of the whole sphere.
-
-Note that complex projective are symplectic, which is what allows to define frame invariant densities. Ideally, whatever formal argument we are able to work for classical mechanics would also apply to quantum mechanics.  Also note that the two dimensional sphere is the only symplectic sphere. By homogeneity, we should be able to argue that the space is symmetric around the maximally mixed state, and is therefore a ball. The symplectic requirement would select dimension two. Note that real and quaternionic spaces would be excluded by this argument.
-
-\subsubsection{Entropic structure}
-
-In quantum mechanics, the entropy is the von Neumann entropy for both finite and infinite dimension. The entropy for the maximally mixed state is $\log n$ where $n$ is the dimensionality of the Hilbert space. Note that, to calculate the von Neumann entropy, we are diagonalizing the density matrix $\rho$. This means finding a set of orthogonal pure states $g_i$ such that $\rho = \sum p_i g_i$ is a convex combination. Note that the convex hull of a set of $n$ orthogonal pure states is an $n$-dimensional simplex whose center is the maximally mixed state. Therefore, we are looking for the smallest simplex that contain $\rho$ and the maximally mixed state. In the two dimensional case, $\rho$ is an interior point. Take the line that connects $\rho$ to the center. The two points of the sphere are the extreme points for the decomposition. The distance from the points will be proportional to the probability. Because of this property, the von Neumann entropy is the smallest Shannon entropy between all possible decompositions.
+[TODO] It may be interesting to study the shell of zero entropy states. For example, it should not be path connected: all uniform distributions with support of the same finite size (in terms of Liouville measure) will have the same entropy. The region, however, need not be contiguous. Since we cannot continuously transform a single region into two disjoint regions, there will be different distributions at zero entropy that cannot be transformed continuously.
 
 
-\subsection{Quantum case - infinite dimensional}
+\subsection{Quantum theory}
 
-The infinite dimensional can be both understood as the countably infinite dimensional version of the discrete case, or as the space of complex square integrable functions. As in the  (i.e. $L^2$) should work the same, except that there is no upper bound on the entropy, and therefore there is no maximally mixed state.
+\begin{defn}
+	The ensemble space of a \textbf{quantum theory} is modeled by the convex space given by the density operators (i.e. positive semi-definite self-adjoint operators with trace one) of a Hilbert space equipped with the von Neumann entropy.
+	
+	That is, given a Hilbert space $\mathcal{H}$, the ensemble space is the space of positive semi-definite self-adjoint operators with trace one $M(\mathcal{H})$. The space of pure states is given by the projective space $P(\mathcal{H})$. The entropy of an ensemble $\rho \in M(\mathcal{H})$ is given by the von Neumann entropy $S(\rho) = \tr(\rho \log \rho)$.
+\end{defn}
 
-As in the classical infinite case, the maximally mixed state is not in the convex space.
+\subsubsection{Finite dimensional case}
 
-TODO: It is not clear what is the correct space for the infinite dimensional case. The Hilbert space contains pure states that have infinite expectation values. Schwartz spaces do not have this problem, but the order of the basis seems relevant as the rate of convergence is defined with that in mind. A reorder of the basis, in fact, can change the rate of convergence. Take, for example, a series that converges faster than any polynomial. Now construct a series by adding a zero term in between every non-zero term. The series will also converge faster than any polynomial. Now rearrange the zero so that the terms get more and more spread out. At some point, the rate of convergence of the series will change. It is unclear what is the relationship between the topology of these limits points and the convex/entropic structure. Related question is whether $S(\mathbb{R})$ and $S(\mathbb{R}^2)$ isomorphic as extreme points of a convex set.
+The simplest non-trivial case is the qubit, for which the Bloch ball is the space of ensembles $M(\mathcal{H})$. The interior of the block sphere correspond to mixtures  while the surface corresponds to the pure states $\mathcal{S} = P(\mathcal{H}) = \{ |\psi\> \<\psi| \}_{\psi \in \mathcal{H}}$). In quantum ensemble spaces there is no single decomposition. Note that the space is exactly characterized by knowing which different mixtures provide the same ensemble.
+
+The multiple decompositions make the ensemble space behave in a way that is a hybrid between the classical discrete and continuous. Pure states are properly a part of the ensemble space, as in the discrete case, and we can describe each mixture in terms of finitely many states. However, the pure states are a continuum, therefore we can also define probability densities over the space, convex integrals. For example, for a single qubit, the maximally mixed state (the center of the sphere) can be equally described as the equal mixture of two opposite states (e.g. spin up and spin down, or spin left and spin right). However, it can also be described as the equal mixture of the whole sphere.
+
+Note that complex projective are symplectic, which is what allows to define frame invariant densities. The goal is to have one argument applied to the generic definition as to why the state of pure states must be symplectic. Also note that the two dimensional sphere is the only symplectic sphere. By homogeneity, we should be able to argue that the space is symmetric around the maximally mixed state, and is therefore a ball. The symplectic requirement would select dimension two. Note that real and quaternionic spaces would be excluded by this argument.
+
+The von Neumann entropy for the maximally mixed state is $\log n$ where $n$ is the dimensionality of the Hilbert space. Again we see that the maximum entropy gives us a measure of the size of the space. Note that, to calculate the von Neumann entropy, we are diagonalizing the density matrix $\rho$. This means finding a set of orthogonal pure states $s_i$ such that $\rho = \sum p_i s_i$ is a convex combination. Note that the convex hull of a set of $n$ orthogonal pure states is an $n$-dimensional simplex whose center is the maximally mixed state. Therefore, we are looking for the smallest simplex that contain $\rho$ and the maximally mixed state. In the two dimensional case, $\rho$ is an interior point. Take the line that connects $\rho$ to the center. The two points of the sphere are the extreme points for the decomposition. The distance from the points will be proportional to the probability. Because of this property, the von Neumann entropy is the smallest Shannon entropy between all possible decompositions.
+
+
+\subsection{Countably infinite dimensional case}
+
+The infinite dimensional cases present similar problems as the classical case, and adds others. As in the classical infinite case, the maximally mixed state is not in the convex space and the entropy is not finite for all mixed states. As in the classical continuous case, there is the issue of finite expectation of position/momentum in all frames. The problem is compounded by the fact that one cannot require finite expectation for all functions of position and momentum: finite support in position automatically implies infinite support on momentum, since the distribution in momentum is the Fourier transform of that in position.
+
+The Hilbert space for a discrete variable with infinite range (e.g. number of particles) and a continuous variable (e.g. position/momentum) is the same. The first is defined as the space of square convergent complex sequences $l^2$ while the second is the space of square integrable complex functions $L^2$. Given that $L^2$ allows a countable basis, the two are isomorphic. This also means that all spaces with finitely many degrees of freedom are also isomorphic. This makes the problem of infinite expectations even more problematic.
+
+Note that Schwartz spaces have finite expectation for all polynomial functions of position and momentum. Given that infinite permutations can change the rate of convergence, the Schwartz space has an idea of what is further away from the origin, unlike Hilbert spaces. [TODO] It is not yet clear to us whether the Schwartz space for one DOF is the same as the one for two DOF.
 
 \section{Convex spaces}
 
@@ -112,7 +135,7 @@ Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab
 
 
 \begin{defn}
-	Let $\Ens$ be a convex space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in (0,1)$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$ and each $\ens_i$ is a \textbf{component} of $\ens[\rho]$. Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$ with $p \in (0,1)$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$.
+	Let $\Ens$ be a convex space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in (0,1)$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$ and each $\ens_i$ is a \textbf{component} of $\ens[\rho]$.
 \end{defn}
 
 \begin{defn}
@@ -124,14 +147,14 @@ Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab
 \end{coro}
 
 \begin{proof}
-	By idempotence, we can write $\ens_1 = p_1 \ens_1 + \bar{p_1} \ens_1$ for some $p_1 \in (0,1)$. Since $\ens_1$ is a component of $\ens_2$, we can write $\ens_2 = p_2 \ens_1 + \bar{p_2} \ens_3$ for some $p \in (0, 1)$ and $\ens_3 \in \Ens$. Therefore $\ens_1$ and $\ens_2$ have a common component.
+	By idempotence, we can write $\ens_1 = p_1 \ens_1 + \bar{p_1} \ens_1$ for some $p_1 \in (0,1)$. Since $\ens_1$ is a component of $\ens_2$, we can write $\ens_2 = p_2 \ens_1 + \bar{p_2} \ens_3$ for some $p_2 \in (0, 1)$ and $\ens_3 \in \Ens$. Therefore $\ens_1$ and $\ens_2$ have a common component.
 \end{proof}
 
 \begin{defn}
-	A convex space is \textbf{complemented} if all $p$-complements are unique.
+	 Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$ with $p \in (0,1)$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$. A convex space is \textbf{complemented} if all $p$-complements are unique.
 \end{defn}
 
-\begin{prop}
+\begin{prop}\label{pm_es_complementedIsVectorSpace}
 	A convex space embeds into a real vector space with convex combination as linear combination if and only if it is complemented.
 \end{prop}
 \begin{proof}
@@ -139,8 +162,17 @@ Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab
 	$$ c_\lambda(x,y) = c_\lambda(x,z) \; \forall \lambda \in (0,1) \implies y = z.$$ This is exactly the conditions that the $\lambda$-complement is unique.	
 \end{proof}
 
+\begin{prop}
+	Discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces are complemented convex spaces.
+\end{prop}
+
+\begin{proof}
+	The space of probability measures, discrete or continuous, forms a convex space that embeds into the vector space of finite signed measure, and therefore it is a complemented convex space by proposition \ref{pm_es_complementedIsVectorSpace}. The space of positive semi-definite self-adjoint operators with trace one is also a convex space that embeds into the vector space of self-adjoint operators, and therefore it is a complemented convex space by proposition \ref{pm_es_complementedIsVectorSpace}.
+\end{proof}
+
+
 \begin{remark}
-	Note that all classical and quantum cases are complemented and therefore embed into real vector spaces. It is not yet clear whether an ensemble space must be complemented or not. It is difficult to justify as it is a claim on existence of more refined ensembles. It may very well be that this is just an assumption on the decomposition, which may fail is new physical conditions.
+	Since all current physical ensemble spaces are complemented, it is not yet clear whether an ensemble space must be complemented or not. It is difficult to justify as it is a claim on existence of more refined ensembles. It may very well be that this is just an assumption on the decomposition, which may fail in new physical conditions (e.g. at Plank scale).
 \end{remark}
 
 
@@ -161,13 +193,17 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	\end{itemize}
 \end{defn}
 
+\begin{prop}
+	The entropy in discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the above definition.
+\end{prop}
+
+\begin{proof}
+	In both classical case, the entropy is a function of only the probabilities of the decomposition in terms of pure states. The function is continuous in terms of those variables as $x \log x$ is a continuous function. [TODO find short proof of convexity and maximum bound]
+	
+	In the quantum case, the entropy is a continuous function of the density operator as the trace, multiplication and logarithm of an operator are all continuous functions. [TODO find short proof of convexity and maximum bound]
+\end{proof}
+
 \begin{remark}
-	Note that the bounds for entropy can also be written as
-	$$ 0 \leq S(p_1\ens_1 + p_2 \ens_2) - (p_1 S(\ens_1) + p_2 S(\ens_2)) \leq I(p_1, p_2).$$
-	The term in the middle compares the entropy of the mixture to the average entropy of the components. It essentially tells us that the entropy can only increase during the mixture, and it can only increase up to the entropy of the coefficients.
-	
-	Note that if an ensemble can be decomposed in multiple ways, the decomposition such that the entropy of the weights is minimal provides the least upper bound.
-	
 	TODO: In \url{https://arxiv.org/abs/1912.02012} we showed how the Shannon entropy quantifies the variability of elements within a distribution. It would be more elegant if we would be able to rederive $I$ from requirements on convex spaces instead of distributions in particular.
 	
 	TODO: Does the existence of an entropy function put a limit on the convex space? For example, a line is convex space with no extreme points. We can parameterize the space with a variable $x$ such that the mixture of two ensembles is identified by the average $x$. Entropy can be written as $S(x)$. Since $S(x)$ is strictly concave over an infinite range, it will tend to minus infinity either when $x$ tends to infinity or minus infinity. Can we keep the increase in entropy bounded regardless of the distance between the two points being mixed? 
@@ -190,6 +226,14 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	The entropy must be continuous as small changes in the ensemble should produce small changes in the variability. It should be strictly concave as mixing different ensembles will increase the variability. Mixing the same ensemble, however, should not increase the variability. The variability increase is maximal when the two ensembles are completely distinct. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. In this case, neither ensemble can be achieved by mixing the other with something else as the ensembles are completely distinct. Note that the converse is not true: the inability to create a mixture from one to the other does not necessarily mean that the ensembles are completely distinct; it may mean that finer ensembles are not available (as in the case of quantum mechanics).
 	
 \end{justification}
+
+\begin{prop}
+	The discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the above definition of ensemble space.
+\end{prop}
+
+\begin{proof}
+	As previously shown, they are all convex space on which is defined an entropy function.
+\end{proof}
 
 \begin{defn}
 	Two ensembles $\ens_1, \ens_2 \in \Ens$ are \textbf{distinct} if they saturate the upper variability bound (i.e. $S(p_1\ens_1 + p_2 \ens_2) - (p_1 S(\ens_1) + p_2 S(\ens_2)) = I(p_1, p_2)$).
@@ -221,19 +265,6 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	This is true both in classical and quantum mechanics. It is not clear whether it can be proven as the previous proposition. If it can't be proven, it most likely should be added to the definition of entropy. Note that, since this specifies the behavior of entropy along a plane (i.e. among three distinct ensembles), it may be the feature that guarantees the entropy to be the square of a distance function.
 \end{remark}
 
-
-\begin{defn}
-	A \textbf{discrete finite classical} ensemble space is a simplex with the standard convex structure and the Shannon entropy.
-\end{defn}
-
-\begin{defn}
-	A \textbf{continuous classical} ensemble space is the convex space given by the probability distributions (i.e. probability measures) over phase space (i.e. a symplectic manifold) that allow a probability density (i.e. the probability measures are absolutely continuous with respect to the Liouville measure). The entropy is given by the Shannon/Gibbs entropy calculated using the probability density (i.e. the Radon-Nikodym derivative between the probability measure and the Liouville measure).
-\end{defn}
-
-\begin{defn}
-	A \textbf{quantum} ensemble space is the convex space given by the density operators (i.e. positive semi-definite self-adjoint operators with trace one) of a Hilbert space equipped with the von Neumann entropy.
-\end{defn}
-
 \begin{defn}
 	An ensemble space $\Ens$ is \textbf{reducible} (or \textbf{classical}) if two ensembles $\ens_1, \ens_2 \in \Ens$ are distinct if only if they do not have a common component.
 \end{defn}
@@ -251,16 +282,26 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \end{remark}
 
 \begin{prop}
-	Continuous and discrete finite classical ensemble spaces are reducible.
+	Continuous and discrete classical ensemble spaces are reducible.
 \end{prop}
 
-\begin{defn}
+\begin{proof}
 	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of finitely many elements. In both cases, the upper bound of the entropy is maximized if and only if the measures being combined have disjoint support. This means that two ensembles are distinct if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measure with disjoint support are exactly ensembles that do not have a common component. Therefore, in both cases, the ensemble space is reducible.
-\end{defn}
+\end{proof}
 
 \begin{defn}
-	An ensemble is \textbf{decomposable} if it is the mixture of two or more components. An ensemble space is \textbf{infinitesimally decomposable} if all ensembles are decomposable.
+	An ensemble is \textbf{decomposable} if it is the mixture of two or more components. An ensemble space is \textbf{infinitesimally decomposable} if all ensembles are decomposable. An ensemble space is \textbf{finitely decomposable} if any ensemble can be decomposed into elements that are not decomposable.
 \end{defn}
+
+\begin{prop}
+	The discrete classical ensemble space and the quantum ensemble space are finitely decomposable. The continuous classical space is infinitesimally decomposable.
+\end{prop}
+
+\begin{proof}
+	Pure states in discrete classical and quantum ensembles can no longer be decomposed, and every other ensemble is the mixture of pure states. Therefore these spaces are finitely decomposable.
+	
+	The ensembles of a continuous classical ensemble spaces are probability distributions that are continuous and therefore must have finite support. However, given any finite support, we can always find distribution with smaller support and therefore decompose any distribution in the sum of two distribution. Therefore the space is infinitesimally decomposable.
+\end{proof}
 
 
 \begin{prop}
@@ -327,7 +368,7 @@ We now show that entropy imposes a geometric structure on the ensemble space.
 
 \begin{coro}
 	The mixing entropy obeys the following bounds
-	$$ 0 \leq MS(\ens_1, \ens_2) \leq 1 $$.
+	$$ 0 \leq MS(\ens_1, \ens_2) \leq 1.$$
 	The lower bound is satisfied if and only if $\ens_1 = \ens_2$ and the upper bound is satisfied if and only if $\ens_1$ and $\ens_2$ are distinct.
 \end{coro}
 
