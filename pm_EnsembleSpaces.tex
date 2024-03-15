@@ -9,6 +9,7 @@
 \newcommand\component{\mathrm{comp}}
 \newcommand\cospan{\mathrm{cospan}}
 \newcommand\dist{\mathrm{dist}}
+\newcommand\hull{\mathrm{hull}}
 
 \newcommand\vspan{\mathrm{span}}
 \newcommand\cl{\mathrm{cl}}
@@ -188,9 +189,14 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	\begin{itemize}
 		\item \textbf{Continuity}
 		\item \textbf{Strict concavity}: $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$ with the equality holding if and only if $\ens_1 = \ens_2$
-		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$ 
+		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality hold then, $e_1$ and $e_2$ are \textbf{distinct}, noted $e_1 \perp e_2$
+		\item \textbf{Mixtures preserve distinctness}: let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \perp \ens_1$ if and only if $\ens_4 \perp \ens_2$ and $\ens_4 \perp \ens_3$
 	\end{itemize}
 \end{defn}
+
+\begin{remark}
+	It is unclear whether or not ``Mixtures preserve distinctness'' can be proven by the previous properties.
+\end{remark}
 
 \begin{prop}
 	The entropy in discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the above definition.
@@ -220,10 +226,11 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	
 	If $p=1$, the output of $P$ will always be the output of $P_1$. This justifies the identity. If $P_1$ and $P_2$ are the same process, then, again, the output of $P$ will always be the output of $P_1$. This justifies the idempotence. As long as the same probability is matched to the same output, the process $P$ is identical. This justifies the symmetry. If we are mixing three processes $P_1$, $P_2$ and $P_3$, as long as the final probabilities are the same, it does not matter if we mix $P_1$ and $P_2$ first or $P_2$ and $P_3$. This justifies associativity.
 	
-	The entropy quantifies the variability of the elements within the ensemble.
+	The entropy quantifies the variability of the elements within the ensemble. This justifies the existence of the entropy.
 	
-	The entropy must be continuous as small changes in the ensemble should produce small changes in the variability. It should be strictly concave as mixing different ensembles will increase the variability. Mixing the same ensemble, however, should not increase the variability. The variability increase is maximal when the two ensembles are completely distinct. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. In this case, neither ensemble can be achieved by mixing the other with something else as the ensembles are completely distinct. Note that the converse is not true: the inability to create a mixture from one to the other does not necessarily mean that the ensembles are completely distinct; it may mean that finer ensembles are not available (as in the case of quantum mechanics).
+	Small changes in the ensemble should produce small changes in the variability, which justifies continuity. Mixing different ensembles will increase the variability, which justifies concavity. Mixing the same ensemble, however, should not increase the variability, which justifies strict concavity. 
 	
+	The variability increase is maximal when the two ensembles are completely distinct. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. This justifies the upper bound. If an ensemble is completely distinct from another, it will also be distinct from all its components. Converse, if an ensemble is completely distinct from two others, it will be completely distinct from all mixtures. That is, distinctness is preserved by mixing, which justifies the last property of the entropy.
 \end{justification}
 
 \begin{prop}
@@ -235,7 +242,7 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \end{proof}
 
 \begin{defn}
-	Two ensembles $\ens_1, \ens_2 \in \Ens$ are \textbf{distinct} if they saturate the upper variability bound (i.e. $S(p_1\ens_1 + p_2 \ens_2) - (p_1 S(\ens_1) + p_2 S(\ens_2)) = I(p_1, p_2)$).
+	Two ensembles $\ens_1, \ens_2 \in \Ens$ are \textbf{distinct}, $\ens_1 \perp \ens_2$, if they saturate the upper variability bound (i.e. $S(p_1\ens_1 + p_2 \ens_2) - (p_1 S(\ens_1) + p_2 S(\ens_2)) = I(p_1, p_2)$). Two sets of ensembles $U, V \subseteq \Ens$ are distinct if $\ens_1 \perp \ens_2$ for all $\ens_1 \in U$ and $\ens_2 \in V$. 
 \end{defn}
 
 \begin{justification}
@@ -258,6 +265,10 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 
 \begin{conj}
 	Distinct elements cannot have common components.
+\end{conj}
+
+\begin{conj}
+	Let $\ens_1, \ens_2, \ens_3 \in \Ens$ such that $\ens_1$ and $\ens_2$ are distinct and $\ens_1$ and $\ens_3$ are distinct. Then $\ens_1$ is distinct from all the mixtures of $\ens_2$ and $\ens_3$.
 \end{conj}
 
 \begin{remark}
@@ -303,7 +314,7 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \end{proof}
 
 
-\begin{prop}
+\begin{prop}[Exponential entropy subadditivity]\label{pm_es_exponentialEntropySubadditivity}
 	Let $\ens_1, \ens_2 \in \Ens$. Let $S_1 = S(\ens_1)$ and $S_2 = S(\ens_2)$. Let $\ens = p \ens_1 + \bar{p} \ens_2$ for some $p \in [0,1]$ and $S = S(\ens)$. Then $2^S \leq 2^{S_1} + 2^{S_2}$, with the equality if and only if $\ens_1$ and $\ens_2$ are distinct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
 \end{prop}
 
@@ -355,6 +366,47 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \begin{remark}
 	The non-decomposable ensembles are exactly the extreme points of the convex space.
 \end{remark}
+
+\section{Measures on the ensemble space}
+
+\begin{defn}
+	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{convex hull} of $U$, noted $\hull(U)$ is the set of all possible mixtures that can be constructed with elements contained in $U$.
+\end{defn}
+
+\begin{coro}
+	The convex hull has the following properties
+	\begin{enumerate}
+		\item $U \subseteq V \implies \hull(U) \subseteq \hull(V)$
+	\end{enumerate}
+\end{coro}
+
+\begin{proof}
+	1. Let $\ens \in \hull(U)$. Then it is a mixture of some elements of $U$. Since $U \subseteq V$, then $\ens$ is also the mixture of some elements of $V$ and therefore $\ens \in \hull(V)$.
+\end{proof}
+
+\begin{defn}
+	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{dimension} of $U$ is defined as $\dim(U) = \sup(2^{S(\hull(U))})$ if $U \neq \emptyset$ and $\dim(U) = 0$ otherwise.
+\end{defn}
+
+\begin{prop}
+	The dimension is a set function that is
+	\begin{enumerate}
+		\item non negative: $\dim(U) \in [0, +\inf]$
+		\item monotone: $U \subseteq V \implies \dim(U) \leq \dim(V)$
+		\item subadditive: $\dim(U \cup V) \leq \dim(U) + \dim(V)$
+		\item additive over distinct sets: $U \perp V \implies \dim(U \cup V) \leq \dim(U) + \dim(V)$ 
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	1. The dimension takes a subset of $\Ens$ and returns a real value and is therefore a set function. The exponential can only return non-negative values, therefore the dimension of a set is non-negative. 
+	
+	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $\dim(U) = 0$. Since $\dim(V)$ is non-negative, $\dim(U) \leq \dim(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $2^{S(\hull(U))} \subseteq 2^{S(\hull(V))}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $\dim(U) \leq \dim(V)$. The dimension is a monotone set function.
+	
+	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of dimension, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \dim(U) + \dim(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the dimensions. Therefore $\dim(U \cup V) \leq \dim(U) + \dim(V)$, the dimension is subadditive.
+	
+	4. Let $U, V \subseteq \Ens$ be two subsets of distinct ensembles. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \dim(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \dim(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \dim(U) + \dim(V)$. Therefore $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Combining with the previous result, $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Therefore dimension, as set function, is additive over distinct sets of ensembles.
+\end{proof}
 
 \section{Entropic geometry}
 
