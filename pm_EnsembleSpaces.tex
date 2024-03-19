@@ -275,6 +275,10 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	This is true both in classical and quantum mechanics. It is not clear whether it can be proven as the previous proposition. If it can't be proven, it most likely should be added to the definition of entropy. Note that, since this specifies the behavior of entropy along a plane (i.e. among three distinct ensembles), it may be the feature that guarantees the entropy to be the square of a distance function.
 \end{remark}
 
+\begin{conj}
+	Let $\ens,\ens_1,\ens_2 \in \Ens$. Then $\ens$ does not have a common component with a mixture of $\ens_1$ and $\ens_2$ if and only if $\ens_1$ does not have a common component with either $\ens_1$ and $\ens_2$.
+\end{conj}
+
 \begin{defn}
 	An ensemble space $\Ens$ is \textbf{reducible} (or \textbf{classical}) if two ensembles $\ens_1, \ens_2 \in \Ens$ are distinct if only if they do not have a common component.
 \end{defn}
@@ -391,10 +395,10 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \begin{prop}
 	The dimension is a set function that is
 	\begin{enumerate}
-		\item non negative: $\dim(U) \in [0, +\inf]$
+		\item non negative: $\dim(U) \in [0, +\infty]$
 		\item monotone: $U \subseteq V \implies \dim(U) \leq \dim(V)$
 		\item subadditive: $\dim(U \cup V) \leq \dim(U) + \dim(V)$
-		\item additive over distinct sets: $U \perp V \implies \dim(U \cup V) \leq \dim(U) + \dim(V)$ 
+		\item additive over distinct sets: $U \perp V \implies \dim(U \cup V) = \dim(U) + \dim(V)$ 
 	\end{enumerate}
 \end{prop}
 
@@ -405,7 +409,31 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	
 	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of dimension, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \dim(U) + \dim(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the dimensions. Therefore $\dim(U \cup V) \leq \dim(U) + \dim(V)$, the dimension is subadditive.
 	
-	4. Let $U, V \subseteq \Ens$ be two subsets of distinct ensembles. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \dim(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \dim(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \dim(U) + \dim(V)$. Therefore $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Combining with the previous result, $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Therefore dimension, as set function, is additive over distinct sets of ensembles.
+	4. Let $U, V \subseteq \Ens$ be two subsets of distinct ensembles. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \dim(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \dim(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \dim(U) + \dim(V)$. Therefore $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Combining with the previous result, $\dim(U \cup V) = \dim(U) + \dim(V)$. Therefore dimension, as set function, is additive over distinct sets of ensembles.
+\end{proof}
+
+\begin{defn}
+	Let $\ens \in \Ens$. The \textbf{probability measure} for $\ens$ is defined as $p_{\ens}(U) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(U), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \})$ if $U \neq \emptyset$ and $p_{\ens}(U) = 0$ otherwise.
+\end{defn}
+
+\begin{prop}
+	The probability measure for an ensemble is
+	\begin{enumerate}
+		\item non negative and unit bounded: $p_{\ens}(U) \in [0,1]$
+		\item monotone: $U \subseteq V \implies p_{\ens}(U) \leq p_{\ens}(V)$
+		\item subadditive: $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$
+		\item additive over mixtures of distinct elements: $\ens \in $ and  $U \perp V \implies p_{\ens}(U \cup V) = p_{\ens}(U) + p_{\ens}(V)$ 
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	1. The probability measure takes a subset of $\Ens$ and returns a real value and is therefore a set function. The coefficients used in mixtures are real values between zero and one. The supremum of a set of numbers between zero and one is between zero and one, and therefore the probability measure for an ensembles is non negative and unit bounded.. 
+	
+	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $p_{\ens}(U) = 0$. Since $p_{\ens}(V)$ is non-negative, $p_{\ens}(U) \leq p_{\ens}(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(U), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \} \subseteq \{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(V), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $p_{\ens}(U) \leq p_{\ens}(V)$. The probability measure is a monotone set function.
+	
+	3. Let $U, V \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(U \cup V)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(U \cup V)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of probability measure, we must have $p\lambda \leq p_{\ens}(U)$ and $p\bar{\lambda} \leq p_{\ens}(V)$, therefore $p = p\lambda + p\bar{\lambda} \leq p_{\ens}(U) + p_{\ens}(V)$. 	Since $p_{\ens}(U \cup V)$ is the supremum for a set of $p$s for which the expression always holds, we have $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$. The probability measure is subadditive.
+	
+	4. Let $U, V \subseteq \Ens$ be two subsets of distinct ensembles. Let $\{p_i\} \subset [0,1]$ such that $p_i \to p_{\ens}(U)$ and $\ens = p_i \ens[u]_i + \bar{p_i} \ens[a]_i$ for some $\{\ens[u]_i\} \subset U$ and $\{\ens[a]_i\} \subset \Ens$ .be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \dim(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \dim(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \dim(U) + \dim(V)$. Therefore $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Combining with the previous result, $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Therefore dimension, as set function, is additive over distinct sets of ensembles.
 \end{proof}
 
 \section{Entropic geometry}
