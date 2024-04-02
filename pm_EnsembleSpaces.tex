@@ -230,7 +230,7 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	
 	Small changes in the ensemble should produce small changes in the variability, which justifies continuity. Mixing different ensembles will increase the variability, which justifies concavity. Mixing the same ensemble, however, should not increase the variability, which justifies strict concavity. 
 	
-	The variability increase is maximal when the two ensembles are completely distinct. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. This justifies the upper bound. If an ensemble is completely distinct from another, it will also be distinct from all its components. Converse, if an ensemble is completely distinct from two others, it will be completely distinct from all mixtures. That is, distinctness is preserved by mixing, which justifies the last property of the entropy.
+	The variability increase is maximal when the two ensembles are completely distinct. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. This justifies the upper bound. If an ensemble is completely distinct from another, it will also be distinct from all its components. Conversely, if an ensemble is completely distinct from two others, it will be completely distinct from all mixtures of those two. That is, distinctness is preserved by mixing, which justifies the last property of the entropy.
 \end{justification}
 
 \begin{prop}
@@ -250,33 +250,31 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \end{justification}
 
 \begin{prop}
-	Let $\ens_1, \ens_2 \in \Ens$ be two distinct ensembles. The $\ens_1$ is not a component of $\ens_2$.
+	Let $\ens_1, \ens_2 \in \Ens$ be two distinct ensembles. Then $\ens_1$ is not a component of $\ens_2$.
 \end{prop}
 
 \begin{proof}
-	Let $\ens_1, \ens_2 \in \Ens$ be two distinct ensembles and suppose $\ens_1$ is a component of $\ens_2$. Then we can find $\ens_3 \in \Ens$ and $\lambda \in (0,1)$ such that $\ens_2 = \lambda \ens_1 + \bar{\lambda} \ens_3$ is a mixture of $\ens_1$ and $\ens_2$. Now consider $S(p \ens_1 + \bar{p} \ens_3)$ as a function of $p$. This must be a strictly concave function. Moreover, if $p \geq \lambda$ we can write $p \ens_1 + \bar{p} \ens_3 = \left(p - \frac{\bar{p} \lambda}{\bar{\lambda}}\right) \ens_1 + \frac{\bar{p}}{\bar{\lambda}} (\lambda \ens_1 + \bar{\lambda} \ens_3) = q \ens_1 + \bar{q} \ens_2$ where $q = \left(p - \frac{\bar{p} \lambda}{\bar{\lambda}}\right)$. Therefore, for $p \geq \lambda$, $S(p \ens_1 + \bar{p} \ens_3) = S(q \ens_1 + \bar{q} \ens_2)  = I(q,\bar{q})$. However, $I(q,\bar{q})$ has a vertical asymptote for $q=0$ and therefore $S(p \ens_1 + \bar{p} \ens_3)$ must have a vertical asymptote for $p=\lambda$. But a strictly concave function cannot have a vertical asymptote in the middle, and therefore $\ens_1$ cannot be a component of $\ens_2$.
+	Let $\ens_1, \ens_2 \in \Ens$ be two distinct ensembles and suppose $\ens_1$ is a component of $\ens_2$. Then we can find $\ens_3 \in \Ens$ and $\lambda \in (0,1)$ such that $\ens_2 = \lambda \ens_1 + \bar{\lambda} \ens_3$ is a mixture of $\ens_1$ and $\ens_3$. Now consider $S(p \ens_1 + \bar{p} \ens_3)$ as a function of $p$. This must be a strictly concave function. Moreover, if $p \geq \lambda$ we can write $p \ens_1 + \bar{p} \ens_3 = \left(p - \frac{\bar{p} \lambda}{\bar{\lambda}}\right) \ens_1 + \frac{\bar{p}}{\bar{\lambda}} (\lambda \ens_1 + \bar{\lambda} \ens_3) = q \ens_1 + \bar{q} \ens_2$ where $q = \left(p - \frac{\bar{p} \lambda}{\bar{\lambda}}\right)$. Therefore, for $p \geq \lambda$, $S(p \ens_1 + \bar{p} \ens_3) = S(q \ens_1 + \bar{q} \ens_2)  = I(q,\bar{q})$. However, $I(q,\bar{q})$ has a vertical asymptote for $q=0$ and therefore $S(p \ens_1 + \bar{p} \ens_3)$ must have a vertical asymptote for $p=\lambda$. But a strictly concave function cannot have a vertical asymptote in the middle, and therefore $\ens_1$ cannot be a component of $\ens_2$.
+	
+	TODO: check the expression.
 \end{proof}
 
-\begin{remark}
-	Two classical distributions are distinct if and only if their support is disjoint. Two quantum states are distinct if and only if they are the mixture of states that belong to orthogonal subspaces.
+\begin{prop}
+	Let $\Ens$ be a discrete or continuous classical ensemble space. Then two ensembles are distinct if and only if the two associated probability measures have disjoint support.
 	
-	Physically, two disjoint ensembles are distinct in the sense that they will never produce overlapping results. The increase in variability is maximal and is given only by the coefficients.
-\end{remark}
+	Let $\Ens$ be a quantum ensemble space. Then two ensembles are distinct if and only if the associated density operators are respectively the mixtures of two sets of pure states that belong to orthogonal subspaces.
+\end{prop}
+
+\begin{proof}
+	TODO
+\end{proof}
 
 \begin{conj}
-	Distinct elements cannot have common components.
+	Distinct ensembles cannot have common components.
 \end{conj}
 
 \begin{conj}
-	Let $\ens_1, \ens_2, \ens_3 \in \Ens$ such that $\ens_1$ and $\ens_2$ are distinct and $\ens_1$ and $\ens_3$ are distinct. Then $\ens_1$ is distinct from all the mixtures of $\ens_2$ and $\ens_3$.
-\end{conj}
-
-\begin{remark}
-	This is true both in classical and quantum mechanics. It is not clear whether it can be proven as the previous proposition. If it can't be proven, it most likely should be added to the definition of entropy. Note that, since this specifies the behavior of entropy along a plane (i.e. among three distinct ensembles), it may be the feature that guarantees the entropy to be the square of a distance function.
-\end{remark}
-
-\begin{conj}
-	Let $\ens,\ens_1,\ens_2 \in \Ens$. Then $\ens$ does not have a common component with a mixture of $\ens_1$ and $\ens_2$ if and only if $\ens_1$ does not have a common component with either $\ens_1$ and $\ens_2$.
+	Let $\ens,\ens_1,\ens_2 \in \Ens$. Then $\ens$ does not have a common component with a mixture of $\ens_1$ and $\ens_2$ if and only if $\ens$ does not have a common component with either $\ens_1$ and $\ens_2$.
 \end{conj}
 
 \begin{defn}
@@ -286,13 +284,13 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \begin{justification}
 	Note that in all ensemble spaces, distinct ensembles do not have a common component. Therefore the definition adds the opposite implication: if they do not have a common component, they are distinct. Therefore, this excludes the case where one has ensembles that do not have a common component and are not distinct.
 	
-	Conceptually, an ensemble space is reducible if we can turn coarser descriptions into finer, distinct, descriptions. The above case represents two ensembles that are not distinct, but no smaller, more refined, ensemble can be prepared that represents the common part. That is, we cannot refine the ensembles in three distinct ones: one that is only part of the first, one that is only part of the second and one that is part of both. In other words, we cannot reduce the coarser description of the system into finer distinct descriptions. In this case, the coarser description is irreducible, and should not be present for a reducible ensemble space. This justifies the definition.
+	Conceptually, an ensemble space is reducible if we can turn coarser descriptions into finer, distinct, descriptions. The above case represents two ensembles that are not distinct, but no smaller, more refined, ensemble can be prepared that represents the common part. That is, we cannot refine the ensembles into three distinct ones: one that is only part of the first, one that is only part of the second and one that is part of both. In other words, we cannot reduce the coarser description of the system into finer distinct descriptions. In this case, the coarser description is irreducible, and should not be present for a reducible ensemble space. This justifies the definition.
 	
 	As we prove below, that case does not exist in classical mechanics, but exists in quantum mechanics. This justifies calling the property classical.
 \end{justification}
 
 \begin{remark}
-	The above property should ultimately be responsible of the single decomposition in terms of pure states.
+	The above property should ultimately be responsible for the single decomposition in terms of pure states.
 \end{remark}
 
 \begin{prop}
@@ -300,11 +298,13 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \end{prop}
 
 \begin{proof}
-	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of finitely many elements. In both cases, the upper bound of the entropy is maximized if and only if the measures being combined have disjoint support. This means that two ensembles are distinct if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measure with disjoint support are exactly ensembles that do not have a common component. Therefore, in both cases, the ensemble space is reducible.
+	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of countably many elements. In both cases, the upper bound of the entropy is maximized if and only if the probability measures being combined have disjoint support. This means that two ensembles are distinct if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measures with disjoint support are exactly ensembles that do not have a common component. Therefore, in both cases, the ensemble space is reducible.
 \end{proof}
 
 \begin{defn}
 	An ensemble is \textbf{decomposable} if it is the mixture of two or more components. An ensemble space is \textbf{infinitesimally decomposable} if all ensembles are decomposable. An ensemble space is \textbf{finitely decomposable} if any ensemble can be decomposed into elements that are not decomposable.
+	
+	TODO: it has to talk about distinctness
 \end{defn}
 
 \begin{prop}
@@ -323,7 +323,7 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \end{prop}
 
 \begin{proof}
-	If $p$ is fixed, the upper bound is saturated only if $\ens_1$ and $\ens_2$ are distinct by definition. The entropy maximum for the mixed ensemble can only be achieved when the elements are distinct, for some value of $p$.
+	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens_1$ and $\ens_2$ are distinct by definition. The entropy maximum for the mixed ensemble can only be achieved when the elements are distinct, for some value of $p$.
 	
 	Now fix $S_1$ and $S_2$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression.
 	\begin{equation}
@@ -337,7 +337,7 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 			p &= \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}  \\
 		\end{aligned}
 	\end{equation}
-	Having found the value of $p$ that maximizes the entropy, we can calculate it.
+	Having found the value of $p$ that maximizes the entropy, we can calculate the maximum entropy.
 	\begin{equation}
 	\begin{aligned}
 		\bar{p} &= 1- \frac{2^{S_1}}{2^{S_1} + 2^{S_2}} = \frac{2^{S_2}}{2^{S_1} + 2^{S_2}} \\
@@ -349,10 +349,9 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 		\log 2^S &= \log \left( 2^{S_1} + 2^{S_2} \right) \\
 		2^S &=  2^{S_1} + 2^{S_2}  \\
 	\end{aligned}
-\end{equation}
-	
+	\end{equation}
+	Therefore the maximum entropy obtainable through a mixture is $S = \log (2^{S_1} + 2^{S_2})$ which is obtained when $\ens_1$ and $\ens_2$ are distinct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
 \end{proof}
-
 
 \begin{conj}
 	An ensemble space $\Ens$ is a finite discrete classical ensemble space if and only if the following properties are all satisfied
