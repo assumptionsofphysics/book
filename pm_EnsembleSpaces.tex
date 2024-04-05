@@ -14,6 +14,8 @@
 \newcommand\vspan{\mathrm{span}}
 \newcommand\cl{\mathrm{cl}}
 
+\def\distinct{\perp}
+\def\disjunct{\upmodels}
 
 \newcommand{\ens}[1][e] {\mathsf{#1}} % Ensemble
 \newcommand{\Ens}[1][E] {\mathcal{#1}} % Ensemble space
@@ -24,7 +26,21 @@ Here we summarize the work in progress for a general theory of states and proces
 
  Conceptually, we want to argue that physical theories are, and can only be, about ensembles. At a practical level, most of the time we can only prepare and measure statistical properties as we do not have perfect control over any system. The cases where properties can be prepared with one hundred percent reliability can still be understood as ensembles of identical preparations, though one can argue for an ensemble of external conditions or internal dynamics. At a conceptual level, the goal of physics is to write laws that apply all the time: every time that one prepares a system according to a particular procedure, lets it evolve in particular conditions, he will obtain a particular result. That is, the idea of repeatability of experimental results implicitly assumes that the objects of scientific inquiry are not single instances, but the infinite collections of all reproducible instances.
 
-\section{Models and examples}
+\section{Ensembles}
+
+TODO: Preamble that argues the justification with physics examples.
+
+\begin{mathSection}
+	\begin{axiom}[Axiom of ensemble] 
+		The state of a system is represented by an \textbf{ensemble}, which represents all possible preparations of equivalent systems prepared according to the same procedure. The set of all possible ensembles for a particular system is an \textbf{ensemble space}. Formally, an ensemble space is a collection of elements called ensembles.
+	\end{axiom}
+	
+	\begin{justification}
+		In physics, ensembles are usually defined as as probability distributions over states. This is conceptually problematic. Any actual physical preparation is always associated with some uncertainty. That is, the system will never be replicated exactly. This is true even in quantum mechanics: while we can always prepare an hydrogen atom in the ground state, we can never prepare an atom in the same exact position with the same exact velocity. Therefore, for all practical purposes, ensembles are the only thing that can actually be prepared in practice. Pure states, then, should not be taken as primitive notions but should be understood as an idealized ensemble. 
+		
+		From a more conceptual level, reproducibility is baked into the requirement of experimental verifiability. A physical law, then, must be understood as describing a relationship that always happen whenever the same set of circumstances are replicated. Given that we need to always be able to replicate those circumstances ``one more time'', the relationship is about countably infinite similar preparations: an ensemble. Therefore, to the extent that physics is about reproducible experimental results, the basic description of a system is in terms of ensembles. This justifies the use of ensembles are the fundamental object to describe the state of a system.
+	\end{justification}
+\end{mathSection}
 
 A general theory of ensembles will need to be able to recover classical and quantum spaces under appropriate physically meaningful assumptions. Here we review these cases and give the appropriate mathematical definitions, highlighting potential issues, as these serve as models and examples for a general theory.
 
@@ -114,48 +130,88 @@ The Hilbert space for a discrete variable with infinite range (e.g. number of pa
 
 Note that Schwartz spaces have finite expectation for all polynomial functions of position and momentum. Given that infinite permutations can change the rate of convergence, the Schwartz space has an idea of what is further away from the origin, unlike Hilbert spaces. [TODO] It is not yet clear to us whether the Schwartz space for one DOF is the same as the one for two DOFs.
 
-\section{Convex spaces}
+\section{Mixtures and convex spaces}
 
-Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab/show/convex+space} and \url{https://arxiv.org/abs/0903.5522}. The notation and terminology will be slightly different to better map to physics ideas. 
+
 
 \begin{defn}
 	Given a real number $p \in [0,1]$, its complement is defined as $\bar{p} = 1-p$.
 \end{defn}
 
-\begin{defn}
-	A \textbf{convex space} $\Ens$ is a set of elements equipped with an operation $+ : [0, 1] \times \Ens \times \Ens \to \Ens$ called \textbf{mixing}, noted with the infix notation $p \ens_1 + \bar{p} \ens_2$, with the following properties:
+\begin{axiom}[Axiom of mixture]
+	An ensemble space $\Ens$ is equipped with an operation $+ : [0, 1] \times \Ens \times \Ens \to \Ens$ called \textbf{mixing}, noted with the infix notation $p \ens_1 + \bar{p} \ens_2$, with the following properties:
 	\begin{itemize}
 		\item \textbf{Identity}: $1 \ens_1 + 0 \ens_2 = \ens_1$
 		\item \textbf{Idempotence}:  $p \ens_1 + \bar{p} \ens_1 = \ens_1$ for all $p \in [0,1]$
 		\item \textbf{Commutativity}: $p \ens_1 + \bar{p} \ens_2 = \bar{p} \ens_2 + p \ens_1$ for all $p \in [0,1]$
 		\item \textbf{Associativity}: $p_1 \ens_1 + \bar{p_1}\left(\overline{\left(\frac{p_3}{\bar{p_1}}\right)}\ens_2 + \frac{p_3}{\bar{p_1}}\ens_3\right) =  \bar{p_3}\left(\frac{p_1}{\bar{p_3}} \ens_1 +  \overline{\left(\frac{p_1}{\bar{p_3}}\right)}\ens_2\right) + p_3 \ens_3$ for all $p_1, p_3 \in [0,1]$
 	\end{itemize}
-	Given symmetry and associativity, we can write $p_1 \ens_1 + p_2 \ens_2 + p_3 \ens_3$ where $p_2 = \bar{p_1}\overline{\left(\frac{p_3}{\bar{p_1}}\right)} = \bar{p_3}\overline{\left(\frac{p_1}{\bar{p_3}}\right)} = 1 - p_1 - p_3 = \overline{\left(p_1 + p_3\right)}$. We can also extend to \textbf{convex combinations} $\sum p_i \ens_i$ where $\sum_i p_i = 1$.
-\end{defn}
+\end{axiom}
 
+\begin{justification}
+	This axiom captures the ability to create a mixture merely by selecting between the output of different processes.
 
-\begin{defn}
-	Let $\Ens$ be a convex space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in (0,1]$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$ and each $\ens_i$ is a \textbf{component} of $\ens[\rho]$.
-\end{defn}
+	Let $\ens_1$ and $\ens_2$ be the ensembles that represent the output of two different processes $P_1$ and $P_2$. Let a selector $S_p$ be a process that outputs two symbols, the first with probability $p$ and the second with probability $\bar{p}$. Then we can create another process $P$ that, depending on the selector, outputs either the output of $P_1$ or $P_2$. Therefore we are justified in assuming the mixing operation among ensembles.
 
-\begin{defn}
-	Let $\Ens$ be a convex space and $\ens_1, \ens_2 \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens_3 \in \Ens$ such that $\ens_1 = p_1 \ens_3 + \bar{p_1} \ens_4$ and $\ens_2 = p_2 \ens_3 + \bar{p_2} \ens_5$ for some $\ens_4, \ens_5 \in \Ens$ and $p_1, p_2 \in (0,1)$.
-\end{defn}
+	If $p=1$, the output of $P$ will always be the output of $P_1$. This justifies the identity. If $P_1$ and $P_2$ are the same process, then, again, the output of $P$ will always be the output of $P_1$. This justifies the idempotence. As long as the same probability is matched to the same output, the process $P$ is identical. This justifies commutativity. If we are mixing three processes $P_1$, $P_2$ and $P_3$, as long as the final probabilities are the same, it does not matter if we mix $P_1$ and $P_2$ first or $P_2$ and $P_3$. This justifies associativity.
+\end{justification}
+
+\begin{remark}
+	Given symmetry and associativity, we can write $p_1 \ens_1 + p_2 \ens_2 + p_3 \ens_3$ where $p_2 = \bar{p_1}\overline{\left(\frac{p_3}{\bar{p_1}}\right)} = \bar{p_3}\overline{\left(\frac{p_1}{\bar{p_3}}\right)} = 1 - p_1 - p_3 = \overline{\left(p_1 + p_3\right)}$. We can also extend to mixtures of finitely many elements $\sum p_i \ens_i$ where $\sum_i p_i = 1$.
+\end{remark}
 
 \begin{coro}
-	Let $\Ens$ be a convex space and $\ens_1, \ens_2 \in \Ens$ such that $\ens_1$ is a component of $\ens_2$. Then $\ens_1$ and $\ens_2$ have a common component.
+	An ensemble space is a convex space.
+\end{coro}
+
+\begin{remark}
+	Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab/show/convex+space} and \url{https://arxiv.org/abs/0903.5522}. The notation and terminology will be slightly different to better map to physics ideas. 
+\end{remark}
+
+
+\begin{defn}
+	Let $\Ens$ be an ensemble space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in (0,1]$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$ and each $\ens_i$ is a \textbf{component} of $\ens[\rho]$.
+\end{defn}
+
+\begin{remark}
+	In terms of the convex space, all the mixtures between two elements corresponds to the segment between them; all the mixtures between three elements correspond to the triangle formed by the three elements and so on. An element $\ens_1$ is a component of a different element $\ens_2$ if the segment can be continued on the side of $\ens_2$. Note that two elements can be a component of each other. If two elements are not a component of each other, then they are the extreme points of the line that connect the two.
+\end{remark}
+
+\begin{defn}
+	Let $\Ens$ be an ensemble space and $\ens_1, \ens_2 \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens_3 \in \Ens$ such that $\ens_1 = p_1 \ens_3 + \bar{p_1} \ens_4$ and $\ens_2 = p_2 \ens_3 + \bar{p_2} \ens_5$ for some $\ens_4, \ens_5 \in \Ens$ and $p_1, p_2 \in (0,1)$. They are \textbf{distinct}, noted $\ens_1 \distinct \ens_2$, otherwise.
+\end{defn}
+
+\begin{remark}
+	In terms of convex spaces, two distinct ensembles are always the extreme points of the line that connects them. Additionally, for any other ensemble $\ens$, one of the two ensembles must be the extreme point of the line that connects it to $\ens$.
+\end{remark}
+
+\begin{coro}
+	The previous definitions obey the following:
+	\begin{enumerate}
+		\item every ensemble has a common component with itself, therefore every ensemble is not distinct from itself
+		\item distinctness is a irreflexive symmetric relation
+		\item if $\ens_1$ is a component of $\ens_2$, then $\ens_1$ and $\ens_2$ have a common component
+	\end{enumerate}
 \end{coro}
 
 \begin{proof}
-	By idempotence, we can write $\ens_1 = p_1 \ens_1 + \bar{p_1} \ens_1$ for some $p_1 \in (0,1)$. Since $\ens_1$ is a component of $\ens_2$, we can write $\ens_2 = p_2 \ens_1 + \bar{p_2} \ens_3$ for some $p_2 \in (0, 1)$ and $\ens_3 \in \Ens$. Therefore $\ens_1$ and $\ens_2$ have a common component.
+	1. Since by idempotence $\ens = p \ens + \bar{p} \ens$ for any $p$, we can satisfy the definition by setting $\ens_1 = \ens_2 = \ens_3 = \ens_4 = \ens_5 = \ens$. Therefore every ensemble has a common component with itself and every ensemble is not distinct from itself.
+	
+	2. The previous property shows that distinctness is irreflexive. The definition of common component is symmetric and therefore so is distinctness.
+	
+	3. By idempotence, we can write $\ens_1 = p_1 \ens_1 + \bar{p_1} \ens_1$ for some $p_1 \in (0,1)$. Since $\ens_1$ is a component of $\ens_2$, we can write $\ens_2 = p_2 \ens_1 + \bar{p_2} \ens_3$ for some $p_2 \in (0, 1)$ and $\ens_3 \in \Ens$. Therefore $\ens_1$ and $\ens_2$ have a common component.
 \end{proof}
 
+\begin{conj}
+	Let $\ens,\ens_1,\ens_2 \in \Ens$. Then $\ens$ is distinct from any mixture of $\ens_1$ and $\ens_2$ if and only if $\ens$ is distinct from both $\ens_1$ and $\ens_2$.
+\end{conj}
+
 \begin{defn}
-	 Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$ with $p \in (0,1)$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$. A convex space is \textbf{complemented} if all $p$-complements are unique for all $p \in (0, 1)$.
+	 Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$ with $p \in (0,1)$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$. An ensemble space is \textbf{complemented} if all $p$-complements are unique for all $p \in (0, 1)$.
 \end{defn}
 
 \begin{prop}\label{pm_es_complementedIsVectorSpace}
-	A convex space embeds into a real vector space with convex combination as linear combination if and only if it is complemented.
+	An ensemble space is complemented if and only if it is a convex subset of a real vector space for which mixtures are linear combination.
 \end{prop}
 \begin{proof}
 	Theorem 4 in \url{https://arxiv.org/abs/1105.1270} states that a convex space embeds into a real vector space with $c_\lambda(x,y) = \lambda x + \bar{\lambda}y$ if and only if
@@ -163,11 +219,13 @@ Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab
 \end{proof}
 
 \begin{prop}
-	Discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces are complemented convex spaces.
+	Discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfy the axiom of mixture and are complemented ensemble spaces.
 \end{prop}
 
 \begin{proof}
-	The space of probability measures, discrete or continuous, forms a convex space that embeds into the vector space of finite signed measures, and therefore it is a complemented convex space by proposition \ref{pm_es_complementedIsVectorSpace}. The space of positive semi-definite self-adjoint operators with trace one is also a convex space that embeds into the vector space of self-adjoint operators, and therefore it is a complemented convex space by proposition \ref{pm_es_complementedIsVectorSpace}.
+	The space of probability measures, discrete or continuous, $\Ens$ is a convex subset of the vector space of finite signed measures. This means that it is closed under convex combinations: $\sum p_i \ens_i$ for all $\{e_i\} \subseteq \Ens$ and $\sum p_i = 1$. The properties of mixing are inherited from the properties of linear combinations. Therefore the discrete and continuous classical ensemble spaces satisfy the axiom of mixture. Moreover, $\Ens$ is a convex subset of a vector space, it is complemented by proposition \ref{pm_es_complementedIsVectorSpace}.
+	
+	Similarly, the space of positive semi-definite self-adjoint operators with trace one is a convex subset of the vector space of self-adjoint operators. Therefore it is closed under convex combinations and it will satisfy the axiom of mixture. Moreover, it is complemented convex by proposition \ref{pm_es_complementedIsVectorSpace}.
 \end{proof}
 
 
@@ -178,28 +236,52 @@ Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab
 
 \section{Entropy}
 
-In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy defines the geometric structure of the space in the sense that the geometric structure can be recovered by knowing the entropy of mixtures. It is not yet clear exactly how much of that structure is already present in the convex structure and, in general, what are the most basic axioms that an entropy should satisfy.
-
 \begin{defn}
 	Given the coefficients $\{p_i\} \in [0,1]$ such that $\sum p_i = 1$, the \textbf{entropy of the coefficients} (also known as Shannon entropy) is defined as $I(\{p_i\}) = - \sum p_i \log p_i $.
 \end{defn}
 
-\begin{defn}
-	Given a convex set $\Ens$, an \textbf{entropy} is a function $S : \Ens \to \mathbb{R}$ with the following properties
+\begin{axiom}[Axiom of entropy]
+	An ensemble space $\Ens$ is equipped a a function $S : \Ens \to \mathbb{R}$ called \textbf{entropy} with the following properties
 	\begin{itemize}
 		\item \textbf{Continuity}
 		\item \textbf{Strict concavity}: $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$ with the equality holding if and only if $\ens_1 = \ens_2$
-		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality hold then, $e_1$ and $e_2$ are \textbf{distinct}, noted $e_1 \perp e_2$
-		\item \textbf{Mixtures preserve distinctness}: let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \perp \ens_1$ if and only if $\ens_4 \perp \ens_2$ and $\ens_4 \perp \ens_3$
+		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality hold then, $e_1$ and $e_2$ are \textbf{disjunct}, noted $e_1 \disjunct e_2$
 	\end{itemize}
-\end{defn}
+\end{axiom}
+
+\begin{justification}
+	The entropy quantifies the variability of the elements within the ensemble. This justifies the existence of the entropy.
+	
+	Small changes in the ensemble should produce small changes in the variability, which justifies continuity. Mixing different ensembles will increase the variability, which justifies concavity. Mixing the same ensemble, however, should not increase the variability, which justifies strict concavity. 
+	
+	The variability increase is maximal when the two ensembles are disjunct, meaning they have no elements in common. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. This justifies the upper bound.
+\end{justification}
 
 \begin{remark}
-	It is unclear whether or not ``Mixtures preserve distinctness'' can be proven by the previous properties.
+	In \url{https://arxiv.org/abs/1912.02012} we showed how the Shannon entropy quantifies the variability of elements within a distribution. Is it possible to rederive $I$ from requirements on convex spaces instead of distributions in particular? This would make the axiom less ad-hoc.
+\end{remark}
+
+
+\begin{axiom}[Axiom of entropic distinctness]
+	The entropy function of an ensemble space obeys the following properties
+	\begin{itemize}
+		\item \textbf{Disjunctness implies distinctness}: $\ens_1 \disjunct \ens_2$ implies $\ens_1 \distinct \ens_2$
+		\item \textbf{Mixtures preserve disjunctness}: let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \disjunct \ens_1$ if and only if $\ens_4 \disjunct \ens_2$ and $\ens_4 \disjunct \ens_3$
+	\end{itemize}
+\end{axiom}
+
+\begin{justification}
+	If two ensembles are disjunct, they have no elements in common. Therefore there will be no common component with the two. We are justified to assume that disjunctness implies distinctness.
+	
+	Suppose an ensemble $\ens_1$ is disjunct from the mixture of two ensembles $\ens_2$ and $\ens_3$. That it has no elements in common with the mixture, which means it has no elements in common with either of them. Therefore $\ens_1$ is disjunct from both $\ens_2$ and $\ens_3$. Now suppose $\ens_1$ is disjunct from both $\ens_2$ and $\ens_3$. That it means it has no elements in common with either of them, and therefore it does not have any elements in common with their mixture. Therefore $\ens_1$ is disjunct from the mixture of two ensembles $\ens_2$ and $\ens_3$. We are justified to assume that mixtures preserve disjunctness.
+\end{justification}
+
+\begin{remark}
+	It is unclear whether or not these properties can be proven by the axiom of mixture. It is possible to prove that two disjunct ensembles are not one the component of the other. The entropy of the coefficients (i.e. the Shannon entropy) has a vertical asymptote at each end. If two elements are disjunct, the entropy along the segment that connects the two follows that function plus a linear function, which does not change the vertical asymptotes. Therefore the segment cannot be extended while preserving the convexity of the entropy, and therefore the two distinct elements must the extremes of the line that connects the two. This is necessary for distinctness, but not sufficient. Maybe, extending the argument, one can at least prove that disjunctness implies distinctness.
 \end{remark}
 
 \begin{prop}
-	The entropy in discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the above definition.
+	The discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the axiom of mixture and the axiom of entropic distinctness.
 \end{prop}
 
 \begin{proof}
@@ -209,82 +291,22 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \end{proof}
 
 \begin{remark}
-	TODO: In \url{https://arxiv.org/abs/1912.02012} we showed how the Shannon entropy quantifies the variability of elements within a distribution. It would be more elegant if we would be able to rederive $I$ from requirements on convex spaces instead of distributions in particular.
+	There should be an interplay between convexity and entropy which limits either the space or the possible entropy. For example, consider a line. It is a convex space with no extreme points. We can parameterize the space with a variable $x$ such that the mixture of two ensembles is identified by the average $x$. Entropy can be written as $S(x)$. Since $S(x)$ is strictly concave over an infinite range, it will tend to minus infinity either when $x$ tends to infinity or minus infinity. Now take a line that intersects the curve. This will intersect it at only two points. By strict convexity, there is only going to be a single point with maximum vertical distance to the line, which has to be greater than zero. Now imagine moving the line down by one vertical unit. The vertical distance now is greater than one. This means that the average entropy can increase more than one during mixture, which violates the upper variability bound. Therefore a line cannot be an ensemble space.
 	
-	TODO: Does the existence of an entropy function put a limit on the convex space? For example, a line is a convex space with no extreme points. We can parameterize the space with a variable $x$ such that the mixture of two ensembles is identified by the average $x$. Entropy can be written as $S(x)$. Since $S(x)$ is strictly concave over an infinite range, it will tend to minus infinity either when $x$ tends to infinity or minus infinity. Can we keep the increase in entropy bounded regardless of the distance between the two points being mixed? 
+	Note that an open segment is absolutely fine. We can, in fact, imagine a two state discrete classical ensemble space with the endpoint removed. This suggests that the convex space knows something about the geometry (probably parallelism and ratio of length - i.e. the affine structure).
 \end{remark}
 
-\section{Ensemble spaces}
-
 \begin{defn}
-	An \textbf{ensemble} represents infinite copies, taken at once, of the output of a process. An \textbf{ensemble space} is a collection of ensembles that describe the same system under all processes. Formally, an ensemble space $\Ens$ is a convex space $(\Ens, +)$ together with an entropy function $S : \Ens \to \mathbb{R}$.
+	Two sets of ensembles $U, V \subseteq \Ens$ are disjunct if $\ens_1 \disjunct \ens_2$ for all $\ens_1 \in U$ and $\ens_2 \in V$. 
 \end{defn}
-\begin{justification}
-	The convex structure captures the ability to create a mixture merely by selecting between the output of different processes.
-	
-	Let $\ens_1$ and $\ens_2$ be the ensembles that represent the output of two different processes $P_1$ and $P_2$. Let a selector $S_p$ be a process that outputs two symbols, the first with probability $p$ and the second with probability $\bar{p}$. Then we can create another process $P$ that, depending on the selector, outputs either the output of $P_1$ or $P_2$. Therefore we are justified in assuming the mixing operation among ensembles.
-	
-	If $p=1$, the output of $P$ will always be the output of $P_1$. This justifies the identity. If $P_1$ and $P_2$ are the same process, then, again, the output of $P$ will always be the output of $P_1$. This justifies the idempotence. As long as the same probability is matched to the same output, the process $P$ is identical. This justifies the symmetry. If we are mixing three processes $P_1$, $P_2$ and $P_3$, as long as the final probabilities are the same, it does not matter if we mix $P_1$ and $P_2$ first or $P_2$ and $P_3$. This justifies associativity.
-	
-	The entropy quantifies the variability of the elements within the ensemble. This justifies the existence of the entropy.
-	
-	Small changes in the ensemble should produce small changes in the variability, which justifies continuity. Mixing different ensembles will increase the variability, which justifies concavity. Mixing the same ensemble, however, should not increase the variability, which justifies strict concavity. 
-	
-	The variability increase is maximal when the two ensembles are completely distinct. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. This justifies the upper bound. If an ensemble is completely distinct from another, it will also be distinct from all its components. Conversely, if an ensemble is completely distinct from two others, it will be completely distinct from all mixtures of those two. That is, distinctness is preserved by mixing, which justifies the last property of the entropy.
-\end{justification}
 
-\begin{prop}
-	The discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfy the above definition of ensemble space.
-\end{prop}
-
-\begin{proof}
-	As previously shown, they are all convex spaces on which is defined an entropy function.
-\end{proof}
 
 \begin{defn}
-	Two ensembles $\ens_1, \ens_2 \in \Ens$ are \textbf{distinct}, $\ens_1 \perp \ens_2$, if they saturate the upper variability bound (i.e. $S(p_1\ens_1 + p_2 \ens_2) - (p_1 S(\ens_1) + p_2 S(\ens_2)) = I(p_1, p_2)$). Two sets of ensembles $U, V \subseteq \Ens$ are distinct if $\ens_1 \perp \ens_2$ for all $\ens_1 \in U$ and $\ens_2 \in V$. 
+	An ensemble space $\Ens$ is \textbf{reducible} (or \textbf{classical}) if distinct ensembles are also disjunct. That is, $\ens_1 \distinct \ens_2$ implies $\ens_1 \disjunct \ens_2$.
 \end{defn}
 
 \begin{justification}
-	As discussed in the previous justification, the increase of variability is maximal when the ensembles have no elements in common.
-\end{justification}
-
-\begin{prop}
-	Let $\ens_1, \ens_2 \in \Ens$ be two distinct ensembles. Then $\ens_1$ is not a component of $\ens_2$.
-\end{prop}
-
-\begin{proof}
-	Let $\ens_1, \ens_2 \in \Ens$ be two distinct ensembles and suppose $\ens_1$ is a component of $\ens_2$. Then we can find $\ens_3 \in \Ens$ and $\lambda \in (0,1)$ such that $\ens_2 = \lambda \ens_1 + \bar{\lambda} \ens_3$ is a mixture of $\ens_1$ and $\ens_3$. Now consider $S(p \ens_1 + \bar{p} \ens_3)$ as a function of $p$. This must be a strictly concave function. Moreover, if $p \geq \lambda$ we can write $p \ens_1 + \bar{p} \ens_3 = \left(p - \frac{\bar{p} \lambda}{\bar{\lambda}}\right) \ens_1 + \frac{\bar{p}}{\bar{\lambda}} (\lambda \ens_1 + \bar{\lambda} \ens_3) = q \ens_1 + \bar{q} \ens_2$ where $q = \left(p - \frac{\bar{p} \lambda}{\bar{\lambda}}\right)$. Therefore, for $p \geq \lambda$, $S(p \ens_1 + \bar{p} \ens_3) = S(q \ens_1 + \bar{q} \ens_2)  = I(q,\bar{q})$. However, $I(q,\bar{q})$ has a vertical asymptote for $q=0$ and therefore $S(p \ens_1 + \bar{p} \ens_3)$ must have a vertical asymptote for $p=\lambda$. But a strictly concave function cannot have a vertical asymptote in the middle, and therefore $\ens_1$ cannot be a component of $\ens_2$.
-	
-	TODO: check the expression.
-\end{proof}
-
-\begin{prop}
-	Let $\Ens$ be a discrete or continuous classical ensemble space. Then two ensembles are distinct if and only if the two associated probability measures have disjoint support.
-	
-	Let $\Ens$ be a quantum ensemble space. Then two ensembles are distinct if and only if the associated density operators are respectively the mixtures of two sets of pure states that belong to orthogonal subspaces.
-\end{prop}
-
-\begin{proof}
-	TODO
-\end{proof}
-
-\begin{conj}
-	Distinct ensembles cannot have common components.
-\end{conj}
-
-\begin{conj}
-	Let $\ens,\ens_1,\ens_2 \in \Ens$. Then $\ens$ does not have a common component with a mixture of $\ens_1$ and $\ens_2$ if and only if $\ens$ does not have a common component with either $\ens_1$ and $\ens_2$.
-\end{conj}
-
-\begin{defn}
-	An ensemble space $\Ens$ is \textbf{reducible} (or \textbf{classical}) if two ensembles $\ens_1, \ens_2 \in \Ens$ are distinct if only if they do not have a common component.
-\end{defn}
-
-\begin{justification}
-	Note that in all ensemble spaces, distinct ensembles do not have a common component. Therefore the definition adds the opposite implication: if they do not have a common component, they are distinct. Therefore, this excludes the case where one has ensembles that do not have a common component and are not distinct.
-	
-	Conceptually, an ensemble space is reducible if we can turn coarser descriptions into finer, distinct, descriptions. The above case represents two ensembles that are not distinct, but no smaller, more refined, ensemble can be prepared that represents the common part. That is, we cannot refine the ensembles into three distinct ones: one that is only part of the first, one that is only part of the second and one that is part of both. In other words, we cannot reduce the coarser description of the system into finer distinct descriptions. In this case, the coarser description is irreducible, and should not be present for a reducible ensemble space. This justifies the definition.
+	Given that $\ens_1 \disjunct \ens_2$ implies $\ens_1 \distinct \ens_2$, classical spaces add the opposite implication. Therefore they exclude the case where two ensembles are disjunct but not distinct. This case describes two ensembles that have elements in common, but there is no ensemble corresponding to those common elements. That is, we cannot refine the ensembles into three distinct ones: one with only elements of the first, one with only elements of the second and one with elements of both. In other words, we cannot reduce the coarser description of the system into finer distinct descriptions. In the excluded case, then, the coarser description is irreducible into finer ensembles. This justifies the definition.
 	
 	As we prove below, that case does not exist in classical mechanics, but exists in quantum mechanics. This justifies calling the property classical.
 \end{justification}
@@ -298,25 +320,10 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 \end{prop}
 
 \begin{proof}
-	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of countably many elements. In both cases, the upper bound of the entropy is maximized if and only if the probability measures being combined have disjoint support. This means that two ensembles are distinct if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measures with disjoint support are exactly ensembles that do not have a common component. Therefore, in both cases, the ensemble space is reducible.
+	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of countably many elements. In both cases, the upper bound of the entropy is maximized if and only if the probability measures being combined have disjoint support. This means that two ensembles are disjunct if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measures with disjoint support are exactly ensembles that are distinct. Therefore, in both cases, the ensemble space is reducible.
 \end{proof}
 
-\begin{defn}
-	An ensemble is \textbf{decomposable} if it is the mixture of two or more components. An ensemble space is \textbf{infinitesimally decomposable} if all ensembles are decomposable. An ensemble space is \textbf{finitely decomposable} if any ensemble can be decomposed into elements that are not decomposable.
-	
-	TODO: it has to talk about distinctness
-\end{defn}
-
-\begin{prop}
-	The discrete classical ensemble space and the quantum ensemble space are finitely decomposable. The continuous classical space is infinitesimally decomposable.
-\end{prop}
-
-\begin{proof}
-	Pure states in discrete classical and quantum ensembles can no longer be decomposed, and every other ensemble is the mixture of pure states. Therefore these spaces are finitely decomposable.
-	
-	The ensembles of a continuous classical ensemble spaces are probability distributions that are continuous and therefore must have finite support. However, given any finite support, we can always find distribution with smaller support and therefore decompose any distribution in the sum of two distribution. Therefore the space is infinitesimally decomposable.
-\end{proof}
-
+\section{Measures on the ensemble space}
 
 \begin{prop}[Exponential entropy subadditivity]\label{pm_es_exponentialEntropySubadditivity}
 	Let $\ens_1, \ens_2 \in \Ens$. Let $S_1 = S(\ens_1)$ and $S_2 = S(\ens_2)$. Let $\ens = p \ens_1 + \bar{p} \ens_2$ for some $p \in [0,1]$ and $S = S(\ens)$. Then $2^S \leq 2^{S_1} + 2^{S_2}$, with the equality if and only if $\ens_1$ and $\ens_2$ are distinct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
@@ -352,25 +359,6 @@ In both classical and quantum mechanics, the Shannon/Gibbs/von Neumann entropy d
 	\end{equation}
 	Therefore the maximum entropy obtainable through a mixture is $S = \log (2^{S_1} + 2^{S_2})$ which is obtained when $\ens_1$ and $\ens_2$ are distinct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
 \end{proof}
-
-\begin{conj}
-	An ensemble space $\Ens$ is a finite discrete classical ensemble space if and only if the following properties are all satisfied
-	\begin{enumerate}
-		\item $\Ens$ is reducible (i.e. classical)
-		\item every state with zero entropy is non-decomposable
-		\item the entropy is bounded
-	\end{enumerate}
-\end{conj}
-
-\begin{proof}
-	Let us first show that all finite discrete classical 
-\end{proof}
-
-\begin{remark}
-	The non-decomposable ensembles are exactly the extreme points of the convex space.
-\end{remark}
-
-\section{Measures on the ensemble space}
 
 \begin{defn}
 	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{convex hull} of $U$, noted $\hull(U)$ is the set of all possible mixtures that can be constructed with elements contained in $U$.
@@ -740,6 +728,39 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \begin{conj}
 	Let $\Ens$ be a reducible ensemble space and $X,Y \subseteq{\Ens}$ two subspaces. Then $\dim(X \vee Y) = \dim(X) + \dim(Y)$.
 \end{conj}
+
+
+\begin{defn}
+	An ensemble is \textbf{decomposable} if it is the mixture of two or more components. An ensemble space is \textbf{infinitesimally decomposable} if all ensembles are decomposable. An ensemble space is \textbf{finitely decomposable} if any ensemble can be decomposed into elements that are not decomposable.
+\end{defn}
+
+\begin{prop}
+	The discrete classical ensemble space and the quantum ensemble space are finitely decomposable. The continuous classical space is infinitesimally decomposable.
+\end{prop}
+
+\begin{proof}
+	Pure states in discrete classical and quantum ensembles can no longer be decomposed, and every other ensemble is the mixture of pure states. Therefore these spaces are finitely decomposable.
+	
+	The ensembles of a continuous classical ensemble spaces are probability distributions that are continuous and therefore must have finite support. However, given any finite support, we can always find distribution with smaller support and therefore decompose any distribution in the sum of two distribution. Therefore the space is infinitesimally decomposable.
+\end{proof}
+
+\begin{conj}
+	An ensemble space $\Ens$ is a finite discrete classical ensemble space if and only if the following properties are all satisfied
+	\begin{enumerate}
+		\item $\Ens$ is reducible (i.e. classical)
+		\item every state with zero entropy is non-decomposable
+		\item the entropy is bounded
+	\end{enumerate}
+\end{conj}
+
+\begin{proof}
+	Let us first show that all finite discrete classical 
+\end{proof}
+
+\begin{remark}
+	The non-decomposable ensembles are exactly the extreme points of the convex space.
+\end{remark}
+
 
 \section{Lessons learned}
 
