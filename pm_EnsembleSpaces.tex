@@ -203,8 +203,14 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \end{proof}
 
 \begin{conj}
-	Let $\ens,\ens_1,\ens_2 \in \Ens$. Then $\ens$ is distinct from any mixture of $\ens_1$ and $\ens_2$ if and only if $\ens$ is distinct from both $\ens_1$ and $\ens_2$.
+	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ is distinct from a mixture of $\ens_1$ and $\ens_2$ then it is distinct from all mixtures of $\ens_1$ and $\ens_2$.
 \end{conj}
+
+\begin{remark}
+	Note that if $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for some $p$, it is not necessarily true that $\ens \distinct \ens_1$ and $\ens \distinct \ens_2$. Conversely, if even if $\ens \distinct \ens_1$ and $\ens \distinct \ens_2$, it is not necessarily distinct from all mixtures of $\ens_1$ and $\ens_2$.
+	
+	For a physical example, consider the Bloch sphere and the states $x^+$, $x^-$, $z^+$, and $z^-$. These are all distinct ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$. Therefore a mixture of $x^+$ and $x^-$ has a common component with $z^+$.
+\end{remark}
 
 \begin{defn}
 	 Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$ with $p \in (0,1)$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$. An ensemble space is \textbf{complemented} if all $p$-complements are unique for all $p \in (0, 1)$.
@@ -367,12 +373,19 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \begin{coro}
 	The convex hull has the following properties
 	\begin{enumerate}
+		\item $U \subseteq \hull(U)$
 		\item $U \subseteq V \implies \hull(U) \subseteq \hull(V)$
+		\item $\hull(\hull(U)) = \hull(U)$
 	\end{enumerate}
+	and is therefore a closure operations
 \end{coro}
 
 \begin{proof}
-	1. Let $\ens \in \hull(U)$. Then it is a mixture of some elements of $U$. Since $U \subseteq V$, then $\ens$ is also the mixture of some elements of $V$ and therefore $\ens \in \hull(V)$.
+	1. Every element of $U$ is trivially a mixture of elements of $U$. Therefore $U \subseteq \hull(U)$.
+	
+	2. Let $\ens \in \hull(U)$. Then it is a mixture of some elements of $U$. Since $U \subseteq V$, then $\ens$ is also the mixture of some elements of $V$ and therefore $\ens \in \hull(V)$.
+	
+	3. Since mixing is associative and commutative, a mixture of mixtures of $U$ can be reepressed as a mixture of $U$. Therefore for all $\ens \in \hull(\hull(U))$ we have $\ens \in \hull(U)$.
 \end{proof}
 
 \begin{defn}
@@ -385,7 +398,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 		\item non negative: $\dim(U) \in [0, +\infty]$
 		\item monotone: $U \subseteq V \implies \dim(U) \leq \dim(V)$
 		\item subadditive: $\dim(U \cup V) \leq \dim(U) + \dim(V)$
-		\item additive over distinct sets: $U \perp V \implies \dim(U \cup V) = \dim(U) + \dim(V)$ 
+		\item additive over disjunct sets: $U \disjunct V \implies \dim(U \cup V) = \dim(U) + \dim(V)$ 
 	\end{enumerate}
 \end{prop}
 
@@ -396,7 +409,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 	
 	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of dimension, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \dim(U) + \dim(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the dimensions. Therefore $\dim(U \cup V) \leq \dim(U) + \dim(V)$, the dimension is subadditive.
 	
-	4. Let $U, V \subseteq \Ens$ be two subsets of distinct ensembles. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \dim(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \dim(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \dim(U) + \dim(V)$. Therefore $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Combining with the previous result, $\dim(U \cup V) = \dim(U) + \dim(V)$. Therefore dimension, as set function, is additive over distinct sets of ensembles.
+	4. Let $U, V \subseteq \Ens$ be two disjunct subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \dim(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \dim(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \dim(U) + \dim(V)$. Therefore $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Combining with the previous result, $\dim(U \cup V) = \dim(U) + \dim(V)$. Therefore dimension, as set function, is additive over distinct sets of ensembles.
 \end{proof}
 
 \begin{defn}
@@ -409,7 +422,6 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 		\item non negative and unit bounded: $p_{\ens}(U) \in [0,1]$
 		\item monotone: $U \subseteq V \implies p_{\ens}(U) \leq p_{\ens}(V)$
 		\item subadditive: $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$
-		\item additive over mixtures of distinct elements: $\ens \in $ and  $U \perp V \implies p_{\ens}(U \cup V) = p_{\ens}(U) + p_{\ens}(V)$ 
 	\end{enumerate}
 \end{prop}
 
@@ -419,8 +431,6 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $p_{\ens}(U) = 0$. Since $p_{\ens}(V)$ is non-negative, $p_{\ens}(U) \leq p_{\ens}(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(U), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \} \subseteq \{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(V), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $p_{\ens}(U) \leq p_{\ens}(V)$. The probability measure is a monotone set function.
 	
 	3. Let $U, V \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(U \cup V)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(U \cup V)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of probability measure, we must have $p\lambda \leq p_{\ens}(U)$ and $p\bar{\lambda} \leq p_{\ens}(V)$, therefore $p = p\lambda + p\bar{\lambda} \leq p_{\ens}(U) + p_{\ens}(V)$. 	Since $p_{\ens}(U \cup V)$ is the supremum for a set of $p$s for which the expression always holds, we have $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$. The probability measure is subadditive.
-	
-	4. Let $U, V \subseteq \Ens$ be two subsets of distinct ensembles. Let $\{p_i\} \subset [0,1]$ such that $p_i \to p_{\ens}(U)$ and $\ens = p_i \ens[u]_i + \bar{p_i} \ens[a]_i$ for some $\{\ens[u]_i\} \subset U$ and $\{\ens[a]_i\} \subset \Ens$ .be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \dim(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \dim(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \dim(U) + \dim(V)$. Therefore $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Combining with the previous result, $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Therefore dimension, as set function, is additive over distinct sets of ensembles.
 \end{proof}
 
 \section{Entropic geometry}
@@ -435,13 +445,13 @@ We now show that entropy imposes a geometric structure on the ensemble space.
 \begin{coro}
 	The mixing entropy obeys the following bounds
 	$$ 0 \leq MS(\ens_1, \ens_2) \leq 1.$$
-	The lower bound is satisfied if and only if $\ens_1 = \ens_2$ and the upper bound is satisfied if and only if $\ens_1$ and $\ens_2$ are distinct.
+	The lower bound is satisfied if and only if $\ens_1 = \ens_2$ and the upper bound is satisfied if and only if $\ens_1 \disjunct \ens_2$.
 \end{coro}
 
 \begin{proof}
 	The bounds descend directly from the bounds on entropy. By strict concavity, $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$, which means $S(p_1\ens_1 + p_2 \ens_2) - p_1 S(\ens_1) - p_2 S(\ens_2) \geq 0$, and in particular $S(\frac{1}{2} \ens_1 + \frac{1}{2} \ens_2) - \frac{1}{2} S(\ens_1) - \frac{1}{2} S(\ens_2) = MS(\ens_1, \ens_2) \geq 0$. By strict concavity, the equality holds if and only if $\ens_1 = \ens_2$
 	
-	By the upper variability bound, $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$, which means $S(p_1\ens_1 + p_2 \ens_2) - p_1 S(\ens_1) - p_2 S(\ens_2) \leq I(p_1, p_2)$, and in particular $S(\frac{1}{2} \ens_1 + \frac{1}{2} \ens_2) - \frac{1}{2} S(\ens_1) - \frac{1}{2} S(\ens_2) = MS(\ens_1, \ens_2) \leq I(\frac{1}{2}, \frac{1}{2}) = 1$. Given that $\ens_1$ and $\ens_2$ are distinct by definition if they saturate the upper variability bound, the equality holds if and only if $\ens_1$ and $\ens_2$ are distinct.
+	By the upper variability bound, $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$, which means $S(p_1\ens_1 + p_2 \ens_2) - p_1 S(\ens_1) - p_2 S(\ens_2) \leq I(p_1, p_2)$, and in particular $S(\frac{1}{2} \ens_1 + \frac{1}{2} \ens_2) - \frac{1}{2} S(\ens_1) - \frac{1}{2} S(\ens_2) = MS(\ens_1, \ens_2) \leq I(\frac{1}{2}, \frac{1}{2}) = 1$. Given that $\ens_1$ and $\ens_2$ are disjunct by definition if they saturate the upper variability bound, the equality holds if and only if $\ens_1$ and $\ens_2$ are disjunct.
 \end{proof}
 
 \begin{prop}
@@ -533,11 +543,11 @@ We can now substitute the norm to the definition of metric tensor. We have
 
 \section{Ensemble subspaces}
 
-We now want to define a notion of subspace in a way that recovers the notions of subspaces we have in both classical and quantum mechanics. Given that orthogonality in all three cases corresponds to ensembles being distinct, distinct ensembles will need to belong to different subspaces. The idea is to reconstruct subspaces only from the distinct relationship.
+We now want to define a notion of subspace in a way that recovers the notions of subspaces we have in both classical and quantum mechanics. Given that orthogonality in all three cases corresponds to ensembles being disjunct, disjunct ensembles will need to belong to different subspaces. The idea is to reconstruct subspaces only from the disjunct relationship.
 
 \subsubsection{Irreflexive symmetric relations and topped $\cap$-structures}
 
-We will first prove a more general set of results, on a generic set (not necessarily an ensemble space) with an irreflexive symmetric relation (not necessarily distinctness of ensembles). This will give us a more general tool to investigate possible different notion of subspaces.
+We will first prove a more general set of results, on a generic set (not necessarily an ensemble space) with an irreflexive symmetric relation (not necessarily disjunctness of ensembles). This will give us a more general tool to investigate possible different notion of subspaces.
 
 \begin{defn}
 	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Given a subset $U \subseteq X$, we define the \textbf{$R$-complement} to be
@@ -670,31 +680,30 @@ This shows that full structure of subspaces of an inner product space can be ful
 
 \subsubsection{Subspaces of ensemble spaces}
 
-We will now use the previous results where $X$ is an ensemble space and $R$ is the distinct relation between two ensembles.
+We will now use the previous results where $X$ is an ensemble space and $R$ is the disjunct relation between two ensembles.
 
 \begin{prop}
-	Let $\Ens$ be an ensemble space and define $\perp = \{ a,b \in \Ens \, | \, a $ district from $b \}$. Then $\perp$ is an irreflexive symmetric operation.
+	Let $\Ens$ be an ensemble space, disjunctness $\disjunct$ is an irreflexive symmetric.
 \end{prop}
 
 \begin{proof}
-	TODO
+	Since any ensemble is not distinct from itself, it is neither disjunct from itself. Therefore disjunctness is irreflexive. Two elements are disjunct if they satureate the upper entropy bound. This does not depend on their order. Therefore disjunctness is symmetric.
 \end{proof}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. The \textbf{distinct complement} $X^\perp \subseteq \Ens$ is the set of all ensembles that are distinct from all elements of $X$. An \textbf{ensemble subspace} is a subset $X \in \Ens$ such that $X = (X^\perp)^\perp$.
+	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. The \textbf{disjunct complement} $X^\disjunct \subseteq \Ens$ is the set of all ensembles that are disjunct from all elements of $X$. An \textbf{ensemble subspace} is a subset $X \in \Ens$ such that $X = (X^\disjunct)^\disjunct$.
 \end{defn}
 
-
-\begin{defn}
-	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ an ensemble subspace. The \textbf{dimension} of the subspaces is defined as $\dim(X) = \sup(\{2^{S(\ens)} \, | \, \ens \in X\})$.
-\end{defn}
+\begin{remark}
+	Since subspaces are subsets of the ensembles space, the dimension and probability measure are automatically defined on subspaces.
+\end{remark}
 
 \begin{defn}
 	A \textbf{pure state} is a limit of an ensemble with the smallest entropy. Formally, a pure state $s \subset \mathfrak{L}$ is a non-empty collection of subspaces such that
 	\begin{enumerate}
-		\item if $\{X_i\}_{i \in I} \in s$ then $\bigcap_{i \in I} U_i \in s$
+		\item if $\{X_i\}_{i \in I} \in s$ then $\bigcap_{i \in I} X_i \in s$
 		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $X \subseteq Y$, then $Y \in s$
-		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $Y \subseteq X$ and $Y \neq \emptyset$, then there exists $Z \in s$ such that $Z \in s$
+		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $Y \subseteq X$ and $Y \neq \emptyset$, then there exists $Z \in s$ such that $Z \subset X$
 	\end{enumerate}
 \end{defn}
 
