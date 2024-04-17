@@ -268,7 +268,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \end{remark}
 
 
-\begin{axiom}[Axiom of entropic distinctness]
+\begin{axiom}[Axiom of entropic disjunctness]
 	The entropy function of an ensemble space obeys the following properties
 	\begin{itemize}
 		\item \textbf{Disjunctness implies distinctness}: $\ens_1 \disjunct \ens_2$ implies $\ens_1 \distinct \ens_2$
@@ -287,7 +287,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \end{remark}
 
 \begin{prop}
-	The discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the axiom of mixture and the axiom of entropic distinctness.
+	The discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the axiom of mixture and the axiom of entropic disjunctness.
 \end{prop}
 
 \begin{proof}
@@ -332,11 +332,11 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \section{Measures on the ensemble space}
 
 \begin{prop}[Exponential entropy subadditivity]\label{pm_es_exponentialEntropySubadditivity}
-	Let $\ens_1, \ens_2 \in \Ens$. Let $S_1 = S(\ens_1)$ and $S_2 = S(\ens_2)$. Let $\ens = p \ens_1 + \bar{p} \ens_2$ for some $p \in [0,1]$ and $S = S(\ens)$. Then $2^S \leq 2^{S_1} + 2^{S_2}$, with the equality if and only if $\ens_1$ and $\ens_2$ are distinct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
+	Let $\ens_1, \ens_2 \in \Ens$. Let $S_1 = S(\ens_1)$ and $S_2 = S(\ens_2)$. Let $\ens = p \ens_1 + \bar{p} \ens_2$ for some $p \in [0,1]$ and $S = S(\ens)$. Then $2^S \leq 2^{S_1} + 2^{S_2}$, with the equality if and only if $\ens_1$ and $\ens_2$ are disjunct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
 \end{prop}
 
 \begin{proof}
-	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens_1$ and $\ens_2$ are distinct by definition. The entropy maximum for the mixed ensemble can only be achieved when the elements are distinct, for some value of $p$.
+	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens_1$ and $\ens_2$ are disjunct by definition. The entropy maximum for the mixed ensemble can only be achieved when the elements are disjunct, for some value of $p$.
 	
 	Now fix $S_1$ and $S_2$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression.
 	\begin{equation}
@@ -363,7 +363,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 		2^S &=  2^{S_1} + 2^{S_2}  \\
 	\end{aligned}
 	\end{equation}
-	Therefore the maximum entropy obtainable through a mixture is $S = \log (2^{S_1} + 2^{S_2})$ which is obtained when $\ens_1$ and $\ens_2$ are distinct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
+	Therefore the maximum entropy obtainable through a mixture is $S = \log (2^{S_1} + 2^{S_2})$ which is obtained when $\ens_1$ and $\ens_2$ are disjunct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
 \end{proof}
 
 \begin{defn}
@@ -409,7 +409,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 	
 	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of dimension, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \dim(U) + \dim(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the dimensions. Therefore $\dim(U \cup V) \leq \dim(U) + \dim(V)$, the dimension is subadditive.
 	
-	4. Let $U, V \subseteq \Ens$ be two disjunct subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \dim(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \dim(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \dim(U) + \dim(V)$. Therefore $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Combining with the previous result, $\dim(U \cup V) = \dim(U) + \dim(V)$. Therefore dimension, as set function, is additive over distinct sets of ensembles.
+	4. Let $U, V \subseteq \Ens$ be two disjunct subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \dim(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \dim(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \dim(U) + \dim(V)$. Therefore $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Combining with the previous result, $\dim(U \cup V) = \dim(U) + \dim(V)$. Therefore dimension, as set function, is additive over disjunct sets of ensembles.
 \end{proof}
 
 \begin{defn}
