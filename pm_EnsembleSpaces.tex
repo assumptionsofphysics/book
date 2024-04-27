@@ -10,6 +10,7 @@
 \newcommand\cospan{\mathrm{cospan}}
 \newcommand\dist{\mathrm{dist}}
 \newcommand\hull{\mathrm{hull}}
+\newcommand\support{\mathrm{supp}}
 
 \newcommand\vspan{\mathrm{span}}
 \newcommand\cl{\mathrm{cl}}
@@ -31,14 +32,16 @@ Here we summarize the work in progress for a general theory of states and proces
 TODO: Preamble that argues the justification with physics examples.
 
 \begin{mathSection}
-	\begin{axiom}[Axiom of ensemble] 
-		The state of a system is represented by an \textbf{ensemble}, which represents all possible preparations of equivalent systems prepared according to the same procedure. The set of all possible ensembles for a particular system is an \textbf{ensemble space}. Formally, an ensemble space is a collection of elements called ensembles.
+	\begin{axiom}[Axiom of ensembles] 
+		The state of a system is represented by an \textbf{ensemble}, which represents all possible preparations of equivalent systems prepared according to the same procedure. The set of all possible ensembles for a particular system is an \textbf{ensemble space}. Formally, an ensemble space is a $T_0$ second countable topological space where each element is called an ensemble.
 	\end{axiom}
 	
 	\begin{justification}
-		In physics, ensembles are usually defined as as probability distributions over states. This is conceptually problematic. Any actual physical preparation is always associated with some uncertainty. That is, the system will never be replicated exactly. This is true even in quantum mechanics: while we can always prepare an hydrogen atom in the ground state, we can never prepare an atom in the same exact position with the same exact velocity. Therefore, for all practical purposes, ensembles are the only thing that can actually be prepared in practice. Pure states, then, should not be taken as primitive notions but should be understood as an idealized ensemble. 
+		In physics, ensembles are usually defined as probability distributions over states. This is conceptually problematic. Any actual physical preparation is always associated with some uncertainty. That is, the system will never be replicated exactly. This is true even in quantum mechanics: while we can always prepare a hydrogen atom in the ground state, we can never prepare an atom in the same exact position with the same exact velocity. The ability to prepare ensembles in which the position and the excitation of the atom can be assumed to be uncorrelated is what allows us to concentrate on one of the properties. Therefore, ensembles are the only thing that can actually be prepared in practice. Pure states, then, should not be taken as primitive notions but should be understood as an idealized ensemble. 
 		
-		From a more conceptual level, reproducibility is baked into the requirement of experimental verifiability. A physical law, then, must be understood as describing a relationship that always happen whenever the same set of circumstances are replicated. Given that we need to always be able to replicate those circumstances ``one more time'', the relationship is about countably infinite similar preparations: an ensemble. Therefore, to the extent that physics is about reproducible experimental results, the basic description of a system is in terms of ensembles. This justifies the use of ensembles are the fundamental object to describe the state of a system.
+		From a more conceptual level, reproducibility is baked into the requirement of experimental verifiability. A physical law, then, must be understood as describing a relationship that always exist whenever the same set of circumstances is replicated. Given that we need to always be able to replicate those circumstances ``one more time'', the relationship is about countably infinite similar preparations: an ensemble. Therefore, to the extent that physics is about reproducible experimental results, the basic description of a system is in terms of ensembles. This justifies the use of ensembles as the fundamental object to describe the state of a system.\footnote{Note that reproducibility also already implies that all properties that characterize an ensemble must be relative to the procedure. If the properties depended, for example, on absolute space or absolute time, then different practitioners would not be able to prepare the same ensemble.}
+		
+		Ensembles are experimentally defined objects, and therefore they are possibilities of an experimental domain. Therefore an ensemble space is a $T_0$ second countable topological space where each element is an ensemble and the topology is induced by the verifiable statements.
 	\end{justification}
 \end{mathSection}
 
@@ -85,7 +88,7 @@ The uncountably infinite case is not physically relevant (i.e. no second countab
 \subsection{Continuous classical theory}
 
 \begin{defn}
-	The ensemble space of a \textbf{continuous classical theory} is the convex space given by the probability distributions (i.e. probability measures) over phase space (i.e. a symplectic manifold) that allow a continuous probability density (i.e. the Radon-Nikodym derivative exists - the probability measures are absolutely continuous with respect to the Liouville measure - and is continuous). The entropy is given by the Shannon/Gibbs entropy calculated using the probability density (i.e. the Radon-Nikodym derivative between the probability measure and the Liouville measure).
+	The ensemble space of a \textbf{continuous classical theory} is the convex space given by the probability distributions (i.e. probability measures) over phase space (i.e. a symplectic manifold) that allow a continuous probability density (i.e. the Radon-Nikodym derivative exists - the probability measures are absolutely continuous with respect to the Liouville measure - and is continuous). Formally, let $(X, \omega)$ be a symplectic manifold. The ensemble space is given by $\Ens = \{ \rho \in C(X) \, | \, \int_X \rho d\mu = 1 \} $. The entropy is given by the Shannon/Gibbs entropy calculated using the probability density (i.e. the Radon-Nikodym derivative between the probability measure and the Liouville measure). That is, $S(\rho) = - \int_X \rho \log \rho d\mu$.
 \end{defn}
 
 In the continuous case, the space of ensembles is the space of continuous integrable functions over a symplectic manifold (e.g.  over phase space) that integrate to one. That is, if $X$ is a symplectic manifold, then $\Ens = \{ \rho \in C(X) \, | \, \int_X \rho(x) d\mu = 1 \} $ where $\mu=\int \omega^n$ is the Liouville measure. The space does not include the pure states, as they correspond to delta distributions $\mathcal{S} = \{\delta_x\}_{x \in X}$: they are limit points. In some sense, a distribution can be understood as a convex integral of pure states: $\rho(x) = \int_X \rho(y) \delta_x(y) d\mu$. Even in this case, each ensemble can be understood as a unique probability distribution (density in this case) over all pure states. The symplectic nature of the manifold is required to assign a frame invariant density to states and a frame invariant notion of independence between DOFs, as we saw in the classical mechanics section of reverse physics.
@@ -141,6 +144,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \begin{axiom}[Axiom of mixture]
 	An ensemble space $\Ens$ is equipped with an operation $+ : [0, 1] \times \Ens \times \Ens \to \Ens$ called \textbf{mixing}, noted with the infix notation $p \ens_1 + \bar{p} \ens_2$, with the following properties:
 	\begin{itemize}
+		\item \textbf{Continuity}: $p \ens_1 + \bar{p} \ens_2$ is continuous in all its arguments (i.e. $p$, $\ens_1$ and $\ens_2$)
 		\item \textbf{Identity}: $1 \ens_1 + 0 \ens_2 = \ens_1$
 		\item \textbf{Idempotence}:  $p \ens_1 + \bar{p} \ens_1 = \ens_1$ for all $p \in [0,1]$
 		\item \textbf{Commutativity}: $p \ens_1 + \bar{p} \ens_2 = \bar{p} \ens_2 + p \ens_1$ for all $p \in [0,1]$
@@ -150,6 +154,8 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 
 \begin{justification}
 	This axiom captures the ability to create a mixture merely by selecting between the output of different processes.
+	
+	Given that mixing represents an experimental relationship, and all experimental relationships must be continuous in the natural topology, mixing must be a continuous function. Note that $p$ is a continuous quantity, and therefore the natural topology is the one of the reals.
 
 	Let $\ens_1$ and $\ens_2$ be the ensembles that represent the output of two different processes $P_1$ and $P_2$. Let a selector $S_p$ be a process that outputs two symbols, the first with probability $p$ and the second with probability $\bar{p}$. Then we can create another process $P$ that, depending on the selector, outputs either the output of $P_1$ or $P_2$. Therefore we are justified in assuming the mixing operation among ensembles.
 
@@ -236,7 +242,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 
 
 \begin{remark}
-	Since all current physical ensemble spaces are complemented, it is not yet clear whether an ensemble space must be complemented or not. It is difficult to justify as it is a claim on existence of more refined ensembles. It may very well be that this is just an assumption on the decomposition, which may fail in new physical conditions (e.g. at Planck scale).
+	Since all current physical ensemble spaces are complemented, it is not yet clear whether an ensemble space must be complemented or not. It is difficult to justify as it is a claim on existence of more refined ensembles. It may very well be that this is just an assumption on the decomposition, which may fail in new physical conditions (e.g. at Planck scale). It may also be something that the strict concavity of the entropy requires.
 \end{remark}
 
 
@@ -300,6 +306,14 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 	There should be an interplay between convexity and entropy which limits either the space or the possible entropy. For example, consider a line. It is a convex space with no extreme points. We can parameterize the space with a variable $x$ such that the mixture of two ensembles is identified by the average $x$. Entropy can be written as $S(x)$. Since $S(x)$ is strictly concave over an infinite range, it will tend to minus infinity either when $x$ tends to infinity or minus infinity. Now take a line that intersects the curve. This will intersect it at only two points. By strict convexity, there is only going to be a single point with maximum vertical distance to the line, which has to be greater than zero. Now imagine moving the line down by one vertical unit. The vertical distance now is greater than one. This means that the average entropy can increase more than one during mixture, which violates the upper variability bound. Therefore a line cannot be an ensemble space.
 	
 	Note that an open segment is absolutely fine. We can, in fact, imagine a two state discrete classical ensemble space with the endpoint removed. This suggests that the convex space knows something about the geometry (probably parallelism and ratio of length - i.e. the affine structure).
+\end{remark}
+
+\begin{conj}
+	Let $\ens_1, \ens_2 \in \Ens$ be such that $p\ens + \bar{p} \ens_1 = p\ens + \bar{p} \ens_2$ for some $p \in (0, 1)$ and $\ens \in \Ens$. Then $\ens_1$ and $\ens_2$ are not disjunct.
+\end{conj}
+
+\begin{remark}
+	It seems very unlikely that differences in states that can be obscured by mixing would correspond to disjunct states. The more general question is whether the strict concavity of the entropy allows non-complemented spaces.
 \end{remark}
 
 \begin{defn}
@@ -466,7 +480,7 @@ We now show that entropy imposes a geometric structure on the ensemble space.
 \end{proof}
 
 \begin{defn}
-	A \textbf{geometric} ensemble space is an ensemble space that is complemented and has a twice differentiable entropy with respect to the mixing coefficients.
+	An ensemble space is \textbf{geometric} if it is complemented and has a twice differentiable entropy with respect to the mixing coefficients.
 \end{defn}
 
 \begin{coro}
@@ -545,7 +559,7 @@ We can now substitute the norm to the definition of metric tensor. We have
 
 We now want to define a notion of subspace in a way that recovers the notions of subspaces we have in both classical and quantum mechanics. Given that orthogonality in all three cases corresponds to ensembles being disjunct, disjunct ensembles will need to belong to different subspaces. The idea is to reconstruct subspaces only from the disjunct relationship.
 
-\subsubsection{Irreflexive symmetric relations and topped $\cap$-structures}
+\subsection{Irreflexive symmetric relations and topped $\cap$-structures}
 
 We will first prove a more general set of results, on a generic set (not necessarily an ensemble space) with an irreflexive symmetric relation (not necessarily disjunctness of ensembles). This will give us a more general tool to investigate possible different notion of subspaces.
 
@@ -678,12 +692,12 @@ We will first prove a more general set of results, on a generic set (not necessa
 
 This shows that full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
 
-\subsubsection{Subspaces of ensemble spaces}
+\subsection{Subspaces of ensemble spaces and states}
 
 We will now use the previous results where $X$ is an ensemble space and $R$ is the disjunct relation between two ensembles.
 
 \begin{prop}
-	Let $\Ens$ be an ensemble space, disjunctness $\disjunct$ is an irreflexive symmetric.
+	Let $\Ens$ be an ensemble space, disjunctness $\disjunct$ is an irreflexive symmetric relation.
 \end{prop}
 
 \begin{proof}
@@ -698,12 +712,87 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	Since subspaces are subsets of the ensembles space, the dimension and probability measure are automatically defined on subspaces.
 \end{remark}
 
+
+\begin{conj}
+	Let $\Ens$ be a discrete classical ensemble space. Then
+	\begin{enumerate}
+		\item the lattice of subspaces $\mathfrak{L}$ is the set of all possible simplexes generated by all possible combinations of extreme points
+		\item the dimension of each subspace is the number of extreme points
+	\end{enumerate}
+\end{conj}
+
+\begin{proof}
+	Let $\Ens$ be a discrete classical ensemble space. Then each ensemble is a sequence $p_i$ such that $\sum_i p_i = 1$. The dimensionality of the space fixes the range of $i$. Note that, given that the space is discrete, the collection $p_i$ can be understood as a continuous function of the pure elements.
+	
+	Note that two probability distributions will be disjunct if and only if their supports are disjoint. Therefore disjunctness for a discrete classical ensemble space is the same as having disjoint support. This means that a subspace is given by all possible probability distributions over a subset of all pure states.
+	
+	If $U$ is the set of all probability distributions over $n$ cases, the distribution with highest entropy is achieved by a continuous distribution and will be $S(p_i) = \log n$. Therefore the dimension of $U$ will be $n$.
+\end{proof}
+
+\begin{conj}
+	Let $\Ens$ be a continuous classical ensemble space. Then
+	\begin{enumerate}
+		\item the lattice of subspaces $\mathfrak{L}$ is the set of all subspaces of continuous probability densities with support within an open set that is the interior of its own closure
+		\item the dimension of each subspace is the Liouville measure
+	\end{enumerate}
+\end{conj}
+
+\begin{proof}
+	Let $\Ens$ be a continuous classical ensemble space. Then each ensemble is a continuous function for a symplectic manifold $X$ that integrates to one. Since the function is continuous, its support must be an open set.
+	
+	Consider two continuous functions that integrate to one. They will be disjunct if and only if their supports are disjoint. Therefore disjunctness for a continuous classical ensemble space is the same as having disjoint support.
+	
+	Take a set of ensembles $U \subseteq \Ens$. An ensemble will be disjunct from all ensembles in $U$ if and only if its support is disjoint from the union of all the supports of all the elements of $U$. Therefore $U^\disjunct$ is the set of all ensembles whose support is a subset of the exterior of the union of all supports of elements of $U$. With a similar logic, $(U^\disjunct)^\disjunct$ is the set of all ensembles whose support is a subset of the exterior of the support of elements of $U^\disjunct$. This corresponds to the interior of the closure of the union  of all supports of elements of $U$. Therefore, any subspace is a set of all continuous probability densities with support within an open set $V \subset X$ that is the interior of its own closure.
+	
+	Now take an open set $V \subseteq X$ that is the interior of its own closure and consider the space $U$ of all continuous probability densities that have support within $V$. Then $U^\disjunct$ is the subspace of all continuous probability densities that have support within $\exterior(V)$ and $(U^\disjunct)^\disjunct$ is the subspace of all continuous probability densities that have support within $\exterior(\exterior(V)) = \interior(\overline{V}) = V$. Therefore $U$ is a subspace.
+	
+	Let $U \in \mathfrak{L}$ be a ensemble subspace. If $\ens \in U$, then $S(\ens) \leq \dim(U)$. Moreover, there must be a sequence $\ens_i$ such that $S(\ens_i) \to \dim(U)$. Let $V \subseteq X$ be the open set corresponding to the largest support of all elements in $U$. Then $S(\ens) \leq \log \mu(V)$ as the highest entropy is given by a uniform distribution over $V$. The uniform distribution is discontinuous, and therefore is not a member of $\Ens$. However, we can construct a sequence of continuous functions whose limit is the uniform distribution. This would correspond to a sequence of ensembles for which $S(\ens_i) \to \log \mu(V)$. Therefore $\log \mu(V)$ is the supremum of the entropy for the subspace, and therefore the dimension is $\mu(V)$, the Liouville measure.
+\end{proof}
+
+\begin{conj}
+	Let $\Ens$ be a quantum ensemble space. Then
+	\begin{enumerate}
+		\item the lattice of subspaces $\mathfrak{L}$ is the set of all possible density operators for each subspace of the Hilbert space
+		\item the dimension of each subspace is the dimension of the corresponding Hilbert space
+	\end{enumerate}
+\end{conj}
+
+
 \begin{defn}
 	A \textbf{pure state} is a limit of an ensemble with the smallest entropy. Formally, a pure state $s \subset \mathfrak{L}$ is a non-empty collection of subspaces such that
 	\begin{enumerate}
 		\item if $\{X_i\}_{i \in I} \in s$ then $\bigcap_{i \in I} X_i \in s$
 		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $X \subseteq Y$, then $Y \in s$
-		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $Y \subseteq X$ and $Y \neq \emptyset$, then there exists $Z \in s$ such that $Z \subset X$
+		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $Y \subseteq X$ and $Y \neq \emptyset$, then there exists $Z \in s$ such that $Z \subset X$.
+	\end{enumerate}
+	The set of all pure states for an ensemble space is noted $S(\Ens)$.
+\end{defn}
+
+\begin{defn}
+	The set of states of a subspace $X \in \mathfrak{L}$ is the set $\support(X) = \{ s \in S(\Ens) \, | \, X \in s \}$. The topology of the pure states is the topology over the set of pure states generated by the set of states of all subspaces.
+\end{defn}
+
+\begin{defn}
+	
+\end{defn}
+
+\begin{defn}
+	Given an ensemble space $\Ens$, its \textbf{state space} is the set of all pure states $S(\Ens)$ equipped with
+	\begin{enumerate}
+		\item the topology generated by the set of states of all subspaces
+		\item the measure 
+	\end{enumerate}
+\end{defn}
+
+
+\subsection{Probability context}
+
+\begin{defn}
+	A \textbf{probability context} is a set of subspaces $C \subseteq \mathfrak{L}$ such that
+	\begin{enumerate}
+		\item if $\{X_i\}_{i \in I} \in C$ then $\bigcap_{i \in I} X_i \in C$ and $\bigvee_{i \in I} X_i \in C$
+		\item if $X, Y \in C$, then either $X \subset Y$, $Y \subset X$ or $X \disjunct Y$ 
+		\item if $X, Y \in C$, then $X \vee Y \in C$
 	\end{enumerate}
 \end{defn}
 
