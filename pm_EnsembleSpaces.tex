@@ -208,14 +208,31 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 	3. By idempotence, we can write $\ens_1 = p_1 \ens_1 + \bar{p_1} \ens_1$ for some $p_1 \in (0,1)$. Since $\ens_1$ is a component of $\ens_2$, we can write $\ens_2 = p_2 \ens_1 + \bar{p_2} \ens_3$ for some $p_2 \in (0, 1)$ and $\ens_3 \in \Ens$. Therefore $\ens_1$ and $\ens_2$ have a common component.
 \end{proof}
 
-\begin{conj}
-	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ is distinct from a mixture of $\ens_1$ and $\ens_2$ then it is distinct from all mixtures of $\ens_1$ and $\ens_2$.
-\end{conj}
+\begin{prop}
+	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ is distinct from a mixture of $\ens_1$ and $\ens_2$ then it is distinct from all mixtures of $\ens_1$ and $\ens_2$ and from both $\ens_1$ and $\ens_2$. That is, if $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$. The converse is not true.
+\end{prop}
+
+\begin{figure}[h]
+	\includegraphics[width=0.5\textwidth]{tempimages/DistinctAndMixture.jpg}
+\end{figure}
+
+\begin{proof}
+	Let $\ens \distinct \ens[a] = p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$. Let $\ens[b] = \alpha \ens_1 + \bar{\alpha} \ens_2$ with $0 \leq \alpha < p$. We can do so without loss of generality since switching $\ens_1$ with $\ens_2$ would lead to the case where $\alpha > p$. Suppose $\ens[b]$ is not distinct from $\ens$. Then we can find $\ens[c]$ such that $\ens[b] = \beta \ens[c] + \bar{\beta} \ens[d]$ and $\ens = \gamma \ens[c] + \bar{\gamma} \ens[f]$ for some $\ens[d], \ens[f] \in \Ens$ and $\beta, \gamma \in (0, 1)$.
+	
+	Setting $\epsilon = \frac{p - \alpha}{\bar{\alpha}}$ and $\lambda = \bar{\epsilon} \beta$ we have:
+	\begin{align*}
+		\ens[a] &= p \ens_1 + \bar{p} = \left(p - \frac{\bar{p}}{\bar{\alpha}} \alpha \right) \ens_1 + \frac{\bar{p}}{\bar{\alpha}} \alpha \ens_1 + \frac{\bar{p}}{\bar{\alpha}} \bar{\alpha}\ens_2 \\
+		&= \left(\frac{p\bar{\alpha} - \bar{p}\alpha}{\bar{\alpha}} \right) \ens_1 + \frac{\bar{p}}{\bar{\alpha}} (\alpha \ens_1 + \bar{\alpha} \ens_2) = \left(\frac{p - p\alpha - \alpha + p \alpha}{\bar{\alpha}} \right) \ens_1 + \frac{1 - p + \alpha - \alpha}{\bar{\alpha}} (\alpha \ens_1 + \bar{\alpha} \ens_2) \\
+		&= \frac{p - \alpha}{\bar{\alpha}}  \ens_1 + \left( 1 - \frac{p - \alpha}{\bar{\alpha}}\right) (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} \ens[b] \\
+		&= \epsilon \ens_1 + \bar{\epsilon} ( \beta \ens[c] + \bar{\beta} \ens[d] ) = \bar{\epsilon} \beta \ens[c] + \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] = \lambda \ens[c] + \bar{\lambda} \ens[g]
+	\end{align*}
+	where $\ens[g] = \frac{1}{\bar{\lambda}}\left( \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] \right)$. This means $\ens[a]$ and $\ens$ have a common component, which is a contradiction. Therefore $\ens[b] \distinct \ens$ and $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$
+	
+	As a counter-example for the converse, consider a circle and three points on the circumference. These are all distinct from each other. Now take two points. A mixture will be on the chord that connects the two. Connecting any mixture with the third point will give a line that will intersect the circumference at a fourth point. This means that the given mixture is has a common component with the third point, even though the third point is distinct from the first two.	
+\end{proof}
 
 \begin{remark}
-	Note that if $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for some $p$, it is not necessarily true that $\ens \distinct \ens_1$ and $\ens \distinct \ens_2$. Conversely, if even if $\ens \distinct \ens_1$ and $\ens \distinct \ens_2$, it is not necessarily distinct from all mixtures of $\ens_1$ and $\ens_2$.
-	
-	For a physical example, consider the Bloch sphere and the states $x^+$, $x^-$, $z^+$, and $z^-$. These are all distinct ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$. Therefore a mixture of $x^+$ and $x^-$ has a common component with $z^+$.
+	Note that, in classical mechanics, $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for some $p$ does imply that $\ens \distinct \ens_1$ and $\ens \distinct \ens_2$. However, this is not the case in quantum mechanics. For example, consider the Bloch sphere and the states $x^+$, $x^-$, $z^+$, and $z^-$. These are all distinct ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$. Therefore a mixture of $x^+$ and $x^-$ has a common component with $z^+$.
 \end{remark}
 
 \begin{defn}
@@ -440,12 +457,18 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \end{prop}
 
 \begin{proof}
-	1. The probability measure takes a subset of $\Ens$ and returns a real value and is therefore a set function. The coefficients used in mixtures are real values between zero and one. The supremum of a set of numbers between zero and one is between zero and one, and therefore the probability measure for an ensembles is non negative and unit bounded.. 
+	1. The probability measure takes a subset of $\Ens$ and returns a real value and is therefore a set function. The coefficients used in mixtures are real values between zero and one. The supremum of a set of numbers between zero and one is between zero and one, and therefore the probability measure for an ensembles is non negative and unit bounded.
 	
 	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $p_{\ens}(U) = 0$. Since $p_{\ens}(V)$ is non-negative, $p_{\ens}(U) \leq p_{\ens}(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(U), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \} \subseteq \{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(V), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $p_{\ens}(U) \leq p_{\ens}(V)$. The probability measure is a monotone set function.
 	
 	3. Let $U, V \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(U \cup V)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(U \cup V)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of probability measure, we must have $p\lambda \leq p_{\ens}(U)$ and $p\bar{\lambda} \leq p_{\ens}(V)$, therefore $p = p\lambda + p\bar{\lambda} \leq p_{\ens}(U) + p_{\ens}(V)$. 	Since $p_{\ens}(U \cup V)$ is the supremum for a set of $p$s for which the expression always holds, we have $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$. The probability measure is subadditive.
 \end{proof}
+
+\begin{remark}
+	The additivity of the probability requires subtle conditions we have yet to pinpoint. Naively, one would expect that if $U$ and $V$ are distinct, then $p_{\ens}(U \cup V) = p_{\ens}(U) + p_{\ens}(V)$. That is, the component of $\ens$ in $U \cup V$ is simply the sum of the components within $U$ and $V$, which are going to be distinct (i.e. will not overlap). However this is not true in quantum mechanics.
+	
+	Take a singe quibit and let $\ens$ be the maximally mixed state. Then $p_{\ens}(\{x\}) = \frac{1}{2}$ for any pure state $x$. However, if we take two pure states $x$ and $y$ that are not orthogonal, the maximally mixed state is not a mixture of $x$ and $y$, which means $p_{\ens}(\{x, y\}) < 1 = p_{\ens}(\{x\}) + p_{\ens}(\{y\})$.
+\end{remark}
 
 \section{Entropic geometry}
 
