@@ -209,7 +209,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \end{proof}
 
 \begin{prop}
-	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ is distinct from a mixture of $\ens_1$ and $\ens_2$ then it is distinct from all mixtures of $\ens_1$ and $\ens_2$ and from both $\ens_1$ and $\ens_2$. That is, if $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$. The converse is not true.
+	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ is distinct from a mixture of $\ens_1$ and $\ens_2$ then it is distinct from all mixtures of $\ens_1$ and $\ens_2$ and from both $\ens_1$ and $\ens_2$. That is, if $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$. However, if $\ens$ is distinct from $\ens_1$ and $\ens_2$, it is not necessarily true that $\ens$ is distinct from a mixture of $\ens_1$ and $\ens_2$.
 \end{prop}
 
 \begin{figure}[h]
@@ -217,11 +217,11 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \end{figure}
 
 \begin{proof}
-	Let $\ens \distinct \ens[a] = p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$. Let $\ens[b] = \alpha \ens_1 + \bar{\alpha} \ens_2$ with $0 \leq \alpha < p$. We can do so without loss of generality since switching $\ens_1$ with $\ens_2$ would lead to the case where $\alpha > p$. Suppose $\ens[b]$ is not distinct from $\ens$. Then we can find $\ens[c]$ such that $\ens[b] = \beta \ens[c] + \bar{\beta} \ens[d]$ and $\ens = \gamma \ens[c] + \bar{\gamma} \ens[f]$ for some $\ens[d], \ens[f] \in \Ens$ and $\beta, \gamma \in (0, 1)$.
+	Let $\ens \distinct \ens[a] = p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$. Let $\ens[b] = \alpha \ens_1 + \bar{\alpha} \ens_2$ with $0 \leq \alpha < p$. We can do so without loss of generality since switching $\ens_1$ with $\ens_2$ would lead to the case where $1 \geq \alpha > p$. Suppose $\ens[b]$ is not distinct from $\ens$. Then we can find $\ens[c] \in \Ens$ such that $\ens[b] = \beta \ens[c] + \bar{\beta} \ens[d]$ and $\ens = \gamma \ens[c] + \bar{\gamma} \ens[f]$ for some $\ens[d], \ens[f] \in \Ens$ and $\beta, \gamma \in (0, 1)$.
 	
 	Setting $\epsilon = \frac{p - \alpha}{\bar{\alpha}}$ and $\lambda = \bar{\epsilon} \beta$ we have:
 	\begin{align*}
-		\ens[a] &= p \ens_1 + \bar{p} = \left(p - \frac{\bar{p}}{\bar{\alpha}} \alpha \right) \ens_1 + \frac{\bar{p}}{\bar{\alpha}} \alpha \ens_1 + \frac{\bar{p}}{\bar{\alpha}} \bar{\alpha}\ens_2 \\
+		\ens[a] &= p \ens_1 + \bar{p} \ens_2 = \left(p - \frac{\bar{p}}{\bar{\alpha}} \alpha \right) \ens_1 + \frac{\bar{p}}{\bar{\alpha}} \alpha \ens_1 + \frac{\bar{p}}{\bar{\alpha}} \bar{\alpha}\ens_2 \\
 		&= \left(\frac{p\bar{\alpha} - \bar{p}\alpha}{\bar{\alpha}} \right) \ens_1 + \frac{\bar{p}}{\bar{\alpha}} (\alpha \ens_1 + \bar{\alpha} \ens_2) = \left(\frac{p - p\alpha - \alpha + p \alpha}{\bar{\alpha}} \right) \ens_1 + \frac{1 - p + \alpha - \alpha}{\bar{\alpha}} (\alpha \ens_1 + \bar{\alpha} \ens_2) \\
 		&= \frac{p - \alpha}{\bar{\alpha}}  \ens_1 + \left( 1 - \frac{p - \alpha}{\bar{\alpha}}\right) (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} \ens[b] \\
 		&= \epsilon \ens_1 + \bar{\epsilon} ( \beta \ens[c] + \bar{\beta} \ens[d] ) = \bar{\epsilon} \beta \ens[c] + \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] = \lambda \ens[c] + \bar{\lambda} \ens[g]
@@ -515,24 +515,22 @@ We now show that entropy imposes a geometric structure on the ensemble space.
 \end{proof}
 
 \begin{remark}
-	These requirements are useful to leverage all definitions of differential geometry, which require a local vector space structure and differentiability. It may be the case that convex structure of the ensemble space is enough, and that the differentiability of the entropy can be derived by showing the continuity of the mixing entropy.
-	
-	For now, we are going to assume the above. This is already a generalization as we work with a generic vector space and not a manifold. The hope is that this can be a rigorous foundation for classical and quantum field theories.
+	The above restriction is useful to use notion of standard differential geometry. It may be that some of the results can be generalized: differentiability of the entropy may be derived by continuity, concavity of the entropy and differentiability of $I(p_1, p_2)$; it may be that the convex structure may be enough to define a generalized version of tangent space. This would should be the target of future research.
 \end{remark}
 
 \begin{defn}
-	Given a geometric ensemble $\ens \in \Ens$, the \textbf{tangent space} at $\ens$, noted $T_{\ens}$, is the space of all infinitesimal variations $\delta \ens$. The \textbf{norm} of a variation $\delta \ens \in T_{\ens}$ is given by
+	Let $V \subseteq \Ens$ be a finite dimensional subregion of a geometric ensemble space. Let $\ens \in \Ens$ be an ensemble, the \textbf{tangent space} at $\ens$, noted $T_{\ens}$, is the space of all infinitesimal variations $\delta \ens$. The \textbf{norm} of a variation $\delta \ens \in T_{\ens}$ is given by
 	$$ \lVert \delta \ens \rVert_{\ens} = \sqrt{ MS(\ens, \ens + \delta \ens) }.$$
 	The \textbf{metric tensor} (i.e. the inner product between two variations $\delta \ens_1 , \delta \ens_2 \in T_{\ens}$ ) is given by
 	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert_{\ens}^2 - \lVert \delta \ens_1 \rVert_{\ens}^2 - \lVert \delta \ens_2 \rVert_{\ens}^2 \right).$$
 \end{defn}
 
 \begin{thrm}
-	Let $\Ens$ be a geometric ensemble space. Then
+	Let $\Ens$ be a geometric ensemble space and $V \subseteq \Ens$ a finite dimensional subregion. Then
 	$$ \lVert \delta \ens \rVert_{\ens}^2 = - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2}(\delta \ens , \delta \ens) $$
 	and 
 	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = - \frac{1}{8} \frac{\partial^2 S}{\partial \ens ^2}( \delta \ens_1, \delta \ens_2 ).$$
-	Let $V \subseteq \Ens$ be a finite dimensional subregion. Then $V$ is a Riemannian manifold with $g_{\ens}$ as the metric tensor and $\lVert \cdot \rVert_{\ens}$ as the norm.
+	Then $V$ is a Riemannian manifold with $g_{\ens}$ as the metric tensor and $\lVert \cdot \rVert_{\ens}$ as the norm.
 \end{thrm}
 
 \begin{proof}
@@ -574,8 +572,20 @@ We can now substitute the norm to the definition of metric tensor. We have
 	Let us now show that $g$ is a metric tensor. Restricted to $V$, $g|_V$ is the Hessian of the entropy $S$. Therefore it is a symmetric rank two tensor which means a symmetric bilinear function of the arguments. Since the entropy is strictly concave, the Hessian is negative definite and therefore $g$ is positive definite. Therefore $(V, g|_V)$ is a Riemannian manifold.
 \end{proof}
 
+\begin{conj}
+	The mixing entropy is the square of a distance function.
+\end{conj}
+
+\begin{proof}
+	This should follow as it is the distance induced by the metric.
+\end{proof}
+
 \begin{remark}
 	We have shown that, under very general conditions, a generalized ensemble space is a geometric space, where the notion of distance and angle are fully defined by the entropy. That is, all geometric structures in physics are entropic structures.
+
+	The metric we find is the \href{https://en.wikipedia.org/wiki/Fisher_information_metric}{Fisher-Rao metric}, whose action/curve length is liked to the \href{https://en.wikipedia.org/wiki/Fisher_information_metric#Relation_to_the_Jensen%E2%80%93Shannon_divergence}{Jensen-Shannon divergence}. The factor of 8 may have to be fixed. What we have is a generalization of those results, which applies to both classical and quantum mechanics as a special case.
+
+	We are also working on a notion of derivative/differentiability that requires just a topological space that is locally isomorphic to a vector space, regardless of dimensionality. This can be used as a basic framework to work directly on the full ensemble space, instead on finite dimensional subsets.
 \end{remark}
 
 \section{Ensemble subspaces}
