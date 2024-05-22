@@ -807,14 +807,22 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \section{Probability}
 
 \begin{defn}
-	A \textbf{context} is a set of subspaces $C \subseteq \mathfrak{L}$ such that
+	A \textbf{context} is a lattice of subspaces $C \subseteq \mathfrak{L}$ such that
 	\begin{enumerate}
-		\item if $\{X_i\}_{i \in I} \in C$ then $\bigcap_{i \in I} X_i \in C$ and $\bigvee_{i \in I} X_i \in C$
-		\item if $X, Y \in C$, then either $X \subset Y$, $Y \subset X$ or $X \disjunct Y$ 
-		\item if $X, Y \in C$, then $X \vee Y \in C$
+		\item if $\{X_i\}_{i \in I} \in C$ then $\bigcap_{i \in I} X_i \in C$ and $((\bigcup_{i \in I} X_i)^\disjunct)^\disjunct \in C$
+		\item if $X \in C$, then $X^\disjunct \in C$
+		\item if $X, Y \in C$, then either $X \subseteq Y$, $Y \subseteq X$ or $X \disjunct Y.$
 	\end{enumerate}
+	That is, the join, meet and complement operation in $\mathfrak{L}$ and $C$ are the same (i.e. smallest subspace that contains all, biggest subspace contained by all, disjunct subspace). The additional property is that in a context two subspaces are either one subspace of the other or are disjoint.
 \end{defn}
 
+\begin{conj}
+	Let $C \subseteq \mathfrak{L}$ be a context. Then $\dim$ is an additive measure over the context. That is, $\dim(X \vee Y) = \dim(X) + \dim(Y)$ for all $X, Y, X \vee Y \in C$ and $X \cap Y = \emptyset$.
+\end{conj}
+
+\begin{defn}
+	An ensemble $\ens \in \Ens$ is \textbf{compatible} with a context $C \subseteq \mathfrak{L}$ if for all $X \in C$, we can write $\ens = p \ens[x] + \bar{p} \ens[y]$ such that $p \in [0,1]$, $\ens[x] \in X$ and $\ens[y] \in X^\disjunct$.
+\end{defn}
 
 \begin{defn}
 	Let $\ens \in \Ens$. The \textbf{probability measure} for $\ens$ is defined as $p_{\ens}(U) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(U), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \})$ if $U \neq \emptyset$ and $p_{\ens}(U) = 0$ otherwise.
@@ -826,7 +834,6 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 		\item non negative and unit bounded: $p_{\ens}(U) \in [0,1]$
 		\item monotone: $U \subseteq V \implies p_{\ens}(U) \leq p_{\ens}(V)$
 		\item subadditive: $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$
-		\item context-additive: if $\ens \in X \in C$, then $p_{\ens}(X \cup Y) = p_{\ens}(X) + p_{\ens}(Y)$ for all $X, Y \in C$ and $X \cap Y = \emptyset$
 	\end{enumerate}
 \end{prop}
 
@@ -838,12 +845,19 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	3. Let $U, V \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(U \cup V)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(U \cup V)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of probability measure, we must have $p\lambda \leq p_{\ens}(U)$ and $p\bar{\lambda} \leq p_{\ens}(V)$, therefore $p = p\lambda + p\bar{\lambda} \leq p_{\ens}(U) + p_{\ens}(V)$. 	Since $p_{\ens}(U \cup V)$ is the supremum for a set of $p$s for which the expression always holds, we have $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$. The probability measure is subadditive.
 \end{proof}
 
+\begin{conj}
+	Let $C \subseteq \mathfrak{L}$ be a context and $\ens \in \Ens$ an ensemble compatible with the context. Then $p_{\ens}$ is an additive measure over the context. That is, $p_{\ens}(X \vee Y) = p_{\ens}(X) + p_{\ens}(Y)$ for all $X, Y, X \vee Y \in C$ and $X \cap Y = \emptyset$.
+\end{conj}
+
 \begin{remark}
 	The additivity of probability is more of a special condition than one may expect. Naively, one would expect that if $U$ and $V$ are distinct, then $p_{\ens}(U \cup V) = p_{\ens}(U) + p_{\ens}(V)$. That is, the component of $\ens$ in $U \cup V$ is simply the sum of the components within $U$ and $V$, which are going to be distinct (i.e. will not overlap). However this is not true in quantum mechanics.
 	
 	Take a singe quibit and let $\ens$ be the maximally mixed state. Then $p_{\ens}(\{x\}) = \frac{1}{2}$ for any pure state $x$. However, if we take two pure states $x$ and $y$ that are not orthogonal, the maximally mixed state is not a mixture of $x$ and $y$, which means $p_{\ens}(\{x, y\}) < 1 = p_{\ens}(\{x\}) + p_{\ens}(\{y\})$.
 \end{remark}
 
+\begin{conj}
+	If $\mathfrak{L}$ is a context, then all probability measure are additive and the ensemble space is classical probability space (i.e. a space of additive measures).
+\end{conj}
 
 
 \begin{conj}
