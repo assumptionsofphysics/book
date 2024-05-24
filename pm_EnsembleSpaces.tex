@@ -144,7 +144,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \begin{axiom}[Axiom of mixture]
 	An ensemble space $\Ens$ is equipped with an operation $+ : [0, 1] \times \Ens \times \Ens \to \Ens$ called \textbf{mixing}, noted with the infix notation $p \ens_1 + \bar{p} \ens_2$, with the following properties:
 	\begin{itemize}
-		\item \textbf{Continuity}: $p \ens_1 + \bar{p} \ens_2$ is continuous in all its arguments (i.e. $p$, $\ens_1$ and $\ens_2$)
+		\item \textbf{Continuity}: the map $(p, \ens_1, \ens_2)  \to p \ens_1 + \bar{p} \ens_2$ is continuous (the products $[0, 1] \times \Ens \times \Ens \to \Ens$ have the product topology)
 		\item \textbf{Identity}: $1 \ens_1 + 0 \ens_2 = \ens_1$
 		\item \textbf{Idempotence}:  $p \ens_1 + \bar{p} \ens_1 = \ens_1$ for all $p \in [0,1]$
 		\item \textbf{Commutativity}: $p \ens_1 + \bar{p} \ens_2 = \bar{p} \ens_2 + p \ens_1$ for all $p \in [0,1]$
@@ -235,6 +235,8 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 	Note that, in classical mechanics, $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for some $p$ does imply that $\ens \distinct \ens_1$ and $\ens \distinct \ens_2$. However, this is not the case in quantum mechanics. For example, consider the Bloch sphere and the states $x^+$, $x^-$, $z^+$, and $z^-$. These are all distinct ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$. Therefore a mixture of $x^+$ and $x^-$ has a common component with $z^+$.
 \end{remark}
 
+\subsection{Vector space embedding}
+
 \begin{defn}
 	 Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$ with $p \in (0,1)$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$. An ensemble space is \textbf{complemented} if all $p$-complements are unique for all $p \in (0, 1)$.
 \end{defn}
@@ -242,10 +244,15 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \begin{prop}\label{pm_es_complementedIsVectorSpace}
 	An ensemble space is complemented if and only if it is a convex subset of a real vector space for which mixtures are linear combination.
 \end{prop}
+
 \begin{proof}
 	Theorem 4 in \url{https://arxiv.org/abs/1105.1270} states that a convex space embeds into a real vector space with $c_\lambda(x,y) = \lambda x + \bar{\lambda}y$ if and only if
-	$$ c_\lambda(x,y) = c_\lambda(x,z) \; \forall \lambda \in (0,1) \implies y = z.$$ This is exactly the condition that the $\lambda$-complement is unique.
+	$$ c_\lambda(x,y) = c_\lambda(x,z) \; \forall \lambda \in (0,1) \implies y = z.$$ This property, called cancellative property, is exactly the condition that the $\lambda$-complement is unique.
 \end{proof}
+
+\begin{conj}\label{pm_es_ensemblesAreTVS}
+	Let a topological convex space be a convex space equipped with a topology such that convex combinations are continuous. A topological convex space embeds into a topological vector space if and only if it is complemented (i.e. cancellative).
+\end{conj}
 
 \begin{prop}
 	Discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfy the axiom of mixture and are complemented ensemble spaces.
@@ -270,7 +277,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \end{defn}
 
 \begin{axiom}[Axiom of entropy]
-	An ensemble space $\Ens$ is equipped a a function $S : \Ens \to \mathbb{R}$ called \textbf{entropy} with the following properties
+	An ensemble space $\Ens$ is equipped a function $S : \Ens \to \mathbb{R}$ called \textbf{entropy} with the following properties
 	\begin{itemize}
 		\item \textbf{Continuity}
 		\item \textbf{Strict concavity}: $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$ with the equality holding if and only if $\ens_1 = \ens_2$
@@ -369,7 +376,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \begin{proof}
 	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens_1$ and $\ens_2$ are disjunct by definition. The entropy maximum for the mixed ensemble can only be achieved when the elements are disjunct, for some value of $p$.
 	
-	Now fix $S_1$ and $S_2$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression.
+	Now fix $S_1$ and $S_2$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression. Since $\ens_1$ and $\ens_2$ are disjunct, $S(p \ens_1 + \bar{p}\ens_2) =  - p \log p - \bar{p} \log \bar{p} + p S_1 + \bar{p} S_2$ which is a smooth function of $p$.
 	\begin{equation}
 		\begin{aligned}
 			0 = \frac{dS}{dp} &= \frac{d}{dp} S(\ens) =\frac{d}{dp} \left( - p \log p - \bar{p} \log \bar{p} + p S_1 + \bar{p} S_2 \right) \\
@@ -479,22 +486,22 @@ We now show that entropy imposes a geometric structure on the ensemble space.
 	An ensemble space is \textbf{geometric} if it is complemented and has a twice differentiable entropy with respect to the mixing coefficients.
 \end{defn}
 
-\begin{coro}
-	A geometric ensemble space is a convex subset of a smooth vector space.
-\end{coro}
+\begin{conj}
+	A geometric ensemble space is a convex subset of a real vector space. Moreover, every finite dimensional subspace is a smooth manifold.
+\end{conj}
 
 \begin{proof}
-	Since a geometric ensemble space is complemented, it embeds into a real vector space. The differentiable structure is imposed by requiring that any parameter used to define families of ensembles must be twice differentiable with respect to the entropy.
+	Since a geometric ensemble space is complemented, it embeds into a real vector space. If conjecture \ref{pm_es_ensemblesAreTVS} holds, then it is a topological vector space. Every finite dimensional subspace $V$, then, is locally $R^n$ with a topology. This may be enough to claim $V$ is a manifold. The differentiable structure is imposed by requiring coordinates that coordinates are twice differentiable with respect to the mixing coefficients.
 \end{proof}
 
 \begin{remark}
-	The above restriction is useful to use notion of standard differential geometry. It may be that some of the results can be generalized: differentiability of the entropy may be derived by continuity, concavity of the entropy and differentiability of $I(p_1, p_2)$; it may be that the convex structure may be enough to define a generalized version of tangent space. This would should be the target of future research.
+	The above restriction is useful to recover standard elements of differential geometry. It is an open question to understand whether other conditions already imply these requirements, or whether a more general setting can be developed. For example, in a classical space every ensemble can be understood as the mixture of orthogonal elements. Therefore the entropy can be proven the Shannon/Gibbs entropy, and therefore it is infinitely smooth with respect to the coefficients. A classical space, then, would be automatically geometric. Similar arguments may exist for a quantum space. Additionally, it may be that the convex structure may be enough to define a generalized version of tangent space.
 \end{remark}
 
 \begin{defn}
-	Let $V \subseteq \Ens$ be a finite dimensional subregion of a geometric ensemble space. Let $\ens \in \Ens$ be an ensemble, the \textbf{tangent space} at $\ens$, noted $T_{\ens}$, is the space of all infinitesimal variations $\delta \ens$. The \textbf{norm} of a variation $\delta \ens \in T_{\ens}$ is given by
+	Let $V \subseteq \Ens$ be a finite dimensional subregion of a geometric ensemble space. Let $\ens \in \Ens$ be an ensemble and $T_{\ens}$ the tangent space at that point. The \textbf{norm} of $\delta \ens \in T_{\ens}$ is given by
 	$$ \lVert \delta \ens \rVert_{\ens} = \sqrt{ MS(\ens, \ens + \delta \ens) }.$$
-	The \textbf{metric tensor} (i.e. the inner product between two variations $\delta \ens_1 , \delta \ens_2 \in T_{\ens}$ ) is given by
+	The \textbf{metric tensor} (i.e. the inner product between $\delta \ens_1 , \delta \ens_2 \in T_{\ens}$ ) is given by
 	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert_{\ens}^2 - \lVert \delta \ens_1 \rVert_{\ens}^2 - \lVert \delta \ens_2 \rVert_{\ens}^2 \right).$$
 \end{defn}
 
@@ -550,7 +557,7 @@ We can now substitute the norm to the definition of metric tensor. We have
 \end{conj}
 
 \begin{proof}
-	This should follow as it is the distance induced by the metric.
+	This is something that is true for both classical and quantum version of the JSD. It is not clear whether this generalizes. The arc length provided by the metric is indeed a distance function, which has a square root over the metric applied to the differentials. The JSD will correspond to the energy (or action) of the curve. This does not seem to be, in general, the square of a distance function.
 \end{proof}
 
 \begin{remark}
