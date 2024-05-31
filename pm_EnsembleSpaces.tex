@@ -499,17 +499,17 @@ We now show that entropy imposes a geometric structure on the ensemble space.
 \end{remark}
 
 \begin{defn}
-	Let $V \subseteq \Ens$ be a finite dimensional subregion of a geometric ensemble space. Let $\ens \in \Ens$ be an ensemble and $T_{\ens}$ the tangent space at that point. The \textbf{norm} of $\delta \ens \in T_{\ens}$ is given by
-	$$ \lVert \delta \ens \rVert_{\ens} = \sqrt{ MS(\ens, \ens + \delta \ens) }.$$
+	Let $V \subseteq \Ens$ be a differentiable manifold embedded in the ensemble space. Let $\ens \in \Ens$ be an ensemble and $T_{\ens}$ the tangent space at that point. The \textbf{norm} of $\delta \ens \in T_{\ens}$ is given by
+	$$ \lVert \delta \ens \rVert_{\ens} = \sqrt{ 8 MS(\ens, \ens + \delta \ens) }.$$
 	The \textbf{metric tensor} (i.e. the inner product between $\delta \ens_1 , \delta \ens_2 \in T_{\ens}$ ) is given by
 	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert_{\ens}^2 - \lVert \delta \ens_1 \rVert_{\ens}^2 - \lVert \delta \ens_2 \rVert_{\ens}^2 \right).$$
 \end{defn}
 
 \begin{thrm}
-	Let $\Ens$ be a geometric ensemble space and $V \subseteq \Ens$ a finite dimensional subregion. Then
-	$$ \lVert \delta \ens \rVert_{\ens}^2 = - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2}(\delta \ens , \delta \ens) $$
+	Let $\Ens$ be a geometric ensemble space and $V \subseteq \Ens$ a differentiable manifold embedded in the ensemble space. Then
+	$$ \lVert \delta \ens \rVert_{\ens}^2 = - \frac{\partial^2 S}{\partial \ens^2}(\delta \ens , \delta \ens) $$
 	and 
-	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = - \frac{1}{8} \frac{\partial^2 S}{\partial \ens ^2}( \delta \ens_1, \delta \ens_2 ).$$
+	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = - \frac{\partial^2 S}{\partial \ens ^2}( \delta \ens_1, \delta \ens_2 ).$$
 	Then $V$ is a Riemannian manifold with $g_{\ens}$ as the metric tensor and $\lVert \cdot \rVert_{\ens}$ as the norm.
 \end{thrm}
 
@@ -534,22 +534,75 @@ Expanding the definition of $MS$, we have
 \end{equation}
 
 Therefore
-$$ \lVert \delta \ens \rVert^2 = MS(\ens, \ens + \delta \ens) = - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} (\delta \ens, \delta \ens).$$
+$$ \lVert \delta \ens \rVert^2 = 8 MS(\ens, \ens + \delta \ens) = -  \frac{\partial^2 S}{\partial \ens^2} (\delta \ens, \delta \ens).$$
 
 We can now substitute the norm to the definition of metric tensor. We have
 \begin{equation}
 	\begin{aligned}
 		g_{\ens}(\delta \ens_1, \delta \ens_2 ) &= \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert^2 - \lVert \delta \ens_1 \rVert^2 - \lVert \delta \ens_2 \rVert^2 \right) \\
-		&= \frac{1}{2} \left( - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1 + \delta \ens_2, \delta \ens_1 + \delta \ens_2) + \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) +\frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right) \\
-		&= - \frac{1}{16} \left(  \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_2) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right. \\
+		&= \frac{1}{2} \left( - \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1 + \delta \ens_2, \delta \ens_1 + \delta \ens_2) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right) \\
+		&= - \frac{1}{2} \left(  \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_2) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right. \\
 		&-  \left. \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) - \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right) \\
-		&= - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_2) \\
+		&= - \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_2) \\
 	\end{aligned}
 \end{equation}
 
-	Let us now take a finite dimensional region $V \subseteq \Ens$. Since $V$ is a finite dimensional subregion of a real vector space, it will be a manifold. It will have a smooth structure inherited from the ensemble space.
+	Let us now take an embedded manifold $V \subseteq \Ens$. It will have a smooth structure inherited from the ensemble space.
 	
 	Let us now show that $g$ is a metric tensor. Restricted to $V$, $g|_V$ is the Hessian of the entropy $S$. Therefore it is a symmetric rank two tensor which means a symmetric bilinear function of the arguments. Since the entropy is strictly concave, the Hessian is negative definite and therefore $g$ is positive definite. Therefore $(V, g|_V)$ is a Riemannian manifold.
+\end{proof}
+
+\begin{prop}
+	For a classical ensemble space, the metric corresponds to the Fisher-Rao metric.
+\end{prop}
+
+\begin{proof}
+	Recall that, given a manifold of probability distributions over $X$ parametrized by $\theta^i$, the \href{https://en.wikipedia.org/wiki/Fisher_information_metric}{Fisher-Rao metric} is defined as:
+	\begin{equation}
+		g_{ij} =- \int_X \frac{\partial^2 \log \rho}{\partial \theta^i \partial \theta^j} \rho dx.
+	\end{equation}
+	For a classical ensemble, the entropy is given by
+	\begin{equation}
+		S(\rho) =- \int_X \rho \log \rho dx.
+	\end{equation}
+	
+	Let us now calculate the first two terms in the Taylor expansion around $\rho$ with a variation $\delta\rho$. Recall that:
+	\begin{equation}
+		\begin{aligned}
+		\log(x+dx) &= \log(x) + d_x \log x \, dx + \frac{1}{2} d_x d_x  \log x \, dx^2 + O(dx^3) \\
+		&= \log(x) + \frac{1}{x} dx - \frac{1}{2} \frac{1}{x^2} dx^2 + O(dx^3)
+		\end{aligned}
+	\end{equation}
+	We have:
+	\begin{equation}
+		\begin{aligned}
+			S(\rho + \delta \rho) &= -\int_X (\rho + \delta \rho) \log (\rho + \delta \rho) dx \\
+			&=-\int_X (\rho + \delta \rho) \left[\log \rho + \frac{1}{\rho} \delta \rho - \frac{1}{2\rho^2} \delta \rho^2 + O(\delta \rho^3)\right] dx \\
+			&= - \int_X \rho \log \rho dx - \int_x \left[\log \rho + 1 \right]dx \delta \rho -\int_X \left[\frac{1}{\rho} - \frac{\rho}{2\rho^2}\right] dx \delta \rho^2 + \int_X dx O(\delta\rho^3) \\
+			&= - \int_X \rho \log \rho dx - \int_x \left[\log \rho + 1 \right]dx \delta \rho - 	
+			\frac{1}{2}\int_X \frac{1}{\rho} dx \delta \rho^2 + \int_X dx O(\delta\rho^3) \\
+		\end{aligned}
+	\end{equation}
+	\begin{equation}
+		\begin{aligned}
+						\frac{\partial^2 S}{\partial \rho^2}(\delta \rho, \delta \rho) &= -\int_X \frac{1}{\rho} \delta \rho^2 dx = -\int_X \frac{1}{\rho} \delta \rho^2 dx + 0 = -\int_X \frac{1}{\rho} \delta \rho^2 dx + \delta^2 (1) \\
+			&= -\int_X \frac{1}{\rho} \delta \rho^2 dx + \delta^2 \int_X \rho dx = -\int_X \frac{1}{\rho} \delta \rho^2 dx + \int_X \delta^2 \rho dx \\
+			&= \int_X \rho dx \left[-\frac{1}{\rho^2} \delta \rho^2 + \frac{1}{\rho} \delta^2 \rho \right]
+			= \int_X \rho dx \, \delta \left[\frac{1}{\rho} \delta \rho \right] \\
+			&= \int_X \rho dx \, \delta^2 \log \rho
+		\end{aligned}
+	\end{equation}
+	
+	Let as consider a family of ensembles charted by a set of parameters $\theta^i$. We have:
+	\begin{equation}
+		\begin{aligned}
+			g_{\ens}(d\theta^1, d\theta^2) &= - \frac{\partial^2 S}{\partial \rho^2}\left(\frac{\partial 
+				\rho}{\partial \theta^1} d\theta^1, \frac{\partial 
+				\rho}{\partial \theta^2} d\theta^2\right) = - \int_X \rho dx \frac{\partial^2 \log \rho}{\partial \theta^1 \partial \theta^2}d\theta^1 d\theta^2
+		\end{aligned}
+	\end{equation}
+	which recovers the Fisher-Rao metric.
+	
 \end{proof}
 
 \begin{conj}
