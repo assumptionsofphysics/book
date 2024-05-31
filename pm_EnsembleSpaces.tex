@@ -811,29 +811,38 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{conj}
 
 
-\section{Probability}
+\section{Probability theory}
+
+\subsection{Probability and components in a hull}
 
 \begin{defn}
-	A \textbf{context} is a lattice of subspaces $C \subseteq \mathfrak{L}$ such that
-	\begin{enumerate}
-		\item if $\{X_i\}_{i \in I} \in C$ then $\bigcap_{i \in I} X_i \in C$ and $((\bigcup_{i \in I} X_i)^\disjunct)^\disjunct \in C$
-		\item if $X \in C$, then $X^\disjunct \in C$
-		\item if $X, Y \in C$, then either $X \subseteq Y$, $Y \subseteq X$ or $X \disjunct Y.$
-	\end{enumerate}
-	That is, the join, meet and complement operation in $\mathfrak{L}$ and $C$ are the same (i.e. smallest subspace that contains all, biggest subspace contained by all, disjunct subspace). The additional property is that in a context two subspaces are either one subspace of the other or are disjoint.
-\end{defn}
-
-\begin{conj}
-	Let $C \subseteq \mathfrak{L}$ be a context. Then $\dim$ is an additive measure over the context. That is, $\dim(X \vee Y) = \dim(X) + \dim(Y)$ for all $X, Y, X \vee Y \in C$ and $X \cap Y = \emptyset$.
-\end{conj}
-
-\begin{defn}
-	An ensemble $\ens \in \Ens$ is \textbf{compatible} with a context $C \subseteq \mathfrak{L}$ if for all $X \in C$, we can write $\ens = p \ens[x] + \bar{p} \ens[y]$ such that $p \in [0,1]$, $\ens[x] \in X$ and $\ens[y] \in X^\disjunct$.
+	Let $\ens \in \Ens$ be an ensemble. A sequence of ensembles $\{\ens[a]_i\} \subseteq \Ens$ is an \textbf{increasing component sequence of $\ens$} if there exists a sequence of ensembles $\{\ens[b]_i\} \subseteq \Ens$ and an increasing sequence of $\{p_i\} \subseteq (0,1]$ such that $\ens = p_i \ens[a]_i + \bar{p}_i \ens[b]_i$.
 \end{defn}
 
 \begin{defn}
-	Let $\ens \in \Ens$. The \textbf{probability measure} for $\ens$ is defined as $p_{\ens}(U) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(U), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \})$ if $U \neq \emptyset$ and $p_{\ens}(U) = 0$ otherwise.
+	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles. Then the \textbf{$A$-components of $\ens$} are the components of $\ens$ that are mixtures of $U$. That is, $A_{\ens} = \{ \ens_1 \in \hull(U) \, | \, \exists p \in (0,1], \ens_2 \in \Ens \text{ s.t. } \ens = p \ens_1 + \bar{p} \ens_2  \}$. An \textbf{increasing $A$-component sequence of $\ens$} is an increasing component sequence of $\ens$ such that $\{\ens[a]_i\} \subseteq A_{\ens}$. The sequence is \textbf{maximal component sequence} $\{\ens[x]_i\} \subseteq \hull(A)$ if the limit $p_i \to p$ is the supremum of all such sequences.
 \end{defn}
+
+\begin{defn}
+	Let $\ens \in \Ens$. The \textbf{probability measure} for $\ens$ is defined as $p_{\ens}(A) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(A), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \})$ if $A \neq \emptyset$ and $p_{\ens}(A) = 0$ otherwise.
+\end{defn}
+
+\begin{coro}
+	Let $\ens_1, \ens_2 \in \Ens$. Then $p_{\ens_1} \neq p_{\ens_2}$.
+\end{coro}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{coro}
+	Let $\{\ens[a]_i\} \subseteq A_{\ens}$ be a maximal sequence and $\{p_i\} \subseteq (0,1]$ its associated coefficients. Then $p_i \to p_{\ens}(U)$.
+\end{coro}
+
+\begin{proof}
+	TODO
+\end{proof}
+
 
 \begin{prop}
 	The probability measure for an ensemble is
@@ -850,6 +859,34 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $p_{\ens}(U) = 0$. Since $p_{\ens}(V)$ is non-negative, $p_{\ens}(U) \leq p_{\ens}(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(U), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \} \subseteq \{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(V), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $p_{\ens}(U) \leq p_{\ens}(V)$. The probability measure is a monotone set function.
 	
 	3. Let $U, V \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(U \cup V)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(U \cup V)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of probability measure, we must have $p\lambda \leq p_{\ens}(U)$ and $p\bar{\lambda} \leq p_{\ens}(V)$, therefore $p = p\lambda + p\bar{\lambda} \leq p_{\ens}(U) + p_{\ens}(V)$. 	Since $p_{\ens}(U \cup V)$ is the supremum for a set of $p$s for which the expression always holds, we have $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$. The probability measure is subadditive.
+\end{proof}
+
+
+\subsection{Contexts and probability measure}
+
+\begin{defn}
+	Let $\mathfrak{L}$ be the lattice of subspaces and $\wedge, \vee, (\cdot)^\disjunct$ be respectively the join, meet and disjunct complement. A \textbf{context} is a lattice of subspaces $C \subseteq \mathfrak{L}$ such that
+	\begin{enumerate}
+		\item if $\{X_i\}_{i \in I} \in C$ then $\bigwedge_{i \in I} X_i \in C$, $\bigvee_{i \in I} X_i \in C$ and $X_i^\disjunct \in C$
+		\item if $X, Y \in C$ and $X \cap Y = \emptyset$, then $X \disjunct Y.$
+	\end{enumerate}
+	That is, the join, meet and complement operation in $\mathfrak{L}$ and $C$ are the same (i.e. smallest subspace that contains all, biggest subspace contained by all, disjunct subspace). The additional property is that disjoint subspaces are disjunct.
+\end{defn}
+
+\begin{conj}
+	Let $C \subseteq \mathfrak{L}$ be a context. Then $\dim$ is an additive measure over the context. That is, $\dim(X \vee Y) = \dim(X) + \dim(Y)$ for all $X, Y, X \vee Y \in C$ and $X \cap Y = \emptyset$.
+\end{conj}
+
+\begin{defn}
+	An ensemble $\ens \in \Ens$ is \textbf{compatible} with a context $C \subseteq \mathfrak{L}$ if for any $X \in C$ we can write $\ens = p_i \ens[x]_i + \lambda_i \ens[y] + \epsilon_i \ens_i$ where $\ens[x]_i \in X$ and $\ens[y]_i \in X^\disjunct$ are maximal component sequences.
+\end{defn}
+
+\begin{coro}
+	Let $\ens \in \Ens$ an ensembles compatible with a context $C \subset \mathfrak{L}$. Then $p_{\ens}(X^\disjunct) = 1 - p_{\ens}(X)$.
+\end{coro}
+
+\begin{proof}
+	Since $\ens$ is compatible with $C$, we can write $\ens = p_i \ens[x]_i + \lambda_i \ens[y] + \epsilon_i \ens_i$ where $\ens[x]_i \in X$ and $\ens[y]_i \in X^\disjunct$ are maximal component sequences. Note that $p_{\ens}(X^\disjunct) = 1 - p_{\ens}(X)$ if and only if $\epsilon_i \to 0$. Suppose it didn't. Then every $\ens_i$ would have a component that is neither in $X$ or $X^\disjunct$. That would mean it is disjunct from all the element of $X$ and of $X^\disjunct$. But $X$ contains all the elements disjuct from $X^\disjunct$ and vice-versa. Therefore such component cannot exist, $\epsilon_i \to 0$ and $p_{\ens}(X^\disjunct) = 1 - p_{\ens}(X)$.
 \end{proof}
 
 \begin{conj}
@@ -930,6 +967,19 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	The non-decomposable ensembles are exactly the extreme points of the convex space.
 \end{remark}
 
+\section{Quantities}
+
+\begin{defn}
+	A \textbf{quantity} is a linear real valued operator on $\Ens$. That is, $F : \Ens \to \mathbb{R}$ such that $F(p \ens_1 + \bar{p} \ens_2) = p F(\ens_1) + \bar{p} F(\ens_2)$. 
+\end{defn}
+
+\begin{conj}
+	Let $\ens \in \Ens$ and $A \subset \Ens$. Let $\{\ens[a]_i\}$ and $\{\ens[b]_i\}$ be two maximal increasing $A$-component sequence. Then $\lim\limits_{i \to \infty} F(\ens[a]_i) = \lim\limits_{i \to \infty} F(\ens[a]_i)$ for any quantities $F$.
+\end{conj}
+
+\begin{proof}
+	Check that the all maximal sequences give the same value.
+\end{proof}
 
 \section{Lessons learned}
 
