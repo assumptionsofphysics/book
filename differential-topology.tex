@@ -198,6 +198,14 @@ We define a map to be differentiable if it maps differentials to differentials w
 	
 \end{proof}
 
+\begin{conj}
+	If $f : V \to W$ is differentiable, then $f$ is continuous. 
+\end{conj}
+
+\begin{conj}
+	If $f : V \to W$ is differentiable, then the derivative $\frac{df}{dV}$ is continuous. 
+\end{conj}
+
 \begin{prop}
 	Let $f:\mathbb{R} \to \mathbb{R}$. Then the standard analytical notions of differentiability and derivative coincide.
 \end{prop}
@@ -250,7 +258,39 @@ We define a map to be differentiable if it maps differentials to differentials w
 \end{prop}
 
 \begin{proof}
-	Given that $f$ and $g$ are differentiable, a differential of $U$ will be mapped to a differential of $V$ which will be mapped to a differential of $W$. The composite map $h$ will map a differential of $U$ to a differential of $W$ and therefore it is differentiable and the derivative exists. The differential returned by $h$ will be the one returned by $g$ and $f$ combined, therefore the derivative of $h$ is the function combination of the derivatives of $g$ and $f$.
+
+Let $u \in U$ and $du[a_{i}\, t]$ and $du[b_{i}\,t]$ be differentials.
+
+let $\left.\frac{df}{dU}\right|_{v}^{i}\,(t) = \frac{f(v_{i}\,+\,a_{i} t_{i})\,-\,f(v_{i})}{a_{i}}$ be a sequence that converges to $\left.\frac{df}{dU}\right|_{u}(t)$. Then...
+
+$$
+\left.\frac{dg}{dV}\right|_{f(v)} \circ \left.\frac{df}{dU}\right|_{v} (t) = \lim_{ i \to \infty } \frac{g\left( f(v_{i}) + b_{i}\left.\frac{df}{dU}\right|_{u}^{i}(t) \right) - g(f(v_{i}))}{b_{i}} 
+$$
+$$
+= \lim_{i \to \infty} \frac{g(f(v_{i}) + b_{i}\frac{f(v_{i} + a_{i}t_{i}) - f(v_{i})}{a_{i}}) - g(f(v_{i}))}{b_{i}} 
+$$
+$$
+= \lim_{i \to \infty} \frac{g(\frac{a_{i}f(v_{i})\,+\,b_{i}f(v_{i}+a_{i}t_{i}) - b_{i}f(v_{i})}{a_{i}}) - g(f(v_{i}))}{b_{i}} 
+$$
+$$
+= \lim_{i \to \infty} \frac{g(\frac{(a_{i}\,-\,b_{i})f(v_{i})\,+\,b_{i}f(v_{i}\,+\,a_{i}t_{i})}{a_{i}}) - g(f(v_{i}))}{b_{i}} 
+$$
+Although $b_{i}$ is a generic convergence envelope, notice how we can use a specific value for this convergence envelope (as the definition of derivative requires the limit to be the same for all convergence envelopes) so let $b_{i} = a_{i}$:
+
+$$
+= \lim_{i \to \infty} \frac{g(\frac{(a_{i}\,-\,a_{i})f(v_{i})\,+\,a_{i}f(v_{i}\,+\,a_{i}t_{i})}{a_{i}}) - g(f(v_{i}))}{a_{i}} 
+$$
+$$
+= \lim_{i \to \infty} \frac{g(\frac{a_{i}f(v_{i}\,+\,a_{i}t_{i})}{a_{i}}) - g(f(v_{i}))}{a_{i}} 
+$$
+$$
+= \lim_{i \to \infty} \frac{g(f(v_{i}\,+\,a_{i}t_{i})) - g(f(v_{i}))}{a_{i}} 
+$$
+$$
+= \lim_{i \to \infty} \frac{h(v_{i}\,+\,a_{i}t_{i})) - h(v_{i}))}{a_{i}} 
+$$
+
+%	Given that $f$ and $g$ are differentiable, a differential of $U$ will be mapped to a differential of $V$ which will be mapped to a differential of $W$. The composite map $h$ will map a differential of $U$ to a differential of $W$ and therefore it is differentiable and the derivative exists. The differential returned by $h$ will be the one returned by $g$ and $f$ combined, therefore the derivative of $h$ is the function combination of the derivatives of $g$ and $f$.
 \end{proof}
 
 \begin{remark}
@@ -280,11 +320,33 @@ Suppose that $V = V_1 \times V_2$, then $dV = dV_1 \times dV_2$. This means that
 	Let $V$ and $W$ be two vector spaces and let $V=\prod V_i$ be the direct product of a family of vector spaces $V_i$. Let $f: V \to W$ be a differentiable map. The \textbf{partial derivative} of $f$ with respect to $W_i$, noted $\frac{\partial f}{\partial V_i}$, is the map from a differential of $V_i$ to the differential of $W$ through $f$. That is, $\frac{\partial f}{\partial V_i} (dv_i) = \frac{\partial f}{\partial V} \left( (0, ..., 0, dv_i, 0, ...) \right)$.
 \end{defn}
 
-\begin{prop}
-	Let $f:\mathbb{R}^m \to \mathbb{R}^n$. Then the standard analytical notions of differentiability and partial derivatives coincide with the new ones.
-\end{prop}
+\begin{conj}
+	Let $V$ and $W$ be two normed vector spaces. Then the notion of Fr\'{e}chet derivative and the new derivative coincide.
+\end{conj}
 
 \begin{proof}
+	Recall the Fr\'{e}chet derivative of a function $f: V \to W$ exists at $x \in V$ if there is a linear function $\lambda: V \to W$ such that
+	\begin{equation}
+	\lim_{\lVert h \rVert_{V} \to 0} \frac{\lVert f(x + h) - f(x) - \lambda(h) \rVert_{W}}{\lVert h \rVert_{V}} = 0 
+	\end{equation}
+	
+	First, assume $f$ is differentiable in the Carcassi sense. Therefore, for every $v_i \to v$, $a_i \to 0$ and $t_i \to t$ we have
+	\begin{equation}
+		\begin{aligned}
+	&\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i})}{a_{i}} = \left.\frac{df}{dV}\right|_{v}(t) \\
+	&\left( \lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i})}{a_{i}} \right) - \left.\frac{df}{dV}\right|_{v}(t) = \vec{0}_{W} \\
+	&\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i})}{a_{i}} - \lim_{i \to \infty}  \left.\frac{df}{dV}\right|_{v}(t_i) = \vec{0}_{W} \\
+	&\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i}) - a_{i}\left.\frac{df}{dV}\right|_{v}(t_i)}{a_{i}} = \vec{0}_{W}
+		\end{aligned}
+	\end{equation}
+	since $\frac{df}{dV}$ is continuous. (TODO) 
+	\begin{equation}
+		\begin{aligned}
+	&\frac{\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i}) - a_{i}\left.\frac{df}{dV}\right|_{v}(t_i)}{a_{i}}}{\lVert t_i \rVert_{V}} = \vec{0}_{W}
+		\end{aligned}
+	\end{equation}
+
+	TODO	
 \end{proof}
 
 \begin{remark}
