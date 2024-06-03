@@ -258,8 +258,25 @@ We define a map to be differentiable if it maps differentials to differentials w
 \end{prop}
 
 \begin{proof}
+		Since $f$ is differentiable, we have $df(u_i, du[a_i \, t]) = dv[a_i \left.\frac{df}{dU}\right|_{u}(t) ]$ for all $u_i \to u$, convergence envelopes $a_i$ and tangent vectors $t$. Since $g$ is differentiable, we have $dg(v_i, dv[a_i \, t]) = dw[a_i \left.\frac{dg}{dV}\right|_{v}(t) ]$ for all $v_i \to v$, convergence envelopes $a_i$ and tangent vectors $t$. In particular, we have
+		\begin{equation}
+			\begin{aligned}
+				dw[a_i \left.\frac{dg}{dV}\right|_{v}\left(\left.\frac{df}{dU}\right|_{u}(t)\right) ] &= dg(f(u_i), dv[a_i \left.\frac{df}{dU}\right|_{u}(t) ]) \\
+				&= dg(f(u_i), df(u_i, du[a_i \, t])) \\
+				&= dg(f(u_i), df(u_i, \{a_i t_i\})) \\
+				&=dg(f(u_i), \{ f(u_i + a_i t_i) - f(u_i) \})) \\
+				&=\{g(f(u_i) + f(u_i + a_i t_i) - f(u_i))- g(f(u_i))\} \\
+				&=\{g(f(u_i + a_i t_i))- g(f(u_i))\} \\
+				&=\{h(u_i + a_i t_i)- h(u_i)\} \\
+				&=dh(u_i, du[a_i \, t]).
+			\end{aligned}
+		\end{equation}
+		Therefore the image of the differential through $h$ is a differential with convergence envelope $a_i$ and tangent vector $\left.\frac{dg}{dV}\right|_{v}\left(\left.\frac{df}{dU}\right|_{u}(t)\right)$. The derivative of $h$ is
+		\begin{equation}
+			\left.\frac{dh}{dU}\right|_{u} = \frac{dg}{dV} \circ \frac{df}{dU}
+		\end{equation}
 
-Let $u \in U$ and $du[a_{i}\, t]$ and $du[b_{i}\,t]$ be differentials.
+\textbf{Alternative proof.} TODO: Clenup. Maybe work directly with alternative definition? Let $u \in U$ and $du[a_{i}\, t]$ and $du[b_{i}\,t]$ be differentials.
 
 let $\left.\frac{df}{dU}\right|_{v}^{i}\,(t) = \frac{f(v_{i}\,+\,a_{i} t_{i})\,-\,f(v_{i})}{a_{i}}$ be a sequence that converges to $\left.\frac{df}{dU}\right|_{u}(t)$. Then...
 
@@ -292,10 +309,6 @@ $$
 
 %	Given that $f$ and $g$ are differentiable, a differential of $U$ will be mapped to a differential of $V$ which will be mapped to a differential of $W$. The composite map $h$ will map a differential of $U$ to a differential of $W$ and therefore it is differentiable and the derivative exists. The differential returned by $h$ will be the one returned by $g$ and $f$ combined, therefore the derivative of $h$ is the function combination of the derivatives of $g$ and $f$.
 \end{proof}
-
-\begin{remark}
-	The chain rule in this framework is just function combination. Given that these are linear function, it reduces to multiplication of the derivative on $\mathbb{R}$ and on matrix multiplication on $\mathbb{R}^N$.
-\end{remark}
 
 
 \subsubsection{Partial derivatives}
