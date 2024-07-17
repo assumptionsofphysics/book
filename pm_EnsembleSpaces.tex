@@ -11,6 +11,7 @@
 \newcommand\dist{\mathrm{dist}}
 \newcommand\hull{\mathrm{hull}}
 \newcommand\support{\mathrm{supp}}
+\newcommand\size{\mathrm{efc}}
 
 \newcommand\vspan{\mathrm{span}}
 \newcommand\cl{\mathrm{cl}}
@@ -265,6 +266,11 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 	Since all current physical ensemble spaces are complemented, it is not yet clear whether an ensemble space must be complemented or not. It is difficult to justify as it is a claim on existence of more refined ensembles. It may very well be that this is just an assumption on the decomposition, which may fail in new physical conditions (e.g. at Planck scale). It may also be something that the strict concavity of the entropy requires.
 \end{remark}
 
+\begin{remark}
+	Assuming that the mixing operation is continuous does not guarantee that we can vector space that embeds the convex space is a topological vector space. See \url{https://math.stackexchange.com/questions/4921905/cancellative-convex-spaces-and-topological-vector-spaces}. The issue is we have no guarantee of continuity on the inverse (i.e. subtraction, multiplication for a negative number).
+\end{remark}
+
+
 \section{Quantities}
 
 In the same way that we define ensembles first, we define quantities through their expectation over ensembles. The possible value for pure states will need to be recovered with constructions that are connected to spectral theory.
@@ -354,6 +360,103 @@ In the same way that we define ensembles first, we define quantities through the
 	Check that the all maximal sequences give the same value.
 \end{proof}
 
+
+\section{Biggest component and probability}
+
+\subsection{Convex hull}
+
+\begin{defn}
+	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{convex hull} of $U$, noted $\hull(U)$ is the set of all possible mixtures that can be constructed with elements contained in $U$.
+\end{defn}
+
+\begin{coro}
+	The convex hull has the following properties
+	\begin{enumerate}
+		\item $U \subseteq \hull(U)$
+		\item $U \subseteq V \implies \hull(U) \subseteq \hull(V)$
+		\item $\hull(\hull(U)) = \hull(U)$
+	\end{enumerate}
+	and is therefore a closure operation
+\end{coro}
+
+\begin{proof}
+	1. Every element of $U$ is trivially a mixture of elements of $U$. Therefore $U \subseteq \hull(U)$.
+	
+	2. Let $\ens \in \hull(U)$. Then it is a mixture of some elements of $U$. Since $U \subseteq V$, then $\ens$ is also the mixture of some elements of $V$ and therefore $\ens \in \hull(V)$.
+	
+	3. Since mixing is associative and commutative, a mixture of mixtures of $U$ can be reepressed as a mixture of $U$. Therefore for all $\ens \in \hull(\hull(U))$ we have $\ens \in \hull(U)$.
+\end{proof}
+
+\subsection{Maximal component sequence}
+
+\begin{defn}
+	Let $\ens \in \Ens$ be an ensemble. A sequence of ensembles $\{\ens[a]_i\} \subseteq \Ens$ is an \textbf{increasing component sequence of $\ens$} if there exists a sequence of ensembles $\{\ens[b]_i\} \subseteq \Ens$ and an increasing sequence of $\{p_i\} \subseteq (0,1]$ such that $\ens = p_i \ens[a]_i + \bar{p}_i \ens[b]_i$. The limit $p = \lim_{i \to \infty} p_i$ is called the size of the component sequence.
+\end{defn}
+
+\begin{remark}
+	Since the sequence of $p_i$ is increasing and is bounded, it must converge.
+\end{remark}
+
+\begin{defn}
+	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles. Then the \textbf{$A$-components of $\ens$} are the components of $\ens$ that are mixtures of $A$. That is, $A_{\ens} = \{ \ens_1 \in \hull(U) \, | \, \exists p \in (0,1], \ens_2 \in \Ens \text{ s.t. } \ens = p \ens_1 + \bar{p} \ens_2  \}$. An \textbf{increasing $A$-component sequence of $\ens$} is an increasing component sequence of $\ens$ such that $\{\ens[a]_i\} \subseteq \hull(A)$. The sequence $\{\ens[a]_i\} \subseteq \hull(A)$ is \textbf{maximal} if the limit $p_i \to p$ is the supremum of all such sequences.
+\end{defn}
+
+\begin{prop}
+	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles, then there exists a maximal $A$-component sequence of $\ens$.
+\end{prop}
+
+\begin{proof}
+	Consider the set of all sizes of all increasing $A$-component sequence of $\ens$. This is a subset of $(0,1]$ that contains all the limits of all increasing sequences. Therefore, it must have an upper bound.
+\end{proof}
+
+\subsection{Mixing probability}
+
+\begin{defn}
+	Let $\ens \in \Ens$. The \textbf{mixing probability measure} for $\ens$ is defined as $p_{\ens}(A) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(A), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \})$ if $A \neq \emptyset$ and $p_{\ens}(A) = 0$ otherwise.
+\end{defn}
+
+\begin{coro}
+	The mixing probability is the size of a maximal $A$-component sequence of $\ens$. That is, let $\{\ens[a]_i\} \subseteq \hull(A)$ be a maximal sequence and $\{p_i\} \subseteq (0,1]$ its associated coefficients. Then $p_i \to p_{\ens}(A)$. 
+\end{coro}
+
+\begin{proof}
+	Suppose that $p_i \nto p_{\ens}(A)$ Then there exists an $\ens[a] \in \hull(A)$ that is a bigger component than all the elements of the sequence. This means that the sequence is not maximal. Therefore $p_i \to p_{\ens}(A)$.
+\end{proof}
+
+\begin{coro}
+	The mixing probability measure uniquely identify an ensemble. That is, let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. Then $p_{\ens_1} \neq p_{\ens_2}$.
+\end{coro}
+
+\begin{proof}
+	Note that $\ens = 1 \ens_1 + 0 \ens_2$ if and only if $\ens = \ens_1$. Therefore, let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. We have $p_{\ens_1}(\{\ens_1\}) = 1$ and $p_{\ens_2}(\{\ens_1\}) \neq 1$. Which means $p_{\ens_1} \neq p_{\ens_2}$
+\end{proof}
+
+
+\begin{prop}
+	The mixing probability measure for an ensemble is
+	\begin{enumerate}
+		\item non negative and unit bounded: $p_{\ens}(U) \in [0,1]$
+		\item monotone: $U \subseteq V \implies p_{\ens}(U) \leq p_{\ens}(V)$
+		\item subadditive: $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	1. The probability measure takes a subset of $\Ens$ and returns a real value and is therefore a set function. The coefficients used in mixtures are real values between zero and one. The supremum of a set of numbers between zero and one is between zero and one, and therefore the probability measure for an ensembles is non negative and unit bounded.
+	
+	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $p_{\ens}(U) = 0$. Since $p_{\ens}(V)$ is non-negative, $p_{\ens}(U) \leq p_{\ens}(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(U), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \} \subseteq \{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(V), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $p_{\ens}(U) \leq p_{\ens}(V)$. The probability measure is a monotone set function.
+	
+	3. Let $U, V \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(U \cup V)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(U \cup V)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of probability measure, we must have $p\lambda \leq p_{\ens}(U)$ and $p\bar{\lambda} \leq p_{\ens}(V)$, therefore $p = p\lambda + p\bar{\lambda} \leq p_{\ens}(U) + p_{\ens}(V)$. 	Since $p_{\ens}(U \cup V)$ is the supremum for a set of $p$s for which the expression always holds, we have $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$. The probability measure is subadditive.
+\end{proof}
+
+\begin{conj}
+	Let $\{U^i\}_{i=1}^{n} \subseteq \Ens$ be a family of sets of ensembles such that $\ens \in \hull(\bigcup U^i)$. Then $p_{\ens}(\bigcup U^i) = \sum p_{\ens}(U_i)$ if and only if we can find a maximal component sequence within each set such that its elements are distinct from those of any other sequence.
+\end{conj}
+
+\begin{proof}
+	TODO
+\end{proof}
+
 \section{Entropy}
 
 \begin{defn}
@@ -382,6 +485,14 @@ In the same way that we define ensembles first, we define quantities through the
 	
 	The difference is that in that proof we are automatically assuming that things can be decomposed into disjunct elements, and that mixture of disjunct elements remain disjunct (i.e. the axiom of entropic disjunctness). This should imply that mixture of many disjunct element saturate the upper bound. Once that is assumed, then one can find the entropy difference for a generic uniform distribution, then for a rational distribution and then, by continuity, for all reals.
 \end{remark}
+
+\begin{conj}\label{pm_es_ensemblesAreTVS}
+	An ensemble space embeds in a topological vector space if and only if it is complemented (i.e. cancellative).
+\end{conj}
+
+\begin{proof}
+	The idea is to use the entropy to show that open balls are part of the topology, and then use this to show that multiplication for a scalar is continuous. The continuity of addition should come from the continuity of the mixing operation.
+\end{proof}
 
 \begin{axiom}[Axiom of entropic disjunctness]
 	The entropy function of an ensemble space obeys the following properties
@@ -429,6 +540,8 @@ In the same way that we define ensembles first, we define quantities through the
 	Two sets of ensembles $U, V \subseteq \Ens$ are disjunct if $\ens_1 \disjunct \ens_2$ for all $\ens_1 \in U$ and $\ens_2 \in V$. 
 \end{defn}
 
+\subsection{Reducible (classical) ensembles}
+
 
 \begin{defn}
 	An ensemble space $\Ens$ is \textbf{reducible} (or \textbf{classical}) if distinct ensembles are also disjunct. That is, $\ens_1 \distinct \ens_2$ implies $\ens_1 \disjunct \ens_2$.
@@ -452,16 +565,7 @@ In the same way that we define ensembles first, we define quantities through the
 	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of countably many elements. In both cases, the upper bound of the entropy is maximized if and only if the probability measures being combined have disjoint support. This means that two ensembles are disjunct if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measures with disjoint support are exactly ensembles that are distinct. Therefore, in both cases, the ensemble space is reducible.
 \end{proof}
 
-
-\begin{conj}\label{pm_es_ensemblesAreTVS}
-	Let a topological convex space be a convex space equipped with a topology such that convex combinations are continuous. A topological convex space embeds into a topological vector space if and only if it is complemented (i.e. cancellative).
-\end{conj}
-
-\begin{proof}
-	The idea is to use the entropy to show that open balls are part of the topology, and then use this to show that multiplication for a scalar is continuous. The continuity of addition should come from the continuity of the mixing operation.
-\end{proof}
-
-\section{Dimension of a set of ensembles}
+\section{Effective count}
 
 \begin{prop}[Exponential entropy subadditivity]\label{pm_es_exponentialEntropySubadditivity}
 	Let $\ens_1, \ens_2 \in \Ens$. Let $S_1 = S(\ens_1)$ and $S_2 = S(\ens_2)$. Let $\ens = p \ens_1 + \bar{p} \ens_2$ for some $p \in [0,1]$ and $S = S(\ens)$. Then $2^S \leq 2^{S_1} + 2^{S_2}$, with the equality if and only if $\ens_1$ and $\ens_2$ are disjunct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
@@ -499,49 +603,27 @@ In the same way that we define ensembles first, we define quantities through the
 \end{proof}
 
 \begin{defn}
-	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{convex hull} of $U$, noted $\hull(U)$ is the set of all possible mixtures that can be constructed with elements contained in $U$.
-\end{defn}
-
-\begin{coro}
-	The convex hull has the following properties
-	\begin{enumerate}
-		\item $U \subseteq \hull(U)$
-		\item $U \subseteq V \implies \hull(U) \subseteq \hull(V)$
-		\item $\hull(\hull(U)) = \hull(U)$
-	\end{enumerate}
-	and is therefore a closure operation
-\end{coro}
-
-\begin{proof}
-	1. Every element of $U$ is trivially a mixture of elements of $U$. Therefore $U \subseteq \hull(U)$.
-	
-	2. Let $\ens \in \hull(U)$. Then it is a mixture of some elements of $U$. Since $U \subseteq V$, then $\ens$ is also the mixture of some elements of $V$ and therefore $\ens \in \hull(V)$.
-	
-	3. Since mixing is associative and commutative, a mixture of mixtures of $U$ can be reepressed as a mixture of $U$. Therefore for all $\ens \in \hull(\hull(U))$ we have $\ens \in \hull(U)$.
-\end{proof}
-
-\begin{defn}
-	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{dimension} of $U$ is defined as $\dim(U) = \sup(2^{S(\hull(U))})$ if $U \neq \emptyset$ and $\dim(U) = 0$ otherwise.
+	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{effective count} of $U$ is defined as $\size(U) = \sup(2^{S(\hull(U))})$ if $U \neq \emptyset$ and $\size(U) = 0$ otherwise.
 \end{defn}
 
 \begin{prop}
-	The dimension is a set function that is
+	The effective count is a set function that is
 	\begin{enumerate}
-		\item non negative: $\dim(U) \in [0, +\infty]$
-		\item monotone: $U \subseteq V \implies \dim(U) \leq \dim(V)$
-		\item subadditive: $\dim(U \cup V) \leq \dim(U) + \dim(V)$
-		\item additive over disjunct sets: $U \disjunct V \implies \dim(U \cup V) = \dim(U) + \dim(V)$ 
+		\item non negative: $\size(U) \in [0, +\infty]$
+		\item monotone: $U \subseteq V \implies \size(U) \leq \size(V)$
+		\item subadditive: $\size(U \cup V) \leq \size(U) + \size(V)$
+		\item additive over disjunct sets: $U \disjunct V \implies \size(U \cup V) = \size(U) + \size(V)$ 
 	\end{enumerate}
 \end{prop}
 
 \begin{proof}
-	1. The dimension takes a subset of $\Ens$ and returns a real value and is therefore a set function. The exponential can only return non-negative values, therefore the dimension of a set is non-negative. 
+	1. The effective count takes a subset of $\Ens$ and returns a real value and is therefore a set function. The exponential can only return non-negative values, therefore the effective count of a set is non-negative. 
 	
-	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $\dim(U) = 0$. Since $\dim(V)$ is non-negative, $\dim(U) \leq \dim(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $2^{S(\hull(U))} \subseteq 2^{S(\hull(V))}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $\dim(U) \leq \dim(V)$. The dimension is a monotone set function.
+	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $\size(U) = 0$. Since $\size(V)$ is non-negative, $\size(U) \leq \size(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $2^{S(\hull(U))} \subseteq 2^{S(\hull(V))}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $\size(U) \leq \size(V)$. The effective count is a monotone set function.
 	
-	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of dimension, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \dim(U) + \dim(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the dimensions. Therefore $\dim(U \cup V) \leq \dim(U) + \dim(V)$, the dimension is subadditive.
+	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of effective count, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \size(U) + \size(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the effective counts. Therefore $\size(U \cup V) \leq \size(U) + \size(V)$, the effective count is subadditive.
 	
-	4. Let $U, V \subseteq \Ens$ be two disjunct subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \dim(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \dim(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \dim(U) + \dim(V)$. Therefore $\dim(U \cup V) \geq \dim(U) + \dim(V)$. Combining with the previous result, $\dim(U \cup V) = \dim(U) + \dim(V)$. Therefore dimension, as set function, is additive over disjunct sets of ensembles.
+	4. Let $U, V \subseteq \Ens$ be two disjunct subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \size(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \size(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \size(U) + \size(V)$. Therefore $\size(U \cup V) \geq \size(U) + \size(V)$. Combining with the previous result, $\size(U \cup V) = \size(U) + \size(V)$. Therefore effective count, as set function, is additive over disjunct sets of ensembles.
 \end{proof}
 
 \section{Entropic geometry}
@@ -697,6 +779,14 @@ We can now substitute the norm to the definition of metric tensor. We have
 	\end{equation}
 	which recovers the Fisher-Rao metric.
 	
+\end{proof}
+
+\begin{conj}
+	For a quantum ensemble space, the metric corresponds to the Bures metric and the Quantum Fisher information metric.
+\end{conj}
+
+\begin{proof}
+	TODO: the closest expression for the QFIM we found is in \href{https://link.springer.com/chapter/10.1007/978-4-431-54493-7_4}{Quantum Estimation Theory}. The RLD Fisher information is $\tr(\rho L_i L_j)$ where $L_i$ is the right logarithmic derivative. We cab re-express $\frac{1}{\rho} \delta \rho^2 = \rho \frac{\delta\rho}{\rho} \frac{\delta\rho}{\rho}$ given that $\partial_i \rho = \rho L_i$.
 \end{proof}
 
 \begin{conj}
@@ -958,58 +1048,8 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{conj}
 
 
-\section{Probability theory}
 
-\subsection{Probability and components in a hull}
-
-\begin{defn}
-	Let $\ens \in \Ens$ be an ensemble. A sequence of ensembles $\{\ens[a]_i\} \subseteq \Ens$ is an \textbf{increasing component sequence of $\ens$} if there exists a sequence of ensembles $\{\ens[b]_i\} \subseteq \Ens$ and an increasing sequence of $\{p_i\} \subseteq (0,1]$ such that $\ens = p_i \ens[a]_i + \bar{p}_i \ens[b]_i$.
-\end{defn}
-
-\begin{defn}
-	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles. Then the \textbf{$A$-components of $\ens$} are the components of $\ens$ that are mixtures of $A$. That is, $A_{\ens} = \{ \ens_1 \in \hull(U) \, | \, \exists p \in (0,1], \ens_2 \in \Ens \text{ s.t. } \ens = p \ens_1 + \bar{p} \ens_2  \}$. An \textbf{increasing $A$-component sequence of $\ens$} is an increasing component sequence of $\ens$ such that $\{\ens[a]_i\} \subseteq \hull(A)$. The sequence $\{\ens[a]_i\} \subseteq \hull(A)$ is \textbf{maximal} if the limit $p_i \to p$ is the supremum of all such sequences.
-\end{defn}
-
-\begin{defn}
-	Let $\ens \in \Ens$. The \textbf{probability measure} for $\ens$ is defined as $p_{\ens}(A) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(A), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \})$ if $A \neq \emptyset$ and $p_{\ens}(A) = 0$ otherwise.
-\end{defn}
-
-\begin{coro}
-	Let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. Then $p_{\ens_1} \neq p_{\ens_2}$.
-\end{coro}
-
-\begin{proof}
-	Note that $\ens = 1 \ens_1 + 0 \ens_2$ if and only if $\ens = \ens_1$. Therefore, let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. We have $p_{\ens_1}(\{\ens_1\}) = 1$ and $p_{\ens_2}(\{\ens_1\}) \neq 1$. Which means $p_{\ens_1} \neq p_{\ens_2}$
-\end{proof}
-
-\begin{coro}
-	Let $\{\ens[a]_i\} \subseteq \hull(A)$ be a maximal sequence and $\{p_i\} \subseteq (0,1]$ its associated coefficients. Then $p_i \to p_{\ens}(A)$.
-\end{coro}
-
-\begin{proof}
-	Suppose that $p_i \nto p_{\ens}(A)$ Then there exists an $\ens[a] \in \hull(A)$ that is a bigger component than all the elements of the sequence. This means that the sequence is not maximal. Therefore $p_i \to p_{\ens}(A)$.
-\end{proof}
-
-
-\begin{prop}
-	The probability measure for an ensemble is
-	\begin{enumerate}
-		\item non negative and unit bounded: $p_{\ens}(U) \in [0,1]$
-		\item monotone: $U \subseteq V \implies p_{\ens}(U) \leq p_{\ens}(V)$
-		\item subadditive: $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$
-	\end{enumerate}
-\end{prop}
-
-\begin{proof}
-	1. The probability measure takes a subset of $\Ens$ and returns a real value and is therefore a set function. The coefficients used in mixtures are real values between zero and one. The supremum of a set of numbers between zero and one is between zero and one, and therefore the probability measure for an ensembles is non negative and unit bounded.
-	
-	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $p_{\ens}(U) = 0$. Since $p_{\ens}(V)$ is non-negative, $p_{\ens}(U) \leq p_{\ens}(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(U), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \} \subseteq \{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(V), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $p_{\ens}(U) \leq p_{\ens}(V)$. The probability measure is a monotone set function.
-	
-	3. Let $U, V \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(U \cup V)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(U \cup V)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of probability measure, we must have $p\lambda \leq p_{\ens}(U)$ and $p\bar{\lambda} \leq p_{\ens}(V)$, therefore $p = p\lambda + p\bar{\lambda} \leq p_{\ens}(U) + p_{\ens}(V)$. 	Since $p_{\ens}(U \cup V)$ is the supremum for a set of $p$s for which the expression always holds, we have $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$. The probability measure is subadditive.
-\end{proof}
-
-
-\subsection{Contexts and probability measure}
+\section{Contexts and probability measure}
 
 \begin{defn}
 	Let $\mathfrak{L}$ be the lattice of subspaces and $\wedge, \vee, (\cdot)^\disjunct$ be respectively the join, meet and disjunct complement. A \textbf{context} is a lattice of subspaces $C \subseteq \mathfrak{L}$ such that
