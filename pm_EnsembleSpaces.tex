@@ -652,7 +652,7 @@ We now show that entropy imposes a geometric structure on the ensemble space.
 \end{prop}
 
 \begin{proof}
-	Looking at the definitions, for example at \url{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}, one can see that
+	Looking at the definitions \href{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}{Jensen-Shannon divergence}, one can see that
 	$$ JSD(\ens_1, \ens_2) = S\left(\frac{1}{2}\ens_1 + \frac{1}{2}\ens_2 \right)  - \frac{1}{2} \left(S(\ens_1) + S(e_2)\right) = MS(\ens_1, \ens_2)$$.
 	The same is true for the quantum case:
 	$$ QJSD(\ens_1, \ens_2) = S\left(\frac{1}{2}\ens_1 + \frac{1}{2}\ens_2 \right)  - \frac{1}{2} \left(S(\ens_1) + S(\ens_2)\right) = MS(\ens_1, \ens_2)$$.
@@ -667,7 +667,7 @@ We now show that entropy imposes a geometric structure on the ensemble space.
 \end{conj}
 
 \begin{proof}
-	Since a geometric ensemble space is complemented, it embeds into a real vector space. If conjecture \ref{pm_es_ensemblesAreTVS} holds, then it is a topological vector space. Every finite dimensional subspace $V$, then, is locally $R^n$ with a topology. This may be enough to claim $V$ is a manifold. The differentiable structure is imposed by requiring coordinates that coordinates are twice differentiable with respect to the mixing coefficients.
+	Since a geometric ensemble space is complemented, it embeds into a real vector space. If conjecture \ref{pm_es_ensemblesAreTVS} holds, then it is a topological vector space. Every finite dimensional subspace $V$, then, is locally $R^n$ with a topology. This would be enough to claim $V$ is a manifold. The differentiable structure is imposed by requiring coordinates that coordinates are twice differentiable with respect to the mixing coefficients.
 \end{proof}
 
 \begin{remark}
@@ -769,7 +769,7 @@ We can now substitute the norm to the definition of metric tensor. We have
 		\end{aligned}
 	\end{equation}
 	
-	Let as consider a family of ensembles charted by a set of parameters $\theta^i$. We have:
+	Let us consider a family of ensembles charted by a set of parameters $\theta^i$. We have:
 	\begin{equation}
 		\begin{aligned}
 			g_{\ens}(d\theta^1, d\theta^2) &= - \frac{\partial^2 S}{\partial \rho^2}\left(\frac{\partial 
@@ -781,12 +781,42 @@ We can now substitute the norm to the definition of metric tensor. We have
 	
 \end{proof}
 
-\begin{conj}
+\begin{remark}
+	For quantum mechanics, the situation is more complicated as there are different definitions of Fisher metrics (see \href{https://arxiv.org/pdf/2008.11178}{RLD Fisher Information Bound for Multiparameter
+	Estimation of Quantum Channels} or \href{https://link.springer.com/chapter/10.1007/978-4-431-54493-7_4}{Quantum Estimation Theory}). We will therefore just show a general connection, without worrying about the mathematical details.
+	
+\end{remark}
+
+\begin{prop}
 	For a quantum ensemble space, the metric corresponds to the Bures metric and the Quantum Fisher information metric.
-\end{conj}
+\end{prop}
 
 \begin{proof}
-	TODO: the closest expression for the QFIM we found is in \href{https://link.springer.com/chapter/10.1007/978-4-431-54493-7_4}{Quantum Estimation Theory}. The RLD Fisher information is $\tr(\rho L_i L_j)$ where $L_i$ is the right logarithmic derivative. We cab re-express $\frac{1}{\rho} \delta \rho^2 = \rho \frac{\delta\rho}{\rho} \frac{\delta\rho}{\rho}$ given that $\partial_i \rho = \rho L_i$.
+	We can repeat the calculations from the classical case and obtain
+	\begin{equation}
+	\begin{aligned}
+		\frac{\partial^2 S}{\partial \rho^2}(\delta \rho, \delta \rho) &= - \tr\left(\rho^{-1} \delta \rho \delta \rho \right)
+	\end{aligned}
+\end{equation}
+	Let us consider a family of ensembles charted by a set of parameters $\theta^i$. We have:
+\begin{equation}
+	\begin{aligned}
+		g_{\ens}(d\theta^1, d\theta^2) &= - \frac{\partial^2 S}{\partial \rho^2}\left(\frac{\partial 
+			\rho}{\partial \theta^1} d\theta^1, \frac{\partial 
+			\rho}{\partial \theta^2} d\theta^2\right) = \tr\left( \rho^{-1} \frac{\partial \rho}{\partial \theta^1 }\frac{\partial \rho}{\partial \theta^2}\right) d\theta^1 d\theta^2
+	\end{aligned}
+\end{equation}
+which recovers one version of the Fisher-Rao metric.
+
+Recalling that the right logarithmic derivative $L^R$ satisfies $\frac{\partial \rho}{\partial \theta} = \rho L^R$, we can write 
+	\begin{equation}
+	\begin{aligned}
+	g_{\ens}(d\theta^1, d\theta^2) &= \tr\left( \rho^{-1} \frac{\partial \rho}{\partial \theta^1 }\frac{\partial \rho}{\partial \theta^2}\right) d\theta^1 d\theta^2 = \tr(\rho^{-1}\rho L^R
+	_1 \rho L^R_2)d\theta^1 d\theta^2 = \tr(\rho L^R
+	_1 L^R_2)d\theta^1 d\theta^2
+\end{aligned}
+	\end{equation}
+which recovers the RLD Fisher information.
 \end{proof}
 
 \begin{conj}
@@ -798,11 +828,7 @@ We can now substitute the norm to the definition of metric tensor. We have
 \end{proof}
 
 \begin{remark}
-	We have shown that, under very general conditions, a generalized ensemble space is a geometric space, where the notion of distance and angle are fully defined by the entropy. That is, all geometric structures in physics are entropic structures.
-
-	The metric we find is the \href{https://en.wikipedia.org/wiki/Fisher_information_metric}{Fisher-Rao metric}, whose action/curve length is liked to the \href{https://en.wikipedia.org/wiki/Fisher_information_metric#Relation_to_the_Jensen%E2%80%93Shannon_divergence}{Jensen-Shannon divergence}. The factor of 8 may have to be fixed. What we have is a generalization of those results, which applies to both classical and quantum mechanics as a special case.
-
-	We are also working on a notion of derivative/differentiability that requires just a topological space that is locally isomorphic to a vector space, regardless of dimensionality. This can be used as a basic framework to work directly on the full ensemble space, instead on finite dimensional subsets.
+	How exactly to make these statements precise in the general case depends on finding a suitable generalized notion of differentiability. It is unclear whether this notion has already been mathematically formulated.
 \end{remark}
 
 \section{Ensemble subspaces}
@@ -870,8 +896,6 @@ We will first prove a more general set of results, on a generic set (not necessa
 	1. Let $a \in U$. Since $R$ is irreflexive,  $aRa$ is false. Therefore it is not true that, for all $b \in U$, $aRb$. This means that $a \notin U^{RC}$. Since that $a$ was arbitrary, $U \cap U^{RC} \emptyset$.
 	
 	2. Suppose $a \in X^{RC}$. Then for all $b \in X$, $aRb$. In particular, we would have $aRa$, which can't be true since $R$ is irreflexive. Therefore $a \notin X^{RC}$ and, since $a$ is arbitrary, $X^{RC} = \emptyset$.
-	
-	
 \end{proof}
 
 \begin{defn}
@@ -962,14 +986,21 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	Since subspaces are subsets of the ensembles space, the dimension is automatically defined on subspaces.
 \end{remark}
 
+\begin{prop}\label{pm_es_subspacesContainHulls}
+	Let $X \subseteq \Ens$ be an ensemble subspace. The $\hull(U) \subseteq X$ for all $U \subseteq X$.
+\end{prop}
 
-\begin{conj}
+\begin{proof}
+	Let $U \subseteq X$. Then $U \disjunct X^{\disjunct}$. But since mixtures preserve disjunctness, we also have $\hull(U) \disjunct X^{\disjunct}$. Therefore $\hull(U) \subseteq X$.
+\end{proof}
+
+\begin{prop}
 	Let $\Ens$ be a discrete classical theory. Then
 	\begin{enumerate}
 		\item the lattice of subspaces $\mathfrak{L}$ is the set of all possible simplexes generated by all possible combinations of extreme points
-		\item the dimension of each subspace is the number of extreme points
+		\item the effective count of each subspace is the number of extreme points
 	\end{enumerate}
-\end{conj}
+\end{prop}
 
 \begin{proof}
 	Let $\Ens$ be a discrete classical ensemble space. Then each ensemble is a sequence $p_i$ such that $\sum_i p_i = 1$. The dimensionality of the space fixes the range of $i$. Note that, given that the space is discrete, the collection $p_i$ can be understood as a continuous function of the pure elements.
@@ -979,75 +1010,45 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	If $U$ is the set of all probability distributions over $n$ cases, the distribution with highest entropy is achieved by a continuous distribution and will be $S(p_i) = \log n$. Therefore the dimension of $U$ will be $n$.
 \end{proof}
 
+\begin{remark}
+	By support, we will mean the set-theoretic support, that is the set of points for which the function is non-zero.
+\end{remark}
+
 \begin{conj}
 	Let $\Ens$ be a continuous classical theory. Then
 	\begin{enumerate}
 		\item the lattice of subspaces $\mathfrak{L}$ is the set of all subspaces of continuous probability densities with support within an open set that is the interior of its own closure
-		\item the dimension of each subspace is the Liouville measure
+		\item the effective count of each subspace is the Liouville measure
 	\end{enumerate}
 \end{conj}
 
 \begin{proof}
-	Let $\Ens$ be a continuous classical ensemble space. Then each ensemble is a continuous function for a symplectic manifold $X$ that integrates to one. Since the function is continuous, its support must be an open set.
+	Let $\Ens$ be a continuous classical ensemble space. Then each ensemble is a continuous function over a symplectic manifold $X$ that integrates to one. Since the function is continuous, the support is an open set.
 	
 	Consider two continuous functions that integrate to one. They will be disjunct if and only if their supports are disjoint. Therefore disjunctness for a continuous classical ensemble space is the same as having disjoint support.
 	
-	Take a set of ensembles $U \subseteq \Ens$. An ensemble will be disjunct from all ensembles in $U$ if and only if its support is disjoint from the union of all the supports of all the elements of $U$. Therefore $U^\disjunct$ is the set of all ensembles whose support is a subset of the exterior of the union of all supports of elements of $U$. With a similar logic, $(U^\disjunct)^\disjunct$ is the set of all ensembles whose support is a subset of the exterior of the support of elements of $U^\disjunct$. This corresponds to the interior of the closure of the union  of all supports of elements of $U$. Therefore, any subspace is a set of all continuous probability densities with support within an open set $V \subset X$ that is the interior of its own closure.
+	Take a set of ensembles $U \subseteq \Ens$. An ensemble $\ens \in \Ens$ will be disjunct from all ensembles in $U$ if and only if its support is disjoint from the union of all the supports of all the elements of $U$. Therefore $U^\disjunct$ is the set of all ensembles whose support is a subset of the exterior of the union of all supports of elements of $U$. With a similar logic, $(U^\disjunct)^\disjunct$ is the set of all ensembles whose support is a subset of the exterior of the support of elements of $U^\disjunct$. This corresponds to the interior of the closure of the union  of all supports of elements of $U$. Therefore, any subspace is a set of all continuous probability densities with support within an open set $V \subseteq X$ that is the interior of its own closure.
 	
 	Now take an open set $V \subseteq X$ that is the interior of its own closure and consider the space $U$ of all continuous probability densities that have support within $V$. Then $U^\disjunct$ is the subspace of all continuous probability densities that have support within $\exterior(V)$ and $(U^\disjunct)^\disjunct$ is the subspace of all continuous probability densities that have support within $\exterior(\exterior(V)) = \interior(\overline{V}) = V$. Therefore $U$ is a subspace.
 	
-	Let $U \in \mathfrak{L}$ be a ensemble subspace. If $\ens \in U$, then $S(\ens) \leq \dim(U)$. Moreover, there must be a sequence $\ens_i$ such that $S(\ens_i) \to \dim(U)$. Let $V \subseteq X$ be the open set corresponding to the largest support of all elements in $U$. Then $S(\ens) \leq \log \mu(V)$ as the highest entropy is given by a uniform distribution over $V$. The uniform distribution is discontinuous, and therefore is not a member of $\Ens$. However, we can construct a sequence of continuous functions whose limit is the uniform distribution. This would correspond to a sequence of ensembles for which $S(\ens_i) \to \log \mu(V)$. Therefore $\log \mu(V)$ is the supremum of the entropy for the subspace, and therefore the dimension is $\mu(V)$, the Liouville measure.
+	Let $U \in \mathfrak{L}$ be a ensemble subspace. If $\ens \in U$, then $S(\ens) \leq \size(U)$. Moreover, there must be a sequence $\ens_i$ such that $S(\ens_i) \to \size(U)$. Let $V \subseteq X$ be the open set corresponding to the largest support of all elements in $U$. Then $S(\ens) \leq \log \mu(V)$ as the highest entropy is given by a uniform distribution over $V$. The uniform distribution is discontinuous, and therefore is not a member of $\Ens$. However, we can construct a sequence of continuous functions whose limit is the uniform distribution. This would correspond to a sequence of ensembles for which $S(\ens_i) \to \log \mu(V)$. Therefore $\log \mu(V)$ is the supremum of the entropy for the subspace, and therefore the effective count is $\mu(V)$, the Liouville measure.
 \end{proof}
 
 \begin{conj}
-	Let $\Ens$ be a quantum theory. Then
+	Let $\Ens$ be a quantum ensemble space. Then
 	\begin{enumerate}
 		\item the lattice of subspaces $\mathfrak{L}$ is the set of all possible density operators for each subspace of the Hilbert space
-		\item the dimension of each subspace is the dimension of the corresponding Hilbert space
+		\item the effective count of each subspace is the dimension of the corresponding Hilbert space
 	\end{enumerate}
 \end{conj}
 
-\subsection{Pure states and state space}
-
-\begin{defn}
-	A \textbf{pure state} is a limit of an ensemble with the smallest entropy. Formally, a pure state $s \subset \mathfrak{L}$ is a non-empty collection of subspaces such that
-	\begin{enumerate}
-		\item if $\{X_i\}_{i \in I} \in s$ then $\bigcap_{i \in I} X_i \in s$
-		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $X \subseteq Y$, then $Y \in s$
-		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $Y \subseteq X$ and $Y \neq \emptyset$, then there exists $Z \in s$ such that $Z \subset X$.
-	\end{enumerate}
-	The set of all pure states for an ensemble space is noted $S(\Ens)$.
-\end{defn}
-
-\begin{remark}
-	The above should correspond to an \href{https://en.wikipedia.org/wiki/Ultrafilter}{ultrafilter}.
-\end{remark}
-
-\begin{defn}
-	The set of states of a subspace $X \in \mathfrak{L}$ is the set $\support(X) = \{ s \in S(\Ens) \, | \, X \in s \}$. The topology of the pure states is the topology over the set of pure states generated by the set of states of all subspaces.
-\end{defn}
-
-\begin{defn}
-	Given an ensemble space $\Ens$, its \textbf{state space} is the set of all pure states $S(\Ens)$ equipped with
-	\begin{enumerate}
-		\item the topology generated by the set of states of all subspaces
-		\item the measure given by the dimension on the Borel algebra
-	\end{enumerate}
-\end{defn}
-
-\begin{conj}
-	The state space of a discrete classical theory is the set of extreme points with a discrete topology and the counting measure.
-\end{conj}
-
-\begin{conj}
-	The state space of a continuous classical theory is the phase space manifold with the standard topology and the Liouville measure.
-\end{conj}
-
-\begin{conj}
-	The state space of a quantum theory is the projective Hilbert space with it's topology. The measure applied to a subspace returns its dimensionality.
-\end{conj}
-
-
+\begin{proof}
+	Let $\Ens$ be a quantum ensemble space. Then each ensemble is a density operator defined over a Hilbert space $\mathcal{H}$.
+	
+	Consider two density operators. They will be disjunct if and only if they are defined on orthogonal subspaces. That is, $\ens_1 | \psi \> \neq 0$ only if $\ens_2 | \psi \> = 0$ and vice-versa. This means that a subspace of the ensemble space corresponds to a subspace of the vector space $\mathcal{H}$.
+	
+	Let $U \in \mathfrak{L}$ be a ensemble subspace. If it is finite dimensional, the ensemble with maximal entropy will correspond to the maximally mixed state $I/n$ where $n$ is the dimension of the subspace. The entropy will be given by $\log n$, which means $\size(U) = n$. If $U$ is infinite dimensional, then there is no upper bound to the entropy and $\size(U) = + \infty$.
+\end{proof}
 
 \section{Contexts and probability measure}
 
@@ -1060,9 +1061,13 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	That is, the join, meet and complement operation in $\mathfrak{L}$ and $C$ are the same (i.e. smallest subspace that contains all, biggest subspace contained by all, disjunct subspace). The additional property is that disjoint subspaces are disjunct.
 \end{defn}
 
-\begin{conj}
-	Let $C \subseteq \mathfrak{L}$ be a context. Then $\dim$ is an additive measure over the context. That is, $\dim(X \vee Y) = \dim(X) + \dim(Y)$ for all $X, Y, X \vee Y \in C$ and $X \cap Y = \emptyset$.
-\end{conj}
+\begin{prop}
+	Let $C \subseteq \mathfrak{L}$ be a context. Then $\size$ is an additive measure over the context. That is, $\size(X \vee Y) = \size(X) + \size(Y)$ for all $X, Y, X \vee Y \in C$ such that $X \cap Y = \emptyset$.
+\end{prop}
+
+\begin{proof}
+	Since $X \vee Y$ contains both $X$ and $Y$, we have $X \cup Y \subseteq(X \vee Y)$. By \ref{pm_es_subspacesContainHulls}, $\hull(X \cup Y) \subseteq(X \vee Y)$. By 
+\end{proof}
 
 \begin{defn}
 	An ensemble $\ens \in \Ens$ is \textbf{compatible} with a context $C \subseteq \mathfrak{L}$ if for any $X \in C$ we can write $\ens = p_i \ens[x]_i + \lambda_i \ens[y] + \epsilon_i \ens_i$ where $\ens[x]_i \in X$ and $\ens[y]_i \in X^\disjunct$ are maximal component sequences.
@@ -1153,6 +1158,51 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \begin{remark}
 	The non-decomposable ensembles are exactly the extreme points of the convex space.
 \end{remark}
+
+
+
+\subsection{Pure states and state space}
+
+\begin{defn}
+	A \textbf{pure state} is a limit of an ensemble with the smallest entropy. Formally, a pure state $s \subset \mathfrak{L}$ is a non-empty collection of subspaces such that
+	\begin{enumerate}
+		\item if $\{X_i\}_{i \in I} \in s$ then $\bigcap_{i \in I} X_i \in s$
+		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $X \subseteq Y$, then $Y \in s$
+		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $Y \subseteq X$ and $Y \neq \emptyset$, then there exists $Z \in s$ such that $Z \subset X$.
+	\end{enumerate}
+	The set of all pure states for an ensemble space is noted $S(\Ens)$.
+\end{defn}
+
+\begin{remark}
+	The above should correspond to an \href{https://en.wikipedia.org/wiki/Ultrafilter}{ultrafilter}.
+\end{remark}
+
+\begin{defn}
+	The set of states of a subspace $X \in \mathfrak{L}$ is the set $\support(X) = \{ s \in S(\Ens) \, | \, X \in s \}$. The topology of the pure states is the topology over the set of pure states generated by the set of states of all subspaces.
+\end{defn}
+
+\begin{defn}
+	Given an ensemble space $\Ens$, its \textbf{state space} is the set of all pure states $S(\Ens)$ equipped with
+	\begin{enumerate}
+		\item the topology generated by the set of states of all subspaces
+		\item the measure given by the dimension on the Borel algebra
+	\end{enumerate}
+\end{defn}
+
+\begin{conj}
+	The state space of a discrete classical theory is the set of extreme points with a discrete topology and the counting measure.
+\end{conj}
+
+\begin{conj}
+	The state space of a continuous classical theory is the phase space manifold with the standard topology and the Liouville measure.
+\end{conj}
+
+\begin{conj}
+	The state space of a quantum theory is the projective Hilbert space with it's topology. The measure applied to a subspace returns its dimensionality.
+\end{conj}
+
+
+
 
 \section{Lessons learned}
 
