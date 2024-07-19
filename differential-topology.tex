@@ -24,23 +24,6 @@
 
 \chapter{Infinitesimal reducibility}
 
-\section{Multivectors}
-
-Blurb: vector spaces define only the notion of parallelism and ratio between two vectors that are parallel. With just this notion we can define $k$-vectors to define, instead of linear direction, planar direction and so on.
-
-A vector space defines a notion of direction and ratios between displacements along the same direction. On top of this, we can define a notion of planar direction, a $2$-vector, and similarly a $k$-dimensional directional, a $k$-vector.
-
-\begin{defn}
-	TODO: find a nice definition for the exterior algebra of vectors.
-	$\wedge : V^n \times V^m \to V^{n+m}$ such that:
-	\begin{description}
-	\item[Bilinear] $a \wedge(b + c) = a \wedge b + a \wedge c$ and $(b + c) \wedge a= b \wedge a + c \wedge a$
-	\item[Associative] $a \wedge (b \wedge c) = (a \wedge b) \wedge c$
-	\item[Antisymmetric] $a \wedge a = 0$
-	\end{description}
-	
-\end{defn}
-
 \section{Differentiability}
 
 The main idea is to just use the vector space structure of $\mathbb{R}^n$ to define a notion of differential, and then recover differentiability as maps that preserve that notion.
@@ -97,6 +80,10 @@ For the second expression, we can write $v_i = a_i t + a_i \left(t_i - t\right)$
 $$\lim\limits_{i \to \infty} t_i = \lim\limits_{i \to \infty} t + \lim\limits_{i \to \infty} w_i $$
 The sequence on the left converges to $t$, the first sequence on the right converges to $t$, therefore the second sequence on the right converges to zero.
 \end{proof}
+
+\begin{conj}
+	Every sequence $v_i \to 0$ is a differential with tangent vector $0$. That is, there exists a $a_i \to 0$ and $t_i \to 0$ such that $v_i = a_i t_i$. 
+\end{conj}
 
 \begin{prop}
 	Differentials respect the following property
@@ -198,43 +185,20 @@ We define a map to be differentiable if it maps differentials to differentials w
 	
 \end{proof}
 
-\begin{conj}
+\begin{coro}
 	If $f : V \to W$ is differentiable, then $f$ is continuous. 
-\end{conj}
+\end{coro}
+
+\begin{proof}
+	TODO
+\end{proof}
 
 \begin{conj}
 	If $f : V \to W$ is differentiable, then the derivative $\frac{df}{dV}$ is continuous. 
 \end{conj}
 
-\begin{prop}
-	Let $f:\mathbb{R} \to \mathbb{R}$. Then the standard analytical notions of differentiability and derivative coincide.
-\end{prop}
 \begin{proof}
-	The standard notion of differentiability at $v \in \mathbb{R}$ requires the limit
-	$$ \lim\limits_{h \to 0} \frac{f(v + h) - f(v)}{h} $$
-	to exist. This is equivalent to requiring that the limit
-	$$ \lim\limits_{i \to \infty} \frac{f(v + h_i) - f(v)}{h_i} $$
-	exist exists for all sequences $\{h_i\}_{i=1}^{\infty}$ that converge to zero with $h_i \neq 0$ for all $i$.
-	
-	Our notion of differentiability at $v \in \mathbb{R}$ requires the limit
-	$$ \lim\limits_{i \to \infty} \frac{f(v_i + a_i t_i) - f(v_i)}{a_i} = \left.\frac{df}{dV} \right|_{v} (t)$$
-	to exist for all sequences $\{v_i\}_{i=1}^{\infty}$ that converge to $v$, $\{a_i\}_{i=1}^{\infty}$ that converge to $0$ with $a_i \neq 0$ for all $i$, and $\{t_i\}_{i=1}^{\infty}$ that converges to some $t$.
-	
-	Suppose $f$ is differentiable in the new sense. Choose $t_i = 1$ and $v_i = v$ for all $i$ we have
-	$$ \lim\limits_{i \to \infty} \frac{f(v + a_i) - f(v)}{a_i} = \left.\frac{df}{dV} \right|_{v} (1)$$
-	for all $\{a_i\}_{i=1}^{\infty}$ that converge to $0$ with $a_i \neq 0$ for all $i$. Therefore $f$ is differential in the standard sense.
-	
-	Suppose $f$ is differentiable in the standard sense. Assuming, for now, that all sequences that appear at the denominator are never zero, we have
-	\begin{align*}
-	\lim\limits_{i \to \infty} \frac{f(v_i + a_i t_i) - f(v_i)}{a_i} &= \lim\limits_{i \to \infty} \frac{f(v + (v_i - v) + a_i t_i) - f(v + (v_i - v))}{a_i} \\
-	&= \lim\limits_{i \to \infty} \frac{f(v + (v_i - v) + a_i t_i) - f(v) + f(v) - f(v + (v_i - v))}{a_i} \\
-	&= \lim\limits_{i \to \infty} \left[\frac{f(v + (v_i - v) + a_i t_i) - f(v)}{a_i}
-	- \frac{f(v + (v_i - v)) - f(v)}{a_i} \right]\\
-	&= \lim\limits_{i \to \infty} \left[ \frac{f(v + (v_i - v) + a_i t_i) - f(v)}{(v_i - v) + a_i t_i} \frac{(v_i - v) + a_i t_i}{a_i} \right. \\
-	&- \left.\frac{f(v + (v_i - v)) - f(v)}{(v_i - v)}  \frac{(v_i - v)}{a_i} \right] \\
-	&=  \left.\frac{df}{dv} \right|_{v} \lim\limits_{i \to \infty} \left[ \frac{(v_i - v) + a_i t_i}{a_i} -  \frac{(v_i - v)}{a_i}\right] = \left.\frac{df}{dv} \right|_{v} \lim\limits_{i \to \infty} t_i = \left.\frac{df}{dv} \right|_{v} t \\
-	\end{align*}
-	Note that left side of each product in the fourth line matches the standard definition derivative. In the one dimensional case, this is a numbers and it factors out of the limit.
+	TODO
 \end{proof}
 
 \begin{remark}
@@ -254,7 +218,7 @@ We define a map to be differentiable if it maps differentials to differentials w
 
 
 \begin{prop}[Chain rule]
-	Let $U$, $V$ and $W$ be three vector spaces. Let $f : U \to V$ and $g : V \to W$ be two differentiable maps and $h = g \circ f$ their composition. Then $\frac{dh}{dU} = \frac{dg}{dV} \circ \frac{df}{dU}$.
+	Let $U$, $V$ and $W$ be three vector spaces. Let $f : U \to V$ and $g : V \to W$ be two differentiable maps and $h = g \circ f$ their composition. Then $f$ is differentiable and $\frac{dh}{dU} = \frac{dg}{dV} \circ \frac{df}{dU}$.
 \end{prop}
 
 \begin{proof}
@@ -310,6 +274,69 @@ $$
 %	Given that $f$ and $g$ are differentiable, a differential of $U$ will be mapped to a differential of $V$ which will be mapped to a differential of $W$. The composite map $h$ will map a differential of $U$ to a differential of $W$ and therefore it is differentiable and the derivative exists. The differential returned by $h$ will be the one returned by $g$ and $f$ combined, therefore the derivative of $h$ is the function combination of the derivatives of $g$ and $f$.
 \end{proof}
 
+\subsubsection{Relation to other derivatives}
+
+
+\begin{prop}
+	Let $f:\mathbb{R} \to \mathbb{R}$. Then the standard analytical notions of differentiability and derivative coincide.
+\end{prop}
+\begin{proof}
+	The standard notion of differentiability at $v \in \mathbb{R}$ requires the limit
+	$$ \lim\limits_{h \to 0} \frac{f(v + h) - f(v)}{h} $$
+	to exist. This is equivalent to requiring that the limit
+	$$ \lim\limits_{i \to \infty} \frac{f(v + h_i) - f(v)}{h_i} $$
+	exist exists for all sequences $\{h_i\}_{i=1}^{\infty}$ that converge to zero with $h_i \neq 0$ for all $i$.
+	
+	Our notion of differentiability at $v \in \mathbb{R}$ requires the limit
+	$$ \lim\limits_{i \to \infty} \frac{f(v_i + a_i t_i) - f(v_i)}{a_i} = \left.\frac{df}{dV} \right|_{v} (t)$$
+	to exist for all sequences $\{v_i\}_{i=1}^{\infty}$ that converge to $v$, $\{a_i\}_{i=1}^{\infty}$ that converge to $0$ with $a_i \neq 0$ for all $i$, and $\{t_i\}_{i=1}^{\infty}$ that converges to some $t$.
+	
+	Suppose $f$ is differentiable in the new sense. Choose $t_i = 1$ and $v_i = v$ for all $i$ we have
+	$$ \lim\limits_{i \to \infty} \frac{f(v + a_i) - f(v)}{a_i} = \left.\frac{df}{dV} \right|_{v} (1)$$
+	for all $\{a_i\}_{i=1}^{\infty}$ that converge to $0$ with $a_i \neq 0$ for all $i$. Therefore $f$ is differential in the standard sense.
+	
+	Suppose $f$ is differentiable in the standard sense. Assuming, for now, that all sequences that appear at the denominator are never zero, we have
+	\begin{align*}
+		\lim\limits_{i \to \infty} \frac{f(v_i + a_i t_i) - f(v_i)}{a_i} &= \lim\limits_{i \to \infty} \frac{f(v + (v_i - v) + a_i t_i) - f(v + (v_i - v))}{a_i} \\
+		&= \lim\limits_{i \to \infty} \frac{f(v + (v_i - v) + a_i t_i) - f(v) + f(v) - f(v + (v_i - v))}{a_i} \\
+		&= \lim\limits_{i \to \infty} \left[\frac{f(v + (v_i - v) + a_i t_i) - f(v)}{a_i}
+		- \frac{f(v + (v_i - v)) - f(v)}{a_i} \right]\\
+		&= \lim\limits_{i \to \infty} \left[ \frac{f(v + (v_i - v) + a_i t_i) - f(v)}{(v_i - v) + a_i t_i} \frac{(v_i - v) + a_i t_i}{a_i} \right. \\
+		&- \left.\frac{f(v + (v_i - v)) - f(v)}{(v_i - v)}  \frac{(v_i - v)}{a_i} \right] \\
+		&=  \left.\frac{df}{dv} \right|_{v} \lim\limits_{i \to \infty} \left[ \frac{(v_i - v) + a_i t_i}{a_i} -  \frac{(v_i - v)}{a_i}\right] = \left.\frac{df}{dv} \right|_{v} \lim\limits_{i \to \infty} t_i = \left.\frac{df}{dv} \right|_{v} t \\
+	\end{align*}
+	Note that left side of each product in the fourth line matches the standard definition derivative. In the one dimensional case, this is a numbers and it factors out of the limit.
+\end{proof}
+
+\begin{conj}
+	Let $V$ and $W$ be two normed vector spaces. Then the notion of Fr\'{e}chet derivative and the new derivative coincide.
+\end{conj}
+
+\begin{proof}
+	Recall the Fr\'{e}chet derivative of a function $f: V \to W$ exists at $x \in V$ if there is a linear function $\lambda: V \to W$ such that
+	\begin{equation}
+		\lim_{\lVert h \rVert_{V} \to 0} \frac{\lVert f(x + h) - f(x) - \lambda(h) \rVert_{W}}{\lVert h \rVert_{V}} = 0 
+	\end{equation}
+	
+	First, assume $f$ is differentiable in the Carcassi sense. Therefore, for every $v_i \to v$, $a_i \to 0$ and $t_i \to t$ we have
+	\begin{equation}
+		\begin{aligned}
+			&\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i})}{a_{i}} = \left.\frac{df}{dV}\right|_{v}(t) \\
+			&\left( \lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i})}{a_{i}} \right) - \left.\frac{df}{dV}\right|_{v}(t) = \vec{0}_{W} \\
+			&\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i})}{a_{i}} - \lim_{i \to \infty}  \left.\frac{df}{dV}\right|_{v}(t_i) = \vec{0}_{W} \\
+			&\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i}) - a_{i}\left.\frac{df}{dV}\right|_{v}(t_i)}{a_{i}} = \vec{0}_{W}
+		\end{aligned}
+	\end{equation}
+	since $\frac{df}{dV}$ is continuous. (TODO) 
+	\begin{equation}
+		\begin{aligned}
+			&\frac{\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i}) - a_{i}\left.\frac{df}{dV}\right|_{v}(t_i)}{a_{i}}}{\lVert t_i \rVert_{V}} = \vec{0}_{W}
+		\end{aligned}
+	\end{equation}
+	
+	TODO	
+\end{proof}
+
 
 \subsubsection{Partial derivatives}
 
@@ -333,35 +360,6 @@ Suppose that $V = V_1 \times V_2$, then $dV = dV_1 \times dV_2$. This means that
 	Let $V$ and $W$ be two vector spaces and let $V=\prod V_i$ be the direct product of a family of vector spaces $V_i$. Let $f: V \to W$ be a differentiable map. The \textbf{partial derivative} of $f$ with respect to $W_i$, noted $\frac{\partial f}{\partial V_i}$, is the map from a differential of $V_i$ to the differential of $W$ through $f$. That is, $\frac{\partial f}{\partial V_i} (dv_i) = \frac{\partial f}{\partial V} \left( (0, ..., 0, dv_i, 0, ...) \right)$.
 \end{defn}
 
-\begin{conj}
-	Let $V$ and $W$ be two normed vector spaces. Then the notion of Fr\'{e}chet derivative and the new derivative coincide.
-\end{conj}
-
-\begin{proof}
-	Recall the Fr\'{e}chet derivative of a function $f: V \to W$ exists at $x \in V$ if there is a linear function $\lambda: V \to W$ such that
-	\begin{equation}
-	\lim_{\lVert h \rVert_{V} \to 0} \frac{\lVert f(x + h) - f(x) - \lambda(h) \rVert_{W}}{\lVert h \rVert_{V}} = 0 
-	\end{equation}
-	
-	First, assume $f$ is differentiable in the Carcassi sense. Therefore, for every $v_i \to v$, $a_i \to 0$ and $t_i \to t$ we have
-	\begin{equation}
-		\begin{aligned}
-	&\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i})}{a_{i}} = \left.\frac{df}{dV}\right|_{v}(t) \\
-	&\left( \lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i})}{a_{i}} \right) - \left.\frac{df}{dV}\right|_{v}(t) = \vec{0}_{W} \\
-	&\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i})}{a_{i}} - \lim_{i \to \infty}  \left.\frac{df}{dV}\right|_{v}(t_i) = \vec{0}_{W} \\
-	&\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i}) - a_{i}\left.\frac{df}{dV}\right|_{v}(t_i)}{a_{i}} = \vec{0}_{W}
-		\end{aligned}
-	\end{equation}
-	since $\frac{df}{dV}$ is continuous. (TODO) 
-	\begin{equation}
-		\begin{aligned}
-	&\frac{\lim_{i \to \infty} \frac{f(v_{i} + a_{i}t_{i}) - f(v_{i}) - a_{i}\left.\frac{df}{dV}\right|_{v}(t_i)}{a_{i}}}{\lVert t_i \rVert_{V}} = \vec{0}_{W}
-		\end{aligned}
-	\end{equation}
-
-	TODO	
-\end{proof}
-
 \begin{remark}
 	Partial derivatives should be recoverable through vector space composition. Suppose that $V = V_1 \times V_2$, then $dV = dV_1 \times V_2$. This means that we can decompose a differential $dv= dv_1 + dv_2$ as the sum of two differentials in the respective spaces (mapped into the composite through the injection map). Suppose that $W = W_1 \times W_2$ and $f : V \to W$ is differentiable. Then we also have $dw= dw_1 + dw_2$ and we can study of $f$ maps differentials of $V_1$ and $V_2$ to differentials of $W_1$ and $W_2$. We will find $dw = dw_1 + dw_2 = \frac{dw_1}{dV} dv + \frac{dw_2}{dV} dv = \frac{\partial w_1}{\partial V_1} dv_1 + \frac{\partial w_1}{\partial V_2} dv_2 + \frac{\partial w_2}{\partial V_1} dv_1 + \frac{\partial w_2}{\partial V_2} dv_2$. If $U = \mathbb{R}^n$ and $V = \mathbb{R}^m$ we find the usual definitions.
 \end{remark}
@@ -369,6 +367,25 @@ Suppose that $V = V_1 \times V_2$, then $dV = dV_1 \times dV_2$. This means that
 \begin{remark}
 	TODO: we could compare and contrast with other notions of generalized derivatives: \url{https://en.wikipedia.org/wiki/Fr%C3%A9chet_derivative} \url{https://en.wikipedia.org/wiki/Gateaux_derivative} \url{https://en.wikipedia.org/wiki/Hadamard_derivative}
 \end{remark}
+
+
+\section{Multivectors}
+
+Blurb: vector spaces define only the notion of parallelism and ratio between two vectors that are parallel. With just this notion we can define $k$-vectors to define, instead of linear direction, planar direction and so on.
+
+A vector space defines a notion of direction and ratios between displacements along the same direction. On top of this, we can define a notion of planar direction, a $2$-vector, and similarly a $k$-dimensional directional, a $k$-vector.
+
+\begin{defn}
+	TODO: find a nice definition for the exterior algebra of vectors.
+	$\wedge : V^n \times V^m \to V^{n+m}$ such that:
+	\begin{description}
+		\item[Bilinear] $a \wedge(b + c) = a \wedge b + a \wedge c$ and $(b + c) \wedge a= b \wedge a + c \wedge a$
+		\item[Associative] $a \wedge (b \wedge c) = (a \wedge b) \wedge c$
+		\item[Antisymmetric] $a \wedge a = 0$
+	\end{description}
+	
+\end{defn}
+
 
 \section{Linear functionals (on vector spaces)}
 
