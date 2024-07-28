@@ -399,7 +399,6 @@ The convex structure allows us to characterize ensembles based on whether they c
 	Assuming that the mixing operation is continuous does not guarantee that we can vector space that embeds the convex space is a topological vector space. See \url{https://math.stackexchange.com/questions/4921905/cancellative-convex-spaces-and-topological-vector-spaces}. The issue is we have no guarantee of continuity on the inverse (i.e. subtraction, multiplication for a negative number).
 \end{remark}
 
-
 \section{Quantities}
 
 In the same way that we define ensembles first, we define quantities through their expectation over ensembles. The possible value for pure states will need to be recovered with constructions that are connected to spectral theory.
@@ -489,40 +488,9 @@ In the same way that we define ensembles first, we define quantities through the
 	Check that the all maximal sequences give the same value.
 \end{proof}
 
-
-\section{Biggest component and probability}
-
-\subsection{Maximal component sequence}
-
-\begin{defn}
-	Let $\ens \in \Ens$ be an ensemble. A sequence of ensembles $\{\ens[a]_i\} \subseteq \Ens$ is an \textbf{increasing component sequence of $\ens$} if there exists a sequence of ensembles $\{\ens[b]_i\} \subseteq \Ens$ and an increasing sequence of $\{p_i\} \subseteq (0,1]$ such that $\ens = p_i \ens[a]_i + \bar{p}_i \ens[b]_i$. The limit $p = \lim_{i \to \infty} p_i$ is called the size of the component sequence.
-\end{defn}
-
-\begin{remark}
-	Since the sequence of $p_i$ is increasing and is bounded, it must converge.
-\end{remark}
-
-\begin{defn}
-	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles. Then the \textbf{$A$-components of $\ens$} are the components of $\ens$ that are mixtures of $A$. That is, $A_{\ens} = \{ \ens_1 \in \hull(U) \, | \, \exists p \in (0,1], \ens_2 \in \Ens \text{ s.t. } \ens = p \ens_1 + \bar{p} \ens_2  \}$. An \textbf{increasing $A$-component sequence of $\ens$} is an increasing component sequence of $\ens$ such that $\{\ens[a]_i\} \subseteq \hull(A)$. The sequence $\{\ens[a]_i\} \subseteq \hull(A)$ is \textbf{maximal} if the limit $p_i \to p$ is the supremum of all such sequences.
-\end{defn}
-
-\begin{prop}
-	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles, then there exists a maximal $A$-component sequence of $\ens$.
-\end{prop}
-
-\begin{proof}
-	Consider the set of all sizes of all increasing $A$-component sequence of $\ens$. This is a subset of $(0,1]$ that contains all the limits of all increasing sequences. Therefore, it must have an upper bound.
-\end{proof}
-
-\begin{coro}
-	The mixing probability is the size of a maximal $A$-component sequence of $\ens$. That is, let $\{\ens[a]_i\} \subseteq \hull(A)$ be a maximal sequence and $\{p_i\} \subseteq (0,1]$ its associated coefficients. Then $p_i \to p_{\ens}(A)$. 
-\end{coro}
-
-\begin{proof}
-	Suppose that $p_i \nto p_{\ens}(A)$ Then there exists an $\ens[a] \in \hull(A)$ that is a bigger component than all the elements of the sequence. This means that the sequence is not maximal. Therefore $p_i \to p_{\ens}(A)$.
-\end{proof}
-
 \section{Entropy}
+
+The third and final property of ensembles is that they have a well-defined entropy, that corresponds to the thermodynamic entropy. That is, while in information theory one can define all sorts of measure of uncertainty/information/variability, there is one that corresponds to a physically measurable quantity.
 
 \begin{defn}
 	Given the coefficients $\{p_i\} \in [0,1]$ such that $\sum p_i = 1$, the \textbf{entropy of the coefficients} (also known as Shannon entropy) is defined as $I(\{p_i\}) = - \sum p_i \log p_i $.
@@ -533,7 +501,7 @@ In the same way that we define ensembles first, we define quantities through the
 	\begin{itemize}
 		\item \textbf{Continuity}
 		\item \textbf{Strict concavity}: $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$ with the equality holding if and only if $\ens_1 = \ens_2$
-		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality hold then, $e_1$ and $e_2$ are \textbf{disjunct}, noted $e_1 \disjunct e_2$
+		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality hold then, $e_1$ and $e_2$ are \textbf{non-overlapping} or \textbf{orthogonal}, noted $e_1 \disjunct e_2$
 	\end{itemize}
 \end{axiom}
 
@@ -542,13 +510,25 @@ In the same way that we define ensembles first, we define quantities through the
 	
 	Small changes in the ensemble should produce small changes in the variability, which justifies continuity. Mixing different ensembles will increase the variability, which justifies concavity. Mixing the same ensemble, however, should not increase the variability, which justifies strict concavity. 
 	
-	The variability increase is maximal when the two ensembles are disjunct, meaning they have no elements in common. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. This justifies the upper bound.
+	The variability increase is maximal when the two ensembles are non-overlapping, meaning they have no elements in common. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. This justifies the upper bound.
 \end{justification}
+
+\begin{conj}
+	The entropy can be derived to be continuous, instead of imposing it.
+\end{conj}
+
+\begin{remark}
+	We have found proofs that convex/concave quantities on a convex subspace of $\mathbb{R}^n$ are continuous. The proof may be generalizable to any topological convex space.
+\end{remark}
+
+\begin{conj}
+	The upper bound of the entropy can be uniquely determined, instead of imposing it.
+\end{conj}
 
 \begin{remark}
 	In \url{https://arxiv.org/abs/1912.02012} we showed how the Shannon entropy quantifies the variability of elements within a distribution. Is it possible to rederive $I$ from requirements on convex spaces instead of distributions in particular? This would make the axiom less ad-hoc.
 	
-	The difference is that in that proof we are automatically assuming that things can be decomposed into disjunct elements, and that mixture of disjunct elements remain disjunct (i.e. the axiom of entropic disjunctness). This should imply that mixture of many disjunct element saturate the upper bound. Once that is assumed, then one can find the entropy difference for a generic uniform distribution, then for a rational distribution and then, by continuity, for all reals.
+	The difference is that in that proof we are automatically assuming that things can be decomposed into orthogonal elements, and that mixture of orthogonal elements remain orthogonal (i.e. the axiom of entropic orthogonality). This should imply that mixture of many orthogonal element saturate the upper bound. Once that is assumed, then one can find the entropy difference for a generic uniform distribution, then for a rational distribution and then, by continuity, for all reals.
 \end{remark}
 
 \begin{conj}\label{pm_es_ensemblesAreTVS}
@@ -559,11 +539,11 @@ In the same way that we define ensembles first, we define quantities through the
 	The idea is to use the entropy to show that open balls are part of the topology, and then use this to show that multiplication for a scalar is continuous. The continuity of addition should come from the continuity of the mixing operation.
 \end{proof}
 
-\begin{axiom}[Axiom of entropic disjunctness]
+\begin{axiom}[Axiom of entropic orthogonality]
 	The entropy function of an ensemble space obeys the following properties
 	\begin{itemize}
-		\item \textbf{Disjunctness implies distinctness}: $\ens_1 \disjunct \ens_2$ implies $\ens_1 \distinct \ens_2$
-		\item \textbf{Mixtures preserve disjunctness}: let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \disjunct \ens_1$ if and only if $\ens_4 \disjunct \ens_2$ and $\ens_4 \disjunct \ens_3$
+		\item \textbf{Orthogonality implies separateness}: $\ens_1 \disjunct \ens_2$ implies $\ens_1 \distinct \ens_2$
+		\item \textbf{Mixtures preserve orthogonality}: let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \disjunct \ens_1$ if and only if $\ens_4 \disjunct \ens_2$ and $\ens_4 \disjunct \ens_3$
 	\end{itemize}
 \end{axiom}
 
@@ -574,7 +554,11 @@ In the same way that we define ensembles first, we define quantities through the
 \end{justification}
 
 \begin{remark}
-	It is unclear whether or not these properties can be proven by the axiom of mixture. It is possible to prove that two disjunct ensembles are not one the component of the other. The entropy of the coefficients (i.e. the Shannon entropy) has a vertical asymptote at each end. If two elements are disjunct, the entropy along the segment that connects the two follows that function plus a linear function, which does not change the vertical asymptotes. Therefore the segment cannot be extended while preserving the convexity of the entropy, and therefore the two distinct elements must the extremes of the line that connects the two. This is necessary for distinctness, but not sufficient. Maybe, extending the argument, one can at least prove that disjunctness implies distinctness.
+	It is unclear whether ``orthogonality implies separatenes'' is an independent axiom. It is possible to prove that two orthogonal ensembles are not one the component of the other. The entropy of the coefficients (i.e. the Shannon entropy) has a vertical asymptote at each end. If two elements are orthogonal, the entropy along the segment that connects the two follows that function plus a linear function, which does not change the vertical asymptotes. Therefore the segment cannot be extended while preserving the convexity of the entropy, and therefore the two orthogonal elements must the extremes of the line that connects the two. This is necessary for separateness, but it is not sufficient.
+\end{remark}
+
+\begin{remark}
+	It may be possible to show that mixtures preserve orthogonality is an independent axiom. Take the 2 dimensional simplex (i.e. a triangle) that represent a classical discrete probability space over three elements. Take the standard entropy, which will satisfy ``mixtures preserve orthogonality''. This is because the middle point has entropy $\log 3$. We can imagine changing the entropy so that it is a little bit lower in the center but it is unchanged on the sides. If that is possible, then the new entropy may still satisfy all other axioms.
 \end{remark}
 
 \begin{prop}
@@ -602,14 +586,13 @@ In the same way that we define ensembles first, we define quantities through the
 \end{remark}
 
 \begin{defn}
-	Two sets of ensembles $U, V \subseteq \Ens$ are disjunct if $\ens_1 \disjunct \ens_2$ for all $\ens_1 \in U$ and $\ens_2 \in V$. 
+	Two sets of ensembles $U, V \subseteq \Ens$ are orthogonal if $\ens_1 \disjunct \ens_2$ for all $\ens_1 \in U$ and $\ens_2 \in V$. 
 \end{defn}
 
-\subsection{Reducible (classical) ensembles}
-
+\subsection{Reducible ensemble spaces}
 
 \begin{defn}
-	An ensemble space $\Ens$ is \textbf{reducible} (or \textbf{classical}) if distinct ensembles are also disjunct. That is, $\ens_1 \distinct \ens_2$ implies $\ens_1 \disjunct \ens_2$.
+	An ensemble space $\Ens$ is \textbf{reducible} if separate ensembles are also orthogonal. That is, $\ens_1 \distinct \ens_2$ implies $\ens_1 \disjunct \ens_2$.
 \end{defn}
 
 \begin{justification}
@@ -617,6 +600,22 @@ In the same way that we define ensembles first, we define quantities through the
 	
 	As we prove below, that case does not exist in classical mechanics, but exists in quantum mechanics. This justifies calling the property classical.
 \end{justification}
+
+\begin{prop}
+	Continuous and discrete classical ensemble spaces are reducible.
+\end{prop}
+
+\begin{proof}
+	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of countably many elements. In both cases, the upper bound of the entropy is maximized if and only if the probability measures being combined have disjoint support. This means that two ensembles are disjunct if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measures with disjoint support are exactly ensembles that are distinct. Therefore, in both cases, the ensemble space is reducible.
+\end{proof}
+
+\begin{conj}
+	An ensembles space is reducible only if it is classical.
+\end{conj}
+
+\begin{remark}
+	The reverse direction cannot, in general, work. Take the subspace of a finite classical discrete ensemble space such the maximum probability of any element is $k < 1$. This corresponds to a simplex of the same dimension, with the same center, but scaled in the interior. Given that it is a convex subset of an ensemble space, it will satisfy all the axioms, except it will contain no orthogonal ensembles. Yet, it contains separate ensembles, which cannot be orthogonal.
+\end{remark}
 
 \begin{remark}
 	The above property should ultimately be responsible for the single decomposition in terms of pure states.
