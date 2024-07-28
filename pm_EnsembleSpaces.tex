@@ -11,7 +11,9 @@
 \newcommand\dist{\mathrm{dist}}
 \newcommand\hull{\mathrm{hull}}
 \newcommand\support{\mathrm{supp}}
-\newcommand\size{\mathrm{efc}}
+\newcommand\capacity{\mathrm{efc}}
+\newcommand\size{\mathrm{frac}}
+\newcommand\fcap{\mathrm{fcap}}
 
 \newcommand\vspan{\mathrm{span}}
 \newcommand\cl{\mathrm{cl}}
@@ -286,11 +288,82 @@ The convex structure allows us to characterize ensembles based on whether they c
 	Let $\Ens$ be an ensemble space such that $\ens \distinct \ens[a]$ and $\ens \distinct \ens[b]$ implies $\ens \distinct p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$. Then it is a classical ensemble space.
 \end{conj}
 
+
+\subsection{Convex hull}
+
+\begin{defn}
+	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{convex hull} of $U$, noted $\hull(U)$ is the set of all possible mixtures that can be constructed with elements contained in $U$.
+\end{defn}
+
+\begin{coro}
+	The convex hull has the following properties
+	\begin{enumerate}
+		\item $U \subseteq \hull(U)$
+		\item $U \subseteq V \implies \hull(U) \subseteq \hull(V)$
+		\item $\hull(\hull(U)) = \hull(U)$
+	\end{enumerate}
+	and is therefore a closure operation
+\end{coro}
+
+\begin{proof}
+	1. Every element of $U$ is trivially a mixture of elements of $U$. Therefore $U \subseteq \hull(U)$.
+	
+	2. Let $\ens \in \hull(U)$. Then it is a mixture of some elements of $U$. Since $U \subseteq V$, then $\ens$ is also the mixture of some elements of $V$ and therefore $\ens \in \hull(V)$.
+	
+	3. Since mixing is associative and commutative, a mixture of mixtures of $U$ can be reepressed as a mixture of $U$. Therefore for all $\ens \in \hull(\hull(U))$ we have $\ens \in \hull(U)$.
+\end{proof}
+
+\begin{conj}
+	Let $A \subseteq \Ens$ be a Borel set. Then $\hull(A)$ is also a Borel set.
+\end{conj}
+
+\subsection{Fraction and fraction capacity}
+
+\begin{defn}
+	Let $\ens, \ens[a] \in \Ens$ be two ensembles. The \textbf{fraction} of $\ens[a]$ in $\ens$ is the greatest mixing coefficient for which $\ens$ can be expressed as a mixture of $\ens[a]$. That is, $\size_{\ens}(\ens[a]) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \Ens \text{ s.t. }  \ens = p \ens[a] + \bar{p} \ens_1 \})$.
+\end{defn}
+
+\begin{coro}
+	Let $\ens, \ens[a] \in \Ens$, then $\size_{\ens}(\ens[a]) = 0$ if and only if $\ens[a]$ is not a component of $\ens$
+\end{coro}
+
+\begin{proof}
+	Note that $\ens[a]$ is a component of $\ens$ if we can write $\ens = \lambda \ens[a] + \bar{\lambda} \ens_1$ for some $\lambda \in (0,1]$ and $\ens_1 \in \Ens$. In this case, $\size_{\ens}(\ens[a]) \geq \lambda > 0$. Conversely, if $\size_{\ens}(\ens[a]) > 0$ we can find $\size_{\ens}(\ens[a]) \geq \lambda > 0$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens_1$ for some $\ens_1 \in \Ens$.
 \end{proof}
 
 \begin{remark}
-	Note that, in classical mechanics, $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for some $p$ does imply that $\ens \distinct \ens_1$ and $\ens \distinct \ens_2$. However, this is not the case in quantum mechanics. For example, consider the Bloch sphere and the states $x^+$, $x^-$, $z^+$, and $z^-$. These are all distinct ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$. Therefore a mixture of $x^+$ and $x^-$ has a common component with $z^+$.
+	We need to take the supremum as the maximum may not exist. For example, consider a discrete classical ensemble space and remove the endpoints. At the moment, there is no reason to rule out such space as unphysical.
 \end{remark}
+
+\begin{defn}
+	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a Borel set. The \textbf{fraction capacity} of $A$ for $\ens$ is the biggest fraction achievable with convex combinations of $A$. That is, $\fcap_{\ens}(A) = \sup(\size_{\ens}(\hull(A))\cup\{0\})$.
+\end{defn}
+
+\begin{coro}
+	The fraction capacity uniquely identifies an ensemble. That is, let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. Then $\fcap_{\ens_1} \neq \fcap_{\ens_2}$.
+\end{coro}
+
+\begin{proof}
+	Note that $\ens = 1 \ens_1 + 0 \ens_2$ if and only if $\ens = \ens_1$. Therefore, let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. We have $\fcap_{\ens_1}(\{\ens_1\}) = 1$ and $\fcap_{\ens_2}(\{\ens_1\}) \neq 1$. Which means $\fcap_{\ens_1} \neq \fcap_{\ens_2}$
+\end{proof}
+
+
+\begin{prop}
+	The fraction capacity for an ensemble is set function that is
+	\begin{enumerate}
+		\item non negative and unit bounded: $\fcap_{\ens}(A) \in [0,1]$
+		\item monotone: $A \subseteq V \implies \fcap_{\ens}(A) \leq \fcap_{\ens}(B)$
+		\item subadditive: $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	1. The fraction capacity takes a subset of $\Ens$ and returns a real value and is therefore a set function. The mixture coefficients are real values between zero and one. The supremum of a set of numbers between zero and one is between zero and one, and therefore the fraction capacity for an ensembles is non negative and unit bounded.
+	
+	2. The $\hull$ is a monotone function. The inverse image of a set is a monotone function. The supremum is a monotone function. Therefore the fraction capacity is a monotone function.
+	
+	3. Let $A, B \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(A \cup B)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(A \cup B)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in A$ and $\ens[v] \in B$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of fraction capacity, we must have $p\lambda \leq \fcap_{\ens}(A)$ and $p\bar{\lambda} \leq \fcap_{\ens}(B)$, therefore $p = p\lambda + p\bar{\lambda} \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. 	Since $\fcap_{\ens}(A \cup B)$ is the supremum for a set of $p$s for which the expression always holds, we have $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. The probability measure is subadditive.
+\end{proof}
 
 \subsection{Vector space embedding}
 
@@ -419,30 +492,6 @@ In the same way that we define ensembles first, we define quantities through the
 
 \section{Biggest component and probability}
 
-\subsection{Convex hull}
-
-\begin{defn}
-	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{convex hull} of $U$, noted $\hull(U)$ is the set of all possible mixtures that can be constructed with elements contained in $U$.
-\end{defn}
-
-\begin{coro}
-	The convex hull has the following properties
-	\begin{enumerate}
-		\item $U \subseteq \hull(U)$
-		\item $U \subseteq V \implies \hull(U) \subseteq \hull(V)$
-		\item $\hull(\hull(U)) = \hull(U)$
-	\end{enumerate}
-	and is therefore a closure operation
-\end{coro}
-
-\begin{proof}
-	1. Every element of $U$ is trivially a mixture of elements of $U$. Therefore $U \subseteq \hull(U)$.
-	
-	2. Let $\ens \in \hull(U)$. Then it is a mixture of some elements of $U$. Since $U \subseteq V$, then $\ens$ is also the mixture of some elements of $V$ and therefore $\ens \in \hull(V)$.
-	
-	3. Since mixing is associative and commutative, a mixture of mixtures of $U$ can be reepressed as a mixture of $U$. Therefore for all $\ens \in \hull(\hull(U))$ we have $\ens \in \hull(U)$.
-\end{proof}
-
 \subsection{Maximal component sequence}
 
 \begin{defn}
@@ -465,52 +514,12 @@ In the same way that we define ensembles first, we define quantities through the
 	Consider the set of all sizes of all increasing $A$-component sequence of $\ens$. This is a subset of $(0,1]$ that contains all the limits of all increasing sequences. Therefore, it must have an upper bound.
 \end{proof}
 
-\subsection{Mixing probability}
-
-\begin{defn}
-	Let $\ens \in \Ens$. The \textbf{mixing probability measure} for $\ens$ is defined as $p_{\ens}(A) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(A), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \})$ if $A \neq \emptyset$ and $p_{\ens}(A) = 0$ otherwise.
-\end{defn}
-
 \begin{coro}
 	The mixing probability is the size of a maximal $A$-component sequence of $\ens$. That is, let $\{\ens[a]_i\} \subseteq \hull(A)$ be a maximal sequence and $\{p_i\} \subseteq (0,1]$ its associated coefficients. Then $p_i \to p_{\ens}(A)$. 
 \end{coro}
 
 \begin{proof}
 	Suppose that $p_i \nto p_{\ens}(A)$ Then there exists an $\ens[a] \in \hull(A)$ that is a bigger component than all the elements of the sequence. This means that the sequence is not maximal. Therefore $p_i \to p_{\ens}(A)$.
-\end{proof}
-
-\begin{coro}
-	The mixing probability measure uniquely identify an ensemble. That is, let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. Then $p_{\ens_1} \neq p_{\ens_2}$.
-\end{coro}
-
-\begin{proof}
-	Note that $\ens = 1 \ens_1 + 0 \ens_2$ if and only if $\ens = \ens_1$. Therefore, let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. We have $p_{\ens_1}(\{\ens_1\}) = 1$ and $p_{\ens_2}(\{\ens_1\}) \neq 1$. Which means $p_{\ens_1} \neq p_{\ens_2}$
-\end{proof}
-
-
-\begin{prop}
-	The mixing probability measure for an ensemble is
-	\begin{enumerate}
-		\item non negative and unit bounded: $p_{\ens}(U) \in [0,1]$
-		\item monotone: $U \subseteq V \implies p_{\ens}(U) \leq p_{\ens}(V)$
-		\item subadditive: $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$
-	\end{enumerate}
-\end{prop}
-
-\begin{proof}
-	1. The probability measure takes a subset of $\Ens$ and returns a real value and is therefore a set function. The coefficients used in mixtures are real values between zero and one. The supremum of a set of numbers between zero and one is between zero and one, and therefore the probability measure for an ensembles is non negative and unit bounded.
-	
-	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $p_{\ens}(U) = 0$. Since $p_{\ens}(V)$ is non-negative, $p_{\ens}(U) \leq p_{\ens}(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(U), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \} \subseteq \{ p \in [0,1] \, | \, \exists \, \ens_1 \in \hull(V), \ens_2 \in \Ens \text{ s.t. }  \ens = p \ens_1 + \bar{p} \ens_2 \}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $p_{\ens}(U) \leq p_{\ens}(V)$. The probability measure is a monotone set function.
-	
-	3. Let $U, V \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(U \cup V)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(U \cup V)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of probability measure, we must have $p\lambda \leq p_{\ens}(U)$ and $p\bar{\lambda} \leq p_{\ens}(V)$, therefore $p = p\lambda + p\bar{\lambda} \leq p_{\ens}(U) + p_{\ens}(V)$. 	Since $p_{\ens}(U \cup V)$ is the supremum for a set of $p$s for which the expression always holds, we have $p_{\ens}(U \cup V) \leq p_{\ens}(U) + p_{\ens}(V)$. The probability measure is subadditive.
-\end{proof}
-
-\begin{conj}
-	Let $\{U^i\}_{i=1}^{n} \subseteq \Ens$ be a family of sets of ensembles such that $\ens \in \hull(\bigcup U^i)$. Then $p_{\ens}(\bigcup U^i) = \sum p_{\ens}(U_i)$ if and only if we can find a maximal component sequence within each set such that its elements are distinct from those of any other sequence.
-\end{conj}
-
-\begin{proof}
-	TODO
 \end{proof}
 
 \section{Entropy}
