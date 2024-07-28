@@ -16,8 +16,9 @@
 \newcommand\vspan{\mathrm{span}}
 \newcommand\cl{\mathrm{cl}}
 
-\def\distinct{\perp}
-\def\disjunct{\upmodels}
+\def\distinct{\downmodels}
+\def\ndistinct{\ndownmodels}
+\def\disjunct{\perp}
 
 \newcommand{\ens}[1][e] {\mathsf{#1}} % Ensemble
 \newcommand{\Ens}[1][E] {\mathcal{#1}} % Ensemble space
@@ -32,7 +33,7 @@ The idea is that physical theories are, and can only be, about ensembles. At a p
 
 Note: all $\log$s are assumed in base 2.
 
-\section{Ensembles topology and examples}
+\section{Axiom of ensemble and topology}
 
 The first property of ensembles is that they must be definable experimentally. As shows in the previous chapters, this means that they must form a topological space where the topology corresponds to that defined by the verifiable statements.
 
@@ -138,8 +139,9 @@ The Hilbert space for a discrete variable with infinite range (e.g. number of pa
 
 Note that Schwartz spaces have finite expectation for all polynomial functions of position and momentum. Given that infinite permutations can change the rate of convergence, the Schwartz space has an idea of what is further away from the origin, unlike Hilbert spaces. [TODO] It is not yet clear to us whether the Schwartz space for one DOF is the same as the one for two DOFs.
 
-\section{Mixtures and convex spaces}
+\section{Axiom of mixtures and convex spaces}
 
+The second property of ensembles is that they can be mixed. That is, we can take two preparation procedures and alternate between them with a known frequency. This constitutes another ensemble.
 
 
 \begin{defn}
@@ -160,7 +162,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 \begin{justification}
 	This axiom captures the ability to create a mixture merely by selecting between the output of different processes.
 	
-	Given that mixing represents an experimental relationship, and all experimental relationships must be continuous in the natural topology, mixing must be a continuous function. Note that $p$ is a continuous quantity, and therefore the natural topology is the one of the reals.
+	Given that mixing represents an experimental relationship, and all experimental relationships must be continuous in the natural topology, mixing must be a continuous function. Note that $p$ is a continuously ordered quantity, where no value is perfectly experimentally verifiable, and therefore the natural topology is the one of the reals.
 
 	Let $\ens_1$ and $\ens_2$ be the ensembles that represent the output of two different processes $P_1$ and $P_2$. Let a selector $S_p$ be a process that outputs two symbols, the first with probability $p$ and the second with probability $\bar{p}$. Then we can create another process $P$ that, depending on the selector, outputs either the output of $P_1$ or $P_2$. Therefore we are justified in assuming the mixing operation among ensembles.
 
@@ -179,29 +181,63 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 	Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab/show/convex+space} and \url{https://arxiv.org/abs/0903.5522}. The notation and terminology will be slightly different to better map to physics ideas. 
 \end{remark}
 
+\begin{prop}
+	A classical discrete ensemble space satisfies the axiom of mixture.
+\end{prop}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{prop}
+	A classical continuous ensemble space satisfies the axiom of mixture.
+\end{prop}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{prop}
+	A quantum ensemble space satisfies the axiom of mixture.
+\end{prop}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\subsection{Common components and separateness}
+
+The convex structure allows us to characterize ensembles based on whether they can be mixed into one another.
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in (0,1]$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$ and each $\ens_i$ is a \textbf{component} of $\ens[\rho]$.
+	Let $\Ens$ be an ensemble space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in (0,1]$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$, each $\ens_i$ is a \textbf{component} of $\ens[\rho]$ and each $p_i$ is a \textbf{mixture coefficient}.
 \end{defn}
 
 \begin{remark}
 	In terms of the convex space, all the mixtures between two elements corresponds to the segment between them; all the mixtures between three elements correspond to the triangle formed by the three elements and so on. An element $\ens_1$ is a component of a different element $\ens_2$ if the segment can be continued on the side of $\ens_2$. Note that two elements can be a component of each other. If two elements are not a component of each other, then they are the extreme points of the line that connect the two.
 \end{remark}
 
+\begin{remark}
+	Note that ``being a component of'' is not a partial order. It is reflexive and transitive, but it is not antisymmetric. That is, two different elements can be a component of each other. For example, consider the two probability distribution $(1/3, 2/3)$ and $(2/3, 1/3)$. The first is a component of the second and, by symmetry, the second is a component of the first.
+\end{remark}
+
+
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $\ens_1, \ens_2 \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens_3 \in \Ens$ such that $\ens_1 = p_1 \ens_3 + \bar{p_1} \ens_4$ and $\ens_2 = p_2 \ens_3 + \bar{p_2} \ens_5$ for some $\ens_4, \ens_5 \in \Ens$ and $p_1, p_2 \in (0,1)$. They are \textbf{distinct}, noted $\ens_1 \distinct \ens_2$, otherwise.
+	Let $\Ens$ be an ensemble space and $\ens_1, \ens_2 \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens_3 \in \Ens$, the common component, such that $\ens_1 = p_1 \ens_3 + \bar{p_1} \ens_4$ and $\ens_2 = p_2 \ens_3 + \bar{p_2} \ens_5$ for some $\ens_4, \ens_5 \in \Ens$ and $p_1, p_2 \in (0,1)$. Otherwise, we say they \textbf{have no common component}, or are \textbf{separate}, noted $\ens_1 \distinct \ens_2$.
 \end{defn}
 
 \begin{remark}
-	In terms of convex spaces, two distinct ensembles are always the extreme points of the line that connects them. Additionally, for any other ensemble $\ens$, one of the two ensembles must be the extreme point of the line that connects it to $\ens$.
+	If two ensembles $\ens[a]$ and $\ens[b]$ have a common component $\ens[c]$, then the ensemble space contains a triangle where the space contains a triangle where $\ens[c]$ is a vertex and $\ens[a]$ and $\ens[b]$ are points on the sides that connect to $\ens[c]$.
+	
+	TODO: add picture
 \end{remark}
 
 \begin{coro}
 	The previous definitions obey the following:
 	\begin{enumerate}
-		\item every ensemble has a common component with itself, therefore every ensemble is not distinct from itself
-		\item distinctness is a irreflexive symmetric relation
-		\item if $\ens_1$ is a component of $\ens_2$, then $\ens_1$ and $\ens_2$ have a common component
+		\item every ensemble has a common component with itself, therefore every ensemble is not separate from itself
+		\item separateness is an irreflexive symmetric relation
+		\item if $\ens[a]$ is a component of $\ens[b]$, then $\ens[a]$ and $\ens[b]$ have a common component
 	\end{enumerate}
 \end{coro}
 
@@ -210,11 +246,11 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 	
 	2. The previous property shows that distinctness is irreflexive. The definition of common component is symmetric and therefore so is distinctness.
 	
-	3. By idempotence, we can write $\ens_1 = p_1 \ens_1 + \bar{p_1} \ens_1$ for some $p_1 \in (0,1)$. Since $\ens_1$ is a component of $\ens_2$, we can write $\ens_2 = p_2 \ens_1 + \bar{p_2} \ens_3$ for some $p_2 \in (0, 1)$ and $\ens_3 \in \Ens$. Therefore $\ens_1$ and $\ens_2$ have a common component.
+	3. By idempotence, we can write $\ens[a] = p_1 \ens[a] + \bar{p_1} \ens[a]$ for some $p_1 \in (0,1)$. Since $\ens[a]$ is a component of $\ens[b]$, we can write $\ens[b] = p_2 \ens[a] + \bar{p_2} \ens[c]$ for some $p_2 \in (0, 1)$ and $\ens[c] \in \Ens$. Therefore $\ens[a]$ and $\ens[b]$ have a common component.
 \end{proof}
 
 \begin{prop}
-	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ is distinct from a mixture of $\ens_1$ and $\ens_2$ then it is distinct from all mixtures of $\ens_1$ and $\ens_2$ and from both $\ens_1$ and $\ens_2$. That is, if $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$. However, if $\ens$ is distinct from $\ens_1$ and $\ens_2$, it is not necessarily true that $\ens$ is distinct from a mixture of $\ens_1$ and $\ens_2$.
+	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ has no common component with a mixture of $\ens_1$ and $\ens_2$ then it has no common component with any mixture of $\ens_1$ and $\ens_2$ and with either $\ens_1$ and $\ens_2$. That is, if $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$.
 \end{prop}
 
 \begin{figure}[h]
@@ -232,8 +268,24 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 		&= \epsilon \ens_1 + \bar{\epsilon} ( \beta \ens[c] + \bar{\beta} \ens[d] ) = \bar{\epsilon} \beta \ens[c] + \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] = \lambda \ens[c] + \bar{\lambda} \ens[g]
 	\end{align*}
 	where $\ens[g] = \frac{1}{\bar{\lambda}}\left( \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] \right)$. This means $\ens[a]$ and $\ens$ have a common component, which is a contradiction. Therefore $\ens[b] \distinct \ens$ and $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$
+\end{proof}
+
+\begin{prop}
+	In a classical ensemble spaces, $\ens \distinct \ens[a]$ and $\ens \distinct \ens[b]$ implies $\ens \distinct p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$. This is not true in a quantum ensemble space.
+\end{prop}
+
+\begin{proof}
+	Let $\Ens$ be a classical ensemble space and let $\mu, \nu \in \Ens$ are probability measures on some space $X$. The space of probability measures is a subsets of the space of signed measures. This space can be equipped with an inner product. The space of signed measures with support $U \subseteq X$ form a subspace. This means that, if we can find a $U \subseteq X$ such that both $\mu(U) \neq 0$ and $\nu(U) \neq 0$, we can find a probability measure that is a component of both. That is, two probability measures that have overlapping support have a common component. Conversely, given that convex combination can only expand the support of measures, two probability measure that have no overlapping support have no common components.
 	
-	As a counter-example for the converse, consider a circle and three points on the circumference. These are all distinct from each other. Now take two points. A mixture will be on the chord that connects the two. Connecting any mixture with the third point will give a line that will intersect the circumference at a fourth point. This means that the given mixture is has a common component with the third point, even though the third point is distinct from the first two.	
+	Now, suppose $\ens \distinct \ens[a]$ and $\ens \distinct \ens[b]$. This means that the support of $\ens$ is disjoint from the support of both $\ens[a]$ and $\ens[b]$, which will also be disjoint from the support of any mixture of $\ens[a]$ and $\ens[b]$ since the support of the mixture will be the union of the individual supports. This means that $\ens$ will be separate from all mixtures of $\ens[a]$ and $\ens[b]$. The property holds, then, in any classical ensemble space.
+	
+	Conversely, suppose that $\Ens$ is a quantum ensemble space. Without loss of generality, suppose $\Ens$ is the Bloch sphere and consider the states $x^+$, $x^-$, $z^+$, and $z^-$, which are points on the surface that form a square. These are all separate ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$. Therefore a mixture of $x^+$ and $x^-$ has a common component with $z^+$. That is, $z^+ \distinct x^+$ and $z^+ \distinct x^+$ but $z^+ \ndistinct \frac{1}{2} x^+ + \frac{1}{2} x^-$.
+\end{proof}
+
+\begin{conj}
+	Let $\Ens$ be an ensemble space such that $\ens \distinct \ens[a]$ and $\ens \distinct \ens[b]$ implies $\ens \distinct p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$. Then it is a classical ensemble space.
+\end{conj}
+
 \end{proof}
 
 \begin{remark}
