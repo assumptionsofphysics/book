@@ -11,7 +11,7 @@
 \newcommand\dist{\mathrm{dist}}
 \newcommand\hull{\mathrm{hull}}
 \newcommand\support{\mathrm{supp}}
-\newcommand\capacity{\mathrm{efc}}
+\newcommand\capacity{\mathrm{scap}}
 \newcommand\size{\mathrm{frac}}
 \newcommand\fcap{\mathrm{fcap}}
 
@@ -617,19 +617,7 @@ The third and final property of ensembles is that they have a well-defined entro
 	The reverse direction cannot, in general, work. Take the subspace of a finite classical discrete ensemble space such the maximum probability of any element is $k < 1$. This corresponds to a simplex of the same dimension, with the same center, but scaled in the interior. Given that it is a convex subset of an ensemble space, it will satisfy all the axioms, except it will contain no orthogonal ensembles. Yet, it contains separate ensembles, which cannot be orthogonal.
 \end{remark}
 
-\begin{remark}
-	The above property should ultimately be responsible for the single decomposition in terms of pure states.
-\end{remark}
-
-\begin{prop}
-	Continuous and discrete classical ensemble spaces are reducible.
-\end{prop}
-
-\begin{proof}
-	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of countably many elements. In both cases, the upper bound of the entropy is maximized if and only if the probability measures being combined have disjoint support. This means that two ensembles are disjunct if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measures with disjoint support are exactly ensembles that are distinct. Therefore, in both cases, the ensemble space is reducible.
-\end{proof}
-
-\section{Effective count}
+\section{State capacity}
 
 \begin{prop}[Exponential entropy subadditivity]\label{pm_es_exponentialEntropySubadditivity}
 	Let $\ens_1, \ens_2 \in \Ens$. Let $S_1 = S(\ens_1)$ and $S_2 = S(\ens_2)$. Let $\ens = p \ens_1 + \bar{p} \ens_2$ for some $p \in [0,1]$ and $S = S(\ens)$. Then $2^S \leq 2^{S_1} + 2^{S_2}$, with the equality if and only if $\ens_1$ and $\ens_2$ are disjunct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
@@ -667,27 +655,27 @@ The third and final property of ensembles is that they have a well-defined entro
 \end{proof}
 
 \begin{defn}
-	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{effective count} of $U$ is defined as $\size(U) = \sup(2^{S(\hull(U))})$ if $U \neq \emptyset$ and $\size(U) = 0$ otherwise.
+	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{state capacity} of $U$ is defined as $\capacity(U) = \sup(2^{S(\hull(U))})$ if $U \neq \emptyset$ and $\capacity(U) = 0$ otherwise.
 \end{defn}
 
 \begin{prop}
-	The effective count is a set function that is
+	The state capacity is a set function that is
 	\begin{enumerate}
-		\item non negative: $\size(U) \in [0, +\infty]$
-		\item monotone: $U \subseteq V \implies \size(U) \leq \size(V)$
-		\item subadditive: $\size(U \cup V) \leq \size(U) + \size(V)$
-		\item additive over disjunct sets: $U \disjunct V \implies \size(U \cup V) = \size(U) + \size(V)$ 
+		\item non negative: $\capacity(U) \in [0, +\infty]$
+		\item monotone: $U \subseteq V \implies \capacity(U) \leq \capacity(V)$
+		\item subadditive: $\capacity(U \cup V) \leq \capacity(U) + \capacity(V)$
+		\item additive over orthogonal sets: $U \disjunct V \implies \capacity(U \cup V) = \capacity(U) + \capacity(V)$ 
 	\end{enumerate}
 \end{prop}
 
 \begin{proof}
-	1. The effective count takes a subset of $\Ens$ and returns a real value and is therefore a set function. The exponential can only return non-negative values, therefore the effective count of a set is non-negative. 
+	1. The state capacity takes a subset of $\Ens$ and returns a real value and is therefore a set function. The exponential can only return non-negative values, therefore the state capacity of a set is non-negative. 
 	
-	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $\size(U) = 0$. Since $\size(V)$ is non-negative, $\size(U) \leq \size(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $2^{S(\hull(U))} \subseteq 2^{S(\hull(V))}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $\size(U) \leq \size(V)$. The effective count is a monotone set function.
+	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $\capacity(U) = 0$. Since $\capacity(V)$ is non-negative, $\capacity(U) \leq \capacity(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $2^{S(\hull(U))} \subseteq 2^{S(\hull(V))}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $\capacity(U) \leq \capacity(V)$. The state capacity is a monotone set function.
 	
-	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of effective count, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \size(U) + \size(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the effective counts. Therefore $\size(U \cup V) \leq \size(U) + \size(V)$, the effective count is subadditive.
+	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \capacity(U) + \capacity(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\capacity(U \cup V) \leq \capacity(U) + \capacity(V)$, the state capacity is subadditive.
 	
-	4. Let $U, V \subseteq \Ens$ be two disjunct subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \size(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \size(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \size(U) + \size(V)$. Therefore $\size(U \cup V) \geq \size(U) + \size(V)$. Combining with the previous result, $\size(U \cup V) = \size(U) + \size(V)$. Therefore effective count, as set function, is additive over disjunct sets of ensembles.
+	4. Let $U, V \subseteq \Ens$ be two disjunct subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \capacity(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \capacity(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(U) + \capacity(V)$. Therefore $\capacity(U \cup V) \geq \capacity(U) + \capacity(V)$. Combining with the previous result, $\capacity(U \cup V) = \capacity(U) + \capacity(V)$. Therefore the state capacity, as set function, is additive over orthogonal sets of ensembles.
 \end{proof}
 
 \section{Entropic geometry}
@@ -1095,7 +1083,7 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	
 	Now take an open set $V \subseteq X$ that is the interior of its own closure and consider the space $U$ of all continuous probability densities that have support within $V$. Then $U^\disjunct$ is the subspace of all continuous probability densities that have support within $\exterior(V)$ and $(U^\disjunct)^\disjunct$ is the subspace of all continuous probability densities that have support within $\exterior(\exterior(V)) = \interior(\overline{V}) = V$. Therefore $U$ is a subspace.
 	
-	Let $U \in \mathfrak{L}$ be a ensemble subspace. If $\ens \in U$, then $S(\ens) \leq \size(U)$. Moreover, there must be a sequence $\ens_i$ such that $S(\ens_i) \to \size(U)$. Let $V \subseteq X$ be the open set corresponding to the largest support of all elements in $U$. Then $S(\ens) \leq \log \mu(V)$ as the highest entropy is given by a uniform distribution over $V$. The uniform distribution is discontinuous, and therefore is not a member of $\Ens$. However, we can construct a sequence of continuous functions whose limit is the uniform distribution. This would correspond to a sequence of ensembles for which $S(\ens_i) \to \log \mu(V)$. Therefore $\log \mu(V)$ is the supremum of the entropy for the subspace, and therefore the effective count is $\mu(V)$, the Liouville measure.
+	Let $U \in \mathfrak{L}$ be a ensemble subspace. If $\ens \in U$, then $S(\ens) \leq \capacity(U)$. Moreover, there must be a sequence $\ens_i$ such that $S(\ens_i) \to \capacity(U)$. Let $V \subseteq X$ be the open set corresponding to the largest support of all elements in $U$. Then $S(\ens) \leq \log \mu(V)$ as the highest entropy is given by a uniform distribution over $V$. The uniform distribution is discontinuous, and therefore is not a member of $\Ens$. However, we can construct a sequence of continuous functions whose limit is the uniform distribution. This would correspond to a sequence of ensembles for which $S(\ens_i) \to \log \mu(V)$. Therefore $\log \mu(V)$ is the supremum of the entropy for the subspace, and therefore the effective count is $\mu(V)$, the Liouville measure.
 \end{proof}
 
 \begin{conj}
@@ -1111,8 +1099,44 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	
 	Consider two density operators. They will be disjunct if and only if they are defined on orthogonal subspaces. That is, $\ens_1 | \psi \> \neq 0$ only if $\ens_2 | \psi \> = 0$ and vice-versa. This means that a subspace of the ensemble space corresponds to a subspace of the vector space $\mathcal{H}$.
 	
-	Let $U \in \mathfrak{L}$ be a ensemble subspace. If it is finite dimensional, the ensemble with maximal entropy will correspond to the maximally mixed state $I/n$ where $n$ is the dimension of the subspace. The entropy will be given by $\log n$, which means $\size(U) = n$. If $U$ is infinite dimensional, then there is no upper bound to the entropy and $\size(U) = + \infty$.
+	Let $U \in \mathfrak{L}$ be a ensemble subspace. If it is finite dimensional, the ensemble with maximal entropy will correspond to the maximally mixed state $I/n$ where $n$ is the dimension of the subspace. The entropy will be given by $\log n$, which means $\capacity(U) = n$. If $U$ is infinite dimensional, then there is no upper bound to the entropy and $\capacity(U) = + \infty$.
 \end{proof}
+
+
+
+\section{Biggest component and probability}
+
+\subsection{Maximal component sequence}
+
+\begin{defn}
+	Let $\ens \in \Ens$ be an ensemble. A sequence of ensembles $\{\ens[a]_i\} \subseteq \Ens$ is an \textbf{increasing component sequence of $\ens$} if there exists a sequence of ensembles $\{\ens[b]_i\} \subseteq \Ens$ and an increasing sequence of $\{p_i\} \subseteq (0,1]$ such that $\ens = p_i \ens[a]_i + \bar{p}_i \ens[b]_i$. The limit $p = \lim_{i \to \infty} p_i$ is called the size of the component sequence.
+\end{defn}
+
+\begin{remark}
+	Since the sequence of $p_i$ is increasing and is bounded, it must converge.
+\end{remark}
+
+\begin{defn}
+	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles. Then the \textbf{$A$-components of $\ens$} are the components of $\ens$ that are mixtures of $A$. That is, $A_{\ens} = \{ \ens_1 \in \hull(U) \, | \, \exists p \in (0,1], \ens_2 \in \Ens \text{ s.t. } \ens = p \ens_1 + \bar{p} \ens_2  \}$. An \textbf{increasing $A$-component sequence of $\ens$} is an increasing component sequence of $\ens$ such that $\{\ens[a]_i\} \subseteq \hull(A)$. The sequence $\{\ens[a]_i\} \subseteq \hull(A)$ is \textbf{maximal} if the limit $p_i \to p$ is the supremum of all such sequences.
+\end{defn}
+
+\begin{prop}
+	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles, then there exists a maximal $A$-component sequence of $\ens$.
+\end{prop}
+
+\begin{proof}
+	Consider the set of all sizes of all increasing $A$-component sequence of $\ens$. This is a subset of $(0,1]$ that contains all the limits of all increasing sequences. Therefore, it must have an upper bound.
+\end{proof}
+
+\begin{coro}
+	The mixing probability is the size of a maximal $A$-component sequence of $\ens$. That is, let $\{\ens[a]_i\} \subseteq \hull(A)$ be a maximal sequence and $\{p_i\} \subseteq (0,1]$ its associated coefficients. Then $p_i \to p_{\ens}(A)$. 
+\end{coro}
+
+\begin{proof}
+	Suppose that $p_i \nto p_{\ens}(A)$ Then there exists an $\ens[a] \in \hull(A)$ that is a bigger component than all the elements of the sequence. This means that the sequence is not maximal. Therefore $p_i \to p_{\ens}(A)$.
+\end{proof}
+
+
 
 \section{Contexts and probability measure}
 
@@ -1126,7 +1150,7 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{defn}
 
 \begin{prop}
-	Let $C \subseteq \mathfrak{L}$ be a context. Then $\size$ is an additive measure over the context. That is, $\size(X \vee Y) = \size(X) + \size(Y)$ for all $X, Y, X \vee Y \in C$ such that $X \cap Y = \emptyset$.
+	Let $C \subseteq \mathfrak{L}$ be a context. Then $\capacity$ is an additive measure over the context. That is, $\capacity(X \vee Y) = \capacity(X) + \capacity(Y)$ for all $X, Y, X \vee Y \in C$ such that $X \cap Y = \emptyset$.
 \end{prop}
 
 \begin{proof}
