@@ -18,9 +18,9 @@
 \newcommand\vspan{\mathrm{span}}
 \newcommand\cl{\mathrm{cl}}
 
-\def\distinct{\downmodels}
-\def\ndistinct{\ndownmodels}
-\def\disjunct{\perp}
+\def\separate{\downmodels}
+\def\nseparate{\ndownmodels}
+\def\ortho{\perp}
 
 \newcommand{\ens}[1][e] {\mathsf{#1}} % Ensemble
 \newcommand{\Ens}[1][E] {\mathcal{#1}} % Ensemble space
@@ -225,7 +225,7 @@ The convex structure allows us to characterize ensembles based on whether they c
 
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $\ens_1, \ens_2 \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens_3 \in \Ens$, the common component, such that $\ens_1 = p_1 \ens_3 + \bar{p_1} \ens_4$ and $\ens_2 = p_2 \ens_3 + \bar{p_2} \ens_5$ for some $\ens_4, \ens_5 \in \Ens$ and $p_1, p_2 \in (0,1)$. Otherwise, we say they \textbf{have no common component}, or are \textbf{separate}, noted $\ens_1 \distinct \ens_2$.
+	Let $\Ens$ be an ensemble space and $\ens_1, \ens_2 \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens_3 \in \Ens$, the common component, such that $\ens_1 = p_1 \ens_3 + \bar{p_1} \ens_4$ and $\ens_2 = p_2 \ens_3 + \bar{p_2} \ens_5$ for some $\ens_4, \ens_5 \in \Ens$ and $p_1, p_2 \in (0,1)$. Otherwise, we say they \textbf{have no common component}, or are \textbf{separate}, noted $\ens_1 \separate \ens_2$.
 \end{defn}
 
 \begin{remark}
@@ -244,15 +244,15 @@ The convex structure allows us to characterize ensembles based on whether they c
 \end{coro}
 
 \begin{proof}
-	1. Since by idempotence $\ens = p \ens + \bar{p} \ens$ for any $p$, we can satisfy the definition by setting $\ens_1 = \ens_2 = \ens_3 = \ens_4 = \ens_5 = \ens$. Therefore every ensemble has a common component with itself and every ensemble is not distinct from itself.
+	1. Since by idempotence $\ens = p \ens + \bar{p} \ens$ for any $p$, we can satisfy the definition by setting $\ens_1 = \ens_2 = \ens_3 = \ens_4 = \ens_5 = \ens$. Therefore every ensemble has a common component with itself and every ensemble is not separate from itself.
 	
-	2. The previous property shows that distinctness is irreflexive. The definition of common component is symmetric and therefore so is distinctness.
+	2. The previous property shows that separateness is irreflexive. The definition of common component is symmetric and therefore so is separateness.
 	
 	3. By idempotence, we can write $\ens[a] = p_1 \ens[a] + \bar{p_1} \ens[a]$ for some $p_1 \in (0,1)$. Since $\ens[a]$ is a component of $\ens[b]$, we can write $\ens[b] = p_2 \ens[a] + \bar{p_2} \ens[c]$ for some $p_2 \in (0, 1)$ and $\ens[c] \in \Ens$. Therefore $\ens[a]$ and $\ens[b]$ have a common component.
 \end{proof}
 
 \begin{prop}
-	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ has no common component with a mixture of $\ens_1$ and $\ens_2$ then it has no common component with any mixture of $\ens_1$ and $\ens_2$ and with either $\ens_1$ and $\ens_2$. That is, if $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$.
+	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ has no common component with a mixture of $\ens_1$ and $\ens_2$ then it has no common component with any mixture of $\ens_1$ and $\ens_2$ and with either $\ens_1$ and $\ens_2$. That is, if $\ens \separate p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \separate p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$.
 \end{prop}
 
 \begin{figure}[h]
@@ -260,7 +260,7 @@ The convex structure allows us to characterize ensembles based on whether they c
 \end{figure}
 
 \begin{proof}
-	Let $\ens \distinct \ens[a] = p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$. Let $\ens[b] = \alpha \ens_1 + \bar{\alpha} \ens_2$ with $0 \leq \alpha < p$. We can do so without loss of generality since switching $\ens_1$ with $\ens_2$ would lead to the case where $1 \geq \alpha > p$. Suppose $\ens[b]$ is not distinct from $\ens$. Then we can find $\ens[c] \in \Ens$ such that $\ens[b] = \beta \ens[c] + \bar{\beta} \ens[d]$ and $\ens = \gamma \ens[c] + \bar{\gamma} \ens[f]$ for some $\ens[d], \ens[f] \in \Ens$ and $\beta, \gamma \in (0, 1)$.
+	Let $\ens \separate \ens[a] = p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$. Let $\ens[b] = \alpha \ens_1 + \bar{\alpha} \ens_2$ with $0 \leq \alpha < p$. We can do so without loss of generality since switching $\ens_1$ with $\ens_2$ would lead to the case where $1 \geq \alpha > p$. Suppose $\ens[b]$ is not separate from $\ens$. Then we can find $\ens[c] \in \Ens$ such that $\ens[b] = \beta \ens[c] + \bar{\beta} \ens[d]$ and $\ens = \gamma \ens[c] + \bar{\gamma} \ens[f]$ for some $\ens[d], \ens[f] \in \Ens$ and $\beta, \gamma \in (0, 1)$.
 	
 	Setting $\epsilon = \frac{p - \alpha}{\bar{\alpha}}$ and $\lambda = \bar{\epsilon} \beta$ we have:
 	\begin{align*}
@@ -269,23 +269,23 @@ The convex structure allows us to characterize ensembles based on whether they c
 		&= \frac{p - \alpha}{\bar{\alpha}}  \ens_1 + \left( 1 - \frac{p - \alpha}{\bar{\alpha}}\right) (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} \ens[b] \\
 		&= \epsilon \ens_1 + \bar{\epsilon} ( \beta \ens[c] + \bar{\beta} \ens[d] ) = \bar{\epsilon} \beta \ens[c] + \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] = \lambda \ens[c] + \bar{\lambda} \ens[g]
 	\end{align*}
-	where $\ens[g] = \frac{1}{\bar{\lambda}}\left( \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] \right)$. This means $\ens[a]$ and $\ens$ have a common component, which is a contradiction. Therefore $\ens[b] \distinct \ens$ and $\ens \distinct p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$
+	where $\ens[g] = \frac{1}{\bar{\lambda}}\left( \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] \right)$. This means $\ens[a]$ and $\ens$ have a common component, which is a contradiction. Therefore $\ens[b] \separate \ens$ and $\ens \separate p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$
 \end{proof}
 
 \begin{prop}
-	In a classical ensemble spaces, $\ens \distinct \ens[a]$ and $\ens \distinct \ens[b]$ implies $\ens \distinct p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$. This is not true in a quantum ensemble space.
+	In a classical ensemble spaces, $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$ implies $\ens \separate p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$. This is not true in a quantum ensemble space.
 \end{prop}
 
 \begin{proof}
 	Let $\Ens$ be a classical ensemble space and let $\mu, \nu \in \Ens$ are probability measures on some space $X$. The space of probability measures is a subsets of the space of signed measures. This space can be equipped with an inner product. The space of signed measures with support $U \subseteq X$ form a subspace. This means that, if we can find a $U \subseteq X$ such that both $\mu(U) \neq 0$ and $\nu(U) \neq 0$, we can find a probability measure that is a component of both. That is, two probability measures that have overlapping support have a common component. Conversely, given that convex combination can only expand the support of measures, two probability measure that have no overlapping support have no common components.
 	
-	Now, suppose $\ens \distinct \ens[a]$ and $\ens \distinct \ens[b]$. This means that the support of $\ens$ is disjoint from the support of both $\ens[a]$ and $\ens[b]$, which will also be disjoint from the support of any mixture of $\ens[a]$ and $\ens[b]$ since the support of the mixture will be the union of the individual supports. This means that $\ens$ will be separate from all mixtures of $\ens[a]$ and $\ens[b]$. The property holds, then, in any classical ensemble space.
+	Now, suppose $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$. This means that the support of $\ens$ is disjoint from the support of both $\ens[a]$ and $\ens[b]$, which will also be disjoint from the support of any mixture of $\ens[a]$ and $\ens[b]$ since the support of the mixture will be the union of the individual supports. This means that $\ens$ will be separate from all mixtures of $\ens[a]$ and $\ens[b]$. The property holds, then, in any classical ensemble space.
 	
-	Conversely, suppose that $\Ens$ is a quantum ensemble space. Without loss of generality, suppose $\Ens$ is the Bloch sphere and consider the states $x^+$, $x^-$, $z^+$, and $z^-$, which are points on the surface that form a square. These are all separate ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$. Therefore a mixture of $x^+$ and $x^-$ has a common component with $z^+$. That is, $z^+ \distinct x^+$ and $z^+ \distinct x^+$ but $z^+ \ndistinct \frac{1}{2} x^+ + \frac{1}{2} x^-$.
+	Conversely, suppose that $\Ens$ is a quantum ensemble space. Without loss of generality, suppose $\Ens$ is the Bloch sphere and consider the states $x^+$, $x^-$, $z^+$, and $z^-$, which are points on the surface that form a square. These are all separate ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$. Therefore a mixture of $x^+$ and $x^-$ has a common component with $z^+$. That is, $z^+ \separate x^+$ and $z^+ \separate x^+$ but $z^+ \nseparate \frac{1}{2} x^+ + \frac{1}{2} x^-$.
 \end{proof}
 
 \begin{conj}
-	Let $\Ens$ be an ensemble space such that $\ens \distinct \ens[a]$ and $\ens \distinct \ens[b]$ implies $\ens \distinct p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$. Then it is a classical ensemble space.
+	Let $\Ens$ be an ensemble space such that $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$ implies $\ens \separate p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$. Then it is a classical ensemble space.
 \end{conj}
 
 
@@ -501,7 +501,7 @@ The third and final property of ensembles is that they have a well-defined entro
 	\begin{itemize}
 		\item \textbf{Continuity}
 		\item \textbf{Strict concavity}: $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$ with the equality holding if and only if $\ens_1 = \ens_2$
-		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality hold then, $e_1$ and $e_2$ are \textbf{non-overlapping} or \textbf{orthogonal}, noted $e_1 \disjunct e_2$
+		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality hold then, $e_1$ and $e_2$ are \textbf{non-overlapping} or \textbf{orthogonal}, noted $e_1 \ortho e_2$
 	\end{itemize}
 \end{axiom}
 
@@ -542,15 +542,15 @@ The third and final property of ensembles is that they have a well-defined entro
 \begin{axiom}[Axiom of entropic orthogonality]
 	The entropy function of an ensemble space obeys the following properties
 	\begin{itemize}
-		\item \textbf{Orthogonality implies separateness}: $\ens_1 \disjunct \ens_2$ implies $\ens_1 \distinct \ens_2$
-		\item \textbf{Mixtures preserve orthogonality}: let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \disjunct \ens_1$ if and only if $\ens_4 \disjunct \ens_2$ and $\ens_4 \disjunct \ens_3$
+		\item \textbf{Orthogonality implies separateness}: $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$
+		\item \textbf{Mixtures preserve orthogonality}: let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \ortho \ens_1$ if and only if $\ens_4 \ortho \ens_2$ and $\ens_4 \ortho \ens_3$
 	\end{itemize}
 \end{axiom}
 
 \begin{justification}
-	If two ensembles are disjunct, they have no elements in common. Therefore there will be no common component with the two. We are justified to assume that disjunctness implies distinctness.
+	If two ensembles are orthogonal, they have no elements in common. Therefore there will be no common component with the two. We are justified to assume that orthogonality implies separateness.
 	
-	Suppose an ensemble $\ens_1$ is disjunct from the mixture of two ensembles $\ens_2$ and $\ens_3$. That it has no elements in common with the mixture, which means it has no elements in common with either of them. Therefore $\ens_1$ is disjunct from both $\ens_2$ and $\ens_3$. Now suppose $\ens_1$ is disjunct from both $\ens_2$ and $\ens_3$. That it means it has no elements in common with either of them, and therefore it does not have any elements in common with their mixture. Therefore $\ens_1$ is disjunct from the mixture of two ensembles $\ens_2$ and $\ens_3$. We are justified to assume that mixtures preserve disjunctness.
+	Suppose an ensemble $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. That it has no elements in common with the mixture, which means it has no elements in common with either of them. Therefore $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. Now suppose $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. That it means it has no elements in common with either of them, and therefore it does not have any elements in common with their mixture. Therefore $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. We are justified to assume that mixtures preserve orthogonality.
 \end{justification}
 
 \begin{remark}
@@ -562,7 +562,7 @@ The third and final property of ensembles is that they have a well-defined entro
 \end{remark}
 
 \begin{prop}
-	The discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the axiom of mixture and the axiom of entropic disjunctness.
+	The discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the axiom of mixture and the axiom of entropic orthogonality.
 \end{prop}
 
 \begin{proof}
@@ -578,25 +578,25 @@ The third and final property of ensembles is that they have a well-defined entro
 \end{remark}
 
 \begin{conj}
-	Let $\ens_1, \ens_2 \in \Ens$ be such that $p\ens + \bar{p} \ens_1 = p\ens + \bar{p} \ens_2$ for some $p \in (0, 1)$ and $\ens \in \Ens$. Then $\ens_1$ and $\ens_2$ are not disjunct.
+	Let $\ens_1, \ens_2 \in \Ens$ be such that $p\ens + \bar{p} \ens_1 = p\ens + \bar{p} \ens_2$ for some $p \in (0, 1)$ and $\ens \in \Ens$. Then $\ens_1$ and $\ens_2$ are not orthogonal.
 \end{conj}
 
 \begin{remark}
-	It seems very unlikely that differences in states that can be obscured by mixing would correspond to disjunct states. The more general question is whether the strict concavity of the entropy allows non-complemented spaces.
+	It seems very unlikely that differences in states that can be obscured by mixing would correspond to orthogonal states. The more general question is whether the strict concavity of the entropy allows non-complemented spaces.
 \end{remark}
 
 \begin{defn}
-	Two sets of ensembles $U, V \subseteq \Ens$ are orthogonal if $\ens_1 \disjunct \ens_2$ for all $\ens_1 \in U$ and $\ens_2 \in V$. 
+	Two sets of ensembles $U, V \subseteq \Ens$ are orthogonal if $\ens_1 \ortho \ens_2$ for all $\ens_1 \in U$ and $\ens_2 \in V$. 
 \end{defn}
 
 \subsection{Reducible ensemble spaces}
 
 \begin{defn}
-	An ensemble space $\Ens$ is \textbf{reducible} if separate ensembles are also orthogonal. That is, $\ens_1 \distinct \ens_2$ implies $\ens_1 \disjunct \ens_2$.
+	An ensemble space $\Ens$ is \textbf{reducible} if separate ensembles are also orthogonal. That is, $\ens_1 \separate \ens_2$ implies $\ens_1 \ortho \ens_2$.
 \end{defn}
 
 \begin{justification}
-	Given that $\ens_1 \disjunct \ens_2$ implies $\ens_1 \distinct \ens_2$, classical spaces add the opposite implication. Therefore they exclude the case where two ensembles are disjunct but not distinct. This case describes two ensembles that have elements in common, but there is no ensemble corresponding to those common elements. That is, we cannot refine the ensembles into three distinct ones: one with only elements of the first, one with only elements of the second and one with elements of both. In other words, we cannot reduce the coarser description of the system into finer distinct descriptions. In the excluded case, then, the coarser description is irreducible into finer ensembles. This justifies the definition.
+	Given that $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$, classical spaces add the opposite implication. Therefore they exclude the case where two ensembles are orthogonal but not separate. This case describes two ensembles that have elements in common, but there is no ensemble corresponding to those common elements. That is, we cannot refine the ensembles into three separate ones: one with only elements of the first, one with only elements of the second and one with elements of both. In other words, we cannot reduce the coarser description of the system into finer separate descriptions. In the excluded case, then, the coarser description is irreducible into finer ensembles. This justifies the definition.
 	
 	As we prove below, that case does not exist in classical mechanics, but exists in quantum mechanics. This justifies calling the property classical.
 \end{justification}
@@ -606,7 +606,7 @@ The third and final property of ensembles is that they have a well-defined entro
 \end{prop}
 
 \begin{proof}
-	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of countably many elements. In both cases, the upper bound of the entropy is maximized if and only if the probability measures being combined have disjoint support. This means that two ensembles are disjunct if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measures with disjoint support are exactly ensembles that are distinct. Therefore, in both cases, the ensemble space is reducible.
+	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of countably many elements. In both cases, the upper bound of the entropy is maximized if and only if the probability measures being combined have disjoint support. This means that two ensembles are orthogonal if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measures with disjoint support are exactly ensembles that are separate. Therefore, in both cases, the ensemble space is reducible.
 \end{proof}
 
 \begin{conj}
@@ -620,13 +620,13 @@ The third and final property of ensembles is that they have a well-defined entro
 \section{State capacity}
 
 \begin{prop}[Exponential entropy subadditivity]\label{pm_es_exponentialEntropySubadditivity}
-	Let $\ens_1, \ens_2 \in \Ens$. Let $S_1 = S(\ens_1)$ and $S_2 = S(\ens_2)$. Let $\ens = p \ens_1 + \bar{p} \ens_2$ for some $p \in [0,1]$ and $S = S(\ens)$. Then $2^S \leq 2^{S_1} + 2^{S_2}$, with the equality if and only if $\ens_1$ and $\ens_2$ are disjunct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
+	Let $\ens_1, \ens_2 \in \Ens$. Let $S_1 = S(\ens_1)$ and $S_2 = S(\ens_2)$. Let $\ens = p \ens_1 + \bar{p} \ens_2$ for some $p \in [0,1]$ and $S = S(\ens)$. Then $2^S \leq 2^{S_1} + 2^{S_2}$, with the equality if and only if $\ens_1$ and $\ens_2$ are orthogonal and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
 \end{prop}
 
 \begin{proof}
-	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens_1$ and $\ens_2$ are disjunct by definition. The entropy maximum for the mixed ensemble can only be achieved when the elements are disjunct, for some value of $p$.
+	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens_1$ and $\ens_2$ are orthogonal by definition. The entropy maximum for the mixed ensemble can only be achieved when the elements are orthogonal, for some value of $p$.
 	
-	Now fix $S_1$ and $S_2$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression. Since $\ens_1$ and $\ens_2$ are disjunct, $S(p \ens_1 + \bar{p}\ens_2) =  - p \log p - \bar{p} \log \bar{p} + p S_1 + \bar{p} S_2$ which is a smooth function of $p$.
+	Now fix $S_1$ and $S_2$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression. Since $\ens_1$ and $\ens_2$ are orthogonal, $S(p \ens_1 + \bar{p}\ens_2) =  - p \log p - \bar{p} \log \bar{p} + p S_1 + \bar{p} S_2$ which is a smooth function of $p$.
 	\begin{equation}
 		\begin{aligned}
 			0 = \frac{dS}{dp} &= \frac{d}{dp} S(\ens) =\frac{d}{dp} \left( - p \log p - \bar{p} \log \bar{p} + p S_1 + \bar{p} S_2 \right) \\
@@ -651,7 +651,7 @@ The third and final property of ensembles is that they have a well-defined entro
 		2^S &=  2^{S_1} + 2^{S_2}  \\
 	\end{aligned}
 	\end{equation}
-	Therefore the maximum entropy obtainable through a mixture is $S = \log (2^{S_1} + 2^{S_2})$ which is obtained when $\ens_1$ and $\ens_2$ are disjunct and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
+	Therefore the maximum entropy obtainable through a mixture is $S = \log (2^{S_1} + 2^{S_2})$ which is obtained when $\ens_1$ and $\ens_2$ are orthogonal and $p = \frac{2^{S_1}}{2^{S_1} + 2^{S_2}}$.
 \end{proof}
 
 \begin{defn}
@@ -664,7 +664,7 @@ The third and final property of ensembles is that they have a well-defined entro
 		\item non negative: $\capacity(U) \in [0, +\infty]$
 		\item monotone: $U \subseteq V \implies \capacity(U) \leq \capacity(V)$
 		\item subadditive: $\capacity(U \cup V) \leq \capacity(U) + \capacity(V)$
-		\item additive over orthogonal sets: $U \disjunct V \implies \capacity(U \cup V) = \capacity(U) + \capacity(V)$ 
+		\item additive over orthogonal sets: $U \ortho V \implies \capacity(U \cup V) = \capacity(U) + \capacity(V)$ 
 	\end{enumerate}
 \end{prop}
 
@@ -675,7 +675,7 @@ The third and final property of ensembles is that they have a well-defined entro
 	
 	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \capacity(U) + \capacity(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\capacity(U \cup V) \leq \capacity(U) + \capacity(V)$, the state capacity is subadditive.
 	
-	4. Let $U, V \subseteq \Ens$ be two disjunct subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \capacity(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \capacity(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(U) + \capacity(V)$. Therefore $\capacity(U \cup V) \geq \capacity(U) + \capacity(V)$. Combining with the previous result, $\capacity(U \cup V) = \capacity(U) + \capacity(V)$. Therefore the state capacity, as set function, is additive over orthogonal sets of ensembles.
+	4. Let $U, V \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \capacity(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \capacity(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(U) + \capacity(V)$. Therefore $\capacity(U \cup V) \geq \capacity(U) + \capacity(V)$. Combining with the previous result, $\capacity(U \cup V) = \capacity(U) + \capacity(V)$. Therefore the state capacity, as set function, is additive over orthogonal sets of ensembles.
 \end{proof}
 
 \section{Entropic geometry}
@@ -690,13 +690,13 @@ We now show that entropy imposes a geometric structure on the ensemble space. Th
 \begin{coro}
 	The mixing entropy obeys the following bounds
 	$$ 0 \leq MS(\ens_1, \ens_2) \leq 1.$$
-	The lower bound is satisfied if and only if $\ens_1 = \ens_2$ and the upper bound is satisfied if and only if $\ens_1 \disjunct \ens_2$.
+	The lower bound is satisfied if and only if $\ens_1 = \ens_2$ and the upper bound is satisfied if and only if $\ens_1 \ortho \ens_2$.
 \end{coro}
 
 \begin{proof}
 	The bounds descend directly from the bounds on entropy. By strict concavity, $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$, which means $S(p_1\ens_1 + p_2 \ens_2) - p_1 S(\ens_1) - p_2 S(\ens_2) \geq 0$, and in particular $S(\frac{1}{2} \ens_1 + \frac{1}{2} \ens_2) - \frac{1}{2} S(\ens_1) - \frac{1}{2} S(\ens_2) = MS(\ens_1, \ens_2) \geq 0$. By strict concavity, the equality holds if and only if $\ens_1 = \ens_2$
 	
-	By the upper variability bound, $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$, which means $S(p_1\ens_1 + p_2 \ens_2) - p_1 S(\ens_1) - p_2 S(\ens_2) \leq I(p_1, p_2)$, and in particular $S(\frac{1}{2} \ens_1 + \frac{1}{2} \ens_2) - \frac{1}{2} S(\ens_1) - \frac{1}{2} S(\ens_2) = MS(\ens_1, \ens_2) \leq I(\frac{1}{2}, \frac{1}{2}) = 1$. Given that $\ens_1$ and $\ens_2$ are disjunct by definition if they saturate the upper variability bound, the equality holds if and only if $\ens_1$ and $\ens_2$ are disjunct.
+	By the upper variability bound, $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$, which means $S(p_1\ens_1 + p_2 \ens_2) - p_1 S(\ens_1) - p_2 S(\ens_2) \leq I(p_1, p_2)$, and in particular $S(\frac{1}{2} \ens_1 + \frac{1}{2} \ens_2) - \frac{1}{2} S(\ens_1) - \frac{1}{2} S(\ens_2) = MS(\ens_1, \ens_2) \leq I(\frac{1}{2}, \frac{1}{2}) = 1$. Given that $\ens_1$ and $\ens_2$ are orthogonal by definition if they saturate the upper variability bound, the equality holds if and only if $\ens_1$ and $\ens_2$ are orthogonal.
 \end{proof}
 
 \begin{prop}
@@ -889,7 +889,7 @@ We now want to define a notion of subspace in a way that recovers the notions of
 
 \subsection{Irreflexive symmetric relations and topped $\cap$-structures}
 
-We will first prove a more general set of results, on a generic set (not necessarily an ensemble space) with an irreflexive symmetric relation (not necessarily disjunctness of ensembles). This will give us a more general tool to investigate possible different notion of subspaces.
+We will first prove a more general set of results, on a generic set (not necessarily an ensemble space) with an irreflexive symmetric relation (not necessarily orthogonality of ensembles). This will give us a more general tool to investigate possible different notion of subspaces.
 
 \begin{defn}
 	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Given a subset $U \subseteq X$, we define the \textbf{$R$-complement} to be
@@ -1023,7 +1023,7 @@ This shows that full structure of subspaces of an inner product space can be ful
 We will now use the previous results where $X$ is an ensemble space and $R$ is the orthogonality relation between two ensembles.
 
 \begin{prop}
-	Let $\Ens$ be an ensemble space, orthogonality $\disjunct$ is an irreflexive symmetric relation.
+	Let $\Ens$ be an ensemble space, orthogonality $\ortho$ is an irreflexive symmetric relation.
 \end{prop}
 
 \begin{proof}
@@ -1031,7 +1031,7 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{proof}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. The \textbf{orthogonal complement} $X^\disjunct \subseteq \Ens$ is the set of all ensembles that are disjunct from all elements of $X$. An \textbf{ensemble subspace} is a subset $X \in \Ens$ such that $X = (X^\disjunct)^\disjunct$.
+	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. The \textbf{orthogonal complement} $X^\ortho \subseteq \Ens$ is the set of all ensembles that are orthogonal from all elements of $X$. An \textbf{ensemble subspace} is a subset $X \in \Ens$ such that $X = (X^\ortho)^\ortho$.
 \end{defn}
 
 \begin{prop}\label{pm_es_subspacesContainHulls}
@@ -1039,7 +1039,7 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{prop}
 
 \begin{proof}
-	Let $U \subseteq X$. Then $U \disjunct X^{\disjunct}$. But since mixtures preserve disjunctness, we also have $\hull(U) \disjunct X^{\disjunct}$. Therefore $\hull(U) \subseteq X$.
+	Let $U \subseteq X$. Then $U \ortho X^{\ortho}$. But since mixtures preserve orthogonality, we also have $\hull(U) \ortho X^{\ortho}$. Therefore $\hull(U) \subseteq X$.
 \end{proof}
 
 \begin{coro}
@@ -1051,7 +1051,7 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{proof}
 
 \begin{remark}
-	The converse is not true: $\hull(X) = X$ does not mean $X$ is an ensemble subspace. For example, let $\Ens$ the ensemble space of a two state quantum system (i.e. the Bloch ball). Let $U$ be the set of all mixtures of two pure states (i.e. and the segment that connects two points on the surface). Then $U$ is closed under mixture (i.e. convex combinations) but it is not a subspace. In fact we have that $U^{\disjunct}=\emptyset$ and therefore $(U^\disjunct)^\disjunct = \Ens$.
+	The converse is not true: $\hull(X) = X$ does not mean $X$ is an ensemble subspace. For example, let $\Ens$ the ensemble space of a two state quantum system (i.e. the Bloch ball). Let $U$ be the set of all mixtures of two pure states (i.e. and the segment that connects two points on the surface). Then $U$ is closed under mixture (i.e. convex combinations) but it is not a subspace. In fact we have that $U^{\ortho}=\emptyset$ and therefore $(U^\ortho)^\ortho = \Ens$.
 \end{remark}
 
 \begin{prop}
@@ -1073,9 +1073,9 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	
 	Consider two continuous probability densities. They will be orthogonal if and only if they have disjoint support, meaning the interior of their supports are disjoint. Therefore orthogonality for a continuous classical ensemble space is the same as having disjoint support.
 	
-	Take a set of ensembles $U \subseteq \Ens$. An ensemble $\ens \in \Ens$ will be orthogonal from all ensembles in $U$ if and only if its support is disjoint from the union of all the supports of all the elements of $U$. Therefore $U^\disjunct$ is the set of all ensembles whose support is within the closure of of the exterior of the union of all supports of elements of $U$. With a similar logic, $(U^\disjunct)^\disjunct$ is the set of all ensembles whose support is within the closure of the exterior of the union of the support of elements of $U^\disjunct$. Therefore, $X$ will contain all probability measure whose support within a set $A \subseteq M$ that is the that $A = \overline{\interior(\interior(A))}$ and is therefore a regular set.
+	Take a set of ensembles $U \subseteq \Ens$. An ensemble $\ens \in \Ens$ will be orthogonal from all ensembles in $U$ if and only if its support is disjoint from the union of all the supports of all the elements of $U$. Therefore $U^\ortho$ is the set of all ensembles whose support is within the closure of of the exterior of the union of all supports of elements of $U$. With a similar logic, $(U^\ortho)^\ortho$ is the set of all ensembles whose support is within the closure of the exterior of the union of the support of elements of $U^\ortho$. Therefore, $X$ will contain all probability measure whose support within a set $A \subseteq M$ that is the that $A = \overline{\interior(\interior(A))}$ and is therefore a regular set.
 	
-	Now take a regular closed set $A \subseteq M$ and let $X$ be the set of all continuous probability densities whose support is within $A$. Then $X^\disjunct$ is the subspace of all continuous probability densities that have support within $\overline{\exterior(A)}$ and $(X^\disjunct)^\disjunct$ is the subspace of all continuous probability densities that have support within $\overline{\exterior(\exterior(A))} = \overline{\interior(A)} = A$. Therefore $X$ is a subspace.
+	Now take a regular closed set $A \subseteq M$ and let $X$ be the set of all continuous probability densities whose support is within $A$. Then $X^\ortho$ is the subspace of all continuous probability densities that have support within $\overline{\exterior(A)}$ and $(X^\ortho)^\ortho$ is the subspace of all continuous probability densities that have support within $\overline{\exterior(\exterior(A))} = \overline{\interior(A)} = A$. Therefore $X$ is a subspace.
 \end{proof}
 
 \begin{prop}
@@ -1121,7 +1121,7 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{defn}
 
 \begin{conj}
-	A space is orthogonally decomposable if and only if the state capacity is additive for orthogonal subspaces. That is, $\capacity(X \vee Y) = \capacity(X) + \capacity(Y)$ for every two ensembles $X, Y \subseteq \Ens$ such that $X \disjunct Y$.
+	A space is orthogonally decomposable if and only if the state capacity is additive for orthogonal subspaces. That is, $\capacity(X \vee Y) = \capacity(X) + \capacity(Y)$ for every two ensembles $X, Y \subseteq \Ens$ such that $X \ortho Y$.
 \end{conj}
 
 \begin{conj}
@@ -1169,12 +1169,12 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \section{Contexts and probability measure}
 
 \begin{defn}
-	Let $\mathfrak{L}$ be the lattice of subspaces and $\wedge, \vee, (\cdot)^\disjunct$ be respectively the join, meet and disjunct complement. A \textbf{context} is a lattice of subspaces $C \subseteq \mathfrak{L}$ such that
+	Let $\mathfrak{L}$ be the lattice of subspaces and $\wedge, \vee, (\cdot)^\ortho$ be respectively the join, meet and orthogonal complement. A \textbf{context} is a lattice of subspaces $C \subseteq \mathfrak{L}$ such that
 	\begin{enumerate}
-		\item if $\{X_i\}_{i \in I} \in C$ then $\bigwedge_{i \in I} X_i \in C$, $\bigvee_{i \in I} X_i \in C$ and $X_i^\disjunct \in C$
-		\item if $X, Y \in C$ and $X \cap Y = \emptyset$, then $X \disjunct Y.$
+		\item if $\{X_i\}_{i \in I} \in C$ then $\bigwedge_{i \in I} X_i \in C$, $\bigvee_{i \in I} X_i \in C$ and $X_i^\ortho \in C$
+		\item if $X, Y \in C$ and $X \cap Y = \emptyset$, then $X \ortho Y.$
 	\end{enumerate}
-	That is, the join, meet and complement operation in $\mathfrak{L}$ and $C$ are the same (i.e. smallest subspace that contains all, biggest subspace contained by all, disjunct subspace). The additional property is that disjoint subspaces are disjunct.
+	That is, the join, meet and complement operation in $\mathfrak{L}$ and $C$ are the same (i.e. smallest subspace that contains all, biggest subspace contained by all, orthogonal subspace). The additional property is that disjoint subspaces are orthogonal.
 \end{defn}
 
 \begin{prop}
@@ -1186,15 +1186,15 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{proof}
 
 \begin{defn}
-	An ensemble $\ens \in \Ens$ is \textbf{compatible} with a context $C \subseteq \mathfrak{L}$ if for any $X \in C$ we can write $\ens = p_i \ens[x]_i + \lambda_i \ens[y] + \epsilon_i \ens_i$ where $\ens[x]_i \in X$ and $\ens[y]_i \in X^\disjunct$ are maximal component sequences.
+	An ensemble $\ens \in \Ens$ is \textbf{compatible} with a context $C \subseteq \mathfrak{L}$ if for any $X \in C$ we can write $\ens = p_i \ens[x]_i + \lambda_i \ens[y] + \epsilon_i \ens_i$ where $\ens[x]_i \in X$ and $\ens[y]_i \in X^\ortho$ are maximal component sequences.
 \end{defn}
 
 \begin{coro}
-	Let $\ens \in \Ens$ an ensembles compatible with a context $C \subset \mathfrak{L}$. Then $p_{\ens}(X^\disjunct) = 1 - p_{\ens}(X)$.
+	Let $\ens \in \Ens$ an ensembles compatible with a context $C \subset \mathfrak{L}$. Then $p_{\ens}(X^\ortho) = 1 - p_{\ens}(X)$.
 \end{coro}
 
 \begin{proof}
-	Since $\ens$ is compatible with $C$, we can write $\ens = p_i \ens[x]_i + \lambda_i \ens[y] + \epsilon_i \ens_i$ where $\ens[x]_i \in X$ and $\ens[y]_i \in X^\disjunct$ are maximal component sequences. Note that $p_{\ens}(X^\disjunct) = 1 - p_{\ens}(X)$ if and only if $\epsilon_i \to 0$. Suppose it didn't. Then every $\ens_i$ would have a component that is neither in $X$ or $X^\disjunct$. That would mean it is disjunct from all the element of $X$ and of $X^\disjunct$. But $X$ contains all the elements disjuct from $X^\disjunct$ and vice-versa. Therefore such component cannot exist, $\epsilon_i \to 0$ and $p_{\ens}(X^\disjunct) = 1 - p_{\ens}(X)$.
+	Since $\ens$ is compatible with $C$, we can write $\ens = p_i \ens[x]_i + \lambda_i \ens[y] + \epsilon_i \ens_i$ where $\ens[x]_i \in X$ and $\ens[y]_i \in X^\ortho$ are maximal component sequences. Note that $p_{\ens}(X^\ortho) = 1 - p_{\ens}(X)$ if and only if $\epsilon_i \to 0$. Suppose it didn't. Then every $\ens_i$ would have a component that is neither in $X$ or $X^\ortho$. That would mean it is orthogonal from all the element of $X$ and of $X^\ortho$. But $X$ contains all the elements disjuct from $X^\ortho$ and vice-versa. Therefore such component cannot exist, $\epsilon_i \to 0$ and $p_{\ens}(X^\ortho) = 1 - p_{\ens}(X)$.
 \end{proof}
 
 \begin{conj}
@@ -1202,7 +1202,7 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{conj}
 
 \begin{remark}
-	The additivity of probability is more of a special condition than one may expect. Naively, one would expect that if $U$ and $V$ are distinct, then $p_{\ens}(U \cup V) = p_{\ens}(U) + p_{\ens}(V)$. That is, the component of $\ens$ in $U \cup V$ is simply the sum of the components within $U$ and $V$, which are going to be distinct (i.e. will not overlap). However this is not true in quantum mechanics.
+	The additivity of probability is more of a special condition than one may expect. Naively, one would expect that if $U$ and $V$ are separate, then $p_{\ens}(U \cup V) = p_{\ens}(U) + p_{\ens}(V)$. That is, the component of $\ens$ in $U \cup V$ is simply the sum of the components within $U$ and $V$, which are going to be separate and orthogonal (i.e. will not overlap). However this is not true in quantum mechanics.
 	
 	Take a singe quibit and let $\ens$ be the maximally mixed state. Then $p_{\ens}(\{x\}) = \frac{1}{2}$ for any pure state $x$. However, if we take two pure states $x$ and $y$ that are not orthogonal, the maximally mixed state is not a mixture of $x$ and $y$, which means $p_{\ens}(\{x, y\}) < 1 = p_{\ens}(\{x\}) + p_{\ens}(\{y\})$.
 \end{remark}
