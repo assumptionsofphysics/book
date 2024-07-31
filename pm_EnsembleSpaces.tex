@@ -295,7 +295,7 @@ The convex structure allows us to characterize ensembles based on whether they c
 	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{convex hull} of $U$, noted $\hull(U)$ is the set of all possible mixtures that can be constructed with elements contained in $U$.
 \end{defn}
 
-\begin{coro}
+\begin{coro}\label{pm_es_hullProp}
 	The convex hull has the following properties
 	\begin{enumerate}
 		\item $U \subseteq \hull(U)$
@@ -680,7 +680,7 @@ The third and final property of ensembles is that they have a well-defined entro
 
 \section{Entropic geometry}
 
-We now show that entropy imposes a geometric structure on the ensemble space.
+We now show that entropy imposes a geometric structure on the ensemble space. The core idea is that, since the entropy is strictly concave, it's Hessian is negative definite. The negation is therefore positive definite, real valued function of two vectors and plays the role of a metric tensor.
 
 \begin{defn}
 	Given two ensembles $\ens_1, \ens_2 \in \Ens$, the \textbf{mixing entropy}, also called Jensen-Shannon divergence, is the increase in entropy associated to their mixture. That is:
@@ -885,7 +885,7 @@ which recovers the RLD Fisher information.
 
 \section{Ensemble subspaces}
 
-We now want to define a notion of subspace in a way that recovers the notions of subspaces we have in both classical and quantum mechanics. Given that orthogonality in all three cases corresponds to ensembles being disjunct, disjunct ensembles will need to belong to different subspaces. The idea is to reconstruct subspaces only from the disjunct relationship.
+We now want to define a notion of subspace in a way that recovers the notions of subspaces we have in both classical and quantum mechanics. Given that orthogonality of subspaces in all three cases corresponds to ensembles saturate the upper entropy bound (i.e. orthogonal in the sense of the entropy), we will define the notion of subspaces based on the entropy.
 
 \subsection{Irreflexive symmetric relations and topped $\cap$-structures}
 
@@ -1018,91 +1018,119 @@ We will first prove a more general set of results, on a generic set (not necessa
 
 This shows that full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
 
-\subsection{Subspaces of ensemble spaces}
+\subsection{Ensemble subspaces}
 
-We will now use the previous results where $X$ is an ensemble space and $R$ is the disjunct relation between two ensembles.
+We will now use the previous results where $X$ is an ensemble space and $R$ is the orthogonality relation between two ensembles.
 
 \begin{prop}
-	Let $\Ens$ be an ensemble space, disjunctness $\disjunct$ is an irreflexive symmetric relation.
+	Let $\Ens$ be an ensemble space, orthogonality $\disjunct$ is an irreflexive symmetric relation.
 \end{prop}
 
 \begin{proof}
-	Since any ensemble is not distinct from itself, it is neither disjunct from itself. Therefore disjunctness is irreflexive. Two elements are disjunct if they satureate the upper entropy bound. This does not depend on their order. Therefore disjunctness is symmetric.
+	Since any ensemble mixed with itself saturates the lower bound of entropy, it does not satureate the upper bound and it is therefore not orthogonal with itself. Therefore orthogonality is irreflexive. Two elements are orthogonal if they satureate the upper entropy bound. This does not depend on their order. Therefore orthogonality is symmetric.
 \end{proof}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. The \textbf{disjunct complement} $X^\disjunct \subseteq \Ens$ is the set of all ensembles that are disjunct from all elements of $X$. An \textbf{ensemble subspace} is a subset $X \in \Ens$ such that $X = (X^\disjunct)^\disjunct$.
+	Let $\Ens$ be an ensemble space and $X \subseteq \Ens$ be a subset. The \textbf{orthogonal complement} $X^\disjunct \subseteq \Ens$ is the set of all ensembles that are disjunct from all elements of $X$. An \textbf{ensemble subspace} is a subset $X \in \Ens$ such that $X = (X^\disjunct)^\disjunct$.
 \end{defn}
 
-\begin{remark}
-	Since subspaces are subsets of the ensembles space, the dimension is automatically defined on subspaces.
-\end{remark}
-
 \begin{prop}\label{pm_es_subspacesContainHulls}
-	Let $X \subseteq \Ens$ be an ensemble subspace. The $\hull(U) \subseteq X$ for all $U \subseteq X$.
+	Let $X \subseteq \Ens$ be an ensemble subspace. Then $\hull(U) \subseteq X$ for all $U \subseteq X$.
 \end{prop}
 
 \begin{proof}
 	Let $U \subseteq X$. Then $U \disjunct X^{\disjunct}$. But since mixtures preserve disjunctness, we also have $\hull(U) \disjunct X^{\disjunct}$. Therefore $\hull(U) \subseteq X$.
 \end{proof}
 
+\begin{coro}
+	Let $X \subseteq \Ens$ be an ensemble subspace, then $\hull(X) = X$.
+\end{coro}
+
+\begin{proof}
+	Since $X \subseteq X$, $\hull(X) \subseteq X$ by \ref{pm_es_subspacesContainHulls}. By \ref{pm_es_hullProp}, we also have $X \subseteq \hull(X)$. Therefore $\hull(X) = X$.
+\end{proof}
+
+\begin{remark}
+	The converse is not true: $\hull(X) = X$ does not mean $X$ is an ensemble subspace. For example, let $\Ens$ the ensemble space of a two state quantum system (i.e. the Bloch ball). Let $U$ be the set of all mixtures of two pure states (i.e. and the segment that connects two points on the surface). Then $U$ is closed under mixture (i.e. convex combinations) but it is not a subspace. In fact we have that $U^{\disjunct}=\emptyset$ and therefore $(U^\disjunct)^\disjunct = \Ens$.
+\end{remark}
+
 \begin{prop}
-	Let $\Ens$ be a discrete classical theory. Then
-	\begin{enumerate}
-		\item the lattice of subspaces $\mathfrak{L}$ is the set of all possible simplexes generated by all possible combinations of extreme points
-		\item the effective count of each subspace is the number of extreme points
-	\end{enumerate}
+	Let $\Ens$ be a discrete classical theory and $X \subseteq \Ens$ an ensemble subspace. Then $X$ is the set of all probability distributions over a subset $A$ of pure states.
 \end{prop}
 
 \begin{proof}
 	Let $\Ens$ be a discrete classical ensemble space. Then each ensemble is a sequence $p_i$ such that $\sum_i p_i = 1$. The dimensionality of the space fixes the range of $i$. Note that, given that the space is discrete, the collection $p_i$ can be understood as a continuous function of the pure elements.
 	
-	Note that two probability distributions will be disjunct if and only if their supports are disjoint. Therefore disjunctness for a discrete classical ensemble space is the same as having disjoint support. This means that a subspace is given by all possible probability distributions over a subset of all pure states.
-	
-	If $U$ is the set of all probability distributions over $n$ cases, the distribution with highest entropy is achieved by a continuous distribution and will be $S(p_i) = \log n$. Therefore the dimension of $U$ will be $n$.
+	Note that two probability distributions will be orthogonal if and only if their supports are disjoint. Therefore orthogonality for a discrete classical ensemble space is the same as having disjoint support. This means that a subspace is given by all possible probability distributions over a subset $A$ of all pure states.
 \end{proof}
 
-\begin{remark}
-	By support, we will mean the set-theoretic support, that is the set of points for which the function is non-zero.
-\end{remark}
-
-\begin{conj}
-	Let $\Ens$ be a continuous classical theory. Then
-	\begin{enumerate}
-		\item the lattice of subspaces $\mathfrak{L}$ is the set of all subspaces of continuous probability densities with support within an open set that is the interior of its own closure
-		\item the effective count of each subspace is the Liouville measure
-	\end{enumerate}
-\end{conj}
+\begin{prop}
+	Let $\Ens$ be a continuous classical theory and $X \subseteq \Ens$ an ensemble subspace. Then $X$ is a set of measures whose support is a regular closed set (i.e a set that is the closure of its own interior).
+\end{prop}
 
 \begin{proof}
-	Let $\Ens$ be a continuous classical ensemble space. Then each ensemble is a continuous function over a symplectic manifold $X$ that integrates to one. Since the function is continuous, the support is an open set.
+	Let $\Ens$ be a continuous classical ensemble space. Then the probability density associated to each ensemble is a continuous function over a symplectic manifold $M$ that integrates to one. Since the function is continuous, it is non-zero on an open set, and the support is the closure of that set.
 	
-	Consider two continuous functions that integrate to one. They will be disjunct if and only if their supports are disjoint. Therefore disjunctness for a continuous classical ensemble space is the same as having disjoint support.
+	Consider two continuous probability densities. They will be orthogonal if and only if they have disjoint support, meaning the interior of their supports are disjoint. Therefore orthogonality for a continuous classical ensemble space is the same as having disjoint support.
 	
-	Take a set of ensembles $U \subseteq \Ens$. An ensemble $\ens \in \Ens$ will be disjunct from all ensembles in $U$ if and only if its support is disjoint from the union of all the supports of all the elements of $U$. Therefore $U^\disjunct$ is the set of all ensembles whose support is a subset of the exterior of the union of all supports of elements of $U$. With a similar logic, $(U^\disjunct)^\disjunct$ is the set of all ensembles whose support is a subset of the exterior of the support of elements of $U^\disjunct$. This corresponds to the interior of the closure of the union  of all supports of elements of $U$. Therefore, any subspace is a set of all continuous probability densities with support within an open set $V \subseteq X$ that is the interior of its own closure.
+	Take a set of ensembles $U \subseteq \Ens$. An ensemble $\ens \in \Ens$ will be orthogonal from all ensembles in $U$ if and only if its support is disjoint from the union of all the supports of all the elements of $U$. Therefore $U^\disjunct$ is the set of all ensembles whose support is within the closure of of the exterior of the union of all supports of elements of $U$. With a similar logic, $(U^\disjunct)^\disjunct$ is the set of all ensembles whose support is within the closure of the exterior of the union of the support of elements of $U^\disjunct$. Therefore, $X$ will contain all probability measure whose support within a set $A \subseteq M$ that is the that $A = \overline{\interior(\interior(A))}$ and is therefore a regular set.
 	
-	Now take an open set $V \subseteq X$ that is the interior of its own closure and consider the space $U$ of all continuous probability densities that have support within $V$. Then $U^\disjunct$ is the subspace of all continuous probability densities that have support within $\exterior(V)$ and $(U^\disjunct)^\disjunct$ is the subspace of all continuous probability densities that have support within $\exterior(\exterior(V)) = \interior(\overline{V}) = V$. Therefore $U$ is a subspace.
-	
-	Let $U \in \mathfrak{L}$ be a ensemble subspace. If $\ens \in U$, then $S(\ens) \leq \capacity(U)$. Moreover, there must be a sequence $\ens_i$ such that $S(\ens_i) \to \capacity(U)$. Let $V \subseteq X$ be the open set corresponding to the largest support of all elements in $U$. Then $S(\ens) \leq \log \mu(V)$ as the highest entropy is given by a uniform distribution over $V$. The uniform distribution is discontinuous, and therefore is not a member of $\Ens$. However, we can construct a sequence of continuous functions whose limit is the uniform distribution. This would correspond to a sequence of ensembles for which $S(\ens_i) \to \log \mu(V)$. Therefore $\log \mu(V)$ is the supremum of the entropy for the subspace, and therefore the effective count is $\mu(V)$, the Liouville measure.
+	Now take a regular closed set $A \subseteq M$ and let $X$ be the set of all continuous probability densities whose support is within $A$. Then $X^\disjunct$ is the subspace of all continuous probability densities that have support within $\overline{\exterior(A)}$ and $(X^\disjunct)^\disjunct$ is the subspace of all continuous probability densities that have support within $\overline{\exterior(\exterior(A))} = \overline{\interior(A)} = A$. Therefore $X$ is a subspace.
 \end{proof}
 
-\begin{conj}
-	Let $\Ens$ be a quantum ensemble space. Then
-	\begin{enumerate}
-		\item the lattice of subspaces $\mathfrak{L}$ is the set of all possible density operators for each subspace of the Hilbert space
-		\item the effective count of each subspace is the dimension of the corresponding Hilbert space
-	\end{enumerate}
-\end{conj}
+\begin{prop}
+	Let $\Ens$ be a quantum ensemble space and $X \subseteq \Ens$ an ensemble subspace. Then $X$ is the set of mixed state whose support is a subspace of the corresponding Hilbert space.
+\end{prop}
 
 \begin{proof}
-	Let $\Ens$ be a quantum ensemble space. Then each ensemble is a density operator defined over a Hilbert space $\mathcal{H}$.
-	
-	Consider two density operators. They will be disjunct if and only if they are defined on orthogonal subspaces. That is, $\ens_1 | \psi \> \neq 0$ only if $\ens_2 | \psi \> = 0$ and vice-versa. This means that a subspace of the ensemble space corresponds to a subspace of the vector space $\mathcal{H}$.
-	
-	Let $U \in \mathfrak{L}$ be a ensemble subspace. If it is finite dimensional, the ensemble with maximal entropy will correspond to the maximally mixed state $I/n$ where $n$ is the dimension of the subspace. The entropy will be given by $\log n$, which means $\capacity(U) = n$. If $U$ is infinite dimensional, then there is no upper bound to the entropy and $\capacity(U) = + \infty$.
+	Let $\Ens$ be a quantum ensemble space. Then each ensemble is a density operator defined over a Hilbert space $\mathcal{H}$. Consider two density operators. They will be orthogonal, that is the entropy increase is maximal, if and only if they are defined on orthogonal subspaces of $\mathcal{H}$. That is, $\ens_1 | \psi \> \neq 0$ only if $\ens_2 | \psi \> = 0$ and vice-versa. Therefore $X$ contains exactly all the mixed states whose support is a subspace of $\mathcal{H}$.
 \end{proof}
 
+\subsection{State capacity of ensemble spaces}
 
+%TODO: since we use X for subspaces, we should use some other letter (M?) for the classical manifold
+
+\begin{prop}
+	Let $\Ens$ be a continuous classical theory and $X \subseteq \Ens$ an ensemble subspace. Then $\capacity(X)$ is the cardinality of the set $A \subseteq M$ of pure states associated to $X$. That is, $\capacity(X) = \#A$.
+\end{prop}
+
+\begin{proof}
+	If $X$ is the set of all probability distributions over $n$ cases, the distribution with highest entropy is achieved by a continuous distribution and will be $S(p_i) = \log n$. Therefore the dimension of $X$ will be $n$.
+\end{proof}
+
+\begin{prop}
+	Let $\Ens$ be a continuous classical theory and $X \subseteq \Ens$ an ensemble subspace. Then $\capacity(X)$ is the Liouville measure of the set $A \subseteq M$ associated to $X$. That is, $\capacity(X) = \mu(A)$.
+\end{prop}
+
+\begin{proof}
+	Let $X \subseteq \Ens$ be an ensemble subspace and $A \subseteq M$ the associated regular open set. The highest entropy reachable by a distribution with support $A$ is $\log \mu(A)$ which corresponds to the uniform distribution. Therefore $\capacity(X) = \mu(A)$.
+\end{proof}
+
+\begin{prop}
+	Let $\Ens$ be a quantum ensemble space and $X \subseteq \Ens$ an ensemble subspace. Then $\capacity(X)$ is the dimension of the corresponding Hilbert subspace.
+\end{prop}
+
+\begin{proof}
+	Since $X$ is a subspace of a quantum ensemble space, $X$ is the set of mixed state whose support is a subspace of the corresponding Hilbert space. If it is finite dimensional, the ensemble with maximal entropy will correspond to the maximally mixed state $I/n$ where $n$ is the dimension of the subspace. The entropy will be given by $\log n$, which means $\capacity(U) = n$. If $U$ is infinite dimensional, then there is no upper bound to the entropy and $\capacity(U) = + \infty$.
+\end{proof}
+
+\subsection{Orthogonal decomposability}
+
+\begin{defn}
+	An ensemble is orthogonally decomposable if it is the limit of the sum of two orthogonal component sequences. An ensemble space is orthogonally decomposable if every decomposable ensemble is orthogonally decomposable.
+\end{defn}
+
+\begin{conj}
+	A space is orthogonally decomposable if and only if the state capacity is additive for orthogonal subspaces. That is, $\capacity(X \vee Y) = \capacity(X) + \capacity(Y)$ for every two ensembles $X, Y \subseteq \Ens$ such that $X \disjunct Y$.
+\end{conj}
+
+\begin{conj}
+	Classical ensemble spaces are orthogonally decomposable.
+\end{conj}
+
+\begin{conj}
+	Quantum ensemble spaces are orthogonally decomposable.
+\end{conj}
 
 \section{Biggest component and probability}
 
