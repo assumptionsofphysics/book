@@ -93,8 +93,9 @@ Regardless, our task is at the moment much simpler: we only need to show that th
 We now want to understand whether all Lagrangian systems are Newtonian. Given what we discussed, we cannot expect to reconstruct the mass and force uniquely from the expression of the Lagrangian. We consider the mass and the frame fixed by the problem, together with the Lagrangian, and therefore we must only see whether we can indeed find a unique expression for the acceleration. From the Euler-Lagrange equations \ref{rp-cm-EulerLagrange} we can write
 \begin{equation}
 	\begin{aligned}
-	\partial_{x^i}L&=d_t \partial_{v^i} L=\partial_{x^j} \partial_{v^i} L \, d_t x^j + \partial_{v^k} \partial_{v^i} L \, d_t v^k = \partial_{x^j} \partial_{v^i} L \, v^j + \partial_{v^k} \partial_{v^i} L \, a^k \\
-	\partial_{v^k} &\partial_{v^i} L \, a^k = \partial_{x^i}L - \partial_{x^j} \partial_{v^i} L \, v^j .
+	\partial_{x^i}L&=d_t \partial_{v^i} L=\partial_{x^j} \partial_{v^i} L \, d_t x^j + \partial_{v^k} \partial_{v^i} L \, d_t v^k + \partial_{t} \partial_{v^i} L \, d_t t \\
+	&= \partial_{x^j} \partial_{v^i} L \, v^j + \partial_{v^k} \partial_{v^i} L \, a^k + \partial_{t} \partial_{v^i} L \\
+	\partial_{v^k} &\partial_{v^i} L \, a^k = \partial_{x^i}L - \partial_{x^j} \partial_{v^i} L \, v^j - \partial_{t} \partial_{v^i} L.
 	\end{aligned}
 \end{equation}
 To be able to write the acceleration explicitly, we must be able to invert the Hessian matrix $\partial_{v^k} \partial_{v^i} L$. As we noted before, this is exactly the condition for which the principle of stationary action leads to a unique solution, and we can better understand why. If it is not invertible at a point, the determinant is zero and therefore one eigenvalue is zero. The corresponding eigenvector corresponds to a direction for which the equation tells us nothing, and therefore a variation of the acceleration in that direction will not change the action. This is why the invertibility of the Hessian is required in order to obtain unique solutions.
@@ -107,8 +108,8 @@ What we find, then, is that for any Lagrangian system, which we assume to have a
 Now we turn our attention to Hamiltonian mechanics and, similarly, we ask whether we can express the acceleration as a function of the state. We have
 \begin{equation}
 	\begin{aligned}
-		a^i &= d_t v^i = d_t d_t q^i = d_t \partial_{p_i} H = \partial_{q^j} \partial_{p_i} H d_t q^j + \partial_{p_k} \partial_{p_i} H d_t p_k \\
-		&= \partial_{q^j} \partial_{p_i} H \partial_{p_j} H - \partial_{p_k} \partial_{p_i} H \partial_{q^k} H.
+		a^i &= d_t v^i = d_t d_t q^i = d_t \partial_{p_i} H = \partial_{q^j} \partial_{p_i} H d_t q^j + \partial_{p_k} \partial_{p_i} H d_t p_k + \partial_{t} \partial_{p_i} H d_t t\\
+		&= \partial_{q^j} \partial_{p_i} H \partial_{p_j} H - \partial_{p_k} \partial_{p_i} H \partial_{q^k} H + \partial_{t} \partial_{p_i} H.
 	\end{aligned}
 \end{equation}
 This tells us that we can always write an explicit function for the acceleration. However, this is not enough. States in Newtonian mechanics are in terms of position and velocity, not position and momentum. For a Hamiltonian system to be equivalent to a Newtonian system we need to be able to write the momentum as a function of position and velocity and vice versa. Note that Hamilton's equations already give a way to express the velocity in terms of position and momentum. We just need that expression to be invertible, which means the Jacobian must be invertible. We must have:
