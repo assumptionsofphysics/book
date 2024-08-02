@@ -62,7 +62,7 @@ We define the differential as a sequence that converges to zero along a specific
 \fi
 
 \begin{defn}
-	Let $V$ be a real vector space. A \textbf{differential} $dv$ is a sequence of vectors $\{v_i\}_{i=1}^{\infty}$ such that there exists a vector $t \in V$ and a convergence envelope $\{a_i\}_{i=1}^{\infty}$ for which 
+	Let $V$ be a real topological vector space. A \textbf{differential} $dv$ is a sequence of vectors $\{v_i\}_{i=1}^{\infty}$ such that there exists a vector $t \in V$ and a convergence envelope $\{a_i\}_{i=1}^{\infty}$ for which 
 	$$ \lim\limits_{i \to \infty} \frac{v_i}{a_i} = t.$$
 	We call $t$ the \textbf{tangent vector} of the differential and $\{a_i\}_{i=1}^{\infty}$ its \textbf{convergence envelope}. We note $dv[a_i \, t]$ the differential with its tangent vector and convergence envelope.
 \end{defn}
@@ -81,9 +81,51 @@ $$\lim\limits_{i \to \infty} t_i = \lim\limits_{i \to \infty} t + \lim\limits_{i
 The sequence on the left converges to $t$, the first sequence on the right converges to $t$, therefore the second sequence on the right converges to zero.
 \end{proof}
 
-\begin{conj}
-	Every sequence $v_i \to 0$ is a differential with tangent vector $0$. That is, there exists a $a_i \to 0$ and $t_i \to 0$ such that $v_i = a_i t_i$. 
-\end{conj}
+\begin{prop}
+	Let $V$ be a first-countable topological vector space. Every sequence $v_i \to 0$ is a differential with tangent vector $0$. That is, there exists a $a_i \to 0$ and $t_i \to 0$ such that $v_i = a_i t_i$. 
+\end{prop}
+
+\begin{proof}
+Since we are in a first countable space, we have a countable basis of neighborhoods around the origin. Let $U_{m}$ be the $m^{th}$ basis neighborhood.
+
+For $U_{m}$ there's going to exist a minimal $${}_{U_{m}}N_{n} \in \mathbb{N}\,\, s.t.\,\, \forall i > {}_{U_{m}}N_{n},\, v_{i} \in \frac{U_{m}}{n \cdot 2^n}$$ where $n, m \in \mathbb{N}$. Note that since $U_{m}$ is a neighborhood around 0, then, by continuity of multiplication, $\frac{U_{m}}{n \,\cdot\, 2^n}$ is also a neighborhood around 0.
+
+Let $k_{1} = {}_{U_{1}}N_{1}$.
+Let $k_{n} = \max(k_{n-1},\, n + 1,\, \max(\{{}_{U_{m}}N_{n} : m \leq k_{n-1}\})) + 1$. Note that $\max(k_{n-1}, \dots)$ and the increment at the end are there to guarantee that the sequence of $k_{n}$'s is strictly increasing.
+
+Notice how ${}_{U_{1}}N_{1} = k_{1} < k_{2} < k_{3} < \dots$ Allowing us to say that,
+$$\forall i \geq k_{1},\, \exists!\,n_{i}\,\,s.t.\,\, k_{n_{i}} \leq i < k_{n_{i}+1}$$
+Now, define $t_{i}$ and $a_{i}$ in the following way:
+
+$$
+\forall i < k_{1}, t_{i} = v_{i} \land a_{i} = 1
+$$
+$$
+\forall i \geq k_{1}, t_{i} = n_{i}v_{i} \land a_{i} = \frac{1}{n_{i}}
+$$
+(this $n_{i}$ is the unique $n_{i}$ we just described).
+
+Since the $k_{n}$'s are strictly increasing we never "run out" of $k_{n}$'s (more importantly, of $n$'s), so we know $a_{i} \to 0$.
+
+Let us now prove that $t_{i} \to 0$. Fix a basis neighborhood $U_{n}$.
+
+We know $k_{n-1} \geq n$ (except for $n = 1$, but this doesn't matter, as what we really want is the result $k_{n} \geq {}_{U_{n}}N_{n}$ which is true for $n = 1$) by definition since $k_{n-1} =  max(\dots, n, \dots) + 1$. Similarly, we know that $k_{n} \geq {}_{U_{n}}N_{n}$ by definition.
+
+Then, $\forall i > k_{n}$, $k_{n_{i}} \geq {}_{U_{n}}N_{n_{i}}$, thus, $v_{i} \in \frac{U_{n}}{n_{i} \cdot 2^{n_{i}}}$, so
+
+$$
+v_{i} \in \frac{U_{n}}{n_{i} \cdot 2^{n_{i}}}
+$$
+$$
+n_{i}v_{i} \in \frac{U_{n}}{2^{n_{i}}}
+$$
+$$
+t_{i} \in \frac{U_{n}}{2^{n_{i}}} \subseteq U_{n}
+$$
+So $t_{i} \in U_{n}$ for all $i > k_{n}$, which obeys the definition of convergence in topological spaces.
+
+Finally, notice that $\forall i$, $v_{i} = a_{i}t_{i}$, which completes the proof.
+\end{proof}
 
 \begin{prop}
 	Differentials respect the following property
@@ -190,7 +232,16 @@ We define a map to be differentiable if it maps differentials to differentials w
 \end{coro}
 
 \begin{proof}
-	TODO
+	Let $v \in V$ be a vector and $v_i$ a sequence of vectors that go to zero. Then $v_i$ is a differential and can be written as $a_i t_i$ where $a_i \to 0$ and $t_i \to 0$.
+	
+	We have:
+	\begin{equation}
+		\begin{aligned}
+		\lim_{ i \to \infty } f(v_i) - f(v) &= \lim_{ i \to \infty } f(v + a_{i}t_{i}) - f(v) = \lim_{ i \to \infty } a_{i} \frac{f(v + a_{i}t_{i}) - f(v)}{a_{i}} \\
+		&= \lim_{ i \to \infty } a_{i} \lim_{ i \to \infty } \frac{f(v + a_{i}t_{i}) - f(v)}{a_{i}} = 0 \cdot \frac{df}{dV}(0) = 0 \cdot 0 \\
+		&= 0.
+		\end{aligned}
+	\end{equation}
 \end{proof}
 
 \begin{conj}
@@ -198,7 +249,7 @@ We define a map to be differentiable if it maps differentials to differentials w
 \end{conj}
 
 \begin{proof}
-	TODO
+	Since the derivative is linear, we only need to prove that is continuous at one point, for example $0$. That is, we need to show that for every $t_i \to 0$, $\frac{df}{dV}(t_i) \to 0$.
 \end{proof}
 
 \begin{remark}
