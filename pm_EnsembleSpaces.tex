@@ -314,7 +314,8 @@ The convex structure allows us to characterize ensembles based on whether they c
 \end{proof}
 
 \begin{conj}
-	Let $A \subseteq \Ens$ be a Borel set. Then $\hull(A)$ is also a Borel set.
+	Let $A \subseteq \Ens$ be a Borel set. Then $\hull(A)$ is also a Borel set. 	Let $A \subseteq \Ens$ be an open set. Then $\hull(A)$ is also an open set.
+	
 \end{conj}
 
 \subsection{Fraction and fraction capacity}
@@ -363,6 +364,47 @@ The convex structure allows us to characterize ensembles based on whether they c
 	2. The $\hull$ is a monotone function. The inverse image of a set is a monotone function. The supremum is a monotone function. Therefore the fraction capacity is a monotone function.
 	
 	3. Let $A, B \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(A \cup B)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(A \cup B)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in A$ and $\ens[v] \in B$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of fraction capacity, we must have $p\lambda \leq \fcap_{\ens}(A)$ and $p\bar{\lambda} \leq \fcap_{\ens}(B)$, therefore $p = p\lambda + p\bar{\lambda} \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. 	Since $\fcap_{\ens}(A \cup B)$ is the supremum for a set of $p$s for which the expression always holds, we have $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. The probability measure is subadditive.
+\end{proof}
+
+
+\subsection{Maximal component sequence}
+
+\begin{defn}
+	Let $\ens \in \Ens$ be an ensemble. A sequence of ensembles $\{\ens[a]_i\} \subseteq \Ens$ is an \textbf{increasing component sequence of $\ens$} if there exists a sequence of ensembles $\{\ens[b]_i\} \subseteq \Ens$ and an increasing sequence of $\{p_i\} \subseteq (0,1]$ such that $\ens = p_i \ens[a]_i + \bar{p}_i \ens[b]_i$. The fraction of the sequence is the highest limit $p_i \to p$ achievable with that sequence.
+\end{defn}
+
+\begin{remark}
+	Since the sequence of $p_i$ is increasing and is bounded, it must converge. The set of all possible limits is bounded and therefore must have a supremum.
+\end{remark}
+
+\begin{defn}
+	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles. Then the \textbf{$A$-components of $\ens$} are the components of $\ens$ that are mixtures of $A$. That is, $A_{\ens} = \{ \ens_1 \in \hull(U) \, | \, \exists p \in (0,1], \ens_2 \in \Ens \text{ s.t. } \ens = p \ens_1 + \bar{p} \ens_2  \}$. An \textbf{increasing $A$-component sequence of $\ens$} is an increasing component sequence of $\ens$ such that $\{\ens[a]_i\} \subseteq \hull(A)$. The sequence $\{\ens[a]_i\} \subseteq \hull(A)$ is \textbf{maximal} if the fraction of the sequence is $\fcap_{\ens}(A)$.
+\end{defn}
+
+\begin{coro}
+	The fraction of $A$-component sequences are bounded by $\fcap_{\ens}(A)$.
+\end{coro}
+
+\begin{proof}
+	For all elements of component sequences we have $p_i \leq \fcap_{\ens}(A)$. Therefore the limit of $p_i$ cannot exceed $\fcap_{\ens}(A)$.
+\end{proof}
+
+\begin{prop}
+	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles, then there exists a maximal $A$-component sequence of $\ens$.
+\end{prop}
+
+\begin{proof}
+	Consider the hull of $A$. This can be ordered by the fraction $\size_{\ens}$, which is less or equal to one. If there is a maximum, then simply take a sequence of an element with the maximum faction. If not, we can take a sequence of ever increasing fractions. The limit, by construction, will be the fraction capacity of $A$.
+\end{proof}
+
+\begin{prop}
+	Let $\ens \in \Ens$ be an ensemble, $A \subseteq \Ens$ a set of ensembles and $\ens[a]_i$ and $\ens[b]_i$ two maximal $A$-component sequence of $\ens$. Then we can write $\ens[a]_i = p_i \ens[b]_i + \bar{p}_i \ens[c]_i$ where $\ens[c]_i \in \Ens$, $p_i \in [0,1]$ and $p_i \to 1$.
+\end{prop}
+
+\begin{proof}
+	Note that we can always write $\ens[a]_i = p_i \ens[b]_i + \bar{p}_i \ens[c]_i$ because we can always choose $p_i = 0$ and $\ens[c]_i = \ens[a]_i$. Therefore, if the proposition is not true, we can always find $p_i \to p$, except that $p \neq 1$.
+	
+	Suppose the proposition is not true. We can still write $\ens = \lambda_i \ens[a]_i + \bar{\lambda}_i \ens[d]_i = \lambda_i p_i \ens[b]_i + \lambda_i \bar{p}_i \ens[c]_i + \bar{\lambda}_i \ens[d]_i$. But $\ens[b]_i$ is maximal, therefore $\lambda_i p_i \ens[b]_i$ can be increased. But $\ens[c]_i \in \hull(A)$, which means we can write an $A$-component sequence whose fraction is higher than the maximal, which cannot be. Therefore the proposition is true.
 \end{proof}
 
 \subsection{Vector space embedding}
@@ -416,6 +458,36 @@ In the same way that we define ensembles first, we define quantities through the
 \begin{remark}
 	Note that variables will have a contiguous range on the ensembles because, given two ensembles with different values, we can mix them to obtain any intermediate value. This does not mean that the variable can take all possible values on pure states. For example, the number of particles in a pure state will necessarily be a non-negative integer, but we can mix those to create ensembles that have non-integer average number of particles.
 \end{remark}
+
+\begin{conj}
+	Let $e \in \Ens$ be an ensemble, $F : \Ens \to \mathbb{R}$ be a statistical variable and $A \subset \Ens$ be a set of ensemble. Let $\ens[a]_i$ and $\ens[b]_i$ be maximal $A$-component sequences of $\ens$. Then $\lim_{i \to \infty} F(\ens[a]_i) = \lim_{i \to \infty} F(\ens[b]_i)$.
+\end{conj}
+
+\begin{defn}
+	Let $e \in \Ens$ be an ensemble, $F : \Ens \to \mathbb{R}$ be a statistical variable and $A \subset \Ens$ be a set of ensemble. Then the \textbf{contribution to $F$ over $A$ given $\ens$} is the limit of variable for a maximal $A$-component sequence of $\ens$. That is, $F_{\ens}(A) = \lim_{i \to \infty} F(\ens[a]_i)$ where $\ens[a]_i$ is a maximal $A$-component sequence of $\ens$.
+\end{defn}
+
+\begin{prop}
+	The contribution to $F$ is a set function.
+\end{prop}
+
+\begin{proof}
+	Since $F_{\ens}$ takes a set of an argument and returns a real value, is a set function.
+\end{proof}
+
+\begin{remark}
+	Note that the contribution cannot be monotone in the same way that the expectation of a random variable to an event is not monotone. Not clear whether the additivity of the variable may tell us something about the additivity of the contribution.
+\end{remark}
+
+\begin{conj}
+	We can define a ``derivative'' $f_{\ens}$ between $F_{\ens}$ and $\fcap_{\ens}$ such that $F_{\ens}(A) = \int_A f_{\ens} \, d \fcap_{\ens}$ where $\int$ is the ??? integral.
+\end{conj}
+
+\begin{remark}
+	This may still not be the correct formulation of the problem. Note that $A$ is a set of ensembles. In the classical case it would correspond to a set of probability measures, not a subset of the sample space (i.e. an event). However, in the discrete case and in the quantum case, $A$ can also be restricted to a set of pure state (i.e. extreme points), which would correspond to a subset of the sample space. It may be worth at least understanding that case.
+\end{remark}
+
+\subsection{Quantifiable spaces and locally convex vector spaces}
 
 \begin{prop}
 	Let $\Ens$ be a complemented ensemble space. Then a statistical variable $F$ induces a semi-norm on the vector space that embeds $\Ens$.
@@ -1133,36 +1205,6 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{conj}
 
 \section{Biggest component and probability}
-
-\subsection{Maximal component sequence}
-
-\begin{defn}
-	Let $\ens \in \Ens$ be an ensemble. A sequence of ensembles $\{\ens[a]_i\} \subseteq \Ens$ is an \textbf{increasing component sequence of $\ens$} if there exists a sequence of ensembles $\{\ens[b]_i\} \subseteq \Ens$ and an increasing sequence of $\{p_i\} \subseteq (0,1]$ such that $\ens = p_i \ens[a]_i + \bar{p}_i \ens[b]_i$. The limit $p = \lim_{i \to \infty} p_i$ is called the size of the component sequence.
-\end{defn}
-
-\begin{remark}
-	Since the sequence of $p_i$ is increasing and is bounded, it must converge.
-\end{remark}
-
-\begin{defn}
-	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles. Then the \textbf{$A$-components of $\ens$} are the components of $\ens$ that are mixtures of $A$. That is, $A_{\ens} = \{ \ens_1 \in \hull(U) \, | \, \exists p \in (0,1], \ens_2 \in \Ens \text{ s.t. } \ens = p \ens_1 + \bar{p} \ens_2  \}$. An \textbf{increasing $A$-component sequence of $\ens$} is an increasing component sequence of $\ens$ such that $\{\ens[a]_i\} \subseteq \hull(A)$. The sequence $\{\ens[a]_i\} \subseteq \hull(A)$ is \textbf{maximal} if the limit $p_i \to p$ is the supremum of all such sequences.
-\end{defn}
-
-\begin{prop}
-	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles, then there exists a maximal $A$-component sequence of $\ens$.
-\end{prop}
-
-\begin{proof}
-	Consider the set of all sizes of all increasing $A$-component sequence of $\ens$. This is a subset of $(0,1]$ that contains all the limits of all increasing sequences. Therefore, it must have an upper bound.
-\end{proof}
-
-\begin{coro}
-	The mixing probability is the size of a maximal $A$-component sequence of $\ens$. That is, let $\{\ens[a]_i\} \subseteq \hull(A)$ be a maximal sequence and $\{p_i\} \subseteq (0,1]$ its associated coefficients. Then $p_i \to p_{\ens}(A)$. 
-\end{coro}
-
-\begin{proof}
-	Suppose that $p_i \nto p_{\ens}(A)$ Then there exists an $\ens[a] \in \hull(A)$ that is a bigger component than all the elements of the sequence. This means that the sequence is not maximal. Therefore $p_i \to p_{\ens}(A)$.
-\end{proof}
 
 
 
