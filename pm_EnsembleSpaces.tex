@@ -807,11 +807,19 @@ We now show that entropy imposes a geometric structure on the ensemble space. Th
 \end{conj}
 
 \begin{proof}
-	Since a geometric ensemble space is complemented, it embeds into a real vector space. If conjecture \ref{pm_es_ensemblesAreTVS} holds, then it is a topological vector space. Every finite dimensional subspace $V$, then, is locally $R^n$ with a topology. This would be enough to claim $V$ is a manifold. The differentiable structure is imposed by requiring coordinates that coordinates are twice differentiable with respect to the mixing coefficients.
+	Since a geometric ensemble space is complemented, it embeds into a real vector space. If conjecture \ref{pm_es_ensemblesAreTVS} holds, then it is a topological vector space. Every finite dimensional subspace $V$, then, is locally $\mathbb{R}^n$ with a topology. This would be enough to claim $V$ is a manifold. The differentiable structure is imposed by requiring coordinates that coordinates are twice differentiable with respect to the mixing coefficients.
 \end{proof}
 
 \begin{remark}
 	The above restriction is useful to recover standard elements of differential geometry. It is an open question to understand whether other conditions already imply these requirements, or whether a more general setting can be developed. For example, in a classical space every ensemble can be understood as the mixture of orthogonal elements. Therefore the entropy can be proven the Shannon/Gibbs entropy, and therefore it is infinitely smooth with respect to the coefficients. A classical space, then, would be automatically geometric. Similar arguments may exist for a quantum space. Additionally, it may be that the convex structure may be enough to define a generalized version of tangent space.
+\end{remark}
+
+\begin{defn}
+	Let $V \subseteq \Ens$ be a differentiable manifold embedded in the ensemble space. A \textbf{linear chart} is chart that preserves the linearity of the ensemble space. A \textbf{variation} $\delta e$ is an element of the tangent space expressed in a linear chart.
+\end{defn}
+
+\begin{remark}
+	Note that since a geometric ensemble space is a convex subset of a real vector space, coordinate systems that are linear with respect to the vector space are privileged. It is only in these coordinates, in fact, that linear combinations correspond to mixtures. The strict concavity of the entropy is therefore guaranteed in the coordinates and only those coordinates. Given the special physical significance of these coordinates, all differential objects and properties will be defined in these coordinates.
 \end{remark}
 
 \begin{defn}
@@ -822,7 +830,7 @@ We now show that entropy imposes a geometric structure on the ensemble space. Th
 \end{defn}
 
 \begin{thrm}
-	Let $\Ens$ be a geometric ensemble space and $V \subseteq \Ens$ a differentiable manifold embedded in the ensemble space. Then
+	Let $\Ens$ be a geometric ensemble space and $V \subseteq \Ens$ a differentiable manifold embedded in the ensemble space. Then, in a linear chart, we have
 	$$ \lVert \delta \ens \rVert_{\ens}^2 = - \frac{\partial^2 S}{\partial \ens^2}(\delta \ens , \delta \ens) $$
 	and 
 	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = - \frac{\partial^2 S}{\partial \ens ^2}( \delta \ens_1, \delta \ens_2 ).$$
@@ -830,7 +838,7 @@ We now show that entropy imposes a geometric structure on the ensemble space. Th
 \end{thrm}
 
 \begin{proof}
-	To recover the first two expression, we simply have to calculate the leading term. Since the entropy is twice differentiable, we can expand it as
+	To recover the first two expression, we simply have to calculate the leading term. Since the entropy is twice differentiable, assuming a linear chart, we can expand it as
 \begin{equation}
 	\begin{aligned}
 		S(\ens + \delta \ens) &= S(\ens) + \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3).
@@ -909,7 +917,7 @@ We can now substitute the norm to the definition of metric tensor. We have
 		\end{aligned}
 	\end{equation}
 	
-	Let us consider a family of ensembles charted by a set of parameters $\theta^i$. We have:
+	Let us consider a family of ensembles charted by a set of parameters $\theta^i$, not necessarily forming a linear chart. We have:
 	\begin{equation}
 		\begin{aligned}
 			g_{\ens}(d\theta^1, d\theta^2) &= - \frac{\partial^2 S}{\partial \rho^2}\left(\frac{\partial 
@@ -932,13 +940,33 @@ We can now substitute the norm to the definition of metric tensor. We have
 \end{prop}
 
 \begin{proof}
-	We can repeat the calculations from the classical case and obtain
+	The entropy is given by the Von Neumann entropy
+	\begin{equation}
+		S(\rho) = - \tr\left(\rho \log \rho\right).
+	\end{equation}
+	We take the first variation and have
+	\begin{equation}
+		\begin{aligned}
+			\delta S(\rho) &= - \delta \tr\left(\rho \log \rho\right)= - \tr\left(\delta \rho \log \rho + \rho \delta \log \rho\right) \\
+			&= - \tr\left(\delta \rho \log \rho + \rho \rho^{-1} \delta \rho \right) \\
+			&= - \tr\left(\left(\log \rho + 1 \right) \delta \rho \right).
+		\end{aligned}
+	\end{equation}
+	We take the second variation and have
+	\begin{equation}
+		\begin{aligned}
+			\delta \delta S(\rho) &= - \delta \tr\left(\left(\log \rho + 1 \right) \delta \rho \right) \\
+			&= - \tr\left(\delta \left(\log \rho + 1 \right) \delta \rho + \delta \delta \rho \right) \\
+			&= - \tr\left(\rho^{-1} \delta \rho \delta \rho + \delta \delta \rho \right).
+		\end{aligned}
+	\end{equation}
+	Note that $\delta \rho$ is defined in a linear chart, therefore $\delta \delta x = 0$. Therefore we have 
 	\begin{equation}
 	\begin{aligned}
 		\frac{\partial^2 S}{\partial \rho^2}(\delta \rho, \delta \rho) &= - \tr\left(\rho^{-1} \delta \rho \delta \rho \right)
 	\end{aligned}
 \end{equation}
-	Let us consider a family of ensembles charted by a set of parameters $\theta^i$. We have:
+	Let us consider a family of ensembles charted by a set of parameters $\theta^i$, not necessarily forming a linear chart. We have:
 \begin{equation}
 	\begin{aligned}
 		g_{\ens}(d\theta^1, d\theta^2) &= - \frac{\partial^2 S}{\partial \rho^2}\left(\frac{\partial 
