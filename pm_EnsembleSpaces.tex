@@ -303,34 +303,62 @@ The convex structure allows us to characterize ensembles based on whether they c
 \end{conj}
 
 
-\subsection{Convex hull}
+\subsection{Convex subsets and convex hull}
 
 \begin{defn}
-	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{convex hull} of $U$, noted $\hull(U)$ is the set of all possible mixtures that can be constructed with elements contained in $U$.
+	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is a \textbf{convex subset} of $\Ens$ if it is closed under mixture. That is, it contains all possible mixtures that can be constructed form its elements.
+\end{defn}
+
+\begin{defn}
+	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{convex hull} of $A$, noted $\hull(A)$ is the set of all possible mixtures that can be constructed with elements contained in $A$. That is, it is the closure of $A$ under mixture.
 \end{defn}
 
 \begin{coro}\label{pm_es_hullProp}
 	The convex hull has the following properties
 	\begin{enumerate}
-		\item $U \subseteq \hull(U)$
-		\item $U \subseteq V \implies \hull(U) \subseteq \hull(V)$
-		\item $\hull(\hull(U)) = \hull(U)$
+		\item $A \subseteq \hull(A)$
+		\item $A \subseteq B \implies \hull(A) \subseteq \hull(B)$
+		\item $\hull(\hull(A)) = \hull(A)$
 	\end{enumerate}
 	and is therefore a closure operation
 \end{coro}
 
 \begin{proof}
-	1. Every element of $U$ is trivially a mixture of elements of $U$. Therefore $U \subseteq \hull(U)$.
+	1. Every element of $A$ is trivially a mixture of elements of $A$. Therefore $A \subseteq \hull(A)$.
 	
-	2. Let $\ens \in \hull(U)$. Then it is a mixture of some elements of $U$. Since $U \subseteq V$, then $\ens$ is also the mixture of some elements of $V$ and therefore $\ens \in \hull(V)$.
+	2. Let $\ens \in \hull(A)$. Then it is a mixture of some elements of $A$. Since $A \subseteq B$, then $\ens$ is also the mixture of some elements of $B$ and therefore $\ens \in \hull(B)$.
 	
-	3. Since mixing is associative and commutative, a mixture of mixtures of $U$ can be reepressed as a mixture of $U$. Therefore for all $\ens \in \hull(\hull(U))$ we have $\ens \in \hull(U)$.
+	3. Since mixing is associative and commutative, a mixture of mixtures of $U$ can be reepressed as a mixture of $A$. Therefore for all $\ens \in \hull(\hull(A))$ we have $\ens \in \hull(A)$.
+\end{proof}
+
+\begin{coro}
+	A subset $A \subseteq \Ens$ is convex if and only if it is its own convex hull.
+\end{coro}
+
+\begin{proof}
+	Let $A \subseteq \Ens$ be a convex subset. By \ref{pm_es_hullProp} we have $A \subseteq \hull(A)$. By definition of convex set, we have $\hull(A) \subseteq A$. Therefore $A = \hull(A)$. Conversely, consider let $A \subseteq \Ens$ be a set of ensembles not necessarily convex. By definition, $\hull(A)$ is closed under mixture and is therefore a convex subset.
 \end{proof}
 
 \begin{conj}
 	Let $A \subseteq \Ens$ be a Borel set. Then $\hull(A)$ is also a Borel set. 	Let $A \subseteq \Ens$ be an open set. Then $\hull(A)$ is also an open set.
 	
 \end{conj}
+
+
+\begin{coro}
+	The set $\mathfrak{Conv}_{\Ens}$ of all convex subsets of $\Ens$ ordered by set inclusion is a topped $\bigcap$-structure and therefore is also a complete lattice.
+\end{coro}
+
+\begin{proof}
+	Let $\mathfrak{Conv}_{\Ens}$ be the set of all convex subsets of $\Ens$ ordered by set inclusion. The empty set $\emptyset \subset \Ens$ is a convex set. The whole space $\Ens \subseteq \Ens$ is also a convex set. It is therefore a bounded ordered set.
+	
+	Let $A, B \in \mathfrak{Conv}_{\Ens}$ be two convex subsets. Consider $A \cap B$. Any mixture of elements in $A \cap B$ is both a mixture of elements in $A$ and a mixture of elements in $B$. Therefore any mixture of elements of $A \cap B$ is both an element of $A$ and an element of $B$. This means it is also an element of $A \cap B$, which is therefore a convex set.
+	
+	The previous argument generalizes to a family of convex subsets $\{A_i\}_{i \in I} \subseteq \mathfrak{L}$. Therefore $\bigcap_{i \in I} A_i \in \mathfrak{Conv}_{\Ens}$ and $\mathfrak{Conv}_{\Ens}$ is an $\bigcap$-structure. This also means that it is a complete lattice.
+\end{proof}
+
+TODO: review the above proof; ideally, we would restrict to all Borel convex subset.
+
 
 \subsection{Fraction and fraction capacity}
 
