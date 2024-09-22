@@ -483,34 +483,44 @@ TODO: review the above proof; ideally, we would restrict to all Borel convex sub
 	Assuming that the mixing operation is continuous does not guarantee that we can vector space that embeds the convex space is a topological vector space. See \url{https://math.stackexchange.com/questions/4921905/cancellative-convex-spaces-and-topological-vector-spaces}. The issue is we have no guarantee of continuity on the inverse (i.e. subtraction, multiplication for a negative number).
 \end{remark}
 
-\section{Quantities}
+\section{Statistical properties and quantities}
 
 In the same way that we define ensembles first, we define quantities through their expectation over ensembles. The possible value for pure states will need to be recovered with constructions that are connected to spectral theory.
 
 \begin{defn}
-	A \textbf{statistical variable}, or simply variable, is a numerical quantity that is well-defined over all ensembles. Formally, it is a continuous linear real valued operator on $\Ens$. That is, $F : \Ens \to \mathbb{R}$ such that $F(p \ens_1 + \bar{p} \ens_2) = p F(\ens_1) + \bar{p} F(\ens_2)$. 
+	A \textbf{statistical property}, or simply property, is an attribute that allows statistical handling. Formally, it is a continuous map $F : \Ens \to \mathcal{Q}$ where $\mathcal{Q}$ is a convex topological space such that $F(p \ens_1 + \bar{p} \ens_2) = p F(\ens_1) + \bar{p} F(\ens_2)$.
+	
+	A \textbf{statistical quantity}, or statistical variable, or simply variable, is a numerical statistical property. That is, it is a continuous linear real valued operator $F : \Ens \to \mathbb{R}$.
 \end{defn}
 
 \begin{justification}
-	Continuity is required since the value of a variables is experimentally verifiable. The linearity of the operator associated to the quantity stems for the expectation. When mixing two different processes, the measured value will only depend on the selection at that particular time, and therefore each process will contribute to the final value based on its fraction.
+	This definition extends the general definition of properties and quantities we already gave to the statistical case. As before, continuity is required since verifying the value of the quantity corresponds to verifying that we are dealing with a specific subset of ensembles.
 	
-	Note that the value cannot be infinite. The only way to measure infinity is if the measured average keeps increasing in time. This would be a contradiction on the assumption that the ensemble is at equilibrium.
+	The ability to create convex combinations corresponds to the ability to create statistical averages. Therefore $\mathcal{Q}$ must be a convex set. Given that preparations are assumed to be independent, the a mixture of the preparation will produce a mixture of the properties according to the same fractions. 
+	
+	Quantities are simply properties that are linearly ordered. The ability to create convex combinations becomes the ability to take weighted averages of the quantities. Regardless of whether one starts from integers, rationals or real valued quantities, the statistical averages will, in general, be a real number.
+	
+	Note that the numerical value cannot be infinite. The only way to measure infinity is if the measured average keeps increasing in time. This would be a contradiction on the assumption that the ensemble is reproducible.
 \end{justification}
 
 \begin{remark}
 	Note that variables will have a contiguous range on the ensembles because, given two ensembles with different values, we can mix them to obtain any intermediate value. This does not mean that the variable can take all possible values on pure states. For example, the number of particles in a pure state will necessarily be a non-negative integer, but we can mix those to create ensembles that have non-integer average number of particles.
 \end{remark}
 
+\begin{coro}
+	A set of statistical quantities ${F_i}_{i \in I}$ can be collected into a single statistical property $F : \Ens \to \mathbb{R}^I$ where $F(\ens) = \{F_i(\ens)\}_{i \in I}$.
+\end{coro}
+
 \begin{prop}
-	Let $\Ens$ be a classical probability space. Then each statistical variable is the expectation of a random variable and vice-versa.
+	Let $\Ens$ be a classical probability space. Then each statistical quantity is the expectation of a random variable and vice-versa.
 \end{prop}
 
 \begin{proof}
-	Let $\Ens$ be an ensemble space where each ensemble is a probability measure $\mu$ over some sample space $\Omega$. Let $f : \Omega \to \mathbb{R}$ be a random variable, then the expectation $F(\mu) = \int_{\Omega} f d\mu$ is a statistical variable. Conversely, let $F : \Ens \to \mathbb{R}$ be a linear functional of the measures. Then, by (TODO: CHECK) Riesz representation theorem, we can write $F(\mu) = \int_{\Omega} f d\mu$ from some $f : \Omega \to \mathbb{R}$.
+	Let $\Ens$ be an ensemble space where each ensemble is a probability measure $\mu$ over some sample space $\Omega$. Let $f : \Omega \to \mathbb{R}$ be a random variable, then the expectation $F(\mu) = \int_{\Omega} f d\mu$ is a statistical quantity. Conversely, let $F : \Ens \to \mathbb{R}$ be a linear functional of the measures. Then, by (TODO: CHECK) Riesz representation theorem, we can write $F(\mu) = \int_{\Omega} f d\mu$ from some $f : \Omega \to \mathbb{R}$.
 \end{proof}
 
 \begin{conj}
-	Let $\Ens$ be a quantum ensemble space. Then each statistical variable is the expectation of an observable and vice-versa.
+	Let $\Ens$ be a quantum ensemble space. Then each statistical quantity is the expectation of an observable and vice-versa.
 \end{conj}
 
 \begin{proof}
@@ -633,10 +643,12 @@ This is an attempt to define spectra purely on the topology and the convex struc
 \end{remark}
 
 \begin{defn}
-	Given a statistical quantity $F : \Ens \to \mathbb{R}$, its spectra $S_F \subseteq \mathbb{R}$ is the set of values $f \in \mathbb{R}$ such that the set of ensembles supported by an open set that contains $f$ is non-empty.
+	Given a statistical quantity $F : \Ens \to \mathbb{R}$, its \textbf{spectrum} $\sigma(F) \subseteq \mathbb{R}$ is the set of values $f \in \mathbb{R}$, called \textbf{spectral elements}, such that the set of ensembles supported by an open set that contains $f$ is non-empty.
 \end{defn}
 
-TODO: check the standard notation for spectra
+\begin{prop}
+	
+\end{prop}
 
 \begin{conj}
 	We recover an equivalent notion of spectra for both classical and quantum mechanics.
