@@ -340,8 +340,15 @@ The convex structure allows us to characterize ensembles based on whether they c
 \end{proof}
 
 \begin{conj}
-	Let $A \subseteq \Ens$ be a Borel set. Then $\hull(A)$ is also a Borel set. 	Let $A \subseteq \Ens$ be an open set. Then $\hull(A)$ is also an open set.
-	
+	The hull is
+	\begin{enumerate}
+		\item continuous from below: $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any increasing sequence $\{A_i\}$
+		\item continuous from above: $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any decreasing sequence $\{A_i\}$
+	\end{enumerate}
+\end{conj}
+
+\begin{conj}
+	Let $A \subseteq \Ens$ be a Borel set. Then $\hull(A)$ is also a Borel set. Let $A \subseteq \Ens$ be an open set. Then $\hull(A)$ is also an open set.
 \end{conj}
 
 
@@ -397,6 +404,8 @@ TODO: review the above proof; ideally, we would restrict to all Borel convex sub
 		\item non negative and unit bounded: $\fcap_{\ens}(A) \in [0,1]$
 		\item monotone: $A \subseteq V \implies \fcap_{\ens}(A) \leq \fcap_{\ens}(B)$
 		\item subadditive: $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$
+		\item continuous from below: $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \fcap_{\ens}(A_i)$ for any increasing sequence $\{A_i\}$
+		\item continuous from above: $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \fcap_{\ens}(A_i)$ for any decreasing sequence $\{A_i\}$
 	\end{enumerate}
 \end{prop}
 
@@ -406,7 +415,19 @@ TODO: review the above proof; ideally, we would restrict to all Borel convex sub
 	2. The $\hull$ is a monotone function. The inverse image of a set is a monotone function. The supremum is a monotone function. Therefore the fraction capacity is a monotone function.
 	
 	3. Let $A, B \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(A \cup B)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(A \cup B)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in A$ and $\ens[v] \in B$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of fraction capacity, we must have $p\lambda \leq \fcap_{\ens}(A)$ and $p\bar{\lambda} \leq \fcap_{\ens}(B)$, therefore $p = p\lambda + p\bar{\lambda} \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. 	Since $\fcap_{\ens}(A \cup B)$ is the supremum for a set of $p$s for which the expression always holds, we have $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. The probability measure is subadditive.
+	
+	4. Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. That is $A_i \subseteq A_{i+1}$ for all $i$. Given that the fraction capacity is monotone, $\{\fcap_{\ens}(A_i)\}$ is an increasing sequence. Note that $\fcap_{\ens}(A_i) \leq 1$ for all $i$, therefore the sequence will have an upper bound which will coincide with the limit. Let $A = \lim\limits_{i \to \infty} A_i$. We have $A = \bigcup A_i$ and $A_i \subseteq A$ for all $i$. Since fraction capacity is monotone, we have $\fcap_{\ens}(A_i) \leq \fcap_{\ens}(A)$ for all $i$ and therefore $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) \leq \fcap_{\ens}(A)$. Suppose $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) < \fcap_{\ens}(A)$. Then there would be an $\ens[a] \in \hull(A)$ such that $\size_{\ens}(\ens[a]) > \size_{ens}(\ens[b])$ for all $\ens[b] \in \hull(A_i)$ for all $i$. But if $\ens[a] \in \hull(A)$, then it is a convex combinations of finitely many elements of $A$. Given that $\{A_i\}$ is an increasing sequence, there will be a $A_k$ that will contain those finitely many elements, and therefore $\ens[a] \in \hull(A_i)$ which is a contradiction. Therefore $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) \leq \fcap_{\ens}(A)$.
+	
+	5. The previous argument works in the same way for decreasing sequences.
 \end{proof}
+
+\begin{prop}
+	The fraction capacity is $\sigma$-subadditive.
+\end{prop}
+
+\begin{remark}
+	In \href{https://link.springer.com/book/10.1007/978-3-319-30690-2}{Set Functions, Games and Capacities in Decision Making}, it is claimed that finite additivity plus continuity implies $\sigma$-additivity. The conjecture is that this generalizes to $\sigma$-subadditivity.
+\end{remark}
 
 
 \subsection{Maximal component sequence}
