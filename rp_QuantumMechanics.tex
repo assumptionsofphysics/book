@@ -24,45 +24,80 @@ Composite system
 
 \section{Schroedinger equation and unitary evolution}
 
-TODO Since time is continuous, we can understand time evolution as a continuous series of time steps $U_{dt}$. Given that the evolution is unitary, we can write the infinitesimal time step as $U_{dt} = 1 + \imath \hbar H dt$. That is the following condition
-%TODO: proof?
-TODOis equivalent to \ref{rp-qm-uev-condUnitaryEvolution}.
-
-
+We start with the Schroedinger equation
 \begin{equation}\label{rp-qm-uev-condSchroedingerEq}
 	\tag{DR-SCEQ}
 	\eqtext{The evolution follows the equation $\imath \hbar \frac{d}{dt} \psi(t) = H \psi(t)$ where $H$ is a self-adjoint operator}
 \end{equation}
 
+We now want to write the evolution as an operator that act on a wave function. The infinitesimal time step is going to be
+\begin{equation}
+	\begin{aligned}
+		\psi(t+dt) &= \psi(t) + d\psi(t) + \psi(t) + \frac{d}{dt} \psi(t) dt \\
+		&= \psi(t)+ \frac{H dt}{\imath \hbar} \psi(t)\\
+		&= \left(1 + \frac{H dt}{\imath \hbar}\right)\psi(t) \\
+		&= U_{dt}\psi(t)
+	\end{aligned}
+\end{equation}
+
+Note that, since $H$ is a self-adjoint operator, $U_{dt}$ is a unitary operator. In fact
+\begin{equation}
+	\begin{aligned}
+		U_{dt}^\dagger U_{dt} &= \left(1 + \frac{H dt}{\imath \hbar}\right)^\dagger \left(1 + \frac{H dt}{\imath \hbar}\right) \\
+		&= \left(1 + \frac{H^\dagger dt}{(- \imath) \hbar}\right) \left(1 + \frac{H dt}{\imath \hbar}\right)\\
+		&= \left(1 - \frac{H dt}{\imath \hbar}\right) \left(1 + \frac{H dt}{\imath \hbar}\right) \\
+		&= 1 + \left(\frac{H dt}{\imath \hbar}\right)^2 \\
+		&= 1 + O(dt^2)
+	\end{aligned}
+\end{equation}
+
+This works the other way around. If we have an infinitesimal operator that is unitary, we can express it in that form. That is
+\begin{equation}
+	\begin{aligned}
+		U_{dt}\psi(t) &= \psi(t) + \frac{d\psi(t)}{dt} dt \\
+		&= (1 + A dt)\psi(t) \\
+		U_{dt}^\dagger U_{dt} &= \left(1 + A dt\right)^\dagger \left(1 + A dt\right) \\
+		&= \left(1 + A^\dagger dt\right) \left(1 + A dt\right)\\
+		&= 1 + \left(A + A^\dagger\right)dt + A^\dagger A dt^2 \\
+		&= 1 + \left(A + A^\dagger\right)dt + O(dt^2) \\
+	\end{aligned}
+\end{equation}
+If we want the operator to be unitary, then we must have that $A = - A^\dagger $, which means $A$ is (anti-self-adjoint) (?). Which means we can write it as $A = \frac{H}{\imath \hbar}$ where $H$ is a self-adjoint operator. The evolution follows the Schroedinger equation.
+
+This means that 
 \begin{equation}\label{rp-qm-uev-condUnitaryEvolution}
 	\tag{DR-UNIT}
 	\eqtext{The evolution is unitary: preserves the norm: $U^{\dagger}_{\Delta t} U_{\Delta t} = 1$} 
 \end{equation}
+is equivalent to \ref{rp-qm-uev-condSchroedingerEq}.
 
-
-Note that unitary evolution $U_{\Delta t}$ preserves the norm of state vectors. That is
+Note that if the evolution is unitary, then the inner product is conserved. In fact
 \begin{equation}
 	\begin{aligned}
-        \<\psi(t + \Delta t) | \psi(t + \Delta t)\> &= \< U_{\Delta t} \psi(t) | U_{\Delta t} \psi(t)\> \\
-        &=\<  \psi(t) | U^{\dagger}_{\Delta t} U_{\Delta t} | \psi(t)\> \\
-        &=\<  \psi(t) | 1 | \psi(t)\> \\
-        &=\<  \psi(t) | \psi(t)\>.
+		\< U \phi | U \psi\> &= \< \phi | U^\dagger U | \psi \> \\
+		&=\<  \phi | \psi \>.
 	\end{aligned}
 \end{equation}
-The reverse is true as well: a transformation that preserves the norm of all state vectors is a unitary operation. We have
+The argument works in reverse as well, therefore
+\begin{equation}\label{rp-qm-uev-condInnerProductPreserved}
+	\tag{DR-INN}
+	\eqtext{The evolution preserves the inner product : $\< U_{\Delta t} \phi | U_{\Delta t} \psi\> =\<  \phi | \psi \>$} 
+\end{equation}
+is equivalent to \ref{rp-qm-uev-condUnitaryEvolution}.
+
+
+In particular, unitary evolution will preserve the norm of vectors, since $|psi|^2 = \<\psi | \psi \>$. The reverse is true as well: a transformation that preserves the norm of all state vectors is a unitary operation. This is because the inner product can be expressed, through the polarization identity, in terms of the norm.
 \begin{equation}
 	\begin{aligned}
-		\< \psi(t+dt) | \psi(t+dt) \> &= \< U_{\Delta t} \psi(t) | U_{\Delta t} \psi(t)\>
-		&= \< \psi(t) | U^{\dagger}_{\Delta t} U_{\Delta t} | \psi(t)\>.
+		\< \phi | \psi \> = \frac{1}{4}\left( |\phi + \psi|^2 - |\phi - \psi|^2 - \imath |\phi + \imath \psi|^2 +\imath |\phi - \imath \psi|^2 \right)
 	\end{aligned}
 \end{equation}
-If $\< \psi(t+dt) | \psi(t+dt) \> = \<  \psi(t) | \psi(t)\>$ for all $\psi$, then we must have $U^{\dagger}_{\Delta t} U_{\Delta t} = 1$, which is the definition of a unitary operator. Therefore condition
+If the norm is conserved, then, the inner product is conserved and the evolultion is unitary. Therefore condition
 \begin{equation}\label{rp-qm-uev-condNormalized}
 	\tag{DR-NORM}
 	\eqtext{The evolution preserves the norm: $\< \psi(t) | \psi(t) \> = \< \psi(t+dt) | \psi(t+dt) \>$} 
 \end{equation}
-is equivalent to condition \ref{rp-qm-uev-condUnitaryEvolution}.
-%TODO: check that the cross terms are also going to work (probably look at the norm of $\psi + \phi$)
+is equivalent to condition \ref{rp-qm-uev-condInnerProductPreserved}.
 
 We now look at the square of the inner product between two states infinitesimally close in time. We have
 \begin{equation}
@@ -76,10 +111,10 @@ We now look at the square of the inner product between two states infinitesimall
 		&=1 + O(dt^2).
 	\end{aligned}
 \end{equation}
-Which means that the projection of the state after an infinitesimal time step over the initial state is one. Or, equivalently, that the change of state is orthogonal to the initial state. Note that the converse is true as well. If the square of the inner product between two states infinitesimally close in time is one, then the evolution is unitary. In fact, if $U_{\Delta t}$ is continuous, we can write the infintesimal time step as $U_{d t} = 1 + \frac{O dt}{\imath \hbar}$ from some operator $O$. If we follow the previous argument in reverse, we will find that $O = O^\dagger$. That is, $O$ is self-adjoint. Therefore $U_{dt}$ is unitary by condition \ref{rp-qm-uev-condSchroedingerEq}. Therefore condition
+Which means that the projection of the state after an infinitesimal time step over the initial state is one. Note that the converse is true as well. If the square of the inner product between two states infinitesimally close in time is one, then the evolution is unitary. In fact, if $U_{\Delta t}$ is continuous, we can write the infintesimal time step as $U_{d t} = 1 + \frac{O dt}{\imath \hbar}$ from some operator $O$. If we follow the previous argument in reverse, we will find that $O = O^\dagger$. That is, $O$ is self-adjoint. Therefore $U_{dt}$ is unitary by condition \ref{rp-qm-uev-condSchroedingerEq}. Therefore condition
 \begin{equation}\label{rp-qm-uev-condUnitaryBorn}
 	\tag{DR-UBOR}
-	\eqtext{The square of the inner product between to states infinitesimally close in time is one: $|\< \psi(t) | \psi(dt) \> |^2 = 1$} 
+	\eqtext{The square of the inner product between to states infinitesimally close in time is one: $|\< \psi(t) | \psi(t + dt) \> |^2 = 1$} 
 \end{equation}
 is yet another equivalent condition to unitary evolution.
 
@@ -90,24 +125,42 @@ The above condition makes sense if we understand what happens geometrically. A u
 \end{equation}
 is yet another equivalent condition.
 
-Another way to characterize unitary evolution is through what happens to an orthonormal basis $|e_i\>$. Given that a unitary evolution preserves the inner product, $\< U_{\Delta t} e_i | U_{\Delta t} e_j \> = \< e_i | e_j \> = \delta_{ij}$. Therefore the unitary evolution maps an orthonormal basis to another orthonormal basis. The converse is also true, if $U_{\Delta t}$ maps an orthonormal basis to another orthonormal basis, then the inner product is preserves. To see this, we can simply expand any vector as a superposition of the basis vector. That is
+Another way to characterize unitary evolution is through what happens to an orthonormal basis $|e_i\>$. Given that a unitary evolution preserves the inner product, $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$. Therefore the unitary evolution maps an orthonormal basis to another orthonormal basis. The converse is also true, if $U_{\Delta t}$ maps an orthonormal basis to another orthonormal basis, then the inner product is preserves. To see this, we can simply expand any vector as a superposition of the basis vector. That is
 \begin{equation}
 	\begin{aligned}
 		\<\psi(t) | \phi(t)\> &= \< c_i e_i | d_j e_j\> \\
 		&= c_i^* d_j \< e_i | e_j\> \\
-		&= c_i^* d_j \< U_{\Delta t} e_i | U_{\Delta t} e_j\> \\
-		&= \< U_{\Delta t} c_i e_i | U_{\Delta t} d_i e_j\> \\
-		&= \< U_{\Delta t} \psi(t) | U_{\Delta t} \phi(t)\> \\
-		&= \< \psi(t + \Delta t) | \phi(t + \Delta t)\> \\
+		&= c_i^* d_j \< U_{d t} e_i | U_{d t} e_j\> \\
+		&= \< U_{d t} c_i e_i | U_{d t} d_i e_j\> \\
+		&= \< U_{d t} \psi(t) | U_{d t} \phi(t)\> \\
+		&= \< \psi(t + d t) | \phi(t + d t)\> \\
 	\end{aligned}
 \end{equation}
 Therefore condition
 \begin{equation}\label{rp-qm-uev-condOrthonormalBasis}
 	\tag{DR-OBAS}
-	\eqtext{The change in time maps orthonormal basis to orthonormal basis: $\< U_{\Delta t} e_i | U_{\Delta t} e_j \> = \< e_i | e_j \> = \delta_{ij}$} 
+	\eqtext{The change in time maps orthonormal basis to orthonormal basis: $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$} 
 \end{equation}
 
-When looking at classical mechanics, we saw that Hamiltonian evolution implied conservation of entropy. The connection is still present in quantum mechanics. Let $\rho(t)$ be the evolution of a density operator. Let $\rho(t) = p_i |e_i(t) \> \<e_i(t)|$ the diagonalized expression for the density operator, where the basis can be, in general, different at each moment in time. Given the linearity of time evolution, the $p_i |e_i(t) \> \<e_i(t)| = p_i |U_{\Delta t}e_i(t) \> \<U_{\Delta t} e_i(t)|$. That is, the coefficients of the probability distribution over the basis remain the same. Only the basis changes. Since the entropy only depends on the coefficients $p_i$, the entropy remains unchanged.
+\subsection{Physical conditions}
+
+In classical mechanics we saw that Hamiltonian evolution was equivalent to determinism and reversibility. The same applies to quantum mechanics. If an evolution is deterministic and reversible, then knowing the initial state means knowing the final state and vice-versa. Given that quantum mechanics is a probabilistic theory, this translates as being able to predict the final state or reconstruct the initial state in terms of probability. That is, if I know the initial state with 100\% probability, I will know the final state with 100\% probability and vice-versa. Mathematically, this means that if we start with a pure state $\rho(t) = |\psi(t) \> \< \psi(t)|$, then the final state will have to be $\rho(t+\Delta t) = |\psi(t+\Delta t) \> \< \psi(t+\Delta t)|$. Given that both $\rho(t)$ and $\rho(t + \Delta t)$ are trace one operators, the norm of both $\psi(t)$ and $\psi(t+\Delta t)$ must be unitary. That is, a deterministic and reversible evolution must preserve the norm. Which means that 
+\begin{equation}\label{rp-qm-uev-condDetRev}
+	\tag{DR-EV}
+	\eqtext{The evolution is deterministic and reversible} 
+\end{equation}
+
+The same argument can be developed on probability distributions. Suppose that we have a mixed state, meaning that it can be understood as a classical mixture of a set of orthogonal states. If we have a deterministic and reversibile evolution evolution, we will be able to map the same distribution to another set of final state such that the probability remains unchanged. That is, if we are able to write $\rho(t) = p_i |e_i(t) \> \<e_i(t)|$, we must have $\rho(t+ \Delta t) = p_i |U_{\Delta t}e_i(t) \> \<U_{\Delta t} e_i(t)|$. For that two work, the final set of states $U_{\Delta t}e_i(t)$ must be orthogonal to each, therefore if the process transports probability distributions from initial to final observers, then it must map orthonormal basis to orthonormal basis. This means the evolution is unitary and 
+\begin{equation}\label{rp-qm-uev-condProbTrans}
+	\tag{DR-EV}
+	\eqtext{The evolution preserves probability distributions} 
+\end{equation}
+is another equivalent conditions.
+
+The idea here is that, in the end, determinism and reversibility is effectively a permutation of objects, while keeping the closeness (i.e. the differentiable topology) and distance (i.e. the inner product) the same.
+
+
+When looking at classical mechanics, we saw that determinism and reversibility, at a conceptual level, is equivalent to conservation of information entropy. This connection is still valid in quantum mechanics. Let $\rho(t)$ be the evolution of a density operator. Let $\rho(t) = p_i |e_i(t) \> \<e_i(t)|$ the diagonalized expression for the density operator, where the basis can be, in general, different at each moment in time. Given the linearity of time evolution, the evolution will be $U_{dt} \left( p_i |e_i(t) \> \<e_i(t)| \right)= p_i |U_{\Delta t}e_i(t) \> \<U_{\Delta t} e_i(t)|$. That is, the coefficients of the probability distribution over the basis remain the same. Only the basis changes. Since the entropy only depends on the coefficients $p_i$, the entropy remains unchanged.
 
 The converse is true: if an evolution preserves entropy, then it is unitary. First of all, note that pure states are the only states with zero entropy. Therefore pure states must be mapped to pure states. Now, consider two orthogonal states. An equal mixture of the two will give us a maximally mixed state over two pure states. This means that, given linearity, a maximally mixed state over two pure states can only be mapped to another maximally mixed state of two pure states. Therefore orthogonal states must be mapped to orthogonal states. This means that an evolution that preserves entropy must map an orthonormal basis to another orthonormal basis, and therefore it is a unitary evolution. That is, condition
 \begin{equation}\label{rp-qm-uev-condInfoEntropy}
@@ -116,18 +169,18 @@ The converse is true: if an evolution preserves entropy, then it is unitary. Fir
 \end{equation}
 is equivalent to \ref{rp-qm-uev-condSchroedingerEq}.
 
-Note that in quantum mechanics both information entropy and thermodynamic entropy coincide, in the sense that we do not have two different definition in quantum statistical mechanics as we have in classical statistical mechanics (i.e. logarithm of count of states and Shannon entropy). Also not that the condition is stronger in quantum mechanics, as it is enough to recover full unitary evolution. In classical mechanics it could only recover the preservation of number of states (i.e. of determinism) while it didn't recover the full Hamiltonian evolution (i.e. the conservation of independent of the DOFs).
+Note that in quantum mechanics both information entropy and thermodynamic entropy coincide, in the sense that we do not have two different definition in quantum statistical mechanics as we have in classical statistical mechanics (i.e. logarithm of count of states and Shannon entropy). What we can show, however, is that unitary evolution can be understood as an infinite sequence of projections that perturb the system minimally.
 
-* Orthogonal states remain orthogonal = unitary evolution
-* Inner product between state and state at next time step = 1 => unitary evolution
+Suppose that you prepare a spin 1/2 system in the horizontal direction and then measure the vertical direction. You have equal chance of measuring spin up or spin down. Now suppose you put a polarizer (?) at a 45 degree angle in between. There will be two projection, first on the 45 degree angle and then along the vertical direction. The chance of ending in the up state is greater than ending the in down state. You can imagine inserting other to (polarizers (?)) in between again, making 4 proections at a 22.5 degree angle between each pair. The chance of ending up in the up state is even greater. We can imagine, then, that if we put infinitely many steps at infinitesimal angles, the chance of being in the up state at the end will be 100\%.
 
-Physical
-* Conservation of entropy
-* Conservation of probability (i.e. unitary evolution)
-* (?) Preservation of uncertainty (would require CPTP) in terms of gaussian state/observarbles
-* Continuous sequences of measurements 
+We saw, in fact, that for a unitary evolution $\<\psi(t+dt) | \psi(t)\> =1$, that is the projection of the state at a future time step on the previous time step is one. This can be understood as making a projective measurement on an observable that is slightly different to one for which $\psi(t)$ is an eigenstate. That is, we can understand unitary evolution as an infiniteimal sequence of projections at each time step.
 
-Unitary evolution is deterministic and reversible evolution
+Another way of understanding this is that determinism and reversibility can be used for both measuring and preparing states. That is, if we prepare a system in a given state, we can use unitary evolution to prepare a system in the future state. Conversely, if we can measure a system in a given state, we can use unitary evolution to infer the state of the system at a prior time. Therefore, we can understand determinism and reversibility as a series of preparations or measurements. Since measurements in quantum mechanics are projections, it makes sense that we can understand unitary evolution as a sequence of projections. Therefore 
+\begin{equation}\label{rp-qm-uev-condProjectionSequence}
+	\tag{DR-PSEQ}
+	\eqtext{The evolution is an sequence of measurements at each time step} 
+\end{equation}
+is equivalent to \ref{rp-qm-uev-condDetRev}.
 
 \section{next}
 
