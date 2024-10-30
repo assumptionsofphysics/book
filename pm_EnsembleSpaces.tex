@@ -369,57 +369,70 @@ TODO: review the above proof; ideally, we would restrict to all Borel convex sub
 
 \subsection{Fraction and fraction capacity}
 
-\begin{defn}
-	Let $\ens, \ens[a] \in \Ens$ be two ensembles. The \textbf{fraction} of $\ens[a]$ in $\ens$ is the greatest mixing coefficient for which $\ens$ can be expressed as a mixture of $\ens[a]$. That is, $\size_{\ens}(\ens[a]) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \Ens \text{ s.t. }  \ens = p \ens[a] + \bar{p} \ens_1 \})$.
-\end{defn}
+In this section we are going to define \textbf{fraction capacity}, which is a generalization of probability to the non-additive case. The typical way to understand probability is through outcomes of a process: $50\%$ probability for tails means that if we repeated the coin toss multiple times, we would expect roughly half to be tails. In classical mechanics, it can also be understood as the probability of preparation: roughly half the times we selected a preparation procedure that prepared tails. In quantum mechanics, this does not work as the probability using during the mixing is the same as the probability of the outcome only if we are mixing orthogonal states. Effectively, probability in the usual sense is defined only on outcomes. The fraction capacity, instead, defines a measure on preparations, which turns out to be more general and only requires the convex structure.
 
-\begin{coro}
-	Let $\ens, \ens[a] \in \Ens$, then $\size_{\ens}(\ens[a]) = 0$ if and only if $\ens[a]$ is not a component of $\ens$
-\end{coro}
+The fraction capacity tells us how much of an ensemble $\ens$ can be constructed through a mixture of ensembles from a set $A$. It is a non-negative, unit bounded, sub-additive, monotone continuous measure, and it reduces to the probability measure in the classical case, and over measurements in the quantum case. The goal is to create a measure theoretic generalization of probability theory that can work on all ensemble spaces.
 
-\begin{proof}
-	Note that $\ens[a]$ is a component of $\ens$ if we can write $\ens = \lambda \ens[a] + \bar{\lambda} \ens_1$ for some $\lambda \in (0,1]$ and $\ens_1 \in \Ens$. In this case, $\size_{\ens}(\ens[a]) \geq \lambda > 0$. Conversely, if $\size_{\ens}(\ens[a]) > 0$ we can find $\size_{\ens}(\ens[a]) \geq \lambda > 0$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens_1$ for some $\ens_1 \in \Ens$.
-\end{proof}
+First we define the \textbf{fraction} of one element within another. For example, suppose $\ens$ is a uniform distribution for a six-faced dice. Suppose $\ens[a]$ represents the outcome $3$ with $100\%$ probability. Then $\ens$ can be understood as $\ens = \frac{1}{6} \ens[a] + \frac{5}{6} \ens[b]$. Note that $\frac{1}{6}$ is the highest coefficient we can put in front of $\ens[a]$ in a convex combination and have $\ens$ as a result. That is what we define the fraction of $\ens[a]$ in $\ens$ to be.
 
-\begin{remark}
-	We need to take the supremum as the maximum may not exist. For example, consider a discrete classical ensemble space and remove the endpoints. At the moment, there is no reason to rule out such space as unphysical.
-\end{remark}
-
-\begin{defn}
-	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a Borel set. The \textbf{fraction capacity} of $A$ for $\ens$ is the biggest fraction achievable with convex combinations of $A$. That is, $\fcap_{\ens}(A) = \sup(\size_{\ens}(\hull(A))\cup\{0\})$.
-\end{defn}
-
-\begin{coro}
-	The fraction capacity uniquely identifies an ensemble. That is, let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. Then $\fcap_{\ens_1} \neq \fcap_{\ens_2}$.
-\end{coro}
-
-\begin{proof}
-	Note that $\ens = 1 \ens_1 + 0 \ens_2$ if and only if $\ens = \ens_1$. Therefore, let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. We have $\fcap_{\ens_1}(\{\ens_1\}) = 1$ and $\fcap_{\ens_2}(\{\ens_1\}) \neq 1$. Which means $\fcap_{\ens_1} \neq \fcap_{\ens_2}$
-\end{proof}
-
-
-\begin{prop}
-	The fraction capacity for an ensemble is set function that is
-	\begin{enumerate}
-		\item non negative and unit bounded: $\fcap_{\ens}(A) \in [0,1]$
-		\item monotone: $A \subseteq B \implies \fcap_{\ens}(A) \leq \fcap_{\ens}(B)$
-		\item subadditive: $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$
-		\item continuous from below: $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \fcap_{\ens}(A_i)$ for any increasing sequence $\{A_i\}$
-		\item continuous from above: $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \fcap_{\ens}(A_i)$ for any decreasing sequence $\{A_i\}$
-	\end{enumerate}
-\end{prop}
-
-\begin{proof}
-	1. The fraction capacity takes a subset of $\Ens$ and returns a real value and is therefore a set function. The mixture coefficients are real values between zero and one. The supremum of a set of numbers between zero and one is between zero and one, and therefore the fraction capacity for an ensembles is non negative and unit bounded.
+\begin{mathSection}
+	\begin{defn}
+		Let $\ens, \ens[a] \in \Ens$ be two ensembles. The \textbf{fraction} of $\ens[a]$ in $\ens$ is the greatest mixing coefficient for which $\ens$ can be expressed as a mixture of $\ens[a]$. That is, $\size_{\ens}(\ens[a]) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens_1 \in \Ens \text{ s.t. }  \ens = p \ens[a] + \bar{p} \ens_1 \})$.
+	\end{defn}
 	
-	2. The $\hull$ is a monotone function. The inverse image of a set is a monotone function. The supremum is a monotone function. Therefore the fraction capacity is a monotone function.
+	\begin{coro}
+		Let $\ens, \ens[a] \in \Ens$, then $\size_{\ens}(\ens[a]) = 0$ if and only if $\ens[a]$ is not a component of $\ens$
+	\end{coro}
 	
-	3. Let $A, B \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(A \cup B)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(A \cup B)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in A$ and $\ens[v] \in B$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of fraction capacity, we must have $p\lambda \leq \fcap_{\ens}(A)$ and $p\bar{\lambda} \leq \fcap_{\ens}(B)$, therefore $p = p\lambda + p\bar{\lambda} \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. 	Since $\fcap_{\ens}(A \cup B)$ is the supremum for a set of $p$s for which the expression always holds, we have $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. The probability measure is subadditive.
+	\begin{proof}
+		Note that $\ens[a]$ is a component of $\ens$ if we can write $\ens = \lambda \ens[a] + \bar{\lambda} \ens_1$ for some $\lambda \in (0,1]$ and $\ens_1 \in \Ens$. In this case, $\size_{\ens}(\ens[a]) \geq \lambda > 0$. Conversely, if $\size_{\ens}(\ens[a]) > 0$ we can find $\size_{\ens}(\ens[a]) \geq \lambda > 0$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens_1$ for some $\ens_1 \in \Ens$.
+	\end{proof}
 	
-	4. Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. That is $A_i \subseteq A_{i+1}$ for all $i$. Given that the fraction capacity is monotone, $\{\fcap_{\ens}(A_i)\}$ is an increasing sequence. Note that $\fcap_{\ens}(A_i) \leq 1$ for all $i$, therefore the sequence will have an upper bound which will coincide with the limit. Let $A = \lim\limits_{i \to \infty} A_i$. We have $A = \bigcup A_i$ and $A_i \subseteq A$ for all $i$. Since fraction capacity is monotone, we have $\fcap_{\ens}(A_i) \leq \fcap_{\ens}(A)$ for all $i$ and therefore $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) \leq \fcap_{\ens}(A)$. Suppose $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) < \fcap_{\ens}(A)$. Then there would be an $\ens[a] \in \hull(A)$ such that $\size_{\ens}(\ens[a]) > \size_{ens}(\ens[b])$ for all $\ens[b] \in \hull(A_i)$ for all $i$. But if $\ens[a] \in \hull(A)$, then it is a convex combinations of finitely many elements of $A$. Given that $\{A_i\}$ is an increasing sequence, there will be a $A_k$ that will contain those finitely many elements, and therefore $\ens[a] \in \hull(A_k)$ which is a contradiction. Therefore $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) = \fcap_{\ens}(A)$.
+	\begin{remark}
+		We need to take the supremum as the maximum may not exist. For example, consider a discrete classical ensemble space and remove the endpoints. At the moment, there is no reason to rule out such space as unphysical.
+	\end{remark}
+\end{mathSection}
+
+We now define \textbf{fraction capacity} of a set of ensemble for another ensemble. Like before, suppose $\ens$ is a uniform distribution for a six-faced dice, but now take $A = \{ \ens[a], \ens[b] \}$ as, respectively, the outcomse $3$ and $4$ with $100\%$ probability. Then $\ens$ can be understood as $\ens = \frac{1}{3} \left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b] \right) + \frac{2}{3} \ens[b]$. Again, note that $\frac{1}{3}$ is the highest coefficient we can put in front of any convex combinations of elements of $A$, and still make a convex combination that has $\ens$ as a result. That is what we define the fraction capacity of $A$ for $\ens$ to be.
+
+The fraction capacity, then, defines how much of the ensemble $\ens$ can be constructed with elements of $A$. The term capacity is used first because, intuitively, it tells us how much can $A$ hold, and second because capacity is a name used to describe non-additive measures. The fraction capacity, in fact, is shown to have several nice properties. First, it's value is always between zero and one, since the coefficient of a convex combination must be so bound. Second, it is monotone in the sense that if $A$ gets bigger, the fraction capacity can only increase. Third, it is subadditive, meaning that the fraction capacity of the union of two sets must be the sum of the respective fraction capacities or less. Fourth, it is continuous. Note that if subadditivity is replaced by additivity, these are exactly the defining properties of a probability measure, since additivity and continuity are equivalent to $\sigma$-additivity.
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a Borel set. The \textbf{fraction capacity} of $A$ for $\ens$ is the biggest fraction achievable with convex combinations of $A$. That is, $\fcap_{\ens}(A) = \sup(\size_{\ens}(\hull(A))\cup\{0\})$.
+	\end{defn}
 	
-	5. The previous argument works in the same way for decreasing sequences.
-\end{proof}
+	\begin{coro}
+		The fraction capacity uniquely identifies an ensemble. That is, let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. Then $\fcap_{\ens_1} \neq \fcap_{\ens_2}$.
+	\end{coro}
+	
+	\begin{proof}
+		Note that $\ens = 1 \ens_1 + 0 \ens_2$ if and only if $\ens = \ens_1$. Therefore, let $\ens_1, \ens_2 \in \Ens$ such that $\ens_1 \neq \ens_2$. We have $\fcap_{\ens_1}(\{\ens_1\}) = 1$ and $\fcap_{\ens_2}(\{\ens_1\}) \neq 1$. Which means $\fcap_{\ens_1} \neq \fcap_{\ens_2}$
+	\end{proof}
+	
+	\begin{prop}
+		The fraction capacity for an ensemble is set function that is
+		\begin{enumerate}
+			\item non negative and unit bounded: $\fcap_{\ens}(A) \in [0,1]$
+			\item monotone: $A \subseteq B \implies \fcap_{\ens}(A) \leq \fcap_{\ens}(B)$
+			\item subadditive: $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$
+			\item continuous from below: $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \fcap_{\ens}(A_i)$ for any increasing sequence $\{A_i\}$
+			\item continuous from above: $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \fcap_{\ens}(A_i)$ for any decreasing sequence $\{A_i\}$
+		\end{enumerate}
+	\end{prop}
+	
+	\begin{proof}
+		1. The fraction capacity takes a subset of $\Ens$ and returns a real value and is therefore a set function. The mixture coefficients are real values between zero and one. The supremum of a set of numbers between zero and one is between zero and one, and therefore the fraction capacity for an ensembles is non negative and unit bounded.
+		
+		2. The $\hull$ is a monotone function. The inverse image of a set is a monotone function. The supremum is a monotone function. Therefore the fraction capacity is a monotone function.
+		
+		3. Let $A, B \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(A \cup B)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(A \cup B)$, we can write $\ens_1 = \lambda \ens[u] + \bar{\lambda} \ens[v]$ for some $\lambda \in [0,1]$, $\ens[u] \in A$ and $\ens[v] \in B$. Therefore we have $\ens = p \lambda \ens[u] + p \bar{\lambda} \ens[v] + \bar{p} \ens_2$. By the definition of fraction capacity, we must have $p\lambda \leq \fcap_{\ens}(A)$ and $p\bar{\lambda} \leq \fcap_{\ens}(B)$, therefore $p = p\lambda + p\bar{\lambda} \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. 	Since $\fcap_{\ens}(A \cup B)$ is the supremum for a set of $p$s for which the expression always holds, we have $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. The probability measure is subadditive.
+		
+		4. Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. That is $A_i \subseteq A_{i+1}$ for all $i$. Given that the fraction capacity is monotone, $\{\fcap_{\ens}(A_i)\}$ is an increasing sequence. Note that $\fcap_{\ens}(A_i) \leq 1$ for all $i$, therefore the sequence will have an upper bound which will coincide with the limit. Let $A = \lim\limits_{i \to \infty} A_i$. We have $A = \bigcup A_i$ and $A_i \subseteq A$ for all $i$. Since fraction capacity is monotone, we have $\fcap_{\ens}(A_i) \leq \fcap_{\ens}(A)$ for all $i$ and therefore $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) \leq \fcap_{\ens}(A)$. Suppose $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) < \fcap_{\ens}(A)$. Then there would be an $\ens[a] \in \hull(A)$ such that $\size_{\ens}(\ens[a]) > \size_{ens}(\ens[b])$ for all $\ens[b] \in \hull(A_i)$ for all $i$. But if $\ens[a] \in \hull(A)$, then it is a convex combinations of finitely many elements of $A$. Given that $\{A_i\}$ is an increasing sequence, there will be a $A_k$ that will contain those finitely many elements, and therefore $\ens[a] \in \hull(A_k)$ which is a contradiction. Therefore $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) = \fcap_{\ens}(A)$.
+		
+		5. The previous argument works in the same way for decreasing sequences.
+	\end{proof}
+\end{mathSection}
 
 \begin{conj}
 	The fraction capacity is $\sigma$-subadditive. That is, $\fcap_{\ens}(\bigcup A_i) \leq \sum \fcap_{\ens}(A_i)$.
@@ -653,7 +666,7 @@ In the same way that we define ensembles first, we define quantities through the
 
 \subsection{Spectra of a quantity}
 
-This is an attempt to define spectra purely on the topology and the convex structure, without reference to entropy and therefore inner product structure.
+This is an attempt to define spectra purely on the topology and the convex structure, without reference to entropy and therefore inner product structure. It is unclear whether this is possible. If it is not possible, this attempt is still useful to understand what are the required definitions.
 
 \begin{defn}
 	Let $\Ens$ be an ensemble space and let $F : \Ens \to \mathbb{R}$ be a statistical quantity. Let $U \subset \mathbb{R}$ an open set of possible values for the quantity. We define the set of \textbf{ensembles supported by $U$} as the convex set $A \subset \Ens$ such that for any component $\ens$ of any element $\ens[a] \in A$ $F(\ens) \in U$. That is, they are all the elements that can be mixed among each other and still have all components have an expectation that fall within $U$.
