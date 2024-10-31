@@ -544,7 +544,7 @@ In the same way that we define ensembles first, we define quantities through the
 \end{remark}
 
 \begin{coro}
-	A set of statistical quantities ${F_i}_{i \in I}$ can be collected into a single statistical property $F : \Ens \to \mathbb{R}^I$ where $F(\ens) = \{F_i(\ens)\}_{i \in I}$.
+	A set of statistical quantities $\{F_i\}_{i \in I}$ can be collected into a single statistical property $F : \Ens \to \mathbb{R}^I$ where $F(\ens) = \{F_i(\ens)\}_{i \in I}$.
 \end{coro}
 
 \begin{prop}
@@ -663,6 +663,36 @@ In the same way that we define ensembles first, we define quantities through the
 \begin{proof}
 	Check that the all maximal sequences give the same value.
 \end{proof}
+
+\subsection{Macrostates and thermodynamics}
+
+In this section we try to recover some elements of thermodynamics on the generalized ensemble space. We want to recover Gibbs' thermodynamics, which means an equation of state in terms of extensive quantities. Instead of extensive quantities, we are going to use statistical quantities. Note that the idea that all extensive quantities are statistical (i.e. the average during mixing) seems to work. The energy and the number or particles average during mixture. The idea that volume averages during mixture can be understood as the system oscillating between the different volumes defined by the components. It also seems that intensive quantities do not average during mixing. Temperature, for example, is only defined on equilibria (i.e. of Boltzmann distributions) and the mixture of two equilibria at different temperature is not an equilibrium. Still, we would need a general proof, which would require the notion of product spaces (i.e. intensitive/extensive quantities represent system/subsystem relationship).
+
+\begin{defn}
+	Let $\Ens$ a quantifiable ensemble space. Let $\{X_i\}_{i = 1}^n$ be set of statistical quantities, not necessarily complete. The \textbf{coarse graining} of $\Ens$ over $\{X_i\}_{i = 1}^n$ is the manifold $\mathcal{M} \subseteq \Ens$ represented by the ensemble that maximize the entropy for each fixed value of the quantities. That is, there exists a chart $\phi : \mathbb{R}^n \to \mathcal{M}$ such that $X^i(\psi(x^i)) = x^i$ and $S(\psi(x^i)) \geq \ens$ for all $\ens \in \Ens$ such that $X^i(\ens) = x^i$.
+\end{defn}
+
+\begin{remark}
+	TODO: prove that $\mathcal{M}$ is a manifold and inherits the topology from $\Ens$. Are we be able to recover the topological isolation of phase transitions?
+\end{remark}
+
+\begin{coro}
+	Every coarse graining defines an equation of state $S : \mathbb{R}^n \to \mathbb{R}$ that returns the entropy as a function of the statistical quantities. The equation of state is convex in all variables.
+\end{coro}
+
+\begin{proof}
+	Given that the value of the statistical quantities identify an ensemble in $\mathcal{M}$ and every ensemble has a well-defined entropy, the equation of state is defined. Let $x^i, y^i \in \mathbb{R}^n$ be two possible sets of values for the statistical quantities, and let $\lambda x^i + \bar{\lambda} y^i$ be a convex combination. We have $X^i(\psi(\lambda x^i + \bar{\lambda} y^i)) = \lambda x^i + \bar{\lambda} y^i = X^i(\lambda \psi(x^i) + \bar{\lambda} \psi(y^i))$. That is, $\psi(\lambda x^i + \bar{\lambda} y^i)$ and $\lambda \psi(x^i) + \bar{\lambda} \psi(y^i)$ are two ensembles that share the same values for the statistical variable. By definition, the entropy of the first cannot be lower than the entropy of the second. We have
+	\begin{equation}
+		\begin{aligned}
+			S(\lambda x^i + \bar{\lambda} y^i) &= S(\psi(\lambda x^i + \bar{\lambda} y^i)) \\
+			&\geq S(\lambda \psi(x^i) + \bar{\lambda} \psi(y^i)) \\
+			&\geq \lambda S(\psi(x^i)) + \bar{\lambda} S(\psi(y^i)) \\
+			&= \lambda S(x^i) + \bar{\lambda} S(y^i),
+		\end{aligned}
+	\end{equation}
+	which shows that the equation of state is convex in all its arguments.
+\end{proof}
+
 
 \subsection{Spectra of a quantity}
 
