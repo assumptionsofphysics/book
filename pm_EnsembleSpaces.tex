@@ -174,7 +174,7 @@ The second property of ensembles is that they can be mixed. That is, we can take
 \end{justification}
 
 \begin{remark}
-	Given symmetry and associativity, we can write $p_1 \ens_1 + p_2 \ens_2 + p_3 \ens_3$ where $p_2 = \bar{p}_1\overline{\left(\frac{p_3}{\bar{p}_1}\right)} = \bar{p}_3\overline{\left(\frac{p_1}{\bar{p}_3}\right)} = 1 - p_1 - p_3 = \overline{\left(p_1 + p_3\right)}$. We can also extend to mixtures of finitely many elements $\sum_i p_i \ens_i$ where $\sum_i p_i = 1$.
+	Given commutativity and associativity, we can write $p_1 \ens_1 + p_2 \ens_2 + p_3 \ens_3$ where $p_2 = \bar{p}_1\overline{\left(\frac{p_3}{\bar{p}_1}\right)} = \bar{p}_3\overline{\left(\frac{p_1}{\bar{p}_3}\right)} = 1 - p_1 - p_3 = \overline{\left(p_1 + p_3\right)}$. We can also extend to mixtures of finitely many elements $\sum_i p_i \ens_i$ where $\sum_i p_i = 1$.
 \end{remark}
 
 \begin{coro}
@@ -666,6 +666,8 @@ In the same way that we define ensembles first, we define quantities through the
 
 \subsection{Macrostates and thermodynamics}
 
+TODO: This should be moved after the definition of entropy.
+
 In this section we try to recover some elements of thermodynamics on the generalized ensemble space. We want to recover Gibbs' thermodynamics, which means an equation of state in terms of extensive quantities. Instead of extensive quantities, we are going to use statistical quantities. Note that the idea that all extensive quantities are statistical (i.e. the average during mixing) seems to work. The energy and the number or particles average during mixture. The idea that volume averages during mixture can be understood as the system oscillating between the different volumes defined by the components. It also seems that intensive quantities do not average during mixing. Temperature, for example, is only defined on equilibria (i.e. of Boltzmann distributions) and the mixture of two equilibria at different temperature is not an equilibrium. Still, we would need a general proof, which would require the notion of product spaces (i.e. intensitive/extensive quantities represent system/subsystem relationship).
 
 \begin{defn}
@@ -681,7 +683,7 @@ In this section we try to recover some elements of thermodynamics on the general
 \end{remark}
 
 \begin{prop}
-	The equation of state is strictly convex. That is, $S(\lambda x + \bar{\lambda} y) \geq \lambda S(x) + \bar{\lambda} S(y)$ and the equality holds if and only if $x=y$.
+	The equation of state is strictly concave. That is, $S(\lambda x + \bar{\lambda} y) \geq \lambda S(x) + \bar{\lambda} S(y)$ and the equality holds if and only if $x=y$.
 \end{prop}
 
 \begin{proof}
@@ -694,7 +696,7 @@ In this section we try to recover some elements of thermodynamics on the general
 			&= \lambda S(x) + \bar{\lambda} S(y),
 		\end{aligned}
 	\end{equation}
-	which shows that the equation of state is convex.
+	which shows that the equation of state is concave.
 	
 	Now suppose that $x=y$. Then on one side $S(\lambda x + \bar{\lambda} y) = S(x)$ and on the other side $\lambda S(x) + \bar{\lambda} S(y) = S(x)$. $S(\lambda x + \bar{\lambda} y) = \lambda S(x) + \bar{\lambda} S(y)$. Conversely, suppose that $x\neq y$. Then $\psi(x) \neq \psi(y)$. By the strict concavity of the entropy, we have
 	\begin{equation}
@@ -705,7 +707,7 @@ In this section we try to recover some elements of thermodynamics on the general
 			&= \lambda S(x) + \bar{\lambda} S(y),
 		\end{aligned}
 	\end{equation}
-	which shows that the equation of state is strictly convex.
+	which shows that the equation of state is strictly concave.
 \end{proof}
 
 \begin{remark}
@@ -777,6 +779,56 @@ The third and final property of ensembles is that they have a well-defined entro
 \begin{conj}
 	The upper bound of the entropy can be uniquely determined, instead of imposing it.
 \end{conj}
+
+\begin{proof}
+	Since the upper entropy bound has to be the same for all spaces, let us assume that $\Ens$ is such that it contains countably many ensembles $\ens_i$ whose mixtures always saturate the upper entropy bound. That is, $S(p \ens[a] + \bar{p} \ens[b]) = I(p, \bar{p}) + p S(\ens[a]) + \bar{p} S(\ens[b])$ for all $\ens[a], \ens[b] \in \hull(e_i)$. Given associativity, for each $\ens[a] \in \hull(e_i)$ we will have $S(\sum p_i e_i ) = I_n(p_i) + \sum p_i S(\ens_i)$ where $I_n : \mathbb{R}^n \to \mathbb{R}$ is a function of the coefficient only. Not that, given commutativity, the order of the $p_i$ do not matter and, since the coefficients can be zero, we must have $I_n(p_i) = I_{n+1}(p_i, 0)$.
+	
+	We now show that $I_n\left({\frac{1}{N}}\right) = k \log N$ with $k > 0$. Pick two positive integers $n, m \in \mathbb{Z}^+$. Pick $nm$ elements of $a_{jk} \in \{e_i\}_{i=1}^{\infty}$ where $1\leq j \leq n$ and $1 \leq k \leq m$. We have:
+	\begin{equation}
+		\begin{aligned}
+			S\left(\sum_{j=1}^{n}\sum_{k=1}^{m} \frac{1}{n}\frac{1}{m} \ens[a]_{jk}\right) &= I_{nm}\left(\left\{ \frac{1}{n}\frac{1}{m}\right\}_{i=1}^{nm}\right) + \sum_{j=1}^{n}\sum_{k=1}^{m} \frac{1}{n}\frac{1}{m} S\left(\ens[a]_{jk}\right) \\
+			= S\left(\sum_{j=1}^{n} \frac{1}{n} \sum_{k=1}^{m} \frac{1}{m} \ens[a]_{jk}\right)  &=I_{n}\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + \sum_{j=1}^{n} \frac{1}{n} S\left(\sum_{k=1}^{m}\frac{1}{m}\ens[a]_{jk}\right) \\
+			&=I_{n}\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + \sum_{j=1}^{n} \frac{1}{n}\left(I_{m}\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right) +  \sum_{k=1}^{m}\frac{1}{m}S\left(\ens[a]_{jk}\right)\right) \\
+			&=I_{n}\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + I_{m}\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right) + \sum_{j=1}^{n} \sum_{k=1}^{m}\frac{1}{n}\frac{1}{m}S\left(\ens[a]_{jk}\right)
+		\end{aligned}
+	\end{equation}
+	\begin{equation}
+		\begin{aligned}
+			I_{nm}\left(\left\{ \frac{1}{nm}\right\}_{i=1}^{nm}\right) 		&=I_n\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + I_m\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right)
+		\end{aligned}
+	\end{equation}
+	Note that $f(n) = I_n\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right)$ is a function of $n$ only such that $f(nm) = f(n) + f(m)$. Since $f$ is continuous, we have $f(n) = k \log n$. Since the entropy is strictly concave, $k$ must be positive. Therefore
+	\begin{equation}
+		I_n\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) = k \log n
+	\end{equation}
+	for some $k>0$.
+	
+	We now show that if the coefficients $p_i$ are rationals, $I_n\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - k \sum_{i=1}^{n} p_i \log p_i$. Let $\{p_i\}_{i=1}^{n}$ be rational coefficients for a convex combination. We can write them as $p_i = \frac{m_i}{m}$ where $m$ is the minimum common denominator. Since $p_i$ form a convex combination, we must have $\sum_{i=1}^{n} m_i = m$. Since $m_i$ is a positive integer, we can write $m_i = \sum_{j=1}^{m_i} 1$. We now take $m$ orthogonal ensembles $\ens[a]_{ij}$ where $1 \leq i \leq n$ and $1 \leq j \leq m_i$. We have
+	\begin{equation}
+	\begin{aligned}
+		S\left(\sum_{i=1}^{n}\sum_{j=1}^{m_i} \frac{1}{m} \ens[a]_{jk}\right) &= I_{m}\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right) + \sum_{i=1}^{n}\sum_{j=1}^{m_i} \frac{1}{m} S\left(\ens[a]_{ij}\right) \\
+		&= k \log m + \sum_{i=1}^{n}\sum_{j=1}^{m_i} \frac{1}{m} S\left(\ens[a]_{ij}\right) \\
+	\end{aligned}
+	\end{equation}
+	\begin{equation}
+	\begin{aligned}
+	= S\left(\sum_{i=1}^{n} \frac{m_i}{m} \sum_{j=1}^{m_i} \frac{1}{m_i} \ens[a]_{jk}\right)  &=I_{n}\left(\left\{ \frac{m_i}{m}\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} \frac{m_i}{m}  S\left(\sum_{j=1}^{m_i} \frac{1}{m_i} \ens[a]_{jk}\right) \\
+		&=I_{n}\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} \frac{m_i}{m}\left(I_{m_i}\left(\left\{ \frac{1}{m_i}\right\}_{i=1}^{m_i}\right) + \sum_{j=1}^{m_i} \frac{1}{m_i} S\left(\ens[a]_{ij}\right)\right) \\
+		&=I_{n}\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} \frac{m_i}{m} I_{m_i}\left(\left\{ \frac{1}{m_i}\right\}_{i=1}^{m_i}\right) + \sum_{i=1}^{n} \frac{m_i}{m} \sum_{j=1}^{m_i} \frac{1}{m_i}S\left(\ens[a]_{jk}\right) \\
+		&=I_{n}\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} p_i k \log m_i + \sum_{i=1}^{n}  \sum_{j=1}^{m_i} \frac{1}{m} S\left(\ens[a]_{jk}\right)
+	\end{aligned}
+	\end{equation}
+	\begin{equation}
+	\begin{aligned}
+		k \log m &= I_{n}\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} p_i k \log m_i \\
+		I_{n}\left(\left\{ p_i\right\}_{i=1}^{n}\right) &= k \log m - \sum_{i=1}^{n} p_i k \log m_i = \sum_{i=1}^{n} p_i k \log m - \sum_{i=1}^{n} p_i k \log m_i \\
+		&= - \sum_{i=1}^{n} p_i k \log \frac{m_i}{m} = - k \sum_{i=1}^{n} p_i \log p_i
+	\end{aligned}
+	\end{equation}
+	
+	Lastly, let $\{p_i\}_{i=1}^{n}$ be coefficients for a convex combination, not necessarily rational. Since $I_n$ is continuous and $p_i$ can be approximated with rational values at an arbitrary level of precision, we will have $I_n\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - k \sum_{i=1}^{n} p_i \log p_i$. In the case of $n=2$, we have $I_2(p_1, p_2) = I(p_1, p_2) = - k p_1 \log p_i - k p_2 \log p_i$.
+	
+\end{proof}
 
 \begin{remark}
 	In \url{https://arxiv.org/abs/1912.02012} we showed how the Shannon entropy quantifies the variability of elements within a distribution. Is it possible to rederive $I$ from requirements on convex spaces instead of distributions in particular? This would make the axiom less ad-hoc.
