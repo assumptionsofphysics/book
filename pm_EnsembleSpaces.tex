@@ -756,16 +756,16 @@ The third and final property of ensembles is that they have a well-defined entro
 	\begin{itemize}
 		\item \textbf{Continuity}
 		\item \textbf{Strict concavity}: $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$ with the equality holding if and only if $\ens_1 = \ens_2$
-		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality hold then, $e_1$ and $e_2$ are \textbf{non-overlapping} or \textbf{orthogonal}, noted $e_1 \ortho e_2$
+		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality holds then, $e_1$ and $e_2$ are \textbf{non-overlapping} or \textbf{orthogonal}, noted $e_1 \ortho e_2$
 	\end{itemize}
 \end{axiom}
 
 \begin{justification}
 	The entropy quantifies the variability of the elements within the ensemble. This justifies the existence of the entropy.
 	
-	Small changes in the ensemble should produce small changes in the variability, which justifies continuity. Mixing different ensembles will increase the variability, which justifies concavity. Mixing the same ensemble, however, should not increase the variability, which justifies strict concavity. 
+	Small changes in the ensemble should produce small changes in the variability, which justifies continuity. Also, entropy is a measureable quantity, therefore the map from the ensemble space to entropy should be topologically continuous. Mixing different ensembles will increase the variability, which justifies concavity. Mixing the same ensemble, however, should not increase the variability, which justifies strict concavity. 
 	
-	The variability increase is maximal when the two ensembles are non-overlapping, meaning they have no elements in common. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. This justifies the upper bound.
+	The variability increase is maximal when the two ensembles are non-overlapping, meaning they have no elements in common. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. This justifies the upper bound. The fact that the Shannon entropy is the only possible indicator is shown in proposition \ref{pm_es_entropyUnique}
 \end{justification}
 
 \begin{conj}
@@ -773,12 +773,35 @@ The third and final property of ensembles is that they have a well-defined entro
 \end{conj}
 
 \begin{remark}
-	We have found proofs that convex/concave quantities on a convex subspace of $\mathbb{R}^n$ are continuous. The proof may be generalizable to any topological convex space.
+	We have found proofs that convex/concave functions are continuous. However, these proofs fail on the boundary and it is unclear whether they are generalizatble on any topological convex space. It would be useful to understand whether this is a separate condition or not.
 \end{remark}
 
-\begin{conj}
-	The upper bound of the entropy can be uniquely determined, instead of imposing it.
-\end{conj}
+
+\begin{axiom}[Axiom of entropic orthogonality]
+	The entropy function of an ensemble space obeys the following properties
+	\begin{itemize}
+		\item \textbf{Orthogonality implies separateness}: $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$
+		\item \textbf{Mixtures preserve orthogonality}: let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \ortho \ens_1$ if and only if $\ens_4 \ortho \ens_2$ and $\ens_4 \ortho \ens_3$
+	\end{itemize}
+\end{axiom}
+
+\begin{justification}
+	If two ensembles are orthogonal, they have no elements in common. Therefore there will be no common component with the two. We are justified to assume that orthogonality implies separateness.
+	
+	Suppose an ensemble $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. That it has no elements in common with the mixture, which means it has no elements in common with either of them. Therefore $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. Now suppose $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. That it means it has no elements in common with either of them, and therefore it does not have any elements in common with their mixture. Therefore $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. We are justified to assume that mixtures preserve orthogonality.
+\end{justification}
+
+\begin{remark}
+	It is unclear whether ``orthogonality implies separatenes'' is an independent axiom. It is possible to prove that two orthogonal ensembles are not one the component of the other. The entropy of the coefficients (i.e. the Shannon entropy) has a vertical asymptote at each end. If two elements are orthogonal, the entropy along the segment that connects the two follows that function plus a linear function, which does not change the vertical asymptotes. Therefore the segment cannot be extended while preserving the convexity of the entropy, and therefore the two orthogonal elements must the extremes of the line that connects the two. This is necessary for separateness, but it is not sufficient.
+\end{remark}
+
+\begin{remark}
+	It is unclear whether ``mixtures preserve orthogonality'' is an independent axiom. Intuitively, the following argument tells us that it is.. Take the 2 dimensional simplex (i.e. a triangle) that represent a classical discrete probability space over three elements. Take the standard entropy, which will satisfy ``mixtures preserve orthogonality''. This is because the middle point has entropy $\log 3$. We can imagine changing the entropy so that it is a little bit lower in the center but it is unchanged on the sides. If that is possible, then the new entropy may still satisfy all other axioms. However, we need to check whether the resulting function is still strictly convex and continuous.
+\end{remark}
+
+\begin{prop}\label{pm_es_entropyUnique}
+	The entropy of the coefficient is the only possible upper bound, up to a choice of units, that depends only on the mixing coefficients.
+\end{prop}
 
 \begin{proof}
 	Since the upper entropy bound has to be the same for all spaces, let us assume that $\Ens$ is such that it contains countably many orthogonal ensembles $\{\ens_l\}_{l=1}^{\infty}$. Since mixtures preserve orthogonality, for any convex combinations $\sum_i p_i \ens[a]_i$ of finitely many $\{a_i\}_{i=1}^{n} \subset \{\ens_l\}_{l=1}^{\infty}$,  we have $S(\sum p_i \ens[a]_i ) = I_n(p_1, p_2, \dots, p_n) + \sum p_i S(\ens[a]_i)$ where $I_n : \mathbb{R}^n \to \mathbb{R}$ is a function of the coefficient only. Not that, given commutativity, the order of the $p_i$ do not matter and, since the coefficients can be zero, we must have $I_n(p_1, p_2, \dots, p_n) = I_{n+1}(p_1, p_2, \dots, p_n, 0)$. Therefore we can think of $I$ as a function of the coefficients and write $I(\{p_i\}_{i=1}^{n})$.
@@ -826,15 +849,8 @@ The third and final property of ensembles is that they have a well-defined entro
 	\end{aligned}
 	\end{equation}
 	
-	Lastly, let $\{p_i\}_{i=1}^{n}$ be coefficients for a convex combination, not necessarily rational. Since $I$ is continuous and $p_i$ can be approximated with rational values at an arbitrary level of precision, we will have $I\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - k \sum_{i=1}^{n} p_i \log p_i$. In the case of $n=2$, we have $I(p_1, p_2) = - k p_1 \log p_i - k p_2 \log p_i$.
-	
+	Lastly, let $\{p_i\}_{i=1}^{n}$ be coefficients for a convex combination, not necessarily rational. Since $I$ is continuous and $p_i$ can be approximated with rational values at an arbitrary level of precision, we will have $I\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - k \sum_{i=1}^{n} p_i \log p_i$. In the case of $n=2$, we have $I(p_1, p_2) = - k p_1 \log p_i - k p_2 \log p_i$.	
 \end{proof}
-
-\begin{remark}
-	In \url{https://arxiv.org/abs/1912.02012} we showed how the Shannon entropy quantifies the variability of elements within a distribution. Is it possible to rederive $I$ from requirements on convex spaces instead of distributions in particular? This would make the axiom less ad-hoc.
-	
-	The difference is that in that proof we are automatically assuming that things can be decomposed into orthogonal elements, and that mixture of orthogonal elements remain orthogonal (i.e. the axiom of entropic orthogonality). This should imply that mixture of many orthogonal element saturate the upper bound. Once that is assumed, then one can find the entropy difference for a generic uniform distribution, then for a rational distribution and then, by continuity, for all reals.
-\end{remark}
 
 \begin{conj}\label{pm_es_ensemblesAreTVS}
 	An ensemble space embeds in a topological vector space if and only if it is complemented (i.e. cancellative).
@@ -843,28 +859,6 @@ The third and final property of ensembles is that they have a well-defined entro
 \begin{proof}
 	The idea is to use the entropy to show that open balls are part of the topology, and then use this to show that multiplication for a scalar is continuous. The continuity of addition should come from the continuity of the mixing operation.
 \end{proof}
-
-\begin{axiom}[Axiom of entropic orthogonality]
-	The entropy function of an ensemble space obeys the following properties
-	\begin{itemize}
-		\item \textbf{Orthogonality implies separateness}: $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$
-		\item \textbf{Mixtures preserve orthogonality}: let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \ortho \ens_1$ if and only if $\ens_4 \ortho \ens_2$ and $\ens_4 \ortho \ens_3$
-	\end{itemize}
-\end{axiom}
-
-\begin{justification}
-	If two ensembles are orthogonal, they have no elements in common. Therefore there will be no common component with the two. We are justified to assume that orthogonality implies separateness.
-	
-	Suppose an ensemble $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. That it has no elements in common with the mixture, which means it has no elements in common with either of them. Therefore $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. Now suppose $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. That it means it has no elements in common with either of them, and therefore it does not have any elements in common with their mixture. Therefore $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. We are justified to assume that mixtures preserve orthogonality.
-\end{justification}
-
-\begin{remark}
-	It is unclear whether ``orthogonality implies separatenes'' is an independent axiom. It is possible to prove that two orthogonal ensembles are not one the component of the other. The entropy of the coefficients (i.e. the Shannon entropy) has a vertical asymptote at each end. If two elements are orthogonal, the entropy along the segment that connects the two follows that function plus a linear function, which does not change the vertical asymptotes. Therefore the segment cannot be extended while preserving the convexity of the entropy, and therefore the two orthogonal elements must the extremes of the line that connects the two. This is necessary for separateness, but it is not sufficient.
-\end{remark}
-
-\begin{remark}
-	It may be possible to show that mixtures preserve orthogonality is an independent axiom. Take the 2 dimensional simplex (i.e. a triangle) that represent a classical discrete probability space over three elements. Take the standard entropy, which will satisfy ``mixtures preserve orthogonality''. This is because the middle point has entropy $\log 3$. We can imagine changing the entropy so that it is a little bit lower in the center but it is unchanged on the sides. If that is possible, then the new entropy may still satisfy all other axioms.
-\end{remark}
 
 \begin{prop}
 	The discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the axiom of mixture and the axiom of entropic orthogonality.
