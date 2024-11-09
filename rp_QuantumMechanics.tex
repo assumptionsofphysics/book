@@ -173,7 +173,7 @@ Note that in quantum mechanics both information entropy and thermodynamic entrop
 
 Suppose that you prepare a spin 1/2 system in the horizontal direction and then measure the vertical direction. You have equal chance of measuring spin up or spin down. Now suppose you put a polarizer (?) at a 45 degree angle in between. There will be two projection, first on the 45 degree angle and then along the vertical direction. The chance of ending in the up state is greater than ending the in down state. You can imagine inserting other to (polarizers (?)) in between again, making 4 proections at a 22.5 degree angle between each pair. The chance of ending up in the up state is even greater. We can imagine, then, that if we put infinitely many steps at infinitesimal angles, the chance of being in the up state at the end will be 100\%.
 
-We saw, in fact, that for a unitary evolution $\<\psi(t+dt) | \psi(t)\> =1$, that is the projection of the state at a future time step on the previous time step is one. This can be understood as making a projective measurement on an observable that is slightly different to one for which $\psi(t)$ is an eigenstate. That is, we can understand unitary evolution as an infiniteimal sequence of projections at each time step.
+We saw, in fact, that for a unitary evolution $\<\psi(t+dt) | \psi(t)\> =1$, that is the projection of the state at a future time step on the previous time step is one. This can be understood as making a projective measurement on an observable that is slightly different to one for which $\psi(t)$ is an eigenstate. That is, we can understand unitary evolution as an infinitesimal sequence of projections at each time step.
 
 Another way of understanding this is that determinism and reversibility can be used for both measuring and preparing states. That is, if we prepare a system in a given state, we can use unitary evolution to prepare a system in the future state. Conversely, if we can measure a system in a given state, we can use unitary evolution to infer the state of the system at a prior time. Therefore, we can understand determinism and reversibility as a series of preparations or measurements. Since measurements in quantum mechanics are projections, it makes sense that we can understand unitary evolution as a sequence of projections. Therefore 
 \begin{equation}\label{rp-qm-uev-condProjectionSequence}
@@ -182,7 +182,23 @@ Another way of understanding this is that determinism and reversibility can be u
 \end{equation}
 is equivalent to \ref{rp-qm-uev-condDetRev}.
 
-\section{next}
+\section{Projection and measurements}
+
+%TODO: settle notation for projectors in Hilbert space
+
+WTS: Every state is an eigenstate of a unitary evolution, of a projection, and of an Observable.
+
+Given a pure state $|\psi \>$ we can always create the operator $P_{\psi}=|\psi \> \<\psi|$. This operator has $|\psi\>$ as an eigenvector with eigenvalue one, and any state $|\phi\>$ that is orthogonal to $|\psi\>$ will also be an eigenvector with eigenvalue zero. In fact:
+\begin{equation}
+	\begin{aligned}
+		P_{\psi} | \psi \> &= |\psi \> \<\psi|\psi\> = |\psi \> \\
+		P_{\psi} | \phi \> &= |\psi \> \<\psi|\phi\> = |\psi \> 0 = 0 \\
+	\end{aligned}
+\end{equation}
+Note that $P_{\psi}^\dagger = P_{\psi}$ which means that this is a Hermitian operator and since  $P_{\psi}^\dagger P_{\psi}  = |\psi \> \<\psi|\psi\> \<\psi| = |\psi \> 1 \<\psi| = |\psi \> \<\psi|$
+
+$X = |x_i\> x_i \< x_i|$
+
 
 Projections are processes with equilibria (all fine states are equilibria)
 * (?) Projection is not enough: need compatility with a unitary evolution
@@ -192,6 +208,8 @@ Projections are processes with equilibria (all fine states are equilibria)
 * Analogy to thermodynamics (context is like different type of ensembles)
 * Unitary evolution is quasi-static evolution (like in thermodynamics)
   - Make the parallel to S-matrix calculation where we put initial state at minus infinity, and final state at plus infinity for a process that actually last "femtoseconds"
+  
+\section{next}
 
 Observables
 * (?) Convex maps of mixed states are Hermitian operators
@@ -236,13 +254,57 @@ Quantum states as equibria
   - Recycle the argument that we have to be able to put a frame invariant distribution over it
   - -> two sphere is the only symplectic sphere and therefor is the only space
   - (?) why are ensembles the Bloch?
-  
-Problems with infinite dimensional spaces
-* Unsuitability of Hilbert space
-  - Hilbert spaces with different number of DOF are equivalent
-  - Ill-defined expectations: states with infinite energy/undefined position and so on...
-  - TODO: take all the arguments from the paper
-* Suitability of Schwartz spaces for special case
+
+\section{Problems with infinite dimensional spaces}
+
+\subsection{Continuous spectra}
+
+In the infinite dimensional cases, we have operators that have a continuous spectra, meaning that they do not have ``proper'' eigenstates. For example, for the position operator, the eigenvectors would correspond to the delta functions, which are not in the Hilbert space, but rather in the space of distributions. Therefore, there are no states with perfectly prepared position and the unitary transformation generated by position has no fixed points (i.e. equilibria, eigenstates).
+
+\subsection{Domain of operators}
+
+In the infinite dimensional case, any unbound operator $O$ will not be defined on the whole Hilbert space. That is, there will be some state $\psi$ for which $O |\psi\>$ is undefined. This may correspond, for example, to states where one has infinite energy, or a state that is a limit of a sequence for which the energy does not converge. That is, the state converges in the Hilbert space, but the value of the energy does not.
+
+\subsection{Equivalence of Hilbert spaces with continuous DOF}
+
+In classical mechanics, the state for $n$ particles is charted by the position and momentum of all the particles and therefore topologically is $\mathbb{R}^6n$. All these spaces are different from each other topologically. In quantum mechanics, the state space for $n$ particles is the space of wevafunctions over $\mathbb{R}^3n$. All these are separable Hilbert spaces with a countable basis. All Hilbert spaces with a countable basis are equivalent as we can write a unitary transformation that maps one into the other (i.e. simply take a basis in each space and map the elements one by one). This means that the state space for 1 particle or a billion particles, in quantum mechanics, are the same space. In principle, then, we could imagine a quantum channel that encodes the state of a billing particles onto a single one.
+
+\subsection{Schwartz spaces}
+
+For multiple independent DOF of position and momentum, the requirement to have all polynomials of position and momentum with a finite expectation value recovers the Schwartz space, which is a dense subspace of the Hilbert space (i.e. any element of the Hilbert space can be understood as the limit of a sequence of Schwarz functions).
+
+
+\subsection{Probability on a continuum}
+
+
+For any observable with any spectra, the probability measure can be recovered in the following way. Take a Borel set. Construct the projector onto that Borel set. For example, take $X$ as the position operator. Take a Borel set $A$ and take the indicator function $1_A$ and calculated $\< \psi | 1_A | \psi \> = \int_{\mathbb{R}} \psi^\dagger 1_A \psi dx = \int_{A} \psi^\dagger 1 \psi dx = \int_{A} \psi^\dagger \psi dx$.
+
+\subsection{Self-adjoint vs Hermitian}
+
+In some spaces,  \href{https://math.stackexchange.com/questions/38387/distinguishing-between-symmetric-hermitian-and-self-adjoint-operators}{self-adjoint is not equivalent to Hermitian.} Consider the half real-line $[0, +\infty]$. Consider the momentum operator $\imath \hbar \partial_x $. The exponential $e^{-\lambda x}$ where $\lambda > 0$ is an eigenstate of momentum
+\begin{equation}
+	\imath \hbar \partial_x e^{-\lambda x} = - \lambda \imath \hbar e^{-\lambda x}
+\end{equation}
+with eigenvalue is $- \lambda \imath \hbar$ which is imaginary.
+
+In the finite dimensional case, all self-adjoint are Hermitian.
+
+Definition of Hermitian adjoint. Given $O$, the Hermitian adjoint $O^\dagger$ is such that:
+\begin{equation}
+	\<\psi|O \phi\> = \< O^\dagger \psi | \phi \>
+\end{equation}
+where $\psi, \phi \in D(O)$ (i.e. the operator is defined on the vectors).
+
+
+\section{WARNINGS}
+
+\textbf{Every state (even if I restrict to Schwartz space) is an eigenstate of some projection, observable and unitary, because $|\psi \> \< \psi|$ is always defined.}
+
+\textbf{Not every projector, observable or unitary can be understood as having eigenstates. For example, projection on a Borel set of position.}
+
+
+Questions:
+* Can we see the position operator as the limit of a discretized position operator where the discretization is smaller and smaller? If we did the same with momentum, would the commutator between them become $\imath \hbar$.
 
 (?) Generalize this to arbitrary dimensions
 
