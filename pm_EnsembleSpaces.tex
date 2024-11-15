@@ -253,56 +253,6 @@ The convex structure allows us to characterize ensembles based on whether they c
 	3. By idempotence, we can write $\ens[a] = p_1 \ens[a] + \bar{p_1} \ens[a]$ for some $p_1 \in (0,1)$. Since $\ens[a]$ is a component of $\ens[b]$, we can write $\ens[b] = p_2 \ens[a] + \bar{p_2} \ens[c]$ for some $p_2 \in (0, 1)$ and $\ens[c] \in \Ens$. Therefore $\ens[a]$ and $\ens[b]$ have a common component.
 \end{proof}
 
-\begin{prop}
-	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ has no common component with a mixture of $\ens_1$ and $\ens_2$ then it has no common component with any mixture of $\ens_1$ and $\ens_2$ and with either $\ens_1$ and $\ens_2$. That is, if $\ens \separate p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \separate p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$.
-\end{prop}
-
-\begin{figure}[h]
-	\includegraphics[width=0.5\textwidth]{tempimages/DistinctAndMixture.jpg}
-\end{figure}
-
-\begin{proof}
-	Let $\ens \separate \ens[a] = p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$. Let $\ens[b] = \alpha \ens_1 + \bar{\alpha} \ens_2$ with $0 \leq \alpha < p$. We can do so without loss of generality since switching $\ens_1$ with $\ens_2$ would lead to the case where $1 \geq \alpha > p$. Suppose $\ens[b]$ is not separate from $\ens$. Then we can find $\ens[c] \in \Ens$ such that $\ens[b] = \beta \ens[c] + \bar{\beta} \ens[d]$ and $\ens = \gamma \ens[c] + \bar{\gamma} \ens[f]$ for some $\ens[d], \ens[f] \in \Ens$ and $\beta, \gamma \in (0, 1)$.
-	
-	Setting $\epsilon = \frac{p - \alpha}{\bar{\alpha}}$ and $\lambda = \bar{\epsilon} \beta$ we have:
-	\begin{align*}
-		\ens[a] &= p \ens_1 + \bar{p} \ens_2 = \left(p - \frac{\bar{p}}{\bar{\alpha}} \alpha \right) \ens_1 + \frac{\bar{p}}{\bar{\alpha}} \alpha \ens_1 + \frac{\bar{p}}{\bar{\alpha}} \bar{\alpha}\ens_2 \\
-		&= \left(\frac{p\bar{\alpha} - \bar{p}\alpha}{\bar{\alpha}} \right) \ens_1 + \frac{\bar{p}}{\bar{\alpha}} (\alpha \ens_1 + \bar{\alpha} \ens_2) = \left(\frac{p - p\alpha - \alpha + p \alpha}{\bar{\alpha}} \right) \ens_1 + \frac{1 - p + \alpha - \alpha}{\bar{\alpha}} (\alpha \ens_1 + \bar{\alpha} \ens_2) \\
-		&= \frac{p - \alpha}{\bar{\alpha}}  \ens_1 + \left( 1 - \frac{p - \alpha}{\bar{\alpha}}\right) (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} \ens[b] \\
-		&= \epsilon \ens_1 + \bar{\epsilon} ( \beta \ens[c] + \bar{\beta} \ens[d] ) = \bar{\epsilon} \beta \ens[c] + \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] = \lambda \ens[c] + \bar{\lambda} \ens[g]
-	\end{align*}
-	where $\ens[g] = \frac{1}{\bar{\lambda}}\left( \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] \right)$. This means $\ens[a]$ and $\ens$ have a common component, which is a contradiction. Therefore $\ens[b] \separate \ens$ and $\ens \separate p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$.
-\end{proof}
-
-\begin{defn}
-	A classical probability space is an ensemble space where all the elements are probability measures over a sample space $\Omega$.
-\end{defn}
-
-\begin{coro}
-	Classical discrete and classical continuous ensemble spaces are classical probability spaces.
-\end{coro}
-
-\begin{proof}
-	Both spaces are defined as the convex spaces of probability measures.
-\end{proof}
-
-\begin{prop}
-	In a classical probability space, $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$ implies $\ens \separate p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$. This is not true in a quantum ensemble space.
-\end{prop}
-
-\begin{proof}
-	Let $\Ens$ be a classical probability space and let $\mu, \nu \in \Ens$ be probability measures on some space $\Omega$. The space of probability measures is a subset of the space of signed measures. This space can be equipped with an inner product. The space of signed measures with support $U \subseteq \Omega$ forms a subspace. This means that, if we can find a $U \subseteq \Omega$ such that both $\mu(U) \neq 0$ and $\nu(U) \neq 0$, we can find a probability measure that is a component of both. That is, two probability measures that have overlapping support have a common component. Conversely, given that convex combination can only expand the support of measures, two probability measures that have no overlapping support have no common components.
-	
-	Now, suppose $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$. This means that the support of $\ens$ is disjoint from the support of both $\ens[a]$ and $\ens[b]$, which will also be disjoint from the support of any mixture of $\ens[a]$ and $\ens[b]$ since the support of the mixture will be the union of the individual supports. This means that $\ens$ will be separate from all mixtures of $\ens[a]$ and $\ens[b]$. The property holds, then, in any classical ensemble space.
-	
-	On the other hand, suppose that $\Ens$ is a quantum ensemble space. Without loss of generality, suppose $\Ens$ is the Bloch sphere and consider the states $x^+$, $x^-$, $z^+$, and $z^-$, which are points on the surface that form a square. These are all separate ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$. Therefore a mixture of $x^+$ and $x^-$ has a common component with $z^+$. That is, $z^+ \separate x^+$ and $z^+ \separate x^-$ but $z^+ \nseparate \frac{1}{2} x^+ + \frac{1}{2} x^-$.
-\end{proof}
-
-\begin{conj}
-	Let $\Ens$ be an ensemble space such that $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$ implies $\ens \separate p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$. Then it is a classical probability space.
-\end{conj}
-
-
 \subsection{Convex subsets and convex hull}
 
 \begin{defn}
@@ -446,7 +396,12 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 \subsection{Maximal component sequence}
 
 \begin{defn}
-	Let $\ens \in \Ens$ be an ensemble. A sequence of ensembles $\{\ens[a]_i\} \subseteq \Ens$ is an \textbf{increasing component sequence of $\ens$} if there exists a sequence of ensembles $\{\ens[b]_i\} \subseteq \Ens$ and an increasing sequence of $\{p_i\} \subseteq (0,1]$ such that $\ens = p_i \ens[a]_i + \bar{p}_i \ens[b]_i$. The \textbf{fraction} of the sequence is the limit $p_i \to p$.
+	Let $\ens \in \Ens$ be an ensemble. A sequence of ensembles $\{\ens[a]_i\} \subseteq \Ens$ is an \textbf{increasing component sequence of $\ens$} if we can write
+	\begin{align*}
+		\ens &= p_i \ens[a]_i + \bar{p}_i \ens[b]_i  \\
+		\ens[a]_{i+1} &= \frac{p_i}{p_{i+1}} \ens[a]_i + \frac{p_{i+1} - p_i}{p_{i+1}} \Delta \ens[a]_i
+	\end{align*}
+	where $\{\ens[b]_i\} \subseteq \Ens$, $\{\Delta\ens[a]_i\} \subseteq \Ens$ and $\{p_i\} \subseteq (0,1]$ is an increasing sequence. The \textbf{fraction} of the sequence is the limit $p_i \to p$.
 \end{defn}
 
 \begin{remark}
@@ -454,7 +409,7 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 \end{remark}
 
 \begin{defn}
-	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles. Then the \textbf{$A$-components of $\ens$} are the components of $\ens$ that are mixtures of $A$. That is, $A_{\ens} = \{ \ens_1 \in \hull(A) \, | \, \exists p \in (0,1], \ens_2 \in \Ens \text{ s.t. } \ens = p \ens_1 + \bar{p} \ens_2  \}$. An \textbf{increasing $A$-component sequence of $\ens$} is an increasing component sequence of $\ens$ such that $\{\ens[a]_i\} \subseteq \hull(A)$. The sequence $\{\ens[a]_i\} \subseteq \hull(A)$ is \textbf{maximal} if the fraction of the sequence is $\fcap_{\ens}(A)$.
+	Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a set of ensembles. Then the \textbf{$A$-components of $\ens$} are the components of $\ens$ that are mixtures of $A$. That is, $A_{\ens} = \{ \ens_1 \in \hull(A) \, | \, \exists p \in (0,1], \ens_2 \in \Ens \text{ s.t. } \ens = p \ens_1 + \bar{p} \ens_2  \}$. An \textbf{increasing $A$-component sequence of $\ens$} is an increasing component sequence of $\ens$ such that $\{\ens[a]_i\} \subseteq \hull(A)$ and $\{\Delta\ens[a]_i\} \subseteq \hull(A)$. The sequence $\{\ens[a]_i\} \subseteq \hull(A)$ is \textbf{maximal} if the fraction of the sequence is $\fcap_{\ens}(A)$.
 \end{defn}
 
 \begin{coro}
@@ -474,6 +429,26 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 \end{proof}
 
 \begin{prop}
+	Let $\{\ens[a]_i\} \subseteq \hull(A)$ be an $A$-component sequence of $\ens \in \Ens$. A \textbf{complement} sequence is an increasing sequence $\{\ens[b]_i\} \subseteq \Ens$ such that
+	$$ \ens = p_i \ens[a]_i + q_i \ens[b]_i + \overline{(p_i + q_i)} \ens[\epsilon]_i $$
+	where $\{\ens[\epsilon]_i\} \in \Ens$ and $(p_i + q_i) \to 1$. In this sense, the sum of the two sequences converges to $\ens$.
+\end{prop}
+
+\begin{remark}
+	Note that complement sequences always exist since we can set $\ens[\epsilon]_i = \ens[b]_i$, $q_i = \bar{p}$ and recover the definition of a component sequence.
+\end{remark}
+
+\begin{prop}
+	An $A$-component sequence $\{\ens[a]_i\} \subseteq \hull(A)$ of $\ens \in \Ens$ is maximal if and only if it admits a complement sequence that is always separate from the hull of A. That is, $\{\ens[b]_i\} \separate \hull(A)$.
+\end{prop}
+
+\begin{proof}
+	Suppose that $\{\ens[a]_i\}$ is maximal and let $\{\ens[b]_i\}$ be a complement.
+	$$ \ens = p_i \ens[a]_i + q_i \ens[b]_i + \overline{(p_i + q_i)} \ens[\epsilon]_i.$$
+	
+\end{proof}
+
+\begin{prop}
 	Let $\ens \in \Ens$ be an ensemble, $A \subseteq \Ens$ a set of ensembles and $\ens[a]_i$ and $\ens[b]_i$ two maximal $A$-component sequence of $\ens$. Then we can write $\ens[a]_i = p_i \ens[b]_i + \bar{p}_i \ens[c]_i$ where $\ens[c]_i \in \Ens$, $p_i \in [0,1]$ and $p_i \to 1$.
 \end{prop}
 
@@ -484,6 +459,68 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	
 	TODO: this may need to be fixed. Can't reconstruct the argument.
 \end{proof}
+
+\subsection{Classical probability spaces}
+
+\begin{defn}
+	A classical probability space is an ensemble space where all the elements are probability measures over a sample space $\Omega$.
+\end{defn}
+
+\begin{coro}
+	Classical discrete and classical continuous ensemble spaces are classical probability spaces.
+\end{coro}
+
+\begin{proof}
+	Both spaces are defined as the convex spaces of probability measures.
+\end{proof}
+
+\begin{prop}[Separatedness extends on all mixtures]\label{pm_es_separateExtendsMixtures}
+	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ has no common component with a mixture of $\ens_1$ and $\ens_2$ then it has no common component with any mixture of $\ens_1$ and $\ens_2$ and with either $\ens_1$ and $\ens_2$. That is, if $\ens \separate p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \separate p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$.
+\end{prop}
+
+\begin{figure}[h]
+	\includegraphics[width=0.5\textwidth]{tempimages/DistinctAndMixture.jpg}
+\end{figure}
+
+\begin{proof}
+	Let $\ens \separate \ens[a] = p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$. Let $\ens[b] = \alpha \ens_1 + \bar{\alpha} \ens_2$ with $0 \leq \alpha < p$. We can do so without loss of generality since switching $\ens_1$ with $\ens_2$ would lead to the case where $1 \geq \alpha > p$. Suppose $\ens[b]$ is not separate from $\ens$. Then we can find $\ens[c] \in \Ens$ such that $\ens[b] = \beta \ens[c] + \bar{\beta} \ens[d]$ and $\ens = \gamma \ens[c] + \bar{\gamma} \ens[f]$ for some $\ens[d], \ens[f] \in \Ens$ and $\beta, \gamma \in (0, 1)$.
+	
+	Setting $\epsilon = \frac{p - \alpha}{\bar{\alpha}}$ and $\lambda = \bar{\epsilon} \beta$ we have:
+	\begin{align*}
+		\ens[a] &= p \ens_1 + \bar{p} \ens_2 = \left(p - \frac{\bar{p}}{\bar{\alpha}} \alpha \right) \ens_1 + \frac{\bar{p}}{\bar{\alpha}} \alpha \ens_1 + \frac{\bar{p}}{\bar{\alpha}} \bar{\alpha}\ens_2 \\
+		&= \left(\frac{p\bar{\alpha} - \bar{p}\alpha}{\bar{\alpha}} \right) \ens_1 + \frac{\bar{p}}{\bar{\alpha}} (\alpha \ens_1 + \bar{\alpha} \ens_2) = \left(\frac{p - p\alpha - \alpha + p \alpha}{\bar{\alpha}} \right) \ens_1 + \frac{1 - p + \alpha - \alpha}{\bar{\alpha}} (\alpha \ens_1 + \bar{\alpha} \ens_2) \\
+		&= \frac{p - \alpha}{\bar{\alpha}}  \ens_1 + \left( 1 - \frac{p - \alpha}{\bar{\alpha}}\right) (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} \ens[b] \\
+		&= \epsilon \ens_1 + \bar{\epsilon} ( \beta \ens[c] + \bar{\beta} \ens[d] ) = \bar{\epsilon} \beta \ens[c] + \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] = \lambda \ens[c] + \bar{\lambda} \ens[g]
+	\end{align*}
+	where $\ens[g] = \frac{1}{\bar{\lambda}}\left( \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] \right)$. This means $\ens[a]$ and $\ens$ have a common component, which is a contradiction. Therefore $\ens[b] \separate \ens$ and $\ens \separate p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$.
+\end{proof}
+
+\begin{defn}
+	We say that in an ensemble space $\Ens$ \textbf{mixtures preserve separatedness} if whenever an ensemble is separate from two other ensembles, than it is also separate from all their mixtures. That is, $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$ implies $\ens \separate p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$.
+\end{defn}
+
+\begin{conj}
+	In a classical probability space mixtures preserve separatedness. In a quantum ensemble space mixtures do not preserve separatedness.
+\end{conj}
+
+\begin{proof}
+	Let $\Ens$ be a classical probability space and let $\mu, \nu \in \Ens$ be probability measures on some space $\Omega$. The space of probability measures is a subset of the space of signed measures. This space can be equipped with an inner product. The space of signed measures with support $U \subseteq \Omega$ forms a subspace. This means that, if we can find a $U \subseteq \Omega$ such that both $\mu(U) \neq 0$ and $\nu(U) \neq 0$, we can find a probability measure that is a component of both. That is, two probability measures that have overlapping support have a common component. Conversely, given that convex combination can only expand the support of measures, two probability measures that have no overlapping support have no common components. (TODO: if all measure are allowed, we may get also measures we do not want - Dirac measures, measures that have no continuous derivative. If not all measures are allowed, we have no existence of a measure that can be a component, and therefore there may be overlapping measures that have no common components.)
+	
+	Now, suppose $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$. This means that the support of $\ens$ is disjoint from the support of both $\ens[a]$ and $\ens[b]$, which will also be disjoint from the support of any mixture of $\ens[a]$ and $\ens[b]$ since the support of the mixture will be the union of the individual supports. This means that $\ens$ will be separate from all mixtures of $\ens[a]$ and $\ens[b]$. The property holds, then, in any classical ensemble space.
+	
+	On the other hand, suppose that $\Ens$ is a quantum ensemble space. Without loss of generality, suppose $\Ens$ is the Bloch sphere and consider the states $x^+$, $x^-$, $z^+$, and $z^-$, which are points on the surface that form a square. These are all separate ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$. Therefore a mixture of $x^+$ and $x^-$ has a common component with $z^+$. That is, $z^+ \separate x^+$ and $z^+ \separate x^-$ but $z^+ \nseparate \frac{1}{2} x^+ + \frac{1}{2} x^-$.
+\end{proof}
+
+\begin{prop}
+	Let $\Ens$ be an ensemble space where mixtures preserve separatedness. Then for every $\ens \in \Ens$ and any Borel set $A \subseteq \Ens$ we can find a sequence $\{a_i\} \subset \hull(A) $
+\end{prop}
+
+\begin{conj}
+	Let $\Ens$ be an ensemble space where mixtures preserve separatedness. Then it is a classical probability space.
+\end{conj}
+
+
+
 
 \subsection{Vector space embedding}
 
