@@ -928,6 +928,70 @@ The third and final property of ensembles is that they have a well-defined entro
 
 TODO: classical ensemble spaces: classical probability spaces plus measure and entropy is rho log rho where rho is Rad-Nik derivative
 
+\subsection{Entropic constraints on the space}
+
+\begin{prop}
+	Let $S : U \to \mathbb{R}$ be an entropy function defined on a subset $U \subseteq \mathbb{R}$ of the real. That is, $f$ satisfies:
+	\begin{itemize}
+		\item \textbf{Continuity}
+		\item \textbf{Strict concavity}: $S(p a + \bar{p} b) \geq p S(a) + \bar{p} S(b)$ with the equality holding if and only if $\ens_1 = \ens_2$
+		\item \textbf{Upper variability bound}: $S(p a + \bar{p} b) \leq I(p, \bar{p}) + p S(a) + \bar{p} S(b)$.
+	\end{itemize}
+	The $U$ must be a bounded subset.
+\end{prop}
+
+\begin{figure}[h]
+	\includegraphics[width=0.9\textwidth]{tempimages/BoundsFromEntropy.png}
+\end{figure}
+\begin{proof}
+	We are going to show that the function $S(x)$ cannot extend to plus infinity. The same argument can be applied in the symmetric case for minus infinity. We are going to assume that $S(0) = 0$ without loss of generality. If $S$ is not defined at zero, or if the value is different, we can apply a translation on the argument or on the value, which will not affect the concavity of the function.
+	
+	Let $0 < a < b \in U$ be two distinct values and $S(0)=0$, $S(a)$ and $S(b)$ their respective entropies. We are going to show that if pick a $c > b$ sufficiently large, we are not going to find a value for $S(c)$ that satisfies the bounds. In the picture, we have the three points. The blue line is the upper bound on $S(c)$ given by the strict concavity between $a$ and $b$. The purple curve is the lower bound on $S(c)$ given by the upper bound between $0$ and $b$. As the picture shows, the two bounds meet at some point and cannot be satisfied.
+	
+	From strict concavity, noting that $\frac{c-b}{c-a} + \frac{b-a}{c-a} = 1$, we have:
+	\begin{equation}
+		\begin{aligned}
+			S(b) &= S\left(\frac{c-b}{c-a} a + \frac{b-a}{c-a} c\right) > \frac{c-b}{c-a} S(a) + \frac{b-a}{c-a} S(c)\\
+			(b-a)S(c) &< (c-a) S(b) - (c-b) S(a) = (c-a) S(b) - (c-a) S(a) + (b-a) S(a) \\
+			S(c) &< \frac{S(b) - S(a)}{(b-a)} (c-a) + S(a) \\
+		\end{aligned}
+	\end{equation}
+	
+	From the upper bound, noting that $\frac{c-a}{c} + \frac{a}{c} = 1$, we have:
+	\begin{equation}
+		\begin{aligned}
+			S(a) &= S\left(\frac{c-a}{c} 0 + \frac{a}{c} c\right) \leq I\left(\frac{c-a}{c}, \frac{a}{c}\right) + \frac{c-a}{c} S(0) +\frac{a}{c} S(c) \\
+			\frac{a}{c} S(c) &\geq S(a) - I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+			S(c) &\geq \frac{c}{a} \left[ S(a) - I\left(\frac{c-a}{c}, \frac{a}{c}\right) \right]
+		\end{aligned}
+	\end{equation}
+	
+	Combining the bounds, we have:
+	\begin{equation}
+		\begin{aligned}
+			\frac{S(b) - S(a)}{(b-a)} (c-a) + S(a) &> \frac{c}{a} \left[ S(a) - I\left(\frac{c-a}{c}, \frac{a}{c}\right) \right] \\
+			(c-a) S(b) - (c-a)S(a) + (b-a) S(a) &> \frac{c(b-a)}{a} S(a) - \frac{c(b-a)}{a} I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+			a (c-a) S(b) - a(c-b) S(a) &> c(b-a)S(a) - c(b-a) I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+			a (c-a) S(b) + (-ac +ab -bc +ac) S(a) &> - c(b-a) I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+			a (c-a) S(b) -b (c-a) S(a) &> - c(b-a) I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+			a  S(b) - b S(a) &> - \frac{c(b-a)}{(c-a)} I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+		\end{aligned}
+	\end{equation}
+	
+	Since $b > a$, $c > a$ and $I(p,\bar{p}) \geq 0$ for all $p$, the right hand side of the inequality is always negative. As $c$ increases, the right hand side will go to zero, since $\lim\limits_{c\to \infty}\frac{c}{c-a} = 1$ and $\lim\limits_{c\to \infty} I\left(\frac{c-a}{c}, \frac{a}{c}\right) = I(1,0) = 0$. The left hand side is a constant. If the constant is positive, the inequality is always satisfied. If it is negative, it will not be satisfied for all $c$.
+	
+	From strict concavity, noting that $\frac{b-a}{b} + \frac{a}{b} = 1$, we have
+	\begin{equation}
+		\begin{aligned}
+			S(a) &= S\left(\frac{b-a}{b} 0 + \frac{a}{b} b\right) > \frac{b-a}{b} S(0) + \frac{a}{b} S(b) = \frac{a}{b} S(b)\\
+			b S(a) &> a S(b)  \\
+			0 &> a S(b) - b S(a)\\
+		\end{aligned}
+	\end{equation}
+	This shows that the left hand side of the previous inequality is negative, and therefore the bounds cannot be satisfied over the whole $\mathbb{R}$.
+\end{proof}
+
+
 \subsection{Reducible ensemble spaces}
 
 \begin{defn}
