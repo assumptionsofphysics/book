@@ -931,6 +931,73 @@ TODO: classical ensemble spaces: classical probability spaces plus measure and e
 \subsection{Entropic constraints on the space}
 
 \begin{prop}
+	Let $\ens[a], \ens[b] \in \Ens$ such that $p\ens[a] + \bar{p} \ens[b] = \ens[b]$ for some $p \in (0,1]$. Then $\ens[a] = \ens[b]$. 
+\end{prop}
+
+\begin{proof}
+	If the premise is true for $p = 1$, then $\ens[b] = 1 \ens[a] + 0 \ens[b] = \ens[a]$.
+	
+	Next we show that $q\ens[a] + \bar{q} \ens[b] = \ens[b]$ is true for some $q = p \in (0,1)$, then it is true for all $q \in [0,p]$. For every $\lambda \in [0,1]$, we have:
+	\begin{equation}
+		\begin{aligned}
+			\ens[b] &= \lambda \ens[b] + \bar{\lambda} \ens[b] = \lambda \left(p\ens[a] + \bar{p} \ens[b]\right) + \bar{\lambda} \ens[b] =  \lambda p\ens[a] + \left(\lambda \bar{p} + \bar{\lambda}\right)\ens[b] = q \ens[a] + \bar{q} \ens[b]
+		\end{aligned}
+	\end{equation}
+	where $q = \lambda p$. If $\lambda \in [0,1]$, then $0 \leq q \leq p$.
+	
+	Now we show that if $q\ens[a] + \bar{q} \ens[b] = \ens[b]$ is true for some $q = p \in (0,1)$, then it is true for all $q \in [0,1)$. We have:
+	\begin{equation}
+		\begin{aligned}
+			\ens[b] &= p\ens[a] + \bar{p} \ens[b] = p\ens[a] + \bar{p} \left(p\ens[a] + \bar{p} \ens[b]\right) = \left(p + p \bar{p}\right) p\ens[a] + \bar{p} \bar{p} \ens[b] = q \ens[a] + \bar{q} \ens[b]
+		\end{aligned}
+	\end{equation}
+	where $\bar{q} = \bar{p} \bar{p}$. Note that we can expand $\ens[b]$ recursively an arbitrary number of time, which means $q\ens[a] + \bar{q} \ens[b] = \ens[b]$ with $\bar{q} = \bar{p}^n$, which makes $p$ arbitrarily close to 1. Therefore the statement holds with any $q \in (0,1)$.
+
+	From strict concavity, we have
+	\begin{equation}
+		\begin{aligned}
+			S(\ens[b]) &= S(p \ens[a] + \bar{p} \ens[b]) \geq p S(\ens[a]) + (1-p) S(\ens[b]) \\
+			pS(\ens[a]) &\leq p S(\ens[b]) \\
+			S(\ens[a]) &\leq S(\ens[b])
+		\end{aligned}
+	\end{equation}
+	From the upper bound, we have
+	\begin{equation}
+		\begin{aligned}
+			S(\ens[b]) &= S(p \ens[a] + \bar{p} \ens[b]) \leq I(p, \bar{p}) + p S(\ens[a]) + (1-p) S(\ens[b]) \\
+			pS(\ens[a]) &\geq  I(p, \bar{p}) + p S(\ens[b]) \\
+			S(\ens[a]) &\geq \frac{1}{p} I(p, \bar{p}) + S(\ens[b])
+		\end{aligned}
+	\end{equation}
+	for any $p \in (0,1)$. Note that $\lim\limits_{p \to 1} \frac{1}{p} I(p, \bar{p}) = \lim\limits_{p \to 1}  - \log p - \frac{1-p}{p} \log (1-p) = 0$. Since $\frac{1}{p} I(p, \bar{p})$ can be made arbitrarily small, we must have $S(\ens[a]) \geq S(\ens[b])$. The two bounds, then, imply that $S(\ens[a]) = S(\ens[b])$
+	
+	But this means that $S(p \ens[a] + \bar{p} \ens[b]) = S(b) = pS(a)+\bar{p}S(b)$. Since the entropy is strictly concave, $\ens[a] = \ens[b]$.
+\end{proof}
+
+\begin{remark}
+	Note that the entropy axioms are necessary for the argument. We can, in fact, construct a counter-example that satisfies all the other axioms.
+	
+	Let $\Ens = \{\ens[a], \ens[b]\}$ with the convex structure that satisfies identity, idempotence and commutativity such that $p \ens[a] + \bar{p} \ens[b]$ equals $\ens[a]$ if $p=1$ and $\ens[b]$ otherwise. Identity, idemopotence and commutativity are satisfied by construction. For associativity, note that the final result of multiple mixtures is $\ens[a]$ if and only if if all elements of a mixtures are $\ens[a]$. The order does not matter, and therefore associativity is satisfied. Therefore such structure satisfies the axioms of a convex structure without the requirement of continuity.
+	
+	For continuity, note that $+^{-1}(\{\}) = \{\}$ and $+^{-1}(\Ens) = [0,1] \times \Ens \times \Ens$. Since $\{\}$ and $\Ens$ must in any topology of $\Ens$, the continuity condition is satisfied for these sets. Next, we have  $+^{-1}(\{\ens[a]\}) = [0,1] \times \{\ens[a]\} \times \{\ens[a]\} \cup [1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0] \times \{\ens[b]\} \times \{\ens[a]\}$. Note that $[0]$ and $[1]$ are not open sets, therefore $\{\ens[a]\}$ cannot be in the topology of $\Ens$ or mixing would not be continuous. Finally, $+^{-1}(\{\ens[b]\}) = [0,1] \times \{\ens[b]\} \times \{\ens[b]\} \cup (0,1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \{\ens[a]\} = (0,1] \times \Ens \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \Ens$. Since $(0,1]$ and $[0,1)$ are open sets, $\ens[b]$ can be an open set. Since the topology must be $\textsf{T}_0$, we must include at least $\{\ens[b]\}$ and therefore $\mathsf{T}_{\Ens} = \{\{\}, \{\ens[b]\}, \{\ens[a], \ens[b]\}\}$ is a $\mathsf{T}_0$ second countable topology for which mixing is continuous.
+	
+	It is therefore the entropy that rules out this case. If the entropy of the two ensembles is different, it would jump from $S(\ens[a])$ directly to $S(\ens[b])$ for an infinitesimal mixture, either violating the upper bound or strict concavity. But if $S(\ens[a])$ equals $S(\ens[b])$, the entropy of the mixture is the same, so the two ensemble cannot possibly be different.
+\end{remark}
+
+
+\begin{defn}
+	A \textbf{linear convex subset} $U \subseteq \Ens$ is a convex subset such that any three distinct elements can be written as the convex combination of one with respect of the other three. That is, for all $\ens_1, \ens_2, \ens_3 \in U$ there exists a permutation $\sigma$ and $p \in (0,1)$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}	$.
+\end{defn}
+
+\begin{prop}
+	Let $U \subseteq \Ens$ be a linear convex subset. Then we can find $V \subseteq \mathbb{R}$ and a convex set isomorphism $r : U \to V$. That is, $f(p \ens_a + \bar{p} \ens_b) = p r(\ens_a) + \bar{p} r(\ens_b)$ and $r^{-1} (p a + \bar{p} b) = p r^{-1} (a) + \bar{p} r^{-1} (b)$.
+\end{prop}
+
+\begin{proof}
+	Let $U \subseteq \Ens$ be a linear convex subset. Pick $\ens_0, \ens_1 \in U$. For any $\ens \in U$, we can find a convex expression between $\ens_0$, $\ens_1$ and $\ens$. Rearranging the terms, we can always write $\ens = a\ens_0 + b\ens_1$ where $a,b \in \mathbb{R}$. We can define $r(\ens) \mapsto b$.
+\end{proof}
+
+\begin{prop}
 	Let $S : U \to \mathbb{R}$ be an entropy function defined on a subset $U \subseteq \mathbb{R}$ of the real. That is, $f$ satisfies:
 	\begin{itemize}
 		\item \textbf{Continuity}
