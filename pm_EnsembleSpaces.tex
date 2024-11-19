@@ -985,6 +985,78 @@ TODO: classical ensemble spaces: classical probability spaces plus measure and e
 \end{remark}
 
 
+\begin{prop}
+	Let $\ens[a], \ens[b], \ens \in \Ens$ such that $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$. Then $\ens[a] = \ens[b]$.
+\end{prop}
+
+\begin{proof}
+	Let $\ens[a], \ens[b], \ens \in \Ens$ such that $p_0\ens[a] + \bar{p}_0 \ens = p_0 \ens[b] + \bar{p}_0 \ens$ for some $p_0 \in (0,1)$.
+	
+	First, we show that the relationship holds for all $p \in (0,p_0]$. In that case, since $0 < \frac{p}{p_0} \leq 1$, we have
+	\begin{equation}
+		\begin{aligned}
+			p \ens[a] + \bar{p} \ens &= \frac{p}{p_0} (p_0 \ens[a] + \bar{p}_0 \ens) + \overline{\left(\frac{p}{p_0}\right)} \ens = \frac{p}{p_0} (p_0 \ens[b] + \bar{p}_0 \ens) + \overline{\left(\frac{p}{p_0}\right)} \ens = p \ens[b] + \bar{p} \ens
+		\end{aligned}
+	\end{equation}
+	
+	Now that we show the relationship holds for all $p \in (0,1)$. Since we want to be able to expand multiple times, we want to be able to find a $p$ such that
+	\begin{equation}
+		p \ens[a] + p \ens[a] + (1-2p) \ens = p \ens[a] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens).
+	\end{equation}
+	That is, we want $\bar{p} p_0 = p$, which means
+	\begin{equation}
+		\begin{aligned}
+			p&=(1-p)p_0=p_0 - p p_0 \\
+			(1+p_0) p &= p_0 \\
+			p &= \frac{p_0}{1+p_0}
+		\end{aligned}
+	\end{equation}
+	We have
+	\begin{equation}
+	\begin{aligned}
+		2p \ens[a] + \bar{2p} \ens &=  p \ens[a] + p \ens[a] + (1-2p) \ens =  p \ens[a] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens) = p \ens[a] + \bar{p} (p_0 \ens[b] + \bar{p}_0 \ens) \\
+		&= p \ens[a] + p \ens[b] + (1-2p) \ens = p \ens[b] + p \ens[a] + (1-2p) \ens = p \ens[b] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens) \\
+		&= p \ens[b] + \bar{p} (p_0 \ens[b] + \bar{p}_0 \ens) = p \ens[b] + p \ens[b] + (1-2p) \ens \\
+		&= 2p \ens[b] + \bar{2p} \ens
+	\end{aligned}
+	\end{equation}
+	Note that $2p \geq p_0$. In fact
+	\begin{equation}
+		\begin{aligned}
+			2p = \frac{2p_0}{1+p_0} &\geq p_0  \\
+			2 p_0 &\geq (1+p_0) p_0 = p_0 + p_0^2 \\
+			p_0 &\leq p_0^2 \\
+		\end{aligned}
+	\end{equation}
+	which is true since $p_0 \in (0,1)$. Therefore, since we can always find a greater $p$ for which the relationship holds, combined with the previous result, $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$.
+	
+	Now we show that if  $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$, then we also have $p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} \ens = p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $\lambda \in [0,1]$. We have
+	\begin{equation}
+		\begin{aligned}
+			p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} \ens &= \lambda(p \ens[a] + \bar{p} \ens) + \bar{\lambda}(p\ens[b] + \bar{p} \ens) = \lambda(p \ens[a] + \bar{p} \ens) + \bar{\lambda}(p\ens[a] + \bar{p} \ens) \\
+			&= p\ens[a] + \bar{p} \ens = p\ens[b] + \bar{p} \ens 
+		\end{aligned}
+	\end{equation}
+	
+	Lastly, we show that $S(\lambda \ens[a] + \bar{\lambda} \ens[b]) = S(a) = S(b)$ for all $\lambda \in (0,1)$. Using the entropy bounds, with $\lambda \in [0,1]$, we have:
+	\begin{equation}
+	\begin{aligned}
+		\lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) &\leq \lim\limits_{p \to 1} I(p,\bar{p}) + p S(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} S(\ens) = S(\lambda\ens[a] + \bar{\lambda}\ens[b]) \\
+		\lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) &\geq \lim\limits_{p \to 1} p S(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} S(\ens) = S(\lambda\ens[a] + \bar{\lambda}\ens[b]) \\
+		\lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) &= S(\lambda\ens[a] + \bar{\lambda}\ens[b]) \\
+	\end{aligned}
+	\end{equation}
+	Using the above property, we also have
+	\begin{equation}
+		\begin{aligned}
+		S(\lambda\ens[a] + \bar{\lambda}\ens[b]) &= \lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) = \lim\limits_{p \to 1} S(p \ens[a] +\bar{p} \ens) = S(\ens[a]) \\
+		S(0\ens[a] + 1\ens[b]) &= S(\ens[b]) = S(\ens[a]) \\
+		\end{aligned}
+	\end{equation}
+	Since $S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\ens[a]) + \bar{\lambda} S(\ens[b])$, $\ens[a] = \ens[b]$.
+\end{proof}
+
+
 \begin{defn}
 	A \textbf{linear convex subset} $U \subseteq \Ens$ is a convex subset such that any three distinct elements can be written as the convex combination of one with respect of the other three. That is, for all $\ens_1, \ens_2, \ens_3 \in U$ there exists a permutation $\sigma$ and $p \in (0,1)$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}	$.
 \end{defn}
@@ -1167,6 +1239,16 @@ We now show that entropy imposes a geometric structure on the ensemble space. Th
 	The bounds descend directly from the bounds on entropy. By strict concavity, $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$, which means $S(p_1\ens_1 + p_2 \ens_2) - p_1 S(\ens_1) - p_2 S(\ens_2) \geq 0$, and in particular $S(\frac{1}{2} \ens_1 + \frac{1}{2} \ens_2) - \frac{1}{2} S(\ens_1) - \frac{1}{2} S(\ens_2) = MS(\ens_1, \ens_2) \geq 0$. By strict concavity, the equality holds if and only if $\ens_1 = \ens_2$
 	
 	By the upper variability bound, $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$, which means $S(p_1\ens_1 + p_2 \ens_2) - p_1 S(\ens_1) - p_2 S(\ens_2) \leq I(p_1, p_2)$, and in particular $S(\frac{1}{2} \ens_1 + \frac{1}{2} \ens_2) - \frac{1}{2} S(\ens_1) - \frac{1}{2} S(\ens_2) = MS(\ens_1, \ens_2) \leq I(\frac{1}{2}, \frac{1}{2}) = 1$. Given that $\ens_1$ and $\ens_2$ are orthogonal by definition if they saturate the upper variability bound, the equality holds if and only if $\ens_1$ and $\ens_2$ are orthogonal.
+\end{proof}
+
+\begin{conj}
+	Ensemble spaces are Hausdorff spaces and therefore limits are unique. 
+\end{conj}
+
+\begin{proof}
+	Since the entropy is a continuous function, the mixing entropy is also a continuous function and so it will be $MS(\ens, \cdot) : \Ens \to [0,+\infty)$ for any $\ens \in \Ens$. Let $\ens[a], \ens[b] \in \Ens$ and let $\epsilon = MS(\ens[a], \ens[b])$. Consider $U = MS(\ens[a], \cdot)^{-1}([0,\epsilon))$. Since $[0,\epsilon)$ is an open subset of $[0,+\infty)$, $U$ is an open set. Since $MS(\ens[a], \ens[a]) = 0$, $\ens[a] \in U$, and since $MS(\ens[a], \ens[b]) = \epsilon$, $\ens[b] \notin U$. Therefore $U$ is an open neighbourhood of $\ens[a]$ that does not contain $U$.
+	
+	TODO: we need to prove that the upper bound on entropy is such that the open balls eventually become disjoint.
 \end{proof}
 
 \begin{prop}
