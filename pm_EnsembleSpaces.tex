@@ -316,45 +316,33 @@ The convex structure allows us to characterize ensembles based on whether they c
 
 TODO: review the above proof; ideally, we would restrict to all Borel convex subset.
 
-\section{Entropy}
+\section{Axioms of entropy}
 
 The third and final property of ensembles is that they have a well-defined entropy, that corresponds to the thermodynamic entropy. That is, while in information theory one can define all sorts of measure of uncertainty/information/variability, there is one that corresponds to a physically measurable quantity.
 
-\begin{defn}
-	Given the coefficients $\{p_i\} \in [0,1]$ such that $\sum p_i = 1$, the \textbf{entropy of the coefficients} (also known as Shannon entropy) is defined as $I(\{p_i\}) = - \sum p_i \log p_i $.
-\end{defn}
-
 \begin{axiom}[Axiom of entropy]
-	An ensemble space $\Ens$ is equipped a function $S : \Ens \to \mathbb{R}$ called \textbf{entropy} with the following properties
+	An ensemble space $\Ens$ is equipped a function $S : \Ens \to \mathbb{R}$, defined up to a multiplicative constant, called \textbf{entropy} with the following properties
 	\begin{itemize}
-		\item \textbf{Continuity}
+		\item \textbf{Continuity}\footnote{Currently, we are imposing that the entropy is continuous. There may a chance that this requirement is redundant, as strict concavity and the upper variability bound may already impose this. We have found proofs that show that real valued convex/concave functions of real values are continuous. These proofs fail at the boundary, but the upper variability bound may fix this. Another open question is whether differentiability is also an independent requirement.}
 		\item \textbf{Strict concavity}: $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$ with the equality holding if and only if $\ens_1 = \ens_2$
-		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality holds then, $e_1$ and $e_2$ are \textbf{non-overlapping} or \textbf{orthogonal}, noted $e_1 \ortho e_2$
+		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality holds then, $e_1$ and $e_2$ are \textbf{non-overlapping} or \textbf{orthogonal}, noted $e_1 \ortho e_2$.
 	\end{itemize}
+	The function $I(p_1, p_2)$ is the same for all ensemble spaces.
 \end{axiom}
 
 \begin{justification}
-	The entropy quantifies the variability of the elements within the ensemble. This justifies the existence of the entropy.
+	The entropy quantifies the variability of the elements within the ensemble. As any physical quantity, its units are arbitrary. Since a change of units is a multiplicative factor, physically the entropy is defined up to a multiplicative constant. The zero entropy, instead, is fixed by its additivity over independent systems. This justifies the existence of the entropy.
 	
 	Small changes in the ensemble should produce small changes in the variability, which justifies continuity. Also, entropy is a measureable quantity, therefore the map from the ensemble space to entropy should be topologically continuous. Mixing different ensembles will increase the variability, which justifies concavity. Mixing the same ensemble, however, should not increase the variability, which justifies strict concavity. 
 	
-	The variability increase is maximal when the two ensembles are non-overlapping, meaning they have no elements in common. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. This justifies the upper bound. The fact that the Shannon entropy is the only possible indicator is shown in proposition \ref{pm_es_entropyUnique}
+	The variability increase is maximal when the two ensembles are non-overlapping, meaning they have no elements in common. In this case, the increase in variability is given only by the coefficients. This justifies the upper bound. The fact that the upper bound is given by the Shannon entropy, as it is the only indicator of variability that is continuous, monotonic and linear in probability, is derived late in proposition \ref{pm_es_entropyUnique}
 \end{justification}
-
-\begin{conj}
-	The entropy can be derived to be continuous, instead of imposing it.
-\end{conj}
-
-\begin{remark}
-	We have found proofs that convex/concave functions are continuous. However, these proofs fail on the boundary and it is unclear whether they are generalizatble on any topological convex space. It would be useful to understand whether this is a separate condition or not.
-\end{remark}
-
 
 \begin{axiom}[Axiom of entropic orthogonality]
 	The entropy function of an ensemble space obeys the following properties
 	\begin{itemize}
-		\item \textbf{Orthogonality implies separateness}: $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$
-		\item \textbf{Mixtures preserve orthogonality}: let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \ortho \ens_1$ if and only if $\ens_4 \ortho \ens_2$ and $\ens_4 \ortho \ens_3$
+		\item \textbf{Orthogonality implies separateness}:\footnote{It is unclear whether ``orthogonality implies separatenes'' is an independent axiom. It is possible to prove that two orthogonal ensembles are not one the component of the other. The entropy of the coefficients (i.e. the Shannon entropy) has a vertical asymptote at each end. If two elements are orthogonal, the entropy along the segment that connects the two follows that function plus a linear function, which does not change the vertical asymptotes. Therefore the segment cannot be extended while preserving the convexity of the entropy, and therefore the two orthogonal elements must the extremes of the line that connects the two. This is necessary for separateness, but it is not sufficient.} $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$
+		\item \textbf{Mixtures preserve orthogonality}:\footnote{It is unclear whether ``mixtures preserve orthogonality'' is an independent axiom. Intuitively, the following argument tells us that it is.. Take the 2 dimensional simplex (i.e. a triangle) that represent a classical discrete probability space over three elements. Take the standard entropy, which will satisfy ``mixtures preserve orthogonality''. This is because the middle point has entropy $\log 3$. We can imagine changing the entropy so that it is a little bit lower in the center but it is unchanged on the sides. However, one needs to provide an actual example and show that it satisfies all axioms.} let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \ortho \ens_1$ if and only if $\ens_4 \ortho \ens_2$ and $\ens_4 \ortho \ens_3$
 	\end{itemize}
 \end{axiom}
 
@@ -364,17 +352,10 @@ The third and final property of ensembles is that they have a well-defined entro
 	Suppose an ensemble $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. That it has no elements in common with the mixture, which means it has no elements in common with either of them. Therefore $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. Now suppose $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. That it means it has no elements in common with either of them, and therefore it does not have any elements in common with their mixture. Therefore $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. We are justified to assume that mixtures preserve orthogonality.
 \end{justification}
 
-\begin{remark}
-	It is unclear whether ``orthogonality implies separatenes'' is an independent axiom. It is possible to prove that two orthogonal ensembles are not one the component of the other. The entropy of the coefficients (i.e. the Shannon entropy) has a vertical asymptote at each end. If two elements are orthogonal, the entropy along the segment that connects the two follows that function plus a linear function, which does not change the vertical asymptotes. Therefore the segment cannot be extended while preserving the convexity of the entropy, and therefore the two orthogonal elements must the extremes of the line that connects the two. This is necessary for separateness, but it is not sufficient.
-\end{remark}
-
-\begin{remark}
-	It is unclear whether ``mixtures preserve orthogonality'' is an independent axiom. Intuitively, the following argument tells us that it is.. Take the 2 dimensional simplex (i.e. a triangle) that represent a classical discrete probability space over three elements. Take the standard entropy, which will satisfy ``mixtures preserve orthogonality''. This is because the middle point has entropy $\log 3$. We can imagine changing the entropy so that it is a little bit lower in the center but it is unchanged on the sides. If that is possible, then the new entropy may still satisfy all other axioms. However, we need to check whether the resulting function is still strictly convex and continuous.
-\end{remark}
-
 \begin{prop}\label{pm_es_entropyUnique}
-	The entropy of the coefficients is the only possible upper bound, up to a choice of units, that depends only on the mixing coefficients.
+	The entropy of the coefficients $I(p,\bar{p})$ is the Shannon entropy. That is, $I(p,\bar{p}) = - k \left(p \log p - \bar{p} \log \bar{p}\right)$ where $k$ is the arbitrary multiplicative constant for the entropy. For a mixture of arbitrary many elements, $I(\{p_i\}) = - k \sum p_i \log p_i$.
 \end{prop}
+
 
 \begin{proof}
 	Since the upper entropy bound has to be the same for all spaces, let us assume that $\Ens$ is such that it contains countably many orthogonal ensembles $\{\ens_l\}_{l=1}^{\infty}$. Since mixtures preserve orthogonality, for any convex combinations $\sum_i p_i \ens[a]_i$ of finitely many $\{\ens[a]_i\}_{i=1}^{n} \subset \{\ens_l\}_{l=1}^{\infty}$,  we have $S(\sum p_i \ens[a]_i ) = I_n(p_1, p_2, \dots, p_n) + \sum p_i S(\ens[a]_i)$ where $I_n : \mathbb{R}^n \to \mathbb{R}$ is a function of the coefficients only. Note that, given commutativity, the order of the $p_i$ does not matter and, since the coefficients can be zero, we must have $I_n(p_1, p_2, \dots, p_n) = I_{n+1}(p_1, p_2, \dots, p_n, 0)$. Therefore we can think of $I$ as a function of the coefficients and write $I(\{p_i\}_{i=1}^{n})$.
@@ -425,12 +406,12 @@ The third and final property of ensembles is that they have a well-defined entro
 	Lastly, let $\{p_i\}_{i=1}^{n}$ be coefficients for a convex combination, not necessarily rational. Since $I$ is continuous and $p_i$ can be approximated with rational values to an arbitrary level of precision, we will have $I\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - k \sum_{i=1}^{n} p_i \log p_i$. In the case of $n=2$, we have $I(p_1, p_2) = - k p_1 \log p_1 - k p_2 \log p_2$.	
 \end{proof}
 
-\begin{conj}\label{pm_es_ensemblesAreTVS}
-	An ensemble space embeds in a topological vector space if and only if it is complemented (i.e. cancellative).
-\end{conj}
+\begin{coro}
+	The units for the entropy are defined up to the physical dimension by the maximum of the entropy of the coefficients $I\left(\frac{1}{2}, \frac{1}{2}\right)$. If $I\left(\frac{1}{2}, \frac{1}{2}\right) = 1$, the entropy is measured in bits.
+\end{coro}
 
 \begin{proof}
-	The idea is to use the entropy to show that open balls are part of the topology, and then use this to show that multiplication for a scalar is continuous. The continuity of addition should come from the continuity of the mixing operation.
+	A rescaling of the entropy will rescale the entropy of the coefficients. Therefore setting the value of the maximum of $I$ will set the arbitrary multiplicative factor. If $I\left(\frac{1}{2}, \frac{1}{2}\right) = 1$, then $k$ is equal to one and the logarithm is base two, which corresponds to the entropy measured in bits. Note that this does not fix the physical dimensions of the entropy, only the numerical value.
 \end{proof}
 
 \begin{prop}
@@ -443,19 +424,11 @@ The third and final property of ensembles is that they have a well-defined entro
 	In the quantum case, the entropy is a continuous function of the density operator as the trace, multiplication and logarithm of an operator are all continuous functions. [TODO find short proof of convexity and maximum bound]
 \end{proof}
 
-\begin{remark}
-	There should be an interplay between convexity and entropy which limits either the space or the possible entropy. For example, consider a line. It is a convex space with no extreme points. We can parameterize the space with a variable $x$ such that the mixture of two ensembles is identified by the average $x$. Entropy can be written as $S(x)$. Since $S(x)$ is strictly concave over an infinite range, it will tend to minus infinity either when $x$ tends to infinity or minus infinity. Now take a line that intersects the curve. This will intersect it at only two points. By strict convexity, there is only going to be a single point with maximum vertical distance to the line, which has to be greater than zero. Now imagine moving the line down by one vertical unit. The vertical distance now is greater than one. This means that the average entropy can increase more than one during mixture, which violates the upper variability bound. Therefore a line cannot be an ensemble space.
-	
-	Note that an open segment is absolutely fine. We can, in fact, imagine a two state discrete classical ensemble space with the endpoint removed. This suggests that the convex space knows something about the geometry (probably parallelism and ratio of length - i.e. the affine structure).
-\end{remark}
+TODO: add the example of open segment. no orthogonal elements. no endpoint but we can tell it is finite
 
 \begin{conj}
 	Let $\ens_1, \ens_2 \in \Ens$ be such that $p\ens + \bar{p} \ens_1 = p\ens + \bar{p} \ens_2$ for some $p \in (0, 1)$ and $\ens \in \Ens$. Then $\ens_1$ and $\ens_2$ are not orthogonal.
 \end{conj}
-
-\begin{remark}
-	It seems very unlikely that differences in states that can be obscured by mixing would correspond to orthogonal states. The more general question is whether the strict concavity of the entropy allows non-complemented spaces.
-\end{remark}
 
 \begin{defn}
 	Two sets of ensembles $U, V \subseteq \Ens$ are orthogonal if $\ens_1 \ortho \ens_2$ for all $\ens_1 \in U$ and $\ens_2 \in V$. 
@@ -664,6 +637,15 @@ TODO: classical ensemble spaces: classical probability spaces plus measure and e
 	\end{equation}
 	This shows that the left hand side of the previous inequality is negative, and therefore the bounds cannot be satisfied over the whole $\mathbb{R}$.
 \end{proof}
+
+\begin{conj}\label{pm_es_ensemblesAreTVS}
+	An ensemble space embeds in a topological vector space if and only if it is complemented (i.e. cancellative).
+\end{conj}
+
+\begin{proof}
+	The idea is to use the entropy to show that open balls are part of the topology, and then use this to show that multiplication for a scalar is continuous. The continuity of addition should come from the continuity of the mixing operation.
+\end{proof}
+
 
 \section{Generalized probability theory}
 
