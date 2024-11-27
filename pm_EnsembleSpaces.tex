@@ -316,6 +316,355 @@ The convex structure allows us to characterize ensembles based on whether they c
 
 TODO: review the above proof; ideally, we would restrict to all Borel convex subset.
 
+\section{Entropy}
+
+The third and final property of ensembles is that they have a well-defined entropy, that corresponds to the thermodynamic entropy. That is, while in information theory one can define all sorts of measure of uncertainty/information/variability, there is one that corresponds to a physically measurable quantity.
+
+\begin{defn}
+	Given the coefficients $\{p_i\} \in [0,1]$ such that $\sum p_i = 1$, the \textbf{entropy of the coefficients} (also known as Shannon entropy) is defined as $I(\{p_i\}) = - \sum p_i \log p_i $.
+\end{defn}
+
+\begin{axiom}[Axiom of entropy]
+	An ensemble space $\Ens$ is equipped a function $S : \Ens \to \mathbb{R}$ called \textbf{entropy} with the following properties
+	\begin{itemize}
+		\item \textbf{Continuity}
+		\item \textbf{Strict concavity}: $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$ with the equality holding if and only if $\ens_1 = \ens_2$
+		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality holds then, $e_1$ and $e_2$ are \textbf{non-overlapping} or \textbf{orthogonal}, noted $e_1 \ortho e_2$
+	\end{itemize}
+\end{axiom}
+
+\begin{justification}
+	The entropy quantifies the variability of the elements within the ensemble. This justifies the existence of the entropy.
+	
+	Small changes in the ensemble should produce small changes in the variability, which justifies continuity. Also, entropy is a measureable quantity, therefore the map from the ensemble space to entropy should be topologically continuous. Mixing different ensembles will increase the variability, which justifies concavity. Mixing the same ensemble, however, should not increase the variability, which justifies strict concavity. 
+	
+	The variability increase is maximal when the two ensembles are non-overlapping, meaning they have no elements in common. In this case, the increase in variability is given only by the coefficients and must follow the Shannon entropy as it is the only continuous indicator of variability that is linear in probability. This justifies the upper bound. The fact that the Shannon entropy is the only possible indicator is shown in proposition \ref{pm_es_entropyUnique}
+\end{justification}
+
+\begin{conj}
+	The entropy can be derived to be continuous, instead of imposing it.
+\end{conj}
+
+\begin{remark}
+	We have found proofs that convex/concave functions are continuous. However, these proofs fail on the boundary and it is unclear whether they are generalizatble on any topological convex space. It would be useful to understand whether this is a separate condition or not.
+\end{remark}
+
+
+\begin{axiom}[Axiom of entropic orthogonality]
+	The entropy function of an ensemble space obeys the following properties
+	\begin{itemize}
+		\item \textbf{Orthogonality implies separateness}: $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$
+		\item \textbf{Mixtures preserve orthogonality}: let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \ortho \ens_1$ if and only if $\ens_4 \ortho \ens_2$ and $\ens_4 \ortho \ens_3$
+	\end{itemize}
+\end{axiom}
+
+\begin{justification}
+	If two ensembles are orthogonal, they have no elements in common. Therefore there will be no common component with the two. We are justified to assume that orthogonality implies separateness.
+	
+	Suppose an ensemble $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. That it has no elements in common with the mixture, which means it has no elements in common with either of them. Therefore $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. Now suppose $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. That it means it has no elements in common with either of them, and therefore it does not have any elements in common with their mixture. Therefore $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. We are justified to assume that mixtures preserve orthogonality.
+\end{justification}
+
+\begin{remark}
+	It is unclear whether ``orthogonality implies separatenes'' is an independent axiom. It is possible to prove that two orthogonal ensembles are not one the component of the other. The entropy of the coefficients (i.e. the Shannon entropy) has a vertical asymptote at each end. If two elements are orthogonal, the entropy along the segment that connects the two follows that function plus a linear function, which does not change the vertical asymptotes. Therefore the segment cannot be extended while preserving the convexity of the entropy, and therefore the two orthogonal elements must the extremes of the line that connects the two. This is necessary for separateness, but it is not sufficient.
+\end{remark}
+
+\begin{remark}
+	It is unclear whether ``mixtures preserve orthogonality'' is an independent axiom. Intuitively, the following argument tells us that it is.. Take the 2 dimensional simplex (i.e. a triangle) that represent a classical discrete probability space over three elements. Take the standard entropy, which will satisfy ``mixtures preserve orthogonality''. This is because the middle point has entropy $\log 3$. We can imagine changing the entropy so that it is a little bit lower in the center but it is unchanged on the sides. If that is possible, then the new entropy may still satisfy all other axioms. However, we need to check whether the resulting function is still strictly convex and continuous.
+\end{remark}
+
+\begin{prop}\label{pm_es_entropyUnique}
+	The entropy of the coefficients is the only possible upper bound, up to a choice of units, that depends only on the mixing coefficients.
+\end{prop}
+
+\begin{proof}
+	Since the upper entropy bound has to be the same for all spaces, let us assume that $\Ens$ is such that it contains countably many orthogonal ensembles $\{\ens_l\}_{l=1}^{\infty}$. Since mixtures preserve orthogonality, for any convex combinations $\sum_i p_i \ens[a]_i$ of finitely many $\{\ens[a]_i\}_{i=1}^{n} \subset \{\ens_l\}_{l=1}^{\infty}$,  we have $S(\sum p_i \ens[a]_i ) = I_n(p_1, p_2, \dots, p_n) + \sum p_i S(\ens[a]_i)$ where $I_n : \mathbb{R}^n \to \mathbb{R}$ is a function of the coefficients only. Note that, given commutativity, the order of the $p_i$ does not matter and, since the coefficients can be zero, we must have $I_n(p_1, p_2, \dots, p_n) = I_{n+1}(p_1, p_2, \dots, p_n, 0)$. Therefore we can think of $I$ as a function of the coefficients and write $I(\{p_i\}_{i=1}^{n})$.
+	
+	We now show that $I\left(\left\{\frac{1}{n}\right\}_{i=1}^{n}\right) = k \log n$ with $k > 0$. That is, the maximum increase of entropy for a uniform distribution is proportional to the logarithm of the number of cases. Pick two positive integers $n, m \in \mathbb{Z}^+$. Pick $nm$ elements $a_{jk} \in \{e_l\}_{l=1}^{\infty}$ where $1\leq j \leq n$ and $1 \leq  k \leq m$. We have:
+	\begin{equation}
+		\begin{aligned}
+			S\left(\sum_{j=1}^{n}\sum_{k=1}^{m} \frac{1}{n}\frac{1}{m} \ens[a]_{jk}\right) &= I\left(\left\{ \frac{1}{n}\frac{1}{m}\right\}_{i=1}^{nm}\right) + \sum_{j=1}^{n}\sum_{k=1}^{m} \frac{1}{n}\frac{1}{m} S\left(\ens[a]_{jk}\right) \\
+			= S\left(\sum_{j=1}^{n} \frac{1}{n} \sum_{k=1}^{m} \frac{1}{m} \ens[a]_{jk}\right)  &=I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + \sum_{j=1}^{n} \frac{1}{n} S\left(\sum_{k=1}^{m}\frac{1}{m}\ens[a]_{jk}\right) \\
+			&=I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + \sum_{j=1}^{n} \frac{1}{n}\left(I\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right) +  \sum_{k=1}^{m}\frac{1}{m}S\left(\ens[a]_{jk}\right)\right) \\
+			&=I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + I\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right) + \sum_{j=1}^{n} \sum_{k=1}^{m}\frac{1}{n}\frac{1}{m}S\left(\ens[a]_{jk}\right)
+		\end{aligned}
+	\end{equation}
+	\begin{equation}
+		\begin{aligned}
+			I\left(\left\{ \frac{1}{nm}\right\}_{i=1}^{nm}\right) &=I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + I\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right)
+		\end{aligned}
+	\end{equation}
+	Note that $f(n) = I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right)$ is a function of $n$ only, such that $f(nm) = f(n) + f(m)$. Since $f$ is continuous, we have $f(n) = k \log n$. Since the entropy is strictly concave, $k$ must be positive. Therefore
+	\begin{equation}
+		I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) = k \log n
+	\end{equation}
+	for some $k>0$.
+	
+	We now show that if the coefficients $p_i$ are rationals, $I_n\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - k \sum_{i=1}^{n} p_i \log p_i$. Let $\{p_i\}_{i=1}^{n}$ be rational coefficients for a convex combination. We can write them as $p_i = \frac{m_i}{m}$ where $\{m_i\}, m \in \mathbb{Z}^+$ and $m$ is the minimum common denominator. Since $p_i$ form a convex combination, we must have $\sum_{i=1}^{n} m_i = m$. Since $m_i$ is a positive integer, we can write $m_i = \sum_{j=1}^{m_i} 1$. We now take $m$ orthogonal ensembles $\ens[a]_{ij}$ where $1 \leq i \leq n$ and $1 \leq j \leq m_i$. We have
+	\begin{equation}
+		\begin{aligned}
+			S\left(\sum_{i=1}^{n}\sum_{j=1}^{m_i} \frac{1}{m} \ens[a]_{ij}\right) &= I\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right) + \sum_{i=1}^{n}\sum_{j=1}^{m_i} \frac{1}{m} S\left(\ens[a]_{ij}\right) \\
+			&= k \log m + \sum_{i=1}^{n}\sum_{j=1}^{m_i} \frac{1}{m} S\left(\ens[a]_{ij}\right) \\
+		\end{aligned}
+	\end{equation}
+	\begin{equation}
+		\begin{aligned}
+			= S\left(\sum_{i=1}^{n} \frac{m_i}{m} \sum_{j=1}^{m_i} \frac{1}{m_i} \ens[a]_{ij}\right)  &=I\left(\left\{ \frac{m_i}{m}\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} \frac{m_i}{m}  S\left(\sum_{j=1}^{m_i} \frac{1}{m_i} \ens[a]_{ij}\right) \\
+			&=I\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} \frac{m_i}{m}\left(I\left(\left\{ \frac{1}{m_i}\right\}_{i=1}^{m_i}\right) + \sum_{j=1}^{m_i} \frac{1}{m_i} S\left(\ens[a]_{ij}\right)\right) \\
+			&=I\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} \frac{m_i}{m} I\left(\left\{ \frac{1}{m_i}\right\}_{i=1}^{m_i}\right) + \sum_{i=1}^{n} \frac{m_i}{m} \sum_{j=1}^{m_i} \frac{1}{m_i}S\left(\ens[a]_{ij}\right) \\
+			&=I\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} p_i k \log m_i + \sum_{i=1}^{n}  \sum_{j=1}^{m_i} \frac{1}{m} S\left(\ens[a]_{ij}\right)
+		\end{aligned}
+	\end{equation}
+	\begin{equation}
+		\begin{aligned}
+			k \log m &= I\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} p_i k \log m_i \\
+			I\left(\left\{ p_i\right\}_{i=1}^{n}\right) &= k \log m - \sum_{i=1}^{n} p_i k \log m_i = \sum_{i=1}^{n} p_i k \log m - \sum_{i=1}^{n} p_i k \log m_i \\
+			&= - \sum_{i=1}^{n} p_i k \log \frac{m_i}{m} = - k \sum_{i=1}^{n} p_i \log p_i
+		\end{aligned}
+	\end{equation}
+	
+	Lastly, let $\{p_i\}_{i=1}^{n}$ be coefficients for a convex combination, not necessarily rational. Since $I$ is continuous and $p_i$ can be approximated with rational values to an arbitrary level of precision, we will have $I\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - k \sum_{i=1}^{n} p_i \log p_i$. In the case of $n=2$, we have $I(p_1, p_2) = - k p_1 \log p_1 - k p_2 \log p_2$.	
+\end{proof}
+
+\begin{conj}\label{pm_es_ensemblesAreTVS}
+	An ensemble space embeds in a topological vector space if and only if it is complemented (i.e. cancellative).
+\end{conj}
+
+\begin{proof}
+	The idea is to use the entropy to show that open balls are part of the topology, and then use this to show that multiplication for a scalar is continuous. The continuity of addition should come from the continuity of the mixing operation.
+\end{proof}
+
+\begin{prop}
+	The discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the axiom of mixture and the axiom of entropic orthogonality.
+\end{prop}
+
+\begin{proof}
+	In both classical cases, the entropy is a function of only the probabilities of the decomposition in terms of pure states. The function is continuous in terms of those variables as $x \log x$ is a continuous function. [TODO find short proof of convexity and maximum bound]
+	
+	In the quantum case, the entropy is a continuous function of the density operator as the trace, multiplication and logarithm of an operator are all continuous functions. [TODO find short proof of convexity and maximum bound]
+\end{proof}
+
+\begin{remark}
+	There should be an interplay between convexity and entropy which limits either the space or the possible entropy. For example, consider a line. It is a convex space with no extreme points. We can parameterize the space with a variable $x$ such that the mixture of two ensembles is identified by the average $x$. Entropy can be written as $S(x)$. Since $S(x)$ is strictly concave over an infinite range, it will tend to minus infinity either when $x$ tends to infinity or minus infinity. Now take a line that intersects the curve. This will intersect it at only two points. By strict convexity, there is only going to be a single point with maximum vertical distance to the line, which has to be greater than zero. Now imagine moving the line down by one vertical unit. The vertical distance now is greater than one. This means that the average entropy can increase more than one during mixture, which violates the upper variability bound. Therefore a line cannot be an ensemble space.
+	
+	Note that an open segment is absolutely fine. We can, in fact, imagine a two state discrete classical ensemble space with the endpoint removed. This suggests that the convex space knows something about the geometry (probably parallelism and ratio of length - i.e. the affine structure).
+\end{remark}
+
+\begin{conj}
+	Let $\ens_1, \ens_2 \in \Ens$ be such that $p\ens + \bar{p} \ens_1 = p\ens + \bar{p} \ens_2$ for some $p \in (0, 1)$ and $\ens \in \Ens$. Then $\ens_1$ and $\ens_2$ are not orthogonal.
+\end{conj}
+
+\begin{remark}
+	It seems very unlikely that differences in states that can be obscured by mixing would correspond to orthogonal states. The more general question is whether the strict concavity of the entropy allows non-complemented spaces.
+\end{remark}
+
+\begin{defn}
+	Two sets of ensembles $U, V \subseteq \Ens$ are orthogonal if $\ens_1 \ortho \ens_2$ for all $\ens_1 \in U$ and $\ens_2 \in V$. 
+\end{defn}
+
+TODO: classical ensemble spaces: classical probability spaces plus measure and entropy is rho log rho where rho is Rad-Nik derivative
+
+\subsection{Entropic constraints on the space}
+
+\begin{prop}
+	Let $\ens[a], \ens[b] \in \Ens$ such that $p\ens[a] + \bar{p} \ens[b] = \ens[b]$ for some $p \in (0,1]$. Then $\ens[a] = \ens[b]$. 
+\end{prop}
+
+\begin{proof}
+	If the premise is true for $p = 1$, then $\ens[b] = 1 \ens[a] + 0 \ens[b] = \ens[a]$.
+	
+	Next we show that $q\ens[a] + \bar{q} \ens[b] = \ens[b]$ is true for some $q = p \in (0,1)$, then it is true for all $q \in [0,p]$. For every $\lambda \in [0,1]$, we have:
+	\begin{equation}
+		\begin{aligned}
+			\ens[b] &= \lambda \ens[b] + \bar{\lambda} \ens[b] = \lambda \left(p\ens[a] + \bar{p} \ens[b]\right) + \bar{\lambda} \ens[b] =  \lambda p\ens[a] + \left(\lambda \bar{p} + \bar{\lambda}\right)\ens[b] = q \ens[a] + \bar{q} \ens[b]
+		\end{aligned}
+	\end{equation}
+	where $q = \lambda p$. If $\lambda \in [0,1]$, then $0 \leq q \leq p$.
+	
+	Now we show that if $q\ens[a] + \bar{q} \ens[b] = \ens[b]$ is true for some $q = p \in (0,1)$, then it is true for all $q \in [0,1)$. We have:
+	\begin{equation}
+		\begin{aligned}
+			\ens[b] &= p\ens[a] + \bar{p} \ens[b] = p\ens[a] + \bar{p} \left(p\ens[a] + \bar{p} \ens[b]\right) = \left(p + p \bar{p}\right) p\ens[a] + \bar{p} \bar{p} \ens[b] = q \ens[a] + \bar{q} \ens[b]
+		\end{aligned}
+	\end{equation}
+	where $\bar{q} = \bar{p} \bar{p}$. Note that we can expand $\ens[b]$ recursively an arbitrary number of time, which means $q\ens[a] + \bar{q} \ens[b] = \ens[b]$ with $\bar{q} = \bar{p}^n$, which makes $p$ arbitrarily close to 1. Therefore the statement holds with any $q \in (0,1)$.
+	
+	From strict concavity, we have
+	\begin{equation}
+		\begin{aligned}
+			S(\ens[b]) &= S(p \ens[a] + \bar{p} \ens[b]) \geq p S(\ens[a]) + (1-p) S(\ens[b]) \\
+			pS(\ens[a]) &\leq p S(\ens[b]) \\
+			S(\ens[a]) &\leq S(\ens[b])
+		\end{aligned}
+	\end{equation}
+	From the upper bound, we have
+	\begin{equation}
+		\begin{aligned}
+			S(\ens[b]) &= S(p \ens[a] + \bar{p} \ens[b]) \leq I(p, \bar{p}) + p S(\ens[a]) + (1-p) S(\ens[b]) \\
+			pS(\ens[a]) &\geq  I(p, \bar{p}) + p S(\ens[b]) \\
+			S(\ens[a]) &\geq \frac{1}{p} I(p, \bar{p}) + S(\ens[b])
+		\end{aligned}
+	\end{equation}
+	for any $p \in (0,1)$. Note that $\lim\limits_{p \to 1} \frac{1}{p} I(p, \bar{p}) = \lim\limits_{p \to 1}  - \log p - \frac{1-p}{p} \log (1-p) = 0$. Since $\frac{1}{p} I(p, \bar{p})$ can be made arbitrarily small, we must have $S(\ens[a]) \geq S(\ens[b])$. The two bounds, then, imply that $S(\ens[a]) = S(\ens[b])$
+	
+	But this means that $S(p \ens[a] + \bar{p} \ens[b]) = S(b) = pS(a)+\bar{p}S(b)$. Since the entropy is strictly concave, $\ens[a] = \ens[b]$.
+\end{proof}
+
+\begin{remark}
+	Note that the entropy axioms are necessary for the argument. We can, in fact, construct a counter-example that satisfies all the other axioms.
+	
+	Let $\Ens = \{\ens[a], \ens[b]\}$ with the convex structure that satisfies identity, idempotence and commutativity such that $p \ens[a] + \bar{p} \ens[b]$ equals $\ens[a]$ if $p=1$ and $\ens[b]$ otherwise. Identity, idemopotence and commutativity are satisfied by construction. For associativity, note that the final result of multiple mixtures is $\ens[a]$ if and only if if all elements of a mixtures are $\ens[a]$. The order does not matter, and therefore associativity is satisfied. Therefore such structure satisfies the axioms of a convex structure without the requirement of continuity.
+	
+	For continuity, note that $+^{-1}(\{\}) = \{\}$ and $+^{-1}(\Ens) = [0,1] \times \Ens \times \Ens$. Since $\{\}$ and $\Ens$ must in any topology of $\Ens$, the continuity condition is satisfied for these sets. Next, we have  $+^{-1}(\{\ens[a]\}) = [0,1] \times \{\ens[a]\} \times \{\ens[a]\} \cup [1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0] \times \{\ens[b]\} \times \{\ens[a]\}$. Note that $[0]$ and $[1]$ are not open sets, therefore $\{\ens[a]\}$ cannot be in the topology of $\Ens$ or mixing would not be continuous. Finally, $+^{-1}(\{\ens[b]\}) = [0,1] \times \{\ens[b]\} \times \{\ens[b]\} \cup (0,1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \{\ens[a]\} = (0,1] \times \Ens \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \Ens$. Since $(0,1]$ and $[0,1)$ are open sets, $\ens[b]$ can be an open set. Since the topology must be $\textsf{T}_0$, we must include at least $\{\ens[b]\}$ and therefore $\mathsf{T}_{\Ens} = \{\{\}, \{\ens[b]\}, \{\ens[a], \ens[b]\}\}$ is a $\mathsf{T}_0$ second countable topology for which mixing is continuous.
+	
+	It is therefore the entropy that rules out this case. If the entropy of the two ensembles is different, it would jump from $S(\ens[a])$ directly to $S(\ens[b])$ for an infinitesimal mixture, either violating the upper bound or strict concavity. But if $S(\ens[a])$ equals $S(\ens[b])$, the entropy of the mixture is the same, so the two ensemble cannot possibly be different.
+\end{remark}
+
+
+\begin{prop}
+	Let $\ens[a], \ens[b], \ens \in \Ens$ such that $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$. Then $\ens[a] = \ens[b]$.
+\end{prop}
+
+\begin{proof}
+	Let $\ens[a], \ens[b], \ens \in \Ens$ such that $p_0\ens[a] + \bar{p}_0 \ens = p_0 \ens[b] + \bar{p}_0 \ens$ for some $p_0 \in (0,1)$.
+	
+	First, we show that the relationship holds for all $p \in (0,p_0]$. In that case, since $0 < \frac{p}{p_0} \leq 1$, we have
+	\begin{equation}
+		\begin{aligned}
+			p \ens[a] + \bar{p} \ens &= \frac{p}{p_0} (p_0 \ens[a] + \bar{p}_0 \ens) + \overline{\left(\frac{p}{p_0}\right)} \ens = \frac{p}{p_0} (p_0 \ens[b] + \bar{p}_0 \ens) + \overline{\left(\frac{p}{p_0}\right)} \ens = p \ens[b] + \bar{p} \ens
+		\end{aligned}
+	\end{equation}
+	
+	Now that we show the relationship holds for all $p \in (0,1)$. Since we want to be able to expand multiple times, we want to be able to find a $p$ such that
+	\begin{equation}
+		p \ens[a] + p \ens[a] + (1-2p) \ens = p \ens[a] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens).
+	\end{equation}
+	That is, we want $\bar{p} p_0 = p$, which means
+	\begin{equation}
+		\begin{aligned}
+			p&=(1-p)p_0=p_0 - p p_0 \\
+			(1+p_0) p &= p_0 \\
+			p &= \frac{p_0}{1+p_0}
+		\end{aligned}
+	\end{equation}
+	We have
+	\begin{equation}
+		\begin{aligned}
+			2p \ens[a] + \bar{2p} \ens &=  p \ens[a] + p \ens[a] + (1-2p) \ens =  p \ens[a] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens) = p \ens[a] + \bar{p} (p_0 \ens[b] + \bar{p}_0 \ens) \\
+			&= p \ens[a] + p \ens[b] + (1-2p) \ens = p \ens[b] + p \ens[a] + (1-2p) \ens = p \ens[b] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens) \\
+			&= p \ens[b] + \bar{p} (p_0 \ens[b] + \bar{p}_0 \ens) = p \ens[b] + p \ens[b] + (1-2p) \ens \\
+			&= 2p \ens[b] + \bar{2p} \ens
+		\end{aligned}
+	\end{equation}
+	Note that $2p \geq p_0$. In fact
+	\begin{equation}
+		\begin{aligned}
+			2p = \frac{2p_0}{1+p_0} &\geq p_0  \\
+			2 p_0 &\geq (1+p_0) p_0 = p_0 + p_0^2 \\
+			p_0 &\leq p_0^2 \\
+		\end{aligned}
+	\end{equation}
+	which is true since $p_0 \in (0,1)$. Therefore, since we can always find a greater $p$ for which the relationship holds, combined with the previous result, $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$.
+	
+	Now we show that if  $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$, then we also have $p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} \ens = p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $\lambda \in [0,1]$. We have
+	\begin{equation}
+		\begin{aligned}
+			p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} \ens &= \lambda(p \ens[a] + \bar{p} \ens) + \bar{\lambda}(p\ens[b] + \bar{p} \ens) = \lambda(p \ens[a] + \bar{p} \ens) + \bar{\lambda}(p\ens[a] + \bar{p} \ens) \\
+			&= p\ens[a] + \bar{p} \ens = p\ens[b] + \bar{p} \ens 
+		\end{aligned}
+	\end{equation}
+	
+	Lastly, we show that $S(\lambda \ens[a] + \bar{\lambda} \ens[b]) = S(a) = S(b)$ for all $\lambda \in (0,1)$. Using the entropy bounds, with $\lambda \in [0,1]$, we have:
+	\begin{equation}
+		\begin{aligned}
+			\lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) &\leq \lim\limits_{p \to 1} I(p,\bar{p}) + p S(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} S(\ens) = S(\lambda\ens[a] + \bar{\lambda}\ens[b]) \\
+			\lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) &\geq \lim\limits_{p \to 1} p S(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} S(\ens) = S(\lambda\ens[a] + \bar{\lambda}\ens[b]) \\
+			\lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) &= S(\lambda\ens[a] + \bar{\lambda}\ens[b]) \\
+		\end{aligned}
+	\end{equation}
+	Using the above property, we also have
+	\begin{equation}
+		\begin{aligned}
+			S(\lambda\ens[a] + \bar{\lambda}\ens[b]) &= \lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) = \lim\limits_{p \to 1} S(p \ens[a] +\bar{p} \ens) = S(\ens[a]) \\
+			S(0\ens[a] + 1\ens[b]) &= S(\ens[b]) = S(\ens[a]) \\
+		\end{aligned}
+	\end{equation}
+	Since $S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\ens[a]) + \bar{\lambda} S(\ens[b])$, $\ens[a] = \ens[b]$.
+\end{proof}
+
+
+\begin{defn}
+	A \textbf{linear convex subset} $U \subseteq \Ens$ is a convex subset such that any three distinct elements can be written as the convex combination of one with respect of the other three. That is, for all $\ens_1, \ens_2, \ens_3 \in U$ there exists a permutation $\sigma$ and $p \in (0,1)$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}	$.
+\end{defn}
+
+\begin{prop}
+	Let $U \subseteq \Ens$ be a linear convex subset. Then we can find $V \subseteq \mathbb{R}$ and a convex set isomorphism $r : U \to V$. That is, $f(p \ens_a + \bar{p} \ens_b) = p r(\ens_a) + \bar{p} r(\ens_b)$ and $r^{-1} (p a + \bar{p} b) = p r^{-1} (a) + \bar{p} r^{-1} (b)$.
+\end{prop}
+
+\begin{proof}
+	Let $U \subseteq \Ens$ be a linear convex subset. Pick $\ens_0, \ens_1 \in U$. For any $\ens \in U$, we can find a convex expression between $\ens_0$, $\ens_1$ and $\ens$. Rearranging the terms, we can always write $\ens = a\ens_0 + b\ens_1$ where $a,b \in \mathbb{R}$. We can define $r(\ens) \mapsto b$.
+\end{proof}
+
+\begin{prop}
+	Let $S : U \to \mathbb{R}$ be an entropy function defined on a subset $U \subseteq \mathbb{R}$ of the real. That is, $f$ satisfies:
+	\begin{itemize}
+		\item \textbf{Continuity}
+		\item \textbf{Strict concavity}: $S(p a + \bar{p} b) \geq p S(a) + \bar{p} S(b)$ with the equality holding if and only if $\ens_1 = \ens_2$
+		\item \textbf{Upper variability bound}: $S(p a + \bar{p} b) \leq I(p, \bar{p}) + p S(a) + \bar{p} S(b)$.
+	\end{itemize}
+	The $U$ must be a bounded subset.
+\end{prop}
+
+\begin{figure}[h]
+	\includegraphics[width=0.9\textwidth]{tempimages/BoundsFromEntropy.png}
+\end{figure}
+\begin{proof}
+	We are going to show that the function $S(x)$ cannot extend to plus infinity. The same argument can be applied in the symmetric case for minus infinity. We are going to assume that $S(0) = 0$ without loss of generality. If $S$ is not defined at zero, or if the value is different, we can apply a translation on the argument or on the value, which will not affect the concavity of the function.
+	
+	Let $0 < a < b \in U$ be two distinct values and $S(0)=0$, $S(a)$ and $S(b)$ their respective entropies. We are going to show that if pick a $c > b$ sufficiently large, we are not going to find a value for $S(c)$ that satisfies the bounds. In the picture, we have the three points. The blue line is the upper bound on $S(c)$ given by the strict concavity between $a$ and $b$. The purple curve is the lower bound on $S(c)$ given by the upper bound between $0$ and $b$. As the picture shows, the two bounds meet at some point and cannot be satisfied.
+	
+	From strict concavity, noting that $\frac{c-b}{c-a} + \frac{b-a}{c-a} = 1$, we have:
+	\begin{equation}
+		\begin{aligned}
+			S(b) &= S\left(\frac{c-b}{c-a} a + \frac{b-a}{c-a} c\right) > \frac{c-b}{c-a} S(a) + \frac{b-a}{c-a} S(c)\\
+			(b-a)S(c) &< (c-a) S(b) - (c-b) S(a) = (c-a) S(b) - (c-a) S(a) + (b-a) S(a) \\
+			S(c) &< \frac{S(b) - S(a)}{(b-a)} (c-a) + S(a) \\
+		\end{aligned}
+	\end{equation}
+	
+	From the upper bound, noting that $\frac{c-a}{c} + \frac{a}{c} = 1$, we have:
+	\begin{equation}
+		\begin{aligned}
+			S(a) &= S\left(\frac{c-a}{c} 0 + \frac{a}{c} c\right) \leq I\left(\frac{c-a}{c}, \frac{a}{c}\right) + \frac{c-a}{c} S(0) +\frac{a}{c} S(c) \\
+			\frac{a}{c} S(c) &\geq S(a) - I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+			S(c) &\geq \frac{c}{a} \left[ S(a) - I\left(\frac{c-a}{c}, \frac{a}{c}\right) \right]
+		\end{aligned}
+	\end{equation}
+	
+	Combining the bounds, we have:
+	\begin{equation}
+		\begin{aligned}
+			\frac{S(b) - S(a)}{(b-a)} (c-a) + S(a) &> \frac{c}{a} \left[ S(a) - I\left(\frac{c-a}{c}, \frac{a}{c}\right) \right] \\
+			(c-a) S(b) - (c-a)S(a) + (b-a) S(a) &> \frac{c(b-a)}{a} S(a) - \frac{c(b-a)}{a} I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+			a (c-a) S(b) - a(c-b) S(a) &> c(b-a)S(a) - c(b-a) I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+			a (c-a) S(b) + (-ac +ab -bc +ac) S(a) &> - c(b-a) I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+			a (c-a) S(b) -b (c-a) S(a) &> - c(b-a) I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+			a  S(b) - b S(a) &> - \frac{c(b-a)}{(c-a)} I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
+		\end{aligned}
+	\end{equation}
+	
+	Since $b > a$, $c > a$ and $I(p,\bar{p}) \geq 0$ for all $p$, the right hand side of the inequality is always negative. As $c$ increases, the right hand side will go to zero, since $\lim\limits_{c\to \infty}\frac{c}{c-a} = 1$ and $\lim\limits_{c\to \infty} I\left(\frac{c-a}{c}, \frac{a}{c}\right) = I(1,0) = 0$. The left hand side is a constant. If the constant is positive, the inequality is always satisfied. If it is negative, it will not be satisfied for all $c$.
+	
+	From strict concavity, noting that $\frac{b-a}{b} + \frac{a}{b} = 1$, we have
+	\begin{equation}
+		\begin{aligned}
+			S(a) &= S\left(\frac{b-a}{b} 0 + \frac{a}{b} b\right) > \frac{b-a}{b} S(0) + \frac{a}{b} S(b) = \frac{a}{b} S(b)\\
+			b S(a) &> a S(b)  \\
+			0 &> a S(b) - b S(a)\\
+		\end{aligned}
+	\end{equation}
+	This shows that the left hand side of the previous inequality is negative, and therefore the bounds cannot be satisfied over the whole $\mathbb{R}$.
+\end{proof}
+
 \section{Generalized probability theory}
 
 \subsection{Fraction and fraction capacity}
