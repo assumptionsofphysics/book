@@ -460,9 +460,11 @@ TODO: classical ensemble spaces: classical probability spaces plus measure and e
 
 \section{Entropic constraints on the space}
 
-The axioms of entropy not only constrain the functional form of the entropy, but they also constrain the type of space we can have. In particular, it rules out some spaces that would seem physically pathological.
+The axioms of entropy not only constrain the functional form of the entropy, but they also constrain the type of space we can have. It also rules out some spaces that would seem physically pathological.
 
 \subsection{Vector space embedding}
+
+The axioms of mixture do not constrain the convex set to be a subset of a vector space. The axioms of entropy, however, do. To be specific, it is the first three properties of the entropy that constrain the space.
 
 \begin{prop}
 	A convex space $X$ embeds into a vector space if and only if it is \textbf{cancellative}, that is $p \ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$ implies $\ens[a] = \ens[b]$.
@@ -473,56 +475,52 @@ The axioms of entropy not only constrain the functional form of the entropy, but
 	$$ c_\lambda(x,y) = c_\lambda(x,z) \; \forall \lambda \in (0,1) \implies y = z.$$ TODO: the proof should be adapted and carried over.
 \end{proof}
 
+\begin{thrm}[Vector space embedding]
+	Let $\ens[a], \ens[b], \ens \in \Ens$ such that $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$. Then $\ens[a] = \ens[b]$. Therefore any ensemble space embeds into a real vector space.
+\end{thrm}
 
-
-\begin{remark}
-	Since all current physical ensemble spaces are complemented, it is not yet clear whether an ensemble space must be complemented or not. It is difficult to justify as it is a claim on existence of more refined ensembles. It may very well be that this is just an assumption on the decomposition, which may fail in new physical conditions (e.g. at Planck scale). It may also be something that the strict concavity of the entropy requires.
-\end{remark}
-
-\begin{prop}
-	Let $\ens[a], \ens[b], \ens \in \Ens$ such that $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$. Then $\ens[a] = \ens[b]$.
-\end{prop}
+% Reviewed by: Christine
 
 \begin{proof}
 	Let $\ens[a], \ens[b], \ens \in \Ens$ such that $p_0\ens[a] + \bar{p}_0 \ens = p_0 \ens[b] + \bar{p}_0 \ens$ for some $p_0 \in (0,1)$.
 	
-	First, we show that the relationship holds for all $p \in (0,p_0]$. In that case, since $0 < \frac{p}{p_0} \leq 1$, we have
+	First, we show that $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,p_0]$. In that case, since $0 < \frac{p}{p_0} \leq 1$, we have
 	\begin{equation}
 		\begin{aligned}
-			p \ens[a] + \bar{p} \ens &= \frac{p}{p_0} (p_0 \ens[a] + \bar{p}_0 \ens) + \overline{\left(\frac{p}{p_0}\right)} \ens = \frac{p}{p_0} (p_0 \ens[b] + \bar{p}_0 \ens) + \overline{\left(\frac{p}{p_0}\right)} \ens = p \ens[b] + \bar{p} \ens
+			p \ens[a] + \bar{p} \ens &= \frac{p}{p_0} (p_0 \ens[a] + \bar{p}_0 \ens) + \overline{\left(\frac{p}{p_0}\right)} \ens = \frac{p}{p_0} (p_0 \ens[b] + \bar{p}_0 \ens) + \overline{\left(\frac{p}{p_0}\right)} \ens = p \ens[b] + \bar{p} \ens.
 		\end{aligned}
 	\end{equation}
 	
-	Now that we show the relationship holds for all $p \in (0,1)$. Since we want to be able to expand multiple times, we want to be able to find a $p$ such that
+	Now we show that $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$. Since we want to be able to expand multiple times, we want to be able to find a $p$ such that
 	\begin{equation}
-		p \ens[a] + p \ens[a] + (1-2p) \ens = p \ens[a] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens).
+		p \ens[a] + p \ens[a] + (1-2p) \ens = p \ens[a] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens)= p \ens[a] + \bar{p} p_0 \ens[a] + \bar{p} \bar{p}_0 \ens.
 	\end{equation}
-	That is, we want $\bar{p} p_0 = p$, which means
+	The coefficient of the middle term on both sides of the equality, then, has to match. That is, we want $p = \bar{p} p_0$, which means
 	\begin{equation}
 		\begin{aligned}
 			p&=(1-p)p_0=p_0 - p p_0 \\
-			(1+p_0) p &= p_0 \\
+			p_0 &= p + p p_0 = (1+p_0) p  \\
 			p &= \frac{p_0}{1+p_0}
 		\end{aligned}
 	\end{equation}
 	We have
 	\begin{equation}
 		\begin{aligned}
-			2p \ens[a] + \bar{2p} \ens &=  p \ens[a] + p \ens[a] + (1-2p) \ens =  p \ens[a] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens) = p \ens[a] + \bar{p} (p_0 \ens[b] + \bar{p}_0 \ens) \\
+			2p \ens[a] + \overline{2p} \ens &=  p \ens[a] + p \ens[a] + (1-2p) \ens =  p \ens[a] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens) = p \ens[a] + \bar{p} (p_0 \ens[b] + \bar{p}_0 \ens) \\
 			&= p \ens[a] + p \ens[b] + (1-2p) \ens = p \ens[b] + p \ens[a] + (1-2p) \ens = p \ens[b] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens) \\
 			&= p \ens[b] + \bar{p} (p_0 \ens[b] + \bar{p}_0 \ens) = p \ens[b] + p \ens[b] + (1-2p) \ens \\
-			&= 2p \ens[b] + \bar{2p} \ens
+			&= 2p \ens[b] + \overline{2p} \ens
 		\end{aligned}
 	\end{equation}
 	Note that $2p \geq p_0$. In fact
 	\begin{equation}
 		\begin{aligned}
-			2p = \frac{2p_0}{1+p_0} &\geq p_0  \\
+			2p &= \frac{2p_0}{1+p_0} \geq p_0  \\
 			2 p_0 &\geq (1+p_0) p_0 = p_0 + p_0^2 \\
 			p_0 &\geq p_0^2 \\
 		\end{aligned}
 	\end{equation}
-	which is true since $p_0 \in (0,1)$. Therefore, since we can always find a greater mixing coefficient greater the relationship holds, combined with the previous result, $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$.
+	which is true since $p_0 \in (0,1)$. Since now the relationship holds for $p_1 = \frac{p_0}{1+p_0} > p_0 $, we can repeat the process again and find that it holds for $p_2 = \frac{p_1}{1+p_1} > p_1$ and so on. Therefore, since we can always find a greater mixing coefficient for which the relationship holds, combined with the previous result, $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$.
 	
 	Now we show that if  $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$, then we also have $p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} \ens = p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $\lambda \in [0,1]$. We have
 	\begin{equation}
@@ -532,22 +530,27 @@ The axioms of entropy not only constrain the functional form of the entropy, but
 		\end{aligned}
 	\end{equation}
 	
-	Lastly, we show that $S(\lambda \ens[a] + \bar{\lambda} \ens[b]) = S(a) = S(b)$ for all $\lambda \in (0,1)$. Using the entropy bounds, with $\lambda \in [0,1]$, we have:
+	Lastly, we show that $S(\lambda \ens[a] + \bar{\lambda} \ens[b]) = S(\ens[a]) = S(\ens[b])$ for all $\lambda \in [0,1]$. Using the entropy bounds, with $\lambda \in [0,1]$, we have
 	\begin{equation}
 		\begin{aligned}
 			\lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) &\leq \lim\limits_{p \to 1} I(p,\bar{p}) + p S(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} S(\ens) = S(\lambda\ens[a] + \bar{\lambda}\ens[b]) \\
-			\lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) &\geq \lim\limits_{p \to 1} p S(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} S(\ens) = S(\lambda\ens[a] + \bar{\lambda}\ens[b]) \\
-			\lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) &= S(\lambda\ens[a] + \bar{\lambda}\ens[b]) \\
+			\lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) &\geq \lim\limits_{p \to 1} p S(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} S(\ens) = S(\lambda\ens[a] + \bar{\lambda}\ens[b])
+		\end{aligned}
+	\end{equation}
+	and therefore
+	\begin{equation}
+		\begin{aligned}		
+			\lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) &= S(\lambda\ens[a] + \bar{\lambda}\ens[b]).
 		\end{aligned}
 	\end{equation}
 	Using the above property, we also have
 	\begin{equation}
 		\begin{aligned}
 			S(\lambda\ens[a] + \bar{\lambda}\ens[b]) &= \lim\limits_{p \to 1} S(p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p}\ens) = \lim\limits_{p \to 1} S(p \ens[a] +\bar{p} \ens) = S(\ens[a]) \\
-			S(0\ens[a] + 1\ens[b]) &= S(\ens[b]) = S(\ens[a]) \\
+			&= \lim\limits_{p \to 1} S(p \ens[b] +\bar{p} \ens) = S(\ens[b]) \\
 		\end{aligned}
 	\end{equation}
-	Since $S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\ens[a]) + \bar{\lambda} S(\ens[b])$, $\ens[a] = \ens[b]$.
+	Since $S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{\lambda} S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\ens[a]) + \bar{\lambda} S(\ens[b])$, $\ens[a] = \ens[b]$ by strict concavity.
 \end{proof}
 
 \begin{conj}\label{pm_es_ensemblesAreTVS}
@@ -564,15 +567,17 @@ The axioms of entropy not only constrain the functional form of the entropy, but
 
 \subsubsection{Self-mixtures}
 
+%Reviewed by: Christine
+
 As an example of convex spaces that are non-cancellative, and therefore ruled out as ensemble spaces, we consider one in which an ensemble mixed with a different ensemble gives the original ensemble. We show that this can be made to satisfy the axioms of ensemble and mixture, and therefore it is really the axioms of entropy that rule it out.
 
 \begin{example}[Self-mixture]
-	Let $\Ens = \{\ens[a], \ens[b]\}$ be a set endowed with the convex structure that satisfies identity, idempotence and commutativity such that $p \ens[a] + \bar{p} \ens[b]$ equals $\ens[a]$ if $p=1$ and $\ens[b]$ otherwise. Identity, idemopotence and commutativity are satisfied by construction. For associativity, note that the final result of multiple mixtures is $\ens[a]$ if and only if all elements of the mixtures are $\ens[a]$. The order does not matter, and therefore associativity is satisfied. Therefore such structure satisfies at least the axioms of mixtures without the requirement of continuity.
+	Let $\Ens = \{\ens[a], \ens[b]\}$ be a set endowed with the convex structure that satisfies identity, idempotence, commutativity and such that $p \ens[a] + \bar{p} \ens[b]$ equals $\ens[a]$ if $p=1$ and $\ens[b]$ otherwise. Identity, idempotence and commutativity are satisfied by construction. For associativity, note that the final result of multiple mixtures is $\ens[a]$ if and only if all elements of the mixtures are $\ens[a]$. The order does not matter, and therefore associativity is satisfied. Therefore such structure satisfies at least the axioms of mixtures without the requirement of continuity.
 	
-	For continuity, note that $+^{-1}(\{\}) = \{\}$ and $+^{-1}(\Ens) = [0,1] \times \Ens \times \Ens$. Since $\{\}$ and $\Ens$ must in any topology of $\Ens$, the continuity condition is satisfied for these sets. Next, we have  $+^{-1}(\{\ens[a]\}) = [0,1] \times \{\ens[a]\} \times \{\ens[a]\} \cup [1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0] \times \{\ens[b]\} \times \{\ens[a]\}$. Note that $[0]$ and $[1]$ are not open sets, therefore $\{\ens[a]\}$ cannot be in the topology of $\Ens$ or mixing would not be continuous. Finally, $+^{-1}(\{\ens[b]\}) = [0,1] \times \{\ens[b]\} \times \{\ens[b]\} \cup (0,1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \{\ens[a]\} = (0,1] \times \Ens \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \Ens$. Since $(0,1]$ and $[0,1)$ are open subsets of $[0,1]$, $\ens[b]$ can be an open set. Since the topology must be $\textsf{T}_0$, we must include at least $\{\ens[b]\}$ and therefore $\mathsf{T}_{\Ens} = \{\{\}, \{\ens[b]\}, \{\ens[a], \ens[b]\}\}$ is a $\mathsf{T}_0$ second countable topology for which mixing is continuous. This means that the example satisfies both the axioms of ensembles and of mixture.
+	For continuity, we need to look at the inverse image under the mixing operation. Note that $+^{-1}(\emptyset) = \emptyset$ and $+^{-1}(\Ens) = [0,1] \times \Ens \times \Ens$. Since $\emptyset$ and $\Ens$ must be in any topology of $\Ens$, the continuity condition is satisfied for these sets. Next, we have  $+^{-1}(\{\ens[a]\}) = [0,1] \times \{\ens[a]\} \times \{\ens[a]\} \cup [1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0] \times \{\ens[b]\} \times \{\ens[a]\}$. Note that $[0]$ and $[1]$ are not open sets, therefore $\{\ens[a]\}$ cannot be in the topology of $\Ens$ or mixing would not be continuous. Finally, $+^{-1}(\{\ens[b]\}) = [0,1] \times \{\ens[b]\} \times \{\ens[b]\} \cup [0,1) \times \{\ens[a]\} \times \{\ens[b]\} \cup (0,1] \times \{\ens[b]\} \times \{\ens[a]\} = [0,1) \times \Ens \times \{\ens[b]\} \cup (0,1] \times \{\ens[b]\} \times \Ens$. Since $(0,1]$ and $[0,1)$ are open subsets of $[0,1]$, \{$\ens[b]\}$ can be an open set. Since the topology must be $\textsf{T}_0$, we must include at least $\{\ens[b]\}$ and therefore $\mathsf{T}_{\Ens} = \{\emptyset, \{\ens[b]\}, \{\ens[a], \ens[b]\}\}$ is a $\mathsf{T}_0$ second countable topology for which mixing is continuous. This means that the example satisfies both the axioms of ensemble and of mixture.
 \end{example}
 
-It is therefore the entropy that rules out this case. If the entropy of the two ensembles is different, it would jump from $S(\ens[a])$ directly to $S(\ens[b])$ for an infinitesimal mixture which violates the upper bound. If $S(\ens[a])$ equals $S(\ens[b])$, the entropy of the mixture of $\ens[a]$ and $\ens[b]$ is also the same, so the two ensemble cannot possibly be different by strict concavity.
+It is therefore the entropy that rules out this case. If the entropy of the two ensembles is different, it would jump from $S(\ens[a])$ directly to $S(\ens[b])$ for an infinitesimal mixture which violates the upper bound. If $S(\ens[a])$ equals $S(\ens[b])$, the entropy of the mixture of $\ens[a]$ and $\ens[b]$ is also the same, so the two ensembles cannot possibly be different by strict concavity.
 
 \begin{prop}
 	Let $\ens[a], \ens[b] \in \Ens$ such that $p\ens[a] + \bar{p} \ens[b] = \ens[b]$ for some $p \in (0,1]$. Then $\ens[a] = \ens[b]$. 
