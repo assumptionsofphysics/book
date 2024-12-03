@@ -186,27 +186,13 @@ The second property of ensembles is that they can be mixed. That is, we can take
 \end{remark}
 
 \begin{prop}
-	A classical discrete ensemble space satisfies the axiom of mixture.
+	Discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfy the axiom of mixture.
 \end{prop}
 
 \begin{proof}
-	TODO
-\end{proof}
-
-\begin{prop}
-	A classical continuous ensemble space satisfies the axiom of mixture.
-\end{prop}
-
-\begin{proof}
-	TODO
-\end{proof}
-
-\begin{prop}
-	A quantum ensemble space satisfies the axiom of mixture.
-\end{prop}
-
-\begin{proof}
-	TODO
+	The space of probability measures, discrete or continuous, $\Ens$ is a convex subset of the vector space of finite signed measures. This means that it is closed under convex combinations: $\sum p_i \ens_i$ for all $\{e_i\} \subseteq \Ens$ and $\sum p_i = 1$. The properties of mixing are inherited from the properties of linear combinations. Therefore the discrete and continuous classical ensemble spaces satisfy the axiom of mixture.
+	
+	Similarly, the space of positive semi-definite self-adjoint operators with trace one is a convex subset of the vector space of self-adjoint operators. Therefore it is closed under convex combinations and it will satisfy the axiom of mixture.
 \end{proof}
 
 \subsection{Common components and separateness}
@@ -475,6 +461,28 @@ TODO: classical ensemble spaces: classical probability spaces plus measure and e
 \section{Entropic constraints on the space}
 
 The axioms of entropy not only constrain the functional form of the entropy, but they also constrain the type of space we can have. In particular, it rules out some spaces that would seem physically pathological.
+
+\subsection{Vector space embedding}
+
+\begin{prop}
+	A convex space $X$ embeds into a vector space if and only if it is \textbf{cancellative}, that is $p \ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$ implies $\ens[a] = \ens[b]$.
+\end{prop}
+
+\begin{proof}
+	Theorem 4 in \url{https://arxiv.org/abs/1105.1270} states that a convex space embeds into a real vector space with $c_\lambda(x,y) = \lambda x + \bar{\lambda}y$ if and only if
+	$$ c_\lambda(x,y) = c_\lambda(x,z) \; \forall \lambda \in (0,1) \implies y = z.$$ TODO: the proof should be adapted and carried over.
+\end{proof}
+
+
+
+\begin{remark}
+	Since all current physical ensemble spaces are complemented, it is not yet clear whether an ensemble space must be complemented or not. It is difficult to justify as it is a claim on existence of more refined ensembles. It may very well be that this is just an assumption on the decomposition, which may fail in new physical conditions (e.g. at Planck scale). It may also be something that the strict concavity of the entropy requires.
+\end{remark}
+
+\begin{remark}
+	Assuming that the mixing operation is continuous does not guarantee that we can vector space that embeds the convex space is a topological vector space. See \url{https://math.stackexchange.com/questions/4921905/cancellative-convex-spaces-and-topological-vector-spaces}. The issue is we have no guarantee of continuity on the inverse (i.e. subtraction, multiplication for a negative number).
+\end{remark}
+
 
 \subsubsection{Self-mixtures}
 
@@ -899,40 +907,6 @@ TODO: This will need to move after proving ensemble spaces embed into vector spa
 
 
 
-
-\subsection{Vector space embedding}
-
-\begin{defn}
-	 Let $\ens[\rho] = p \ens_1 + \bar{p} \ens_2$ with $p \in (0,1)$. Then we say that $\ens_2$ is a $p$-\textbf{complement} of $\ens_1$ towards $\ens[\rho]$. An ensemble space is \textbf{complemented} if all $p$-complements are unique for all $p \in (0, 1)$.
-\end{defn}
-
-\begin{prop}\label{pm_es_complementedIsVectorSpace}
-	An ensemble space is complemented if and only if it is a convex subset of a real vector space for which mixtures are linear combination.
-\end{prop}
-
-\begin{proof}
-	Theorem 4 in \url{https://arxiv.org/abs/1105.1270} states that a convex space embeds into a real vector space with $c_\lambda(x,y) = \lambda x + \bar{\lambda}y$ if and only if
-	$$ c_\lambda(x,y) = c_\lambda(x,z) \; \forall \lambda \in (0,1) \implies y = z.$$ This property, called cancellative property, is exactly the condition that the $\lambda$-complement is unique.
-\end{proof}
-
-\begin{prop}
-	Discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfy the axiom of mixture and are complemented ensemble spaces.
-\end{prop}
-
-\begin{proof}
-	The space of probability measures, discrete or continuous, $\Ens$ is a convex subset of the vector space of finite signed measures. This means that it is closed under convex combinations: $\sum p_i \ens_i$ for all $\{e_i\} \subseteq \Ens$ and $\sum p_i = 1$. The properties of mixing are inherited from the properties of linear combinations. Therefore the discrete and continuous classical ensemble spaces satisfy the axiom of mixture. Moreover, $\Ens$ is a convex subset of a vector space, it is complemented by proposition \ref{pm_es_complementedIsVectorSpace}.
-	
-	Similarly, the space of positive semi-definite self-adjoint operators with trace one is a convex subset of the vector space of self-adjoint operators. Therefore it is closed under convex combinations and it will satisfy the axiom of mixture. Moreover, it is complemented convex by proposition \ref{pm_es_complementedIsVectorSpace}.
-\end{proof}
-
-
-\begin{remark}
-	Since all current physical ensemble spaces are complemented, it is not yet clear whether an ensemble space must be complemented or not. It is difficult to justify as it is a claim on existence of more refined ensembles. It may very well be that this is just an assumption on the decomposition, which may fail in new physical conditions (e.g. at Planck scale). It may also be something that the strict concavity of the entropy requires.
-\end{remark}
-
-\begin{remark}
-	Assuming that the mixing operation is continuous does not guarantee that we can vector space that embeds the convex space is a topological vector space. See \url{https://math.stackexchange.com/questions/4921905/cancellative-convex-spaces-and-topological-vector-spaces}. The issue is we have no guarantee of continuity on the inverse (i.e. subtraction, multiplication for a negative number).
-\end{remark}
 
 \section{Statistical properties and quantities}
 
