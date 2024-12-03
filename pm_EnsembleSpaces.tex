@@ -479,33 +479,6 @@ The axioms of entropy not only constrain the functional form of the entropy, but
 	Since all current physical ensemble spaces are complemented, it is not yet clear whether an ensemble space must be complemented or not. It is difficult to justify as it is a claim on existence of more refined ensembles. It may very well be that this is just an assumption on the decomposition, which may fail in new physical conditions (e.g. at Planck scale). It may also be something that the strict concavity of the entropy requires.
 \end{remark}
 
-\begin{remark}
-	Assuming that the mixing operation is continuous does not guarantee that we can vector space that embeds the convex space is a topological vector space. See \url{https://math.stackexchange.com/questions/4921905/cancellative-convex-spaces-and-topological-vector-spaces}. The issue is we have no guarantee of continuity on the inverse (i.e. subtraction, multiplication for a negative number).
-\end{remark}
-
-
-\subsubsection{Self-mixtures}
-
-As an example of convex spaces that are non-cancellative, and therefore ruled out as ensemble spaces, we consider one in which an ensemble mixed with a different ensemble gives the original ensemble. We show that this can be made to satisfy the axioms of ensemble and mixture, and therefore it is really the axioms of entropy that rule it out.
-
-\begin{example}[Self-mixture]
-	Let $\Ens = \{\ens[a], \ens[b]\}$ be a set endowed with the convex structure that satisfies identity, idempotence and commutativity such that $p \ens[a] + \bar{p} \ens[b]$ equals $\ens[a]$ if $p=1$ and $\ens[b]$ otherwise. Identity, idemopotence and commutativity are satisfied by construction. For associativity, note that the final result of multiple mixtures is $\ens[a]$ if and only if all elements of the mixtures are $\ens[a]$. The order does not matter, and therefore associativity is satisfied. Therefore such structure satisfies at least the axioms of mixtures without the requirement of continuity.
-	
-	For continuity, note that $+^{-1}(\{\}) = \{\}$ and $+^{-1}(\Ens) = [0,1] \times \Ens \times \Ens$. Since $\{\}$ and $\Ens$ must in any topology of $\Ens$, the continuity condition is satisfied for these sets. Next, we have  $+^{-1}(\{\ens[a]\}) = [0,1] \times \{\ens[a]\} \times \{\ens[a]\} \cup [1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0] \times \{\ens[b]\} \times \{\ens[a]\}$. Note that $[0]$ and $[1]$ are not open sets, therefore $\{\ens[a]\}$ cannot be in the topology of $\Ens$ or mixing would not be continuous. Finally, $+^{-1}(\{\ens[b]\}) = [0,1] \times \{\ens[b]\} \times \{\ens[b]\} \cup (0,1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \{\ens[a]\} = (0,1] \times \Ens \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \Ens$. Since $(0,1]$ and $[0,1)$ are open subsets of $[0,1]$, $\ens[b]$ can be an open set. Since the topology must be $\textsf{T}_0$, we must include at least $\{\ens[b]\}$ and therefore $\mathsf{T}_{\Ens} = \{\{\}, \{\ens[b]\}, \{\ens[a], \ens[b]\}\}$ is a $\mathsf{T}_0$ second countable topology for which mixing is continuous. This means that the example satisfies both the axioms of ensembles and of mixture.
-\end{example}
-
-It is therefore the entropy that rules out this case. If the entropy of the two ensembles is different, it would jump from $S(\ens[a])$ directly to $S(\ens[b])$ for an infinitesimal mixture which violates the upper bound. If $S(\ens[a])$ equals $S(\ens[b])$, the entropy of the mixture of $\ens[a]$ and $\ens[b]$ is also the same, so the two ensemble cannot possibly be different by strict concavity.
-
-\begin{prop}
-	Let $\ens[a], \ens[b] \in \Ens$ such that $p\ens[a] + \bar{p} \ens[b] = \ens[b]$ for some $p \in (0,1]$. Then $\ens[a] = \ens[b]$. 
-\end{prop}
-
-\begin{proof}
-	We have $p\ens[a] + \bar{p} \ens[b] = \ens[b] = p\ens[b] + \bar{p} \ens[b]$ for some $p \in (0,1]$. Therefore $\ens[a] = \ens[b]$.
-\end{proof}
-
-
-
 \begin{prop}
 	Let $\ens[a], \ens[b], \ens \in \Ens$ such that $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$. Then $\ens[a] = \ens[b]$.
 \end{prop}
@@ -576,6 +549,41 @@ It is therefore the entropy that rules out this case. If the entropy of the two 
 	\end{equation}
 	Since $S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\ens[a]) + \bar{\lambda} S(\ens[b])$, $\ens[a] = \ens[b]$.
 \end{proof}
+
+\begin{conj}\label{pm_es_ensemblesAreTVS}
+	An ensemble space embeds in a topological vector space if and only if it is complemented (i.e. cancellative).
+\end{conj}
+
+\begin{remark}
+	It is still an open question whether the ambient vector space must be a topological vector space. 
+	
+	Axioms of ensemble and mixture are not enough to guarantee. See \url{https://math.stackexchange.com/questions/4921905/cancellative-convex-spaces-and-topological-vector-spaces}. The issue is we have no guarantee of continuity on the inverse (i.e. subtraction, multiplication for a negative number).
+	
+	As it is shown later, the entropy provides a pseudo-distance, which allows to create open balls. Moreover, the entropy induces a metric tensor, which may induce a suitable topology.
+\end{remark}
+
+\subsubsection{Self-mixtures}
+
+As an example of convex spaces that are non-cancellative, and therefore ruled out as ensemble spaces, we consider one in which an ensemble mixed with a different ensemble gives the original ensemble. We show that this can be made to satisfy the axioms of ensemble and mixture, and therefore it is really the axioms of entropy that rule it out.
+
+\begin{example}[Self-mixture]
+	Let $\Ens = \{\ens[a], \ens[b]\}$ be a set endowed with the convex structure that satisfies identity, idempotence and commutativity such that $p \ens[a] + \bar{p} \ens[b]$ equals $\ens[a]$ if $p=1$ and $\ens[b]$ otherwise. Identity, idemopotence and commutativity are satisfied by construction. For associativity, note that the final result of multiple mixtures is $\ens[a]$ if and only if all elements of the mixtures are $\ens[a]$. The order does not matter, and therefore associativity is satisfied. Therefore such structure satisfies at least the axioms of mixtures without the requirement of continuity.
+	
+	For continuity, note that $+^{-1}(\{\}) = \{\}$ and $+^{-1}(\Ens) = [0,1] \times \Ens \times \Ens$. Since $\{\}$ and $\Ens$ must in any topology of $\Ens$, the continuity condition is satisfied for these sets. Next, we have  $+^{-1}(\{\ens[a]\}) = [0,1] \times \{\ens[a]\} \times \{\ens[a]\} \cup [1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0] \times \{\ens[b]\} \times \{\ens[a]\}$. Note that $[0]$ and $[1]$ are not open sets, therefore $\{\ens[a]\}$ cannot be in the topology of $\Ens$ or mixing would not be continuous. Finally, $+^{-1}(\{\ens[b]\}) = [0,1] \times \{\ens[b]\} \times \{\ens[b]\} \cup (0,1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \{\ens[a]\} = (0,1] \times \Ens \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \Ens$. Since $(0,1]$ and $[0,1)$ are open subsets of $[0,1]$, $\ens[b]$ can be an open set. Since the topology must be $\textsf{T}_0$, we must include at least $\{\ens[b]\}$ and therefore $\mathsf{T}_{\Ens} = \{\{\}, \{\ens[b]\}, \{\ens[a], \ens[b]\}\}$ is a $\mathsf{T}_0$ second countable topology for which mixing is continuous. This means that the example satisfies both the axioms of ensembles and of mixture.
+\end{example}
+
+It is therefore the entropy that rules out this case. If the entropy of the two ensembles is different, it would jump from $S(\ens[a])$ directly to $S(\ens[b])$ for an infinitesimal mixture which violates the upper bound. If $S(\ens[a])$ equals $S(\ens[b])$, the entropy of the mixture of $\ens[a]$ and $\ens[b]$ is also the same, so the two ensemble cannot possibly be different by strict concavity.
+
+\begin{prop}
+	Let $\ens[a], \ens[b] \in \Ens$ such that $p\ens[a] + \bar{p} \ens[b] = \ens[b]$ for some $p \in (0,1]$. Then $\ens[a] = \ens[b]$. 
+\end{prop}
+
+\begin{proof}
+	We have $p\ens[a] + \bar{p} \ens[b] = \ens[b] = p\ens[b] + \bar{p} \ens[b]$ for some $p \in (0,1]$. Therefore $\ens[a] = \ens[b]$.
+\end{proof}
+
+
+
 
 \subsubsection{Boundedness of lines}
 
@@ -650,14 +658,6 @@ It is therefore the entropy that rules out this case. If the entropy of the two 
 		\end{aligned}
 	\end{equation}
 	This shows that the left hand side of the previous inequality is negative, and therefore the bounds cannot be satisfied over the whole $\mathbb{R}$.
-\end{proof}
-
-\begin{conj}\label{pm_es_ensemblesAreTVS}
-	An ensemble space embeds in a topological vector space if and only if it is complemented (i.e. cancellative).
-\end{conj}
-
-\begin{proof}
-	The idea is to use the entropy to show that open balls are part of the topology, and then use this to show that multiplication for a scalar is continuous. The continuity of addition should come from the continuity of the mixing operation.
 \end{proof}
 
 
