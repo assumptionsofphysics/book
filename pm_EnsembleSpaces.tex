@@ -321,7 +321,7 @@ TODO: review the above proof; ideally, we would restrict to all Borel convex sub
 The third and final property of ensembles is that they have a well-defined entropy, that corresponds to the thermodynamic entropy. That is, while in information theory one can define all sorts of measure of uncertainty/information/variability, there is one that corresponds to a physically measurable quantity.
 
 \begin{axiom}[Axiom of entropy]
-	An ensemble space $\Ens$ is equipped a function $S : \Ens \to \mathbb{R}$, defined up to a multiplicative constant, called \textbf{entropy} with the following properties
+	An ensemble space $\Ens$ is equipped with a function $S : \Ens \to \mathbb{R}$, defined up to a multiplicative constant, called \textbf{entropy} with the following properties
 	\begin{itemize}
 		\item \textbf{Continuity}\footnote{Currently, we are imposing that the entropy is continuous. There may a chance that this requirement is redundant, as strict concavity and the upper variability bound may already impose this. We have found proofs that show that real valued convex/concave functions of real values are continuous. These proofs fail at the boundary, but the upper variability bound may fix this. Another open question is whether differentiability is also an independent requirement.}
 		\item \textbf{Strict concavity}: $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$ with the equality holding if and only if $\ens_1 = \ens_2$
@@ -352,9 +352,9 @@ The third and final property of ensembles is that they have a well-defined entro
 	Suppose an ensemble $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. That it has no elements in common with the mixture, which means it has no elements in common with either of them. Therefore $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. Now suppose $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. That it means it has no elements in common with either of them, and therefore it does not have any elements in common with their mixture. Therefore $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. We are justified to assume that mixtures preserve orthogonality.
 \end{justification}
 
-\begin{prop}\label{pm_es_entropyUnique}
+\begin{thrm}[Uniqueness of entropy]\label{pm_es_entropyUnique}
 	The entropy of the coefficients $I(p,\bar{p})$ is the Shannon entropy. That is, $I(p,\bar{p}) = - k \left(p \log p - \bar{p} \log \bar{p}\right)$ where $k$ is the arbitrary multiplicative constant for the entropy. For a mixture of arbitrary many elements, $I(\{p_i\}) = - k \sum p_i \log p_i$.
-\end{prop}
+\end{thrm}
 
 
 \begin{proof}
@@ -436,9 +436,9 @@ The third and final property of ensembles is that they have a well-defined entro
 			&= p S(\rho_1) + \bar{p} S(\rho_2) \\
 		\end{aligned}
 	\end{equation}
-	The equality hold if and only if $\frac{p\rho_1 + \bar{p}\rho_2}{\rho_1} = 1$ which is exactly when $\rho_1 = \rho_2$.
-	
-	For the upper bound, note that the logarithm is a strictly increasing function, and therefore $- \log(x + k) \leq -\log(x)$ for any $k \geq x$, with equality holding if and only if $k=0$. We have
+	The equality holds if and only if $\frac{p\rho_1 + \bar{p}\rho_2}{\rho_1} = 1$ which is exactly when $\rho_1 = \rho_2$.
+		
+	For the upper bound, note that the logarithm is a strictly increasing function, and therefore $- \log(x + k) \leq -\log(x)$ for any $k \geq 0$, with equality holding if and only if $k=0$. We have
 	\begin{equation}
 		\begin{aligned}
 			S(p\rho_1 + \bar{p}\rho_2) &= - \int_X \left(p\rho_1 + \bar{p}\rho_2\right) \log \left(p\rho_1 + \bar{p}\rho_2\right) d\mu \\
@@ -449,13 +449,13 @@ The third and final property of ensembles is that they have a well-defined entro
 			&=  - p \log p - \bar{p} \log \bar{p} + p S(\rho_1) + \bar{p} S(\rho_2)\\
 		\end{aligned}
 	\end{equation}
-	The equality to hold, if and only if $\rho_2=0$ wherever $\rho_1\neq0$ and vice-versa. That is, the equality holds if and only if the two distributions have disjoint support. Therefore orthogonal distributions are exactly distributions with disjoint support.
+	The equality holds if and only if $\rho_2=0$ wherever $\rho_1\neq0$ and $\rho_1=0$ wherever $\rho_2\neq0$. That is, the equality holds if and only if the two distributions have disjoint support. Therefore orthogonal distributions are exactly distributions with disjoint support.
 	
-	Note that two distributions that have no common components. That is, there is no $\rho_3$ such that $\rho_1 = p \rho_3 + \bar{p} \rho_4$ and $\rho_2 = q \rho_3 + \bar{q} \rho_5$. Therefore orthogonality implies disjunctness which implies separatedness.
+	Note that two distributions that have disjunct support have no common components. That is, there is no $\rho_3$ such that $\rho_1 = p \rho_3 + \bar{p} \rho_4$ and $\rho_2 = q \rho_3 + \bar{q} \rho_5$. This is because $\rho_3$ would have to have support that is both within the support of $\rho_1$ and $\rho_2$. Therefore orthogonality implies separatedness.
 	
 	Suppose $\rho_4$ has disjoint support from $\rho_1 = p \rho_2 + \bar{p} \rho_3$, then it has disjoint support from $\rho_2$ and $\rho_3$ because the support of $\rho_1$ is the union of the supports of $\rho_2$ and $\rho_3$. Conversely, if $\rho_4$ has disjoint support from both $\rho_2$ and $\rho_3$, then $\rho_4$ has disjoint support from $\rho_1$ as well. Therefore mixtures preserve orthogonality.
 	
-	All these arguments are valid for discrete classical ensemble spaces, changing integrals with sums.
+	All these arguments are valid for discrete classical ensemble spaces, changing integrals to sums.
 	
 	In the quantum case, the entropy is a continuous function of the density operator as the trace, multiplication and logarithm of an operator are all continuous functions. [TODO find short proof of convexity and maximum bound]
 \end{proof}
@@ -472,61 +472,30 @@ TODO: add the example of open segment. no orthogonal elements. no endpoint but w
 
 TODO: classical ensemble spaces: classical probability spaces plus measure and entropy is rho log rho where rho is Rad-Nik derivative
 
-\subsection{Entropic constraints on the space}
+\section{Entropic constraints on the space}
+
+The axioms of entropy not only constrain the functional form of the entropy, but they also constrain the type of space we can have. In particular, it rules out some spaces that would seem physically pathological.
+
+\subsubsection{Self-mixtures}
+
+As an example of convex spaces that are non-cancellative, and therefore ruled out as ensemble spaces, we consider one in which an ensemble mixed with a different ensemble gives the original ensemble. We show that this can be made to satisfy the axioms of ensemble and mixture, and therefore it is really the axioms of entropy that rule it out.
+
+\begin{example}[Self-mixture]
+	Let $\Ens = \{\ens[a], \ens[b]\}$ be a set endowed with the convex structure that satisfies identity, idempotence and commutativity such that $p \ens[a] + \bar{p} \ens[b]$ equals $\ens[a]$ if $p=1$ and $\ens[b]$ otherwise. Identity, idemopotence and commutativity are satisfied by construction. For associativity, note that the final result of multiple mixtures is $\ens[a]$ if and only if all elements of the mixtures are $\ens[a]$. The order does not matter, and therefore associativity is satisfied. Therefore such structure satisfies at least the axioms of mixtures without the requirement of continuity.
+	
+	For continuity, note that $+^{-1}(\{\}) = \{\}$ and $+^{-1}(\Ens) = [0,1] \times \Ens \times \Ens$. Since $\{\}$ and $\Ens$ must in any topology of $\Ens$, the continuity condition is satisfied for these sets. Next, we have  $+^{-1}(\{\ens[a]\}) = [0,1] \times \{\ens[a]\} \times \{\ens[a]\} \cup [1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0] \times \{\ens[b]\} \times \{\ens[a]\}$. Note that $[0]$ and $[1]$ are not open sets, therefore $\{\ens[a]\}$ cannot be in the topology of $\Ens$ or mixing would not be continuous. Finally, $+^{-1}(\{\ens[b]\}) = [0,1] \times \{\ens[b]\} \times \{\ens[b]\} \cup (0,1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \{\ens[a]\} = (0,1] \times \Ens \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \Ens$. Since $(0,1]$ and $[0,1)$ are open subsets of $[0,1]$, $\ens[b]$ can be an open set. Since the topology must be $\textsf{T}_0$, we must include at least $\{\ens[b]\}$ and therefore $\mathsf{T}_{\Ens} = \{\{\}, \{\ens[b]\}, \{\ens[a], \ens[b]\}\}$ is a $\mathsf{T}_0$ second countable topology for which mixing is continuous. This means that the example satisfies both the axioms of ensembles and of mixture.
+\end{example}
+
+It is therefore the entropy that rules out this case. If the entropy of the two ensembles is different, it would jump from $S(\ens[a])$ directly to $S(\ens[b])$ for an infinitesimal mixture which violates the upper bound. If $S(\ens[a])$ equals $S(\ens[b])$, the entropy of the mixture of $\ens[a]$ and $\ens[b]$ is also the same, so the two ensemble cannot possibly be different by strict concavity.
 
 \begin{prop}
 	Let $\ens[a], \ens[b] \in \Ens$ such that $p\ens[a] + \bar{p} \ens[b] = \ens[b]$ for some $p \in (0,1]$. Then $\ens[a] = \ens[b]$. 
 \end{prop}
 
 \begin{proof}
-	If the premise is true for $p = 1$, then $\ens[b] = 1 \ens[a] + 0 \ens[b] = \ens[a]$.
-	
-	Next we show that $q\ens[a] + \bar{q} \ens[b] = \ens[b]$ is true for some $q = p \in (0,1)$, then it is true for all $q \in [0,p]$. For every $\lambda \in [0,1]$, we have:
-	\begin{equation}
-		\begin{aligned}
-			\ens[b] &= \lambda \ens[b] + \bar{\lambda} \ens[b] = \lambda \left(p\ens[a] + \bar{p} \ens[b]\right) + \bar{\lambda} \ens[b] =  \lambda p\ens[a] + \left(\lambda \bar{p} + \bar{\lambda}\right)\ens[b] = q \ens[a] + \bar{q} \ens[b]
-		\end{aligned}
-	\end{equation}
-	where $q = \lambda p$. If $\lambda \in [0,1]$, then $0 \leq q \leq p$.
-	
-	Now we show that if $q\ens[a] + \bar{q} \ens[b] = \ens[b]$ is true for some $q = p \in (0,1)$, then it is true for all $q \in [0,1)$. We have:
-	\begin{equation}
-		\begin{aligned}
-			\ens[b] &= p\ens[a] + \bar{p} \ens[b] = p\ens[a] + \bar{p} \left(p\ens[a] + \bar{p} \ens[b]\right) = \left(p + p \bar{p}\right) p\ens[a] + \bar{p} \bar{p} \ens[b] = q \ens[a] + \bar{q} \ens[b]
-		\end{aligned}
-	\end{equation}
-	where $\bar{q} = \bar{p} \bar{p}$. Note that we can expand $\ens[b]$ recursively an arbitrary number of time, which means $q\ens[a] + \bar{q} \ens[b] = \ens[b]$ with $\bar{q} = \bar{p}^n$, which makes $p$ arbitrarily close to 1. Therefore the statement holds with any $q \in (0,1)$.
-	
-	From strict concavity, we have
-	\begin{equation}
-		\begin{aligned}
-			S(\ens[b]) &= S(p \ens[a] + \bar{p} \ens[b]) \geq p S(\ens[a]) + (1-p) S(\ens[b]) \\
-			pS(\ens[a]) &\leq p S(\ens[b]) \\
-			S(\ens[a]) &\leq S(\ens[b])
-		\end{aligned}
-	\end{equation}
-	From the upper bound, we have
-	\begin{equation}
-		\begin{aligned}
-			S(\ens[b]) &= S(p \ens[a] + \bar{p} \ens[b]) \leq I(p, \bar{p}) + p S(\ens[a]) + (1-p) S(\ens[b]) \\
-			pS(\ens[a]) &\geq  I(p, \bar{p}) + p S(\ens[b]) \\
-			S(\ens[a]) &\geq \frac{1}{p} I(p, \bar{p}) + S(\ens[b])
-		\end{aligned}
-	\end{equation}
-	for any $p \in (0,1)$. Note that $\lim\limits_{p \to 1} \frac{1}{p} I(p, \bar{p}) = \lim\limits_{p \to 1}  - \log p - \frac{1-p}{p} \log (1-p) = 0$. Since $\frac{1}{p} I(p, \bar{p})$ can be made arbitrarily small, we must have $S(\ens[a]) \geq S(\ens[b])$. The two bounds, then, imply that $S(\ens[a]) = S(\ens[b])$
-	
-	But this means that $S(p \ens[a] + \bar{p} \ens[b]) = S(b) = pS(a)+\bar{p}S(b)$. Since the entropy is strictly concave, $\ens[a] = \ens[b]$.
+	We have $p\ens[a] + \bar{p} \ens[b] = \ens[b] = p\ens[b] + \bar{p} \ens[b]$ for some $p \in (0,1]$. Therefore $\ens[a] = \ens[b]$.
 \end{proof}
 
-\begin{remark}
-	Note that the entropy axioms are necessary for the argument. We can, in fact, construct a counter-example that satisfies all the other axioms.
-	
-	Let $\Ens = \{\ens[a], \ens[b]\}$ with the convex structure that satisfies identity, idempotence and commutativity such that $p \ens[a] + \bar{p} \ens[b]$ equals $\ens[a]$ if $p=1$ and $\ens[b]$ otherwise. Identity, idemopotence and commutativity are satisfied by construction. For associativity, note that the final result of multiple mixtures is $\ens[a]$ if and only if if all elements of a mixtures are $\ens[a]$. The order does not matter, and therefore associativity is satisfied. Therefore such structure satisfies the axioms of a convex structure without the requirement of continuity.
-	
-	For continuity, note that $+^{-1}(\{\}) = \{\}$ and $+^{-1}(\Ens) = [0,1] \times \Ens \times \Ens$. Since $\{\}$ and $\Ens$ must in any topology of $\Ens$, the continuity condition is satisfied for these sets. Next, we have  $+^{-1}(\{\ens[a]\}) = [0,1] \times \{\ens[a]\} \times \{\ens[a]\} \cup [1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0] \times \{\ens[b]\} \times \{\ens[a]\}$. Note that $[0]$ and $[1]$ are not open sets, therefore $\{\ens[a]\}$ cannot be in the topology of $\Ens$ or mixing would not be continuous. Finally, $+^{-1}(\{\ens[b]\}) = [0,1] \times \{\ens[b]\} \times \{\ens[b]\} \cup (0,1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \{\ens[a]\} = (0,1] \times \Ens \times \{\ens[b]\} \cup [0,1) \times \{\ens[b]\} \times \Ens$. Since $(0,1]$ and $[0,1)$ are open sets, $\ens[b]$ can be an open set. Since the topology must be $\textsf{T}_0$, we must include at least $\{\ens[b]\}$ and therefore $\mathsf{T}_{\Ens} = \{\{\}, \{\ens[b]\}, \{\ens[a], \ens[b]\}\}$ is a $\mathsf{T}_0$ second countable topology for which mixing is continuous.
-	
-	It is therefore the entropy that rules out this case. If the entropy of the two ensembles is different, it would jump from $S(\ens[a])$ directly to $S(\ens[b])$ for an infinitesimal mixture, either violating the upper bound or strict concavity. But if $S(\ens[a])$ equals $S(\ens[b])$, the entropy of the mixture is the same, so the two ensemble cannot possibly be different.
-\end{remark}
 
 
 \begin{prop}
@@ -569,10 +538,10 @@ TODO: classical ensemble spaces: classical probability spaces plus measure and e
 		\begin{aligned}
 			2p = \frac{2p_0}{1+p_0} &\geq p_0  \\
 			2 p_0 &\geq (1+p_0) p_0 = p_0 + p_0^2 \\
-			p_0 &\leq p_0^2 \\
+			p_0 &\geq p_0^2 \\
 		\end{aligned}
 	\end{equation}
-	which is true since $p_0 \in (0,1)$. Therefore, since we can always find a greater $p$ for which the relationship holds, combined with the previous result, $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$.
+	which is true since $p_0 \in (0,1)$. Therefore, since we can always find a greater mixing coefficient greater the relationship holds, combined with the previous result, $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$.
 	
 	Now we show that if  $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$, then we also have $p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} \ens = p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $\lambda \in [0,1]$. We have
 	\begin{equation}
@@ -600,6 +569,7 @@ TODO: classical ensemble spaces: classical probability spaces plus measure and e
 	Since $S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\ens[a]) + \bar{\lambda} S(\ens[b])$, $\ens[a] = \ens[b]$.
 \end{proof}
 
+\subsubsection{Boundedness of lines}
 
 \begin{defn}
 	A \textbf{linear convex subset} $U \subseteq \Ens$ is a convex subset such that any three distinct elements can be written as the convex combination of one with respect of the other three. That is, for all $\ens_1, \ens_2, \ens_3 \in U$ there exists a permutation $\sigma$ and $p \in (0,1)$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}	$.
