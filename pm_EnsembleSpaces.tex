@@ -304,14 +304,16 @@ TODO: review the above proof; ideally, we would restrict to all Borel convex sub
 
 \section{Axioms of entropy}
 
+%Reviewed by Christine (up to verification of axioms for the quantum case excluded)
+
 The third and final property of ensembles is that they have a well-defined entropy, that corresponds to the thermodynamic entropy. That is, while in information theory one can define all sorts of measure of uncertainty/information/variability, there is one that corresponds to a physically measurable quantity.
 
 \begin{axiom}[Axiom of entropy]
-	An ensemble space $\Ens$ is equipped with a function $S : \Ens \to \mathbb{R}$, defined up to a multiplicative constant, called \textbf{entropy} with the following properties
+	An ensemble space $\Ens$ is equipped with a function $S : \Ens \to \mathbb{R}$, defined up to a positive multiplicative constant, called \textbf{entropy} with the following properties:
 	\begin{itemize}
-		\item \textbf{Continuity}\footnote{Currently, we are imposing that the entropy is continuous. There may a chance that this requirement is redundant, as strict concavity and the upper variability bound may already impose this. We have found proofs that show that real valued convex/concave functions of real values are continuous. These proofs fail at the boundary, but the upper variability bound may fix this. Another open question is whether differentiability is also an independent requirement.}
-		\item \textbf{Strict concavity}: $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$ with the equality holding if and only if $\ens_1 = \ens_2$
-		\item \textbf{Upper variability bound}: $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$; if the equality holds then, $e_1$ and $e_2$ are \textbf{non-overlapping} or \textbf{orthogonal}, noted $e_1 \ortho e_2$.
+		\item \textbf{Continuity}\footnote{Currently, we are imposing that the entropy is continuous. There may be a chance that this requirement is redundant, as strict concavity and the upper variability bound may already impose this. We have found proofs that show that real valued convex/concave functions of real values are continuous. These proofs fail at the boundary, but the upper variability bound may fix this. Another open question is whether differentiability is also an independent requirement.}
+		\item \textbf{Strict concavity}: $S(p\ens[a] + \bar{p} \ens[b]) \geq p S(\ens[a]) + \bar{p} S(\ens[b])$ with the equality holding if and only if $\ens[a] = \ens[b]$
+		\item \textbf{Upper variability bound}: $S(p\ens[a] + \bar{p} \ens[b]) \leq I(p, \bar{p}) + p S(\ens[a]) + \bar{p} S(\ens[b])$; if the equality holds, $\ens[a]$ and $\ens[b]$ are \textbf{non-overlapping} or \textbf{orthogonal}, noted $\ens[a] \ortho \ens[b]$.
 	\end{itemize}
 	The function $I(p_1, p_2)$ is the same for all ensemble spaces.
 \end{axiom}
@@ -319,58 +321,58 @@ The third and final property of ensembles is that they have a well-defined entro
 \begin{justification}
 	The entropy quantifies the variability of the elements within the ensemble. As any physical quantity, its units are arbitrary. Since a change of units is a multiplicative factor, physically the entropy is defined up to a multiplicative constant. The zero entropy, instead, is fixed by its additivity over independent systems. This justifies the existence of the entropy.
 	
-	Small changes in the ensemble should produce small changes in the variability, which justifies continuity. Also, entropy is a measureable quantity, therefore the map from the ensemble space to entropy should be topologically continuous. Mixing different ensembles will increase the variability, which justifies concavity. Mixing the same ensemble, however, should not increase the variability, which justifies strict concavity. 
+	Small changes in the ensemble should produce small changes in the variability, which justifies continuity. Also, entropy is a measurable quantity, therefore the map from the ensemble space to entropy should be topologically continuous. Mixing different ensembles will increase the variability, which justifies concavity. Mixing the same ensemble, however, should not increase the variability, which justifies strict concavity. It also justifies the positiveness of the arbitrary multiplicative constant.
 	
-	The variability increase is maximal when the two ensembles are non-overlapping, meaning they have no elements in common. In this case, the increase in variability is given only by the coefficients. This justifies the upper bound. The fact that the upper bound is given by the Shannon entropy, as it is the only indicator of variability that is continuous, monotonic and linear in probability, is derived late in proposition \ref{pm_es_entropyUnique}
+	The variability increase is maximal when the two ensembles are non-overlapping, meaning they have no elements in common. In this case, the increase in variability is given only by the coefficients. This justifies the upper bound. The fact that the upper bound is given by the Shannon entropy, as it is the only indicator of variability that is continuous, monotonic and linear in probability, is derived later in proposition \ref{pm_es_entropyUnique}.
 \end{justification}
 
 \begin{axiom}[Axiom of entropic orthogonality]
-	The entropy function of an ensemble space obeys the following properties
+	The entropy function of an ensemble space obeys the following properties:
 	\begin{itemize}
-		\item \textbf{Orthogonality implies separateness}:\footnote{It is unclear whether ``orthogonality implies separatenes'' is an independent axiom. It is possible to prove that two orthogonal ensembles are not one the component of the other. The entropy of the coefficients (i.e. the Shannon entropy) has a vertical asymptote at each end. If two elements are orthogonal, the entropy along the segment that connects the two follows that function plus a linear function, which does not change the vertical asymptotes. Therefore the segment cannot be extended while preserving the convexity of the entropy, and therefore the two orthogonal elements must the extremes of the line that connects the two. This is necessary for separateness, but it is not sufficient.} $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$
-		\item \textbf{Mixtures preserve orthogonality}:\footnote{It is unclear whether ``mixtures preserve orthogonality'' is an independent axiom. Intuitively, the following argument tells us that it is.. Take the 2 dimensional simplex (i.e. a triangle) that represent a classical discrete probability space over three elements. Take the standard entropy, which will satisfy ``mixtures preserve orthogonality''. This is because the middle point has entropy $\log 3$. We can imagine changing the entropy so that it is a little bit lower in the center but it is unchanged on the sides. However, one needs to provide an actual example and show that it satisfies all axioms.} let $\ens_1 = p \ens_2 + \bar{p} \ens_3$, then $\ens_4 \ortho \ens_1$ if and only if $\ens_4 \ortho \ens_2$ and $\ens_4 \ortho \ens_3$
+		\item \textbf{Orthogonality implies separateness}:\footnote{It is unclear whether ``orthogonality implies separateness'' is an independent axiom. It is possible to prove that, given two orthogonal ensembles, neither is a component of the other. The entropy of the coefficients (i.e. the Shannon entropy) has a vertical asymptote at each end. If two elements are orthogonal, the entropy along the segment that connects the two follows that function plus a linear function, which does not change the vertical asymptotes. Therefore the segment cannot be extended while preserving the concavity of the entropy, and therefore the two orthogonal elements must be the extremes of the line that connects the two. This is necessary for separateness, but it is not sufficient.} $\ens[a] \ortho \ens[b]$ implies $\ens[a] \separate \ens[b]$
+		\item \textbf{Mixtures preserve orthogonality}:\footnote{It is unclear whether ``mixtures preserve orthogonality'' is an independent axiom. Intuitively, the following argument tells us that it is. Take the 2 dimensional simplex (i.e. a triangle) that represent a classical discrete probability space over three elements. Take the standard entropy, which will satisfy ``mixtures preserve orthogonality''. This is because the middle point has entropy $\log 3$. We can imagine changing the entropy so that it is a little bit lower in the center but it is unchanged on the sides. However, one needs to provide an actual example and show that it satisfies all axioms.} let $\ens[a] = p \ens[b] + \bar{p} \ens[c]$, then $\ens[d] \ortho \ens[a]$ if and only if $\ens[d] \ortho \ens[b]$ and $\ens[d] \ortho \ens[c]$
 	\end{itemize}
 \end{axiom}
 
 \begin{justification}
 	If two ensembles are orthogonal, they have no elements in common. Therefore there will be no common component with the two. We are justified to assume that orthogonality implies separateness.
 	
-	Suppose an ensemble $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. That it has no elements in common with the mixture, which means it has no elements in common with either of them. Therefore $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. Now suppose $\ens_1$ is orthogonal from both $\ens_2$ and $\ens_3$. That it means it has no elements in common with either of them, and therefore it does not have any elements in common with their mixture. Therefore $\ens_1$ is orthogonal from the mixture of two ensembles $\ens_2$ and $\ens_3$. We are justified to assume that mixtures preserve orthogonality.
+	Suppose an ensemble $\ens[a]$ is orthogonal from the mixture of two ensembles $\ens[b]$ and $\ens[c]$. That is, it has no elements in common with the mixture, which means it has no elements in common with either of them. Therefore $\ens[a]$ is orthogonal from both $\ens[b]$ and $\ens[c]$. Now suppose $\ens[a]$ is orthogonal from both $\ens[b]$ and $\ens[c]$. That means it has no elements in common with either of them, and therefore it does not have any elements in common with their mixture. Therefore $\ens[a]$ is orthogonal from the mixture of two ensembles $\ens[b]$ and $\ens[c]$. We are justified to assume that mixtures preserve orthogonality.
 \end{justification}
 
 \begin{thrm}[Uniqueness of entropy]\label{pm_es_entropyUnique}
-	The entropy of the coefficients $I(p,\bar{p})$ is the Shannon entropy. That is, $I(p,\bar{p}) = - k \left(p \log p - \bar{p} \log \bar{p}\right)$ where $k$ is the arbitrary multiplicative constant for the entropy. For a mixture of arbitrary many elements, $I(\{p_i\}) = - k \sum p_i \log p_i$.
+	The entropy of the coefficients $I(p,\bar{p})$ is the Shannon entropy. That is, $I(p,\bar{p}) = - \kappa \left(p \log p - \bar{p} \log \bar{p}\right)$ where $\kappa>0$ is the arbitrary multiplicative constant for the entropy. For a mixture of arbitrarily many elements, $I(\{p_i\}) = - \kappa \sum p_i \log p_i$.
 \end{thrm}
-
 
 \begin{proof}
 	Since the upper entropy bound has to be the same for all spaces, let us assume that $\Ens$ is such that it contains countably many orthogonal ensembles $\{\ens_l\}_{l=1}^{\infty}$. Since mixtures preserve orthogonality, for any convex combinations $\sum_i p_i \ens[a]_i$ of finitely many $\{\ens[a]_i\}_{i=1}^{n} \subset \{\ens_l\}_{l=1}^{\infty}$,  we have $S(\sum p_i \ens[a]_i ) = I_n(p_1, p_2, \dots, p_n) + \sum p_i S(\ens[a]_i)$ where $I_n : \mathbb{R}^n \to \mathbb{R}$ is a function of the coefficients only. Note that, given commutativity, the order of the $p_i$ does not matter and, since the coefficients can be zero, we must have $I_n(p_1, p_2, \dots, p_n) = I_{n+1}(p_1, p_2, \dots, p_n, 0)$. Therefore we can think of $I$ as a function of the coefficients and write $I(\{p_i\}_{i=1}^{n})$.
 	
-	We now show that $I\left(\left\{\frac{1}{n}\right\}_{i=1}^{n}\right) = k \log n$ with $k > 0$. That is, the maximum increase of entropy for a uniform distribution is proportional to the logarithm of the number of cases. Pick two positive integers $n, m \in \mathbb{Z}^+$. Pick $nm$ elements $a_{jk} \in \{e_l\}_{l=1}^{\infty}$ where $1\leq j \leq n$ and $1 \leq  k \leq m$. We have:
+	We now show that $I\left(\left\{\frac{1}{n}\right\}_{i=1}^{n}\right) = \kappa \log n$ with $\kappa > 0$. That is, the maximum increase of entropy for a uniform distribution is proportional to the logarithm of the number of cases. Pick two positive integers $n, m \in \mathbb{Z}^+$. Pick $nm$ elements $a_{jk} \in \{e_l\}_{l=1}^{\infty}$ where $1\leq j \leq n$ and $1 \leq  k \leq m$. We have:
 	\begin{equation}
 		\begin{aligned}
 			S\left(\sum_{j=1}^{n}\sum_{k=1}^{m} \frac{1}{n}\frac{1}{m} \ens[a]_{jk}\right) &= I\left(\left\{ \frac{1}{n}\frac{1}{m}\right\}_{i=1}^{nm}\right) + \sum_{j=1}^{n}\sum_{k=1}^{m} \frac{1}{n}\frac{1}{m} S\left(\ens[a]_{jk}\right) \\
 			= S\left(\sum_{j=1}^{n} \frac{1}{n} \sum_{k=1}^{m} \frac{1}{m} \ens[a]_{jk}\right)  &=I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + \sum_{j=1}^{n} \frac{1}{n} S\left(\sum_{k=1}^{m}\frac{1}{m}\ens[a]_{jk}\right) \\
 			&=I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + \sum_{j=1}^{n} \frac{1}{n}\left(I\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right) +  \sum_{k=1}^{m}\frac{1}{m}S\left(\ens[a]_{jk}\right)\right) \\
-			&=I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + I\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right) + \sum_{j=1}^{n} \sum_{k=1}^{m}\frac{1}{n}\frac{1}{m}S\left(\ens[a]_{jk}\right)
+			&=I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + I\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right) + \sum_{j=1}^{n} \sum_{k=1}^{m}\frac{1}{n}\frac{1}{m}S\left(\ens[a]_{jk}\right).
 		\end{aligned}
 	\end{equation}
+	Therefore
 	\begin{equation}
 		\begin{aligned}
-			I\left(\left\{ \frac{1}{nm}\right\}_{i=1}^{nm}\right) &=I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + I\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right)
+			I\left(\left\{ \frac{1}{nm}\right\}_{i=1}^{nm}\right) &=I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + I\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right).
 		\end{aligned}
 	\end{equation}
-	Note that $f(n) = I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right)$ is a function of $n$ only, such that $f(nm) = f(n) + f(m)$. Since $f$ is continuous, we have $f(n) = k \log n$. Since the entropy is strictly concave, $k$ must be positive. Therefore
+	Note that $f(n) = I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right)$ is a function of $n$ only, such that $f(nm) = f(n) + f(m)$. Since $f$ is continuous, we have $f(n) = \kappa \log n$. Since the entropy is strictly concave, $\kappa$ must be positive. Therefore
 	\begin{equation}
-		I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) = k \log n
+		I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) = \kappa \log n
 	\end{equation}
-	for some $k>0$.
+	for some $\kappa>0$.
 	
-	We now show that if the coefficients $p_i$ are rationals, $I_n\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - k \sum_{i=1}^{n} p_i \log p_i$. Let $\{p_i\}_{i=1}^{n}$ be rational coefficients for a convex combination. We can write them as $p_i = \frac{m_i}{m}$ where $\{m_i\}, m \in \mathbb{Z}^+$ and $m$ is the minimum common denominator. Since $p_i$ form a convex combination, we must have $\sum_{i=1}^{n} m_i = m$. Since $m_i$ is a positive integer, we can write $m_i = \sum_{j=1}^{m_i} 1$. We now take $m$ orthogonal ensembles $\ens[a]_{ij}$ where $1 \leq i \leq n$ and $1 \leq j \leq m_i$. We have
+	We now show that if the coefficients $p_i$ are rationals, $I_n\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - \kappa \sum_{i=1}^{n} p_i \log p_i$. Let $\{p_i\}_{i=1}^{n}$ be rational coefficients for a convex combination. We can write them as $p_i = \frac{m_i}{m}$ where $\{m_i\}, m \in \mathbb{Z}^+$ and $m$ is the least common denominator. Since $p_i$ are the coefficients of a convex combination, we must have $\sum_{i=1}^{n} m_i = m$. Since $m_i$ is a positive integer, we can write $m_i = \sum_{j=1}^{m_i} 1$. We now take $m$ orthogonal ensembles $\ens[a]_{ij}$ where $1 \leq i \leq n$ and $1 \leq j \leq m_i$. We have
 	\begin{equation}
 		\begin{aligned}
 			S\left(\sum_{i=1}^{n}\sum_{j=1}^{m_i} \frac{1}{m} \ens[a]_{ij}\right) &= I\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right) + \sum_{i=1}^{n}\sum_{j=1}^{m_i} \frac{1}{m} S\left(\ens[a]_{ij}\right) \\
-			&= k \log m + \sum_{i=1}^{n}\sum_{j=1}^{m_i} \frac{1}{m} S\left(\ens[a]_{ij}\right) \\
+			&= \kappa \log m + \sum_{i=1}^{n}\sum_{j=1}^{m_i} \frac{1}{m} S\left(\ens[a]_{ij}\right) \\
 		\end{aligned}
 	\end{equation}
 	\begin{equation}
@@ -378,18 +380,19 @@ The third and final property of ensembles is that they have a well-defined entro
 			= S\left(\sum_{i=1}^{n} \frac{m_i}{m} \sum_{j=1}^{m_i} \frac{1}{m_i} \ens[a]_{ij}\right)  &=I\left(\left\{ \frac{m_i}{m}\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} \frac{m_i}{m}  S\left(\sum_{j=1}^{m_i} \frac{1}{m_i} \ens[a]_{ij}\right) \\
 			&=I\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} \frac{m_i}{m}\left(I\left(\left\{ \frac{1}{m_i}\right\}_{i=1}^{m_i}\right) + \sum_{j=1}^{m_i} \frac{1}{m_i} S\left(\ens[a]_{ij}\right)\right) \\
 			&=I\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} \frac{m_i}{m} I\left(\left\{ \frac{1}{m_i}\right\}_{i=1}^{m_i}\right) + \sum_{i=1}^{n} \frac{m_i}{m} \sum_{j=1}^{m_i} \frac{1}{m_i}S\left(\ens[a]_{ij}\right) \\
-			&=I\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} p_i k \log m_i + \sum_{i=1}^{n}  \sum_{j=1}^{m_i} \frac{1}{m} S\left(\ens[a]_{ij}\right)
+			&=I\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} p_i \kappa \log m_i + \sum_{i=1}^{n}  \sum_{j=1}^{m_i} \frac{1}{m} S\left(\ens[a]_{ij}\right).
 		\end{aligned}
 	\end{equation}
+	Therefore
 	\begin{equation}
 		\begin{aligned}
-			k \log m &= I\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} p_i k \log m_i \\
-			I\left(\left\{ p_i\right\}_{i=1}^{n}\right) &= k \log m - \sum_{i=1}^{n} p_i k \log m_i = \sum_{i=1}^{n} p_i k \log m - \sum_{i=1}^{n} p_i k \log m_i \\
-			&= - \sum_{i=1}^{n} p_i k \log \frac{m_i}{m} = - k \sum_{i=1}^{n} p_i \log p_i
+			\kappa \log m &= I\left(\left\{ p_i\right\}_{i=1}^{n}\right) + \sum_{i=1}^{n} p_i \kappa \log m_i \\
+			I\left(\left\{ p_i\right\}_{i=1}^{n}\right) &= \kappa \log m - \sum_{i=1}^{n} p_i \kappa \log m_i = \sum_{i=1}^{n} p_i \kappa \log m - \sum_{i=1}^{n} p_i \kappa \log m_i \\
+			&= - \sum_{i=1}^{n} p_i \kappa \log \frac{m_i}{m} = - \kappa \sum_{i=1}^{n} p_i \log p_i.
 		\end{aligned}
 	\end{equation}
 	
-	Lastly, let $\{p_i\}_{i=1}^{n}$ be coefficients for a convex combination, not necessarily rational. Since $I$ is continuous and $p_i$ can be approximated with rational values to an arbitrary level of precision, we will have $I\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - k \sum_{i=1}^{n} p_i \log p_i$. In the case of $n=2$, we have $I(p_1, p_2) = - k p_1 \log p_1 - k p_2 \log p_2$.	
+	Lastly, let $\{p_i\}_{i=1}^{n}$ be coefficients for a convex combination, not necessarily rational. Since $I$ is continuous and $p_i$ can be approximated with rational values to an arbitrary level of precision, we will have $I\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - \kappa \sum_{i=1}^{n} p_i \log p_i$. In the case of $n=2$, we have $I(p_1, p_2) = - \kappa p_1 \log p_1 - \kappa p_2 \log p_2$.	
 \end{proof}
 
 \begin{coro}
@@ -397,15 +400,17 @@ The third and final property of ensembles is that they have a well-defined entro
 \end{coro}
 
 \begin{proof}
-	A rescaling of the entropy will rescale the entropy of the coefficients. Therefore setting the value of the maximum of $I$ will set the arbitrary multiplicative factor. If $I\left(\frac{1}{2}, \frac{1}{2}\right) = 1$, then $k$ is equal to one and the logarithm is base two, which corresponds to the entropy measured in bits. Note that this does not fix the physical dimensions of the entropy, only the numerical value.
+	A rescaling of the entropy will rescale the entropy of the coefficients. Therefore setting the value of the maximum of $I$ will set the arbitrary multiplicative factor. If $I\left(\frac{1}{2}, \frac{1}{2}\right) = 1$, then $\kappa$ is equal to one and the logarithm is base two, which corresponds to the entropy measured in bits. Note that this does not fix the physical dimensions of the entropy, only the numerical value.
 \end{proof}
 
 \begin{prop}
-	The discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfies the axiom of mixture and the axiom of entropic orthogonality.
+	The discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfy the axiom of mixture and the axiom of entropic orthogonality.
 \end{prop}
 
 \begin{proof}
-	Let's first look at the classical continuous case. Every ensemble is represented by a distribution $\rho(x)$ with $\int_X \rho(x) d\mu=1$. The entropy is given by $S(\rho) - \int_X \rho \log \rho d\mu$. This is a continuous function of $\rho$.
+	Let's first look at the classical continuous case. Every ensemble is represented by a distribution $\rho(x)$ with $\int_X \rho(x) d\mu=1$. The entropy is given by $S(\rho) = - \int_X \rho \log \rho d\mu$. This is a continuous function of $\rho$.
+	
+	TODO: add a picture to show the bound for the log
 	
 	To show strict concavity, note that $- \log x \geq \frac{1-x}{\ln 2}$ with the equality holding if and only if $x=1$. We have
 	\begin{equation}
@@ -414,11 +419,11 @@ The third and final property of ensembles is that they have a well-defined entro
 			&= - \int_X p\rho_1 \log \left(p\rho_1 + \bar{p}\rho_2\right) d\mu - \int_X \bar{p}\rho_2 \log \left(p\rho_1 + \bar{p}\rho_2\right) d\mu \\
 			&= - \int_X p\rho_1 \log \frac{p\rho_1 + \bar{p}\rho_2}{\rho_1} d\mu - \int_X p\rho_1 \log \rho_1 d\mu \\
 			&- \int_X \bar{p}\rho_2 \log \frac{p\rho_1 + \bar{p}\rho_2}{\rho_2} d\mu - \int_X \bar{p}\rho_2 \log \rho_2 d\mu \\
-			&\geq - \int_X p\rho_1 \frac{1}{\ln 2} \left(1 - \frac{p\rho_1 + \bar{p}\rho_2}{\rho_1} \right)   d\mu - p \int_X \rho_1 \log \rho_1 d\mu \\
-			&- \int_X \bar{p}\rho_2 \frac{1}{\ln 2} \left(1 - \frac{p\rho_1 + \bar{p}\rho_2}{\rho_2} \right)   d\mu - \bar{p} \int_X \rho_2 \log \rho_2 d\mu \\
-			&= - \frac{p}{\ln 2}\left[ \int_X \rho_1 d\mu - \int_X \left(p\rho_1 + \bar{p}\rho_2\right) d\mu  \right] + p S(\rho_1) \\
-			&- \frac{\bar{p}}{\ln 2}\left[ \int_X \rho_2 d\mu - \int_X \left(p\rho_1 + \bar{p}\rho_2\right) d\mu  \right] + \bar{p} S(\rho_2) \\
-			&= - \frac{p}{\ln 2}\left[ 1 - 1  \right] + p S(\rho_1) - \frac{\bar{p}}{\ln 2}\left[ 1 - 1 \right] + \bar{p} S(\rho_2) \\
+			&\geq \int_X p\rho_1 \frac{1}{\ln 2} \left(1 - \frac{p\rho_1 + \bar{p}\rho_2}{\rho_1} \right)   d\mu - p \int_X \rho_1 \log \rho_1 d\mu \\
+			&+ \int_X \bar{p}\rho_2 \frac{1}{\ln 2} \left(1 - \frac{p\rho_1 + \bar{p}\rho_2}{\rho_2} \right)   d\mu - \bar{p} \int_X \rho_2 \log \rho_2 d\mu \\
+			&= \frac{p}{\ln 2}\left[ \int_X \rho_1 d\mu - \int_X \left(p\rho_1 + \bar{p}\rho_2\right) d\mu  \right] + p S(\rho_1) \\
+			&+ \frac{\bar{p}}{\ln 2}\left[ \int_X \rho_2 d\mu - \int_X \left(p\rho_1 + \bar{p}\rho_2\right) d\mu  \right] + \bar{p} S(\rho_2) \\
+			&= \frac{p}{\ln 2}\left[ 1 - 1  \right] + p S(\rho_1) + \frac{\bar{p}}{\ln 2}\left[ 1 - 1 \right] + \bar{p} S(\rho_2) \\
 			&= p S(\rho_1) + \bar{p} S(\rho_2) \\
 		\end{aligned}
 	\end{equation}
@@ -430,20 +435,20 @@ The third and final property of ensembles is that they have a well-defined entro
 			S(p\rho_1 + \bar{p}\rho_2) &= - \int_X \left(p\rho_1 + \bar{p}\rho_2\right) \log \left(p\rho_1 + \bar{p}\rho_2\right) d\mu \\
 			&= - \int_X p\rho_1 \log \left(p\rho_1 + \bar{p}\rho_2\right) d\mu - \int_X \bar{p}\rho_2 \log \left(p\rho_1 + \bar{p}\rho_2\right) d\mu \\
 			&\leq  - \int_X p\rho_1 \log p\rho_1 d\mu - \int_X \bar{p}\rho_2 \log \bar{p}\rho_2 d\mu\\
-			&=  - \int_X p\rho_1 \log p d\mu - \int_X p\rho_1 \log \rho_1 d\mu - \int_X \bar{p}\rho_2 \log \bar{p} - \int_X \bar{p}\rho_2 \log \rho_2 d\mu\\
+			&=  - \int_X p\rho_1 \log p d\mu - \int_X p\rho_1 \log \rho_1 d\mu - \int_X \bar{p}\rho_2 \log \bar{p} d\mu - \int_X \bar{p}\rho_2 \log \rho_2 d\mu\\
 			&=  - p \log p \int_X \rho_1 d\mu - p \int_X \rho_1 \log \rho_1 d\mu - \bar{p} \log \bar{p} \int_X \rho_2 d\mu - \bar{p} \int_X \rho_2 \log \rho_2 d\mu\\
 			&=  - p \log p - \bar{p} \log \bar{p} + p S(\rho_1) + \bar{p} S(\rho_2)\\
 		\end{aligned}
 	\end{equation}
 	The equality holds if and only if $\rho_2=0$ wherever $\rho_1\neq0$ and $\rho_1=0$ wherever $\rho_2\neq0$. That is, the equality holds if and only if the two distributions have disjoint support. Therefore orthogonal distributions are exactly distributions with disjoint support.
 	
-	Note that two distributions that have disjunct support have no common components. That is, there is no $\rho_3$ such that $\rho_1 = p \rho_3 + \bar{p} \rho_4$ and $\rho_2 = q \rho_3 + \bar{q} \rho_5$. This is because $\rho_3$ would have to have support that is both within the support of $\rho_1$ and $\rho_2$. Therefore orthogonality implies separatedness.
+	Note that two distributions that have disjoint support have no common components. That is, there is no $\rho_3$ such that $\rho_1 = p \rho_3 + \bar{p} \rho_4$ and $\rho_2 = q \rho_3 + \bar{q} \rho_5$. This is because $\rho_3$ would have to have support that is both within the support of $\rho_1$ and $\rho_2$. Therefore orthogonality implies separateness.
 	
 	Suppose $\rho_4$ has disjoint support from $\rho_1 = p \rho_2 + \bar{p} \rho_3$, then it has disjoint support from $\rho_2$ and $\rho_3$ because the support of $\rho_1$ is the union of the supports of $\rho_2$ and $\rho_3$. Conversely, if $\rho_4$ has disjoint support from both $\rho_2$ and $\rho_3$, then $\rho_4$ has disjoint support from $\rho_1$ as well. Therefore mixtures preserve orthogonality.
 	
 	All these arguments are valid for discrete classical ensemble spaces, changing integrals to sums.
 	
-	In the quantum case, the entropy is a continuous function of the density operator as the trace, multiplication and logarithm of an operator are all continuous functions. [TODO find short proof of convexity and maximum bound]
+	In the quantum case, the entropy is a continuous function of the density operator as the trace, multiplication and logarithm of an operator are all continuous functions. [TODO find short proof of concavity and maximum bound]
 \end{proof}
 
 TODO: add the example of open segment. no orthogonal elements. no endpoint but we can tell it is finite
