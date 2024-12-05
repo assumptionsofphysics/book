@@ -174,7 +174,9 @@ The second property of ensembles is that they can be mixed. That is, we can take
 \end{justification}
 
 \begin{remark}
-	Given commutativity and associativity, we can write $p_1 \ens_1 + p_2 \ens_2 + p_3 \ens_3$ where $p_2 = \bar{p}_1\overline{\left(\frac{p_3}{\bar{p}_1}\right)} = \bar{p}_3\overline{\left(\frac{p_1}{\bar{p}_3}\right)} = 1 - p_1 - p_3 = \overline{\left(p_1 + p_3\right)}$. We can also extend to mixtures of finitely many elements $\sum_i p_i \ens_i$ where $\sum_i p_i = 1$.
+	Given commutativity and associativity, we can write $p_1 \ens_1 + p_2 \ens_2 + p_3 \ens_3$ where $p_2 = \bar{p}_1\overline{\left(\frac{p_3}{\bar{p}_1}\right)} = \bar{p}_3\overline{\left(\frac{p_1}{\bar{p}_3}\right)} = 1 - p_1 - p_3 = \overline{\left(p_1 + p_3\right)}$. We can also extend to mixtures of finitely many elements $\sum_{n=1}^\infty p_i \ens_i$ where $\sum_{n=1}^\infty p_i = 1$.
+	
+	NOTE: the mixture is guaranteed only for finitely many elements. Whether an infinite sum $\sum_{i=1}^\infty \ens_i$ converges or not in the space is determined by the topology (i.e. experimental verifiability). The goal is to work with only finite convex combinations and let the closure of the topology handle the limits.
 \end{remark}
 
 \begin{coro}
@@ -182,7 +184,7 @@ The second property of ensembles is that they can be mixed. That is, we can take
 \end{coro}
 
 \begin{remark}
-	Basic definitions for convex spaces are taken from \url{https://ncatlab.org/nlab/show/convex+space} and \url{https://arxiv.org/abs/0903.5522}. The notation and terminology will be slightly different to better map to physics ideas. 
+	Basic definitions for convex spaces are taken from \href{https://ncatlab.org/nlab/show/convex+space}{ncatlab} and \href{https://arxiv.org/abs/0903.5522}{this excellent paper}. The notation and terminology will be slightly different to better map to physics ideas. 
 \end{remark}
 
 \begin{prop}
@@ -558,8 +560,16 @@ The axioms of mixture do not constrain the convex set to be a subset of a vector
 	Since $S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{\lambda} S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\ens[a]) + \bar{\lambda} S(\ens[b])$, $\ens[a] = \ens[b]$ by strict concavity.
 \end{proof}
 
+\begin{defn}
+	An element $\ens \in \Ens$ can be expressed as an \textbf{affine combination} of ensembles $\ens = \sum_{i=1}^{n} p_i \ens_i$, where $\ens_i \in \Ens$, $p_i \in \mathbb{R}$ and $\sum_{i=1}^{n} p_i = 1$, if the linear combination in the vector space returns an element of $\Ens$.
+\end{defn}
+
+\begin{remark}
+	In the same way that not all infinite convex combinations yield valid ensembles, not all finite or infinite affine combinations yield valid ensembles.
+\end{remark}
+
 \begin{conj}\label{pm_es_ensemblesAreTVS}
-	An ensemble space embeds in a topological vector space if and only if it is complemented (i.e. cancellative).
+	An ensemble space embeds in a topological vector space.
 \end{conj}
 
 \begin{remark}
@@ -598,11 +608,22 @@ It is therefore the entropy that rules out this case. If the entropy of the two 
 \subsubsection{Boundedness of lines}
 
 \begin{defn}
-	A \textbf{linear convex subset} $U \subseteq \Ens$ is a convex subset such that any three distinct elements can be written as the convex combination of one with respect of the other three. That is, for all $\ens_1, \ens_2, \ens_3 \in U$ there exists a permutation $\sigma$ and $p \in (0,1)$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}	$.
+	A \textbf{line} $U \subseteq \Ens$ is a convex subset such that for any three elements one can be expressed as a mixture of the other two. That is, for all $\ens_1, \ens_2, \ens_3 \in U$ there exists a permutation $\sigma$ and $p \in [0,1]$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}	$.
 \end{defn}
 
 \begin{prop}
-	Let $U \subseteq \Ens$ be a linear convex subset. Then we can find $V \subseteq \mathbb{R}$ and a convex set isomorphism $r : U \to V$. That is, $f(p \ens_a + \bar{p} \ens_b) = p r(\ens_a) + \bar{p} r(\ens_b)$ and $r^{-1} (p a + \bar{p} b) = p r^{-1} (a) + \bar{p} r^{-1} (b)$.
+	Given $\ens[a], \ens[b] \in \Ens$, there is only one line that contains them.
+\end{prop}
+
+\begin{proof}
+	Since an ensemble space embeds into a vector space, given two ensembles there is only one line that connects them.
+\end{proof}
+
+
+TODO: rewrite these proofs using "line" and hiding some details.
+
+\begin{prop}
+	Let $U \subseteq \Ens$ be a line. Then we can find $V \subseteq \mathbb{R}$ and a convex set isomorphism $r : U \to V$. That is, $f(p \ens_a + \bar{p} \ens_b) = p r(\ens_a) + \bar{p} r(\ens_b)$ and $r^{-1} (p a + \bar{p} b) = p r^{-1} (a) + \bar{p} r^{-1} (b)$.
 \end{prop}
 
 \begin{proof}
@@ -831,23 +852,23 @@ TODO: create a section of examples. Add all probability measures, show that sing
 TODO: This will need to move after proving ensemble spaces embed into vector spaces
 
 \begin{defn}
-	A \textbf{line} $U \subseteq \Ens$ is a convex subset such that for any three elements one can be expressed as a mixture of the other two. That is, for all $\ens_1, \ens_2, \ens_3 \in U$ there exists a permutation $\sigma$ and $p \in [0,1]$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}	$.
+	A \textbf{simplex} is a subset $U \subset \mathbb{R}^n$ that is the hull of a finitely many affinely independent points. That is, $U = \hull(\{x_i\}_{i=0}^{n})$ such that $\{x_i - x_0\}_{i=0}^{n}$ are linearly independent.
+\end{defn}
+
+\begin{defn}
+	A \textbf{flat} $A \subseteq \Ens$ is a closed convex subset that contains all lines between all elements. That is, for any $\ens[a], \ens[b] \in A$, $A$ also contains the line that contains $\ens[a]$ and $\ens[b]$. Given a set $U \subseteq \Ens$, the flat generated by $U$ is the smallest flat that contains $U$. A flat is \textbf{finite} if it can be generated by a finite number of elements. An $n$-flat is a flat that must be generated by a set with at least $n$ elements.
 \end{defn}
 
 \begin{prop}
-	Given $\ens[a], \ens[b] \in \Ens$, there is only one line that contains them.
+	A flat includes all possible affine combinations and is therefore the intersection of $\Ens$ with a closed affine subspace of the embedding vector space.
 \end{prop}
 
 \begin{proof}
-	Since an ensemble space embeds into a vector space, given two ensembles there is only one line that connects them.
+	Let $A \subset \Ens$ be a flat and let $V$ the real vector space that embeds $\Ens$. A line between two elements $\ens[a], \ens[b] \in \Ens$ can be extended in $V$ and can be written as $\ens[a] + x \left(\ens[b] - \ens[a]\right)$. Therefore any ensemble that can be written as an affine combination of two ensembles is an element of the flat. Recursively, this means that any ensemble that can be written as an affine combination of finitely name ensembles is also in the flat. Moreover, since the flat is a closed set, it will include all its limits and therefore every element of $A$ is an element of $\Ens$ that is also an element of the closed affine span of $A$. Then $A$ is the intersection of an affine subspace of the embedding vector space and the ensemble space.
 \end{proof}
 
-\begin{defn}
-	A \textbf{flat} $A \subseteq \Ens$ is a convex subset that contains all possible lines. That is, for any $\ens[a], \ens[b] \in A$, $A$ also contains the line that contains $\ens[a]$ and $\ens[b]$. Given a set $U \subseteq \Ens$, the flat generated by $U$ is the smallest flat that contains $U$. A flat is \textbf{finite} if it can be generated by a finite number of elements. An $n$-flat is a flat that must be generated by a set with at least $n$ elements.
-\end{defn}
-
 \begin{conj}
-	A flat embeds into an affine subspace of the embedding vector space. An $n$-flat embeds into an $n$-dimensional affine space.
+	An $n$-flat is a simplex if and only if its $3$-flats are simplexes (i.e. triangles).
 \end{conj}
 
 \begin{remark}
@@ -855,12 +876,44 @@ TODO: This will need to move after proving ensemble spaces embed into vector spa
 \end{remark}
 
 \begin{defn}
-	A classical probability space is a convex subset of probability measure of subset of a vector space of measures over a sample space $\Omega$.
+	An ensemble is \textbf{decomposable} if it can be expressed as a mixture of two ensembles. An ensemble is \textbf{separately/orthogonally decomposable} if it can be expressed as a mixture of two separate/orthogonal ensembles. An ensemble is \textbf{separately co-decomposable} if it can be expressed as two separate decomposition for which all four components are separate. That is, $\ens = p \ens_1 + \bar{p} \ens_2 = \lambda \ens_3 +\bar{\lambda} \ens_4$ and $\ens_i \separate \ens_k$ for all $i \neq j$.
 \end{defn}
 
+\begin{remark}
+	TODO: maybe a picture with examples. Co-decomposable is probably not a good name
+	
+	Take a classical discrete space which is a simplex. The only three elements that are not decomposable are the extreme points. Mixtures of two points are decomposable and are also separately decomposable in only one way. Mixtures of three points are also separately decomposable, but in multiple ways: as a mixture of $\ens_1$ and a mixture of $\ens_2$ and $\ens_3$, or as a mixture of $\ens_2$ and a mixture of $\ens_1$ and $\ens_3$. Note, however, that they are not separately co-decomposable as the different components are not separate.
+	
+	Take a Bloch ball for quantum mechanics. All the elements of the surface and not decomposable and they are all pairwise separate. The middle point can be seen as the equal mixture of any two pair of opposite points. Therefore the middle point, as well as any other point not on the surface, is not only separately decomposable but also co-decomposable.
+\end{remark}
+
 \begin{defn}
-	A classical probability space is a convex subset where all finite flats a simplexes.
+	Let $\Ens$ be an ensemble space. A \textbf{classical probability context} is a flat of $\Ens$ where each decomposable element is separately decomposable but not separately co-decomposable.
 \end{defn}
+
+\begin{conj}
+	Let $C \subseteq \Ens$ be a classical probability context. Let $U \subset C$ be a set of ensembles. Then $U^\separate$ and $(U^\separate)^\separate$ are two probability contexts whose closed convex closure is $C$.
+\end{conj}
+
+\begin{remark}
+	The key is that if we take $\ens[a] \in U^\separate$ and $\ens[b] \in (U^\separate)^\separate$, then $p \ens[a] + \bar{p}\ens[b]$ cannot be a mixture of elements of just $U^\separate$ or $(U^\separate)^\separate$. Since is by single decomposition.
+\end{remark}
+
+\begin{conj}
+	Let $C \subseteq \Ens$ be a classical probability context. Let $U \subset C$ be a set of ensembles. Then the fraction capacity is linear across $U^\separate$ and $(U^\separate)^\separate$. That is, for all $\ens \in C$ $\fcap_{\ens}(C) = \fcap_{\ens}(U^\separate) + \fcap_{\ens}((U^\separate)^\separate)$.
+\end{conj}
+
+\begin{prop}
+	A convex subset $U \subset \Ens$ is a classical probability context if and only if it is the subset of probability measures of a vector space of measures over a sample space $\Omega$.
+\end{prop}
+
+\begin{prop}
+	A convex subset $U \subset \Ens$ is a classical probability context if and only all finite flats a simplexes.
+\end{prop}
+
+\begin{proof}
+	Let $\ens = p \ens[a] + \bar{p} \ens[b] = \lambda \ens[c] +\bar{\lambda} \ens[d]$
+\end{proof}
 
 \begin{coro}
 	Classical discrete and classical continuous ensemble spaces are classical probability spaces.
