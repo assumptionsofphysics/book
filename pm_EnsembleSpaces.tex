@@ -876,28 +876,60 @@ TODO: This will need to move after proving ensemble spaces embed into vector spa
 \end{remark}
 
 \begin{defn}
-	An ensemble is \textbf{decomposable} if it can be expressed as a mixture of two ensembles. An ensemble is \textbf{separately/orthogonally decomposable} if it can be expressed as a mixture of two separate/orthogonal ensembles. An ensemble is \textbf{separately co-decomposable} if it can be expressed as two separate decomposition for which all four components are separate. That is, $\ens = p \ens_1 + \bar{p} \ens_2 = \lambda \ens_3 +\bar{\lambda} \ens_4$ and $\ens_i \separate \ens_k$ for all $i \neq j$.
+	An ensemble is \textbf{decomposable} if it can be expressed as a mixture of two ensembles. An ensemble is \textbf{separately/orthogonally decomposable} if it can be expressed as a mixture of two separate/orthogonal ensembles. An ensemble is \textbf{separately multidecomposable} if it can be expressed as two decompositions where the component of one is separate from both components of the other. That is, $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$ and either $\ens[a]_1 \separate \ens[b]_j$ or $\ens[a]_2 \separate \ens[b]_j$.
 \end{defn}
 
+\begin{figure}[h]
+	\includegraphics[width=0.5\textwidth]{tempimages/MultipleDecomposition.jpg}
+\end{figure}
+
 \begin{remark}
-	TODO: maybe a picture with examples. Co-decomposable is probably not a good name
+	Take a classical discrete space for three points which is a triangle (simplex). The only three elements that are not decomposable are the extreme points. Mixtures of two points are decomposable and are also separately decomposable in only one way. Mixtures of three points are also separately decomposable, but in multiple ways: as a mixture of $\ens_1$ and a mixture of $\ens_2$ and $\ens_3$, or as a mixture of $\ens_2$ and a mixture of $\ens_1$ and $\ens_3$. Note, however, that they are not separately multidecomposable as the different components are not separate.
 	
-	Take a classical discrete space which is a simplex. The only three elements that are not decomposable are the extreme points. Mixtures of two points are decomposable and are also separately decomposable in only one way. Mixtures of three points are also separately decomposable, but in multiple ways: as a mixture of $\ens_1$ and a mixture of $\ens_2$ and $\ens_3$, or as a mixture of $\ens_2$ and a mixture of $\ens_1$ and $\ens_3$. Note, however, that they are not separately co-decomposable as the different components are not separate.
+	Take a Bloch ball for quantum mechanics. All the elements of the surface and not decomposable and they are all pairwise separate. The middle point can be seen as the equal mixture of any two pair of opposite points. Therefore the middle point, as well as any other point not on the surface, is not only separately decomposable but also multidecomposable.
 	
-	Take a Bloch ball for quantum mechanics. All the elements of the surface and not decomposable and they are all pairwise separate. The middle point can be seen as the equal mixture of any two pair of opposite points. Therefore the middle point, as well as any other point not on the surface, is not only separately decomposable but also co-decomposable.
+	To see why we require only one components to be separate from the other two, consider the cut triangle. Here we can have multiple decompositions where not all elements are separate.
 \end{remark}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space. A \textbf{classical probability context} is a flat of $\Ens$ where each decomposable element is separately decomposable but not separately co-decomposable.
+	Let $\Ens$ be an ensemble space. A \textbf{classical probability context} is a flat $C \subset \Ens$ where each decomposable element in $C$ is separately decomposable in $C$ but not separately multidecomposable $C$.
 \end{defn}
 
 \begin{conj}
-	Let $C \subseteq \Ens$ be a classical probability context. Let $U \subset C$ be a set of ensembles. Then $U^\separate$ and $(U^\separate)^\separate$ are two probability contexts whose closed convex closure is $C$.
+	Let $C \subseteq \Ens$ be a classical probability context. Let $U \subset C$ be a set of ensembles. Then $A=U^\separate=\{ \ens[a] \in C \, | \, \forall \ens \in U, \ens[a] \separate \ens \}$ and $B=(U^\separate)^\separate=\{ \ens[b] \in C \, | \, \forall \ens[a] \in A, \ens[b] \separate \ens[a] \}$ are two probability contexts whose closed convex closure is $C$.
 \end{conj}
 
+\begin{proof}
+	First we show that $C$ contains only three types of ensembles: those that are limits of convex mixtures of only elements $A$, those that are limits of convex mixtures of $B$, those that are limits of convex mixtures of both $A$ and $B$. For an ensemble to not be in both $A$ and $B$, it would be separate from both which, by construction, is not possible: if it separate from $A$ it would be separate from $U$ and therefore would be in $B$. Since separate multidecomposition is forbidden, an ensemble $\ens$ cannot be written both as a convex combination of $A$ and as a convex combination with an element of $B$. This would yield two decompositions in which one components, the one chose from $B$, is separate from the all the components of the other. This means that an element of $C$ is either a mixture of $A$, a mixture of $B$ or a mixture of both $A$ and $B$.
+	
+	Now we show that both $A$ and $B$ are convex sets. Since a mixture of $A$ can only be expressed as a mixture of components of $A$, it is separate from all elements of $B$. Therefore $A$ contains all its mixtures. With the same logic, $B$ will contain all its mixtures. The argument works for infinite convex combinations as well. If $\ens = \sum_{i=1}^{\infty} p_i a_i$, it can be understood as the limit of the series $\frac{p_1}{P_n} \ens[a]_1 + \frac{\bar{p}_1}{P_n} \sum_{i=2}^{n} p_i a_i$ where $P_n = \sum_{i=1}^{n} p_i$. Therefore
+	\begin{equation}
+		\begin{aligned}
+			\ens &= \sum_{i=1}^{\infty} p_i \ens[a]_i = \lim\limits_{n \to \infty}  \sum_{i=1}^{n} \frac{p_i}{P_n} \ens[a]_i = \lim\limits_{n \to \infty} \frac{p_1}{P_n} \ens[a]_1 + \frac{\bar{p}_1}{P_n} \sum_{i=2}^{n} \frac{p_i}{\bar{p}_1} \ens[a]_i = p_1 \ens[a]_1 + \bar{p}_1 \sum_{i=2}^{\infty} \frac{p_i}{\bar{p}_1} \ens[a]_i \\
+			&= p_1 \ens[a]_1 + \bar{p}_1 \hat{\ens[a]}_1
+		\end{aligned}
+	\end{equation}
+	where $\hat{\ens[a]}_1 = \sum_{i=2}^{\infty} \frac{p_i}{\bar{p}_1} \ens[a]_i$. Since $\ens$ and $\ens[a]_1$ are element of the ensemble space, the series converges to $\hat{\ens[a]}_1$, which is in the closed convex closure of $A$. It will also be an element of $A$ because multidecompositions are forbidden.
+	
+	To see that $C$ is the closed convex closure of $A$ and $B$, not that all the elements in $C$ that are not already in $A$ and $B$ are the mixtures of $A$ and $B$. These are exactly added when performing the closure.
+	
+	Now we show that $A$ and $B$ are classical probability contexts. First we have to show that they are flats. Let $L$ be a line that connects two elements $\ens[a]_1, \ens[a]_2 \in A$. Take $\ens[a]_3 \in L$. If it is a mixture of $\ens[a]_1$ and $\ens[a]_2$ the it is an $A$. If $\ens[a]_1$ is a mixture of $\ens[a]_2$ and $\ens[a]_3$, since $\ens[a]_1$ cannot have a common component with $B$, $\ens[a]_2$ must be a mixture of elements of $A$. Similarly if $\ens[a]_3$ is a mixture of $\ens[a]_2$ and $\ens[a]_1$. Therefore $A$ is a flat. Similarly, $B$ is a flat.
+	
+	TODO: finish
+\end{proof}
+
+
+\begin{figure}[h]
+	\includegraphics[width=0.5\textwidth]{tempimages/CounterexampleProbabilityContexts.jpg}
+\end{figure}
+
 \begin{remark}
-	The key is that if we take $\ens[a] \in U^\separate$ and $\ens[b] \in (U^\separate)^\separate$, then $p \ens[a] + \bar{p}\ens[b]$ cannot be a mixture of elements of just $U^\separate$ or $(U^\separate)^\separate$. Since is by single decomposition.
+	Note that if multiple separate decompositions are not ruled out, the sub-contexts will not include all convex combinations. Take a circle as a convex space. Suppose $U$ is made two points $a$ and $b$. All other points on the surface are separate from both and therefore belong two $B$. Now consider the convex combinations of $a$ and $b$. These are not separate from $U$ but they are also not separate from the all other elements on the surface. Therefore they are neither in $A$ and $B$. Therefore $A$ and $B$ are not necessarily convex sets if $C$ is not a classical probability context.
 \end{remark}
+
+\begin{conj}
+	The property of classical probability context is exactly what allows $A$ and $B$ to be convex sets.
+\end{conj}
 
 \begin{conj}
 	Let $C \subseteq \Ens$ be a classical probability context. Let $U \subset C$ be a set of ensembles. Then the fraction capacity is linear across $U^\separate$ and $(U^\separate)^\separate$. That is, for all $\ens \in C$ $\fcap_{\ens}(C) = \fcap_{\ens}(U^\separate) + \fcap_{\ens}((U^\separate)^\separate)$.
