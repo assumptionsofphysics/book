@@ -342,6 +342,18 @@ The third and final property of ensembles is that they have a well-defined entro
 	Suppose an ensemble $\ens[a]$ is orthogonal from the mixture of two ensembles $\ens[b]$ and $\ens[c]$. That is, it has no elements in common with the mixture, which means it has no elements in common with either of them. Therefore $\ens[a]$ is orthogonal from both $\ens[b]$ and $\ens[c]$. Now suppose $\ens[a]$ is orthogonal from both $\ens[b]$ and $\ens[c]$. That means it has no elements in common with either of them, and therefore it does not have any elements in common with their mixture. Therefore $\ens[a]$ is orthogonal from the mixture of two ensembles $\ens[b]$ and $\ens[c]$. We are justified to assume that mixtures preserve orthogonality.
 \end{justification}
 
+\begin{prop}
+	An ensemble is not orthogonal with itself or with its own components. Two orthogonal ensembles are separate. That is, let $\ens[a], \ens[b] \in \Ens$. If $\ens[a] \ortho \ens[b]$ then $\ens[a] \separate \ens[b]$
+\end{prop}
+
+\begin{proof}
+	To show that every ensemble is not orthogonal to itself, let $\ens[a] \in \Ens$. We have $S(p\ens[a] + \bar{p}\ens[a]) = S(\ens[a]) < I(p,\bar{p}) + p S(\ens[a]) + \bar{p} S(\ens[a])$. Therefore $\ens[a]$ is not orthogonal to itself as it does not saturate the upper bound.
+	
+	To show that every ensemble is not orthogonal to its own components, let $\ens[a] = p \ens[b] + \bar{p} \ens[c]$. By mixtures preserve orthogonality, $\ens[b] \ortho \ens[a]$ if and only if $\ens[b] \ortho \ens[b]$ and $\ens[b] \ortho \ens[c]$. But $\ens[b]$ is not orthogonal to itself, therefore $\ens[a]$ and $\ens[b]$ are not orthogonal.
+	
+	Two show that orthogonal ensembles are separate we demonstrate the contrapositive: that ensemble that are not separate are not orthogonal. Let $\ens[a], \ens[b] \in \Ens$ have a common component. That is, $\ens[a] = p \ens[c] + \bar{p} \ens[d]$ and $\ens[b] = p \ens[c] + \bar{p} \ens[e]$. By mixtures preserve orthogonality, $\ens[a] \ortho \ens[b]$ if and only if $\ens[a] \ortho \ens[c]$ and $\ens[a] \ortho \ens[e]$. But $\ens[c]$ is a component of $\ens[a]$, therefore they are not orthogonal. Therefore two ensemble that have a common component are not orthogonal. Which means that if two ensembles are orthogonal they cannot have a common component and are therefore separate.
+\end{proof}
+
 \begin{thrm}[Uniqueness of entropy]\label{pm_es_entropyUnique}
 	The entropy of the coefficients $I(p,\bar{p})$ is the Shannon entropy. That is, $I(p,\bar{p}) = - \kappa \left(p \log p - \bar{p} \log \bar{p}\right)$ where $\kappa>0$ is the arbitrary multiplicative constant for the entropy. For a mixture of arbitrarily many elements, $I(\{p_i\}) = - \kappa \sum p_i \log p_i$.
 \end{thrm}
