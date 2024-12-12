@@ -145,83 +145,92 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 
 \section{Axiom of mixture and convex spaces}
 
-The second property of ensembles is that they can be mixed. That is, we can take two preparation procedures and choose between them with a known probability. This constitutes another ensemble.
-
+The second property of ensembles is that they can be mixed. That is, we can take two preparation procedures and choose between them with a known probability. This constitutes another ensemble. The convex space structure is ultimately responsible for all linear structures in physics.
 
 \begin{defn}
 	Given a real number $p \in [0,1]$, its complement is defined as $\bar{p} = 1-p$.
 \end{defn}
 
 \begin{axiom}[Axiom of mixture]
-	An ensemble space $\Ens$ is equipped with an operation $+ : [0, 1] \times \Ens \times \Ens \to \Ens$ called \textbf{mixing}, noted with the infix notation $p \ens_1 + \bar{p} \ens_2$, with the following properties:
+	An ensemble space is closed under statistical mixing. Formally, an ensemble space $\Ens$ is equipped with an operation $+ : [0, 1] \times \Ens \times \Ens \to \Ens$ called \textbf{mixing}, noted with the infix notation $p \ens[a] + \bar{p} \ens[b]$, with the following properties:
 	\begin{itemize}
-		\item \textbf{Continuity}: the map $(p, \ens_1, \ens_2)  \to p \ens_1 + \bar{p} \ens_2$ is continuous (the products $[0, 1] \times \Ens \times \Ens \to \Ens$ have the product topology)
-		\item \textbf{Identity}: $1 \ens_1 + 0 \ens_2 = \ens_1$
-		\item \textbf{Idempotence}:  $p \ens_1 + \bar{p} \ens_1 = \ens_1$ for all $p \in [0,1]$
-		\item \textbf{Commutativity}: $p \ens_1 + \bar{p} \ens_2 = \bar{p} \ens_2 + p \ens_1$ for all $p \in [0,1]$
-		\item \textbf{Associativity}: $p_1 \ens_1 + \bar{p_1}\left(\overline{\left(\frac{p_3}{\bar{p_1}}\right)}\ens_2 + \frac{p_3}{\bar{p_1}}\ens_3\right) =  \bar{p_3}\left(\frac{p_1}{\bar{p}_3} \ens_1 +  \overline{\left(\frac{p_1}{\bar{p}_3}\right)}\ens_2\right) + p_3 \ens_3$ for all $p_1, p_3 \in [0,1]$
+		\item \textbf{Continuity}: the map $+(p, \ens[a], \ens[b])  \to p \ens[a] + \bar{p} \ens[b]$ is continuous (with respect to the product topology $[0, 1] \times \Ens \times \Ens$)
+		\item \textbf{Identity}: $1 \ens[a] + 0 \ens[b] = \ens[a]$
+		\item \textbf{Idempotence}:  $p \ens[a] + \bar{p} \ens[a] = \ens[a]$ for all $p \in [0,1]$
+		\item \textbf{Commutativity}: $p \ens[a] + \bar{p} \ens[b] = \bar{p} \ens[b] + p \ens[a]$ for all $p \in [0,1]$
+		\item \textbf{Associativity}: $p_1 \ens_1 + \bar{p}_1\left(\overline{\left(\frac{p_3}{\bar{p}_1}\right)}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) =  \bar{p}_3\left(\frac{p_1}{\bar{p}_3} \ens_1 +  \overline{\left(\frac{p_1}{\bar{p}_3}\right)}\ens_2\right) + p_3 \ens_3$ where $0 < p_1 + p_3 < 1$
 	\end{itemize}
 \end{axiom}
 
 \begin{justification}
-	This axiom captures the ability to create a mixture merely by selecting between the output of different processes.
+	This axiom captures the ability to create a mixture merely by selecting between the output of different processes. Let $\ens_1$ and $\ens_2$ be two ensembles that represent the output of two different processes $P_1$ and $P_2$. Let a selector $S_p$ be a process that outputs two symbols, the first with probability $p$ and the second with probability $\bar{p}$. Then we can create another process $P$ that, depending on the selector, outputs either the output of $P_1$ or $P_2$. All possible preparations of such a procedure will form an ensemble. Therefore we are justified in equipping an ensemble space with a mixing operation that take a real number from zero to one and two ensembles.
 	
-	Given that mixing represents an experimental relationship, and all experimental relationships must be continuous in the natural topology, mixing must be a continuous function. Note that $p$ is a continuously ordered quantity, where no value is perfectly experimentally verifiable, and therefore the natural topology is the one of the reals.
+	Given that mixing represents an experimental relationship, and all experimental relationships must be continuous in the natural topology, mixing must be a continuous function. Note that $p$ is a continuously ordered quantity, where no value is perfectly experimentally verifiable, and therefore the natural topology is the one of the reals. This justifies continuity.
 
-	Let $\ens_1$ and $\ens_2$ be the ensembles that represent the output of two different processes $P_1$ and $P_2$. Let a selector $S_p$ be a process that outputs two symbols, the first with probability $p$ and the second with probability $\bar{p}$. Then we can create another process $P$ that, depending on the selector, outputs either the output of $P_1$ or $P_2$. Therefore we are justified in assuming the mixing operation among ensembles.
-
-	If $p=1$, the output of $P$ will always be the output of $P_1$. This justifies the identity. If $P_1$ and $P_2$ are the same process, then, again, the output of $P$ will always be the output of $P_1$. This justifies the idempotence. As long as the same probability is matched to the same output, the process $P$ is identical. This justifies commutativity. If we are mixing three processes $P_1$, $P_2$ and $P_3$, as long as the final probabilities are the same, it does not matter if we mix $P_1$ and $P_2$ first or $P_2$ and $P_3$. This justifies associativity.
+	If $p=1$, the output of $P$ will always be the output of $P_1$. This justifies the identity property. If $P_1$ and $P_2$ are the same process, then the output of $P$ will always be the output of $P_1$. This justifies the idempotence property. The order in which the processes are given does not matter as long as the same probability is matched to the same process. The process $P$ is identical under permutation of $P_1$ and $P_2$. This justifies commutativity. If we are mixing three processes $P_1$, $P_2$ and $P_3$, as long as the final probabilities are the same, it does not matter if we mix $P_1$ and $P_2$ first or $P_2$ and $P_3$. This justifies associativity.
 \end{justification}
 
 \begin{remark}
-	Given commutativity and associativity, we can write $p_1 \ens_1 + p_2 \ens_2 + p_3 \ens_3$ where $p_2 = \bar{p}_1\overline{\left(\frac{p_3}{\bar{p}_1}\right)} = \bar{p}_3\overline{\left(\frac{p_1}{\bar{p}_3}\right)} = 1 - p_1 - p_3 = \overline{\left(p_1 + p_3\right)}$. We can also extend to mixtures of finitely many elements $\sum_{n=1}^\infty p_i \ens_i$ where $\sum_{n=1}^\infty p_i = 1$.
+	Given commutativity and associativity, we can write $p_1 \ens[a] + p_2 \ens[b] + p_3 \ens_3$ where $p_2 = \bar{p}_1\overline{\left(\frac{p_3}{\bar{p}_1}\right)} = \bar{p}_3\overline{\left(\frac{p_1}{\bar{p}_3}\right)} = 1 - p_1 - p_3 = \overline{\left(p_1 + p_3\right)}$.
 	
-	NOTE: the mixture is guaranteed only for finitely many elements. Whether an infinite sum $\sum_{i=1}^\infty \ens_i$ converges or not in the space is determined by the topology (i.e. experimental verifiability). The goal is to work with only finite convex combinations and let the closure of the topology handle the limits.
+	We can also extend to mixtures of finitely many elements $\sum_{n=1}^\infty p_i \ens_i$ where $\sum_{n=1}^\infty p_i = 1$ with the following caveat. The mixture is guaranteed to exist only for finitely many elements. Whether an infinite sum $\sum_{i=1}^\infty \ens_i$ converges or not in the space is determined by the topology (i.e. experimental verifiability). The goal is to work with only finite convex combinations and let the closure of the topology handle the limits.
 \end{remark}
 
 \begin{coro}
 	An ensemble space is a convex space.
 \end{coro}
 
-\begin{remark}
-	Basic definitions for convex spaces are taken from \href{https://ncatlab.org/nlab/show/convex+space}{ncatlab} and \href{https://arxiv.org/abs/0903.5522}{this excellent paper}. The notation and terminology will be slightly different to better map to physics ideas. 
-\end{remark}
+\begin{proof}
+	The properties of the axiom of mixture match the basic definition of a convex spaces, which can be taken from \href{https://ncatlab.org/nlab/show/convex+space}{ncatlab} and \href{https://arxiv.org/abs/0903.5522}{this excellent paper}.  The notation and terminology will be slightly different to better map to physics ideas. 
+\end{proof}
 
 \begin{prop}
 	Discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfy the axiom of mixture.
 \end{prop}
 
 \begin{proof}
-	The space of probability measures, discrete or continuous, $\Ens$ is a convex subset of the vector space of finite signed measures. This means that it is closed under convex combinations: $\sum p_i \ens_i$ for all $\{e_i\} \subseteq \Ens$ and $\sum p_i = 1$. The properties of mixing are inherited from the properties of linear combinations. Therefore the discrete and continuous classical ensemble spaces satisfy the axiom of mixture.
+	The space of probability measures, discrete or continuous, $\Ens$ is a convex subset of the vector space of signed finite measures. It is therefore closed under convex combinations: if $\{e_i\} \subseteq \Ens$ are probability measure, then $\sum p_i \ens_i$ with $\sum p_i = 1$ is a probability measure. The properties of mixing are inherited from the properties of linear combinations. Therefore the discrete and continuous classical ensemble spaces satisfy the axiom of mixture.
 	
 	Similarly, the space of positive semi-definite self-adjoint operators with trace one is a convex subset of the vector space of self-adjoint operators. Therefore it is closed under convex combinations and it will satisfy the axiom of mixture.
 \end{proof}
 
 \subsection{Common components and separateness}
 
-The convex structure allows us to characterize ensembles based on whether they can be mixed into one another.
+The convex structure allows us to characterize ensembles based on whether they can be mixed into one another. For example, we can ask whether an ensemble is or is not the mixture of some other ensembles; whether two ensembles can be expressed as a mixture of a common component.
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space. Let $\ens[\rho] = \sum_i p_i \ens_i$ where $\ens[\rho], \{\ens_i\} \in \Ens$ and $p_i \in (0,1]$ such that $\sum p_i = 1$. We say that $\ens[\rho]$ is a \textbf{mixture} of $\{\ens_i\}$, each $\ens_i$ is a \textbf{component} of $\ens[\rho]$ and each $p_i$ is a \textbf{mixture coefficient}.
+	Let $\Ens$ be an ensemble space. Let $\ens[a] = \sum_i p_i \ens_i$ where $\ens[a], \{\ens_i\} \in \Ens$ and $p_i \in (0,1]$ such that $\sum p_i = 1$. We say that $\ens[a]$ is a \textbf{mixture} of $\{\ens_i\}$, each $\ens_i$ is a \textbf{component} of $\ens[a]$ and each $p_i$ is a \textbf{mixture coefficient}.
 \end{defn}
 
-\begin{remark}
-	In terms of the convex space, all the mixtures between two elements correspond to the segment between them; all the mixtures between three elements correspond to the triangle formed by the three elements and so on. An element $\ens_1$ is a component of a different element $\ens_2$ if the segment can be continued on the side of $\ens_2$. Note that two elements can be a component of each other. If two elements are not a component of each other, then they are the extreme points of the line that connect the two.
-\end{remark}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{tempimages/ConvexExamples.jpg}
+\end{figure}
 
 \begin{remark}
-	Note that ``being a component of'' is not a partial order. It is reflexive and transitive, but it is not antisymmetric. That is, two different elements can be a component of each other. For example, consider the two probability distributions $(1/3, 2/3)$ and $(2/3, 1/3)$. The first is a component of the second and, by symmetry, the second is a component of the first.
+	In terms of the convex space, all the mixtures between two ensembles correspond to the segment between them; all the mixtures between three ensemble correspond to the triangle formed by the three elements and so on. An ensemble $\ens[a]$ is a component of a different ensemble $\ens[b]$ if the segment can be continued on the side of $\ens[b]$. If two elements are not a component of each other, then they are the extreme points of the line that connect the two. That is, the segment cannot be extended.
 \end{remark}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{tempimages/ComponentNotOrder.jpg}
+\end{figure}
+
+\begin{remark}
+	Note that two ensembles can be the component of each other. Consider $\frac{2}{3} \ens[a] + \frac{1}{3} \ens[b]$ and $\frac{1}{3} \ens[a] + \frac{2}{3} \ens[b]$. We can write $\frac{2}{3} \ens[a] + \frac{1}{3} \ens[b] = \frac{1}{2}\left(\frac{1}{3} \ens[a] + \frac{2}{3} \ens[b]\right) + \frac{1}{2} \ens[a]$ and $\frac{1}{3} \ens[a] + \frac{2}{3} \ens[b] = \frac{1}{2}\left(\frac{2}{3} \ens[a] + \frac{1}{3} \ens[b]\right) + \frac{1}{2} \ens[b]$ (they are both midpoints along each other). Therefore a component is not necessarily ``smaller'' or ``better defined'' than the mixture. Mathematically, ``being a component of'' is not a partial order. It is reflexive and transitive, but it is not antisymmetric. In practical term, we need something else to tell us whether we are, for example, taking a limit with components that become ``smaller and smaller.''
+\end{remark}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $\ens_1, \ens_2 \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens_3 \in \Ens$, the common component, such that $\ens_1 = p_1 \ens_3 + \bar{p}_1 \ens_4$ and $\ens_2 = p_2 \ens_3 + \bar{p}_2 \ens_5$ for some $\ens_4, \ens_5 \in \Ens$ and $p_1, p_2 \in (0,1)$. Otherwise, we say they \textbf{have no common component}, or are \textbf{separate}, noted $\ens_1 \separate \ens_2$.
+	Let $\Ens$ be an ensemble space and $\ens[a], \ens[b] \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens[c] \in \Ens$, the common component, such that $\ens[a] = p_1 \ens[c] + \bar{p}_1 \ens_a$ and $\ens[b] = p_2 \ens[c] + \bar{p}_2 \ens_2$ for some $\ens_1, \ens_2 \in \Ens$ and $p_1, p_2 \in (0,1)$. Otherwise, we say they \textbf{have no common component}, or are \textbf{separate}, noted $\ens[a] \separate \ens[b]$. Two ensemble have a common component in $A \subseteq \Ens$ if the common component can be found in $A$, and are separate in $A$ if there is none.
 \end{defn}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{tempimages/CommonComponent.jpg}
+\end{figure}
 
 \begin{remark}
 	If two ensembles $\ens[a]$ and $\ens[b]$ have a common component $\ens[c]$, then the ensemble space contains a triangle where $\ens[c]$ is a vertex and $\ens[a]$ and $\ens[b]$ are points on the sides that connect to $\ens[c]$.
-	
-	TODO: add picture
 \end{remark}
 
 \begin{coro}
@@ -234,7 +243,7 @@ The convex structure allows us to characterize ensembles based on whether they c
 \end{coro}
 
 \begin{proof}
-	1. Since by idempotence $\ens = p \ens + \bar{p} \ens$ for any $p$, we can satisfy the definition by setting $\ens_1 = \ens_2 = \ens_3 = \ens_4 = \ens_5 = \ens$. Therefore every ensemble has a common component with itself and every ensemble is not separate from itself.
+	1. Since by idempotence $\ens = p \ens + \bar{p} \ens$ for any $p$, we can satisfy the definition by setting $\ens[a] = \ens[b] = \ens[c] = \ens_1 = \ens_2 = \ens$. Therefore every ensemble has a common component with itself and every ensemble is not separate from itself.
 	
 	2. The previous property shows that separateness is irreflexive. The definition of common component is symmetric and therefore so is separateness.
 	
@@ -244,11 +253,11 @@ The convex structure allows us to characterize ensembles based on whether they c
 \subsection{Convex subsets and convex hull}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is a \textbf{convex subset} of $\Ens$ if it is closed under mixture. That is, it contains all possible mixtures that can be constructed form its elements.
+	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is a \textbf{convex subset} of $\Ens$ if it is closed under mixture and it is a closed set. That is, it contains all possible mixtures that can be constructed form its elements, including infinite ones. If we want to stress that we care closing only under finite mixing, we say that $A$ is closed under finite convex combinations.
 \end{defn}
 
 \begin{defn}
-	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{convex hull} of $A$, noted $\hull(A)$ is the set of all possible mixtures that can be constructed with elements contained in $A$. That is, it is the closure of $A$ under mixture.
+	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{convex hull} of $A$, noted $\hull(A)$ is the set of all possible mixtures that can be constructed with elements contained in $A$, including infinite ones. That is, it is the topological closure of the closure of $A$ under mixing.
 \end{defn}
 
 \begin{coro}\label{pm_es_hullProp}
@@ -266,7 +275,7 @@ The convex structure allows us to characterize ensembles based on whether they c
 	
 	2. Let $\ens \in \hull(A)$. Then it is a mixture of some elements of $A$. Since $A \subseteq B$, then $\ens$ is also the mixture of some elements of $B$ and therefore $\ens \in \hull(B)$.
 	
-	3. Since mixing is associative and commutative, a mixture of mixtures of $U$ can be reepressed as a mixture of $A$. Therefore for all $\ens \in \hull(\hull(A))$ we have $\ens \in \hull(A)$.
+	3. Since mixing is associative and commutative, a mixture of mixtures of $U$ can be re-epressed as a mixture of $\hull(A)$. Therefore for all $\ens \in \hull(\hull(A))$ we have $\ens \in \hull(A)$.
 \end{proof}
 
 \begin{coro}
@@ -280,15 +289,14 @@ The convex structure allows us to characterize ensembles based on whether they c
 \begin{conj}
 	The hull is
 	\begin{enumerate}
-		\item continuous from below: $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any increasing sequence $\{A_i\}$
 		\item continuous from above: $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any decreasing sequence $\{A_i\}$
+		\item not continuous from below: $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any increasing sequence $\{A_i\}$
 	\end{enumerate}
 \end{conj}
 
-\begin{conj}
-	Let $A \subseteq \Ens$ be a Borel set. Then $\hull(A)$ is also a Borel set. Let $A \subseteq \Ens$ be an open set. Then $\hull(A)$ is also an open set.
-\end{conj}
-
+\begin{proof}
+	It would seem that from above we are taking an infinite intersection of closed sets, which will be closed. From below, we would be taking an infinite union of closed sets, which will not be closed. We would be missing the closure of infinite convex combination with, for example, an element in each set.
+\end{proof}
 
 \begin{coro}
 	The set $\mathfrak{Conv}_{\Ens}$ of all convex subsets of $\Ens$ ordered by set inclusion is a topped $\bigcap$-structure and therefore is also a complete lattice.
@@ -299,10 +307,8 @@ The convex structure allows us to characterize ensembles based on whether they c
 	
 	Let $A, B \in \mathfrak{Conv}_{\Ens}$ be two convex subsets. Consider $A \cap B$. Any mixture of elements in $A \cap B$ is both a mixture of elements in $A$ and a mixture of elements in $B$. Therefore any mixture of elements of $A \cap B$ is both an element of $A$ and an element of $B$. This means it is also an element of $A \cap B$, which is therefore a convex set.
 	
-	The previous argument generalizes to a family of convex subsets $\{A_i\}_{i \in I} \subseteq \mathfrak{L}$. Therefore $\bigcap_{i \in I} A_i \in \mathfrak{Conv}_{\Ens}$ and $\mathfrak{Conv}_{\Ens}$ is an $\bigcap$-structure. This also means that it is a complete lattice.
+	The previous argument generalizes to a family of convex subsets $\{A_i\}_{i \in I} \subseteq \mathfrak{L}$. Moreover, the intersection of infinitely many closed sets is still closed. Therefore $\bigcap_{i \in I} A_i \in \mathfrak{Conv}_{\Ens}$ and $\mathfrak{Conv}_{\Ens}$ is an $\bigcap$-structure. This also means that it is a complete lattice.
 \end{proof}
-
-TODO: review the above proof; ideally, we would restrict to all Borel convex subset.
 
 \section{Axioms of entropy}
 
