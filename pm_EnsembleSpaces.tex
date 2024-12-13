@@ -27,53 +27,31 @@
 
 \chapter{Ensemble spaces}
 
-Here we summarize the work in progress for a general theory of states and processes that is applicable to any physical system. The core concept is that of an ensemble, and the goal is to find necessary requirements for ensembles that can serve as basic axioms and then further suitable assumptions to recover the different theories (e.g. classical, quantum and thermodynamics).
+In this chapter we aim to develop a general theory of states and processes that is applicable to any physical system. The core concept is that of an ensemble, and the goal is to find necessary requirements for ensembles that can serve as basic axioms and then further suitable assumptions to recover the different theories (e.g. classical, quantum and thermodynamics).
 
-By ensemble we mean what is usually meant in statistical mechanics: we have a preparation device that follows some known recipe; its output is somewhat varied by it is consistently varied (i.e. its statistical properties are well defined); the collection of all possible outputs taken as one object is an ensemble. Typically, one defines statistical ensembles on top of the space of ``true'' physical states (e.g. microstates, pure states, ...). Here we will do the opposite: we will start from the ensembles and recover the states as the ``most pure'' ensembles.
+The basic premise is that physical theories are primarily about ensembles. At a practical level, most of the time we can only prepare and measure statistical properties as we do not have perfect control over any system (i.e. all measurements are really statistical). The cases where properties can be prepared with one hundred percent reliability can still be understood as ensembles of identical preparations, were the variability is limited to external conditions or internal dynamics. At a conceptual level, the goal of physics is to write laws that apply all the time: every time that one prepares a system according to a particular procedure and lets it evolve in particular conditions, he will obtain a particular result. That is, the idea of repeatability of experimental results implicitly assumes that the objects of scientific inquiry are not single instances, but the infinite collections of all reproducible instances. This means that any physical theory, at the very least, it will have to provide a mathematical representation for its ensembles.
 
-The idea is that physical theories are, and can only be, about ensembles. At a practical level, most of the time we can only prepare and measure statistical properties as we do not have perfect control over any system (i.e. all measurements are really statistical). The cases where properties can be prepared with one hundred percent reliability can still be understood as ensembles of identical preparations, were the variability is limited to external conditions or internal dynamics. At a conceptual level, the goal of physics is to write laws that apply all the time: every time that one prepares a system according to a particular procedure and lets it evolve in particular conditions, he will obtain a particular result. That is, the idea of repeatability of experimental results implicitly assumes that the objects of scientific inquiry are not single instances, but the infinite collections of all reproducible instances.
+By ensemble we mean what is usually meant in statistical mechanics: we have a preparation device that follows some known recipe; its output is varied but it is consistently varied (i.e. its statistical properties are well defined); the collection of all possible outputs taken as one object is an ensemble. In classical physics, ensembles are probability distributions over the full description of the system, over phase space for classical mechanics. In quantum mechanics, ensembles are represented by density matrices and density operators. The main distinction difference is that statistical ensembles are defined on top of the space of ``true'' physical states (e.g. microstates, pure states, ...). We will proceed in the opposite way: we will start from the ensembles and recover the states as the ``most pure'' ensembles. There are two main advantages: the first is that we can create a theory that is agnostic about what the fundamental states are, and is therefore general. The second this approach is more in line with experimental practice: the experimental data is about statistical ensembles only and the pure states are idealizations that are useful as a mental model or for calculation.
+
+There are three main requirements for ensemble. First, they must be experimentally well-defined. This means that there need to be enough experimentally verifiable statements and experimental test to fully characterize them. This will impose a topology on the ensemble space. Second, we can always perform statistical mixtures: given two ensembles, we can create a third one by selecting the first or the second according to a certain probability. This will impose a convex structure on the ensemble space. Third, ensembles will need a well-defined entropy which quantifies the variability of the elements within the ensemble. Since the variability cannot decrease when performing a statistical mixture and can only increase up to the variability introduced by the random choice, the entropy will have to satisfy certain bounds.
+
+From these axioms, many general results can be proven. An ensemble space will be a convex subset of a vector space that will extend over a bounded interval in each direction. The concavity of the entropy will impose a metric over the space, turning it into a geometrical space and a metrizable topological space. Each ensemble can be characterized by a sub-additive measure, which becomes a probability measure in the classical case. This makes the space of physical theory a lot more constrained than one may imagine at first.
 
 Note: all $\log$s are assumed in base 2.
 
-\section{Axiom of ensemble and topology}
+\section{Review of standard cases}
 
-The first property of ensembles is that they must be definable experimentally. As shown in the previous chapters, this means that they must form a topological space where the topology corresponds to that defined by the verifiable statements.
+We will start this chapter by reviewing three cases: classical discrete ensembles, classical continuous ensemble and quantum ensembles. These will be useful to both form an intuition for ensembles and to serve as targets the whole theory needs to reproduce.
 
-\begin{mathSection}
-	\begin{axiom}[Axiom of ensemble] 
-		The state of a system is represented by an \textbf{ensemble}, which represents all possible preparations of equivalent systems prepared according to the same procedure. The set of all possible ensembles for a particular system is an \textbf{ensemble space}. Formally, an ensemble space is a $T_0$ second countable topological space where each element is called an ensemble.
-	\end{axiom}
-	
-	\begin{justification}
-		In physics, ensembles are usually defined as probability distributions over states. This is conceptually problematic. Any actual physical preparation is always associated with some uncertainty. That is, the system will never be replicated exactly. This is true even in quantum mechanics: while we can always prepare a hydrogen atom in the ground state, we can never prepare an atom in the same exact position with the same exact velocity. The ability to prepare ensembles in which the position and the excitation of the atom can be assumed to be uncorrelated is what allows us to concentrate on one of the properties. Therefore, ensembles are the only thing that can actually be prepared in practice. Pure states, then, should not be taken as primitive notions but should be understood as an idealized ensemble. 
-		
-		From a more conceptual level, reproducibility is baked into the requirement of experimental verifiability. A physical law, then, must be understood as describing a relationship that always exists whenever the same set of circumstances is replicated. Given that we need to always be able to replicate those circumstances ``one more time'', the relationship is about countably infinite similar preparations: an ensemble. Therefore, to the extent that physics is about reproducible experimental results, the basic description of a system is in terms of ensembles. This justifies the use of ensembles as the fundamental object to describe the state of a system.\footnote{Note that reproducibility also already implies that all properties that characterize an ensemble must be relative to the procedure. If the properties depended, for example, on absolute space or absolute time, then different practitioners would not be able to prepare the same ensemble.}
-		
-		Ensembles are experimentally defined objects, and therefore they are possibilities of an experimental domain. Therefore an ensemble space is a $T_0$ second countable topological space where each element is an ensemble and the topology is induced by the verifiable statements.
-	\end{justification}
-\end{mathSection}
-
-We give three canonical examples, which we aim to fully characterize within the general theory. These correspond to the classical discrete, classical continuum and quantum ensemble spaces. Here we review these cases and give the appropriate mathematical definitions, highlighting potential issues, as these serve as models and examples for a general theory.
-
-%TODO: classical ensemble space: ensembles are probability measures
-
-\subsection{Discrete classical theory}
-
-%TODO: divide the discussion of the example to discuss topology/convex structure/entropy separately?
+\subsection{Discrete classical ensemble spaces}
 
 \begin{defn}
-	The ensemble space of a \textbf{discrete classical theory} is a simplex with the standard convex structure and the Shannon entropy. The simplex can have finitely or countably many vertices.
-	
-	That is, a discrete classical ensemble space is a set $\Ens$ containing $n$ points $\{s_i\}^n_{i=1}$ and for which every element $\ens \in \Ens$ is characterized by a unique convex combination $\ens = \sum_i p_i s_i$ such that $\sum_i p_i = 1$. The space is closed under convex combinations of finitely many elements. The entropy is given by $S(\ens) = - \sum_i p_i \log p_i$.
+	A \textbf{classical discrete ensemble space} is the space of probability distributions over a countable number of cases. That is, a discrete classical ensemble space is the simplex $\Ens$ containing $n$ points, possibly countably infinite, $\{s_i\}^n_{i=1}$ and for which every element $\ens \in \Ens$ is characterized by a unique convex combination $\ens = \sum_i p_i s_i$ such that $\sum_i p_i = 1$. The space is closed under convex combinations of finitely many elements. The entropy is given by $S(\ens) = - \sum_i p_i \log p_i$.
 \end{defn}
-
-\begin{remark}
-	The correct closure under convex combinations of countably many elements is not clear.
-\end{remark}
 
 \subsubsection{Finite case}
 
-The space of classical distributions over a discrete space corresponds to a simplex (\url{https://en.wikipedia.org/wiki/Simplex}). In the finite case, the pure states $\mathcal{S} = \{s_i\}_{i=1}^{n} \subset \Ens$ are finitely many and each ensemble $\ens = \sum p_i s_i$ is uniquely identified by a decomposition of pure states. Effectively, each ensemble is a probability distribution over the pure states. Mathematically, each point of the space is a convex combination of the vertices. The simplex has a center point, which corresponds to the maximally mixed state, a uniform distribution over all pure states. 
+The space of classical distributions over a discrete space corresponds to a \href{https://en.wikipedia.org/wiki/Simplex}{simplex}. In the finite case, the pure states $\mathcal{S} = \{s_i\}_{i=1}^{n} \subset \Ens$ are finitely many and each ensemble $\ens = \sum p_i s_i$ is uniquely identified by a decomposition of pure states. Effectively, each ensemble is a probability distribution over the pure states. Mathematically, each point of the space is a convex combination of the vertices. The simplex has a center point, which corresponds to the maximally mixed state, a uniform distribution over all pure states. 
 
 The entropy is given by the Shannon entropy $-\sum_i p_i \log p_i$. This means that the entropy of each pure state is zero and the entropy of the maximally mixed state is $\log n$ where $n$ is the number of pure states. The entropy increases as we go from pure states to the maximally mixed state. The level sets (i.e. the fibers) of the entropy form a series of concentric ``shells''.
 
@@ -81,13 +59,11 @@ The fact that all pure states have the same entropy is an additional hypothesis 
 
 \subsubsection{Countable case}
 
-The countable case is not well-defined mathematically.
+The countable case is, to some respect, not well-defined.
 
-The obvious extension is to include all series $\{p_i\} \in [0,1]$ that converge to one. That is, the space of all probability measures over a countable discrete space. Since we cannot create a uniform distribution over infinitely many cases, there is no center point. Effectively, there is a ``hole'' in the middle. More precisely, the space is not topologically closed in the sense it does not contain all the limit points.
+The obvious extension is to include all series $\{p_i\} \in [0,1]$ that converge to one. That is, the space of all probability measures over a countable discrete space. Since we cannot create a uniform distribution over infinitely many cases, there is no center point. Effectively, there is a ``hole'' in the middle. More precisely, the space is not topologically closed in the sense it does not contain all the limit points.\footnote{It may be useful to characterize this ``hole'' and the limit points. There should be at least one limit point for each series $\{p_i\}$ that converges to a finite $p < 1$. Intuitively, we can keep that part of the distribution constant while we spread the rest uniformly to all cases. Each should reach a different limit point.}
 
-[TODO] It may be useful to characterize this ``hole'' and the limit points. There should be at least one limit point for each series $\{p_i\}$ that converges to a finite $p < 1$. Intuitively, we can keep that part of the distribution constant while we spread the rest uniformly to all cases. Each should reach a different limit point.
-
-However, the space of all probability measures is too large. Note that the entropy is not finite for all convergent $p_i$ (i.e. infinite convex combinations). For details, see \url{https://arxiv.org/pdf/1212.5630.pdf}. Given that we want the entropy to exist and be finite for all ensembles, this generalization (like in \url{https://ncatlab.org/nlab/show/superconvex+space} ) does not seem physically warranted.
+However, the space of all probability measures is too large. Note that the entropy is not finite for all convergent $p_i$ (i.e. infinite convex combinations). For details, see \href{https://arxiv.org/pdf/1212.5630.pdf}{this article}. Given that we want the entropy to exist and be finite for all ensembles, this generalization (like the one provided \href{https://ncatlab.org/nlab/show/superconvex+space}{here} ) does not seem physically warranted.
 
 Also note that expectation values are not guaranteed to be finite either, and requiring a particular observable to be finite further restricts the space. This restriction may be desirable for another reason: a discrete ensemble space has no notion of the ordering of the pure states. Physically, this would mean that the states with 1, 100, or 1 trillion particles are ``equally distant'' (i.e. all infinite permutations are allowed). Requiring the expectation of the number of particles to be finite (e.g. $\sum_i N(i) p_i < \infty$) should effectively encode the infinite ordering in the rate of convergence of the probability distributions (i.e. not all infinite permutations would be allowed).
 
@@ -95,40 +71,36 @@ Also note that expectation values are not guaranteed to be finite either, and re
 
 The uncountably infinite case is not physically relevant (i.e. no second countable discrete topology, cases are not experimentally decidable). Also note that any set of real numbers whose sum is finite can have only countably many non-zero elements. To understand why, note that there can only be finitely many terms above any particular positive value if their sum is to remain finite. Effectively, the uncountable case would be stitching together infinitely many countable cases.
 
-\subsection{Continuous classical theory}
+\subsection{Continuous classical ensemble spaces}
 
 \begin{defn}
-	The ensemble space of a \textbf{continuous classical theory} is the convex space given by the probability distributions (i.e. probability measures) over phase space (i.e. a symplectic manifold) that allow a continuous probability density (i.e. the Radon-Nikodym derivative exists - the probability measures are absolutely continuous with respect to the Liouville measure - and is continuous). Formally, let $(X, \omega)$ be a symplectic manifold. The ensemble space is given by $\Ens = \{ \rho \in C(X) \, | \, \int_X \rho d\mu = 1 \} $. The entropy is given by the Shannon/Gibbs entropy calculated using the probability density (i.e. the Radon-Nikodym derivative between the probability measure and the Liouville measure). That is, $S(\rho) = - \int_X \rho \log \rho d\mu$.
+	A \textbf{classical continuous ensemble space} is the space of probability distributions over phase space. That is, it is the space of probability measures over a symplectic manifold this is absolutely continuous with respect to the Liouville measure. The entropy is given by the Shannon/Gibbs entropy calculated using the probability density (i.e. the Radon-Nikodym derivative between the probability measure and the Liouville measure). That is, $S(\rho) = - \int_X \rho \log \rho d\mu$ where $\rho = \frac{dp}{d\mu}$.
 \end{defn}
 
-In the continuous case, the space of ensembles is the space of continuous integrable functions over a symplectic manifold (e.g.  over phase space) that integrate to one. That is, if $X$ is a symplectic manifold, then $\Ens = \{ \rho \in C(X) \, | \, \int_X \rho(x) d\mu = 1 \} $ where $\mu=\int \omega^n$ is the Liouville measure. The space does not include the pure states, as they correspond to delta distributions $\mathcal{S} = \{\delta_x\}_{x \in X}$: they are limit points. In some sense, a distribution can be understood as a convex integral of pure states: $\rho(x) = \int_X \rho(y) \delta_x(y) d\mu$. Even in this case, each ensemble can be understood as a unique probability distribution (density in this case) over all pure states. The symplectic nature of the manifold is required to assign a frame invariant density to states and a frame invariant notion of independence between DOFs, as we saw in the classical mechanics section of reverse physics.
+In the continuous case, the space of ensembles is the space of integrable functions over a symplectic manifold (e.g.  over phase space) that integrate to one. That is, if $X$ is a symplectic manifold, then $\Ens = \{ \rho \in C(X) \, | \, \int_X \rho(x) d\mu = 1 \} $ where $\mu=\int \omega^n$ is the Liouville measure. The space does not include the pure states, as they correspond to delta distributions $\mathcal{S} = \{\delta_x\}_{x \in X}$: they are limit points. In some sense, a distribution can be understood as a convex integral of pure states: $\rho(x) = \int_X \rho(y) \delta_x(y) d\mu$. Even in this case, each ensemble can be understood as a unique probability distribution (density in this case) over all pure states. The symplectic nature of the manifold is required to assign a frame invariant density to states and a frame invariant notion of independence between DOFs, as we saw in the classical mechanics section of reverse physics.
 
 The fact that pure states are not part of the space, but limits, means we need a more sophisticated definition of pure states than simply the extreme points of the convex space of ensembles.
 
-The entropy is given by $- \int \rho \log \rho d\mu$ where $\mu$ is the Liouville measure and $\rho$ is the probability density over canonical coordinates. If a different measure is used, or if the coordinates are not canonical, the formula gives the wrong result.
+The entropy is given by $- \int \rho \log \rho d\mu$ where $\mu$ is the Liouville measure and $\rho$ is the probability density over canonical coordinates. If a different measure is used, or if the coordinates are not canonical, the formula gives the wrong result.\footnote{It may be interesting to study the shell of zero entropy states. For example, it should not be path connected: all uniform distributions with support of the same finite size (in terms of the Liouville measure) will have the same entropy. The region, however, need not be contiguous. Since we cannot continuously transform a single region into two disjoint regions, there will be different distributions at zero entropy that cannot be transformed continuously.}
+
 
 Similarly to the infinite discrete case, the entropy can be infinite and expectation values can be infinite. The added complication is the frame invariance: it would not make sense to have the expectation for position in one frame to be finite while infinite in another. Requiring all functions of position/momentum to have finite expectation restricts the distributions to those with finite support. Requiring all polynomial functions of position/momentum to have finite expectation restricts the distributions to those that decay faster than any polynomial.
 
 Unlike the discrete classical case, subspaces and dimensionality of subspaces cannot be defined without the entropy. The issue is that we need a measure on the set of pure states, and the convex structure cannot provide it. The entropy, however, does as the supremum of the entropy for all distributions with support $U$ is $\log \mu(U)$. As we will see, the entropy can be used to both identify subspaces and recover the Liouville measure.
 
-Note that we exclude discontinuous distributions as starting from the space of discontinuous distributions does not allow one to recover the topology of the base space. Suppose, in fact, to have the space of all distributions over the real line that integrate to one. Now imagine switching the interval $[0, 1)$ with the interval $[1, 2)$. This is an isomorphism on the space of discontinuous distributions. Therefore given the space of distributions, we cannot recover the topology of the real line. Now take the space of continuous functions that integrate to one. Take those with support $[0,1) \cup [2,3)$. This is the set of convex combinations of the distributions with support $[0,1)$ and $[2,3)$ precisely because the sets are not contiguous and the distributions will have to go to zero at the boundary. However, the distributions with support $[0,2)$ are not just the convex combinations of those with support $[0,1)$ and $[1,2)$ because this will include the continuous functions that have a non-zero value at $1$.
+It is a bit unclear whether discontinuous distributions should be included or not. Originally, we thought the probability density should be continuous as only continuous functions can physically represent experimental relationships. However, the relationship given by the measure is not between point and probability but rather between sets and probability. The probability density is, in sense, not the prime physical object. The measure is. The probability density, in fact, is not uniquely defined as countably many discontinuity can be added and the measure is not changed.
 
-[TODO] It may be interesting to study the shell of zero entropy states. For example, it should not be path connected: all uniform distributions with support of the same finite size (in terms of the Liouville measure) will have the same entropy. The region, however, need not be contiguous. Since we cannot continuously transform a single region into two disjoint regions, there will be different distributions at zero entropy that cannot be transformed continuously.
-
-
-\subsection{Quantum theory}
+\subsection{Quantum ensemble spaces}
 
 \begin{defn}
-	The ensemble space of a \textbf{quantum theory} is modeled by the convex space given by the density operators (i.e. positive semi-definite self-adjoint operators with trace one) of a Hilbert space equipped with the von Neumann entropy.
-	
-	That is, given a Hilbert space $\mathcal{H}$, the ensemble space is the space of positive semi-definite self-adjoint operators with trace one $M(\mathcal{H})$. The space of pure states is given by the projective space $P(\mathcal{H})$. The entropy of an ensemble $\rho \in M(\mathcal{H})$ is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
+	A \textbf{quantum ensemble space} is the space given by the density matrices/operators of a Hilbert space equipped with the von Neumann entropy. That is, given a separable Hilbert space $\mathcal{H}$ representing a quantum system, the ensemble space is the space of positive semi-definite self-adjoint operators with trace one $M(\mathcal{H})$. The space of pure states is given by the projective space $P(\mathcal{H})$. The entropy of an ensemble $\rho \in M(\mathcal{H})$ is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
 \end{defn}
 
 \subsubsection{Finite dimensional case}
 
-The simplest non-trivial case is the qubit, for which the Bloch ball is the space of ensembles $M(\mathcal{H})$. The interior of the Bloch ball corresponds to mixtures  while the surface corresponds to the pure states $\mathcal{S} = P(\mathcal{H}) = \{ |\psi\> \<\psi| \}_{\psi \in \mathcal{H}}$. In quantum ensemble spaces there is no unique decomposition. Note that the space is exactly characterized by knowing which different mixtures provide the same ensemble.
+The simplest non-trivial case is the qubit, for which the Bloch ball is the space of ensembles $M(\mathcal{H})$. The interior of the Bloch ball corresponds to mixtures  while the surface corresponds to the pure states $\mathcal{S} = P(\mathcal{H}) = \{ |\psi\> \<\psi| \}_{\psi \in \mathcal{H}}$. In quantum ensemble spaces there is no unique decomposition in terms of pure states. Note that the space is exactly characterized by knowing which different mixtures provide the same ensemble.
 
-The multiple decompositions make the ensemble space behave in a way that is a hybrid between the classical discrete and continuous. Pure states are properly a part of the ensemble space, as in the discrete case, and we can describe each mixture in terms of finitely many pure states. However, the pure states are a continuum, therefore we can also define probability densities over the space, convex integrals. For example, for a single qubit, the maximally mixed state (the center of the ball) can be equally described as the equal mixture of two opposite states (e.g. spin up and spin down, or spin left and spin right). However, it can also be described as the equal mixture of the whole sphere.
+The multiple decompositions make the ensemble space behave in a way that is a hybrid between the classical discrete and continuous. Pure states are properly a part of the ensemble space, as in the discrete case, and we can describe each mixture in terms of finitely many pure states. However, the pure states form a continuum, therefore we can also define probability densities over the space, convex integrals. For example, for a single qubit, the maximally mixed state (the center of the ball) can be equally described as the equal mixture of two opposite states (e.g. spin up and spin down, or spin left and spin right). However, it can also be described as the equal mixture of the whole sphere.
 
 Note that complex projective spaces are symplectic, which is what allows one to define frame invariant densities. The goal is to have one argument applied to the generic definition as to why the space of pure states must be symplectic. Also note that the two dimensional sphere is the only symplectic sphere. By homogeneity, we should be able to argue that the space is symmetric around the maximally mixed state, and is therefore a sphere. The symplectic requirement would select dimension two. Note that real and quaternionic spaces would be excluded by this argument.
 
@@ -141,7 +113,41 @@ The countable infinite dimensional case presents similar problems as the classic
 
 The Hilbert space for a discrete variable with infinite range (e.g. number of particles) and a continuous variable (e.g. position/momentum) is the same. The first is defined as the space of square convergent complex sequences $l^2$ while the second is the space of square integrable complex functions $L^2$. Given that $L^2$ allows a countable basis, the two are isomorphic. This also means that all spaces with finitely many degrees of freedom are also isomorphic. This makes the problem of infinite expectations even more problematic.
 
-Note that Schwartz spaces have finite expectation for all polynomial functions of position and momentum. Given that infinite permutations can change the rate of convergence, the Schwartz space has an idea of what is further away from the origin, unlike Hilbert spaces. [TODO] It is not yet clear to us whether the Schwartz space for one DOF is the same as the one for two DOFs.
+Note that Schwartz spaces have finite expectation for all polynomial functions of position and momentum. Given that infinite permutations can change the rate of convergence, the Schwartz space has an idea of what is further away from the origin, unlike Hilbert spaces. We will likely want to use Schwartz spaces instead of Hilbert spaces to make the physics and mathematics more consistent.
+
+\section{Axiom of ensemble and topology}
+
+The first property of ensembles is that they must be experimentally well-defined. As shown in the previous chapters, this means that they are possibilities of an experimental domain, which means points of a $\textsf{T}_0$ second countable topological space where the topology corresponds to the natural one defined by the verifiable statements.
+
+The verifiable statements for the ensemble space are statements about the ensembles themselves, either in terms of statistical quantities (e.g. \statement{the average energy is of the particle is $3 eV \pm 0.5$}) or in terms of preparation settings (e.g. \statement{the beam goes through a polarizer oriented to the vertical direction within 1 degree}). Probability ranges are also typical verifiable statements on ensembles (e.g. \statement{the coin toss will result in heads between 49 and 51 percent of the cases}). The verifiable statements on the specific instances will be recovered later from the structure of the ensemble space as we recover probability distributions of specific quantities. The topology of the two is related but it is not the same (e.g. the topology of the Bloch ball is the standard topology of $\mathbb{R}$ but the topology on the values of an observable is the discrete topology).
+
+The fact that we start from ensembles and recover the probability of outcomes, instead of constructing ensembles from the probability of outcomes, should avoid the problems associated with frequentist interpretations of probability.
+
+\begin{mathSection}
+	\begin{axiom}[Axiom of ensemble] 
+		The state of a system is represented by an \textbf{ensemble}, which represents all possible preparations of equivalent systems prepared according to the same procedure. The set of all possible ensembles for a particular system is an \textbf{ensemble space}. Formally, an ensemble space is a $T_0$ second countable topological space where each element is called an ensemble.
+	\end{axiom}
+	
+	\begin{justification}
+		In experimental setting, preparation procedures never prepare a system exactly in the same configuration. Experimental results, then, are always in terms of statistical preparations and statistical measurements. A physical theory, then, must be able to talk about what are the possible statistical ensembles describable by the theory. States, then, can be understood as ensembles as those are what we produce and study in practice.
+		
+		Equivalently, reproducibility is a basic requirement of a physical theory. A physical law, then, must be understood as describing a relationship that always exists whenever the same set of circumstances is replicated. Given that we need to always be able to replicate those circumstances ``one more time'', the relationship is about countably infinite preparations and results: ensembles. Therefore, to the extent that physics is about reproducible experimental results, the basic description of a system is in terms of ensembles. This justifies the use of ensembles as the fundamental object to describe the state of a system.\footnote{Note that reproducibility also already implies that all properties that characterize an ensemble must be relative to the procedure. If the properties depended, for example, on absolute space or absolute time, then different practitioners would not be able to prepare the same ensemble.}
+		
+		Ensembles are experimentally defined objects, and therefore they are possibilities of an experimental domain. Therefore an ensemble space is a $T_0$ second countable topological space where each element is an ensemble and the topology is induced by the verifiable statements.
+	\end{justification}
+\end{mathSection}
+
+We should now verify that our three basic cases satisfy the axiom of ensemble.
+
+\begin{prop}
+	Classical discrete, classical continuous and quantum ensemble spaces satisfy the axiom of ensemble.
+\end{prop}
+
+\begin{proof}
+	For the classical discrete case, including all infinite convex combinations, we have $\ell^1$. Similarly, for the classical continuous case we have $L^1$. Both of these spaces are separable, admit a countable orthonormal basis and can be given a topology that is $\textsf{T}_0$ and second countable.
+	
+	For the quantum case, the Hilbert space is also separable, will admit a countable orthonormal basis and can be given a topology that is $\textsf{T}_0$ and second countable. An operator will be fully defined by its result on the basis, which means that it is also a vector space with a countable basis and can be given a topology that is $\textsf{T}_0$ and second countable.
+\end{proof}
 
 \section{Axiom of mixture and convex spaces}
 
