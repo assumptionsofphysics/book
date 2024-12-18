@@ -632,9 +632,6 @@ Another constraint that the entropy imposes is that every affine direction is bo
 	\caption{$\Ens$ is the ensemble space and $V$ is the embedding vector space. Taking to ensembles, the dashed line represents all the affine combinations. Those that are in the ensemble space form a line segment.}
 \end{figure}
 
-TODO: add the example of open segment. no orthogonal elements. no endpoint but we can tell it is finite
-
-
 \begin{defn}
 	A \textbf{line} $U \subseteq \Ens$ is a convex subset such that for any three elements one can be expressed as a mixture of the other two. That is, for all $\ens_1, \ens_2, \ens_3 \in U$ there exists a permutation $\sigma$ and $p \in [0,1]$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}	$.
 \end{defn}
@@ -716,6 +713,10 @@ TODO: add the example of open segment. no orthogonal elements. no endpoint but w
 	
 	This means that $V = f(A)$ must be bounded and therefore every line is a segment as embedded in the vector space
 \end{proof}
+
+\begin{remark}
+	Note that this does not mean that, along each direction, the line is closed in the vector space. That is, it may not include extreme point in the convex space. An open bounded interval, in fact, it is till a convex space and we would be able to define an entropy on it.
+\end{remark}
 
 
 \section{Generalized probability theory}
@@ -871,11 +872,23 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 
 In this section we are going to define what classical probability spaces are and give a set of necessary and sufficient conditions for ensemble spaces, or subsets of ensemble spaces, to form a classical probability space.
 
-Formalizing what a classical probability space is not that straight forward. In general, a single classical probability distribution is a probability measure, but it is not obvious what a set of probability measure should satisfy to be a valid probability space. The set of all probability measure (TODO reference) is too broad as it would include distribution with either infinite or minus infinite entropy. The cut triangle (TODO reference) is too small, as it does not get all probability measure. We also want a definition based on only finite convex combinations. The approach is to require that we can make all possible finite mixtures. Mathematically, all finite flats are simplexes.
+We want a simple definition that captures the intuition of spaces of classical probability distributions in a way that works well for infinite dimensional spaces, is compatible with both discrete and continuous classical ensemble spaces but also with measurements context in quantum ensemble spaces. It is instructive to go through some of the different attempts to understand why we settled on these definitions, so that one can understand why they work.
 
-TODO: create a section of examples. Add all probability measures, show that singleton measure on phase space is problematic. Add cut triangle.
+The first idea would be to define a classical probability space as the set of all probability measures over a space $X$. This is too broad as it includes probability measures that are unphysical. If $X$ is a countable discrete space, some probability measure will have infinite entropy. If $X$ is a real line, a probability measure concentrated at a point (i.e. a discrete measure) would have minus infinite entropy. There are two distinct problems here, let us look at them closely one at a time.
 
-TODO: This will need to move after proving ensemble spaces embed into vector spaces
+The first problem is due to the spread of a finite amount of probability over an infinite region. It is the same as characterizing what is the correct closure under infinite convex combination. Since we want the topology to determine which infinite convex combinations are allowed, we want a notion of classical probability space that guarantees the closure only on finite convex combinations and lets the closure in the topology extend sets to infinite convex combinations. Therefore, the solution here is to let topological structure handle this problem, and assume that different spaces will have, potentially, different closures.
+
+The second problem is due to the spread of a finite amount of probability over a measure zero set. In classical mechanics, requiring a probability measure to be absolutely continuous with respect to the Liouville measure avoids the problem. Recall that a measure $p$ is \href{https://en.wikipedia.org/wiki/Absolute_continuity#Absolute_continuity_of_measures}{absolutely continuous} with respect to $\mu$ if $\mu(U) = $ implies that $p(U)=0$. That is, the probability is zero over any set for which the Liouville measure is zero. Physically, if the set contains zero states, it has zero probability. Note that the Liouville measure is connected to the entropy and, as we will see later, to the state capacity. However, this solution is not general enough, as there are cases in which we will want a probability defined at a point over the continuum. For example, we are able to prepare a mixture of water, water vapor and ice in thermodynamic equilibrium. This would correspond to a point in the pressure/volume diagram. Therefore, we can create a distribution with finite probability over a point. What we need is a compatibility condition between each measures and the topology of the space, instead of across measures. Note that this is the topology of the space that supports the measure (i.e. phase space in classical mechanics) not the topology of the ensemble space (i.e. the space of probability distributions over phase space in classical mechanics). Therefore we will also need to relate the topology of the space that supports the measures with the ensemble space it represents.
+
+Recall that an open set corresponds to a experimentally verifiable statement. Imagine we prepared a distribution over some variable, and have a test that tells us whether the value of an instance is within a specific range $U$. The $U$ is the open set would correspond to the positive outcome. The exterior $\exterior(U)$ corresponds to cases we are able to tell apart from those from $U$ with another test. The boundary $\partial U$ corresponds to the cases we are not be able to adjudicate experimentally: they are too close to $U$ to discern from $U$. That is, there is no test that can tell us we have an element of $\partial U$, these cases are not detectable. Assigning a non-zero probability or count of states to these sets, then, would be physically unjustifiable. Therefore, a measure of probability should assign non-zero values directly only to open sets, and the closure of that open set should have the probability. We have therefore a physically justifiable assignment on both open sets and closed sets. The collection of open and closed sets forms a ring, in the sense that it is closed under complement and finite union. \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory's_extension_theorem}{Carath\'{e}odory's extension theorem} guarantees a unique extension to the whole Borel algebra. For a measure that counts configurations we will additionally require that every open set correspond to a non-zero number of configurations. This means that a probability measure will necessarily be absolutely continuous with respect to count of configurations, and therefore a probability density will always be well defined. In this section, we will only concentrate on the probability measure and its compatibility with the topology.
+
+To sum up, given a topological space $X$, we are interested in measures that are topologically compatible, in the sense that $p(U) = p(\bar{U})$ for every open set $U$. We stress that this is not necessarily true for any Borel set, just for open sets. Consider, in fact, the set of rationals $\mathbb{Q}$ as a subset of the reals $\mathbb{R}$. This is a measure zero subset whose closure is the whole space. Therefore, if $p$ is a probability measure over the reals, we would have $p(\mathbb{R}) = p(\overline{\mathbb{Q}}) = p(\mathbb{Q})$ which would mean that the probability is all concentrated on a set of measure zero, which is exactly what we do not want. The requirement, then, holds only for open sets. Conversely, it is not true that all sets of measure zero are boundaries of open sets. The set of rationals is not the boundary of an open set.
+
+Having clarified the connection to the topology, we now turn our attention to the convex structure. Requiring the set of probability measures to be closed under convex combinations is not enough. The cut triangle \ref{pm_es_cutTriangle}, for example, is a subset of a set of discrete classical ensemble space where not all elements ensemble can be understood as a unique convex combination of the extreme points. The convex closure is leaving out some ensembles, making a classical space not look classical. On the other hand, if we take a Bloch ball, we can take three points on the surface. These would form a triangle, which could be understood as a discrete classical probability space. Here the convex closure is leaving out some ensemble, making a non-classical space look classical. Therefore we have two problem: what is the correct closure we should be looking at? How can we formulate the classical property?
+
+As an early attempt, we though extending the closure to both mixtures and components. That is, closure on the convex structure would require $\ens[a] = p \ens[b] + \bar{p} \ens[c]$ to be in the set if both $\ens[b]$ and $\ens[c]$. Closure on the components would also require $\ens[b]$ and $\ens[c]$ to be in the set if $\ens[a]$ is present. This seems to take too much in. In quantum mechanics, for example, a single mixed state would bring in all the mixed states in the smallest subspace that contains it.
+
+The correct closure seems to be to include all affine combinations. That is, if $\ens[a] = p \ens[b] + \bar{p} \ens[c]$ and two of the ensembles are in the set, then the other two are in the set. We call this a flat. In the triangle example, the only flats available are the single vertexes, each side and the whole triangle. For the Bloch ball, if we took two elements, we would get the whole segment that connects them and extends to the surface. But if we get three points, we get a circle, which is not a simplex. A classical probability space, then, is a flat where we can guarantee single decomposition: they are simplexes. While this needs to be stated carefully, so that it can work in infinite dimensions, this is the core idea.
 
 % Reviewed with Christine start
 
@@ -1981,7 +1994,7 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{remark}
 
 \begin{defn}
-	Let $C$ be a context and $X \in C$ be a subspace. A \textbf{spectral element} of $X$ is a spectral element $c \in \sigma(C)$ such that $X \in c$. The \textbf{spectral set} of $X$ is the collection of all its spectral elements. The standard topology of the spectrum $\sigma(C)$ is the one generated by the spectral sets of all supspaces $X \in C$.
+	Let $C$ be a context and $X \in C$ be a subspace. A \textbf{spectral element} of $X$ is a spectral element $c \in \sigma(C)$ such that $X \in c$. The \textbf{spectral set} of $X$ is the collection of all its spectral elements. The standard topology of the spectrum $\sigma(C)$ is the one generated by the spectral sets of all subspaces $X \in C$.
 \end{defn}
 
 \begin{defn}
@@ -2000,6 +2013,15 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	We can define a context from a statistical variable such that the spectrum corresponds to the possible values of the variable.
 \end{conj}
 
+\section{Examples}
+
+In this section we explore some examples that appear throughout the discussion to exemplify some corner cases, some wanted and some unwanted.
+
+\begin{example}[Cut triangle]\label{pm_es_cutTriangle}
+	The cut triangle is the subset of probability measures over three elements where the probability of the first is constrained to be no more than $\frac{1}{2}$.
+\end{example}
+
+This ensemble space is the standard two simplex, a triangle, where the top is cutoff. This is the space of probability distributions $[p_1, p_2, p_3]$ such that $p_1 \leq \frac{1}{2}$, where entropy is the Shannon entropy. The extreme point of the space are $\ens[2] = [0,1,0]$, $\ens[3] = [0,0,1]$, $\ens[a] = [\frac{1}{2},\frac{1}{2},0]$ and $\ens[b] = [\frac{1}{2},0,\frac{1}{2}]$. Every ensemble that is decomposable is also separately decomposable but not necessarily orthogonally decomposable. Most ensembles, all those in the interior, are also separately multidecomposable. For example, $\ens[c]$ can be expressed as a mixture of $\ens[a]$ and $\ens[3]$, and of $\ens[b]$ and $\ens[2]$.
 
 
 \section{Lessons learned}
