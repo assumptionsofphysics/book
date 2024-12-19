@@ -870,27 +870,27 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	TODO: this may need to be fixed. Can't reconstruct the argument.
 \end{proof}
 
-\subsection{Classical probability spaces}
+\subsection{Classical probability contexts}
 
-In this section we are going to define what classical probability spaces are and give a set of necessary and sufficient conditions for ensemble spaces, or subsets of ensemble spaces, to form a classical probability space.
+In this section we are going to define what classical probability contexts are and give a set of necessary and sufficient conditions for ensemble spaces, or subsets of ensemble spaces, to form a classical probability context. That is, for the ensembles to be represented using the standard tools of classical probability.
 
 We want a simple definition that captures the intuition of spaces of classical probability distributions in a way that works well for infinite dimensional spaces, is compatible with both discrete and continuous classical ensemble spaces but also with measurements context in quantum ensemble spaces. It is instructive to go through some of the different attempts to understand why we settled on these definitions, so that one can understand why they work.
 
-The first idea would be to define a classical probability space as the set of all probability measures over a space $X$. This is too broad as it includes probability measures that are unphysical. If $X$ is a countable discrete space, some probability measure will have infinite entropy. If $X$ is a real line, a probability measure concentrated at a point (i.e. a discrete measure) would have minus infinite entropy. There are two distinct problems here, let us look at them closely one at a time.
+The first idea would be to define a classical probability context as the set of all probability measures over a space $X$. This is too broad as it includes probability measures that are unphysical. If $X$ is a countable discrete space, some probability measure will have infinite entropy. If $X$ is a real line, a probability measure concentrated at a point (i.e. a discrete measure) would have minus infinite entropy. There are two distinct problems here, let us look at them closely one at a time.
 
-The first problem is due to the spread of a finite amount of probability over an infinite region. It is the same as characterizing what is the correct closure under infinite convex combination. Since we want the topology to determine which infinite convex combinations are allowed, we want a notion of classical probability space that guarantees the closure only on finite convex combinations and lets the closure in the topology extend sets to infinite convex combinations. Therefore, the solution here is to let topological structure handle this problem, and assume that different spaces will have, potentially, different closures.
+The first problem is due to the spread of a finite amount of probability over an infinite region. This problem is strictly connected to characterizing what is the correct closure under infinite convex combination. Since we want the topology to determine which infinite convex combinations are allowed, we want a notion of classical probability context that guarantees the closure only on finite convex combinations and lets the closure in the topology extend sets to infinite convex combinations. Therefore, the solution here is to let topological structure handle this problem, and assume that different spaces will have, potentially, different closures.
 
-The second problem is due to the spread of a finite amount of probability over a measure zero set. In classical mechanics, requiring a probability measure to be absolutely continuous with respect to the Liouville measure avoids the problem. Recall that a measure $p$ is \href{https://en.wikipedia.org/wiki/Absolute_continuity#Absolute_continuity_of_measures}{absolutely continuous} with respect to $\mu$ if $\mu(U) = $ implies that $p(U)=0$. That is, the probability is zero over any set for which the Liouville measure is zero. Physically, if the set contains zero states, it has zero probability. Note that the Liouville measure is connected to the entropy and, as we will see later, to the state capacity. However, this solution is not general enough, as there are cases in which we will want a probability defined at a point over the continuum. For example, we are able to prepare a mixture of water, water vapor and ice in thermodynamic equilibrium. This would correspond to a point in the pressure/volume diagram. Therefore, we can create a distribution with finite probability over a point. What we need is a compatibility condition between each measures and the topology of the space, instead of across measures. Note that this is the topology of the space that supports the measure (i.e. phase space in classical mechanics) not the topology of the ensemble space (i.e. the space of probability distributions over phase space in classical mechanics). Therefore we will also need to relate the topology of the space that supports the measures with the ensemble space it represents.
+The second problem is due to the spread of a finite amount of probability over a measure zero set. In classical mechanics, requiring a probability measure to be absolutely continuous with respect to the Liouville measure avoids the problem. Recall that a measure $p$ is \href{https://en.wikipedia.org/wiki/Absolute_continuity#Absolute_continuity_of_measures}{absolutely continuous} with respect to $\mu$ if $\mu(U) = $ implies that $p(U)=0$. That is, the probability is zero over any set for which the Liouville measure is zero. Physically, if the set contains zero states, it has zero probability. Note that the Liouville measure is connected to the entropy and, as we will see later, to the state capacity. However, this solution is not general enough, as there are cases in which we will want a probability defined at a point over the continuum. For example, we are able to prepare a mixture of water, water vapor and ice in thermodynamic equilibrium. This would correspond to a point in the pressure/volume diagram. Therefore, we can create a distribution with finite probability over few, very special points. What we need is a compatibility condition between each measures and the topology of the space, instead of across measures. Note that this is the topology of the space that supports the measure (i.e. phase space in classical mechanics) not the topology of the ensemble space (i.e. the space of probability distributions over phase space in classical mechanics). Therefore we will also need to relate the topology of the space that supports the measures with the ensemble space it represents.
 
-Recall that an open set corresponds to a experimentally verifiable statement. Imagine we prepared a distribution over some variable, and have a test that tells us whether the value of an instance is within a specific range $U$. The $U$ is the open set would correspond to the positive outcome. The exterior $\exterior(U)$ corresponds to cases we are able to tell apart from those from $U$ with another test. The boundary $\partial U$ corresponds to the cases we are not be able to adjudicate experimentally: they are too close to $U$ to discern from $U$. That is, there is no test that can tell us we have an element of $\partial U$, these cases are not detectable. Assigning a non-zero probability or count of states to these sets, then, would be physically unjustifiable. Therefore, a measure of probability should assign non-zero values directly only to open sets, and the closure of that open set should have the probability. We have therefore a physically justifiable assignment on both open sets and closed sets. The collection of open and closed sets forms a ring, in the sense that it is closed under complement and finite union. \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory's_extension_theorem}{Carath\'{e}odory's extension theorem} guarantees a unique extension to the whole Borel algebra. For a measure that counts configurations we will additionally require that every open set correspond to a non-zero number of configurations. This means that a probability measure will necessarily be absolutely continuous with respect to count of configurations, and therefore a probability density will always be well defined. In this section, we will only concentrate on the probability measure and its compatibility with the topology.
+Recall that an open set corresponds to an experimentally verifiable statement. Imagine we prepared a distribution over some variable, and have a test that tells us whether the value of an instance is within a specific range $U$. Then the open set $U$ corresponds to the positive outcome of the test. The exterior $\exterior(U)$ corresponds to cases we are able to tell apart from those from $U$ with another test, one that fails if the instance is in $U$. The boundary $\partial U$ corresponds to those cases we are not be able to adjudicate experimentally: they are not in $U$, but are too close to $U$ to discern from $U$. That is, there is no test that can tell us we have an element of $\partial U$, these cases are not detectable. Assigning a non-zero probability or count of states to these sets, then, would be physically unjustifiable. Therefore, a measure of probability should assign non-zero values directly only to open sets, and the closure of open sets should have the same probability. We have therefore a physically justifiable assignment on both open sets and closed sets. The collection of open and closed sets forms a ring, in the sense that it is closed under complement and finite union. \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory's_extension_theorem}{Carath\'{e}odory's extension theorem} guarantees a unique extension to the whole Borel algebra. For a measure that counts configurations we will additionally require that every open set correspond to a non-zero number of configurations. This means that a probability measure will necessarily be absolutely continuous with respect to the count of configurations, and therefore a probability density will always be well defined. In this section, we will only concentrate on the probability measure and its compatibility with the topology.
 
 To sum up, given a topological space $X$, we are interested in measures that are topologically compatible, in the sense that $p(U) = p(\bar{U})$ for every open set $U$. We stress that this is not necessarily true for any Borel set, just for open sets. Consider, in fact, the set of rationals $\mathbb{Q}$ as a subset of the reals $\mathbb{R}$. This is a measure zero subset whose closure is the whole space. Therefore, if $p$ is a probability measure over the reals, we would have $p(\mathbb{R}) = p(\overline{\mathbb{Q}}) = p(\mathbb{Q})$ which would mean that the probability is all concentrated on a set of measure zero, which is exactly what we do not want. The requirement, then, holds only for open sets. Conversely, it is not true that all sets of measure zero are boundaries of open sets. The set of rationals is not the boundary of an open set.
 
-Having clarified the connection to the topology, we now turn our attention to the convex structure. Requiring the set of probability measures to be closed under convex combinations is not enough. The cut triangle \ref{pm_es_cutTriangle}, for example, is a subset of a set of discrete classical ensemble space where not all elements ensemble can be understood as a unique convex combination of the extreme points. The convex closure is leaving out some ensembles, making a classical space not look classical. On the other hand, if we take a Bloch ball, we can take three points on the surface. These would form a triangle, which could be understood as a discrete classical probability space. Here the convex closure is leaving out some ensemble, making a non-classical space look classical. Therefore we have two problem: what is the correct closure we should be looking at? How can we formulate the classical property?
+Having somewhat clarified what a ``well-behaved'' probability distribution looks like, by requiring its compatibility to the topology, we now want to understand what subsets of an ensemble space can be understood as a classical probability context. Roughly speaking, we want to be able to think of a classical probability context as the set of all the ``well-behaved'' probability distributions over a set of cases. We have to clarify what do we mean by ``all.'' Requiring the set of probability measures to be closed under convex combinations does not seem to be not enough. The cut triangle \ref{pm_es_cutTriangle}, for example, is a subset of a set of discrete classical ensemble space where not all ensembles can be understood as a unique convex combination of the extreme points, precisely because some cases are missing. This convex subset is leaving out some ensembles, making a classical space not look classical. On the other hand, if we take a Bloch ball, we can take three points on the surface. These would form a triangle, which could be understood as a discrete classical probability space. Here the convex closure is leaving out some ensembles, making a non-classical space look classical. Therefore we have two problem: what is the correct closure we should be looking at? How can we formulate the classical property?
 
 As an early attempt, we though extending the closure to both mixtures and components. That is, closure on the convex structure would require $\ens[a] = p \ens[b] + \bar{p} \ens[c]$ to be in the set if both $\ens[b]$ and $\ens[c]$. Closure on the components would also require $\ens[b]$ and $\ens[c]$ to be in the set if $\ens[a]$ is present. This seems to take too much in. In quantum mechanics, for example, a single mixed state would bring in all the mixed states in the smallest subspace that contains it.
 
-The correct closure seems to be to include all affine combinations. That is, if $\ens[a] = p \ens[b] + \bar{p} \ens[c]$ and two of the ensembles are in the set, then the other two are in the set. We call this a flat. In the triangle example, the only flats available are the single vertexes, each side and the whole triangle. For the Bloch ball, if we took two elements, we would get the whole segment that connects them and extends to the surface. But if we get three points, we get a circle, which is not a simplex. A classical probability space, then, is a flat where we can guarantee single decomposition: they are simplexes. While this needs to be stated carefully, so that it can work in infinite dimensions, this is the core idea.
+The correct closure seems to be to include all affine combinations. That is, if $\ens[a] = p \ens[b] + \bar{p} \ens[c]$ and two of the ensembles are in the set, then the other one is in the set as well. This allows us to get all the ensembles in the same hyperplane. We call this a flat. In the triangle example, the only flats available are the single vertexes, each side and the whole triangle. For the Bloch ball, if we took two elements, we would get the whole segment that connects them and extends to the surface. But if we get three points, we get a circle, which is not a simplex. A classical probability context, then, is a flat where we can guarantee single decomposition: they are simplexes. While this needs to be stated carefully, so that it can work in infinite dimensions, this is the core idea.
 
 % Reviewed with Christine start
 
@@ -1020,6 +1020,8 @@ The correct closure seems to be to include all affine combinations. That is, if 
 \end{proof}
 
 % Reviewed with Christine end
+
+We now want to define a notion of spectra for a classical probability context. These will constitute the sample space over the measures are defined. We will use the notion of subspaces defined in \ref{pm_es_subspaceSection} and applied to separateness.
 
 \begin{defn}
 	Given a classical probability context $C \subseteq \Ens$, the \textbf{spectra} $\sigma(C)$ is the set of equivalence classes of ensemble sequences that are eventually separate from each other. More rigorously, given a probability context, the spectra is the collection of the ultrafilters of the lattice of $\separate$-subspaces $\mathfrak{L}^\separate(C)$. The standard topology of the spectra is the one generated by the elements of the lattice seen as a set (i.e. for each $A \in \mathfrak{L}^\separate(C)$, $A \mapsto \{ x \in \Sigma(C) \, | \, A \in x \}$).
@@ -1679,77 +1681,88 @@ which recovers the RLD Fisher information.
 	How exactly to make these statements precise in the general case depends on finding a suitable generalized notion of differentiability. It is unclear whether this notion has already been mathematically formulated.
 \end{remark}
 
-\section{Ensemble subspaces}
+\section{R-subspaces}\label{pm_es_subspaceSection}
 
-We now want to define a notion of subspace in a way that recovers the notions of subspaces we have in both classical and quantum mechanics. Given that orthogonality of subspaces in all three cases corresponds to ensembles saturate the upper entropy bound (i.e. orthogonal in the sense of the entropy), we will define the notion of subspaces based on the entropy.
+Here we present a generic construction that we will be using in a couple of different ways to construct lattice of subspaces. The general idea can be understood by looking at vector spaces with an inner product. The inner product defines a notion of orthogonality between vectors and this notion of orthogonality can be used to construct subspaces in the following way. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all perpendicular to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were a subspace to begin with, then $U = (U^{\perp})^{\perp}$. We can now proceed in the opposite way, and use just the relationship of orthogonality to define subspaces, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar some construction related to Galois connections.}
+
+The construction work for any binary relationship that is symmetric and irreflexive. For example, given two distributions, the fact they have disjoint support is a symmetric and irreflexive relationship: a distribution does not have disjoint support with respect to itself, and the order of comparison does not matter. We can then construct subspaces based on this relationship, and find sets of function that are all defined within different regions.
+
+In our case, separateness, as defined by the mixing function, and orthogonality, as defined by the entropy, are symmetric and irreflexive.
 
 \subsection{Irreflexive symmetric relations and topped $\cap$-structures}
 
-% TODO: this is a Galois connection
+We start with a generic set $X$ and a symmetric relation (i.e. if $aRb$ then $bRa$). We define the $R$-complement $U^R$ of all elements that are $R$-related to $U$ and study some useful properties. The symmetry of the relation is already enough to recover most of the properties we will need.
 
-We will first prove a more general set of results, on a generic set (not necessarily an ensemble space) with an irreflexive symmetric relation (not necessarily orthogonality of ensembles). This will give us a more general tool to investigate possible different notion of subspaces.
-
+\begin{mathSection}
 \begin{defn}
 	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Given a subset $U \subseteq X$, we define the \textbf{$R$-complement} to be
-	$$ U^{RC} = \{ a \in X \, | \, \forall b \in U, aRb  \}. $$
+	$$ U^{R} = \{ a \in X \, | \, \forall b \in U, aRb  \}. $$
 \end{defn}
 
 \begin{prop}\label{pm_es_rComplProps}
 	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Then:
 	\begin{enumerate}
-		\item $U \subseteq V \implies V^{RC} \subseteq U^{RC}$
-		\item $U \subseteq (U^{RC})^{RC}$
-		\item $U^{RC} = ((U^{RC})^{RC})^{RC}$
-		\item $U^{RC} = (V^{RC})^{RC} \iff (U^{RC})^{RC} = V^{RC}$
-		\item $(\bigcup_{i \in I} U_i )^{RC} = \bigcap_{i \in I} (U_i)^{RC}$
-		\item $\emptyset^{RC} = X$
+		\item $U \subseteq V \implies V^{R} \subseteq U^{R}$
+		\item $U \subseteq (U^{R})^{R}$
+		\item $U^{R} = ((U^{R})^{R})^{R}$
+		\item $U^{R} = (V^{R})^{R} \iff (U^{R})^{R} = V^{R}$
+		\item $(\bigcup_{i \in I} U_i )^{R} = \bigcap_{i \in I} (U_i)^{R}$
+		\item $\emptyset^{R} = X$
 	\end{enumerate}
 \end{prop}
 
 \begin{proof}
-	1. Suppose $a \in V^{RC}$. Then, by definition, $\forall b \in V, aRb$. Since $U \subset V$, it is also true that $\forall b \in U, aRb$. Therefore $a \in U^{RC}$ by definition. Since $a$ was arbitrary, $V^{RC} \subseteq U^{RC}$.
+	1. Suppose $a \in V^{R}$. Then, by definition, $\forall b \in V, aRb$. Since $U \subset V$, it is also true that $\forall b \in U, aRb$. Therefore $a \in U^{R}$ by definition. Since $a$ was arbitrary, $V^{R} \subseteq U^{R}$.
 	
-	2. By expanding the definition of complement, we have $(U^{RC})^{RC}=\{ a \in X \, | \, \forall b \in U^{RC}, aRb \} = \{ a \in X \, | \, \forall b \in \{ c \in X \, | \, \forall d \in U, cRd  \}, aRb \} = \{ a \in X \, | \, \forall b \in X \, s.t. (\forall d \in U, bRd), aRb \}$.
+	2. By expanding the definition of complement, we have $(U^{R})^{R}=\{ a \in X \, | \, \forall b \in U^{R}, aRb \} = \{ a \in X \, | \, \forall b \in \{ c \in X \, | \, \forall d \in U, cRd  \}, aRb \} = \{ a \in X \, | \, \forall b \in X \, s.t. (\forall d \in U, bRd), aRb \}$.
 	
-	Let $a \in U$ and let $b \in X$ such that $\forall d \in U, bRd$. Since $a \in U$ and $bRd$ for all $b \in U$, we have $bRa$ in particular. Since $R$ is symmetric, $aRb$. Given that $b$ was arbitrary, we conclude that $\forall b \in X \, s.t. (\forall d \in U, bRd), aRb$. Therefore $a \in (U^{RC})^{RC}$ by definition of complement. Given that $a$ was arbitrary, $U \in (U^{RC})^{RC}$.
+	Let $a \in U$ and let $b \in X$ such that $\forall d \in U, bRd$. Since $a \in U$ and $bRd$ for all $b \in U$, we have $bRa$ in particular. Since $R$ is symmetric, $aRb$. Given that $b$ was arbitrary, we conclude that $\forall b \in X \, s.t. (\forall d \in U, bRd), aRb$. Therefore $a \in (U^{R})^{R}$ by definition of complement. Given that $a$ was arbitrary, $U \in (U^{R})^{R}$.
 	
-	3. We again expand the definition and have $((U^{RC})^{RC})^{RC} = \{ a \in X \, | \, \forall b \in (U^{RC})^{RC}, aRb \}$.
+	3. We again expand the definition and have $((U^{R})^{R})^{R} = \{ a \in X \, | \, \forall b \in (U^{R})^{R}, aRb \}$.
 	
-	Let $x \in ((U^{RC})^{RC})^{RC}$. Then $\forall b \in (U^{RC})^{RC}, xRb$ by definition of the complement. Since by 1. $U \subset (U^{RC})^{RC}$, we can restrict the previous expression to only the elements of $U$, and therefore $\forall b \in U, xRb$. But this means that $x \in U^{RC}$ by definition of the complement. Since $x$ was arbitrary, $((U^{RC})^{RC})^{RC} \subseteq U^{RC}$. But by 1., we also have $U^{RC} \subseteq ((U^{RC})^{RC})^{RC}$ since $U^{RC}$ is just a set onto which we can apply the complement twice . By two-way containment, we have $U^{RC} = ((U^{RC})^{RC})^{RC}$.
+	Let $x \in ((U^{R})^{R})^{R}$. Then $\forall b \in (U^{R})^{R}, xRb$ by definition of the complement. Since by 1. $U \subset (U^{R})^{R}$, we can restrict the previous expression to only the elements of $U$, and therefore $\forall b \in U, xRb$. But this means that $x \in U^{R}$ by definition of the complement. Since $x$ was arbitrary, $((U^{R})^{R})^{R} \subseteq U^{R}$. But by 1., we also have $U^{R} \subseteq ((U^{R})^{R})^{R}$ since $U^{R}$ is just a set onto which we can apply the complement twice . By two-way containment, we have $U^{R} = ((U^{R})^{R})^{R}$.
 	
-	4. Let $U, V \subseteq X$ such that $U^{RC} = (V^{RC})^{RC}$. Applying the complement on each side, $(U^{RC})^{RC} = ((V^{RC})^{RC})^{RC}$. By the previous property $((V^{RC})^{RC})^{RC} = V^{RC}$ and therefore $(U^{RC})^{RC} = V^{RC}$. Switching $U$ and $V$ proves the other direction.
+	4. Let $U, V \subseteq X$ such that $U^{R} = (V^{R})^{R}$. Applying the complement on each side, $(U^{R})^{R} = ((V^{R})^{R})^{R}$. By the previous property $((V^{R})^{R})^{R} = V^{R}$ and therefore $(U^{R})^{R} = V^{R}$. Switching $U$ and $V$ proves the other direction.
 	
 	5. We have:
 	\begin{equation*}
 		\begin{aligned}
-		(\bigcup_{i \in I} U_i )^{RC} &= \{ a \in X \, | \, \forall b \in \bigcup_{i \in I} U_i, aRb \} \\
-		&= \{ a \in X \, | \, \forall U_i, \forall  b \in U_i, aRb \} \\
-		&= \{ a \in X \, | \, \forall U_i, a \in \{ c \in X \, | \,  \forall  b \in U_i, cRb \} \} \\
-		&= \bigcap_{i \in I} \{ c \in X \, | \, \forall  b \in U_i, cRb\} \\
-		&= \bigcap_{i \in I} (U_i)^{RC}
-	\end{aligned}
+			(\bigcup_{i \in I} U_i )^{R} &= \{ a \in X \, | \, \forall b \in \bigcup_{i \in I} U_i, aRb \} \\
+			&= \{ a \in X \, | \, \forall U_i, \forall  b \in U_i, aRb \} \\
+			&= \{ a \in X \, | \, \forall U_i, a \in \{ c \in X \, | \,  \forall  b \in U_i, cRb \} \} \\
+			&= \bigcap_{i \in I} \{ c \in X \, | \, \forall  b \in U_i, cRb\} \\
+			&= \bigcap_{i \in I} (U_i)^{R}
+		\end{aligned}
 	\end{equation*}
 	Note that this property does not rely on the symmetry of $R$.
 	
-	6. Let $a \in X$. There is no $b \in \emptyset$ such that $aRb$. Therefore $\forall b \in \emptyset, aRb$. This means that $a \in \emptyset^{RC}$. Since $a$ was arbitrary, $X = \emptyset^{RC}$.
+	6. Let $a \in X$. There is no $b \in \emptyset$ such that $aRb$. Therefore $\forall b \in \emptyset, aRb$. This means that $a \in \emptyset^{R}$. Since $a$ was arbitrary, $X = \emptyset^{R}$.
 \end{proof}
+\end{mathSection}
 
+The last two properties depends on both the symmetry and the irreflexivity.
+
+\begin{mathSection}
 \begin{prop}\label{pm_ensmblespaces_symirreflproperties}
 	Let $X$ be a set and $R \subseteq X \times X$ a symmetric and irreflexive relation. Then
 	\begin{enumerate}
-		\item $U \cap U^{RC} = \emptyset$
-		\item $X^{RC} = \emptyset$
+		\item $U \cap U^{R} = \emptyset$
+		\item $X^{R} = \emptyset$
 	\end{enumerate}
 \end{prop}
 
 \begin{proof}
-	1. Let $a \in U$. Since $R$ is irreflexive,  $aRa$ is false. Therefore it is not true that, for all $b \in U$, $aRb$. This means that $a \notin U^{RC}$. Since that $a$ was arbitrary, $U \cap U^{RC} \emptyset$.
+	1. Let $a \in U$. Since $R$ is irreflexive,  $aRa$ is false. Therefore it is not true that, for all $b \in U$, $aRb$. This means that $a \notin U^{R}$. Since that $a$ was arbitrary, $U \cap U^{R} \emptyset$.
 	
-	2. Suppose $a \in X^{RC}$. Then for all $b \in X$, $aRb$. In particular, we would have $aRa$, which can't be true since $R$ is irreflexive. Therefore $a \notin X^{RC}$ and, since $a$ is arbitrary, $X^{RC} = \emptyset$.
+	2. Suppose $a \in X^{R}$. Then for all $b \in X$, $aRb$. In particular, we would have $aRa$, which can't be true since $R$ is irreflexive. Therefore $a \notin X^{R}$ and, since $a$ is arbitrary, $X^{R} = \emptyset$.
 \end{proof}
+\end{mathSection}
 
+We now define a notion of $R$-subspace by requiring that a subspace is the $R$-complement of its $R$-complement. We then construct the lattice of subspaces and show it satisfies properties we would expect from a lattice of subspaces.
+
+\begin{mathSection}
 \begin{defn}
-	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Let $U \subseteq X$. The \textbf{$R$-subspace generated by $U$} is $\langle U \rangle_R = (U^{RC})^{RC}$. An \textbf{$R$-subspace} of $X$ is a set $U \subseteq X$ such that $U = \langle U \rangle_R$. The \textbf{lattice of $R$-subspaces} is the set $\mathfrak{L} = \{ U \subseteq X \, | \, U = \langle U \rangle_R \}$ ordered by inclusion.
+	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Let $U \subseteq X$. The \textbf{$R$-closure of $U$} is $\langle U \rangle_R = (U^{R})^{R}$. An \textbf{$R$-subspace} of $X$ is a set $U \subseteq X$ such that $U = \langle U \rangle_R$. The \textbf{lattice of $R$-subspaces} is the set $\mathfrak{L} = \{ U \subseteq X \, | \, U = \langle U \rangle_R \}$ ordered by inclusion.
 \end{defn}
 
 \begin{coro}
@@ -1758,15 +1771,15 @@ We will first prove a more general set of results, on a generic set (not necessa
 \begin{proof}
 	The set $\mathfrak{L}$ is a collection of subsets of $X$. Let $\{U_i\}_{i \in I} \subseteq \mathfrak{L}$ be a non-empty family. Then, using the definition of subspace, and the third and fifth properties of \ref{pm_es_rComplProps}, we have
 	\begin{align*}
-		\bigcap_{i \in I} U_i &= \bigcap_{i \in I} (U_i^{RC})^{RC} = (\bigcup_{i \in I} U_i^{RC})^{RC} \\
-		&= (((\bigcup_{i \in I} (U_i^{RC})^{RC})^{RC})^{RC} = ((\bigcap_{i \in I} (U_i^{RC})^{RC})^{RC})^{RC} \\
-		&= ((\bigcap_{i \in I} U_i)^{RC})^{RC}.
+		\bigcap_{i \in I} U_i &= \bigcap_{i \in I} (U_i^{R})^{R} = (\bigcup_{i \in I} U_i^{R})^{R} \\
+		&= (((\bigcup_{i \in I} (U_i^{R})^{R})^{R})^{R} = ((\bigcap_{i \in I} (U_i^{R})^{R})^{R})^{R} \\
+		&= ((\bigcap_{i \in I} U_i)^{R})^{R}.
 	\end{align*}
-	Therefore $\bigcap_{i \in I} U_i \in \mathfrak{L}$. This means $\mathfrak{L}$ is an $\bigcap$-structure. Using the second property of \ref{pm_ensmblespaces_symirreflproperties}, $X = \emptyset^{RC} = (X^{RC})^{RC}$. Therefore $\mathfrak{L}$ is a topped $\bigcap$-structure. This also means that it is a complete lattice.
+	Therefore $\bigcap_{i \in I} U_i \in \mathfrak{L}$. This means $\mathfrak{L}$ is an $\bigcap$-structure. Using the second property of \ref{pm_ensmblespaces_symirreflproperties}, $X = \emptyset^{R} = (X^{R})^{R}$. Therefore $\mathfrak{L}$ is a topped $\bigcap$-structure. This also means that it is a complete lattice.
 \end{proof}
 
 \begin{coro}\label{pm_es_subspaceClosure}
-	The $R$-subspace operator satisfies the following properties
+	The $R$-closure satisfies the following properties
 	\begin{enumerate}
 		\item $U \subseteq \langle U \rangle_R$
 		\item $U \subseteq V \implies \langle U \rangle_R \subseteq \langle V \rangle_R$
@@ -1778,30 +1791,34 @@ We will first prove a more general set of results, on a generic set (not necessa
 \begin{proof}
 	1. The first property is true by the second property of \ref{pm_ensmblespaces_symirreflproperties}.
 	
-	2. Using the first property of \ref{pm_ensmblespaces_symirreflproperties} we have $U \subseteq V$ implies $V^{RC} \subseteq U^{RC}$ which in turns implies $(U^{RC})^{RC} \subseteq (V^{RC})^{RC}$. Therefore $\langle U \rangle_R \subseteq \langle V \rangle_R$.
+	2. Using the first property of \ref{pm_ensmblespaces_symirreflproperties} we have $U \subseteq V$ implies $V^{R} \subseteq U^{R}$ which in turns implies $(U^{R})^{R} \subseteq (V^{R})^{R}$. Therefore $\langle U \rangle_R \subseteq \langle V \rangle_R$.
 	
-	3. Using the fifth property of \ref{pm_ensmblespaces_symirreflproperties} we have $\langle \langle U \rangle_R \rangle_R = (((U^{RC})^{RC})^{RC})^{RC} = (U^{RC})^{RC} = \langle U \rangle_R$.
+	3. Using the fifth property of \ref{pm_ensmblespaces_symirreflproperties} we have $\langle \langle U \rangle_R \rangle_R = (((U^{R})^{R})^{R})^{R} = (U^{R})^{R} = \langle U \rangle_R$.
 \end{proof}
 
 \begin{prop}
 	Let $X$ be a set and $R \subseteq X \times X$ a symmetric and irreflexive relation. Then
 	\begin{enumerate}
 		\item $\langle U \rangle_R$ is the smallest $R$-subspace containing $U$
-		\item if $U, V \in \mathfrak{L}$ then $U = V^{RC} \iff U^{RC} = V$
+		\item if $U, V \in \mathfrak{L}$ then $U = V^{R} \iff U^{R} = V$
 	\end{enumerate}
 \end{prop}
 
 \begin{proof}
 	1. Let $U \subseteq X$ and $V \in \mathfrak{L}$ such that $U \subseteq V$ and $V \subseteq \langle U \rangle_R$. Since $U \subseteq V$, using the second property of \ref{pm_es_subspaceClosure}, $\langle U \rangle_R \subseteq \langle V \rangle_R = V$. Since $V \subseteq \langle U \rangle_R$ and  $\langle U \rangle_R \subseteq  V$, $\langle U \rangle_R = V$. This means that no $R$-subspace that contains $U$ is smaller than $\langle U \rangle_R$.
 	
-	2. Since $U, V \in \mathfrak{L}$, $U = (U^{RC})^{RC} = V^{RC}$ which, by the fourth property of \ref{pm_es_rComplProps}, implies $U^{RC} = (V^{RC})^{RC} = V$. Switching $U$ and $V$ proves the other direction.
+	2. Since $U, V \in \mathfrak{L}$, $U = (U^{R})^{R} = V^{R}$ which, by the fourth property of \ref{pm_es_rComplProps}, implies $U^{R} = (V^{R})^{R} = V$. Switching $U$ and $V$ proves the other direction.
 \end{proof}
+\end{mathSection}
 
+Lastly, we show that if we start with the mere notion of orthogonality defined from an inner product vector space, we recover the notion of orthogonal component and subspaces. That is, the full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
+
+\begin{mathSection}
 \begin{prop}
 	Let $X$ be an inner product space and $R = \{(a,b) \,|\, \langle a , b\rangle = 0\}$. Then:
 	\begin{enumerate}
 		\item $R$ is an irreflexive and symmetric relation
-		\item $U^{RC} = U^{\perp}$
+		\item $U^{R} = U^{\perp}$
 		\item $\langle U \rangle_R = \cl_X (\vspan(U))$
 	\end{enumerate}
 \end{prop}
@@ -1809,13 +1826,15 @@ We will first prove a more general set of results, on a generic set (not necessa
 \begin{proof}
 	1. Given that the inner product is symmetric, so will be $R$. Given that no vector is orthogonal to itself, $R$ is irreflexive.
 	
-	2. The orthogonal complex is defined as $U^\perp = \{ a \in X \, | \, \forall b \in U, \langle a , b\rangle = 0 \}$. Since $aRb \iff \langle a , b\rangle = 0$, $U^{RC} = U^{\perp}$.
+	2. The orthogonal complex is defined as $U^\perp = \{ a \in X \, | \, \forall b \in U, \langle a , b\rangle = 0 \}$. Since $aRb \iff \langle a , b\rangle = 0$, $U^{R} = U^{\perp}$.
 	
 	3. We have $\langle U \rangle_R = (U^{\perp})^\perp$ which returns the smallest closed subspace that contains $U$.
 \end{proof}
+\end{mathSection}
 
-This shows that full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
+\section{Ensemble subspaces}
 
+We now want to define a notion of subspace in a way that recovers the notions of subspaces we have in both classical and quantum mechanics. Given that orthogonality of subspaces in all three cases corresponds to ensembles saturate the upper entropy bound (i.e. orthogonal in the sense of the entropy), we will define the notion of subspaces based on the entropy.
 \subsection{Ensemble subspaces}
 
 We will now use the previous results where $X$ is an ensemble space and $R$ is the orthogonality relation between two ensembles.
