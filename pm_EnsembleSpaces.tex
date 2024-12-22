@@ -46,7 +46,7 @@ We will start this chapter by reviewing three cases: discrete classical ensemble
 \subsection{Discrete classical ensemble spaces}
 
 \begin{defn}
-	A \textbf{discrete classical ensemble space} is the space of probability distributions over a countable number of cases. That is, a discrete classical ensemble space is the simplex $\Ens$ containing $n$ points, possibly countably infinite, $\{s_i\}^n_{i=1}$ and for which every element $\ens \in \Ens$ is characterized by a unique convex combination $\ens = \sum_i p_i s_i$ such that $\sum_i p_i = 1$. The space is closed under convex combinations of finitely many elements. The entropy is given by $S(\ens) = - \sum_i p_i \log p_i$.
+	A \textbf{discrete classical ensemble space} is the space of probability distributions over a countable number of cases. That is, a discrete classical ensemble space is the simplex $\Ens$ containing $n$ points, possibly countably infinite, $\{s_i\}^n_{i=1}$ and for which every element $\ens \in \Ens$ is characterized by a unique convex combination $\ens = \sum_i p_i s_i$ such that $\sum_i p_i = 1$ and $p_i \geq 0$. The space is closed under convex combinations of finitely many elements. The entropy is given by $S(\ens) = - \sum_i p_i \log p_i$.
 \end{defn}
 
 \subsubsection{Finite case}
@@ -77,16 +77,16 @@ The uncountably infinite case is not physically relevant (i.e. no second countab
 	A \textbf{continuous classical ensemble space} is the space of probability distributions over phase space. That is, it is the space of probability measures over a symplectic manifold that is absolutely continuous with respect to the Liouville measure. The entropy is given by the Shannon/Gibbs entropy calculated using the probability density (i.e. the Radon-Nikodym derivative between the probability measure $p$ and the Liouville measure $\mu$). That is, $S(\rho) = - \int_X \rho \log \rho d\mu$ where $\rho = \frac{dp}{d\mu}$.
 \end{defn}
 
-In the continuous case, the space of ensembles is the space of integrable functions over a symplectic manifold (e.g.  over phase space) that integrate to one. That is, if $X$ is a symplectic manifold, then $\Ens = \{ \rho \in L^1(X) \, | \, \int_X \rho(x) d\mu = 1 \} $ where $\mu(U)=\int_U \omega^n$ is the Liouville measure. There are no extreme points in the convex space, meaning there are no ensembles that cannot be written as a convex combination of other ensembles. This is important as, when developing standard constructions in the ensemble space, one cannot rely on the existence of extreme points.
+In the continuous case, the space of ensembles is the space of non-negative integrable functions over a symplectic manifold (e.g.  over phase space) that integrate to one. That is, if $X$ is a symplectic manifold, then $\Ens = \{ \rho \in L^1(X) \, | \, \rho(x) \geq 0, \, \int_X \rho(x) d\mu = 1 \} $ where $\mu(U)=\int_U \omega^n$ is the Liouville measure. There are no extreme points in the convex space, meaning there are no ensembles that cannot be written as a convex combination of other ensembles. This is important as, when developing standard constructions in the ensemble space, one cannot rely on the existence of extreme points.
 
-The delta distributions are not part of the space. In fact, the relative measures are not absolutely continuous with respect to the Liouville measure (i.e. they assign non-zero probability over a set of measure zero). Therefore one should not think of delta distributions as ``pure states.'' There is a difference between the spectra (i.e. the possible values of a random variable) and states, which will be even more pronounced in the quantum case.
+The delta distributions are not part of the space. In fact, the discrete measures are not absolutely continuous with respect to the Liouville measure (i.e. they assign non-zero probability over a set of measure zero). Therefore one should not think of delta distributions as ``pure states.'' There is a difference between the spectra (i.e. the possible values of a random variable) and states, which will be even more pronounced in the quantum case.
 
 The symplectic nature of the manifold is required to assign a frame-invariant density to states and a frame-invariant notion of independence between DOFs, as we saw in the classical mechanics section of reverse physics.
 
 The entropy is given by $- \int \rho \log \rho d\mu$ where $\mu$ is the Liouville measure and $\rho$ is the probability density over canonical coordinates. If a different measure is used, or if the coordinates are not canonical, the formula gives the wrong result.\footnote{It may be interesting to study the shell of zero entropy states. For example, it should not be path connected. All uniform distributions with support of the same finite size (in terms of the Liouville measure) will have the same entropy. The region, however, need not be contiguous. Since we cannot continuously transform a single region into two disjoint regions, there will be different distributions at zero entropy that cannot be transformed continuously.}
 
 
-Similarly to the countable discrete case, the entropy can be infinite and expectation values can be infinite. The added complication is the frame invariance: it would not make sense to have the expectation for position in one frame to be finite while infinite in another. Requiring all functions of position and momentum to have finite expectations restricts the distributions to those with finite support. Requiring all polynomial functions of position and momentum to have finite expectation restricts the distributions to those that decay faster than any polynomial.
+Similarly to the countable discrete case, the entropy can be infinite and expectation values can be infinite. The added complication is the frame invariance: it would not make sense to have finite expectation for position in one frame but infinite in another. Requiring all functions of position and momentum to have finite expectation restricts the distributions to those with finite support. Requiring all polynomial functions of position and momentum to have finite expectation restricts the distributions to those that decay faster than any polynomial.
 
 Unlike the discrete classical case, subspaces and dimensionality of subspaces cannot be defined without the entropy. The issue is that we need a measure on the set of pure states, and the convex structure cannot provide it. The entropy, however, does as the supremum of the entropy for all distributions with support $U$ is $\log \mu(U)$. As we will see, the entropy can be used to both identify subspaces and recover the Liouville measure.
 
@@ -95,7 +95,7 @@ It is a bit unclear whether discontinuous distributions should be included or no
 \subsection{Quantum ensemble spaces}
 
 \begin{defn}
-	A \textbf{quantum ensemble space} is the space given by the density matrices/operators of a Hilbert space equipped with the von Neumann entropy. That is, given a separable Hilbert space $\mathcal{H}$ representing a quantum system, the ensemble space is the space of positive semi-definite self-adjoint operators with trace one $M(\mathcal{H})$. The space of pure states is given by the projective space $P(\mathcal{H})$. The entropy of an ensemble $\rho \in M(\mathcal{H})$ is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
+	A \textbf{quantum ensemble space} is the space given by the density matrices/operators of a Hilbert space equipped with the von Neumann entropy. That is, given a separable Hilbert space $\mathcal{H}$ for a quantum system, the ensemble space is the space of positive semi-definite self-adjoint operators with trace one $M(\mathcal{H})$. The space of pure states is given by the projective space $P(\mathcal{H})$. The entropy of an ensemble $\rho \in M(\mathcal{H})$ is given by the von Neumann entropy $S(\rho) = -\tr(\rho \log \rho)$.
 \end{defn}
 
 \subsubsection{Finite dimensional case}
@@ -106,14 +106,14 @@ The multiple decompositions make the ensemble space behave in a way that is a hy
 
 Note that complex projective spaces are symplectic, which is what allows one to define frame invariant densities. The goal is to have one argument applied to the generic definition as to why the space of pure states must be symplectic. Also note that the two dimensional sphere is the only symplectic sphere. By homogeneity, we should be able to argue that the space is symmetric around the maximally mixed state, and is therefore a sphere. The symplectic requirement would select dimension two. Note that real and quaternionic spaces would be excluded by this argument.
 
-The von Neumann entropy for the maximally mixed state is $\log n$ where $n$ is the dimensionality of the Hilbert space. Again we see that the maximum entropy gives us a measure of the size of the space. Note that, to calculate the von Neumann entropy, we are diagonalizing the density matrix $\rho$. This means finding a set of orthogonal pure states $s_i$ such that $\rho = \sum p_i s_i$ is a convex combination. Note that the convex hull of a set of $n$ orthogonal pure states is an $n$-dimensional simplex whose center is the maximally mixed state. Therefore, we are looking for a simplex that contains $\rho$ and the maximally mixed state. In the two dimensional case, $\rho$ is an interior point of the Bloch ball. Take the line that connects $\rho$ to the center. The two points of the sphere are the extreme points for the decomposition. The distance from the points will be proportional to the probability. Because of this property, the von Neumann entropy is the smallest Shannon entropy between all possible decompositions.
+The von Neumann entropy for the maximally mixed state is $\log n$ where $n$ is the dimensionality of the Hilbert space. Again we see that the maximum entropy gives us a measure of the size of the space. Note that, to calculate the von Neumann entropy, we are diagonalizing the density matrix $\rho$. This means finding a set of orthogonal pure states $s_i$ such that $\rho_i = \sum p_i s_i$ is a convex combination. Note that the convex hull of a set of $n$ orthogonal pure states is an $n$-dimensional simplex whose center is the maximally mixed state. Therefore, we are looking for a simplex that contains $\rho$ and the maximally mixed state. In the two dimensional case, $\rho$ is an interior point of the Bloch ball. Take the line that connects $\rho$ to the center. The two points of the sphere are the extreme points for the decomposition. The distance from the points will be proportional to the probability. Because of this property, the von Neumann entropy is the smallest Shannon entropy between all possible decompositions.
 
 
 \subsection{Countably infinite dimensional case}
 
-The countable infinite dimensional case presents similar problems as the classical case, and adds others. As in the classical infinite cases, the maximally mixed state (i.e. uniform distribution) is not in the convex space and the entropy is not finite for all infinite convex combinations. As in the classical continuous case, there is the issue of finite expectation of position/momentum in all frames. The problem is compounded by the fact that one cannot require finite expectation for all functions of position and momentum: finite support in position automatically implies infinite support on momentum, since the distribution in momentum is the Fourier transform of that in position.
+The countably infinite dimensional case presents similar problems as the classical case, and adds others. As in the classical infinite cases, the maximally mixed state (i.e. uniform distribution) is not in the convex space and the entropy is not finite for all infinite convex combinations. As in the classical continuous case, there is the issue of finite expectation of position/momentum in all frames. The problem is compounded by the fact that one cannot require finite expectation for all functions of position and momentum: finite support in position automatically implies infinite support on momentum, since the distribution in momentum is the Fourier transform of that in position.
 
-The Hilbert space for a discrete variable with infinite range (e.g. number of particles) and a continuous variable (e.g. position/momentum) is the same. The first is defined as the space of square convergent complex sequences $l^2$ while the second is the space of square integrable complex functions $L^2$. Given that $L^2$ allows a countable basis, the two are isomorphic. This also means that all spaces with finitely many degrees of freedom are also isomorphic. This makes the problem of infinite expectations even more problematic.
+The Hilbert space for a discrete variable with infinite range (e.g. number of particles) and a continuous variable (e.g. position/momentum) is the same. The first is defined as the space of square-summable complex sequences $l^2$ while the second is the space of square integrable complex functions $L^2$. Given that $L^2$ allows a countable basis, the two are isomorphic. This also means that all spaces with finitely many degrees of freedom are also isomorphic. This makes the problem of infinite expectations even more problematic.
 
 Note that Schwartz spaces have finite expectation for all polynomial functions of position and momentum. Given that infinite permutations can change the rate of convergence, the Schwartz space has an idea of what is further away from the origin, unlike Hilbert spaces. We will likely want to use Schwartz spaces instead of Hilbert spaces to make the physics and mathematics more consistent.
 
@@ -121,7 +121,7 @@ Note that Schwartz spaces have finite expectation for all polynomial functions o
 
 The first property of ensembles is that they must be experimentally well-defined. As shown in the previous chapters, this means that they are possibilities of an experimental domain, which means points of a $\textsf{T}_0$ second countable topological space where the topology corresponds to the natural one defined by the verifiable statements.
 
-The verifiable statements for the ensemble space are statements about the ensembles themselves, either in terms of statistical quantities (e.g. \statement{the average energy is of the particle is $3 eV \pm 0.5$}) or in terms of preparation settings (e.g. \statement{the beam goes through a polarizer oriented to the vertical direction within 1 degree}). Probability ranges are also typical verifiable statements on ensembles (e.g. \statement{the coin toss will result in heads between 49 and 51 percent of the cases}). The verifiable statements on the specific instances will be recovered later from the structure of the ensemble space as we recover probability distributions of specific quantities. The topology of the two is related but it is not the same (e.g. the topology of the Bloch ball is the standard topology of $\mathbb{R}$ but the topology on the values of an observable is the discrete topology).
+The verifiable statements for the ensemble space are statements about the ensembles themselves, either in terms of statistical quantities (e.g. \statement{the average energy of the particle is $3 \, eV \pm 0.5$}) or in terms of preparation settings (e.g. \statement{the beam goes through a polarizer oriented to the vertical direction within 1 degree}). Probability ranges are also typical verifiable statements on ensembles (e.g. \statement{the coin toss will result in heads between 49 and 51 percent of the cases}). The verifiable statements on the specific instances will be recovered later from the structure of the ensemble space as we recover probability distributions of specific quantities. The topology of the two is related but it is not the same (e.g. the topology of the Bloch ball is the standard topology of $\mathbb{R}^3$ but the topology on the values of an observable is the discrete topology).
 
 The fact that we start from ensembles and recover the probability of outcomes, instead of constructing ensembles from the probability of outcomes, should avoid the problems associated with frequentist interpretations of probability.
 
@@ -131,7 +131,7 @@ The fact that we start from ensembles and recover the probability of outcomes, i
 	\end{axiom}
 	
 	\begin{justification}
-		In experimental setting, preparation procedures never prepare a system exactly in the same configuration. Experimental results, then, are always in terms of statistical preparations and statistical measurements. A physical theory, then, must be able to talk about what are the possible statistical ensembles describable by the theory. States, then, can be understood as ensembles as those are what we produce and study in practice.
+		In experimental settings, preparation procedures never prepare a system exactly in the same configuration. Experimental results, then, are always in terms of statistical preparations and statistical measurements. A physical theory, then, must be able to talk about the possible statistical ensembles describable by the theory. States, then, can be understood as ensembles as those are what we produce and study in practice.
 		
 		Equivalently, reproducibility is a basic requirement of a physical theory. A physical law, then, must be understood as describing a relationship that always exists whenever the same set of circumstances is replicated. Given that we need to always be able to replicate those circumstances ``one more time'', the relationship is about countably infinite preparations and results: ensembles. Therefore, to the extent that physics is about reproducible experimental results, the basic description of a system is in terms of ensembles. This justifies the use of ensembles as the fundamental object to describe the state of a system.\footnote{Note that reproducibility also already implies that all properties that characterize an ensemble must be relative to the procedure. If the properties depended, for example, on absolute space or absolute time, then different practitioners would not be able to prepare the same ensemble.}
 		
@@ -155,6 +155,7 @@ We should now verify that our three basic cases satisfy the axiom of ensemble.
 
 The second property of ensembles is that they can be mixed. That is, we can take two preparation procedures and choose between them with a known probability. This constitutes another ensemble. The convex space structure is ultimately responsible for all linear structures in physics.
 
+\begin{mathSection}
 \begin{defn}
 	Given a real number $p \in [0,1]$, its complement is defined as $\bar{p} = 1-p$.
 \end{defn}
@@ -162,16 +163,16 @@ The second property of ensembles is that they can be mixed. That is, we can take
 \begin{axiom}[Axiom of mixture]
 	An ensemble space is closed under statistical mixing. Formally, an ensemble space $\Ens$ is equipped with an operation $+ : [0, 1] \times \Ens \times \Ens \to \Ens$ called \textbf{mixing}, noted with the infix notation $p \ens[a] + \bar{p} \ens[b]$, with the following properties:
 	\begin{itemize}
-		\item \textbf{Continuity}: the map $+(p, \ens[a], \ens[b])  \to p \ens[a] + \bar{p} \ens[b]$ is continuous (with respect to the product topology $[0, 1] \times \Ens \times \Ens$)
+		\item \textbf{Continuity}: the map $+(p, \ens[a], \ens[b])  \to p \ens[a] + \bar{p} \ens[b]$ is continuous (with respect to the product topology of $[0, 1] \times \Ens \times \Ens$)
 		\item \textbf{Identity}: $1 \ens[a] + 0 \ens[b] = \ens[a]$
 		\item \textbf{Idempotence}:  $p \ens[a] + \bar{p} \ens[a] = \ens[a]$ for all $p \in [0,1]$
 		\item \textbf{Commutativity}: $p \ens[a] + \bar{p} \ens[b] = \bar{p} \ens[b] + p \ens[a]$ for all $p \in [0,1]$
-		\item \textbf{Associativity}: $p_1 \ens_1 + \bar{p}_1\left(\overline{\left(\frac{p_3}{\bar{p}_1}\right)}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) =  \bar{p}_3\left(\frac{p_1}{\bar{p}_3} \ens_1 +  \overline{\left(\frac{p_1}{\bar{p}_3}\right)}\ens_2\right) + p_3 \ens_3$ where $0 < p_1 + p_3 < 1$
+		\item \textbf{Associativity}: $p_1 \ens_1 + \bar{p}_1\left(\overline{\left(\frac{p_3}{\bar{p}_1}\right)}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) =  \bar{p}_3\left(\frac{p_1}{\bar{p}_3} \ens_1 +  \overline{\left(\frac{p_1}{\bar{p}_3}\right)}\ens_2\right) + p_3 \ens_3$ where $p_1 + p_3 \leq 1$
 	\end{itemize}
 \end{axiom}
 
 \begin{justification}
-	This axiom captures the ability to create a mixture merely by selecting between the output of different processes. Let $\ens_1$ and $\ens_2$ be two ensembles that represent the output of two different processes $P_1$ and $P_2$. Let a selector $S_p$ be a process that outputs two symbols, the first with probability $p$ and the second with probability $\bar{p}$. Then we can create another process $P$ that, depending on the selector, outputs either the output of $P_1$ or $P_2$. All possible preparations of such a procedure will form an ensemble. Therefore we are justified in equipping an ensemble space with a mixing operation that take a real number from zero to one and two ensembles.
+	This axiom captures the ability to create a mixture merely by selecting between the output of different processes. Let $\ens_1$ and $\ens_2$ be two ensembles that represent the output of two different processes $P_1$ and $P_2$. Let a selector $S_p$ be a process that outputs two symbols, the first with probability $p$ and the second with probability $\bar{p}$. Then we can create another process $P$ that, depending on the selector, outputs either the output of $P_1$ or $P_2$. All possible preparations of such a procedure will form an ensemble. Therefore we are justified in equipping an ensemble space with a mixing operation that takes a real number from zero to one, and two ensembles.
 	
 	Given that mixing represents an experimental relationship, and all experimental relationships must be continuous in the natural topology, mixing must be a continuous function. Note that $p$ is a continuously ordered quantity, where no value is perfectly experimentally verifiable, and therefore the natural topology is the one of the reals. This justifies continuity.
 
@@ -179,9 +180,9 @@ The second property of ensembles is that they can be mixed. That is, we can take
 \end{justification}
 
 \begin{remark}
-	Given commutativity and associativity, we can write $p_1 \ens[a] + p_2 \ens[b] + p_3 \ens_3$ where $p_2 = \bar{p}_1\overline{\left(\frac{p_3}{\bar{p}_1}\right)} = \bar{p}_3\overline{\left(\frac{p_1}{\bar{p}_3}\right)} = 1 - p_1 - p_3 = \overline{\left(p_1 + p_3\right)}$.
+	Given commutativity and associativity, we can write $p_1 \ens[e]_1 + p_2 \ens[e]_2 + p_3 \ens_3$ where $p_2 = \bar{p}_1\overline{\left(\frac{p_3}{\bar{p}_1}\right)} = (1 - p_1)\left(1 - \frac{p_3}{1-p_1}\right) = 1 - p_1 - p_3 = (1 - p_3)\left(1 - \frac{p_1}{1-p_3}\right) = \bar{p}_3\overline{\left(\frac{p_1}{\bar{p}_3}\right)} = \overline{\left(p_1 + p_3\right)}$.
 	
-	We can also extend to mixtures of finitely many elements $\sum_{n=1}^\infty p_i \ens_i$ where $\sum_{n=1}^\infty p_i = 1$ with the following caveat. The mixture is guaranteed to exist only for finitely many elements. Whether an infinite sum $\sum_{i=1}^\infty \ens_i$ converges or not in the space is determined by the topology (i.e. experimental verifiability). The goal is to work with only finite convex combinations and let the closure of the topology handle the limits.
+	We also extend the notation to mixtures of arbitrarily many elements $\sum_{i=1}^n p_i \ens_i$ where $\sum_{i=1}^n p_i = 1$ with the following caveat. The mixture is guaranteed to exist only when we are mixing finitely many elements. Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in the ensemble space is determined by the topology (i.e. experimental verifiability). The strategy will be to work with only finite convex combinations and let the closure of the topology handle the limits.
 \end{remark}
 
 \begin{coro}
@@ -189,52 +190,60 @@ The second property of ensembles is that they can be mixed. That is, we can take
 \end{coro}
 
 \begin{proof}
-	The properties of the axiom of mixture match the basic definition of a convex spaces, which can be taken from \href{https://ncatlab.org/nlab/show/convex+space}{ncatlab} and \href{https://arxiv.org/abs/0903.5522}{this excellent paper}.  The notation and terminology will be slightly different to better map to physics ideas. 
+	The properties of the axiom of mixture match the basic definition of convex spaces, which can be taken from \href{https://ncatlab.org/nlab/show/convex+space}{ncatlab} and \href{https://arxiv.org/abs/0903.5522}{this excellent paper}.  The notation and terminology will be slightly different to better map to physics ideas. 
 \end{proof}
 
+\end{mathSection}
+
+We should now check that the axiom of mixture is satisfied by the standard cases.
+
+\begin{mathSection}
 \begin{prop}
 	Discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfy the axiom of mixture.
 \end{prop}
 
 \begin{proof}
-	The space of probability measures, discrete or continuous, $\Ens$ is a convex subset of the vector space of signed finite measures. It is therefore closed under convex combinations: if $\{e_i\} \subseteq \Ens$ are probability measure, then $\sum p_i \ens_i$ with $\sum p_i = 1$ is a probability measure. The properties of mixing are inherited from the properties of linear combinations. Therefore the discrete and continuous classical ensemble spaces satisfy the axiom of mixture.
+	The space $\Ens$ of probability measures, discrete or continuous, is a convex subset of the vector space of signed finite measures. It is therefore closed under convex combinations: if $\{e_i\} \subseteq \Ens$ are probability measures, then $\sum_i p_i \ens_i$ with $\sum_i p_i = 1$ and $p_i \geq 0$ is a probability measure. The properties of mixing are inherited from the properties of linear combinations. Therefore the discrete and continuous classical ensemble spaces satisfy the axiom of mixture.
 	
 	Similarly, the space of positive semi-definite self-adjoint operators with trace one is a convex subset of the vector space of self-adjoint operators. Therefore it is closed under convex combinations and it will satisfy the axiom of mixture.
 \end{proof}
+\end{mathSection}
 
 \subsection{Common components and separateness}
 
 The convex structure allows us to characterize ensembles based on whether they can be mixed into one another. For example, we can ask whether an ensemble is or is not the mixture of some other ensembles; whether two ensembles can be expressed as a mixture of a common component.
 
+\begin{mathSection}
+
 \begin{defn}
-	Let $\Ens$ be an ensemble space. Let $\ens[a] = \sum_i p_i \ens_i$ where $\ens[a], \{\ens_i\} \in \Ens$ and $p_i \in (0,1]$ such that $\sum p_i = 1$. We say that $\ens[a]$ is a \textbf{mixture} of $\{\ens_i\}$, each $\ens_i$ is a \textbf{component} of $\ens[a]$ and each $p_i$ is a \textbf{mixture coefficient}.
+	Let $\Ens$ be an ensemble space. Let $\ens[a] = \sum_i p_i \ens_i$ where $\ens[a], \ens_i \in \Ens$ and $p_i \in (0,1]$ such that $\sum_i p_i = 1$. We say that $\ens[a]$ is a \textbf{mixture} of $\{\ens_i\}$, each $\ens_i$ is a \textbf{component} of $\ens[a]$ and each $p_i$ is a \textbf{mixture coefficient}.
 \end{defn}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{tempimages/ConvexExamples.jpg}
 \end{figure}
 
 \begin{remark}
-	In terms of the convex space, all the mixtures between two ensembles correspond to the segment between them; all the mixtures between three ensemble correspond to the triangle formed by the three elements and so on. An ensemble $\ens[a]$ is a component of a different ensemble $\ens[b]$ if the segment can be continued on the side of $\ens[b]$. If two elements are not a component of each other, then they are the extreme points of the line that connect the two. That is, the segment cannot be extended.
+	In terms of the convex space, all the mixtures between two ensembles correspond to the segment between them; all the mixtures between three ensembles correspond to the triangle formed by the three elements and so on. An ensemble $\ens[a]$ is a component of a different ensemble $\ens[b]$ if the segment connecting $\ens[a]$ and $\ens[b]$ can be extended past $\ens[b]$. If two elements are not a component of each other, then they are the extreme points of the line that connects the two. That is, the segment cannot be extended.
 \end{remark}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{tempimages/ComponentNotOrder.jpg}
+	\includegraphics[width=0.4\textwidth]{tempimages/ComponentNotOrder.jpg}
 \end{figure}
 
 \begin{remark}
-	Note that two ensembles can be the component of each other. Consider $\frac{2}{3} \ens[a] + \frac{1}{3} \ens[b]$ and $\frac{1}{3} \ens[a] + \frac{2}{3} \ens[b]$. We can write $\frac{2}{3} \ens[a] + \frac{1}{3} \ens[b] = \frac{1}{2}\left(\frac{1}{3} \ens[a] + \frac{2}{3} \ens[b]\right) + \frac{1}{2} \ens[a]$ and $\frac{1}{3} \ens[a] + \frac{2}{3} \ens[b] = \frac{1}{2}\left(\frac{2}{3} \ens[a] + \frac{1}{3} \ens[b]\right) + \frac{1}{2} \ens[b]$ (they are both midpoints along each other). Therefore a component is not necessarily ``smaller'' or ``better defined'' than the mixture. Mathematically, ``being a component of'' is not a partial order. It is reflexive and transitive, but it is not antisymmetric. In practical term, we need something else to tell us whether we are, for example, taking a limit with components that become ``smaller and smaller.''
+	Note that two ensembles can be components of each other. Consider $\frac{2}{3} \ens[a] + \frac{1}{3} \ens[b]$ and $\frac{1}{3} \ens[a] + \frac{2}{3} \ens[b]$. We can write $\frac{2}{3} \ens[a] + \frac{1}{3} \ens[b] = \frac{1}{2}\left(\frac{1}{3} \ens[a] + \frac{2}{3} \ens[b]\right) + \frac{1}{2} \ens[a]$ and $\frac{1}{3} \ens[a] + \frac{2}{3} \ens[b] = \frac{1}{2}\left(\frac{2}{3} \ens[a] + \frac{1}{3} \ens[b]\right) + \frac{1}{2} \ens[b]$ (they are both midpoints along each other). Therefore a component is not necessarily ``smaller'' or ``better defined'' than the mixture. Mathematically, ``being a component of'' is not a partial order. It is reflexive and transitive, but it is not antisymmetric. In practical terms, we need something else to tell us whether we are, for example, taking a limit with components that become ``smaller and smaller.''
 \end{remark}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space and $\ens[a], \ens[b] \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens[c] \in \Ens$, the common component, such that $\ens[a] = p_1 \ens[c] + \bar{p}_1 \ens_a$ and $\ens[b] = p_2 \ens[c] + \bar{p}_2 \ens_2$ for some $\ens_1, \ens_2 \in \Ens$ and $p_1, p_2 \in (0,1)$. Otherwise, we say they \textbf{have no common component}, or are \textbf{separate}, noted $\ens[a] \separate \ens[b]$. Two ensemble have a common component in $A \subseteq \Ens$ if the common component can be found in $A$, and are separate in $A$ if there is none.
+	Let $\Ens$ be an ensemble space and $\ens[a], \ens[b] \in \Ens$. We say that they \textbf{have a common component} if we can find $\ens[c] \in \Ens$, the common component, such that $\ens[a] = p_1 \ens[c] + \bar{p}_1 \ens_1$ and $\ens[b] = p_2 \ens[c] + \bar{p}_2 \ens_2$ for some $\ens_1, \ens_2 \in \Ens$ and $p_1, p_2 \in (0,1]$. Otherwise, we say they \textbf{have no common component}, or are \textbf{separate}, noted $\ens[a] \separate \ens[b]$. Two ensembles have a common component in $A \subseteq \Ens$ if the common component can be found in $A$, and are separate in $A$ if there is none.
 \end{defn}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{tempimages/CommonComponent.jpg}
+	\includegraphics[width=0.3\textwidth]{tempimages/CommonComponent.jpg}
 \end{figure}
 
 \begin{remark}
@@ -244,19 +253,20 @@ The convex structure allows us to characterize ensembles based on whether they c
 \begin{coro}
 	The previous definitions obey the following:
 	\begin{enumerate}
-		\item every ensemble has a common component with itself, therefore every ensemble is not separate from itself
+		\item every ensemble is a component of itself
+		\item if $\ens[a]$ is a component of $\ens[b]$, then $\ens[a]$ and $\ens[b]$ have a common component and therefore they are not separate
 		\item separateness is an irreflexive symmetric relation
-		\item if $\ens[a]$ is a component of $\ens[b]$, then $\ens[a]$ and $\ens[b]$ have a common component
 	\end{enumerate}
 \end{coro}
 
 \begin{proof}
-	1. Since by idempotence $\ens = p \ens + \bar{p} \ens$ for any $p$, we can satisfy the definition by setting $\ens[a] = \ens[b] = \ens[c] = \ens_1 = \ens_2 = \ens$. Therefore every ensemble has a common component with itself and every ensemble is not separate from itself.
+	1. Since by idempotence $\ens = p \ens + \bar{p} \ens$ for any $p$, then every ensemble is a mixture of itself, and therefore it is a component of itself.
 	
-	2. The previous property shows that separateness is irreflexive. The definition of common component is symmetric and therefore so is separateness.
+	2. By idempotence, we can write $\ens[a] = p_1 \ens[a] + \bar{p}_1 \ens[a]$ for some $p_1 \in (0,1]$. Since $\ens[a]$ is a component of $\ens[b]$, we can write $\ens[b] = p_2 \ens[a] + \bar{p}_2 \ens[e]_2$ for some $p_2 \in (0, 1]$ and $\ens[c] \in \Ens$. Therefore $\ens[a]$ and $\ens[b]$ have $\ens[a]$ as a common component.
 	
-	3. By idempotence, we can write $\ens[a] = p_1 \ens[a] + \bar{p_1} \ens[a]$ for some $p_1 \in (0,1)$. Since $\ens[a]$ is a component of $\ens[b]$, we can write $\ens[b] = p_2 \ens[a] + \bar{p_2} \ens[c]$ for some $p_2 \in (0, 1)$ and $\ens[c] \in \Ens$. Therefore $\ens[a]$ and $\ens[b]$ have a common component.
+	3. Since every ensemble is a component of itself, every ensemble has a common component with itself and therefore is not separate from itself. This proves that separateness is irreflexive. The definition of common component is symmetric and therefore so is separateness.
 \end{proof}
+\end{mathSection}
 
 \subsection{Convex subsets and convex hull}
 
