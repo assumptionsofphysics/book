@@ -270,12 +270,15 @@ The convex structure allows us to characterize ensembles based on whether they c
 
 \subsection{Convex subsets and convex hull}
 
+In many cases, we will need to discuss the set of all possible mixtures of a given set of ensembles. Mathematically, this is the convex closure meaning that we take all possible convex combinations of the given ensembles. Additionally, since the mixture is only a finite operation, we will use the topology to reach all possible limits, all possible infinite mixtures. The topology, in fact, is what defines the limits and will tell us whether a particular infinite convex combination corresponds to a valid mixture or not.
+
+\begin{mathSection}
 \begin{defn}
-	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is a \textbf{convex subset} of $\Ens$ if it is closed under mixture and it is a closed set. That is, it contains all possible mixtures that can be constructed form its elements, including infinite ones. If we want to stress that we care closing only under finite mixing, we say that $A$ is closed under finite convex combinations.
+	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is a \textbf{convex subset} of $\Ens$ if it contains all possible mixtures, including infinite ones, of its elements. Formally, it is a topologically closed set that is also closed under convex combinations. If we want to stress that we are closing only under finite mixing, we say that $A$ is closed under finite convex combination.
 \end{defn}
 
 \begin{defn}
-	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{convex hull} of $A$, noted $\hull(A)$ is the set of all possible mixtures that can be constructed with elements contained in $A$, including infinite ones. That is, it is the topological closure of the closure of $A$ under mixing.
+	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{convex hull} of $A$, noted $\hull(A)$ is the set of all possible mixtures that can be constructed with elements contained in $A$, including infinite ones. Formally, it is the topological closure of the closure of $A$ under convex combination. That is, it is the smallest convex subset that contains $A$.
 \end{defn}
 
 \begin{coro}\label{pm_es_hullProp}
@@ -293,7 +296,7 @@ The convex structure allows us to characterize ensembles based on whether they c
 	
 	2. Let $\ens \in \hull(A)$. Then it is a mixture of some elements of $A$. Since $A \subseteq B$, then $\ens$ is also the mixture of some elements of $B$ and therefore $\ens \in \hull(B)$.
 	
-	3. Since mixing is associative and commutative, a mixture of mixtures of $U$ can be re-epressed as a mixture of $\hull(A)$. Therefore for all $\ens \in \hull(\hull(A))$ we have $\ens \in \hull(A)$.
+	3. Since $\hull(\hull(A))$ is the smallest convex subset that contains $\hull(A)$, and since $\hull(A)$ is a convex subset, then $\hull(\hull(A))$ must be $\hull(A)$ since no smaller set can contain all elements of $\hull(A)$.
 \end{proof}
 
 \begin{coro}
@@ -301,67 +304,69 @@ The convex structure allows us to characterize ensembles based on whether they c
 \end{coro}
 
 \begin{proof}
-	Let $A \subseteq \Ens$ be a convex subset. By \ref{pm_es_hullProp} we have $A \subseteq \hull(A)$. By definition of convex set, we have $\hull(A) \subseteq A$. Therefore $A = \hull(A)$. Conversely, consider let $A \subseteq \Ens$ be a set of ensembles not necessarily convex. By definition, $\hull(A)$ is closed under mixture and is therefore a convex subset.
+	Let $A \subseteq \Ens$ be a convex subset. By \ref{pm_es_hullProp} we have $A \subseteq \hull(A)$. By definition of convex set, we have $\hull(A) \subseteq A$. Therefore $A = \hull(A)$. Conversely, let $A \subseteq \Ens$ be a set of ensembles not necessarily convex. By definition, $\hull(A)$ is closed under mixture and is therefore a convex subset.
 \end{proof}
 
-\begin{conj}
-	The hull is
-	\begin{enumerate}
-		\item continuous from above: $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any decreasing sequence $\{A_i\}$
-		\item not continuous from below: $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any increasing sequence $\{A_i\}$
-	\end{enumerate}
-\end{conj}
+\begin{prop}
+	The hull is continuous from above. That is, $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any decreasing sequence $A_i \subseteq \Ens$.
+\end{prop}
 
 \begin{proof}
-	It would seem that from above we are taking an infinite intersection of closed sets, which will be closed. From below, we would be taking an infinite union of closed sets, which will not be closed. We would be missing the closure of infinite convex combination with, for example, an element in each set.
+	Since $A_i$ is a decreasing sequence, $\lim\limits_{i \to \infty} A_i = \bigcap_i A_i$. Also, since $A_{i+1} \subseteq A_i$, then $\hull(A_{i+1}) \subseteq \hull(A_i)$ and therefore $\hull(A_i)$ is a decreasing sequence. This also means $\lim\limits_{i \to \infty} \hull(A_i) = \bigcap_i \hull(A_i)$. Therefore we need to show that $\hull(\bigcap_i A_i) = \bigcap_i \hull(A_i)$.
+	
+	Let $\ens = \sum_j p_j \ens[a]_j \in \hull(\bigcap_i A_i)$ be a convex combination, possibly infinite, such that $\ens[a]_j \in \bigcap_i A_i$. This means that $\ens[a]_j \in A_i$ for all $i$ and all $j$. Since $\ens$ is a convex combination of elements of each $A_i$, $\ens \in \hull(A_i)$ for all $i$ and therefore $\ens \in \bigcap_i \hull(A_i)$. We have $\hull(\bigcap_i A_i) \subseteq \bigcap_i \hull(A_i)$. Conversely, let $\ens \in \bigcap_i \hull(A_i)$. Then we can write $\ens = \sum_j p_j \ens[a]_j$ where $\ens[a]_j \in \bigcap_i \hull(A_i)$. Therefore $\ens[a]_j \in \hull(A_i)$ for all $i$ and $j$. TODO: finish the proof.
 \end{proof}
+
+\begin{remark}
+	Note that the hull is not necessarily continuous from below. That is, it is not necessarily true that $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any increasing sequence $A_i \subseteq \Ens$. The limit from below, in fact, would correspond to the infinite union of closed sets, which is not necessarily a closed set. Therefore if we take the closure after the limit, we are going to include the infinite convex combinations that require, for example, an element from each of the $A_i$.
+\end{remark}
 
 \begin{coro}
 	The set $\mathfrak{Conv}_{\Ens}$ of all convex subsets of $\Ens$ ordered by set inclusion is a topped $\bigcap$-structure and therefore is also a complete lattice.
 \end{coro}
 
 \begin{proof}
-	Let $\mathfrak{Conv}_{\Ens}$ be the set of all convex subsets of $\Ens$ ordered by set inclusion. The empty set $\emptyset \subset \Ens$ is a convex set. The whole space $\Ens \subseteq \Ens$ is also a convex set. It is therefore a bounded ordered set.
+	Let $\mathfrak{Conv}_{\Ens}$ be the set of all convex subsets of $\Ens$ ordered by set inclusion. The empty set $\emptyset \subset \Ens$ is a convex set. The whole space $\Ens \subseteq \Ens$ is also a convex set. Then $\mathfrak{Conv}_{\Ens}$ is therefore a bounded ordered set.
 	
 	Let $A, B \in \mathfrak{Conv}_{\Ens}$ be two convex subsets. Consider $A \cap B$. Any mixture of elements in $A \cap B$ is both a mixture of elements in $A$ and a mixture of elements in $B$. Therefore any mixture of elements of $A \cap B$ is both an element of $A$ and an element of $B$. This means it is also an element of $A \cap B$, which is therefore a convex set.
 	
-	The previous argument generalizes to a family of convex subsets $\{A_i\}_{i \in I} \subseteq \mathfrak{L}$. Moreover, the intersection of infinitely many closed sets is still closed. Therefore $\bigcap_{i \in I} A_i \in \mathfrak{Conv}_{\Ens}$ and $\mathfrak{Conv}_{\Ens}$ is an $\bigcap$-structure. This also means that it is a complete lattice.
+	The previous argument generalizes to a family of convex subsets $\{A_i\}_{i \in I} \subseteq \mathfrak{Conv}_{\Ens}$. Moreover, the intersection of infinitely many closed sets is still closed. Therefore $\bigcap_{i \in I} A_i \in \mathfrak{Conv}_{\Ens}$ and $\mathfrak{Conv}_{\Ens}$ is an $\bigcap$-structure. This also means that it is a complete lattice.
 \end{proof}
+\end{mathSection}
 
 \section{Axioms of entropy}
 
-The third and final property of ensembles is that they have a well-defined entropy. The entropy quantifies the variability of the elements within the ensembles. That is, since an ensemble represents all possible preparations of equivalent systems prepared according to the same procedure, we are asking how much those preparations are different from each other. No matter what the full description of each individual preparation may be, we can assume that their variability has some specific features. It will have to be compatible with experimental verifiability (i.e. the variability must be a continuous function with respect to the topology) and with statistical mixing (i.e. the variability cannot decrease during mixing and it maximally increase when the ensembles do not overlap). The formula for entropy can then be recovered with these very broad physically justified assumptions.
+The third and final property of ensembles is that they have a well-defined entropy. The entropy quantifies the variability of the elements within the ensembles. That is, since an ensemble represents all possible preparations of equivalent systems prepared according to the same procedure, we are asking how much those preparations are different from each other. No matter what the full description of each individual preparation may be, we can assume that their variability has some specific features. It will have to be compatible with experimental verifiability (i.e. the variability must be a continuous function with respect to the topology) and with statistical mixing (i.e. the variability cannot decrease during mixing and it maximally increases when the ensembles do not overlap). The formula for entropy can then be recovered with these very broad physically justified assumptions.
 
-The entropic structure, in general, will constrain both the topological structure, making it metrizable, and the convex structure, making it embeddable in a vector space. The entropy is also responsible for all the geometric structure of the ensemble space.
-
+\begin{mathSection}
 \begin{axiom}[Axiom of entropy]
-	Every element of the ensemble is associated with an \textbf{entropy} which quantifies the variability of the preparations of the ensemble. Formally, an ensemble space $\Ens$ is equipped with a function $S : \Ens \to \mathbb{R}$, defined up to a positive multiplicative constant representing the unit numerical value. The entropy has the following the following properties:
+	Every element of the ensemble is associated with an \textbf{entropy} which quantifies the variability of the preparations of the ensemble. Formally, an ensemble space $\Ens$ is equipped with a function $S : \Ens \to \mathbb{R}$, defined up to a positive multiplicative constant representing the unit numerical value. The entropy has the following properties:
 	\begin{itemize}
-		\item \textbf{Continuity}\footnote{Currently, we are imposing that the entropy is continuous. There may be a chance that this requirement is redundant, as strict concavity and the upper variability bound may already impose this. We have found proofs that show that real valued convex/concave functions of real values are continuous. These proofs fail at the boundary, but the upper variability bound may fix this. Another open question is whether differentiability is also an independent requirement.}
+		\item \textbf{Continuity}\footnote{Currently, we are imposing that the entropy is continuous. There may be a chance that this requirement is redundant, as strict concavity and the upper variability bound may already impose this. We have found proofs that show that real valued convex/concave functions of real values are continuous. These proofs fail at the extreme points, but the upper variability bound may fix this. Another open question is whether differentiability is also an independent requirement.}
 		\item \textbf{Strict concavity}: $S(p\ens[a] + \bar{p} \ens[b]) \geq p S(\ens[a]) + \bar{p} S(\ens[b])$ with the equality holding if and only if $\ens[a] = \ens[b]$
 		\item \textbf{Upper variability bound}: $S(p\ens[a] + \bar{p} \ens[b]) \leq I(p, \bar{p}) + p S(\ens[a]) + \bar{p} S(\ens[b])$; if the equality holds, $\ens[a]$ and $\ens[b]$ are \textbf{non-overlapping} or \textbf{orthogonal}, noted $\ens[a] \ortho \ens[b]$; the function $I(p_1, p_2)$ is the same for all ensemble spaces
-		\item \textbf{Mixtures preserve orthogonality}:\footnote{It is unclear whether ``mixtures preserve orthogonality'' is an independent axiom. Intuitively, the following argument tells us that it is. Take the 2 dimensional simplex (i.e. a triangle) that represent a classical discrete probability space over three elements. Take the standard entropy, which will satisfy ``mixtures preserve orthogonality''. This is because the middle point has entropy $\log 3$. We can imagine changing the entropy so that it is a little bit lower in the center but it is unchanged on the sides. However, one needs to provide an actual example and show that it satisfies all axioms. It may also be that only one direction is an independent axiom. That is, that orthogonality with the components implies orthogonality with the mixtures. This is what does not hold for separateness.} $\ens[a] \ortho \ens[b]$ and $\ens[a] \ortho \ens[c]$ if and only if $\ens[a] \ortho p \ens[b] + \bar{p} \ens[c]$ for any $p \in (0,1)$
+		\item \textbf{Mixtures preserve orthogonality}:\footnote{It is unclear whether ``mixtures preserve orthogonality'' is an independent axiom. Intuitively, the following argument tells us that it is. Take the 2 dimensional simplex (i.e. a triangle) that represents a classical discrete probability space over three elements. Take the standard entropy, which will satisfy ``mixtures preserve orthogonality''. This is because the middle point has entropy $\log 3$. We can imagine redefining the entropy so that it is a little bit lower in the center but it is unchanged on the sides. However, one needs to provide an actual example and show that it satisfies all axioms. It may also be that only one direction is an independent axiom. That is, that orthogonality with the components implies orthogonality with the mixtures. This is what does not hold for separateness.} $\ens[a] \ortho \ens[b]$ and $\ens[a] \ortho \ens[c]$ if and only if $\ens[a] \ortho p \ens[b] + \bar{p} \ens[c]$ for any $p \in (0,1)$
 	\end{itemize}
 \end{axiom}
 
 \begin{justification}
-	The entropy quantifies the variability of the instances of the ensemble. Since the ensemble represents a collection of preparations of equivalent systems, and since each instance will in general be potentially different, it is legitimate to ask how much variability there is among the different instances. We are assuming that the entropy is a quantity (i.e. a linearly ordered property), meaning that is always meaningful to tell whether one ensemble has more variability than another. If this is the case, the later requirement of continuity and strict concavity will force the entropy to be a real valued quantity. This is because the variability will change under statistical mixtures, and since statistical mixtures are performed with real valued coefficients, the variability will have to be a real valued quantity. Whether it is conceptually possible to have a characterization of variability that is not linearly ordered but still have a meaningful connection with statistical mixing is an open question, therefore we are not able to fully justify entropy's linear ordering at this time. Therefore the linear ordering of the entropy should be considered an assumption. Provided that assumptions, we are justified to assume the existence of a real valued function that returns the entropy, a measure of variability of the ensemble.
+	The entropy quantifies the variability of the instances of the ensemble. Since the ensemble represents a collection of preparations of equivalent systems, and since each instance will in general be potentially different, it is legitimate to ask how much variability there is among the different instances. We are assuming that the entropy is a quantity (i.e. a linearly ordered property), meaning that it is always meaningful to tell whether one ensemble has more variability than another. If this is the case, the later requirements of continuity and strict concavity will force the entropy to be a real valued quantity. This is because the variability will change under statistical mixtures, and since statistical mixtures are performed with real valued coefficients, the variability will have to be a real valued quantity. Whether it is conceptually possible to have a characterization of variability that is not linearly ordered but still have a meaningful connection with statistical mixing is an open question, therefore we are not able to fully justify entropy's linear ordering at this time. Therefore the linear ordering of the entropy should be considered an assumption. Provided that assumption, we are justified to assume the existence of a real valued function that returns the entropy, a measure of variability of the ensemble.
 	
-	Since the entropy is a real valued quantity, it will have a corresponding unit. This unit is independent from all other units, and therefore the overall structure of the ensemble space must be independent from this choice. Mathematically, the physical dimension of the unit is not captured, just its numeric value. A change of unit changes the numeric value by a multiplicative constant. Since variability is an ordered quantity, with want the change of units to respect the ordering and therefore it should be a positive multiplicative constant. This justifies that the entropy function is defined up to a positive multiplicative constant.
+	Since the entropy is a real valued quantity, it will have a corresponding unit. This unit is independent from all other units, and therefore the overall structure of the ensemble space must be independent of this choice. Mathematically, the physical dimension of the unit is not captured, just its numeric value. A change of unit changes the numeric value by a multiplicative constant. Since variability is an ordered quantity, we want the change of units to respect the ordering and therefore it should be a positive multiplicative constant. This justifies that the entropy function is defined up to a positive multiplicative constant.
 	
-	Note that the additivity of the entropy over independent system fixes the absolute scale. If $S_{AB} = S_A + S_B$, in fact, one can't rescale all three terms by an additive factor and preserve the relationship.
+	Note that the additivity of the entropy over independent systems fixes the absolute scale. If $S_{AB} = S_A + S_B$, in fact, one can't rescale all three terms by an additive factor and preserve the relationship.
 	
-	The variability, in the end, will have physical consequences, and it will be therefore measurable and therefore experimentally verifiable. Therefore it will have to be a topologically continuous function. Moreover, small changes in the ensemble should produce small changes in the variability, which justifies analytical continuity. We are therefore justified to assume continuity of the entropy.
+	The variability, in the end, will have physical consequences, and it will therefore be measurable, thus experimentally verifiable: it will have to be a topologically continuous function. Moreover, small changes in the ensemble should produce small changes in the variability, which justifies analytical continuity. We are therefore justified to assume continuity of the entropy.
 	
-	Suppose we have two ensembles and we perform a statistical mixture. There are going to be three source of variability: the two ensembles and the random choice at every instance. The total contribution from the original ensembles will be the average variability of the original ensembles. This is increased by the variability introduced by the random choice, which is always a positive contribution. Therefore the final variability cannot be less than the average of the original ensembles. That is, $S(p\ens[a] + \bar{p} \ens[b]) \geq p S(\ens[a]) + \bar{p} S(\ens[b])$. If we are mixing an ensemble with itself, this is equivalent to just choosing from the original ensemble, therefore the variability will not increase. Conversely, if the variability stays the same, it means that the random choice does not increase the variability, and therefore we must be choosing between equivalent ensembles. Therefore we are justified to assume that entropy is strictly concave.
+	Suppose we have two ensembles and we perform a statistical mixture. There are going to be three sources of variability: the two ensembles and the random choice at every instance. The total contribution from the original ensembles will be the average variability of the original ensembles. This is increased by the variability introduced by the random choice, which is always a positive contribution. Therefore the final variability cannot be less than the average of the original ensembles. That is, $S(p\ens[a] + \bar{p} \ens[b]) \geq p S(\ens[a]) + \bar{p} S(\ens[b])$. If we are mixing an ensemble with itself, this is equivalent to just choosing from the original ensemble, therefore the variability will not increase. Conversely, if the variability stays the same, it means that the random choice does not increase the variability, and therefore we must be choosing between equivalent ensembles. Therefore we are justified to assume that entropy is strictly concave.
 	
-	On the other hand, the variability cannot increase arbitrarily during mixture. The maximum variability will be given when the two ensembles are non-overlapping, when an instance of the first ensemble cannot be produced by the second ensemble. That is, a single instances is enough to determine whether we have the first ensemble or the second. In this case, the variability is increase by the variability of the random choice, which must depend only by the mixture coefficient, and not the nature of the ensembles themselves. That is, $S(p\ens[a] + \bar{p} \ens[b]) \leq I(p, \bar{p}) + p S(\ens[a]) + \bar{p} S(\ens[b])$ is the upper variability bound, which is satisfied if and only if the $\ens[a]$ and $\ens[b]$ are non-overlapping. The actual function $I$ is left unspecified, as we show in proposition \ref{pm_es_entropyUnique} is the only indicator of variability that will satisfy the axiom of entropy. This justifies the upper variability bound.
+	On the other hand, the variability cannot increase arbitrarily during mixture. The maximum variability will be given when the two ensembles are non-overlapping, when an instance of the first ensemble cannot be produced by the second ensemble. That is, a single instance is enough to determine whether we have the first ensemble or the second. In this case, the variability is increased by the variability of the random choice, which must depend only on the mixture coefficient, and not the nature of the ensembles themselves. That is, $S(p\ens[a] + \bar{p} \ens[b]) \leq I(p, \bar{p}) + p S(\ens[a]) + \bar{p} S(\ens[b])$ is the upper variability bound, which is saturated if and only if the $\ens[a]$ and $\ens[b]$ are non-overlapping. The actual function $I$ is left unspecified and, as we show in proposition \ref{pm_es_entropyUnique}, is the only indicator of variability that will satisfy the axiom of entropy. This justifies the upper variability bound.
 	
-	Now suppose ensemble $\ens[a]$ is non-overlapping with $\ens[b]$ and $\ens[c]$. That is, an instance of $\ens[a]$ cannot ever be produced by either $\ens[b]$ and $\ens[c]$. Then an instance of $\ens[a]$ cannot either be produced by a mixture of $\ens[b]$ and $\ens[c]$, since ultimately a mixture of $\ens[b]$ and $\ens[c]$ will return an instance of one of the two. Therefore $\ens[a]$ is non-overlapping with any mixture of $\ens[b]$ and $\ens[c]$. The argument works in reverse as well: if an instance of $\ens[a]$ cannot be produced by a mixture of $\ens[b]$ and $\ens[c]$, then it cannot be produced by either. This justifies mixtures preserve orthogonality.
+	Now suppose ensemble $\ens[a]$ is non-overlapping with $\ens[b]$ and $\ens[c]$. That is, an instance of $\ens[a]$ cannot ever be produced by either $\ens[b]$ or $\ens[c]$. Then an instance of $\ens[a]$ cannot be produced by a mixture of $\ens[b]$ and $\ens[c]$, since ultimately a mixture of $\ens[b]$ and $\ens[c]$ will return an instance of one of the two. Therefore $\ens[a]$ is non-overlapping with any mixture of $\ens[b]$ and $\ens[c]$. The argument works in reverse as well: if an instance of $\ens[a]$ cannot be produced by a mixture of $\ens[b]$ and $\ens[c]$, then it cannot be produced by either. This justifies mixtures preserve orthogonality.
 \end{justification}
 
 \begin{prop}
-	An ensemble is not orthogonal with itself or with its own components. Two orthogonal ensembles are separate. That is, if $\ens[a] \ortho \ens[b]$ then $\ens[a] \separate \ens[b]$
+	An ensemble is not orthogonal with itself or with its own components. Two orthogonal ensembles are separate. That is, if $\ens[a] \ortho \ens[b]$ then $\ens[a] \separate \ens[b]$.
 \end{prop}
 
 \begin{proof}
@@ -369,17 +374,19 @@ The entropic structure, in general, will constrain both the topological structur
 	
 	To show that every ensemble is not orthogonal to its own components, let $\ens[a] = p \ens[b] + \bar{p} \ens[c]$. By mixtures preserve orthogonality, $\ens[b] \ortho \ens[a]$ if and only if $\ens[b] \ortho \ens[b]$ and $\ens[b] \ortho \ens[c]$. But $\ens[b]$ is not orthogonal to itself, therefore $\ens[a]$ and $\ens[b]$ are not orthogonal.
 	
-	Two show that orthogonal ensembles are separate we demonstrate the contrapositive: that ensemble that are not separate are not orthogonal. Let $\ens[a], \ens[b] \in \Ens$ have a common component. That is, $\ens[a] = p \ens[c] + \bar{p} \ens[d]$ and $\ens[b] = p \ens[c] + \bar{p} \ens[e]$. By mixtures preserve orthogonality, $\ens[a] \ortho \ens[b]$ if and only if $\ens[a] \ortho \ens[c]$ and $\ens[a] \ortho \ens[e]$. But $\ens[c]$ is a component of $\ens[a]$, therefore they are not orthogonal. Therefore two ensemble that have a common component are not orthogonal. Which means that if two ensembles are orthogonal they cannot have a common component and are therefore separate.
+	Two show that orthogonal ensembles are separate we demonstrate the contrapositive: that ensembles that are not separate are not orthogonal. Let $\ens[a], \ens[b] \in \Ens$ have a common component. That is, $\ens[a] = p \ens[c] + \bar{p} \ens[d]$ and $\ens[b] = p \ens[c] + \bar{p} \ens[e]$. By mixtures preserve orthogonality, $\ens[a] \ortho \ens[b]$ if and only if $\ens[a] \ortho \ens[c]$ and $\ens[a] \ortho \ens[e]$. But $\ens[c]$ is a component of $\ens[a]$, therefore they are not orthogonal. Therefore two ensemble that have a common component are not orthogonal. This means that if two ensembles are orthogonal they cannot have a common component and are therefore separate.
 \end{proof}
+\end{mathSection}
 
-%Reviewed by Christine (up to verification of axioms for the quantum case excluded)
+We now prove that the function $I(p,\bar{p})$ must be the Shannon entropy.
 
+\begin{mathSection}
 \begin{thrm}[Uniqueness of entropy]\label{pm_es_entropyUnique}
-	The entropy of the coefficients $I(p,\bar{p})$ is the Shannon entropy. That is, $I(p,\bar{p}) = - \kappa \left(p \log p - \bar{p} \log \bar{p}\right)$ where $\kappa>0$ is the arbitrary multiplicative constant for the entropy. For a mixture of arbitrarily many elements, $I(\{p_i\}) = - \kappa \sum p_i \log p_i$.
+	The entropy of the coefficients $I(p,\bar{p})$ is the Shannon entropy. That is, $I(p,\bar{p}) = - \kappa \left(p \log p - \bar{p} \log \bar{p}\right)$ where $\kappa>0$ is the arbitrary multiplicative constant for the entropy. For a mixture of arbitrarily many elements, $I(\{p_i\}) = - \kappa \sum_i p_i \log p_i$.
 \end{thrm}
 
 \begin{proof}
-	Since the upper entropy bound has to be the same for all spaces, let us assume that $\Ens$ is such that it contains countably many orthogonal ensembles $\{\ens_l\}_{l=1}^{\infty}$. Since mixtures preserve orthogonality, for any convex combinations $\sum_i p_i \ens[a]_i$ of finitely many $\{\ens[a]_i\}_{i=1}^{n} \subset \{\ens_l\}_{l=1}^{\infty}$,  we have $S(\sum p_i \ens[a]_i ) = I_n(p_1, p_2, \dots, p_n) + \sum p_i S(\ens[a]_i)$ where $I_n : \mathbb{R}^n \to \mathbb{R}$ is a function of the coefficients only. Note that, given commutativity, the order of the $p_i$ does not matter and, since the coefficients can be zero, we must have $I_n(p_1, p_2, \dots, p_n) = I_{n+1}(p_1, p_2, \dots, p_n, 0)$. Therefore we can think of $I$ as a function of the coefficients and write $I(\{p_i\}_{i=1}^{n})$.
+	Since the upper entropy bound has to be the same for all spaces, let us assume that $\Ens$ is such that it contains countably many orthogonal ensembles $\{\ens_l\}_{l=1}^{\infty}$. Since mixtures preserve orthogonality, for any convex combinations $\sum_i p_i \ens[a]_i$ of finitely many $\{\ens[a]_i\}_{i=1}^{n} \subset \{\ens_l\}_{l=1}^{\infty}$,  we have $S(\sum_i p_i \ens[a]_i ) = I_n(p_1, p_2, \dots, p_n) + \sum_i p_i S(\ens[a]_i)$ where $I_n : \mathbb{R}^n \to \mathbb{R}$ is a function of the coefficients only. Note that, given commutativity, the order of the $p_i$ does not matter and, since the coefficients can be zero, we must have $I_n(p_1, p_2, \dots, p_n) = I_{n+1}(p_1, p_2, \dots, p_n, 0)$. Therefore we can think of $I$ as a function of the coefficients and write $I(\{p_i\}_{i=1}^{n})$.
 	
 	We now show that $I\left(\left\{\frac{1}{n}\right\}_{i=1}^{n}\right) = \kappa \log n$ with $\kappa > 0$. That is, the maximum increase of entropy for a uniform distribution is proportional to the logarithm of the number of cases. Pick two positive integers $n, m \in \mathbb{Z}^+$. Pick $nm$ elements $a_{jk} \in \{e_l\}_{l=1}^{\infty}$ where $1\leq j \leq n$ and $1 \leq  k \leq m$. We have:
 	\begin{equation}
@@ -436,15 +443,19 @@ The entropic structure, in general, will constrain both the topological structur
 \begin{proof}
 	A rescaling of the entropy will also rescale the entropy of the coefficients. Therefore setting the value of the maximum of $I$ will set the arbitrary multiplicative factor. If $I\left(\frac{1}{2}, \frac{1}{2}\right) = 1$, then $\kappa$ is equal to one and the logarithm is base two, which corresponds to the entropy measured in bits. Note that this does not fix the physical dimensions of the entropy, only the numerical value.
 \end{proof}
+\end{mathSection}
 
+We should now verify that the axiom of entropy is satisfied by the standard cases.
+
+\begin{mathSection}
 \begin{prop}
-	Discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfy the axiom of mixture and the axiom of entropic orthogonality.
+	Discrete classical ensemble spaces, continuous classical ensemble spaces and quantum ensemble spaces satisfy the axiom of entropy.
 \end{prop}
 
 \begin{proof}
 	Let's first look at the classical continuous case. Every ensemble is represented by a distribution $\rho(x)$ with $\int_X \rho(x) d\mu=1$. The entropy is given by $S(\rho) = - \int_X \rho \log \rho d\mu$. This is a continuous function of $\rho$.
 	
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{tempimages/LogBound.jpg}
 \end{figure}
@@ -467,7 +478,7 @@ The entropic structure, in general, will constrain both the topological structur
 	The equality holds if and only if $\frac{p\rho_1 + \bar{p}\rho_2}{\rho_1} = 1$ which is exactly when $\rho_1 = \rho_2$.
 		
 	
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{tempimages/LogMonotone.jpg}
 \end{figure}
@@ -484,14 +495,13 @@ The entropic structure, in general, will constrain both the topological structur
 	\end{equation}
 	The equality holds if and only if $\rho_2=0$ wherever $\rho_1\neq0$ and $\rho_1=0$ wherever $\rho_2\neq0$. That is, the equality holds if and only if the two distributions have disjoint support. Therefore orthogonal distributions are exactly distributions with disjoint support.
 	
-	Note that two distributions that have disjoint support have no common components. That is, there is no $\rho_3$ such that $\rho_1 = p \rho_3 + \bar{p} \rho_4$ and $\rho_2 = q \rho_3 + \bar{q} \rho_5$. This is because $\rho_3$ would have to have support that is both within the support of $\rho_1$ and $\rho_2$. Therefore orthogonality implies separateness.
-	
 	Suppose $\rho_4$ has disjoint support from $\rho_1 = p \rho_2 + \bar{p} \rho_3$, then it has disjoint support from $\rho_2$ and $\rho_3$ because the support of $\rho_1$ is the union of the supports of $\rho_2$ and $\rho_3$. Conversely, if $\rho_4$ has disjoint support from both $\rho_2$ and $\rho_3$, then $\rho_4$ has disjoint support from $\rho_1$ as well. Therefore mixtures preserve orthogonality.
 	
 	All these arguments are valid for discrete classical ensemble spaces, changing integrals to sums.
 	
 	For the quantum case, we haven't found a short proof that does not require defining the KL divergence and the entropy for a joint distribution. The result, however, is generally known and can be found, for example, in \href{https://www.cambridge.org/highereducation/books/quantum-computation-and-quantum-information/01E10196D0A682A6AEFFEA52D53BE9AE}{Nielsen-Chuang}.
 \end{proof}
+\end{mathSection}
 
 \begin{defn}
 	Two sets of ensembles are orthogonal if all the elements of one are orthogonal to all the elements of the other. That is, $A \ortho B$ with $A, B \subseteq \Ens$ if $\ens[a] \ortho \ens[b]$ for all $\ens[a] \in A$ and $\ens[b] \in B$. 
@@ -500,6 +510,9 @@ The entropic structure, in general, will constrain both the topological structur
 \section{Entropic constraints on the space}
 
 The axioms of entropy not only constrain the functional form of the entropy, but they also constrain the type of space we can have. It also rules out some spaces that would seem physically pathological.
+
+The entropic structure, in general, will constrain both the topological structure, making it metrizable, and the convex structure, making it embeddable in a vector space. The entropy is also responsible for all the geometric structure of the ensemble space.
+
 
 \subsection{Vector space embedding}
 
