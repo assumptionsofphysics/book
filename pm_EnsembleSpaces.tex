@@ -277,6 +277,18 @@ In many cases, we will need to discuss the set of all possible mixtures of a giv
 	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is a \textbf{convex subset} of $\Ens$ if it contains all possible mixtures, including infinite ones, of its elements. Formally, it is a topologically closed set that is also closed under convex combinations. If we want to stress that we are closing only under finite mixing, we say that $A$ is closed under finite convex combination.
 \end{defn}
 
+\begin{prop}
+	The set $\mathfrak{Conv}_{\Ens}$ of all convex subsets of $\Ens$ ordered by set inclusion is a topped $\bigcap$-structure and therefore is also a complete lattice.
+\end{prop}
+
+\begin{proof}
+	Let $\mathfrak{Conv}_{\Ens}$ be the set of all convex subsets of $\Ens$ ordered by set inclusion. The empty set $\emptyset \subset \Ens$ is a convex set. The whole space $\Ens \subseteq \Ens$ is also a convex set. Then $\mathfrak{Conv}_{\Ens}$ is therefore a bounded ordered set.
+	
+	Let $A, B \in \mathfrak{Conv}_{\Ens}$ be two convex subsets. Consider $A \cap B$. Any mixture of elements in $A \cap B$ is both a mixture of elements in $A$ and a mixture of elements in $B$. Therefore any mixture of elements of $A \cap B$ is both an element of $A$ and an element of $B$. This means it is also an element of $A \cap B$, which is therefore a convex set.
+	
+	The previous argument generalizes to a family of convex subsets $\{A_i\}_{i \in I} \subseteq \mathfrak{Conv}_{\Ens}$. That is, an ensemble is a mixture of elements of $\bigcap_{i \in I} A_i$ if and only if is a mixture of elements of $A_i$ for every $i$. Moreover, the intersection of infinitely many closed sets is still closed. Therefore $\bigcap_{i \in I} A_i \in \mathfrak{Conv}_{\Ens}$ and $\mathfrak{Conv}_{\Ens}$ is an $\bigcap$-structure. This also means that it is a complete lattice.
+\end{proof}
+
 \begin{defn}
 	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{convex hull} of $A$, noted $\hull(A)$ is the set of all possible mixtures that can be constructed with elements contained in $A$, including infinite ones. Formally, it is the topological closure of the closure of $A$ under convex combination. That is, it is the smallest convex subset that contains $A$.
 \end{defn}
@@ -314,24 +326,12 @@ In many cases, we will need to discuss the set of all possible mixtures of a giv
 \begin{proof}
 	Since $A_i$ is a decreasing sequence, $\lim\limits_{i \to \infty} A_i = \bigcap_i A_i$. Also, since $A_{i+1} \subseteq A_i$, then $\hull(A_{i+1}) \subseteq \hull(A_i)$ and therefore $\hull(A_i)$ is a decreasing sequence. This also means $\lim\limits_{i \to \infty} \hull(A_i) = \bigcap_i \hull(A_i)$. Therefore we need to show that $\hull(\bigcap_i A_i) = \bigcap_i \hull(A_i)$.
 	
-	Let $\ens = \sum_j p_j \ens[a]_j \in \hull(\bigcap_i A_i)$ be a convex combination, possibly infinite, such that $\ens[a]_j \in \bigcap_i A_i$. This means that $\ens[a]_j \in A_i$ for all $i$ and all $j$. Since $\ens$ is a convex combination of elements of each $A_i$, $\ens \in \hull(A_i)$ for all $i$ and therefore $\ens \in \bigcap_i \hull(A_i)$. We have $\hull(\bigcap_i A_i) \subseteq \bigcap_i \hull(A_i)$. Conversely, let $\ens \in \bigcap_i \hull(A_i)$. Then we can write $\ens = \sum_j p_j \ens[a]_j$ where $\ens[a]_j \in \bigcap_i \hull(A_i)$. Therefore $\ens[a]_j \in \hull(A_i)$ for all $i$ and $j$. TODO: finish the proof.
+	Since the arbitrary intersection of convex sets is a convex set, $\bigcap_i \hull(A_i)$ is a convex set. Therefore $\bigcap_i \hull(A_i) = \hull(\bigcap_i \hull(A_i))$. Note that a mixture of mixture of elements can always be re-expressed as a mixture of elements. Moreover, an element that is the mixture of $A_i$ for all $i$ can be re-expressed as a mixture of the common elements, since $A_{i+1} \subset A_i$. Therefore $\hull(\bigcap_i \hull(A_i)) = \hull(\bigcap_i A_i)$. This means $\hull(\bigcap_i A_i) = \bigcap_i \hull(A_i)$, which proves the proposition.
 \end{proof}
 
 \begin{remark}
 	Note that the hull is not necessarily continuous from below. That is, it is not necessarily true that $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any increasing sequence $A_i \subseteq \Ens$. The limit from below, in fact, would correspond to the infinite union of closed sets, which is not necessarily a closed set. Therefore if we take the closure after the limit, we are going to include the infinite convex combinations that require, for example, an element from each of the $A_i$.
 \end{remark}
-
-\begin{coro}
-	The set $\mathfrak{Conv}_{\Ens}$ of all convex subsets of $\Ens$ ordered by set inclusion is a topped $\bigcap$-structure and therefore is also a complete lattice.
-\end{coro}
-
-\begin{proof}
-	Let $\mathfrak{Conv}_{\Ens}$ be the set of all convex subsets of $\Ens$ ordered by set inclusion. The empty set $\emptyset \subset \Ens$ is a convex set. The whole space $\Ens \subseteq \Ens$ is also a convex set. Then $\mathfrak{Conv}_{\Ens}$ is therefore a bounded ordered set.
-	
-	Let $A, B \in \mathfrak{Conv}_{\Ens}$ be two convex subsets. Consider $A \cap B$. Any mixture of elements in $A \cap B$ is both a mixture of elements in $A$ and a mixture of elements in $B$. Therefore any mixture of elements of $A \cap B$ is both an element of $A$ and an element of $B$. This means it is also an element of $A \cap B$, which is therefore a convex set.
-	
-	The previous argument generalizes to a family of convex subsets $\{A_i\}_{i \in I} \subseteq \mathfrak{Conv}_{\Ens}$. Moreover, the intersection of infinitely many closed sets is still closed. Therefore $\bigcap_{i \in I} A_i \in \mathfrak{Conv}_{\Ens}$ and $\mathfrak{Conv}_{\Ens}$ is an $\bigcap$-structure. This also means that it is a complete lattice.
-\end{proof}
 \end{mathSection}
 
 \section{Axioms of entropy}
