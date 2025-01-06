@@ -1084,30 +1084,38 @@ Every subspace can then be understood as a set of limits, a set of ultrafilters,
 \begin{prop}
 	Let $C \subseteq \Ens$ be a classical probability context and $\sigma(C)$ its spectra. Then the following are true:
 	\begin{enumerate}
+		\item $A \subseteq B$ if and only if $\sigma(A) \subseteq \sigma(B)$
 		\item $\exterior(\sigma(A)) = \sigma(A^{\separate})$
 		\item $\partial \sigma(A) = \{ x \in \sigma(C) \, | \, A \notin x, A^{\separate} \notin x \}$
 		\item $\sigma(A)^{\complement} = \overline{\sigma(A^{\separate})}$
-		\item $\sigma(A \wedge B) = \sigma(A) \cap \sigma(B)$
-		\item $\sigma(A \vee B) = \interior(\overline{\sigma(A) \cup \sigma(B)})$.
+		\item $\sigma(\bigwedge_{i \in I} A_i) = \interior\left(\bigcap_{i \in I} \sigma(A_i)\right)$
+		\item $\sigma(\bigvee_{i \in I} A_i) = \interior\left(\overline{\bigcup_{i \in I} \sigma(A_i)}\right)$
 	\end{enumerate}
 \end{prop}
 
 \begin{proof}
-	For 1 and 2, note that $\sigma(A) = \{ x \in \sigma(C) \, | \, A \in x \}$ and therefore $\sigma(A)^{\complement} = \{ x \in \sigma(C) \, | \, A \notin x \}$. Since $\sigma(A)$ is an open set, $\sigma(A)^{\complement} = \exterior(\sigma(A)) \cup \partial \sigma(A)$. Now consider $\sigma(A^{\separate})$. This is an open set and it is disjoint from $\sigma(A)$. In fact, if $x \in \sigma(A) \cap \sigma(A^{\separate})$ then $A, A^{\separate} \in x$. But this would mean that $\emptyset \in x$, which can't be because $x$ is a proper filter and cannot contain $\emptyset$. Since $A^{\separate}$ is the largest $\separate$-subspace that is separate from $A$, there is no set in $\sigma(\mathfrak{L}^\separate(C))$ that is larger than $A^{\separate}$ and still disjoint from $A$. Therefore $\sigma(A^{\separate}) = \exterior(\sigma(A))$. We have $\partial \sigma(A) = \sigma(C) \ (\interior(\sigma(A))\cup\exterior(\sigma(A))) = \{ x \in \sigma(C) \, | \, A \notin x, A^{\separate} \notin x \}$.
+	For 1, since all $x \in \sigma(C)$ are upward closed, $A \in x$ means $B \in x$ as well. Therefore if $x \in \sigma(A)$ then $x \in \sigma(B)$, which means $\sigma(A) \subseteq \sigma(B)$. Conversely, if $\sigma(A) \subseteq \sigma(B)$ then all downward sets of $\mathfrak{L}^\separate(C)$ that contain $A$ must also contain $B$, which means $B \supseteq A$.
 	
-	For 3, since $\sigma(A)$ is an open set, the complement is the closure of the exterior. Therefore, given 1, $\sigma(A)^{\complement} = \overline{\sigma(A^{\separate})}$.
+	For 2 and 3, note that $\sigma(A) = \{ x \in \sigma(C) \, | \, A \in x \}$ and therefore $\sigma(A)^{\complement} = \{ x \in \sigma(C) \, | \, A \notin x \}$. Since $\sigma(A)$ is an open set, $\sigma(A)^{\complement} = \exterior(\sigma(A)) \cup \partial \sigma(A)$. Now consider $\sigma(A^{\separate})$. This is an open set and it is disjoint from $\sigma(A)$. In fact, if $x \in \sigma(A) \cap \sigma(A^{\separate})$ then $A, A^{\separate} \in x$. But this would mean that $\emptyset \in x$, which can't be because $x$ is a proper filter and cannot contain $\emptyset$. Since $A^{\separate}$ is the largest $\separate$-subspace that is separate from $A$, there is no set in $\sigma(\mathfrak{L}^\separate(C))$ that is larger than $A^{\separate}$ and still disjoint from $A$. Therefore $\sigma(A^{\separate}) = \exterior(\sigma(A))$. We have $\partial \sigma(A) = \sigma(C) \ (\interior(\sigma(A))\cup\exterior(\sigma(A))) = \{ x \in \sigma(C) \, | \, A \notin x, A^{\separate} \notin x \}$.
 	
-	For 4, let $x \in \sigma(A \wedge B)$. Then $A \wedge B \in x$. Since $x$ is upward closed, $A \in x$ and $B \in x$. Therefore $x \in \sigma(A)$ and $x \in \sigma(B)$, which means $x \in \sigma(A) \cap \sigma(B)$. Conversely, let $x \in \sigma(A) \cap \sigma(B)$, and therefore $x \in \sigma(A)$ and $x \in \sigma(B)$. This means $A \in x$ and $B \in x$ and, since $x$ a downward set, $A \cap B \in x$. We have $x \in \sigma(A \wedge B)$. Therefore $\sigma(A \wedge B) = \sigma(A) \cap \sigma(B)$.
+	For 4, since $\sigma(A)$ is an open set, the complement is the closure of the exterior. Therefore, given 1, $\sigma(A)^{\complement} = \overline{\sigma(A^{\separate})}$.
 	
-	TODO: prove 5. Last attempt: for 5, note that $\sigma((A\vee B)^{\separate}) = \sigma(A^{\separate}\wedge B^{\separate}) = \sigma(A^{\separate})\cap\sigma( B^{\separate})$. Since the interior of a set equals the exterior of its complement, we have	
+	For 5, consider $\bigwedge_{i \in I} A_i$. This is the largest $\separate$-subspace that is contained by all $A_i$. Then, given 1, $\sigma\left(\bigwedge_{i \in I} A_i\right)$ must be the largest open set that is contained by all $\sigma(A_i)$. This corresponds to $\interior\left(\bigcap_{i \in I} \sigma(A_i)\right)$.
+	
+	For 6, we have
 	\begin{align*}
-		\sigma(A \vee B) &= \interior(\sigma(A \vee B)) = \exterior((\sigma(A \vee B))^{\complement}) = \exterior(\overline{\sigma((A\vee B)^{\separate})}) \\
-		&= \exterior(\overline{\sigma(A^{\separate})\cap\sigma(B^{\separate})})
+		\sigma(\bigvee_{i \in I} A_i) &= \exterior(\exterior(\sigma(\bigvee_{i \in I} A_i))) = \exterior(\sigma((\bigvee_{i \in I} A_i)^{\separate})) = \exterior(\sigma(\bigwedge_{i \in I} A_i^{\separate})) \\
+		&= \exterior(\interior(\bigcap_{i \in I} \sigma(A_i^{\separate}))) = \exterior(\bigcap_{i \in I} \sigma(A_i^{\separate})) =  \\
+		&= \exterior\left(\bigcap_{i \in I}\overline{\sigma(A_i)}^{\complement}\right) = \exterior\left(\left(\bigcup_{i \in I}\overline{\sigma(A_i)}\right)^{\complement}\right) \\
+		&= \interior\left(\bigcup_{i \in I}\overline{\sigma(A_i)}\right)
 	\end{align*}
+	For the last step, not that the union of the closure is not necessarily the closure of the union, but they have the same interior
 \end{proof}
 
 \begin{remark}
-	Note that while the lattice of the $\separate$-subspaces is a topped intersection structure, the lattice of the corresponding closed sets is not. In fact, suppose we are taking the lattice of probability measures defined over the interval $[0,1]$ that are absolutely continuous with respect to the Lebesgue measure. Each $\separate$-subspace will correspond a set of measures whose support lives in a particular region. A singleton will not correspond to any subspace it cannot support an absolutely continuous measure. Therefore, if we take all the $\separate$-subspaces of all measures that have $1/2$ within the support, the intersection of all those subspaces will be the empty set, which is a $\separate$-subspace. However, the intersection of the sets representing their support is the singleton $\{1/2\}$, which is not the empty set.
+	Note that while the lattice of the $\separate$-subspaces is a topped intersection structure, the lattice of the corresponding closed sets is not. The intersection of the $\separate$-subspaces corresponds to the interior of the intersection of their spectra. A point of the spectra, in fact, can correspond to an infinitesimal subspace (i.e. a non-principal/free ultrafilter) which corresponds to no actual ensemble.
+	
+	As an example, suppose we are taking the lattice of probability measures defined over the interval $[0,1]$ that are absolutely continuous with respect to the Lebesgue measure. Each $\separate$-subspace will correspond to a set of measures whose support lives in a particular region. A singleton will not correspond to any subspace as it cannot support an absolutely continuous measure. Therefore, if we take all the $\separate$-subspaces of all measures that have $1/2$ within the support, the intersection of all those subspaces will be the empty set, which is a $\separate$-subspace. However, the intersection of the sets representing their support is the singleton $\{1/2\}$, which is not the empty set. However, its interior is the empty set.
 \end{remark}
 
 Before showing that classical probability contexts reduce to a space of probability measures, we first have to solve two problems: characterize the requirement for each measure and then characterize the appropriate closure for the space of measures.
