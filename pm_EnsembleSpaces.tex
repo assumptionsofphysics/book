@@ -1090,6 +1090,7 @@ Every subspace can then be understood as a set of limits, a set of ultrafilters,
 		\item $\sigma(A)^{\complement} = \overline{\sigma(A^{\separate})}$
 		\item $\sigma(\bigwedge_{i \in I} A_i) = \interior\left(\bigcap_{i \in I} \sigma(A_i)\right)$
 		\item $\sigma(\bigvee_{i \in I} A_i) = \interior\left(\overline{\bigcup_{i \in I} \sigma(A_i)}\right)$
+		\item if $U$ open, then $U = \bigcup_{i \in I} \sigma(A_i)$ for some family of $A_i \in \mathfrak{L}^\separate(C)$
 	\end{enumerate}
 \end{prop}
 
@@ -1109,13 +1110,17 @@ Every subspace can then be understood as a set of limits, a set of ultrafilters,
 		&= \exterior\left(\bigcap_{i \in I}\overline{\sigma(A_i)}^{\complement}\right) = \exterior\left(\left(\bigcup_{i \in I}\overline{\sigma(A_i)}\right)^{\complement}\right) \\
 		&= \interior\left(\bigcup_{i \in I}\overline{\sigma(A_i)}\right)
 	\end{align*}
-	For the last step, not that the union of the closure is not necessarily the closure of the union, but they have the same interior
+	For the last step, not that the union of the closure is not necessarily the closure of the union, but they have the same interior.
+	
+	For 7, note that an open set $U$ is generated from $\sigma(\mathfrak{L}^\separate(C))$ through finite intersection and arbitrary union. Note that the finite intersection, of open sets is an open set, so we have $\bigcap_{i \in I} \sigma(A_i) = \interior\left(\bigcap_{i \in I} \sigma(A_i)\right) = \sigma(\bigwedge_{i \in I} A_i)$. Therefore the finite intersection corresponds to a $\separate$-subspace. This means that we can can generate all open sets with arbitrary unions of sets from $\sigma(\mathfrak{L}^\separate(C))$.
 \end{proof}
 
 \begin{remark}
 	Note that while the lattice of the $\separate$-subspaces is a topped intersection structure, the lattice of the corresponding closed sets is not. The intersection of the $\separate$-subspaces corresponds to the interior of the intersection of their spectra. A point of the spectra, in fact, can correspond to an infinitesimal subspace (i.e. a non-principal/free ultrafilter) which corresponds to no actual ensemble.
 	
 	As an example, suppose we are taking the lattice of probability measures defined over the interval $[0,1]$ that are absolutely continuous with respect to the Lebesgue measure. Each $\separate$-subspace will correspond to a set of measures whose support lives in a particular region. A singleton will not correspond to any subspace as it cannot support an absolutely continuous measure. Therefore, if we take all the $\separate$-subspaces of all measures that have $1/2$ within the support, the intersection of all those subspaces will be the empty set, which is a $\separate$-subspace. However, the intersection of the sets representing their support is the singleton $\{1/2\}$, which is not the empty set. However, its interior is the empty set.
+	
+	The fact a single probability measure is an equivalence class of probability densities is related to this distinction. Consider a uniform distribution over $[0,1]$. The related probability density can be understood as a constant between those values and zero everywhere else. However, the same constant over $[0,1/2) \cup (1/2,1]$ will also work. That is, the same element of the ensemble space can be represented in different way as a function over the spectra.
 \end{remark}
 
 Before showing that classical probability contexts reduce to a space of probability measures, we first have to solve two problems: characterize the requirement for each measure and then characterize the appropriate closure for the space of measures.
@@ -1136,8 +1141,23 @@ Conceptually, we are saying that it does not make sense to assign probability to
 	Let $X$ be a topological space. A set $A \subseteq X$ is \textbf{nicely bounded} if its boundary is nowhere dense.
 \end{defn}
 
+\begin{coro}
+	The following statements are equivalent:
+	\begin{enumerate}
+		\item $A$ is nicely bounded
+		\item $\overline{A} = \overline{\interior(A)}$
+		\item $\exterior(A) = \exterior(\interior(A))$
+	\end{enumerate}
+\end{coro}
+
+\begin{proof}
+	To show that 1 and 2 are equivalent, consider a nicely bounded set $A$. Like any set, $X$ will be partitioned into the three disjoint sets $\interior(A)$, $\partial A$ and $\exterior(A)$. Let $U \supset \emptyset$ be a non-empty open set. Since $\interior(\partial A) = \emptyset$, either it $U \subseteq \interior(A)$, $U \subseteq \exterior(A)$ or it will overlap with more than one of the regions. This means that any open set that is disjoint from the exterior is either already in the interior or the union of an open set and a set of limit points. Therefore any open set that is disjoint from the exterior is in the closure of the interior. Conversely, if $A$ and $\interior(A)$ have the same closure, then any open set in the closure must overlap with a set in the interior. Therefore the is no open set in the closure that is disjoint from the interior, and therefore the boundary has an empty interior.
+	
+	To show that 3 is equivalent to 2, note that the exterior is the complement of the closure. Therefore two sets that have the same closure if and only if they have the same exterior.
+\end{proof}
+
 \begin{prop}
-	Open and closed sets are nicely bounded. The complement of a nicely bounded set is nicely bounded. The intersection and the union of nicely bounded sets are nicely bounded. The closure of open sets under complement, finite intersection and finite union is a Boolean algebra of nicely bounded sets.
+	Open and closed sets are nicely bounded. The complement of a nicely bounded set is nicely bounded. The intersection and the union of nicely bounded sets are nicely bounded. The closure of open sets under complement, finite intersection and finite union is a Boolean algebra $R_X$ of nicely bounded sets.
 \end{prop}
 
 \begin{proof}
@@ -1149,6 +1169,10 @@ Conceptually, we are saying that it does not make sense to assign probability to
 	
 	Let $\mathcal{A}$ the closure of open sets under complement, finite intersection and finite union. This forms a Boolean algebra as it is closed under the given operations and it includes $\emptyset$ and $X$. Moreover, since the algebra is generated from the open sets, which are nicely bounded, all sets will be nicely bounded.
 \end{proof}
+
+\begin{remark}
+	Open question: does the algebra $R_X$ contains all the nicely bounded sets?
+\end{remark}
 
 \begin{prop}
 	Given a topological space $X$ and a measure $\mu$ on its Borel algebra, the following propositions are equivalent
@@ -1169,6 +1193,44 @@ Conceptually, we are saying that it does not make sense to assign probability to
 	To show that 1 implies 4, note that if $A$ is a nicely bounded set, then $\interior(A)$ is an open set that has the same boundary of $A$. If $\mu$ is continuous with respect to the topology, $\mu(\interior(A)) = \mu(\bar{A})$ which means $\mu(\partial A) = 0$.
 	
 	To show that 5 is equivalent to 4, first note that $X = \interior(A) \cup \partial A \cup \exterior(A)$ for any $A$. Also note that the interior, the exterior and the boundary are all disjoint. Therefore $\mu(X) = \mu(\interior(A)) + \mu(\partial A) + \mu(\exterior(A))$. Therefore $\mu(\partial A) = 0$ for all nicely bounded set if and only if $\mu(X) = \mu(\interior(A)) + \mu(\exterior(A))$.
+\end{proof}
+
+\begin{defn}
+	Let $X$ be a topological space. A \textbf{topological measure} is a set function $\mu :\textsf{T}_X \to [0, +\infty]$ that satisfies the following:
+	\begin{enumerate}
+	\item non negative: $\mu(U) \geq 0$
+	\item topologically additive: $\mu\left(\interior\left(\overline{\bigcup_{i \in I} U_i}\right)\right) = \sum_{i \in I} \mu(U_i)$ whenever $U_i \cap U_j = \emptyset$ for all $i\neq j$
+	\item locally finite: if $\mu(U) = + \infty$ then we can find $V \in \textsf{T}_X$ such that $\emptyset \subset V \subseteq U$ and $\mu(V) < + \infty$.
+	\end{enumerate}
+	The measure is finite if $\mu(X) < \infty$.
+\end{defn}
+
+\begin{coro}
+	Let $\mu$ be a topological measure. The measure is monotone (i.e. $U \subseteq V$ implies $\mu(U) \leq \mu(V)$). The empty set has zero measure (i.e. $\mu(\emptyset) = 0$). For every open set $U$, $\mu(U) = \mu(\interior(\overline{U}))$.
+\end{coro}
+
+\begin{proof}
+	Let $U \subseteq V$ then $V = U \cup (V \setminus U)$ where $U$ and $(V \setminus U)$ are disjoint. This means that $U$ and $\interior(V \setminus U)$ are also disjoint. We have $\mu(V) = \mu(\interior(\overline{U \cup \interior(V \setminus U)})) = \mu(U) + \mu(\interior(V \setminus U)) \geq \mu(U)$.
+
+	Since $\emptyset$ is open, it is disjoint from itself and it is its own closure, $\mu(\emptyset) + \mu(\emptyset) = \mu(\interior(\overline{\emptyset\cap\emptyset}))= \mu(\emptyset)$. This means the empty set has either zero measure or infinite measure. Since the measure is monotone and locally finite, the empty set has zero measure.
+	
+	Let $U$ be an open set. We have $\mu(U) = \mu(U) + \mu(\emptyset) = \mu(\interior(\overline{U\cap\emptyset}))= \mu(\interior(\overline{U}))$.
+\end{proof}
+
+\begin{thrm}[Topological measure extension theorem]
+	Let $X$ be a topological space and $\mu$ a topological measure on that space. Then there exists a meausre $\overline{\mu}$ defined on the Borel algebra such that $\left.\overline{\mu}\right|_{\textsf{T}_X} = \mu$. If $X$ is second countable or if $\mu$ is finite the extension is unique.
+\end{thrm}
+
+\begin{proof}
+	The strategy is first to extend the measure to the algebra of nicely bounded sets generated by the open sets and then use \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory's_extension_theorem}{Carathéodory extension theorem} to extend to the whole Borel algebra.
+	
+	First we show that if we want to extend the measure to $R_X$, the algebra generated by closing the open sets under complement and finite intersection, the measure of a closed set must be the same as the measure of its interior. Let $U$ be a closed set and $V$ an open superset of $V$. Then $W = V \setminus U = V \cap U^{\complement}$ is an open set since is the intersection of two open sets. If we want to extend the measure to the closed sets, we must have $\mu(V) = \mu(U) + \mu(W)$. Note that $\interior(U)$ and $W$ are two disjoint open sets, therefore we have $\mu(\interior(U)) + \mu(W) = \mu(\interior(\overline{W \cup U})) = \mu(\interior(\overline{V})) = \mu(V)$. Therefore $\mu(U) = \mu(\interior(U))$.
+	
+	Now we show that for any nicely bounded set $U$, $\mu(U) = \mu(\overline{U}) = \mu(\interior(U))$. For a generic set, we have $\interior(U) \subseteq U \subseteq \overline{U}$. Therefore $\mu(\interior(U)) \subseteq \mu(U) \subseteq \mu(\overline{U})$. Since $\interior(U)$ is an open set, we have $\mu(\interior(U)) = \mu(\interior(\overline{\interior(U)}))$. Since $U$ is nicely bounded, $\overline{U} = \overline{\interior(U)}$ and therefore $\mu(\interior(\overline{\interior(U)})) = \mu(\interior(\overline{U}))$. Since $\overline{U}$ is a closed set, $\mu(\interior(\overline{U})) = \mu(\overline{U})$. Putting it all together, $\mu(\interior(U)) = \mu(\overline{U})$. Since $\mu(U)$ must be between the two values, $\mu(U) = \mu(\interior(U)) = \mu(\overline{U})$.
+	
+	We can therefore extend the measure to all nicely bounded sets simply by setting $\mu(U) = \mu(\interior(U))$. Since the interior of disjoint sets is disjoint, the measure will preserve $\sigma$-additivity. Therefore the extension is a pre-measure on the algebra of nicely bounded sets generated from the open sets. This satisfies the prerequisites of Carathéodory's extension theorem, and can therefore be extended to the full Borel algebra.
+	
+	The extension is unique if the pre-measure is $\sigma$-finite, which means, for example, that we can find a countable cover of the space where each open set is finite. Note that if $X$ is second countable, and since the measure is locally finite, we are going to be able to find a countable basis of the space where each element of the basis is finite. Therefore we are guaranteed $\sigma$-finite. If the topological measure is finite, then it is $\sigma$-finite regardless of the space.
 \end{proof}
 
 \begin{conj}
