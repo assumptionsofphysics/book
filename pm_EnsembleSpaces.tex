@@ -1234,14 +1234,16 @@ Conceptually, we are saying that it does not make sense to assign probability to
 	The extension is unique if the pre-measure is $\sigma$-finite, which means, for example, that we can find a countable cover of the space where each open set is finite. Note that if $X$ is second countable, and since the measure is locally finite, we are going to be able to find a countable basis of the space where each element of the basis is finite. Therefore we are guaranteed $\sigma$-finite. If the topological measure is finite, then it is $\sigma$-finite regardless of the space.
 \end{proof}
 
-\begin{conj}
-	Each ensemble in a classical probability context can be represented by a measure over its spectra that is continuous with respect to its topology.
-\end{conj}
+\begin{thrm}
+	Let $C \subseteq \Ens$ be a probability context and $\ens \in C$ be an ensemble in the context. The set function $p^*_{\ens} : \textsf{T}_{\sigma(C)} \to[0,1]$, defined such that $p^*_{\ens}(U) = \inf(\{ \fcap(A) \, | \, \sigma(A) \supseteq U \})$, is a topological measure. Therefore ensemble in a classical probability context can be represented by a unique measure over its spectra that is continuous with respect to its topology.
+\end{thrm}
 
 \begin{proof}
-	The general idea is to use the fraction capacity to define a measure on the spectra. The problem will be to translate sets of points of the spectra into sets of ensembles. The strategy is to define it for the algebra of nicely bounded sets that includes the open sets, and extend it to the whole Borel algebra using the \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory's_extension_theorem}{Carathéodory extension theorem}.
+	Since $p^*_{\ens}$ is finite, it is locally finite. We need to show that is topologically additive. If $U$ is a generic open set, then we are looking for the smallest subspace $A$ such that $\sigma(A) \subseteq U$. If $U$ corresponds to a $\separate$-subspace, that is $U = \sigma(A)$, then $p^*_{\ens} = \fcap_{\ens}(A)$. If not, $U$ can still be written as the union of the spectrum of a family of subspaces. That is, $U = \bigcup_{i \in I} \sigma(A_i)$ for some family of $A_i \in \mathfrak{L}^\separate(C)$. The smallest subspaces that contains them all, then is the join $A$. Therefore we have $p^*_{\ens}(U) = p^*_{\ens}(\sigma(A)) = p^*_{\ens}(\sigma(\bigvee_{i \in I} A_i)) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} \sigma(A_i)}\right)\right)$. Lastly, let $U_i$ be a family of disjoint open sets and let $A_i$ be the corresponding smallest subspaces such that $\sigma(A_i) \supseteq U_i$. Since $U_i$ are disjoint, $A_i$ will also be disjoint, and therefore they will be separate. But the fraction capacity is additive across separate subspaces. We have $\sum_{i \in I} p^*_{\ens}(U_i) = \sum_{i \in I} \fcap_{\ens}(A_i) = \fcap_{\ens}(\bigvee_{i \in I} A_i) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} \sigma(A_i)}\right)\right) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} U_i}\right)\right)$. Therefore $p^*_{\ens}$ is a topological measure.
 	
-	Conceptually, given a set of points of the spectra, the set of ensembles associated with that should include, and only include, those ensemble that allows a (possible infinite) decomposition in terms of the limits defined by those points. No clear idea of how to make that work yet.
+	The measure, then, can be extended uniquely to the whole $\sigma$-algebra, since the measure is finite.
+	
+	Lastly, we need to show that two different ensembles will correspond to two different measures. Let $\ens[a],\ens[b] \in C$ be two distinct ensembles in the probability context. TODO
 \end{proof}
 
 \begin{conj}
@@ -1257,7 +1259,7 @@ Conceptually, we are saying that it does not make sense to assign probability to
 	
 	Since ensembles are separate if and only if they have disjoint support, the $\separate$-closure of a subset $A \subseteq \Ens$ of ensembles corresponds to all ensembles whose support is a subset of the union of the supports of the elements of $A$. Each $\separate$-subspace, then, is associated to one unique subset $U \subseteq \Omega$ of the sample space. Given that for any subset $U$ we can find a measure whose support is $U$, every subset corresponds a unique $\separate$-subspace. If the support of a measure is a subset of $U$, it will also be a subset of any other set $V \supseteq U$. Therefore the ordering of the lattice of $\separate$-subspaces is the same as inclusion on the lattice of supports. The two lattices are isomorphic.
 	
-	Since the singletons are elements of the lattice, all ultrafilters are principal, meaning that they are all of the form $X(x) = \{A \in \mathfrak{L}^\separate(C) \, | \, \{x\} \in A\}$ where $x \in \Omega$ is an element of the sample space. Therefore the sample space and the spectra coincide. Each singleton is a closed set, since it is an element of the lattice. The complement of each singleton is also an element of the lattice, therefore each singleton is also an open set. The topology is therefore the discrete topology.	
+	Since the singletons are elements of the lattice, all ultrafilters are principal, meaning that they are all of the form $X(x) = \{A \in \mathfrak{L}^\separate(C) \, | \, \{x\} \in A\}$ where $x \in \Omega$ is an element of the sample space. Therefore the sample space and the spectra coincide. Each singleton is a closed set, since it is an element of the lattice. The complement of each singleton is also an element of the lattice, therefore each singleton is also an open set. The topology is therefore the discrete topology.
 \end{proof}
 
 \begin{remark}
