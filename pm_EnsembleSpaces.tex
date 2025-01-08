@@ -784,6 +784,251 @@ Another constraint that the entropy imposes is that every affine direction is bo
 \end{remark}
 \end{mathSection}
 
+\section{Entropic geometry}
+
+We now show that the entropy imposes a geometric structure on the ensemble space. The core idea is that, since the entropy is strictly concave, it's Hessian is negative definite. The negation is therefore positive definite, real valued function of two vectors and plays the role of a metric tensor.
+
+\subsection{Mixing entropy as pseudo-distance}
+
+The first observation is that the entropy can be used to define a pseudo-distance. If we mix two ensemble, in fact, the average entropy cannot decrease, and will stay the same if two components of the mixture are the same ensemble. The increase, then, is zero if the two ensemble are equal, greater than zero if not, with the maximum if they are orthogonal. 
+
+\begin{defn}
+	Given two ensembles $\ens[a], \ens[b] \in \Ens$, the \textbf{mixing entropy}, also called Jensen-Shannon divergence, is the increase in entropy associated to their mixture. That is:
+	$$MS(\ens[a], \ens[b]) = S\left(\frac{1}{2}\ens[a] + \frac{1}{2} \ens[b]\right) - \left(\frac{1}{2} S(\ens[a]) + \frac{1}{2} S(\ens[b])\right).$$
+\end{defn}
+
+\begin{prop}
+	The mixing entropy $MS(\ens[a], \ens[b]) \to [0,1]$ satisfies the following:
+	\begin{enumerate}
+		\item \textbf{non-negativity}: $MS(\ens[a], \ens[b]) \geq 0$
+		\item \textbf{identity of indiscernibles}: $MS(\ens[a], \ens[b]) = 0 \iff \ens[a]=\ens[b]$
+		\item \textbf{unit boundedness}: $MS(\ens[a], \ens[b]) \leq 1$
+		\item \textbf{maximality of orthogonals}: $MS(\ens[a], \ens[b]) = 1 \iff \ens[a] \ortho \ens[b]$
+		\item \textbf{symmetry}: $MS(\ens[a], \ens[b]) = MS(\ens[b], \ens[a])$
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	For 1, by strict concavity, $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) \geq \frac{1}{2} S(\ens[a]) + \frac{1}{2} S(\ens[b])$, which means $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) - \frac{1}{2} S(\ens[a]) - \frac{1}{2} S(\ens[b]) = MS(\ens[a], \ens[b]) \geq 0$.
+	
+	For 2, the concavity is strict and therefore the equality holds if and only if $\ens[a] = \ens[b]$.
+	
+	For 3, by the upper variability bound, $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) \leq I(\frac{1}{2}, \frac{1}{2}) + \frac{1}{2} S(\ens[a]) + \frac{1}{2} S(\ens[b])$, which means $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) - \frac{1}{2} S(\ens[a]) - \frac{1}{2} S(\ens[b]) = MS(\ens[a], \ens[b]) \leq I(\frac{1}{2}, \frac{1}{2}) = 1$.
+	
+	For 4, the upper variability bound is saturated if and only if $\ens[a] \ortho \ens[b]$.
+\end{proof}
+
+\begin{prop}
+	In discrete and continuous classical cases, the mixing entropy coincides with the Jensen-Shannon divergence. In quantum spaces it coincindes with the quantum Jensen-Shannon divergence.
+\end{prop}
+
+\begin{proof}
+	Looking at the definitions \href{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}{Jensen-Shannon divergence}, one can see that
+	$$ JSD(\ens_1, \ens_2) = S\left(\frac{1}{2}\ens_1 + \frac{1}{2}\ens_2 \right)  - \frac{1}{2} \left(S(\ens_1) + S(e_2)\right) = MS(\ens_1, \ens_2).$$
+	The same is true for the quantum case:
+	$$ QJSD(\ens_1, \ens_2) = S\left(\frac{1}{2}\ens_1 + \frac{1}{2}\ens_2 \right)  - \frac{1}{2} \left(S(\ens_1) + S(\ens_2)\right) = MS(\ens_1, \ens_2).$$
+\end{proof}
+
+\begin{remark}
+	The mixing entropy fails to be a distance function as it does not satisfy the triangle inequality. In the classical and quantum case, in fact, the JSD is the square of a distance function. It is unclear whether this result can be generalized to the mixing entropy itself.
+	
+	The lack of the triangle inequality also makes it difficult to show that the topology is Hausdorff. The mixing entropy, in fact, allows us to create open balls around each point. These open balls will shrink to each point as the radius goes to zero. However, one typically uses the triangle inequality to show that the open ball, at some point, become disjoint.
+\end{remark}
+
+\subsection{Entropic metric}
+
+The second observation is that the strict concavity of the entropy forces the Hessian to be negative definite. The negation of the Hessian, then, is a positive definite function of two variation. In general, the Hessian of a scalar function is not a tensor. However, the ensemble space is a linear space and that linearity has physical significance. It is only for coordinates linear to the mixing coefficient that the convex combination of coordinates will equal the statistical mixture of the corresponding ensembles. Therefore the metric tensor corresponds to the Hessian calculated on that linear structure. When using non-linear coordinates, as long as the coordinates are smooth, one can always make the appropriate change.
+
+\begin{defn}
+	An ensemble space is \textbf{smooth} if the entropy is twice differentiable entropy with respect to the mixing coefficients.
+\end{defn}
+
+\begin{prop}
+	Discrete and continuous classical ensemble space and quantum ensemble spaces are smooth.
+\end{prop}
+
+\begin{proof}
+	In both the discrete classical case and the quantum case the entropy of an ensemble is the Shannon entropy of a decomposition in terms of pure states. The Shannon entropy is a smooth function of the coefficients. For the continuous classical case, the differential entropy is a smooth function of the probability density, which is linear under mixture. Therefore the entropy is always smooth with respect to mixing coefficients.
+\end{proof}
+
+\begin{defn}
+	A convex set $V \subseteq \Ens$ is finite dimensional if it embeds into a finite dimensional subspace of the embedding vector space. A finite dimensional convex set $V$ is a manifold, and is endowed with a differentiable structure given by all coordinates that are infinitely smooth with respect to the mixing coefficients (i.e. to the affine structure). A \textbf{linear chart} is a chart that preserves the linearity of the affine structure. A \textbf{variation} $\delta e$ is an element of the tangent space expressed in a linear chart.
+\end{defn}
+
+\begin{remark}
+	Note that since a geometric ensemble space is a convex subset of a real vector space, coordinate systems that are linear with respect to the vector space are privileged. It is only in these coordinates, in fact, that linear combinations correspond to mixtures. The strict concavity of the entropy is therefore guaranteed in the coordinates and only those coordinates. Given the special physical significance of these coordinates, all differential objects and properties will be defined in these coordinates.
+	
+	It remains an open problem to show that the topology of the ensemble space is indeed the topology of the manifold.
+\end{remark}
+
+\begin{defn}
+	Let $V \subseteq \Ens$ be a finite dimensional convex subset of a smooth ensemble space. Let $\ens \in \Ens$ be an ensemble and $T_{\ens}$ the tangent space at that point. The \textbf{norm} of $\delta \ens \in T_{\ens}$ is given by
+	$$ \lVert \delta \ens \rVert_{\ens} = \sqrt{ 8 MS(\ens, \ens + \delta \ens) }.$$
+	The \textbf{metric tensor} (i.e. the inner product between $\delta \ens_1 , \delta \ens_2 \in T_{\ens}$ ) is given by
+	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert_{\ens}^2 - \lVert \delta \ens_1 \rVert_{\ens}^2 - \lVert \delta \ens_2 \rVert_{\ens}^2 \right).$$
+\end{defn}
+
+\begin{thrm}
+	Let $\Ens$ be a smooth ensemble space and $V \subseteq \Ens$ a finite dimensional convex subset. Then, in a linear chart, we have
+	$$ \lVert \delta \ens \rVert_{\ens}^2 = - \frac{\partial^2 S}{\partial \ens^2}(\delta \ens , \delta \ens) $$
+	and 
+	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = - \frac{\partial^2 S}{\partial \ens ^2}( \delta \ens_1, \delta \ens_2 ).$$
+	Then $V$ is a Riemannian manifold with $g_{\ens}$ as the metric tensor and $\lVert \cdot \rVert_{\ens}$ as the norm.
+\end{thrm}
+
+\begin{proof}
+	To recover the first two expression, we simply have to calculate the leading term. Since the entropy is twice differentiable, assuming a linear chart, we can expand it as
+	\begin{equation}
+		\begin{aligned}
+			S(\ens + \delta \ens) &= S(\ens) + \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3).
+		\end{aligned}
+	\end{equation}
+	Expanding the definition of $MS$, we have
+	\begin{equation}
+		\begin{aligned}
+			MS(\ens, \ens + \delta \ens) &= S\left(\frac{1}{2} \ens + \frac{1}{2}(\ens + \delta \ens) \right) - \frac{1}{2} S(\ens) - \frac{1}{2} S(\ens+\delta \ens) \\
+			&=  S\left(\ens + \frac{1}{2} \delta \ens \right) - \frac{1}{2} S(\ens) - \frac{1}{2} S(\ens+\delta \ens) \\
+			&= S(\ens) + \frac{\partial S}{\partial \ens} \frac{1}{2}\delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \frac{1}{2}\delta \ens \frac{1}{2}\delta \ens + O(\delta \ens ^3) \\
+			&- \frac{1}{2} S(\ens) - \frac{1}{2} \left( S(\ens) + \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3) \right) \\
+			&= S(\ens) + \frac{1}{2} \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens \\
+			&- S(\ens) - \frac{1}{2} \frac{\partial S}{\partial \ens} \delta \ens - \frac{1}{4} \frac{\partial^2 S}{\partial \ens^2} + O(\delta \ens ^3) \\
+			&= - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3).
+		\end{aligned}
+	\end{equation}
+	
+	Therefore
+	$$ \lVert \delta \ens \rVert^2 = 8 MS(\ens, \ens + \delta \ens) = -  \frac{\partial^2 S}{\partial \ens^2} (\delta \ens, \delta \ens).$$
+	
+	We can now substitute the norm to the definition of metric tensor. We have
+	\begin{equation}
+		\begin{aligned}
+			g_{\ens}(\delta \ens_1, \delta \ens_2 ) &= \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert^2 - \lVert \delta \ens_1 \rVert^2 - \lVert \delta \ens_2 \rVert^2 \right) \\
+			&= \frac{1}{2} \left( - \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1 + \delta \ens_2, \delta \ens_1 + \delta \ens_2) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right) \\
+			&= - \frac{1}{2} \left(  \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_2) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right. \\
+			&-  \left. \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) - \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right) \\
+			&= - \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_2) \\
+		\end{aligned}
+	\end{equation}
+	
+	Let us now take an embedded manifold $V \subseteq \Ens$. It will have a smooth structure inherited from the ensemble space.
+	
+	Let us now show that $g$ is a metric tensor. Restricted to $V$, $g|_V$ is the Hessian of the entropy $S$ in a linear chart. Therefore it is a symmetric rank two tensor which means a symmetric bilinear function of the arguments. Since the entropy is strictly concave, the Hessian is negative definite and therefore $g$ is positive definite. Therefore $(V, g|_V)$ is a Riemannian manifold.
+\end{proof}
+
+\begin{prop}
+	For a classical ensemble space, the metric corresponds to the Fisher-Rao metric.
+\end{prop}
+
+\begin{proof}
+	Recall that, given a manifold of probability distributions over $X$ parametrized by $\theta^i$, the \href{https://en.wikipedia.org/wiki/Fisher_information_metric}{Fisher-Rao metric} is defined as:
+	\begin{equation}
+		g_{ij} =- \int_X \frac{\partial^2 \log \rho}{\partial \theta^i \partial \theta^j} \rho dx.
+	\end{equation}
+	For a classical ensemble, the entropy is given by
+	\begin{equation}
+		S(\rho) =- \int_X \rho \log \rho dx.
+	\end{equation}
+	
+	Let us now calculate the first two terms in the Taylor expansion around $\rho$ with a variation $\delta\rho$. Recall that:
+	\begin{equation}
+		\begin{aligned}
+			\log(x+dx) &= \log(x) + d_x \log x \, dx + \frac{1}{2} d_x d_x  \log x \, dx^2 + O(dx^3) \\
+			&= \log(x) + \frac{1}{x} dx - \frac{1}{2} \frac{1}{x^2} dx^2 + O(dx^3)
+		\end{aligned}
+	\end{equation}
+	We have:
+	\begin{equation}
+		\begin{aligned}
+			S(\rho + \delta \rho) &= -\int_X (\rho + \delta \rho) \log (\rho + \delta \rho) dx \\
+			&=-\int_X (\rho + \delta \rho) \left[\log \rho + \frac{1}{\rho} \delta \rho - \frac{1}{2\rho^2} \delta \rho^2 + O(\delta \rho^3)\right] dx \\
+			&= - \int_X \rho \log \rho dx - \int_x \left[\log \rho + 1 \right]dx \delta \rho -\int_X \left[\frac{1}{\rho} - \frac{\rho}{2\rho^2}\right] dx \delta \rho^2 + \int_X dx O(\delta\rho^3) \\
+			&= - \int_X \rho \log \rho dx - \int_x \left[\log \rho + 1 \right]dx \delta \rho - 	
+			\frac{1}{2}\int_X \frac{1}{\rho} dx \delta \rho^2 + \int_X dx O(\delta\rho^3) \\
+		\end{aligned}
+	\end{equation}
+	\begin{equation}
+		\begin{aligned}
+			\frac{\partial^2 S}{\partial \rho^2}(\delta \rho, \delta \rho) &= -\int_X \frac{1}{\rho} \delta \rho^2 dx = -\int_X \frac{1}{\rho} \delta \rho^2 dx + 0 = -\int_X \frac{1}{\rho} \delta \rho^2 dx + \delta^2 (1) \\
+			&= -\int_X \frac{1}{\rho} \delta \rho^2 dx + \delta^2 \int_X \rho dx = -\int_X \frac{1}{\rho} \delta \rho^2 dx + \int_X \delta^2 \rho dx \\
+			&= \int_X \rho dx \left[-\frac{1}{\rho^2} \delta \rho^2 + \frac{1}{\rho} \delta^2 \rho \right]
+			= \int_X \rho dx \, \delta \left[\frac{1}{\rho} \delta \rho \right] \\
+			&= \int_X \rho dx \, \delta^2 \log \rho
+		\end{aligned}
+	\end{equation}
+	
+	Let us consider a family of ensembles charted by a set of parameters $\theta^i$, not necessarily forming a linear chart. We have:
+	\begin{equation}
+		\begin{aligned}
+			g_{\ens}(d\theta^1, d\theta^2) &= - \frac{\partial^2 S}{\partial \rho^2}\left(\frac{\partial 
+				\rho}{\partial \theta^1} d\theta^1, \frac{\partial 
+				\rho}{\partial \theta^2} d\theta^2\right) = - \int_X \rho dx \frac{\partial^2 \log \rho}{\partial \theta^1 \partial \theta^2}d\theta^1 d\theta^2
+		\end{aligned}
+	\end{equation}
+	which recovers the Fisher-Rao metric.
+\end{proof}
+
+\begin{remark}
+	For quantum mechanics, the situation is more complicated as there are different definitions of Fisher metrics (see \href{https://arxiv.org/pdf/2008.11178}{RLD Fisher Information Bound for Multiparameter
+		Estimation of Quantum Channels} or \href{https://link.springer.com/chapter/10.1007/978-4-431-54493-7_4}{Quantum Estimation Theory}). We will therefore just show a general connection, without worrying about the mathematical details.
+	
+\end{remark}
+
+\begin{prop}
+	For a quantum ensemble space, the metric corresponds to the Bures metric and the Quantum Fisher information metric.
+\end{prop}
+
+\begin{proof}
+	The entropy is given by the Von Neumann entropy
+	\begin{equation}
+		S(\rho) = - \tr\left(\rho \log \rho\right).
+	\end{equation}
+	We take the first variation and have
+	\begin{equation}
+		\begin{aligned}
+			\delta S(\rho) &= - \delta \tr\left(\rho \log \rho\right)= - \tr\left(\delta \rho \log \rho + \rho \delta \log \rho\right) \\
+			&= - \tr\left(\delta \rho \log \rho + \rho \rho^{-1} \delta \rho \right) \\
+			&= - \tr\left(\left(\log \rho + 1 \right) \delta \rho \right).
+		\end{aligned}
+	\end{equation}
+	We take the second variation and have
+	\begin{equation}
+		\begin{aligned}
+			\delta \delta S(\rho) &= - \delta \tr\left(\left(\log \rho + 1 \right) \delta \rho \right) \\
+			&= - \tr\left(\delta \left(\log \rho + 1 \right) \delta \rho + \delta \delta \rho \right) \\
+			&= - \tr\left(\rho^{-1} \delta \rho \delta \rho + \delta \delta \rho \right).
+		\end{aligned}
+	\end{equation}
+	Note that $\delta \rho$ is defined in a linear chart, therefore $\delta \delta x = 0$. Therefore we have 
+	\begin{equation}
+		\begin{aligned}
+			\frac{\partial^2 S}{\partial \rho^2}(\delta \rho, \delta \rho) &= - \tr\left(\rho^{-1} \delta \rho \delta \rho \right)
+		\end{aligned}
+	\end{equation}
+	Let us consider a family of ensembles charted by a set of parameters $\theta^i$, not necessarily forming a linear chart. We have:
+	\begin{equation}
+		\begin{aligned}
+			g_{\ens}(d\theta^1, d\theta^2) &= - \frac{\partial^2 S}{\partial \rho^2}\left(\frac{\partial 
+				\rho}{\partial \theta^1} d\theta^1, \frac{\partial 
+				\rho}{\partial \theta^2} d\theta^2\right) = \tr\left( \rho^{-1} \frac{\partial \rho}{\partial \theta^1 }\frac{\partial \rho}{\partial \theta^2}\right) d\theta^1 d\theta^2
+		\end{aligned}
+	\end{equation}
+	which recovers one version of the Fisher-Rao metric.
+	
+	Recalling that the right logarithmic derivative $L^R$ satisfies $\frac{\partial \rho}{\partial \theta} = \rho L^R$, we can write 
+	\begin{equation}
+		\begin{aligned}
+			g_{\ens}(d\theta^1, d\theta^2) &= \tr\left( \rho^{-1} \frac{\partial \rho}{\partial \theta^1 }\frac{\partial \rho}{\partial \theta^2}\right) d\theta^1 d\theta^2 = \tr(\rho^{-1}\rho L^R
+			_1 \rho L^R_2)d\theta^1 d\theta^2 = \tr(\rho L^R
+			_1 L^R_2)d\theta^1 d\theta^2
+		\end{aligned}
+	\end{equation}
+	which recovers the RLD Fisher information.
+\end{proof}
+
+\begin{remark}
+	Note that the \href{https://en.wikipedia.org/wiki/Ruppeiner_geometry}{Ruppeiner metric} is exactly the Hessian of the entropy. Also note Hessian metric or \href{https://web.osu.cz/~Zusmanovich/seminar/2017/wolak/ostrava-11-17-hessian-pdf.pdf}{Hessian structures} \href{https://link.springer.com/chapter/10.1007/978-3-642-40020-9_4}{1}
+\end{remark}
+
 \section{Generalized probability theory}
 
 \subsection{Fraction and fraction capacity}
@@ -1631,253 +1876,6 @@ Note that, in principle, the definitions only use $\mathbb{R}$ as a topological 
 	
 	4. Let $U, V \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \capacity(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \capacity(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(U) + \capacity(V)$. Therefore $\capacity(U \cup V) \geq \capacity(U) + \capacity(V)$. Combining with the previous result, $\capacity(U \cup V) = \capacity(U) + \capacity(V)$. Therefore the state capacity, as set function, is additive over orthogonal sets of ensembles.
 \end{proof}
-
-\section{Entropic geometry}
-
-We now show that entropy imposes a geometric structure on the ensemble space. The core idea is that, since the entropy is strictly concave, it's Hessian is negative definite. The negation is therefore positive definite, real valued function of two vectors and plays the role of a metric tensor.
-
-\begin{defn}
-	Given two ensembles $\ens_1, \ens_2 \in \Ens$, the \textbf{mixing entropy}, also called Jensen-Shannon divergence, is the increase in entropy associated to their mixture. That is:
-	$$MS(\ens_1, \ens_2) = S\left(\frac{1}{2}\ens_1 + \frac{1}{2} \ens_2\right) - \left(\frac{1}{2} S(\ens_1) + \frac{1}{2} S(\ens_2)\right).$$
-\end{defn}
-
-\begin{coro}
-	The mixing entropy obeys the following bounds
-	$$ 0 \leq MS(\ens_1, \ens_2) \leq 1.$$
-	The lower bound is satisfied if and only if $\ens_1 = \ens_2$ and the upper bound is satisfied if and only if $\ens_1 \ortho \ens_2$.
-\end{coro}
-
-\begin{proof}
-	The bounds descend directly from the bounds on entropy. By strict concavity, $S(p_1\ens_1 + p_2 \ens_2) \geq p_1 S(\ens_1) + p_2 S(\ens_2)$, which means $S(p_1\ens_1 + p_2 \ens_2) - p_1 S(\ens_1) - p_2 S(\ens_2) \geq 0$, and in particular $S(\frac{1}{2} \ens_1 + \frac{1}{2} \ens_2) - \frac{1}{2} S(\ens_1) - \frac{1}{2} S(\ens_2) = MS(\ens_1, \ens_2) \geq 0$. By strict concavity, the equality holds if and only if $\ens_1 = \ens_2$
-	
-	By the upper variability bound, $S(p_1\ens_1 + p_2 \ens_2) \leq I(p_1, p_2) + p_1 S(\ens_1) + p_2 S(\ens_2)$, which means $S(p_1\ens_1 + p_2 \ens_2) - p_1 S(\ens_1) - p_2 S(\ens_2) \leq I(p_1, p_2)$, and in particular $S(\frac{1}{2} \ens_1 + \frac{1}{2} \ens_2) - \frac{1}{2} S(\ens_1) - \frac{1}{2} S(\ens_2) = MS(\ens_1, \ens_2) \leq I(\frac{1}{2}, \frac{1}{2}) = 1$. Given that $\ens_1$ and $\ens_2$ are orthogonal by definition if they saturate the upper variability bound, the equality holds if and only if $\ens_1$ and $\ens_2$ are orthogonal.
-\end{proof}
-
-\begin{conj}
-	Ensemble spaces are Hausdorff spaces and therefore limits are unique. 
-\end{conj}
-
-\begin{proof}
-	Since the entropy is a continuous function, the mixing entropy is also a continuous function and so it will be $MS(\ens, \cdot) : \Ens \to [0,+\infty)$ for any $\ens \in \Ens$. Let $\ens[a], \ens[b] \in \Ens$ and let $\epsilon = MS(\ens[a], \ens[b])$. Consider $U = MS(\ens[a], \cdot)^{-1}([0,\epsilon))$. Since $[0,\epsilon)$ is an open subset of $[0,+\infty)$, $U$ is an open set. Since $MS(\ens[a], \ens[a]) = 0$, $\ens[a] \in U$, and since $MS(\ens[a], \ens[b]) = \epsilon$, $\ens[b] \notin U$. Therefore $U$ is an open neighbourhood of $\ens[a]$ that does not contain $U$.
-	
-	TODO: we need to prove that the upper bound on entropy is such that the open balls eventually become disjoint.
-\end{proof}
-
-\begin{prop}
-	In discrete and continuous classical cases, the mixing entropy coincides with the Jensen-Shannon divergence. In quantum spaces it coincindes with the quantum Jensen-Shannon divergence.
-\end{prop}
-
-\begin{proof}
-	Looking at the definitions \href{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}{Jensen-Shannon divergence}, one can see that
-	$$ JSD(\ens_1, \ens_2) = S\left(\frac{1}{2}\ens_1 + \frac{1}{2}\ens_2 \right)  - \frac{1}{2} \left(S(\ens_1) + S(e_2)\right) = MS(\ens_1, \ens_2)$$.
-	The same is true for the quantum case:
-	$$ QJSD(\ens_1, \ens_2) = S\left(\frac{1}{2}\ens_1 + \frac{1}{2}\ens_2 \right)  - \frac{1}{2} \left(S(\ens_1) + S(\ens_2)\right) = MS(\ens_1, \ens_2)$$.
-\end{proof}
-
-\begin{defn}
-	An ensemble space is \textbf{geometric} if it is complemented and has a twice differentiable entropy with respect to the mixing coefficients.
-\end{defn}
-
-\begin{conj}
-	A geometric ensemble space is a convex subset of a real vector space. Moreover, every finite dimensional subspace is a smooth manifold.
-\end{conj}
-
-\begin{proof}
-	Since a geometric ensemble space is complemented, it embeds into a real vector space. If conjecture \ref{pm_es_ensemblesAreTVS} holds, then it is a topological vector space. Every finite dimensional subspace $V$, then, is locally $\mathbb{R}^n$ with a topology. This would be enough to claim $V$ is a manifold. The differentiable structure is imposed by requiring coordinates that coordinates are twice differentiable with respect to the mixing coefficients.
-\end{proof}
-
-\begin{remark}
-	The above restriction is useful to recover standard elements of differential geometry. It is an open question to understand whether other conditions already imply these requirements, or whether a more general setting can be developed. For example, in a classical space every ensemble can be understood as the mixture of orthogonal elements. Therefore the entropy can be proven the Shannon/Gibbs entropy, and therefore it is infinitely smooth with respect to the coefficients. A classical space, then, would be automatically geometric. Similar arguments may exist for a quantum space. Additionally, it may be that the convex structure may be enough to define a generalized version of tangent space.
-\end{remark}
-
-\begin{defn}
-	Let $V \subseteq \Ens$ be a differentiable manifold embedded in the ensemble space. A \textbf{linear chart} is chart that preserves the linearity of the ensemble space. A \textbf{variation} $\delta e$ is an element of the tangent space expressed in a linear chart.
-\end{defn}
-
-\begin{remark}
-	Note that since a geometric ensemble space is a convex subset of a real vector space, coordinate systems that are linear with respect to the vector space are privileged. It is only in these coordinates, in fact, that linear combinations correspond to mixtures. The strict concavity of the entropy is therefore guaranteed in the coordinates and only those coordinates. Given the special physical significance of these coordinates, all differential objects and properties will be defined in these coordinates.
-\end{remark}
-
-\begin{defn}
-	Let $V \subseteq \Ens$ be a differentiable manifold embedded in the ensemble space. Let $\ens \in \Ens$ be an ensemble and $T_{\ens}$ the tangent space at that point. The \textbf{norm} of $\delta \ens \in T_{\ens}$ is given by
-	$$ \lVert \delta \ens \rVert_{\ens} = \sqrt{ 8 MS(\ens, \ens + \delta \ens) }.$$
-	The \textbf{metric tensor} (i.e. the inner product between $\delta \ens_1 , \delta \ens_2 \in T_{\ens}$ ) is given by
-	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert_{\ens}^2 - \lVert \delta \ens_1 \rVert_{\ens}^2 - \lVert \delta \ens_2 \rVert_{\ens}^2 \right).$$
-\end{defn}
-
-\begin{thrm}
-	Let $\Ens$ be a geometric ensemble space and $V \subseteq \Ens$ a differentiable manifold embedded in the ensemble space. Then, in a linear chart, we have
-	$$ \lVert \delta \ens \rVert_{\ens}^2 = - \frac{\partial^2 S}{\partial \ens^2}(\delta \ens , \delta \ens) $$
-	and 
-	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = - \frac{\partial^2 S}{\partial \ens ^2}( \delta \ens_1, \delta \ens_2 ).$$
-	Then $V$ is a Riemannian manifold with $g_{\ens}$ as the metric tensor and $\lVert \cdot \rVert_{\ens}$ as the norm.
-\end{thrm}
-
-\begin{proof}
-	To recover the first two expression, we simply have to calculate the leading term. Since the entropy is twice differentiable, assuming a linear chart, we can expand it as
-\begin{equation}
-	\begin{aligned}
-		S(\ens + \delta \ens) &= S(\ens) + \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3).
-	\end{aligned}
-\end{equation}
-Expanding the definition of $MS$, we have
-\begin{equation}
-	\begin{aligned}
-		MS(\ens, \ens + \delta \ens) &= S\left(\frac{1}{2} \ens + \frac{1}{2}(\ens + \delta \ens) \right) - \frac{1}{2} S(\ens) - \frac{1}{2} S(\ens+\delta \ens) \\
-		&=  S\left(\ens + \frac{1}{2} \delta \ens \right) - \frac{1}{2} S(\ens) - \frac{1}{2} S(\ens+\delta \ens) \\
-		&= S(\ens) + \frac{\partial S}{\partial \ens} \frac{1}{2}\delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \frac{1}{2}\delta \ens \frac{1}{2}\delta \ens + O(\delta \ens ^3) \\
-		&- \frac{1}{2} S(\ens) - \frac{1}{2} \left( S(\ens) + \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3) \right) \\
-		&= S(\ens) + \frac{1}{2} \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens \\
-		&- S(\ens) - \frac{1}{2} \frac{\partial S}{\partial \ens} \delta \ens - \frac{1}{4} \frac{\partial^2 S}{\partial \ens^2} + O(\delta \ens ^3) \\
-		&= - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3).
-	\end{aligned}
-\end{equation}
-
-Therefore
-$$ \lVert \delta \ens \rVert^2 = 8 MS(\ens, \ens + \delta \ens) = -  \frac{\partial^2 S}{\partial \ens^2} (\delta \ens, \delta \ens).$$
-
-We can now substitute the norm to the definition of metric tensor. We have
-\begin{equation}
-	\begin{aligned}
-		g_{\ens}(\delta \ens_1, \delta \ens_2 ) &= \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert^2 - \lVert \delta \ens_1 \rVert^2 - \lVert \delta \ens_2 \rVert^2 \right) \\
-		&= \frac{1}{2} \left( - \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1 + \delta \ens_2, \delta \ens_1 + \delta \ens_2) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right) \\
-		&= - \frac{1}{2} \left(  \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_2) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_1) + \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right. \\
-		&-  \left. \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_1) - \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_2, \delta \ens_2) \right) \\
-		&= - \frac{\partial^2 S}{\partial \ens^2} (\delta \ens_1, \delta \ens_2) \\
-	\end{aligned}
-\end{equation}
-
-	Let us now take an embedded manifold $V \subseteq \Ens$. It will have a smooth structure inherited from the ensemble space.
-	
-	Let us now show that $g$ is a metric tensor. Restricted to $V$, $g|_V$ is the Hessian of the entropy $S$ in a linear chart. Therefore it is a symmetric rank two tensor which means a symmetric bilinear function of the arguments. Since the entropy is strictly concave, the Hessian is negative definite and therefore $g$ is positive definite. Therefore $(V, g|_V)$ is a Riemannian manifold.
-\end{proof}
-
-\begin{prop}
-	For a classical ensemble space, the metric corresponds to the Fisher-Rao metric.
-\end{prop}
-
-\begin{proof}
-	Recall that, given a manifold of probability distributions over $X$ parametrized by $\theta^i$, the \href{https://en.wikipedia.org/wiki/Fisher_information_metric}{Fisher-Rao metric} is defined as:
-	\begin{equation}
-		g_{ij} =- \int_X \frac{\partial^2 \log \rho}{\partial \theta^i \partial \theta^j} \rho dx.
-	\end{equation}
-	For a classical ensemble, the entropy is given by
-	\begin{equation}
-		S(\rho) =- \int_X \rho \log \rho dx.
-	\end{equation}
-	
-	Let us now calculate the first two terms in the Taylor expansion around $\rho$ with a variation $\delta\rho$. Recall that:
-	\begin{equation}
-		\begin{aligned}
-		\log(x+dx) &= \log(x) + d_x \log x \, dx + \frac{1}{2} d_x d_x  \log x \, dx^2 + O(dx^3) \\
-		&= \log(x) + \frac{1}{x} dx - \frac{1}{2} \frac{1}{x^2} dx^2 + O(dx^3)
-		\end{aligned}
-	\end{equation}
-	We have:
-	\begin{equation}
-		\begin{aligned}
-			S(\rho + \delta \rho) &= -\int_X (\rho + \delta \rho) \log (\rho + \delta \rho) dx \\
-			&=-\int_X (\rho + \delta \rho) \left[\log \rho + \frac{1}{\rho} \delta \rho - \frac{1}{2\rho^2} \delta \rho^2 + O(\delta \rho^3)\right] dx \\
-			&= - \int_X \rho \log \rho dx - \int_x \left[\log \rho + 1 \right]dx \delta \rho -\int_X \left[\frac{1}{\rho} - \frac{\rho}{2\rho^2}\right] dx \delta \rho^2 + \int_X dx O(\delta\rho^3) \\
-			&= - \int_X \rho \log \rho dx - \int_x \left[\log \rho + 1 \right]dx \delta \rho - 	
-			\frac{1}{2}\int_X \frac{1}{\rho} dx \delta \rho^2 + \int_X dx O(\delta\rho^3) \\
-		\end{aligned}
-	\end{equation}
-	\begin{equation}
-		\begin{aligned}
-						\frac{\partial^2 S}{\partial \rho^2}(\delta \rho, \delta \rho) &= -\int_X \frac{1}{\rho} \delta \rho^2 dx = -\int_X \frac{1}{\rho} \delta \rho^2 dx + 0 = -\int_X \frac{1}{\rho} \delta \rho^2 dx + \delta^2 (1) \\
-			&= -\int_X \frac{1}{\rho} \delta \rho^2 dx + \delta^2 \int_X \rho dx = -\int_X \frac{1}{\rho} \delta \rho^2 dx + \int_X \delta^2 \rho dx \\
-			&= \int_X \rho dx \left[-\frac{1}{\rho^2} \delta \rho^2 + \frac{1}{\rho} \delta^2 \rho \right]
-			= \int_X \rho dx \, \delta \left[\frac{1}{\rho} \delta \rho \right] \\
-			&= \int_X \rho dx \, \delta^2 \log \rho
-		\end{aligned}
-	\end{equation}
-	
-	Let us consider a family of ensembles charted by a set of parameters $\theta^i$, not necessarily forming a linear chart. We have:
-	\begin{equation}
-		\begin{aligned}
-			g_{\ens}(d\theta^1, d\theta^2) &= - \frac{\partial^2 S}{\partial \rho^2}\left(\frac{\partial 
-				\rho}{\partial \theta^1} d\theta^1, \frac{\partial 
-				\rho}{\partial \theta^2} d\theta^2\right) = - \int_X \rho dx \frac{\partial^2 \log \rho}{\partial \theta^1 \partial \theta^2}d\theta^1 d\theta^2
-		\end{aligned}
-	\end{equation}
-	which recovers the Fisher-Rao metric.
-	
-\end{proof}
-
-\begin{remark}
-	For quantum mechanics, the situation is more complicated as there are different definitions of Fisher metrics (see \href{https://arxiv.org/pdf/2008.11178}{RLD Fisher Information Bound for Multiparameter
-	Estimation of Quantum Channels} or \href{https://link.springer.com/chapter/10.1007/978-4-431-54493-7_4}{Quantum Estimation Theory}). We will therefore just show a general connection, without worrying about the mathematical details.
-	
-\end{remark}
-
-\begin{prop}
-	For a quantum ensemble space, the metric corresponds to the Bures metric and the Quantum Fisher information metric.
-\end{prop}
-
-\begin{proof}
-	The entropy is given by the Von Neumann entropy
-	\begin{equation}
-		S(\rho) = - \tr\left(\rho \log \rho\right).
-	\end{equation}
-	We take the first variation and have
-	\begin{equation}
-		\begin{aligned}
-			\delta S(\rho) &= - \delta \tr\left(\rho \log \rho\right)= - \tr\left(\delta \rho \log \rho + \rho \delta \log \rho\right) \\
-			&= - \tr\left(\delta \rho \log \rho + \rho \rho^{-1} \delta \rho \right) \\
-			&= - \tr\left(\left(\log \rho + 1 \right) \delta \rho \right).
-		\end{aligned}
-	\end{equation}
-	We take the second variation and have
-	\begin{equation}
-		\begin{aligned}
-			\delta \delta S(\rho) &= - \delta \tr\left(\left(\log \rho + 1 \right) \delta \rho \right) \\
-			&= - \tr\left(\delta \left(\log \rho + 1 \right) \delta \rho + \delta \delta \rho \right) \\
-			&= - \tr\left(\rho^{-1} \delta \rho \delta \rho + \delta \delta \rho \right).
-		\end{aligned}
-	\end{equation}
-	Note that $\delta \rho$ is defined in a linear chart, therefore $\delta \delta x = 0$. Therefore we have 
-	\begin{equation}
-	\begin{aligned}
-		\frac{\partial^2 S}{\partial \rho^2}(\delta \rho, \delta \rho) &= - \tr\left(\rho^{-1} \delta \rho \delta \rho \right)
-	\end{aligned}
-\end{equation}
-	Let us consider a family of ensembles charted by a set of parameters $\theta^i$, not necessarily forming a linear chart. We have:
-\begin{equation}
-	\begin{aligned}
-		g_{\ens}(d\theta^1, d\theta^2) &= - \frac{\partial^2 S}{\partial \rho^2}\left(\frac{\partial 
-			\rho}{\partial \theta^1} d\theta^1, \frac{\partial 
-			\rho}{\partial \theta^2} d\theta^2\right) = \tr\left( \rho^{-1} \frac{\partial \rho}{\partial \theta^1 }\frac{\partial \rho}{\partial \theta^2}\right) d\theta^1 d\theta^2
-	\end{aligned}
-\end{equation}
-which recovers one version of the Fisher-Rao metric.
-
-Recalling that the right logarithmic derivative $L^R$ satisfies $\frac{\partial \rho}{\partial \theta} = \rho L^R$, we can write 
-	\begin{equation}
-	\begin{aligned}
-	g_{\ens}(d\theta^1, d\theta^2) &= \tr\left( \rho^{-1} \frac{\partial \rho}{\partial \theta^1 }\frac{\partial \rho}{\partial \theta^2}\right) d\theta^1 d\theta^2 = \tr(\rho^{-1}\rho L^R
-	_1 \rho L^R_2)d\theta^1 d\theta^2 = \tr(\rho L^R
-	_1 L^R_2)d\theta^1 d\theta^2
-\end{aligned}
-	\end{equation}
-which recovers the RLD Fisher information.
-\end{proof}
-
-\begin{remark}
-	Note that the \href{https://en.wikipedia.org/wiki/Ruppeiner_geometry}{Ruppeiner metric} is exactly the Hessian of the entropy. Also note Hessian metric or \href{https://web.osu.cz/~Zusmanovich/seminar/2017/wolak/ostrava-11-17-hessian-pdf.pdf}{Hessian structures} \href{https://link.springer.com/chapter/10.1007/978-3-642-40020-9_4}{1}
-\end{remark}
-
-\begin{conj}
-	The mixing entropy is the square of a distance function.
-\end{conj}
-
-\begin{proof}
-	This is something that is true for both classical and quantum version of the JSD. It is not clear whether this generalizes. The arc length provided by the metric is indeed a distance function, which has a square root over the metric applied to the differentials. The JSD will correspond to the energy (or action) of the curve. This does not seem to be, in general, the square of a distance function.
-\end{proof}
-
-\begin{remark}
-	How exactly to make these statements precise in the general case depends on finding a suitable generalized notion of differentiability. It is unclear whether this notion has already been mathematically formulated.
-\end{remark}
 
 \section{R-subspaces}\label{pm_es_subspaceSection}
 
