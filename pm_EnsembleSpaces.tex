@@ -1334,7 +1334,11 @@ Now that we have identified the correct closure, a classical probability context
 \end{defn}
 
 \begin{conj}
-	A flat $C \in \Ens$ is a classical probability context if and only if mixtures preserve separateness in $C$. That is, if $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$, then $\ens \separate p\ens[a] + \bar{p} \ens[b]$ in $C$ for all $\ens, \ens[a], \ens[b] \in C$ and $p \in [0,1]$.
+	A flat $C \subseteq \Ens$ is a classical probability context if and only if mixtures preserve separateness in $C$. That is, if $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$, then $\ens \separate p\ens[a] + \bar{p} \ens[b]$ in $C$ for all $\ens, \ens[a], \ens[b] \in C$ and $p \in [0,1]$.
+\end{conj}
+
+\begin{conj}
+	A convex subset $U \subseteq \Ens$ is a classical probability context if and only all finite flats a simplexes.
 \end{conj}
 
 \begin{prop}
@@ -1490,37 +1494,39 @@ Every subspace can then be understood as a set of limits, a set of ultrafilters,
 	TODO: organize. There are different types of limits. One limit of convex combinations. Physically, these are mixtures over infinitely many elements. Limit of ensemble sequences. Physically, these are sequences of ensembles, taken one after the other, for example in temporal succession. Limits of ensembles taken from $\separate$-subspaces strictly included into each other. This is the limit of ensemble that are finer and finer.
 \end{remark}
 
-\begin{conj}
-	A convex subset $U \subseteq \Ens$ is a classical probability context if and only all finite flats a simplexes.
-\end{conj}
+\subsubsection{Classical probability contexts in classical and quantum ensemble spaces}
 
-\subsubsection{Classical ensemble spaces}
-
-The definition of classical probability context is disconnected from the entropy and applies to a convex subset. We will want also a definition for a convex subset that constrains the entropy, and one for the whole space.
-
-\begin{defn}
-	We say that in an ensemble space $\Ens$ \textbf{mixtures preserve separatedness} if whenever an ensemble is separate from two other ensembles, than it is also separate from all their mixtures. That is, $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$ implies $\ens \separate p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$.
-\end{defn}
+We now want to show the relationship between classical probability context for classical and quantum ensembles spaces. For classical ensemble spaces the connection is simple: every classical ensemble space is classical probability context. The reverse is not true. We could have, for example, an ensemble space that is exactly like the discrete classical one except for the entropy of the pure states, which are all assumed to be zero in a discrete classical ensemble space. The convex space structure would be exactly the same, but the entropy wouldn't match. We could also have a space of probability functions defined on a space that is not symplectic. This would be classical probability contexts, but not a space of classical ensembles.
 
 \begin{conj}
-	Let $\Ens$ be an ensemble space where mixtures preserve separatedness. Then it is a classical probability context.
+	Discrete and continuous classical ensemble spaces are classical probability contexts.
 \end{conj}
 
-\begin{conj}
-	In a discrete and continuous classical ensemble spaces mixtures preserve separatedness. In a quantum ensemble space mixtures do not preserve separatedness.
-\end{conj}
+%\begin{proof}
+%	Let $\Ens$ be a classical probability space and let $\mu, \nu \in \Ens$ be probability measures on some space $\Omega$. The space of probability measures is a subset of the space of signed measures. This space can be equipped with an inner product. The space of signed measures with support $U \subseteq \Omega$ forms a subspace. This means that, if we can find a $U \subseteq \Omega$ such that both $\mu(U) \neq 0$ and $\nu(U) \neq 0$, we can find a probability measure that is a component of both. That is, two probability measures that have overlapping support have a common component. Conversely, given that convex combination can only expand the support of measures, two probability measures that have no overlapping support have no common components. (TODO: if all measure are allowed, we may get also measures we do not want - Dirac measures, measures that have no continuous derivative. If not all measures are allowed, we have no existence of a measure that can be a component, and therefore there may be overlapping measures that have no common components.)
+	
+%	Now, suppose $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$. This means that the support of $\ens$ is disjoint from the support of both $\ens[a]$ and $\ens[b]$, which will also be disjoint from the support of any mixture of $\ens[a]$ and $\ens[b]$ since the support of the mixture will be the union of the individual supports. This means that $\ens$ will be separate from all mixtures of $\ens[a]$ and $\ens[b]$. The property holds, then, in any classical ensemble space.
+%\end{proof}
+
+A quantum ensemble space, however, does not allow a description in terms of classical probability precisely because it allows separate multidecompositions.
+
+\begin{prop}
+	A quantum ensemble space is not a classical probability context.
+\end{prop}
 
 \begin{proof}
-	Let $\Ens$ be a classical probability space and let $\mu, \nu \in \Ens$ be probability measures on some space $\Omega$. The space of probability measures is a subset of the space of signed measures. This space can be equipped with an inner product. The space of signed measures with support $U \subseteq \Omega$ forms a subspace. This means that, if we can find a $U \subseteq \Omega$ such that both $\mu(U) \neq 0$ and $\nu(U) \neq 0$, we can find a probability measure that is a component of both. That is, two probability measures that have overlapping support have a common component. Conversely, given that convex combination can only expand the support of measures, two probability measures that have no overlapping support have no common components. (TODO: if all measure are allowed, we may get also measures we do not want - Dirac measures, measures that have no continuous derivative. If not all measures are allowed, we have no existence of a measure that can be a component, and therefore there may be overlapping measures that have no common components.)
-	
-	Now, suppose $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$. This means that the support of $\ens$ is disjoint from the support of both $\ens[a]$ and $\ens[b]$, which will also be disjoint from the support of any mixture of $\ens[a]$ and $\ens[b]$ since the support of the mixture will be the union of the individual supports. This means that $\ens$ will be separate from all mixtures of $\ens[a]$ and $\ens[b]$. The property holds, then, in any classical ensemble space.
-	
-	On the other hand, suppose that $\Ens$ is a quantum ensemble space. Without loss of generality, suppose $\Ens$ is the Bloch sphere and consider the states $x^+$, $x^-$, $z^+$, and $z^-$, which are points on the surface that form a square. These are all separate ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$. Therefore a mixture of $x^+$ and $x^-$ has a common component with $z^+$. That is, $z^+ \separate x^+$ and $z^+ \separate x^-$ but $z^+ \nseparate \frac{1}{2} x^+ + \frac{1}{2} x^-$.
+Let $\Ens$ be a quantum ensemble space. Let $A \subseteq \Ens$ the space of mixtures of a two dimensional subspace (i.e. a Bloch sphere) and consider the states $x^+$, $x^-$, $z^+$, and $z^-$, which are points on the surface that form a square. These are all separate ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$ therefore the space allows separate multidecomposition and is not a classical probability context.
 \end{proof}
+
+However, given a maximal set of commuting observables, we can define a classical probability context as the set of all mixed states that commute with all the observables. This makes the spectrum of all the density operator coincide with the product of the spectra of all commuting observables, and therefore those mixed states can be characterized by a measure over the spectra.
+
+\begin{conj}
+	Let $\Ens$ be a quantum ensemble space. Let $O_i$ a maximal set of commuting observables. Let $C \subseteq \Ens$ be the set of mixed state that commute with all $O_i$. Then $C$ is a classical probability context.
+\end{conj}
 
 \section{Statistical properties and quantities}
 
-TODO: need to review this part
+TODO: from here on are just old notes to be reorganized
 
 \subsection{Maximal component sequence}
 
