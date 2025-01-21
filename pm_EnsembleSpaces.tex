@@ -195,6 +195,8 @@ The second property of ensembles is that they can be mixed. That is, we can take
 
 \end{mathSection}
 
+TODO: in the previous math section, show how when rearranging convex combinations, you can essentially only look at one side, and the other side will always "fix itself."
+
 We should now check that the axiom of mixture is satisfied by the standard cases.
 
 \begin{mathSection}
@@ -268,21 +270,20 @@ The convex structure allows us to characterize ensembles based on whether they c
 \end{proof}
 \end{mathSection}
 
-TODO: review with Christine
+Since separateness is defined on top of mixing, it has an important relationship with mixtures: if an ensemble is separate from a mixture of two elements, it is separate from both elements and all their mixtures.
 
-Since separateness is defined on top of mixing, it is an important property relationship with mixtures: if an ensemble is separate from a mixture of two elements, it is separate from both elements and all their mixtures.
-
-\begin{prop}[Separateness extends on all mixtures]\label{pm_es_separateExtendsMixtures}
-	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ has no common component with a mixture of $\ens_1$ and $\ens_2$ then it has no common component with any mixture of $\ens_1$ and $\ens_2$ and with either $\ens_1$ and $\ens_2$. That is, if $\ens \separate p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \separate p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$.
+\begin{mathSection}
+\begin{prop}[Separateness extends to all mixtures]\label{pm_es_separateExtendsMixtures}
+	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ has no common component with a mixture of $\ens_1$ and $\ens_2$ then it has no common component with any mixture of $\ens_1$ and $\ens_2$ and with either $\ens_1$ or $\ens_2$. That is, if $\ens \separate p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \separate p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$.
 \end{prop}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.3\textwidth]{tempimages/DistinctAndMixture.jpg}
 \end{figure}
 
 \begin{proof}
-	Let $\ens \separate \ens[a] = p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$. Let $\ens[b] = \alpha \ens_1 + \bar{\alpha} \ens_2$ with $0 \leq \alpha < p$. We can do so without loss of generality since switching $\ens_1$ with $\ens_2$ would lead to the case where $1 \geq \alpha > p$. Suppose $\ens[b]$ is not separate from $\ens$. Then we can find $\ens[c] \in \Ens$ such that $\ens[b] = \beta \ens[c] + \bar{\beta} \ens[d]$ and $\ens = \gamma \ens[c] + \bar{\gamma} \ens[f]$ for some $\ens[d], \ens[f] \in \Ens$ and $\beta, \gamma \in (0, 1)$.
+	Let $\ens \separate \ens[a] = p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$. Let $\ens[b] = \alpha \ens_1 + \bar{\alpha} \ens_2$ with $0 \leq \alpha < p$. Suppose $\ens[b]$ is not separate from $\ens$. Then we can find $\ens[c] \in \Ens$ such that $\ens[b] = \beta \ens[c] + \bar{\beta} \ens[d]$ and $\ens = \gamma \ens[c] + \bar{\gamma} \ens[f]$ for some $\ens[d], \ens[f] \in \Ens$ and $\beta, \gamma \in (0, 1)$.
 	
 	Setting $\epsilon = \frac{p - \alpha}{\bar{\alpha}}$ and $\lambda = \bar{\epsilon} \beta$ we have:
 	\begin{align*}
@@ -291,12 +292,20 @@ Since separateness is defined on top of mixing, it is an important property rela
 		&= \frac{p - \alpha}{\bar{\alpha}}  \ens_1 + \left( 1 - \frac{p - \alpha}{\bar{\alpha}}\right) (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} (\alpha \ens_1 + \bar{\alpha} \ens_2) = \epsilon \ens_1 + \bar{\epsilon} \ens[b] \\
 		&= \epsilon \ens_1 + \bar{\epsilon} ( \beta \ens[c] + \bar{\beta} \ens[d] ) = \bar{\epsilon} \beta \ens[c] + \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] = \lambda \ens[c] + \bar{\lambda} \ens[g]
 	\end{align*}
-	where $\ens[g] = \frac{1}{\bar{\lambda}}\left( \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] \right)$. This means $\ens[a]$ and $\ens$ have a common component, which is a contradiction. Therefore $\ens[b] \separate \ens$ and $\ens \separate p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$.
+	where $\ens[g] = \frac{1}{\bar{\lambda}}\left( \epsilon \ens_1 + \bar{\epsilon} \bar{\beta} \ens[d] \right)$. This means $\ens[a]$ and $\ens$ have a common component, which is a contradiction. Therefore $\ens \separate \alpha \ens_1 + \bar{\alpha} \ens_2$ for all $\alpha \in [0, p]$.
+	
+	We can repeat the argument switching $\ens_1$ with $\ens_2$ and find $\ens \separate \alpha \ens_1 + \bar{\alpha} \ens_2$ for all $\alpha \in [0, 1]$.
 \end{proof}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{tempimages/MixturesDoNotPreserveSeparateness.jpg}
+\end{figure}
+
 \begin{remark}
-	Note that the property does not work the other way around 
+	Note that the property does not work the other way around, in the sense that $\ens \separate \ens_1$ and $\ens \separate \ens_2$ does not imply $\ens \separate \alpha \ens_1 + \bar{\alpha} \ens_2$ for all $\alpha \in [0, 1]$. We can find a counterexample in quantum mechanics. Suppose that $\ens$, $\ens_1$ and $\ens_2$ are three pure states within the same two-dimensional subspace. These will be points on the surface of a Bloch ball, which will identify a circle. Since they are pure states, they will be all separate. However, if we take a mixture $\ens[a]$ of $\ens_1$ and $\ens_2$, this can also be written as a mixture of $\ens$ and some $\ens[b]$. Since $\ens$ is a component of $\ens[a]$, they are not separate.
 \end{remark}
+\end{mathSection}
 
 \subsection{Convex subsets and convex hull}
 
@@ -534,7 +543,9 @@ We now prove that the function $I(p,\bar{p})$ must be the Shannon entropy.
 
 \subsection{Separateness and orthogonality}
 
-TODO: review with Christine
+Separateness and orthogonality are tightly related to each other, and we can think of orthogonality as a stronger condition than separateness. Like separateness, orthogonality is an irreflexive symmetric relation, and
+
+TODO: make homogeneous with separateness review with Christine; maybe add that in classical spaces the two coincide
 
 \begin{prop}
 	An ensemble is not orthogonal with itself or with its own components. Two orthogonal ensembles are separate. That is, if $\ens[a] \ortho \ens[b]$ then $\ens[a] \separate \ens[b]$.
@@ -589,7 +600,7 @@ The axiom of mixture does not constrain the convex set to be a subset of a vecto
 		\end{aligned}
 	\end{equation}
 	
-	Now we show that $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$. Since we want to be able to expand multiple times, we want to be able to find a $p$ such that
+	Now we show that $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$. Since we want to be able to expand multiple times, we want to be able to find a $p \in (0,1)$ such that
 	\begin{equation}
 		p \ens[a] + p \ens[a] + (1-2p) \ens = p \ens[a] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens)= p \ens[a] + \bar{p} p_0 \ens[a] + \bar{p} \bar{p}_0 \ens.
 	\end{equation}
@@ -601,7 +612,7 @@ The axiom of mixture does not constrain the convex set to be a subset of a vecto
 			p &= \frac{p_0}{1+p_0}
 		\end{aligned}
 	\end{equation}
-	We have
+	Note that since $p_0 > 0$ we have $p>0$, and since the numerator is always greater than the denominator $p < 1$. We have
 	\begin{equation}
 		\begin{aligned}
 			2p \ens[a] + \overline{2p} \ens &=  p \ens[a] + p \ens[a] + (1-2p) \ens =  p \ens[a] + \bar{p} (p_0 \ens[a] + \bar{p}_0 \ens) = p \ens[a] + \bar{p} (p_0 \ens[b] + \bar{p}_0 \ens) \\
@@ -618,7 +629,7 @@ The axiom of mixture does not constrain the convex set to be a subset of a vecto
 			p_0 &> p_0^2 \\
 		\end{aligned}
 	\end{equation}
-	which is true since $p_0 \in (0,1)$. Since now the relationship holds for $p_1 = \frac{2 p_0}{1+p_0} > p_0 $, we can repeat the process again and find that it holds for $p_2 = \frac{2 p_1}{1+p_1} > p_1$ and so on. Therefore, since we can always find a greater mixing coefficient for which the relationship holds, combined with the previous result, $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$.
+	which is true since $p_0 \in (0,1)$. Since now the relationship holds for $p_1 = \frac{2 p_0}{1+p_0} > p_0 $, we can repeat the process again and find that it holds for $p_2 = \frac{2 p_1}{1+p_1} > p_1$ and so on. We thus have a sequence of elements between $0$ and $1$ and we need to determine what is the limit of this sequence. The only two fixed points of the expression $f(x) = \frac{2x}{1+x}$ are $0$ and $1$, with $0$ being a repelling fixed point and $1$ an attracting fixed point. Since we start with an element that is strictly between those values, the sequence will converge to $1$. Therefore, since we can always find a greater mixing coefficient for which the relationship holds, combined with the previous result, $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$.
 	
 	Now we show that if  $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$, then we also have $p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} \ens = p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $\lambda \in [0,1]$. We have
 	\begin{equation}
@@ -700,7 +711,7 @@ Another constraint that the entropy imposes is that every affine direction is bo
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\textwidth]{tempimages/BoundedEnsembleSpace.jpg}
-	\caption{$\Ens$ is the ensemble space and $V$ is the embedding vector space. Taking two ensembles, the dashed line represents all the affine combinations. Those that are in the ensemble space are a line, as defined above.}
+	\caption{$\Ens$ is the ensemble space and $V$ is the embedding vector space. Taking two ensembles, the dashed line represents all the affine combinations. Those that are in the ensemble space are a line, as defined below.}
 \end{figure}
 
 \begin{mathSection}
@@ -721,7 +732,7 @@ Another constraint that the entropy imposes is that every affine direction is bo
 \end{thrm}
 
 \begin{proof}
-	Let $A \subseteq \Ens$ be a line. Pick $\ens_0, \ens_1 \in A$. For any $\ens[a] \in A$, we can find a convex expression between $\ens_0$, $\ens_1$ and $\ens[a]$. Rearranging the terms, we can always write $\ens[a] = \bar{x}\ens_0 + x\ens_1$ where $x \in \mathbb{R}$. Note that $x$ uniquely determines $\ens[a]$. Therefore we can define $f(\ens[a]) \mapsto x$, and it will be an invertible function.
+	Let $A \subseteq \Ens$ be a line. Pick $\ens_0, \ens_1 \in A$. For any $\ens[a] \in A$, we can find an affine expression between $\ens_0$, $\ens_1$ and $\ens[a]$. Rearranging the terms, we can always write $\ens[a] = \bar{x}\ens_0 + x\ens_1$ where $x \in \mathbb{R}$. Note that $x$ uniquely determines $\ens[a]$. Therefore we can define $f(\ens[a]) \mapsto x$, and it will be an invertible function.
 	
 	We can verify that, given $\ens[a], \ens[b] \in A$, we have
 	\begin{equation}
@@ -1236,47 +1247,54 @@ Mathematically, this leads to the notion of a nicely bounded set, a set whose bo
 
 Given that we are stressing the importance of the topology, one is led to ask: can we just define the measure purely in terms of the topology, with no reference to the Borel algebra? That is, can we define a measure-theoretic object that is purely topological? The answer is positive. Once the measure is defined on the open sets, it can first be extended to the algebra of nicely bounded sets and then to the whole Borel algebra.
 
+\begin{mathSection}
 \begin{defn}
 	Let $X$ be a topological space. A \textbf{topological measure} is a set function $\mu$ over the topology that satisfies the following:
 	\begin{enumerate}
 		\item non-negative: $\mu(U) \geq 0$
 		\item topologically additive: $\mu\left(\interior\left(\overline{\bigcup_{i \in I} U_i}\right)\right) = \sum_{i \in I} \mu(U_i)$ whenever $U_i \cap U_j = \emptyset$ for all $i\neq j$
-		\item locally finite: if $\mu(U) = + \infty$ then we can find $V \in \textsf{T}_X$ such that $\emptyset \subset V \subseteq U$ and $\mu(V) < + \infty$.
+		\item locally finite: for any $U$, we can find $V \in \textsf{T}_X$ such that $\emptyset \subset V \subseteq U$ and $\mu(V) < + \infty$.
 	\end{enumerate}
 	The measure is finite if $\mu(X) < \infty$.
 \end{defn}
 
 \begin{coro}
-	Let $\mu$ be a topological measure. The measure is monotone (i.e. $U \subseteq V$ implies $\mu(U) \leq \mu(V)$). The empty set has zero measure (i.e. $\mu(\emptyset) = 0$). For every open set $U$, $\mu(U) = \mu(\interior(\overline{U}))$.
+	Let $\mu$ be a topological measure, then the following are true:
+	\begin{enumerate}
+		\item the measure is monotone: $U \subseteq V$ implies $\mu(U) \leq \mu(V)$
+		\item the empty set has zero measure: $\mu(\emptyset) = 0$
+		\item $\mu(U) = \mu(\interior(\overline{U}))$ for every open set $U$.
+	\end{enumerate}
 \end{coro}
 
 \begin{proof}
-	Let $U \subseteq V$ then $V = U \cup (V \setminus U)$ where $U$ and $(V \setminus U)$ are disjoint. This means that $U$ and $\interior(V \setminus U)$ are also disjoint. We have $\mu(V) = \mu(\interior(\overline{U \cup \interior(V \setminus U)})) = \mu(U) + \mu(\interior(V \setminus U)) \geq \mu(U)$.
+	For 1, let $U \subseteq V$ then $V = U \cup (V \setminus U)$ where $U$ and $(V \setminus U)$ are disjoint. This means that $U$ and $\interior(V \setminus U)$ are also disjoint. We have $\mu(V) = \mu(\interior(\overline{U \cup \interior(V \setminus U)})) = \mu(U) + \mu(\interior(V \setminus U)) \geq \mu(U)$.
 	
-	Since $\emptyset$ is open, it is disjoint from itself and it is its own closure, $\mu(\emptyset) + \mu(\emptyset) = \mu(\interior(\overline{\emptyset\cup\emptyset}))= \mu(\emptyset)$. This means the empty set has either zero measure or infinite measure. Since the measure is monotone and locally finite, the empty set has zero measure.
+	For 2, since $\emptyset$ is open, it is disjoint from itself and it is its own closure, $\mu(\emptyset) + \mu(\emptyset) = \mu(\interior(\overline{\emptyset\cup\emptyset}))= \mu(\emptyset)$. This means the empty set has either zero measure or infinite measure. Since the measure is monotone and locally finite, the empty set has zero measure.
 	
-	Let $U$ be an open set. We have $\mu(U) = \mu(U) + \mu(\emptyset) = \mu(\interior(\overline{U\cup\emptyset}))= \mu(\interior(\overline{U}))$.
+	For 3, let $U$ be an open set. We have $\mu(U) = \mu(U) + \mu(\emptyset) = \mu(\interior(\overline{U\cup\emptyset}))= \mu(\interior(\overline{U}))$.
 \end{proof}
 
 \begin{thrm}[Topological measure extension theorem]
-	Let $X$ be a topological space and $\mu$ a topological measure on that space. Then there exists a meausre $\overline{\mu}$ defined on the Borel algebra such that $\left.\overline{\mu}\right|_{\textsf{T}_X} = \mu$. If $X$ is second countable or if $\mu$ is finite the extension is unique.
+	Let $X$ be a topological space and $\mu$ a topological measure on that space. Then there exists a measure $\overline{\mu}$ defined on the Borel algebra such that $\left.\overline{\mu}\right|_{\textsf{T}_X} = \mu$. If $X$ is second countable or if $\mu$ is finite the extension is unique.
 \end{thrm}
 
 \begin{proof}
-	The strategy is first to extend the measure to the algebra of nicely bounded sets generated by the open sets and then use \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory's_extension_theorem}{Carathéodory extension theorem} to extend to the whole Borel algebra.
+	The strategy is first to extend the topological measure $\mu$ to a pre-measure $\mu'$ over the algebra of nicely bounded sets generated by the open sets and then use \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory's_extension_theorem}{Carathéodory's extension theorem} to extend to a measure $\bar{\mu}$ on the whole Borel algebra.
 	
-	First we show that if we want to extend the measure to $R_X$, the algebra generated by closing the open sets under complement and finite intersection, the measure of a closed set must be the same as the measure of its interior. Let $U$ be a closed set and $V$ an open superset of $V$. Then $W = V \setminus U = V \cap U^{\complement}$ is an open set since is the intersection of two open sets. If we want to extend the measure to the closed sets, we must have $\mu(V) = \mu(U) + \mu(W)$. Note that $\interior(U)$ and $W$ are two disjoint open sets, therefore we have $\mu(\interior(U)) + \mu(W) = \mu(\interior(\overline{W \cup U})) = \mu(\interior(\overline{V})) = \mu(V)$. Therefore $\mu(U) = \mu(\interior(U))$.
+	First we show that if we want to extend the topological measure $\mu : \mathsf{T}_X \to [0,+\infty]$ to a pre-measure $\mu' : R_X \to [0,+\infty]$ over $R_X$, the algebra generated by closing the open sets under complement and finite intersection, the pre-measure of a closed set must be the same as the topological measure of its interior. That is, $\mu'(U) = \mu(\interior(U))$ for any closed set $U$. Let $U$ be a closed set and $V$ an open superset of $U$. Then $W = V \setminus U = V \cap U^{\complement}$ is an open set since it is the intersection of two open sets. Since $\mu'$ must be additive, we must have $\mu(V) = \mu'(V) = \mu'(U) + \mu'(W) = \mu'(U) + \mu(W)$. Note that $\interior(U)$ and $W$ are two disjoint open sets, therefore we have $\mu(\interior(U)) + \mu(W) = \mu(\interior(\overline{W \cup \interior(U)})) = \mu(\interior(\overline{W \cup U})) = \mu(\interior(\overline{V})) = \mu(V)$. Therefore $\mu'(U) = \mu(\interior(U)) = \mu'(\interior(U))$.
 	
-	Now we show that for any nicely bounded set $U$, $\mu(U) = \mu(\overline{U}) = \mu(\interior(U))$. For a generic set, we have $\interior(U) \subseteq U \subseteq \overline{U}$. Therefore $\mu(\interior(U)) \subseteq \mu(U) \subseteq \mu(\overline{U})$. Since $\interior(U)$ is an open set, we have $\mu(\interior(U)) = \mu(\interior(\overline{\interior(U)}))$. Since $U$ is nicely bounded, $\overline{U} = \overline{\interior(U)}$ and therefore $\mu(\interior(\overline{\interior(U)})) = \mu(\interior(\overline{U}))$. Since $\overline{U}$ is a closed set, $\mu(\interior(\overline{U})) = \mu(\overline{U})$. Putting it all together, $\mu(\interior(U)) = \mu(\overline{U})$. Since $\mu(U)$ must be between the two values, $\mu(U) = \mu(\interior(U)) = \mu(\overline{U})$.
+	Now we show that for any nicely bounded set $U$, $\mu'(U) = \mu'(\overline{U}) = \mu'(\interior(U)) = \mu(\interior(U))$. For a generic set, we have $\interior(U) \subseteq U \subseteq \overline{U}$. Therefore $\mu'(\interior(U)) \leq \mu'(U) \leq \mu'(\overline{U})$. Since $\interior(U)$ is an open set, we have $\mu'(\interior(U)) = \mu'(\interior(\overline{\interior(U)}))$. Since $U$ is nicely bounded, $\overline{U} = \overline{\interior(U)}$ and therefore $\mu'(\interior(\overline{\interior(U)})) = \mu'(\interior(\overline{U}))$. Since $\overline{U}$ is a closed set, $\mu'(\interior(\overline{U})) = \mu'(\overline{U})$. Putting it all together, $\mu'(\interior(U)) = \mu'(\overline{U})$. Since $\mu'(U)$ must be between the two values, $\mu'(U) = \mu'(\interior(U)) = \mu'(\overline{U}) = \mu(\interior(U))$.
 	
-	We can therefore extend the measure to all nicely bounded sets simply by setting $\mu(U) = \mu(\interior(U))$. Since the interior of disjoint sets is disjoint, the measure will preserve $\sigma$-additivity. Therefore the extension is a pre-measure on the algebra of nicely bounded sets generated from the open sets. This satisfies the prerequisites of Carathéodory's extension theorem, and can therefore be extended to the full Borel algebra.
+	We can therefore extend the topological measure $\mu$ to a pre-measure $\mu'$ over all nicely bounded sets simply by setting $\mu'(U) = \mu(\interior(U))$. Since the interior of disjoint sets is disjoint, the pre-measure will preserve $\sigma$-additivity. Therefore the extension is a pre-measure on the algebra of nicely bounded sets generated from the open sets. This satisfies the prerequisites of Carathéodory's extension theorem, and it can therefore be extended to measure $\bar{\mu} : \Sigma_X \to [0,+\infty]$ over the full Borel algebra $\Sigma_X$.
 	
-	The extension is unique if the pre-measure is $\sigma$-finite, which means, for example, that we can find a countable cover of the space where each open set is finite. Note that if $X$ is second countable, and since the measure is locally finite, we are going to be able to find a countable basis of the space where each element of the basis is finite. Therefore we are guaranteed $\sigma$-finite. If the topological measure is finite, then it is $\sigma$-finite regardless of the space.
+	The extension is unique if the pre-measure $\mu'$ is $\sigma$-finite, which means, for example, that we can find a countable cover of the space where each open set is finite. Note that if $X$ is second countable, and since the measure is locally finite, we are going to be able to find a countable basis of the space where each element of the basis is finite. Therefore we are guaranteed $\sigma$-finite. If the topological measure is finite, then it is $\sigma$-finite regardless of the space.
 \end{proof}
 
-\begin{remark}
-	One last point would be to show that if $\mu$ is a locally finite measure continuous with respect to the topology, then $\left.\mu\right|_{\textsf{T}_X}$ is a topological measure. Additionally, it would be interesting to know whether the extension to the Borel algebra recovers the same measure. Alternatively, whether two distinct continuous measures must be different on some open set.
-\end{remark}
+\begin{conj}
+	Let $X$ be a topological space and $\mu : \Sigma_X \to [0,+\infty]$ be a $\sigma$-finite measure compatible with the topology. Then $\left.\mu\right|_{\textsf{T}_X}$ is a topological measure and $\mu$ is its unique extension.
+\end{conj}
+\end{mathSection}
 
 \subsection{Flats and affine combinations}
 
