@@ -671,7 +671,7 @@ The axiom of mixture does not constrain the convex set to be a subset of a vecto
 \end{remark}
 
 \begin{conj}\label{pm_es_ensemblesAreTVS}
-	An ensemble space embeds in a topological vector space.
+	An ensemble space embeds continuously in a topological vector space.
 \end{conj}
 
 \begin{remark}
@@ -863,6 +863,10 @@ The first observation is that the entropy can be used to define a pseudo-distanc
 The second observation is that the strict concavity of the entropy forces the Hessian to be negative definite. The negation of the Hessian, then, is a positive definite function of two variations. In general, the Hessian of a scalar function is not a tensor. However, the ensemble space is a linear space and that linearity has physical significance. It is only for coordinates linear with respect to the mixing coefficient that the convex combination of coordinates will equal the statistical mixture of the corresponding ensembles. Therefore the metric tensor corresponds to the Hessian calculated on that linear structure. When using non-linear coordinates, as long as the coordinates are smooth, one can always make the appropriate transformation to linear coordinates.
 
 \begin{mathSection}
+\begin{remark}
+	In this section we will assume that an ensemble space embeds continuously into a topological vector space, even though we have not yet proved it. We are going to talk about variations $\delta \ens$ on the space, even though it is not yet clear exactly which mathematical approach is best to make variations well-defined. We are also going to talk about a metric tensor even though the space is not, in general, a manifold.
+\end{remark}
+	
 \begin{defn}
 	An ensemble space is \textbf{smooth} if the entropy is twice differentiable with respect to the mixing coefficients.
 \end{defn}
@@ -876,28 +880,25 @@ The second observation is that the strict concavity of the entropy forces the He
 \end{proof}
 
 \begin{defn}
-	A convex set $V \subseteq \Ens$ is finite dimensional if it embeds into a finite dimensional subspace of the embedding vector space. A finite dimensional convex set $V$ is a manifold, and is endowed with a differentiable structure given by all coordinates that are infinitely smooth with respect to the mixing coefficients (i.e. to the affine structure). A \textbf{linear chart} is a chart that preserves the linearity of the affine structure. A \textbf{variation} $\delta \ens$ is an element of the tangent space expressed in a linear chart.
+	A convex set $V \subseteq \Ens$ is finite dimensional if it embeds into a finite dimensional subspace of the embedding vector space. A finite dimensional convex set $V$ is a subset of $\mathbb{R}^n$ and can be charted by a set of coordinates, even though it is not a manifold (i.e. it may have a boundary, a boundary that is not a manifold, corners and so on). We can identify a set of coordinate that are smooth with respect to the mixing coefficients (i.e. to the affine structure). We call that that the differentiable structure of $V$. A \textbf{linear chart} is a chart that preserves the linearity of the affine structure. A \textbf{variation} $\delta \ens$ is assumed to be defined on the affine structure, though it can be re-expressed in any coordinate of the differentiable structure.
 \end{defn}
 
 \begin{remark}
 	Note that since an ensemble space is a convex subset of a real vector space, coordinate systems that are linear with respect to the vector space are privileged. It is only in these coordinates, in fact, that linear combinations correspond to mixtures. The strict concavity of the entropy is therefore guaranteed in these coordinates and only these coordinates. Given the special physical significance of these coordinates, all differential objects and properties will be defined in these coordinates.
-	
-	It remains an open problem to show that the topology of the ensemble space is indeed the topology of the manifold.
 \end{remark}
 
 \begin{defn}
-	Let $V \subseteq \Ens$ be a finite dimensional convex subset of a smooth ensemble space. Let $\ens \in \Ens$ be an ensemble and $T_{\ens}$ the tangent space at that point. The \textbf{norm} of $\delta \ens \in T_{\ens}$ is given by
+	Given an ensemble $\ens \subseteq \Ens$ and a variation $\delta \ens$ defined at that point, the \textbf{norm} of $\delta \ens$ is given by
 	$$ \lVert \delta \ens \rVert_{\ens} = \sqrt{ 8 MS(\ens, \ens + \delta \ens) }.$$
 	The \textbf{metric tensor} (i.e. the inner product between $\delta \ens_1 , \delta \ens_2 \in T_{\ens}$) is given by
 	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert_{\ens}^2 - \lVert \delta \ens_1 \rVert_{\ens}^2 - \lVert \delta \ens_2 \rVert_{\ens}^2 \right).$$
 \end{defn}
 
 \begin{thrm}
-	Let $\Ens$ be a smooth ensemble space and $V \subseteq \Ens$ a finite dimensional convex subset. Then, in a linear chart, we have
+	Let $\Ens$ be a smooth ensemble space. Then, in a linear chart, we have
 	$$ \lVert \delta \ens \rVert_{\ens}^2 = - \frac{\partial^2 S}{\partial \ens^2}(\delta \ens , \delta \ens) $$
 	and 
 	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = - \frac{\partial^2 S}{\partial \ens ^2}( \delta \ens_1, \delta \ens_2 ).$$
-	Then $V$ is a Riemannian manifold with $g_{\ens}$ as the metric tensor and $\lVert \cdot \rVert_{\ens}$ as the norm.
 \end{thrm}
 
 \begin{proof}
