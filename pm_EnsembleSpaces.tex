@@ -21,6 +21,7 @@
 \def\separate{\downmodels}
 \def\nseparate{\ndownmodels}
 \def\ortho{\perp}
+\def\northo{\nperp}
 
 \newcommand{\ens}[1][e] {\mathsf{#1}} % Ensemble
 \newcommand{\Ens}[1][E] {\mathcal{#1}} % Ensemble space
@@ -543,27 +544,49 @@ We now prove that the function $I(p,\bar{p})$ must be the Shannon entropy.
 
 \subsection{Separateness and orthogonality}
 
-Separateness and orthogonality are tightly related to each other, and we can think of orthogonality as a stronger condition than separateness. Like separateness, orthogonality is an irreflexive symmetric relation, and
+TODO: review
 
-TODO: make homogeneous with separateness review with Christine; maybe add that in classical spaces the two coincide
+Separateness and orthogonality are tightly related to each other. First of all, orthogonality implies separateness and is therefore a stronger properties. Moreover, orthogonality is an irreflexive symmetric relation, like separateness.
 
 \begin{prop}
-	An ensemble is not orthogonal with itself or with its own components. Two orthogonal ensembles are separate. That is, if $\ens[a] \ortho \ens[b]$ then $\ens[a] \separate \ens[b]$.
+	Orthogonality satisfies the following properties:
+	\begin{enumerate}
+		\item irreflexivity: $\ens[a] \northo \ens[a]$
+		\item symmetry: $\ens[a] \ortho \ens[b]$ if and only if $\ens[b] \ortho \ens[a]$
+		\item components are not orthogonal: if $\ens[b]$ is a component of $\ens[a]$ then $\ens[a] \northo \ens[b]$
+		\item imply separateness: if $\ens[a] \ortho \ens[b]$ then $\ens[a] \separate \ens[b]$.
+	\end{enumerate}
 \end{prop}
 
 \begin{proof}
-	To show that every ensemble is not orthogonal to itself, let $\ens[a] \in \Ens$. We have $S(p\ens[a] + \bar{p}\ens[a]) = S(\ens[a]) < I(p,\bar{p}) + p S(\ens[a]) + \bar{p} S(\ens[a])$. Therefore $\ens[a]$ is not orthogonal to itself as it does not saturate the upper bound.
+	For 1, let $\ens[a] \in \Ens$. We have $S(p\ens[a] + \bar{p}\ens[a]) = S(\ens[a]) < I(p,\bar{p}) + p S(\ens[a]) + \bar{p} S(\ens[a])$. Therefore $\ens[a]$ is not orthogonal to itself as it does not saturate the upper bound.
 	
-	To show that every ensemble is not orthogonal to its own components, let $\ens[a] = p \ens[b] + \bar{p} \ens[c]$. By mixtures preserve orthogonality, $\ens[b] \ortho \ens[a]$ if and only if $\ens[b] \ortho \ens[b]$ and $\ens[b] \ortho \ens[c]$. But $\ens[b]$ is not orthogonal to itself, therefore $\ens[a]$ and $\ens[b]$ are not orthogonal.
+	For 2, note that the upper entropy bound is symmetric in $\ens[a]$ and $\ens[b]$.
 	
-	Two show that orthogonal ensembles are separate we demonstrate the contrapositive: that ensembles that are not separate are not orthogonal. Let $\ens[a], \ens[b] \in \Ens$ have a common component. That is, $\ens[a] = p \ens[c] + \bar{p} \ens[d]$ and $\ens[b] = \lambda \ens[c] + \bar{\lambda} \ens[e]$. By mixtures preserve orthogonality, $\ens[a] \ortho \ens[b]$ if and only if $\ens[a] \ortho \ens[c]$ and $\ens[a] \ortho \ens[e]$. But $\ens[c]$ is a component of $\ens[a]$, therefore they are not orthogonal. Therefore two ensemble that have a common component are not orthogonal. This means that if two ensembles are orthogonal they cannot have a common component and are therefore separate.
+	For 3, let $\ens[a] = p \ens[b] + \bar{p} \ens[c]$. By mixtures preserve orthogonality, $\ens[b] \ortho \ens[a]$ if and only if $\ens[b] \ortho \ens[b]$ and $\ens[b] \ortho \ens[c]$. But $\ens[b]$ is not orthogonal to itself, therefore $\ens[a]$ and $\ens[b]$ are not orthogonal.
+	
+	For 4, we demonstrate the contrapositive: that ensembles that are not separate are not orthogonal. Let $\ens[a], \ens[b] \in \Ens$ have a common component. That is, $\ens[a] = p \ens[c] + \bar{p} \ens[d]$ and $\ens[b] = \lambda \ens[c] + \bar{\lambda} \ens[e]$. By mixtures preserve orthogonality, $\ens[a] \ortho \ens[b]$ if and only if $\ens[a] \ortho \ens[c]$ and $\ens[a] \ortho \ens[e]$. But $\ens[c]$ is a component of $\ens[a]$, therefore they are not orthogonal. Therefore two ensemble that have a common component are not orthogonal. This means that if two ensembles are orthogonal they cannot have a common component and are therefore separate.
 \end{proof}
 
-As we did for separateness, we can extend orthogonality to sets of ensembles.
+As we did for separateness, we extend the notion of orthogonality to sets of ensembles.
 
 \begin{defn}
 	Two sets of ensembles are orthogonal if all the elements of one are orthogonal to all the elements of the other. That is, $A \ortho B$ with $A, B \subseteq \Ens$ if $\ens[a] \ortho \ens[b]$ for all $\ens[a] \in A$ and $\ens[b] \in B$. 
 \end{defn}
+
+\begin{prop}
+	Let $A, B \subseteq \Ens$ be two sets of ensembles such that $A \ortho B$. Then the following are true:
+	\begin{enumerate}
+		\item the two sets are separate: $A \separate B$
+		\item their hulls are orthogonal: $\hull(A) \ortho \hull(B)$
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	For 1, by definition $\ens[a] \ortho \ens[b]$ for all $\ens[a] \in A$ and $\ens[b] \in B$. Since orthogonality implies separateness, we also have $\ens[a] \separate \ens[b]$.
+	
+	For 2, since mixtures preserve orthogonality, every mixture of $A$ is orthogonal to every mixture of $B$. To show that this extends to the closure, let $\ens[a]_i \in A$ and $\ens[b]_j \in B$ be two sequences of finite mixtures that converge in $A$ and $B$ respectively. Consider $f(p,\ens[a]_i, \ens[b]_j) = S(p \ens[a]_i + \bar{p} \ens[b]_j) - p S(\ens[a]_i) - \bar{p} S(\ens[b]_j)$. Since all mixtures are orthogonal, $f(p,\ens[a]_i, \ens[b]_j) = I(p,\bar{p})$. Note that $f$ is a continuous function, therefore the limits will also tend to the same constant. This means that every element in the hull of $A$ is orthogonal to every element in the hull of $B$.
+\end{proof}
 
 \section{Entropic constraints on the space}
 
@@ -1147,6 +1170,10 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 		5. The previous argument works in the same way for decreasing sequences by inverting the order.
 	\end{proof}
 \end{mathSection}
+
+\begin{conj}
+	The fraction capacity is additive over sets whose convex closures are separate. Therefore it is additive over orthogonal sets.
+\end{conj}
 
 \begin{conj}
 	The fraction capacity is $\sigma$-subadditive. That is, $\fcap_{\ens}(\bigcup A_i) \leq \sum_i \fcap_{\ens}(A_i)$.
