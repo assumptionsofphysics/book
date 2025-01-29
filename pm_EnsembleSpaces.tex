@@ -1128,27 +1128,35 @@ The first hint that the exponential is the right function is the relationship $S
 Given a set of ensembles, we can ask what spread reachable by a mixture in terms of the number of distinguishable states. We call this the state capacity as it represents the maximum potential spread reachable by the set, and because it turns out to be a non-additive measure.\footnote{In some literature, capacities are non-additive measures.} The state capacity is monotone and subadditive, and recovers additivity over orthogonal sets.
 
 \begin{defn}
-	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{state capacity} of $U$ is defined as $\capacity(U) = \sup(2^{S(\hull(U))})$ if $U \neq \emptyset$ and $\capacity(U) = 0$ otherwise.
+	Let $A \subseteq \Ens$ be the subset of an ensemble space. The \textbf{state capacity} of $A$ is defined as $\capacity(A) = \sup(2^{S(\hull(A))}\cup\{0\})$.
 \end{defn}
 
 \begin{prop}
 	The state capacity is a set function that is
 	\begin{enumerate}
-		\item non-negative: $\capacity(U) \in [0, +\infty]$
-		\item monotone: $U \subseteq V \implies \capacity(U) \leq \capacity(V)$
-		\item subadditive: $\capacity(U \cup V) \leq \capacity(U) + \capacity(V)$
-		\item additive over orthogonal sets: $U \ortho V \implies \capacity(U \cup V) = \capacity(U) + \capacity(V)$ 
+		\item non-negative: $\capacity(A) \in [0, +\infty]$
+		\item monotone: $A \subseteq B \implies \capacity(A) \leq \capacity(B)$
+		\item subadditive: $\capacity(A \cup B) \leq \capacity(A) + \capacity(B)$
+		\item additive over orthogonal sets: $A \ortho B \implies \capacity(A \cup B) = \capacity(A) + \capacity(B)$ 
 	\end{enumerate}
 \end{prop}
 
 \begin{proof}
 	1. The state capacity takes a subset of $\Ens$ and returns a real value and is therefore a set function. The exponential can only return non-negative values, therefore the state capacity of a set is non-negative. 
 	
-	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $\capacity(U) = 0$. Since $\capacity(V)$ is non-negative, $\capacity(U) \leq \capacity(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $2^{S(\hull(U))} \subseteq 2^{S(\hull(V))}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $\capacity(U) \leq \capacity(V)$. The state capacity is a monotone set function.
+	2. Let $A, B \subseteq \Ens$ such that $A \subseteq B$. If $A = \emptyset$, we have $\capacity(A) = 0$. Since $\capacity(B)$ is non-negative, $\capacity(A) \leq \capacity(B)$. If $A \neq \emptyset$, $\hull(A) \subseteq \hull(B)$ and therefore $2^{S(\hull(A))} \subseteq 2^{S(\hull(B))}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $\capacity(A) \leq \capacity(B)$. The state capacity is a monotone set function.
 	
-	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \capacity(U) + \capacity(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\capacity(U \cup V) \leq \capacity(U) + \capacity(V)$, the state capacity is subadditive.
+	3. Let $A, B \subseteq \Ens$ and let $\ens \in \hull(A \cup B)$. Then we can write $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} = 2^{S(\ens[a])} + 2^{S(\ens[b])} \leq \capacity(A) + \capacity(B)$. Since this is true for any element of $\hull(A \cup B)$, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\capacity(A \cup B) \leq \capacity(A) + \capacity(B)$, the state capacity is subadditive.
 	
-	4. Let $U, V \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \capacity(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \capacity(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(U) + \capacity(V)$. Therefore $\capacity(U \cup V) \geq \capacity(U) + \capacity(V)$. Combining with the previous result, $\capacity(U \cup V) = \capacity(U) + \capacity(V)$. Therefore the state capacity, as set function, is additive over orthogonal sets of ensembles.
+	4. Let $A, B \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[a]_i\} \subset A$ be a sequence of ensembles such that $2^{S(\ens[a]_i)} \to \capacity(A)$ and let $\{\ens[b]_i\} \subset B$ be a sequence of ensembles such that $2^{S(\ens[b]_i)} \to \capacity(B)$. Consider $\ens_i = p_i \ens[a]_i + \bar{p_i} \ens[b]_i$ where $p_i = \frac{2^{S(\ens[a]_i)}}{2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(A) + \capacity(B)$. Therefore $\capacity(A \cup B) \geq \capacity(A) + \capacity(B)$. Combining with the previous result, $\capacity(A \cup B) = \capacity(A) + \capacity(B)$. Therefore the state capacity, as set function, is additive over orthogonal sets of ensembles.
+\end{proof}
+
+\begin{conj}
+	The state capacity is additive only on orthogonal sets.
+\end{conj}
+
+\begin{proof}
+	If the state capacity adds, then the states with highest entropy satisfy the upper variability bound and are orthogonal. What needs to be shown is that this is enough to say all elements are orthogonal. There a series of nice results possible here. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. If $\ens[a]$ is the ensemble with maximum entropy in $\hull(A)$, it should be true that all elements of the hull are components of $\ens[a]$. If one ensemble is not, we should be able to create an ensemble with higher entropy.
 \end{proof}
 
 Note that the state capacity for a single element correspond to the ``ensemble volume'' defined in \href{https://arxiv.org/pdf/physics/9903045}{this work} and more recently \href{https://arxiv.org/pdf/1804.01343}{here}. It is connected to various uncertainty relationships, including a stronger form of the quantum uncertainty principle. It would be interesting to understand what results can be generalized to the ensemble space.
