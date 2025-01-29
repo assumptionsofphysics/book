@@ -1078,6 +1078,82 @@ We now show that the metric tensor we defined reduces to the Fisher-Rao metric i
 \end{remark}
 \end{mathSection}
 
+\section{State capacity}
+
+In this section we are going to develop a generalization of the link between count of states and the entropy. In classical mechanics, for a uniform distribution $\rho_U$ over a region of phase space $U$, we have $S(\rho_U) = \log \mu(U)$, where $\mu$ is the Liouville measure that is taken to correspond to the count of states. The idea is to generalize this relationship to all ensembles, classical and quantum.
+
+Given an ensemble, we want to quantify the number of distinguishable cases over which the ensemble is spread. Since entropy characterizes the variability of the preparations of the ensemble, greater variability means the ensemble is spread over more caes. Therefore the distinguishable states must be a monotonic function of the entropy. The question is what function.
+
+The first hint that the exponential is the right function is the relationship $S(\rho_U) = \log \mu(U)$ mentioned before. Another hint is that we will want this size to be multiplicative over independent distributions. That is, if we have two ensembles $\rho_1 \in \Ens_1$ and $\rho_2 \in \Ens_2$ of two different ensemble space, we can imagine the composite system $\rho = \rho_1 \rho_2$ representing the ensemble of the two independent ensembles. While the entropy should be additive, that is $S(\rho) = S_1(\rho_1) + S_2(\rho_2)$, the count of states should be multiplicative, that is $\mu(\rho) = \mu_1(\rho_1) \mu_2(\rho_2)$. This suggests the relationship $S(\rho) = \log \rho$ for all ensembles. The other hint is that the spread can be, at most, additive. If we mix two ensembles, the spread can at most be over the configurations of both. The following shows that the exponential of the entropy has exactly that property
+
+\begin{prop}[Exponential entropy subadditivity]\label{pm_es_exponentialEntropySubadditivity}
+	Let $\ens[a], \ens[b] \in \Ens$ and $\ens = p \ens_1 + \bar{p} \ens[b]$ for some $p \in [0,1]$. Then $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])}$, with the equality holding if and only if $\ens[a] \ortho \ens[b]$ and $p = \frac{2^{S(\ens[a])}}{2^{S(\ens[a])} + 2^{S(\ens[b])}}$.
+\end{prop}
+
+\begin{proof}
+	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens[a]$ and $\ens[b]$ are orthogonal by definition. The entropy maximum for the mixed ensemble can only be achieved when the elements are orthogonal, for some value of $p$.
+	
+	Now fix the entropy of $\ens[a]$ and $\ens[b]$ to some values $S_a = S(\ens[a])$ and $S_b = S(\ens[b])$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression. Since $\ens[a]$ and $\ens[b]$ are orthogonal, $S(p \ens[a] + \bar{p}\ens[b]) =  - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b$ which is a smooth function of $p$.
+	\begin{equation}
+		\begin{aligned}
+			0 = \frac{dS}{dp} &= \frac{d}{dp} S(\ens) =\frac{d}{dp} \left( - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b \right) \\
+			&= - \log p - 1 + \log \bar{p} + 1 + S_a - S_b \\
+			\log \frac{p}{\bar{p}} &= \log 2^{S_a} - \log 2^{S_b} \\
+			\log \frac{p}{1-p} &= \log \frac{2^{S_a}}{2^{S_b}}  \\
+			p 2^{S_b} &= (1-p) 2^{S_a}  \\
+			p (2^{S_a} + 2^{S_b}) &= 2^{S_a}  \\
+			p &= \frac{2^{S_a}}{2^{S_a} + 2^{S_b}}  \\
+		\end{aligned}
+	\end{equation}
+	Having found the value of $p$ that maximizes the entropy, we can calculate the maximum entropy.
+	\begin{equation}
+		\begin{aligned}
+			\bar{p} &= 1- \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} = \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \\
+			S &= S(\ens) = - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b  \\
+			&= - \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} - \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \\
+			&+ \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log 2^{S_a} + \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log 2^{S_b} \\
+			&= \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) + \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) \\
+			&= \frac{2^{S_a} + 2^{S_b}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) \\
+			\log 2^S &= \log \left( 2^{S_a} + 2^{S_b} \right) \\
+			2^S &=  2^{S_a} + 2^{S_b}  \\
+		\end{aligned}
+	\end{equation}
+	Therefore the maximum entropy obtainable through a mixture is $S = \log (2^{S_a} + 2^{S_b})$ which is obtained when $\ens[a]$ and $\ens[b]$ are orthogonal and $p = \frac{2^{S_a}}{2^{S_a} + 2^{S_b}}$.
+\end{proof}
+
+\begin{conj}
+	Let $f : \mathbb{R} \to \mathbb{R}$ be a continuous function such that $f(S(p\ens[a]+\bar{p}\ens[b])) \leq f(S(\ens[a])) + f(S(\ens[b]))$ and the equality can be verified in some condition, then $f(x) = \kappa^x$ for some arbitrary constant $\kappa$.
+\end{conj}
+
+Given a set of ensembles, we can ask what spread reachable by a mixture in terms of the number of distinguishable states. We call this the state capacity as it represents the maximum potential spread reachable by the set, and because it turns out to be a non-additive measure.\footnote{In some literature, capacities are non-additive measures.} The state capacity is monotone and subadditive, and recovers additivity over orthogonal sets.
+
+\begin{defn}
+	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{state capacity} of $U$ is defined as $\capacity(U) = \sup(2^{S(\hull(U))})$ if $U \neq \emptyset$ and $\capacity(U) = 0$ otherwise.
+\end{defn}
+
+\begin{prop}
+	The state capacity is a set function that is
+	\begin{enumerate}
+		\item non-negative: $\capacity(U) \in [0, +\infty]$
+		\item monotone: $U \subseteq V \implies \capacity(U) \leq \capacity(V)$
+		\item subadditive: $\capacity(U \cup V) \leq \capacity(U) + \capacity(V)$
+		\item additive over orthogonal sets: $U \ortho V \implies \capacity(U \cup V) = \capacity(U) + \capacity(V)$ 
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+	1. The state capacity takes a subset of $\Ens$ and returns a real value and is therefore a set function. The exponential can only return non-negative values, therefore the state capacity of a set is non-negative. 
+	
+	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $\capacity(U) = 0$. Since $\capacity(V)$ is non-negative, $\capacity(U) \leq \capacity(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $2^{S(\hull(U))} \subseteq 2^{S(\hull(V))}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $\capacity(U) \leq \capacity(V)$. The state capacity is a monotone set function.
+	
+	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \capacity(U) + \capacity(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\capacity(U \cup V) \leq \capacity(U) + \capacity(V)$, the state capacity is subadditive.
+	
+	4. Let $U, V \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \capacity(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \capacity(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(U) + \capacity(V)$. Therefore $\capacity(U \cup V) \geq \capacity(U) + \capacity(V)$. Combining with the previous result, $\capacity(U \cup V) = \capacity(U) + \capacity(V)$. Therefore the state capacity, as set function, is additive over orthogonal sets of ensembles.
+\end{proof}
+
+Note that the state capacity for a single element correspond to the ``ensemble volume'' defined in \href{https://arxiv.org/pdf/physics/9903045}{this work} and more recently \href{https://arxiv.org/pdf/1804.01343}{here}. It is connected to various uncertainty relationships, including a stronger form of the quantum uncertainty principle. It would be interesting to understand what results can be generalized to the ensemble space.
+
+
 \section{Generalized probability theory}
 
 Having seen how the strict concavity of the entropy leads to geometric structures, we are going to see how mixing is responsible for the measure theoretic structures. In the same way we derived a geometric structure on the ensembles, we are going to first define a measure theoretic structure on the ensembles as well. This measure, the fraction capacity, will tell us how much of an ensemble can be seen as a mixture of a set of others. It is not additive in general, but subadditive.
@@ -1921,81 +1997,6 @@ Note that, in principle, the definitions only use $\mathbb{R}$ as a topological 
 \begin{remark}
 	The reverse direction cannot, in general, work. Take the subspace of a finite classical discrete ensemble space such the maximum probability of any element is $k < 1$. This corresponds to a simplex of the same dimension, with the same center, but scaled in the interior. Given that it is a convex subset of an ensemble space, it will satisfy all the axioms, except it will contain no orthogonal ensembles. Yet, it contains separate ensembles, which cannot be orthogonal.
 \end{remark}
-
-\section{State capacity}
-
-In this section we are going to develop a generalization of the link between count of states and the entropy. In classical mechanics, for a uniform distribution $\rho_U$ over a region of phase space $U$, we have $S(\rho_U) = \log \mu(U)$, where $\mu$ is the Liouville measure that is taken to correspond to the count of states. The idea is to generalize this relationship to all ensembles, classical and quantum.
-
-Given an ensemble, we want to quantify the number of distinguishable cases over which the ensemble is spread. Since entropy characterizes the variability of the preparations of the ensemble, greater variability means the ensemble is spread over more caes. Therefore the distinguishable states must be a monotonic function of the entropy. The question is what function.
-
-The first hint that the exponential is the right function is the relationship $S(\rho_U) = \log \mu(U)$ mentioned before. Another hint is that we will want this size to be multiplicative over independent distributions. That is, if we have two ensembles $\rho_1 \in \Ens_1$ and $\rho_2 \in \Ens_2$ of two different ensemble space, we can imagine the composite system $\rho = \rho_1 \rho_2$ representing the ensemble of the two independent ensembles. While the entropy should be additive, that is $S(\rho) = S_1(\rho_1) + S_2(\rho_2)$, the count of states should be multiplicative, that is $\mu(\rho) = \mu_1(\rho_1) \mu_2(\rho_2)$. This suggests the relationship $S(\rho) = \log \rho$ for all ensembles. The other hint is that the spread can be, at most, additive. If we mix two ensembles, the spread can at most be over the configurations of both. The following shows that the exponential of the entropy has exactly that property
-
-\begin{prop}[Exponential entropy subadditivity]\label{pm_es_exponentialEntropySubadditivity}
-	Let $\ens[a], \ens[b] \in \Ens$ and $\ens = p \ens_1 + \bar{p} \ens[b]$ for some $p \in [0,1]$. Then $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])}$, with the equality holding if and only if $\ens[a] \ortho \ens[b]$ and $p = \frac{2^{S(\ens[a])}}{2^{S(\ens[a])} + 2^{S(\ens[b])}}$.
-\end{prop}
-
-\begin{proof}
-	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens[a]$ and $\ens[b]$ are orthogonal by definition. The entropy maximum for the mixed ensemble can only be achieved when the elements are orthogonal, for some value of $p$.
-	
-	Now fix the entropy of $\ens[a]$ and $\ens[b]$ to some values $S_a = S(\ens[a])$ and $S_b = S(\ens[b])$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression. Since $\ens[a]$ and $\ens[b]$ are orthogonal, $S(p \ens[a] + \bar{p}\ens[b]) =  - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b$ which is a smooth function of $p$.
-	\begin{equation}
-		\begin{aligned}
-			0 = \frac{dS}{dp} &= \frac{d}{dp} S(\ens) =\frac{d}{dp} \left( - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b \right) \\
-			&= - \log p - 1 + \log \bar{p} + 1 + S_a - S_b \\
-			\log \frac{p}{\bar{p}} &= \log 2^{S_a} - \log 2^{S_b} \\
-			\log \frac{p}{1-p} &= \log \frac{2^{S_a}}{2^{S_b}}  \\
-			p 2^{S_b} &= (1-p) 2^{S_a}  \\
-			p (2^{S_a} + 2^{S_b}) &= 2^{S_a}  \\
-			p &= \frac{2^{S_a}}{2^{S_a} + 2^{S_b}}  \\
-		\end{aligned}
-	\end{equation}
-	Having found the value of $p$ that maximizes the entropy, we can calculate the maximum entropy.
-	\begin{equation}
-	\begin{aligned}
-		\bar{p} &= 1- \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} = \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \\
-		S &= S(\ens) = - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b  \\
-		&= - \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} - \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \\
-		&+ \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log 2^{S_a} + \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log 2^{S_b} \\
-		&= \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) + \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) \\
-		&= \frac{2^{S_a} + 2^{S_b}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) \\
-		\log 2^S &= \log \left( 2^{S_a} + 2^{S_b} \right) \\
-		2^S &=  2^{S_a} + 2^{S_b}  \\
-	\end{aligned}
-	\end{equation}
-	Therefore the maximum entropy obtainable through a mixture is $S = \log (2^{S_a} + 2^{S_b})$ which is obtained when $\ens[a]$ and $\ens[b]$ are orthogonal and $p = \frac{2^{S_a}}{2^{S_a} + 2^{S_b}}$.
-\end{proof}
-
-\begin{conj}
-	Let $f : \mathbb{R} \to \mathbb{R}$ be a continuous function such that $f(S(p\ens[a]+\bar{p}\ens[b])) \leq f(S(\ens[a])) + f(S(\ens[b]))$ and the equality can be verified in some condition, then $f(x) = \kappa^x$ for some arbitrary constant $\kappa$.
-\end{conj}
-
-Given a set of ensembles, we can ask what spread reachable by a mixture in terms of the number of distinguishable states. We call this the state capacity as it represents the maximum potential spread reachable by the set, and because it turns out to be a non-additive measure.\footnote{In some literature, capacities are non-additive measures.} The state capacity is monotone and subadditive, and recovers additivity over orthogonal sets.
-
-\begin{defn}
-	Let $U \subseteq \Ens$ be the subset of an ensemble space. The \textbf{state capacity} of $U$ is defined as $\capacity(U) = \sup(2^{S(\hull(U))})$ if $U \neq \emptyset$ and $\capacity(U) = 0$ otherwise.
-\end{defn}
-
-\begin{prop}
-	The state capacity is a set function that is
-	\begin{enumerate}
-		\item non-negative: $\capacity(U) \in [0, +\infty]$
-		\item monotone: $U \subseteq V \implies \capacity(U) \leq \capacity(V)$
-		\item subadditive: $\capacity(U \cup V) \leq \capacity(U) + \capacity(V)$
-		\item additive over orthogonal sets: $U \ortho V \implies \capacity(U \cup V) = \capacity(U) + \capacity(V)$ 
-	\end{enumerate}
-\end{prop}
-
-\begin{proof}
-	1. The state capacity takes a subset of $\Ens$ and returns a real value and is therefore a set function. The exponential can only return non-negative values, therefore the state capacity of a set is non-negative. 
-	
-	2. Let $U, V \subseteq \Ens$ such that $U \subseteq V$. If $U = \emptyset$, we have $\capacity(U) = 0$. Since $\capacity(V)$ is non-negative, $\capacity(U) \leq \capacity(V)$. If $U \neq \emptyset$, $\hull(U) \subseteq \hull(V)$ and therefore $2^{S(\hull(U))} \subseteq 2^{S(\hull(V))}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $\capacity(U) \leq \capacity(V)$. The state capacity is a monotone set function.
-	
-	3. Let $U, V \subseteq \Ens$ and let $\ens \in \hull(U \cup V)$. Then we can write $\ens = p \ens[u] + \bar{p} \ens[v]$ for some $p \in [0,1]$, $\ens[u] \in U$ and $\ens[v] \in V$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} = 2^{S(\ens[u])} + 2^{S(\ens[v])} \leq \capacity(U) + \capacity(V)$. Since this is true for any element of $\hull(U \cup V)$, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\capacity(U \cup V) \leq \capacity(U) + \capacity(V)$, the state capacity is subadditive.
-	
-	4. Let $U, V \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[u]_i\} \subset U$ be a sequence of ensembles such that $2^{S(\ens[u]_i)} \to \capacity(U)$ and let $\{\ens[v]_i\} \subset V$ be a sequence of ensembles such that $2^{S(\ens[v]_i)} \to \capacity(V)$. Consider $\ens_i = p_i \ens[u]_i + \bar{p_i} \ens[v]_i$ where $p_i = \frac{2^{S(\ens[u]_i)}}{2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[u]_i)} + 2^{S(\ens[v]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(U) + \capacity(V)$. Therefore $\capacity(U \cup V) \geq \capacity(U) + \capacity(V)$. Combining with the previous result, $\capacity(U \cup V) = \capacity(U) + \capacity(V)$. Therefore the state capacity, as set function, is additive over orthogonal sets of ensembles.
-\end{proof}
-
-Note that the state capacity for a single element correspond to the ``ensemble volume'' defined in \href{https://arxiv.org/pdf/physics/9903045}{this work} and more recently \href{https://arxiv.org/pdf/1804.01343}{here}. It is connected to various uncertainty relationships, including a stronger form of the quantum uncertainty principle. It would be interesting to understand what results can be generalized to the ensemble space.
 
 \section{R-subspaces}\label{pm_es_subspaceSection}
 
