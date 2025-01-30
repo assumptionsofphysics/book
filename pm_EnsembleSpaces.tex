@@ -1682,6 +1682,169 @@ However, given a maximal set of commuting observables, we can define a classical
 
 \section{Statistical properties and quantities}
 
+Given our ensembles first approach, we define statistical quantities as linear functions of ensembles. The idea is that a statistical quantity represents an expectation over ensembles. The possible value of the quantities will need to be recovered with constructions that mimic spectral theory, though we will not want to talk about eigenstates and eigenvalues in the general case since these are not properly defined for a continuous quantity.
+
+\subsection{Properties and quantities}
+
+These definitions extend the notion of properties and quantities that we defined for an experimental domain. In that case, we simply required that a property we a continuous map to a set of possible values for the property. For a statistical property, the set of values are a topological convex space, so that the property allows statistical mixing. For a quantity is simply a linearly ordered property, which in this case will always be a real valued quantity. The convexity, the averaging operation, fills in the gaps in the linear order in case that not all intermediate values can be obtained.
+
+\begin{defn}
+	A \textbf{statistical property}, or simply property, is an attribute that allows statistical handling. Formally, it is a continuous map $F : \Ens \to \mathcal{Q}$ where $\mathcal{Q}$ is a convex topological space such that $F(p \ens_1 + \bar{p} \ens_2) = p F(\ens_1) + \bar{p} F(\ens_2)$.
+	
+	A \textbf{statistical quantity}, or statistical variable, or simply variable, is a numerical statistical property. That is, it is a continuous linear real valued operator $F : \Ens \to \mathbb{R}$.
+\end{defn}
+
+\begin{justification}
+	This definition extends the general definition of properties and quantities we already gave to the statistical case. As before, continuity is required since verifying the value of the quantity corresponds to verifying that we are dealing with a specific subset of ensembles.
+	
+	The ability to create convex combinations corresponds to the ability to create statistical averages. Therefore $\mathcal{Q}$ must be a convex set. Given that preparations are assumed to be independent, the a mixture of the preparation will produce a mixture of the properties according to the same fractions. 
+	
+	Quantities are simply properties that are linearly ordered. The ability to create convex combinations becomes the ability to take weighted averages of the quantities. Regardless of whether one starts from integers, rationals or real valued quantities, the statistical averages will, in general, be a real number.
+	
+	Note that the numerical value cannot be infinite. The only way to measure infinity is if the measured average keeps increasing in time. This would be a contradiction on the assumption that the ensemble represent a reproducible collection of preparations.
+\end{justification}
+
+\begin{remark}
+	Note that variables will have a contiguous range on the ensembles because, given two ensembles with different values, we can mix them to obtain any intermediate value. This does not mean that the variable can take all possible values on pure states. For example, the number of particles in a pure state will necessarily be a non-negative integer, but we can mix those to create ensembles that have non-integer average number of particles.
+\end{remark}
+
+\begin{coro}
+	A set of statistical quantities $\{F_i\}_{i \in I}$ can be collected into a single statistical property $F : \Ens \to \mathbb{R}^I$ where $F(\ens) = \{F_i(\ens)\}_{i \in I}$.
+\end{coro}
+
+Here we show that statistical quantities recover the standard random variables of classical mechanics and observables of quantum mechanics.
+
+\begin{prop}
+	Let $\Ens$ be a classical probability space. Then each statistical quantity is the expectation of a random variable and vice-versa.
+\end{prop}
+
+\begin{proof}
+	Let $\Ens$ be an ensemble space where each ensemble is a probability measure $\mu$ over some sample space $\Omega$. Let $f : \Omega \to \mathbb{R}$ be a random variable, then the expectation $F(\mu) = \int_{\Omega} f d\mu$ is a statistical quantity. Conversely, let $F : \Ens \to \mathbb{R}$ be a linear functional of the measures. Then, by Riesz representation theorem, we can write $F(\mu) = \int_{\Omega} f d\mu$ from some $f : \Omega \to \mathbb{R}$.
+\end{proof}
+
+\begin{conj}
+	Let $\Ens$ be a quantum ensemble space. Then each statistical quantity is the expectation of an observable and vice-versa.
+\end{conj}
+
+\begin{proof}
+	TODO: need to find a quantum correspondent of the Riesz representation theorem.
+\end{proof}
+
+\subsection{Quantifiable spaces and locally convex vector spaces}
+
+A common case is when all ensembles are identifiable by a set of statistical variables.
+
+\begin{defn}
+	A \textbf{quantifiable} ensemble space is an ensemble space where each ensemble can be identified by a set of statistical variables. That is, there is family of statistical variables $F_i : \Ens \to \mathbb{R}$ such that, given $\ens_1, \ens_2 \in \Ens$, $F_i(\ens_1) = F_i(\ens_2)$ for all $i$ if and only if $\ens_1 = \ens_2$. Moreover, the topology is generated by those variables.
+\end{defn}
+
+\begin{remark}
+	Ideally, we would want to show that the topology must be generated by those variables instead of imposing it.
+\end{remark}
+
+\begin{prop}
+	A statistical variable $F$ induces a semi-norm on the vector space that embeds $\Ens$.
+\end{prop}
+
+\begin{proof}
+	Let $F$ be a variable on $\Ens$ and let $V$ be the vector space that embeds $\Ens$. Extend $F$ on $V$ such that $F(a\ens) = |a| F(\ens)$. Then, according to the definition given after 1.1 in \url{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf} $F$ is a semi-norm.
+\end{proof}
+
+
+\begin{prop}
+	A quantifiable ensemble space embeds continuously into a Hausdorff locally convex topological vector space.
+\end{prop}
+
+\begin{proof}
+	The topology of the ensemble space is generated by the statistical variables, which induce semi-norms on the ambient vector space. This means that the topology of the vector space is generated by a countable set of semi-norms, and is therefore a locally convex topological vector space. See Prop 2.2 in \url{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}.
+	
+	The statistical variables fully identify each ensemble, which means that, if two elements are different, one semi-norm will give a non-zero value for the distance function associated with it. This means that the topology is Hausdorff. See Prop 2.6 in \url{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}.
+\end{proof}
+
+\begin{coro}
+	A quantifiable ensemble spaces is fully determined by countably many statistical variables.
+\end{coro}
+
+\begin{proof}
+	The topology of an ensemble space is second countable. A Hausdorff second countable locally convex topological vector space can always be generated by countably many semi-norms.
+\end{proof}
+
+\begin{remark}
+	Note that we are missing completeness in terms of the semi-norms to obtain a Fr\'echet space. It is not clear whether this is required since, for example, $L^1(\mathbb{R}^{2n}) \cap C(\mathbb{R}^{2n})$ is not Fr\'echet.
+\end{remark}
+
+\begin{conj}
+	Discrete/continuous classical ensemble spaces and quantum ensemble spaces are quantifiable.
+\end{conj}
+
+\begin{proof}
+	For discrete classical spaces, the expectation of the indicator of each extreme point defines a countable set of quantities that fully identifies the distribution.
+	
+	For continuous classical spaces, note that $L^1(\mathbb{R}^{2n})$ is a Hausdorff locally convex topological spaces.
+	
+	TODO Quantum (note that we are looking at the space of density operators with finite expectation value for position and momentum).
+\end{proof}
+
+\begin{conj}
+	If all ensembles can be connected by linear transformations parameterized by real quantities, then the ensemble is quantifiable.
+\end{conj}
+
+\begin{remark}
+	Not clear whether this is true. The idea is that the time interval can be used to define variables. A more sophisticated conjecture may look at the space of generators of Lie groups. This would link the topology of time to the topology of the ensemble space. If the topology of time is not that of the real numbers, then, the ensemble space must change significantly.
+\end{remark}
+
+\subsection{Macrostates and thermodynamics}
+
+In this section we try to recover some elements of thermodynamics on the generalized ensemble space. We want to recover Gibbs' thermodynamics, which means an equation of state in terms of extensive quantities. Instead of extensive quantities, we are going to use statistical quantities. Note that the idea that all extensive quantities are statistical (i.e. the average during mixing) seems to work. The energy and the number or particles average during mixture. The idea that volume averages during mixture can be understood as the system oscillating between the different volumes defined by the components. It also seems that intensive quantities do not average during mixing. Temperature, for example, is only defined on equilibria (i.e. of Boltzmann distributions) and the mixture of two equilibria at different temperature is not an equilibrium. Still, we would need a general proof, which would require the notion of product spaces (i.e. intensitive/extensive quantities represent system/subsystem relationship).
+
+\begin{defn}
+	Let $\Ens$ be an ensemble space. Let $F : \Ens \to \mathcal{Q}$ be a statistical property. The \textbf{coarse graining} of $\Ens$ over $F$ is the set $\mathcal{M} \subseteq \Ens$ represented by the ensemble that maximize the entropy for each fixed value of the property. That is, there exists a map $\psi : \mathcal{Q} \to \mathcal{M}$ such that $F(\psi(x)) = x$ and $S(\psi(x)) \geq \ens$ for all $\ens \in \Ens$ such that $F(\ens) = x$. The \textbf{equation of state} is the map $S(x) \mapsto S(\psi(x))$ that returns the entropy given the value of the statistical property.
+\end{defn}
+
+\begin{conj}
+	Let $F : \Ens \to \mathbb{R}^n$ be a vector of statistical quantities. Then the corresponding coarse graining of $\mathcal{M}$ is a manifold. The equation of state $S : \mathbb{R}^n \to \mathbb{R}$ returns the entropy as a function of the statistical values.
+\end{conj}
+
+\begin{remark}
+	We need to prove that $\mathcal{M}$ inherits the topology from $\Ens$. Are we be able to recover the topological isolation of phase transitions? The quantities will typically be energy plus other extensive quantities (i.e. volume, number of particles, ...).
+\end{remark}
+
+\begin{prop}
+	The equation of state is strictly concave. That is, $S(\lambda x + \bar{\lambda} y) \geq \lambda S(x) + \bar{\lambda} S(y)$ and the equality holds if and only if $x=y$.
+\end{prop}
+
+\begin{proof}
+	Let $x, y \in \mathcal{Q}$ be two possible values for the statistical property, and let $\lambda x + \bar{\lambda} y$ be a convex combination. We have $F(\psi(\lambda x + \bar{\lambda} y)) = \lambda x + \bar{\lambda} y = F(\lambda \psi(x) + \bar{\lambda} \psi(y))$. That is, $\psi(\lambda x + \bar{\lambda} y)$ and $\lambda \psi(x) + \bar{\lambda} \psi(y)$ are two ensembles that share the same value for the statistical property. By definition, the entropy of the first cannot be lower than the entropy of the second. We have
+	\begin{equation}
+		\begin{aligned}
+			S(\lambda x + \bar{\lambda} y) &= S(\psi(\lambda x + \bar{\lambda} y)) \\
+			&\geq S(\lambda \psi(x) + \bar{\lambda} \psi(y)) \\
+			&\geq \lambda S(\psi(x)) + \bar{\lambda} S(\psi(y)) \\
+			&= \lambda S(x) + \bar{\lambda} S(y),
+		\end{aligned}
+	\end{equation}
+	which shows that the equation of state is concave.
+	
+	Now suppose that $x=y$. Then on one side $S(\lambda x + \bar{\lambda} y) = S(x)$ and on the other side $\lambda S(x) + \bar{\lambda} S(y) = S(x)$. $S(\lambda x + \bar{\lambda} y) = \lambda S(x) + \bar{\lambda} S(y)$. Conversely, suppose that $x\neq y$. Then $\psi(x) \neq \psi(y)$. By the strict concavity of the entropy, we have
+	\begin{equation}
+		\begin{aligned}
+			S(\lambda x + \bar{\lambda} y) &= S(\psi(\lambda x + \bar{\lambda} y)) \\
+			&\geq S(\lambda \psi(x) + \bar{\lambda} \psi(y)) \\
+			&> \lambda S(\psi(x)) + \bar{\lambda} S(\psi(y)) \\
+			&= \lambda S(x) + \bar{\lambda} S(y),
+		\end{aligned}
+	\end{equation}
+	which shows that the equation of state is strictly concave.
+\end{proof}
+
+\begin{remark}
+	In the case of thermodynamics, where the statistical property is a vector of statistical values, the equation of state will be concave in all arguments and in all combination of arguments.
+\end{remark}
+
+
+\section{To be organized}
+
+
 TODO: from here on are just old notes to be reorganized
 
 \subsection{Maximal component sequence}
@@ -1751,50 +1914,6 @@ TODO: from here on are just old notes to be reorganized
 	TODO: this may need to be fixed. Can't reconstruct the argument.
 \end{proof}
 
-\subsection{Statistical properties}
-
-In the same way that we define ensembles first, we define quantities through their expectation over ensembles. The possible value for pure states will need to be recovered with constructions that are connected to spectral theory.
-
-\begin{defn}
-	A \textbf{statistical property}, or simply property, is an attribute that allows statistical handling. Formally, it is a continuous map $F : \Ens \to \mathcal{Q}$ where $\mathcal{Q}$ is a convex topological space such that $F(p \ens_1 + \bar{p} \ens_2) = p F(\ens_1) + \bar{p} F(\ens_2)$.
-	
-	A \textbf{statistical quantity}, or statistical variable, or simply variable, is a numerical statistical property. That is, it is a continuous linear real valued operator $F : \Ens \to \mathbb{R}$.
-\end{defn}
-
-\begin{justification}
-	This definition extends the general definition of properties and quantities we already gave to the statistical case. As before, continuity is required since verifying the value of the quantity corresponds to verifying that we are dealing with a specific subset of ensembles.
-	
-	The ability to create convex combinations corresponds to the ability to create statistical averages. Therefore $\mathcal{Q}$ must be a convex set. Given that preparations are assumed to be independent, the a mixture of the preparation will produce a mixture of the properties according to the same fractions. 
-	
-	Quantities are simply properties that are linearly ordered. The ability to create convex combinations becomes the ability to take weighted averages of the quantities. Regardless of whether one starts from integers, rationals or real valued quantities, the statistical averages will, in general, be a real number.
-	
-	Note that the numerical value cannot be infinite. The only way to measure infinity is if the measured average keeps increasing in time. This would be a contradiction on the assumption that the ensemble is reproducible.
-\end{justification}
-
-\begin{remark}
-	Note that variables will have a contiguous range on the ensembles because, given two ensembles with different values, we can mix them to obtain any intermediate value. This does not mean that the variable can take all possible values on pure states. For example, the number of particles in a pure state will necessarily be a non-negative integer, but we can mix those to create ensembles that have non-integer average number of particles.
-\end{remark}
-
-\begin{coro}
-	A set of statistical quantities $\{F_i\}_{i \in I}$ can be collected into a single statistical property $F : \Ens \to \mathbb{R}^I$ where $F(\ens) = \{F_i(\ens)\}_{i \in I}$.
-\end{coro}
-
-\begin{prop}
-	Let $\Ens$ be a classical probability space. Then each statistical quantity is the expectation of a random variable and vice-versa.
-\end{prop}
-
-\begin{proof}
-	Let $\Ens$ be an ensemble space where each ensemble is a probability measure $\mu$ over some sample space $\Omega$. Let $f : \Omega \to \mathbb{R}$ be a random variable, then the expectation $F(\mu) = \int_{\Omega} f d\mu$ is a statistical quantity. Conversely, let $F : \Ens \to \mathbb{R}$ be a linear functional of the measures. Then, by (TODO: CHECK) Riesz representation theorem, we can write $F(\mu) = \int_{\Omega} f d\mu$ from some $f : \Omega \to \mathbb{R}$.
-\end{proof}
-
-\begin{conj}
-	Let $\Ens$ be a quantum ensemble space. Then each statistical quantity is the expectation of an observable and vice-versa.
-\end{conj}
-
-\begin{proof}
-	TODO: need to find a quantum correspondent of the Riesz representation theorem.
-\end{proof}
-
 \begin{conj}
 	Let $e \in \Ens$ be an ensemble, $F : \Ens \to \mathbb{R}$ be a statistical variable and $A \subset \Ens$ be a set of ensemble. Let $\ens[a]_i$ and $\ens[b]_i$ be maximal $A$-component sequences of $\ens$. Then $\lim_{i \to \infty} F(\ens[a]_i) = \lim_{i \to \infty} F(\ens[b]_i)$.
 \end{conj}
@@ -1822,131 +1941,6 @@ In the same way that we define ensembles first, we define quantities through the
 \begin{remark}
 	This may still not be the correct formulation of the problem. Note that $A$ is a set of ensembles. In the classical case it would correspond to a set of probability measures, not a subset of the sample space (i.e. an event). However, in the discrete case and in the quantum case, $A$ can also be restricted to a set of pure state (i.e. extreme points), which would correspond to a subset of the sample space. It may be worth at least understanding that case.
 \end{remark}
-
-\subsection{Quantifiable spaces and locally convex vector spaces}
-
-\begin{prop}
-	Let $\Ens$ be a complemented ensemble space. Then a statistical variable $F$ induces a semi-norm on the vector space that embeds $\Ens$.
-\end{prop}
-
-\begin{proof}
-	Let $F$ be a variable on $\Ens$ and let $V$ be the vector space that embeds $\Ens$. Extend $F$ on $V$ such that $F(a\ens) = |a| F(\ens)$. Then, according to the definition given after 1.1 in \url{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf} $F$ is a semi-norm.
-\end{proof}
-
-\begin{defn}
-	A \textbf{quantifiable} ensemble space is an ensemble space where each ensemble can be identified by a set of statistical variables. That is, there is family of statistical variables $F_i : \Ens \to \mathbb{R}$ such that, given $\ens_1, \ens_2 \in \Ens$, $F_i(\ens_1) = F_i(\ens_2)$ for all $i$ if and only if $\ens_1 = \ens_2$. Moreover, the topology is generated by those variables.
-\end{defn}
-
-\begin{prop}
-	A quantifiable ensemble space is complemented and embeds into a Hausdorff locally convex topological vector space.
-\end{prop}
-
-\begin{proof}
-	Let $\ens[a], \ens[b], \ens[c] \in \Ens$ be three ensembles such that $p \ens[a] + \bar{p} \ens[b] = p \ens[a] + \bar{p} \ens[c]$ for some $p \in (0,1)$. For any statistical variable $F : \Ens \to \mathbb{R}$ we have
-	\begin{equation}
-		\begin{aligned}
-			F(p \ens[a] + \bar{p} \ens[b]) &= F(p \ens[a] + \bar{p} \ens[c]) = p F(\ens[a]) + \bar{p} F(\ens[b]) = p F(\ens[a]) + \bar{p} F(\ens[c])\\
-			F(\ens[b]) &= F(\ens[c]) 
-		\end{aligned}
-	\end{equation}
-	For a quantifiable ensemble space with statistical variables $F_i$, we have $F_i(\ens[b]) = F_i(\ens[c])$, which means $\ens[b] = \ens[c]$. Since $\ens[a]$, $\ens[b]$, $\ens[c]$ and $p$ where arbitrary, the space is complemented.
-	
-	The ensemble is complemented, therefore it is embedded into a vector space. The topology of the ensemble space is generated by the statistical variables, which induce semi-norms on the vector space. This means that the topology of the vector space is generated by a countable set of semi-norms, and is therefore a locally convex topological vector space. See Prop 2.2 in \url{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}.
-	
-	The statistical variables fully identify each ensemble, which means that, if two elements are different, one semi-norm will give a non-zero value for the distance function associated with it. This means that the topology is Hausdorff. See Prop 2.6 in \url{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}.
-\end{proof}
-
-\begin{coro}
-	A quantifiable ensemble spaces is fully determined by countably many statistical variables.
-\end{coro}
-
-\begin{proof}
-	The topology of an ensemble space is second countable. A Hausdorff second countable locally convex topological vector space can always be generated by countably many semi-norms.
-\end{proof}
-
-\begin{remark}
-	Note that we are missing completeness in terms of the semi-norms to obtain a Fr\'echet space. It is not clear whether this is required since, for example, $L^1(\mathbb{R}^{2n}) \cap C(\mathbb{R}^{2n})$ is not Fr\'echet.
-\end{remark}
-
-\begin{conj}
-	Discrete/continuous classical ensemble spaces and quantum ensemble spaces are quantifiable.
-\end{conj}
-
-\begin{proof}
-	For discrete classical spaces, the expectation of the indicator of each extreme point defines a countable set of quantities that fully identifies the distribution.
-	
-	For continuous classical spaces, $L^1(\mathbb{R}^{2n}) \cap C(\mathbb{R}^{2n})$ is a Hausdorff locally convex topological spaces.
-	
-	TODO Quantum (note that we are looking at the space of density operators with finite expectation value for position and momentum).
-\end{proof}
-
-\begin{conj}
-	If all ensembles can be connected by linear transformations parameterized by real quantities, then the ensemble is quantifiable.
-\end{conj}
-
-\begin{remark}
-	Note clear whether this is true. The idea is that the time interval can be used to define variables. A more sophisticated conjecture may look at the space of generators of Lie groups. This would link the topology of time to the topology of the ensemble space. If the topology of time is not that of the real numbers, then, the ensemble space must change significantly.
-\end{remark}
-
-% TODO: for later
-%\begin{conj}
-%	Let $\ens \in \Ens$ and $A \subset \Ens$. Let $\{\ens[a]_i\}$ and $\{\ens[b]_i\}$ be two maximal increasing $A$-component sequence. Then $\lim\limits_{i \to \infty} F(\ens[a]_i) = \lim\limits_{i \to \infty} F(\ens[a]_i)$ for any quantities $F$.
-%\end{conj}
-
-\begin{proof}
-	Check that the all maximal sequences give the same value.
-\end{proof}
-
-\subsection{Macrostates and thermodynamics}
-
-TODO: This should be moved after the definition of entropy.
-
-In this section we try to recover some elements of thermodynamics on the generalized ensemble space. We want to recover Gibbs' thermodynamics, which means an equation of state in terms of extensive quantities. Instead of extensive quantities, we are going to use statistical quantities. Note that the idea that all extensive quantities are statistical (i.e. the average during mixing) seems to work. The energy and the number or particles average during mixture. The idea that volume averages during mixture can be understood as the system oscillating between the different volumes defined by the components. It also seems that intensive quantities do not average during mixing. Temperature, for example, is only defined on equilibria (i.e. of Boltzmann distributions) and the mixture of two equilibria at different temperature is not an equilibrium. Still, we would need a general proof, which would require the notion of product spaces (i.e. intensitive/extensive quantities represent system/subsystem relationship).
-
-\begin{defn}
-	Let $\Ens$ be an ensemble space. Let $F : \Ens \to \mathcal{Q}$ be a statistical property. The \textbf{coarse graining} of $\Ens$ over $F$ is the set $\mathcal{M} \subseteq \Ens$ represented by the ensemble that maximize the entropy for each fixed value of the property. That is, there exists a map $\psi : \mathcal{Q} \to \mathcal{M}$ such that $F(\psi(x)) = x$ and $S(\psi(x)) \geq \ens$ for all $\ens \in \Ens$ such that $F(\ens) = x$. The \textbf{equation of state} is the map $S(x) \mapsto S(\psi(x))$ that returns the entropy given the value of the statistical property.
-\end{defn}
-
-\begin{conj}
-	Let $F : \Ens \to \mathbb{R}^n$ be a vector of statistical quantities. Then the corresponding coarse graining of $\mathcal{M}$ is a manifold. The equation of state $S : \mathbb{R}^n \to \mathbb{R}$ returns the entropy as a function of the statistical values.
-\end{conj}
-
-\begin{remark}
-	We need to prove that $\mathcal{M}$ inherits the topology from $\Ens$. Are we be able to recover the topological isolation of phase transitions? The quantities will typically be energy plus other extensive quantities (i.e. volume, number of particles, ...).
-\end{remark}
-
-\begin{prop}
-	The equation of state is strictly concave. That is, $S(\lambda x + \bar{\lambda} y) \geq \lambda S(x) + \bar{\lambda} S(y)$ and the equality holds if and only if $x=y$.
-\end{prop}
-
-\begin{proof}
-	Let $x, y \in \mathcal{Q}$ be two possible values for the statistical property, and let $\lambda x + \bar{\lambda} y$ be a convex combination. We have $F(\psi(\lambda x + \bar{\lambda} y)) = \lambda x + \bar{\lambda} y = F(\lambda \psi(x) + \bar{\lambda} \psi(y))$. That is, $\psi(\lambda x + \bar{\lambda} y)$ and $\lambda \psi(x) + \bar{\lambda} \psi(y)$ are two ensembles that share the same value for the statistical property. By definition, the entropy of the first cannot be lower than the entropy of the second. We have
-	\begin{equation}
-		\begin{aligned}
-			S(\lambda x + \bar{\lambda} y) &= S(\psi(\lambda x + \bar{\lambda} y)) \\
-			&\geq S(\lambda \psi(x) + \bar{\lambda} \psi(y)) \\
-			&\geq \lambda S(\psi(x)) + \bar{\lambda} S(\psi(y)) \\
-			&= \lambda S(x) + \bar{\lambda} S(y),
-		\end{aligned}
-	\end{equation}
-	which shows that the equation of state is concave.
-	
-	Now suppose that $x=y$. Then on one side $S(\lambda x + \bar{\lambda} y) = S(x)$ and on the other side $\lambda S(x) + \bar{\lambda} S(y) = S(x)$. $S(\lambda x + \bar{\lambda} y) = \lambda S(x) + \bar{\lambda} S(y)$. Conversely, suppose that $x\neq y$. Then $\psi(x) \neq \psi(y)$. By the strict concavity of the entropy, we have
-	\begin{equation}
-		\begin{aligned}
-			S(\lambda x + \bar{\lambda} y) &= S(\psi(\lambda x + \bar{\lambda} y)) \\
-			&\geq S(\lambda \psi(x) + \bar{\lambda} \psi(y)) \\
-			&> \lambda S(\psi(x)) + \bar{\lambda} S(\psi(y)) \\
-			&= \lambda S(x) + \bar{\lambda} S(y),
-		\end{aligned}
-	\end{equation}
-	which shows that the equation of state is strictly concave.
-\end{proof}
-
-\begin{remark}
-	In the case of thermodynamics, where the statistical property is a vector of statistical values, the equation of state will be concave in all arguments and in all combination of arguments.
-\end{remark}
-
 
 \subsection{Spectra of a quantity}
 
@@ -2227,6 +2221,10 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \begin{proof}
 	Let $\Ens$ be a quantum ensemble space. Then each ensemble is a density operator defined over a Hilbert space $\mathcal{H}$. Consider two density operators. They will be orthogonal, that is the entropy increase is maximal, if and only if they are defined on orthogonal subspaces of $\mathcal{H}$. That is, $\ens_1 | \psi \> \neq 0$ only if $\ens_2 | \psi \> = 0$ and vice-versa. Therefore $X$ contains exactly all the mixed states whose support is a subspace of $\mathcal{H}$.
 \end{proof}
+
+\subsection{Statistical properties and quantities}
+
+
 
 \subsection{State capacity of ensemble spaces}
 
