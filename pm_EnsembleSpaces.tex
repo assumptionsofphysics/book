@@ -1844,10 +1844,238 @@ In this section we try to recover some elements of thermodynamics on the general
 \end{remark}
 
 
-\section{To be organized}
+\section{R-subspaces}\label{pm_es_subspaceSection}
+
+Here we present a generic construction that we will be using in a couple of different ways to construct lattice of subspaces. The general idea can be understood by looking at vector spaces with an inner product. The inner product defines a notion of orthogonality between vectors and this notion of orthogonality can be used to construct subspaces in the following way. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all perpendicular to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were a subspace to begin with, then $U = (U^{\perp})^{\perp}$. We can now proceed in the opposite way, and use just the relationship of orthogonality to define subspaces, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar some construction related to Galois connections.}
+
+The construction work for any binary relationship that is symmetric and irreflexive. For example, given two distributions, the fact they have disjoint support is a symmetric and irreflexive relationship: a distribution does not have disjoint support with respect to itself, and the order of comparison does not matter. We can then construct subspaces based on this relationship, and find sets of function that are all defined within different regions.
+
+In our case, separateness, as defined by the mixing function, and orthogonality, as defined by the entropy, are symmetric and irreflexive.
+
+\subsection{Irreflexive symmetric relations and topped $\cap$-structures}
+
+We start with a generic set $X$ and a symmetric relation (i.e. if $aRb$ then $bRa$). We define the $R$-complement $U^R$ of all elements that are $R$-related to $U$ and study some useful properties. The symmetry of the relation is already enough to recover most of the properties we will need.
+
+\begin{mathSection}
+	\begin{defn}
+		Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Given a subset $U \subseteq X$, we define the \textbf{$R$-complement} to be
+		$$ U^{R} = \{ a \in X \, | \, \forall b \in U, aRb  \}. $$
+	\end{defn}
+	
+	\begin{prop}\label{pm_es_rComplProps}
+		Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Then:
+		\begin{enumerate}
+			\item $U \subseteq V \implies V^{R} \subseteq U^{R}$
+			\item $U \subseteq (U^{R})^{R}$
+			\item $U^{R} = ((U^{R})^{R})^{R}$
+			\item $U^{R} = (V^{R})^{R} \iff (U^{R})^{R} = V^{R}$
+			\item $(\bigcup_{i \in I} U_i )^{R} = \bigcap_{i \in I} (U_i)^{R}$
+			\item $\emptyset^{R} = X$
+		\end{enumerate}
+	\end{prop}
+	
+	\begin{proof}
+		1. Suppose $a \in V^{R}$. Then, by definition, $\forall b \in V, aRb$. Since $U \subset V$, it is also true that $\forall b \in U, aRb$. Therefore $a \in U^{R}$ by definition. Since $a$ was arbitrary, $V^{R} \subseteq U^{R}$.
+		
+		2. By expanding the definition of complement, we have $(U^{R})^{R}=\{ a \in X \, | \, \forall b \in U^{R}, aRb \} = \{ a \in X \, | \, \forall b \in \{ c \in X \, | \, \forall d \in U, cRd  \}, aRb \} = \{ a \in X \, | \, \forall b \in X \, s.t. (\forall d \in U, bRd), aRb \}$.
+		
+		Let $a \in U$ and let $b \in X$ such that $\forall d \in U, bRd$. Since $a \in U$ and $bRd$ for all $b \in U$, we have $bRa$ in particular. Since $R$ is symmetric, $aRb$. Given that $b$ was arbitrary, we conclude that $\forall b \in X \, s.t. (\forall d \in U, bRd), aRb$. Therefore $a \in (U^{R})^{R}$ by definition of complement. Given that $a$ was arbitrary, $U \in (U^{R})^{R}$.
+		
+		3. We again expand the definition and have $((U^{R})^{R})^{R} = \{ a \in X \, | \, \forall b \in (U^{R})^{R}, aRb \}$.
+		
+		Let $x \in ((U^{R})^{R})^{R}$. Then $\forall b \in (U^{R})^{R}, xRb$ by definition of the complement. Since by 1. $U \subset (U^{R})^{R}$, we can restrict the previous expression to only the elements of $U$, and therefore $\forall b \in U, xRb$. But this means that $x \in U^{R}$ by definition of the complement. Since $x$ was arbitrary, $((U^{R})^{R})^{R} \subseteq U^{R}$. But by 1., we also have $U^{R} \subseteq ((U^{R})^{R})^{R}$ since $U^{R}$ is just a set onto which we can apply the complement twice . By two-way containment, we have $U^{R} = ((U^{R})^{R})^{R}$.
+		
+		4. Let $U, V \subseteq X$ such that $U^{R} = (V^{R})^{R}$. Applying the complement on each side, $(U^{R})^{R} = ((V^{R})^{R})^{R}$. By the previous property $((V^{R})^{R})^{R} = V^{R}$ and therefore $(U^{R})^{R} = V^{R}$. Switching $U$ and $V$ proves the other direction.
+		
+		5. We have:
+		\begin{equation*}
+			\begin{aligned}
+				(\bigcup_{i \in I} U_i )^{R} &= \{ a \in X \, | \, \forall b \in \bigcup_{i \in I} U_i, aRb \} \\
+				&= \{ a \in X \, | \, \forall U_i, \forall  b \in U_i, aRb \} \\
+				&= \{ a \in X \, | \, \forall U_i, a \in \{ c \in X \, | \,  \forall  b \in U_i, cRb \} \} \\
+				&= \bigcap_{i \in I} \{ c \in X \, | \, \forall  b \in U_i, cRb\} \\
+				&= \bigcap_{i \in I} (U_i)^{R}
+			\end{aligned}
+		\end{equation*}
+		Note that this property does not rely on the symmetry of $R$.
+		
+		6. Let $a \in X$. There is no $b \in \emptyset$ such that $aRb$. Therefore $\forall b \in \emptyset, aRb$. This means that $a \in \emptyset^{R}$. Since $a$ was arbitrary, $X = \emptyset^{R}$.
+	\end{proof}
+\end{mathSection}
+
+The last two properties depends on both the symmetry and the irreflexivity.
+
+\begin{mathSection}
+	\begin{prop}\label{pm_ensmblespaces_symirreflproperties}
+		Let $X$ be a set and $R \subseteq X \times X$ a symmetric and irreflexive relation. Then
+		\begin{enumerate}
+			\item $U \cap U^{R} = \emptyset$
+			\item $X^{R} = \emptyset$
+		\end{enumerate}
+	\end{prop}
+	
+	\begin{proof}
+		1. Let $a \in U$. Since $R$ is irreflexive,  $aRa$ is false. Therefore it is not true that, for all $b \in U$, $aRb$. This means that $a \notin U^{R}$. Since that $a$ was arbitrary, $U \cap U^{R} \emptyset$.
+		
+		2. Suppose $a \in X^{R}$. Then for all $b \in X$, $aRb$. In particular, we would have $aRa$, which can't be true since $R$ is irreflexive. Therefore $a \notin X^{R}$ and, since $a$ is arbitrary, $X^{R} = \emptyset$.
+	\end{proof}
+\end{mathSection}
+
+We now define a notion of $R$-subspace by requiring that a subspace is the $R$-complement of its $R$-complement. We then construct the lattice of subspaces and show it satisfies properties we would expect from a lattice of subspaces.
+
+\begin{mathSection}
+	\begin{defn}
+		Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Let $U \subseteq X$. The \textbf{$R$-closure of $U$} is $\langle U \rangle_R = (U^{R})^{R}$. An \textbf{$R$-subspace} of $X$ is a set $U \subseteq X$ such that $U = \langle U \rangle_R$. The \textbf{lattice of $R$-subspaces} is the set $\mathfrak{L} = \{ U \subseteq X \, | \, U = \langle U \rangle_R \}$ ordered by inclusion.
+	\end{defn}
+	
+	\begin{coro}
+		The lattice of $R$-subspaces $\mathfrak{L}$ is a topped $\bigcap$-structure on $X$ and therefore is also a complete lattice.
+	\end{coro}
+	\begin{proof}
+		The set $\mathfrak{L}$ is a collection of subsets of $X$. Let $\{U_i\}_{i \in I} \subseteq \mathfrak{L}$ be a non-empty family. Then, using the definition of subspace, and the third and fifth properties of \ref{pm_es_rComplProps}, we have
+		\begin{align*}
+			\bigcap_{i \in I} U_i &= \bigcap_{i \in I} (U_i^{R})^{R} = (\bigcup_{i \in I} U_i^{R})^{R} \\
+			&= (((\bigcup_{i \in I} (U_i^{R})^{R})^{R})^{R} = ((\bigcap_{i \in I} (U_i^{R})^{R})^{R})^{R} \\
+			&= ((\bigcap_{i \in I} U_i)^{R})^{R}.
+		\end{align*}
+		Therefore $\bigcap_{i \in I} U_i \in \mathfrak{L}$. This means $\mathfrak{L}$ is an $\bigcap$-structure. Using the second property of \ref{pm_ensmblespaces_symirreflproperties}, $X = \emptyset^{R} = (X^{R})^{R}$. Therefore $\mathfrak{L}$ is a topped $\bigcap$-structure. This also means that it is a complete lattice.
+	\end{proof}
+	
+	\begin{coro}\label{pm_es_subspaceClosure}
+		The $R$-closure satisfies the following properties
+		\begin{enumerate}
+			\item $U \subseteq \langle U \rangle_R$
+			\item $U \subseteq V \implies \langle U \rangle_R \subseteq \langle V \rangle_R$
+			\item $\langle \langle U \rangle_R \rangle_R = \langle U \rangle_R $
+		\end{enumerate}
+		and is therefore a closure operation.
+	\end{coro}
+	
+	\begin{proof}
+		1. The first property is true by the second property of \ref{pm_es_rComplProps}.
+		
+		2. Using the first property of \ref{pm_es_rComplProps} we have $U \subseteq V$ implies $V^{R} \subseteq U^{R}$ which in turns implies $(U^{R})^{R} \subseteq (V^{R})^{R}$. Therefore $\langle U \rangle_R \subseteq \langle V \rangle_R$.
+		
+		3. Using the fifth property of \ref{pm_es_rComplProps} we have $\langle \langle U \rangle_R \rangle_R = (((U^{R})^{R})^{R})^{R} = (U^{R})^{R} = \langle U \rangle_R$.
+	\end{proof}
+	
+	\begin{prop}
+		Let $X$ be a set and $R \subseteq X \times X$ a symmetric and irreflexive relation. Then
+		\begin{enumerate}
+			\item $\langle U \rangle_R$ is the smallest $R$-subspace containing $U$
+			\item if $U, V \in \mathfrak{L}$ then $U = V^{R} \iff U^{R} = V$
+		\end{enumerate}
+	\end{prop}
+	
+	\begin{proof}
+		1. Let $U \subseteq X$ and $V \in \mathfrak{L}$ such that $U \subseteq V$ and $V \subseteq \langle U \rangle_R$. Since $U \subseteq V$, using the second property of \ref{pm_es_subspaceClosure}, $\langle U \rangle_R \subseteq \langle V \rangle_R = V$. Since $V \subseteq \langle U \rangle_R$ and  $\langle U \rangle_R \subseteq  V$, $\langle U \rangle_R = V$. This means that no $R$-subspace that contains $U$ is smaller than $\langle U \rangle_R$.
+		
+		2. Since $U, V \in \mathfrak{L}$, $U = (U^{R})^{R} = V^{R}$ which, by the fourth property of \ref{pm_es_rComplProps}, implies $U^{R} = (V^{R})^{R} = V$. Switching $U$ and $V$ proves the other direction.
+	\end{proof}
+\end{mathSection}
+
+Lastly, we show that if we start with the mere notion of orthogonality defined from an inner product vector space, we recover the notion of orthogonal component and subspaces. That is, the full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
+
+\begin{mathSection}
+	\begin{prop}
+		Let $X$ be an inner product space and $R = \{(a,b) \,|\, \langle a , b\rangle = 0\}$. Then:
+		\begin{enumerate}
+			\item $R$ is an irreflexive and symmetric relation
+			\item $U^{R} = U^{\perp}$
+			\item $\langle U \rangle_R = \cl_X (\vspan(U))$
+		\end{enumerate}
+	\end{prop}
+	
+	\begin{proof}
+		1. Given that the inner product is symmetric, so will be $R$. Given that no vector is orthogonal to itself, $R$ is irreflexive.
+		
+		2. The orthogonal complex is defined as $U^\perp = \{ a \in X \, | \, \forall b \in U, \langle a , b\rangle = 0 \}$. Since $aRb \iff \langle a , b\rangle = 0$, $U^{R} = U^{\perp}$.
+		
+		3. We have $\langle U \rangle_R = (U^{\perp})^\perp$ which returns the smallest closed subspace that contains $U$.
+	\end{proof}
+\end{mathSection}
 
 
+\section{Examples}
+
+In this section we explore some examples that appear throughout the discussion to exemplify some corner cases, some wanted and some unwanted.
+
+\begin{example}[Cut triangle]\label{pm_es_cutTriangle}
+	The cut triangle is the subset of probability measures over three elements where the probability of the first is constrained to be no more than $\frac{1}{2}$.
+\end{example}
+
+This ensemble space is the standard two simplex, a triangle, where the top is cutoff. This is the space of probability distributions $[p_1, p_2, p_3]$ such that $p_1 \leq \frac{1}{2}$, where entropy is the Shannon entropy. The extreme point of the space are $\ens[2] = [0,1,0]$, $\ens[3] = [0,0,1]$, $\ens[a] = [\frac{1}{2},\frac{1}{2},0]$ and $\ens[b] = [\frac{1}{2},0,\frac{1}{2}]$. Every ensemble that is decomposable is also separately decomposable but not necessarily orthogonally decomposable. Most ensembles, all those in the interior, are also separately multidecomposable. For example, $\ens[c]$ can be expressed as a mixture of $\ens[a]$ and $\ens[3]$, and of $\ens[b]$ and $\ens[2]$.
+
+
+\section{Lessons learned}
+
+This section summarized previous attempt that turned out to be failures. These lead to critical insights and therefore are kept here for reference.
+
+\subsection{Subspaces from convex structure}\label{pm_es_failureConvexSubspace}
+
+Initially, we tried recovering the notion of subspaces purely from the convex structure. We did make some progress in the finite dimensional case, but ultimately this does not work. The ultimate problem is that it cannot be generalized to the classical continuous case. The problem of rate of convergence is described below in the example. Even if that problem is fixed, there would be nothing to determine the dimensionality of $U$, and we could create convex maps that ``stretch'' the space. This lead to the following:
+\begin{insight}
+	Convex structure, by itself, cannot define subspaces.
+\end{insight}
+
+The attempt was the following:
+
+\begin{defn}
+	Let $\Ens$ be a convex space and $X \subseteq \Ens$ be a subset. We say that $X$ is a \textbf{subspace} of $\Ens$ if it contains all the convex combinations and all the components of its elements. That is, for every $\ens_1, \ens_2, \ens_3 \in \Ens$ and $\lambda \in (0,1)$ such that $p \ens_1 + \bar{p} \ens_2 = \ens_3$ we have:
+	\begin{itemize}
+		\item $\ens_1, \ens_2 \in X$ implies $\ens_3 \in X$
+		\item $\ens_3 \in X$ implies $\ens_1, \ens_2 \in X$
+	\end{itemize}
+\end{defn}
+
+\begin{defn}
+	Let $\Ens$ be a convex space and $X \subseteq \Ens$.  The \textbf{convex span} of $X$, noted $\cospan(X)$, is the smallest subspace containing $X$.
+\end{defn}
+
+\begin{remark}
+	As defined, the convex span of two elements will include all their possible mixtures (i.e. the segment that connects them), all possible decompositions (i.e. all lines that pass through them) plus, recursively, all other mixtures and decompositions that can be reached from those. Physically, the idea is that not all ensembles, pure states in particular, cannot be physically realized. Therefore, the inclusion of pure states in our convex space stems from a theoretical idealization useful to decompose and study the problem. It makes sense, then, that a subspace comes with all its idealizations.
+\end{remark}
+
+\begin{example}[Classical discrete subspaces]
+	Let $S$ be a set of $n$ possible discrete states and let $\Ens$ the space of probability distributions over the set $S$ (i.e. $\Ens$ is an $n$-simplex and $S$ are its extreme points). A subspace $X$ of $\Ens$ is a convex hull of a subset $U$ of $S$. That is, a subspace of $\Ens$ is the space of probability distributions over a subset of the cases. Geometrically, it is one of the sides (possibly recursively) of the simplex.
+	
+	To see this, first note that the convex hull $X$ of any subset $U$ of extreme points $S$ is a subspace. In fact, it will contain all convex combinations of $U$, and any element can only be decomposed in convex combinations of $U$. Second, note that only convex hulls of a subset of extreme points can be a subspace. In fact, any element of $\Ens$ can be expressed as a non-trivial convex combination of a set of extreme points $U$. Therefore, if an element is present in a subspace $X$, then $U \subset X$, which means all elements of the convex hull of $U$ are in $X$.
+\end{example}
+
+\begin{remark}
+	The definition does not entirely work in the continuous case. Let $S$ be a symplectic manifold and let $\Ens$ be the space of probability distributions over $S$ (i.e. the space of continuous functions over $S$ that are integrable and integrate to one). We would like to have a definition for which a subspace of $\Ens$ is a set of functions whose support is a subset of an open region $U \subseteq S$. That is, a subspace contains all probability distributions defined over a subset of the cases. One problem is that continuity forces the function to go to zero on the boundary of $U$, and the speed of the convergence cannot be change with a finite convex combination. That is, the convex combination of functions that go down like an exponential will also go down like an exponential. The issue seems to be related to finding the correct closure for infinite convex combinations in the definition of convex space.
+\end{remark}
+
+\begin{example}[Quantum subspaces]
+	Let $\mathcal{H}$ be an $n$-dimensional Hilbert space and let $\Ens$ be the space of density matrices (i.e. positive semi-definite self-adjoint operators with trace one). A subspace $X$ of $\Ens$ is the space of density matrices of a subspace $U$ of $\mathcal{H}$. That is, a subspace of $\Ens$ is the space of mixed states over a subspace of pure states.
+	
+	To see this, first note that the space of density matrices $X$ of a subspace $U$ of $\mathcal{H}$ is a subspace of $\Ens$. In fact, $X$ it will contain all convex combinations of its elements. Moreover, any element $x \in X$ can only be decomposed in a convex combination of pure states of $U$. Therefore any convex decomposition of $x$ has all its elements in $X$. Second, note that only the space of density matrices $X$ of a subspace $U$ of $\mathcal{H}$ is a subspace of $\Ens$. In fact, any element $x$ of $\Ens$ can be expressed as a non-trivial convex combination of orthogonal pure states, its eigenstates. These elements will span a subspace $U$ of $\mathcal{H}$. From those elements, we can construct an equal mixture which represents the maximally mixed states and, mathematically, is the identity operator $I/m$ divided by the number of elements $m \leq n$ of $U$. The equal mixture of any orthogonal basis of $U$ will also give the maximally mixed state. Therefore, given an element $x$, any subspace that contain $x$ will also contain a basis of $U$, the maximally mixed state $I/n$, all possible basis of $U$, which means all the pure states, and finally all convex combinations of the pure states, which means all possible density matrices, all possible mixed states.
+\end{example}
+
+\begin{defn}
+	A convex space $\mathcal{E}$ is \textbf{closed} if it contains all its extreme points.
+\end{defn}
+
+\begin{defn}
+	Let $\mathcal{E}$ be a convex space and $X \subset \mathcal{E}$ be a subspace of $\mathcal{E}$. The \textbf{dimension} of $X$, noted $\dim(X)$, is the minimum number of extreme points whose convex span is $X$.
+\end{defn}
+
+\begin{conj}
+	Let $\mathcal{E}$ be closed convex space of finite dimensions. Then:
+	\begin{itemize}
+		\item $\mathcal{E}$ is a simplex if and only if every two dimensional subspace is a line segment
+		\item the set of extreme points of $\mathcal{E}$ is a complex projective space if and only if every two dimensional subspace is a two dimensional sphere ($\mathcal{E}$ is the space of density matrices).
+	\end{itemize}
+\end{conj}
+
+\begin{remark}
+	The only if is easy to show based on the discussion above. The if part does not actually work. Take 6 points in a 4 dimensional euclidean space such that the form two triangles that intersect at a single point. All two dimensional convex spaces will be segments. However, the whole convex hull is not a simplex. 
+\end{remark}
+
+\chapter{Old notes to be organized}
 TODO: from here on are just old notes to be reorganized
+
+\section{Expectation values and measure}
 
 \subsection{Maximal component sequence}
 
@@ -2001,157 +2229,6 @@ Note that, in principle, the definitions only use $\mathbb{R}$ as a topological 
 \begin{remark}
 	The reverse direction cannot, in general, work. Take the subspace of a finite classical discrete ensemble space such the maximum probability of any element is $k < 1$. This corresponds to a simplex of the same dimension, with the same center, but scaled in the interior. Given that it is a convex subset of an ensemble space, it will satisfy all the axioms, except it will contain no orthogonal ensembles. Yet, it contains separate ensembles, which cannot be orthogonal.
 \end{remark}
-
-\section{R-subspaces}\label{pm_es_subspaceSection}
-
-Here we present a generic construction that we will be using in a couple of different ways to construct lattice of subspaces. The general idea can be understood by looking at vector spaces with an inner product. The inner product defines a notion of orthogonality between vectors and this notion of orthogonality can be used to construct subspaces in the following way. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all perpendicular to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were a subspace to begin with, then $U = (U^{\perp})^{\perp}$. We can now proceed in the opposite way, and use just the relationship of orthogonality to define subspaces, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar some construction related to Galois connections.}
-
-The construction work for any binary relationship that is symmetric and irreflexive. For example, given two distributions, the fact they have disjoint support is a symmetric and irreflexive relationship: a distribution does not have disjoint support with respect to itself, and the order of comparison does not matter. We can then construct subspaces based on this relationship, and find sets of function that are all defined within different regions.
-
-In our case, separateness, as defined by the mixing function, and orthogonality, as defined by the entropy, are symmetric and irreflexive.
-
-\subsection{Irreflexive symmetric relations and topped $\cap$-structures}
-
-We start with a generic set $X$ and a symmetric relation (i.e. if $aRb$ then $bRa$). We define the $R$-complement $U^R$ of all elements that are $R$-related to $U$ and study some useful properties. The symmetry of the relation is already enough to recover most of the properties we will need.
-
-\begin{mathSection}
-\begin{defn}
-	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Given a subset $U \subseteq X$, we define the \textbf{$R$-complement} to be
-	$$ U^{R} = \{ a \in X \, | \, \forall b \in U, aRb  \}. $$
-\end{defn}
-
-\begin{prop}\label{pm_es_rComplProps}
-	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Then:
-	\begin{enumerate}
-		\item $U \subseteq V \implies V^{R} \subseteq U^{R}$
-		\item $U \subseteq (U^{R})^{R}$
-		\item $U^{R} = ((U^{R})^{R})^{R}$
-		\item $U^{R} = (V^{R})^{R} \iff (U^{R})^{R} = V^{R}$
-		\item $(\bigcup_{i \in I} U_i )^{R} = \bigcap_{i \in I} (U_i)^{R}$
-		\item $\emptyset^{R} = X$
-	\end{enumerate}
-\end{prop}
-
-\begin{proof}
-	1. Suppose $a \in V^{R}$. Then, by definition, $\forall b \in V, aRb$. Since $U \subset V$, it is also true that $\forall b \in U, aRb$. Therefore $a \in U^{R}$ by definition. Since $a$ was arbitrary, $V^{R} \subseteq U^{R}$.
-	
-	2. By expanding the definition of complement, we have $(U^{R})^{R}=\{ a \in X \, | \, \forall b \in U^{R}, aRb \} = \{ a \in X \, | \, \forall b \in \{ c \in X \, | \, \forall d \in U, cRd  \}, aRb \} = \{ a \in X \, | \, \forall b \in X \, s.t. (\forall d \in U, bRd), aRb \}$.
-	
-	Let $a \in U$ and let $b \in X$ such that $\forall d \in U, bRd$. Since $a \in U$ and $bRd$ for all $b \in U$, we have $bRa$ in particular. Since $R$ is symmetric, $aRb$. Given that $b$ was arbitrary, we conclude that $\forall b \in X \, s.t. (\forall d \in U, bRd), aRb$. Therefore $a \in (U^{R})^{R}$ by definition of complement. Given that $a$ was arbitrary, $U \in (U^{R})^{R}$.
-	
-	3. We again expand the definition and have $((U^{R})^{R})^{R} = \{ a \in X \, | \, \forall b \in (U^{R})^{R}, aRb \}$.
-	
-	Let $x \in ((U^{R})^{R})^{R}$. Then $\forall b \in (U^{R})^{R}, xRb$ by definition of the complement. Since by 1. $U \subset (U^{R})^{R}$, we can restrict the previous expression to only the elements of $U$, and therefore $\forall b \in U, xRb$. But this means that $x \in U^{R}$ by definition of the complement. Since $x$ was arbitrary, $((U^{R})^{R})^{R} \subseteq U^{R}$. But by 1., we also have $U^{R} \subseteq ((U^{R})^{R})^{R}$ since $U^{R}$ is just a set onto which we can apply the complement twice . By two-way containment, we have $U^{R} = ((U^{R})^{R})^{R}$.
-	
-	4. Let $U, V \subseteq X$ such that $U^{R} = (V^{R})^{R}$. Applying the complement on each side, $(U^{R})^{R} = ((V^{R})^{R})^{R}$. By the previous property $((V^{R})^{R})^{R} = V^{R}$ and therefore $(U^{R})^{R} = V^{R}$. Switching $U$ and $V$ proves the other direction.
-	
-	5. We have:
-	\begin{equation*}
-		\begin{aligned}
-			(\bigcup_{i \in I} U_i )^{R} &= \{ a \in X \, | \, \forall b \in \bigcup_{i \in I} U_i, aRb \} \\
-			&= \{ a \in X \, | \, \forall U_i, \forall  b \in U_i, aRb \} \\
-			&= \{ a \in X \, | \, \forall U_i, a \in \{ c \in X \, | \,  \forall  b \in U_i, cRb \} \} \\
-			&= \bigcap_{i \in I} \{ c \in X \, | \, \forall  b \in U_i, cRb\} \\
-			&= \bigcap_{i \in I} (U_i)^{R}
-		\end{aligned}
-	\end{equation*}
-	Note that this property does not rely on the symmetry of $R$.
-	
-	6. Let $a \in X$. There is no $b \in \emptyset$ such that $aRb$. Therefore $\forall b \in \emptyset, aRb$. This means that $a \in \emptyset^{R}$. Since $a$ was arbitrary, $X = \emptyset^{R}$.
-\end{proof}
-\end{mathSection}
-
-The last two properties depends on both the symmetry and the irreflexivity.
-
-\begin{mathSection}
-\begin{prop}\label{pm_ensmblespaces_symirreflproperties}
-	Let $X$ be a set and $R \subseteq X \times X$ a symmetric and irreflexive relation. Then
-	\begin{enumerate}
-		\item $U \cap U^{R} = \emptyset$
-		\item $X^{R} = \emptyset$
-	\end{enumerate}
-\end{prop}
-
-\begin{proof}
-	1. Let $a \in U$. Since $R$ is irreflexive,  $aRa$ is false. Therefore it is not true that, for all $b \in U$, $aRb$. This means that $a \notin U^{R}$. Since that $a$ was arbitrary, $U \cap U^{R} \emptyset$.
-	
-	2. Suppose $a \in X^{R}$. Then for all $b \in X$, $aRb$. In particular, we would have $aRa$, which can't be true since $R$ is irreflexive. Therefore $a \notin X^{R}$ and, since $a$ is arbitrary, $X^{R} = \emptyset$.
-\end{proof}
-\end{mathSection}
-
-We now define a notion of $R$-subspace by requiring that a subspace is the $R$-complement of its $R$-complement. We then construct the lattice of subspaces and show it satisfies properties we would expect from a lattice of subspaces.
-
-\begin{mathSection}
-\begin{defn}
-	Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Let $U \subseteq X$. The \textbf{$R$-closure of $U$} is $\langle U \rangle_R = (U^{R})^{R}$. An \textbf{$R$-subspace} of $X$ is a set $U \subseteq X$ such that $U = \langle U \rangle_R$. The \textbf{lattice of $R$-subspaces} is the set $\mathfrak{L} = \{ U \subseteq X \, | \, U = \langle U \rangle_R \}$ ordered by inclusion.
-\end{defn}
-
-\begin{coro}
-	The lattice of $R$-subspaces $\mathfrak{L}$ is a topped $\bigcap$-structure on $X$ and therefore is also a complete lattice.
-\end{coro}
-\begin{proof}
-	The set $\mathfrak{L}$ is a collection of subsets of $X$. Let $\{U_i\}_{i \in I} \subseteq \mathfrak{L}$ be a non-empty family. Then, using the definition of subspace, and the third and fifth properties of \ref{pm_es_rComplProps}, we have
-	\begin{align*}
-		\bigcap_{i \in I} U_i &= \bigcap_{i \in I} (U_i^{R})^{R} = (\bigcup_{i \in I} U_i^{R})^{R} \\
-		&= (((\bigcup_{i \in I} (U_i^{R})^{R})^{R})^{R} = ((\bigcap_{i \in I} (U_i^{R})^{R})^{R})^{R} \\
-		&= ((\bigcap_{i \in I} U_i)^{R})^{R}.
-	\end{align*}
-	Therefore $\bigcap_{i \in I} U_i \in \mathfrak{L}$. This means $\mathfrak{L}$ is an $\bigcap$-structure. Using the second property of \ref{pm_ensmblespaces_symirreflproperties}, $X = \emptyset^{R} = (X^{R})^{R}$. Therefore $\mathfrak{L}$ is a topped $\bigcap$-structure. This also means that it is a complete lattice.
-\end{proof}
-
-\begin{coro}\label{pm_es_subspaceClosure}
-	The $R$-closure satisfies the following properties
-	\begin{enumerate}
-		\item $U \subseteq \langle U \rangle_R$
-		\item $U \subseteq V \implies \langle U \rangle_R \subseteq \langle V \rangle_R$
-		\item $\langle \langle U \rangle_R \rangle_R = \langle U \rangle_R $
-	\end{enumerate}
-	and is therefore a closure operation.
-\end{coro}
-
-\begin{proof}
-	1. The first property is true by the second property of \ref{pm_es_rComplProps}.
-	
-	2. Using the first property of \ref{pm_es_rComplProps} we have $U \subseteq V$ implies $V^{R} \subseteq U^{R}$ which in turns implies $(U^{R})^{R} \subseteq (V^{R})^{R}$. Therefore $\langle U \rangle_R \subseteq \langle V \rangle_R$.
-	
-	3. Using the fifth property of \ref{pm_es_rComplProps} we have $\langle \langle U \rangle_R \rangle_R = (((U^{R})^{R})^{R})^{R} = (U^{R})^{R} = \langle U \rangle_R$.
-\end{proof}
-
-\begin{prop}
-	Let $X$ be a set and $R \subseteq X \times X$ a symmetric and irreflexive relation. Then
-	\begin{enumerate}
-		\item $\langle U \rangle_R$ is the smallest $R$-subspace containing $U$
-		\item if $U, V \in \mathfrak{L}$ then $U = V^{R} \iff U^{R} = V$
-	\end{enumerate}
-\end{prop}
-
-\begin{proof}
-	1. Let $U \subseteq X$ and $V \in \mathfrak{L}$ such that $U \subseteq V$ and $V \subseteq \langle U \rangle_R$. Since $U \subseteq V$, using the second property of \ref{pm_es_subspaceClosure}, $\langle U \rangle_R \subseteq \langle V \rangle_R = V$. Since $V \subseteq \langle U \rangle_R$ and  $\langle U \rangle_R \subseteq  V$, $\langle U \rangle_R = V$. This means that no $R$-subspace that contains $U$ is smaller than $\langle U \rangle_R$.
-	
-	2. Since $U, V \in \mathfrak{L}$, $U = (U^{R})^{R} = V^{R}$ which, by the fourth property of \ref{pm_es_rComplProps}, implies $U^{R} = (V^{R})^{R} = V$. Switching $U$ and $V$ proves the other direction.
-\end{proof}
-\end{mathSection}
-
-Lastly, we show that if we start with the mere notion of orthogonality defined from an inner product vector space, we recover the notion of orthogonal component and subspaces. That is, the full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
-
-\begin{mathSection}
-\begin{prop}
-	Let $X$ be an inner product space and $R = \{(a,b) \,|\, \langle a , b\rangle = 0\}$. Then:
-	\begin{enumerate}
-		\item $R$ is an irreflexive and symmetric relation
-		\item $U^{R} = U^{\perp}$
-		\item $\langle U \rangle_R = \cl_X (\vspan(U))$
-	\end{enumerate}
-\end{prop}
-
-\begin{proof}
-	1. Given that the inner product is symmetric, so will be $R$. Given that no vector is orthogonal to itself, $R$ is irreflexive.
-	
-	2. The orthogonal complex is defined as $U^\perp = \{ a \in X \, | \, \forall b \in U, \langle a , b\rangle = 0 \}$. Since $aRb \iff \langle a , b\rangle = 0$, $U^{R} = U^{\perp}$.
-	
-	3. We have $\langle U \rangle_R = (U^{\perp})^\perp$ which returns the smallest closed subspace that contains $U$.
-\end{proof}
-\end{mathSection}
 
 \section{Ensemble subspaces}
 
@@ -2358,78 +2435,3 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \begin{conj}
 	We can define a context from a statistical variable such that the spectrum corresponds to the possible values of the variable.
 \end{conj}
-
-\section{Examples}
-
-In this section we explore some examples that appear throughout the discussion to exemplify some corner cases, some wanted and some unwanted.
-
-\begin{example}[Cut triangle]\label{pm_es_cutTriangle}
-	The cut triangle is the subset of probability measures over three elements where the probability of the first is constrained to be no more than $\frac{1}{2}$.
-\end{example}
-
-This ensemble space is the standard two simplex, a triangle, where the top is cutoff. This is the space of probability distributions $[p_1, p_2, p_3]$ such that $p_1 \leq \frac{1}{2}$, where entropy is the Shannon entropy. The extreme point of the space are $\ens[2] = [0,1,0]$, $\ens[3] = [0,0,1]$, $\ens[a] = [\frac{1}{2},\frac{1}{2},0]$ and $\ens[b] = [\frac{1}{2},0,\frac{1}{2}]$. Every ensemble that is decomposable is also separately decomposable but not necessarily orthogonally decomposable. Most ensembles, all those in the interior, are also separately multidecomposable. For example, $\ens[c]$ can be expressed as a mixture of $\ens[a]$ and $\ens[3]$, and of $\ens[b]$ and $\ens[2]$.
-
-
-\section{Lessons learned}
-
-\subsection{Subspaces from convex structure}
-
-\begin{insight}
-	Convex structure, by itself, cannot define subspaces.
-\end{insight}
-
-Initially, we tried recovering the notion of subspaces purely from the convex structure. We did make some progress in the finite dimensional case, but ultimately this does not work. The ultimate problem is that it cannot be generalized to the classical continuous case. The problem of rate of convergence is described below in the example. Even if that problem is fixed, there would be nothing to determine the dimensionality of $U$, and we could create convex maps that ``stretch'' the space.
-
-The attempt was the following:
-
-\begin{defn}
-	Let $\Ens$ be a convex space and $X \subseteq \Ens$ be a subset. We say that $X$ is a \textbf{subspace} of $\Ens$ if it contains all the convex combinations and all the components of its elements. That is, for every $\ens_1, \ens_2, \ens_3 \in \Ens$ and $\lambda \in (0,1)$ such that $p \ens_1 + \bar{p} \ens_2 = \ens_3$ we have:
-	\begin{itemize}
-		\item $\ens_1, \ens_2 \in X$ implies $\ens_3 \in X$
-		\item $\ens_3 \in X$ implies $\ens_1, \ens_2 \in X$
-	\end{itemize}
-\end{defn}
-
-\begin{defn}
-	Let $\Ens$ be a convex space and $X \subseteq \Ens$.  The \textbf{convex span} of $X$, noted $\cospan(X)$, is the smallest subspace containing $X$.
-\end{defn}
-
-\begin{remark}
-	As defined, the convex span of two elements will include all their possible mixtures (i.e. the segment that connects them), all possible decompositions (i.e. all lines that pass through them) plus, recursively, all other mixtures and decompositions that can be reached from those. Physically, the idea is that not all ensembles, pure states in particular, cannot be physically realized. Therefore, the inclusion of pure states in our convex space stems from a theoretical idealization useful to decompose and study the problem. It makes sense, then, that a subspace comes with all its idealizations.
-\end{remark}
-
-\begin{example}[Classical discrete subspaces]
-	Let $S$ be a set of $n$ possible discrete states and let $\Ens$ the space of probability distributions over the set $S$ (i.e. $\Ens$ is an $n$-simplex and $S$ are its extreme points). A subspace $X$ of $\Ens$ is a convex hull of a subset $U$ of $S$. That is, a subspace of $\Ens$ is the space of probability distributions over a subset of the cases. Geometrically, it is one of the sides (possibly recursively) of the simplex.
-	
-	To see this, first note that the convex hull $X$ of any subset $U$ of extreme points $S$ is a subspace. In fact, it will contain all convex combinations of $U$, and any element can only be decomposed in convex combinations of $U$. Second, note that only convex hulls of a subset of extreme points can be a subspace. In fact, any element of $\Ens$ can be expressed as a non-trivial convex combination of a set of extreme points $U$. Therefore, if an element is present in a subspace $X$, then $U \subset X$, which means all elements of the convex hull of $U$ are in $X$.
-\end{example}
-
-\begin{remark}
-	The definition does not entirely work in the continuous case. Let $S$ be a symplectic manifold and let $\Ens$ be the space of probability distributions over $S$ (i.e. the space of continuous functions over $S$ that are integrable and integrate to one). We would like to have a definition for which a subspace of $\Ens$ is a set of functions whose support is a subset of an open region $U \subseteq S$. That is, a subspace contains all probability distributions defined over a subset of the cases. One problem is that continuity forces the function to go to zero on the boundary of $U$, and the speed of the convergence cannot be change with a finite convex combination. That is, the convex combination of functions that go down like an exponential will also go down like an exponential. The issue seems to be related to finding the correct closure for infinite convex combinations in the definition of convex space.
-\end{remark}
-
-\begin{example}[Quantum subspaces]
-	Let $\mathcal{H}$ be an $n$-dimensional Hilbert space and let $\Ens$ be the space of density matrices (i.e. positive semi-definite self-adjoint operators with trace one). A subspace $X$ of $\Ens$ is the space of density matrices of a subspace $U$ of $\mathcal{H}$. That is, a subspace of $\Ens$ is the space of mixed states over a subspace of pure states.
-	
-	To see this, first note that the space of density matrices $X$ of a subspace $U$ of $\mathcal{H}$ is a subspace of $\Ens$. In fact, $X$ it will contain all convex combinations of its elements. Moreover, any element $x \in X$ can only be decomposed in a convex combination of pure states of $U$. Therefore any convex decomposition of $x$ has all its elements in $X$. Second, note that only the space of density matrices $X$ of a subspace $U$ of $\mathcal{H}$ is a subspace of $\Ens$. In fact, any element $x$ of $\Ens$ can be expressed as a non-trivial convex combination of orthogonal pure states, its eigenstates. These elements will span a subspace $U$ of $\mathcal{H}$. From those elements, we can construct an equal mixture which represents the maximally mixed states and, mathematically, is the identity operator $I/m$ divided by the number of elements $m \leq n$ of $U$. The equal mixture of any orthogonal basis of $U$ will also give the maximally mixed state. Therefore, given an element $x$, any subspace that contain $x$ will also contain a basis of $U$, the maximally mixed state $I/n$, all possible basis of $U$, which means all the pure states, and finally all convex combinations of the pure states, which means all possible density matrices, all possible mixed states.
-\end{example}
-
-\begin{defn}
-	A convex space $\mathcal{E}$ is \textbf{closed} if it contains all its extreme points.
-\end{defn}
-
-\begin{defn}
-	Let $\mathcal{E}$ be a convex space and $X \subset \mathcal{E}$ be a subspace of $\mathcal{E}$. The \textbf{dimension} of $X$, noted $\dim(X)$, is the minimum number of extreme points whose convex span is $X$.
-\end{defn}
-
-\begin{conj}
-	Let $\mathcal{E}$ be closed convex space of finite dimensions. Then:
-	\begin{itemize}
-		\item $\mathcal{E}$ is a simplex if and only if every two dimensional subspace is a line segment
-		\item the set of extreme points of $\mathcal{E}$ is a complex projective space if and only if every two dimensional subspace is a two dimensional sphere ($\mathcal{E}$ is the space of density matrices).
-	\end{itemize}
-\end{conj}
-
-\begin{remark}
-	The only if is easy to show based on the discussion above. The if part does not actually work. Take 6 points in a 4 dimensional euclidean space such that the form two triangles that intersect at a single point. All two dimensional convex spaces will be segments. However, the whole convex hull is not a simplex. 
-\end{remark}
