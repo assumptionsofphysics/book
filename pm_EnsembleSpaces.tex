@@ -1189,7 +1189,7 @@ We now show that the state capacity recovers a notion of number of cases in all 
 	Let $A$ be the set of density operators defined on a subspace $U$. The highest entropy is achieved by the uniform distribution, which equals to $\log(\dim(U))$. Therefore $\capacity(A) = 2^{\log(\dim(U))} = \dim(U)$.
 \end{proof}
 
-\section{Generalized probability theory}
+\section{Fraction capacity and probability}
 
 Having seen how the strict concavity of the entropy leads to geometric structures, we are going to see how mixing is responsible for the measure theoretic structures. In the same way we derived a geometric structure on the ensembles, we are going to first define a measure theoretic structure on the ensembles as well. This measure, the fraction capacity, will tell us how much of an ensemble can be seen as a mixture of a set of others. It is not additive in general, but subadditive.
 
@@ -2097,10 +2097,39 @@ The attempt was the following:
 	The only if is easy to show based on the discussion above. The if part does not actually work. Take 6 points in a 4 dimensional euclidean space such that the form two triangles that intersect at a single point. All two dimensional convex spaces will be segments. However, the whole convex hull is not a simplex. 
 \end{remark}
 
-\iffalse
+\iftrue
 
 \section{Old notes to be organized}
 TODO: from here on are just old notes to be reorganized
+
+\subsection{Spectrum of a quantity}
+
+\begin{defn}
+	Let $\Ens$ be an ensemble space and let $F : \Ens \to \mathbb{R}$ be a statistical quantity. Let $x,y \in \mathbb{R}$ an open interval. We say $\ens[a]$ is \textbf{within $[x,y]$ of $F$} if $F(\ens) \in [x,y]$ for every component $\ens$ of $\ens[a]$. Analogous definition applies for intervals bounded only on one side.
+	
+	We say $\ens[a] \in \Ens$ is \textbf{supported by $[x,y]$ of $F$} if:
+	\begin{enumerate}
+		\item $\ens[a]$ is within $[x,y]$ of $F$
+		\item given $\ens[b] \in \Ens$ within $(-\infty,x]$, $F(\ens) \leq F(\ens[a])$ for all $\ens \in \langle \{\ens[a], \ens[b]\} \rangle_{\ortho}$
+		\item given $\ens[b] \in \Ens$ within $[y, +\infty)$, $F(\ens[a]) \leq F(\ens)$ for all $\ens \in \langle \{\ens[a], \ens[b]\} \rangle_{\ortho}$.
+	\end{enumerate}
+	Analogous definition applies for intervals bounded only on one side.
+	
+	An \textbf{eigenstate} of $F$ is an ensemble $\ens[a] \in \Ens$ that is supported by a singleton $U=[a,a]$, where $a \in \mathbb{R}$ is called the respective \textbf{eigenvalue}. 
+\end{defn}
+
+\begin{prop}
+	Let $\Ens$ be a discrete classical ensemble space over the set of points $X$, and $F$ a statistical quantity. Then $F(X)$ is the set of possible eigenvalues, and an eigenstate is any ensemble that can be expressed as a mixture of points with the same eigenvalue.
+\end{prop}
+
+\begin{proof}
+	First we show that any extreme point $\ens[a] \in \Ens$ is an eigenstate with eigenvalue $F(\ens[a])$. First, we have $F(\ens[a]) \in [F(\ens[a]), F(\ens[a])]$, which satisfies the first condition for the support. Now let $\ens[b] \in \Ens$ be an ensemble within $(-\infty, F(\ens[a])]$. Let $\{\ens_i\}$ be the set of extreme points that are components of $\ens[b]$. Since $\{\ens_i\}$ are components of $\ens[b]$, $F(\ens_i) \leq F(\ens[a])$ since $\ens[b]$ is within $(-\infty, F(\ens[a])]$. Recall that orthogonality, for a classical space, coincides with disjoint support of the probability distribution. Also recall that, in a discrete classical ensemble space, all ensembles can be decomposed in terms of the extreme points. Then $\langle \{\ens[a], \ens[b]\} \rangle_{\ortho}$ is exactly $\hull(\{\ens_i\} \cup \{\ens[a]\})$. Given the linearity of $F$, for any convex combination $\ens$ of $\ens_i$ and $\ens[a]$ we have $F(\ens) \leq F(\ens[a])$. This satisfies the second condition for the support. The argument can be repeated with the upper bound, so the third condition is also satisfies. This means that any extreme point is $\ens[a]$ is an eigenstate of $F$ with eigenvalue $F(\ens[a])$.
+	
+	Note that the above argument works also if $\ens$ is a mixture of eigenstates with the same eigenvalues. 
+	
+	Lastly, we show that any ensemble that is a mixture of two extreme points with different eigenvalue is not an eigenstate.
+	Let $\ens = p \ens[a] + \bar{p} \ens[b]$ be a mixture of two extreme points $\ens[a], \ens[b] \in \Ens$ such that $F(\ens[a]) \neq F(\ens[b])$. Without loss of generality, suppose $F(\ens[a]) < F(\ens[b])$. Given the linearity of $F$, we have $F(\ens[a]) < F(\ens) < F(\ens[b])$. Therefore $\ens$ is not within $[F(\ens),F(\ens)]$, is not supported by $[F(\ens),F(\ens)]$ and therefore is not an eigenstate. This also means that any ensemble of extreme points with different eigenvalue is not an eigenstate.
+\end{proof}
 
 \section{Expectation values and measure}
 
@@ -2199,33 +2228,6 @@ TODO: from here on are just old notes to be reorganized
 	This may still not be the correct formulation of the problem. Note that $A$ is a set of ensembles. In the classical case it would correspond to a set of probability measures, not a subset of the sample space (i.e. an event). However, in the discrete case and in the quantum case, $A$ can also be restricted to a set of pure state (i.e. extreme points), which would correspond to a subset of the sample space. It may be worth at least understanding that case.
 \end{remark}
 
-\subsection{Spectra of a quantity}
-
-This is an attempt to define spectra purely on the topology and the convex structure, without reference to entropy and therefore inner product structure. It is unclear whether this is possible. If it is not possible, this attempt is still useful to understand what are the required definitions.
-
-\begin{defn}
-	Let $\Ens$ be an ensemble space and let $F : \Ens \to \mathbb{R}$ be a statistical quantity. Let $U \subset \mathbb{R}$ an open set of possible values for the quantity. We define the set of \textbf{ensembles supported by $U$} as the convex set $A \subset \Ens$ such that for any component $\ens$ of any element $\ens[a] \in A$ $F(\ens) \in U$. That is, they are all the elements that can be mixed among each other and still have all components have an expectation that fall within $U$.
-\end{defn}
-
-\begin{remark}
-	Note that even if we have $F(\ens) \in U$ for some $\ens$, we can still have that no ensemble is supported by $U$. Consider a simply two dimensional discrete classical space $p\ens[a] + \bar{p} \ens[b]$ with $F(\ens[a]) = 0$ and $F(\ens[b]) = 1$. Now consider $U = \left(\frac{1}{4}, \frac{3}{4} \right)$. Ensembles for which $F(\ens) \in U$ are necessarily mixtures of $\ens[a]$ and $\ens[b]$, and $F(\ens[a])\neq 0 \neq F(\ens[b])$. Therefore no ensemble is supported by $U$.
-	
-	On the other hand, even if we have ensembles for which the expectation for all the components falls in $U$, they may still not be supported by $U$. Consider a Bloch ball for a qubit and  $F : \Ens \to \mathbb{R}$ such that $F(|0\>\<0|) = 0$ and $F(|1\>\<1|) = 1$. We have $F(|+\>\<+|) = F(|-\>\<-|) = \frac{1}{2}$ and therefore any mixture of those states
-\end{remark}
-
-\begin{defn}
-	Given a statistical quantity $F : \Ens \to \mathbb{R}$, its \textbf{spectrum} $\sigma(F) \subseteq \mathbb{R}$ is the set of values $f \in \mathbb{R}$, called \textbf{spectral elements}, such that the set of ensembles supported by an open set that contains $f$ is non-empty.
-\end{defn}
-
-\begin{prop}
-	
-\end{prop}
-
-\begin{conj}
-	We recover an equivalent notion of spectra for both classical and quantum mechanics.
-\end{conj}
-
-Note that, in principle, the definitions only use $\mathbb{R}$ as a topological space (that also has a convex structure). Maybe this can generalize in the case that quantities are not real numbers.
 
 \section{Reducibility}
 
