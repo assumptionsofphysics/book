@@ -1082,23 +1082,24 @@ TODO: add a note/proof for the discrete version
 
 \section{State capacity}
 
-In this section we are going to develop a generalization of the link between count of states and the entropy. In classical mechanics, for a uniform distribution $\rho_U$ over a region of phase space $U$, we have $S(\rho_U) = \log \mu(U)$, where $\mu$ is the Liouville measure that is taken to correspond to the count of states. The idea is to generalize this relationship to all ensembles, classical and quantum.
+In this section we are going to develop a generalization of the link between count of states and entropy. In classical mechanics, for a uniform distribution $\rho_U$ over a region of phase space $U$, we have $S(\rho_U) = \log \mu(U)$, where $\mu$ is the Liouville measure that is taken to correspond to the count of states. The idea is to generalize this relationship to all ensembles, classical and quantum.
 
-Given an ensemble, we want to quantify the number of distinguishable cases over which the ensemble is spread. Since entropy characterizes the variability of the preparations of the ensemble, greater variability means the ensemble is spread over more caes. Therefore the distinguishable states must be a monotonic function of the entropy. The question is what function.
+Given an ensemble, we want to quantify the number of distinguishable cases over which the ensemble is spread. Since entropy characterizes the variability of the preparations of the ensemble, greater variability means the ensemble is spread over more cases. Therefore the count of distinguishable states must be a monotonic function of the entropy. The question is what function.
 
-The first hint that the exponential is the right function is the relationship $S(\rho_U) = \log \mu(U)$ mentioned before. Another hint is that we will want this size to be multiplicative over independent distributions. That is, if we have two ensembles $\rho_1 \in \Ens_1$ and $\rho_2 \in \Ens_2$ of two different ensemble space, we can imagine the composite system $\rho = \rho_1 \rho_2$ representing the ensemble of the two independent ensembles. While the entropy should be additive, that is $S(\rho) = S_1(\rho_1) + S_2(\rho_2)$, the count of states should be multiplicative, that is $\mu(\rho) = \mu_1(\rho_1) \mu_2(\rho_2)$. This suggests the relationship $S(\rho) = \log \rho$ for all ensembles. The other hint is that the spread can be, at most, additive. If we mix two ensembles, the spread can at most be over the configurations of both. The following shows that the exponential of the entropy has exactly that property
+The first hint that the exponential is the right function is the relationship $S(\rho_U) = \log \mu(U)$ mentioned before. Another hint is that we will want this size to be multiplicative over independent distributions. That is, if we have two ensembles $\rho_1 \in \Ens_1$ and $\rho_2 \in \Ens_2$ of two different ensemble spaces, we can imagine the composite system $\rho = \rho_1 \rho_2$ representing the ensemble of the two independent ensembles. While the entropy should be additive, that is $S(\rho) = S_1(\rho_1) + S_2(\rho_2)$, the count of states should be multiplicative, that is $\mu(\rho) = \mu_1(\rho_1) \mu_2(\rho_2)$. This suggests the relationship $S(\rho) = \log \mu (\rho)$ for all ensembles. The other hint is that the spread can be, at most, additive. If we mix two ensembles, the spread can be at most over the configurations of both and not more. The following shows that the exponential of the entropy has exactly that property
 
+\begin{mathSection}
 \begin{prop}[Exponential entropy subadditivity]\label{pm_es_exponentialEntropySubadditivity}
-	Let $\ens[a], \ens[b] \in \Ens$ and $\ens = p \ens_1 + \bar{p} \ens[b]$ for some $p \in [0,1]$. Then $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])}$, with the equality holding if and only if $\ens[a] \ortho \ens[b]$ and $p = \frac{2^{S(\ens[a])}}{2^{S(\ens[a])} + 2^{S(\ens[b])}}$.
+	Let $\ens[a], \ens[b] \in \Ens$ and $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$. Then $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])}$, with the equality holding if and only if $\ens[a] \ortho \ens[b]$ and $p = \frac{2^{S(\ens[a])}}{2^{S(\ens[a])} + 2^{S(\ens[b])}}$.
 \end{prop}
 
 \begin{proof}
-	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens[a]$ and $\ens[b]$ are orthogonal by definition. The entropy maximum for the mixed ensemble can only be achieved when the elements are orthogonal, for some value of $p$.
+	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens[a]$ and $\ens[b]$ are orthogonal by definition. Therefore the entropy maximum for the mixed ensemble will be achieved when the elements are orthogonal, for some value of $p$.
 	
 	Now fix the entropy of $\ens[a]$ and $\ens[b]$ to some values $S_a = S(\ens[a])$ and $S_b = S(\ens[b])$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression. Since $\ens[a]$ and $\ens[b]$ are orthogonal, $S(p \ens[a] + \bar{p}\ens[b]) =  - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b$ which is a smooth function of $p$.
 	\begin{equation}
 		\begin{aligned}
-			0 = \frac{dS}{dp} &= \frac{d}{dp} S(\ens) =\frac{d}{dp} \left( - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b \right) \\
+			0 &= \frac{d}{dp} S(p \ens[a] + \bar{p}\ens[b]) =\frac{d}{dp} \left( - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b \right) \\
 			&= - \log p - 1 + \log \bar{p} + 1 + S_a - S_b \\
 			\log \frac{p}{\bar{p}} &= \log 2^{S_a} - \log 2^{S_b} \\
 			\log \frac{p}{1-p} &= \log \frac{2^{S_a}}{2^{S_b}}  \\
@@ -1111,24 +1112,30 @@ The first hint that the exponential is the right function is the relationship $S
 	\begin{equation}
 		\begin{aligned}
 			\bar{p} &= 1- \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} = \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \\
-			S &= S(\ens) = - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b  \\
+			S(p \ens[a] + \bar{p}\ens[b]) &= - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b  \\
 			&= - \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} - \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \\
 			&+ \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log 2^{S_a} + \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log 2^{S_b} \\
 			&= \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) + \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) \\
 			&= \frac{2^{S_a} + 2^{S_b}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) \\
-			\log 2^S &= \log \left( 2^{S_a} + 2^{S_b} \right) \\
-			2^S &=  2^{S_a} + 2^{S_b}  \\
+			\log 2^{S(p \ens[a] + \bar{p}\ens[b])} &= \log \left( 2^{S_a} + 2^{S_b} \right) \\
+			2^{S(p \ens[a] + \bar{p}\ens[b])} &=  2^{S_a} + 2^{S_b}  \\
 		\end{aligned}
 	\end{equation}
-	Therefore the maximum entropy obtainable through a mixture is $S = \log (2^{S_a} + 2^{S_b})$ which is obtained when $\ens[a]$ and $\ens[b]$ are orthogonal and $p = \frac{2^{S_a}}{2^{S_a} + 2^{S_b}}$.
+	Therefore the maximum entropy obtainable through a mixture is $S(p \ens[a] + \bar{p}\ens[b]) = \log (2^{S(\ens[a])} + 2^{S(\ens[b])})$ which is obtained when $\ens[a]$ and $\ens[b]$ are orthogonal and $p = \frac{2^{S(\ens[a])}}{2^{S(\ens[a])} + 2^{S(\ens[b])}}$.
 \end{proof}
 
+\begin{remark}
+	We have proved that the exponential of the entropy gives us subadditivity. Ideally, we should prove that this is the only function with that characteristic.
+\end{remark}
+
 \begin{conj}
-	Let $f : \mathbb{R} \to \mathbb{R}$ be a continuous function such that $f(S(p\ens[a]+\bar{p}\ens[b])) \leq f(S(\ens[a])) + f(S(\ens[b]))$ and the equality can be verified in some condition, then $f(x) = \kappa^x$ for some arbitrary constant $\kappa$.
+	Let $f : \mathbb{R} \to \mathbb{R}$ be a continuous function such that $f(S(p\ens[a]+\bar{p}\ens[b])) \leq f(S(\ens[a])) + f(S(\ens[b]))$ and the equality can be verified in some condition. Then $f(x) = \kappa^x$ for some arbitrary constant $\kappa$.
 \end{conj}
+\end{mathSection}
 
-Given a set of ensembles, we can ask what spread reachable by a mixture in terms of the number of distinguishable states. We call this the state capacity as it represents the maximum potential spread reachable by the set, and because it turns out to be a non-additive measure.\footnote{In some literature, capacities are non-additive measures.} The state capacity is monotone and subadditive, and recovers additivity over orthogonal sets.
+Given a set of ensembles, we can ask what spread is reachable by a mixture in terms of the number of distinguishable states. We call this the state capacity as it represents the maximum potential spread reachable by the set, and because it turns out to be a non-additive measure.\footnote{In some literature, capacities are non-additive measures.} The state capacity is monotone, subadditive and recovers additivity over orthogonal sets.
 
+\begin{mathSection}
 \begin{defn}
 	Let $A \subseteq \Ens$ be the subset of an ensemble space. The \textbf{state capacity} of $A$ is defined as $\capacity(A) = \sup(2^{S(\hull(A))}\cup\{0\})$.
 \end{defn}
@@ -1146,11 +1153,11 @@ Given a set of ensembles, we can ask what spread reachable by a mixture in terms
 \begin{proof}
 	1. The state capacity takes a subset of $\Ens$ and returns a real value and is therefore a set function. The exponential can only return non-negative values, therefore the state capacity of a set is non-negative. 
 	
-	2. Let $A, B \subseteq \Ens$ such that $A \subseteq B$. If $A = \emptyset$, we have $\capacity(A) = 0$. Since $\capacity(B)$ is non-negative, $\capacity(A) \leq \capacity(B)$. If $A \neq \emptyset$, $\hull(A) \subseteq \hull(B)$ and therefore $2^{S(\hull(A))} \subseteq 2^{S(\hull(B))}$. This means that the supremum of the first set cannot be greater than the supremum of the second set, and therefore $\capacity(A) \leq \capacity(B)$. The state capacity is a monotone set function.
+	2. The $\hull$ is a monotone function. The image of a set through a map is a monotone function. The supremum is a monotone function. Therefore the state capacity is a monotone function.
 	
-	3. Let $A, B \subseteq \Ens$ and let $\ens \in \hull(A \cup B)$. Then we can write $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} = 2^{S(\ens[a])} + 2^{S(\ens[b])} \leq \capacity(A) + \capacity(B)$. Since this is true for any element of $\hull(A \cup B)$, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\capacity(A \cup B) \leq \capacity(A) + \capacity(B)$, the state capacity is subadditive.
+	3. Let $A, B \subseteq \Ens$ and let $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])} \leq \capacity(A) + \capacity(B)$. Since this is true for any finite mixture of elements of $A$ and $B$, it will also be true for any element of $\hull(A \cup B)$ since the entropy is continuous. Consequently, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\capacity(A \cup B) \leq \capacity(A) + \capacity(B)$ (i.e. the state capacity is subadditive).
 	
-	4. Let $A, B \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[a]_i\} \subset A$ be a sequence of ensembles such that $2^{S(\ens[a]_i)} \to \capacity(A)$ and let $\{\ens[b]_i\} \subset B$ be a sequence of ensembles such that $2^{S(\ens[b]_i)} \to \capacity(B)$. Consider $\ens_i = p_i \ens[a]_i + \bar{p_i} \ens[b]_i$ where $p_i = \frac{2^{S(\ens[a]_i)}}{2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(A) + \capacity(B)$. Therefore $\capacity(A \cup B) \geq \capacity(A) + \capacity(B)$. Combining with the previous result, $\capacity(A \cup B) = \capacity(A) + \capacity(B)$. Therefore the state capacity, as set function, is additive over orthogonal sets of ensembles.
+	4. Let $A, B \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[a]_i\} \subseteq A$ be a sequence of ensembles such that $2^{S(\ens[a]_i)} \to \capacity(A)$ and let $\{\ens[b]_i\} \subseteq B$ be a sequence of ensembles such that $2^{S(\ens[b]_i)} \to \capacity(B)$. Consider $\ens_i = p_i \ens[a]_i + \bar{p_i} \ens[b]_i$ where $p_i = \frac{2^{S(\ens[a]_i)}}{2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(A) + \capacity(B)$. Therefore $\capacity(A \cup B)$ must be at least $\capacity(A) + \capacity(B)$. Combining with the previous result, $\capacity(A \cup B) = \capacity(A) + \capacity(B)$. Therefore the state capacity, as a set function, is additive over orthogonal sets of ensembles.
 \end{proof}
 
 \begin{conj}
@@ -1158,19 +1165,21 @@ Given a set of ensembles, we can ask what spread reachable by a mixture in terms
 \end{conj}
 
 \begin{proof}
-	If the state capacity adds, then the states with highest entropy satisfy the upper variability bound and are orthogonal. What needs to be shown is that this is enough to say all elements are orthogonal. There a series of nice results possible here. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. If $\ens[a]$ is the ensemble with maximum entropy in $\hull(A)$, it should be true that all elements of the hull are components of $\ens[a]$. If one ensemble is not, we should be able to create an ensemble with higher entropy.
+	If the state capacity adds, then the states with highest entropy satisfy the upper variability bound and are orthogonal. What needs to be shown is that this is enough to say all elements are orthogonal. There is a series of nice results possible here. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. If $\ens[a]$ is the ensemble with maximum entropy in $\hull(A)$, it should be true that all elements of the hull are components of $\ens[a]$. If one ensemble is not, we should be able to create an ensemble with higher entropy.
 \end{proof}
+\end{mathSection}
 
-Note that the state capacity for a single element correspond to the ``ensemble volume'' defined in \href{https://arxiv.org/pdf/physics/9903045}{this work} and more recently \href{https://arxiv.org/pdf/1804.01343}{here}. It is connected to various uncertainty relationships, including a stronger form of the quantum uncertainty principle. It would be interesting to understand what results can be generalized to the ensemble space.
+Note that the state capacity for a single element corresponds to the ``ensemble volume'' defined in \href{https://arxiv.org/pdf/physics/9903045}{this work} and more recently \href{https://arxiv.org/pdf/1804.01343}{here}. It is connected to various uncertainty relationships, including a stronger form of the quantum uncertainty principle. It would be interesting to understand what results can be generalized to the ensemble space.
 
 We now show that the state capacity recovers a notion of number of cases in all three target spaces. In the discrete classical case it recovers the number of points; in the continuous classical case, it recovers the Liouville volume; in the quantum case, it recovers the number of orthogonal pure states.
 
+\begin{mathSection}
 \begin{prop}
-	Let $\Ens$ be a discrete classical ensemble space. Let $U \subseteq \{s_i\}$ be a subset of the corresponding (extreme) points and $A$ be the set of probability distributions supported by $U$. Then $\capacity(A) = \#U$.
+	Let $\Ens$ be a discrete classical ensemble space. Let $U \subseteq \{s_i\}$ be a subset of the corresponding (extreme) points and $A$ be the set of probability distributions whose support is a subset of $U$. Then $\capacity(A) = \#U$.
 \end{prop}
 
 \begin{proof}
-	Let $A$ be the set of probability distributions defined over a discrete $U$. The highest entropy is achieved by the uniform distribution, which equals to $\log (\#U)$. Therefore $\capacity(A) = 2^{\log(\#U)} = \#U$.
+	Let $A$ be the set of probability distributions defined over a discrete countable set $U$. The highest entropy is achieved by the uniform distribution, which equals $\log (\#U)$. Therefore $\capacity(A) = 2^{\log(\#U)} = \#U$.
 \end{proof}
 
 \begin{prop}
@@ -1178,7 +1187,7 @@ We now show that the state capacity recovers a notion of number of cases in all 
 \end{prop}
 
 \begin{proof}
-	Let $A$ be the set of probability distributions whose support is a subset of $U$. The highest entropy is achieved by the uniform distribution, which equals to $\log(\mu(U))$. Therefore $\capacity(A) = 2^{\log(\mu(U))} = \mu(U)$.
+	Let $A$ be the set of probability distributions whose support is a subset of $U$. The highest entropy is achieved by the uniform distribution, which equals $\log(\mu(U))$. Therefore $\capacity(A) = 2^{\log(\mu(U))} = \mu(U)$.
 \end{proof}
 
 \begin{prop}
@@ -1186,8 +1195,9 @@ We now show that the state capacity recovers a notion of number of cases in all 
 \end{prop}
 
 \begin{proof}
-	Let $A$ be the set of density operators defined on a subspace $U$. The highest entropy is achieved by the uniform distribution, which equals to $\log(\dim(U))$. Therefore $\capacity(A) = 2^{\log(\dim(U))} = \dim(U)$.
+	Let $A$ be the set of density operators defined on a subspace $U$. The highest entropy is achieved by the maximally mixed state, which equals $\log(\dim(U))$. Therefore $\capacity(A) = 2^{\log(\dim(U))} = \dim(U)$.
 \end{proof}
+\end{mathSection}
 
 \section{Fraction capacity and probability}
 
@@ -1592,14 +1602,15 @@ Now that we have identified the correct closure, we need to find the right chara
 
 To recover classical probability distributions, we need to recover the possible cases (i.e. the sample space) and the events (i.e. the $\sigma$-algebra) over which the probability distributions are defined. These are not necessarily states. For example, in the countinuous classical case, the sample space corresponds to the sets of possible values of position and momentum (i.e. the symplectic manifold over which the values are defined). In quantum mechanics, the sample space is the range of possible values defined by an observable (i.e. the spectrum of the operator). The goal here is to identify a single physically meaningful construction that will be able to work for all these cases.
 
-Intuitively, while we cannot perfectly prepare a continuous variable, we can imagine making preparations that have narrower and narrower spread. For example, we can imagine a sequence of uniform distributions over $[-\frac{1}{i}, \frac{1}{i}]$. The spread will converge to the single value $0$, though the sequence of ensembles will not converge to an ensemble. Similarly, we can imagine a sequence of density matrices, or even wave-functions, for the quantum case. We will be able to characterize ensembles in terms of classical probability distributions over these limits, which represent merely a convenient tool for representation and calculation. That is, conceptually we are not starting from the sample space (i.e. the possible idealized values) and then constructing probability distributions on top; we start with a set of ensembles, which are the physical objects we are studying, and, in the case that satisfy particular properties, they can be represented as probability distributions over limits of sequences.
+Intuitively, we are taking ensembles and decomposing them into mixtures of ensembles with narrower and narrower spread. The points over which the classical distributions are defined are limits where the spread goes to zero. Note, however, that the limit of sequences with narrower and narrower spread will not, in general, be itself an ensemble. For example, we can imagine a sequence of uniform distributions over $[-\frac{1}{i}, \frac{1}{i}]$. As $i$ increases, the spread will converge to the single value $0$, though the sequence of ensembles will not converge to an ensemble. Similarly, we can imagine a sequence of density matrices, or even wave-functions, for the quantum case. The points, then, should be understood as a convenient tool for representation and calculation, not as physically realizable objects. What is physically realizable, at least conceptually in the model, is the sequence of finer and finer decomposition at an arbitrary level of precision. That is, conceptually we are not starting from the sample space (i.e. the possible idealized values) and then constructing probability distributions on top; we start with a set of ensembles, which are the physical objects we are studying, and obtain the points and the corresponding probability distributions as the limit of recursive decomposition.
 
-Mathematically, the construction uses the notion of subspaces defined in \ref{pm_es_subspaceSection} applied to separateness. We use separateness to constructs sets of ensembles that share the same support. These are the $\separate$-subspaces and are constructed by looking for pairs of sets such that all the elements of one are separate from all the elements of the other. These subspaces form a lattice: they have a partial order according to set inclusion. Therefore we can find sequences of subspaces that become more and more refined, whose elements have a narrower and narrower support. Using a standard technique in topology, the set of possible limits are identified by a collection of subspaces (called ultrafilters) that become smaller and smaller. These become the point of the spectra, the sample space.
+Mathematically, the construction uses the notion of subspaces defined in \ref{pm_es_subspaceSection} applied to separateness. We use separateness to construct sets of ensembles that share the same support. These are the $\separate$-subspaces and are constructed by looking for pairs of sets such that all the elements of one are separate from all the elements of the other. These subspaces form a lattice: they have a partial order according to set inclusion. Therefore we can find sequences of subspaces that become more and more refined, whose elements have a narrower and narrower support. Using a standard technique in topology, the points are identified by a collection of subspaces (called ultrafilters) that become smaller and smaller. A limiting sequence can be understood as taking an element from each of these shrinking subspaces. We call the set of all these points the spectrum of the context.
 
-Every subspace can then be understood as a set of limits, a set of ultrafilters, that are open sets in the topology of the spectra. The topology is the one generated by the those sets.
+Every subspace can then be understood as a set of limits, a set of ultrafilters, that are open sets in the topology of the spectrum. The topology is the one generated by those sets.
 
+\begin{mathSection}
 \begin{defn}
-	Given a classical probability context $C \subseteq \Ens$, the \textbf{spectrum} $\sigma(C)$ is the set of equivalence classes of sequences of ensembles that eventually become separate from each other. More rigorously, given a probability context, the spectra is the collection of the ultrafilters of the lattice of $\separate$-subspaces $\mathfrak{L}^\separate(C)$. The spectrum of each $\separate$-subspace is given by $\sigma(A) \mapsto \{ x \in \sigma(C) \, | \, A \in x \}$. The standard topology of the spectrum is the one generated by the spectra of all $\separate$-subspaces (i.e. $\sigma(\mathfrak{L}^\separate(C))$.
+	Given a classical probability context $C \subseteq \Ens$, the \textbf{spectrum} $\sigma(C)$ is the set of equivalence classes of sequences of ensembles that eventually become separate from each other. More rigorously, given a probability context, the spectrum is the collection of the ultrafilters of the lattice of $\separate$-subspaces $\mathfrak{L}^\separate(C)$. The spectrum of each $\separate$-subspace is given by $\sigma(A) \mapsto \{ x \in \sigma(C) \, | \, A \in x \}$. The standard topology of the spectrum is the one generated by the spectra of all $\separate$-subspaces (i.e. $\sigma(\mathfrak{L}^\separate(C))$.
 \end{defn}
 
 \begin{prop}
@@ -1618,9 +1629,9 @@ Every subspace can then be understood as a set of limits, a set of ultrafilters,
 \begin{proof}
 	For 1, since all $x \in \sigma(C)$ are upward closed, $A \in x$ means $B \in x$ as well. Therefore if $x \in \sigma(A)$ then $x \in \sigma(B)$, which means $\sigma(A) \subseteq \sigma(B)$. Conversely, if $\sigma(A) \subseteq \sigma(B)$ then all downward sets of $\mathfrak{L}^\separate(C)$ that contain $A$ must also contain $B$, which means $B \supseteq A$.
 	
-	For 2 and 3, note that $\sigma(A) = \{ x \in \sigma(C) \, | \, A \in x \}$ and therefore $\sigma(A)^{\complement} = \{ x \in \sigma(C) \, | \, A \notin x \}$. Since $\sigma(A)$ is an open set, $\sigma(A)^{\complement} = \exterior(\sigma(A)) \cup \partial \sigma(A)$. Now consider $\sigma(A^{\separate})$. This is an open set and it is disjoint from $\sigma(A)$. In fact, if $x \in \sigma(A) \cap \sigma(A^{\separate})$ then $A, A^{\separate} \in x$. But this would mean that $\emptyset \in x$, which can't be because $x$ is a proper filter and cannot contain $\emptyset$. Since $A^{\separate}$ is the largest $\separate$-subspace that is separate from $A$, there is no set in $\sigma(\mathfrak{L}^\separate(C))$ that is larger than $A^{\separate}$ and still disjoint from $A$. Therefore $\sigma(A^{\separate}) = \exterior(\sigma(A))$. We have $\partial \sigma(A) = \sigma(C) \ (\interior(\sigma(A))\cup\exterior(\sigma(A))) = \{ x \in \sigma(C) \, | \, A \notin x, A^{\separate} \notin x \}$.
+	For 2 and 3, note that $\sigma(A) = \{ x \in \sigma(C) \, | \, A \in x \}$ and therefore $\sigma(A)^{\complement} = \{ x \in \sigma(C) \, | \, A \notin x \}$. Since $\sigma(A)$ is an open set, $\sigma(A)^{\complement} = \exterior(\sigma(A)) \cup \partial \sigma(A)$. Now consider $\sigma(A^{\separate})$. This is an open set and it is disjoint from $\sigma(A)$. In fact, if $x \in \sigma(A) \cap \sigma(A^{\separate})$ then $A, A^{\separate} \in x$. But this would mean that $\emptyset \in x$, which can't be because $x$ is a proper filter and cannot contain $\emptyset$. Since $A^{\separate}$ is the largest $\separate$-subspace that is separate from $A$, there is no set in $\sigma(\mathfrak{L}^\separate(C))$ that is larger than $A^{\separate}$ and still disjoint from $A$. Therefore $\sigma(A^{\separate}) = \exterior(\sigma(A))$. We have $\partial \sigma(A) = \sigma(C) \setminus (\interior(\sigma(A))\cup\exterior(\sigma(A))) = \{ x \in \sigma(C) \, | \, A \notin x, A^{\separate} \notin x \}$.
 	
-	For 4, since $\sigma(A)$ is an open set, the complement is the closure of the exterior. Therefore, given 1, $\sigma(A)^{\complement} = \overline{\sigma(A^{\separate})}$.
+	For 4, since $\sigma(A)$ is an open set, the complement is the closure of the exterior. Therefore, given 2, $\sigma(A)^{\complement} = \overline{\sigma(A^{\separate})}$.
 	
 	For 5, consider $\bigwedge_{i \in I} A_i$. This is the largest $\separate$-subspace that is contained by all $A_i$. Then, given 1, $\sigma\left(\bigwedge_{i \in I} A_i\right)$ must be the largest open set that is contained by all $\sigma(A_i)$. This corresponds to $\interior\left(\bigcap_{i \in I} \sigma(A_i)\right)$.
 	
@@ -1631,31 +1642,30 @@ Every subspace can then be understood as a set of limits, a set of ultrafilters,
 		&= \exterior\left(\bigcap_{i \in I}\overline{\sigma(A_i)}^{\complement}\right) = \exterior\left(\left(\bigcup_{i \in I}\overline{\sigma(A_i)}\right)^{\complement}\right) \\
 		&= \interior\left(\bigcup_{i \in I}\overline{\sigma(A_i)}\right)
 	\end{align*}
-	For the last step, not that the union of the closure is not necessarily the closure of the union, but they have the same interior.
+	For the last step, note that the union of the closure is not necessarily the closure of the union, but they have the same interior. (TODO: check that the ext of int is really ext in the second line)
 	
-	For 7, note that an open set $U$ is generated from $\sigma(\mathfrak{L}^\separate(C))$ through finite intersection and arbitrary union. Note that the finite intersection, of open sets is an open set, so we have $\bigcap_{i \in I} \sigma(A_i) = \interior\left(\bigcap_{i \in I} \sigma(A_i)\right) = \sigma(\bigwedge_{i \in I} A_i)$. Therefore the finite intersection corresponds to a $\separate$-subspace. This means that we can can generate all open sets with arbitrary unions of sets from $\sigma(\mathfrak{L}^\separate(C))$.
+	For 7, note that an open set $U$ is generated from $\sigma(\mathfrak{L}^\separate(C))$ through finite intersection and arbitrary union. Note that the finite intersection of open sets is an open set, so we have $\bigcap_{i \in I} \sigma(A_i) = \interior\left(\bigcap_{i \in I} \sigma(A_i)\right) = \sigma(\bigwedge_{i \in I} A_i)$. Therefore the finite intersection corresponds to a $\separate$-subspace. This means that we can can generate all open sets with arbitrary unions of sets from $\sigma(\mathfrak{L}^\separate(C))$.
 \end{proof}
 
 \begin{remark}
-	Note that while the lattice of the $\separate$-subspaces is a topped intersection structure, the lattice of the corresponding closed sets is not. The intersection of the $\separate$-subspaces corresponds to the interior of the intersection of their spectra. A point of the spectra, in fact, can correspond to an infinitesimal subspace (i.e. a non-principal/free ultrafilter) which corresponds to no actual ensemble.
+	Note how the infinite joins/meets on the lattice of the $\separate$-subspaces do not correspond to the infinite operations on the lattice of the topology or of the Borel sets. For example, suppose we are taking the lattice of probability measures defined over the interval $[0,1]$ that are absolutely continuous with respect to the Lebesgue measure. Each $\separate$-subspace will correspond to a set of measures whose support lives in a particular region. A singleton will not correspond to any subspace as it cannot support an absolutely continuous measure. Therefore, if we take all the $\separate$-subspaces of all measures that have $1/2$ within the support, the intersection of all those subspaces will be the empty set, which is a $\separate$-subspace. However, the intersection of the sets representing their support is the singleton $\{1/2\}$, which is not the empty set. However, its interior is the empty set.
 	
-	As an example, suppose we are taking the lattice of probability measures defined over the interval $[0,1]$ that are absolutely continuous with respect to the Lebesgue measure. Each $\separate$-subspace will correspond to a set of measures whose support lives in a particular region. A singleton will not correspond to any subspace as it cannot support an absolutely continuous measure. Therefore, if we take all the $\separate$-subspaces of all measures that have $1/2$ within the support, the intersection of all those subspaces will be the empty set, which is a $\separate$-subspace. However, the intersection of the sets representing their support is the singleton $\{1/2\}$, which is not the empty set. However, its interior is the empty set.
-	
-	The fact a single probability measure is an equivalence class of probability densities is related to this distinction. Consider a uniform distribution over $[0,1]$. The related probability density can be understood as a constant between those values and zero everywhere else. However, the same constant over $[0,1/2) \cup (1/2,1]$ will also work. That is, the same element of the ensemble space can be represented in different way as a function over the spectra.
+	The fact that a single probability measure is an equivalence class of probability densities is related to this distinction. Consider a uniform distribution over $[0,1]$. The related probability density can be understood as a constant between those values and zero everywhere else. However, the same constant over $[0,1/2) \cup (1/2,1]$ will also work. That is, the same element of the ensemble space can be represented in different ways as a function over the spectrum.
 \end{remark}
 
 
 \begin{thrm}
-	Let $C \subseteq \Ens$ be a probability context and $\ens \in C$ be an ensemble in the context. The set function $p^*_{\ens} : \textsf{T}_{\sigma(C)} \to[0,1]$, defined such that $p^*_{\ens}(U) = \inf(\{ \fcap(A) \, | \, \sigma(A) \supseteq U \})$, is a topological measure. Therefore ensemble in a classical probability context can be represented by a unique measure over its spectra that is continuous with respect to its topology.
+	Let $C \subseteq \Ens$ be a probability context and $\ens \in C$ be an ensemble in the context. The set function $p^*_{\ens} : \textsf{T}_{\sigma(C)} \to[0,1]$, defined such that $p^*_{\ens}(U) = \inf(\{ \fcap(A) \, | \, \sigma(A) \supseteq U \})$, is a topological measure. Therefore an ensemble in a classical probability context can be represented by a unique measure over its spectrum that is continuous with respect to its topology.
 \end{thrm}
 
 \begin{proof}
-	Since $p^*_{\ens}$ is finite, it is locally finite. We need to show that is topologically additive. If $U$ is a generic open set, then we are looking for the smallest subspace $A$ such that $\sigma(A) \subseteq U$. If $U$ corresponds to a $\separate$-subspace, that is $U = \sigma(A)$, then $p^*_{\ens} = \fcap_{\ens}(A)$. If not, $U$ can still be written as the union of the spectrum of a family of subspaces. That is, $U = \bigcup_{i \in I} \sigma(A_i)$ for some family of $A_i \in \mathfrak{L}^\separate(C)$. The smallest subspaces that contains them all, then is the join $A$. Therefore we have $p^*_{\ens}(U) = p^*_{\ens}(\sigma(A)) = p^*_{\ens}(\sigma(\bigvee_{i \in I} A_i)) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} \sigma(A_i)}\right)\right)$. Lastly, let $U_i$ be a family of disjoint open sets and let $A_i$ be the corresponding smallest subspaces such that $\sigma(A_i) \supseteq U_i$. Since $U_i$ are disjoint, $A_i$ will also be disjoint, and therefore they will be separate. But the fraction capacity is additive across separate subspaces. We have $\sum_{i \in I} p^*_{\ens}(U_i) = \sum_{i \in I} \fcap_{\ens}(A_i) = \fcap_{\ens}(\bigvee_{i \in I} A_i) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} \sigma(A_i)}\right)\right) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} U_i}\right)\right)$. Therefore $p^*_{\ens}$ is a topological measure.
+	Since $p^*_{\ens}$ is finite, it is locally finite. We need to show that is topologically additive. If $U$ is a generic open set, then we are looking for the smallest subspace $A$ such that $\sigma(A) \subseteq U$. If $U$ corresponds to a $\separate$-subspace $A$, that is $U = \sigma(A)$, then $p^*_{\ens} = \fcap_{\ens}(A)$. If not, $U$ can still be written as the union of the spectra of a family of subspaces. That is, $U = \bigcup_{i \in I} \sigma(A_i)$ for some family of $A_i \in \mathfrak{L}^\separate(C)$. The smallest subspace that contains them all, then is the join of all $A_i$. Therefore we have $p^*_{\ens}(U) = p^*_{\ens}(\sigma(A)) = p^*_{\ens}(\sigma(\bigvee_{i \in I} A_i)) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} \sigma(A_i)}\right)\right)$. Lastly, let $U_i$ be a family of disjoint open sets and let $A_i$ be the corresponding smallest subspaces such that $\sigma(A_i) \supseteq U_i$. Since $U_i$ are disjoint, $A_i$ will also be disjoint, and therefore they will be separate. But the fraction capacity is additive across separate subspaces. We have $\sum_{i \in I} p^*_{\ens}(U_i) = \sum_{i \in I} \fcap_{\ens}(A_i) = \fcap_{\ens}(\bigvee_{i \in I} A_i) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} \sigma(A_i)}\right)\right) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} U_i}\right)\right)$. Therefore $p^*_{\ens}$ is a topological measure.
 	
 	The measure, then, can be extended uniquely to the whole $\sigma$-algebra, since the measure is finite.
 	
 	Lastly, we need to show that two different ensembles will correspond to two different measures. Let $\ens[a],\ens[b] \in C$ be two distinct ensembles in the probability context. TODO
 \end{proof}
+\end{mathSection}
 
 \begin{conj}
 	A convex subset $U \subset \Ens$ is a classical probability context if and only if it is the subset of probability measures of a vector space of measures over a sample space $\Omega$.
@@ -2097,7 +2107,7 @@ The attempt was the following:
 	The only if is easy to show based on the discussion above. The if part does not actually work. Take 6 points in a 4 dimensional euclidean space such that the form two triangles that intersect at a single point. All two dimensional convex spaces will be segments. However, the whole convex hull is not a simplex. 
 \end{remark}
 
-\iftrue
+\iffalse
 
 \section{Old notes to be organized}
 TODO: from here on are just old notes to be reorganized
