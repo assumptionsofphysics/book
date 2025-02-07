@@ -1317,10 +1317,16 @@ To sum up, given a topological space $X$, we are interested in measures that are
 
 \begin{mathSection}
 \begin{defn}
-	Let $X$ be a topological space. We say a measure $\mu : \Sigma_X \to \mathbb{R}$ is compatible with the topology if $\mu(U) = \mu(\bar{U})$ for every open set $U$.
+	Let $X$ be a topological space. We say a measure $\mu : \Sigma_X \to \mathbb{R}$ is compatible with the topology if it satisfies the following:
+	\begin{enumerate}
+		\item constant on closures of open sets: $\mu(U) = \mu(\bar{U})$ for every open set $U$ and it is locally finite
+		\item locally finite on open sets: for any open set $U$, there is an open set $V \subset U$ such that $\mu(V) \in (0,+\infty)$
+	\end{enumerate}
 \end{defn}
 \begin{justification}
 	Recall that if $X$ is a topological space that represents an experimental domain, each open set represents a verifiable statement. If a measure quantifies a physically well-defined quantity associated to the statement, it has to be associated only to the part of the statement that can be experimentally verified or falsified. The undecidable part, then, is physically indistinguishable from an empty set and therefore have zero measure. This means we are justified to assume the measure on an open set is the same as the measure on its closure.
+	
+	Given that infinite values are not measurable but represent limit cases, any infinite open set must be a superset of a finite open set.
 \end{justification}
 \end{mathSection}
 
@@ -1462,9 +1468,33 @@ Given that we are stressing the importance of the topology, one is led to ask: c
 	The extension is unique if the pre-measure $\mu'$ is $\sigma$-finite, which means, for example, that we can find a countable cover of the space where each open set is finite. Note that if $X$ is second countable, and since the measure is locally finite, we are going to be able to find a countable basis of the space where each element of the basis is finite. Therefore we are guaranteed $\sigma$-finite. If the topological measure is finite, then it is $\sigma$-finite regardless of the space.
 \end{proof}
 
-\begin{conj}
-	Let $X$ be a topological space and $\mu : \Sigma_X \to [0,+\infty]$ be a $\sigma$-finite measure compatible with the topology. Then $\left.\mu\right|_{\textsf{T}_X}$ is a topological measure and $\mu$ is its unique extension.
-\end{conj}
+\begin{coro}
+	The extension of the topological measure is compatible with the topology.
+\end{coro}
+\begin{proof}
+	By construction of the pre-measure, $\mu(U) = \mu(U)$ for every open set. Since the topological measure is locally finite, its extension retains the property as it applies to open sets.
+\end{proof}
+
+\begin{prop}
+	Let $X$ be a topological space and $\mu : \Sigma_X \to [0,+\infty]$ be a measure compatible with the topology. Then $\left.\mu\right|_{\textsf{T}_X}$ is a topological measure.
+\end{prop}
+
+\begin{proof}
+	It suffices to prove that the restriction of $\mu$ to the topology is a topological measure.
+	
+	Since $\mu$ is non-negative on all Borel sets, it is also non-negative on all open sets.
+	
+	Let $U$ and $V$ two open disjoint sets. Since open and closed sets are nicely bounded and the union of open sets is open, we have $\mu(U) + \mu(V) = \mu(U \cup V) = \mu(\overline{U \cup V}) = \mu(\interior(\overline{U \cup V}))$. Therefore $\mu$ is topologically additive.
+	
+	Since $\mu$ is continuous from above and below for sequences of Borel sets, it will also be continuous from above and below for sequences of open sets in particular.
+	
+	Since $\mu$ is locally finite on open sets, its restriction will be locally finite.
+\end{proof}
+
+\begin{remark}
+	We need to impose that measures compatible with the topology are locally finite on open sets specifically, as being locally finite on Borel sets is not enough. Consider the natural numbers with the right right order topology (or the cofinite topology). The counting measure satisfies $\mu(U) = \mu(\overline{U})$ since every open set has infinite measure and the measure is monotone. Every open set has a Borel subset that is finite. However, no open set is finite.
+\end{remark}
+
 \end{mathSection}
 
 \subsection{Flats and affine combinations}
