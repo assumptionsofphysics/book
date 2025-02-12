@@ -1161,6 +1161,10 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 \end{proof}
 
 \begin{conj}
+	The state capacity is continuous from above and below.
+\end{conj}
+
+\begin{conj}
 	The state capacity is additive only on orthogonal sets.
 \end{conj}
 
@@ -1708,10 +1712,15 @@ Every subspace can then be understood as a set of limits, a set of ultrafilters,
 	
 	The fact that a single probability measure is an equivalence class of probability densities is related to this distinction. Consider a uniform distribution over $[0,1]$. The related probability density can be understood as a constant between those values and zero everywhere else. However, the same constant over $[0,1/2) \cup (1/2,1]$ will also work. That is, the same element of the ensemble space can be represented in different ways as a function over the spectrum.
 \end{remark}
+\end{mathSection}
 
+\subsection{Probability measures from classical probability contexts}
 
+We now show that each ensemble in a classical probability context can be understood as a probability measure over the spectrum of the context. That is, each ensemble can either be understood as a convex combination of smaller and smaller components that are separate from each other.
+
+\begin{mathSection}
 \begin{thrm}
-	Let $C \subseteq \Ens$ be a probability context and $\ens \in C$ be an ensemble in the context. The set function $p^*_{\ens} : \textsf{T}_{\sigma(C)} \to[0,1]$, defined such that $p^*_{\ens}(U) = \inf(\{ \fcap(A) \, | \, \sigma(A) \supseteq U \})$, is a topological measure. Therefore an ensemble in a classical probability context can be represented by a unique measure over its spectrum that is continuous with respect to its topology.
+	Let $C \subseteq \Ens$ be a probability context and $\ens \in C$ be an ensemble in the context. The set function $p^*_{\ens} : \textsf{T}_{\sigma(C)} \to[0,1]$, defined such that $p^*_{\ens}(U) = \inf(\{ \fcap_{\ens}(A) \, | \, \sigma(A) \supseteq U \})$, is a topological measure. Therefore an ensemble in a classical probability context can be represented by a unique measure over its spectrum that is continuous with respect to its topology.
 \end{thrm}
 
 \begin{proof}
@@ -1727,9 +1736,11 @@ Every subspace can then be understood as a set of limits, a set of ultrafilters,
 	A convex subset $U \subset \Ens$ is a classical probability context if and only if it is the subset of probability measures of a vector space of measures over a sample space $\Omega$.
 \end{conj}
 
+We now want to show that, in standard ensemble spaces, we recover the standard notions of probability.
+
 \begin{mathSection}
 \begin{prop}
-	Let $\Ens$ be a discrete classical ensemble space. Then $\Ens$ is a probability context, the spectrum is the sample space and its topology is the discrete topology.
+	Let $\Ens$ be a discrete classical ensemble space over a set $X$ of outcomes. Then $\Ens$ is a probability context, the spectrum is $X$ and its topology is the discrete topology. The probability measures over the spectrum recover the original probability measures.
 \end{prop}
 
 \begin{proof}
@@ -1737,19 +1748,31 @@ Every subspace can then be understood as a set of limits, a set of ultrafilters,
 	
 	Since ensembles are separate if and only if they have disjoint support, the $\separate$-subspace of a subset $A \subseteq \Ens$ of ensembles corresponds to all ensembles whose support is a subset of the union of the supports of the elements of $A$. Each $\separate$-subspace, then, is associated to one unique subset $U \subseteq \Omega$ of the sample space. Given that for any subset $U$ we can find a measure whose support is $U$, every subset corresponds to a unique $\separate$-subspace. If the support of a measure is a subset of $U$, it will also be a subset of any other set $V \supseteq U$. Therefore the ordering of the lattice of $\separate$-subspaces is the same as inclusion on the lattice of supports. The two lattices are isomorphic.
 	
-	Since the singletons are elements of the lattice, all ultrafilters are principal, meaning that they are all of the form $X(x) = \{A \in \mathfrak{L}^\separate(C) \, | \, \{x\} \in A\}$ where $x \in \Omega$ is an element of the sample space. Therefore the sample space and the spectrum coincide. Each singleton is an open set, since it is an element of the lattice. The topology is therefore the discrete topology.
+	Since the singletons are elements of the lattice, all ultrafilters are principal, meaning that they are all of the form $\uparrow\mathclose{x} = \{A \in \mathfrak{L}^\separate(C) \, | \, \{x\} \in A\}$ where $x \in \Omega$ is an element of the sample space. Therefore the sample space and the spectrum coincide. Each singleton is an open set, since it is an element of the lattice. The topology is therefore the discrete topology.
+	
+	Now consider $p^*_{\ens}(\{x\})$ for some $x \in X$. Since $\{x\}$ is a $\separate$-subspace, $p^*_{\ens}(\{x\}) = \fcap_{\ens}(\{x\}) = \size_{\ens}(x)$. Note that the ensemble $\ens$ corresponds to a probability measure $p$ which can be written as a convex combination $\ens = \sum_{x_i \in X} p(\{x_i\}) x_i$. Given an $x \in X$, then, $p(\{x\})$ is the greatest mixing coefficient that can be associated to $x$ in a convex combination, which corresponds to the fraction capacity. Therefore $p^*_{\ens}(\{x\}) = p(\{x\})$ for all $x \in X$, which means the two measures are the same.
 \end{proof}
-
-\begin{conj}
-	Let $\Ens$ be a continuous classical ensemble space. Then $\Ens$ is a probability context, the spectrum is the symplectic manifold $X$ of all particle states and its topology is locally the standard topology of $\mathbb{R}^n$.
-\end{conj}
 \end{mathSection}
+
+\begin{prop}
+	Let $\Ens$ be a continuous classical ensemble space over a symplectic manifold $X$. Then $\Ens$ is a probability context, the spectrum is $X$ and its topology is locally the standard topology of $\mathbb{R}^n$.
+\end{prop}
+
+\begin{proof}
+	Let $\Ens$ be a continuous classical ensemble space. The whole space is a flat as it contains all its affine combinations. Note that two ensembles are separate if and only if they have disjoint support. Suppose $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 + \bar{\lambda} \ens[b]_2$. Then the union of the support of each pair must be the same. Therefore the support of at least one element of each pair must overlap with the support of another element of another pair. This means that separate multidecomposability is not allowed. Therefore $\Ens$ is a classical probability context.
+	
+	Since ensembles are separate if and only if they have disjoint support, the $\separate$-subspace of a subset $A \subseteq \Ens$ of ensembles corresponds to all ensembles whose support is a subset of the union of the supports of the elements of $A$. Each $\separate$-subspace, then, is associated to a subset $U \subseteq \Omega$ of the sample space. If the support of a measure is a subset of $U$, it will also be a subset of any other set $V \supseteq U$. Therefore the ordering of the lattice of $\separate$-subspaces is the same as inclusion on the lattice of supports. The two lattices are isomorphic. Unlike the discrete version, in the continuous case not all sets can be the support of a probability measure that is part of the ensemble space. For example, a set of measure zero with respect to the Liouville measure cannot support a probability measure absolutely continuous with respect to the Liouville measure.
+	
+	Recall that the support of a probability measure is the smallest closed set such that $p(A) = 1$. Given that the ensemble space is formed by probability measures that are absolutely continuous with respect to the Liouville measure, the measure over the support is equal to the measure of the interior. Therefore a set $U$ corresponds to a $\separate$-subspace if and only if the $U = \overline{\interior(U)}$. Given that the measure is zero on the boundary, we can really think of each $\separate$-subspace as corresponding to those open sets that are the interior of their own closure.
+	
+	Note that any open coordinate ball is the interior of its closure. Since any point can be recovered as the limit of a decreasing sequence of open coordinate balls, every $x \in X$ corresponds to an ultrafilter of $\mathfrak{L}^\separate(C)$. That is, the ultrafilters are not principal because there is no absolutely continuous measure that has support only on $x$, but they are still associated with a single point: they corresponds the supports that contain an open neighborhood of $x$. Each $\separate$-subspace, then, corresponds to the interior of the support as there is no open neighborhood of limit points. Since $\mathfrak{L}^\separate(C)$ contains all open ball, the topology generated is the one of the manifold $X$.
+	
+	Now consider $p^*_{\ens}(U)$ for some open set $U \subseteq X$. Since $p^*_{\ens}(U) = p^*_{\ens}(\interior(\overline{U}))$ and $\interior(\overline{U})$ corresponds to a $\separate$-subspace, noted $A(\interior(\overline{U}))$, $p^*_{\ens}(U) = \fcap_{\ens}(A(\interior(\overline{U})))$. Given an absolutely continuous probability measure $p$ and a set $U$, we can write $p = p(U) \frac{\left.p\right|_{U}}{p(U)} + p(U^{\complement}) \frac{\left.p\right|_{U^{\complement}}}{p(U^{\complement})}$, which is a convex combinations of two absolutely continuous probability measures. Moreover, $p(U)$ corresponds to the greatest mixing coefficient that can be associated to a probability measure with support $U$. Therefore $p(U) = \fcap_{\ens}(A(\interior(\overline{U}))) = p^*_{\ens}(U)$, which means $p = p^*_{\ens}$.
+\end{proof}
 
 \begin{remark}
 	TODO: organize. There are different types of limits. One limit of convex combinations. Physically, these are mixtures over infinitely many elements. Limit of ensemble sequences. Physically, these are sequences of ensembles, taken one after the other, for example in temporal succession. Limits of ensembles taken from $\separate$-subspaces strictly included into each other. This is the limit of ensemble that are finer and finer.
 \end{remark}
-
-\subsection{Classical probability contexts in classical and quantum ensemble spaces}
 
 We now want to show the relationship between classical probability context for classical and quantum ensembles spaces. For classical ensemble spaces the connection is simple: every classical ensemble space is classical probability context. The reverse is not true. We could have, for example, an ensemble space that is exactly like the discrete classical one except for the entropy of the pure states, which are all assumed to be zero in a discrete classical ensemble space. The convex space structure would be exactly the same, but the entropy wouldn't match. We could also have a space of probability functions defined on a space that is not symplectic. This would be classical probability contexts, but not a space of classical ensembles.
 
@@ -1941,9 +1964,11 @@ In this section we try to recover some elements of thermodynamics on the general
 \end{remark}
 
 
-\section{R-subspaces}\label{pm_es_subspaceSection}
+\section{R-subspaces (orthogonality spaces)}\label{pm_es_subspaceSection}
 
-Here we present a generic construction that we will be using in a couple of different ways to construct lattice of subspaces. The general idea can be understood by looking at vector spaces with an inner product. The inner product defines a notion of orthogonality between vectors and this notion of orthogonality can be used to construct subspaces in the following way. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all perpendicular to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were a subspace to begin with, then $U = (U^{\perp})^{\perp}$. We can now proceed in the opposite way, and use just the relationship of orthogonality to define subspaces, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar some construction related to Galois connections.}
+Here we present a generic construction that we will be using in a couple of different ways to construct lattice of subspaces. The structure we are going to define is sometimes called orthogonality space or orthomodular space, and it sometimes appears in the context of Galois connections.
+
+The general idea can be understood by looking at vector spaces with an inner product. The inner product defines a notion of orthogonality between vectors and this notion of orthogonality can be used to construct subspaces in the following way. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all perpendicular to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were a subspace to begin with, then $U = (U^{\perp})^{\perp}$. We can now proceed in the opposite way, and use just the relationship of orthogonality to define subspaces, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar some construction related to Galois connections.}
 
 The construction work for any binary relationship that is symmetric and irreflexive. For example, given two distributions, the fact they have disjoint support is a symmetric and irreflexive relationship: a distribution does not have disjoint support with respect to itself, and the order of comparison does not matter. We can then construct subspaces based on this relationship, and find sets of function that are all defined within different regions.
 
