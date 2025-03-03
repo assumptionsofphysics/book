@@ -26,6 +26,16 @@
 \newcommand{\ens}[1][e] {\mathsf{#1}} % Ensemble
 \newcommand{\Ens}[1][E] {\mathcal{#1}} % Ensemble space
 
+\newcommand{\titledbreak}[1]{
+	\newpage
+	\vspace{3em}  % Add vertical space before the title
+	\noindent
+	\centerline{\huge\centering\textbf{#1}} % Print the titled break title in bold
+	\par\nobreak
+%	\vspace{0.5em}  % Add some vertical space after the title
+	\noindent\rule{\textwidth}{0.5pt}  % Add a horizontal rule
+%	\vspace{1.5em}  % Add vertical space after the rule
+}
 \chapter{Ensemble spaces}
 
 In this chapter we aim to develop a general theory of states and processes that is applicable to any physical system. The core concept is that of an ensemble, and the goal is to find necessary requirements for ensembles that can serve as basic axioms and then further suitable assumptions to recover the different theories (e.g. classical, quantum or thermodynamics).
@@ -593,30 +603,6 @@ As we did for separateness, we extend the notion of orthogonality to sets of ens
 The axiom of entropy not only constrains the functional form of the entropy, but it also constrains the type of space we can have. Additionally, it rules out some spaces that would seem physically pathological.
 
 The entropic structure, in general, will constrain both the topological structure, making it metrizable, and the convex structure, making it embeddable in a vector space. The entropy is also responsible for all the geometric structure of the ensemble space.
-
-\subsection{EXPERIMENTAL: Space of differences}
-
-\begin{defn}
-	Given an ensemble space, a difference between two ensemble represents the change required to transform one ensemble into another. Formally, an \textbf{ensemble difference}, or simply a difference, is an ordered pair of ensembles $\ens[a],\ens[b] \in \Ens$, noted $\ens[b] - \ens[a]$. Given a difference $\ens[b] - \ens[a]$, its \textbf{opposite} $-(\ens[b] - \ens[a])$, if it exists, is the pair $\ens[c] - \ens[a]$ where $\frac{1}{2}\ens[b] + \frac{1}{2} \ens[c] = \ens[a]$. Given $k \in [0,1]$, the \textbf{shrunk difference} is defined to be $k(\ens[b] - \ens[a]) = (k\ens[b] + \bar{k}\ens[a]) - \ens[a]$. Given $k \in (1,+\infty)$, a \textbf{stretched difference} $k(\ens[b] - \ens[a])$, if it exists, is a difference $\ens[c] - \ens[a]$ such that $\ens[b] = \frac{1}{k} \ens[c] - \overline{\frac{1}{k}}\ens[a]$. Given two differences $\ens[b] - \ens[a]$ and $\ens[c] - \ens[a]$ with an equal second term, the \textbf{average difference} is defined as $\frac{1}{2}(\ens[b] - \ens[a]) + \frac{1}{2}(\ens[c] - \ens[a]) =\frac{1}{2}(\ens[b] + \ens[c]) - \ens[a]$.
-\end{defn}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\textwidth]{tempimages/EnsembleDifferences.jpg}
-	\caption{This picture represent the motivation of the definition of the operations on the space of differences.}
-\end{figure}
-
-\begin{remark}
-	Note that the notation is chosen so that, effectively, it is like we had operations on the actual ensembles. For example $k(\ens[b] - \ens[a]) = k\ens[b] - k \ens[a] = k\ens[b] - k \ens[a] + \ens[a] - \ens[a] = k\ens[b] + (1 - k) \ens[a] - \ens[a]= (k\ens[b] - \bar{k}\ens[a]) - \ens[a]$. This can be done because the ensemble space does embed into a vector space. Note that the second term in the difference plays the role of the origin, so all operations are relative to that. For example $\frac{1}{2}(\ens[b] - \ens[a]) + \frac{1}{2}(-(\ens[b] - \ens[a])) = \frac{1}{2}(\ens[b] - \ens[a]) + \frac{1}{2}(\ens[c] - \ens[a])) = \frac{1}{2}(\ens[b] + \ens[c]) - \ens[a] = \ens[a] - \ens[a]$, which shows that the sum of opposite differences is ``zero''. The reason why this is an affine structure and not a vector space is precisely because the vectors are differences: there is no physically operation that corresponds to multiplying an ensemble by a constant.
-\end{remark}
-
-\begin{prop}
-	Since an ensemble space is cancellative, given an ensemble $\ens \in \Ens$, the space of differences $\ens[a] - \ens$ relative to $\ens$ embed into a vector space and provide an affine structure to the ensemble space.
-\end{prop}
-
-\begin{proof}
-	Since the space is cancellative, the stretched differences, if they exist, are unique. Therefore we have $\frac{1}{k}k(\ens[a] - \ens) =\ens[a] - \ens$ for all $\ens[a]$. At this point we can extend the space ???
-\end{proof}
 
 \subsection{Vector space embedding}
 
@@ -2328,10 +2314,192 @@ The attempt was the following:
 
 \iftrue
 
-\section{Old notes to be organized}
-TODO: from here on are just old notes to be reorganized
+\titledbreak{Experimental section}
 
-\subsection{Spectrum of a quantity}
+\subsection{Space of differences}
+
+The idea is to actually construct the affine space through the notion of differences.
+
+\begin{defn}[Affine combinations]
+	Let $\{\ens_i\}_{i=1}^n \subseteq \Ens$ be a finite sequence of ensembles and $\{r_i\}_{i=1}^n \subseteq \mathbb{R}$ be a finite sequence of coefficients such that $\sum_{i=1}^n r_i = 1$. The \textbf{affine combination} $\sum_{i=1}^n r_i \ens_i$ is, if it exists, the ensemble $\ens[a] \in \Ens$ such that  $\sum_{i \in I} \frac{r_i}{r} \ens_i = \frac{1}{r} \ens[a] + \sum_{i \notin I} \frac{-r_i}{r} \ens_i$ where $I = \{ i \in [1,n] \, | \, r_i \geq 0 \}$ and $r = \sum_{i \in I} r_i$.
+\end{defn}
+
+\begin{proof}
+	For the definition to work, we need to show that the affine combination can be re-expressed in terms of convex combinations. Note that the coefficients $r_i$ are not necessarily positive, but still sum to $1$. With the given definitions, $I$ includes exactly the indexes that are non-negative, and $r$ is the sum of all the non-negative coefficients. This means that $\frac{r_i}{r} \in [0,1]$ for all $i \in I$ and $\sum_{i \in I} \frac{r_i}{r}=1$. Therefore $\sum_{i \in I} \frac{r_i}{r} \ens_i$ is a convex combination and it is always well-defined. Additionally, we have that $\sum_{i \in I} r_i = 1 - \sum_{i \notin I} r_i$, which means $\frac{-r_i}{r - 1} \in [0,1]$ for all $i \notin I$ and $\sum_{i \in I} \frac{-r_i}{r-1}=1$. Therefore $\sum_{i \in I} \frac{-r_i}{r-1} \ens_i$ is a convex combination and it is always well-defined. Note that $\ens[a]$ is defined to be such that $\sum_{i \in I} \frac{r_i}{r} \ens_i = \frac{1}{r} \ens[a] + \frac{r-1}{r}\sum_{i \notin I} \frac{-r_i}{r-1} \ens_i$. If it exists, it is unique.
+\end{proof}
+
+\begin{remark}
+	Note that any equation $\sum_{i=1}^n r_i \ens[a]_i = \sum_{i=1}^n s_i \ens[b]_i$ such that $\sum_{i=1}^n r_i = \sum_{i=1}^n s_i = t$ can be understood as an equation between affine combinations by simply dividing both sides by $t$. From now on, all equations of such kind should be understood that way.
+\end{remark}
+
+\begin{defn}
+	An \textbf{interior point} of an ensemble space is an ensemble $\ens \in \Ens$ such that for every $\ens[a] \in \Ens$ there exists a $\ens[b] \in \Ens$ and a $p \in (0,1)$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$. 
+\end{defn}
+
+
+\begin{defn}[Ensemble differences]
+	Given an ensemble space, a difference between two ensemble represents the change required to transform one ensemble into another. Formally, an \textbf{ensemble difference} is an ordered pair of ensembles $\ens[a],\ens[b] \in \Ens$, noted $\ens[b] - \ens[a]$. A \textbf{scaled difference}, noted $r(\ens[b] - \ens[a])$, is a pair formed by a real number $r \in \mathbb{R}$ and a difference.
+\end{defn}
+
+\begin{defn}
+	Two scaled differences are \textbf{equivalent}, noted $r(\ens[b] - \ens[a]) \sim s(\ens[c] - \ens[a])$, if $r\ens[b] - r \ens[a] = s\ens[c] - s \ens[a]$.
+\end{defn}
+
+\begin{prop}
+	The above relation is reflexive, symmetric and transitive and therefore is an equivalence relation.
+\end{prop}
+
+\begin{proof}
+	For reflexivity, we have $r \ens[b] - r \ens[a] = r \ens[b] + r \ens[a]$, which is satisfied for any $\ens[a], \ens[b] \in \Ens$ and $r \in \mathbb{R}$.
+	
+	For symmetry, note that right hand side of the equality can be obtained by switching $r$ with $s$ and $\ens[b]$ with $\ens[c]$ in left right hand side.
+	
+	For transitivity, suppose $r(\ens[b] - \ens[a]) \sim s(\ens[c] - \ens[a])$ and $s(\ens[c] - \ens[a]) \sim t(\ens[d] - \ens[a])$. We have $r\ens[b] - r \ens[a] = s \ens[c] - s \ens[a]$ and $s\ens[c] - s \ens[a] = t\ens[d] - t \ens[a]$, or, equivalently, $\ens[b] = \frac{r-s}{r} \ens[a] +\frac{s}{r}\ens[c]$ and $\ens[c] = \frac{s-t}{s} \ens[a] +\frac{t}{s}\ens[d]$. Putting them together, $\ens[b] = \frac{r-s}{r} \ens[a] +\frac{s}{r}\left(\frac{s-t}{s} \ens[a] +\frac{t}{s}\ens[d]\right) = \frac{r-s + s -t}{r} \ens[a] +\frac{t}{r}\ens[d] = \frac{r-t}{r} \ens[a] +\frac{t}{r}\ens[d]$. Which means $r\ens[b] - r \ens[a] = t \ens[d] - t \ens[a]$. Therefore $r(\ens[b] - \ens[a]) \sim t(\ens[d] - \ens[a])$.
+\end{proof}
+
+\begin{coro}
+	The equivalence relationship satisfies the following:
+	\begin{enumerate}
+		\item the equivalence class $\left[r(\ens[b] - \ens[a])\right]$ is given by the set $\left\{s\left(\frac{r}{s}\ens[b] + \frac{s-r}{s}\ens[a] - \ens[a]\right)\right\}$
+		\item $r(\ens[b] - \ens[a]) \sim s(\ens[c] - \ens[a])$, then $\ens[a]$, $\ens[b]$ and $\ens[c]$ are on the same line
+		\item given $p \in [0,1]$, $r(\ens[b] - \ens[a]) \sim \frac{r}{p}(p\ens[b] + \bar{p}\ens[a] - \ens[a])$
+		\item $r(\ens[b] - \ens[a]) \sim -r(\ens[c] - \ens[a])$ if $\frac{1}{2}\ens[b] + \frac{1}{2} \ens[c] = \ens[a]$
+		\item $r(\ens[b] - \ens[a]) \sim s(\ens[b] - \ens[a])$ with $\ens[b] \neq \ens[a]$ if and only if $r=s$
+		\item $r(\ens[b] - \ens[a]) \sim s(\ens[b] - \ens[a])$ with $\ens[b] = \ens[a]$ for any $r,s \in \mathbb{R}$
+	\end{enumerate}
+\end{coro}
+
+\begin{proof}
+	For 1, note that the condition for equivalence is $r \ens[b] - r \ens[a] = s\ens[c] - s \ens[a]$. This can be re-expressed as $\ens[c] = \frac{r}{s}\ens[b] + \frac{s-r}{s} \ens[a]$.
+	
+	For 2, since 1 tells us that $\ens[c]$ is an affine combination of $\ens[a]$ and $\ens[b]$, it must be on the same line.
+	
+	For 3, just substitute $s= \frac{r}{p}$ in 1.
+	
+	For 4, if we substitute $s = -r$ in the definition, we have $r \ens[b] - r \ens[a] = -r \ens[c] + r \ens[a]$, which means $\frac{1}{2}\ens[b] + \frac{1}{2} \ens[c] = \ens[a]$.
+	
+	For 5 and 6, suppose $r(\ens[b] - \ens[a]) \sim s(\ens[b] - \ens[a])$. Then $r\ens[b] + s\ens[a] = s \ens[b] + r \ens[a]$, which is an equality between affine combinations. If $\ens[b] \neq \ens[a]$, the two affine combinations correspond to the same ensemble if and only if $r=s$. If $\ens[b] = \ens[a]$, then the equality is always satisfied.
+\end{proof}
+
+
+\begin{defn}
+	The \textbf{addition} between two equivalence classes of differences is defined by 
+	$$\left[r(\ens[b] - \ens[a])\right] + \left[s(\ens[c] - \ens[a])\right] = \left[(r+s) (\frac{r}{r+s}\ens[b] + \frac{s}{r+s} \ens[c] - \ens[a])\right] = \{ \}$$
+	where $\frac{r}{r+s}\ens[b] + \frac{s}{r+s} \ens[c]$ is an affine combination. Two scaled differences are \textbf{equivalent} if their difference is the reference ensemble. That is
+	$$r(\ens[b] - \ens[a]) \sim s(\ens[c] - \ens[a]) \textrm{ if } r(\ens[b] - \ens[a]) - s(\ens[c] - \ens[a]) = (r+s) (\ens[a] - \ens[a])$$
+	
+	
+	On the scaled differences is defined an equivalence relationship $\sim$ that is the closure of following relationships
+	\begin{enumerate}
+		\item $r(\ens[b] - \ens[a]) \sim_1 s(\ens[c] - \ens[a])$ if $r,s \in [0, +\infty)$ and $\frac{r}{r+s}\ens[b] + \frac{s}{r+s} \ens[a] = \frac{s}{r+s}\ens[c] + \frac{r}{r+s} \ens[a]$ 
+		\item $r(\ens[b] - \ens[a]) \sim_2 -r(\ens[c] - \ens[a])$ if $\frac{1}{2}\ens[b] + \frac{1}{2} \ens[c] = \ens[a]$
+	\end{enumerate}
+\end{defn}
+\begin{proof}
+	For the addition to be well-defined, we need to make sure that the affine combination is always well-defined. If $r$ and $s$ have the same sign, 
+\end{proof}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{tempimages/EnsembleDifferences.jpg}
+	\caption{This picture represents the motivation of the definition of the operations on the space of differences.}
+\end{figure}
+
+\begin{coro}
+	The following relationships hold:
+	\begin{enumerate}
+		\item 
+		\item $r(\ens[b] - \ens[a]) \sim \frac{r}{p}(p\ens[b] + \bar{p}\ens[a] - \ens[a])$ for all $p \in [0,1]$
+		\item $r(\ens[b] - \ens[a]) \sim s(\ens[b] - \ens[a])$ with $\ens[b] \neq \ens[a]$ if and only if $r=s$
+		\item $r(\ens[b] - \ens[a]) \sim s(\ens[b] - \ens[a])$ with $\ens[a] \neq \ens[a]$ for any $r,s \in \mathbb{R}$
+		\item the addition is consistent with $\sim_1$
+	\end{enumerate}
+\end{coro}
+
+\begin{proof}
+	For 1, first we verify $\sim_1$ holds. Let $r \geq 0$ We have $r,\frac{r}{p} \in [0, + \infty)$ and $\frac{r}{p} \frac{1}{r + \frac{r}{p}} (p\ens[b] + \bar{p}\ens[a]) + \frac{r}{r+\frac{r}{p}}  \ens[a] = \frac{r}{r+\frac{r}{p}} \ens[b] + \left(\frac{r- rp}{p} +r\right) \frac{1}{r + \frac{r}{p}} \ens[a] = \frac{r}{r+\frac{r}{p}} \ens[b] + \frac{r}{p} \frac{1}{r + \frac{r}{p}} \ens[a]$. Now, suppose $r<0$
+	
+	For 2
+\end{proof}
+
+\begin{defn}
+	Given an ensemble space, a difference between two ensemble represents the change required to transform one ensemble into another. Formally, an \textbf{ensemble difference}, or simply a difference, is an ordered pair of ensembles $\ens[a],\ens[b] \in \Ens$, noted $\ens[b] - \ens[a]$. Given a difference $\ens[b] - \ens[a]$, its \textbf{opposite} $-(\ens[b] - \ens[a])$, if it exists, is the pair $\ens[c] - \ens[a]$ where $\frac{1}{2}\ens[b] + \frac{1}{2} \ens[c] = \ens[a]$. Given $k \in [0,1]$, the \textbf{shrunk difference} is defined to be $k(\ens[b] - \ens[a]) = (k\ens[b] + \bar{k}\ens[a]) - \ens[a]$. Given $k \in (1,+\infty)$, a \textbf{stretched difference} $k(\ens[b] - \ens[a])$, if it exists, is a difference $\ens[c] - \ens[a]$ such that $\ens[b] = \frac{1}{k} \ens[c] - \overline{\frac{1}{k}}\ens[a]$. Given two differences $\ens[b] - \ens[a]$ and $\ens[c] - \ens[a]$ with an equal second term, the \textbf{average difference} is defined as $\frac{1}{2}(\ens[b] - \ens[a]) + \frac{1}{2}(\ens[c] - \ens[a]) =\frac{1}{2}(\ens[b] + \ens[c]) - \ens[a]$.
+\end{defn}
+
+\begin{remark}
+	Note that the notation is chosen so that, effectively, it is like we had operations on the actual ensembles. For example $k(\ens[b] - \ens[a]) = k\ens[b] - k \ens[a] = k\ens[b] - k \ens[a] + \ens[a] - \ens[a] = k\ens[b] + (1 - k) \ens[a] - \ens[a]= (k\ens[b] - \bar{k}\ens[a]) - \ens[a]$. This can be done because the ensemble space does embed into a vector space. Note that the second term in the difference plays the role of the origin, so all operations are relative to that. For example $\frac{1}{2}(\ens[b] - \ens[a]) + \frac{1}{2}(-(\ens[b] - \ens[a])) = \frac{1}{2}(\ens[b] - \ens[a]) + \frac{1}{2}(\ens[c] - \ens[a])) = \frac{1}{2}(\ens[b] + \ens[c]) - \ens[a] = \ens[a] - \ens[a]$, which shows that the sum of opposite differences is ``zero''. The reason why this is an affine structure and not a vector space is precisely because the vectors are differences: there is no physically operation that corresponds to multiplying an ensemble by a constant.
+\end{remark}
+
+\begin{defn}
+	$r(\ens[b] - \ens[a]) \sim -r(\ens[c] - \ens[a])$ if $\frac{1}{2}\ens[b] + \frac{1}{2} \ens[c] = \ens[a]$
+	
+	$r(\ens[b] - \ens[a]) \sim s(\ens[c] - \ens[a])$ if $\frac{r}{r+s}\ens[b] + \frac{s}{r+s} \ens[a] = \frac{s}{r+s}\ens[c] + \frac{r}{r+s} \ens[a]$
+	
+	$r(\ens[b] - \ens[a]) + s(\ens[c] - \ens[a]) = (r+s) (\frac{r}{r+s}\ens[b] + \frac{s}{r+s} \ens[c] - \ens[a])$
+\end{defn}
+
+\begin{proof}
+	The zero element is $0 = (\ens[a] - \ens[a])$. $(\ens[b] - \ens[a]) + (\ens[a] - \ens[a]) = 2 (\frac{1}{2}\ens[b] + \frac{1}{2} \ens[a] - \ens[a])$.
+\end{proof}
+
+\begin{prop}
+	Since an ensemble space is cancellative, given an ensemble $\ens \in \Ens$, the space of differences $\ens[a] - \ens$ relative to $\ens$ embed into a vector space and provide an affine structure to the ensemble space.
+\end{prop}
+
+\begin{proof}
+	Since the space is cancellative, the stretched differences, if they exist, are unique. Therefore we have $\frac{1}{k}k(\ens[a] - \ens) =\ens[a] - \ens$ for all $\ens[a]$. At this point we can extend the space ???
+\end{proof}
+
+
+\subsection{Nicely boundaried sets}
+Part of an original attempt to square measure and topology, sets with a nowhere dense boundary form a nice algebra that may, or may not, be useful.
+
+\begin{mathSection}
+	\begin{defn}
+		Let $X$ be a topological space. A set $A \subseteq X$ is \textbf{nicely boundaried} if its boundary is nowhere dense.
+	\end{defn}
+	
+	\begin{prop}
+		The following are true:
+		\begin{enumerate}
+			\item open sets are nicely bounded
+			\item the complement of a nicely bounded set is nicely bounded
+			\item closed sets are nicely bounded
+			\item the union of nicely bounded sets is nicely bounded
+			\item the intersection of nicely bounded sets is nicely bounded.
+		\end{enumerate}
+		
+		Open and closed sets are nicely bounded. The complement of a nicely bounded set is nicely bounded. The intersection and the union of nicely bounded sets are nicely bounded. The closure of open sets under complement, finite intersection and finite union is a Boolean algebra $R_X$ of nicely bounded sets.
+	\end{prop}
+	
+	\begin{proof}
+		For 1, let $A \subseteq X$ be an open set. We have $A = \interior(A)$ and, since $\partial A$ and $\interior(A)$ are disjoint, $\partial A$ and $A$ are disjoint. Let $U \subseteq \partial A$ be an open set. Then $U$ is disjoint from $A$ and therefore $U \subseteq \exterior(A)$. Since the boundary and the exterior are disjoint, $U$ must be the empty set.
+		
+		For 2, let $A$ be nicely bounded. Since $\partial A = \partial A^{\complement}$, $A^{\complement}$ is also nicely bounded.
+		
+		For 3, note that closed sets are complements of open sets, which are nicely bounded.
+		
+		For 4, let $A, B \subseteq X$ be two nicely bounded sets. The boundary \href{https://proofwiki.org/wiki/Boundary_of_Union_is_Subset_of_Union_of_Boundaries}{satisfies} the property $\partial (A \cup B) \subseteq \partial A \cup \partial B$. The union of two nowhere dense sets is nowhere dense and \href{https://proofwiki.org/wiki/Subset_of_Nowhere_Dense_Subset_is_Nowhere_Dense}{a subset of a nowhere dense set is nowhere dense}. Therefore $\partial (A \cup B)$ is nowhere dense and $A \cup B$ is a nicely bounded set.
+		
+		For 5, since complements and unions of nicely bounded sets are nicely bounded, by De Morgan intersections are nicely bounded as well.
+	\end{proof}
+	
+	\begin{prop}
+		Let $X$ be a topological space, the closure of open sets under complement, finite intersection and finite union is a Boolean algebra $R_X$ of nicely bounded sets.
+	\end{prop}
+	
+	\begin{proof}
+		By definition, $R_X$ is closed under complement, finite intersection and finite union and is therefore a Boolean algebra. Since open sets are nicely bounded, and the operation preserve the property, $R_X$ is composed of only nicely bounded sets.
+	\end{proof}
+	
+	\begin{remark}
+		Note that the algebra $R_X$ does not contain all the nicely bounded sets. Consider a circle in $\mathbb{R}^2$. Let $U$ be the open set of all the interior points and $B$ be the points on the circle at a rational angle. Now consider $A = U \cup B$: $U$ is the interior of $A$ and $B$ its boundary. The boundary is nowhere dense, therefore $A$ is a nicely bounded set. However, we cannot generate $A$ with finite operations from open sets of $\mathbb{R}^2$.
+	\end{remark}
+
+
+\titledbreak{Old notes to be organized}
+
+\section{Spectrum of a quantity}
 
 \begin{defn}
 	Let $\Ens$ be an ensemble space and let $F : \Ens \to \mathbb{R}$ be a statistical quantity. Let $x,y \in \mathbb{R}$ such that $x \leq y$. We say $\ens[a]$ is \textbf{within $[x,y]$ of $F$} if $F(\ens) \in [x,y]$ for every component $\ens$ of $\ens[a]$. Analogous definitions apply for intervals bounded only on one side.
