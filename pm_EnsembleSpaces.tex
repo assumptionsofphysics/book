@@ -1407,7 +1407,8 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 \end{remark}
 
 \subsection{Topological measures}
-Before showing when and how the fraction capacity reduces to a standard probability measure, we need to find which requirements a measure must satisfy to describe a well-posed physical problem. The issue is that the set of all probability measures defined over a space is too broad. Here we try to find the correct relationship a measure should have with respect to the topology of the space mathematically, which physically captures its relationsihp with experimental verifiability.
+
+Before showing when and how the fraction capacity reduces to a standard probability measure, we need to find which requirements a measure must satisfy to describe a well-posed physical problem. The issue is that the set of all probability measures defined over a space is too broad. The problem is not yet fully understood, so we limit there are articulating some problems.
 
 If we restrict ourselves to the real line, given the Lebesgue measure $\mu$, \href{https://en.wikipedia.org/wiki/Lebesgue%27s_decomposition_theorem}{Lebesgue's decomposition theorem} assures us that every measure $\nu$ can be divided into these three components: an \href{https://en.wikipedia.org/wiki/Absolute_continuity#Absolute_continuity_of_measures}{absolutely continuous} part $\nu_{ac}$ with respect to the Lebesgue measure (i.e. $\nu_{ac}(U)=0$ for all sets $U$ for which $\mu(U)=0$), a pure point part $\nu_{pp}$ (i.e. there is a set of countable points $\{x_i\}$ such that $\nu_{pp}(\{x_i\}^{\complement})=0$) and a singular continuous part $\nu_{sc}$ (i.e. $\mu(\{x\})=0$ for all $x$ and there is a set $U$ such that $\mu(U)=0$ and $\nu_{sc}(U^{\complement})=0$).
 
@@ -1415,197 +1416,7 @@ To make this more concrete, let us assume that we are working on phase space, $\
 
 Physically, we see that the requirement of experimental verifiability poses constraints on the measure. Mathematically, experimental verifiability is captured by the topology. Therefore the question is: when can we say that a measure is compatible with a topology? That is, instead of having relationships between measures, which ignore the topology, we should have a direct relationship between each measure and the topology. If two measures are compatible with the topology, then they should be automatically well-behaved with respect to each other.
 
-Let us step back and think more broadly. Recall that an open set corresponds to an experimentally verifiable statement. Imagine we prepared a distribution over some variable, and have a test that tells us whether the value of an instance is within a specific range $U$. Then the open set $U$ corresponds to the positive outcome of the test. The exterior $\exterior(U)$ corresponds to the negative outcomes of our test. The boundary $\partial U$ corresponds to those cases we are not able to adjudicate experimentally: they are not in $U$, but are too close to $U$ to discern from $U$. That is, there is no test that can tell us we have an element of $\partial U$, these cases are not experimentally verifiable. Assigning a non-zero probability or count of states to these sets, then, would be physically unjustifiable. On physical grounds, $\mu(\partial U) = 0$ for every open set $U$.
-
-The requirement now depends on the topology, and is satisfied by the standard measures on their respective topology. For example, if we have a discrete topology, every open set is also closed, therefore the boundary of every open set is the empty set, which will have measure zero. On the other hand, if we have the real line with the standard topology, the boundary of an open interval is the two extreme points, which will have measure zero. If a probability measure is absolutely continuous with respect to the Lebesgue measure, it will have measure zero over all boundaries of all open sets as well. In fact, that requirement is enough to show it is absolutely continuous.
-
-To sum up, given a topological space $X$, we are interested in measures that are compatible with its topology. This requirement can be simply stated: the measure over an open set has to be equal to the measure on its closure. 
-
-\begin{mathSection}
-\begin{defn}
-	Let $X$ be a topological space. We say a measure $\mu : \Sigma_X \to [0, +\infty]$ is compatible with the topology if it satisfies the following:
-	\begin{enumerate}
-		\item constant on closures of open sets: $\mu(U) = \mu(\bar{U})$ for every open set $U$
-		\item locally finite on open sets: for any open set $U$, there is an open set $V \subseteq U$ such that $\mu(V) \in (0,+\infty)$
-	\end{enumerate}
-\end{defn}
-\begin{justification}
-	Recall that if $X$ is a topological space that represents an experimental domain, each open set represents a verifiable statement. If a measure quantifies a physically well-defined quantity associated to the statement, it has to be associated only to the part of the statement that can be experimentally verified or falsified. The undecidable part, then, is physically indistinguishable from an empty set and therefore has zero measure. This means we are justified to assume the measure on an open set is the same as the measure on its closure.
-	
-	Given that infinite values are not measurable but represent limit cases, any infinite open set must be a superset of a finite open set.
-\end{justification}
-\end{mathSection}
-
-We stress that $\mu(U) = \mu(\overline{U})$ is not necessarily true for all Borel sets, just for open sets. Consider, in fact, the set of rationals $\mathbb{Q}$ as a subset of the reals $\mathbb{R}$. This is a measure zero subset whose closure is the whole space. Therefore, if $p$ is a probability measure over the reals, we would have $p(\mathbb{R}) = p(\overline{\mathbb{Q}}) = p(\mathbb{Q})$ which would mean that the probability is all concentrated on a set of measure zero, which is exactly what we do not want. On the other hand, we are also not saying that all sets of measure zero are boundaries of open sets. The set of rationals is not the boundary of an open set. Additionally, since all boundaries of open sets have no interior (i.e. are nowhere dense sets), one may be tempted to say that all nowhere dense sets have measure zero. This, again, does not work. To better understand the requirement both mathematically and physically, let us find a bigger class of sets that will have the same property.
-
-Conceptually, we are saying that it does not make sense to assign probability to non-termination. The prediction that a test will never terminate cannot be verified and we cannot gather statistics about it. Since the boundary of a set corresponds to the possibilities that are associated with an undefined outcome, the first instinct would be to simply say that any set that is a boundary of another set has zero probability. This does not work. Consider the statement \statement{the mass of the electron is rational in $eV$.} This statement corresponds to the rationals $\mathbb{Q}$ as a subset of the reals $\mathbb{R}$. Since the statement is undecidable, the associated test will never terminate. The boundary of $\mathbb{Q}$ is the whole $\mathbb{R}$, the whole space, which must have probability one. That is, we can never verify or falsify that a continuous quantity is exactly a rational or not as it would require infinite precision. The issue here is that the termination condition is specific to a particular set, to a particular statement. No set is intrinsically a boundary or not. However, if the boundary has no interior, it means that there is no additional test that can tell us whether we are in one of the non-terminating conditions. In the previous case, we know a priori that the test will never terminate in any case. Therefore, if we are able to predict that the test for a particular statement will never terminate, and we are able to verify that prediction with a verifiable statement, we would be able to say that \statement{there is a probability $p$ that the test will not terminate}. The correct characterization, then, is that a boundary set with an empty interior cannot be assigned non-zero probability.
-
-Mathematically, this leads to the notion of a nicely bounded set, a set whose boundary is nowhere dense. Measures that behave nicely with open sets are exactly those that behave nicely with nicely bounded sets.
-
-TODO: bounded  -> boundaried 
-
-\begin{mathSection}
-\begin{defn}
-	Let $X$ be a topological space. A set $A \subseteq X$ is \textbf{nicely bounded} if its boundary is nowhere dense.
-\end{defn}
-
-\begin{coro}
-	The following statements are equivalent:
-	\begin{enumerate}
-		\item $A$ is nicely bounded
-		\item $\overline{A} = \overline{\interior(A)}$
-		\item $\exterior(A) = \exterior(\interior(A))$
-	\end{enumerate}
-\end{coro}
-
-\begin{proof}
-	To show that 1 and 2 are equivalent, consider a nicely bounded set $A$. Like any set, $X$ will be partitioned into the three disjoint sets $\interior(A)$, $\partial A$ and $\exterior(A)$. Let $U \supset \emptyset$ be a non-empty open set. Since $\interior(\partial A) = \emptyset$, either $U \subseteq \interior(A)$, $U \subseteq \exterior(A)$ or it will overlap with more than one of the regions. This means that any open set that is disjoint from the exterior is either already in the interior or the union of an open set and a set of limit points. Therefore any open set that is disjoint from the exterior is in the closure of the interior. Conversely, if $A$ and $\interior(A)$ have the same closure, then any open set in the closure must overlap with a set in the interior. Therefore there is no open set in the closure that is disjoint from the interior, and therefore the boundary has an empty interior.
-	
-	To show that 3 is equivalent to 2, note that the exterior is the complement of the closure. Therefore two sets have the same closure if and only if they have the same exterior.
-\end{proof}
-
-\begin{prop}
-	Open and closed sets are nicely bounded. The complement of a nicely bounded set is nicely bounded. The intersection and the union of nicely bounded sets are nicely bounded. The closure of open sets under complement, finite intersection and finite union is a Boolean algebra $R_X$ of nicely bounded sets.
-\end{prop}
-
-\begin{proof}
-	Let $A \subset X$ be an open set. Since $A$ is an open set, $A = \interior(A)$. Since $\partial A$ and $\interior(A)$ are disjoint, $\partial A$ and $A$ are disjoint. Let $U$ be an open set such that $U \subseteq \partial A$. Therefore $U$ must be disjoint from $A$. We also have $U \subseteq \partial A \subseteq \bar{A}$. Since $U$ is an open set, it will be a subset of the interior of the closure of $A$, which is $A$ since $A$ is an open set. Putting it all together, $U$ must be an open set that is disjoint from $A$ but also a subset of $A$. Therefore $U$ is the empty set. Therefore the interior of the boundary of $A$ must be the empty set, which means it is nowhere dense.
-	
-	Let $A$ be a nicely bounded set. Since the boundary of a set is equal to the boundary of its complement, the complement of $A$ must also be a nicely bounded set. A closed set is the complement of an open set, which is a nicely bounded set, therefore all closed sets are nicely bounded.
-	
-	Let $A, B \subseteq X$ be two nicely bounded sets. The boundary \href{https://proofwiki.org/wiki/Boundary_of_Union_is_Subset_of_Union_of_Boundaries}{satisfies} the property $\partial (A \cup B) \subseteq \partial A \cup \partial B$. The union of two nowhere dense sets is nowhere dense and \href{https://proofwiki.org/wiki/Subset_of_Nowhere_Dense_Subset_is_Nowhere_Dense}{a subset of a nowhere dense set is nowhere dense}. Therefore $\partial (A \cup B)$ is nowhere dense and $A \cup B$ is a nicely bounded set. Since complements and unions of nicely bounded sets are nicely bounded, by De Morgan intersections are nicely bounded as well.
-	
-	Let $R_X$ be the closure of open sets under complement, finite intersection and finite union. This forms a Boolean algebra as it is closed under the given operations and it includes $\emptyset$ and $X$. Moreover, since the algebra is generated from the open sets, which are nicely bounded, all sets will be nicely bounded.
-\end{proof}
-
-\begin{remark}
-	Note that the algebra $R_X$ does not contain all the nicely bounded sets. Consider a circle in $\mathbb{R}^2$. Let $U$ be the open set of all the interior points and $B$ be the points on the circle at a rational angle. Now consider $A = U \cup B$: $U$ is the interior of $A$ and $B$ its boundary. The boundary is nowhere dense, therefore $A$ is a nicely bounded set. However, we cannot generate $A$ with finite operations from open sets of $\mathbb{R}^2$.
-\end{remark}
-
-\begin{prop}
-	Given a topological space $X$ and a measure $\mu$ on its Borel algebra, the following propositions are equivalent:
-	\begin{enumerate}
-		\item $\mu$ is compatible with the topology
-		\item $\mu(A) = \mu(\bar{A})$ for any nicely bounded set $A$
-		\item $\mu(A) = \mu(\interior(A))$ for any nicely bounded set $A$
-		\item $\mu(\partial A) = 0$ for any nicely bounded set A
-		\item $\mu(\interior(A)) + \mu(\exterior(A)) = \mu(X)$ for any nicely bounded set $A$
-	\end{enumerate}
-\end{prop}
-
-\begin{proof}
-	To show that 2 implies 1, every open set is a nicely bounded set. Therefore $\mu(A) = \mu(\bar{A})$ for all open sets.
-	
-	To show that 2, 3 and 4 are equivalent, first note that if $A$ is nicely bounded then $\interior(A)$ is also nicely bound since $A$ and $\interior(A)$ have the same boundary. Given that $\bar{A} = \interior(A) \cup \partial A$ and $\interior(A) \cap \partial A = \emptyset$, we have $\mu(\bar{A}) = \mu(\interior(A) \cup \partial A) = \mu(\interior(A)) + \mu(\partial A)$. Given that $\interior(A) \subseteq A \subseteq \bar{A}$, $\mu(\interior(A)) \leq \mu(A) \leq \mu(\bar{A})$. Therefore $\mu(\interior(A)) = \mu(A) = \mu(\bar{A})$ if and only if $\mu(\partial A) = 0$.
-	
-	To show that 1 implies 4, note that if $A$ is a nicely bounded set, then $\interior(A)$ is an open set that has the same boundary as $A$. If $\mu$ is compatible with the topology, $\mu(\interior(A)) = \mu(\bar{A})$ which means $\mu(\partial A) = 0$.
-	
-	To show that 5 is equivalent to 4, first note that $X = \interior(A) \cup \partial A \cup \exterior(A)$ for any $A$. Also note that the interior, the exterior and the boundary are all disjoint. Therefore $\mu(X) = \mu(\interior(A)) + \mu(\partial A) + \mu(\exterior(A))$. Therefore $\mu(\partial A) = 0$ for any nicely bounded set if and only if $\mu(X) = \mu(\interior(A)) + \mu(\exterior(A))$.
-\end{proof}
-\end{mathSection}
-
-Given that we are stressing the importance of the topology, one is led to ask: can we just define the measure purely in terms of the topology, with no reference to the Borel algebra? That is, can we define a measure-theoretic object that is purely topological? The answer is positive. Once the measure is defined on the open sets, it can first be extended to the algebra of nicely bounded sets and then to the whole Borel algebra.
-
-\begin{mathSection}
-\begin{defn}
-	Let $X$ be a topological space. A \textbf{topological measure} is a set function $\mu$ over the topology that satisfies the following:
-	\begin{enumerate}
-		\item non-negative: $\mu(U) \in [0 , +\infty]$
-		\item topologically additive: $\mu\left(\interior\left(\overline{U \cup V}\right)\right) = \mu(U)+\mu(V)$ whenever $U \cap V = \emptyset$
-		\item continuous from above and below: $\mu(U) = \lim\limits_{i \to \infty}\mu(U_i)$ for any increasing or decreasing sequence of open sets $U_i$ such that $U_i \to U \in \mathsf{T}_X$ and if $\mu(U_i)<+\infty$
-		\item locally finite: for any $U$, we can find $V \in \textsf{T}_X$ such that $V \subseteq U$ and $\mu(V) \in (0, + \infty)$.
-	\end{enumerate}
-	The measure is finite if $\mu(X) < \infty$. Given a topological measure $\mu$, $U$ is a \textbf{null set} if $\mu(U) = 0$, a \textbf{finite set} if $\mu(U) \in (0,+\infty)$ and an \textbf{infinite set} if $\mu(U) = +\infty$. 
-\end{defn}
-
-\begin{remark}
-	Note that continuity from above and below is imposed only on finite sets. This makes the definition more symmetric in the two cases. The corollary recovers the conditions for infinite sets.
-\end{remark}
-
-\begin{coro}
-	Let $\mu$ be a topological measure, then the following are true:
-	\begin{enumerate}
-		\item the measure is monotone: $U \subseteq V$ implies $\mu(U) \leq \mu(V)$
-		\item the empty set is a null set: $\mu(\emptyset) = 0$
-		\item $\mu(U) = \mu(\interior(\overline{U}))$ for every open set $U$
-		\item $\mu(U) = \mu(V) + \mu(\interior(U \setminus V))$ if  $U \supseteq V$.
-		\item for any increasing sequence $U_i$ such that $U_i \to U \in \mathsf{T}_X$, $\mu(U) = \lim\limits_{i \to \infty}\mu(U_i)$
-		\item for any decreasing sequence $U_i$ such that $U_i \to U \in \mathsf{T}_X$ and $\mu(U_i) < \infty$ for some $i$, $\mu(U) = \lim\limits_{i \to \infty}\mu(U_i)$
-		\item given an infinite open set $U$ and a finite open set $V$ such that $V \subset U$, there exists a finite open set $W$ such that $V \subset W \subset U$ and $\mu(V) < \mu(W) < \mu(U)$
-		\item given an infinite open set $U$, there exists an increasing sequence of finite open sets $U_i$ such that $U_i \to U$ and $\mu(U_i) \to +\infty$.
-	\end{enumerate}
-\end{coro}
-
-\begin{proof}
-	For 1, let $U \subseteq V$ then $V = U \cup (V \setminus U)$ where $U$ and $(V \setminus U)$ are disjoint. This means that $U$ and $\interior(V \setminus U)$ are also disjoint. We have $\mu(V) = \mu(\interior(\overline{U \cup \interior(V \setminus U)})) = \mu(U) + \mu(\interior(V \setminus U)) \geq \mu(U)$.
-	
-	For 2, since $\emptyset$ is open, it is disjoint from itself and it is its own closure, $\mu(\emptyset) + \mu(\emptyset) = \mu(\interior(\overline{\emptyset\cup\emptyset}))= \mu(\emptyset)$. This means the empty set has either zero measure or infinite measure. Since the measure is monotone and locally finite, the empty set has zero measure.
-	
-	For 3, let $U$ be an open set. We have $\mu(U) = \mu(U) + \mu(\emptyset) = \mu(\interior(\overline{U\cup\emptyset}))= \mu(\interior(\overline{U}))$.
-	
-	For 4, let $V \subseteq U$. Since $\interior(U \setminus V)$ and $V$ are two disjoint open sets, we have $\mu(\interior(U \setminus V)) + \mu(V) = \mu(\interior(\overline{\interior(U \setminus V)\cup V}))=\mu(\interior(\overline{(U \setminus V)\cup V}))=\mu(\interior(\overline{U}))=\mu(U)$.
-	
-	For 5, we simply need to extend to the infinite case. If $\mu(U_i) = + \infty$ from some $i$, we have $\lim\limits_{i \to \infty}\mu(U_i) = +\infty$. Since $U \supseteq U_i$ and the measure is monotone, $\mu(U) = +\infty$.
-	
-	For 6, simply start the sequence from an element that is finite and apply continuity from above.
-	
-	For 7, consider $A = \interior(U \setminus V)$. Suppose $A = \emptyset$. Then $U$ would be in the closure of $V$. But we would have $+ \infty > \mu(V) = \mu(\overline{V}) \geq \mu(U) = +\infty$, which is a contradiction. Therefore $A \neq \emptyset$. Since $A = \interior(U \setminus V)$, $\mu(U) = \mu(A) + \mu(V)$. Since $U$ is an infinite set and $V$ is finite, then $A$ is infinite. Therefore, since $\mu$ is locally finite, we can find a finite open set $B$ such that $B \subset A$. Consider $W = \interior(\overline{V \cup B})$. Since $V$ and $B$ are disjoint open sets and $W$ is an open set, we have $\mu(W) = \mu(V) + \mu(B)$. Since both $V$ and $B$ are finite, $W$ is finite and $\mu(W) > \mu(V)$.
-	
-	For 8, consider all the finite open subsets of $U$. Let $V$ be the union of all those sets. Then $V$ cannot be a finite set: if it were we could find another finite open subset of $U$ that is greater than $V$. Therefore $V$ must be an infinite set and there is no upper value for the measure of finite subsets of an infinite set. Therefore there exists an increasing sequence of $U_i$ such that $\mu(U_i) \to +\infty$.
-\end{proof}
-
-\begin{thrm}[Topological measure extension theorem]
-	Let $X$ be a topological space and $\mu$ a topological measure on that space. Then there exists a measure $\overline{\mu}$ defined on the Borel algebra such that $\left.\overline{\mu}\right|_{\textsf{T}_X} = \mu$. If $X$ is second countable or if $\mu$ is finite the extension is unique.
-\end{thrm}
-
-TODO: make sure that nicely boundaried sets are A and B
-
-\begin{proof}
-	The strategy is first to extend the topological measure $\mu$ to a pre-measure $\mu'$ over the algebra of nicely bounded sets generated by the open sets and then use \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory's_extension_theorem}{Carath\'{e}odory's extension theorem} to extend to a measure $\bar{\mu}$ on the whole Borel algebra.
-	
-	First we show that if we want to extend the topological measure $\mu : \mathsf{T}_X \to [0,+\infty]$ to a pre-measure $\mu' : R_X \to [0,+\infty]$ over $R_X$, the algebra generated by closing the open sets under complement and finite intersection, the pre-measure of a closed set must be the same as the topological measure of its interior. That is, $\mu'(U) = \mu(\interior(U))$ for any closed set $U$. Let $U$ be a closed set and $V$ an open superset of $U$. Then $W = V \setminus U = V \cap U^{\complement}$ is an open set since it is the intersection of two open sets. Since $\mu'$ must be additive, we must have $\mu(V) = \mu'(V) = \mu'(U) + \mu'(W) = \mu'(U) + \mu(W)$. Note that $\interior(U)$ and $W$ are two disjoint open sets, therefore we have $\mu(\interior(U)) + \mu(W) = \mu(\interior(\overline{W \cup \interior(U)})) = \mu(\interior(\overline{W \cup U})) = \mu(\interior(\overline{V})) = \mu(V)$. Therefore $\mu'(U) = \mu(\interior(U)) = \mu'(\interior(U))$.
-	
-	Now we show that for any nicely bounded set $U$, $\mu'(U) = \mu'(\overline{U}) = \mu'(\interior(U)) = \mu(\interior(U))$. For a generic set, we have $\interior(U) \subseteq U \subseteq \overline{U}$. Therefore $\mu'(\interior(U)) \leq \mu'(U) \leq \mu'(\overline{U})$. Since $\interior(U)$ is an open set, we have $\mu'(\interior(U)) = \mu'(\interior(\overline{\interior(U)}))$. Since $U$ is nicely bounded, $\overline{U} = \overline{\interior(U)}$ and therefore $\mu'(\interior(\overline{\interior(U)})) = \mu'(\interior(\overline{U}))$. Since $\overline{U}$ is a closed set, $\mu'(\interior(\overline{U})) = \mu'(\overline{U})$. Putting it all together, $\mu'(\interior(U)) = \mu'(\overline{U})$. Since $\mu'(U)$ must be between the two values, $\mu'(U) = \mu'(\interior(U)) = \mu'(\overline{U}) = \mu(\interior(U))$.
-	
-	The only way to extend the topological measure $\mu$ to a pre-measure $\mu'$ over all nicely bounded sets while satisfying finite additivity is by setting $\mu'(U) = \mu(\interior(U))$. We now have to prove that the pre-measure satisfies $\sigma$-additivity. Let $A_i \in R_X$ be a sequence of nicely bounded sets such that $A_i \cap A_j = \emptyset$ for all $i \neq j$ and $\bigcup_{i = 1}^{\infty}A_i = A \in R_X$. Since $A$ is a nicely bounded set, we have $\mu(A) = \mu(\interior(A))$. This means that it is only the interior of $A$ that will contribute to the measure of $A$. The issue is that the interior of $A$ in not simply the union of all interiors of $A_i$. For each $i$, $A_i \cap \partial A_i$ represents the extra elements that are in $A_i$ but not in the interior. Let us call this the ``interior boundary.'' The union of interior boundaries can, potentially, form an open set. For finite disjoint unions, since the measure is topologically additive, the measure of the union is the sum of the measure on the interiores. Therefore an open set that is the union of finitely many interior boundaries of nicely bounded sets has to have measure zero. For the pre-measure to be $\sigma$-additive, we need to show that this happens with infinite unions as well.
-	
-	Let $B = \interior(A)$, which means $\mu(A) = \mu(B)$. Let $B_n = B \cap \bigcup_{i = 1}^{n}A_i$ and $B_0 = \emptyset$. Each $B_n$ is the finite intersection and union of nicely bounded sets, and is therefore nicely bounded. Since $A_i \subset A \subset \overline{A} = \overline{B}$, $\overline{B_n} = \overline{\bigcup_{i = 1}^{n}A_i} = \bigcup_{i = 1}^{n}\overline{A_i}$. Therefore $\mu'(B_n) = \mu'(\overline{B_n}) = \mu'(\bigcup_{i = 1}^{n}\overline{A_i}) = \sum_{i=1}^{n} \mu'(\overline{A_i}) = \sum_{i=1}^{n} \mu'(A_i)$. Now let $C_n = B \setminus \overline{B_n}$. Every $C_n$ is the intersection of an open set with the complement of a closed set, and is therefore an open set. Note since $B_i$ is an increasing sequence whose union is $B$, every element of $B$ is eventually in a $B_i$. Therefore $C_n$ is a sequence of open sets such that $C_n \to \emptyset$. Moreover, since $B_n \subset B$, $B \subseteq C_n \cup \overline{B_n} = B \cup \overline{B_n} \subseteq \bar{B}$, therefore $\mu'(B) = \mu'(\overline{C_n \cup \overline{B_n}})$. Keeping in mind all sets are nicely bounded, we have $\mu'(B) = \mu'(\overline{C_n \cup \overline{B_n}}) = \mu'(\overline{C_n \cup \overline{\interior(B_n)}}) = \mu'(\overline{C_n \cup \interior(B_n)}) = \mu'(C_n) + \mu'(\interior(B_n)) = \mu'(C_n) + \mu'(B_n)$. Therefore $\mu'(B_n) = \mu'(B) - \mu'(C_n) = \mu(B) - \mu(C_n)$.
-	
-	In case that $\mu'(A_i) = \infty$ for some $i$, given the monotonicity of the measure, $\mu'(A) = \infty$ therefore $\sum_{i=1}^{n} \mu'(A_i) \to \infty = \mu'(A)$. If all $A_i$ are finite sets, $A$ may be finite or infinite. If it is finite, then all $C_n$ are finite sets since $B$ and all $B_n$ are finite sets. In that case, since the measure is continuous from above, we have $\lim\limits_{n \to \infty} \sum_{i=1}^{n} \mu'(A_i) = \lim\limits_{n \to \infty} \mu'(B_n) = \lim\limits_{n \to \infty} \mu(B) - \lim\limits_{n \to \infty} \mu(C_n) = \mu(B) - \mu(\emptyset) = \mu(B) = \mu'(B) = \mu'(A)$. The last case is when all $A_i$ are finite sets but $A$ is infinite. This means that $\mu(C_n) = \infty$ for all $n$, but jumps to zero at infinity therefore continuity from above does not apply. Note that $\mu'(A_i) = \mu(\interior(A_i))$. Therefore if $\sum_{i=1}^{n}\mu(\interior(A_i)) \to \infty$ then $\sigma$-additivity is satisfied. The only case remaining is when $\sum_{i=1}^{n}\mu(\interior(A_i)) \to k < \infty$ but $\mu(A) = \infty$. Let us show that the only way this can happen is if the union of all internal boundaries of $A_i$ includes an infinite open set $W$, which is a subset of $A$, but never intersects with the interior of any $A_i$. Let $U = \bigcup_{i = 1}^{\infty} \interior(A_i)$ and $W = \interior(A \setminus U)$. Note that $U$ is an open set, $\mu(U) = k$ by continuity from below, and, since $A$ is nicely bounded, $\mu'(W) = \mu'(A) - \mu'(U) = \infty$. Therefore $W$ is an infinite open set that is disjoint from all interiors of $A_i$, is a subset of the union of all internal boundaries of $A_i$. However, since the measure is locally finite, we would be able to find a finite subset $V \subseteq W$. We could, then, create a new sequence $A'_i = A_i \setminus (W \setminus V)$ which reduces the internal boundary of all $A_i$ to be within $V$. These new sets are still nicely bounded, as all we have done is reduce the internal boundary. This would give us a sequence of finite nicely bounded sets $A'_i$ over which $\sigma$-additivity must hold. This means that $V$ must be a null set, which is a contradiction. In other words, $W$ cannot be an infinite set because it cannot have a finite open subset. Therefore, even in this last case, the pre-measure $\mu'$ is $\sigma$-additive.
-	
-	The pre-measure $\mu'$, then, satisfies the prerequisites of Carath\'{e}odory's extension theorem, and it can therefore be extended to measure $\bar{\mu} : \Sigma_X \to [0,+\infty]$ over the full Borel algebra $\Sigma_X$.
-	
-	The extension is unique if the pre-measure $\mu'$ is $\sigma$-finite, which means, for example, that we can find a countable cover of the space where each open set is finite. Note that if $X$ is second countable, and since the measure is locally finite, we are going to be able to find a countable basis of the space where each element of the basis is finite. Therefore we are guaranteed $\sigma$-finite. If the topological measure is finite, then it is $\sigma$-finite regardless of the space.
-\end{proof}
-
-\begin{coro}
-	The extension of the topological measure is compatible with the topology.
-\end{coro}
-\begin{proof}
-	By construction of the pre-measure, $\bar{\mu}(U) = \bar{\mu}(\overline{U})$ for every open set. Since the topological measure is locally finite, its extension retains the property as it applies to open sets.
-\end{proof}
-
-\begin{prop}
-	Let $X$ be a topological space and $\mu : \Sigma_X \to [0,+\infty]$ be a measure compatible with the topology. Then $\left.\mu\right|_{\textsf{T}_X}$ is a topological measure.
-\end{prop}
-
-\begin{proof}
-	It suffices to prove that the restriction of $\mu$ to the topology is a topological measure.
-	
-	Since $\mu$ is non-negative on all Borel sets, it is also non-negative on all open sets.
-	
-	Let $U$ and $V$ be two open disjoint sets. Since open and closed sets are nicely bounded and the union of open sets is open, we have $\mu(U) + \mu(V) = \mu(U \cup V) = \mu(\overline{U \cup V}) = \mu(\interior(\overline{U \cup V}))$. Therefore $\mu$ is topologically additive.
-	
-	Since $\mu$ is continuous from above and below for sequences of Borel sets, it will also be continuous from above and below for sequences of open sets in particular.
-	
-	Since $\mu$ is locally finite on open sets, its restriction will be locally finite.
-\end{proof}
-
-\begin{remark}
-	We need to impose that measures compatible with the topology are locally finite on open sets specifically, as being locally finite on Borel sets is not enough. Consider the natural numbers with the right order topology (or the cofinite topology). The counting measure satisfies $\mu(U) = \mu(\overline{U})$ since every open set has infinite measure and the measure is monotone. Every open set has a Borel subset that is finite. However, no open set is finite.
-\end{remark}
-
-\end{mathSection}
+Let us step back and think more broadly. Recall that an open set corresponds to an experimentally verifiable statement. Imagine we prepared a distribution over some variable, and have a test that tells us whether the value of an instance is within a specific range $U$. Then the open set $U$ corresponds to the positive outcome of the test. The exterior $\exterior(U)$ corresponds to the negative outcomes of our test. The boundary $\partial U$ corresponds to those cases we are not able to adjudicate experimentally: they are not in $U$, but are too close to $U$ to discern from $U$. That is, there is no test that can tell us we have an element of $\partial U$, these cases are not experimentally verifiable. It is not clear exactly what is the right specification to make sure we do not associate a probability or a count of possible cases to sets that cannot be associated to termination.
 
 \subsection{Flats and affine combinations}
 
@@ -1825,17 +1636,9 @@ Every subspace can then be understood as a set of limits, a set of ultrafilters,
 We now show that each ensemble in a classical probability context can be understood as a probability measure over the spectrum of the context. That is, each ensemble can either be understood as a convex combination of smaller and smaller components that are separate from each other.
 
 \begin{mathSection}
-\begin{thrm}
-	Let $C \subseteq \Ens$ be a probability context and $\ens \in C$ be an ensemble in the context. The set function $p^*_{\ens} : \textsf{T}_{\sigma(C)} \to[0,1]$, defined such that $p^*_{\ens}(U) = \inf(\{ \fcap_{\ens}(A) \, | \, \sigma(A) \supseteq U \})$, is a topological measure. Therefore an ensemble in a classical probability context can be represented by a unique measure over its spectrum that is continuous with respect to its topology.
-\end{thrm}
-
-\begin{proof}
-	Since $p^*_{\ens}$ is finite, it is locally finite. We need to show that is topologically additive. If $U$ is a generic open set, then we are looking for the smallest subspace $A$ such that $\sigma(A) \subseteq U$. If $U$ corresponds to a $\separate$-subspace $A$, that is $U = \sigma(A)$, then $p^*_{\ens} = \fcap_{\ens}(A)$. If not, $U$ can still be written as the union of the spectra of a family of subspaces. That is, $U = \bigcup_{i \in I} \sigma(A_i)$ for some family of $A_i \in \mathfrak{L}^\separate(C)$. The smallest subspace that contains them all, then is the join of all $A_i$. Therefore we have $p^*_{\ens}(U) = p^*_{\ens}(\sigma(A)) = p^*_{\ens}(\sigma(\bigvee_{i \in I} A_i)) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} \sigma(A_i)}\right)\right)$. Lastly, let $U_i$ be a family of disjoint open sets and let $A_i$ be the corresponding smallest subspaces such that $\sigma(A_i) \supseteq U_i$. Since $U_i$ are disjoint, $A_i$ will also be disjoint, and therefore they will be separate. But the fraction capacity is additive across separate subspaces. We have $\sum_{i \in I} p^*_{\ens}(U_i) = \sum_{i \in I} \fcap_{\ens}(A_i) = \fcap_{\ens}(\bigvee_{i \in I} A_i) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} \sigma(A_i)}\right)\right) = p^*_{\ens}\left(\interior\left(\overline{\bigcup_{i \in I} U_i}\right)\right)$. Therefore $p^*_{\ens}$ is a topological measure.
-	
-	The measure, then, can be extended uniquely to the whole $\sigma$-algebra, since the measure is finite.
-	
-	Lastly, we need to show that two different ensembles will correspond to two different measures. Let $\ens[a],\ens[b] \in C$ be two distinct ensembles in the probability context. TODO
-\end{proof}
+\begin{conj}
+	Let $C \subseteq \Ens$ be a probability context and $\ens \in C$ be an ensemble in the context. The set function $p_{\ens} : \Sigma_{\sigma(C)} \to[0,1]$, defined such that $p^*_{\ens}(U) = \inf(\{ \fcap_{\ens}(A) \, | \, \sigma(A) \supseteq U \})$, is a measure. Therefore each ensemble of a probability context is associated with a unique measure over the spectrum.
+\end{conj}
 \end{mathSection}
 
 \begin{conj}
@@ -2322,7 +2125,7 @@ The attempt was the following:
 	The only if is easy to show based on the discussion above. The if part does not actually work. Take 6 points in a 4 dimensional euclidean space such that the form two triangles that intersect at a single point. All two dimensional convex spaces will be segments. However, the whole convex hull is not a simplex. 
 \end{remark}
 
-\iftrue
+\iffalse
 
 \titledbreak{Experimental section}
 
