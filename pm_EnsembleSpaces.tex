@@ -1983,11 +1983,31 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 		Therefore $\bigcap_{i \in I} U_i \in \mathfrak{L}$. This means $\mathfrak{L}$ is an $\bigcap$-structure. Using the second property of \ref{pm_ensmblespaces_symirreflproperties}, $X = \emptyset^{R} = (X^{R})^{R}$. Therefore $\mathfrak{L}$ is a topped $\bigcap$-structure. This also means that it is a complete lattice.
 	\end{proof}
 	
-	\begin{conj}
-		The lattice is a complemented bounded lattice, not necessarily a Boolean algebra.
-	\end{conj}
+	\begin{prop}
+		The lattice of $R$-subspaces is orthocomplemented. That is
+		\begin{enumerate}
+			\item the $R$-complement is a lattice complement: $A \wedge A^{R} = \emptyset$ and $A \vee A^{R} = X$
+			\item $(A^{R})^{R} = A$
+			\item $A \subseteq B$ implies $B^{R} \subseteq A^{R}$.
+		\end{enumerate}
+	\end{prop}
+	
 	\begin{proof}
-		Distributivity fails as complement may not be unique (e.g. lattice of orthogonal subspaces of vector space).
+		Note that 2 is satisfied because $A$ is an $R$-closure and 3 is already proven in \ref{pm_es_rComplProps}.
+		
+		From \ref{pm_ensmblespaces_symirreflproperties} we have $A \wedge A^{R} = \emptyset$. Using \ref{pm_es_rComplProps}, we also have $X = \emptyset^{R} = (A \wedge A^{R}) ^{R} = ((A^{R} \vee (A^{R})^{R})^{R})^{R} = ((A^{R} \vee (A^{R})^{R})^{R})^{R} = ((A^{R} \vee A)^{R})^{R} = A^{R} \vee A$.
+	\end{proof}
+	
+	\begin{coro}
+		The lattice of $R$-subspaces satisfies de Morgan's laws. That is
+		\begin{enumerate}
+			\item $(A \vee B)^{R} = A^{R} \wedge B^{R}$
+			\item $(A \wedge B)^{R} = A^{R} \vee B^{R}$
+		\end{enumerate}
+	\end{coro}
+	
+	\begin{proof}
+		Every \href{https://en.wikipedia.org/wiki/Complemented_lattice#Orthocomplementation}{orthocomplemented lattice satisfy de Morgan's laws}.
 	\end{proof}
 	
 	\begin{coro}\label{pm_es_subspaceClosure}
@@ -2023,7 +2043,7 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 	\end{proof}
 \end{mathSection}
 
-Lastly, we show that if we start with the mere notion of orthogonality defined from an inner product vector space, we recover the notion of orthogonal component and subspaces. That is, the full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
+We now show that if we start with the mere notion of orthogonality defined from an inner product vector space, we recover the notion of orthogonal component and subspaces. That is, the full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
 
 \begin{mathSection}
 	\begin{prop}
@@ -2041,6 +2061,25 @@ Lastly, we show that if we start with the mere notion of orthogonality defined f
 		2. The orthogonal complex is defined as $U^\perp = \{ a \in X \, | \, \forall b \in U, \langle a , b\rangle = 0 \}$. Since $aRb \iff \langle a , b\rangle = 0$, $U^{R} = U^{\perp}$.
 		
 		3. We have $\langle U \rangle_R = (U^{\perp})^\perp$ which returns the smallest closed subspace that contains $U$.
+	\end{proof}
+\end{mathSection}
+
+Note that, in general, the lattice of $R$-subspaces is not a Boolean algebra. For example, the lattice of orthogonal subspaces is not distributive and therefore it is not a Boolean algebra, though it is a orthocomplemented lattice. The extra conditions of distributivity or, equivalently, the uniqueness of the lattice complements, are exactly what turn the orthocomplemented lattice into a Boolean algebra.
+
+\begin{mathSection}	
+	\begin{prop}
+		The following three statements are equivalent
+		\begin{enumerate}
+			\item the lattice of $R$-subspaces is a Boolean algebra
+			\item the lattice of $R$-subspaces is distributive
+			\item the lattice complements are unique
+		\end{enumerate}
+	\end{prop}
+	
+	\begin{proof}
+		Since every Boolean algebra is distributive, 1 implies 2. Since in every orthocomplemented distributive lattice is a Boolean algebra, 2 implies 1.
+		
+		Since \href{https://proofwiki.org/wiki/Complement_in_Distributive_Lattice_is_Unique}{complements in a distributive lattice are unique}, 2 implies 3. Since \href{https://en.wikipedia.org/wiki/Complemented_lattice#Orthocomplementation}{orthocomplemented lattices satisfy de Morgan's laws} and  \href{https://proofwiki.org/wiki/De_Morgan%27s_Laws_imply_Uniquely_Complemented_Lattice_is_Boolean_Lattice}{de Morgan laws imply distributivity for a uniquely complemented lattice}, 3 implies 2.
 	\end{proof}
 \end{mathSection}
 
