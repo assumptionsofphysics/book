@@ -1569,6 +1569,16 @@ Now that we have identified the correct closure, we need to find the right chara
 \end{conj}
 
 \begin{prop}
+	Let $C \subseteq \Ens$ be a classical probability context. The lattice of $\separate$-subspaces $\mathfrak{L}$ is commutative and is therefore a Boolean algebra.
+\end{prop}
+
+\begin{proof}
+	The lattice of $\separate$-subspaces is a complemented bounded lattice. Note that a lattice is distributive if there are no sublattices \href{https://en.wikipedia.org/wiki/Distributive_lattice#Characteristic_properties}{ismorphic to $M_3$ and $N_5$}. Both require the existence of multiple complements. Therefore, if \href{https://en.wikipedia.org/wiki/Complemented_lattice#Orthocomplementation }{complements are unique} the lattice is distributive and is therefore a Boolean algebra.
+	
+	Let $A \in \mathfrak{L}$ be a subspace. A complement of $A$ is a subspace $B \in \mathfrak{L}$ such that $A \wedge B = \emptyset$ and $A \vee B = C$. Since $A \wedge B = \emptyset$, then $B \subseteq A^{\separate}$ (TODO: check or prove for all $R$-lattices). Since $A \vee B = C$, every element of $C$ is a mixture of elements of $A$ and $B$. Now suppose $\ens \in A^{\separate}$.
+\end{proof}
+
+\begin{prop}
 	Let $C \subseteq \Ens$ be a classical probability context. Let $\mathfrak{L}$ be the lattice of $\separate$-subspaces. Then the fraction capacity is an additive set function on the lattice. That is, for all $\ens \in C$ and $A, B \in \mathfrak{L}$ such that $A \cap B = \emptyset$,  $\fcap_{\ens}(A \vee B) = \fcap_{\ens}(A) + \fcap_{\ens}(B)$.
 \end{prop}
 
@@ -2082,6 +2092,19 @@ Note that, in general, the lattice of $R$-subspaces is not a Boolean algebra. Fo
 		Since \href{https://proofwiki.org/wiki/Complement_in_Distributive_Lattice_is_Unique}{complements in a distributive lattice are unique}, 2 implies 3. Since \href{https://en.wikipedia.org/wiki/Complemented_lattice#Orthocomplementation}{orthocomplemented lattices satisfy de Morgan's laws} and  \href{https://proofwiki.org/wiki/De_Morgan%27s_Laws_imply_Uniquely_Complemented_Lattice_is_Boolean_Lattice}{de Morgan laws imply distributivity for a uniquely complemented lattice}, 3 implies 2.
 	\end{proof}
 \end{mathSection}
+
+Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthonormal, as one requires, for example, in quantum logic. The cut triangle \ref{pm_es_cutTriangle} is a counterexample. The only orthogonality relationship are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are $\bot = \emptyset$, $X= \{\ens[2]\}$, $Y= \{\ens[3]\}$, $A= \{p \ens[2] + \bar{p}\ens[a]\}$, $B= \{p \ens[3] + \bar{p}\ens[b]\}$ and $\top = \Ens$. This forms an $M_6$ lattice, which is not orthonormal.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces.jpg}
+\end{figure}
+
+The lack of orthonormality is due to the multiple complements that are one a subset of the other. This means that $X \vee (X^\perp \wedge A) = X \vee (B \wedge A) = X \vee \bot = X$ instead of $A$, if the lattice where orthonormal. This leads to the following:
+
+\begin{conj}
+	The lattice of $\separate$-subspaces is orthonormal if and only if the ensemble space is orthogonally decomposable (i.e. every decomposable ensemble is orthogonally decomposable).
+\end{conj}
 
 
 \section{Examples}
