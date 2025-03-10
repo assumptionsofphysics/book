@@ -1503,7 +1503,17 @@ Now that we have identified the correct closure, we need to find the right chara
 \begin{defn}
 	Let $\Ens$ be an ensemble space. A \textbf{classical probability context} is a flat $C \subseteq \Ens$ where each decomposable element in $C$ is separately decomposable in $C$ but not separately multidecomposable in $C$.
 \end{defn}
+\end{mathSection}
 
+\begin{defn}
+	An orthocomplemented lattice is orthomodular if $a \leq b$ implies $a \vee (a^{\ortho} \wedge b) = b$. An orthocomplemented lattice is orthoregular if 
+\end{defn}
+
+\begin{prop}
+	Let $C \subseteq \Ens$ be a convex set where each decomposable element is separately (or orthogonally) decomposible. Then the lattice of $\mathcal{L}$ of $\separate$-subspaces (or $\ortho$-subspaces) is
+\end{prop}
+
+\begin{mathSection}
 \begin{prop}
 	A flat $C \subseteq \Ens$ is a classical probability context if and only if every decomposable element is separately decomposable and mixtures preserve separateness in $C$. That is, if $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$, then $\ens \separate p\ens[a] + \bar{p} \ens[b]$ in $C$ for all $\ens, \ens[a], \ens[b] \in C$ and $p \in [0,1]$.
 \end{prop}
@@ -1567,17 +1577,21 @@ Now that we have identified the correct closure, we need to find the right chara
 \begin{conj}
 	The defining property of a classical probability context is exactly that property that allows $A$ and $B$ so constructed to be convex sets whose closure is $C$.
 \end{conj}
+\end{mathSection}
 
 \begin{prop}
-	Let $C \subseteq \Ens$ be a classical probability context. The lattice of $\separate$-subspaces $\mathfrak{L}$ is commutative and is therefore a Boolean algebra.
+	Let $C \subseteq \Ens$ be a classical probability context. The lattice of $\separate$-subspaces $\mathfrak{L}$ is distributive and is therefore a Boolean algebra.
 \end{prop}
 
 \begin{proof}
-	The lattice of $\separate$-subspaces is a complemented bounded lattice. Note that a lattice is distributive if there are no sublattices \href{https://en.wikipedia.org/wiki/Distributive_lattice#Characteristic_properties}{ismorphic to $M_3$ and $N_5$}. Both require the existence of multiple complements. Therefore, if \href{https://en.wikipedia.org/wiki/Complemented_lattice#Orthocomplementation }{complements are unique} the lattice is distributive and is therefore a Boolean algebra.
+	Let $X,Y,Z \in \mathfrak{L}$ be three $\separate$-subspaces. Let $\ens \in X \wedge (Y \vee Z)$, then $\ens \in X$ and $\ens \in Y \vee Z$. This also means that all components of $\ens$ are in both $X$ and $Y \vee Z$ since the components of $\ens$ are not separate from $\ens$ and, given the absence of multi-decomposability, are separate from all elements that are separate from $\ens$. Since $Y \vee Z = \hull(Y \cup Z)$, we can decompose $\ens$ into components of $Y$ and $Z$. But these must be in $X$, and therefore $\ens \in \hull((X \wedge Y) \cup (X \wedge Z) ) = (X \wedge Y) \vee (X \wedge Z) )$. Therefore $X \wedge (Y \vee Z) \subseteq (X \wedge Y) \vee (X \wedge Z)$. Now let $\ens \in (X \wedge Y) \vee (X \wedge Z)$, then $\ens \in \hull((X \wedge Y) \cup (X \wedge Z) )$. Therefore $\ens$ is the mixture of ensembles that are in $X$, which means that $\ens \in X$. Since $\ens$ is the mixture of elements that are also in $Y$ and $Z$, $\ens \in \hull(Y \cup Z) = Y \vee Z$. This means $\ens \in X \wedge (Y \vee Z)$. Therefore $(X \wedge Y) \vee (X \wedge Z) \subseteq X \wedge (Y \vee Z)$. Which means $X \wedge (Y \vee Z) = (X \wedge Y) \vee (X \wedge Z)$.
 	
-	Let $A \in \mathfrak{L}$ be a subspace. A complement of $A$ is a subspace $B \in \mathfrak{L}$ such that $A \wedge B = \emptyset$ and $A \vee B = C$. Since $A \wedge B = \emptyset$, then $B \subseteq A^{\separate}$ (TODO: check or prove for all $R$-lattices). Since $A \vee B = C$, every element of $C$ is a mixture of elements of $A$ and $B$. Now suppose $\ens \in A^{\separate}$.
+	Now let $\ens \in X \vee (Y \wedge Z)$, then $\ens \in \hull(X \cup (Y \wedge Z) )$. That is, $\ens$ is a mixture of elements of $X$ and of elements that are in both $Y$ and $Z$. Which means $\ens \in \hull(X \cup Y)$ and $\ens \in \hull(X \cup Z)$. Therefore $\ens \in \hull(X \cup Y) \cap \hull(X \cup Z) = (X \vee Y) \wedge (X \vee Z)$, which means $X \vee (Y \wedge Z) \subseteq (X \vee Z) \vee (Y \wedge Z)$. Conversely, let $\ens \in (X \vee Y) \wedge (X \vee Z) = \hull(X \cup Y) \cap \hull(X \cup Z)$. Then $\ens$ can be expressed as a mixture of elements of $X$ and $Y$ and also of elements of $X$ and $Z$. Now consider the elements of $Y$ in the first decomposition. Since multiple decomposition is not allowed, they cannot be separate from both $X$ and $Z$, end therefore must be in their hull. Similarly, the elements of $Z$ in the second decomposition must be in the hull of $X$ and $Y$. Therefore $\ens \in \hull(X \cup (Y \wedge Z) ) = X \vee (Y \wedge Z)$. Therefore $(X \vee Y) \wedge (X \vee Z) \subseteq X \vee (Y \wedge Z)$. Which means $X \vee (Y \wedge Z) = (X \vee Z) \vee (Y \wedge Z)$.
+	
+	The lattice $\mathfrak{L}$ is therefore a distributive orthocomplemented lattice, which means it is a Boolean algebra.
 \end{proof}
 
+\begin{mathSection}
 \begin{prop}
 	Let $C \subseteq \Ens$ be a classical probability context. Let $\mathfrak{L}$ be the lattice of $\separate$-subspaces. Then the fraction capacity is an additive set function on the lattice. That is, for all $\ens \in C$ and $A, B \in \mathfrak{L}$ such that $A \cap B = \emptyset$,  $\fcap_{\ens}(A \vee B) = \fcap_{\ens}(A) + \fcap_{\ens}(B)$.
 \end{prop}
@@ -2074,24 +2088,20 @@ We now show that if we start with the mere notion of orthogonality defined from 
 	\end{proof}
 \end{mathSection}
 
-Note that, in general, the lattice of $R$-subspaces is not a Boolean algebra. For example, the lattice of orthogonal subspaces is not distributive and therefore it is not a Boolean algebra, though it is a orthocomplemented lattice. The extra conditions of distributivity or, equivalently, the uniqueness of the lattice complements, are exactly what turn the orthocomplemented lattice into a Boolean algebra.
+\begin{conj}
+	The following three statements are equivalent
+	\begin{enumerate}
+		\item the lattice of $R$-subspaces is a Boolean algebra
+		\item the lattice of $R$-subspaces is distributive
+		\item the lattice complements are unique (?)
+	\end{enumerate}
+\end{conj}
 
-\begin{mathSection}	
-	\begin{prop}
-		The following three statements are equivalent
-		\begin{enumerate}
-			\item the lattice of $R$-subspaces is a Boolean algebra
-			\item the lattice of $R$-subspaces is distributive
-			\item the lattice complements are unique
-		\end{enumerate}
-	\end{prop}
+\begin{proof}
+	Since every Boolean algebra is distributive, 1 implies 2. Since in every orthocomplemented distributive lattice is a Boolean algebra, 2 implies 1.
 	
-	\begin{proof}
-		Since every Boolean algebra is distributive, 1 implies 2. Since in every orthocomplemented distributive lattice is a Boolean algebra, 2 implies 1.
-		
-		Since \href{https://proofwiki.org/wiki/Complement_in_Distributive_Lattice_is_Unique}{complements in a distributive lattice are unique}, 2 implies 3. Since \href{https://en.wikipedia.org/wiki/Complemented_lattice#Orthocomplementation}{orthocomplemented lattices satisfy de Morgan's laws} and  \href{https://proofwiki.org/wiki/De_Morgan%27s_Laws_imply_Uniquely_Complemented_Lattice_is_Boolean_Lattice}{de Morgan laws imply distributivity for a uniquely complemented lattice}, 3 implies 2.
-	\end{proof}
-\end{mathSection}
+	Since \href{https://proofwiki.org/wiki/Complement_in_Distributive_Lattice_is_Unique}{complements in a distributive lattice are unique}, 2 implies 3. Since \href{https://en.wikipedia.org/wiki/Complemented_lattice#Orthocomplementation}{orthocomplemented lattices satisfy de Morgan's laws} and  \href{https://proofwiki.org/wiki/De_Morgan%27s_Laws_imply_Uniquely_Complemented_Lattice_is_Boolean_Lattice}{de Morgan laws imply distributivity for a uniquely complemented lattice}, 3 implies 2.
+\end{proof}
 
 Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthonormal, as one requires, for example, in quantum logic. The cut triangle \ref{pm_es_cutTriangle} is a counterexample. The only orthogonality relationship are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are $\bot = \emptyset$, $X= \{\ens[2]\}$, $Y= \{\ens[3]\}$, $A= \{p \ens[2] + \bar{p}\ens[a]\}$, $B= \{p \ens[3] + \bar{p}\ens[b]\}$ and $\top = \Ens$. This forms an $M_6$ lattice, which is not orthonormal.
 
