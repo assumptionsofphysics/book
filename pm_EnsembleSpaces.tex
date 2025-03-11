@@ -23,6 +23,16 @@
 \def\ortho{\perp}
 \def\northo{\nperp}
 
+%\NewDocumentCommand{\separate}{o}{
+%	\downmodels
+%	\IfNoValueTF{#1}{}{_{#1}}%
+%}
+%
+%\NewDocumentCommand{\nseparate}{o}{
+%	\ndownmodels
+%	\IfNoValueTF{#1}{}{_{#1}}%
+%}
+
 \newcommand{\ens}[1][e] {\mathsf{#1}} % Ensemble
 \newcommand{\Ens}[1][E] {\mathcal{#1}} % Ensemble space
 
@@ -557,7 +567,7 @@ We now prove that the function $I(p,\bar{p})$ must be the Shannon entropy.
 Separateness and orthogonality are tightly related to each other. First of all, orthogonality implies separateness and is therefore a stronger property. Moreover, orthogonality is an irreflexive symmetric relation, like separateness.
 
 \begin{mathSection}
-\begin{prop}
+\begin{prop}\label{pm_es_orthoProps}
 	Orthogonality satisfies the following properties:
 	\begin{enumerate}
 		\item irreflexivity: $\ens[a] \northo \ens[a]$
@@ -1499,19 +1509,13 @@ Now that we have identified the correct closure, we need to find the right chara
 \begin{remark}
 	A convex set that is separately decomposable is not necessarily a flat (i.e. triangle within a sphere). A flat is not necessarily separately decomposable (i.e. open segment as a whole is a flat, but is not separately decomposable).
 \end{remark}
+\end{mathSection}
 
+\begin{mathSection}
 \begin{defn}
 	Let $\Ens$ be an ensemble space. A \textbf{classical probability context} is a flat $C \subseteq \Ens$ where each decomposable element in $C$ is separately decomposable in $C$ but not separately multidecomposable in $C$.
 \end{defn}
 \end{mathSection}
-
-\begin{defn}
-	An orthocomplemented lattice is orthomodular if $a \leq b$ implies $a \vee (a^{\ortho} \wedge b) = b$. An orthocomplemented lattice is orthoregular if 
-\end{defn}
-
-\begin{prop}
-	Let $C \subseteq \Ens$ be a convex set where each decomposable element is separately (or orthogonally) decomposible. Then the lattice of $\mathcal{L}$ of $\separate$-subspaces (or $\ortho$-subspaces) is
-\end{prop}
 
 \begin{mathSection}
 \begin{prop}
@@ -1519,9 +1523,9 @@ Now that we have identified the correct closure, we need to find the right chara
 \end{prop}
 
 \begin{proof}
-	Suppose mixtures do not preserve separateness. Then we can find $\ens,\ens[a],\ens[b], \ens[c] \in \Ens$ such that $\ens \separate \ens[a]$, $\ens \separate \ens[b]$ and $\ens \nseparate \ens[c] = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1)$. Since $\ens \nseparate \ens[c]$, we can find $\ens[d], \ens[f], \ens[g]$ such that $\ens[c] = \lambda \ens[d] + \bar{\lambda} \ens[f]$ and $\ens = \mu \ens[d] + \bar{\mu} \ens[g]$.  Since separateness extends to all mixtures (\ref{pm_es_separateExtendsMixtures}), $\ens[a] \separate \ens[d]$ and $\ens[b] \separate \ens[d]$, which means that $\ens[c]$ is separately multidecomposable.
+	Suppose mixtures do not preserve separateness. Then we can find $\ens,\ens[a],\ens[b], \ens[c] \in \Ens$ such that $\ens \separate \ens[a]$, $\ens \separate \ens[b]$ and $\ens \nseparate \ens[c] = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1)$. Since $\ens \nseparate \ens[c]$, we can find $\ens[d], \ens[f], \ens[g]$ such that $\ens[c] = \lambda \ens[d] + \bar{\lambda} \ens[f]$ and $\ens = \mu \ens[d] + \bar{\mu} \ens[g]$.  Since separateness extends to all mixtures (\ref{pm_es_separateExtendsMixtures}) and $\ens[a] \separate \ens[e]$, $\ens[a] \separate \ens[d]$ and, similarly, $\ens[b] \separate \ens[d]$, which means that $\ens[c]$ is separately multidecomposable.
 	
-	Now suppose mixture do preserve separateness, and let $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$. Since $\ens[a]_1$ is a component of $\ens$, then $\ens \nseparate \ens[a]_1$. Since $\ens$ is a mixture of $\ens[b]_1$ and $\ens[b]_2$ and mixtures preserve separateness, then either $\ens[a]_1 \nseparate \ens[b]_1$ or $\ens[a]_1 \separate \ens[b]_2$. Similarly, $\ens[a]_2 \nseparate \ens[b]_1$ or $\ens[a]_2 \separate \ens[b]_2$. Therefore $\ens$ is not separately multidecomposable.
+	Now suppose mixture do preserve separateness, and let $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$. Since $\ens[a]_1$ is a component of $\ens$, then $\ens \nseparate \ens[a]_1$. Since $\ens$ is a mixture of $\ens[b]_1$ and $\ens[b]_2$ and mixtures preserve separateness, then either $\ens[a]_1 \nseparate \ens[b]_1$ or $\ens[a]_1 \nseparate \ens[b]_2$. Similarly, $\ens[a]_2 \nseparate \ens[b]_1$ or $\ens[a]_2 \nseparate \ens[b]_2$. Therefore $\ens$ is not separately multidecomposable.
 \end{proof}
 
 \begin{conj}
@@ -2234,14 +2238,59 @@ The attempt was the following:
 	The only if is easy to show based on the discussion above. The if part does not actually work. Take 6 points in a 4 dimensional euclidean space such that the form two triangles that intersect at a single point. All two dimensional convex spaces will be segments. However, the whole convex hull is not a simplex. 
 \end{remark}
 
-\iffalse
+\iftrue
 
 \titledbreak{Experimental section}
+
+\subsection{Separability and sets}
+
+Here we try to construct better definitions for separability of sets to generalize the ones we created for probability contexts.
+
+\begin{defn}
+	An ensemble is \textbf{decomposable} if it can be expressed as a mixture of two ensembles. An ensemble is \textbf{separately/orthogonally decomposable} if it can be expressed as a mixture of two separate/orthogonal ensembles. An ensemble is \textbf{multidecomposable} if it can be expressed as two decompositions where a component of one is separate from both components of the other. That is, $\ens = \lambda \ens[a]_1 + \bar{\lambda} \ens[a]_2 = \mu \ens[b]_1 +\bar{\mu} \ens[b]_2$ and either $\ens[a]_1 \separate \ens[b]_j$ or $\ens[a]_2 \separate \ens[b]_j$. An ensemble is \textbf{monodecomposable} if it is not multidecomposable. An ensemble is \textbf{separately/orthogonally monodecomposable} if it is both separately/orthogonally decomposable and monodecomposable.
+\end{defn}
+
+\begin{coro}
+	An ensemble that is orthogonally decomposable is also separately decomposable.
+\end{coro}
+
+\begin{proof}
+	Since orthogonality implies separateness \ref{pm_es_orthoProps}, an orthogonal decomposition is also a separate decomposition.
+\end{proof}
+
+\begin{prop}
+	Let $C$ be a convex set. An ensemble $\ens \in C$ is \textbf{decomposable in $C$} if it can be expressed as a mixture of two ensembles belonging to $C$. Similarly, an ensemble is separately/orthogonally decomposable in $C$ or multidecomposable/monodecomposable in $C$ if the respective mixtures can be made with elements of $C$.
+\end{prop}
+
+\begin{prop}
+	Let $C$ be a convex set. The set is \textbf{always separately/orthogonally decomposable} if every element of $C$ that is decomposable in $C$ is also separately/orthogonally decomposable in $C$. The set is \textbf{monodecomposable} if every element in $C$ is monodecomposable in $C$. The set is \textbf{always separately/orthogonally monodecomposable} if it is both always separately/orthogonally decomposable and monodecomposable.
+\end{prop}
+
+\begin{defn}
+	Let $C$ be a convex set. We say that \textbf{mixtures preserve separateness in $C$} if $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$ implies $\ens \separate p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$.
+	
+	TODO: notation should be clear that is separate in $C$.
+\end{defn}
+
+\begin{prop}
+	A convex set $C$ is monodecomposable if and only if mixtures preserve separateness in $C$.
+\end{prop}
+
+\begin{proof}
+	All statements of mixture as assumed in $C$.
+	
+	Suppose mixtures do not preserve separateness. Then we can find $\ens,\ens[a],\ens[b], \ens[c] \in \Ens$ such that $\ens \separate \ens[a]$, $\ens \separate \ens[b]$ and $\ens \nseparate \ens[c] = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1)$. Since $\ens \nseparate \ens[c]$, we can find $\ens[d], \ens[f], \ens[g]$ such that $\ens[c] = \lambda \ens[d] + \bar{\lambda} \ens[f]$ and $\ens = \mu \ens[d] + \bar{\mu} \ens[g]$.  Since separateness extends to all mixtures (\ref{pm_es_separateExtendsMixtures}) and $\ens[a] \separate \ens[e] = \mu \ens[d] + \bar{\mu} \ens[g]$, then $\ens[a] \separate \ens[d]$. Similarly, $\ens[b] \separate \ens[d]$, which means that $\ens[c]$ is separately multidecomposable. (TODO: add drawing)
+	
+	Now suppose mixture do preserve separateness, and let $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$. Since $\ens[a]_1$ is a component of $\ens$, then $\ens \nseparate \ens[a]_1$. Since $\ens$ is a mixture of $\ens[b]_1$ and $\ens[b]_2$ and mixtures preserve separateness, then either $\ens[a]_1 \nseparate \ens[b]_1$ or $\ens[a]_1 \nseparate \ens[b]_2$. Similarly, $\ens[a]_2 \nseparate \ens[b]_1$ or $\ens[a]_2 \nseparate \ens[b]_2$. Therefore $\ens$ is not separately multidecomposable.
+\end{proof}
+
+
 
 \subsection{Space of differences}
 
 The idea is to actually construct the affine space through the notion of differences.
 
+\begin{mathSection}
 \begin{defn}[Affine combinations]
 	Let $\{\ens_i\}_{i=1}^n \subseteq \Ens$ be a finite sequence of ensembles and $\{r_i\}_{i=1}^n \subseteq \mathbb{R}$ be a finite sequence of coefficients such that $\sum_{i=1}^n r_i = 1$. The \textbf{affine combination} $\sum_{i=1}^n r_i \ens_i$ is, if it exists, the ensemble $\ens[a] \in \Ens$ such that  $\sum_{i \in I} \frac{r_i}{r} \ens_i = \frac{1}{r} \ens[a] + \sum_{i \notin I} \frac{-r_i}{r} \ens_i$ where $I = \{ i \in [1,n] \, | \, r_i \geq 0 \}$ and $r = \sum_{i \in I} r_i$.
 \end{defn}
@@ -2321,7 +2370,7 @@ The idea is to actually construct the affine space through the notion of differe
 	For the addition to be well-defined, we need to make sure that the affine combination is always well-defined. If $r$ and $s$ have the same sign, 
 \end{proof}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{tempimages/EnsembleDifferences.jpg}
 	\caption{This picture represents the motivation of the definition of the operations on the space of differences.}
@@ -2373,7 +2422,6 @@ The idea is to actually construct the affine space through the notion of differe
 \end{proof}
 \end{mathSection}
 
-
 \subsection{Nicely boundaried sets}
 Part of an original attempt to square measure and topology, sets with a nowhere dense boundary form a nice algebra that may, or may not, be useful.
 
@@ -2418,7 +2466,7 @@ Part of an original attempt to square measure and topology, sets with a nowhere 
 	\begin{remark}
 		Note that the algebra $R_X$ does not contain all the nicely bounded sets. Consider a circle in $\mathbb{R}^2$. Let $U$ be the open set of all the interior points and $B$ be the points on the circle at a rational angle. Now consider $A = U \cup B$: $U$ is the interior of $A$ and $B$ its boundary. The boundary is nowhere dense, therefore $A$ is a nicely bounded set. However, we cannot generate $A$ with finite operations from open sets of $\mathbb{R}^2$.
 	\end{remark}
-
+\end{mathSection}
 
 \titledbreak{Old notes to be organized}
 
