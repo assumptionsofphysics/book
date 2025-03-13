@@ -2299,14 +2299,6 @@ The idea is to actually construct the affine space through the notion of differe
 	For the definition to work, we need to show that the affine combination can be re-expressed in terms of convex combinations. Note that the coefficients $r_i$ are not necessarily positive, but still sum to $1$. With the given definitions, $I$ includes exactly the indexes that are non-negative, and $r$ is the sum of all the non-negative coefficients. This means that $\frac{r_i}{r} \in [0,1]$ for all $i \in I$ and $\sum_{i \in I} \frac{r_i}{r}=1$. Therefore $\sum_{i \in I} \frac{r_i}{r} \ens_i$ is a convex combination and it is always well-defined. Additionally, we have that $\sum_{i \in I} r_i = 1 - \sum_{i \notin I} r_i$, which means $\frac{-r_i}{r - 1} \in [0,1]$ for all $i \notin I$ and $\sum_{i \in I} \frac{-r_i}{r-1}=1$. Therefore $\sum_{i \in I} \frac{-r_i}{r-1} \ens_i$ is a convex combination and it is always well-defined. Note that $\ens[a]$ is defined to be such that $\sum_{i \in I} \frac{r_i}{r} \ens_i = \frac{1}{r} \ens[a] + \frac{r-1}{r}\sum_{i \notin I} \frac{-r_i}{r-1} \ens_i$. If it exists, it is unique.
 \end{proof}
 
-%\begin{defn}[Ensemble equation]
-%	Let $\{\ens[a]_i\}_{i=1}^n, \{\ens[b]_i\}_{j=1}^m \subseteq \Ens$ be two finite sequences of ensembles and $\{r_i\}_{i=1}^n, \{s_i\}_{j=1}^m \subseteq \mathbb{R}$ be two finite sequences of coefficients such that $\sum_{i=1}^n r_i = \sum_{j=1}^m s_j = t$. The \textbf{ensemble equation} $\sum_{i=1}^n r_i \ens[a]_i = \sum_{j=1}^m s_j \ens[b]_j $ is satisfied if .
-%\end{defn}
-%
-%\begin{remark}
-%	Note that any equation $\sum_{i=1}^n r_i \ens[a]_i = \sum_{i=1}^n s_i \ens[b]_i$ such that $\sum_{i=1}^n r_i = \sum_{i=1}^n s_i = t$ can be understood as an equation between affine combinations by simply dividing both sides by $t$. From now on, all equations of such kind should be understood that way.
-%\end{remark}
-
 \begin{defn}
 	An \textbf{interior point} of an ensemble space is an ensemble $\ens \in \Ens$ such that for every $\ens[a] \in \Ens$ there exists $\ens[b] \in \Ens$ and $p \in (0,1)$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$. 
 \end{defn}
@@ -2319,6 +2311,10 @@ The idea is to actually construct the affine space through the notion of differe
 
 \begin{defn}[Ensemble differences]
 	Given an ensemble space, a difference between two ensemble represents the change required to transform one ensemble into another. Formally, an \textbf{ensemble difference}, noted $r(\ens[b] - \ens[a])$, is a triple formed by a real number $r \in \mathbb{R}$ and an ordered pair of ensembles $\ens[a],\ens[b] \in \Ens$.
+\end{defn}
+
+\begin{defn}
+	The \textbf{scalar multiplication} of a difference $s(\ens[b] - \ens[a])$ by a real number $r \in \mathbb{R}$ is the difference $(rs)(\ens[b] - \ens[a])$
 \end{defn}
 
 \begin{defn}
@@ -2357,6 +2353,7 @@ The idea is to actually construct the affine space through the notion of differe
 		\item if $r\neq0$, $[r(\ens[b] - \ens[a])] = \left\{(r+j)\left(\left(\frac{r}{r+j}\ens[b] +\frac{j}{r+j} \ens[a]\right) -\ens[a]\right)\right\}$
 		\item $\left[0(\ens[b] - \ens[a])\right] = \left\{0\left(\ens - \ens[a]\right) \, | \, \ens \in \Ens \right\} \cup \left\{r\left(\ens[a] - \ens[a]\right) \, | \, r \in \mathbb{R} \right\}$
 		\item given $p \in (0,1]$, $r(\ens[b] - \ens[a]) \sim \frac{r}{p}((p\ens[b] + \bar{p}\ens[a]) - \ens[a])$
+		\item $r(\ens[b] - \ens[a]) \sim s(\ens[c] - \ens[a])$ implies $(rt)(\ens[b] - \ens[a]) \sim (st)(\ens[c] - \ens[a])$ and therefore scalar multiplication maps equivalence classes to equivalence classes
 	\end{enumerate}
 \end{prop}
 
@@ -2367,7 +2364,17 @@ The idea is to actually construct the affine space through the notion of differe
 	
 	For 3, we have $\frac{1}{r+k} (r \ens[b] + k \ens[a]) = \frac{1}{r+k} (r \ens[a] + k \ens[a])$. If $r=0$ we have $\ens[a] = \ens[a]$ which is satisfied for all $\ens[b], \ens[b] \in \Ens$. If $r\neq0$ we have $\frac{1}{r+k} (r \ens[b] + k \ens[a]) = \ens[a]$ which is satisfied only if $\ens[b] = \ens[a]$.
 
-	For 4, let $\frac{r}{p}=r+j$. We have $j = \frac{r}{p}-r = \frac{r(1-p)}{p} = (r+j)\bar{p}$. Therefore $\frac{r}{r+j} = r\frac{p}{r} = p$ and $\frac{j}{r+j} = \bar{p}$. This matches the coefficients in the equivalence class. 	
+	For 4, let $\frac{r}{p}=r+j$. We have $j = \frac{r}{p}-r = \frac{r(1-p)}{p} = (r+j)\bar{p}$. Therefore $\frac{r}{r+j} = r\frac{p}{r} = p$ and $\frac{j}{r+j} = \bar{p}$. This matches the coefficients in the equivalence class.
+	
+	For 5, we have
+	\begin{equation}
+		\begin{aligned}
+			\frac{1}{r+s+k} (r \ens[b] + s \ens[a] + k \ens[a]) &= \frac{1}{r+s+k} (s \ens[c] + r \ens[a] + k \ens[a]) \\
+			\frac{1}{tr+ts+tk} (rt \ens[b] + st \ens[a] + kt \ens[a]) &= \frac{1}{rt+st+kt} (st \ens[c] + rt \ens[a] + kt \ens[a]) \\
+			\frac{1}{tr+ts+k'} (rt \ens[b] + st \ens[a] + k' \ens[a]) &= \frac{1}{rt+st+k'} (st \ens[c] + rt \ens[a] + k' \ens[a])
+		\end{aligned}
+	\end{equation}
+	which means $(rt)(\ens[b] - \ens[a]) \sim (st)(\ens[c] - \ens[a])$.
 \end{proof}
 
 \begin{defn}
@@ -2397,6 +2404,45 @@ The idea is to actually construct the affine space through the notion of differe
 	\end{equation}
 	This means that $\left[r\frac{\bar{p}}{p}(\ens[c] - \ens[a])\right]$ is the inverse of $[r(\ens[b] - \ens[a])]$ and that the addition is an abelian group.
 \end{proof}
+
+\begin{thrm}
+	Let $\ens[a] \in \Ens$ be an interior point and let $V = \{ [r(\ens[b]-\ens[a])] \}$ be the set of equivalence classes of ensemble differences from $\ens[a]$. Then $V$ is a vector space under the scalar multiplication and addition.
+\end{thrm}
+
+\begin{proof}
+	Scalar multiplication is compatible with the multiplication between scalars since $r(s(t(\ens[b] - \ens[a])))= r((st)(\ens[b]-\ens[a])) = (rst)(\ens[b]-\ens[a]) = (rs)(t(\ens[b]-\ens[a])$. The identity of the scalars is the identity of scalar multiplication since $1(r(\ens[b]-\ens[a])) = r(\ens[b] - \ens[a])$. Scalar multiplication is distributive with respect to vector addition
+	\begin{equation}
+		\begin{aligned}
+		&t\left(\left[r(\ens[b] - \ens[a])\right] + \left[s(\ens[c] - \ens[a])\right]\right) \\
+		&= t\left[(r+s+k) \left(\left(\frac{r}{r+s+k}\ens[b] + \frac{s}{r+s+k} \ens[c] +\frac{k}{r+s+k} \ens[a] \right) - \ens[a]\right)\right] \\
+		&= \left[t(r+s+k) \left(\left(\frac{r}{r+s+k}\ens[b] + \frac{s}{r+s+k} \ens[c] +\frac{k}{r+s+k} \ens[a] \right) - \ens[a]\right)\right] \\
+		&= \left[(tr+ts+tk) \left(\left(\frac{tr}{tr+ts+tk}\ens[b] + \frac{ts}{tr+ts+tk} \ens[c] +\frac{tk}{tr+ts+tk} \ens[a] \right) - \ens[a]\right)\right] \\
+		&= \left[(tr+ts+k') \left(\left(\frac{tr}{tr+ts+k'}\ens[b] + \frac{ts}{tr+ts+k'} \ens[c] +\frac{k'}{tr+ts+k'} \ens[a] \right) - \ens[a]\right)\right] \\
+		&\left[tr(\ens[b] - \ens[a])\right] + \left[ts(\ens[c] - \ens[a])\right].
+		\end{aligned}
+	\end{equation}
+	Scalar multiplication is distributive with respect to scalar addition
+	\begin{equation}
+		\begin{aligned}
+			&s\left[r(\ens[b] - \ens[a])\right] + t\left[r(\ens[b] - \ens[a])\right] \\
+			&\left[sr(\ens[b] - \ens[a])\right] + \left[tr(\ens[b] - \ens[a])\right] \\
+			&= \left[(sr+tr+k) \left(\left(\frac{sr}{sr+tr+k}\ens[b] + \frac{tr}{sr+tr+k} \ens[b] +\frac{k}{sr+tr+k} \ens[a] \right) - \ens[a]\right)\right] \\
+			&= \left[(sr+tr+k) \left(\left(\frac{sr+tr}{sr+tr+k}\ens[b] + \frac{k}{sr+tr+k} \ens[a] \right) - \ens[a]\right)\right] \\
+			&= [((s+t)r)(\ens[b]-\ens[a])] \\
+			&= (s+t)[r(\ens[b]-\ens[a])].
+		\end{aligned}
+	\end{equation}
+	Therefore $V$ with addition and scalar multiplication satisfies the definition of a vector space.
+\end{proof}
+
+\begin{defn}
+	Given an internal point $\ens[a]$, the map $\ens[b] \to (\ens[b] - \ens[a])$ is the \textbf{natural embedding} of the vector space in the space of differences from $\ens[a]$.
+\end{defn}
+
+\begin{prop}
+	Let $\ens[a],\ens[b] \in \Ens$ be two internal points. Then $r(\ens[c] - \ens[b]) \mapsto r(\ens[c]-\ens[a]) - r(\ens[b]-\ens[a])$ is an isomorphism between the corresponding vector spaces. The ensemble space is therefore endowed with an affine structure.
+\end{prop}
+
 \end{mathSection}
 
 \subsection{Nicely boundaried sets}
