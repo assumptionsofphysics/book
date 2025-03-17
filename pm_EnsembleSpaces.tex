@@ -1611,6 +1611,26 @@ Now that we have identified the correct closure, we need to find the right chara
 
 \subsection{Spectrum of a classical probability context}
 
+WARNING: the following may imply that the construction below doesn't work. Since we can show that different topological spaces correspond to the same Boolean algebra of regular open sets (or regular closed sets), then knowing the lattice of regular open (or closed) sets is not enough to recover the points and the topology.
+
+\begin{prop}
+	Let $X$ and $Y$ be two distinct topological spaces. Then it is not necessarily true that the algebras of the regular open sets are not isomorphic as Boolean algebras.
+\end{prop}
+
+\begin{proof}
+	Let $X=S^1$ be a circle with the standard topology, $Y=\mathbb{R}$ be the real line with the standard topology and $Z=\mathbb{R}\setminus \{0\}$ be the real line without the origin. Note that the circle is the one point compactification of the real line, and therefore $Y=X\setminus \{\infty\}$. This forms a chain of embedding $X \to Y \to Z$.
+	
+	Suppose $U$ is a regular open set in $X$. Then $U_Y = U \setminus \{\infty\}$ is an open set in $Y$. We also have $\overline{U_Y} = \overline{U} \setminus \{\infty\}$ and $\interior(\overline{U_Y}) = \interior(\overline{U}) \setminus \{\infty\}$. Therefore $U_Y$ is a regular open set. Also, let $U$ and $V$ be two distinct open sets of $X$. Then, since every open set that contains $U$ also contains an open neighborhood of $U$, the corresponding $U_Y$ and $V_Y$ will also be two distinct open sets. There is, therefore, a bijection between the regular open sets of $X$ and $Y$.
+
+	Note that regular open sets form a Boolean algebra where the complement is the exterior, the join is the interior of the closure and the meet is the intersection. The bijection will preserve these operations. Therefore the corresponding algebras of regular open sets are isomorphic. The same reasoning applies when comparing $Y$ to $Z$.
+	
+	Now, note that $\{\infty\}$ is a closed set, but not a regular closed set. Therefore we are going to be able to construct a similar argument for the lattice of regular closed sets
+\end{proof}
+
+\begin{remark}
+	Since the construction below wants to recover the points of the space from what happens to be the algebras of regular open (or closed) sets, the above proposition seems to imply that this is not possible. We would not be able to know, for example, whether the points form a circle or a real line. Even if we knew that they form a real line, and would know what half-lines we have, we would not know how to stitch them back together, as we could do it with $\{0\}$ or with $\{\infty\}$. We would need to know, at least, which intervals would correspond to a finite interval (e.g. a finite entropy), which requires more structure.
+\end{remark}
+
 To recover classical probability distributions, we need to recover the possible cases (i.e. the sample space) and the events (i.e. the $\sigma$-algebra) over which the probability distributions are defined. These are not necessarily states. For example, in the countinuous classical case, the sample space corresponds to the sets of possible values of position and momentum (i.e. the symplectic manifold over which the values are defined). In quantum mechanics, the sample space is the range of possible values defined by an observable (i.e. the spectrum of the operator). The goal here is to identify a single physically meaningful construction that will be able to work for all these cases.
 
 Intuitively, we are taking ensembles and decomposing them into mixtures of ensembles with narrower and narrower spread. The points over which the classical distributions are defined are limits where the spread goes to zero. Note, however, that the limit of sequences with narrower and narrower spread will not, in general, be itself an ensemble. For example, we can imagine a sequence of uniform distributions over $[-\frac{1}{i}, \frac{1}{i}]$. As $i$ increases, the spread will converge to the single value $0$, though the sequence of ensembles will not converge to an ensemble. Similarly, we can imagine a sequence of density matrices, or even wave-functions, for the quantum case. The points, then, should be understood as a convenient tool for representation and calculation, not as physically realizable objects. What is physically realizable, at least conceptually in the model, is the sequence of finer and finer decomposition at an arbitrary level of precision. That is, conceptually we are not starting from the sample space (i.e. the possible idealized values) and then constructing probability distributions on top; we start with a set of ensembles, which are the physical objects we are studying, and obtain the points and the corresponding probability distributions as the limit of recursive decomposition.
@@ -2310,6 +2330,8 @@ The idea is to actually construct the affine space through the notion of differe
 	An \textbf{interior point} of an ensemble space is an ensemble $\ens \in \Ens$ such that for every $\ens[a] \in \Ens$ there exists $\ens[b] \in \Ens$ and $p \in (0,1)$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$. 
 \end{defn}
 
+TODO: add figure for interior point
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{tempimages/EnsembleDifferences.jpg}
@@ -2443,8 +2465,26 @@ The idea is to actually construct the affine space through the notion of differe
 \end{proof}
 
 \begin{defn}
-	Given an internal point $\ens[a]$, the map $\ens[b] \to (\ens[b] - \ens[a])$ is the \textbf{natural embedding} of the vector space in the space of differences from $\ens[a]$.
+	Given an internal point $\ens[a]$, the \textbf{natural embedding} of $\Ens$ into $V_{\ens[a]}$ is the map $\iota_{\ens[a]} : \Ens \hookrightarrow V_{\ens[a]}$ defined as $\iota(\ens) \to [(\ens - \ens[a])]$ is the  of the vector space in the space of differences from $\ens[a]$.
 \end{defn}
+
+\begin{coro}
+	The natural embedding of $\Ens$ into $V_{\ens[a]}$ preserves affine combinations. That is, $\iota\left(\sum_{i=1}^n r_i \ens_i \right) = \sum_{i=1}^n r_i \iota(\ens_i)$.
+\end{coro}
+
+\begin{proof}
+	Let $r+s=1$, we have
+	\begin{equation}
+		\begin{aligned}
+			r[(\ens[b] - \ens[a])] +s[(\ens[b] - \ens[a])] &= [r(\ens[b] - \ens[a])] +[s(\ens[b] - \ens[a])] \\
+			&= \left[(r+s+k) \left(\left(\frac{r}{r+s+k}\ens[b] + \frac{s}{r+s+k} \ens[c] +\frac{k}{r+s+k} \ens[a] \right) - \ens[a]\right)\right] \\
+			&= \left[(1+k) \left(\left(\frac{r}{1+k}\ens[b] + \frac{s}{1+k} \ens[c] +\frac{k}{1+k} \ens[a] \right) - \ens[a]\right)\right] \\
+			&= \left[(1) \left(\left(\frac{r}{1}\ens[b] + \frac{s}{1} \ens[c] \right) - \ens[a]\right)\right] \\
+			&= \left[\left(\left(r\ens[b] + s \ens[c] \right) - \ens[a]\right)\right].
+		\end{aligned}
+	\end{equation}
+	If we apply recursively, we have $\sum_{i=1}^{n} r_i [(\ens_i - \ens[a])] = \left[\left(\left(\sum_{i=1}^{n}r_i \ens_i\right) - \ens[a]\right)\right]$. TFherefore $\sum_{i=1}^n r_i \iota(\ens_i) = \iota\left(\sum_{i=1}^n r_i \ens_i \right)$.
+\end{proof}
 
 \begin{prop}
 	Let $\ens[a],\ens[b] \in \Ens$ be two internal points. Then $r(\ens[c] - \ens[b]) \mapsto r(\ens[c]-\ens[a]) - r(\ens[b]-\ens[a])$ is an isomorphism between the corresponding vector spaces. The ensemble space is therefore endowed with an affine structure.
