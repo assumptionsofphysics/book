@@ -608,28 +608,25 @@ As we did for separateness, we extend the notion of orthogonality to sets of ens
 \end{proof}
 \end{mathSection}
 
-\section{Entropic constraints on the space}
+\section{Affine combinations and vector space embedding}
 
-The axiom of entropy not only constrains the functional form of the entropy, but it also constrains the type of space we can have. Additionally, it rules out some spaces that would seem physically pathological.
+The bounds on the entropy not only constrain the functional form of the entropy, but it also constrains the type of convex space, ruling out some that would be physically pathological.
 
-The entropic structure, in general, will constrain both the topological structure, making it metrizable, and the convex structure, making it embeddable in a vector space. The entropy is also responsible for all the geometric structure of the ensemble space.
+First of all, the bounds make it possible to define a unique inverse for statistical mixture. This allows us to define affine combinations, and to show that the ensemble space is embedded into a vector space. Lastly, the bounds will force this embedding to be into a subset of a compact set of the vector space.
 
-\subsection{Vector space embedding}
+\subsection{Affine combinations}
 
-The axiom of mixture does not constrain the convex set to be a subset of a vector space. The axiom of entropy, however, does. To be specific, it is the first three properties of the entropy that constrain the space.
+The axiom of mixture just tells us that given two ensembles and a mixing ratio, we can identify the mixture of the two ensembles. It does not guarantee the reverse. That is, given a final mixed ensembles, the mixing ratio and one component, it is not necessarily true that the second component is uniquely determined. This is the cancellative property of a convex space. This property is important as \href{https://arxiv.org/abs/1105.1270}{it can be shown} that is necessary and sufficient for the convex space to embed into a vector space.
+
+It is the continuity of the entropy and its bounds that force the convex space to be cancellative.
 
 \begin{mathSection}
-\begin{prop}
-	A convex space $X$ embeds into a vector space if and only if it is \textbf{cancellative}, that is $p \ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$ implies $\ens[a] = \ens[b]$.
-\end{prop}
+\begin{defn}
+	A convex space $X$ is \textbf{cancellative} if $p \ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$ implies $\ens[a] = \ens[b]$.
+\end{defn}
 
-\begin{proof}
-	Theorem 4 in \href{https://arxiv.org/abs/1105.1270}{this paper} states that a convex space embeds into a real vector space with $c_\lambda(x,y) = \lambda x + \bar{\lambda}y$ if and only if
-	$$ c_\lambda(x,y) = c_\lambda(x,z) \; \forall \lambda \in (0,1) \implies y = z.$$ TODO: the proof should be adapted and carried over.
-\end{proof}
-
-\begin{thrm}[Vector space embedding]
-	Let $\ens[a], \ens[b], \ens \in \Ens$ such that $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$. Then $\ens[a] = \ens[b]$. Therefore any ensemble space embeds into a real vector space.
+\begin{thrm}[Ensemble spaces are cancellative]
+	Let $\Ens$ be an ensemble space. Let $\ens[a], \ens[b], \ens \in \Ens$ such that $p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$. Then $\ens[a] = \ens[b]$.
 \end{thrm}
 
 \begin{proof}
@@ -703,6 +700,12 @@ The axiom of mixture does not constrain the convex set to be a subset of a vecto
 	\end{equation}
 	Since $S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{\lambda} S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\ens[a]) + \bar{\lambda} S(\ens[b])$, $\ens[a] = \ens[b]$ by strict concavity.
 \end{proof}
+\end{mathSection}
+
+
+\subsection{Vector space embedding}
+
+\begin{mathSection}
 
 \begin{defn}
 	An element $\ens \in \Ens$ can be expressed as an \textbf{affine combination} of ensembles $\ens = \sum_{i=1}^{n} p_i \ens_i$, where $\ens_i \in \Ens$, $p_i \in \mathbb{R}$ and $\sum_{i=1}^{n} p_i = 1$, if the linear combination in the vector space returns an element of $\Ens$.
