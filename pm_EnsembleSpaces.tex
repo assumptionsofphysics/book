@@ -702,27 +702,37 @@ It is the continuity of the entropy and its bounds that force the convex space t
 \end{proof}
 \end{mathSection}
 
+The fact that the convex space is cancellative essentially allows us to ``invert'' a convex combination, allowing affine combinations. An affine combinations is a linear combination where the coefficients sum to one, like in a convex combination, but coefficient can be negative, unlike in a convex combination. The ability in quantum mechanics to use negative probability, for example, stems from the fact that the space of ensembles allows affine combinations because it is cancellative.
 
-\subsection{Vector space embedding}
+An affine combination can be translated into the equality between two convex combinations by moving all the negative coefficients on the other side of the equality. This reduces to finding the component a mixture, which, if it exists, is unique by the cancellative property.
 
-\begin{mathSection}
-
-\begin{defn}
-	An element $\ens \in \Ens$ can be expressed as an \textbf{affine combination} of ensembles $\ens = \sum_{i=1}^{n} p_i \ens_i$, where $\ens_i \in \Ens$, $p_i \in \mathbb{R}$ and $\sum_{i=1}^{n} p_i = 1$, if the linear combination in the vector space returns an element of $\Ens$.
+\begin{mathSection}	
+\begin{defn}[Affine combinations]
+	Let $\{\ens_i\}_{i=1}^n \subseteq \Ens$ be a finite sequence of ensembles and $\{r_i\}_{i=1}^n \subseteq \mathbb{R}$ be a finite sequence of coefficients such that $\sum_{i=1}^n r_i = 1$. The \textbf{affine combination} $\sum_{i=1}^n r_i \ens_i$ is, if it exists, the ensemble $\ens[a] \in \Ens$ such that  $\sum_{i \in I} \frac{r_i}{r} \ens_i = \frac{1}{r} \ens[a] + \sum_{i \notin I} \frac{-r_i}{r} \ens_i$ where $I = \{ i \in [1,n] \, | \, r_i \geq 0 \}$ and $r = \sum_{i \in I} r_i$.
 \end{defn}
+
+\begin{check}
+	For the definition to work, we need to show that the affine combination can be re-expressed in terms of convex combinations. Note that the coefficients $r_i$ are not necessarily positive, but still sum to $1$. With the given definitions, $I$ includes exactly the indexes that are non-negative, and $r$ is the sum of all the non-negative coefficients. This means that $\frac{r_i}{r} \in [0,1]$ for all $i \in I$ and $\sum_{i \in I} \frac{r_i}{r}=1$. Therefore $\sum_{i \in I} \frac{r_i}{r} \ens_i$ is a convex combination and it is always well-defined. Additionally, we have that $\sum_{i \in I} r_i = 1 - \sum_{i \notin I} r_i$, which means $\frac{-r_i}{r - 1} \in [0,1]$ for all $i \notin I$ and $\sum_{i \in I} \frac{-r_i}{r-1}=1$. Therefore $\sum_{i \in I} \frac{-r_i}{r-1} \ens_i$ is a convex combination and it is always well-defined. Note that $\ens[a]$ is defined to be such that $\sum_{i \in I} \frac{r_i}{r} \ens_i = \frac{1}{r} \ens[a] + \frac{r-1}{r}\sum_{i \notin I} \frac{-r_i}{r-1} \ens_i$. If it exists, it is unique.
+\end{check}	
 
 \begin{remark}
 	In the same way that not all infinite convex combinations yield valid ensembles, not all finite or infinite affine combinations yield valid ensembles.
 \end{remark}
+\end{mathSection}
 
+
+\subsection{Vector space embedding}
+
+It is still an open question whether the ensemble space embeds continuously in a topological vector space, and whether the topological vector space would have to be a locally convex.
+
+\begin{mathSection}
 \begin{conj}\label{pm_es_ensemblesAreTVS}
 	An ensemble space embeds continuously in a topological vector space.
 \end{conj}
 
 \begin{remark}
-	It is still an open question whether the ambient vector space must be a topological vector space. Axioms of ensemble and mixture are not enough to guarantee the topological nature of the vector space. See \href{https://math.stackexchange.com/questions/4921905/cancellative-convex-spaces-and-topological-vector-spaces}{this post}. The issue is that we have no guarantee of continuity on the inverse (i.e. subtraction, multiplication by a negative number). As it is shown later, the entropy provides a pseudo-distance, which allows one to create open balls. Moreover, the entropy induces a metric tensor, which may induce a suitable topology.
+	Axioms of ensemble and mixture are not enough to guarantee the topological nature of the vector space. See \href{https://math.stackexchange.com/questions/4921905/cancellative-convex-spaces-and-topological-vector-spaces}{this post}. The issue is that we have no guarantee of continuity on the inverse (i.e. subtraction, multiplication by a negative number). As it is shown later, the entropy provides a pseudo-distance, which allows one to create open balls. Moreover, the entropy induces a metric tensor, which may induce a suitable topology.
 \end{remark}
-
 \end{mathSection}
 
 \subsubsection{Self-mixtures}
@@ -2321,13 +2331,6 @@ Here we try to construct better definitions for separability of sets to generali
 The idea is to actually construct the affine space through the notion of differences.
 
 \begin{mathSection}
-\begin{defn}[Affine combinations]
-	Let $\{\ens_i\}_{i=1}^n \subseteq \Ens$ be a finite sequence of ensembles and $\{r_i\}_{i=1}^n \subseteq \mathbb{R}$ be a finite sequence of coefficients such that $\sum_{i=1}^n r_i = 1$. The \textbf{affine combination} $\sum_{i=1}^n r_i \ens_i$ is, if it exists, the ensemble $\ens[a] \in \Ens$ such that  $\sum_{i \in I} \frac{r_i}{r} \ens_i = \frac{1}{r} \ens[a] + \sum_{i \notin I} \frac{-r_i}{r} \ens_i$ where $I = \{ i \in [1,n] \, | \, r_i \geq 0 \}$ and $r = \sum_{i \in I} r_i$.
-\end{defn}
-
-\begin{proof}
-	For the definition to work, we need to show that the affine combination can be re-expressed in terms of convex combinations. Note that the coefficients $r_i$ are not necessarily positive, but still sum to $1$. With the given definitions, $I$ includes exactly the indexes that are non-negative, and $r$ is the sum of all the non-negative coefficients. This means that $\frac{r_i}{r} \in [0,1]$ for all $i \in I$ and $\sum_{i \in I} \frac{r_i}{r}=1$. Therefore $\sum_{i \in I} \frac{r_i}{r} \ens_i$ is a convex combination and it is always well-defined. Additionally, we have that $\sum_{i \in I} r_i = 1 - \sum_{i \notin I} r_i$, which means $\frac{-r_i}{r - 1} \in [0,1]$ for all $i \notin I$ and $\sum_{i \in I} \frac{-r_i}{r-1}=1$. Therefore $\sum_{i \in I} \frac{-r_i}{r-1} \ens_i$ is a convex combination and it is always well-defined. Note that $\ens[a]$ is defined to be such that $\sum_{i \in I} \frac{r_i}{r} \ens_i = \frac{1}{r} \ens[a] + \frac{r-1}{r}\sum_{i \notin I} \frac{-r_i}{r-1} \ens_i$. If it exists, it is unique.
-\end{proof}
 
 \begin{defn}
 	An \textbf{interior point} of an ensemble space is an ensemble $\ens \in \Ens$ such that for every $\ens[a] \in \Ens$ there exists $\ens[b] \in \Ens$ and $p \in (0,1)$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$. 
