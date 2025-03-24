@@ -148,7 +148,7 @@ The fact that we start from ensembles and recover the probability of outcomes, i
 
 \begin{mathSection}
 	\begin{axiom}[Axiom of ensemble] 
-		The state of a system is represented by an \textbf{ensemble}, which represents all possible preparations of equivalent systems prepared according to the same procedure. The set of all possible ensembles for a particular system is an \textbf{ensemble space}. Formally, an ensemble space is a $T_0$ second countable topological space where each element is called an ensemble.
+		The state of a system is given by an \textbf{ensemble}, which represents all possible preparations of equivalent systems prepared according to the same procedure. The set of all possible ensembles for a particular system is an \textbf{ensemble space}. Formally, an ensemble space is a $T_0$ second countable topological space where each element is called an ensemble.
 	\end{axiom}
 	
 	\begin{justification}
@@ -188,7 +188,7 @@ The second property of ensembles is that they can be mixed. That is, we can take
 		\item \textbf{Identity}: $1 \ens[a] + 0 \ens[b] = \ens[a]$
 		\item \textbf{Idempotence}:  $p \ens[a] + \bar{p} \ens[a] = \ens[a]$ for all $p \in [0,1]$
 		\item \textbf{Commutativity}: $p \ens[a] + \bar{p} \ens[b] = \bar{p} \ens[b] + p \ens[a]$ for all $p \in [0,1]$
-		\item \textbf{Associativity}: $p_1 \ens_1 + \bar{p}_1\left(\overline{\left(\frac{p_3}{\bar{p}_1}\right)}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) =  \bar{p}_3\left(\frac{p_1}{\bar{p}_3} \ens_1 +  \overline{\left(\frac{p_1}{\bar{p}_3}\right)}\ens_2\right) + p_3 \ens_3$ where $p_1 + p_3 \leq 1$
+		\item \textbf{Associativity}: $p_1 \ens_1 + \bar{p}_1\left(\frac{1-p_1-p_3}{\bar{p}_1}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) =  \bar{p}_3\left(\frac{p_1}{\bar{p}_3} \ens_1 +  \frac{1-p_1-p_3}{\bar{p}_3}\ens_2\right) + p_3 \ens_3$ where $p_1 + p_3 \leq 1$
 	\end{itemize}
 \end{axiom}
 
@@ -200,12 +200,6 @@ The second property of ensembles is that they can be mixed. That is, we can take
 	If $p=1$, the output of $P$ will always be the output of $P_1$. This justifies the identity property. If $P_1$ and $P_2$ are the same process, then the output of $P$ will always be the output of $P_1$. This justifies the idempotence property. The order in which the processes are given does not matter as long as the same probability is matched to the same process. The process $P$ is identical under permutation of $P_1$ and $P_2$. This justifies commutativity. If we are mixing three processes $P_1$, $P_2$ and $P_3$, as long as the final probabilities are the same, it does not matter if we mix $P_1$ and $P_2$ first or $P_2$ and $P_3$. This justifies associativity.
 \end{justification}
 
-\begin{remark}
-	Given commutativity and associativity, we can write $p_1 \ens[e]_1 + p_2 \ens[e]_2 + p_3 \ens_3$ where $p_2 = \bar{p}_1\overline{\left(\frac{p_3}{\bar{p}_1}\right)} = (1 - p_1)\left(1 - \frac{p_3}{1-p_1}\right) = 1 - p_1 - p_3 = (1 - p_3)\left(1 - \frac{p_1}{1-p_3}\right) = \bar{p}_3\overline{\left(\frac{p_1}{\bar{p}_3}\right)} = \overline{\left(p_1 + p_3\right)}$.
-	
-	We also extend the notation to mixtures of arbitrarily many elements $\sum_{i=1}^n p_i \ens_i$ where $\sum_{i=1}^n p_i = 1$ with the following caveat. The mixture is guaranteed to exist only when we are mixing finitely many elements. Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in the ensemble space is determined by the topology (i.e. experimental verifiability). The strategy will be to work with only finite convex combinations and let the closure of the topology handle the limits.
-\end{remark}
-
 \begin{coro}
 	An ensemble space is a convex space.
 \end{coro}
@@ -216,8 +210,6 @@ The second property of ensembles is that they can be mixed. That is, we can take
 
 \end{mathSection}
 
-TODO: in the previous math section, show how when rearranging convex combinations, you can essentially only look at one side, and the other side will always "fix itself."
-
 We should now check that the axiom of mixture is satisfied by the standard cases.
 
 \begin{mathSection}
@@ -226,18 +218,64 @@ We should now check that the axiom of mixture is satisfied by the standard cases
 \end{prop}
 
 \begin{proof}
-	The space $\Ens$ of probability measures, discrete or continuous, is a convex subset of the vector space of signed finite measures. It is therefore closed under convex combinations: if $\{e_i\} \subseteq \Ens$ are probability measures, then $\sum_i p_i \ens_i$ with $\sum_i p_i = 1$ and $p_i \geq 0$ is a probability measure. The properties of mixing are inherited from the properties of linear combinations. Therefore the discrete and continuous classical ensemble spaces satisfy the axiom of mixture.
+	The space $\Ens$ of probability measures, discrete or continuous, is a convex subset of the vector space of signed finite measures. It is therefore closed under convex combinations: if $\ens[a], \ens[b] \subseteq \Ens$ are probability measures, then $p \ens[a] + \bar{p} \ens[b]$ is a probability measure. The properties of mixing are inherited from the properties of linear combinations. Therefore the discrete and continuous classical ensemble spaces satisfy the axiom of mixture.
 	
 	Similarly, the space of positive semi-definite self-adjoint operators with trace one is a convex subset of the vector space of self-adjoint operators. Therefore it is closed under convex combinations and it will satisfy the axiom of mixture.
 \end{proof}
 \end{mathSection}
+
+\subsection{Finite and infinite mixtures}
+
+We can always extend the notion of mixture to a finite convex combination. Commutativity and associativity makes these mixture independent from the mixing order.
+
+\begin{defn}[Finite mixture]
+	Let $\{e_i\}_{i=1}^{n} \subseteq \Ens$ be a finite subset of ensembles and $\{p_i\} \in [0,1]$ be a finite set of coefficients such that $\sum_{i=1}^{n} p_i = 1$, then the finite mixture, noted $\ens[a] = \sum_{i=1}^{n} p_i \ens_i$, is defined to be
+	$$p_1 \ens_1 + (1-p_1)\left( \tfrac{p_2}{1-p_1} \ens_2 + \tfrac{1-p_1-p_2}{1-p_1} \left( \tfrac{p_3}{1-p_1-p_2} \ens_3 + \tfrac{1-p_1-p_2-p_3}{1-p_1-p_2}\left(\ldots+\left(\tfrac{p_{n-1}}{1- p_1 + \ldots + p_{n-1}} \ens_{n-1} + \tfrac{p_n}{1- p_1 + \ldots + p_{n-1}}\ens_n\right)\right) \right) \right).$$
+\end{defn}
+
+\begin{check}
+	For the definition to work, we need to make sure that the final ensemble does not depend on the order of mixing. We first check with three elements. Let $p_1, p_2, p_3 \in [0,1]$ with $p_1+p_2+p_3=1$. By commutativity, we can switch the second with the third element:
+	\begin{equation}
+	\begin{aligned}
+		p_1 \ens[e]_1 + p_2 \ens[e]_2 + p_3 \ens_3 &= p_1 \ens_1 + \bar{p}_1\left(\frac{p_2}{\bar{p}_1}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) = p_1 \ens_1 + \bar{p}_1\left(\frac{p_3}{\bar{p}_1} \ens_3 +  \frac{p_2}{\bar{p}_1}\ens_2\right) \\
+		&= p_1 \ens[e]_1 + p_3 \ens[e]_3 + p_2 \ens_2.
+	\end{aligned}
+	\end{equation}
+	
+	Then, by commutativity and associativity, we can switch the first with the third element:
+	\begin{equation}
+		\begin{aligned}
+	 p_1 \ens[e]_1 + p_2 \ens[e]_2 + p_3 \ens_3 &= p_1 \ens_1 + \bar{p}_1\left(\frac{p_2}{\bar{p}_1}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) = p_1 \ens_1 + \bar{p}_1\left(\frac{1-p_1-p_3}{\bar{p}_1}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) \\
+	 &= \bar{p}_3\left(\frac{p_1}{\bar{p}_3} \ens_1 + \frac{1-p_1-p_3}{\bar{p}_3}\ens_2\right) + p_3 \ens_3 = p_3 \ens_3 + \bar{p}_3\left(\frac{p_1}{\bar{p}_3} \ens_1 + \frac{p_2}{\bar{p}_3}\ens_2\right) \\
+	 &= p_3 \ens[e]_3 + p_2 \ens[e]_2 + p_1 \ens_1.
+		\end{aligned}
+	\end{equation}
+	Since switching the first with the second is equivalent to switching the second with the third and the third with the first, we can reach all permutations.
+	
+	Note that the definition is recursive, therefore we can use prove by induction. The base case is a sequence of two elements. By commutativity, the order does not matter. Given a sequence of $n$ elements, the inductive hypothesis is that the order does not matter for the last $n-1$ element. To prove induction, then, it suffices to show that we can switch the first and the second element. Note that we can sum the last $n-2$ elements, thus converting this to a problem of three elements. We proved before that we can switch the first with the second element, and we can now re-expand the third element into the full sequence. Therefore, the order of mixing does not matter for any finite mixture. 
+	
+	We also extend the notation to mixtures of arbitrarily many elements $\sum_{i=1}^n p_i \ens_i$ where $\sum_{i=1}^n p_i = 1$ with the following caveat. The mixture is guaranteed to exist only when we are mixing finitely many elements. Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in the ensemble space is determined by the topology (i.e. experimental verifiability). The strategy will be to work with only finite convex combinations and let the closure of the topology handle the limits.
+\end{check}
+
+\begin{remark}
+	Note that we can collect and expand convex combination into other convex combinations. Because coefficients always sum to one, we can always calculate the new coefficients from one side. For example, $p_a \ens[a] + p_b \ens[b] + p_c \ens[c] + p_d \ens[d] = p(\frac{p_a}{p} \ens[a] + \frac{p_b}{p} \ens[b]) + \bar{p}(\frac{p_c}{\bar{p}} \ens[c] + \frac{p_d}{\bar{p}} \ens[d])$ where $p = p_a + p_b$ is defined only on the left part. Since $1 = p + \bar{p} = p_a +p_b + p_c + p_d$, $\bar{p} = p_c + p_d$.
+\end{remark}
+
+The topology also allows us to extend the notion to infinite mixtures. Not all infinite mixtures will be allows, and it is the topology that will tell us which series are going to converge or not.
+
+\begin{defn}[Infinite mixture]
+	Let $\{e_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\} \in [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$, then the ensemble $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$ is, if it exists, the limit of sequence of finite mixtures $\lim\limits_{n\to\infty} \sum_{i=1}^{n} p_i \ens_i$.
+\end{defn}
+
+\begin{conj}[Convergence of submixtures]
+	All the submixtures of an infinite mixture converge. That is, if $\sum_{i=1}^{\infty} p_i \ens_i$ convergence, then $\sum_{i \in I} p_i \ens_i$ for all $I \subseteq \mathbb{N}$.
+\end{conj}
 
 \subsection{Common components and separateness}
 
 The convex structure allows us to characterize ensembles based on whether they can be mixed into one another. For example, we can ask whether an ensemble is or is not the mixture of some other ensembles; whether two ensembles can be expressed as a mixture of a common component.
 
 \begin{mathSection}
-
 \begin{defn}
 	Let $\Ens$ be an ensemble space. Let $\ens[a] = \sum_i p_i \ens_i$ where $\ens[a], \ens_i \in \Ens$ and $p_i \in (0,1]$ such that $\sum_i p_i = 1$. We say that $\ens[a]$ is a \textbf{mixture} of $\{\ens_i\}$, each $\ens_i$ is a \textbf{component} of $\ens[a]$ and each $p_i$ is a \textbf{mixture coefficient}.
 \end{defn}
