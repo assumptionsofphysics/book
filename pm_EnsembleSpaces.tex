@@ -230,7 +230,7 @@ We can always extend the notion of mixture to a finite convex combination. Commu
 
 \begin{defn}[Finite mixture]
 	Let $\{e_i\}_{i=1}^{n} \subseteq \Ens$ be a finite subset of ensembles and $\{p_i\} \in [0,1]$ be a finite set of coefficients such that $\sum_{i=1}^{n} p_i = 1$, then the finite mixture, noted $\ens[a] = \sum_{i=1}^{n} p_i \ens_i$, is defined to be
-	$$p_1 \ens_1 + (1-p_1)\left( \tfrac{p_2}{1-p_1} \ens_2 + \tfrac{1-p_1-p_2}{1-p_1} \left( \tfrac{p_3}{1-p_1-p_2} \ens_3 + \tfrac{1-p_1-p_2-p_3}{1-p_1-p_2}\left(\ldots+\left(\tfrac{p_{n-1}}{1- p_1 + \ldots + p_{n-1}} \ens_{n-1} + \tfrac{p_n}{1- p_1 + \ldots + p_{n-1}}\ens_n\right)\right) \right) \right).$$
+	$$p_1 \ens_1 + (1-p_1)\left( \tfrac{p_2}{1-p_1} \ens_2 + \tfrac{1-p_1-p_2}{1-p_1} \left( \tfrac{p_3}{1-p_1-p_2} \ens_3 +  \tfrac{1-\sum_{i=1}^{3}p_i}{1-p_1-p_2}\left(\ldots+\tfrac{1-\sum_{i=1}^{n-1}p_i}{1-\sum_{i=1}^{n-2}p_i}\left(\tfrac{p_{n-1}}{1- \sum_{i=1}^{n-1}p_i} \ens_{n-1} + \tfrac{p_n}{1- \sum_{i=1}^{n-1}p_i}\ens_n\right)\right) \right) \right).$$
 \end{defn}
 
 \begin{check}
@@ -252,16 +252,16 @@ We can always extend the notion of mixture to a finite convex combination. Commu
 	\end{equation}
 	Since switching the first with the second is equivalent to switching the second with the third and the third with the first, we can reach all permutations.
 	
-	Note that the definition is recursive, therefore we can use prove by induction. The base case is a sequence of two elements. By commutativity, the order does not matter. Given a sequence of $n$ elements, the inductive hypothesis is that the order does not matter for the last $n-1$ element. To prove induction, then, it suffices to show that we can switch the first and the second element. Note that we can sum the last $n-2$ elements, thus converting this to a problem of three elements. We proved before that we can switch the first with the second element, and we can now re-expand the third element into the full sequence. Therefore, the order of mixing does not matter for any finite mixture. 
-	
-	We also extend the notation to mixtures of arbitrarily many elements $\sum_{i=1}^n p_i \ens_i$ where $\sum_{i=1}^n p_i = 1$ with the following caveat. The mixture is guaranteed to exist only when we are mixing finitely many elements. Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in the ensemble space is determined by the topology (i.e. experimental verifiability). The strategy will be to work with only finite convex combinations and let the closure of the topology handle the limits.
+	Note that the definition is recursive, therefore we can use proof by induction. The base case is a sequence of two elements. By commutativity, the order does not matter. Given a sequence of $n$ elements, the inductive hypothesis is that the order does not matter for the last $n-1$ elements. Therefore, it suffices to show that we can switch the first and the second element. Note that we can sum the last $n-2$ elements, thus converting this to a problem of three elements. We proved before that we can switch the first with the second element, and we can now re-expand the third element into the full sequence. Therefore, the order of mixing does not matter for any finite mixture. 
 \end{check}
 
 \begin{remark}
-	Note that we can collect and expand convex combination into other convex combinations. Because coefficients always sum to one, we can always calculate the new coefficients from one side. For example, $p_a \ens[a] + p_b \ens[b] + p_c \ens[c] + p_d \ens[d] = p(\frac{p_a}{p} \ens[a] + \frac{p_b}{p} \ens[b]) + \bar{p}(\frac{p_c}{\bar{p}} \ens[c] + \frac{p_d}{\bar{p}} \ens[d])$ where $p = p_a + p_b$ is defined only on the left part. Since $1 = p + \bar{p} = p_a +p_b + p_c + p_d$, $\bar{p} = p_c + p_d$.
+	Note that we can collect and expand convex combination into other convex combinations. Because coefficients always sum to one, when breaking the expression in two, we can always calculate the new coefficients from one part. For example, $p_a \ens[a] + p_b \ens[b] + p_c \ens[c] + p_d \ens[d] = p(\frac{p_a}{p} \ens[a] + \frac{p_b}{p} \ens[b]) + \bar{p}(\frac{p_c}{\bar{p}} \ens[c] + \frac{p_d}{\bar{p}} \ens[d])$ where $p = p_a + p_b$ is defined only on the left part. Since $1 = p + \bar{p} = p_a +p_b + p_c + p_d$, we automatically have that $\bar{p} = p_c + p_d$.
 \end{remark}
 
-The topology also allows us to extend the notion to infinite mixtures. Not all infinite mixtures will be allows, and it is the topology that will tell us which series are going to converge or not.
+While mixtures of finitely many elements are always guaranteed to exist, the extension to mixture of infinite elements is not. First of all, an infinite mixture of ensembles with finite entropy \href{https://arxiv.org/pdf/1212.5630}{does not necessarily have finite entropy}. Secondly, it may lead to infinite expectation values which make ensembles not physically meaningful. For example, suppose we put $i$ particles in a box according to the distribution $\frac{6}{\pi^2 i^2}$ given that $\sum_{i=1}^{\infty} \frac{6}{\pi^2 i^2}=1$. The expectation $\sum_{i=1}^{\infty} \frac{6}{\pi^2 i^2} i$ diverges. Given that every finite preparation will have a finite expectation value, the actual implementation of that ensembles will necessarily give us a stream of preparations whose number of particle must keep increasing. No finite statistics is representative of the ensemble and, worst of all, the finite statistics will necessarily have arbitrarily large differences. We therefore cannot simply look at the coefficients to understand whether the infinite mixture gives us a valid ensemble or not.
+
+Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in the ensemble space is determined by the topology (i.e. experimental verifiability). The strategy will be to work with only finite convex combinations and let the closure of the topology handle the limits.
 
 \begin{defn}[Infinite mixture]
 	Let $\{e_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\} \in [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$, then the ensemble $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$ is, if it exists, the limit of sequence of finite mixtures $\lim\limits_{n\to\infty} \sum_{i=1}^{n} p_i \ens_i$.
@@ -664,7 +664,7 @@ As we did for separateness, we extend the notion of orthogonality to sets of ens
 
 \section{Affine combinations and vector space embedding}
 
-The bounds on the entropy not only constrain the functional form of the entropy, but it also constrains the type of convex space, ruling out some that would be physically pathological.
+The bounds on the entropy not only constrain the functional form of the entropy, but they also constrain the type of convex space, ruling out some that would be physically pathological.
 
 First of all, the bounds make it possible to define a unique inverse for statistical mixture. This allows us to define affine combinations, and to show that the ensemble space is embedded into a vector space. Lastly, the bounds will force this embedding to be into a subset of a bounded set of the vector space.
 
@@ -785,7 +785,7 @@ In order to keep a physically grounded picture, we will construct the vector spa
 	\caption{This picture represents the motivation of the definition of the operations on the space of differences.}
 \end{figure}
 
-We take an ensemble $\ens[a]$ to be a reference, the origin. For any other ensemble $\ens[b]$, we imagine the change from $\ens[a]$ to $\ens[b]$ as the arrow that connects them, as the difference $(\ens[b] - \ens[a])$. The inverse of that difference would find an ensemble $\ens[c]$ in the opposite direction. Note that $\ens[a]$ now sits exactly in between $\ens[b]$ and $\ens[c]$, and therefore $\ens[a] = \frac{1}{2}\ens[b] + \frac{1}{2}\ens[c]$ if and only if $(\ens[b] - \ens[a]) = - (\ens[c]- \ens[a])$. That is, relationship between vectors are re-expressed as convex combinations of ensembles.
+We take an ensemble $\ens[a]$ to be a reference, the origin. For any other ensemble $\ens[b]$, we imagine the change from $\ens[a]$ to $\ens[b]$ as the arrow the connects the first to the second. This is the ensemble difference $(\ens[b] - \ens[a])$. The inverse of that difference would find an ensemble $\ens[c]$ in the opposite direction. Note that $\ens[a]$ now sits exactly in between $\ens[b]$ and $\ens[c]$, and therefore $\ens[a] = \frac{1}{2}\ens[b] + \frac{1}{2}\ens[c]$ if and only if $(\ens[b] - \ens[a]) = - (\ens[c]- \ens[a])$. That is, relationship between vectors are re-expressed as convex combinations of ensembles.
 
 Similarly, we can now stretch or shrink difference by a factor. For example, multiplying the difference by a third will give us the ensemble that it's at a third between $\ens[a]$ and $\ens[b]$. Similarly, we can add differences. For example, $\frac{1}{2}(\ens[b] - \ens[a]) + \frac{1}{2}(\ens[c] - \ens[a])$ will give us the difference $\left(\left(\frac{1}{2}\ens[b] + \frac{1}{2}\ens[c]\right) - \ens[a]\right)$. In other words, the difference with the midpoint between $\ens[b]$ and $\ens[c]$. Note that if we double that difference, we obtain the parallelogram law for vector addition.
 
@@ -938,7 +938,7 @@ While the motivation is straight-forward, the construction is complicated by the
 				&= \left[\left(\left(r\ens[b] + s \ens[c] \right) - \ens[a]\right)\right].
 			\end{aligned}
 		\end{equation}
-		If we apply recursively, we have $\sum_{i=1}^{n} r_i [(\ens_i - \ens[a])] = \left[\left(\left(\sum_{i=1}^{n}r_i \ens_i\right) - \ens[a]\right)\right]$. TFherefore $\sum_{i=1}^n r_i \iota(\ens_i) = \iota\left(\sum_{i=1}^n r_i \ens_i \right)$.
+		If we apply recursively, we have $\sum_{i=1}^{n} r_i [(\ens_i - \ens[a])] = \left[\left(\left(\sum_{i=1}^{n}r_i \ens_i\right) - \ens[a]\right)\right]$. Therefore $\sum_{i=1}^n r_i \iota(\ens_i) = \iota\left(\sum_{i=1}^n r_i \ens_i \right)$.
 	\end{proof}
 	
 	\begin{prop}
@@ -993,7 +993,7 @@ Another constraint that the entropy imposes is that every affine direction is bo
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\textwidth]{tempimages/BoundedEnsembleSpace.jpg}
-	\caption{$\Ens$ is the ensemble space and $V$ is the embedding vector space. Taking two ensembles, the dashed line represents all the affine combinations. Those that are in the ensemble space are a line, as defined below.}
+	\caption{$\Ens$ is the ensemble space and $V$ is the embedding vector space. Any affine line, like the dashed one in the picture, will intersect $\Ens$ over a finite range limited by the two elements $a$ and $b$ of the vector space (but not necessarily of the ensemble space).}
 \end{figure}
 
 \begin{mathSection}
@@ -1138,7 +1138,13 @@ The first observation is that the entropy can be used to define a pseudo-distanc
 	
 	The lack of the triangle inequality also makes it difficult to show that the topology is Hausdorff. The mixing entropy, in fact, allows us to create open balls around each point. These open balls will shrink to each point as the radius goes to zero. However, one typically uses the triangle inequality to show that the open balls, at some point, become disjoint.
 \end{remark}
+
+\begin{conj}
+	The mixing entropy is the square of a distance function.
+\end{conj}
 \end{mathSection}
+
+Though the mixing entropy is not a distance function, we can still show that, like a distance, it decreases as one ensemble approaches another. While a topological space has no notion of closeness, in a convex space a mixture of $\ens[a]$ and $\ens[b]$ is closer to $\ens[a]$ than $\ens[b]$. This allows to create a notion of open balls around each point.
 
 \begin{prop}
 	Let $\ens[a], \ens[b] \in \Ens$. Then $MS(\ens[a], \ens[b]) \geq MS(\ens[a], p\ens[a]+\bar{p}\ens[b])$ with the equality holding if and only if $p=0$.
@@ -1205,6 +1211,18 @@ The first observation is that the entropy can be used to define a pseudo-distanc
 	Since both the entropy and the mixing operation are continuous, the mixing entropy is also continuous. An entropic open ball is the reverse image of an open set through a continuous function and it is therefore an open set.
 \end{proof}
 
+The entropic open balls generate a topology. It is an open question whether the open balls generate the topology of the ensemble space. It is also an open question whether this topology makes the ensemble space embed continuously into a topological vector space.
+
+\begin{conj}
+	The topology of the ensemble space is generated by the entropic open balls.
+\end{conj}
+
+\begin{remark}
+	Note that all entropic open balls are open sets in the topology, since the mixing entropy is a continuous function. It suffices to prove that all open sets can be generated by generated by open balls.
+	
+	The next proposition shows that for each point in a open set and a line that goes through that point we can find a mixing entropy such that every element with a mixing entropy lower than that value is in the open set. That is, we can find an open ball along each direction that is contained by the opens set. However, it is not clear whether this can be done along all directions at once.
+\end{remark}
+
 \begin{prop}
 	Let $U \subseteq \Ens$ be an open set. Let $\ens[a] \in U$ and $L \subseteq \Ens$ be a line containing $\ens[a]$. Then there is an $r \in (0,1]$ such that for all $\ens \in L$ such that $MS(\ens[a], \ens) < r$ we have $\ens \in U$.
 \end{prop}
@@ -1215,23 +1233,17 @@ The first observation is that the entropy can be used to define a pseudo-distanc
 	If $\ens[a]$ is an extreme point of $L$ (i.e. there is no $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$), then we are done. If $\ens[a]$ is not an extreme point, then we can find $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$. Repeat the previous procedure with $\ens[d]$ to find another $r'$ and the $t$ be the minimum between the two. Then we have that $t \in (0,1]$ such that for all $\ens \in L$ such that such that $MS(\ens[a], \ens) < r$, $\ens \in U$.
 \end{proof}
 
-\begin{prop}
+\begin{conj}
 	Let $U \subseteq \Ens$ be an open set and $\ens[a] \in U$. Then we there exists an $r \in (0,1]$ such that $B_r(\ens[a]) \subseteq U$.
-\end{prop}
+\end{conj}
 
-\begin{proof}
-	Let $r_{\ens[a]}(L)$ be the map that, for every line $L$ such that $\ens[a] \in L$, returns an $r \in (0,1]$ such that for all $\ens \in L$ such that $MS(\ens[a], \ens) < r$ we have $\ens \in U$. Let $r$ be the minimum value ... TODO: no minimum?
-\end{proof}
+\begin{remark}
+	If this were true, than the topology is generated by the open balls
+\end{remark}
 
-\begin{prop}
-	The topology of the ensemble space is generated by the entropic open balls.
-\end{prop}
-
-\begin{proof}
-	Note that all entropic open balls are open sets in the topology, since the mixing entropy is a continuous function. It suffices to prove that all open sets can be generated by generated by open balls.
-	
-	Let us show that, given an open set $U \subseteq \Ens$ and an ensemble $\ens \in U$ we can always find an $r \in [0,1]$ such that $B_r(\ens) \subset U$. Pick a second point $\ens[a] \in U$. Let $A \subset U$ be the line that contains them.  and consider the line 
-\end{proof}
+\begin{conj}
+	The topology generated by the open balls and extended to the embedding vector space endows the vector space with a topology that is continuous with respect to addition and scalar multiplication. Therefore an ensemble embeds continuously into a topological vector space.
+\end{conj}
 
 \subsection{Entropic metric}
 
@@ -1426,6 +1438,10 @@ TODO: add a note/proof for the discrete version
 	\end{equation}
 	which recovers the RLD Fisher information.
 \end{proof}
+
+\begin{remark}
+	The feedback we received on the above derivation is contradictory, as some says we are handling the possible non-commutativity between $\rho$ and its variation $\delta \rho$ correctly and others say we aren't. Note that in all steps we are using the cyclical nature of the trace, and not commuting $\rho$ and its variation $\delta \rho$.
+\end{remark}
 
 \begin{remark}
 	Note that these results relate also to the \href{https://en.wikipedia.org/wiki/Ruppeiner_geometry}{Ruppeiner metric}, which is the Hessian of the entropy. They also relate to the Hessian metric as described in  \href{https://web.osu.cz/~Zusmanovich/seminar/2017/wolak/ostrava-11-17-hessian-pdf.pdf}{Hessian structures} \href{https://link.springer.com/chapter/10.1007/978-3-642-40020-9_4}{1}.
