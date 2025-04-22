@@ -2105,14 +2105,14 @@ However, given a maximal set of commuting observables, we can define a classical
 
 \section{Statistical properties and quantities}
 
-Given our ensembles first approach, we define statistical quantities as linear functions of ensembles. The idea is that a statistical quantity represents an expectation over ensembles. The possible value of the quantities will need to be recovered with constructions that mimic spectral theory, though we will not want to talk about eigenstates and eigenvalues in the general case since these are not properly defined for a continuous quantity.
+Given our ensembles first approach, we define statistical quantities as affine (linear) functions of ensembles. The idea is that a statistical quantity represents an expectation over ensembles. The possible value of the quantities will need to be recovered with constructions that mimic spectral theory, though we will not want to talk about eigenstates and eigenvalues in the general case since these are not properly defined for a continuous quantity.
 
 \subsection{Properties and quantities}
 
-These definitions extend the notion of properties and quantities that we defined for an experimental domain. In that case, we simply required that a property we a continuous map to a set of possible values for the property. For a statistical property, the set of values are a topological convex space, so that the property allows statistical mixing. For a quantity is simply a linearly ordered property, which in this case will always be a real valued quantity. The convexity, the averaging operation, fills in the gaps in the linear order in case that not all intermediate values can be obtained.
+These definitions extend the notion of properties and quantities that we defined for an experimental domain. In that case, we simply required that a property be a continuous map to a set of possible values for the property. For a statistical property, the set of values are a topological convex space, so that the property allows statistical mixing. For a quantity, the topological convex space is simply a linearly ordered property, which in this case will always be a real valued quantity. The convexity, the averaging operation, fills in the gaps in the linear order in case that not all intermediate values can be obtained.
 
 \begin{defn}
-	A \textbf{statistical property}, or simply property, is an attribute that allows statistical handling. Formally, it is a continuous map $F : \Ens \to \mathcal{Q}$ where $\mathcal{Q}$ is a convex topological space such that $F(p \ens_1 + \bar{p} \ens_2) = p F(\ens_1) + \bar{p} F(\ens_2)$.
+	A \textbf{statistical property}, or simply property, is an attribute that allows statistical mixing. Formally, it is a continuous map $F : \Ens \to \mathcal{Q}$ where $\mathcal{Q}$ is a convex topological space such that $F(p \ens_1 + \bar{p} \ens_2) = p F(\ens_1) + \bar{p} F(\ens_2)$.
 	
 	A \textbf{statistical quantity}, or statistical variable, or simply variable, is a numerical statistical property. That is, it is a continuous linear real valued operator $F : \Ens \to \mathbb{R}$.
 \end{defn}
@@ -2120,7 +2120,7 @@ These definitions extend the notion of properties and quantities that we defined
 \begin{justification}
 	This definition extends the general definition of properties and quantities we already gave to the statistical case. As before, continuity is required since verifying the value of the quantity corresponds to verifying that we are dealing with a specific subset of ensembles.
 	
-	The ability to create convex combinations corresponds to the ability to create statistical averages. Therefore $\mathcal{Q}$ must be a convex set. Given that preparations are assumed to be independent, the a mixture of the preparation will produce a mixture of the properties according to the same fractions. 
+	The ability to create convex combinations corresponds to the ability to create statistical averages. Therefore $\mathcal{Q}$ must be a convex set. Given that preparation instances are assumed to be independent, a mixture of the preparation will produce a mixture of the properties according to the same fraction coefficients.
 	
 	Quantities are simply properties that are linearly ordered. The ability to create convex combinations becomes the ability to take weighted averages of the quantities. Regardless of whether one starts from integers, rationals or real valued quantities, the statistical averages will, in general, be a real number.
 	
@@ -2170,18 +2170,41 @@ A common case is when all ensembles are identifiable by a set of statistical var
 \end{prop}
 
 \begin{proof}
-	Let $F$ be a variable on $\Ens$ and let $V$ be the vector space that embeds $\Ens$. Extend $F$ on $V$ such that $F(a\ens) = |a| F(\ens)$. Then, according to the definition given after 1.1 in \url{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf} $F$ is a semi-norm.
+	Let $F$ be a variable on $\Ens$, let $\ens[a] \in \Ens$ an interior point and and let $V_{\ens[a]}$ be the vector space of differences. Define $F_{\ens[a]} : V_{\ens[a]} \to \mathbb{R}$ such that $F_{\ens[a]}([r(\ens[b]-\ens[a])]) = |r (F(\ens[b]) - F(\ens[a]))|$.
+	
+	First we show that $F_{\ens[a]}$ does not depend on the representative. If we have the zero class, then either $r=0$ or $\ens[b] = \ens[a]$. In both cases, the function evaluates to zero. For the non-zero class, we have
+	\begin{equation}
+		\begin{aligned}
+			F_{\ens[a]}\left(\left\{(r+j)\left(\left(\frac{r}{r+j}\ens[b] +\frac{j}{r+j} \ens[a]\right) -\ens[a]\right)\right\}\right) &= \left\{ \left|(r+j)\left(F\left(\frac{r}{r+j}\ens[b] +\frac{j}{r+j} \ens[a]\right) - F(\ens[a]) \right)\right| \right\} \\
+			&= \left\{ \left|(r+j)\left(\frac{r}{r+j}F(\ens[b]) +\frac{j}{r+j} F(\ens[a]) - F(\ens[a]) \right)\right| \right\} \\
+			&= \left\{ \left| r F(\ens[b]) + j F(\ens[a]) - (r+j) F(\ens[a]) \right| \right\} \\
+			&= \left\{|r (F(\ens[b]) - F(\ens[a]))|\right\}.
+		\end{aligned}
+	\end{equation}
+	
+	Since $F_{\ens[a]}$ evaluates to an absolute value, it is a non-negative function. Since $F_{\ens[a]}(r[s(\ens[b]-\ens[a])]) = F_{\ens[a]}([(rs)(\ens[b]-\ens[a])]) = |(rs) (F(\ens[b]) - F(\ens[a]))| = |r| |s (F(\ens[b]) - F(\ens[a]))| = |r| F_{\ens[a]}([s(\ens[b]-\ens[a])])$, $F_{\ens[a]}$ is absolutely homogeneous. We also have
+	\begin{equation}
+	\begin{aligned}
+		&F_{\ens[a]}([r(\ens[b]-\ens[a])] + [s(\ens[c]-\ens[a])])  \\
+		&= F_{\ens[a]}\left(\left[(r+s+k) \left(\left(\frac{r}{r+s+k}\ens[b] + \frac{s}{r+s+k} \ens[c] +\frac{k}{\alpha r+ \beta s+k} \ens[a] \right) - \ens[a]\right)\right]\right) \\
+		&= \left|(r+s+k)\left(F\left(\frac{r}{r+s+k}\ens[b] + \frac{s}{r+s+k} \ens[c] +\frac{k}{r+s+k} \ens[a]\right) - F(\ens[a]) \right)\right| \\
+		&= \left|r F(\ens[b]) + s F(\ens[c]) + k F(\ens[a]) - (r+s+k) F(\ens[a]) \right| \\
+		&= \left|r ( F(\ens[b]) - F(\ens[a]))  + s ( F(\ens[c]) - F(\ens[a])) \right| \\
+		&\leq \left| r ( F(\ens[b]) - F(\ens[a])) \right| + \left| s ( F(\ens[c]) - F(\ens[a])) \right| \\
+		&= F_{\ens[a]}([r(\ens[b]-\ens[a])]) + F_{\ens[a]}([s(\ens[c]-\ens[a])]).
+	\end{aligned}
+	\end{equation}
+	This means that $F_{\ens[a]}$ is sub-additive. Therefore $F_{\ens[a]}$ is a seminorm by \href{https://en.wikipedia.org/wiki/Seminorm}{definition}.
 \end{proof}
-
 
 \begin{prop}
 	A quantifiable ensemble space embeds continuously into a Hausdorff locally convex topological vector space.
 \end{prop}
 
 \begin{proof}
-	The topology of the ensemble space is generated by the statistical variables, which induce semi-norms on the ambient vector space. This means that the topology of the vector space is generated by a countable set of semi-norms, and is therefore a locally convex topological vector space. See Prop 2.2 in \url{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}.
+	The topology of the ensemble space is generated by the statistical variables, which induce semi-norms on the ambient vector space. This means that the topology of the vector space is generated by a countable set of semi-norms, and is therefore a locally convex topological vector space (see $\href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.2 in here}$).
 	
-	The statistical variables fully identify each ensemble, which means that, if two elements are different, one semi-norm will give a non-zero value for the distance function associated with it. This means that the topology is Hausdorff. See Prop 2.6 in \url{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}.
+	The statistical variables fully identify each ensemble, which means that, if two elements are different, one semi-norm will give a non-zero value for the distance function associated with it. This means that the topology is Hausdorff (see $\href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.6 in here}$).
 \end{proof}
 
 \begin{coro}
