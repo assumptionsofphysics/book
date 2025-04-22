@@ -2201,6 +2201,401 @@ The attempt was the following:
 
 \titledbreak{Experimental section}
 
+
+\section{Fraction capacity and probability}
+
+Having seen how the strict concavity of the entropy leads to geometric structures, we are going to see how mixing is responsible for the measure theoretic structures. In the same way we derived a geometric structure on the ensembles, we are going to first define a measure theoretic structure on the ensembles as well. This measure, the fraction capacity, will tell us how much of an ensemble can be seen as a mixture of a set of others. It is not additive in general, but subadditive.
+
+We are then going to find necessary and sufficient conditions for a subset of ensembles to form a classical probability context, so that each element can be understood as a classical probability measure over a set of cases, over the spectrum of the context. We will see that all classical ensemble spaces are classical probability contexts, while in quantum mechanics the set of mixed states that commutes with a complete set of commuting observables corresponds to a classical probability context.\footnote{In the future we will want to generalize the construction of the spectrum to the whole space.}
+
+\subsection{Topological measures}
+
+Before showing when and how the fraction capacity reduces to a standard probability measure, we need to find which requirements a measure must satisfy to describe a well-posed physical problem. The issue is that the set of all probability measures defined over a space is too broad. The problem is not yet fully understood, so we limit there are articulating some problems.
+
+If we restrict ourselves to the real line, given the Lebesgue measure $\mu$, \href{https://en.wikipedia.org/wiki/Lebesgue%27s_decomposition_theorem}{Lebesgue's decomposition theorem} assures us that every measure $\nu$ can be divided into these three components: an \href{https://en.wikipedia.org/wiki/Absolute_continuity#Absolute_continuity_of_measures}{absolutely continuous} part $\nu_{ac}$ with respect to the Lebesgue measure (i.e. $\nu_{ac}(U)=0$ for all sets $U$ for which $\mu(U)=0$), a pure point part $\nu_{pp}$ (i.e. there is a set of countable points $\{x_i\}$ such that $\nu_{pp}(\{x_i\}^{\complement})=0$) and a singular continuous part $\nu_{sc}$ (i.e. $\mu(\{x\})=0$ for all $x$ and there is a set $U$ such that $\mu(U)=0$ and $\nu_{sc}(U^{\complement})=0$).
+
+To make this more concrete, let us assume that we are working on phase space, $\mu$ is the Liouville measure, which in statistical mechanics quantifies the states in a region, and $p$ is a probability measure. If $p$ is absolutely continuous with respect to $\mu$, it means that if a region has no states, it will have zero probability. This is the requirement under which the \href{https://en.wikipedia.org/wiki/Radon%E2%80%93Nikodym_theorem}{Radon-Nikodym theorem} applies and a probability density $\frac{dp}{d\mu}$ exists. Without this requirement, for example, the entropy cannot even be defined. On physics grounds, this requirement makes a lot of sense. A pure point measure would correspond to the case where the probability is concentrated into a few isolated points. In physics, these are often represented with delta functions. There is an inherent unphysicality of these measures: if we really have a continuum, it would make no sense to say that we are are able to prepare an exact value with certainty. We are essentially saying that we are able to concentrate the whole distribution on a set that is not experimentally verifiable (i.e. it is a closed set with no interior) and contains no states (i.e. the Liouville measure is zero). Yet, there are some cases where the distribution is over real values, but only certain values are allowed. For example, the mass spectrum for particles or the energy spectrum for a bound quantum system can only take certain values. In this case, the Lebesgue measure is the one that is meaningless, because the region in between the allowed value contains no physically meaningful cases. A singular continuous measure may be something physically irrelevant, like the \href{https://en.wikipedia.org/wiki/Cantor_distribution}{Cantor distribution} which is defined only on a Cantor set, but it may also represent a constrained distribution. For example, a uniform distribution over the surface of a sphere, if defined over three dimensional space, would have support on a measure zero set, and have zero probability at every point. The issue, again, is that the imposition of the constraint has to be applied to the whole mathematical structure, not just the probability measure.
+
+Physically, we see that the requirement of experimental verifiability poses constraints on the measure. Mathematically, experimental verifiability is captured by the topology. Therefore the question is: when can we say that a measure is compatible with a topology? That is, instead of having relationships between measures, which ignore the topology, we should have a direct relationship between each measure and the topology. If two measures are compatible with the topology, then they should be automatically well-behaved with respect to each other.
+
+Let us step back and think more broadly. Recall that an open set corresponds to an experimentally verifiable statement. Imagine we prepared a distribution over some variable, and have a test that tells us whether the value of an instance is within a specific range $U$. Then the open set $U$ corresponds to the positive outcome of the test. The exterior $\exterior(U)$ corresponds to the negative outcomes of our test. The boundary $\partial U$ corresponds to those cases we are not able to adjudicate experimentally: they are not in $U$, but are too close to $U$ to discern from $U$. That is, there is no test that can tell us we have an element of $\partial U$, these cases are not experimentally verifiable. It is not clear exactly what is the right specification to make sure we do not associate a probability or a count of possible cases to sets that cannot be associated to termination.
+
+\subsection{Flats and affine combinations}
+
+Having seen the type of classical probability measure each ensemble should reduce to, we now need to identify the correct closure condition for a set of ensembles to form a space of probability measures. Roughly speaking, we want to be able to think of the set of ``all'' the probability distributions over a set of cases. We have to clarify what we mean by ``all.''
+
+Requiring the set of probability measures to be closed under convex combinations is not enough. The cut triangle \ref{pm_es_cutTriangle}, for example, is a subset of a discrete classical ensemble space where not all ensembles can be understood as a unique convex combination of the extreme points, precisely because some cases are missing. This convex subset is leaving out some ensembles, making a classical space not look classical. On the other hand, if we take a Bloch ball, we can take three points on the surface. These would form a triangle, which could be understood as a discrete classical probability space. Here the convex closure is leaving out some ensembles, making a non-classical space look classical. Therefore we first have to understand what the correct closure is before we can determine whether it forms a set of classical probability measures or not.
+
+As an early attempt, we considered extending the closure to both mixtures and components. That is, closure on the mixtures would require $\ens[a] = p \ens[b] + \bar{p} \ens[c]$ to be in the set if both $\ens[b]$ and $\ens[c]$ are present. Closure on the components would also require $\ens[b]$ and $\ens[c]$ to be in the set if $\ens[a]$ is present. This seems to take too much in. In quantum mechanics, for example, a single mixed state would bring in all the mixed states in the smallest subspace that contains it. The problem is that we would never be able to carve out the spaces of classical probability measures that are associated with each quantum measurement context.
+
+The correct closure seems to be to include all affine combinations. That is, if $\ens[a] = p \ens[b] + \bar{p} \ens[c]$ and two of the ensembles are in the set, then the other one is in the set as well. This allows us to get all the ensembles in the same hyperplane. We call this a flat. In the triangle example, the only flats available are the single vertexes, each side and the whole triangle. For the Bloch ball, if we took two elements, we would get the whole segment that connects them and extends to the surface. But if we get three points, we get a circle, which is not a simplex. This affine closure, essentially, allows us to remove ``ensembles from each other'' as much as possible, so that we can get to their most distinct, most separate, form.
+
+% Reviewed with Christine start
+
+\begin{mathSection}
+	\begin{defn}
+		A \textbf{simplex} is a subset $U \subset \mathbb{R}^n$ that is the hull of finitely many affinely independent points. That is, $U = \hull(\{x_i\}_{i=0}^{n})$ such that $\{x_i - x_0\}_{i=1}^{n}$ are linearly independent.
+	\end{defn}
+	
+	\begin{defn}
+		A \textbf{flat} $A \subseteq \Ens$ is a closed convex subset that contains all lines between all elements. That is, for any $\ens[a], \ens[b] \in A$, $A$ also contains the line that contains $\ens[a]$ and $\ens[b]$. Given a set $U \subseteq \Ens$, the \textbf{flat closure} of $U$ is the smallest flat that contains $U$. A flat is \textbf{finite} if it can be generated by a finite number of elements. An $n$-flat is a flat that must be generated by a set with at least $n$ elements.
+	\end{defn}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\textwidth]{tempimages/FlatVsConvex.jpg}
+		\caption{Flat vs convex set. The ball is the ensemble space. The triangle represents a convex subset. The disc containing the triangle is the flat closure of the triangle. The plane is the affine closure of the triangle.}
+	\end{figure}
+	
+	
+	\begin{prop}
+		A flat includes all possible affine combinations of elements of $\Ens$ that are contained in $\Ens$. The flat closure of $U \subseteq \Ens$ is the intersection of $\Ens$ with the affine closure of $U$ in the embedding vector space.
+	\end{prop}
+	
+	\begin{proof}
+		Let $A \subseteq \Ens$ be a flat and let $V$ be the real vector space that embeds $\Ens$. A line between two elements $\ens[a], \ens[b] \in A$ can be extended in $V$ and can be written as $\ens[a] + x \left(\ens[b] - \ens[a]\right)$ with $x \in \mathbb{R}$. Therefore any ensemble that can be written as an affine combination of two ensembles in $A$ is an element of the flat. Recursively, this means that any ensemble that can be written as an affine combination of finitely many ensembles in $A$ is also in the flat. Moreover, since the flat is a closed set, it will also include all its limits. Therefore every affine combination of $A$ that is also an element of $\Ens$ is in $A$, which means $A$ is the intersection of an affine subspace of the embedding vector space and the ensemble space.
+		
+		Now let $U \subseteq \Ens$ be a set of ensembles. The affine closure of $U$ will be an affine subspace of the embedding vector space. The flat closure will be the intersection of the affine closure with $\Ens$. Since the affine closure is the smallest closed affine subspace that contains $U$, its intersection with $\Ens$ will be the smallest flat that contains $U$, which is the flat closure of $U$.
+	\end{proof}
+	
+	\begin{conj}
+		An $n$-flat is a simplex if and only if its $3$-flats are simplexes (i.e. triangles).
+	\end{conj}
+	
+	\begin{remark}
+		In classical discrete ensemble spaces, any flat is a simplex. In classical continuous ensemble spaces, infinite dimensional flats will depend on what limits are allowed. In a quantum ensemble space, if we take three ensembles inside a Bloch ball, the corresponding flat will be a circle. If we take three orthogonal pure states, however, the corresponding flat will be a simplex.
+	\end{remark}
+\end{mathSection}
+
+\subsection{Classical probability contexts}
+
+Now that we have identified the correct closure, we need to find the right characterization of a flat to identify a classical probability context: a set of ensembles that can be characterized by a family of classical probability measures. For finite discrete spaces, we want to recover the notion of a simplex. In a simplex, every element has a single decomposition in terms of extreme points. This characterization does not work in infinite dimensions as there are no extreme points. As we saw before, the pure point probability measures are not, in general, continuous with respect to the topology. The trick, again, is being able to express this lack of multiple decompositions for finite mixtures.
+
+%A classical probability context will be a set of ensembles that we will map to a space of measures. From the ensembles we will need to define the points over which the probability are defined, the spectrum of the context (in analogy to the spectrum of a linear operator). The general idea is that these will be limits of ensembles that become more and more concentrated, which will be characterized using tools from order theory and topology. Once the spectrum is defined, we will use the fraction capacity to define the probability measure over the topology of the spectrum.
+
+%Technical details aside, we want definitions that capture the intuition of spaces of classical probability distributions in a way that works well for infinite dimensional spaces, is compatible with both discrete and continuous classical ensemble spaces but also with measurement contexts in quantum ensemble spaces. It is instructive to go through some of the different attempts to understand why we settled on these definitions, so that one can understand why they work.
+
+\begin{mathSection}
+	\begin{defn}
+		An ensemble is \textbf{decomposable} if it can be expressed as a mixture of two distinct ensembles. An ensemble is \textbf{separately/orthogonally decomposable} if it can be expressed as a mixture of two separate/orthogonal ensembles. An ensemble is \textbf{separately multidecomposable} if it can be expressed as two decompositions where a component of one is separate from both components of the other. That is, $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$ and either $\ens[a]_1 \separate \ens[b]_j$ or $\ens[a]_2 \separate \ens[b]_j$.
+	\end{defn}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\textwidth]{tempimages/MultipleDecomposition.jpg}
+	\end{figure}
+	
+	\begin{remark}
+		Take a classical discrete space for three points which is a triangle (simplex). The only three elements that are not decomposable are the extreme points. Mixtures of two points are decomposable and are also separately decomposable in only one way. Mixtures of three points are also separately decomposable, but in multiple ways: as a mixture of $\ens_1$ and a mixture of $\ens_2$ and $\ens_3$, or as a mixture of $\ens_2$ and a mixture of $\ens_1$ and $\ens_3$. Note, however, that they are not separately multidecomposable as the different components are not separate.
+		
+		Take a Bloch ball for quantum mechanics. All the elements of the surface are not decomposable and they are all pairwise separate. The middle point can be seen as the equal mixture of any pair of opposite points. Therefore the middle point, as well as any other point not on the surface, is not only separately decomposable but also multidecomposable.
+		
+		To see why we require only one component to be separate from the other two, consider the cut triangle. Here we can have multiple decompositions where not all elements are separate.
+	\end{remark}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.4\textwidth]{tempimages/SeparableButNotFlat.jpg}
+	\end{figure}
+	
+	\begin{remark}
+		A convex set that is separately decomposable is not necessarily a flat (i.e. triangle within a sphere). A flat is not necessarily separately decomposable (i.e. open segment as a whole is a flat, but is not separately decomposable).
+	\end{remark}
+\end{mathSection}
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\Ens$ be an ensemble space. A \textbf{classical probability context} is a flat $C \subseteq \Ens$ where each decomposable element in $C$ is separately decomposable in $C$ but not separately multidecomposable in $C$.
+	\end{defn}
+\end{mathSection}
+
+\begin{mathSection}
+	\begin{prop}
+		A flat $C \subseteq \Ens$ is a classical probability context if and only if every decomposable element is separately decomposable and mixtures preserve separateness in $C$. That is, if $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$, then $\ens \separate p\ens[a] + \bar{p} \ens[b]$ in $C$ for all $\ens, \ens[a], \ens[b] \in C$ and $p \in [0,1]$.
+	\end{prop}
+	
+	\begin{proof}
+		Suppose mixtures do not preserve separateness. Then we can find $\ens,\ens[a],\ens[b], \ens[c] \in \Ens$ such that $\ens \separate \ens[a]$, $\ens \separate \ens[b]$ and $\ens \nseparate \ens[c] = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1)$. Since $\ens \nseparate \ens[c]$, we can find $\ens[d], \ens[f], \ens[g]$ such that $\ens[c] = \lambda \ens[d] + \bar{\lambda} \ens[f]$ and $\ens = \mu \ens[d] + \bar{\mu} \ens[g]$.  Since separateness extends to all mixtures (\ref{pm_es_separateExtendsMixtures}) and $\ens[a] \separate \ens[e]$, $\ens[a] \separate \ens[d]$ and, similarly, $\ens[b] \separate \ens[d]$, which means that $\ens[c]$ is separately multidecomposable.
+		
+		Now suppose mixture do preserve separateness, and let $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$. Since $\ens[a]_1$ is a component of $\ens$, then $\ens \nseparate \ens[a]_1$. Since $\ens$ is a mixture of $\ens[b]_1$ and $\ens[b]_2$ and mixtures preserve separateness, then either $\ens[a]_1 \nseparate \ens[b]_1$ or $\ens[a]_1 \nseparate \ens[b]_2$. Similarly, $\ens[a]_2 \nseparate \ens[b]_1$ or $\ens[a]_2 \nseparate \ens[b]_2$. Therefore $\ens$ is not separately multidecomposable.
+	\end{proof}
+	
+	\begin{conj}
+		A convex subset $U \subseteq \Ens$ is a classical probability context if and only if all finite flats are simplexes.
+	\end{conj}
+	
+	\begin{prop}
+		Let $C \subseteq \Ens$ be a classical probability context. Let $U \subseteq C$ be a set of ensembles. Then $A=U^\separate=\{ \ens[a] \in C \, | \, \forall \ens \in U, \ens[a] \separate \ens \}$ and $B=(U^\separate)^\separate=\{ \ens[b] \in C \, | \, \forall \ens[a] \in A, \ens[b] \separate \ens[a] \}$ are two probability contexts such that $C = \hull(A \cup B)$.
+	\end{prop}
+	
+	\begin{proof}
+		First we show that $C$ contains only three types of ensembles: those that are limits of convex mixtures of $A$, those that are limits of convex mixtures of $B$ and those that are limits of convex mixtures of both $A$ and $B$. Any ensemble in $C$ is one of these three types. For $\ens[c] \in C$ to not be a mixture of $A$ or $B$, then $\ens[c]$ cannot be in either $A$ or $B$. This means that it must be separate from both $A$ and $B$. But $B$ contains all the elements that are separate from $A$, which is a contradiction. Since separate multidecomposition is forbidden, an ensemble $\ens$ cannot be written both as a convex combination of $A$ and as a convex combination with an element of $B$. This would yield two decompositions in which one component, the one chosen from $B$, is separate from all the components of the other. This means that an element of $C$ is either a mixture of $A$, a mixture of $B$ or a mixture of both $A$ and $B$.
+		
+		Now we show that both $A$ and $B$ are convex sets. Since a mixture of $A$ can only be expressed as a mixture of components of $A$, it is separate from all elements of $B$. Therefore $A$ contains all its mixtures. With the same logic, $B$ will contain all its mixtures. The argument works for infinite convex combinations as well. If $\ens = \sum_{i=1}^{\infty} p_i \ens[a]_i$ with $p_i \in [0,1]$ and $\sum_{i=1}^{\infty} p_i = 1$, it can be understood as the limit of the series $\frac{p_1}{P_n} \ens[a]_1 + \frac{\bar{p}_1}{P_n} \sum_{i=2}^{n} p_i \ens[a]_i$ where $P_n = \sum_{i=1}^{n} p_i$. Therefore
+		\begin{equation}
+			\begin{aligned}
+				\ens &= \sum_{i=1}^{\infty} p_i \ens[a]_i = \lim\limits_{n \to \infty}  \sum_{i=1}^{n} \frac{p_i}{P_n} \ens[a]_i = \lim\limits_{n \to \infty} \frac{p_1}{P_n} \ens[a]_1 + \lim\limits_{n \to \infty}\frac{\bar{p}_1}{P_n} \sum_{i=2}^{n} \frac{p_i}{\bar{p}_1} \ens[a]_i = p_1 \ens[a]_1 + \bar{p}_1 \sum_{i=2}^{\infty} \frac{p_i}{\bar{p}_1} \ens[a]_i \\
+				&= p_1 \ens[a]_1 + \bar{p}_1 \hat{\ens[a]}_1
+			\end{aligned}
+		\end{equation}
+		where $\hat{\ens[a]}_1 = \sum_{i=2}^{\infty} \frac{p_i}{\bar{p}_1} \ens[a]_i$. Since $\ens$ and $\ens[a]_1$ are elements of the ensemble space, the series converges to $\hat{\ens[a]}_1$, which is in the hull of $A$. It will also be an element of $A$ because multidecompositions are forbidden.
+		
+		To see that $C$ is the hull of $A$ and $B$, note that all the elements in $C$ that are not already in $A$ or $B$ are the mixtures of $A$ and $B$. These are exactly added when taking the hull of $A \cup B$.
+		
+		Now we show that $A$ and $B$ are classical probability contexts. First we have to show that they are flats. Let $L$ be the line that connects two elements $\ens[a]_1, \ens[a]_2 \in A$. Take $\ens[a]_3 \in L$. If it is a mixture of $\ens[a]_1$ and $\ens[a]_2$ then it is an element of $A$. If $\ens[a]_1$ is a mixture of $\ens[a]_2$ and $\ens[a]_3$, since $\ens[a]_1$ cannot have a common component with $B$, and $\ens[a]_3$ is a component of $\ens[a]_1$, $\ens[a]_3$ cannot have components in $B$ as well. Therefore $\ens[a]_3$ must be a mixture of elements of $A$. Similarly if $\ens[a]_2$ is a mixture of $\ens[a]_1$ and $\ens[a]_3$. Therefore $A$ is a flat. Similarly, $B$ is a flat.
+		
+		Now we show that $A$, and by symmetry $B$, is a classical probability context. We have seen that $A$ is a flat. If an element of $A$ is decomposable in $A$ it is also decomposable in $C$ and is therefore separately decomposable in $C$. Because multidecomposability in $C$ is not allowed, it must be separately decomposable into elements of $A$. Lastly, if multidecomposability were allowed in $A$, it would also be allowed in $C$. Therefore it is not allowed in $A$. This means that $A$ is a classical probability context.
+	\end{proof}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.25\textwidth]{tempimages/CounterexampleProbabilityContexts.jpg}
+		\caption{TODO: make the final picture not go through the center, change the label for the points to $\ens_1$ and $\ens_2$}
+	\end{figure}
+	
+	\begin{remark}
+		Note that if multiple separate decompositions are not ruled out, the sub-contexts will not include all convex combinations. Take a disk as a convex space. Suppose $U$ is made of two points $\ens_1$ and $\ens_2$. All other points on the surface are separate from both and therefore belong to $A$. Now consider the convex combinations of $\ens_1$ and $\ens_2$. These are not separate from $U$ but they are also not separate from all the other elements on the surface. Therefore they are neither in $A$ nor $B$. Moreover, any other point in the interior can be seen as a convex combination of $\ens_1$ and another element of the surface that is not $\ens_2$. Therefore no point in the interior is in either $A$ or $B$. Thus $A$ and $B$ are not necessarily convex sets if $C$ is not a classical probability context.
+	\end{remark}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.75\textwidth]{tempimages/ContextClosureNotContext.jpg}
+	\end{figure}
+	
+	\begin{remark}
+		While a classical probability context can be decomposed into classical probability contexts whose closure is the original context, the converse is not true. That is, given two classical probability contexts, their convex or flat closure is not in general a classical probability context. Take a disk (the ensemble space) and two lines connecting three points (the two probability contexts). The convex closure is the triangle, which is not a flat as it misses some affine combinations. The flat closure is the disk, which is not a probability context.
+	\end{remark}
+	
+	\begin{conj}
+		Let $A, B \subseteq \Ens$ be two classical probability contexts. Then their flat closure and convex closure coincide if and only if these closures are a classical probability context.
+	\end{conj}
+	
+	\begin{conj}
+		The defining property of a classical probability context is exactly that property that allows $A$ and $B$ so constructed to be convex sets whose closure is $C$.
+	\end{conj}
+\end{mathSection}
+
+\begin{prop}
+	Let $C \subseteq \Ens$ be a classical probability context. The lattice of $\separate$-subspaces $\mathfrak{L}$ is distributive and is therefore a Boolean algebra.
+\end{prop}
+
+\begin{proof}
+	Let $X,Y,Z \in \mathfrak{L}$ be three $\separate$-subspaces. Let $\ens \in X \wedge (Y \vee Z)$, then $\ens \in X$ and $\ens \in Y \vee Z$. This also means that all components of $\ens$ are in both $X$ and $Y \vee Z$ since the components of $\ens$ are not separate from $\ens$ and, given the absence of multi-decomposability, are separate from all elements that are separate from $\ens$. Since $Y \vee Z = \hull(Y \cup Z)$, we can decompose $\ens$ into components of $Y$ and $Z$. But these must be in $X$, and therefore $\ens \in \hull((X \wedge Y) \cup (X \wedge Z) ) = (X \wedge Y) \vee (X \wedge Z) )$. Therefore $X \wedge (Y \vee Z) \subseteq (X \wedge Y) \vee (X \wedge Z)$. Now let $\ens \in (X \wedge Y) \vee (X \wedge Z)$, then $\ens \in \hull((X \wedge Y) \cup (X \wedge Z) )$. Therefore $\ens$ is the mixture of ensembles that are in $X$, which means that $\ens \in X$. Since $\ens$ is the mixture of elements that are also in $Y$ and $Z$, $\ens \in \hull(Y \cup Z) = Y \vee Z$. This means $\ens \in X \wedge (Y \vee Z)$. Therefore $(X \wedge Y) \vee (X \wedge Z) \subseteq X \wedge (Y \vee Z)$. Which means $X \wedge (Y \vee Z) = (X \wedge Y) \vee (X \wedge Z)$.
+	
+	Now let $\ens \in X \vee (Y \wedge Z)$, then $\ens \in \hull(X \cup (Y \wedge Z) )$. That is, $\ens$ is a mixture of elements of $X$ and of elements that are in both $Y$ and $Z$. Which means $\ens \in \hull(X \cup Y)$ and $\ens \in \hull(X \cup Z)$. Therefore $\ens \in \hull(X \cup Y) \cap \hull(X \cup Z) = (X \vee Y) \wedge (X \vee Z)$, which means $X \vee (Y \wedge Z) \subseteq (X \vee Z) \vee (Y \wedge Z)$. Conversely, let $\ens \in (X \vee Y) \wedge (X \vee Z) = \hull(X \cup Y) \cap \hull(X \cup Z)$. Then $\ens$ can be expressed as a mixture of elements of $X$ and $Y$ and also of elements of $X$ and $Z$. Now consider the elements of $Y$ in the first decomposition. Since multiple decomposition is not allowed, they cannot be separate from both $X$ and $Z$, end therefore must be in their hull. Similarly, the elements of $Z$ in the second decomposition must be in the hull of $X$ and $Y$. Therefore $\ens \in \hull(X \cup (Y \wedge Z) ) = X \vee (Y \wedge Z)$. Therefore $(X \vee Y) \wedge (X \vee Z) \subseteq X \vee (Y \wedge Z)$. Which means $X \vee (Y \wedge Z) = (X \vee Z) \vee (Y \wedge Z)$.
+	
+	The lattice $\mathfrak{L}$ is therefore a distributive orthocomplemented lattice, which means it is a Boolean algebra.
+\end{proof}
+
+\begin{mathSection}
+	\begin{prop}
+		Let $C \subseteq \Ens$ be a classical probability context. Let $\mathfrak{L}$ be the lattice of $\separate$-subspaces. Then the fraction capacity is an additive set function on the lattice. That is, for all $\ens \in C$ and $A, B \in \mathfrak{L}$ such that $A \cap B = \emptyset$,  $\fcap_{\ens}(A \vee B) = \fcap_{\ens}(A) + \fcap_{\ens}(B)$.
+	\end{prop}
+	
+	\begin{proof}
+		Let $A, B\in \mathfrak{L}$ such that $A \cap B = \emptyset$. Then $A$ is separate from $B$. Therefore $A \vee B$ is a classical probability context that is the convex closure of two separate probability contexts. Therefore, as we saw in a previous proof, $A \vee B$ consists of convex combinations of $A$, which are all in $A$, of convex combinations of $B$, which are all in $B$, and of convex combinations of both, which are in neither $A$ nor $B$.
+		
+		We want to show that $\fcap_{\ens}(A \vee B) = \fcap_{\ens}(A) + \fcap_{\ens}(B)$ if $\ens \in A \vee B$. Let $\ens \in A \vee B$ be an ensemble that is the mixture of elements of $A$. Then $\ens \in A$ and it has no components in $B$. Therefore $\fcap_{\ens}(A \vee B) = 1$ and $\fcap_{\ens}(A) = 1$ while $\fcap_{\ens}(B) = 0$. This means $\fcap_{\ens}(A \vee B) = 1 = 1 + 0 = \fcap_{\ens}(A) + \fcap_{\ens}(B)$. If $\ens$ is a mixture of elements of $B$, we get the same conclusion. The last case is when $\ens$ is a mixture of elements of $A$ and $B$. That is, $\ens = \sum_i p_i \ens[a]_i + \sum_j \lambda_j \ens[b]_j$ with $\ens[a]_i \in A$, $\ens[b]_j \in B$, $p_i, \lambda_j \in [0,1]$ and $\sum_i p_i + \sum_j \lambda_j = 1$. By definition of fraction capacity, $\sum_i p_i \leq \fcap_{\ens}(A)$. Suppose $\sum_i p_i < \fcap_{\ens}(A)$. Then there is $\hat{\ens[a]} \in A$ such that $\ens = \sum_i p_i \ens[a]_i + p \hat{\ens[a]} + \lambda \ens[c]$ for some $p,\lambda \in [0,1]$ and $\ens[c] \in A \vee B$. But then $\ens$ would be separately multidecomposable, which is a contradiction since it is an element of a classical probability context. Therefore $\sum_i p_i = \fcap_{\ens}(A)$. Similarly, we find that $\sum_j \lambda_j = \fcap_{\ens}(B)$. Since $\sum_i p_i + \sum_j \lambda_j = 1$, $\fcap_{\ens}(A) + \fcap_{\ens}(B) = 1 = \fcap_{\ens}(A \vee B)$ for all $\ens \in A \vee B$.
+		
+		Now let $\ens \in C$. We have $(A \vee B)^\separate \in \mathfrak{L}$ and $(A \vee B) \cap (A \vee B)^\separate = \emptyset$. Therefore $\fcap_{\ens}(C) = \fcap_{\ens}(A \vee B)+ \fcap_{\ens}((A \vee B)^\separate)$. Note that $\ens$, in general, is a convex combination of elements of $A\vee B$ and $(A \vee B)^\separate$. Components in $A \vee B$ are convex combinations of elements of $A$ and $B$, which also disjoint. Therefore $\ens$ is a convex combination of elements of $A$, $B$ and $(A \vee B)^\separate$, which are pairwise disjoint. As before, since multidecomposability is forbidden in a classical probability context, the sum of the coefficients for each part will have to match the fraction capacity of its subcontext. Therefore $\fcap_{\ens}(A) +  \fcap_{\ens}(B) + \fcap_{\ens}((A \vee B)^\separate) = \fcap_{\ens}(C) = \fcap_{\ens}(A \vee B) + \fcap_{\ens}((A \vee B)^\separate)$. Thus $\fcap_{\ens}(A \vee B) = \fcap_{\ens}(A) +  \fcap_{\ens}(B)$ for all $\ens \in C$.
+	\end{proof}
+\end{mathSection}
+
+\subsection{Spectrum of a classical probability context}
+
+WARNING: the following may imply that the construction below doesn't work. Since we can show that different topological spaces correspond to the same Boolean algebra of regular open sets (or regular closed sets), then knowing the lattice of regular open (or closed) sets is not enough to recover the points and the topology.
+
+\begin{prop}[Regular open sets are not enough]\label{pm_es_regularOpenSetsNotEnough}
+	Let $X$ and $Y$ be two topological spaces such that the respective lattices of regular open sets $R_X$ and $R_Y$ are isomorphic as Boolean algebras. It does not follow that $X$ and $Y$ are homeomorphic as topological spaces.
+\end{prop}
+
+\begin{proof}
+	Let $X=S^1$ be a circle with the standard topology, $Y=\mathbb{R}$ be the real line with the standard topology and $Z=\mathbb{R}\setminus \{0\}$ be the real line without the origin. Note that the circle is the one point compactification of the real line, and therefore $Y=X\setminus \{\infty\}$. This forms a chain of embedding $Z \to Y \to X$.
+	
+	Suppose $U_X$ is a regular open set in $X$. Then $U_Y = U_X \setminus \{\infty\}$ is an open set in $Y$. We also have $\overline{U_Y} = \overline{U_X} \setminus \{\infty\}$ and $\interior(\overline{U_Y}) = \interior(\overline{U_X}) \setminus \{\infty\}$ where the closure and interior are taken in the respective spaces. Therefore $U_Y$ is a regular open set. Also, let $U_X$ and $V_X$ be two distinct open sets of $X$. Then, since every open set that contains $\{\infty\}$ also contains an open neighborhood of $\{\infty\}$, the corresponding $U_Y$ and $V_Y$ will also be two distinct open sets. Then $\iota(U_X) = U_X \setminus \{\infty\}$ is an injection between the regular open sets of $X$ and $Y$. Now let $U_Y$ be a regular open set on $U$. Let $U_X = \interior(\overline{U_Y \cup \{ \infty \}})$ where the  closure and interior are taken in $X$. Then $U_X$ is a regular open set of $X$ because it is the interior of a closure. Also note that $\interior(\overline{\iota(U_X) \cup \{ \infty \}}) = \interior(\overline{U_X \setminus \{\infty\} \cup \{ \infty \}}) = \interior(\overline{U_X}) = U_X$. Therefore the map $\iota$ is a bijection between the regular open sets of $X$ and $Y$.
+	
+	Note that regular open sets form a Boolean algebra where the complement is the exterior, the join is the interior of the closure of the union and the meet is the intersection. Note that if $U_X \subset V_X$, then $\iota(U_X) \subset \iota(V_X)$, therefore $\iota$ preserves the joins and the meets. Now let $V_X = \exterior(U_X)$ and consider $\iota(V_X)$. This will contain all the exterior points of $U_X$ minus $\{\infty\}$. But these are also the exterior points of $\iota(U_X)$. Therefore $\exterior(\iota(U_X)) = \iota(\exterior(U_X))$. The bijection is an isomorphism of Boolean algebras, and the corresponding algebras of regular open sets are isomorphic. The same reasoning applies when comparing $Y$ to $Z$.
+	
+	Now, note that $\{\infty\}$ is a closed set, but not a regular closed set. Therefore we are going to be able to construct a similar argument for the lattice of regular closed sets
+\end{proof}
+
+\begin{remark}
+	Since the construction below wants to recover the points of the space from what happens to be the algebras of regular open (or closed) sets, the above proposition seems to imply that this is not possible. We would not be able to know, for example, whether the points form a circle or a real line. Even if we knew that they form a real line, and would know what half-lines we have, we would not know how to stitch them back together, as we could do it with $\{0\}$ or with $\{\infty\}$. We would need to know, at least, which intervals would correspond to a finite interval (e.g. a finite entropy), which requires more structure.
+\end{remark}
+
+To recover classical probability distributions, we need to recover the possible cases (i.e. the sample space) and the events (i.e. the $\sigma$-algebra) over which the probability distributions are defined. These are not necessarily states. For example, in the countinuous classical case, the sample space corresponds to the sets of possible values of position and momentum (i.e. the symplectic manifold over which the values are defined). In quantum mechanics, the sample space is the range of possible values defined by an observable (i.e. the spectrum of the operator). The goal here is to identify a single physically meaningful construction that will be able to work for all these cases.
+
+Intuitively, we are taking ensembles and decomposing them into mixtures of ensembles with narrower and narrower spread. The points over which the classical distributions are defined are limits where the spread goes to zero. Note, however, that the limit of sequences with narrower and narrower spread will not, in general, be itself an ensemble. For example, we can imagine a sequence of uniform distributions over $[-\frac{1}{i}, \frac{1}{i}]$. As $i$ increases, the spread will converge to the single value $0$, though the sequence of ensembles will not converge to an ensemble. Similarly, we can imagine a sequence of density matrices, or even wave-functions, for the quantum case. The points, then, should be understood as a convenient tool for representation and calculation, not as physically realizable objects. What is physically realizable, at least conceptually in the model, is the sequence of finer and finer decomposition at an arbitrary level of precision. That is, conceptually we are not starting from the sample space (i.e. the possible idealized values) and then constructing probability distributions on top; we start with a set of ensembles, which are the physical objects we are studying, and obtain the points and the corresponding probability distributions as the limit of recursive decomposition.
+
+Mathematically, the construction uses the notion of subspaces defined in \ref{pm_es_subspaceSection} applied to separateness. We use separateness to construct sets of ensembles that share the same support. These are the $\separate$-subspaces and are constructed by looking for pairs of sets such that all the elements of one are separate from all the elements of the other. These subspaces form a lattice: they have a partial order according to set inclusion. Therefore we can find sequences of subspaces that become more and more refined, whose elements have a narrower and narrower support. Using a standard technique in topology, the points are identified by a collection of subspaces (called filters) that become smaller and smaller. A limiting sequence can be understood as taking an element from each of these shrinking subspaces. We call the set of all these points the spectrum of the context.
+
+Every subspace can then be understood as a set of limits that are open sets in the topology of the spectrum. The topology is the one generated by those sets.
+
+\begin{mathSection}
+	\begin{defn}
+		Given a poset $(P, \leq)$ downward refined filter is a proper filter $F$ such that if $x \in F$ and there exists a $y \in P$ such that $y < x$, then there exists a $z \in F$ such that $z < x$.
+	\end{defn}
+	
+	\begin{remark}
+		A downward refined filter is not necessarily an ultrafilter. Consider the lattice $L$ of the regular open sets of the real line $\mathbb{R}$ with the standard topology. For each point $x \in \mathbb{R}$ the set $F = {U \in L \, | \, x \in U}$ is a downward refined filter. In fact, it is non-trivial (i.e. $x$ is in at least one interval), it is downward directed (i.e. the intersection of two regular sets that contains $x$ is a regular set that contains $x$), upward closed (i.e. every superset of a set that contains $x$ contains $x$) and is downward refined (i.e. every regular open set that contains $x$ has a regular open subset that contains $x$). However, $(-\infty, x) \notin F$ and $(x, \infty) \notin F$, even though they are complement. This means that $F$ is not maximal.
+		
+		Ultrafilters are, in this sense, too fine. They ``split'' the points.
+	\end{remark}
+	
+	\begin{defn}
+		Given a classical probability context $C \subseteq \Ens$, the \textbf{spectrum} $\sigma(C)$ is the set of equivalence classes of sequences of ensembles that eventually become separate from each other. More rigorously, given a probability context, the spectrum is the collection of the downward refined filters of the lattice of $\separate$-subspaces $\mathfrak{L}^\separate(C)$. The spectrum of each $\separate$-subspace is given by $\sigma(A) \mapsto \{ x \in \sigma(C) \, | \, A \in x \}$. The standard topology of the spectrum is the one generated by the spectra of all $\separate$-subspaces (i.e. $\sigma(\mathfrak{L}^\separate(C))$.
+	\end{defn}
+	
+	\begin{prop}
+		Let $C \subseteq \Ens$ be a classical probability context and $\sigma(C)$ its spectrum. Then the following are true:
+		\begin{enumerate}
+			\item $A \subseteq B$ if and only if $\sigma(A) \subseteq \sigma(B)$
+			\item $\exterior(\sigma(A)) = \sigma(A^{\separate})$
+			\item $\partial \sigma(A) = \{ x \in \sigma(C) \, | \, A \notin x, A^{\separate} \notin x \}$
+			\item $\sigma(A)^{\complement} = \overline{\sigma(A^{\separate})}$
+			\item $\sigma(\bigwedge_{i \in I} A_i) = \interior\left(\bigcap_{i \in I} \sigma(A_i)\right)$
+			\item $\sigma(\bigvee_{i \in I} A_i) = \interior\left(\overline{\bigcup_{i \in I} \sigma(A_i)}\right)$
+			\item if $U$ open, then $U = \bigcup_{i \in I} \sigma(A_i)$ for some family of $A_i \in \mathfrak{L}^\separate(C)$
+		\end{enumerate}
+	\end{prop}
+	
+	\begin{proof}
+		For 1, since all $x \in \sigma(C)$ are upward closed, $A \in x$ means $B \in x$ as well. Therefore if $x \in \sigma(A)$ then $x \in \sigma(B)$, which means $\sigma(A) \subseteq \sigma(B)$. Conversely, if $\sigma(A) \subseteq \sigma(B)$ then all downward sets of $\mathfrak{L}^\separate(C)$ that contain $A$ must also contain $B$, which means $B \supseteq A$.
+		
+		For 2 and 3, note that $\sigma(A) = \{ x \in \sigma(C) \, | \, A \in x \}$ and therefore $\sigma(A)^{\complement} = \{ x \in \sigma(C) \, | \, A \notin x \}$. Since $\sigma(A)$ is an open set, $\sigma(A)^{\complement} = \exterior(\sigma(A)) \cup \partial \sigma(A)$. Now consider $\sigma(A^{\separate})$. This is an open set and it is disjoint from $\sigma(A)$. In fact, if $x \in \sigma(A) \cap \sigma(A^{\separate})$ then $A, A^{\separate} \in x$. But this would mean that $\emptyset \in x$, which can't be because $x$ is a proper filter and cannot contain $\emptyset$. Since $A^{\separate}$ is the largest $\separate$-subspace that is separate from $A$, there is no set in $\sigma(\mathfrak{L}^\separate(C))$ that is larger than $A^{\separate}$ and still disjoint from $A$. Therefore $\sigma(A^{\separate}) = \exterior(\sigma(A))$. We have $\partial \sigma(A) = \sigma(C) \setminus (\interior(\sigma(A))\cup\exterior(\sigma(A))) = \{ x \in \sigma(C) \, | \, A \notin x, A^{\separate} \notin x \}$.
+		
+		For 4, since $\sigma(A)$ is an open set, the complement is the closure of the exterior. Therefore, given 2, $\sigma(A)^{\complement} = \overline{\sigma(A^{\separate})}$.
+		
+		For 5, consider $\bigwedge_{i \in I} A_i$. This is the largest $\separate$-subspace that is contained by all $A_i$. Then, given 1, $\sigma\left(\bigwedge_{i \in I} A_i\right)$ must be the largest open set that is contained by all $\sigma(A_i)$. This corresponds to $\interior\left(\bigcap_{i \in I} \sigma(A_i)\right)$.
+		
+		For 6, we have
+		\begin{align*}
+			\sigma(\bigvee_{i \in I} A_i) &= \exterior(\exterior(\sigma(\bigvee_{i \in I} A_i))) = \exterior(\sigma((\bigvee_{i \in I} A_i)^{\separate})) = \exterior(\sigma(\bigwedge_{i \in I} A_i^{\separate})) \\
+			&= \exterior(\interior(\bigcap_{i \in I} \sigma(A_i^{\separate}))) = \exterior(\bigcap_{i \in I} \sigma(A_i^{\separate})) =  \\
+			&= \exterior\left(\bigcap_{i \in I}\overline{\sigma(A_i)}^{\complement}\right) = \exterior\left(\left(\bigcup_{i \in I}\overline{\sigma(A_i)}\right)^{\complement}\right) \\
+			&= \interior\left(\bigcup_{i \in I}\overline{\sigma(A_i)}\right)
+		\end{align*}
+		For the last step, note that the union of the closure is not necessarily the closure of the union, but they have the same interior.
+		
+		For 7, note that an open set $U$ is generated from $\sigma(\mathfrak{L}^\separate(C))$ through finite intersection and arbitrary union. Note that the finite intersection of open sets is an open set, so we have $\bigcap_{i \in I} \sigma(A_i) = \interior\left(\bigcap_{i \in I} \sigma(A_i)\right) = \sigma(\bigwedge_{i \in I} A_i)$. Therefore the finite intersection corresponds to a $\separate$-subspace. This means that we can can generate all open sets with arbitrary unions of sets from $\sigma(\mathfrak{L}^\separate(C))$.
+	\end{proof}
+\end{mathSection}
+
+\begin{coro}
+	For every $A \in\sigma(\mathfrak{L}^\separate(C))$, $\sigma(A)$ is a regular open set. The topology of a spectrum is semiregular.
+\end{coro}
+
+\begin{proof}
+	Since the lattice is orthocomplemented, we have $\sigma(A) = \sigma((A^{\separate})^{\separate}) = \exterior(\sigma(A^{\separate})) = \exterior(\exterior(A))$. Therefore $\sigma(A)$ is a regular open set.
+	
+	The topology is generated by regular open sets, and is therefore semiregular.
+\end{proof}
+
+\begin{conj}
+	Given a point $x \in \sigma(C)$ and an open neighborhood $U$ of $x$, we can find a closed neighborhood $A$ that is a subset of $U$. The topology of a spectrum is regular.
+\end{conj}
+
+\begin{proof}
+	Since $U$ is an open set, it is the union of a family of sets $\sigma(A_i)$. Since $U$ is a neighborhood of $x$, $x \in \sigma(A)$ with $A = A_i$ for some $i$. Now consider $y \in \partial \sigma(A)$. Since both $x$ and $y$ are two distinct downward refined filters, there will be a $\separate$-subspace $B_y$ such that $B_y \in x$ but $B_y \notin y$. That is, $x \in \sigma(B_y) \subseteq \sigma(A)$ and $y \notin \sigma(B_y)$. Now consider $D = \bigcap_{y \in \partial \sigma(A)} B_y$. Since $\mathfrak{L}^\separate(C)$ is an intersection structure, $D \in \mathfrak{L}^\separate(C)$. We also have $D \in x$ and therefore $D \neq \emptyset$. Therefore $\sigma(D)$ is an open set that is a subset of $\sigma(A)$ where we removed an open neighborhood around its boundary. This means that $\partial \sigma(D) \subseteq \sigma(A)$. This means that $\overline{\sigma(D)} \subseteq \sigma(A)$. Therefore we found a closed neighborhood of $x$ that is a subset of $U$.
+	
+	The above means that the closed neighborhoods of $x$ form a local base for $x$, which is another way to characterize regular topological spaces.
+\end{proof}
+
+\begin{mathSection}
+	\begin{remark}
+		Note how the infinite joins/meets on the lattice of the $\separate$-subspaces do not correspond to the infinite operations on the lattice of the topology or of the Borel sets. For example, suppose we are taking the lattice of probability measures defined over the interval $[0,1]$ that are absolutely continuous with respect to the Lebesgue measure. Each $\separate$-subspace will correspond to a set of measures whose support lives in a particular region. A singleton will not correspond to any subspace as it cannot support an absolutely continuous measure. Therefore, if we take all the $\separate$-subspaces of all measures that have $1/2$ within the support, the intersection of all those subspaces will be the empty set, which is a $\separate$-subspace. However, the intersection of the sets representing their support is the singleton $\{1/2\}$, which is not the empty set. However, its interior is the empty set.
+		
+		The fact that a single probability measure is an equivalence class of probability densities is related to this distinction. Consider a uniform distribution over $[0,1]$. The related probability density can be understood as a constant between those values and zero everywhere else. However, the same constant over $[0,1/2) \cup (1/2,1]$ will also work. That is, the same element of the ensemble space can be represented in different ways as a function over the spectrum.
+	\end{remark}
+\end{mathSection}
+
+\subsection{Probability measures from classical probability contexts}
+
+We now show that each ensemble in a classical probability context can be understood as a probability measure over the spectrum of the context. That is, each ensemble can either be understood as a convex combination of smaller and smaller components that are separate from each other.
+
+\begin{mathSection}
+	\begin{conj}
+		Let $C \subseteq \Ens$ be a probability context and $\ens \in C$ be an ensemble in the context. The set function $p_{\ens} : \Sigma_{\sigma(C)} \to[0,1]$, defined such that $p^*_{\ens}(U) = \inf(\{ \fcap_{\ens}(A) \, | \, \sigma(A) \supseteq U \})$, is a measure. Therefore each ensemble of a probability context is associated with a unique measure over the spectrum.
+	\end{conj}
+\end{mathSection}
+
+\begin{conj}
+	A convex subset $U \subset \Ens$ is a classical probability context if and only if it is the subset of probability measures of a vector space of measures over a sample space $\Omega$.
+\end{conj}
+
+We now want to show that, in standard ensemble spaces, we recover the standard notions of probability.
+
+\begin{mathSection}
+	\begin{prop}
+		Let $\Ens$ be a discrete classical ensemble space over a set $X$ of outcomes. Then $\Ens$ is a probability context, the spectrum is $X$ and its topology is the discrete topology. The probability measures over the spectrum recover the original probability measures.
+	\end{prop}
+	
+	\begin{proof}
+		Let $\Ens$ be a discrete classical ensemble space. The whole space is a flat as it contains all its affine combinations. Note that two ensembles are separate if and only if they have disjoint support. Suppose $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 + \bar{\lambda} \ens[b]_2$. Then the union of the support of each pair must be the same. Therefore the support of at least one element of each pair must overlap with the support of another element of another pair. This means that separate multidecomposability is not allowed. Therefore $\Ens$ is a classical probability context.
+		
+		Since ensembles are separate if and only if they have disjoint support, the $\separate$-subspace of a subset $A \subseteq \Ens$ of ensembles corresponds to all ensembles whose support is a subset of the union of the supports of the elements of $A$. Each $\separate$-subspace, then, is associated to one unique subset $U \subseteq \Omega$ of the sample space. Given that for any subset $U$ we can find a measure whose support is $U$, every subset corresponds to a unique $\separate$-subspace. If the support of a measure is a subset of $U$, it will also be a subset of any other set $V \supseteq U$. Therefore the ordering of the lattice of $\separate$-subspaces is the same as inclusion on the lattice of supports. The two lattices are isomorphic.
+		
+		Since the singletons are elements of the lattice, all downward refined filters are principal, meaning that they are all of the form $\uparrow\mathclose{x} = \{A \in \mathfrak{L}^\separate(C) \, | \, \{x\} \in A\}$ where $x \in \Omega$ is an element of the sample space. Therefore the sample space and the spectrum coincide. Each singleton is an open set, since it is an element of the lattice. The topology is therefore the discrete topology.
+		
+		Now consider $p^*_{\ens}(\{x\})$ for some $x \in X$. Since $\{x\}$ is a $\separate$-subspace, $p^*_{\ens}(\{x\}) = \fcap_{\ens}(\{x\}) = \size_{\ens}(x)$. Note that the ensemble $\ens$ corresponds to a probability measure $p$ which can be written as a convex combination $\ens = \sum_{x_i \in X} p(\{x_i\}) x_i$. Given an $x \in X$, then, $p(\{x\})$ is the greatest mixing coefficient that can be associated to $x$ in a convex combination, which corresponds to the fraction capacity. Therefore $p^*_{\ens}(\{x\}) = p(\{x\})$ for all $x \in X$, which means the two measures are the same.
+	\end{proof}
+\end{mathSection}
+
+\begin{prop}
+	Let $\Ens$ be a continuous classical ensemble space over a symplectic manifold $X$. Then $\Ens$ is a probability context, the spectrum is $X$ and its topology is locally the standard topology of $\mathbb{R}^n$.
+\end{prop}
+
+\begin{proof}
+	Let $\Ens$ be a continuous classical ensemble space. The whole space is a flat as it contains all its affine combinations. Note that two ensembles are separate if and only if they have disjoint support. Suppose $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 + \bar{\lambda} \ens[b]_2$. Then the union of the support of each pair must be the same. Therefore the support of at least one element of each pair must overlap with the support of another element of another pair. This means that separate multidecomposability is not allowed. Therefore $\Ens$ is a classical probability context.
+	
+	Since ensembles are separate if and only if they have disjoint support, the $\separate$-subspace of a subset $A \subseteq \Ens$ of ensembles corresponds to all ensembles whose support is a subset of the union of the supports of the elements of $A$. Each $\separate$-subspace, then, is associated to a subset $U \subseteq \Omega$ of the sample space. If the support of a measure is a subset of $U$, it will also be a subset of any other set $V \supseteq U$. Therefore the ordering of the lattice of $\separate$-subspaces is the same as inclusion on the lattice of supports. The two lattices are isomorphic. Unlike the discrete version, in the continuous case not all sets can be the support of a probability measure that is part of the ensemble space. For example, a set of measure zero with respect to the Liouville measure cannot support a probability measure absolutely continuous with respect to the Liouville measure.
+	
+	Recall that the support of a probability measure is the smallest closed set such that $p(A) = 1$. Given that the ensemble space is formed by probability measures that are absolutely continuous with respect to the Liouville measure, the measure over the support is equal to the measure of the interior. Therefore a set $U$ corresponds to a $\separate$-subspace if and only if the $U = \overline{\interior(U)}$. Given that the measure is zero on the boundary, we can really think of each $\separate$-subspace as corresponding to those open sets that are the interior of their own closure.
+	
+	Note that any open coordinate ball is the interior of its closure. Since any point can be recovered as the limit of a decreasing sequence of open coordinate balls, every $x \in X$ corresponds to an downward refined filter of $\mathfrak{L}^\separate(C)$. That is, the downward refined filters are not principal because there is no absolutely continuous measure that has support only on $x$, but they are still associated with a single point: they corresponds the supports that contain an open neighborhood of $x$. Each $\separate$-subspace, then, corresponds to the interior of the support as there is no open neighborhood of limit points. Since $\mathfrak{L}^\separate(C)$ contains all open ball, the topology generated is the one of the manifold $X$.
+	
+	Now consider $p^*_{\ens}(U)$ for some open set $U \subseteq X$. Since $p^*_{\ens}(U) = p^*_{\ens}(\interior(\overline{U}))$ and $\interior(\overline{U})$ corresponds to a $\separate$-subspace, noted $A(\interior(\overline{U}))$, $p^*_{\ens}(U) = \fcap_{\ens}(A(\interior(\overline{U})))$. Given an absolutely continuous probability measure $p$ and a set $U$, we can write $p = p(U) \frac{\left.p\right|_{U}}{p(U)} + p(U^{\complement}) \frac{\left.p\right|_{U^{\complement}}}{p(U^{\complement})}$, which is a convex combinations of two absolutely continuous probability measures. Moreover, $p(U)$ corresponds to the greatest mixing coefficient that can be associated to a probability measure with support $U$. Therefore $p(U) = \fcap_{\ens}(A(\interior(\overline{U}))) = p^*_{\ens}(U)$, which means $p = p^*_{\ens}$.
+\end{proof}
+
+\begin{prop}
+	Let $\Ens$ be a quantum ensemble space over a symplectic manifold $X$. Then $\Ens$ is a probability context, the spectrum is $X$ and its topology is locally the standard topology of $\mathbb{R}^n$.
+\end{prop}
+
+
+\begin{remark}
+	TODO: organize. There are different types of limits. One limit of convex combinations. Physically, these are mixtures over infinitely many elements. Limit of ensemble sequences. Physically, these are sequences of ensembles, taken one after the other, for example in temporal succession. Limits of ensembles taken from $\separate$-subspaces strictly included into each other. This is the limit of ensemble that are finer and finer.
+\end{remark}
+
+We now want to show the relationship between classical probability context for classical and quantum ensembles spaces. For classical ensemble spaces the connection is simple: every classical ensemble space is classical probability context. The reverse is not true. We could have, for example, an ensemble space that is exactly like the discrete classical one except for the entropy of the pure states, which are all assumed to be zero in a discrete classical ensemble space. The convex space structure would be exactly the same, but the entropy wouldn't match. We could also have a space of probability functions defined on a space that is not symplectic. This would be classical probability contexts, but not a space of classical ensembles.
+
+\begin{conj}
+	Discrete and continuous classical ensemble spaces are classical probability contexts.
+\end{conj}
+
+%\begin{proof}
+%	Let $\Ens$ be a classical probability space and let $\mu, \nu \in \Ens$ be probability measures on some space $\Omega$. The space of probability measures is a subset of the space of signed measures. This space can be equipped with an inner product. The space of signed measures with support $U \subseteq \Omega$ forms a subspace. This means that, if we can find a $U \subseteq \Omega$ such that both $\mu(U) \neq 0$ and $\nu(U) \neq 0$, we can find a probability measure that is a component of both. That is, two probability measures that have overlapping support have a common component. Conversely, given that convex combination can only expand the support of measures, two probability measures that have no overlapping support have no common components. (TODO: if all measure are allowed, we may get also measures we do not want - Dirac measures, measures that have no continuous derivative. If not all measures are allowed, we have no existence of a measure that can be a component, and therefore there may be overlapping measures that have no common components.)
+
+%	Now, suppose $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$. This means that the support of $\ens$ is disjoint from the support of both $\ens[a]$ and $\ens[b]$, which will also be disjoint from the support of any mixture of $\ens[a]$ and $\ens[b]$ since the support of the mixture will be the union of the individual supports. This means that $\ens$ will be separate from all mixtures of $\ens[a]$ and $\ens[b]$. The property holds, then, in any classical ensemble space.
+%\end{proof}
+
+A quantum ensemble space, however, does not allow a description in terms of classical probability precisely because it allows separate multidecompositions.
+
+\begin{prop}
+	A quantum ensemble space is not a classical probability context.
+\end{prop}
+
+\begin{proof}
+	Let $\Ens$ be a quantum ensemble space. Let $A \subseteq \Ens$ the space of mixtures of a two dimensional subspace (i.e. a Bloch sphere) and consider the states $x^+$, $x^-$, $z^+$, and $z^-$, which are points on the surface that form a square. These are all separate ensembles. We have $\frac{1}{2} x^+ + \frac{1}{2} x^- = \frac{1}{2} z^+ + \frac{1}{2} z^-$ therefore the space allows separate multidecomposition and is not a classical probability context.
+\end{proof}
+
+However, given a maximal set of commuting observables, we can define a classical probability context as the set of all mixed states that commute with all the observables. This makes the spectrum of all the density operator coincide with the product of the spectra of all commuting observables, and therefore those mixed states can be characterized by a measure over the spectra.
+
+\begin{conj}
+	Let $\Ens$ be a quantum ensemble space. Let $O_i$ a maximal set of commuting observables. Let $C \subseteq \Ens$ be the set of mixed state that commute with all $O_i$. Then $C$ is a classical probability context.
+\end{conj}
+
+
+
 \section{Separability and sets}
 
 Here we try to construct better definitions for separability of sets to generalize the ones we created for probability contexts.
