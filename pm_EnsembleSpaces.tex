@@ -2128,6 +2128,12 @@ This section summarized previous attempt that turned out to be failures. These l
 
 \subsection{Measures and topology}
 
+\begin{insight}
+	Boundaries of open sets can have non-zero measure.
+\end{insight}
+
+An earlier attempt of trying to find a compatibility condition between measures and topology was to impose that boundaries of open sets have measure zero. The idea was that we cannot associate measure to non-terminating conditions. Though the conceptual idea is sensible, the specific implementation does not work. We can find a counterexample on the real line. 
+
 \begin{prop}
 	Let $\mu$ be the Lebesgue measure on the real line $\mathbb{R}$. There exists an open set $U$ such that $\mu(U) \neq \mu(\overline{U})$.
 \end{prop}
@@ -2138,64 +2144,101 @@ This section summarized previous attempt that turned out to be failures. These l
 
 \subsection{Subspaces from convex structure}\label{pm_es_failureConvexSubspace}
 
-Initially, we tried recovering the notion of subspaces purely from the convex structure. We did make some progress in the finite dimensional case, but ultimately this does not work. The ultimate problem is that it cannot be generalized to the classical continuous case. The problem of rate of convergence is described below in the example. Even if that problem is fixed, there would be nothing to determine the dimensionality of $U$, and we could create convex maps that ``stretch'' the space. This lead to the following:
 \begin{insight}
-	Convex structure, by itself, cannot define subspaces.
+	The convex structure, by itself, cannot define subspaces.
 \end{insight}
 
-The attempt was the following:
+Initially, we tried recovering the notion of subspaces purely from the convex structure. We did make some progress in the finite dimensional case, but ultimately this does not work. We identified two problems.
+
+The original definition was as follows.
 
 \begin{defn}
 	Let $\Ens$ be a convex space and $X \subseteq \Ens$ be a subset. We say that $X$ is a \textbf{subspace} of $\Ens$ if it contains all the convex combinations and all the components of its elements. That is, for every $\ens_1, \ens_2, \ens_3 \in \Ens$ and $\lambda \in (0,1)$ such that $p \ens_1 + \bar{p} \ens_2 = \ens_3$ we have:
 	\begin{itemize}
 		\item $\ens_1, \ens_2 \in X$ implies $\ens_3 \in X$
-		\item $\ens_3 \in X$ implies $\ens_1, \ens_2 \in X$
+		\item $\ens_3 \in X$ implies $\ens_1, \ens_2 \in X$.
 	\end{itemize}
-\end{defn}
-
-\begin{defn}
-	Let $\Ens$ be a convex space and $X \subseteq \Ens$.  The \textbf{convex span} of $X$, noted $\cospan(X)$, is the smallest subspace containing $X$.
+	The \textbf{convex span} of $X$, noted $\cospan(X)$, is the smallest subspace containing $X$.
 \end{defn}
 
 \begin{remark}
-	As defined, the convex span of two elements will include all their possible mixtures (i.e. the segment that connects them), all possible decompositions (i.e. all lines that pass through them) plus, recursively, all other mixtures and decompositions that can be reached from those. Physically, the idea is that not all ensembles, pure states in particular, cannot be physically realized. Therefore, the inclusion of pure states in our convex space stems from a theoretical idealization useful to decompose and study the problem. It makes sense, then, that a subspace comes with all its idealizations.
+	As defined, the convex span of two elements will include all their possible mixtures (i.e. the segment that connects them), all possible decompositions (i.e. all lines that pass through them) plus, recursively, all other mixtures and decompositions that can be reached from those. Physically, the idea is that if we act on some ensembles, then we are also acting not them but we are acting on all its components. Therefore, the proper definition of subspace does not include just the mixtures, but all possible components and all their possible mixtures.
 \end{remark}
 
-\begin{example}[Classical discrete subspaces]
+\begin{example}[Classical discrete spaces]
 	Let $S$ be a set of $n$ possible discrete states and let $\Ens$ the space of probability distributions over the set $S$ (i.e. $\Ens$ is an $n$-simplex and $S$ are its extreme points). A subspace $X$ of $\Ens$ is a convex hull of a subset $U$ of $S$. That is, a subspace of $\Ens$ is the space of probability distributions over a subset of the cases. Geometrically, it is one of the sides (possibly recursively) of the simplex.
 	
 	To see this, first note that the convex hull $X$ of any subset $U$ of extreme points $S$ is a subspace. In fact, it will contain all convex combinations of $U$, and any element can only be decomposed in convex combinations of $U$. Second, note that only convex hulls of a subset of extreme points can be a subspace. In fact, any element of $\Ens$ can be expressed as a non-trivial convex combination of a set of extreme points $U$. Therefore, if an element is present in a subspace $X$, then $U \subset X$, which means all elements of the convex hull of $U$ are in $X$.
 \end{example}
 
-\begin{remark}
-	The definition does not entirely work in the continuous case. Let $S$ be a symplectic manifold and let $\Ens$ be the space of probability distributions over $S$ (i.e. the space of continuous functions over $S$ that are integrable and integrate to one). We would like to have a definition for which a subspace of $\Ens$ is a set of functions whose support is a subset of an open region $U \subseteq S$. That is, a subspace contains all probability distributions defined over a subset of the cases. One problem is that continuity forces the function to go to zero on the boundary of $U$, and the speed of the convergence cannot be change with a finite convex combination. That is, the convex combination of functions that go down like an exponential will also go down like an exponential. The issue seems to be related to finding the correct closure for infinite convex combinations in the definition of convex space.
-\end{remark}
-
-\begin{example}[Quantum subspaces]
+\begin{example}[Finite dimensional quantum spaces]
 	Let $\mathcal{H}$ be an $n$-dimensional Hilbert space and let $\Ens$ be the space of density matrices (i.e. positive semi-definite self-adjoint operators with trace one). A subspace $X$ of $\Ens$ is the space of density matrices of a subspace $U$ of $\mathcal{H}$. That is, a subspace of $\Ens$ is the space of mixed states over a subspace of pure states.
 	
 	To see this, first note that the space of density matrices $X$ of a subspace $U$ of $\mathcal{H}$ is a subspace of $\Ens$. In fact, $X$ it will contain all convex combinations of its elements. Moreover, any element $x \in X$ can only be decomposed in a convex combination of pure states of $U$. Therefore any convex decomposition of $x$ has all its elements in $X$. Second, note that only the space of density matrices $X$ of a subspace $U$ of $\mathcal{H}$ is a subspace of $\Ens$. In fact, any element $x$ of $\Ens$ can be expressed as a non-trivial convex combination of orthogonal pure states, its eigenstates. These elements will span a subspace $U$ of $\mathcal{H}$. From those elements, we can construct an equal mixture which represents the maximally mixed states and, mathematically, is the identity operator $I/m$ divided by the number of elements $m \leq n$ of $U$. The equal mixture of any orthogonal basis of $U$ will also give the maximally mixed state. Therefore, given an element $x$, any subspace that contain $x$ will also contain a basis of $U$, the maximally mixed state $I/n$, all possible basis of $U$, which means all the pure states, and finally all convex combinations of the pure states, which means all possible density matrices, all possible mixed states.
 \end{example}
 
-\begin{defn}
-	A convex space $\mathcal{E}$ is \textbf{closed} if it contains all its extreme points.
-\end{defn}
+The definition works in these cases, which is why it looked promising, but not in general.
+
+\begin{insight}
+	Rate of convergence cannot be changed by a convex combination.
+\end{insight}
+
+\begin{prop}
+	Let $\Ens$ be the space of probability measures over $[0,1]$. Let $\ens[a]$ be the uniform distribution and let $\ens[b]$ be a distribution whose density goes to zero at the endpoints. Then $\ens[b]$ is a component of $\ens[a]$ but not vice-versa. Therefore the convex span of $\ens[a]$ is the whole $\Ens$ while the convex span of $\ens[b]$ is not the whole $\Ens$.
+\end{prop}
+
+\begin{proof}
+	Consider the two probability densities $\rho_a$ and $\rho_b$ associated with the ensembles. The density $\rho_b$ has a supremum $\sup \rho_b$ that is greater than $1$, which means $p = \frac{1}{\sup \rho_b}$ is smaller than one. The function $\rho_c = \frac{1}{\bar{p}} \rho_a - \frac{p}{\bar{p}}\rho_b$ will be a non-negative function that integrates to one. The same procedure could be applied for any probability density, which means every probability measure over $[0,1]$ is a component of the uniform distribution. Therefore the convex span of $\ens[a]$ is the whole $\Ens$.
+	
+	Conversely, consider a possible convex combination $p \rho_a + \bar{p} \rho_c = \rho_b$. Since $\rho_b$ converges to zero at the endpoints, for each $p$ there will be a neighborhood of $0$ for which $p\rho_a$ is greater than $\rho_b$. Therefore $\rho_c$ cannot be a non-negative function. This means that $\ens[a]$ is not a component of $\ens[b]$ and the convex span of $\ens[b]$ is not the whole $\Ens$.
+\end{proof}
+
+This means that this notion of subspace does not simply return all the function with the same support, but the function with the same support and a particular class of convergence on the boundaries, and possibly at interior points.
+
+One key problem is that it cannot be generalized to the classical continuous case, as the rate of convergence cannot be changed by finite convex combinations. Even if that problem is fixed, there would be nothing to determine the dimensionality of $U$, and we could create convex maps that ``stretch'' the space. This lead to the following:
+
+\begin{insight}
+	Dimension/count of states cannot be determined by the convex structure.
+\end{insight}
+
+Even if the previous problem is solved, the ``size'' of the subspace cannot be determined with a convex structure alone. In the finite dimensional case this works, but in the infinite dimensional case it does not. 
+
+\begin{prop}
+	Let $X=M_1([0,1])$ and $Y=M_1([0,2])$ be the spaces of probability measures on $[0,1]$ and $[0,2]$ respectively. The function $f : [0,1] \to [0,2]$ such that $f(x) = 2x$ is a diffeomorphism and induces a bijective continuous affine map between $M_1([0,1])$ and $M_1([0,2])$. However, the entropy is not conserved through the map.
+\end{prop}
 
 \begin{defn}
-	Let $\mathcal{E}$ be a convex space and $X \subset \mathcal{E}$ be a subspace of $\mathcal{E}$. The \textbf{dimension} of $X$, noted $\dim(X)$, is the minimum number of extreme points whose convex span is $X$.
+	In terms of the probability measures, the map simply acts on the transformed sets. That is, $\mu_Y(A) = \mu_X(f^{-1}(A))$. This, for example, maps the uniform distribution over $[0,1]$ to the uniform distribution over $[0,2]$. Therefore $A$ and $B$ are isomorphic as convex spaces. However, the entropy over a uniform distribution changes with the range, therefore the entropy is not conserved through the map.
 \end{defn}
 
-\begin{conj}
-	Let $\mathcal{E}$ be closed convex space of finite dimensions. Then:
-	\begin{itemize}
-		\item $\mathcal{E}$ is a simplex if and only if every two dimensional subspace is a line segment
-		\item the set of extreme points of $\mathcal{E}$ is a complex projective space if and only if every two dimensional subspace is a two dimensional sphere ($\mathcal{E}$ is the space of density matrices).
-	\end{itemize}
-\end{conj}
+This means that the convex structure and the topology are not enough to determine the size of the space. This means that, without information about the entropy, we are not going to be able to tells that we spread ensembles over double the distance.
 
-\begin{remark}
-	The only if is easy to show based on the discussion above. The if part does not actually work. Take 6 points in a 4 dimensional euclidean space such that the form two triangles that intersect at a single point. All two dimensional convex spaces will be segments. However, the whole convex hull is not a simplex. 
-\end{remark}
+
+\subsection{Spectrum from subspaces}
+
+\begin{insight}
+	The lattice of subspaces is not enough to recover the points.
+\end{insight}
+
+Originally, we intended to recover the spectrum of an operator (i.e. the values possible values over which the distribution is defined) by taking the limit of subspaces. For example, for position a possible value $x$ would be the limit of the sequence of subspaces of distributions with support $[x-\epsilon, x+\epsilon]$. Formally, the construction was similar to the \href{https://en.wikipedia.org/wiki/Stone%27s_representation_theorem_for_Boolean_algebras}{Stone's representation theorem for Boolean algebras}, and the points were the ultrafilters. However, this does not work as the ultrafilters are ``too fine.'' When reconstructing a real line, for example, the limit approaching from below and the limit approaching from above would be two separate points.
+
+The core of the problem is that the lattice of subspaces recover the Boolean algebra of the regular open sets. However, the lattice of the regular open sets is not enough to reconstruct the points of the space.
+
+\begin{prop}[Regular open sets are not enough]\label{pm_es_regularOpenSetsNotEnough}
+	Let $X$ and $Y$ be two topological spaces such that the respective lattices of regular open sets $R_X$ and $R_Y$ are isomorphic as Boolean algebras. It does not follow that $X$ and $Y$ are homeomorphic as topological spaces.
+\end{prop}
+
+\begin{proof}
+	Let $X=S^1$ be a circle with the standard topology, $Y=\mathbb{R}$ be the real line with the standard topology and $Z=\mathbb{R}\setminus \{0\}$ be the real line without the origin. Note that the circle is the one point compactification of the real line, and therefore $Y=X\setminus \{\infty\}$. This forms a chain of embedding $Z \to Y \to X$.
+	
+	Suppose $U_X$ is a regular open set in $X$. Then $U_Y = U_X \setminus \{\infty\}$ is an open set in $Y$. We also have $\overline{U_Y} = \overline{U_X} \setminus \{\infty\}$ and $\interior(\overline{U_Y}) = \interior(\overline{U_X}) \setminus \{\infty\}$ where the closure and interior are taken in the respective spaces. Therefore $U_Y$ is a regular open set. Also, let $U_X$ and $V_X$ be two distinct open sets of $X$. Then, since every open set that contains $\{\infty\}$ also contains an open neighborhood of $\{\infty\}$, the corresponding $U_Y$ and $V_Y$ will also be two distinct open sets. Then $\iota(U_X) = U_X \setminus \{\infty\}$ is an injection between the regular open sets of $X$ and $Y$. Now let $U_Y$ be a regular open set on $U$. Let $U_X = \interior(\overline{U_Y \cup \{ \infty \}})$ where the  closure and interior are taken in $X$. Then $U_X$ is a regular open set of $X$ because it is the interior of a closure. Also note that $\interior(\overline{\iota(U_X) \cup \{ \infty \}}) = \interior(\overline{U_X \setminus \{\infty\} \cup \{ \infty \}}) = \interior(\overline{U_X}) = U_X$. Therefore the map $\iota$ is a bijection between the regular open sets of $X$ and $Y$.
+	
+	Note that regular open sets form a Boolean algebra where the complement is the exterior, the join is the interior of the closure of the union and the meet is the intersection. Note that if $U_X \subset V_X$, then $\iota(U_X) \subset \iota(V_X)$, therefore $\iota$ preserves the joins and the meets. Now let $V_X = \exterior(U_X)$ and consider $\iota(V_X)$. This will contain all the exterior points of $U_X$ minus $\{\infty\}$. But these are also the exterior points of $\iota(U_X)$. Therefore $\exterior(\iota(U_X)) = \iota(\exterior(U_X))$. The bijection is an isomorphism of Boolean algebras, and the corresponding algebras of regular open sets are isomorphic. The same reasoning applies when comparing $Y$ to $Z$.
+	
+	Now, note that $\{\infty\}$ is a closed set, but not a regular closed set. Therefore we are going to be able to construct a similar argument for the lattice of regular closed sets
+\end{proof}
+
+Since the construction below wants to recover the points of the space from what happens to be the algebras of regular open (or closed) sets, the above proposition implies that this is not possible. We would not be able to know, for example, whether the points form a circle or a real line. Even if we knew that they form a real line, and would know what half-lines we have, we would not know how to stitch them back together, as we could do it with $\{0\}$ or with $\{\infty\}$. We would need to know, at least, which intervals would correspond to a finite interval (e.g. a finite entropy), which requires more structure.
 
 \iftrue
 
