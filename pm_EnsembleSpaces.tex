@@ -88,6 +88,8 @@ However, the space of all probability measures is too large. Note that the entro
 
 Also note that expectation values are not guaranteed to be finite either, and requiring a particular observable to be finite further restricts the space. This restriction may be desirable for another reason: a discrete ensemble space has no notion of the ordering of the pure states. Physically, this would mean that the states with 1, 100, or 1 trillion particles are ``equally distant'' (i.e. all infinite permutations are allowed). Requiring the expectation of the number of particles to be finite (e.g. $\sum_i N(i) p_i < \infty$) should effectively encode the infinite ordering in the rate of convergence of the probability distributions (i.e. not all infinite permutations would be allowed).
 
+Another problem is which is the correct topology for the space. The entropy defines a notion of orthogonality, as we will see later, based on the disjoint support of distributions. This suggests that we need a space with an inner product, therefore we should require the probability distribution to be square integrable. However, the inner product could be defined on the square root of the probability distribution, more in line with the quantum case, which would be well defined as probability is never negative. It is not yet clear which is the correct case.
+
 \subsubsection{No uncountable case}
 
 The uncountably infinite case is not physically relevant (i.e. no second countable discrete topology, cases are not experimentally decidable). Also note that any set of real numbers whose sum is finite can have only countably many non-zero elements. To understand why, note that there can only be finitely many terms above any particular positive value if their sum is to remain finite. Effectively, the uncountable case would be stitching together infinitely many countable cases.
@@ -162,15 +164,17 @@ The fact that we start from ensembles and recover the probability of outcomes, i
 
 We should now verify that our three basic cases satisfy the axiom of ensemble.
 
+\begin{mathSection}
 \begin{prop}
 	Classical discrete, classical continuous and quantum ensemble spaces satisfy the axiom of ensemble.
 \end{prop}
 
 \begin{proof}
-	For the classical discrete case, including all infinite convex combinations, we have the subset of $\ell^1$ of all non-negative sequences that sum to one. Similarly, for the classical continuous case we have the subset of $L^1$ that corresponds to non-negative distributions that integrate to one. Both of these spaces are separable, admit a countable orthonormal basis and can be given a topology that is $\textsf{T}_0$ and second countable.
+	For the classical discrete case, including all infinite convex combinations, we have the subset of $\ell^1$ of all non-negative sequences that sum to one. Similarly, for the classical continuous case we have the subset of $L^1$ that corresponds to non-negative distributions that integrate to one. Both of these spaces, with the subspace topology, are separable, admit a countable orthonormal basis and can be given a topology that is $\textsf{T}_0$ and second countable. Note that, in case the correct formulation is in terms of square integrable functions, instead of simply integrable functions, the space is still $\textsf{T}_0$ and second countable.
 	
-	For the quantum case, the Hilbert space is also separable, will admit a countable orthonormal basis and can be given a topology that is $\textsf{T}_0$ and second countable. An operator will be fully defined by its result on the basis, which means that it is also a vector space with a countable basis and can be given a topology that is $\textsf{T}_0$ and second countable.
+	For the quantum case, the Hilbert space with its standard topology is also separable, will admit a countable orthonormal basis and can be given a topology that is $\textsf{T}_0$ and second countable. An operator will be fully defined by its result on the basis, which means that it is also a vector space with a countable basis and can be given a topology that is $\textsf{T}_0$ and second countable.
 \end{proof}
+\end{mathSection}
 
 \section{Axiom of mixture and convex spaces}
 
@@ -218,9 +222,9 @@ We should now check that the axiom of mixture is satisfied by the standard cases
 \end{prop}
 
 \begin{proof}
-	The space $\Ens$ of probability measures, discrete or continuous, is a convex subset of the vector space of signed finite measures. It is therefore closed under convex combinations: if $\ens[a], \ens[b] \subseteq \Ens$ are probability measures, then $p \ens[a] + \bar{p} \ens[b]$ is a probability measure. The properties of mixing are inherited from the properties of linear combinations. Therefore the discrete and continuous classical ensemble spaces satisfy the axiom of mixture.
+	The space $\Ens$ of probability measures, discrete or continuous, is a convex subset of the topological vector space of signed finite measures. It is therefore closed under convex combinations: if $\ens[a], \ens[b] \subseteq \Ens$ are probability measures, then $p \ens[a] + \bar{p} \ens[b]$ is a probability measure. The properties of mixing are inherited from the properties of linear combinations, which include continuity. Therefore the discrete and continuous classical ensemble spaces satisfy the axiom of mixture.
 	
-	Similarly, the space of positive semi-definite self-adjoint operators with trace one is a convex subset of the vector space of self-adjoint operators. Therefore it is closed under convex combinations and it will satisfy the axiom of mixture.
+	Similarly, the space of positive semi-definite self-adjoint operators with trace one is a convex subset of the topological vector space of self-adjoint operators. Therefore it is closed under convex combinations, which are continuous in the given topology, and it will satisfy the axiom of mixture.
 \end{proof}
 \end{mathSection}
 
@@ -228,6 +232,7 @@ We should now check that the axiom of mixture is satisfied by the standard cases
 
 We can always extend the notion of mixture to a finite convex combination. Commutativity and associativity makes these mixture independent from the mixing order.
 
+\begin{mathSection}
 \begin{defn}[Finite mixture]
 	Let $\{e_i\}_{i=1}^{n} \subseteq \Ens$ be a finite subset of ensembles and $\{p_i\} \in [0,1]$ be a finite set of coefficients such that $\sum_{i=1}^{n} p_i = 1$, then the finite mixture, noted $\ens[a] = \sum_{i=1}^{n} p_i \ens_i$, is defined to be
 	$$p_1 \ens_1 + (1-p_1)\left( \tfrac{p_2}{1-p_1} \ens_2 + \tfrac{1-p_1-p_2}{1-p_1} \left( \tfrac{p_3}{1-p_1-p_2} \ens_3 +  \tfrac{1-\sum_{i=1}^{3}p_i}{1-p_1-p_2}\left(\ldots+\tfrac{1-\sum_{i=1}^{n-1}p_i}{1-\sum_{i=1}^{n-2}p_i}\left(\tfrac{p_{n-1}}{1- \sum_{i=1}^{n-1}p_i} \ens_{n-1} + \tfrac{p_n}{1- \sum_{i=1}^{n-1}p_i}\ens_n\right)\right) \right) \right).$$
@@ -258,17 +263,24 @@ We can always extend the notion of mixture to a finite convex combination. Commu
 \begin{remark}
 	Note that we can collect and expand convex combination into other convex combinations. Because coefficients always sum to one, when breaking the expression in two, we can always calculate the new coefficients from one part. For example, $p_a \ens[a] + p_b \ens[b] + p_c \ens[c] + p_d \ens[d] = p(\frac{p_a}{p} \ens[a] + \frac{p_b}{p} \ens[b]) + \bar{p}(\frac{p_c}{\bar{p}} \ens[c] + \frac{p_d}{\bar{p}} \ens[d])$ where $p = p_a + p_b$ is defined only on the left part. Since $1 = p + \bar{p} = p_a +p_b + p_c + p_d$, we automatically have that $\bar{p} = p_c + p_d$.
 \end{remark}
+\end{mathSection}
 
 While mixtures of finitely many elements are always guaranteed to exist, the extension to mixture of infinite elements is not. First of all, an infinite mixture of ensembles with finite entropy \href{https://arxiv.org/pdf/1212.5630}{does not necessarily have finite entropy}. Secondly, it may lead to infinite expectation values which make ensembles not physically meaningful. For example, suppose we put $i$ particles in a box according to the distribution $\frac{6}{\pi^2 i^2}$ given that $\sum_{i=1}^{\infty} \frac{6}{\pi^2 i^2}=1$. The expectation $\sum_{i=1}^{\infty} \frac{6}{\pi^2 i^2} i$ diverges. Given that every finite preparation will have a finite expectation value, the actual implementation of that ensembles will necessarily give us a stream of preparations whose number of particle must keep increasing. No finite statistics is representative of the ensemble and, worst of all, the finite statistics will necessarily have arbitrarily large differences. We therefore cannot simply look at the coefficients to understand whether the infinite mixture gives us a valid ensemble or not.
 
 Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in the ensemble space is determined by the topology (i.e. experimental verifiability). The strategy will be to work with only finite convex combinations and let the closure of the topology handle the limits.
 
+\begin{mathSection}
 \begin{defn}[Infinite mixture]
-	Let $\{e_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\} \in [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$, then the ensemble $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$ is, if it exists, the limit of sequence of finite mixtures $\lim\limits_{n\to\infty} \sum_{i=1}^{n} p_i \ens_i$.
+	Let $\{e_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\} \in [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$, then the ensemble $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$ is, if it exists, the limit of sequence of finite mixtures $\lim\limits_{n\to\infty} \sum_{i=1}^{n} p_i \ens_i$  as defined by the topology.
 \end{defn}
+\end{mathSection}
 
-\begin{conj}[Convergence of submixtures]
-	All the submixtures of an infinite mixture converge. That is, if $\sum_{i=1}^{\infty} p_i \ens_i$ convergence, then $\sum_{i \in I} p_i \ens_i$ for all $I \subseteq \mathbb{N}$.
+\begin{conj}[Convergence of submixtures (finite)]
+	If $\sum_{i=1}^{\infty} p_i \ens_i$ converge, then $\sum_{i=2}^{\infty} p_i \ens_i$.
+\end{conj}
+
+\begin{conj}[Convergence of submixtures (infinite)]
+	All the submixtures of an infinite mixture converge. That is, if $\sum_{i=1}^{\infty} p_i \ens_i$ converge, then $\sum_{i \in I} p_i \ens_i$ for all $I \subseteq \mathbb{N}$.
 \end{conj}
 
 \subsection{Common components and separateness}
@@ -447,6 +459,10 @@ In many cases, we will need to discuss the set of all possible mixtures of a giv
 	Note that the hull is not necessarily continuous from below. That is, it is not necessarily true that $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any increasing sequence $A_i \subseteq \Ens$. The limit from below, in fact, would correspond to the infinite union of closed sets, which is not necessarily a closed set. Therefore if we take the closure after the limit, we are going to include the infinite convex combinations that require, for example, an element from each of the $A_i$.
 \end{remark}
 \end{mathSection}
+
+\begin{conj}
+	Let $A \subset \Ens$ be a set of ensembles and let $\ens \in \hull(A)$. Then we can find  $\{\ens[a]_i\} \subseteq A$ and $p_i \in [0,1]$ such that $\ens = \sum_i p_i \ens[a]_i$.
+\end{conj}
 
 \begin{conj}
 	The topological closure of the finite convex closure is closed under convex combinations.
