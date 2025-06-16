@@ -276,7 +276,7 @@ Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in t
 \end{mathSection}
 
 \begin{conj}[Convergence of submixtures (finite)]
-	If $\sum_{i=1}^{\infty} p_i \ens_i$ converge, then $\sum_{i=2}^{\infty} p_i \ens_i$.
+	If $\sum_{i=1}^{\infty} p_i \ens_i$ converges, then $\sum_{i=2}^{\infty} \frac{p_i}{\bar{p_1}} \ens_i$ converges.
 \end{conj}
 
 \begin{conj}[Convergence of submixtures (infinite)]
@@ -311,13 +311,17 @@ The convex structure allows us to characterize ensembles based on whether they c
 \end{remark}
 
 \begin{defn}
-	Let $\Ens$ be an ensemble space. An \textbf{extreme point} $\ens \in \Ens$ is an ensemble that has no component distinct from itself. That is, there is no $\ens[a] \in \Ens\setminus\{ \ens \}$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1]$ and $\ens[b] \in \Ens$. An \textbf{interior point} $\ens \in \Ens$ is an ensemble for which every ensemble is a component. That is, for every $\ens[a] \in \Ens$ there is always $\ens[b] \in \Ens$ and $p(0,1]$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$. A \textbf{boundary point} is any ensemble that is not an interior point.
+	Let $\Ens$ be an ensemble space. An \textbf{extreme point} $\ens \in \Ens$ is an ensemble that has no component distinct from itself. That is, there is no $\ens[a] \in \Ens\setminus\{ \ens \}$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1]$ and $\ens[b] \in \Ens$. An \textbf{internal point} $\ens \in \Ens$ is an ensemble for which every ensemble is a component. That is, for every $\ens[a] \in \Ens$ there is always $\ens[b] \in \Ens$ and $p(0,1]$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$. A \textbf{boundary point} is any ensemble that is not an internal point.
 \end{defn}
+
+\begin{remark}
+	The notion of internal point parallel \href{https://en.wikipedia.org/wiki/Algebraic_interior}{the similar notion} in topological vector spaces.
+\end{remark}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{tempimages/InteriorExteriorPoints.jpg}
-	\caption{The ensemble $\ens[a]$ is an extreme point in both spaces. $\ens[b]$ is a boundary point, but is not an extreme point (it is the mixture of the vertices on the same side). $\ens[c]$ is an interior point.}
+	\caption{The ensemble $\ens[a]$ is an extreme point in both spaces. $\ens[b]$ is a boundary point, but is not an extreme point (it is the mixture of the vertices on the same side). $\ens[c]$ is an internal point.}
 \end{figure}
 
 \begin{defn}
@@ -340,7 +344,7 @@ The convex structure allows us to characterize ensembles based on whether they c
 		\item if $\ens[a]$ is a component of $\ens[b]$, then $\ens[a]$ and $\ens[b]$ have a common component and therefore they are not separate
 		\item separateness is an irreflexive symmetric relation
 		\item an ensemble is an extreme point if and only if it is separate from all other ensembles
-		\item an ensemble is an interior point if and only if it is not separate from any ensemble
+		\item an ensemble is an internal point if and only if it is not separate from any ensemble
 	\end{enumerate}
 \end{coro}
 
@@ -353,7 +357,7 @@ The convex structure allows us to characterize ensembles based on whether they c
 	
 	4. An extreme point has only itself as a component, therefore it can have a common component only with itself.
 	
-	5. Every ensemble is a component of an interior point, therefore every ensemble is not separate from an interior point
+	5. Every ensemble is a component of an internal point, therefore every ensemble is not separate from an internal point
 \end{proof}
 \end{mathSection}
 
@@ -452,7 +456,7 @@ In many cases, we will need to discuss the set of all possible mixtures of a giv
 \begin{proof}
 	Since $A_i$ is a decreasing sequence, $\lim\limits_{i \to \infty} A_i = \bigcap_i A_i$. Also, since $A_{i+1} \subseteq A_i$, then $\hull(A_{i+1}) \subseteq \hull(A_i)$ and therefore $\hull(A_i)$ is a decreasing sequence. This also means $\lim\limits_{i \to \infty} \hull(A_i) = \bigcap_i \hull(A_i)$. Therefore we need to show that $\hull(\bigcap_i A_i) = \bigcap_i \hull(A_i)$.
 	
-	Since the arbitrary intersection of convex sets is a convex set, $\bigcap_i \hull(A_i)$ is a convex set. Therefore $\bigcap_i \hull(A_i) = \hull(\bigcap_i \hull(A_i))$. Note that a mixture of mixture of elements can always be re-expressed as a mixture of elements. Moreover, an element that is the mixture of $A_i$ for all $i$ can be re-expressed as a mixture of the common elements, since $A_{i+1} \subset A_i$. Therefore $\hull(\bigcap_i \hull(A_i)) = \hull(\bigcap_i A_i)$. This means $\hull(\bigcap_i A_i) = \bigcap_i \hull(A_i)$, which proves the proposition.
+	Since the arbitrary intersection of convex sets is a convex set, $\bigcap_i \hull(A_i)$ is a convex set. Therefore $\bigcap_i \hull(A_i) = \hull(\bigcap_i \hull(A_i))$. Note that a mixture of mixture of elements can always be re-expressed as a mixture of elements. TODO: this needs to be clarified. Moreover, an element that is the mixture of $A_i$ for all $i$ can be re-expressed as a mixture of the common elements, since $A_{i+1} \subset A_i$. Therefore $\hull(\bigcap_i \hull(A_i)) = \hull(\bigcap_i A_i)$. This means $\hull(\bigcap_i A_i) = \bigcap_i \hull(A_i)$, which proves the proposition.
 \end{proof}
 
 \begin{remark}
@@ -809,7 +813,7 @@ While the motivation is straight-forward, the construction is complicated by the
 \begin{mathSection}
 	
 	\begin{defn}[Ensemble differences]
-		Given an ensemble space, a difference between two ensemble represents the change required to transform one ensemble into another. Formally, an \textbf{ensemble difference}, noted $r(\ens[b] - \ens[a])$, is a triple formed by a real number $r \in \mathbb{R}$ and an ordered pair of ensembles $\ens[a],\ens[b] \in \Ens$.
+		Given an ensemble space, a difference between two ensembles represents the change required to transform one ensemble into another. Formally, an \textbf{ensemble difference}, noted $r(\ens[b] - \ens[a])$, is a triple formed by a real number $r \in \mathbb{R}$ and an ordered pair of ensembles $\ens[a],\ens[b] \in \Ens$.
 	\end{defn}
 	
 	\begin{defn}
@@ -886,13 +890,13 @@ While the motivation is straight-forward, the construction is complicated by the
 	\end{check}
 	
 	\begin{coro}
-		Let $\ens[a] \in \Ens$ be an ensemble and let $V = \{ [r(\ens[b]-\ens[a])] \}$ be the set of equivalence classes of ensemble differences from $\ens[a]$. Then the addition of ensemble difference over $V$ is a commutative monoid. If $\ens[a]$ is an interior point, the addition is an abelian group.
+		Let $\ens[a] \in \Ens$ be an ensemble and let $V = \{ [r(\ens[b]-\ens[a])] \}$ be the set of equivalence classes of ensemble differences from $\ens[a]$. Then the addition of ensemble difference over $V$ is a commutative monoid. If $\ens[a]$ is an internal point, the addition is an abelian group.
 	\end{coro}
 	
 	\begin{proof}
 		The operation is commutative as the definition of addition is symmetric over its arguments. The operation is associative as further sums of equivalence classes turn into additions of the real coefficients and extensions of affine combinations both of which are associative. The zero equivalence class $[0(\ens[b] - \ens[a])]$ is the identity element, as shown in the previous proof. The addition is a commutative monoid.
 		
-		Now let $\ens[a]$ is an interior point and let $[r(\ens[b] - \ens[a])]$ be an equivalence class. Since $\ens[a]$ is an interior point, we can find $\ens[c] \in \Ens$ such that $\ens[a] = p \ens[b] + \bar{p} \ens[c]$. Consider $\left[r\frac{\bar{p}}{p}(\ens[c] - \ens[a])\right]$. Note that $r + r\frac{\bar{p}}{p} = \frac{r}{p}(p+\bar{p}) = \frac{r}{p}$. The addition is given by
+		Now let $\ens[a]$ is an internal point and let $[r(\ens[b] - \ens[a])]$ be an equivalence class. Since $\ens[a]$ is an internal point, we can find $\ens[c] \in \Ens$ such that $\ens[a] = p \ens[b] + \bar{p} \ens[c]$. Consider $\left[r\frac{\bar{p}}{p}(\ens[c] - \ens[a])\right]$. Note that $r + r\frac{\bar{p}}{p} = \frac{r}{p}(p+\bar{p}) = \frac{r}{p}$. The addition is given by
 		\begin{equation}
 			\begin{aligned}
 				&\left[\left(r+r\frac{\bar{p}}{p}+k\right) \left(\left(\frac{r}{r+r\frac{\bar{p}}{p}+k}\ens[b] + \frac{r\frac{\bar{p}}{p}}{r+r\frac{\bar{p}}{p}+k} \ens[c] +\frac{k}{r+r\frac{\bar{p}}{p}+k} \ens[a] \right) - \ens[a]\right)\right] \\
@@ -904,8 +908,8 @@ While the motivation is straight-forward, the construction is complicated by the
 		This means that $\left[r\frac{\bar{p}}{p}(\ens[c] - \ens[a])\right]$ is the inverse of $[r(\ens[b] - \ens[a])]$ and that the addition is an abelian group.
 	\end{proof}
 	
-	\begin{thrm}[Differences from a vector space]
-		Let $\ens[a] \in \Ens$ be an interior point and let $V = \{ [r(\ens[b]-\ens[a])] \}$ be the set of equivalence classes of ensemble differences from $\ens[a]$. Then $V$ is a vector space under the scalar multiplication and addition.
+	\begin{thrm}[Differences form a vector space]
+		Let $\ens[a] \in \Ens$ be an internal point and let $V = \{ [r(\ens[b]-\ens[a])] \}$ be the set of equivalence classes of ensemble differences from $\ens[a]$. Then $V$ is a vector space under scalar multiplication and addition.
 	\end{thrm}
 	
 	\begin{proof}
@@ -935,7 +939,7 @@ While the motivation is straight-forward, the construction is complicated by the
 	\end{proof}
 	
 	\begin{defn}
-		Given an internal point $\ens[a]$, the \textbf{natural embedding} of $\Ens$ into $V_{\ens[a]}$ is the map $\iota_{\ens[a]} : \Ens \hookrightarrow V_{\ens[a]}$ defined as $\iota(\ens) \to [(\ens - \ens[a])]$ is the  of the vector space in the space of differences from $\ens[a]$.
+		Given an internal point $\ens[a]$, the \textbf{natural embedding} of $\Ens$ into $V_{\ens[a]}$ is the map $\iota_{\ens[a]} : \Ens \hookrightarrow V_{\ens[a]}$, defined as $\iota_{\ens[a]}(\ens) \to [(\ens - \ens[a])]$, that maps each ensemble to its difference from $\ens[a]$.
 	\end{defn}
 	
 	\begin{coro}
@@ -1099,6 +1103,14 @@ Another constraint that the entropy imposes is that every affine direction is bo
 	Note that this does not mean that, along each direction, the line is closed in the vector space. That is, it may not include the extreme points. in the convex space. An open bounded interval, in fact, is still a convex space and we would be able to define an entropy on it.
 \end{remark}
 \end{mathSection}
+
+\begin{prop}
+	The ensemble space is, as a subset of the embedding vector space, a radial set and, since the vector space is real, an absorbing set.
+\end{prop}
+
+\begin{proof}
+	Let $\ens[a] \in \Ens$ be an internal point and $\Ens \subseteq V_{\ens[a]}$ be the ensemble space as a subset of the embedding vector space. Since $\ens[a]$ is an internal point, for every direction there exist a finite segment that starts from $\ens[a]$ and proceeds in that direction. Therefore the ensemble space is a radial set. Moreover, since in a real vector space \href{https://en.wikipedia.org/wiki/Radial_set#Relation_to_absorbing_sets}{every radial is absorbing}, the ensemble space is an absorbing set. TODO: find a better reference.
+\end{proof}
 
 \section{Entropic geometry}
 
@@ -1576,7 +1588,7 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 
 \begin{mathSection}
 \begin{defn}
-	Let $A \subseteq \Ens$ be the subset of an ensemble space. The \textbf{state capacity} of $A$ is defined as $\capacity(A) = \sup(2^{S(\hull(A))}\cup\{0\})$.
+	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{state capacity} of $A$ is defined as $\capacity(A) = \sup(2^{S(\hull(A))}\cup\{0\})$.
 \end{defn}
 
 \begin{prop}
@@ -1808,7 +1820,7 @@ A common case is when all ensembles are identifiable by a set of statistical var
 \end{prop}
 
 \begin{proof}
-	Let $F$ be a variable on $\Ens$, let $\ens[a] \in \Ens$ an interior point and and let $V_{\ens[a]}$ be the vector space of differences. Define $F_{\ens[a]} : V_{\ens[a]} \to \mathbb{R}$ such that $F_{\ens[a]}([r(\ens[b]-\ens[a])]) = |r (F(\ens[b]) - F(\ens[a]))|$.
+	Let $F$ be a variable on $\Ens$, let $\ens[a] \in \Ens$ an internal point and let $V_{\ens[a]}$ be the vector space of differences. Define $F_{\ens[a]} : V_{\ens[a]} \to \mathbb{R}$ such that $F_{\ens[a]}([r(\ens[b]-\ens[a])]) = |r (F(\ens[b]) - F(\ens[a]))|$.
 	
 	First we show that $F_{\ens[a]}$ does not depend on the representative. If we have the zero class, then either $r=0$ or $\ens[b] = \ens[a]$. In both cases, the function evaluates to zero. For the non-zero class, we have
 	\begin{equation}
