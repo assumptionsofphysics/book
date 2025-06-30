@@ -2891,58 +2891,54 @@ Negative entropy is not compatible with the third law of thermodynamics, which s
 
 First of all, since we saw that units have an important role, consider the expression for thermodynamic entropy $S=k_B \log W$ where $k_B$ is the Boltzmann constant and $W$ is a volume of phase space. Given that a logarithm must take pure numbers, the expression is dimensionally incorrect. To correct it, we should take
 \begin{equation}
-	S = k_B \log \frac{W}{W_0}
+	S = k_B \log \frac{W}{h}
 \end{equation}
-where $W_0$ can be understood as the volume for which the thermodynamic entropy is zero. As we saw, units of momentum are units of configurations, of areas in phase space, over units of position. Therefore we can choose units of momentum such that $W_0$ is, numerically, one, but not dimensionally. To keep track of the value and units of $W_0$ separately, then, let's write
+where $h$ can be understood as the volume for which the thermodynamic entropy is zero.\footnote{We stress that here $h$ is defined purely from the zero of the thermodynamic entropy, and it would be a value that is to be found experimentally. Experimentally, one would find the value of the Planck constant.} As we saw, units of momentum are units of configurations, of areas in phase space, over units of position. Therefore we can choose units of momentum such that $h$ is, numerically, one, but not dimensionally. To keep track of the value and units, let $[qp]$ denote the unit of the product between position and momentum, and let $(W)$  of $(h)$ denote the respective numeric values. We have
 \begin{equation}
-	W_0 = w_0 \textbf{1}^{qp}
+	S = k_B \log \frac{W}{h} = k_B \log \frac{(W)[qp]}{(h) [qp]} = k_B \log \frac{(W)}{(h)} = k_B \log (W) - k_B \log (h)
 \end{equation}
-where $w_0$ is the pure numeric value and $\textbf{1}^{qp}$ is the product of the units of $q$ and $p$. If we substitute in the above expression, we find
-\begin{equation}
-	S = k_B \log \frac{W}{w_0 \textbf{1}^{qp}} = k_B \log \frac{W}{\textbf{1}^{qp}} - k_B \log w_0 = k_B \log W - k_B \log w_0
-\end{equation}
-where $\log W$ is the logarithm of the numeric value of $W$. This clearly show that changing $w_0$, the numeric value of $W_0$, changes the zero for the entropy.
+where $\log (W)$ is the logarithm of the numeric value of $W$. This clearly show that changing $(h)$, the numeric value of $h$, changes the zero for the entropy and therefore the value of $h$ can be fixed by requiring that the entropy is zero if $W=h$.
 
 To make the Gibbs-Shannon entropy consistent with the previous definition, we must set
 \begin{equation}
-	I[\rho] = - k_B \int \rho \log ( W_0 \rho ) \; dq dp.
+	I[\rho] = - k_B \int \rho \log ( h \rho ) \; dq dp.
 \end{equation}
 If we take a uniform distribution $\rho_U$ over a region $U$ with volume $W$, we find
 \begin{equation}
 	\begin{aligned}
-		I[\rho] &= - k_B \int \rho_U \log ( W_0 \rho_U ) \; dq dp = - k_B \int_{U} \frac{1}{W} \log \frac{W_0}{W} \; dq dp \\
-		&= k_B \log \frac{W}{W_0} \frac{ \int_{U} dq dp}{W} \;  = k_B \log \frac{W}{W_0}
+		I[\rho] &= - k_B \int \rho_U \log ( h \rho_U ) \; dq dp = - k_B \int_{U} \frac{1}{W} \log \frac{h}{W} \; dq dp \\
+		&= k_B \log \frac{W}{h} \frac{ \int_{U} dq dp}{W} \;  = k_B \log \frac{W}{h}
 	\end{aligned}
 \end{equation}
 Similarly to before, we find
 \begin{equation}
 	\begin{aligned}
-	I[\rho] &= - k_B \int \rho \log (W_0 \rho) \; dq dp = - k_B \int \rho \log (\rho \textbf{1}^{qp}) \; dq dp - k_B \int \rho \log w_0 \; dq dp \\
-	&= - k_B \int \rho \log (\rho \textbf{1}^{qp}) \; dq dp - k_B \log w_0 \\
-	&= - k_B \int \rho \log \rho \; dq dp - k_B \log w_0
+	I[\rho] &= - k_B \int \rho \log (h \rho) \; dq dp = - k_B \int \rho \log \left( (h)[qp](\rho)[q^{-1}p^{-1}] \right) \; dq dp  \\
+	&= - k_B \int \rho \log (\rho) \; dq dp - k_B \log (h) \\
+	&= - k_B \int \rho \log (\rho) \; dq dp - k_B \log (h)
 	\end{aligned}
 \end{equation}
-which again shows that $w_0$ changes the zero for entropy.
+which again shows that $(h)$ fixes the zero for entropy.
 
 We are now ready to study the relationship between spreads in classical phase space and entropy. We want to find the distribution $\rho$ with zero entropy that minimizes the uncertainty. To do that, we set up a minimization problem using Lagrange multipliers. We want to minimize the product of the variances $\sigma_q^2 \sigma_p^2 \equiv \int (q-\mu_q)^2 \rho \, dqdp \int (p-\mu_p)^2 \rho \, dqdp$, where $\mu_q$ and $\mu_p$ are the mean position and momentum, under two constraints: $\rho$ integrates to 1 and its entropy is zero. We have: 
 \begin{align*}
 	L = &\int (q-\mu_q)^2 \rho \, dqdp \int (p-\mu_p)^2 \rho \, dqdp \\
-	&+ \lambda_1(\int \rho dqdp - 1) + \lambda'_2(- k_B \int \rho \ln (W_0 \rho) \, dqdp - 0)\\
+	&+ \lambda_1(\int \rho dqdp - 1) + \lambda'_2(- k_B \int \rho \ln (h \rho) \, dqdp - 0)\\
 	= &\int (q-\mu_q)^2 \rho \, dqdp \int (p-\mu_p)^2 \rho \, dqdp \\
-&+ \lambda_1(\int \rho dqdp - 1) + \lambda_2(- \int \rho \ln \rho \, dqdp - \ln w_0)\\
-	\delta L = &\int \delta \rho [(q-\mu_q)^2 \sigma_p^2 + \sigma_q^2 (p-\mu_p)^2 +  \lambda_1 - \lambda_2 \ln \rho - \lambda_2 ] dqdp = 0 \\
-	\lambda_2 \ln \rho = &\lambda_1 - \lambda_2 + (q-\mu_q)^2 \sigma_p^2 + \sigma_q^2 (p-\mu_p)^2 \\
-	\rho = &e^{\frac{\lambda_1 - \lambda_2}{\lambda_2}}e^{\frac{(q-\mu_q)^2 \sigma_p^2}{\lambda_2}}e^{\frac{\sigma_q^2 (p-\mu_p)^2}{\lambda_2}}
+&+ \lambda_1(\int \rho dqdp - 1) + \lambda_2(- \int \rho \ln (h \rho) \, dqdp )\\
+	\delta L = &\int \delta \rho [(q-\mu_q)^2 \sigma_p^2 + \sigma_q^2 (p-\mu_p)^2 +  \lambda_1 - \lambda_2 \ln (h \rho) - \lambda_2 ] dqdp = 0 \\
+	\lambda_2 \ln (h \rho) = &\lambda_1 - \lambda_2 + (q-\mu_q)^2 \sigma_p^2 + \sigma_q^2 (p-\mu_p)^2 \\
+	\rho = &\frac{1}{h} e^{\frac{\lambda_1 - \lambda_2}{\lambda_2}}e^{\frac{(q-\mu_q)^2 \sigma_p^2}{\lambda_2}}e^{\frac{\sigma_q^2 (p-\mu_p)^2}{\lambda_2}}
 \end{align*}
 We recognize the distribution as the product of two independent Gaussians. We can therefore use the standard expression and calculate the entropy, which must be zero. We find:
 \begin{align*}
 	\rho_{\mathcal{c}} = &\frac{1}{ 2 \pi \sigma_q \sigma_p} e^{-\frac{(q-\mu_q)^2}{2\sigma_q^2}} e^{-\frac{(p-\mu_p)^2}{2\sigma_p^2}} \\
-	I[\rho] &= k_B \ln \left( 2\pi e \frac{\sigma_q\sigma_p}{W_0}  \right) = 0 = k_B \ln 1  \\
-	\sigma_q \sigma_p &= \frac{W_0}{2 \pi e}
+	I[\rho] &= k_B \ln \left( 2\pi e \frac{\sigma_q\sigma_p}{h}  \right) = 0 = k_B \ln 1  \\
+	\sigma_q \sigma_p &= \frac{h}{2 \pi e} = \frac{\hbar}{e}
 \end{align*}
-We have found that any distribution $\rho(q,p)$ with non-negative entropy (i.e. that satisfies the third law of thermodynamics) satisfies the inequality
+where $\hbar = \frac{h}{2\pi}$. We have found that any distribution $\rho(q,p)$ with non-negative entropy (i.e. that satisfies the third law of thermodynamics) satisfies the inequality
 \begin{equation}\label{rp-cm-classicalUncertaintyPrinciple}
-	\sigma_q \sigma_p \geq \frac{W_0}{2 \pi e}.
+	\sigma_q \sigma_p \geq \frac{\hbar}{e}.
 \end{equation}
 Moreover, the inequality is saturated (i.e. becomes an equality) for Gaussian distributions.
 
@@ -2951,6 +2947,8 @@ Compare this with the Heisenberg uncertainty principle of quantum mechanics, whi
 	\sigma_q \sigma_p \geq \frac{\hbar}{2},
 \end{equation}
 which is saturated by Gaussian states. Given the parallel, we call equation \ref{rp-cm-classicalUncertaintyPrinciple} the classical uncertainty principle. Note that the classical uncertainty principle has a clear physical explanation: the third law of thermodynamics. Given that all quantum states have non-negative entropy, the same explanation can be taken for quantum mechanics as well.
+
+Note that, since $e \approx 2.71828 > 2$, the classical uncertainty principle is has a slightly lower bound. The reason is that, at a given entropy, the product $\sigma_q \sigma_p$ is minimized when position and momentum are uncorrelated. Given that the uncorrelated Gaussians are also independent, this means that position and momentum are independent when the uncertainty is the lowest, and the joint distribution is the product of the marginal. This cannot happen in quantum mechanics, since there is cannot write the joint distribution of position and momentum. Classical mechanics, then, can reach a lower uncertainty precisely because position and momentum of the same degree of freedom can be independent variables.
 
 This result also tells us the problem with Maxwell's demon. In this setup, a gas is separated into two chambers with a door. A demon that sees the exact position and momentum of all particles can open the door letting a particle go only from one specific side to the other, decreasing the entropy of the system. But knowing the exact position of all particles corresponds to having access to a state of minus infinite entropy, which is forbidden by the third law. Naturally, if we have access to a source of minus infinite entropy, we can always decrease the entropy of any system by a finite amount without violating the second law: given that minus infinity minus a finite amount is equal to minus infinity, the entropy is technically not decreasing.
 
