@@ -271,7 +271,7 @@ Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in t
 
 \begin{mathSection}
 \begin{defn}[Infinite mixture]
-	Let $\{e_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\} \in [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$, then the ensemble $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$ is, if it exists, the limit of sequence of finite mixtures $\lim\limits_{n\to\infty} \sum_{i=1}^{n} p_i \ens_i$  as defined by the topology.
+	Let $\{e_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\} \in [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$, then the ensemble $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$ is, if it exists, the topological limit of sequence of finite mixtures $\lim\limits_{n\to\infty} \sum_{i=1}^{n} \frac{p_i}{p_n} \ens_i$, where $p_n = \sum_{i=1}^{n} p_i$.
 \end{defn}
 \end{mathSection}
 
@@ -465,11 +465,15 @@ In many cases, we will need to discuss the set of all possible mixtures of a giv
 \end{mathSection}
 
 \begin{conj}
-	Let $A \subset \Ens$ be a set of ensembles and let $\ens \in \hull(A)$. Then we can find  $\{\ens[a]_i\} \subseteq A$ and $p_i \in [0,1]$ such that $\ens = \sum_i p_i \ens[a]_i$.
+	Let $A \subset \Ens$ be a set of ensembles and let $\ens \in \hull(A)$ be an internal point with respect to $\hull(A)$. Then we can find  $\{\ens[a]_i\} \subseteq A$ and $p_i \in [0,1]$ such that $\ens = \sum_i p_i \ens[a]_i$.
 \end{conj}
 
+\begin{remark}
+	Note that, given a set $A$, not all elements of its hull $\hull(A)$ can be understood as infinite mixtures. Let $\Ens$ bet the line segment $[0,1]$ and consider the set $A=\left\{\frac{1}{2^i}\right\}_{i=0}^{\infty}$. Every point in $(0,1]$ can be expressed as a finite mixture of two elements of $A$. For example, $1$ and any number smaller than the target number. However, zero cannot be expressed as a convex combination of positive numbers, and therefore it is not an infinite mixture of $A$. However, zero is the limit of the sequence, and therefore it will be in the topological closure of $A$.
+\end{remark}
+
 \begin{conj}
-	The topological closure of the finite convex closure is closed under convex combinations.
+	The topological closure of the finite convex closure is closed under finite convex combinations.
 \end{conj}
 
 \begin{proof}
@@ -681,6 +685,8 @@ As we did for separateness, we extend the notion of orthogonality to sets of ens
 	For 2, since mixtures preserve orthogonality, every mixture of $A$ is orthogonal to every mixture of $B$. To show that this extends to the closure, let $\ens[a]_i \in A$ and $\ens[b]_j \in B$ be two sequences of finite mixtures that converge in $A$ and $B$ respectively. Consider $f(p,\ens[a]_i, \ens[b]_j) = S(p \ens[a]_i + \bar{p} \ens[b]_j) - p S(\ens[a]_i) - \bar{p} S(\ens[b]_j)$. Since all mixtures are orthogonal, $f(p,\ens[a]_i, \ens[b]_j) = I(p,\bar{p})$. Note that $f$ is a continuous function, therefore the limits will also converge to $I(p,\bar{p})$. This means that every element in the hull of $A$ is orthogonal to every element in the hull of $B$.
 \end{proof}
 \end{mathSection}
+
+TODO: Put pictures to show that orthogonal elements are on "opposite sides"
 
 \section{Affine combinations and vector space embedding}
 
@@ -1174,7 +1180,7 @@ The first observation is that the entropy can be used to define a pseudo-distanc
 Though the mixing entropy is not a distance function, we can still show that, like a distance, it decreases as one ensemble approaches another. While a topological space has no notion of closeness, in a convex space a mixture of $\ens[a]$ and $\ens[b]$ is closer to $\ens[a]$ than $\ens[b]$. This allows to create a notion of open balls around each point.
 
 \begin{prop}
-	Let $\ens[a], \ens[b] \in \Ens$. Then $MS(\ens[a], \ens[b]) \geq MS(\ens[a], p\ens[a]+\bar{p}\ens[b])$ with the equality holding if and only if $p=0$.
+	Let $\ens[a], \ens[b] \in \Ens$. Then $MS(\ens[a], \ens[b]) \geq MS(\ens[a], p\ens[a]+\bar{p}\ens[b])$ with the equality holding if and only if $p=0$ or $\ens[a] = \ens[b]$.
 \end{prop}
 
 \begin{proof}
