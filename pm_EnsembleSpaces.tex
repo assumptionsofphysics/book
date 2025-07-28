@@ -10,6 +10,8 @@
 \newcommand\cospan{\mathrm{cospan}}
 \newcommand\dist{\mathrm{dist}}
 \newcommand\hull{\mathrm{hull}}
+\newcommand\shull{\mathrm{shull}}
+\newcommand\chull{\mathrm{chull}}
 \newcommand\support{\mathrm{supp}}
 \newcommand\capacity{\mathrm{scap}}
 \newcommand\size{\mathrm{frac}}
@@ -449,93 +451,103 @@ One key property of separateness is its relationship with mixtures. If an ensemb
 
 \subsection{Convex subsets and convex hull}
 
-In many cases, we will need to discuss the set of all possible mixtures of a given set of ensembles. Mathematically, this is the convex closure meaning that we take all possible convex combinations of the given ensembles. Additionally, since the mixture is only a finite operation, we will use the topology to reach all possible limits, all possible infinite mixtures. The topology, in fact, is what defines the limits and will tell us whether a particular infinite convex combination corresponds to a valid mixture or not.
+In many cases, we will need to discuss the sets that contain all their possible mixtures. One typically distinguish two cases. A set is convex if it allows all possible finite mixtures. This may be too restrictive as it may not include all possible infinite mixtures. A set is closed and convex if it includes all finite mixtures and their topological limits. Given that infinite mixtures are the topological limit of finite mixtures, a closed convex set contains all infinite mixtures. However, not all topological limits can be expressed as infinite mixture. For example, on the real line $1$ can be seen as a limit of points within the open interval $(0,1)$, but not as infinite convex combination. Therefore we add the notions of $\sigma$-convex set that is closed under infinite mixtures.\footnote{The mathematical properties of $\sigma$-convex sets is yet to be explored.}
 
 \begin{mathSection}
 \begin{defn}
-	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is a \textbf{convex subset} of $\Ens$ if it contains all possible mixtures, including infinite ones, of its elements. Formally, it is a topologically closed set that is also closed under convex combinations. If we want to stress that we are closing only under finite mixing, we say that $A$ is closed under finite convex combination.
+	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is \textbf{convex} if it closed under finite mixtures (i.e. $\ens[a],\ens[b] \in A$ implies $p\ens[a] + \bar{p} \ens[b] \in A$), \textbf{$\sigma$-convex} if it is closed under infinite mixtures (i.e. $\ens[a]_i \in A$ implies $\sum_i p_i \ens[a]_i \in A$ for all converging infinite mixtures) and \textbf{closed and convex} if it is both convex and topologically closed.
 \end{defn}
 
-\begin{prop}
-	The set $\mathfrak{Conv}_{\Ens}$ of all convex subsets of $\Ens$ ordered by set inclusion is a topped $\bigcap$-structure and therefore is also a complete lattice.
-\end{prop}
+\begin{coro}
+	A closed and convex set is $\sigma$-convex. A $\sigma$-convex set is convex.
+\end{coro}
+\end{mathSection}
+
+Given a set of ensembles $A$, we can ask for all ensembles that can be constructed from $A$. The hull of $A$ is the set of all finite mixtures of $A$, the $\sigma$-hull of $A$ is the set of all infinite mixtures of $A$ and the closed hull of $A$ is the set of all the topological limits of finite mixtures of $A$. Notably, the closed hull of $A$ is equivalent to the topological closure of the hull of $A$.
+
+\begin{mathSection}
+\begin{defn}
+	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{convex hull} of $A$, noted $\hull(A)$ is the set of all finite mixtures of elements contained in $A$ (i.e. it is the smallest convex set that contains $A$). The \textbf{$\sigma$-hull} of $A$, noted $\shull(A)$ is the set of all infinite mixtures of elements contained in $A$ (i.e. it is the smallest $\sigma$-convex set that contains $A$). The \textbf{closed hull} of $A$, noted $\chull(A)$ is the smallest closed convex set that contains $A$. 
+\end{defn}
+
+\begin{remark}
+	Note that, given a set $A$, not all elements of $\chull(A)$ can be understood as infinite mixtures. That is, we can have $\shull(A) \subset \chull(A)$. Let $\Ens$ bet the line segment $[0,1]$ and consider the set $A=\left\{\frac{1}{2^i}\right\}_{i=0}^{\infty}$. Every point in $(0,1]$ can be expressed as a finite mixture of two elements of $A$. For example, $1$ and any number smaller than the target number. However, zero cannot be expressed as a convex combination of positive numbers, and therefore it is not an infinite mixture of $A$. However, zero is the limit of the sequence, and therefore it will be in the topological closure of $A$.
+\end{remark}
+
+\begin{coro}
+	Given $A \subseteq \Ens$, $\hull(A) \subseteq \shull(A) \subset \chull(A)$.
+\end{coro}
 
 \begin{proof}
-	Let $\mathfrak{Conv}_{\Ens}$ be the set of all convex subsets of $\Ens$ ordered by set inclusion. The empty set $\emptyset \subset \Ens$ is a convex set. The whole space $\Ens \subseteq \Ens$ is also a convex set. Then $\mathfrak{Conv}_{\Ens}$ is therefore a bounded ordered set.
-	
-	Let $A, B \in \mathfrak{Conv}_{\Ens}$ be two convex subsets. Consider $A \cap B$. Any mixture of elements in $A \cap B$ is both a mixture of elements in $A$ and a mixture of elements in $B$. Therefore any mixture of elements of $A \cap B$ is both an element of $A$ and an element of $B$. This means it is also an element of $A \cap B$, which is therefore a convex set.
-	
-	The previous argument generalizes to a family of convex subsets $\{A_i\}_{i \in I} \subseteq \mathfrak{Conv}_{\Ens}$. That is, an ensemble is a mixture of elements of $\bigcap_{i \in I} A_i$ if and only if is a mixture of elements of $A_i$ for every $i$. Moreover, the intersection of infinitely many closed sets is still closed. Therefore $\bigcap_{i \in I} A_i \in \mathfrak{Conv}_{\Ens}$ and $\mathfrak{Conv}_{\Ens}$ is an $\bigcap$-structure. This also means that it is a complete lattice. (TODO: find a link to the theorem)
+	All finite mixtures are also infinite mixtures with $p_i = 0$ for all $i > n$ for some $n$. Therefore $\hull(A) \subseteq \shull(A)$. All infinite mixtures are topological limits of finite mixtures. Therefore $\shull(A) \subseteq \chull(A)$. 
 \end{proof}
 
-\begin{defn}
-	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{convex hull} of $A$, noted $\hull(A)$ is the set of all possible mixtures that can be constructed with elements contained in $A$, including infinite ones. Formally, it is the topological closure of the closure of $A$ under convex combination. That is, it is the smallest convex subset that contains $A$.
-\end{defn}
-
 \begin{coro}\label{pm_es_hullProp}
-	The convex hull has the following properties
+	All three hull operators are closures. That is, for $\hull$ we have
 	\begin{enumerate}
 		\item $A \subseteq \hull(A)$
 		\item $A \subseteq B \implies \hull(A) \subseteq \hull(B)$
 		\item $\hull(\hull(A)) = \hull(A)$
 	\end{enumerate}
-	and is therefore a closure operation
+	and similarly for $\shull$ and $\chull$.
 \end{coro}
 
 \begin{proof}
-	1. Every element of $A$ is trivially a mixture of elements of $A$. Therefore $A \subseteq \hull(A)$.
+	1. Every element of $A$ is trivially a mixture of elements of $A$. Therefore $A \subseteq \hull(A)$. Since $\hull(A) \subseteq \shull(A) \subset \chull(A)$, $A \subseteq \shull(A)$ and $A \subseteq \chull(A)$ as well. 
 	
-	2. Let $\ens \in \hull(A)$. Then it is a mixture of some elements of $A$. Since $A \subseteq B$, then $\ens$ is also the mixture of some elements of $B$ and therefore $\ens \in \hull(B)$.
+	2. Let $\ens \in \hull(A)$. Then it is a finite mixture of some elements of $A$. Since $A \subseteq B$, then $\ens$ is also the finite mixture of some elements of $B$ and therefore $\ens \in \hull(B)$. The same logic applies to the $\sigma$-hull and closed hull replacing finite mixture with the appropriate operation.
 	
-	3. Since $\hull(\hull(A))$ is the smallest convex subset that contains $\hull(A)$, and since $\hull(A)$ is a convex subset, then $\hull(\hull(A))$ must be $\hull(A)$ since no smaller set can contain all elements of $\hull(A)$.
+	3. Since $\hull(\hull(A))$ is the smallest convex subset that contains $\hull(A)$, and since $\hull(A)$ is a convex subset, then $\hull(\hull(A))$ must be $\hull(A)$ since no smaller set can contain all elements of $\hull(A)$. The same logic applies to the $\sigma$-hull and closed hull.
 \end{proof}
 
 \begin{coro}
-	A subset $A \subseteq \Ens$ is convex if and only if it is its own convex hull.
+	A subset $A \subseteq \Ens$ is respectively convex/$\sigma$-convex/closed convex if and only if it is its own convex hull/$\sigma$-hull/closed hull.
 \end{coro}
 
 \begin{proof}
-	Let $A \subseteq \Ens$ be a convex subset. By \ref{pm_es_hullProp} we have $A \subseteq \hull(A)$. By definition of convex set, we have $\hull(A) \subseteq A$. Therefore $A = \hull(A)$. Conversely, let $A \subseteq \Ens$ be a set of ensembles not necessarily convex. By definition, $\hull(A)$ is closed under mixture and is therefore a convex subset.
+	Let $A \subseteq \Ens$ be a convex subset. By \ref{pm_es_hullProp} we have $A \subseteq \hull(A)$. By definition of convex set, we have $\hull(A) \subseteq A$. Therefore $A = \hull(A)$. Conversely, let $A \subseteq \Ens$ be a set of ensembles not necessarily convex and let $A=\hull(A)$. By definition, $\hull(A)$ is closed under finite mixture and is therefore a convex subset. The same logic applies to the $\sigma$-convex and closed convex with the respective hull.
 \end{proof}
 
+\begin{defn}
+	We note $\mathfrak{co}_{\Ens}$ the set of all convex subsets of $\Ens$, $\mathfrak{sco}_{\Ens}$ the set of all $\sigma$-convex subsets of $\Ens$ and $\mathfrak{cco}_{\Ens}$ the set of all closed convex subsets of $\Ens$.
+\end{defn}
+
 \begin{prop}
-	The hull is continuous from above. That is, $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any decreasing sequence $A_i \subseteq \Ens$.
+	The sets $\mathfrak{co}_{\Ens}$, $\mathfrak{sco}_{\Ens}$ and $\mathfrak{cco}_{\Ens}$, as posets ordered by inclusion, are topped $\bigcap$-structure and therefore complete lattices.
 \end{prop}
 
 \begin{proof}
-	Since $A_i$ is a decreasing sequence, $\lim\limits_{i \to \infty} A_i = \bigcap_i A_i$. Also, since $A_{i+1} \subseteq A_i$, then $\hull(A_{i+1}) \subseteq \hull(A_i)$ and therefore $\hull(A_i)$ is a decreasing sequence. This also means $\lim\limits_{i \to \infty} \hull(A_i) = \bigcap_i \hull(A_i)$. Therefore we need to show that $\hull(\bigcap_i A_i) = \bigcap_i \hull(A_i)$.
-	
-	Since the arbitrary intersection of convex sets is a convex set, $\bigcap_i \hull(A_i)$ is a convex set. Therefore $\bigcap_i \hull(A_i) = \hull(\bigcap_i \hull(A_i))$. Note that a mixture of mixture of elements can always be re-expressed as a mixture of elements. TODO: this needs to be clarified. Moreover, an element that is the mixture of $A_i$ for all $i$ can be re-expressed as a mixture of the common elements, since $A_{i+1} \subset A_i$. Therefore $\hull(\bigcap_i \hull(A_i)) = \hull(\bigcap_i A_i)$. This means $\hull(\bigcap_i A_i) = \bigcap_i \hull(A_i)$, which proves the proposition.
+	Theorem 7.3 in Davey, Priestley Introduction to Lattice and Order states that, given a closure operator, the set of all closures, ordered by inclusion, is a topped $\bigcap$-structure and therefore complete lattices. Since $\mathfrak{co}_{\Ens}$, $\mathfrak{sco}_{\Ens}$ and $\mathfrak{cco}_{\Ens}$ are closures, the theorem applies.
 \end{proof}
 
 \begin{remark}
-	Note that the hull is not necessarily continuous from below. That is, it is not necessarily true that $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any increasing sequence $A_i \subseteq \Ens$. The limit from below, in fact, would correspond to the infinite union of closed sets, which is not necessarily a closed set. Therefore if we take the closure after the limit, we are going to include the infinite convex combinations that require, for example, an element from each of the $A_i$.
-\end{remark}
-\end{mathSection}
+It may be interesting to see whether the hulls are continuous from above and below. That is, whether  $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for decreasing or increasing sequences.
 
-\begin{conj}
-	Let $A \subset \Ens$ be a set of ensembles and let $\ens \in \hull(A)$ be an internal point with respect to $\hull(A)$. Then we can find  $\{\ens[a]_i\} \subseteq A$ and $p_i \in [0,1]$ such that $\ens = \sum_i p_i \ens[a]_i$.
-\end{conj}
-
-\begin{remark}
-	Note that, given a set $A$, not all elements of its hull $\hull(A)$ can be understood as infinite mixtures. Let $\Ens$ bet the line segment $[0,1]$ and consider the set $A=\left\{\frac{1}{2^i}\right\}_{i=0}^{\infty}$. Every point in $(0,1]$ can be expressed as a finite mixture of two elements of $A$. For example, $1$ and any number smaller than the target number. However, zero cannot be expressed as a convex combination of positive numbers, and therefore it is not an infinite mixture of $A$. However, zero is the limit of the sequence, and therefore it will be in the topological closure of $A$.
+All hulls should be continuous from above as the arbitrary union remains within the corresponding lattice. The closed hull, however, should not be necessarily continuous from below. That is, it is not necessarily true that $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$ for any increasing sequence $A_i \subseteq \Ens$. The limit from below, in fact, would correspond to the infinite union of closed sets, which is not necessarily a closed set. Therefore if we take the closure after the limit, we are going to include the infinite convex combinations that require, for example, an element from each of the $A_i$.
 \end{remark}
+
 
 \begin{prop}
-	The topological closure of the finite convex closure is closed under finite convex combinations.
+	The topological closure of the hull is a convex set and, therefore, the closed hull.
 \end{prop}
 
 \begin{proof}
-	Let $A \subseteq \Ens$ be a set closed under finite convex combinations. Let $\bar{A}$ be its topological closure. Let $\ens[a]_i \in A$ and $\ens[b]_i \in A$ be two sequences that converge to $\ens[a],\ens[b] \in \Ens$ respectively. Since $\bar{A}$ is the topological closure of $A$, then $\ens[a],\ens[b] \in \bar{A}$ given that they are limit points of elements of $A$.
-	
-	Consider a mixture $\ens = p \ens[a] + \bar{p} \ens[b]$ of the two limits and the sequence $\ens_i = p \ens[a]_i + \bar{p} \ens[b]_i$. Since $A$ is closed under convex combinations, $\ens_i \in A$. Since mixing is continuous, we have
+	Let $A$ be a convex set and $\bar{A}$ its topological closure. Let $\ens[a]_i, \ens[b]_i \in A$ be two sequences that converge to $\ens[a], \ens[b] \in \Ens$ respectively. We have $\ens[a], \ens[b] \in \bar{A}$ since they are topological limits. Consider $\ens_i = p \ens[a]_i + \bar{p} \ens[b]_i$. Since mixing is continuous, we have:
 	\begin{equation}
 		\begin{aligned}
-			\ens &= p \ens[a] + \bar{p} \ens[b] = p \lim\limits_{i \to \infty} \ens[a]_i + \bar{p} \lim\limits_{i \to \infty} \ens[b]_i = \lim\limits_{i \to \infty} p \ens[a]_i + \bar{p} \ens[b]_i = \lim\limits_{i \to \infty} \ens_i
+			\ens &= p \ens[a] + \bar{p} \ens[b] = p \lim\limits_{i \to \infty} \ens[a]_i + \bar{p} \lim\limits_{i \to \infty} \ens[b]_i = \lim\limits_{i \to \infty} p \ens[a]_i + \bar{p} \ens[b]_i = \lim\limits_{i \to \infty} \ens_i.
 		\end{aligned}
 	\end{equation}
-	Therefore $\ens \in \bar{A}$ since it is the limit point of a sequence of elements of $A$. This means that the topological closure of the finite convex closure is itself closed under finite convex combinations.
+	But $\ens_i$ are finite mixtures of elements of $A$, and therefore $\ens_i \in A$ is a sequence of elements of $A$. The sequence converges, $\ens$ is the limit of a sequence of elements of $A$ and therefore $\ens \in \bar{A}$. That is, the topological closure of a convex set is also a convex set. But this means that $\bar{A}$ is a closed convex set. Since any closed convex set that contains $A$ will also need to contain $\bar{A}$, $\bar{A}$ is the closed hull of $A$.
+
+	Let $A \subset \Ens$ be a subset not necessarily convex, $\hull(A)$ will convex. Therefore its topological closure will be the closed hull of $A$.
 \end{proof}
+
+\end{mathSection}
+
+Something that still need to be explored is the relationship between the algebraic interior and topological interior. For example, is every interior point an internal point? Given a set of internal points of $\Ens$, is the $\sigma$-hull a set of internal points? It would seem so, as convex combinations cannot bring us to the boundary of a set. Given $A$, if $\ens \in \chull(A)$ is an internal point with respect to $\chull(A)$, does it mean that $\ens \in \shull(A)$?
+
+
 
 \section{Axiom of entropy}
 
