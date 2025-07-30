@@ -775,15 +775,15 @@ TODO: Put pictures to show that orthogonal elements are on "opposite sides"
 
 \section{Affine combinations and vector space embedding}
 
-The bounds on the entropy not only constrain the functional form of the entropy, but they also constrain the type of convex space, ruling out some that would be physically pathological.
+In this section we will see how the bounds of entropy constrain ensemble spaces to embed into vector space. Moreover, the ensemble space must be bounded along any direction. In other words, the existence of an entropy forces the convex space to rule out behaviors that would be physically pathological.
 
-First of all, the bounds make it possible to define a unique inverse for statistical mixture. This allows us to define affine combinations, and to show that the ensemble space is embedded into a vector space. Lastly, the bounds will force this embedding to be into a subset of a bounded set of the vector space.
+%First of all, the bounds make it possible to define a unique inverse for statistical mixture. This allows us to define affine combinations, and to show that the ensemble space is embedded into a vector space. Lastly, the bounds will force this embedding to be into a subset of a bounded set of the vector space.
 
 \subsection{Affine combinations}
 
-The axiom of mixture just tells us that given two ensembles and a mixing ratio, we can identify the mixture of the two ensembles. It does not guarantee the reverse. That is, given a final mixed ensembles, the mixing ratio and one component, it is not necessarily true that the second component is uniquely determined. This is the cancellative property of a convex space. This property is important as \href{https://arxiv.org/abs/1105.1270}{it can be shown} that is necessary and sufficient for the convex space to embed into a vector space.
+The axiom of mixture just tells us that given two ensembles and a mixing ratio, we can identify the mixture of the two ensembles. It does not guarantee the reverse. That is, given a final mixed ensembles, the mixing ratio and one component, it is not necessarily true that the second component is uniquely determined. Mathematically, the uniqueness of this type of decomposition is called the cancellative property of a convex space. This property is important as \href{https://arxiv.org/abs/1105.1270}{it can be shown} that is necessary and sufficient for the convex space to embed into a vector space.
 
-It is the continuity of the entropy and its bounds that force the convex space to be cancellative.
+In an ensemble space, the continuity and the strict concavity of the entropy forces the space to be cancellative. If $p \ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for some $p \in (0,1)$, from the convex structure we can show that $p(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{p} \ens = p\ens[a] + \bar{p} \ens = p \ens[b] + \bar{p} \ens$ for all $p \in (0,1)$ and $\lambda \in [0,1]$. That is, if mixing $\ens$ with either $\ens[a]$ or $\ens[b]$ for some mixing coefficient $p$ yields the same result, then all non-trivial mixtures of $\ens$ with any mixture of $\ens[a]$ and $\ens[b]$ will yield the same result. But this means that the entropy cannot change as we change $\ens[a]$ to $\ens[b]$ during mixture, which can only happen if they are the same ensemble.
 
 \begin{mathSection}
 \begin{defn}
@@ -867,9 +867,11 @@ It is the continuity of the entropy and its bounds that force the convex space t
 \end{proof}
 \end{mathSection}
 
-The fact that the convex space is cancellative essentially allows us to ``invert'' a convex combination, allowing affine combinations. An affine combinations is a linear combination where the coefficients sum to one, like in a convex combination, but coefficient can be negative, unlike in a convex combination. The ability in quantum mechanics to use negative probability, for example, stems from the fact that the space of ensembles allows affine combinations because it is cancellative.
+The fact that the convex space is cancellative essentially allows us to ``invert'' a convex combination, allowing affine combinations. An affine combinations is a linear combination where the coefficients sum to one, like in a convex combination, but coefficient can be negative, unlike in a convex combination. Conceptually we can ``take part of an ensemble out'' from another ensemble. The ability in quantum mechanics to use negative probability, for example, stems from the fact that the space of ensembles allows affine combinations because it is cancellative.
 
 An affine combination can be translated into the equality between two convex combinations by moving all the negative coefficients on the other side of the equality. This reduces to finding the component a mixture, which, if it exists, is unique by the cancellative property.
+
+It is important to note that while we can write affine combinations, not all affine combinations correspond to ensemble spaces. For example, if $\ens[b]$ is not a component of $\ens[a]$, then $\frac{3}{2}\ens[a] - \frac{1}{2} \ens[b]$ cannot possibly be an ensemble as we cannot take any ``amount of $\ens[b]$'' from $\ens[a]$.
 
 \begin{mathSection}	
 \begin{defn}[Affine combinations]
@@ -887,19 +889,21 @@ An affine combination can be translated into the equality between two convex com
 
 \subsection{Vector space embedding}
 
-In order to keep a physically grounded picture, we will construct the vector space of differences between ensembles, and show that the ensemble space embeds into this vector space. The following figure shows the motivation of the construction.
+As we said before, the cancellative property is necessary and sufficient for the embedding of a convex space into a vector space. While this can be proved with a short mathematical proof, it would be an abstract construction which would not give us any insight in what it is actually been represented physically. Therefore we will construct a vector space from the ground up, as the spaces of differences between ensembles, which will be ``the'' embedding vector space. This will also justify way, locally at every point, this space becomes the space of variations.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{tempimages/EnsembleDifferences.jpg}
-	\caption{This picture represents the motivation of the definition of the operations on the space of differences.}
+	\caption{This picture represents the motivation of the definition of the operations on the space of differences.}\label{pm_es_vectorJustification}
 \end{figure}
 
-We take an ensemble $\ens[a]$ to be a reference, the origin. For any other ensemble $\ens[b]$, we imagine the change from $\ens[a]$ to $\ens[b]$ as the arrow the connects the first to the second. This is the ensemble difference $(\ens[b] - \ens[a])$. The inverse of that difference would find an ensemble $\ens[c]$ in the opposite direction. Note that $\ens[a]$ now sits exactly in between $\ens[b]$ and $\ens[c]$, and therefore $\ens[a] = \frac{1}{2}\ens[b] + \frac{1}{2}\ens[c]$ if and only if $(\ens[b] - \ens[a]) = - (\ens[c]- \ens[a])$. That is, relationship between vectors are re-expressed as convex combinations of ensembles.
+Figure \ref{pm_es_vectorJustification} shows the motivation of the construction. We take an ensemble $\ens[a]$ to be a reference, the origin. For any other ensemble $\ens[b]$, we imagine the change from $\ens[a]$ to $\ens[b]$ as the arrow the connects the first to the second. This is the ensemble difference $(\ens[b] - \ens[a])$. The inverse of that difference would find an ensemble $\ens[c]$ in the opposite direction. Note that $\ens[a]$ now sits exactly in between $\ens[b]$ and $\ens[c]$, and therefore $\ens[a] = \frac{1}{2}\ens[b] + \frac{1}{2}\ens[c]$ if and only if $(\ens[b] - \ens[a]) = - (\ens[c]- \ens[a])$. That is, relationship between vectors are re-expressed as convex combinations of ensembles.
 
 Similarly, we can now stretch or shrink difference by a factor. For example, multiplying the difference by a third will give us the ensemble that it's at a third between $\ens[a]$ and $\ens[b]$. Similarly, we can add differences. For example, $\frac{1}{2}(\ens[b] - \ens[a]) + \frac{1}{2}(\ens[c] - \ens[a])$ will give us the difference $\left(\left(\frac{1}{2}\ens[b] + \frac{1}{2}\ens[c]\right) - \ens[a]\right)$. In other words, the difference with the midpoint between $\ens[b]$ and $\ens[c]$. Note that if we double that difference, we obtain the parallelogram law for vector addition.
 
-While the motivation is straight-forward, the construction is complicated by the fact that there are multiple way of expressing the same difference, and therefore it is the equivalence class of differences that forms the vector space.
+Clearly, if we stretch a difference too much, we will go out of the ensemble space. Yet, since we can always shrink and then stretch,  all operations defined on differences within the ensemble space can be formally defined on differences that go outside the ensemble space. If $\ens[a]$ is an internal point, then differences exist in every direction. This is, in a nutshell, the vector space we are constructing. This clarifies that, in the end, we are always going to be interested in sets of vectors that can be shrunk within the ensemble space.\footnote{It is unclear whether this insight may help us understand what the topology of the embedding vector space is.}
+
+While the motivation is straight-forward, the construction is complicated by the fact that there are multiple way of expressing the same difference. In the third example in figure \ref{pm_es_vectorJustification}, $(\ens[b] - \ens[a])$ and $3(\ens[c] - \ens[a])$ correspond to the same vector. Therefore, we need to specify this equivalence class and prove that the set of equivalence classes form a vector space. The way that the equivalence relationship is specified is so that the proofs remain short and manageable, and it is therefore mainly a technical issue.\footnote{Originally, the equivalence relationship we specified by three separate cases. While more directly justifiable, that gave 6 different possible combinations to check in every proof.}
 
 \begin{mathSection}
 	
