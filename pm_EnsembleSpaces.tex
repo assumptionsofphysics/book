@@ -1102,13 +1102,15 @@ Intuitively, this tells us that we cannot have a mixture of two different elemen
 
 \subsection{Boundedness of lines}
 
-Another constraint that the entropy imposes is that every affine direction is bounded, even if there are no endpoints. That is, if we take two ensembles, these will identify a line that contains all the affine combinations in the vector space. The elements of that line that are also in the ensemble space are contained in a bounded segment of that line.
+Another constraint that the entropy imposes is that the ensemble space is bounded along every direction. That is, if we take two ensembles, these will identify an affine line in the embedding vector space that will, at some point, exit the ensemble space in both directions.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\textwidth]{tempimages/BoundedEnsembleSpace.jpg}
 	\caption{$\Ens$ is the ensemble space and $V$ is the embedding vector space. Any affine line, like the dashed one in the picture, will intersect $\Ens$ over a finite range limited by the two elements $a$ and $b$ of the vector space (but not necessarily of the ensemble space).}
 \end{figure}
+
+The proof proceeds as follows. Suppose we take three points and assign them an entropy that is strictly concave: can we assign to always pick an entropy value that satisfies the bounds for any subsequent point? The answer is negative and figure \ref{pm_es_directionallyBound} represent the problem pictorially. On the horizontal axis we can imagine all the ensembles over a line, and on the vertical axis their entropy. We fix the entropy for the origin, the blue and the red point. What are the values for the next point, the green one, that satisfy the entropy bounds? Because of strict concavity, the green point must remain below the blue line. The green line represents the upper bound for the blue point, which means the green point must be above the purple line. If we go far enough, the blue and purple line meet, leaving no possible value for the entropy.
 
 \begin{mathSection}
 \begin{defn}
@@ -1143,7 +1145,7 @@ Another constraint that the entropy imposes is that every affine direction is bo
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{tempimages/BoundsFromEntropy.png}
-	\caption{Visual representation of the bounds. See proof for details.}
+	\caption{Visual representation of the bounds. See proof for details.}\label{pm_es_directionallyBound}
 \end{figure}
 	We are going to show that the function $S(x)$ cannot extend to plus infinity. The same argument can be applied by symmetry for minus infinity. We are going to assume that $S(0) = 0$ without loss of generality. If $S$ is not defined at zero, or if the value is different, we can apply a translation on the argument or on the value, which will not affect the concavity of the function.
 	
@@ -1199,13 +1201,27 @@ Another constraint that the entropy imposes is that every affine direction is bo
 \end{remark}
 \end{mathSection}
 
-\begin{prop}
-	The ensemble space is, as a subset of the embedding vector space, a radial set and, since the vector space is real, an absorbing set.
-\end{prop}
+The fact that the ensemble space is directionally bound gives us an intuitive property that we would, mistakenly, always think to be true. Suppose we have an ensemble $\ens$ and a sequence of ensembles $\ens[a]_i \in L$ on some line that contains $\ens$. Then $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$ if $p_i \to 1$. This does not work in a convex space if directions are unbounded. For example, suppose $\ens = \mathbb{R}$, which is a convex set but not directionally bounded. Let $\ens = 0$, $\ens[a]_i = i$ and $p_i = 1 - \frac{1}{i}$. Then $\left(1 - \frac{1}{i}\right) 0 + \frac{1}{i}{i} = 1$. Therefore $p_i \ens + \bar{p}_i \ens[a]_i \nto \ens$. It is, again, the entropy that guarantee that this intuitive property is satisfied. \footnote{It is an open question whether this property is guaranteed for a generic sequence $\ens[a]_i$, not necessarily on a line.}
 
-\begin{proof}
-	Let $\ens[a] \in \Ens$ be an internal point and $\Ens \subseteq V_{\ens[a]}$ be the ensemble space as a subset of the embedding vector space. Since $\ens[a]$ is an internal point, for every direction there exist a finite segment that starts from $\ens[a]$ and proceeds in that direction. Therefore the ensemble space is a radial set. Moreover, since in a real vector space \href{https://en.wikipedia.org/wiki/Radial_set#Relation_to_absorbing_sets}{every radial is absorbing}, the ensemble space is an absorbing set. TODO: find a better reference.
-\end{proof}
+\begin{mathSection}
+	\begin{prop}
+		Let $L \subseteq \Ens$ be a line. Let $\ens \in L$ and $\ens[a]_i \in L$. Then $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$ if $p_i \to 1$.
+	\end{prop}
+	
+	\begin{proof}
+		Pick $\ens[a] \in L$ such that $\ens[a] \neq \ens$. Then every $\ens[a]_i$ can be expressed as an affine combination $\ens[a]_i = r_i \ens + \bar{r}_i \ens[a]$. We have $p_i \ens + \bar{p}_i \ens[a]_i = p_i \ens + \bar{p}_i \left( r_i \ens + \bar{r}_i \ens[a] \right) = \left( p_i + \bar{p}_i r_i \right) \ens + \bar{p}_i\bar{r}_i \ens[a]$. Since the ensemble space is directionally bounded, the sequence $r_i$ is bounded from below and above. This means that $\bar{p}_i \to 0$ implies $p_i + \bar{p}_i r_i \to 1$ and $\bar{p}_i\bar{r}_i \to 0$. Therefore by continuity $\left( p_i + \bar{p}_i r_i \right) \ens + \bar{p}_i\bar{r}_i \ens[a] \to 1 \ens 0 \ens[a] = \ens$.
+	\end{proof}
+\end{mathSection}
+
+%TODO: for topology, the ensemble space is a convex neighbourhood of the origin, which means it is an absorbing set.
+
+%\begin{prop}
+%	The ensemble space is, as a subset of the embedding vector space, a radial set and, since the vector space is real, an absorbing set.
+%\end{prop}
+
+%\begin{proof}
+%	Let $\ens[a] \in \Ens$ be an internal point and $\Ens \subseteq V_{\ens[a]}$ be the ensemble space as a subset of the embedding vector space. Since $\ens[a]$ is an internal point, for every direction there exist a finite segment that starts from $\ens[a]$ and proceeds in that direction. Therefore the ensemble space is a radial set. Moreover, since in a real vector space \href{https://en.wikipedia.org/wiki/Radial_set#Relation_to_absorbing_sets}{every radial is absorbing}, the ensemble space is an absorbing set. TODO: find a better reference.
+%\end{proof}
 
 \section{Entropic geometry}
 
