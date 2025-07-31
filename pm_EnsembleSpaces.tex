@@ -1225,11 +1225,13 @@ The fact that the ensemble space is directionally bound gives us an intuitive pr
 
 \section{Entropic geometry}
 
-We now show that the entropy imposes a geometric structure on the ensemble space. The core idea is that, since the entropy is strictly concave, its Hessian is negative definite. The negation is therefore a positive definite, real-valued function of two variations and plays the role of a metric tensor.
+In this section we will see how the entropy imposes a geometric structure on the ensemble space. The core idea is that, since the entropy is strictly concave, its Hessian is negative definite. The negation is therefore a positive definite, real-valued function of two variations and plays the role of a metric tensor.
 
 \subsection{Mixing entropy as pseudo-distance}
 
-The first observation is that the entropy can be used to define a pseudo-distance. If we mix two ensembles, in fact, the average entropy cannot decrease, and will stay the same if the two components of the mixture are the same ensemble. The increase, then, is zero if the two ensembles are equal, greater than zero if not, with the maximum if they are orthogonal. 
+The first observation is that the entropy can be used to define a pseudo-distance. If we mix two ensembles, in fact, the average entropy cannot decrease, and will stay the same if the two components of the mixture are the same ensemble. The increase, then, is zero if the two ensembles are equal, greater than zero if not, with the maximum if they are orthogonal. This means that the increase of entropy during mixing can be used to characterize how different two ensembles are.
+
+We define the mixing entropy as the increase in entropy for the equal mixture of two states. This satisfies all axioms for a distance, except the triangle inequality. The mixing entropy recovers the Jensen-Shannon divergence in both the classical and quantum case, and can therefore be seen as its generalization.
 
 \begin{mathSection}
 \begin{defn}
@@ -1265,25 +1267,20 @@ The first observation is that the entropy can be used to define a pseudo-distanc
 \end{prop}
 
 \begin{proof}
-	Looking at the definitions of the \href{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}{Jensen-Shannon divergence}, one can see that
-	$$ JSD(\ens[a], \ens[b]) = S\left(\frac{1}{2}\ens[a] + \frac{1}{2}\ens[b] \right)  - \frac{1}{2} \left(S(\ens[a]) + S(\ens[b])\right) = MS(\ens[a], \ens[b]).$$
-	The same is true for the quantum case:
+	Looking at the definitions of the \href{https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence}{Jensen-Shannon divergence}, in the classical case we have
+	$$ JSD(\ens[a], \ens[b]) = S\left(\frac{1}{2}\ens[a] + \frac{1}{2}\ens[b] \right)  - \frac{1}{2} \left(S(\ens[a]) + S(\ens[b])\right) = MS(\ens[a], \ens[b]),$$
+	and, similarly, in the quantum case we have
 	$$ QJSD(\ens[a], \ens[b]) = S\left(\frac{1}{2}\ens[a] + \frac{1}{2}\ens[b] \right)  - \frac{1}{2} \left(S(\ens[a]) + S(\ens[b])\right) = MS(\ens[a], \ens[b]).$$
 \end{proof}
 
 \begin{remark}
-	The mixing entropy fails to be a distance function as it does not satisfy the triangle inequality. In the classical and quantum case, in fact, the JSD and QJSD are the square of a distance function. It is unclear whether this result can be generalized to the mixing entropy itself.
-	
-	The lack of the triangle inequality also makes it difficult to show that the topology is Hausdorff. The mixing entropy, in fact, allows us to create open balls around each point. These open balls will shrink to each point as the radius goes to zero. However, one typically uses the triangle inequality to show that the open balls, at some point, become disjoint.
+	The mixing entropy fails to be a distance function as it does not satisfy the triangle inequality. In the classical and quantum case, in fact, the JSD and QJSD are the square of a distance function. Given the current axiom, it is unlikely that this result can be generalized to the mixing entropy itself. The issue is that we do not have enough information about the relative entropy of 3 points, apart from the orthogonal case. It is very likely that, on physics ground, there should be constraints on the mixing entropy between three points.
 \end{remark}
-
-\begin{conj}
-	The mixing entropy is the square of a distance function.
-\end{conj}
 \end{mathSection}
 
-Though the mixing entropy is not a distance function, we can still show that, like a distance, it decreases as one ensemble approaches another. While a topological space has no notion of closeness, in a convex space a mixture of $\ens[a]$ and $\ens[b]$ is closer to $\ens[a]$ than $\ens[b]$. This allows to create a notion of open balls around each point.
+Though the mixing entropy is not a distance function, we can still show that, like a distance, it decreases as one ensemble approaches another. The notion of two ensembles approaching is given by the convex structure: a convex space a mixture of $\ens[a]$ and $\ens[b]$ is closer to $\ens[a]$ than $\ens[b]$.
 
+\begin{mathSection}
 \begin{prop}
 	Let $\ens[a], \ens[b] \in \Ens$. Then $MS(\ens[a], \ens[b]) \geq MS(\ens[a], p\ens[a]+\bar{p}\ens[b])$ with the equality holding if and only if $p=0$ or $\ens[a] = \ens[b]$.
 \end{prop}
@@ -1299,10 +1296,10 @@ Though the mixing entropy is not a distance function, we can still show that, li
 	\end{equation}
 	From strict concavity we have
 	\begin{equation}
-	\begin{aligned}
-		S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b] \right) &\geq  \frac{1-2p}{1-p}S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) + \frac{p}{1-p} S\left(p\ens[a] + \bar{p} \ens[b]\right).
-	\end{aligned}
-\end{equation}
+		\begin{aligned}
+			S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b] \right) &\geq  \frac{1-2p}{1-p}S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) + \frac{p}{1-p} S\left(p\ens[a] + \bar{p} \ens[b]\right).
+		\end{aligned}
+	\end{equation}
 	Note that the equality holds only if $p=0$, in which case the second mixing coefficient is zero.
 	
 	Now let us show that $p \ens[a] + \bar{p} \ens[b]$ can be expressed as a mixture of $\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)$ and $\ens[b]$.
@@ -1315,11 +1312,11 @@ Though the mixing entropy is not a distance function, we can still show that, li
 	\end{equation}
 	From strict concavity we have
 	\begin{equation}
-	\begin{aligned}
-		S\left(p \ens[a] + \bar{p} \ens[b] \right)&\geq \frac{2p}{1+p} S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) + \frac{1-p}{1+p} S(\ens[b]) \\
-		-S(\ens[b]) &\geq \frac{1+p}{1-p} \frac{2p}{1+p} S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) - \frac{1+p}{1-p} S\left(p \ens[a] + \bar{p} \ens[b] \right) \\
-		&= \frac{2p}{1-p} S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) - \frac{1+p}{1-p} S\left(p \ens[a] + \bar{p} \ens[b] \right).
-	\end{aligned}
+		\begin{aligned}
+			S\left(p \ens[a] + \bar{p} \ens[b] \right)&\geq \frac{2p}{1+p} S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) + \frac{1-p}{1+p} S(\ens[b]) \\
+			-S(\ens[b]) &\geq \frac{1+p}{1-p} \frac{2p}{1+p} S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) - \frac{1+p}{1-p} S\left(p \ens[a] + \bar{p} \ens[b] \right) \\
+			&= \frac{2p}{1-p} S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) - \frac{1+p}{1-p} S\left(p \ens[a] + \bar{p} \ens[b] \right).
+		\end{aligned}
 	\end{equation}
 	Note that the equality holds only if $p=0$, in which case the first mixing coefficient is zero.
 	
@@ -1336,11 +1333,14 @@ Though the mixing entropy is not a distance function, we can still show that, li
 	\end{equation}
 	The equality holds only if $p=0$.
 \end{proof}
+\end{mathSection}
 
+The fact that the mixing entropy decreases on all directions as we get closer to an ensemble allows us to create a notion of open ball, which allows to prove the topology is at least $\mathsf{T}_1$. The lack of the triangle inequality does not allow us to easily prove that we can always find disjoint balls centered at two different points, which is what typically is used to show that the topology is Hausdorff.\footnote{It is likely that we could at least show that in the finite dimensional case the topology is the standard one on $\mathbb{R}^n$, and that the embedding of the ensemble space into $\mathbb{R}^n$ is continuous.}
+
+\begin{mathSection}
 \begin{defn}
 	Given $\ens[a] \in \Ens$ and $r \in [0,1]$, an entropic open ball is the set of all ensembles for which the mixing entropy from $\ens[a]$ is within $r$. That is, $B_r(\ens[a]) = \{\ens \in \Ens \, | \, MS(\ens[a], \ens) < r\}$.
 \end{defn}
-
 \begin{coro}
 	Every entropic open ball is an open set.
 \end{coro}
@@ -1349,71 +1349,20 @@ Though the mixing entropy is not a distance function, we can still show that, li
 	Since both the entropy and the mixing operation are continuous, the mixing entropy is also continuous. An entropic open ball is the reverse image of an open set through a continuous function and it is therefore an open set.
 \end{proof}
 
-\begin{conj}
-	Every entropic open ball is convex.
-\end{conj}
+\begin{prop}
+	Ensemble spaces are $\mathsf{T}_1$ topological spaces.
+\end{prop}
+
+\begin{proof}
+	Since $MS(\ens[a], \ens) = 0$ if and only if $\ens = \ens[a]$, $\{\ens \in \Ens \, | \, MS(\ens[a], \ens) = 0\} = \{\ens[a]\}$. Since $MS$ is continuous, $\{\ens[a]\}$ is closed set. Since every singleton is closed, the topology is $\mathsf{T}_1$.
+\end{proof}
 
 \begin{remark}
-	This intuition is supported by numeric calculation for both the \href{https://www.desmos.com/calculator/ama0u3u31d}{classical case} and the \href{https://www.desmos.com/calculator/6ga2hygwmm}{quantum case} (though the quantum case is not checked for a three dimensional quantum system). The convexity of the entropic open balls may be used to prove the other conjectures.
+	Intuitively, we would expect the entropic balls to be convex. This intuition is supported by numeric calculation for both the \href{https://www.desmos.com/calculator/ama0u3u31d}{classical case} and the \href{https://www.desmos.com/calculator/6ga2hygwmm}{quantum case} (though the quantum case is not checked for a three dimensional quantum system). However, the current axioms allow us to use a different entropy function in a space that is not orthogonally decomposable: the extreme points are not orthogonal. In this case, one is able to create open balls that are not convex.
+	
+	Whether this is physically relevant or not depends on whether there are additional physical constraints on the mixing entropy between three points, which is very likely. The convexity of the entropic balls may, for example, help us show that the topology they generate is Hausdorff.
 \end{remark}
 
-\begin{conj}
-	For every sequence $\ens[a]_i \in \Ens$, $\ens[a]_i \to \ens[a]$ if and only if $MS(\ens[a], \ens[a]_i) \to 0$.
-\end{conj}
-
-\begin{proof}
-	Let $\ens[a]_i \to \ens[a]$, fix $r \in \mathbb{R}$ and consider $B_r(\ens[a])$. This is an open set, therefore we will be able to find some $k$ such that $\ens[a]_i \in B_r(\ens[a])$ for all $i \geq k$. But this means that $MS(\ens[a], \ens[a]_i) < r$ for all $i \geq k$. Therefore $MS(\ens[a], \ens[a]_i) \to 0$.
-	
-	Now let $\ens[a]_i$ be a sequence such that $MS(\ens[a], \ens[a]_i) = r_i \to 0$. Since every sequence that converges to zero will have a strictly decreasing sub-sequence that converges to zero, without loss of generality, let us assume $r_i$ is strictly decreasing. Then $B_{r_i}(\ens[a])$ is a strictly decreasing sequence of open sets such that $\bigcap_i B_{r_i}(\ens[a]) = \{\ens[a]\}$ and $\ens[a]_i \in B_{r_k}(\ens[a])$ for all $i>k$. This means that $\ens[a]$ is a limit point of the sequence $\ens[a]_i$. Since the space is Hausdorff, $\ens[a]$ is the only limit point and therefore $\ens[a]_i \to \ens[a]$. (Not sure this works)
-\end{proof}
-
-\begin{conj}
-	The entropic balls generate a Hausdorff sub-topology.
-\end{conj}
-
-\begin{proof}
-	Since each open ball is an open set, the topology generated by all open sets is a sub-topology of the ensemble space. Moreover, since converge in the mixing distance is enough to characterize convergence in the space, the topology is Hausdorff.
-\end{proof}
-
-It is also an open question whether this topology makes the ensemble space embed continuously into a topological vector space. It should be sufficient that affine combinations, the inverse of convex mixtures, are continuous. It may be possible to prove this using the topology generated by the open balls.
-
-\begin{conj}
-	Let $+_{\ens[a]\ens[b]} : [0,1] \to \Ens$ be the curried function $+_{\ens[a]\ens[b]}(p) = p\ens[a] + \bar{p}\ens[b]$. The function is a homeomorphism between $[0,1]$ and $+_{\ens[a]\ens[b]}([0,1])$.
-\end{conj}
-
-\begin{proof}
-	Since the space is cancellative, the function is invertible and bijective. Since mixing is continuous, the curried function is also continuous. To prove that the inverse is continuous, consider a sequence $p_i \in [0,1]$ that converges to $p$. Let $\ens[c]_i = +_{\ens[a]\ens[b]}(p_i)$ and $\ens[c] = +_{\ens[a]\ens[b]}(p)$. Note that $\ens[c]_i$ can also be expressed as a sequence of mixtures $\lambda_i \ens[a] + \bar{\lambda_i} \ens[c]$ with $\lambda_i \to 0$. This means that $MS(\ens[c], \ens[c]_i) \to 0$, which means $\ens[c]_i \to \ens[c]$.
-	
-	TODO: do we need to use the entropy?
-\end{proof}
-
-\begin{conj}
-	Let $\ens[a], \ens[b]_i\in \Ens$ and $\ens[c]_i = p \ens[a] +\bar{p} \ens[b]_i$ for some $p \in (0,1)$. Then $\ens[b]_i \to \ens[b]$ if and only if $\ens[c]_i \to \ens[c]$. 
-\end{conj}
-
-\begin{conj}[Affine combinations are continuous]
-	Let $\ens \in \Ens$ and let $p \in [0,1]$. Let $+_{p\ens[a]} : \Ens \to \Ens$ be the curried function $+_{p\ens[a]}(\ens[b]) = p\ens[a] + \bar{p}\ens[b]$. The function is a homeomorphism between $\Ens$ and $+_{p\ens[a]}(\Ens)$.
-\end{conj}
-
-\begin{proof}
-	Tentative.
-	
-	Since mixing is continuous, the curried function $+_{p\ens[a]}$ is also continuous. Because the space is cancellative, if $\ens[b] \neq \ens[c]$ then $+_{p\ens[a]}(\ens[b]) \neq +_{p\ens[a]}(\ens[c])$, and therefore $+_{p\ens[a]}$ is injective. Any function is surjective over its own codomain. Therefore $+_{p\ens[a]}$ is a continuous bijective function between $\Ens$ and $+_{p\ens[a]}(\Ens)$. It only remain to show that the inverse is continuous.
-	
-	Note that, since the topology is first-countable, a function is continuous if and only it is sequentially continuous (i.e. the function of the limit of a sequence is the limit of the function applied to the sequence). Let $\ens[c]_i \in +_{p\ens[a]}(\Ens)$ be a sequence and $\ens[b]_i = +_{p\ens[a]}^{-1}(\ens[c]_i)$ be the image of that sequence. If $\ens[c]_i \to \ens[c]$, then we have $\ens[b] = +_{p\ens[a]}^{-1}(\ens[c])$ for some $\ens[b]$. If $\ens[b]_i$ converges, then it must converge to $\ens[b]$ because the topology is Hausdorff and limits are unique.
-\end{proof}
-
-While the entropic open balls generate a sub-topology, it is an open question whether the open balls generate the topology of the ensemble space.
-
-\begin{conj}
-	The topology of the ensemble space is generated by the entropic open balls.
-\end{conj}
-
-\begin{remark}
-	Note that all entropic open balls are open sets in the topology, since the mixing entropy is a continuous function. It suffices to prove that all open sets can be generated by generated by open balls.
-	
-	The next proposition shows that for each point in a open set and a line that goes through that point we can find a mixing entropy such that every element with a mixing entropy lower than that value is in the open set. That is, we can find an open ball along each direction that is contained by the opens set. However, it is not clear whether this can be done along all directions at once.
-\end{remark}
 
 \begin{prop}
 	Let $U \subseteq \Ens$ be an open set. Let $\ens[a] \in U$ and $L \subseteq \Ens$ be a line containing $\ens[a]$. Then there is an $r \in (0,1]$ such that for all $\ens \in L$ such that $MS(\ens[a], \ens) < r$ we have $\ens \in U$.
@@ -1424,20 +1373,57 @@ While the entropic open balls generate a sub-topology, it is an open question wh
 	
 	If $\ens[a]$ is an extreme point of $L$ (i.e. there is no $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$), then we are done. If $\ens[a]$ is not an extreme point, then we can find $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$. Repeat the previous procedure with $\ens[d]$ to find another $r'$ and the $t$ be the minimum between the two. Then we have that $t \in (0,1]$ such that for all $\ens \in L$ such that such that $MS(\ens[a], \ens) < r$, $\ens \in U$.
 \end{proof}
+\end{mathSection}
+	
+There are a number of conjectures on the topology generated by the entropic open ball that are probably all related. They are summarized here with some notes on what was understood:
+
+\begin{conj}
+	For every sequence $\ens[a]_i \in \Ens$, $\ens[a]_i \to \ens[a]$ if and only if $MS(\ens[a], \ens[a]_i) \to 0$.
+\end{conj}
+
+\begin{conj}
+	The topology of the ensemble space is generated by the entropic open balls.
+\end{conj}
 
 \begin{conj}
 	Let $U \subseteq \Ens$ be an open set and $\ens[a] \in U$. Then we there exists an $r \in (0,1]$ such that $B_r(\ens[a]) \subseteq U$.
 \end{conj}
 
 \begin{remark}
-	If this were true, than the topology is generated by the open balls
+	These conjectures are likely the same. If the topology is generated by the entropic open balls, then convergence in mixing entropy is the convergence criteria associated with the topology. It also means that we can generate every open set with entropy open balls by fitting them insight every open set.
+	
+	Note that all entropic open balls are open sets in the topology, since the mixing entropy is a continuous function. It suffices to prove that all open sets can be generated by generated by open balls. We have shown that given a point in an open set we can find a finite range of mixing entropy along each direction. However, since we do not know if there is a non-zero infimum across all directions, we do not know whether we can ``fit'' an entropic open ball.
+	
+	Similarly, it is clear that if a sequence converge, the mixing distance goes to zero. However, we do not know whether there is an open set for which the mixing entropy goes to zero but the sequence does not converge. This would mean that a sequence is always eventually enters an entropic open ball of any size, but it may not enter all open sets.
 \end{remark}
 
 \begin{conj}
-	The topology generated by the open balls and extended to the embedding vector space endows the vector space with a topology that is continuous with respect to addition and scalar multiplication. Therefore an ensemble embeds continuously into a topological vector space.
+	Let $\ens[a], \ens[b]_i\in \Ens$ and $\ens[c]_i = p \ens[a] +\bar{p} \ens[b]_i$ for some $p \in (0,1)$. Then $\ens[b]_i \to \ens[b]$ if and only if $\ens[c]_i \to \ens[c]$. 
 \end{conj}
 
-Another open question is how the mixing entropy is related, in general, to an inner product.
+\begin{conj}[Affine combinations are continuous]
+	Let $\ens \in \Ens$ and let $p \in [0,1]$. Let $+_{p\ens[a]} : \Ens \to \Ens$ be the curried function $+_{p\ens[a]}(\ens[b]) = p\ens[a] + \bar{p}\ens[b]$. The function is a homeomorphism between $\Ens$ and $+_{p\ens[a]}(\Ens)$.
+\end{conj}
+
+\begin{conj}
+	Mixing is an open map.
+\end{conj}
+
+\begin{conj}
+	An ensemble embeds continuously into a topological vector space.
+\end{conj}
+
+\begin{conj}
+	Let $+_{\ens[a]\ens[b]} : [0,1] \to \Ens$ be the curried function $+_{\ens[a]\ens[b]}(p) = p\ens[a] + \bar{p}\ens[b]$. The function is a homeomorphism between $[0,1]$ and $+_{\ens[a]\ens[b]}([0,1])$.
+\end{conj}
+
+\begin{remark}
+	These are all about showing that mixing allows a continuous inverse. It is easy to show that mixing gives us a continuous bijection. The problem is showing that the inverse is continuous.
+	
+	Continuity of mixtures only shows that we can stretch open sets to bigger open sets. What we would need is to show that we can shrink open sets to open sets. For example, suppose $U$ is an open neighborhood of $\ens[a]$. The set $V = p \ens[a] + \bar{p} U$ is a set that contains $\ens[a]$ and it is a strict subset of $V$. The question is whether a sequence can stay in $U$, converge to $\ens[a]$ without ever entering $V$. 
+\end{remark}
+
+Another open question is whether the mixing entropy, or the entropy directly, can be related to a generalized notion of inner product.
 
 \subsection{Entropic metric}
 
