@@ -1431,7 +1431,7 @@ The second observation is that the strict concavity of the entropy forces the He
 
 \begin{mathSection}
 \begin{remark}
-	In this section we will assume that an ensemble space embeds continuously into a topological vector space, even though we have not yet proved it. We are going to talk about variations $\delta \ens$ on the space, even though it is not yet clear exactly which mathematical approach is best to make variations well-defined. We are also going to talk about a metric tensor even though the space is not, in general, a manifold.
+	In this section we will assume that an ensemble space embeds continuously into a topological vector space, even though we have not yet proved it. We are going to talk about variations $\delta \ens$ on the space, even though it is not yet clear exactly which mathematical approach is best to make variations well-defined. We are also going to talk about a metric tensor even though the space is not, in general, a manifold. All these issues will need to be resolved in due time.
 \end{remark}
 	
 \begin{defn}
@@ -1447,7 +1447,7 @@ The second observation is that the strict concavity of the entropy forces the He
 \end{proof}
 
 \begin{defn}
-	Assuming $\Ens$ embeds in a topological vector space, given $\ens \in \Ens$ a \textbf{variation} $\delta \ens$ of $\ens$ is a vector in the ambient space such that $\forall t \in [0,1]$ $\ens + t \delta \ens \in \Ens$. Unless otherwise noted, we assume the variation is expressed on the affine structure. Note that it can be re-expressed through a non-linear map as long as the map is differentiable (i.e. it maps variations to variations).
+	Assuming $\Ens$ embeds in a topological vector space and given $\ens \in \Ens$, a \textbf{variation} $\delta \ens$ of $\ens$ is a vector in the ambient space such that $\forall t \in [0,1]$ $\ens + t \delta \ens \in \Ens$. Unless otherwise noted, we assume the variation is expressed on the affine structure. Note that it can be re-expressed through a non-linear map as long as the map is differentiable (i.e. it maps variations to variations).
 \end{defn}
 
 \begin{remark}
@@ -1630,11 +1630,12 @@ TODO: add a note/proof for the discrete version
 
 \section{State capacity}
 
-In this section we are going to develop a generalization of the link between count of states and entropy. In classical mechanics, for a uniform distribution $\rho_U$ over a region of phase space $U$, we have $S(\rho_U) = \log \mu(U)$, where $\mu$ is the Liouville measure that is taken to correspond to the count of states. The idea is to generalize this relationship to all ensembles, classical and quantum.
+In this section we are going to develop a generalized version of the count of states. In classical statistical mechanics, the entropy for a uniform distribution $\rho_U$ over a region of phase space $U$ is given by $S(\rho_U) = \log \mu(U)$, where $\mu$ is the count of states given by the Liouville measure. Since entropy is our stating point: we will define the state capacity of a set of ensembles as the highest exponential of the entropy achievable by mixing those ensembles. This definition works in general, and recovers both the classical Liouville measure and the dimensionality of a quantum subspace.
 
 Given an ensemble, we want to quantify the number of distinguishable cases over which the ensemble is spread. Since entropy characterizes the variability of the preparations of the ensemble, greater variability means the ensemble is spread over more cases. Therefore the count of distinguishable states must be a monotonic function of the entropy. The question is what function.
 
-The first hint that the exponential is the right function is the relationship $S(\rho_U) = \log \mu(U)$ mentioned before. Another hint is that we will want this size to be multiplicative over independent distributions. That is, if we have two ensembles $\rho_1 \in \Ens_1$ and $\rho_2 \in \Ens_2$ of two different ensemble spaces, we can imagine the composite system $\rho = \rho_1 \rho_2$ representing the ensemble of the two independent ensembles. While the entropy should be additive, that is $S(\rho) = S_1(\rho_1) + S_2(\rho_2)$, the count of states should be multiplicative, that is $\mu(\rho) = \mu_1(\rho_1) \mu_2(\rho_2)$. This suggests the relationship $S(\rho) = \log \mu (\rho)$ for all ensembles. The other hint is that the spread can be, at most, additive. If we mix two ensembles, the spread can be at most over the configurations of both and not more. The following shows that the exponential of the entropy has exactly that property
+The first hint that the exponential is the right function is the relationship $S(\rho_U) = \log \mu(U)$ in classical statistical mechanics. Another hint is that we will want this size to be multiplicative over independent distributions. That is, if we have two ensembles $\rho_1 \in \Ens_1$ and $\rho_2 \in \Ens_2$ of two different ensemble spaces, we can imagine the composite system $\rho = \rho_1 \rho_2$ representing the ensemble of the two independent ensembles. While the entropy should be additive, that is $S(\rho) = S_1(\rho_1) + S_2(\rho_2)$, the count of states should be multiplicative, that is $\mu(\rho) = \mu_1(\rho_1) \mu_2(\rho_2)$. This suggests the relationship $S(\rho) = \log \mu (\rho)$ for all ensembles. The other hint is that the spread can be, at most, additive. If we mix two ensembles, the spread can be at most over the configurations of both and not more. The following shows that the exponential of the entropy has exactly that property.\footnote{
+	Note that the state capacity for a single element corresponds to the ``ensemble volume'' defined in \href{https://arxiv.org/pdf/physics/9903045}{this work} and more recently \href{https://arxiv.org/pdf/1804.01343}{here}. It is connected to various uncertainty relationships, including a stronger form of the quantum uncertainty principle. It would be interesting to understand what results can be generalized to the ensemble space.}
 
 \begin{mathSection}
 \begin{prop}[Exponential entropy subadditivity]\label{pm_es_exponentialEntropySubadditivity}
@@ -1688,6 +1689,18 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{state capacity} of $A$ is defined as $\capacity(A) = \sup(2^{S(\hull(A))}\cup\{0\})$.
 \end{defn}
 
+\begin{check}
+	Note that the supremum is taken on the extended real line, therefore it can be infinity. Therefore the state capacity is always defined.
+\end{check}
+
+\begin{coro}
+	The state capacity can be equivalently defined on the $\sigma$-hull or the closed hull. That is, $\sup(2^{S(\hull(A))}\cup\{0\}) = \sup(2^{S(\shull(A))}\cup\{0\}) = \sup(2^{S(\chull(A))}\cup\{0\})$.
+\end{coro}
+
+\begin{proof}
+	Any ensemble $\ens[a] \in \chull(A)$ is the limit of a sequence $\ens[a]_i \in \hull(A)$. Given that the entropy is continuous, $2^{S(\ens(a))} = \lim_{i \to \infty} 2^{S(\ens[a]_i)} \leq \sup(2^{S(\{\ens[a]_i\})}) \leq \sup(2^{S(\hull(A))})$. The supremum for the closed hull, then, cannot be greater than the supremum of the finite hull. Since the closed hull contains the finite hull, the supremum of the finite hull cannot be greater than the closed hull. Therefore, they must be the same. Since the $\sigma$-hull is a subset of the closed hull and a superset of the finite hull, its supremum will also be the same.
+\end{proof}
+
 \begin{prop}
 	The state capacity is a set function that is
 	\begin{enumerate}
@@ -1703,7 +1716,7 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 	
 	2. The $\hull$ is a monotone function. The image of a set through a map is a monotone function. The supremum is a monotone function. Therefore the state capacity is a monotone function.
 	
-	3. Let $A, B \subseteq \Ens$ and let $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])} \leq \capacity(A) + \capacity(B)$. Since this is true for any finite mixture of elements of $A$ and $B$, it will also be true for any element of $\hull(A \cup B)$ since the entropy is continuous. Consequently, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\capacity(A \cup B) \leq \capacity(A) + \capacity(B)$ (i.e. the state capacity is subadditive).
+	3. Let $A, B \subseteq \Ens$ and let $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])} \leq \capacity(A) + \capacity(B)$. Since this is true for any finite mixture of elements of $A$ and $B$, it will be true for any element of $\hull(A \cup B)$. Consequently, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\capacity(A \cup B) \leq \capacity(A) + \capacity(B)$ (i.e. the state capacity is subadditive).
 	
 	4. Let $A, B \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[a]_i\} \subseteq A$ be a sequence of ensembles such that $2^{S(\ens[a]_i)} \to \capacity(A)$ and let $\{\ens[b]_i\} \subseteq B$ be a sequence of ensembles such that $2^{S(\ens[b]_i)} \to \capacity(B)$. Consider $\ens_i = p_i \ens[a]_i + \bar{p_i} \ens[b]_i$ where $p_i = \frac{2^{S(\ens[a]_i)}}{2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(A) + \capacity(B)$. Therefore $\capacity(A \cup B)$ must be at least $\capacity(A) + \capacity(B)$. Combining with the previous result, $\capacity(A \cup B) = \capacity(A) + \capacity(B)$. Therefore the state capacity, as a set function, is additive over orthogonal sets of ensembles.
 \end{proof}
@@ -1713,21 +1726,20 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 \end{prop}
 
 \begin{proof}
-	Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. Given that the state capacity is monotone, $\{\capacity(A_i)\}$ is a an increasing sequence and it will converge in the extended real line. Let $A = \lim\limits_{i \to \infty} A_i$. We have $A = \cup A_i$ and $A_i \subseteq A$ for all $i$. Since state capacity is monotone, $\capacity(A_i) \leq \capacity(A)$ for all $i$ and therefore $\lim\limits_{i \to \infty} \capacity(A_i) \leq \capacity(A)$. Given any $\ens[a] \in \hull(A)$, we can find a sequence $\ens[a]_i \in \hull(A_i)$ such that $\ens[a]_i \to \ens[a]$. Because of the continuity of the entropy, $S(\ens[a]_i) \to S(\ens[a])$. This means we cannot have $k$ such that $\capacity(A) > k > \capacity(A_i)$ for all $i$, and therefore $\lim\limits_{i \to \infty} \capacity(A_i) = \capacity(A)$.
+	Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. Given that the state capacity is monotone, $\{\capacity(A_i)\}$ is a an increasing sequence and it will converge in the extended real line. Let $A = \lim\limits_{i \to \infty} A_i$. We have $A = \cup A_i$ and $A_i \subseteq A$ for all $i$. Since state capacity is monotone, $\capacity(A_i) \leq \capacity(A)$ for all $i$ and therefore $\lim\limits_{i \to \infty} \capacity(A_i) \leq \capacity(A)$. Given any $\ens[a] \in \chull(A)$, we can find a sequence $\ens[a]_i \in \chull(A_i)$ such that $\ens[a]_i \to \ens[a]$. Because of the continuity of the entropy, $S(\ens[a]_i) \to S(\ens[a])$. This means we cannot have $k$ such that $\capacity(A) > k > \capacity(A_i)$ for all $i$, and therefore $\lim\limits_{i \to \infty} \capacity(A_i) = \capacity(A)$.
 	
 	The same argument works for decreasing sequences by inverting the order.
 \end{proof}
 
-\begin{conj}
-	The state capacity is additive only on orthogonal sets.
-\end{conj}
-
-\begin{proof}
-	If the state capacity adds, then the states with highest entropy satisfy the upper variability bound and are orthogonal. What needs to be shown is that this is enough to say all elements are orthogonal. There is a series of nice results possible here. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. If $\ens[a]$ is the ensemble with maximum entropy in $\hull(A)$, it should be true that all elements of the hull are components of $\ens[a]$. If one ensemble is not, we should be able to create an ensemble with higher entropy.
-\end{proof}
 \end{mathSection}
 
-Note that the state capacity for a single element corresponds to the ``ensemble volume'' defined in \href{https://arxiv.org/pdf/physics/9903045}{this work} and more recently \href{https://arxiv.org/pdf/1804.01343}{here}. It is connected to various uncertainty relationships, including a stronger form of the quantum uncertainty principle. It would be interesting to understand what results can be generalized to the ensemble space.
+The state capacity is additive over orthogonal set. Intuitively, orthogonal sets corresponds to mutually exclusive events, so it makes sense that the count of states is additive. Intuitively, the converse should be true as well: if the count of states is additive, the sets correspond to mutually exclusive events and therefore the sets are orthogonal. This leads to the following conjecture
+
+\begin{conj}
+	The state capacity is additive only on orthogonal sets. That is, if $\capacity(A)<\infty$, $\capacity(B)<\infty$ and $\capacity(A \cup B) = \capacity(A) +\capacity(B)$, then $A \ortho B$.
+\end{conj}
+
+One should be able to prove that if the state capacity adds, then the states with highest entropy satisfy the upper variability bound and are orthogonal. What needs to be shown is that this is enough to say all elements are orthogonal. There is a series of nice results connected to this to expand the whole theory. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. If $\ens[a]$ is the ensemble with maximum entropy in $\chull(A)$, it should be true that all elements of the hull are components of $\ens[a]$. One should be able to show that, given two sequences with a convergent entropy and whose elements are orthogonal to each other, one can create another sequence that converges to an entropy higher than both of them. Another useful tool would be a type of sequence within $\hull(A)$ whose entropy always increases, tends to the supremum and each element is a component of the following. Also: the state with maximal entropy (it if exists) is an internal point. All internal points are in the $\sigma$-hull. We leave these series of conjecture for future work.
 
 We now show that the state capacity recovers a notion of number of cases in all three target spaces. In the discrete classical case it recovers the number of points; in the continuous classical case, it recovers the Liouville volume; in the quantum case, it recovers the number of orthogonal pure states.
 
