@@ -1875,6 +1875,32 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	In \href{https://link.springer.com/book/10.1007/978-3-319-30690-2}{Set Functions, Games and Capacities in Decision Making}, it is claimed that finite additivity plus continuity implies $\sigma$-additivity. The conjecture is that this generalizes to $\sigma$-subadditivity.
 \end{remark}
 
+We now show that fraction capacity recovers classical probability in the classical case. The key insight is that each event, each Borel set $A$, corresponds to a subspace of probability measures for which that event will be true. This is the set of probability measure whose support is always within the given Borel set $A$. A probability measure, then, can always be decomposed in a part for which that event will be true, the part supported by $A$, and a part for which that event will be false, the part supported by the complement. The fraction capacity correspond to the mixing coefficient of this decomposition.
+\begin{mathSection}
+	\begin{prop}
+		Let $\Ens$ be a discrete or continuous classical ensemble space with sample space $X$. Let $A \in \Sigma_X$ be an event and $\Ens_A \subseteq \Ens$ the set of distributions with support contained in $A$. Let $p \in Ens$ a probability measure in the ensemble space. Then $p(A) = \fcap_{p}(\Ens_A)$. That is, the probability of an event is equal to the fraction capacity of the subspace corresponding to that event.
+	\end{prop}
+	\begin{proof}
+		Let $p \in \Ens$ be a probability measure over $X$, absolutely continuous with respect to the appropriate measure $\mu$ (i.e. discrete for discrete case and Liouville for continuous case). Given $A \in \Sigma$, we can write $p = p(A) p_A + p(A^{\complement}) p_{A^{\complement}}$ where  $p_A$ is a probability measure with support $A$ and $p_{A^{\complement}}$ is a probability measure with support to $A^{\complement}$.
+		
+		Let $\Ens_A \subseteq \Ens$ be the subset of probability measures with support contained in $A$. Then $p_A \in \Ens_A$ and $\fcap_{p}(\Ens_A) \geq p(A)$. Given that $p_{A^{\complement}}$ has support disjoint from $A$, we can find no further component of $p$ that has support in $A$. Therefore $\fcap_{p}(\Ens_A) = p(A)$. The fraction capacity, then, recovers the probability.
+	\end{proof}
+\end{mathSection}
+	
+We now show that the fraction capacity recovers probability over measurements in the quantum case. The setup is essentially the same as of the classical case, except that we start with an observable $O$, and each Borel set $A$ for that observable will have a corresponding subspace of $\mathcal{H}$ and a projector $\Pi_A$. A post-measurement state of $O$ is mixed state that commutes with $O$, since it will commute with any projector that commutes with $O$. We can show, then, that the fraction capacity recovers the decomposition of any post-measurement state of $O$ over the subspace corresponding to $Pi_A$.
+
+\begin{mathSection}
+	\begin{prop}
+		Let $\Ens$ be a quantum ensemble space associated to a Hilbert space $\mathcal{H}$. Let $O : \mathcal{H} \to \mathcal{H}$ be a quantum observable. Let $A \in \Sigma_{\mathbb{R}}$ be a Borel set and $\Pi_{A}$ be the projection associated with the subspace of $\mathcal{H}$ corresponding to the subset $A$ of the spectrum of $O$. Let $\Ens_A$ be the set of ensembles within that subspace. Let $\rho \in \Ens$ be a mixed state that commutes with $O$ (i.e. the ensemble resulting form a measurement of $O$). Then $\tr(\rho \Pi_A) = \fcap_{\rho}(\Ens_A)$.
+	\end{prop}
+	
+	\begin{proof}
+		Let $\rho \in \Ens$ be a mixed state that commutes with $O$. Let $A \in \Sigma_{\mathbb{R}}$ be a Borel set and $\Pi_{A}$ be the projection associated with the subspace of $\mathcal{H}$ corresponding to the subset $A$ of the spectrum of $O$. Then we can write $\rho = \lambda \rho_A + \bar{\lambda} \rho_{A^{\complement}}$ where $\rho_A, \rho_{A^{\complement}} \in \Ens$ are such that $\tr(\rho_A \Pi_A) = 1$ and  $\tr(\rho_{A^{\complement}} \Pi_A) = 0$. We have $\tr(\rho \Pi_A) = \lambda$.
+		
+		Let $\Ens_A \subseteq \Ens$ be the subset of mixed states $d$ such that $\tr(d \Pi_A) = 1$. Then $d \in \Ens_A$ and $\fcap_{\rho}(\Ens_A) \geq \lambda$. Given that $\rho_{A^{\complement}}$ is in the subspace orthogonal to $\Ens_A$, we can find no further component of $\rho$ in that subspace. Therefore $\fcap_{p}(\Ens_A) = \lambda$. We have $\tr(\rho \Pi_A) = \lambda = \fcap_{p}(\Ens_A)$ The fraction capacity, then, recovers the probability.
+	\end{proof}
+\end{mathSection}
+
 \section{Statistical properties and quantities}
 
 Given our ensembles first approach, we define statistical quantities as affine (linear) functions of ensembles. The idea is that a statistical quantity represents an expectation over ensembles. The possible value of the quantities will need to be recovered with constructions that mimic spectral theory, though we will not want to talk about eigenstates and eigenvalues in the general case since these are not properly defined for a continuous quantity.
