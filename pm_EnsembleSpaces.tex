@@ -361,12 +361,38 @@ We can also characterize some ensembles based on what other ensembles they can a
 	\includegraphics[width=0.8\textwidth]{tempimages/InteriorExteriorPoints.jpg}
 	\caption{The ensemble $\ens[a]$ is an extreme point in both spaces. $\ens[b]$ is a boundary point, but is not an extreme point (it is the mixture of the vertices on the same side). $\ens[c]$ is an internal point.}
 \end{figure}
+
+\begin{prop}
+	The set of all internal points $I_{\Ens}$ is a convex set.
+\end{prop}
+\begin{proof}
+Let $\ens_1, \ens_2 \in I_{\Ens}$ be two internal points of $\Ens$. Since $\ens_1$ and $\ens_2$ are internal points, given any $\ens[a] \in \Ens$ we can find $\ens[b]_1, \ens[b]_2 \in \Ens$ such that 
+\begin{equation}
+	\begin{aligned}
+	\ens_1 & =p_1 \ens[a]+\bar{p}_1 \ens[b]_1 \\
+	\ens_2 & =p_2 \ens[a]+\bar{p}_2 \ens[b]_2
+	\end{aligned}
+\end{equation}
+for some $p_1, p_2 \in [0,1]$. Now let $p \in [0,1]$ and $\ens = p \ens_1+\bar{p} \ens_2$. We have:
+\begin{equation}
+\begin{aligned}
+	\ens = p \ens_1+\bar{p} \ens_2 &= p(p_1 \ens[a]+\bar{p}_1 \ens[b]_1) + \bar{p} (p_2 \ens[a]+\bar{p}_2 \ens[b]_2)\\
+	&=\left(p p_1+\bar{p} p_2\right) \ens[a]+\left(p \bar{p}_{1} \ens[b]_1+\bar{p} \bar{p}_{2} \ens[b]_2\right) \\
+	&=\lambda \ens[a] + \bar{\lambda} \left(\frac{p \bar{p}_{1}}{\bar{\lambda}} \ens[b]_1+\frac{\bar{p} \bar{p}_{2}}{\bar{\lambda}} \ens[b]_2\right) = \lambda \ens[a] + \bar{\lambda} \ens[b] \\
+\end{aligned}
+\end{equation}
+where $\lambda = p p_1+\bar{p} p_2$ and $\ens[b] = \frac{p \bar{p}_{1}}{\bar{\lambda}} \ens[b]_1+\frac{\bar{p} \bar{p}_{2}}{\bar{\lambda}} \ens[b]_2$. Therefore, given any $\ens[a] \in \Ens$, we can find a $\ens[b] \in \Ens$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in [0,1]$. This means the convex combination of internal points is an internal point, and $I_{\varepsilon}$ is a convex set.
+\end{proof}
+
+\begin{remark}
+	It is an open question whether this result generalizes to infinite mixtures. That is, whether the infinite mixture of internal points is still an internal point.
+\end{remark}
 \end{mathSection}
 
-For topological vector space, the algebraic interior and the topological interior are related. For example, if $A$ is a convex subset of a TVS with non-empty topological interior, then the algebraic and topological interior coincide. It is an open question how many of these results hold for topological convex space as well. As an example, we would like to prove the following.
+For topological vector spaces, the algebraic interior and the topological interior are related. For example, if $A$ is a convex subset of a TVS with non-empty topological interior, then the algebraic and topological interior coincide. It is an open question how many of these results hold for topological convex space as well. As an example, we would like to prove the following.
 
 \begin{conj}
-	Let $\Ens$ be an ensemble space with a $T_1$ topology. Then the set of all internal points $I_{\Ens}$ is a convex set. The set of boundary points $B_{\Ens}$ is a closed set and therefore $I_{\Ens}$ is an open set.
+	Let $\Ens$ be an ensemble space with a $T_1$ topology. The set of boundary points $B_{\Ens}$ is a closed set and therefore $I_{\Ens}$ is an open set.
 \end{conj}
 \begin{remark}
 	One may be able to show that the limit of a sequence of boundary points cannot be an interior point.
