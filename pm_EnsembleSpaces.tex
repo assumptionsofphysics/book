@@ -1913,7 +1913,7 @@ We now show that fraction capacity recovers classical probability in the classic
 	\end{proof}
 \end{mathSection}
 	
-We now show that the fraction capacity recovers probability over measurements in the quantum case. The setup is essentially the same as of the classical case, except that we start with an observable $O$, and each Borel set $A$ for that observable will have a corresponding subspace of $\mathcal{H}$ and a projector $\Pi_A$. A post-measurement state of $O$ is mixed state that commutes with $O$, since it will commute with any projector that commutes with $O$. We can show, then, that the fraction capacity recovers the decomposition of any post-measurement state of $O$ over the subspace corresponding to $Pi_A$.
+We now show that the fraction capacity recovers probability over measurements in the quantum case. The setup is essentially the same as of the classical case, except that we start with an observable $O$, and each Borel set $A$ for that observable will have a corresponding subspace of $\mathcal{H}$ and a projector $\Pi_A$. A post-measurement state of $O$ is mixed state that commutes with $O$, since it will commute with any projector that commutes with $O$. We can show, then, that the fraction capacity recovers the decomposition of any post-measurement state of $O$ over the subspace corresponding to $\Pi_A$.
 
 \begin{mathSection}
 	\begin{prop}
@@ -2074,6 +2074,28 @@ If one is able to prove that the topology induced by the statistical variables i
 \end{proof}
 
 An open problem is whether statistical quantities are required by ensemble spaces or they are an additional requirement. If we were able to show that ensemble spaces always embed continuously in a locally convex topological vector space, one may use the semi-norms to define quantities. Another approach is to investigate whether the existence of linear transformations parameterized by real quantities give us statistical quantities through the generators of the transformations. Physically, this would correspond to the assumption that time is a continuous quantity. It would also mean that, if time is not modeled as a real quantity, then the ensemble space would have to change.
+
+\subsection{Connection to Choquet theory}
+
+We now connect ensemble spaces to Choquet theory. Given a compact convex subset $E$ of a locally convex topological vector space $V$, Choquet theory asks whether every point of $E$ can be represented as a probability measure over its extreme points. If an ensemble space $\Ens$ is compact, or allows a completion completion $E$, then we can study the ensemble space within Choquet theory as well. The fraction capacity can be understood as the supremum from all measures that can represent an ensemble. The fraction capacity is therefore additive only if all ensembles can be represented with only one measure (i.e. multiple decomposition is not allowed).
+
+Choquet theory can be summarized in the following way. First, we need to define what it means to represent an ensemble with a probability measure. Let $E$ be a convex subset of a locally convex topological vector space $V$ and $X$ the set of extreme points. We say that $\ens \in E$ is represented by a probability measure $p : \Sigma_{E} \to [0,1]$ if $F(\ens) = \int_E F dp$ for every continuous linear functional $F$ on $V$. Moreover, we say that $p$ is supported by the extreme points if $p(X) = 1$. Given any probability measure $p$ over the extreme points $X$, we can always find an $\ens \in E$ that is represented by $p$. Therefore, we have a map from the set of probability measures to the set of ensembles. Choquet theory characterizes how the map works in the opposite direction.
+
+The first question is whether each ensemble is represented by a probability measure. Choquet theory tells us that this is the case:
+\begin{thrm}[Choquet 1]
+	Let $E$ be a metrizable compact convex subset of a locally convex topological vector space $V$, and let $\ens \in E$. Then there exists a probability measure $p_{\ens}$ on $X$ which represents $\ens$ and is supported by the extreme points $X$.
+\end{thrm}
+The second question is whether the representation is unique. Choquet theory has a clear answer.
+\begin{thrm}[Choquet 2]
+	Let $E$ be a closed convex metrizable subset of a locally convex topological vector space $V$. Then $E$ is a Choquet simplex if and only if for each $\ens \in E$ there exists a unique measure $p_{\ens}$ which represents $\ens$ and is supported by the extreme points $X$.
+\end{thrm}
+The definition of a Choquet simplex is rather involved, so it is omitted. Intuitively, it is the generalization of the finite dimensional simplex and we can take is a definition. The key point is that $E$ is a Choquet simplex if and only if the ensemble space does not allow multiple decompositions in terms of extreme points.
+
+There is a connection between mixtures and the representation through a probability measure. We can, in fact, write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $\ens$ can be represented by the probability measure $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$, and $p(\Ens \setminus \{\ens[a], \ens[b]\}) = 0$. Therefore, if $M_{\ens}$ is the set of probability measre that represent $\ens$, the fraction $\size_{\ens}(\ens[a])$ is given by the maximum value over $\{\ens[a]\}$ that can be taken by one of those measures. That is,  $\size_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$.
+
+
+
+In case $E$ is compact, we can restrict the fraction capacity to the set $X$ of extreme points. Given a set $A \subset X$, of extreme points, we can find the set $N \subset E$ of all ensembles that can be represented with a probability measure with support $A$. This forms a convex set. Now, the ability to express an ensemble $\ens$ as the convex combination of $N$ is precisely the ability to find a measure $p$ that represents $\ens$ such that $p(A) \neq 0$. That is, $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ with $\ens[a] \in M$ if and only if there is a probability measure $p$ that represents $\ens$ such that $p(A) \geq \lambda$.\footnote{TODO: add proof somewhere} Consequently, if $M_{\ens}$ is the set of all probability measures that represent $\ens$ as defined in Choquet theory, then $\fcap_{\ens}(A) = \sup(\{p(A) \, | \, p \in M_{\ens}\})$.\footnote{TODO: prove somewhere} The fraction capacity is simply the supremum on each set over all possible measures.
 
 \subsection{Macrostates and thermodynamics}
 
