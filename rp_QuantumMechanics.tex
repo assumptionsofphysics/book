@@ -30,63 +30,60 @@ We start with the Schroedinger equation
 	\eqtext{The evolution follows the equation $\imath \hbar \frac{d}{dt} \psi(t) = H \psi(t)$ where $H$ is a self-adjoint operator}
 \end{equation}
 
-We now want to write the evolution as an operator that act on a wave function. The infinitesimal time step is going to be
+\subsection{Infinitesimal time evolution}
+
+The Schroedinger equation describes time evolution as a relationship between the change of the state and the Hamiltonian of the system. Here we want to characterize time evolution as a map $U_{dt}$ that takes the state at time $t$ and returns the state at time $t + dt$. We have
 \begin{equation}
 	\begin{aligned}
-		\psi(t+dt) &= \psi(t) + d\psi(t) + \psi(t) + \frac{d}{dt} \psi(t) dt \\
-		&= \psi(t)+ \frac{H dt}{\imath \hbar} \psi(t)\\
-		&= \left(1 + \frac{H dt}{\imath \hbar}\right)\psi(t) \\
-		&= U_{dt}\psi(t)
+		\psi(t+dt) &= \psi(t) + d\psi(t) = \psi(t) + \frac{d}{dt} \psi(t) dt = \psi(t)+ \frac{H dt}{\imath \hbar} \psi(t)\\
+		&= \left(1 + \frac{H dt}{\imath \hbar}\right)\psi(t) = U_{dt}\psi(t).
 	\end{aligned}
 \end{equation}
-
-Note that, since $H$ is a self-adjoint operator, $U_{dt}$ is a unitary operator. In fact
+Since $H$ is a self-adjoint operator, we have
 \begin{equation}
 	\begin{aligned}
-		U_{dt}^\dagger U_{dt} &= \left(1 + \frac{H dt}{\imath \hbar}\right)^\dagger \left(1 + \frac{H dt}{\imath \hbar}\right) \\
-		&= \left(1 + \frac{H^\dagger dt}{(- \imath) \hbar}\right) \left(1 + \frac{H dt}{\imath \hbar}\right)\\
-		&= \left(1 - \frac{H dt}{\imath \hbar}\right) \left(1 + \frac{H dt}{\imath \hbar}\right) \\
-		&= 1 + \left(\frac{H dt}{\imath \hbar}\right)^2 \\
-		&= 1 + O(dt^2)
+		U_{dt}^\dagger U_{dt} &= \left(1 + \frac{H dt}{\imath \hbar}\right)^\dagger \left(1 + \frac{H dt}{\imath \hbar}\right) = \left(1 + \frac{H^\dagger dt}{(- \imath) \hbar}\right) \left(1 + \frac{H dt}{\imath \hbar}\right) = \left(1 - \frac{H dt}{\imath \hbar}\right) \left(1 + \frac{H dt}{\imath \hbar}\right) \\
+		&= 1 + \left(\frac{H dt}{\imath \hbar}\right)^2 = 1 + O(dt^2).
 	\end{aligned}
 \end{equation}
+This means that the infinitesimal time evolution operator $U_{dt}$ is unitary.
 
-This works the other way around. If we have an infinitesimal operator that is unitary, we can express it in that form. That is
+We can proceed in the opposite way. Given an infinitesimal unitary time evolution operator, we can recover the change of the state in time.
 \begin{equation}
 	\begin{aligned}
-		U_{dt}\psi(t) &= \psi(t) + \frac{d\psi(t)}{dt} dt \\
-		&= (1 + A dt)\psi(t) \\
-		U_{dt}^\dagger U_{dt} &= \left(1 + A dt\right)^\dagger \left(1 + A dt\right) \\
-		&= \left(1 + A^\dagger dt\right) \left(1 + A dt\right)\\
-		&= 1 + \left(A + A^\dagger\right)dt + A^\dagger A dt^2 \\
-		&= 1 + \left(A + A^\dagger\right)dt + O(dt^2) \\
+		\frac{d\psi(t)}{dt} &= \frac{\psi(t+dt) - \psi(t)}{dt} = \frac{U_{dt}\psi(t) - \psi(t)}{dt} = \frac{U_{dt} - 1}{dt} \psi(t) = A \psi(t)\\
+		U_{dt} &= 1 + A dt
 	\end{aligned}
 \end{equation}
-If we want the operator to be unitary, then we must have that $A = - A^\dagger $, which means $A$ is (anti-self-adjoint) (?). Which means we can write it as $A = \frac{H}{\imath \hbar}$ where $H$ is a self-adjoint operator. The evolution follows the Schroedinger equation.
-
-This means that 
+From the unitarity we have
+\begin{equation}
+	\begin{aligned}
+		U_{dt}^\dagger U_{dt} &= \left(1 + A dt\right)^\dagger \left(1 + A dt\right) = \left(1 + A^\dagger dt\right) \left(1 + A dt\right) = 1 + \left(A + A^\dagger\right)dt + A^\dagger A dt^2 \\
+		&= 1 + \left(A + A^\dagger\right)dt + O(dt^2) = 1 \\
+		A &= - A^\dagger
+	\end{aligned}
+\end{equation}
+Therefore $A$ is skew-adjoint, and we can set $A = \frac{H}{\imath \hbar}$ where $H$ is a self-adjoint operator. Therefore $\imath \hbar \frac{d}{dt} \psi(t) = \imath \hbar A \psi(t) = H \psi(t)$. The evolution follows the Schroedinger equation. To sum it up
 \begin{equation}\label{rp-qm-uev-condUnitaryEvolution}
 	\tag{DR-UNIT}
-	\eqtext{The evolution is unitary: preserves the norm: $U^{\dagger}_{\Delta t} U_{\Delta t} = 1$} 
+	\eqtext{Time evolution is unitary: $U^{\dagger}_{dt} U_{dt} = 1$} 
 \end{equation}
 is equivalent to \ref{rp-qm-uev-condSchroedingerEq}.
 
 Note that if the evolution is unitary, then the inner product is conserved. In fact
 \begin{equation}
 	\begin{aligned}
-		\< U \phi | U \psi\> &= \< \phi | U^\dagger U | \psi \> \\
-		&=\<  \phi | \psi \>.
+		\< U_{dt} \phi | U_{dt} \psi\> &= \< \phi | U^\dagger_{dt} U_{dt} | \psi \> =\<  \phi | \psi \>.
 	\end{aligned}
 \end{equation}
-The argument works in reverse as well, therefore
+The argument works in reverse as well: an infinitesimal time evolution operator that conserves the inner product is unitary. Therefore
 \begin{equation}\label{rp-qm-uev-condInnerProductPreserved}
 	\tag{DR-INN}
-	\eqtext{The evolution preserves the inner product : $\< U_{\Delta t} \phi | U_{\Delta t} \psi\> =\<  \phi | \psi \>$} 
+	\eqtext{Time evolution preserves the inner product : $\< U_{dt} \phi | U_{dt} \psi\> =\<  \phi | \psi \>$} 
 \end{equation}
 is equivalent to \ref{rp-qm-uev-condUnitaryEvolution}.
 
-
-In particular, unitary evolution will preserve the norm of vectors, since $|psi|^2 = \<\psi | \psi \>$. The reverse is true as well: a transformation that preserves the norm of all state vectors is a unitary operation. This is because the inner product can be expressed, through the polarization identity, in terms of the norm.
+In particular, unitary evolution will preserve the norm of vectors, since $|\psi|^2 = \<\psi | \psi \>$. The reverse is true as well: a transformation that preserves the norm of all state vectors is a unitary operation. This is because the inner product can be expressed, through the polarization identity, in terms of the norm.
 \begin{equation}
 	\begin{aligned}
 		\< \phi | \psi \> = \frac{1}{4}\left( |\phi + \psi|^2 - |\phi - \psi|^2 - \imath |\phi + \imath \psi|^2 +\imath |\phi - \imath \psi|^2 \right)
@@ -107,40 +104,64 @@ We now look at the square of the inner product between two states infinitesimall
 		&=\<  \psi(t) | 1 + \frac{H dt}{\imath \hbar} | \psi(t)\> \<\psi(t) | 1 - \frac{H dt}{\imath \hbar} | \psi(t)\> \\
 		&=\< \psi(t) | \psi(t)\> \< \psi(t) | \psi(t)\> + \<  \psi(t) | \psi(t)\> \<\psi(t) | - \frac{H dt}{\imath \hbar} | \psi(t)\> \\
 		&+ \< \psi(t) | \frac{H dt}{\imath \hbar} | \psi(t)\> \<\psi(t) | \psi(t)\> + O(dt^2)\\
-		&=1 - \<\psi(t) | \frac{H dt}{\imath \hbar} | \psi(t)\> + \<\psi(t) | \frac{H dt}{\imath \hbar} | \psi(t)\>+ O(dt^2). \\
-		&=1 + O(dt^2).
+		&=|\<\psi(t) | \psi(t)\>|^2 + O(dt^2).
 	\end{aligned}
 \end{equation}
-Which means that the projection of the state after an infinitesimal time step over the initial state is one. Note that the converse is true as well. If the square of the inner product between two states infinitesimally close in time is one, then the evolution is unitary. In fact, if $U_{\Delta t}$ is continuous, we can write the infintesimal time step as $U_{d t} = 1 + \frac{O dt}{\imath \hbar}$ from some operator $O$. If we follow the previous argument in reverse, we will find that $O = O^\dagger$. That is, $O$ is self-adjoint. Therefore $U_{dt}$ is unitary by condition \ref{rp-qm-uev-condSchroedingerEq}. Therefore condition
+In particular, if the vector is normalized, we have
+\begin{equation}
+	\begin{aligned}
+		|\<\psi(t) | \psi(t + dt)\>|^2 &= 1 + O(dt^2).
+	\end{aligned}
+\end{equation}
+That is, the square of the inner product between two infinitesimally close states is one.
+
+For the converse, let's assume $U_{dt}$ is such that $|\<\psi(t) | \psi(t + dt)\>|^2 = |\<\psi(t) | \psi(t)\>|^2$. As we saw before, since $U_{dt}$ is infinitesimal, we can write $U_{dt} = 1 + A dt$. We have:
+\begin{equation}
+	\begin{aligned}
+		|\<\psi(t) | \psi(t)\>|^2 &= |\<\psi(t) | \psi(t + dt)\>|^2 = \<  \psi(t) | U_{dt} \psi(t)\> \< U_{dt} \psi(t) | \psi(t)\> \\
+		&= \<  \psi(t) | U_{dt} | \psi(t)\> \<  \psi(t) | U_{dt}^{\dagger} | \psi(t)\> \\
+		&= \<  \psi(t) | 1 + A dt | \psi(t)\> \<  \psi(t) | 1 + A^{\dagger} dt | \psi(t)\> \\
+		&=|\<\psi(t) | \psi(t)\>|^2 + \<\psi(t) | \psi(t)\> \<  \psi(t) | (A + A^{\dagger}) dt | \psi(t)\> + O(dt^2).
+	\end{aligned}
+\end{equation}
+This means that $A = A^{\dagger}$ and therefore $U_{dt} = 1 + A dt$ is unitary. Therefore condition
 \begin{equation}\label{rp-qm-uev-condUnitaryBorn}
 	\tag{DR-UBOR}
 	\eqtext{The square of the inner product between to states infinitesimally close in time is one: $|\< \psi(t) | \psi(t + dt) \> |^2 = 1$} 
 \end{equation}
 is yet another equivalent condition to unitary evolution.
 
-The above condition makes sense if we understand what happens geometrically. A unitary evolution is effectively a rotation in the Hilbert space, and the infinitesimal change under a rotation is perpendicular to the radius. In our case, the state vector $|\psi(t)\>$ is the radius and $|d\psi(t)\>$ is the change. Therefore condition
-\begin{equation}\label{rp-qm-uev-condOrthogonalChange}
-	\tag{DR-ORTH}
-	\eqtext{The change in time is orthogonal to the state being changed: $|\< \psi(t) | d\psi(dt) \> |^2 = 0$} 
-\end{equation}
-is yet another equivalent condition.
+The above two conditions make sense if we understand what happens geometrically. A unitary evolution is effectively a rotation in the Hilbert space, that is why the norm is conserved. An infinitesimal unitary evolution, then, is an infinitesimal rotation so the change is tangent to the circle, and therefore perpendicular with respect to the original vector. This is why the projection of the new vector onto the old one is equal to the norm.
 
-Another way to characterize unitary evolution is through what happens to an orthonormal basis $|e_i\>$. Given that a unitary evolution preserves the inner product, $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$. Therefore the unitary evolution maps an orthonormal basis to another orthonormal basis. The converse is also true, if $U_{\Delta t}$ maps an orthonormal basis to another orthonormal basis, then the inner product is preserves. To see this, we can simply expand any vector as a superposition of the basis vector. That is
+However, perpendicular does not mean orthogonal in this case. In the complex plane, a multiplication by $\imath$ gives us a perpendicular vector that is not orthogonal with respect to the inner product. To see this
 \begin{equation}
 	\begin{aligned}
-		\<\psi(t) | \phi(t)\> &= \< c_i e_i | d_j e_j\> \\
-		&= c_i^* d_j \< e_i | e_j\> \\
-		&= c_i^* d_j \< U_{d t} e_i | U_{d t} e_j\> \\
-		&= \< U_{d t} c_i e_i | U_{d t} d_i e_j\> \\
-		&= \< U_{d t} \psi(t) | U_{d t} \phi(t)\> \\
-		&= \< \psi(t + d t) | \phi(t + d t)\> \\
+		\<\psi(t+dt) | \psi(t+dt) \> &= \<\psi(t) + d\psi | \psi(t) + d\psi \> \\
+		&= \<\psi(t) | \psi(t) \> + \<\psi(t) |  d\psi \> + \< d\psi | \psi(t) \> + \< d\psi |  d\psi \> \\
+		&= \<\psi(t) | \psi(t) \> + \<\psi(t) | A dt |  \psi(t) \> + \< \psi(t) | A^{\dagger} dt | \psi(t) \> + O(dt^2) \\
+		\<\psi(t+dt) | \psi(t+dt) \> &- \<\psi(t) | \psi(t) \> = \<\psi(t) | (A + A^{\dagger})dt | \psi(t) \> + O(dt^2)
+	\end{aligned}
+\end{equation}
+Note how $A + A^{\dagger}$ gives us the change in the norm of $\psi$ during the evolution. The norm does not change if and and only if $A$ is skew-adjoint. Since $\<\psi(t) |  d\psi(t) \> = \<\psi(t) | A | \psi(t) \> \neq 0$, the change in not orthogonal in the Hilber space. However, the quantity is imaginary so the change is perpendicular in the complex plane of every dimension. If we consider the triangle formed by $\psi(t+dt)$, $\psi(t)$ and $d\psi$, the triangle is perpendicular if and only if $A$ is skew-adjoint. Therefore the condition
+\begin{equation}\label{rp-qm-uev-condOrthogonalChange}
+	\tag{DR-PERP}
+	\eqtext{The change is perpendicular to the original state: $\< \psi(t) | d\psi(dt) \>$ is imaginary} 
+\end{equation}
+is yet another equivalent condition to \ref{rp-qm-uev-condSchroedingerEq}.
+
+Another way to characterize unitary evolution is through what happens to an orthonormal basis $|e_i\>$. Given that a unitary evolution preserves the inner product, we have $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$. Therefore the unitary evolution maps an orthonormal basis to another orthonormal basis. The converse is also true, if $U_{dt}$ maps an orthonormal basis to another orthonormal basis, then the inner product is preserves. To see this, we can simply expand any vector in terms of the basis vector. That is
+\begin{equation}
+	\begin{aligned}
+		\<\psi(t) | \phi(t)\> &= \< c_i e_i | d_j e_j\> = c_i^* d_j \< e_i | e_j\> = c_i^* d_j \< U_{d t} e_i | U_{d t} e_j\> \\
+		&= \< U_{d t} c_i e_i | U_{d t} d_i e_j\> = \< U_{d t} \psi(t) | U_{d t} \phi(t)\> = \< \psi(t + d t) | \phi(t + d t)\> \\
 	\end{aligned}
 \end{equation}
 Therefore condition
 \begin{equation}\label{rp-qm-uev-condOrthonormalBasis}
 	\tag{DR-OBAS}
-	\eqtext{The change in time maps orthonormal basis to orthonormal basis: $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$} 
+	\eqtext{Time evolution maps orthonormal basis to orthonormal basis: $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$} 
 \end{equation}
+The condition can be related to just preserving orthogonality pair-wise. TODO
 
 \subsection{Physical conditions}
 
