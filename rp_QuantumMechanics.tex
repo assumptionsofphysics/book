@@ -83,16 +83,24 @@ The argument works in reverse as well: an infinitesimal time evolution operator 
 \end{equation}
 is equivalent to \ref{rp-qm-uev-condUnitaryEvolution}.
 
-In particular, unitary evolution will preserve the norm of vectors, since $|\psi|^2 = \<\psi | \psi \>$. The reverse is true as well: a transformation that preserves the norm of all state vectors is a unitary operation. This is because the inner product can be expressed, through the polarization identity, in terms of the norm.
+In particular, unitary evolution will preserve the norm of vectors, since $|\psi|^2 = \<\psi | \psi \>$. Note that the inner product can be expressed, through the polarization identity, in terms of the norm.
 \begin{equation}
 	\begin{aligned}
 		\< \phi | \psi \> = \frac{1}{4}\left( |\phi + \psi|^2 - |\phi - \psi|^2 - \imath |\phi + \imath \psi|^2 +\imath |\phi - \imath \psi|^2 \right)
 	\end{aligned}
 \end{equation}
-If the norm is conserved, then, the inner product is conserved and the evolultion is unitary. Therefore condition
+If $U_{dt}$ is a linear transformation that preserves the norm, that is $|U_{dt} \psi | ^2 = | \psi |^2$, then, we have
+\begin{equation}
+	\begin{aligned}
+		\< U_{dt} \phi | U_{dt} \psi \> &= \frac{1}{4}\left( |U_{dt}\phi + U_{dt}\psi|^2 - |U_{dt}\phi - U_{dt}\psi|^2 - \imath |U_{dt}\phi + \imath U_{dt}\psi|^2 +\imath |U_{dt}\phi - \imath U_{dt}\psi|^2 \right) \\
+		&= \frac{1}{4}\left( |U_{dt}(\phi + \psi)|^2 - |U_{dt}(\phi - \psi)|^2 - \imath |U_{dt}(\phi + \imath \psi)|^2 +\imath |U_{dt}(\phi - \imath \psi)|^2 \right) \\
+		&= \frac{1}{4}\left( |\phi + \psi|^2 - |\phi - \psi|^2 - \imath |\phi + \imath \psi|^2 +\imath |\phi - \imath \psi|^2 \right) =  \< \phi | \psi \> 
+	\end{aligned}
+\end{equation}
+Therefore condition
 \begin{equation}\label{rp-qm-uev-condNormalized}
 	\tag{DR-NORM}
-	\eqtext{The evolution preserves the norm: $\< \psi(t) | \psi(t) \> = \< \psi(t+dt) | \psi(t+dt) \>$} 
+	\eqtext{Time evolution is linear and preserves the norm: $\< \psi(t) | \psi(t) \> = \< \psi(t+dt) | \psi(t+dt) \>$} 
 \end{equation}
 is equivalent to condition \ref{rp-qm-uev-condInnerProductPreserved}.
 
@@ -149,7 +157,7 @@ Note how $A + A^{\dagger}$ gives us the change in the norm of $\psi$ during the 
 \end{equation}
 is yet another equivalent condition to \ref{rp-qm-uev-condSchroedingerEq}.
 
-Another way to characterize unitary evolution is through what happens to an orthonormal basis $|e_i\>$. Given that a unitary evolution preserves the inner product, we have $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$. Therefore the unitary evolution maps an orthonormal basis to another orthonormal basis. The converse is also true, if $U_{dt}$ maps an orthonormal basis to another orthonormal basis, then the inner product is preserves. To see this, we can simply expand any vector in terms of the basis vector. That is
+Another way to characterize unitary evolution is through what happens to an orthonormal basis $|e_i\>$. Given that a unitary evolution preserves the inner product, we have $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$. Therefore the unitary evolution maps an orthonormal basis to another orthonormal basis. The converse is also true, if $U_{dt}$ is linear and maps an orthonormal basis to another orthonormal basis, then the inner product is preserves. To see this, we can simply expand any vector in terms of the basis vector. That is
 \begin{equation}
 	\begin{aligned}
 		\<\psi(t) | \phi(t)\> &= \< c_i e_i | d_j e_j\> = c_i^* d_j \< e_i | e_j\> = c_i^* d_j \< U_{d t} e_i | U_{d t} e_j\> \\
@@ -159,9 +167,17 @@ Another way to characterize unitary evolution is through what happens to an orth
 Therefore condition
 \begin{equation}\label{rp-qm-uev-condOrthonormalBasis}
 	\tag{DR-OBAS}
-	\eqtext{Time evolution maps orthonormal basis to orthonormal basis: $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$} 
+	\eqtext{Time evolution is linear and maps orthonormal basis to orthonormal basis: $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$} 
 \end{equation}
-The condition can be related to just preserving orthogonality pair-wise. TODO
+
+The above condition can be relaxed to just preserving pairs of orthonormal vectors. Take any two vectors $\psi$ and $\phi$, not necessarily orthogonal. We can write $\phi_{\perp} = \psi - \frac{\<\phi | \psi\>}{\<\phi | \phi\> }\phi $ and $\psi_{\perp} = \phi - \frac{\<\psi | \phi\>}{\<\psi | \psi\> }\psi $. Note that $\<\phi | \phi_{\perp}\> = 0$ and $\<\psi | \psi_{\perp}\> = 0$. We have
+\begin{equation}
+	\begin{aligned}
+		\<U_{dt} \phi | U_{dt} \psi \> &= \<U_{dt} \phi | U_{dt} (\phi_{\perp} + \frac{\<\phi | \psi\>}{\<\phi | \phi\> }\phi) \> = \<U_{dt} \phi | U_{dt} \phi_{\perp}\> + \frac{\<\phi | \psi\>}{\<\phi | \phi\> } \< U_{dt} \phi | U_{dt} \phi \> \\
+		&= 0 + \frac{\<\phi | \psi\>}{\<\phi | \phi\> } \< \phi | \phi \> = \<\phi | \psi\>,
+	\end{aligned}
+\end{equation}
+which means the inner product is preserved.
 
 \subsection{Physical conditions}
 
