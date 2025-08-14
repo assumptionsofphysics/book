@@ -1376,17 +1376,19 @@ The fact that the mixing entropy decreases on all directions as we get closer to
 \end{proof}
 
 \begin{prop}
-	Ensemble spaces are $\mathsf{T}_1$ topological spaces.
+	Ensemble spaces are Hausdorff topological spaces.
 \end{prop}
 
 \begin{proof}
-	Since $MS(\ens[a], \ens) = 0$ if and only if $\ens = \ens[a]$, $\{\ens \in \Ens \, | \, MS(\ens[a], \ens) = 0\} = \{\ens[a]\}$. Since $MS$ is continuous, $\{\ens[a]\}$ is closed set. Since every singleton is closed, the topology is $\mathsf{T}_1$.
+	We will prove this in two ways. First, since the topology is second countable, the space is Hausdorff if and only if limits of sequences are unique. Let $\ens[a]_i$ be a sequence su that $\ens[a]_i \to \ens[a]$ and $\ens[a]_i \to \ens[b]$. We have $MS(\ens[a]_i, \ens[a]_i) = 0 \to 0$. Since $MS$ is continuous, we also have $MS(\ens[a]_i, \ens[a]_i) \to MS(\ens[a], \ens[b])$ which means $MS(\ens[a], \ens[b]) = 0$ and therefore $\ens[a] = \ens[b]$.
+	
+	Another way to show it, a space is Hausdorff if and only if any singleton $\{\ens\}$ is the intersection of all closed neighborhoods of $\ens$. For any $\ens$, the intersection of all closed neighborhoods will contain $\ens$, so we just need to show that no other elements can be in all closed neighborhood. Consider an entropic closed ball centered around $\ens$ with radius $r>0$. It will contain an entropic open ball of the same radius and is therefore a closed neighborhood of $\ens$. Given an element $\ens[a] \neq \ens$, a closed ball with radius less than $MS(\ens, \ens[a])$ will not contain $\ens[a]$. Therefore, the only element contained in all entropic closed balls is $\ens$, which means the intersection of all closed neighborhoods of $\ens$ contains only $\ens$.
 \end{proof}
 
 \begin{remark}
 	Intuitively, we would expect the entropic balls to be convex. This intuition is supported by numeric calculation for both the \href{https://www.desmos.com/calculator/ama0u3u31d}{classical case} and the \href{https://www.desmos.com/calculator/6ga2hygwmm}{quantum case} (though the quantum case is not checked for a three dimensional quantum system). However, the current axioms allow us to use a different entropy function in a space that is not orthogonally decomposable: the extreme points are not orthogonal. In this case, one is able to create open balls that are not convex.
 	
-	Whether this is physically relevant or not depends on whether there are additional physical constraints on the mixing entropy between three points, which is very likely. The convexity of the entropic balls may, for example, help us show that the topology they generate is Hausdorff.
+	Whether this is physically relevant or not depends on whether there are additional physical constraints on the mixing entropy between three points, which is very likely.
 \end{remark}
 
 
