@@ -2084,20 +2084,39 @@ We now connect ensemble spaces to Choquet theory. Given a compact convex subset 
 Choquet theory can be summarized in the following way. First, we need to define what it means to represent an ensemble with a probability measure. Let $E$ be a convex subset of a locally convex topological vector space $V$ and $X$ the set of extreme points. We say that $\ens \in E$ is represented by a probability measure $p : \Sigma_{E} \to [0,1]$ if $F(\ens) = \int_E F dp$ for every continuous linear functional $F$ on $V$. Moreover, we say that $p$ is supported by the extreme points if $p(X) = 1$. Given any probability measure $p$ over the extreme points $X$, we can always find an $\ens \in E$ that is represented by $p$. Therefore, we have a map from the set of probability measures to the set of ensembles. Choquet theory characterizes how the map works in the opposite direction.
 
 The first question is whether each ensemble is represented by a probability measure. Choquet theory tells us that this is the case:
-\begin{thrm}[Choquet 1]
-	Let $E$ be a metrizable compact convex subset of a locally convex topological vector space $V$, and let $\ens \in E$. Then there exists a probability measure $p_{\ens}$ on $X$ which represents $\ens$ and is supported by the extreme points $X$.
+\begin{thrm}[Choquet-Bishop-de Leeuw]
+	Let $E$ be a compact convex subset of a locally convex topological vector space $V$, and let $\ens \in E$. Then there exists a probability measure $p_{\ens}$ on $X$ which represents $\ens$ and is supported by the extreme points $X$.
 \end{thrm}
 The second question is whether the representation is unique. Choquet theory has a clear answer.
-\begin{thrm}[Choquet 2]
-	Let $E$ be a closed convex metrizable subset of a locally convex topological vector space $V$. Then $E$ is a Choquet simplex if and only if for each $\ens \in E$ there exists a unique measure $p_{\ens}$ which represents $\ens$ and is supported by the extreme points $X$.
+\begin{thrm}[Choquet uniqueness]
+	Let $E$ be a compact convex subset of a locally convex topological vector space $V$. Then $E$ is a Choquet simplex if and only if for each $\ens \in E$ there exists a unique measure $p_{\ens}$ which represents $\ens$ and is supported by the extreme points $X$.
 \end{thrm}
 The definition of a Choquet simplex is rather involved, so it is omitted. Intuitively, it is the generalization of the finite dimensional simplex and we can take is a definition. The key point is that $E$ is a Choquet simplex if and only if the ensemble space does not allow multiple decompositions in terms of extreme points.
 
 There is a connection between mixtures and the representation through a probability measure. We can, in fact, write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $\ens$ can be represented by the probability measure $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$, and $p(\Ens \setminus \{\ens[a], \ens[b]\}) = 0$. Therefore, if $M_{\ens}$ is the set of probability measre that represent $\ens$, the fraction $\size_{\ens}(\ens[a])$ is given by the maximum value over $\{\ens[a]\}$ that can be taken by one of those measures. That is,  $\size_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$.
 
+\begin{prop}
+	Let $E$ be a compact convex subset of a locally convex topological vector space $V$ and define the fraction capacity as for an ensemble space. Let $\ens \in E$ be a point and $M_{\ens}$ be the set of measures that represent $\ens$. Then $\size_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$ and $\fcap_{\ens}(A) = \sup \{ p(\{A\}) \, | \, M_{\ens} \}$.
+\end{prop}
+
+\begin{proof}
+	Let $\ens \in E$ and suppose $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ with $\ens[a], \ens[b] \in E$ and $\lambda \in [0,1]$. The measure $p$ such that $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$ and $p(E\setminus \{ \ens[a], \ens[b]\})=0$ represents $\ens$. The converse is true as well. Therefore $\size_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$. 
+\end{proof}
 
 
 In case $E$ is compact, we can restrict the fraction capacity to the set $X$ of extreme points. Given a set $A \subset X$, of extreme points, we can find the set $N \subset E$ of all ensembles that can be represented with a probability measure with support $A$. This forms a convex set. Now, the ability to express an ensemble $\ens$ as the convex combination of $N$ is precisely the ability to find a measure $p$ that represents $\ens$ such that $p(A) \neq 0$. That is, $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ with $\ens[a] \in M$ if and only if there is a probability measure $p$ that represents $\ens$ such that $p(A) \geq \lambda$.\footnote{TODO: add proof somewhere} Consequently, if $M_{\ens}$ is the set of all probability measures that represent $\ens$ as defined in Choquet theory, then $\fcap_{\ens}(A) = \sup(\{p(A) \, | \, p \in M_{\ens}\})$.\footnote{TODO: prove somewhere} The fraction capacity is simply the supremum on each set over all possible measures.
+
+\begin{prop}
+	Let $E$ be a compact convex The following statements are equivalent:
+	\begin{enumerate}
+		\item $\Ens$ is a Choquet simplex
+		\item each ensemble is uniquely represented by a measure over its extreme points $X_{\Ens}$
+		\item the fraction capacity restricted over the extreme points is additive
+	\end{enumerate}
+	
+	An ensemble space $\Ens$ is a Choquet simplex if an only if Let $E$ be a closed convex metrizable subset of a locally convex topological vector space $V$. Then $E$ is a Choquet simplex if and only if for each $\ens \in E$ there exists a unique measure $p_{\ens}$ which represents $\ens$ and is supported by the extreme points $X$.
+\end{prop}
+
 
 \subsection{Macrostates and thermodynamics}
 
