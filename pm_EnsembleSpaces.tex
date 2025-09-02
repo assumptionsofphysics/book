@@ -2171,17 +2171,17 @@ What can we already prove, however, is that the entropy is a strictly concave fu
 \end{remark}
 
 
-\section{R-subspaces (orthogonality spaces)}\label{pm_es_subspaceSection}
+\section{Orthogonal and separate subspaces}\label{pm_es_subspaceSection}
 
-Here we present a generic construction that we will be using in a couple of different ways to construct lattice of subspaces. The structure we are going to define is sometimes called orthogonality space or orthomodular space, and it sometimes appears in the context of Galois connections.
-
-The general idea can be understood by looking at vector spaces with an inner product. The inner product defines a notion of orthogonality between vectors and this notion of orthogonality can be used to construct subspaces in the following way. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all perpendicular to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were a subspace to begin with, then $U = (U^{\perp})^{\perp}$. We can now proceed in the opposite way, and use just the relationship of orthogonality to define subspaces, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar some construction related to Galois connections.}
-
-The construction works for any binary relationship that is symmetric and irreflexive. For example, given two distributions, the fact they have disjoint support is a symmetric and irreflexive relationship: a distribution does not have disjoint support with respect to itself, and the order of comparison does not matter. We can then construct subspaces based on this relationship, and find sets of function that are all defined within different regions.
-
-In our case, separateness, as defined by the mixing function, and orthogonality, as defined by the entropy, are symmetric and irreflexive.
+In this section we recover the notion of subspaces from orthogonality and separateness. Since orthogonality as defined from the entropy coincides with the orthogonality of the inner product for classical and quantum ensemble spaces, orthogonal subspaces as defined here will coincide with those defined by the inner product.
 
 \subsection{Irreflexive symmetric relations and topped $\cap$-structures}
+
+We first present a generic construction, which is sometimes called orthogonality space or orthomodular space, and it sometimes appears in the context of Galois connections. The general idea is that given any irreflexive and symmetric relation, we can define a closure that gives us an orthocomplemented lattice. Since orthogonality and separateness, as defined before, satisfy those properties, they will each give a notion of subspace.
+
+To get an idea, we look at how orthogonality and orthogonal subspaces work in inner product spaces. Let $V$ be an inner product space. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all orthogonal to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were a subspace to begin with, then $U = (U^{\perp})^{\perp}$. Note that we can therefore define subspaces without having a notion of space, just by using the orthogonality relationship, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar some construction related to Galois connections.}
+
+The construction works for any binary relationship that is symmetric and irreflexive. For example, given two distributions, the fact they have disjoint support is a symmetric and irreflexive relationship: a distribution does not have disjoint support with respect to itself, and the order of comparison does not matter. We can then construct subspaces based on this relationship, and find sets of function that are all defined within different regions. In our case, separateness, as defined by the mixing function, and orthogonality, as defined by the entropy, are symmetric and irreflexive.
 
 We start with a generic set $X$ and a symmetric relation (i.e. if $aRb$ then $bRa$). We define the $R$-complement $U^R$ of all elements that are $R$-related to $U$ and study some useful properties. The symmetry of the relation is already enough to recover most of the properties we will need.
 
@@ -2351,17 +2351,42 @@ We now show that if we start with the mere notion of orthogonality defined from 
 	\end{proof}
 \end{mathSection}
 
-\begin{conj}
-	The following three statements are equivalent
-	\begin{enumerate}
-		\item the lattice of $R$-subspaces is a Boolean algebra
-		\item the lattice of $R$-subspaces is distributive
-	\end{enumerate}
-\end{conj}
+\subsubsection{Separate and orthogonal subspaces}
+
+Since orthogonality and separateness are irreflexive symmetric operations, they will both give a lattice of subspaces. Here we present a series of conjectures about these subspaces that we have yet to prove.
+
+\begin{defn}
+	Let $\Ens$ be an ensemble space. An $\ortho$-subspace is an R-subspace defined by $\ortho$ and a $\separate$-subspace is an R-subspace defined by $\separate$.
+\end{defn}
+
+In the classical case, since both orthogonality and separateness coincide with disjoint support, a subspace consist of all the probability distribution whose support is within a given set $U$.\footnote{Clearly, not all closed sets will give a different subspace. For example, over $\mathbb{R}$, $[0,1]$ and $[0,1]\cup[2,2]$ will correspond to the same subspace. Characterizing that equivalence class is still an open question.}
+
+\begin{prop}
+	Let $\Ens$ be a discrete or classical ensemble space over a sample space $X$ and $\mu$ the corresponding measure. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
+\end{prop}
 
 \begin{proof}
-	Since every Boolean algebra is distributive, 1 implies 2. Since in every orthocomplemented distributive lattice is a Boolean algebra, 2 implies 1.
+	Recall that in a classical ensemble space, $p \ortho \lambda$ if and only if $\lambda(\support(p)^{\complement}) = 1$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigcup_{p \in A} \support(p)$ be the union of all supports. Then $\lambda \in A^{\ortho}$ is orthogonal to all elements of $A$ if and only if $\lambda(U^{\complement}) = 1$. Conversely, $p \in A$ only if it is orthogonal to all elements, which means if and only if $p(U) = 1$. Therefore if $A$ is a subspace, there is a $U \subseteq X$ such that $p(U)=1$ for all $p \in A$.
+	
+	Conversely, let $A = \{ p \in \Ens \, | \, p(U) = 1\}$ for some $U \subseteq X$. The orthogonal complement will be the set of all probability measure $\lambda \in \Ens$ such that $\lambda(U^{\complement})=1$. The complement of the complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
 \end{proof}
+
+In the quantum case, the orthogonality coincide with orthogonality in the Hilbert space, and therefore an $\ortho$-subspace coincides with the set of density operators supported by a given subspace.
+
+\begin{prop}
+	Let $\Ens$ be a quantum ensemble space over a Hilbert space $\mathcal{H}$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a subspace $U \subseteq \mathcal{H}$ with a corresponding projector $P$ such that $A = \{ \rho \in \Ens \, | \, \tr[P\rho] = 1\}$.
+\end{prop}
+
+\begin{proof}
+	Given a density operator $\rho \in \Ens$, recall that its support is the subspace spanned by the non-zero eigenvectors. With a slight abuse of notation, since each subspace corresponds to a projector, $\support(\rho)$ will also note the projector corresponding to the support and the join/meet/complement of projectors will correspond to the projector of the join/meet/complement of the subspaces.
+	
+	For a quantum ensemble space, $\rho \ortho \sigma$ if and only if $\tr[ \support(\rho)^{\ortho} \sigma] = 1$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $P = \bigvee_{\rho \in A} \support(p)$ be the projector corresponding to the subspaces $U$ spanned by all supports. Then $\sigma \in A^{\ortho}$ is orthogonal to all elements of $A$ if and only if $\tr[\sigma P^{\ortho}] = 1$. Conversely, $\rho \in A$ if it is orthogonal to all elements, which means if and only if $\tr[\rho P] = 1$. Therefore if $A$ is a subspace, there is a projector $P$ such that $\tr[\rho P] = 1$ for all $\rho \in A$.
+	
+	Conversely, let $A = \{ \rho \in \Ens \, | \, \tr[\rho P] = 1\}$ for some projector $P$. The orthogonal complement $A^{\ortho}$ will be the set of all density operators $\sigma \in \Ens$ such that $\tr[\sigma P^{\ortho}]=1$. The complement of the complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
+\end{proof}
+
+
+Note that, in general, the two notion of subspaces, and therefore their lattice, will be different.  If a classical ensemble space is exactly an ensemble space for which orthogonality and separateness coincide, the two lattices will coincide if and only if we have a classical space.
 
 Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthonormal, as one requires, for example, in quantum logic. The cut triangle \ref{pm_es_cutTriangle} is a counterexample. The only orthogonality relationship are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are $\bot = \emptyset$, $X= \{\ens[2]\}$, $Y= \{\ens[3]\}$, $A= \{p \ens[2] + \bar{p}\ens[a]\}$, $B= \{p \ens[3] + \bar{p}\ens[b]\}$ and $\top = \Ens$. This forms an $M_6$ lattice, which is not orthonormal.
 
@@ -2381,7 +2406,7 @@ Note, however, that the lattice of $\separate$-subspaces is not only orthonormal
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces2.jpg}
-	\caption{In this diagram, the lower tier represents the singletons of the extreme points, the middle tier represents each side and the top tier represent the pairs of sides that are the $\separate$-complement of the extreme points. Note that the lattice is not a distributive (e.g. $A\vee (3 \wedge 3) = A \neq (A\vee 3) \wedge (A \vee 2) = A3$). In fact, $\{\bot, 3, A, A2, BP\}$ is an $N_5$ sub-lattice. }
+	\caption{In this diagram, the lower tier represents the singletons of the extreme points, the middle tier represents each side and the top tier represent the pairs of sides that are the $\separate$-complement of the extreme points. Note that the lattice is not a distributive (e.g. $A\vee (3 \wedge A2) = A \vee \bot = A \neq (A\vee 3) \wedge (A \vee A2) = BP \wedge A2 = A2$). In fact, $\{\bot, 3, A, A2, BP\}$ is an $N_5$ sub-lattice. }
 \end{figure}
 
 
