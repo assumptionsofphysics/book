@@ -2362,46 +2362,45 @@ Since orthogonality and separateness are irreflexive symmetric operations, they 
 In the classical case, since both orthogonality and separateness coincide with disjoint support, a subspace consist of all the probability distribution whose support is within a given set $U$.\footnote{Clearly, not all closed sets will give a different subspace. For example, over $\mathbb{R}$, $[0,1]$ and $[0,1]\cup[2,2]$ will correspond to the same subspace. Characterizing that equivalence class is still an open question.}
 
 \begin{prop}
-	Let $\Ens$ be a discrete or classical ensemble space over a sample space $X$ and $\mu$ the corresponding measure. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
+	Let $\Ens$ be a discrete or classical ensemble space over a sample space $X$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
 \end{prop}
 
 \begin{proof}
-	Recall that in a classical ensemble space, $p \ortho \lambda$ if and only if $\lambda(\support(p)^{\complement}) = 1$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigcup_{p \in A} \support(p)$ be the union of all supports. Then $\lambda \in A^{\ortho}$ is orthogonal to all elements of $A$ if and only if $\lambda(U^{\complement}) = 1$. Conversely, $p \in A$ only if it is orthogonal to all elements, which means if and only if $p(U) = 1$. Therefore if $A$ is a subspace, there is a $U \subseteq X$ such that $p(U)=1$ for all $p \in A$.
+	Recall that in a classical ensemble space, $p \ortho \lambda$ if and only if $\lambda(\support(p)) = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigcup_{p \in A} \support(p)$ be the union of all supports. Then $\lambda \in A^{\ortho}$ (i.e. is orthogonal to all elements of $A$) if and only if $\lambda(U) = 0$. Conversely, $p \in A$ only if it is orthogonal to all elements, which means if and only if $p(U) = 1$. Therefore if $A$ is a subspace, there is a $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
 	
-	Conversely, let $A = \{ p \in \Ens \, | \, p(U) = 1\}$ for some $U \subseteq X$. The orthogonal complement will be the set of all probability measure $\lambda \in \Ens$ such that $\lambda(U^{\complement})=1$. The complement of the complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
+	Conversely, let $A = \{ p \in \Ens \, | \, p(U) = 1\}$ for some $U \subseteq X$. Then and $A^{\ortho} = \{ p \in \Ens \, | \, p(U) = 0\}$. The orthogonal complement of the orthogonal complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
 \end{proof}
 
 In the quantum case, the orthogonality coincide with orthogonality in the Hilbert space, and therefore an $\ortho$-subspace coincides with the set of density operators supported by a given subspace.
 
 \begin{prop}
-	Let $\Ens$ be a quantum ensemble space over a Hilbert space $\mathcal{H}$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a subspace $U \subseteq \mathcal{H}$ with a corresponding projector $P$ such that $A = \{ \rho \in \Ens \, | \, \tr[P\rho] = 1\}$.
+	Let $\Ens$ be a quantum ensemble space over a Hilbert space $\mathcal{H}$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a subspace $U \subseteq \mathcal{H}$ with a corresponding projector $\mathbf{1}_{U}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$. 
 \end{prop}
 
 \begin{proof}
-	Given a density operator $\rho \in \Ens$, recall that its support is the subspace spanned by the non-zero eigenvectors. With a slight abuse of notation, since each subspace corresponds to a projector, $\support(\rho)$ will also note the projector corresponding to the support and the join/meet/complement of projectors will correspond to the projector of the join/meet/complement of the subspaces.
+	Recall that to each subspace $U \subseteq \mathcal{H}$ is associated a projector $\mathbf{1}_U$ whose eigenvectors with eigenvalue $1$ span $U$. Given a density operator $\rho \in \Ens$, its support is the subspace $U=\support(\rho)$ spanned by the non-zero eigenvectors. Therefore $\tr[\mathbf{1}_{U} \, \rho] = 1$ and $\tr[\mathbf{1}_{U^{\ortho}} \, \rho] = 0$.
+
+	Also recall that, for a quantum ensemble space, $\rho \ortho \sigma$ if and only if $\tr[ \mathbf{1}_{\support(\rho)} \, \sigma] = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigvee_{\rho \in A} \support(p)$ be the subspace $U$ spanned by all supports. Then $\sigma \in A^{\ortho}$  (i.e. is orthogonal to all elements of $A$) if and only if $\tr[\mathbf{1}_{U} \, \sigma] = 0$. Conversely, $\rho \in A$ if and only if it is orthogonal to all elements, which is the case if and only if $\tr[\mathbf{1}_{U} \, \rho] = 1$. Therefore if $A$ is a subspace, there is a subspace $U \subseteq \mathcal{H}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$.
 	
-	For a quantum ensemble space, $\rho \ortho \sigma$ if and only if $\tr[ \support(\rho)^{\ortho} \sigma] = 1$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $P = \bigvee_{\rho \in A} \support(p)$ be the projector corresponding to the subspaces $U$ spanned by all supports. Then $\sigma \in A^{\ortho}$ is orthogonal to all elements of $A$ if and only if $\tr[\sigma P^{\ortho}] = 1$. Conversely, $\rho \in A$ if it is orthogonal to all elements, which means if and only if $\tr[\rho P] = 1$. Therefore if $A$ is a subspace, there is a projector $P$ such that $\tr[\rho P] = 1$ for all $\rho \in A$.
-	
-	Conversely, let $A = \{ \rho \in \Ens \, | \, \tr[\rho P] = 1\}$ for some projector $P$. The orthogonal complement $A^{\ortho}$ will be the set of all density operators $\sigma \in \Ens$ such that $\tr[\sigma P^{\ortho}]=1$. The complement of the complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
+	Conversely, let $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$ for some subspace $U \subseteq \mathcal{H}$. The orthogonal complement $A^{\ortho}$ will be the set of all density operators $\sigma \in \Ens$ such that $\tr[\mathbf{1}_{U} \, \sigma] = 0$. The complement of the complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
 \end{proof}
 
+Note that, in general, the two notions of subspaces, and therefore their lattices, will be different. Note that a feature of classical classical ensemble space is exactly that orthogonality and separateness coincide, which also means the two lattices will coincide.
 
-Note that, in general, the two notion of subspaces, and therefore their lattice, will be different.  If a classical ensemble space is exactly an ensemble space for which orthogonality and separateness coincide, the two lattices will coincide if and only if we have a classical space.
-
-Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthonormal, as one requires, for example, in quantum logic. The cut triangle \ref{pm_es_cutTriangle} is a counterexample. The only orthogonality relationship are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are $\bot = \emptyset$, $X= \{\ens[2]\}$, $Y= \{\ens[3]\}$, $A= \{p \ens[2] + \bar{p}\ens[a]\}$, $B= \{p \ens[3] + \bar{p}\ens[b]\}$ and $\top = \Ens$. This forms an $M_6$ lattice, which is not orthonormal.
+Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthonormal, as one requires, for example, in quantum logic. The cut triangle \ref{pm_es_cutTriangle} is a counterexample. The only orthogonality relationship are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are $\bot = \emptyset$, $X= \{\ens[2]\}$, $Y= \{\ens[3]\}$, $A= \{p \ens[2] + \bar{p}\ens[a]\}$, $B= \{p \ens[3] + \bar{p}\ens[b]\}$ and $\top = \Ens$. As we can is see in fig. \ref{pm_es_figCutTriangleOrthoSubspaces}, the subspaces form an $M_6$ lattice, which is not orthonormal.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces.jpg}
+	\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces.jpg}\label{pm_es_figCutTriangleOrthoSubspaces}\caption{On the left, the cut triangle. On the right, the diagram of the orthogonal subspaces.}
 \end{figure}
 
 The lack of orthonormality is due to the multiple complements that are one a subset of the other. This means that $X \vee (X^\perp \wedge A) = X \vee (B \wedge A) = X \vee \bot = X$ instead of $A$, if the lattice where orthonormal. This leads to the following:
-
 \begin{conj}
 	The lattice of $\separate$-subspaces is orthonormal if and only if the ensemble space is orthogonally decomposable (i.e. every decomposable ensemble is orthogonally decomposable).
 \end{conj}
+If this is true, the requirement of orthonormality is an additional requirement that can be understood physically.
 
-Note, however, that the lattice of $\separate$-subspaces is not only orthonormal but commutative (i.e. a Boolean algebra).
+Note, however, that the lattice of $\separate$-subspaces  of the cut triangle is orthonormal, though not commutative. This shows how the two lattices can be very different.
 
 \begin{figure}[h]
 	\centering
