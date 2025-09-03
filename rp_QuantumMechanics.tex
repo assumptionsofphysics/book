@@ -22,6 +22,51 @@ Composite system
 * Review the arguments in the paper
 * see if using a Segre embedding would make our life easier
 
+\section{States and ensembles}
+
+As we have already seen in classical mechanics, re-expressing the same mathematical framework in different equivalent ways brings out new understanding. This will be even more clear in quantum mechanics, as the standard Hilbert space formulation is as good for calculations it is bad for understanding.
+
+First of all, we should not that wave-function do not provide a unique representation for states. The reader may already be aware that a change in norm or phase does not change the physics. Intuitively, all the physics is given by the born rule
+\begin{equation}
+	p(\phi|\psi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}.
+\end{equation}
+If we chage $\psi$ with $\rho e^{\imath \theta} \psi$, we have
+\begin{equation}
+	p(\phi|\rho e^{\imath \theta}\psi) = \frac{\< \phi |\rho e^{\imath \theta}\psi \>\<\rho e^{\imath \theta}\psi | \phi \>}{\< \rho e^{\imath \theta}\psi | \rho e^{\imath \theta}\psi \>\< \phi | \phi \>} = \frac{\rho e^{\imath \theta}\rho e^{-\imath \theta}}{\rho e^{-\imath \theta}\rho e^{\imath \theta}}\frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}=\frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}.
+\end{equation}
+
+There is another detail, however, that is often neglected, maybe because it applies only for continuous variables. The inner production between two wave functions is given by:
+\begin{equation}
+	\< \phi | \psi \> = \int_X \phi^*(x) \psi(x) dx.
+\end{equation}
+Note that integrals do not change if we change the value of the function over a set of measure zero. For example, if we changed $\psi(x)$ such had it returned zero over the rationals, the inner product wouldn't change. If the physics is given by the Born rule through the inner product, then the physics does not change. Mathematically, when we write the vector $|\psi \>$ we are actually talking about the set of all functions that are equivalent to the wave function $\psi(x)$.
+
+Note that this is not something peculiar to quantum mechanics. In fact, this happens in classical probability as well. If we have a probability density $\rho(x,p)$, a change over a measure zero set will not change the expectation of any variable.
+
+Since the representation in terms of Hilbert spaces already removes the second issue, is there a representation of states that eliminates the first as well? Turns out that there is. In a sense, working with Hilbert space is somewhat a conceptual no man's land. We are aware that we are dealing with probabilistic objects, but we are not really working with full fledged statistical mixtures. A lot things become clearer once we look at the quantum statistical framework as a whole and compare it to the classical statistical framework.
+
+Let us look, then, at the space of all possible statistical mixtures. In quantum statistical mechanics, a state is represented by a density operator $\rho$. Mathematically, this is an operator $\rho : \mathcal{H} \to \mathcal{H}$ that is positive semi-definite trace one self-adjoint operator. In fact, since $\< \psi | \rho | \psi \>$ returns the probability to measure $\psi$ given the state $\rho$, $\rho$ is an observable. Since the probability cannot be negative, $\rho$ is positive semi-definite. Since the probability has to sum to one, it is a trace one operator.
+
+Every pure state $\psi$ can be represented as the density operator $| \psi \> \< \psi |$. Note that $|\psi\>$ has to be normalized or $| \psi \> \< \psi |$ would not be trace one. Moreover, a change of phase will leave the corresponding density operator unchanged. In fact, $| e^{\imath \theta}  \psi \> \< e^{\imath \theta}  \psi | = e^{\imath \theta} | \psi \> \< \psi | e^{-\imath \theta} = | \psi \> \< \psi |$. Also note that $| \psi \> \< \psi | = \mathbf{1}_{\psi}$ is the projector corresponding by the subspace spanned by $\psi$.
+\begin{insight}
+	A state is equally represented by a ray $c|\psi\>$, by a density operator $| \psi \> \< \psi |$ where $c|\psi\>$ is the only non-zero eigenvector, or by a the projector $\mathbf{1}_{\psi}$ corresponding to the subspace $c|\psi\>$.
+\end{insight}
+
+
+States are rays <-> states are pure ensembles.
+
+Linearity from ensembles
+
+Observables as expectations
+
+Probability as expectations of indicator functions
+
+Projections as indicator functions
+
+Orthogonality as mutual exclusivity
+
+Inner product as overlap between pure ensembles
+
 \section{Schroedinger equation and unitary evolution}
 
 We start with the Schroedinger equation
