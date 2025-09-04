@@ -47,10 +47,59 @@ Since the representation in terms of Hilbert spaces already removes the second i
 
 Let us look, then, at the space of all possible statistical mixtures. In quantum statistical mechanics, a state is represented by a density operator $\rho$. Mathematically, this is an operator $\rho : \mathcal{H} \to \mathcal{H}$ that is positive semi-definite trace one self-adjoint operator. In fact, since $\< \psi | \rho | \psi \>$ returns the probability to measure $\psi$ given the state $\rho$, $\rho$ is an observable. Since the probability cannot be negative, $\rho$ is positive semi-definite. Since the probability has to sum to one, it is a trace one operator.
 
-Every pure state $\psi$ can be represented as the density operator $| \psi \> \< \psi |$. Note that $|\psi\>$ has to be normalized or $| \psi \> \< \psi |$ would not be trace one. Moreover, a change of phase will leave the corresponding density operator unchanged. In fact, $| e^{\imath \theta}  \psi \> \< e^{\imath \theta}  \psi | = e^{\imath \theta} | \psi \> \< \psi | e^{-\imath \theta} = | \psi \> \< \psi |$. Also note that $| \psi \> \< \psi | = \mathbf{1}_{\psi}$ is the projector corresponding by the subspace spanned by $\psi$.
+Every pure state $\psi$ can be represented as the density operator $\rho_{\psi} = \frac{| \psi \> \< \psi |}{\< \psi | \psi \>}$. Note that, in fact, that $\rho_{\psi}$ is trace one and a change of phase will leave it unchanged. Also note that $\frac{| \psi \> \< \psi |}{\< \psi | \psi \>} = \mathbf{1}_{\psi}$ is the projector corresponding by the subspace spanned by $\psi$.
 \begin{insight}
-	A state is equally represented by a ray $c|\psi\>$, by a density operator $| \psi \> \< \psi |$ where $c|\psi\>$ is the only non-zero eigenvector, or by a the projector $\mathbf{1}_{\psi}$ corresponding to the subspace $c|\psi\>$.
+	A state is equally represented by a ray $c|\psi\>$, by a density operator $\rho_{\psi}$ where $c|\psi\>$ is the only non-zero eigenvector, or by a the projector $\mathbf{1}_{\psi}$ corresponding to the subspace $c|\psi\>$.
 \end{insight}
+We now have three equivalent ways to represent pure states.
+
+Note that the linearity on the vector space is somewhat physically mysterious. A linear combination $\sum c_i | \psi_i \>$ will give us another state, but is somewhat unclear what this operation means. First of all, we have the problem that the linear combination is physically unique up to a total phase, so only the phase differences are physically significant. Moreover, the meaning of the norm of the $c_i$ is also ill defined. The overall intuition one gets is that $|c_i|^2$ corresponds to probability, but this does not actually work. In fact, we have
+\begin{equation}
+	\begin{aligned}
+		|\phi\> &= c_1 |\psi_1\> + c_2 | \psi_2\> \\
+		\< \phi | \phi\> &= |c_1|^2 \< \psi_1 |\psi_1\> + c_1^* c_2 \< \psi_1 |\psi_2\> + c_2^* c_1 \< \psi_2 |\psi_1\> + |c_2|^2 \< \psi_2 |\psi_2\> \\
+		\< \psi_1 | \phi\> &= c_1 \< \psi_1 |\psi_1\> + c_2 \< \psi_1 |\psi_2\> \\
+		p(\phi|\psi_1) &= \frac{\< \phi | \psi_1 \>\< \psi_1 | \phi \>}{\< \psi_1 | \psi_1 \>\< \phi | \phi \>} \\
+		&= \frac{(c_1^* \< \psi_1 |\psi_1\> + c_2^* \< \psi_2 |\psi_1\>)(c_1 \< \psi_1 |\psi_1\> + c_2 \< \psi_1 |\psi_2\>)}{\< \psi_1 | \psi_1 \>(|c_1|^2 \< \psi_1 |\psi_1\> + c_1^* c_2 \< \psi_1 |\psi_2\> + c_2^* c_1 \< \psi_2 |\psi_1\> + |c_2|^2 \< \psi_2 |\psi_2\>)}.
+	\end{aligned}
+\end{equation}
+In the special case where $\psi_1$ and $\psi_2$ are orthonormal, the above simplifies to
+\begin{equation}
+	p(\phi|\psi_1) = \frac{|c_1|^2}{|c_1|^2 + |c_2|^2}
+\end{equation}
+and therefore, if $|c_1|^2 + |c_2|^2 = 1$, we recover the probability. But this is a special case which does not work in general. And building our understanding on special cases that do not work in general is not a recipe for success.
+
+Moreover, making a linear combination of two pure states gives another pure state, not a probability distribution. For a spin 1/2 system, spin left is a linear combination of spin up and spin down with $|c_1|^2=|c_2|^2=\frac{1}{2}$. But spin up is also a linear combination of spin left and spin right with $|c_1|^2=|c_2|^2=\frac{1}{2}$. Any direction of spin 1/2, in fact, can always be expressed as a linear combination of any distinct two other direction. Mathematically, any two linear independent vectors of a two dimensional space will span the entire space.
+
+To understand what the linearity represent, we turn to the space of statistical states. In that space, we can make statistical distribution. For example, $\frac{1}{2}| \psi \> \< \psi | + \frac{1}{2} | \phi \> \< \phi |$ represents a preparation that selects two states with equal probability. This linearity is the same linearity we have in classical probability spaces, it is over real number, not complex numbers, and is required by any physical theory. Since science is about repeatable experiment, measurement are about gathering statistics from similarly prepared systems. We must be able to describe statistical mixtures.
+
+The question, now, is whether this linearity that represents statistical mixture is in any way related to the linearity in the complex vector space. Turns out that it is in the following way: if $|\phi\>$ is a linear combination of $|\psi_1\>$ and $|\psi_2\>$, then we can find a statistical mixture $\rho$ of $|\psi_1\>$ and $|\psi_2\>$ such that it can also be expressed as a mixture of $|\phi\>$ and another state $|\hat{\phi}\>$. Let us first see that we can actually do mathematically before understanding the physical meaning.
+
+Let $|\phi\> = c_1 |\psi_1\> + c_2 |\psi_2\>$. We define $|\hat{\phi}\> = c_1 |\psi_1\> - c_2 |\psi_2\>$. We have:
+\begin{equation}
+	\begin{aligned}
+		| \phi \> \< \phi | &= c_1^* c_1 | \psi_1 \> \< \psi_1 | + c_1^* c_2 | \psi_1 \> \< \psi_2 | + c_2^* c_1 | \psi_2 \> \< \psi_1 | + c_2^* c_2 | \psi_2 \> \< \psi_2 | \\
+		| \hat{\phi} \> \< \hat{\phi} | &= c_1^* c_1 | \psi_1 \> \< \psi_1 | - c_1^* c_2 | \psi_1 \> \< \psi_2 | - c_2^* c_1 | \psi_2 \> \< \psi_1 | + c_2^* c_2 | \psi_2 \> \< \psi_2 | \\
+		| \phi \> \< \phi | &+ | \hat{\phi} \> \< \hat{\phi} | = 2 |c_1|^2 | \psi_1 \> \< \psi_1 | + 2 |c_2|^2 | \psi_2 \> \< \psi_2 |
+	\end{aligned}
+\end{equation}\begin{equation}
+\begin{aligned}
+	p_{\phi} &= \frac{\<\phi|\phi\>}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} 
+	&p_{\hat{\phi}} = \frac{\<\hat{\phi}|\hat{\phi}\>}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \\
+	p_{1} &= \frac{2 |c_1|^2 \< \psi_1 | \psi_1 \> |}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} 
+	&p_{2} = \frac{2 |c_2|^2 \< \psi_2 | \psi_2 \> |}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>}
+\end{aligned}
+\end{equation}
+\begin{equation}
+	\begin{aligned}
+		\rho = p_{\phi} \rho_{\phi} + p_{\hat{\phi}} \rho_{\hat{\phi}} &= \frac{\<\phi|\phi\>}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \frac{| \phi \> \< \phi |}{\< \phi | \phi \>} + \frac{\<\hat{\phi}|\hat{\phi}\>}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \frac{| \hat{\phi} \> \< \hat{\phi} |}{\< \hat{\phi} | \hat{\phi} \>} \\
+		&=\frac{1}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \left(| \phi \> \< \phi | + | \hat{\phi} \> \< \hat{\phi} |\right) \\
+		&=\frac{1}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \left(2 |c_1|^2 | \psi_1 \> \< \psi_1 | + 2 |c_2|^2 | \psi_2 \> \< \psi_2 |\right) \\
+		&=\frac{2 |c_1|^2 \< \psi_1 | \psi_1 \> |}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \frac{| \psi_1 \> \< \psi_1 |}{\< \psi_1 | \psi_1 \>} + \frac{2 |c_2|^2 \< \psi_2 | \psi_2 \> |}{\<\phi|\phi\> + \<\hat{\phi}|\hat{\phi}\>} \frac{| \psi_2 \> \< \psi_2 |}{\< \psi_2 | \psi_2 \>} \\
+		&=p_{1} \rho_{\psi_1} + p_{2} \rho_{\psi_2} \\
+	\end{aligned}
+\end{equation}
+Note that $p_{\phi} + p_{\hat{\phi}}$, which means $\rho$ is a statistical mixture with the given probability. This also means that $p_1 + p_2 = 1$ as well. We therefore have a mixed state that can be expressed either as a mixture of $\psi_1$ and $\psi_2$ or of $\phi$ and $\hat{\phi}$.
 
 
 States are rays <-> states are pure ensembles.
