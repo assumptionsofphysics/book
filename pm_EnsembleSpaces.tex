@@ -13,8 +13,8 @@
 \newcommand\shull{\mathrm{shull}}
 \newcommand\chull{\mathrm{chull}}
 \newcommand\support{\mathrm{supp}}
-\newcommand\capacity{\mathrm{scap}}
-\newcommand\size{\mathrm{frac}}
+\newcommand\scap{\mathrm{scap}}
+\newcommand\fraction{\mathrm{frac}}
 \newcommand\fcap{\mathrm{fcap}}
 
 \newcommand\vspan{\mathrm{span}}
@@ -1714,7 +1714,7 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 
 \begin{mathSection}
 \begin{defn}
-	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{state capacity} of $A$ is defined as $\capacity(A) = \sup(2^{S(\hull(A))}\cup\{0\})$.
+	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{state capacity} of $A$ is defined as $\scap(A) = \sup(2^{S(\hull(A))}\cup\{0\})$.
 \end{defn}
 
 \begin{check}
@@ -1732,10 +1732,10 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 \begin{prop}
 	The state capacity is a set function that is
 	\begin{enumerate}
-		\item non-negative: $\capacity(A) \in [0, +\infty]$
-		\item monotone: $A \subseteq B \implies \capacity(A) \leq \capacity(B)$
-		\item subadditive: $\capacity(A \cup B) \leq \capacity(A) + \capacity(B)$
-		\item additive over orthogonal sets: $A \ortho B \implies \capacity(A \cup B) = \capacity(A) + \capacity(B)$ 
+		\item non-negative: $\scap(A) \in [0, +\infty]$
+		\item monotone: $A \subseteq B \implies \scap(A) \leq \scap(B)$
+		\item subadditive: $\scap(A \cup B) \leq \scap(A) + \scap(B)$
+		\item additive over orthogonal sets: $A \ortho B \implies \scap(A \cup B) = \scap(A) + \scap(B)$ 
 	\end{enumerate}
 \end{prop}
 
@@ -1744,9 +1744,9 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 	
 	2. The $\hull$ is a monotone function. The image of a set through a map is a monotone function. The supremum is a monotone function. Therefore the state capacity is a monotone function.
 	
-	3. Let $A, B \subseteq \Ens$ and let $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])} \leq \capacity(A) + \capacity(B)$. Since this is true for any finite mixture of elements of $A$ and $B$, it will be true for any element of $\hull(A \cup B)$. Consequently, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\capacity(A \cup B) \leq \capacity(A) + \capacity(B)$ (i.e. the state capacity is subadditive).
+	3. Let $A, B \subseteq \Ens$ and let $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])} \leq \scap(A) + \scap(B)$. Since this is true for any finite mixture of elements of $A$ and $B$, it will be true for any element of $\hull(A \cup B)$. Consequently, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\scap(A \cup B) \leq \scap(A) + \scap(B)$ (i.e. the state capacity is subadditive).
 	
-	4. Let $A, B \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[a]_i\} \subseteq A$ be a sequence of ensembles such that $2^{S(\ens[a]_i)} \to \capacity(A)$ and let $\{\ens[b]_i\} \subseteq B$ be a sequence of ensembles such that $2^{S(\ens[b]_i)} \to \capacity(B)$. Consider $\ens_i = p_i \ens[a]_i + \bar{p_i} \ens[b]_i$ where $p_i = \frac{2^{S(\ens[a]_i)}}{2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}$. This means that $2^{S(\ens_i)} \to \capacity(A) + \capacity(B)$. Therefore $\capacity(A \cup B)$ must be at least $\capacity(A) + \capacity(B)$. Combining with the previous result, $\capacity(A \cup B) = \capacity(A) + \capacity(B)$. Therefore the state capacity, as a set function, is additive over orthogonal sets of ensembles.
+	4. Let $A, B \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[a]_i\} \subseteq A$ be a sequence of ensembles such that $2^{S(\ens[a]_i)} \to \scap(A)$ and let $\{\ens[b]_i\} \subseteq B$ be a sequence of ensembles such that $2^{S(\ens[b]_i)} \to \scap(B)$. Consider $\ens_i = p_i \ens[a]_i + \bar{p_i} \ens[b]_i$ where $p_i = \frac{2^{S(\ens[a]_i)}}{2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}$. This means that $2^{S(\ens_i)} \to \scap(A) + \scap(B)$. Therefore $\scap(A \cup B)$ must be at least $\scap(A) + \scap(B)$. Combining with the previous result, $\scap(A \cup B) = \scap(A) + \scap(B)$. Therefore the state capacity, as a set function, is additive over orthogonal sets of ensembles.
 \end{proof}
 
 \begin{prop}
@@ -1754,7 +1754,7 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 \end{prop}
 
 \begin{proof}
-	Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. Given that the state capacity is monotone, $\{\capacity(A_i)\}$ is a an increasing sequence and it will converge in the extended real line. Let $A = \lim\limits_{i \to \infty} A_i$. We have $A = \cup A_i$ and $A_i \subseteq A$ for all $i$. Since state capacity is monotone, $\capacity(A_i) \leq \capacity(A)$ for all $i$ and therefore $\lim\limits_{i \to \infty} \capacity(A_i) \leq \capacity(A)$. Given any $\ens[a] \in \chull(A)$, we can find a sequence $\ens[a]_i \in \chull(A_i)$ such that $\ens[a]_i \to \ens[a]$. Because of the continuity of the entropy, $S(\ens[a]_i) \to S(\ens[a])$. This means we cannot have $k$ such that $\capacity(A) > k > \capacity(A_i)$ for all $i$, and therefore $\lim\limits_{i \to \infty} \capacity(A_i) = \capacity(A)$.
+	Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. Given that the state capacity is monotone, $\{\scap(A_i)\}$ is a an increasing sequence and it will converge in the extended real line. Let $A = \lim\limits_{i \to \infty} A_i$. We have $A = \cup A_i$ and $A_i \subseteq A$ for all $i$. Since state capacity is monotone, $\scap(A_i) \leq \scap(A)$ for all $i$ and therefore $\lim\limits_{i \to \infty} \scap(A_i) \leq \scap(A)$. Given any $\ens[a] \in \chull(A)$, we can find a sequence $\ens[a]_i \in \chull(A_i)$ such that $\ens[a]_i \to \ens[a]$. Because of the continuity of the entropy, $S(\ens[a]_i) \to S(\ens[a])$. This means we cannot have $k$ such that $\scap(A) > k > \scap(A_i)$ for all $i$, and therefore $\lim\limits_{i \to \infty} \scap(A_i) = \scap(A)$.
 	
 	The same argument works for decreasing sequences by inverting the order.
 \end{proof}
@@ -1764,7 +1764,7 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 The state capacity is additive over orthogonal set. Intuitively, orthogonal sets corresponds to mutually exclusive events, so it makes sense that the count of states is additive. Intuitively, the converse should be true as well: if the count of states is additive, the sets correspond to mutually exclusive events and therefore the sets are orthogonal. This leads to the following conjecture
 
 \begin{conj}
-	The state capacity is additive only on orthogonal sets. That is, if $\capacity(A)<\infty$, $\capacity(B)<\infty$ and $\capacity(A \cup B) = \capacity(A) +\capacity(B)$, then $A \ortho B$.
+	The state capacity is additive only on orthogonal sets. That is, if $\scap(A)<\infty$, $\scap(B)<\infty$ and $\scap(A \cup B) = \scap(A) +\scap(B)$, then $A \ortho B$.
 \end{conj}
 
 One should be able to prove that if the state capacity adds, then the states with highest entropy satisfy the upper variability bound and are orthogonal. What needs to be shown is that this is enough to say all elements are orthogonal. There is a series of nice results connected to this to expand the whole theory. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. If $\ens[a]$ is the ensemble with maximum entropy in $\chull(A)$, it should be true that all elements of the hull are components of $\ens[a]$. One should be able to show that, given two sequences with a convergent entropy and whose elements are orthogonal to each other, one can create another sequence that converges to an entropy higher than both of them. Another useful tool would be a type of sequence within $\hull(A)$ whose entropy always increases, tends to the supremum and each element is a component of the following. Also: the state with maximal entropy (it if exists) is an internal point. All internal points are in the $\sigma$-hull. We leave these series of conjecture for future work.
@@ -1773,27 +1773,27 @@ We now show that the state capacity recovers a notion of number of cases in all 
 
 \begin{mathSection}
 \begin{prop}
-	Let $\Ens$ be a discrete classical ensemble space. Let $U \subseteq \{s_i\}$ be a subset of the corresponding (extreme) points and $A$ be the set of probability distributions whose support is a subset of $U$. Then $\capacity(A) = \#U$.
+	Let $\Ens$ be a discrete classical ensemble space. Let $U \subseteq \{s_i\}$ be a subset of the corresponding (extreme) points and $A$ be the set of probability distributions whose support is a subset of $U$. Then $\scap(A) = \#U$.
 \end{prop}
 
 \begin{proof}
-	Let $A$ be the set of probability distributions defined over a discrete countable set $U$. The highest entropy is achieved by the uniform distribution, which equals $\log (\#U)$. Therefore $\capacity(A) = 2^{\log(\#U)} = \#U$.
+	Let $A$ be the set of probability distributions defined over a discrete countable set $U$. The highest entropy is achieved by the uniform distribution, which equals $\log (\#U)$. Therefore $\scap(A) = 2^{\log(\#U)} = \#U$.
 \end{proof}
 
 \begin{prop}
-	Let $\Ens$ be a continuous classical ensemble space. Let $U \subseteq X$ be a subset of the corresponding symplectic manifold (i.e. phase space) and $A$ be the set of probability distributions whose support is a subset of $U$. Then $\capacity(A) = \mu(U)$ where $\mu(U)$ is the Liouville measure.
+	Let $\Ens$ be a continuous classical ensemble space. Let $U \subseteq X$ be a subset of the corresponding symplectic manifold (i.e. phase space) and $A$ be the set of probability distributions whose support is a subset of $U$. Then $\scap(A) = \mu(U)$ where $\mu(U)$ is the Liouville measure.
 \end{prop}
 
 \begin{proof}
-	Let $A$ be the set of probability distributions whose support is a subset of $U$. The highest entropy is achieved by the uniform distribution, which equals $\log(\mu(U))$. Therefore $\capacity(A) = 2^{\log(\mu(U))} = \mu(U)$.
+	Let $A$ be the set of probability distributions whose support is a subset of $U$. The highest entropy is achieved by the uniform distribution, which equals $\log(\mu(U))$. Therefore $\scap(A) = 2^{\log(\mu(U))} = \mu(U)$.
 \end{proof}
 
 \begin{prop}
-	Let $\Ens$ be a quantum ensemble space. Let $U \subseteq \mathcal{H}$ be a subspace of the corresponding Hilbert space and $A$ be the set of density operators defined on that subspace (i.e. zero eigenvalues outside). Then $\capacity(A) = \dim(U)$ where $\dim(U)$ is the dimensionality of the subspace.
+	Let $\Ens$ be a quantum ensemble space. Let $U \subseteq \mathcal{H}$ be a subspace of the corresponding Hilbert space and $A$ be the set of density operators defined on that subspace (i.e. zero eigenvalues outside). Then $\scap(A) = \dim(U)$ where $\dim(U)$ is the dimensionality of the subspace.
 \end{prop}
 
 \begin{proof}
-	Let $A$ be the set of density operators defined on a subspace $U$. The highest entropy is achieved by the maximally mixed state, which equals $\log(\dim(U))$. Therefore $\capacity(A) = 2^{\log(\dim(U))} = \dim(U)$.
+	Let $A$ be the set of density operators defined on a subspace $U$. The highest entropy is achieved by the maximally mixed state, which equals $\log(\dim(U))$. Therefore $\scap(A) = 2^{\log(\dim(U))} = \dim(U)$.
 \end{proof}
 \end{mathSection}
 
@@ -1815,7 +1815,7 @@ First we define the \textbf{fraction} of one element within another. For example
 
 \begin{mathSection}
 	\begin{defn}
-		Let $\ens, \ens[a] \in \Ens$ be two ensembles. The \textbf{fraction} of $\ens[a]$ in $\ens$ is the greatest mixing coefficient for which $\ens$ can be expressed as a mixture of $\ens[a]$. That is, $\size_{\ens}(\ens[a]) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens[b] \in \Ens \text{ s.t. }  \ens = p \ens[a] + \bar{p} \ens[b] \})$.
+		Let $\ens, \ens[a] \in \Ens$ be two ensembles. The \textbf{fraction} of $\ens[a]$ in $\ens$ is the greatest mixing coefficient for which $\ens$ can be expressed as a mixture of $\ens[a]$. That is, $\fraction_{\ens}(\ens[a]) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens[b] \in \Ens \text{ s.t. }  \ens = p \ens[a] + \bar{p} \ens[b] \})$.
 	\end{defn}
 \begin{figure}[H]
 	\centering
@@ -1827,11 +1827,11 @@ First we define the \textbf{fraction} of one element within another. For example
 	\end{remark}
 	
 	\begin{coro}
-		Let $\ens, \ens[a] \in \Ens$, then $\size_{\ens}(\ens[a]) = 0$ if and only if $\ens[a]$ is not a component of $\ens$.
+		Let $\ens, \ens[a] \in \Ens$, then $\fraction_{\ens}(\ens[a]) = 0$ if and only if $\ens[a]$ is not a component of $\ens$.
 	\end{coro}
 	
 	\begin{proof}
-		Note that $\ens[a]$ is a component of $\ens$ if we can write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in (0,1]$ and $\ens[b] \in \Ens$. In this case, $\size_{\ens}(\ens[a]) \geq \lambda > 0$. Conversely, if $\size_{\ens}(\ens[a]) > 0$ we can find $\size_{\ens}(\ens[a]) \geq \lambda > 0$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\ens[b] \in \Ens$.
+		Note that $\ens[a]$ is a component of $\ens$ if we can write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in (0,1]$ and $\ens[b] \in \Ens$. In this case, $\fraction_{\ens}(\ens[a]) \geq \lambda > 0$. Conversely, if $\fraction_{\ens}(\ens[a]) > 0$ we can find $\fraction_{\ens}(\ens[a]) \geq \lambda > 0$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\ens[b] \in \Ens$.
 	\end{proof}
 \end{mathSection}
 
@@ -1852,7 +1852,7 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 
 \begin{mathSection}
 	\begin{defn}
-		Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a Borel set. The \textbf{fraction capacity} of $A$ for $\ens$ is the biggest fraction achievable with convex combinations of $A$. That is, $\fcap_{\ens}(A) = \sup(\size_{\ens}(\hull(A))\cup\{0\})$.
+		Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a Borel set. The \textbf{fraction capacity} of $A$ for $\ens$ is the biggest fraction achievable with convex combinations of $A$. That is, $\fcap_{\ens}(A) = \sup(\fraction_{\ens}(\hull(A))\cup\{0\})$.
 	\end{defn}
 	
 	\begin{remark}
@@ -1885,7 +1885,7 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 		
 		3. Let $A, B \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(A \cup B)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(A \cup B)$, we can write $\ens_1 = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. Therefore we have $\ens = p \lambda \ens[a] + p \bar{\lambda} \ens[b] + \bar{p} \ens_2$. By the definition of fraction capacity, we must have $p\lambda \leq \fcap_{\ens}(A)$ and $p\bar{\lambda} \leq \fcap_{\ens}(B)$, therefore $p = p\lambda + p\bar{\lambda} \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. 	Since $\fcap_{\ens}(A \cup B)$ is the supremum for a set of $p$s for which the expression always holds, we have $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. The fraction capacity is subadditive.
 		
-		4. Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. That is $A_i \subseteq A_{i+1}$ for all $i$. Given that the fraction capacity is monotone, $\{\fcap_{\ens}(A_i)\}$ is an increasing sequence. Note that $\fcap_{\ens}(A_i) \leq 1$ for all $i$, therefore the sequence will have an upper bound which will coincide with the limit. Let $A = \lim\limits_{i \to \infty} A_i$. We have $A = \bigcup A_i$ and $A_i \subseteq A$ for all $i$. Since fraction capacity is monotone, we have $\fcap_{\ens}(A_i) \leq \fcap_{\ens}(A)$ for all $i$ and therefore $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) \leq \fcap_{\ens}(A)$. Suppose $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) < \fcap_{\ens}(A)$. Then there would be an $\ens[a] \in \hull(A)$ such that $\size_{\ens}(\ens[a]) > \size_{\ens}(\ens[b])$ for all $\ens[b] \in \hull(A_i)$ for all $i$. But if $\ens[a] \in \hull(A)$, then it can be written as a finite combination of finitely many elements of $A$. Then we will be able to find a $k$ such that $A_k$ will contain all the elements, and therefore $\ens[a] \in A_k$. But this means $\ens[a] \leq \fcap_{\ens}(A_k)$ which is a contradiction. Therefore $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) = \fcap_{\ens}(A)$.
+		4. Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. That is $A_i \subseteq A_{i+1}$ for all $i$. Given that the fraction capacity is monotone, $\{\fcap_{\ens}(A_i)\}$ is an increasing sequence. Note that $\fcap_{\ens}(A_i) \leq 1$ for all $i$, therefore the sequence will have an upper bound which will coincide with the limit. Let $A = \lim\limits_{i \to \infty} A_i$. We have $A = \bigcup A_i$ and $A_i \subseteq A$ for all $i$. Since fraction capacity is monotone, we have $\fcap_{\ens}(A_i) \leq \fcap_{\ens}(A)$ for all $i$ and therefore $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) \leq \fcap_{\ens}(A)$. Suppose $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) < \fcap_{\ens}(A)$. Then there would be an $\ens[a] \in \hull(A)$ such that $\fraction_{\ens}(\ens[a]) > \fraction_{\ens}(\ens[b])$ for all $\ens[b] \in \hull(A_i)$ for all $i$. But if $\ens[a] \in \hull(A)$, then it can be written as a finite combination of finitely many elements of $A$. Then we will be able to find a $k$ such that $A_k$ will contain all the elements, and therefore $\ens[a] \in A_k$. But this means $\ens[a] \leq \fcap_{\ens}(A_k)$ which is a contradiction. Therefore $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) = \fcap_{\ens}(A)$.
 		
 		5. The previous argument works in the same way for decreasing sequences by inverting the order.
 	\end{proof}
@@ -2093,14 +2093,14 @@ The second question is whether the representation is unique. Choquet theory has 
 \end{thrm}
 The definition of a Choquet simplex is rather involved, so it is omitted. Intuitively, it is the generalization of the finite dimensional simplex and we can take is a definition. The key point is that $E$ is a Choquet simplex if and only if the ensemble space does not allow multiple decompositions in terms of extreme points.
 
-There is a connection between mixtures and the representation through a probability measure. We can, in fact, write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $\ens$ can be represented by the probability measure $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$, and $p(\Ens \setminus \{\ens[a], \ens[b]\}) = 0$. Therefore, if $M_{\ens}$ is the set of probability measre that represent $\ens$, the fraction $\size_{\ens}(\ens[a])$ is given by the maximum value over $\{\ens[a]\}$ that can be taken by one of those measures. That is,  $\size_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$.
+There is a connection between mixtures and the representation through a probability measure. We can, in fact, write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $\ens$ can be represented by the probability measure $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$, and $p(\Ens \setminus \{\ens[a], \ens[b]\}) = 0$. Therefore, if $M_{\ens}$ is the set of probability measre that represent $\ens$, the fraction $\fraction_{\ens}(\ens[a])$ is given by the maximum value over $\{\ens[a]\}$ that can be taken by one of those measures. That is,  $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$.
 
 \begin{prop}
-	Let $E$ be a compact convex subset of a locally convex topological vector space $V$ and define the fraction capacity as for an ensemble space. Let $\ens \in E$ be a point and $M_{\ens}$ be the set of measures that represent $\ens$. Then $\size_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$ and $\fcap_{\ens}(A) = \sup \{ p(\{A\}) \, | \, M_{\ens} \}$.
+	Let $E$ be a compact convex subset of a locally convex topological vector space $V$ and define the fraction capacity as for an ensemble space. Let $\ens \in E$ be a point and $M_{\ens}$ be the set of measures that represent $\ens$. Then $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$ and $\fcap_{\ens}(A) = \sup \{ p(\{A\}) \, | \, M_{\ens} \}$.
 \end{prop}
 
 \begin{proof}
-	Let $\ens \in E$ and suppose $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ with $\ens[a], \ens[b] \in E$ and $\lambda \in [0,1]$. The measure $p$ such that $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$ and $p(E\setminus \{ \ens[a], \ens[b]\})=0$ represents $\ens$. The converse is true as well. Therefore $\size_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$. 
+	Let $\ens \in E$ and suppose $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ with $\ens[a], \ens[b] \in E$ and $\lambda \in [0,1]$. The measure $p$ such that $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$ and $p(E\setminus \{ \ens[a], \ens[b]\})=0$ represents $\ens$. The converse is true as well. Therefore $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$. 
 \end{proof}
 
 
@@ -2116,6 +2116,10 @@ In case $E$ is compact, we can restrict the fraction capacity to the set $X$ of 
 	
 	An ensemble space $\Ens$ is a Choquet simplex if an only if Let $E$ be a closed convex metrizable subset of a locally convex topological vector space $V$. Then $E$ is a Choquet simplex if and only if for each $\ens \in E$ there exists a unique measure $p_{\ens}$ which represents $\ens$ and is supported by the extreme points $X$.
 \end{prop}
+
+\begin{proof}
+	TODO
+\end{proof}
 
 
 \subsection{Macrostates and thermodynamics}
@@ -2472,10 +2476,10 @@ The continuity of the mixing function means we can stretch open sets and still h
 	In a limit, the fraction does not necessarily converge to one.
 \end{insight}
 
-Since the fraction tells us how much an ensemble is part of another, an intuitive conjecture would be that if $\ens[a]_i \to \ens[a]$ then $\size_{\ens[a]}(\ens[a]_i) \to 1$. That is, the fraction increases as we get closer to the limit. This does not work because one can make a limit over the extreme point.
+Since the fraction tells us how much an ensemble is part of another, an intuitive conjecture would be that if $\ens[a]_i \to \ens[a]$ then $\fraction_{\ens[a]}(\ens[a]_i) \to 1$. That is, the fraction increases as we get closer to the limit. This does not work because one can make a limit over the extreme point.
 
 \begin{example}[Pure state convergence in a quantum space]
-	Let $\psi_i$ be a sequence of pure states and $\psi$ a pure state such that $\psi_i \to \psi$. For example, on Bloch sphere, it would be a sequence of points on the surface that converges to a point on the surface. Then, since they are all pure states, we have $\size_{\psi}(\psi_i) = 0$. This means $\psi_i \to \psi$ while $\size_{\psi}(\psi_i) \to 0 \neq 1$.
+	Let $\psi_i$ be a sequence of pure states and $\psi$ a pure state such that $\psi_i \to \psi$. For example, on Bloch sphere, it would be a sequence of points on the surface that converges to a point on the surface. Then, since they are all pure states, we have $\fraction_{\psi}(\psi_i) = 0$. This means $\psi_i \to \psi$ while $\fraction_{\psi}(\psi_i) \to 0 \neq 1$.
 \end{example}
 
 \subsection{Measures and topology}
@@ -2932,7 +2936,7 @@ We now want to show that, in standard ensemble spaces, we recover the standard n
 		
 		Since the singletons are elements of the lattice, all downward refined filters are principal, meaning that they are all of the form $\uparrow\mathclose{x} = \{A \in \mathfrak{L}^\separate(C) \, | \, \{x\} \in A\}$ where $x \in \Omega$ is an element of the sample space. Therefore the sample space and the spectrum coincide. Each singleton is an open set, since it is an element of the lattice. The topology is therefore the discrete topology.
 		
-		Now consider $p^*_{\ens}(\{x\})$ for some $x \in X$. Since $\{x\}$ is a $\separate$-subspace, $p^*_{\ens}(\{x\}) = \fcap_{\ens}(\{x\}) = \size_{\ens}(x)$. Note that the ensemble $\ens$ corresponds to a probability measure $p$ which can be written as a convex combination $\ens = \sum_{x_i \in X} p(\{x_i\}) x_i$. Given an $x \in X$, then, $p(\{x\})$ is the greatest mixing coefficient that can be associated to $x$ in a convex combination, which corresponds to the fraction capacity. Therefore $p^*_{\ens}(\{x\}) = p(\{x\})$ for all $x \in X$, which means the two measures are the same.
+		Now consider $p^*_{\ens}(\{x\})$ for some $x \in X$. Since $\{x\}$ is a $\separate$-subspace, $p^*_{\ens}(\{x\}) = \fcap_{\ens}(\{x\}) = \fraction_{\ens}(x)$. Note that the ensemble $\ens$ corresponds to a probability measure $p$ which can be written as a convex combination $\ens = \sum_{x_i \in X} p(\{x_i\}) x_i$. Given an $x \in X$, then, $p(\{x\})$ is the greatest mixing coefficient that can be associated to $x$ in a convex combination, which corresponds to the fraction capacity. Therefore $p^*_{\ens}(\{x\}) = p(\{x\})$ for all $x \in X$, which means the two measures are the same.
 	\end{proof}
 \end{mathSection}
 
@@ -3170,7 +3174,7 @@ Part of an original attempt to square measure and topology, sets with a nowhere 
 \end{prop}
 
 \begin{proof}
-	Consider the hull of $A$. This can be ordered by the fraction $\size_{\ens}$, which is less or equal to one. If there is a maximum, then simply take a sequence of an element with the maximum faction. If not, we can take a sequence of ever increasing fractions whose limit is the fraction capacity, and find a corresponding sequence of ensembles within $\hull(A)$. By definition, this will be a maximal $A$-component sequence of $\ens$.
+	Consider the hull of $A$. This can be ordered by the fraction $\fraction_{\ens}$, which is less or equal to one. If there is a maximum, then simply take a sequence of an element with the maximum faction. If not, we can take a sequence of ever increasing fractions whose limit is the fraction capacity, and find a corresponding sequence of ensembles within $\hull(A)$. By definition, this will be a maximal $A$-component sequence of $\ens$.
 \end{proof}
 
 \begin{prop}
@@ -3344,7 +3348,7 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 %TODO: since we use X for subspaces, we should use some other letter (M?) for the classical manifold
 
 \begin{prop}
-	Let $\Ens$ be a continuous classical theory and $X \subseteq \Ens$ an ensemble subspace. Then $\capacity(X)$ is the cardinality of the set $A \subseteq M$ of pure states associated to $X$. That is, $\capacity(X) = \#A$.
+	Let $\Ens$ be a continuous classical theory and $X \subseteq \Ens$ an ensemble subspace. Then $\scap(X)$ is the cardinality of the set $A \subseteq M$ of pure states associated to $X$. That is, $\scap(X) = \#A$.
 \end{prop}
 
 \begin{proof}
@@ -3352,19 +3356,19 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{proof}
 
 \begin{prop}
-	Let $\Ens$ be a continuous classical theory and $X \subseteq \Ens$ an ensemble subspace. Then $\capacity(X)$ is the Liouville measure of the set $A \subseteq M$ associated to $X$. That is, $\capacity(X) = \mu(A)$.
+	Let $\Ens$ be a continuous classical theory and $X \subseteq \Ens$ an ensemble subspace. Then $\scap(X)$ is the Liouville measure of the set $A \subseteq M$ associated to $X$. That is, $\scap(X) = \mu(A)$.
 \end{prop}
 
 \begin{proof}
-	Let $X \subseteq \Ens$ be an ensemble subspace and $A \subseteq M$ the associated regular open set. The highest entropy reachable by a distribution with support $A$ is $\log \mu(A)$ which corresponds to the uniform distribution. Therefore $\capacity(X) = \mu(A)$.
+	Let $X \subseteq \Ens$ be an ensemble subspace and $A \subseteq M$ the associated regular open set. The highest entropy reachable by a distribution with support $A$ is $\log \mu(A)$ which corresponds to the uniform distribution. Therefore $\scap(X) = \mu(A)$.
 \end{proof}
 
 \begin{prop}
-	Let $\Ens$ be a quantum ensemble space and $X \subseteq \Ens$ an ensemble subspace. Then $\capacity(X)$ is the dimension of the corresponding Hilbert subspace.
+	Let $\Ens$ be a quantum ensemble space and $X \subseteq \Ens$ an ensemble subspace. Then $\scap(X)$ is the dimension of the corresponding Hilbert subspace.
 \end{prop}
 
 \begin{proof}
-	Since $X$ is a subspace of a quantum ensemble space, $X$ is the set of mixed state whose support is a subspace of the corresponding Hilbert space. If it is finite dimensional, the ensemble with maximal entropy will correspond to the maximally mixed state $I/n$ where $n$ is the dimension of the subspace. The entropy will be given by $\log n$, which means $\capacity(U) = n$. If $U$ is infinite dimensional, then there is no upper bound to the entropy and $\capacity(U) = + \infty$.
+	Since $X$ is a subspace of a quantum ensemble space, $X$ is the set of mixed state whose support is a subspace of the corresponding Hilbert space. If it is finite dimensional, the ensemble with maximal entropy will correspond to the maximally mixed state $I/n$ where $n$ is the dimension of the subspace. The entropy will be given by $\log n$, which means $\scap(U) = n$. If $U$ is infinite dimensional, then there is no upper bound to the entropy and $\scap(U) = + \infty$.
 \end{proof}
 
 \subsection{Orthogonal decomposability}
@@ -3374,7 +3378,7 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{defn}
 
 \begin{conj}
-	A space is orthogonally decomposable if and only if the state capacity is additive for orthogonal subspaces. That is, $\capacity(X \vee Y) = \capacity(X) + \capacity(Y)$ for any two subspaces $X, Y \subseteq \Ens$ such that $X \ortho Y$.
+	A space is orthogonally decomposable if and only if the state capacity is additive for orthogonal subspaces. That is, $\scap(X \vee Y) = \scap(X) + \scap(Y)$ for any two subspaces $X, Y \subseteq \Ens$ such that $X \ortho Y$.
 \end{conj}
 
 \begin{conj}
@@ -3397,7 +3401,7 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 \end{defn}
 
 \begin{prop}
-	Let $C \subseteq \mathfrak{L}$ be a context. Then $\capacity$ is an additive measure over the context. That is, $\capacity(X \vee Y) = \capacity(X) + \capacity(Y)$ for all $X, Y, X \vee Y \in C$ such that $X \cap Y = \emptyset$.
+	Let $C \subseteq \mathfrak{L}$ be a context. Then $\scap$ is an additive measure over the context. That is, $\scap(X \vee Y) = \scap(X) + \scap(Y)$ for all $X, Y, X \vee Y \in C$ such that $X \cap Y = \emptyset$.
 \end{prop}
 
 \begin{proof}
