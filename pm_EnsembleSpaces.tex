@@ -1745,7 +1745,7 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 \end{check}
 
 \begin{coro}
-	The state capacity can be equivalently defined on the $\sigma$-hull or the closed hull. That is, $\sup(2^{S(\hull(A))}\cup\{0\}) = \sup(2^{S(\shull(A))}\cup\{0\}) = \sup(2^{S(\chull(A))}\cup\{0\})$.
+	Given a set $A \subseteq \Ens$, the state capacity of all hulls is the same. That is, $\scap(\hull(A)) = \scap(\shull(A)) = \scap(\chull(A))$.
 \end{coro}
 
 \begin{proof}
@@ -1759,6 +1759,7 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 		\item monotone: $A \subseteq B \implies \scap(A) \leq \scap(B)$
 		\item subadditive: $\scap(A \cup B) \leq \scap(A) + \scap(B)$
 		\item additive over orthogonal sets: $A \ortho B \implies \scap(A \cup B) = \scap(A) + \scap(B)$ 
+		\item the state capacity is continuous from above and below.
 	\end{enumerate}
 \end{prop}
 
@@ -1770,16 +1771,17 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 	3. Let $A, B \subseteq \Ens$ and let $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])} \leq \scap(A) + \scap(B)$. Since this is true for any finite mixture of elements of $A$ and $B$, it will be true for any element of $\hull(A \cup B)$. Consequently, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\scap(A \cup B) \leq \scap(A) + \scap(B)$ (i.e. the state capacity is subadditive).
 	
 	4. Let $A, B \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[a]_i\} \subseteq A$ be a sequence of ensembles such that $2^{S(\ens[a]_i)} \to \scap(A)$ and let $\{\ens[b]_i\} \subseteq B$ be a sequence of ensembles such that $2^{S(\ens[b]_i)} \to \scap(B)$. Consider $\ens_i = p_i \ens[a]_i + \bar{p_i} \ens[b]_i$ where $p_i = \frac{2^{S(\ens[a]_i)}}{2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}$. This means that $2^{S(\ens_i)} \to \scap(A) + \scap(B)$. Therefore $\scap(A \cup B)$ must be at least $\scap(A) + \scap(B)$. Combining with the previous result, $\scap(A \cup B) = \scap(A) + \scap(B)$. Therefore the state capacity, as a set function, is additive over orthogonal sets of ensembles.
-\end{proof}
 
-\begin{prop}
-	The state capacity is continuous from above and below.
-\end{prop}
-
-\begin{proof}
-	Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. Given that the state capacity is monotone, $\{\scap(A_i)\}$ is a an increasing sequence and it will converge in the extended real line. Let $A = \lim\limits_{i \to \infty} A_i$. We have $A = \bigcup A_i$ and $A_i \subseteq A$ for all $i$. Since state capacity is monotone, $\scap(A_i) \leq \scap(A)$ for all $i$ and therefore $\lim\limits_{i \to \infty} \scap(A_i) \leq \scap(A)$. Given any $\ens[a] \in \hull(A)$, since $\ens[a]$ is a convex combination of finitely many elements of $A$, we will be able to find an $i$ such that $\ens[a] \in \hull(A_i)$. Therefore $\hull(A) = \bigcup \hull(A_i)$. This means we cannot have $k$ such that $\scap(A) > k > \scap(A_i)$ for all $i$, and therefore $\lim\limits_{i \to \infty} \scap(A_i) = \scap(A)$.
+	5. Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. Since $\scap$ is monotone, $\scap(A_i)$ is also increasing. Since $\hull$ is continuous from below, we have:
+	\begin{equation}
+		\begin{aligned}
+			\scap(A) &= \sup(2^{S(\hull(A))}\cup\{0\}) = \sup(2^{S(\bigcup\hull(A_i))}\cup\{0\})\\
+			&= \sup(\bigcup 2^{S(\hull(A_i))}\cup\{0\}) = \sup(\bigcup \scap(A_i)).
+		\end{aligned}
+	\end{equation}
+	But since $\scap(A_i)$ is increasing, the supremum is exactly the limit. Therefore the state capacity is continuous from below.
 	
-	The same argument works for decreasing sequences by inverting the order.
+	Since $\hull$ is also continuous from above, the same argument works for decreasing sequences by inverting the order.
 \end{proof}
 
 \end{mathSection}
