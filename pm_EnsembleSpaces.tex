@@ -594,22 +594,22 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \end{proof}
 
 \begin{defn}
-	Given a function $f : \Ens \to \mathbb{R}$, the its \textbf{convex supremum} is the set function to the extended real line defined as $cs_f(A) = \sup(f(\hull(A)) \cup \{\inf(f(\Ens))\})$ that returns the highest value of $f$ reachable by convex combinations of $A$.
+	Given a function $f : \Ens \to \mathbb{R}$, a \textbf{convex supremum} of $f$ is a set function $cs_f : 2^{\Ens} \to [- \infty, + \infty]$ such that $cs_f(A) = \sup(f(\hull(A)) \cup \{f_{\emptyset}\})$, with $f_{\emptyset} \leq \inf(f(\Ens))$, that returns the highest value of $f$ reachable by convex combinations of $A$.
 \end{defn}
 
 \begin{prop}\label{pm_es_convexSupremumProps}
 	For any $f$, the convex supremum $cs_f$ has the following properties
 	\begin{enumerate}
-		\item range of $f$: $cs_f(A) \in [\inf(f(\Ens)), \sup(f(\Ens))]$
-		\item increasing: $A \subseteq B \implies \scap(A) \leq \scap(B)$
+		\item range of $f$: $cs_f(A) \in [f_{\emptyset}, \sup(f(\Ens))]$
+		\item increasing: $A \subseteq B \implies cs_f(A) \leq cs_f(B)$
 		\item continuous from below: for any increasing sequence $A_i \subseteq \Ens$, $cs_f(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} cs_f(A_i)$.
 	\end{enumerate}
 \end{prop}
 
 \begin{proof}
-	1. If $A$ is non-empty, $cs_f(A)$ returns the supremum of the subset of value returned by $f(A)$, which means $\inf(f(\Ens)) \leq cs_f(A) \leq \sup(f(\Ens))$. If $A$ is empty, $\inf(f(\Ens)) = cs_f(A) \leq \sup(f(\Ens))$. Therefore $cs_f(A) \in [\inf(f(\Ens)), \sup(f(\Ens))]$ for all $A$.
+	1. If $A$ is empty, $cs_f(A) = f_{\emptyset}$. If $A$ is non-empty, $cs_f(A)$ is the supremum of the subset of value returned by $f(\hull(A))$, which means $f_{\emptyset} \leq \inf(f(\Ens)) \leq cs_f(A) \leq \sup(f(\Ens))$. Therefore $cs_f(A) \in [f_{\emptyset}, \sup(f(\Ens))]$ for all $A$.
 
-	2. Since the $\hull$ is an increasing function, the image of a set through a map is an increasing function and the supremum is an increasing function, the convex supremum is an increasing function.
+	2. If $A = B = \emptyset$, then $cs_f(A) = cs_f(B)$. If $B \neq \emptyset$, $cs_f(A) = f_{\emptyset} \leq \inf(\Ens) \leq cs_f(B)$. In the last case, since the $\hull$ is an increasing function, the image of a set through a map is an increasing function and the supremum is an increasing function, the convex supremum is an increasing function.
 	
 	3. Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. Since $cs_f$ is increasing, $cs_f(A_i)$ is also an increasing sequence. Since $\hull$ is continuous from below, we have:
 	\begin{equation}
@@ -1784,9 +1784,9 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{state capacity} of $A$ is defined as $\scap(A) = \sup(2^{S(\hull(A))}\cup\{0\})$.
 \end{defn}
 
-\begin{remark}
-	Note that the state capacity coincides with the convex supremum of the exponential of the entropy, except for the empty set.
-\end{remark}
+\begin{coro}
+	The state capacity is a convex supremum of the exponential of the entropy with $0$ for the empty set.
+\end{coro}
 
 \begin{coro}
 	Given a set $A \subseteq \Ens$, the state capacity of all hulls is the same. That is, $\scap(\hull(A)) = \scap(\shull(A)) = \scap(\chull(A))$.
@@ -1808,15 +1808,15 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 \end{prop}
 
 \begin{proof}
-	1. The exponential can only return non-negative values, therefore the state capacity of a set is non-negative. 
+	1. By \ref{pm_es_convexSupremumProps}, $\scap(A) \in [0, \sup(2^{S(\Ens)})] \subseteq [0,+\infty]$. 
 	
-	2. Since all convex supremum maps are increasing, the state capacity is increasing for all sets that are not the empty set. Since $0 \leq \inf(2^{S(\Ens)})$, the function is increasing over the empty set.
+	2. By \ref{pm_es_convexSupremumProps}.
 	
 	3. Let $A, B \subseteq \Ens$ and let $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. By \ref{pm_es_exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])} \leq \scap(A) + \scap(B)$. Since this is true for any finite mixture of elements of $A$ and $B$, it will be true for any element of $\hull(A \cup B)$. Consequently, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\scap(A \cup B) \leq \scap(A) + \scap(B)$ (i.e. the state capacity is subadditive).
 	
 	4. Let $A, B \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[a]_i\} \subseteq A$ be a sequence of ensembles such that $2^{S(\ens[a]_i)} \to \scap(A)$ and let $\{\ens[b]_i\} \subseteq B$ be a sequence of ensembles such that $2^{S(\ens[b]_i)} \to \scap(B)$. Consider $\ens_i = p_i \ens[a]_i + \bar{p_i} \ens[b]_i$ where $p_i = \frac{2^{S(\ens[a]_i)}}{2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}}$. Then, by \ref{pm_es_exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}$. This means that $2^{S(\ens_i)} \to \scap(A) + \scap(B)$. Therefore $\scap(A \cup B)$ must be at least $\scap(A) + \scap(B)$. Combining with the previous result, $\scap(A \cup B) = \scap(A) + \scap(B)$. Therefore the state capacity, as a set function, is additive over orthogonal sets of ensembles.
 
-	5. Since convex supremum maps are continuous from below, the state capacity is continuous from below.
+	5. By \ref{pm_es_convexSupremumProps}.
 \end{proof}
 
 \begin{remark}
@@ -1918,9 +1918,13 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	\begin{defn}
 		Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a Borel set. The \textbf{fraction capacity} of $A$ for $\ens$ is the biggest fraction achievable with convex combinations of $A$. That is, $\fcap_{\ens}(A) = \sup(\fraction_{\ens}(\hull(A))\cup\{0\})$.
 	\end{defn}
+
+	\begin{coro}
+		The fraction capacity is a convex supremum of the fraction with $0$ for the empty set.
+	\end{coro}
 	
 	\begin{remark}
-		Note that the fraction capacity is the convex supremum of the capacity for any ensemble space with at least two ensembles. An open question is whether the type of hull matters. If the fraction is proven to be continuous, then it does not matter.
+		An open question is whether the type of hull matters in the definition of the fraction capacity. If the fraction is proven to be continuous, then it does not matter.
 	\end{remark}
 
 	\begin{coro}
@@ -1942,13 +1946,13 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	\end{prop}
 	
 	\begin{proof}
-		1. The fraction capacity takes a subset of $\Ens$ and returns a real value and is therefore a set function. The mixture coefficients are real values between zero and one. The supremum of a set of numbers between zero and one is between zero and one, and therefore the fraction capacity for an ensemble is non-negative and unit bounded.
-		
-		2. Since all convex supremum maps are increasing, the fraction capacity is increasing.
+		1. By \ref{pm_es_convexSupremumProps}, $\fcap(A) \in [0, \sup(\fraction_{\ens}(\Ens))] = [0,1]$. 
+	
+		2. By \ref{pm_es_convexSupremumProps}.
 		
 		3. Let $A, B \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(A \cup B)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(A \cup B)$, we can write $\ens_1 = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. Therefore we have $\ens = p \lambda \ens[a] + p \bar{\lambda} \ens[b] + \bar{p} \ens_2$. By the definition of fraction capacity, we must have $p\lambda \leq \fcap_{\ens}(A)$ and $p\bar{\lambda} \leq \fcap_{\ens}(B)$, therefore $p = p\lambda + p\bar{\lambda} \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. 	Since $\fcap_{\ens}(A \cup B)$ is the supremum for a set of $p$s for which the expression always holds, we have $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. The fraction capacity is subadditive.
-		
-		4. Since convex supremum maps are continuous from below, the fraction capacity is continuous from below.
+	
+		2. By \ref{pm_es_convexSupremumProps}.
 	\end{proof}
 	
 
