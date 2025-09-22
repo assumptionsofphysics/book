@@ -1957,7 +1957,7 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	
 
 \begin{remark}
-	The fraction capacity is, in general, not continuous from above. Let $\Ens$ be the Bloch ball. Let $\ens \in \Ens$ be the maximally mixed state (i.e. the center of the sphere). Let $\{\ens_i\}$ be a countable set of distinct pure states. Let $A_j = \{ \ens_i \, | \, i \geq j\}$. Then $\fcap_{\ens}(A_j) >= \frac{1}{2}$ for all $j$ because $A_j$ contains at least one pure state. This means that $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) >= \frac{1}{2}$. However, $\bigcap A_j = \emptyset$ which means $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) = 0$. This means that, in general, $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) \neq \lim\limits_{i \to \infty} \fcap_{\ens}(A_i)$ for a decreasing sequence.
+	The fraction capacity is, in general, not continuous from above. Let $\Ens$ be the Bloch ball. Let $\ens \in \Ens$ be the maximally mixed state (i.e. the center of the sphere). Let $\{\ens_i\}$ be a countable set of distinct pure states. Let $A_j = \{ \ens_i \, | \, i \geq j\}$. Then $\fcap_{\ens}(A_j) \geq \frac{1}{2}$ for all $j$ because $A_j$ contains at least one pure state. This means that $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) \geq \frac{1}{2}$. However, $\bigcap A_j = \emptyset$ which means $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) = 0$. This means that, in general, $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) \neq \lim\limits_{i \to \infty} \fcap_{\ens}(A_i)$ for a decreasing sequence.
 \end{remark}
 	
 \end{mathSection}
@@ -2150,48 +2150,52 @@ An open problem is whether statistical quantities are required by ensemble space
 
 \subsection{Connection to Choquet theory}
 
-We now connect ensemble spaces to Choquet theory. Given a compact convex subset $E$ of a locally convex topological vector space $V$, Choquet theory asks whether every point of $E$ can be represented as a probability measure over its extreme points. If an ensemble space $\Ens$ is compact, or allows a completion completion $E$, then we can study the ensemble space within Choquet theory as well. The fraction capacity can be understood as the supremum from all measures that can represent an ensemble. The fraction capacity is therefore additive only if all ensembles can be represented with only one measure (i.e. multiple decomposition is not allowed).
+We now want to establish a connection between ensemble spaces and Choquet theory. Specifically, we want to show that the fraction capacity restricted to the extreme points corresponds to the supremum of all possible measures that represents an ensemble. Moreover, the fraction capacity over the extreme point is additive exactly when the ensemble space is a Choquet simplex.
 
-Choquet theory can be summarized in the following way. First, we need to define what it means to represent an ensemble with a probability measure. Let $E$ be a convex subset of a locally convex topological vector space $V$ and $X$ the set of extreme points. We say that $\ens \in E$ is represented by a probability measure $p : \Sigma_{E} \to [0,1]$ if $F(\ens) = \int_E F dp$ for every continuous linear functional $F$ on $V$. Moreover, we say that $p$ is supported by the extreme points if $p(X) = 1$. Given any probability measure $p$ over the extreme points $X$, we can always find an $\ens \in E$ that is represented by $p$. Therefore, we have a map from the set of probability measures to the set of ensembles. Choquet theory characterizes how the map works in the opposite direction.
+The goal of Choquet theory is to study how a point of a compact convex set can be represented by a probability measure over its extreme points. First, we need to define what it means to represent an ensemble with a probability measure. Let $E$ be a convex subset of a locally convex topological vector space $V$ and $X$ the set of extreme points. We say that $\ens \in E$ is represented by a probability measure $p : \Sigma_{E} \to [0,1]$ if $F(\ens) = \int_E F dp$ for every continuous linear functional $F$ on $V$. Moreover, we say that $p$ is supported by the extreme points if $p(X) = 1$. Given any probability measure $p$ over the extreme points $X$, we can always find an $\ens \in E$ that is represented by $p$. Therefore, we have a map from the set of probability measures to the set of ensembles. Choquet theory characterizes how the map works in the opposite direction.
 
 The first question is whether each ensemble is represented by a probability measure. Choquet theory tells us that this is the case:
-\begin{thrm}[Choquet-Bishop-de Leeuw]
+\begin{thrm}[Choquet-Bishop-de Leeuw]\label{pm_es_ChoquetExistence}
 	Let $E$ be a compact convex subset of a locally convex topological vector space $V$, and let $\ens \in E$. Then there exists a probability measure $p_{\ens}$ on $X$ which represents $\ens$ and is supported by the extreme points $X$.
 \end{thrm}
 The second question is whether the representation is unique. Choquet theory has a clear answer.
-\begin{thrm}[Choquet uniqueness]
+\begin{thrm}[Choquet uniqueness]\label{pm_es_ChoquetUniqueness}
 	Let $E$ be a compact convex subset of a locally convex topological vector space $V$. Then $E$ is a Choquet simplex if and only if for each $\ens \in E$ there exists a unique measure $p_{\ens}$ which represents $\ens$ and is supported by the extreme points $X$.
 \end{thrm}
 The definition of a Choquet simplex is rather involved, so it is omitted. Intuitively, it is the generalization of the finite dimensional simplex and we can take is a definition. The key point is that $E$ is a Choquet simplex if and only if the ensemble space does not allow multiple decompositions in terms of extreme points.
 
-There is a connection between mixtures and the representation through a probability measure. We can, in fact, write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $\ens$ can be represented by the probability measure $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$, and $p(\Ens \setminus \{\ens[a], \ens[b]\}) = 0$. Therefore, if $M_{\ens}$ is the set of probability measre that represent $\ens$, the fraction $\fraction_{\ens}(\ens[a])$ is given by the maximum value over $\{\ens[a]\}$ that can be taken by one of those measures. That is,  $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$.
+Note that there is a mismatch between ensemble spaces and the definition of Choquet theory. While ensemble spaces are convex subsets of a vector space, they will not necessarily be compact. For example, in the classical continuous case, the space of absolutely continuous probability distributions is not compact, even we restrict ourselves to a compact subset of phase space. The issue is that the extreme points, the Dirac distributions, are not ensembles. Moreover, ensemble spaces are equipped with an entropy, and therefore have more structure than required by Choquet theory.
 
-\begin{prop}
+However, the link to Choquet theory is limited to the fraction capacity, which can be defined for any convex set. Therefore we are going to study the relationship between the fraction capacity in all cases where Choquet theory is applicable. If an ensemble space $\Ens$ is compact, the results will apply directly. If an ensemble space $\Ens$ admits some type of compactification $E$, like taking extending the space to all probability measures over a compact subset, then the results will apply to these extreme points that are not necessarily ensembles.
+
+We first note that there is a connection between mixtures and the representation through a probability measure. We can, in fact, write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $\ens$ can be represented by the probability measure $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$, and $p(\Ens \setminus \{\ens[a], \ens[b]\}) = 0$. Therefore, if $M_{\ens}$ is the set of probability measures that represent $\ens$, the fraction $\fraction_{\ens}(\ens[a])$ is given by the maximum value over $\{\ens[a]\}$ that can be taken by one of those measures. That is,  $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$.
+
+\begin{prop}\label{pm_es_fractionSupChoquet}
 	Let $E$ be a compact convex subset of a locally convex topological vector space $V$ and define the fraction capacity as for an ensemble space. Let $\ens \in E$ be a point and $M_{\ens}$ be the set of measures that represent $\ens$. Then $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$ and $\fcap_{\ens}(A) = \sup \{ p(\{A\}) \, | \, M_{\ens} \}$.
 \end{prop}
 
 \begin{proof}
-	Let $\ens \in E$ and suppose $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ with $\ens[a], \ens[b] \in E$ and $\lambda \in [0,1]$. The measure $p$ such that $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$ and $p(E\setminus \{ \ens[a], \ens[b]\})=0$ represents $\ens$. The converse is true as well. Therefore $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$. 
+	Let $\ens \in E$ and suppose $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ with $\ens[a], \ens[b] \in E$ and $\lambda \in [0,1]$. Then the measure $p$ such that $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$ and $p(E\setminus \{ \ens[a], \ens[b]\})=0$ represents $\ens$. In fact, for any statistical variable $F$ we have $F(\ens) = \lambda F(\ens[a]) + \bar{\lambda} F(\ens[b]) = \int_E F dp$. The converse is true as well. Since a Dirac measure at a point $\ens$ represents $\ens$, the convex combination of two Dirac measures represents the convex combination of the two corresponding points. Therefore $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$.
+	
+	Now let $A \subseteq \Ens$ be convex and let $M_A$ be the set of all measures whose support is in $A$. Each measure in $M_A$ will represent a point on $A$. Also, since the expectation a convex combinations of measures correspond to a convex combination of the expectations values, $M_A$ will be convex as well. If $p$ represents $\ens$ and $p(A) \neq 0$, then $\frac{p|_A}{p(A)}$ is a probability measure that represents an element $\ens[a] \in A$ such that $\ens = p(A) \ens[a] + p(A^{\complement}) \ens[b]$. Therefore $\fraction_{\ens}(A) = \sup \{ p(A) \, | \, M_{\ens} \}$.
 \end{proof}
 
-
-In case $E$ is compact, we can restrict the fraction capacity to the set $X$ of extreme points. Given a set $A \subset X$, of extreme points, we can find the set $N \subset E$ of all ensembles that can be represented with a probability measure with support $A$. This forms a convex set. Now, the ability to express an ensemble $\ens$ as the convex combination of $N$ is precisely the ability to find a measure $p$ that represents $\ens$ such that $p(A) \neq 0$. That is, $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ with $\ens[a] \in M$ if and only if there is a probability measure $p$ that represents $\ens$ such that $p(A) \geq \lambda$.\footnote{TODO: add proof somewhere} Consequently, if $M_{\ens}$ is the set of all probability measures that represent $\ens$ as defined in Choquet theory, then $\fcap_{\ens}(A) = \sup(\{p(A) \, | \, p \in M_{\ens}\})$.\footnote{TODO: prove somewhere} The fraction capacity is simply the supremum on each set over all possible measures.
+If we restrict the fraction capacity to the set $X$ of extreme points, it will represent the supremum of all probability measures over the extreme points. If $E$ is a Choquet simplex, then each ensembles will be represented by a unique measure over the extreme points, therefore the fraction capacity over the extreme points will coincide with that measure, and will be additive. Conversely, if the fraction capacity over the extreme points is additive, the fraction capacity must be the supremum over a single measure. If the fraction capacity over the extreme points is additive for all ensembles, then each ensemble is represented by a unique probability measure over the extreme points. In other words, the additivity of the fraction capacity over the extreme points exactly captures the single decomposition of ensembles into pure states and the Choquet simplex case.
 
 \begin{prop}
-	Let $E$ be a compact convex The following statements are equivalent:
+	Let $E$ be a compact convex subset of a locally convex topological vector space $V$. Then the following statements are equivalent:
 	\begin{enumerate}
 		\item $\Ens$ is a Choquet simplex
-		\item each ensemble is uniquely represented by a measure over its extreme points $X_{\Ens}$
+		\item each ensemble is uniquely represented by a measure over its extreme points $X$
 		\item the fraction capacity restricted over the extreme points is additive
 	\end{enumerate}
-	
-	An ensemble space $\Ens$ is a Choquet simplex if an only if Let $E$ be a closed convex metrizable subset of a locally convex topological vector space $V$. Then $E$ is a Choquet simplex if and only if for each $\ens \in E$ there exists a unique measure $p_{\ens}$ which represents $\ens$ and is supported by the extreme points $X$.
 \end{prop}
 
 \begin{proof}
-	TODO
+	By theorem \ref{pm_es_ChoquetUniqueness}, 1 and 2 are equivalent. 
+	
+	Now consider $\fraction_{\ens}|_X$. By \ref{pm_es_fractionSupChoquet}, $\fcap_{\ens}|_X$ gives us the supremum of all possible measures supported by $X$ that represent $\ens$. By \ref{pm_es_ChoquetExistence}, $\ens$ is represented by at least one measure. Suppose that it is represented by exactly one measure $p$. Then $\fraction_{\ens}|_X = p$ and therefore $\fraction_{\ens}|_X$ is additive. Now, suppose that $\ens$ is represented by at least two distinct measures $p_1$ and $p_2$. Then there will be a set $A \subseteq X$ such that $p_1(A) \neq p_2(A)$. Suppose, without loss of generality, that $p_1(A) > p_2(A)$. We will also have $p_1(A^{\complement}) = 1- p_1(A) < 1 - p_2(A) = p_2(A^{\complement})$. Therefore $\fcap_{\ens}(A \cup A^{\complement})=\fcap{\ens}(X) = 1 = p_1(A) + p_1(A^{\complement}) < p_1(A) + p_2(A^{\complement}) \leq \fcap_{\ens}(A) + \fcap_{\ens}(A^{\complement})$. The fraction capacity is therefore additive if and only if $\ens$ is represented by a single measure over the extreme points. Therefore 2 and 3 are equivalent.
 \end{proof}
-
 
 \subsection{Macrostates and thermodynamics}
 
