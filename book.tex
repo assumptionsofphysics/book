@@ -821,7 +821,7 @@ Combining verifiable statements with conjunction (i.e.~the logical AND) is more 
 		\end{enumerate}
 		The experimental procedure so defined is repeatable, can be executed by anybody, therefore $\bigAND\limits_{i=1}^{n} \expt_i \in \exptSet$. We have, for every $a \in \pAss$, $\result(\bigAND\limits_{i=1}^{n} \expt_i, a) = \SUCCESS$ if and only if $\result(\expt_i, a) = \SUCCESS$ for all $i$ if and only if $a(\stmt_i) = \TRUE$ for all $i$ if and only if $a(\bigAND\limits_{i=1}^{n}\stmt_i) = \TRUE$. Therefore $\bigAND\limits_{i=1}^{n}\stmt_i$ is a verifiable statement. We are therefore justified to assume that the finite conjunction of verifiable statements is a verifiable statement.
 		
-		Note that this cannot be generalized to infinite collections as the procedure would not be guaranteed to terminate. In fact, if the only way to test the infinite conjunction is to test each statement individually, then we are guaranteed to take infinite time and the test will never terminate. Therefore we are not justified to assume the infinite conjunction of verifiable statements is verifiable.
+		Note that this cannot be generalized to infinite collections as the procedure would not be guaranteed to terminate. In fact, if the only way to test the infinite conjunction is to test each statement individually, then we are guaranteed to take infinite time and the test will never terminate. Therefore we are not justified to assume that the infinite conjunction of verifiable statements is verifiable.
 	\end{justification}
 \end{mathSection}	
 
@@ -909,7 +909,7 @@ Note that once we have tested the basis, we have tested any other verifiable sta
 	
 	As we have already argued, we cannot run uncountably many tests in infinite time. Let $E \subset \exptSet$ be an uncountable set of experimental tests. Let $t_0$ be the amount of time that the shortest test will take to run. Each test must at least run for $t_0$ time. Given that each test will succeed in finite non-zero time, at best $t_0$ is a finite number. We can divide time into slots of $t_0$ time. The slots will be countable. As $E$ is uncountable, we cannot associate each test to a slot. We cannot test uncountably many tests.
 	
-	We can, however, test countably many tests. Let $\basis = \{\expt_i\}_{i=1}^{\infty} \in \exptSet$ be a countable set of tests. Ee can proceed as follows:
+	We can, however, test countably many tests. Let $\basis = \{\expt_i\}_{i=1}^{\infty} \in \exptSet$ be a countable set of tests. We can proceed as follows:
 	\begin{enumerate}
 		\item initialize $n$ to 1
 		\item for each $i=1..n$
@@ -1195,7 +1195,7 @@ We have now presented the fundamental objects of our general mathematical theory
 
 The starting point is often a basis: a set of verifiable statements which defines all the domain knowledge that we can gather experimentally. The content of the statements determines what combinations can be true at the same time, which defines the possibilities for our domain. Everything in the domain is grounded within the verifiable statements: there is nothing else in it. This also maps well to the practice of most scientific fields, where one defines states and other physical objects based on what can be measured.
 
-As we'll see later, some verifiable statements may be idealizations. For example, we may assume that a quantity can be measured with arbitrary level of precision, which we know not to be strictly true. We may assume a volume of gas to have a well defined temperature, which we may not be true if it is not at perfect equilibrium. This type of simplification makes a domain applicable only within the realm of validity of those idealizations, but does not change the formal structure we have identified here. In fact, the focus of much of this work will be deriving the details of different experimental domains under different physical assumptions.
+As we'll see later, some verifiable statements may be idealizations. For example, we may assume that a quantity can be measured with arbitrary level of precision, which we know not to be strictly true. We may assume a volume of gas to have a well defined temperature, which may not be true if it is not at perfect equilibrium. This type of simplification makes a domain applicable only within the realm of validity of those idealizations, but does not change the formal structure we have identified here. In fact, the focus of much of this work will be deriving the details of different experimental domains under different physical assumptions.
 
 The main point of our framework is that this conceptual structure is inescapable once we set the principle of scientific objectivity. We will always need a set of statements and a way to test them and, if we are given those, we have all we need. These elements are necessary and sufficient to be able to do science. And by being clear about which statements can be considered physically meaningful, and which are an idealization, we can then be more precise on the physical status of each component of a particular scientific theory.
 
@@ -1617,7 +1617,7 @@ What we have ended up with is a conceptual framework that captures the necessary
 	\hline 
 	$X$ & possibilities of a domain & those statements that, if true, determine the value of all verifiable statements of a domain\\ 
 	\hline 
-	$\estPoss$ & established possibility & a possibility for which at least a verifiable statements is true (i.e.~it can be established experimentally)\\ 
+	$\estPoss$ & established possibility & a possibility for which at least a verifiable statement is true (i.e.~it can be established experimentally)\\ 
 	\hline 
 	$\resPoss$ & residual possibility & if it exists, the possibility for which all verifiable statements are false (i.e.~the remaining case that cannot be established experimentally)\\ 
 	
@@ -2242,7 +2242,7 @@ Now that we have the right context, we have to understand what is the right basi
 	
 	Conversely, if we suppose $\hat{z}$ to be true in an assignment, then we will know the truth assignment for all statements of the form $``x \comp y"$ where $(x,y) \in X \times Y$. Let $(e_x, e_y) \in \basis_X \times \basis_Y$ and consider the statement $``e_x \narrower e_y"$. We have $e_x \narrower e_y$ if and only if there is no pair $(x,y)$ such that $x \narrower e_x$, $y \ncomp e_y$ and $x \comp y$. Therefore if $\hat{z}$ is true in an assignment it will tell us whether $e_x \narrower e_y$ is true or not, so we either have $\hat{z} \narrower ``e_x \narrower e_y"$ or $\hat{z} \narrower \NOT ``e_x \narrower e_y"$. As $z$ is a minterm of statements of the form $``e_x \narrower e_y"$, we'll either have $\hat{z} \narrower z$ or $\hat{z} \ncomp z$. Since $z \narrower \hat{z}$,  $\hat{z} \comp z$ and therefore $\hat{z} \narrower z$. Since we also have $z \narrower \hat{z}$, then we have $z \equiv \hat{z}$.
 	
-	Now we want to show that for each possibility $z$ there is a function $f_z : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} ``x \narrower f_z(x)"$. We note that statements of the form $``\stmt_x \comp \stmt_y"$ are precisely the statements used to generate the relationship metacontext. Statements of the form $``x \comp y"$, where $x \in X$ and $y \in Y$, are enough to determine the truth value of statements of the form $``\stmt_x \comp \stmt_y"$. Therefore for each possibility $z$ there is be one and only one possible truth assignment in which $z$ is true. That is, each $x$ correspond to particular logical context $\logCtx_i$. Since in that context $\edomain_{Y_i} \subseteq \edomain_{X_i}$ there will be a causal relationship $f_i : X_i \to Y_i$ such that $x_i \narrower f_i (x_i)$ which means $x_i \comp y_i$ if and only if $y_i = f_i(x_i)$. Since causal relationships are unique and the possible assignments are distinct, to each $z$ will correspond a unique $f_z : X \to Y$ such that $\bar{g}_i \circ f_z \circ \bar{f}^{-1}_i = f_i$ and $z\equiv\bigAND\limits_{x\in X} ``x \narrower f_z(x)"$. Moreover $f_z$ is continuous since $\bar{f}_i$ and $\bar{g}_i$ are logical isomorphisms.
+	Now we want to show that for each possibility $z$ there is a function $f_z : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} ``x \narrower f_z(x)"$. We note that statements of the form $``\stmt_x \comp \stmt_y"$ are precisely the statements used to generate the relationship metacontext. Statements of the form $``x \comp y"$, where $x \in X$ and $y \in Y$, are enough to determine the truth value of statements of the form $``\stmt_x \comp \stmt_y"$. Therefore for each possibility $z$ there is one and only one possible truth assignment in which $z$ is true. That is, each $x$ correspond to particular logical context $\logCtx_i$. Since in that context $\edomain_{Y_i} \subseteq \edomain_{X_i}$ there will be a causal relationship $f_i : X_i \to Y_i$ such that $x_i \narrower f_i (x_i)$ which means $x_i \comp y_i$ if and only if $y_i = f_i(x_i)$. Since causal relationships are unique and the possible assignments are distinct, to each $z$ will correspond a unique $f_z : X \to Y$ such that $\bar{g}_i \circ f_z \circ \bar{f}^{-1}_i = f_i$ and $z\equiv\bigAND\limits_{x\in X} ``x \narrower f_z(x)"$. Moreover $f_z$ is continuous since $\bar{f}_i$ and $\bar{g}_i$ are logical isomorphisms.
 \end{proof}
 \end{mathSection}
 
@@ -2873,7 +2873,7 @@ We stress here that it is the immediate successors of the references that matter
 	
 	Consider now the statement $\stmt$. Because it is contingent, it will not be compatible with at least one possibility and therefore one value in $U$. The set $V$ will contain some interval with at least one finite endpoint $q_0$. Since it is the endpoint of an open interval, we cannot find $q_1 < q_0 < q_2$ such that $\hat{q} \notin V$ for all $q_1 < \hat{q} < q_2$. That is, there is at least one value incompatible with $\stmt$ that does not admit a finite interval surrounding it with all elements incompatible with $\stmt$.
 	
-	Now consider the previous finding as it relates to $\NOT \stmt$. There will be at least one value compatible with $\NOT \stmt$ that does not admit a finite interval surrounding with all elements with $\NOT \stmt$. But since this cannot happen for a verifiable statement, then $\NOT \stmt$ is not a verifiable statement and $\stmt$ is not decidable.
+	Now consider the previous finding as it relates to $\NOT \stmt$. There will be at least one value compatible with $\NOT \stmt$ that does not admit a finite interval surrounding it with only elements compatible with $\NOT \stmt$. But since this cannot happen for a verifiable statement, then $\NOT \stmt$ is not a verifiable statement and $\stmt$ is not decidable.
 \end{proof}
 \end{mathSection}
 
