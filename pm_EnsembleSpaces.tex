@@ -252,7 +252,7 @@ The axiom of mixture only guarantees the existence of a mixture between two ense
 
 \begin{mathSection}
 \begin{defn}[Finite mixture]
-	Let $\{e_i\}_{i=1}^{n} \subseteq \Ens$ be a finite subset of ensembles and $\{p_i\} \in [0,1]$ be a finite set of coefficients such that $\sum_{i=1}^{n} p_i = 1$, then the finite mixture, noted $\ens[a] = \sum_{i=1}^{n} p_i \ens_i$, is defined to be
+	Let $\{e_i\}_{i=1}^{n} \subseteq \Ens$ be a finite subset of ensembles and $\{p_i\} \in [0,1]$ be a finite set of coefficients such that $\sum_{i=1}^{n} p_i = 1$, then the \textbf{finite mixture}, noted $\ens[a] = \sum_{i=1}^{n} p_i \ens_i$, is defined to be
 	\begin{equation}
 		\begin{split}
 	p_1 \ens_1 + (1-p_1)\left( \tfrac{p_2}{1-p_1} \ens_2 + \tfrac{1-p_1-p_2}{1-p_1} \left( \tfrac{p_3}{1-p_1-p_2} \ens_3 +  \tfrac{1-\sum_{i=1}^{3}p_i}{1-p_1-p_2}\Bigl(\ldots \right.\right. \\
@@ -294,8 +294,12 @@ Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in t
 
 \begin{mathSection}
 \begin{defn}[Infinite mixture]
-	Let $\{e_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\} \in [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$, then the ensemble $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$ is, if it exists, the topological limit of sequence of finite mixtures $\lim\limits_{n\to\infty} \sum_{i=1}^{n} \frac{p_i}{p_n} \ens_i$, where $p_n = \sum_{i=1}^{n} p_i$.
+	Let $\{e_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\} \in [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$, then the ensemble $\ens[a]$ is an \textbf{infinite mixture} of those ensembles if it is a topological limit of the sequence of finite mixtures $\sum_{i=1}^{n} \frac{p_i}{p_n} \ens_i$, where $p_n = \sum_{i=1}^{n} p_i$. If the infinite mixture is unique, we write $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$.
 \end{defn}
+
+\begin{remark}
+	We will see later that the entropy constrains the topology to be Hausdorff, therefore all infinite mixtures, if they exist, are unique.
+\end{remark}
 \end{mathSection}
 
 It is unclear whether commutativity and associativity extends, or should extend, to infinite mixtures. For series, \href{https://en.wikipedia.org/wiki/Unconditional_convergence}{unconditional convergence} defines convergence that does not depend on infinite reordering, but it is unclear even whether this is a desirable property. Additionally, we would expect that if an infinite mixture is possible, any sub-mixture should converge as well. That is, if $\sum_{i=1}^{\infty} p_i \ens_i$ converge, then $\sum_{i \in I} p_i \ens_i$ for all $I \subseteq \mathbb{N}$.
@@ -500,8 +504,10 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 	Note that, given a set $A$, not all elements of $\chull(A)$ can be understood as infinite mixtures. That is, we can have $\shull(A) \subset \chull(A)$. Let $\Ens$ bet the line segment $[0,1]$ and consider the set $A=\left\{\frac{1}{2^i}\right\}_{i=0}^{\infty}$. Every point in $(0,1]$ can be expressed as a finite mixture of two elements of $A$. For example, $1$ and any number smaller than the target number. However, zero cannot be expressed as a convex combination of positive numbers, and therefore it is not an infinite mixture of $A$. However, zero is the limit of the sequence, and therefore it will be in the topological closure of $A$.
 \end{remark}
 
+TODO: make an example of a sigma hull bigger of finite hull
+
 \begin{coro}
-	Given $A \subseteq \Ens$, $\hull(A) \subseteq \shull(A) \subset \chull(A)$.
+	Given $A \subseteq \Ens$, $\hull(A) \subseteq \shull(A) \subseteq \chull(A)$.
 \end{coro}
 
 \begin{proof}
