@@ -109,6 +109,49 @@ Note that the previous insight does not tell us that if a theory allows multiple
 
 The above insight also tells us why quantum mechanics is a linear theory. If we have a physical process $\mathcal{P}$ that takes as input a statistical mixture, we expect that the output of the statistical mixture is the statistical mixture of the individual outputs. That is, $\mathcal{P}(p\rho_1 + (1-p) \rho_2) = p \mathcal{P}(\rho_1) + (1-p) \mathcal{P}(\rho_2)$. But if the process is linear with respect to statistical mixing, and the linearity of statistical mixing can be converted to the linearity of superpositions, then the process must be also linear with respect to superpositions. Similarly, if we have an observable $O$ and a statistical mixture, we expect that the expectation of the statistical mixture is the average of the expectations on the statistical components. That is $E[p\rho_1 + (1-p) \rho_2] = pE[\rho_1] + (1-p) E[\rho_2]$. In quantum mechanics, this means that $\tr(O(p\rho_1 + (1-p) \rho_2)) = p\tr(O\rho_1) + (1-p) \tr(O\rho_2)$. That is, the linearity of the observables is exactly the linearity of expectation values.
 
+Note, however, that while the linearity of statistical mixture is a physically necessary requirement, the linearity of superposition is a choice dictated by mathematical convenience. As we saw, it is the Born rule that captures the physics, not the inner product. Therefore, a non-linear transformation that preserves the inner product is still physically valid. For example, consider the Bloch ball. Taken two orthogonal states $\psi$ and $\phi$, every other state can be expressed as a linear combination $c_{\psi} | \psi \> + c_{\phi} | \phi \>$. Now consider the map $m : \mathcal{H} \to \mathcal{H}$ defined by
+\begin{equation}
+	m(c_{\psi} | \psi \> + c_{\phi} | \phi \>) \mapsto e^{\imath \theta \frac{|c_{\phi}|}{\sqrt{|c_{\psi}|^2+|c_{\phi}|^2}}} ( c_{\psi} | \psi \> + c_{\phi}  | \phi \>),
+\end{equation}
+where $\theta \in (0,2\pi)$ is an arbitrary constant. The map is introducing a phase shift that is proportional to the cosine of the angle along the vertical direction. Since it is introducing only a total phase shift, it will map a vector to a physically equivalent vector. The physics will not change, and we do not expect the Born rule to change. However, since the shift is not linear, we will not expect the inner product to me conserved since only linear maps can preserve the inner product.
+
+Let's verify all of this in the math. First, the map is colinear, meaning that it maps a ray to another ray. That is:
+\begin{equation}
+	\begin{aligned}
+	m(k(c_{\psi} | \psi \> + c_{\phi} | \phi \>)) &= m(kc_{\psi} | \psi \> + k c_{\phi} | \phi \>) = e^{\imath \theta \frac{|kc_{\phi}|}{\sqrt{|kc_{\psi}|^2+|kc_{\phi}|^2}}} ( k c_{\psi} | \psi \> + k c_{\phi}  | \phi \>) \\
+	&= k e^{\imath \theta \frac{|k||c_{\phi}|}{|k|\sqrt{|c_{\psi}|^2+|c_{\phi}|^2}}} ( c_{\psi} | \psi \> + c_{\phi}  | \phi \>) = k e^{\imath \theta \frac{|c_{\phi}|}{\sqrt{|c_{\psi}|^2+|c_{\phi}|^2}}} \left( c_{\psi} | \psi \> + c_{\phi}  | \phi \> \right) \\
+	&= k \, m(c_{\psi} | \psi \> + c_{\phi} | \phi \>) \\
+	\end{aligned}
+\end{equation}
+Moreover, we can see that each ray is mapped to the same ray. We can verify that the map in not linear. In fact:
+\begin{equation}
+	\begin{aligned}
+		m(|\psi\>) &= |\psi\> \\
+		m(|\phi\>) &=  e^{\imath \theta} | \phi \>\\
+		m(|\psi\> + |\phi\>) &= e^{\frac{\imath \theta}{\sqrt{2}}}( |\psi\> +  | \phi \>) \neq |\psi\> + e^{\imath \theta} | \phi \>.
+	\end{aligned}
+\end{equation}
+The inner product becomes:
+\begin{equation}
+	\begin{aligned}
+	\<m(v) | m(w) \> &= e^{-\imath \theta \frac{|v_{\phi}|}{\sqrt{|v_{\psi}|^2+|v_{\phi}|^2}}} e^{\imath \theta \frac{|w_{\phi}|}{\sqrt{|w_{\psi}|^2+|w_{\phi}|^2}}} \< v | w \>,
+	\end{aligned}
+\end{equation}
+which is manifestly not conserved. However, for the Born rule we have:
+\begin{equation}
+	\begin{aligned}
+		\<m(v) | m(v) \> &= e^{-\imath \theta \frac{|v_{\phi}|}{\sqrt{|v_{\psi}|^2+|v_{\phi}|^2}}} e^{\imath \theta \frac{|v_{\phi}|}{\sqrt{|v{\psi}|^2+|v_{\phi}|^2}}} \< v | v \> = \< v | v \> \\
+	p(m(v)|m(w)) &= \frac{\< m(v) | m(w) \>\< m(w) | m(v) \>}{\< m(v) | m(v) \>\< m(w) | m(w) \>} \\
+	&= \frac{e^{-\imath \theta \frac{|v_{\phi}|}{\sqrt{|v_{\psi}|^2+|v_{\phi}|^2}}} e^{\imath \theta \frac{|w_{\phi}|}{\sqrt{|w_{\psi}|^2+|w_{\phi}|^2}}} \< v | w \> e^{-\imath \theta \frac{|w_{\phi}|}{\sqrt{|w_{\psi}|^2+|w_{\phi}|^2}}}e^{\imath \theta \frac{|v_{\phi}|}{\sqrt{|v_{\psi}|^2+|v_{\phi}|^2}}}  \< w | v \>}{\< v | v \>\< w | w \>} \\
+		&= \frac{\< v | w \>\< w | v \>}{\< v | v \>\< w | w \>} = p(v|w).
+	\end{aligned}
+\end{equation}
+As expected, the Born rule is conserved while the inner product is not.
+
+This tells us that, technically, the linearity of the underlying vector space is not a physical requirement and, in principle, we could represent pure states with a space where superposition as ``slightly'' non-linear. That is, the fact that the space of pure states is a complex projective space is a physical requirement if we want to represent a set of states that provides the statistical mixtures given by quantum mechanics. However, using the underlying complex inner product space is not a physical requirement: it is mathematical convenience.
+
+Once we decide to use the vector space, the representation of states in terms of vector is also defined up to an arbitrary choice. In a spin 1/2 system, for example, we typically define $|x^+\> = \frac{1}{\sqrt{2}} | z^+ \> + \frac{1}{\sqrt{2}} | z^- \>$. But note the state corresponding to spin down is the whole ray, so the above expression hides that fact that $|z^-\>$ hides a choice of arbitrary phase. We could, in fact, redefine $|z^-\>$ with a quarter of a turn phase shift, and have $|x^+\> = \frac{1}{\sqrt{2}} | z^+ \> + \imath \frac{1}{\sqrt{2}} | z^- \>$. In other words, the choice of representation of the physics in terms of the Hilbert space is up to an arbitrary choice of phase for elements of the basis.
+
 Another interesting equivalence is the one between probability, subspaces and expectations. This equivalence exists also in classical probability, therefore we can understand it there fit. The standard way to define a probability space is by giving three objects. First, a sample space $\Omega$ that represents all the possible cases. In classical mechanics, it's phase space, where each point represent all the values of position and momentum. Second, an algebra of events $\Sigma_{\Omega}$ which represent all possible conditions we could test for. In classical mechanics, this is the collection of Borel sets, subsets of phase space that can be generated from the open regions using complements and countable unions. Third, a probability measure $p : \Sigma_{\Omega} \to [0,1]$ that associated a probability to each event. From this one can define random variables $X : \Omega \to \mathbb{R}$ and their expectation.
 
 
