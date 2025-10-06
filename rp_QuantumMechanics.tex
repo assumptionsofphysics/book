@@ -152,6 +152,25 @@ This tells us that, technically, the linearity of the underlying vector space is
 
 Once we decide to use the vector space, the representation of states in terms of vector is also defined up to an arbitrary choice. In a spin 1/2 system, for example, we typically define $|x^+\> = \frac{1}{\sqrt{2}} | z^+ \> + \frac{1}{\sqrt{2}} | z^- \>$. But note the state corresponding to spin down is the whole ray, so the above expression hides that fact that $|z^-\>$ hides a choice of arbitrary phase. We could, in fact, redefine $|z^-\>$ with a quarter of a turn phase shift, and have $|x^+\> = \frac{1}{\sqrt{2}} | z^+ \> + \imath \frac{1}{\sqrt{2}} | z^- \>$. In other words, the choice of representation of the physics in terms of the Hilbert space is up to an arbitrary choice of phase for elements of the basis.
 
+For continuous observable, this choice is even more important, as it is not a matter of basis, but of operators. Suppose we have a wave function $\psi(x)$. The corresponding position and momentum operators will be $X=x$ and $P=-\imath \hbar \partial_x$. Now choose an arbitrary continuous function $\theta(x)$. This corresponds to an arbitrary choice of phase at each point. If we set $\phi(x) = e^{\imath \theta(x)} \psi(x)$, the probability distribution over position will not change as the norm at each point remains the same. If set $P_{\phi} = -\imath \hbar \partial_x - \hbar \partial_x \theta(x)$, we have
+\begin{equation}
+	\begin{aligned}
+		\{X, P_{\phi}\} &= \{X, P - \hbar \partial_x \theta(x)\} = \{X, P \} - \{X, \hbar \partial_x \theta(x)\} = \{X, P \}
+	\end{aligned}
+\end{equation}
+since $X$ will commute with any function of $x$. This means that $X$ and $P_{\theta}$ have the same commutation relationships than $X$ and $P$. Also note that
+\begin{equation}
+	\begin{aligned}
+		\<\phi | P_{\phi} | \phi \> & = \int_X e^{ - \imath \theta} \psi(x) (-\imath \hbar \partial_x - \hbar \partial_x  \theta(x) )(e^{ \imath \theta} \psi(x)) dx \\
+		& = \int_X e^{ - \imath \theta} \psi(x) (-\imath \hbar e^{ \imath \theta} \imath \partial_x \theta(x)  \psi(x) - e^{ \imath \theta} \imath \hbar \partial_x\psi(x)  - \hbar \partial_x  \theta(x) e^{ \imath \theta} \psi(x)) dx \\
+		& = \int_X e^{ - \imath \theta} \psi(x) (- e^{ \imath \theta} \imath \hbar \partial_x\psi(x) ) dx \\
+		& = \int_X \psi(x) (- \imath \hbar \partial_x )\psi(x)  dx  = \<\psi | P_{\psi} | \psi \>.
+	\end{aligned}
+\end{equation}
+In other words, we can redefine both the phase of the wave function and the momentum operator so that the physics remains unchanged. This corresponds to the change of gauge we had in classical particle mechanics, where we could redefine momentum $p \to p + \partial f(x)$ while leaving the Poisson brackets, and therefore the space-time trajectories, unchanged.
+
+To sum up, fixing the Hilbert space and its physical representation is equivalent to fixing the space of ensembles, including how the mix, requiring a linear representation in terms of the Hilbert space and choosing an arbitrary phase for each element of the spectrum of a complete set of observables.
+
 Another interesting equivalence is the one between probability, subspaces and expectations. This equivalence exists also in classical probability, therefore we can understand it there fit. The standard way to define a probability space is by giving three objects. First, a sample space $\Omega$ that represents all the possible cases. In classical mechanics, it's phase space, where each point represent all the values of position and momentum. Second, an algebra of events $\Sigma_{\Omega}$ which represent all possible conditions we could test for. In classical mechanics, this is the collection of Borel sets, subsets of phase space that can be generated from the open regions using complements and countable unions. Third, a probability measure $p : \Sigma_{\Omega} \to [0,1]$ that associated a probability to each event. From this one can define random variables $X : \Omega \to \mathbb{R}$ and their expectation.
 
 
