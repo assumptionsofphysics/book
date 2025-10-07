@@ -3,6 +3,9 @@
 \def\>{\rangle}
 \def\<{\langle}
 
+\newcommand{\indicator}[1][A] {\mathbf{1}_{#1}} % Ensemble space
+
+
 %TODO: decide whether the identity operator should be 1 or $I$ or something else
 
 \chapter{Quantum mechanics}
@@ -45,9 +48,9 @@ Since the representation in terms of Hilbert spaces already removes the second i
 
 Let us look, then, at the space of all possible statistical mixtures. In quantum statistical mechanics, a state is represented by a density operator $\rho$. Mathematically, this is an operator $\rho : \mathcal{H} \to \mathcal{H}$ that is positive semi-definite trace one self-adjoint operator. In fact, since $\< \psi | \rho | \psi \>$ returns the probability to measure $\psi$ given the state $\rho$, $\rho$ is an observable. Since the probability cannot be negative, $\rho$ is positive semi-definite. Since the probability has to sum to one, it is a trace one operator.
 
-Every pure state $\psi$ can be represented as the density operator $\rho_{\psi} = \frac{| \psi \> \< \psi |}{\< \psi | \psi \>}$. Note that, in fact, that $\rho_{\psi}$ is trace one and a change of phase will leave it unchanged. Also note that $\frac{| \psi \> \< \psi |}{\< \psi | \psi \>} = \mathbf{1}_{\psi}$ is the projector corresponding by the subspace spanned by $\psi$.
+Every pure state $\psi$ can be represented as the density operator $\rho_{\psi} = \frac{| \psi \> \< \psi |}{\< \psi | \psi \>}$. Note that, in fact, that $\rho_{\psi}$ is trace one and a change of phase will leave it unchanged. Also note that $\frac{| \psi \> \< \psi |}{\< \psi | \psi \>} = \indicator[\psi]$ is the projector corresponding by the subspace spanned by $\psi$.
 \begin{insight}
-	A state is equally represented by a ray $c|\psi\>$, by a density operator $\rho_{\psi}$ where $c|\psi\>$ is the only non-zero eigenvector, or by a the projector $\mathbf{1}_{\psi}$ corresponding to the subspace $c|\psi\>$.
+	A state is equally represented by a ray $c|\psi\>$, by a density operator $\rho_{\psi}$ where $c|\psi\>$ is the only non-zero eigenvector, or by a the projector $\indicator[\psi]$ corresponding to the subspace $c|\psi\>$.
 \end{insight}
 We now have three equivalent ways to represent pure states.
 
@@ -169,14 +172,104 @@ since $X$ will commute with any function of $x$. This means that $X$ and $P_{\th
 \end{equation}
 In other words, we can redefine both the phase of the wave function and the momentum operator so that the physics remains unchanged. This corresponds to the change of gauge we had in classical particle mechanics, where we could redefine momentum $p \to p + \partial f(x)$ while leaving the Poisson brackets, and therefore the space-time trajectories, unchanged.
 
-To sum up, fixing the Hilbert space and its physical representation is equivalent to fixing the space of ensembles, including how the mix, requiring a linear representation in terms of the Hilbert space and choosing an arbitrary phase for each element of the spectrum of a complete set of observables.
+To sum up, fixing the Hilbert space and its physical representation is equivalent to fixing the space of ensembles, including how they mix, requiring a linear representation in terms of the Hilbert space and choosing an arbitrary phase for each element of the spectrum of a complete set of observables.
 
-Another interesting equivalence is the one between probability, subspaces and expectations. This equivalence exists also in classical probability, therefore we can understand it there fit. The standard way to define a probability space is by giving three objects. First, a sample space $\Omega$ that represents all the possible cases. In classical mechanics, it's phase space, where each point represent all the values of position and momentum. Second, an algebra of events $\Sigma_{\Omega}$ which represent all possible conditions we could test for. In classical mechanics, this is the collection of Borel sets, subsets of phase space that can be generated from the open regions using complements and countable unions. Third, a probability measure $p : \Sigma_{\Omega} \to [0,1]$ that associated a probability to each event. From this one can define random variables $X : \Omega \to \mathbb{R}$ and their expectation.
+\subsection{Probability from expectations}
+
+Another interesting equivalence is the one between probability, subspaces and expectations. This equivalence exists also in classical probability, therefore we should understand it there fit. The standard way to define a probability space is by giving three objects. First, a sample space $\Omega$ that represents all the possible cases. In classical mechanics, it's phase space, where each point represent all the values of position and momentum. Second, an algebra of events $\Sigma_{\Omega}$ which represents all possible conditions we could test for. In classical mechanics, this is the collection of Borel sets, subsets of phase space that can be generated from the open regions using complements and countable unions. Third, a probability measure $p : \Sigma_{\Omega} \to [0,1]$ that associated a probability to each event. From this one can define random variables $X : \Omega \to \mathbb{R}$ and their expectation. That is, we start with a notion of probability and define a notion of observables on top.
+
+We could proceed the other way. The key insight is that for every event $A \in \Sigma_{\Omega}$ we can define the indicator function $\indicator[A] : \Omega \to \{0,1\}$ that returns one if the given point is in $A$ or zero otherwise. This is a random variable and its expectation is exactly the probability of the event $A$. That is, $E[\indicator[A]] = p(A)$. Suppose, therefore, that we are given $\Omega$, $\Sigma_{\Omega}$ but not the probability measure. However, we are given the expectation operator $E : M(\Omega, \mathbb{R})$ that, given a function $f : \Omega \to \mathbb{R}$\footnote{The function will need to be measureable in the mathematical sense: the inverse image of a Borel set is a Borel set.}, $E[f]$ returns it's expectation. We can then define the probability measure as $p(A) = E[\indicator[A]]$.
+
+A similar perspective can be achieved in quantum mechanics, and it is the basis of some other axiomatic approaches and quantum reconstruction approaches, like quantum logic. As we are using the same notation for indicator functions and projectors, it should not be surprising that projectors play the role of indicator function in quantum mechanics. A projector $P$ is an idempotent linear operator, meaning that $P^2 = P$. This also means that $E[P^2] = E[P]$. This is true for an indicator function $I$ as well: since the only values $I$ takes are zeros and one, $I^2=I$, and $E[I^2] = E[I]$. On the other hand, the spectrum of a projector (i.e. the possible eigenvalues) consists only of zero and one, just like an indicator function. Therefore, if we can reverse the definitions for probability in quantum mechanics as well.
+
+The standard construction starts with a set of pure states $\mathbf{P}(\mathcal{H})$, defines the Born rule $p(\phi | \psi)$ in terms of the inner product, and then the expectation based on the Born rule. We can start with a set of pure states $\mathbf{P}(\mathcal{H})$, where $\mathcal{H}$ is taken as a vector space forgetting its inner product, the space of all possible observables $O(\mathcal{H})$ and the expectation operator $E : O(\mathcal{H}) \to \mathbb{R}$. For every pure state $\phi \in \mathbf{P}(\mathcal{H})$ we can find the corresponding projector $\indicator[\phi]$ and define $p(\phi) = E[\indicator[\phi]]$. This allows to reconstruct the mixed state, much like we reconstructed the probability measure in classical mechanics. To reconstruct the Born rule, for each pure $\psi \in \mathbf{P}(\mathcal{H})$ we need an $E_{\psi}$ that gives us the expectations of all the variables if we prepared $\psi$. Then we can set $p(\phi | \psi) = E_{\psi}[\indicator[\phi]]$.
+
+Therefore condition
+\begin{equation}\label{rp-qm-br-condExpectations}
+	\tag{BR-EXP}
+	\eqtext{Expectations are defined for all observables and for all ensembles} 
+\end{equation}
+is an alternative characterization of the Born rule.
+
+\subsection{Entropy and the Born rule}
+
+TODO: preamble. 
 
 
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale = 1]
+		\draw (0,0) circle (2);
+		\node at (-2.3,0) {$-$};
+		\node at (2.3,0) {$+$};
+		\node at (2,1.4) {$\psi$};
+		\node at (2,-1.4) {$\phi$};
+		\draw (-2,0) -- (2,0);
+		\begin{scope}
+			\clip(0,0) circle (2);
+			\draw (0,0) -- (2,1.4);
+			\draw (0,0) -- (2,-1.4);
+			\draw (1.634,1.4) -- (1.634,-1.4);
+		\end{scope}
+		\fill (1.634,0) circle (0.05);
+		\node at (1.8,.2) {$\rho$};
+	\end{tikzpicture}
+	\caption{Geometric diagonalization of an equal mixture of two states.}\label{rp-qm-geometricDiagonalization}
+\end{figure}
+
+To calculate the entropy of a mixture of two pure states, we can use the understanding that we built in terms of ensembles and their multiple decomposition. Let $\psi$ and $\phi$ be two pure states. Their equal mixture $\rho=\frac{1}{2}\rho_{\psi} + \frac{1}{2}\rho_{\phi}$ will be the midpoint between them. To calculate the entropy, we need to diagonalize $\rho$ and calculate the Shannon entropy from the eigenvalues. To diagonalize $\rho$ we need to express it as a mixture of two orthogonal $+$ and $-$. But $+$ and $-$ will be orthogonal only if they are opposite points on the Bloch sphere. Therefore, $\rho$ is diagonalized by $+$ and $-$ if and only if it lies on the axis identified by $+$ and $-$ as we see in figure \ref{rp-qm-geometricDiagonalization}. Geometrical, we will have $\rho = \frac{\overline{-\rho}}{\overline{-+}}\rho_{+} + \frac{\overline{\rho+}}{\overline{-+}}\rho_{-}$. Using simple trigonometry, we have:
+\begin{equation}
+	\begin{aligned}
+		\cos \theta_{\psi+} &= \cos \frac{\theta_{\psi\phi}}{2} = \sqrt{p(\phi|\psi)} \\
+		\rho &= \frac{\overline{-\rho}}{\overline{-+}}\rho_{+} + \frac{\overline{\rho+}}{\overline{-+}}\rho_{-} = \frac{1+\cos \theta_{\psi+}}{2}\rho_{+} + \frac{1-\cos \theta_{\psi+}}{2}\rho_{-} \\
+		&= \frac{1+\sqrt{p(\phi|\psi)}}{2}\rho_{+} + \frac{1-\sqrt{p(\phi|\psi)}}{2}\rho_{-}.
+	\end{aligned}
+\end{equation}
 
 
-Since two distinct classical distributions always correspond to two distinct ensembles, it is clear that  This is a property that does not exist in classical mechanics, as .
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\def\xi{0.25};
+		\def\vi{1.25};
+		\def\m{1};
+		\def\b{1};
+		\pgfplotsset{ticks=none}
+		\begin{axis}[
+			width=5.3cm,
+			height=4.5cm,				
+			axis lines=middle,
+			axis line style={-},
+			clip=false,
+			xlabel=$p(\phi | \psi)$,
+			xlabel style={below=5pt},
+			ylabel=$S\left(\frac{1}{2} \rho_{\phi} + \frac{1}{2} \rho_{\psi}\right)$,
+			ylabel style={above=2pt, left},
+			xmin=0,xmax=1.1,
+			ymin=0,ymax=0.8,
+			domain=0:4,
+			]
+			\addplot[black,samples=69]{ - ((1+sqrt(x))/2) * ln((1+sqrt(x))/2) - ((1-sqrt(x))/2) * ln((1-sqrt(x))/2)}
+			node [pos=0,left] {$1$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption {Entropy of a mixture of two pure states as a function of their Born rule.} \label{fig_rp_qm_entropyVsProb}
+\end{figure}
+
+
+The entropy is therefore
+\begin{equation}
+	\begin{aligned}
+		S(\rho) = - \tr(\rho \log \rho) = - \frac{1+\sqrt{p(\phi|\psi)}}{2} \log \frac{1+\sqrt{p(\phi|\psi)}}{2} - \frac{1-\sqrt{p(\phi|\psi)}}{2} \log \frac{1-\sqrt{p(\phi|\psi)}}{2}.
+	\end{aligned}
+\end{equation}
+The relationship is plotted in figure \ref{fig_rp_qm_entropyVsProb} and, as one can see, it is strictly concave. The relationship is, therefore, invertible: if we are given the entropy of all pairs of state we would be able to recover the Born rule. In other words
+\begin{equation}\label{rp-qm-br-condExpectations}
+	\tag{BR-ENT}
+	\eqtext{The entropy is well defined for all ensembles} 
+\end{equation}
+is an alternative characterization of the Born rule.
+
 
 States are rays <-> states are pure ensembles.
 
