@@ -25,6 +25,17 @@ Composite system
 * Review the arguments in the paper
 * see if using a Segre embedding would make our life easier
 
+\subsection{Bloch sphere review}
+
+The state space of a two-state quantum system (i.e. qubit) is of fundamental importance as it allows us to visualize and therefore better understand almost all features of quantum mechanics. The space of pure states is isomorphic to a unit 2-sphere, with opposite points corresponding to orthogonal states, meaning that we can understand each pure state as a unit vector along a direction of three dimensional space. Since this is also the space of a spin 1/2 system, we will often label states as spatial directions. Let us quickly review the main features.
+
+Let $|z^+\>$ and $|z^-\>$ be two orthonormal states, representing, for example, the two possible directions of spin along the vertical direction. Every other normalized state can be expressed as $\rho |z^+\> + \sqrt{1-\rho^2}e^{\imath \varphi} |z^-\>$ with $\rho \in [0,1]$ and $\varphi \in [0,2\pi)$. Normalization, in fact, imposes that the square of the norm of the coefficient sum to one. The arbitrariness of the phase allows us to impose the first coefficient to be real. Note that, for any $p \in (0,1)$, we can choose an arbitrary $\varphi$, meaning that we are choosing a point on a circle. At the endpoints $p \in \{0,1\}$, however, there is no longer a choice of $\varphi$. The topology, then, is the one of the sphere. We can therefore draw a sphere with $|z^+\>$ and $|z^-\>$ respectively at the top and at the bottom. The choice of $\rho$ will select a horizontal plane, whose intersection with the sphere will be a circle. The choice of $\varphi$ will pick a point on that circle. That is, $\rho$ and $\varphi$ can be understood as a sort of ``cylindrical coordinates over a sphere.'' We can also choose spherical coordinates $(\theta, \varphi)$ such that $\rho = \cos \theta$.
+
+More remarkably, the interior points of the sphere represent mixed states. Therefore the whole space, the Bloch ball, represents the full space of ensembles for a two-state quantum systems. Given two ensembles $\rho_1$ and $\rho_2$, the statistical mixture $\rho = p \rho_1 + (1-p) \rho_2$ will be the point in between the two. The coefficient for each endpoint is higher the closer the mixture is to that point, meaning it is proportional to the distance to the other endpoint. That is,
+\begin{equation}
+	\rho = \frac{\overline{\rho \rho_2}}{\overline{\rho_1 \rho_2}} \rho_1 + \frac{\overline{\rho_1 \rho}}{\overline{\rho_1 \rho_2}} \rho_2.
+\end{equation}
+
 \section{States and ensembles}
 
 As we have already seen in classical mechanics, re-expressing the same mathematical framework in different equivalent ways brings out new understanding. This will be even more clear in quantum mechanics, as the standard Hilbert space formulation is as good for calculations it is bad for understanding.
@@ -53,6 +64,8 @@ Every pure state $\psi$ can be represented as the density operator $\rho_{\psi} 
 	A state is equally represented by a ray $c|\psi\>$, by a density operator $\rho_{\psi}$ where $c|\psi\>$ is the only non-zero eigenvector, or by a the projector $\indicator[\psi]$ corresponding to the subspace $c|\psi\>$.
 \end{insight}
 We now have three equivalent ways to represent pure states.
+
+\subsection{Two linearities: superposition and statistical mixing}
 
 A linear combination, a superposition, $\sum c_i | \psi_i \>$ will give us another state, but is somewhat unclear what this operation means. First of all, we have the problem that the superposition is physically unique up to a total phase, so only the phase differences are physically significant. Moreover, the meaning of the norm of the coefficient $c_i$ is also ill defined. The overall intuition one gets is that $|c_i|^2$ corresponds to probability, but this does not actually work. In fact, we have
 \begin{equation}
@@ -111,6 +124,8 @@ This explains why there are no superpositions in classical mechanics. Every clas
 Note that the previous insight does not tell us that if a theory allows multiple decompositions then it must be equivalent to quantum mechanics. For example, if the state space of statistical mixture is a disc instead of a ball, we would still have multiple decompositions but no complex superpositions. It does tell us, however, that what superpositions are allowed is fixed by what mixtures are allowed, which means that the pure states are rays of a complex Hilbert space if and only if the space of statistical mixtures is isomorphic to the quantum one.
 
 The above insight also tells us why quantum mechanics is a linear theory. If we have a physical process $\mathcal{P}$ that takes as input a statistical mixture, we expect that the output of the statistical mixture is the statistical mixture of the individual outputs. That is, $\mathcal{P}(p\rho_1 + (1-p) \rho_2) = p \mathcal{P}(\rho_1) + (1-p) \mathcal{P}(\rho_2)$. But if the process is linear with respect to statistical mixing, and the linearity of statistical mixing can be converted to the linearity of superpositions, then the process must be also linear with respect to superpositions. Similarly, if we have an observable $O$ and a statistical mixture, we expect that the expectation of the statistical mixture is the average of the expectations on the statistical components. That is $E[p\rho_1 + (1-p) \rho_2] = pE[\rho_1] + (1-p) E[\rho_2]$. In quantum mechanics, this means that $\tr(O(p\rho_1 + (1-p) \rho_2)) = p\tr(O\rho_1) + (1-p) \tr(O\rho_2)$. That is, the linearity of the observables is exactly the linearity of expectation values.
+
+\subsection{The gap between the two linearities}
 
 Note, however, that while the linearity of statistical mixture is a physically necessary requirement, the linearity of superposition is a choice dictated by mathematical convenience. As we saw, it is the Born rule that captures the physics, not the inner product. Therefore, a non-linear transformation that preserves the inner product is still physically valid. For example, consider the Bloch ball. Taken two orthogonal states $\psi$ and $\phi$, every other state can be expressed as a linear combination $c_{\psi} | \psi \> + c_{\phi} | \phi \>$. Now consider the map $m : \mathcal{H} \to \mathcal{H}$ defined by
 \begin{equation}
@@ -191,6 +206,25 @@ Therefore condition
 \end{equation}
 is an alternative characterization of the Born rule.
 
+\subsection{Born rule and angles in projective space}
+
+As we saw, the Born rule is essentially a relationship between rays, points in the projective space. We want to understand what exactly is it describing. Since it is a relationship between two pure states, let us take two rays $\psi, \phi \in P(\mathcal{H})$. Regardless of the dimensionality of $\mathcal{H}$, $\psi$ and $\phi$ will span a two-dimensional subspace, a Bloch sphere. In fact, considering the circle that contains $\psi$, $\phi$ and its opposite  $\phi_{\perp}$ will suffice.
+
+Since $\phi$ and $\phi_{\perp}$ are opposite in the Bloch sphere, and therefore orthogonal, we can write $|\psi\> = \rho |\phi\> + \sqrt{1-\rho^2}e^{\imath \theta} |\phi_{\perp}\>$. We have
+\begin{equation}
+	\begin{aligned}
+		p(\psi|\phi) &= \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>} = \rho^2 = \cos^2 \theta_{\psi\phi} \\
+		\theta_{\psi\phi} &= \arccos \sqrt{\frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}}.
+	\end{aligned}
+\end{equation}
+In other words, the Born rule defines the geometry of the projective space by defining the angles between points. Note that, since we are on a unit sphere, the angle can be understood also as a distance along the maximal circle that connects the two. The maximal circles are the geodesics of the sphere and therefore the angle is the distance between the points. Therefore $\theta_{\psi\phi}$ is literally the distance function that define the geometry of the space.\footnote{The angle is the distance as calculated using the \href{https://en.wikipedia.org/wiki/Fubini\%E2\%80\%93Study_metric\#In_bra-ket_coordinate_notation}{Fubini-Study metric}.} We have that
+\begin{equation}\label{rp-qm-br-condAngles}
+	\tag{BR-ANG}
+	\eqtext{The angles between pure states are well defined.} 
+\end{equation}
+is an alternative characterization of the Born rule.
+
+
 \subsection{Entropy and the Born rule}
 
 TODO: preamble. 
@@ -217,7 +251,7 @@ TODO: preamble.
 	\caption{Geometric diagonalization of an equal mixture of two states.}\label{rp-qm-geometricDiagonalization}
 \end{figure}
 
-To calculate the entropy of a mixture of two pure states, we can use the understanding that we built in terms of ensembles and their multiple decomposition. Let $\psi$ and $\phi$ be two pure states. Their equal mixture $\rho=\frac{1}{2}\rho_{\psi} + \frac{1}{2}\rho_{\phi}$ will be the midpoint between them. To calculate the entropy, we need to diagonalize $\rho$ and calculate the Shannon entropy from the eigenvalues. To diagonalize $\rho$ we need to express it as a mixture of two orthogonal $+$ and $-$. But $+$ and $-$ will be orthogonal only if they are opposite points on the Bloch sphere. Therefore, $\rho$ is diagonalized by $+$ and $-$ if and only if it lies on the axis identified by $+$ and $-$ as we see in figure \ref{rp-qm-geometricDiagonalization}. Geometrical, we will have $\rho = \frac{\overline{-\rho}}{\overline{-+}}\rho_{+} + \frac{\overline{\rho+}}{\overline{-+}}\rho_{-}$. Using simple trigonometry, we have:
+To calculate the entropy of a mixture of two pure states, we can use the understanding that we built in terms of ensembles and their multiple decomposition. Let $\psi$ and $\phi$ be two pure states. Their equal mixture $\rho=\frac{1}{2}\rho_{\psi} + \frac{1}{2}\rho_{\phi}$ will be the midpoint between them. To calculate the entropy, we need to diagonalize $\rho$ and calculate the Shannon entropy from the eigenvalues. To diagonalize $\rho$ we need to express it as a mixture of two orthogonal $+$ and $-$. But $+$ and $-$ will be orthogonal only if they are opposite points on the Bloch sphere. Therefore, $\rho$ is diagonalized by $+$ and $-$ if and only if it lies on the axis identified by $+$ and $-$ as we see in figure \ref{rp-qm-geometricDiagonalization}. Geometrical, we will have $\rho = \frac{\overline{-\rho}}{\overline{-+}}\rho_{+} + \frac{\overline{\rho+}}{\overline{-+}}\rho_{-}$. Using simple trigonometry and recalling the relationship between the Born rule and angles, we have:
 \begin{equation}
 	\begin{aligned}
 		\cos \theta_{\psi+} &= \cos \frac{\theta_{\psi\phi}}{2} = \sqrt{p(\phi|\psi)} \\
@@ -264,7 +298,7 @@ The entropy is therefore
 	\end{aligned}
 \end{equation}
 The relationship is plotted in figure \ref{fig_rp_qm_entropyVsProb} and, as one can see, it is strictly concave. The relationship is, therefore, invertible: if we are given the entropy of all pairs of state we would be able to recover the Born rule. In other words
-\begin{equation}\label{rp-qm-br-condExpectations}
+\begin{equation}\label{rp-qm-br-condEntropy}
 	\tag{BR-ENT}
 	\eqtext{The entropy is well defined for all ensembles} 
 \end{equation}
