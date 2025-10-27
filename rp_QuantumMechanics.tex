@@ -12,6 +12,35 @@
 
 % TODO: review classical uncertainty principle
 
+\section{The postulates of quantum mechanics}
+
+In this section we will review the standard formulations of quantum mechanics in terms of projective Hilbert spaces.
+
+\subsection{States}
+
+The first postulate of quantum mechanics characterizes how states are represented in the mathematical framework.
+\renewcommand{\thepostulate}{ST}
+\begin{postulate}[State postulate]\label{rp_qm_postState}
+	The state space of a quantum system is represented by the projective space $\mathrm{P}(\mathcal{H})$ of a complex Hilbert space $\mathcal{H}$. A state is represented by a ray of the Hilbert space $\mathcal{H}$. An ensemble is represented by a density operator $\rho : \mathcal{H} \to \mathcal{H}$, that is a positive semi-definite trace one self-adjoint operator.
+\end{postulate}
+\renewcommand{\thepostulate}{\Roman{assump}}
+In terms of notation, we will mostly follow the convention most used by physicists,\footnote{Vectors will be noted as $|\psi\>$ instead by a simple letter $v$. The inner product will be noted as $\< \phi | \psi \> $, with a vertical line instead of a comma, and it will be linear in the first term instead of the second term. } with some addition or modification to make the connection to the math more clear. Mathematically, a complex Hilbert space $\mathcal{H}$ has three defining properties. It is a vector space, meaning that it is closed under addition $+ : \mathcal{H} \times \mathcal{H} \to \mathcal{H}$ and scalar multiplication $\cdot : \mathbb{C} \times \mathcal{H} \to \mathcal{H}$. It has an inner product, meaning that it is equipped with a map $\< \; \cdot \; | \; \cdot \; \> : \mathcal{H} \times \mathcal{H} \to \mathbb{C}$ that is positive-definite, linear in the second argument and conjugate symmetric. It is a complete metric space with respect to the distance function induced by the inner product, meaning that, given a sequence of vectors $|\psi_i\>$, if the series given by their norm $\sum_i |\psi_i|$ converges, then the series of given by the vectors $\sum_i |\psi_i\>$ converges as well. A ray of a Hilbert space is a one dimensional subspace. That is, given a vector $|\psi\>$, the corresponding ray is the set of all vectors given by $c |\psi\>$. With a slight abuse of notation, we will use $\psi$ to indicate the ray identified by the vector $|\psi\>$.
+
+The second postulate of quantum mechanics characterizes observables.
+\renewcommand{\thepostulate}{OBS}
+\begin{postulate}[Observable postulate]\label{rp_qm_postObs}
+	An observable is represented by a self-adjoint operator $O : \mathcal{H} \to \mathcal{H}$. Given a state $|\psi\>$, the expectation is given by $\<\psi | O | \psi \>$, and, given an ensemble $\rho$, the expectation is given by $\tr(O\rho)$.
+\end{postulate}
+\renewcommand{\thepostulate}{\Roman{assump}}
+
+\renewcommand{\thepostulate}{Meas}
+\begin{postulate}[Measurement postulate]\label{rp_qm_postMeas}
+	An observable is represented by a self-adjoint operator $O : \mathcal{H} \to \mathcal{H}$. Given a state $|\psi\>$, the expectation is given by $\<\psi | O | \psi \>$, and, given an ensemble $\rho$, the expectation is given by $\tr(O\rho)$.
+\end{postulate}
+\renewcommand{\thepostulate}{\Roman{assump}}
+
+
+
 Review of the mathematical formulation of quantum mechanics
 * wave-function (postulates - rays of Hilbert space)
 - states are rays in Hilbert space
@@ -168,6 +197,12 @@ As expected, the Born rule is conserved while the inner product is not.
 
 This tells us that, technically, the linearity of the underlying vector space is not a physical requirement and, in principle, we could represent pure states with a space where superposition as ``slightly'' non-linear. That is, the fact that the space of pure states is a complex projective space is a physical requirement if we want to represent a set of states that provides the statistical mixtures given by quantum mechanics. However, using the underlying complex inner product space is not a physical requirement: it is mathematical convenience.
 
+\begin{insight}
+	The linearity of statistical mixing is a physical requirement. The linearity of the Hilbert space is a mathematical convenience.
+\end{insight}
+
+\subsection{Basis and gauge choice}
+
 Once we decide to use the vector space, the representation of states in terms of vector is also defined up to an arbitrary choice. In a spin 1/2 system, for example, we typically define $|x^+\> = \frac{1}{\sqrt{2}} | z^+ \> + \frac{1}{\sqrt{2}} | z^- \>$. But note the state corresponding to spin down is the whole ray, so the above expression hides that fact that $|z^-\>$ hides a choice of arbitrary phase. We could, in fact, redefine $|z^-\>$ with a quarter of a turn phase shift, and have $|x^+\> = \frac{1}{\sqrt{2}} | z^+ \> + \imath \frac{1}{\sqrt{2}} | z^- \>$. In other words, the choice of representation of the physics in terms of the Hilbert space is up to an arbitrary choice of phase for elements of the basis.
 
 For continuous observable, this choice is even more important, as it is not a matter of basis, but of operators. Suppose we have a wave function $\psi(x)$. The corresponding position and momentum operators will be $X=x$ and $P=-\imath \hbar \partial_x$. Now choose an arbitrary continuous function $\theta(x)$. This corresponds to an arbitrary choice of phase at each point. If we set $\phi(x) = e^{\imath \theta(x)} \psi(x)$, the probability distribution over position will not change as the norm at each point remains the same. If set $P_{\phi} = -\imath \hbar \partial_x - \hbar \partial_x \theta(x)$, we have
@@ -186,6 +221,11 @@ since $X$ will commute with any function of $x$. This means that $X$ and $P_{\th
 	\end{aligned}
 \end{equation}
 In other words, we can redefine both the phase of the wave function and the momentum operator so that the physics remains unchanged. This corresponds to the change of gauge we had in classical particle mechanics, where we could redefine momentum $p \to p + \partial f(x)$ while leaving the Poisson brackets, and therefore the space-time trajectories, unchanged.
+
+\begin{insight}
+	The choice of a basis in the Hilbert space is a choice of a maximal set of orthogonal states plus a choice of gauge (i.e. a phase for each element of the basis).
+\end{insight}
+
 
 To sum up, fixing the Hilbert space and its physical representation is equivalent to fixing the space of ensembles, including how they mix, requiring a linear representation in terms of the Hilbert space and choosing an arbitrary phase for each element of the spectrum of a complete set of observables.
 
