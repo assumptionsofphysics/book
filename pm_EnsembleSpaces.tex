@@ -290,11 +290,11 @@ The axiom of mixture only guarantees the existence of a mixture between two ense
 
 While mixtures of finitely many elements are always guaranteed to exist, the extension to mixture of infinite elements is not. First of all, an infinite mixture of ensembles with finite entropy does not necessarily have finite entropy.\footnote{For details, see \href{https://arxiv.org/pdf/1212.5630.pdf}{J. Stat. Mech. (2013) P04010}.} Secondly, it may lead to infinite expectation values which make ensembles not physically meaningful. For example, suppose we put $i$ particles in a box according to the distribution $\frac{6}{\pi^2 i^2}$ given that $\sum_{i=1}^{\infty} \frac{6}{\pi^2 i^2}=1$. The expectation $\sum_{i=1}^{\infty} \frac{6}{\pi^2 i^2} i$ diverges. Given that every finite preparation will have a finite expectation value, the actual implementation of that ensemble will necessarily give us a stream of preparations whose number of particles must keep increasing. No finite statistics is representative of the ensemble and, worst of all, the finite statistics will necessarily have averages of arbitrarily large differences. We therefore cannot simply look at the coefficients to understand whether the infinite mixture gives us a valid ensemble or not.
 
-Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in the ensemble space is determined by the topology (i.e. experimental verifiability). The strategy will be to work with only finite convex combinations and let the closure of the topology handle the limits.
+Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in the ensemble space is therefore determined by the topology (i.e. experimental verifiability). The axiom guarantees only finite mixtures and we let the closure of the topology handle the limits.
 
 \begin{mathSection}
 \begin{defn}[Infinite mixture]
-	Let $\{e_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\} \in [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$, then the ensemble $\ens[a]$ is an \textbf{infinite mixture} of those ensembles if it is a topological limit of the sequence of finite mixtures $\sum_{i=1}^{n} \frac{p_i}{p_n} \ens_i$, where $p_n = \sum_{i=1}^{n} p_i$. If the infinite mixture is unique, we write $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$.
+	Let $\{e_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\} \in [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$. Then the ensemble $\ens[a]$ is an \textbf{infinite mixture} of those ensembles if it is a topological limit of the sequence of finite mixtures $\sum_{i=1}^{n} \frac{p_i}{p_n} \ens_i$, where $p_n = \sum_{i=1}^{n} p_i$. If the infinite mixture is unique, we write $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$.
 \end{defn}
 
 \begin{remark}
@@ -302,28 +302,27 @@ Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in t
 \end{remark}
 \end{mathSection}
 
-It is unclear whether commutativity and associativity extends, or should extend, to infinite mixtures. For series, \href{https://en.wikipedia.org/wiki/Unconditional_convergence}{unconditional convergence} defines convergence that does not depend on infinite reordering, but it is unclear even whether this is a desirable property. Additionally, we would expect that if an infinite mixture is possible, any sub-mixture should converge as well. That is, if $\sum_{i=1}^{\infty} p_i \ens_i$ converge, then $\sum_{i \in I} p_i \ens_i$ for all $I \subseteq \mathbb{N}$.
+It is unclear whether commutativity and associativity extend, or should extend, to infinite mixtures. For series, \href{https://en.wikipedia.org/wiki/Unconditional_convergence}{unconditional convergence} defines convergence that does not depend on infinite reordering, but it is unclear even whether this is a desirable property. Additionally, we would expect that if an infinite mixture is possible, any submixture should converge as well. That is, if $\sum_{i=1}^{\infty} p_i \ens_i$ converges, then $\sum_{i \in I} \frac{p_i}{p_I} \ens_i$ converges for all $I \subseteq \mathbb{N}$ where $p_I = \sum_{i \in I} p_i$.
 
-We do know that the convex structure is not enough to guarantee the above property, as shown by the following counter-example. The axiom of entropy will force the ensemble space to have a bounded intersection with every affine line. This would avoid the above problem, though it is not clear whether it would yield the desired property.
 
-\begin{remark}
-	The following counterexample was provided \href{https://math.stackexchange.com/questions/5085283/does-a-convex-subcombination-of-a-convergent-convex-combination-converge}{on stack exchange}. Consider $\mathbb{R}$. It is a metrizable secound countable topological vector space, which means it is a convex space. It satisfies the axiom of ensemble and the axiom of mixture. Let $p_i = \frac{6}{\pi^2 i^2}$, which means $\sum_i p_i = 1$ and $\ens_i = (-1)^i i$. We have
-	\begin{equation*}
-		\sum_i p_i \ens_i = \frac{6}{\pi^2} \sum_i \frac{(-1)^i}{i} = - \frac{6}{\pi^2} \ln 2
-	\end{equation*}
-	which means it converges. However, let $I = \{2,4,6,\dots\}$. We have
-	\begin{equation*}
-		\begin{aligned}
-			p_I &= \sum_{k=1}^{\infty} p_{2k} = \sum_{k=1}^{\infty} \frac{6}{\pi^2 4 k^2} = \frac{1}{4} \\
-			\sum_{i \in I} \frac{p_i}{p_I} \ens_i &= 4 \sum_{i \in I} p_i \ens_i = 4 \sum_{k=1}^{\infty} \frac{6}{\pi^2 (2k^2)} 2k = \frac{12}{\pi^2} \sum_{k=1}^{\infty} \frac{1}{k} \to \infty.
-		\end{aligned}
-	\end{equation*}
-	Therefore the convex combination of all positive values diverges.
-\end{remark}
+We do know that the convex structure is not enough to guarantee the above property, as shown by the following counterexample provided \href{https://math.stackexchange.com/questions/5085283/does-a-convex-subcombination-of-a-convergent-convex-combination-converge}{on stack exchange}. Consider $\mathbb{R}$. It is a metrizable second-countable topological vector space, which means it is a convex space with a topology such that the mixing operation is continuous. It satisfies the axiom of ensemble and the axiom of mixture. Let $p_i = \frac{6}{\pi^2 i^2}$, which means $\sum_i p_i = 1$ and $\ens_i = (-1)^i i$. We have
+\begin{equation*}
+	\sum_{i=1}^{\infty} p_i \ens_i = \frac{6}{\pi^2} \sum_{i=1}^{\infty} \frac{(-1)^i}{i} = - \frac{6}{\pi^2} \ln 2
+\end{equation*}
+which means it converges. However, let $I = \{2,4,6,\dots\}$. We have
+\begin{equation*}
+	\begin{aligned}
+		p_I &= \sum_{k=1}^{\infty} p_{2k} = \sum_{k=1}^{\infty} \frac{6}{\pi^2 4 k^2} = \frac{1}{4} \\
+		\sum_{i \in I} \frac{p_i}{p_I} \ens_i &= 4 \sum_{i \in I} p_i \ens_i = 4 \sum_{k=1}^{\infty} \frac{6}{\pi^2 (4k^2)} 2k = \frac{12}{\pi^2} \sum_{k=1}^{\infty} \frac{1}{k} \to \infty.
+	\end{aligned}
+\end{equation*}
+Therefore the convex combination of all even elements of the series diverges.
+
+Note that the above counterexample works because the series is effectively the sum of two divergent series. The axiom of entropy will force the ensemble space to have a bounded intersection with every affine line. Therefore the above problem would not exist, because one cannot produce a divergent series from a bounded interval of the real line. It is not clear, though, whether this is enough to show that submixtures of convergent infinite mixtures converge. We leave this as conjecture \ref{pm_es_conjSubmixturesConverge}.
 
 \subsection{Common components and separateness}
 
-The convex structure allows us to characterize ensembles based on whether they can be mixed into one another. For example, we can ask whether an ensemble is or is not the mixture of some other ensembles; whether two ensembles can be expressed as a mixture of a common component.
+The convex structure allows us to characterize ensembles based on whether they can be mixed into one another. For example, we can ask whether an ensemble is or is not the mixture of some other ensembles; or whether two ensembles can be expressed as a mixture of a common component.
 
 \begin{mathSection}
 \begin{defn}
@@ -336,7 +335,7 @@ The convex structure allows us to characterize ensembles based on whether they c
 \end{figure}
 
 \begin{remark}
-	In terms of the convex space, all the mixtures between two ensembles correspond to the segment between them; all the mixtures between three ensembles correspond to the triangle formed by the three elements and so on. An ensemble $\ens[a]$ is a component of a different ensemble $\ens[b]$ if the segment connecting $\ens[a]$ and $\ens[b]$ can be extended past $\ens[b]$. If two elements are not a component of each other, then they are the extreme points of the line that connects the two. That is, the segment cannot be extended.
+	In terms of the convex space, all the mixtures of two ensembles correspond to the segment between them; all the mixtures of three ensembles correspond to the triangle formed by the three elements and so on. An ensemble $\ens[a]$ is a component of a different ensemble $\ens[b]$ if the segment connecting $\ens[a]$ and $\ens[b]$ can be extended past $\ens[b]$. If two elements are not a component of each other, then they are the extreme points of the line that goes through the two. That is, the segment cannot be extended.
 \end{remark}
 
 \begin{figure}[H]
@@ -349,15 +348,15 @@ The convex structure allows us to characterize ensembles based on whether they c
 \end{remark}
 \end{mathSection}
 
-We can also characterize some ensembles based on what other ensembles they can admit as components. An extreme point is an ensemble that has only itself as a component. For example, a pure state will be an extreme point as it cannot be expressed as a mixture of any other states. Conversely, an internal point is an ensemble that admits any other ensemble as a component. For example, in a finite discrete classical space, the uniform distribution over all cases can be seen the mixture of any other distribution with something else. A boundary point is an ensemble that is neither an extreme or an internal point. The figure helps visualize the properties.
+We can also characterize some ensembles based on what other ensembles they can admit as components. An extreme point is an ensemble that has only itself as a component. For example, a pure state will be an extreme point as it cannot be expressed as a mixture of any other states. Conversely, an internal point is an ensemble that admits any other ensemble as a component. For example, in a finite discrete classical space, the uniform distribution over all cases can be seen as the mixture of any other distribution with something else. A boundary point is an ensemble that is not  an internal point. The figure helps visualize the properties.
 
 \begin{mathSection}
 \begin{defn}
-	Let $\Ens$ be an ensemble space. An \textbf{extreme point} $\ens \in \Ens$ is an ensemble that has no component distinct from itself. That is, there is no $\ens[a] \in \Ens\setminus\{ \ens \}$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1]$ and $\ens[b] \in \Ens$. An \textbf{internal point} $\ens \in \Ens$ is an ensemble for which every ensemble is a component. That is, for every $\ens[a] \in \Ens$ there is always $\ens[b] \in \Ens$ and $p(0,1]$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$. A \textbf{boundary point} is any ensemble that is not an internal point.
+	Let $\Ens$ be an ensemble space. An \textbf{extreme point} $\ens \in \Ens$ is an ensemble that has no component distinct from itself. That is, there is no $\ens[a] \in \Ens\setminus\{ \ens \}$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1]$ and $\ens[b] \in \Ens$. An \textbf{internal point} $\ens \in \Ens$ is an ensemble for which every ensemble is a component. That is, for every $\ens[a] \in \Ens$ there is always $\ens[b] \in \Ens$ and $p \in (0,1]$ such that $\ens = p \ens[a] + \bar{p} \ens[b]$. A \textbf{boundary point} is any ensemble that is not an internal point.
 \end{defn}
 
 \begin{remark}
-	The notion of internal point parallel \href{https://en.wikipedia.org/wiki/Algebraic_interior}{the similar notion} in topological vector spaces.
+	The notion of internal point parallels \href{https://en.wikipedia.org/wiki/Algebraic_interior}{the similar notion} in topological vector spaces.
 \end{remark}
 
 \begin{figure}[H]
@@ -377,7 +376,7 @@ Let $\ens_1, \ens_2 \in I_{\Ens}$ be two internal points of $\Ens$. Since $\ens_
 	\ens_2 & =p_2 \ens[a]+\bar{p}_2 \ens[b]_2
 	\end{aligned}
 \end{equation}
-for some $p_1, p_2 \in [0,1]$. Now let $p \in [0,1]$ and $\ens = p \ens_1+\bar{p} \ens_2$. We have:
+for some $p_1, p_2 \in (0,1]$. Now let $p \in [0,1]$ and $\ens = p \ens_1+\bar{p} \ens_2$. We have:
 \begin{equation}
 \begin{aligned}
 	\ens = p \ens_1+\bar{p} \ens_2 &= p(p_1 \ens[a]+\bar{p}_1 \ens[b]_1) + \bar{p} (p_2 \ens[a]+\bar{p}_2 \ens[b]_2)\\
@@ -385,24 +384,20 @@ for some $p_1, p_2 \in [0,1]$. Now let $p \in [0,1]$ and $\ens = p \ens_1+\bar{p
 	&=\lambda \ens[a] + \bar{\lambda} \left(\frac{p \bar{p}_{1}}{\bar{\lambda}} \ens[b]_1+\frac{\bar{p} \bar{p}_{2}}{\bar{\lambda}} \ens[b]_2\right) = \lambda \ens[a] + \bar{\lambda} \ens[b] \\
 \end{aligned}
 \end{equation}
-where $\lambda = p p_1+\bar{p} p_2$ and $\ens[b] = \frac{p \bar{p}_{1}}{\bar{\lambda}} \ens[b]_1+\frac{\bar{p} \bar{p}_{2}}{\bar{\lambda}} \ens[b]_2$. Therefore, given any $\ens[a] \in \Ens$, we can find a $\ens[b] \in \Ens$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in [0,1]$. This means the convex combination of internal points is an internal point, and $I_{\varepsilon}$ is a convex set.
+where $\lambda = p p_1+\bar{p} p_2$ and $\ens[b] = \frac{p \bar{p}_{1}}{\bar{\lambda}} \ens[b]_1+\frac{\bar{p} \bar{p}_{2}}{\bar{\lambda}} \ens[b]_2$. Therefore, given any $\ens[a] \in \Ens$, we can find a $\ens[b] \in \Ens$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in (0,1]$. This means the convex combination of internal points is an internal point, and $I_{\varepsilon}$ is a convex set.
 \end{proof}
-
-\begin{remark}
-	It is an open question whether this result generalizes to infinite mixtures. That is, whether the infinite mixture of internal points is still an internal point.
-\end{remark}
 \end{mathSection}
 
-For topological vector spaces, the algebraic interior and the topological interior are related. For example, if $A$ is a convex subset of a TVS with non-empty topological interior, then the algebraic and topological interior coincide. It is an open question how many of these results hold for topological convex space as well. As an example, we would like to prove the following.
+It is an open question whether this result generalizes to infinite mixtures. That is, whether the infinite mixture of internal points is still an internal point. To generalize the previous proof to the infinite case, one would need to show that the infinite mixture of $\ens[b]_i$ converges. If conjecture \ref{pm_es_conjSubmixturesConverge} is true, that is if submixtures of convergent infinite mixtures converge, then the infinite mixture of $\ens[b]_i$ would converge as it is a submixture of $\ens$. We leave this as conjecture \ref{pm_es_conjAlgebraicInteriorSigmaConvex}.
+
+For topological vector spaces, the algebraic interior and the topological interior are related. For example, if $A$ is a convex subset of a TVS with non-empty topological interior, then the algebraic and topological interior coincide. It is an open question how many of these results hold for topological convex spaces as well. As an example, we would like to prove the following.
 
 \begin{conj}
 	Let $\Ens$ be an ensemble space with a $T_1$ topology. The set of boundary points $B_{\Ens}$ is a closed set and therefore $I_{\Ens}$ is an open set.
 \end{conj}
-\begin{remark}
-	One may be able to show that the limit of a sequence of boundary points cannot be an interior point.
-\end{remark}
+One may be able to show that the limit of a sequence of boundary points cannot be an interior point in the topological sense.
 
-We now define the notions of separateness: two ensembles are separate, noted $\ens[a] \separate \ens[b]$ if they do not have a common component. That is, they are not a mixture of a common ensemble. In classical ensemble spaces, this is equivalent to probability measures with disjoint support, which is the extension of the concept. Separateness is a useful concept to characterize the relationship between ensembles as it has some useful property. Most of all, it is an irreflexive symmetric relation: everything is not separate from itself and if $\ens[a] \separate \ens[b]$, then $\ens[b] \separate \ens[a]$.\footnote{Note that orthogonality in inner product vector spaces is also an irreflexive symmetric relationship.}
+We now define the notions of separateness: two ensembles are separate, noted $\ens[a] \separate \ens[b]$ if they do not have a common component. That is, they are not a mixture of a common ensemble. In classical ensemble spaces, this is equivalent to probability measures with disjoint support, which is the extension of the concept. Separateness is a useful concept to characterize the relationship between ensembles as it has some useful properties. Most of all, it is an irreflexive symmetric relation: nothing is separate from itself and if $\ens[a] \separate \ens[b]$, then $\ens[b] \separate \ens[a]$.\footnote{Note that orthogonality in inner product vector spaces is also an irreflexive symmetric relationship.}
 
 \begin{mathSection}
 \begin{defn}
@@ -426,23 +421,26 @@ We now define the notions of separateness: two ensembles are separate, noted $\e
 		\item separateness is an irreflexive symmetric relation
 		\item an ensemble is an extreme point if and only if it is separate from all other ensembles
 		\item an ensemble is an internal point if and only if it is not separate from any ensemble
+		\item if two ensembles are separate, then they are boundary points
 	\end{enumerate}
 \end{coro}
 
 \begin{proof}
 	1. Since by idempotence $\ens = p \ens + \bar{p} \ens$ for any $p$, then every ensemble is a mixture of itself, and therefore it is a component of itself.
 	
-	2. By idempotence, we can write $\ens[a] = p_1 \ens[a] + \bar{p}_1 \ens[a]$ for some $p_1 \in (0,1]$. Since $\ens[a]$ is a component of $\ens[b]$, we can write $\ens[b] = p_2 \ens[a] + \bar{p}_2 \ens[e]_2$ for some $p_2 \in (0, 1]$ and $\ens[c] \in \Ens$. Therefore $\ens[a]$ and $\ens[b]$ have $\ens[a]$ as a common component.
+	2. By idempotence, we can write $\ens[a] = p_1 \ens[a] + \bar{p}_1 \ens[a]$ for some $p_1 \in (0,1]$. Since $\ens[a]$ is a component of $\ens[b]$, we can write $\ens[b] = p_2 \ens[a] + \bar{p}_2 \ens[e]_2$ for some $p_2 \in (0, 1]$ and $\ens[e]_2 \in \Ens$. Therefore $\ens[a]$ and $\ens[b]$ have $\ens[a]$ as a common component.
 	
 	3. Since every ensemble is a component of itself, every ensemble has a common component with itself and therefore is not separate from itself. This proves that separateness is irreflexive. The definition of common component is symmetric and therefore so is separateness.
 	
 	4. An extreme point has only itself as a component, therefore it can have a common component only with itself.
 	
 	5. Every ensemble is a component of an internal point, therefore every ensemble is not separate from an internal point
+	
+	6. Since an internal point cannot be separate from any ensemble, then two ensembles that are separate are not internal points, and therefore are boundary points.
 \end{proof}
 \end{mathSection}
 
-One key property of separateness is its relationship with mixtures. If an ensemble is separate from a mixture of two elements, it is separate from both elements and all their mixtures. Note that the converse, as we show in the example below, is not true in general. It is true in classical ensembles spaces (i.e. a probability distribution has disjoint support with other two distributions if and only if it has disjoint support from any convex combination) but not in quantum mechanics. This is another reason why this property is important to characterize ensemble spaces in general.
+One key property of separateness is its relationship with mixtures. If an ensemble is separate from a mixture of two elements, it is separate from both elements and all their mixtures. Note that, as we show in the example below, it is not true that if an ensemble is separate from two elements, then it is separate from their mixtures. It is true in classical ensembles spaces (i.e. a probability distribution has disjoint support with two other distributions if and only if it has disjoint support from any convex combination) but not in quantum mechanics. This is another reason why this property is important to characterize ensemble spaces in general.
 
 \begin{mathSection}
 \begin{prop}[Separateness extends to all mixtures]\label{pm_es_separateExtendsMixtures}
@@ -481,11 +479,11 @@ One key property of separateness is its relationship with mixtures. If an ensemb
 
 \subsection{Convex subsets and convex hull}
 
-In many cases, we will need to discuss the sets that contain all their possible mixtures. One typically distinguish two cases. A set is convex if it allows all possible finite mixtures. This may be too restrictive as it may not include all possible infinite mixtures. A set is closed and convex if it includes all finite mixtures and their topological limits. Given that infinite mixtures are the topological limit of finite mixtures, a closed convex set contains all infinite mixtures. However, not all topological limits can be expressed as infinite mixture. For example, on the real line $1$ can be seen as a limit of points within the open interval $(0,1)$, but not as infinite convex combination. Therefore we add the notions of $\sigma$-convex set that is closed under infinite mixtures.\footnote{The mathematical properties of $\sigma$-convex sets is yet to be explored.}
+In many cases, we will need to discuss the sets that contain all their possible mixtures. One typically distinguishes two cases. A set is convex if it allows all possible finite mixtures. This may be too restrictive as it may not include all possible infinite mixtures. A set is closed and convex if it includes all finite mixtures and their topological limits. Given that infinite mixtures are the topological limit of finite mixtures, a closed convex set contains all infinite mixtures. However, not all topological limits can be expressed as infinite mixture. For example, on the real line $1$ can be seen as a limit of points within the open interval $(0,1)$, but not as infinite convex combination. Therefore we add the notion of $\sigma$-convex set, a set that is closed under infinite mixtures.\footnote{The mathematical properties of $\sigma$-convex sets are yet to be explored.}
 
 \begin{mathSection}
 \begin{defn}
-	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is \textbf{convex} if it closed under finite mixtures (i.e. $\ens[a],\ens[b] \in A$ implies $p\ens[a] + \bar{p} \ens[b] \in A$), \textbf{$\sigma$-convex} if it is closed under infinite mixtures (i.e. $\ens[a]_i \in A$ implies $\sum_i p_i \ens[a]_i \in A$ for all converging infinite mixtures) and \textbf{closed and convex} if it is both convex and topologically closed.
+	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is \textbf{convex} if it closed under finite mixtures (i.e. $\ens[a],\ens[b] \in A$ implies $p\ens[a] + \bar{p} \ens[b] \in A$), \textbf{$\sigma$-convex} if it is closed under infinite mixtures (i.e. $\ens[a]_i \in A$ implies $\sum_i p_i \ens[a]_i \in A$ for all possible infinite mixtures) and \textbf{closed and convex} if it is both convex and topologically closed.
 \end{defn}
 
 \begin{coro}
@@ -501,7 +499,7 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \end{defn}
 
 \begin{remark}
-	Note that, given a set $A$, not all elements of $\chull(A)$ can be understood as infinite mixtures. That is, we can have $\shull(A) \subset \chull(A)$. Let $\Ens$ bet the line segment $[0,1]$ and consider the set $A=\left\{\frac{1}{2^i}\right\}_{i=0}^{\infty}$. Every point in $(0,1]$ can be expressed as a finite mixture of two elements of $A$. For example, $1$ and any number smaller than the target number. However, zero cannot be expressed as a convex combination of positive numbers, and therefore it is not an infinite mixture of $A$. However, zero is the limit of the sequence, and therefore it will be in the topological closure of $A$. This shows that the difference between $\sigma$-hull and convex hull exists already in finite dimension. The convex hull and the $\sigma$-hull, instead, are the same in finite dimensions because \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory%27s_theorem_%28convex_hull%29}{Carathéodory's theorem} allows us to rewrite any infinite convex combination into a finite one.
+	Note that, given a set $A$, not all elements of $\chull(A)$ can be understood as infinite mixtures. That is, we can have $\shull(A) \subset \chull(A)$. For example, let $\Ens$ be the line segment $[0,1]$ and consider the set $A=\left\{\frac{1}{2^i}\right\}_{i=0}^{\infty}$. Every point in $(0,1]$ can be expressed as a finite mixture of two elements of $A$, for example, $1$ and any number smaller than the target number. However, zero cannot be expressed as a convex combination of positive numbers, and therefore it is not an infinite mixture of $A$. However, zero is the limit of the sequence, and therefore it will be in the topological closure of $A$. This shows that the difference between $\sigma$-hull and convex hull exists already in finite dimensions. The convex hull and the $\sigma$-hull, instead, are the same in finite dimensions because \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory%27s_theorem_%28convex_hull%29}{Carathéodory's theorem} allows us to rewrite any infinite convex combination into a finite one.
 	
 	For an example in which all hulls are different, consider the space of probability distributions $\Ens$ over countably many elements $X = \{x_i\}_{i=1}^{\infty}$. Let $\ens[a]_{ip} = p x_i + \bar{p} x_{i+1}$ and let $A = \left\{ \ens[a]_{ip}  \, | \, i \geq 1, p \in (0,1)  \right\} \subset \Ens$ be the set of all non-trivial mixtures of pairs of consecutive elements. A probability distribution with support over the full $X$ cannot be expressed as a finite convex combination of elements of $A$, and will therefore not be in the convex hull. However, it can be expressed as an infinite convex combination, and therefore it will be in the $\sigma$-hull. An element $x_i \in X$, is not in the $\sigma$-hull, but it will be in the closed hull, as $x_i = \lim_{p \to 1} p x_i + \bar{p} x_{i+1} = \lim_{p \to 1} \ens[a]_{ip} \in \chull(A)$.
 \end{remark}
@@ -515,7 +513,7 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \end{proof}
 
 \begin{prop}\label{pm_es_hullProp}
-	All three hull operators are closures. That is, $\hull$ satisfy the following three properties:
+	All three hull operators are closures. That is, $\hull$ satisfies the following three properties:
 	\begin{enumerate}
 		\item \textbf{extensive}: $A \subseteq \hull(A)$
 		\item \textbf{increasing}: $A \subseteq B \implies \hull(A) \subseteq \hull(B)$
@@ -525,7 +523,7 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \end{prop}
 
 \begin{proof}
-	1. Every element of $A$ is trivially a mixture of elements of $A$. Therefore $A \subseteq \hull(A)$. Since $\hull(A) \subseteq \shull(A) \subset \chull(A)$, $A \subseteq \shull(A)$ and $A \subseteq \chull(A)$ as well. 
+	1. Every element of $A$ is trivially a mixture of elements of $A$. Therefore $A \subseteq \hull(A)$. Since $\hull(A) \subseteq \shull(A) \subseteq \chull(A)$, $A \subseteq \shull(A)$ and $A \subseteq \chull(A)$ as well. 
 	
 	2. Let $\ens \in \hull(A)$. Then it is a finite mixture of some elements of $A$. Since $A \subseteq B$, then $\ens$ is also the finite mixture of some elements of $B$ and therefore $\ens \in \hull(B)$. The same logic applies to the $\sigma$-hull and closed hull replacing finite mixture with the appropriate operation.
 	
@@ -537,7 +535,7 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \end{coro}
 
 \begin{proof}
-	Let $A \subseteq \Ens$ be a convex subset. By \ref{pm_es_hullProp} we have $A \subseteq \hull(A)$. By definition of convex set, we have $\hull(A) \subseteq A$. Therefore $A = \hull(A)$. Conversely, let $A \subseteq \Ens$ be a set of ensembles not necessarily convex and let $A=\hull(A)$. By definition, $\hull(A)$ is closed under finite mixture and is therefore a convex subset. The same logic applies to the $\sigma$-convex and closed convex with the respective hull.
+	Let $A \subseteq \Ens$ be a convex subset. By \ref{pm_es_hullProp} we have $A \subseteq \hull(A)$. By definition of convex set, we have $\hull(A) \subseteq A$. Therefore $A = \hull(A)$. Conversely, let $A \subseteq \Ens$ be a set of ensembles not necessarily convex and let $A=\hull(A)$. By definition, $\hull(A)$ is closed under finite mixture and is therefore a convex subset. The same logic applies to $\sigma$-convex and closed convex sets with the respective hulls.
 \end{proof}
 
 \begin{defn}
@@ -545,11 +543,11 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \end{defn}
 
 \begin{prop}
-	The sets $\mathfrak{co}_{\Ens}$, $\mathfrak{sco}_{\Ens}$ and $\mathfrak{cco}_{\Ens}$, as posets ordered by inclusion, are topped $\bigcap$-structure and therefore complete lattices.
+	The sets $\mathfrak{co}_{\Ens}$, $\mathfrak{sco}_{\Ens}$ and $\mathfrak{cco}_{\Ens}$, as posets ordered by inclusion, are topped $\bigcap$-structures and therefore complete lattices.
 \end{prop}
 
 \begin{proof}
-	Theorem 7.3 in Davey, Priestley Introduction to Lattice and Order states that, given a closure operator, the set of all closures, ordered by inclusion, is a topped $\bigcap$-structure and therefore complete lattices. Since $\mathfrak{co}_{\Ens}$, $\mathfrak{sco}_{\Ens}$ and $\mathfrak{cco}_{\Ens}$ are closures, the theorem applies.
+	Theorem 7.3 in Davey and Priestley's ``Introduction to Lattice and Order'' states that, given a closure operator, the set of all closures, ordered by inclusion, is a topped $\bigcap$-structure and, therefore, a complete lattice. Since $\mathfrak{co}_{\Ens}$, $\mathfrak{sco}_{\Ens}$ and $\mathfrak{cco}_{\Ens}$ are closures, the theorem applies.
 \end{proof}
 
 
@@ -558,9 +556,9 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \end{prop}
 
 \begin{proof}
-	The above proposition is a consequence of the fact that the hulls are closure operations and they generate an intersection structure. This means that the intersection of a hulls is itself a hull.
+	The above proposition is a consequence of the fact that the hulls are closure operations and they generate an intersection structure. This means that the intersection of hulls is the hull of the intersections.
 	
-	Let $A_i \subseteq \Ens$ be a decreasing sequence. That is, $A_{i+1} \subseteq A_i$. Then $A = \lim\limits_{i \to \infty} A_i = \bigcap A_i$. Since $\hull$ is order preserving, $\hull(A_i)$ is a decreasing sequence and $\lim\limits_{i \to \infty} \hull(A_i) = \bigcap \hull(A_i)$. Moreover, $\hull(A) \subseteq \hull(A_i)$ for all $i$ and therefore $\hull(A) \subseteq \bigcap \hull(A_i)$. Now let $\ens \in \hull(A)$. Then $\ens$ is a convex combination of elements of $A$. Since every element of $A$ is also an element of any $A_i$, then $\ens$ is also a convex combination of elements of a $A_i$ for any $i$. Therefore $\ens \in \hull(A_i)$ for all $i$ which means $\ens \in \bigcap \hull(A_i)$ and therefore $\hull(A) \supseteq \bigcap \hull(A_i)$. Therefore $\hull(A) \supseteq \bigcap \hull(A_i)$ which means $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$.
+	Let $A_i \subseteq \Ens$ be a decreasing sequence. That is, $A_{i+1} \subseteq A_i$. Then $A = \lim\limits_{i \to \infty} A_i = \bigcap A_i$. Since $\hull$ is order preserving, $\hull(A_i)$ is a decreasing sequence and $\lim\limits_{i \to \infty} \hull(A_i) = \bigcap \hull(A_i)$. Moreover, $\hull(A) \subseteq \hull(A_i)$ for all $i$ and therefore $\hull(A) \subseteq \bigcap \hull(A_i)$. Now let $\ens \in \hull(A)$. Then $\ens$ is a convex combination of elements of $A$. Since every element of $A$ is also an element of any $A_i$, then $\ens$ is also a convex combination of elements of $A_i$ for any $i$. Therefore $\ens \in \hull(A_i)$ for all $i$ which means $\ens \in \bigcap \hull(A_i)$ and therefore $\hull(A) \supseteq \bigcap \hull(A_i)$. Thus we have that $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$.
 	
 	Since we have only used closure properties of $\hull$, the same reasoning applies to $\shull$ and $\chull$ since they are closures.
 \end{proof}
@@ -1311,6 +1309,17 @@ The fact that the ensemble space is directionally bound gives us an intuitive pr
 		Pick $\ens[a] \in L$ such that $\ens[a] \neq \ens$. Then every $\ens[a]_i$ can be expressed as an affine combination $\ens[a]_i = r_i \ens + \bar{r}_i \ens[a]$. We have $p_i \ens + \bar{p}_i \ens[a]_i = p_i \ens + \bar{p}_i \left( r_i \ens + \bar{r}_i \ens[a] \right) = \left( p_i + \bar{p}_i r_i \right) \ens + \bar{p}_i\bar{r}_i \ens[a]$. Since the ensemble space is directionally bounded, the sequence $r_i$ is bounded from below and above. This means that $\bar{p}_i \to 0$ implies $p_i + \bar{p}_i r_i \to 1$ and $\bar{p}_i\bar{r}_i \to 0$. Therefore by continuity $\left( p_i + \bar{p}_i r_i \right) \ens + \bar{p}_i\bar{r}_i \ens[a] \to 1 \ens + 0 \ens[a] = \ens$.
 	\end{proof}
 \end{mathSection}
+
+As discussed previously, it may be that the boundedness provided by the entropy forces all submixtures of convergent infinite mixtures to converge.
+
+\begin{conj}\label{pm_es_conjSubmixturesConverge}
+	Let $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$. Then, given $I \subseteq \mathbb{N}$, $\sum_{i \in I} \frac{p_i}{p_I} \ens_i$ converges where $p_I = \sum_{i \in I} p_i$.
+\end{conj}
+
+\begin{conj}\label{pm_es_conjAlgebraicInteriorSigmaConvex}
+	The set of all internal points $I_{\Ens}$ is closed under infinite convex combinations.
+\end{conj}
+
 
 %TODO: for topology, the ensemble space is a convex neighbourhood of the origin, which means it is an absorbing set.
 
