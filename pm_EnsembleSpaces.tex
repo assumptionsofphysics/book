@@ -568,16 +568,16 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \end{prop}
 
 \begin{proof}
-	Let $A_i \subseteq \Ens$ be an increasing sequence. That is, $A_{i+1} \supseteq A_i$. Then $A = \lim\limits_{i \to \infty} A_i = \bigcup A_i$. Since $\hull$ is an increasing function, $\hull(A) \supseteq \hull(A_i)$ for all $i$ and therefore $\hull(A) \supseteq \bigcup \hull(A_i)$. Now let $\ens \in \hull(A)$. Then $\ens$ is a convex combination of finitely many elements $\ens[a]_j$ of $A$. Since $A$ is the union of all $A_i$, each $\ens[a]_j$ will be in some $A_i$. Since the sequence of $A_i$ is increasing, and there are only finitely many $\ens[a]_j$, we will find an $i$ such that $\ens[a]_j \in A_i$ for all $j$. This means that $\ens$ is a convex combination of elements of $A_i$ and therefore $\ens \in \hull(A_i) \subseteq A$. Therefore $\hull(A) = \bigcup \hull(A_i)$ which means $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$.
+	Let $A_i \subseteq \Ens$ be an increasing sequence. That is, $A_{i+1} \supseteq A_i$. Then $A = \lim\limits_{i \to \infty} A_i = \bigcup A_i$. Since $\hull$ is an increasing function, $\hull(A) \supseteq \hull(A_i)$ for all $i$ and therefore $\hull(A) \supseteq \bigcup \hull(A_i)$. Now let $\ens \in \hull(A)$. Then $\ens$ is a convex combination of finitely many elements $\ens[a]_j$ of $A$. Since $A$ is the union of all $A_i$, each $\ens[a]_j$ will be in some $A_i$. Since the sequence of $A_i$ is increasing, and there are only finitely many $\ens[a]_j$, we will find an $i$ such that $\ens[a]_j \in A_i$ for all $j$. This means that $\ens$ is a convex combination of elements of $A_i$ and therefore $\ens \in \hull(A_i) \subseteq \hull(A)$. Therefore $\hull(A) = \bigcup \hull(A_i)$ which means $\hull(\lim\limits_{i \to \infty} A_i) = \lim\limits_{i \to \infty} \hull(A_i)$.
 \end{proof}
 
 
 \begin{remark}
 	Note that $\shull$ and $\chull$ are not, in general, continuous from below. This is because, in general, the union of closures is not the closure of the union. This is true, in particular, with topological closures, which is part of the definition of $\chull$.
 	
-	For example, consider the sequence $A_i = \left[0, 1-\frac{1}{i}\right) \subseteq \mathbb{R}$. These are convex sets therefore their closed hull is simply their topological closure. That is, $\chull(A_i) = \left[0, 1-\frac{1}{i}\right]$. We have $\lim\limits_{i \to \infty} A_i = \bigcup A_i = \left[0, 1\right)$ and $\lim\limits_{i \to \infty} \chull(A_i) = \bigcup \chull(A_i) = \left[0, 1\right)$ which is not a closed set and therefore different from $\chull(A) = [0,1]$. The closed hull of the limit is not the limit of the convex hull, even in a finite dimensional space.
+	For example, consider the sequence $A_i = \left[0, 1-\frac{1}{i}\right) \subseteq \mathbb{R}$. These are convex sets therefore their closed hull is simply their topological closure. That is, $\chull(A_i) = \left[0, 1-\frac{1}{i}\right]$. We have $\lim\limits_{i \to \infty} A_i = \bigcup A_i = \left[0, 1\right)$ and $\lim\limits_{i \to \infty} \chull(A_i) = \bigcup \chull(A_i) = \left[0, 1\right)$ which is not a closed set and therefore different from $\chull(A) = [0,1]$. The closed hull of the limit is not the limit of the convex hull, even in a finite-dimensional space.
 	
-	For the $\sigma$-hull, we need an infinite dimensional example. Conceptually, we are using the fact that a uniform distribution over the whole $[0,1]$ is the infinite convex combination of uniform distributions over countably many sets that cover the whole $[0,1]$. Let $\Ens$ be the space of probability measure defined over $[0,1] \subseteq \mathbb{R}$. Let $\{\ens[a]_i\}_{i=1}^{\infty}$ be the sequence of uniform distributions over $\left[\frac{1}{i+1}, \frac{1}{i}\right]$. Let $\ens$ be the uniform distribution over $[0,1]$. We have $\ens = \sum \frac{1}{i(i+1)} \ens[a]_i$ where $\sum \frac{1}{i(i+1)} = 1$. Therefore $\ens$ is the countable convex combination of $\ens[a]_i$. Let $A_j = \{ \ens[a]_i \, | \, i \leq j\}$. Note that $\ens[a]_i \separate \ens[a]_j$ for all $i \neq j$. Therefore, $\{\ens[a]_i\}$ are exactly all extreme points of $\shull(\bigcup A_j)$. This means that $\ens \notin \shull(A_j)$ for all $j$ while $\ens \in \shull(\bigcup A_j)$. Therefore the $\sigma$-hull of the limit is not the limit of the $\sigma$-hulls.
+	For the $\sigma$-hull, we need an infinite-dimensional example. Conceptually, we are using the fact that a uniform distribution over the whole $[0,1]$ is the infinite convex combination of uniform distributions over countably many sets that cover the whole $[0,1]$. Let $\Ens$ be the space of probability measures defined over $[0,1] \subseteq \mathbb{R}$. Let $\{\ens[a]_i\}_{i=1}^{\infty}$ be the sequence of uniform distributions over $\left[\frac{1}{i+1}, \frac{1}{i}\right]$. Let $\ens$ be the uniform distribution over $[0,1]$. We have $\ens = \sum \frac{1}{i(i+1)} \ens[a]_i$ where $\sum \frac{1}{i(i+1)} = 1$. Therefore $\ens$ is the countable convex combination of $\ens[a]_i$. Let $A_j = \{ \ens[a]_i \, | \, i \leq j\}$. Note that $\ens[a]_i \separate \ens[a]_j$ for all $i \neq j$. Therefore, $\{\ens[a]_i\}$ are exactly all extreme points of $\shull(\bigcup A_j)$. This means that $\ens \notin \shull(A_j)$ for all $j$ while $\ens \in \shull(\bigcup A_j)$. Therefore the $\sigma$-hull of the limit is not the limit of the $\sigma$-hulls.
 \end{remark}
 
 
@@ -589,14 +589,40 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 	Let $A$ be a convex set and $\bar{A}$ its topological closure. Let $\ens[a]_i, \ens[b]_i \in A$ be two sequences that converge to $\ens[a], \ens[b] \in \Ens$ respectively. We have $\ens[a], \ens[b] \in \bar{A}$ since they are topological limits. Consider $\ens_i = p \ens[a]_i + \bar{p} \ens[b]_i$. Since mixing is continuous, we have:
 	\begin{equation}
 		\begin{aligned}
-			\ens &= p \ens[a] + \bar{p} \ens[b] = p \lim\limits_{i \to \infty} \ens[a]_i + \bar{p} \lim\limits_{i \to \infty} \ens[b]_i = \lim\limits_{i \to \infty} p \ens[a]_i + \bar{p} \ens[b]_i = \lim\limits_{i \to \infty} \ens_i.
+			\ens &= p \ens[a] + \bar{p} \ens[b] = p \lim\limits_{i \to \infty} \ens[a]_i + \bar{p} \lim\limits_{i \to \infty} \ens[b]_i = \lim\limits_{i \to \infty} (p \ens[a]_i + \bar{p} \ens[b]_i) = \lim\limits_{i \to \infty} \ens_i.
 		\end{aligned}
 	\end{equation}
 	But $\ens_i$ are finite mixtures of elements of $A$, and therefore $\ens_i \in A$ is a sequence of elements of $A$. The sequence converges, $\ens$ is the limit of a sequence of elements of $A$ and therefore $\ens \in \bar{A}$. That is, the topological closure of a convex set is also a convex set. But this means that $\bar{A}$ is a closed convex set. Since any closed convex set that contains $A$ will also need to contain $\bar{A}$, $\bar{A}$ is the closed hull of $A$.
 
-	Let $A \subset \Ens$ be a subset not necessarily convex, $\hull(A)$ will convex. Therefore its topological closure will be the closed hull of $A$.
+	Let $A \subset \Ens$ be a subset not necessarily convex. Then $\hull(A)$ will be convex. Therefore its topological closure will be the closed hull of $A$.
 \end{proof}
+\end{mathSection}
 
+There may be a relationship between the algebraic notion of $\sigma$-convexity and the topological notion of interior. For example, let $U$ be an convex open set. While it clearly cannot be closed convex, is it $\sigma$-convex? The idea is that convexity can only return points that are ``inside'' the set, and $\sigma$-convexity is required to fill in all the limits. If that is true, it would be natural to look at some sort of converse. Clearly, not all $\sigma$-convex sets are open, since all closed convex sets are also $\sigma$-convex. The question becomes whether, for $\sigma$-convex sets, the notion of algebraic boundary and topological boundary coincides. These questions raise the following conjectures.
+
+\begin{conj}
+	Let $U \subseteq \Ens$ be an open set. Then $U$ is $\sigma$-convex.
+\end{conj}
+
+\begin{defn}
+	Given a set $A \subset \Ens$, $\ens[a] \in A$ is an internal point of $A$ if for any $\ens \in \Ens$ we can find $\ens[b] \in A$ such that $\ens[a] = p \ens + \bar{p} \ens[b]$ for some $p \in (0,1]$.
+\end{defn}
+
+\begin{conj}
+	 Let $A \subseteq \Ens$ and let $\ens[a] \in \chull(A)$ be an internal point of $\chull(A)$. Then $\ens[a] \in \shull(A)$.
+\end{conj}
+
+\begin{conj}
+	Let $A \subseteq \Ens$ be a $\sigma$-convex set. Than $\ens[a] \in A$ is an internal point of $A$ if and only if it is an interior point of $A$.
+\end{conj}
+
+\begin{remark}
+	Note that if $A$ is not convex, this is clear not true. For example, let $A \subseteq \mathbb{R}^2$ ba an annulus (i.e. the region of two concentric circles). The points in the inner circle are internal points of $A$ according to the definition, but they are not interior points. An internal point of $A$ would be guaranteed to be surrounded by an open interval along any direction. The question, as usual, is if this is enough to fit an open set.
+\end{remark}
+
+Later in the chapter, we will need to create the non-additive generalization for probability measures and state counting measures. It turns out that both constructions can be understood as instances of a more general construction that starts with a function $f(\ens)$ of elements of the ensemble space and generates a function $cs_f(A)$ of sets of ensembles by asking what is the highest value of $f$ that is reachable by a mixture of elements of $A$. We are going to show that this construction alone presents many nice mathematical properties.
+
+\begin{mathSection}
 \begin{defn}
 	Given a function $f : \Ens \to \mathbb{R}$, a \textbf{convex supremum} of $f$ is a set function $cs_f : 2^{\Ens} \to [- \infty, + \infty]$ such that $cs_f(A) = \sup(f(\hull(A)) \cup \{f_{\emptyset}\})$, with $f_{\emptyset} \leq \inf(f(\Ens))$, that returns the highest value of $f$ reachable by convex combinations of $A$.
 \end{defn}
@@ -611,40 +637,38 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \end{prop}
 
 \begin{proof}
-	1. If $A$ is empty, $cs_f(A) = f_{\emptyset}$. If $A$ is non-empty, $cs_f(A)$ is the supremum of the subset of value returned by $f(\hull(A))$, which means $f_{\emptyset} \leq \inf(f(\Ens)) \leq cs_f(A) \leq \sup(f(\Ens))$. Therefore $cs_f(A) \in [f_{\emptyset}, \sup(f(\Ens))]$ for all $A$.
+	1. If $A$ is empty, $cs_f(A) = f_{\emptyset}$. If $A$ is non-empty, $cs_f(A)$ is the supremum of the subset of values returned by $f(\hull(A))$, which means $f_{\emptyset} \leq \inf(f(\Ens)) \leq cs_f(A) \leq \sup(f(\Ens))$. Therefore $cs_f(A) \in [f_{\emptyset}, \sup(f(\Ens))]$ for all $A$.
 
 	2. If $A = B = \emptyset$, then $cs_f(A) = cs_f(B)$. If $B \neq \emptyset$, $cs_f(A) = f_{\emptyset} \leq \inf(\Ens) \leq cs_f(B)$. In the last case, since the $\hull$ is an increasing function, the image of a set through a map is an increasing function and the supremum is an increasing function, the convex supremum is an increasing function.
 	
-	3. Let $\{A_i\} \subseteq \Sigma_{\Ens}$ be an increasing sequence. Since $cs_f$ is increasing, $cs_f(A_i)$ is also an increasing sequence. Since $\hull$ is continuous from below, we have:
+	3. Let $A_i \subseteq \Ens$ be an increasing sequence and $A = \bigcup A_i$. Since $cs_f$ is increasing, $cs_f(A_i)$ is also an increasing sequence. Since $\hull$ is continuous from below, we have:
 	\begin{equation}
 		\begin{aligned}
-			cs_f(A) &= \sup(f(\hull(A))\cup\{\inf(f(\Ens))\}) = \sup(f(\bigcup\hull(A_i))\cup\{\inf(f(\Ens))\})\\
-			&= \sup(\bigcup f(\hull(A_i))\cup\{\inf(f(\Ens))\}) = \sup(\bigcup cs_f(A_i)).
+			cs_f(A) &= \sup(f(\hull(A))\cup\{f_{\emptyset}\}) = \sup(f(\bigcup\hull(A_i))\cup\{f_{\emptyset}\})\\
+			&= \sup(\bigcup f(\hull(A_i))\cup\{f_{\emptyset}\}) = \sup(\bigcup (\sup(f(\hull(A_i))\cup\{f_{\emptyset}\}))) \\
+			&= \sup(\bigcup cs_f(A_i)).
 		\end{aligned}
 	\end{equation}
-	But since $cs_f(A_i)$ is increasing, the supremum is exactly the limit. Therefore the state capacity is continuous from below.
+	But since $cs_f(A_i)$ is increasing, the supremum is exactly the limit. Therefore the convex supremum is continuous from below.
 \end{proof}
 
 \begin{remark}
-	Note that the convex supremum is not continuous from above. Let $\Ens$ be a disc embedded in $\mathbb{R}^2$. Let $f : \Ens \to \mathbb{R}$ be a non-trivial linear function. Then $f$ will have a maximum and a minimum on two opposite points $\ens[a]$ and $\ens[b]$ on the circle that encloses the disc. Take a line that divides the disc in two halfs, leaving the minimum and the maximum on different halfs. Then $f$ will take the minimum value $m > f(\ens[b])$ on one of the extreme points of the line. Consider a countable collection $\{\ens_i\}$ of points over that line and let $A_j = \{ \ens_i \, | \, i \geq j \}$.  We have $m \leq \ens_i$ for all $i$ and therefore $cs_f(A_j) \geq m$ for all $j$, which means $\lim\limits_{i \to \infty} cs_f(A_j) \geq m$. However, $\bigcap A_j = \emptyset$ and $sc_f(\emptyset) = \inf(f(\Ens)) = f(\ens[b]) < m$. This means that, in general, $cs_f(\lim\limits_{i \to \infty} A_i) \neq \lim\limits_{i \to \infty} cs_f(A_i)$ for a decreasing sequence.
+	Note that the convex supremum is not continuous from above. Let $\Ens$ be a disc embedded in $\mathbb{R}^2$. Let $f : \Ens \to \mathbb{R}$ be a non-trivial linear function. Then $f$ will have a maximum and a minimum on two opposite points $\ens[a]$ and $\ens[b]$ on the circle that encloses the disc. Take a line that divides the disc in two halves, leaving the minimum and the maximum on different halves. Then over that line $f$ will take the minimum value $m > f(\ens[b])$ on one of the extreme points of the line. Consider a countable collection $\{\ens_i\}$ of points over that line and let $A_j = \{ \ens_i \, | \, i \geq j \}$. This is a decreasing sequence of infinite sets, where we are taking one point out at a time.  We have $f(\ens_i) \geq m$ for all $i$ and therefore $cs_f(A_j) \geq m$ for all $j$, which means $\lim\limits_{j \to \infty} cs_f(A_j) \geq m$. However, $\bigcap A_j = \emptyset$ and $cs_f(\emptyset) = f_{\emptyset} \leq \inf(f(\Ens)) = f(\ens[b]) < m$. This means that, in general, $cs_f(\lim\limits_{j \to \infty} A_j) \neq \lim\limits_{j \to \infty} cs_f(A_j)$ for a decreasing sequence.
 \end{remark}
 
 \begin{prop}\label{pm_es_convexSupremumContinuous}
-	Let $A \subset \Ens$ and $f: \Ens \to \mathbb{R}$ be a continuous function, then $cs_f(A) = cs_f(\shull(A)) = cs_f(\chull(A))$.
+	Let $A \subseteq \Ens$ and $f: \Ens \to \mathbb{R}$ be a continuous function, then $cs_f(A) = cs_f(\shull(A)) = cs_f(\chull(A))$.
 \end{prop}
 
 \begin{proof}
 	The proposition is true if $A = \emptyset$, since $\emptyset = \hull(\emptyset) = \shull(\emptyset) = \chull(\emptyset)$.
 	
-	Now let $A \neq \emptyset$. Note that $\chull(A)$ is a convex set, meaning $\hull(\chull(A)) = \chull(A)$. This means that we are looking for the difference between the supremum of $f$ over the hull and the closed hull. Suppose $\ens \in \chull(A)$ but $\ens \notin \hull(A)$. Still, $\ens$ will be the limit of a sequence of $\ens_i \in \hull(A)$. Since $f$ is continuous, then $f(\ens)$ is the limit of the sequence $f(\ens_i)$, for which $f(\ens_i) \leq \sup(f(\hull(A)))$ for all $i$. Therefore, $f(\ens) \leq \sup(f(\hull(A))) = cs_f(A)$. Since $cs_f$ is increasing and $\hull(A) \subseteq \chull(A)$, $cs_f(A) = cs_f(\chull(A))$.
+	Now let $A \neq \emptyset$. Note that $\chull(A)$ is a convex set, meaning $\hull(\chull(A)) = \chull(A)$. This means that we are looking for the difference between the supremum of $f$ over the hull and the closed hull. Suppose $\ens \in \chull(A)$ but $\ens \notin \hull(A)$. Still, $\ens$ will be the limit of a sequence of $\ens_i \in \hull(A)$. Since $f$ is continuous, then $f(\ens)$ is the limit of the sequence $f(\ens_i)$, for which $f(\ens_i) \leq \sup(f(\hull(A)))$ for all $i$. Therefore, $f(\ens) \leq \sup(f(\hull(A))) = cs_f(A)$. Since $f(\ens) \leq cs_f(A)$ for all $\ens \in \chull(A)$, then $\sup(f(\chull(A))) = cs_f(\chull(A)) \leq cs_f(A)$. Since $cs_f$ is increasing and $\hull(A) \subseteq \chull(A)$, $cs_f(A) \leq cs_f(\chull(A))$. Therefore $cs_f(A) = cs_f(\chull(A))$.
 	
 	Note that $A \subseteq \shull(A) \subseteq \chull(A)$ and $cs_f$ is an increasing function. Therefore $cs_f(A) \leq cs_f(\shull(A)) \leq cs_f(\chull(A)) = cs_f(A)$ which means $cs_f(A) = cs_f(\shull(A))$.
 \end{proof}
 
 \end{mathSection}
-
-Something that still need to be explored is the relationship between the algebraic interior and topological interior. For example, is every interior point an internal point? Given a set of internal points of $\Ens$, is the $\sigma$-hull a set of internal points? It would seem so, as convex combinations cannot bring us to the boundary of a set. Given $A$, if $\ens \in \chull(A)$ is an internal point with respect to $\chull(A)$, does it mean that $\ens \in \shull(A)$?
-
 
 \section{Axiom of entropy}
 
