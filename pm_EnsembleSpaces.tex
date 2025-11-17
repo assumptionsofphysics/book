@@ -1984,7 +1984,33 @@ Intuitively, we would expect the fraction $\fraction_{\ens}(\ens[a])$ to be cont
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.6\textwidth]{tempimages/FractionCapacity.jpg}
+	\def\xstep{0.75em}
+	\def\bHeight{0.6}
+	\def\tHeight{0.1}
+	\def\tGap{0.3}
+	\begin{tikzpicture}
+		%\draw [help lines] (0,0) grid (10,3);
+		
+		\node at (1,0.5) {$\ens_{123456}$};
+		
+		\draw (0, 0) foreach \x in {1,...,6} { -- (\tGap * \x, 0) -- (\tGap * \x, -\tHeight) (\tGap * \x, 0) } -- ++(\tGap, 0);
+		\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(\tGap * 1, \bHeight/6) (\tGap * 2, \bHeight/6) (\tGap * 3, \bHeight/6) (\tGap * 4, \bHeight/6) (\tGap * 5, \bHeight/6) (\tGap * 6, \bHeight/6)};
+		
+		\node at (2.6,0) {$ = \frac{1}{3}$};
+		
+		\node at (4.2,0.6) {$\frac{1}{2} \ens_3 + \frac{1}{2} \ens_4$};
+		
+		\draw (3, 0) foreach \x in {1,...,6} { -- (3 + \tGap * \x, 0) -- (3 + \tGap * \x, -\tHeight) (3 + \tGap * \x, 0) } -- ++(\tGap, 0);
+		\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(3 + \tGap * 3, \bHeight/2)(3 + \tGap * 4, \bHeight/2)};
+		
+		\node at (5.6,0) {$ + \frac{2}{3}$};
+		
+		\node at (7,0.5) {$\ens_{1256}$};
+		
+		\draw (6, 0) foreach \x in {1,...,6} { -- (6 + \tGap * \x, 0) -- (6 + \tGap * \x, -\tHeight) (6 + \tGap * \x, 0) } -- ++(\tGap, 0);
+		\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(6 + \tGap * 1, \bHeight/4) (6 + \tGap * 2, \bHeight/4)  (6 + \tGap * 5, \bHeight/4) (6 + \tGap * 6, \bHeight/4)};
+	\end{tikzpicture}
+	%\includegraphics[width=0.6\textwidth]{tempimages/FractionCapacity.jpg}
 \end{figure}
 
 We now define \textbf{fraction capacity} of a set of ensembles for another ensemble. Like before, suppose $\ens_{123456}$ is a uniform distribution for a six-faced die, but now take $A = \{ \ens_3, \ens_4 \}$ as, respectively, the outcomes $3$ and $4$ with $100\%$ probability. Then $\ens$ can be understood as $\ens_{123456} = \frac{1}{3} \left(\frac{1}{2} \ens_3 + \frac{1}{2} \ens_4 \right) + \frac{2}{3} \ens_{1256}$, where $\ens_{1256}$ is the uniform distribution over outcomes 1,2,5 and 6. Again, note that $\frac{1}{3}$ is the highest coefficient we can put in front of any convex combinations of elements of $A$, and still make a convex combination that has $\ens$ as a result. That is what we define the fraction capacity of $A$ for $\ens_{123456}$ to be.
