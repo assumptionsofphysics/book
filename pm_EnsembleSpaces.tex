@@ -1923,7 +1923,33 @@ The fraction capacity tells us how much of an ensemble $\ens$ can be constructed
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.6\textwidth]{tempimages/Fraction.jpg}
+	\def\xstep{0.75em}
+	\def\bHeight{0.6}
+	\def\tHeight{0.1}
+	\def\tGap{0.3}
+	\begin{tikzpicture}
+		%\draw [help lines] (0,0) grid (10,3);
+		
+		\node at (1,0.5) {$\ens_{123456}$};
+		
+		\draw (0, 0) foreach \x in {1,...,6} { -- (\tGap * \x, 0) -- (\tGap * \x, -\tHeight) (\tGap * \x, 0) } -- ++(\tGap, 0);
+		\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(\tGap * 1, \bHeight/6) (\tGap * 2, \bHeight/6) (\tGap * 3, \bHeight/6) (\tGap * 4, \bHeight/6) (\tGap * 5, \bHeight/6) (\tGap * 6, \bHeight/6)};
+		
+		\node at (2.6,0) {$ = \frac{1}{6}$};
+		
+		\node at (4.4,0.5) {$\ens_{3}$};
+		
+		\draw (3, 0) foreach \x in {1,...,6} { -- (3 + \tGap * \x, 0) -- (3 + \tGap * \x, -\tHeight) (3 + \tGap * \x, 0) } -- ++(\tGap, 0);
+		\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(3 + \tGap * 3, \bHeight)};
+
+		\node at (5.6,0) {$ + \frac{5}{6}$};
+		
+		\node at (7,0.5) {$\ens_{12456}$};
+		
+		\draw (6, 0) foreach \x in {1,...,6} { -- (6 + \tGap * \x, 0) -- (6 + \tGap * \x, -\tHeight) (6 + \tGap * \x, 0) } -- ++(\tGap, 0);
+		\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(6 + \tGap * 1, \bHeight/5) (6 + \tGap * 2, \bHeight/5) (6 + \tGap * 4, \bHeight/5) (6 + \tGap * 5, \bHeight/5) (6 + \tGap * 6, \bHeight/5)};
+	\end{tikzpicture}
+	%\includegraphics[width=0.6\textwidth]{tempimages/Fraction.jpg}
 \end{figure}
 
 First we define the \textbf{fraction} of one element within another. For example, suppose $\ens_{123456}$ is a uniform distribution for a six-faced die. Suppose $\ens_3$ represents the outcome 3 with $100\%$ probability. Then $\ens$ can be understood as $\ens_{123456} = \frac{1}{6} \ens_3 + \frac{5}{6} \ens_{12456}$ where $\ens_{12456}$ is the uniform distribution over the outcomes 1,2,4,5 and 6. Note that $\frac{1}{6}$ is the highest coefficient we can put in front of $\ens_3$ in a convex combination and have $\ens_{123456}$ as a result, which coincides with the probability of obtaining 3 from a uniform distribution over six outcomes. That is what we define the fraction of $\ens_3$ in $\ens_{123456}$ to be.
