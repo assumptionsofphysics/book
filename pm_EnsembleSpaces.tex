@@ -331,11 +331,40 @@ The convex structure allows us to characterize ensembles based on whether they c
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{tempimages/ConvexExamples.jpg}
+	\def\angle{10}
+	\def\radius{1.2}
+	\begin{tikzpicture}		
+		%\draw [help lines] (0,0) grid (10,3);
+		\coordinate (a)      at (0,0);
+		\coordinate (aab)    at (0.5,0.75);
+		\coordinate (ab)    at (1,1.5);
+		\coordinate (b)      at (2,3);
+		
+		\draw[-, thick] (a) -- (b);
+		\filldraw [black] (a) circle (1pt) node[left] {$\ens[a]$};
+		\filldraw [black] (ab) circle (1pt) node[left] {$\frac{1}{2}\ens[a] + \frac{1}{2}\ens[b]$};
+		\filldraw [black] (aab) circle (1pt) node[right] {$\frac{3}{4}\ens[a] + \frac{1}{4}\ens[b]$};
+		\filldraw [black] (b) circle (1pt) node[right] {$\ens[b]$};
+		
+		\coordinate (center) at (4,1.5);
+		
+		\draw[fill=lightgray, thick] ($(center)+\radius*({cos(0+\angle)},{sin(0+\angle)})$) -- ($(center)+\radius*({cos(120+\angle)},{sin(120+\angle)})$) -- ($(center)+\radius*({cos(240+\angle)},{sin(240+\angle)})$) -- cycle;
+		
+		\coordinate (c)    at (6.5,0.5);
+		\coordinate (d)    at (7.5,1.5);
+		\coordinate (e)    at (8.5,2.5);
+		
+		\draw[-, thick] (c) -- (d);
+		\draw[dashed, thick] (d) -- (e);
+		\filldraw [black] (c) circle (1pt) node[left] {$\ens[a]$};
+		\filldraw [black] (d) circle (1pt) node[right] {$\ens[b]$};
+		\filldraw [black] (e) circle (1pt) node[right] {$\ens[c]$};
+	\end{tikzpicture}
+	%\includegraphics[width=0.5\textwidth]{tempimages/ConvexExamples.jpg}
 \end{figure}
 
 \begin{remark}
-	In terms of the convex space, all the mixtures of two ensembles correspond to the segment between them; all the mixtures of three ensembles correspond to the triangle formed by the three elements and so on. An ensemble $\ens[a]$ is a component of a different ensemble $\ens[b]$ if the segment connecting $\ens[a]$ and $\ens[b]$ can be extended past $\ens[b]$. If two elements are not a component of each other, then they are the extreme points of the line that goes through the two. That is, the segment cannot be extended.
+	In terms of the convex space, all the mixtures of two ensembles correspond to the segment between them; all the mixtures of three ensembles correspond to the triangle formed by the three elements and so on. An ensemble $\ens[c]$ is a component of a different ensemble $\ens[d]$ if the segment connecting $\ens[c]$ and $\ens[d]$ can be extended past $\ens[d]$. If two elements are not a component of each other, then they are the extreme points of the line that goes through the two. That is, the segment cannot be extended.
 \end{remark}
 
 \begin{figure}[H]
