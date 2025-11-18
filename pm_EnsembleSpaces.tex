@@ -1270,8 +1270,29 @@ Another constraint that the entropy imposes is that the ensemble space is bounde
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.4\textwidth]{tempimages/BoundedEnsembleSpace.jpg}
-	\caption{$\Ens$ is the ensemble space and $V$ is the embedding vector space. Any affine line, like the dashed one in the picture, will intersect $\Ens$ over a finite range limited by the two elements $a$ and $b$ of the vector space (but not necessarily of the ensemble space).}
+	\begin{tikzpicture}
+		%\draw [help lines] (0,0) grid (10,3);
+		\coordinate (O) at (1, 1);
+		\coordinate (x) at (0, 0);
+		\coordinate (y) at (3, 1);
+		\coordinate (z) at (1, 3);
+		
+		\node[below left] at (z) {$V_{\ens}$};
+		\node[above] at (2,2.6) {$\Ens$};
+		\node[below right] at (O) {$\ens$};
+		
+		\draw[-] (O) -- (x);
+		\draw[-] (O) -- (y);
+		\draw[-] (O) -- (z);
+		
+		\draw[-, thick] plot [smooth cycle] coordinates {(0.5,1.5)(1.5,0.3)(2.7,1)(2.6,2.5)(1,2.5)};
+		
+		\draw[dashed] (2, 2) -- (3, 2.5);
+		\draw[-, thick] (1.5, 1.75) -- (2, 2) node[below] {$b$};
+		\draw[dashed] (0.4,1.2) -- (1.5, 1.75) node[below] {$a$};
+	\end{tikzpicture}
+	%\includegraphics[width=0.4\textwidth]{tempimages/BoundedEnsembleSpace.jpg}
+	\caption{$\Ens$ is the ensemble space and $V_{\ens}$ is the embedding vector space with origin $\ens$. Any affine line, like the dashed one in the picture, will intersect $\Ens$ over a finite range limited by the two elements $a$ and $b$ of the vector space (but not necessarily of the ensemble space).}
 \end{figure}
 
 The proof proceeds as follows. Suppose we take three points and assign them an entropy that is strictly concave: can we assign to always pick an entropy value that satisfies the bounds for any subsequent point? The answer is negative and figure \ref{pm_es_directionallyBound} represent the problem pictorially. On the horizontal axis we can imagine all the ensembles over a line, and on the vertical axis their entropy. We fix the entropy for the origin, the blue and the red point. What are the values for the next point, the green one, that satisfy the entropy bounds? Because of strict concavity, the green point must remain below the blue line. The green line represents the upper bound for the blue point, which means the green point must be above the purple line. If we go far enough, the blue and purple line meet, leaving no possible value for the entropy.
