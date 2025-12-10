@@ -661,6 +661,8 @@ There may be a relationship between the algebraic notion of $\sigma$-convexity a
 	Note that if $A$ is not convex, this is clearly not true. For example, let $A \subseteq \mathbb{R}^2$ be an annulus (i.e. the region of two concentric circles). The points on the inner circle are internal points of $A$ according to the definition, but they are not interior points. An internal point of $A$ for a $\sigma$-convex set is guaranteed to be surrounded by an open interval along any direction. The question, as usual, is if this is enough to fit an open set.
 \end{remark}
 
+\subsection{Convex supremum}
+
 Later in the chapter, we will need to create the non-additive generalization for probability measures and state counting measures. It turns out that both constructions can be understood as instances of a more general construction that starts with a function $f(\ens)$ of elements of the ensemble space and generates a function $cs_f(A)$ of sets of ensembles by asking what is the highest value of $f$ that is reachable by a mixture of elements of $A$. We are going to show that this construction alone presents many nice mathematical properties.
 
 \begin{mathSection}
@@ -709,6 +711,19 @@ Later in the chapter, we will need to create the non-additive generalization for
 	Note that $A \subseteq \shull(A) \subseteq \chull(A)$ and $cs_f$ is an increasing function. Therefore $cs_f(A) \leq cs_f(\shull(A)) \leq cs_f(\chull(A)) = cs_f(A)$ which means $cs_f(A) = cs_f(\shull(A))$.
 \end{proof}
 
+\end{mathSection}
+
+TODO: review with Christine
+
+Recall that a measure is a monotonic set function continuous from below that is also non-negative and additive. It is easy to show that the convex supremum is non-negative if and only if $f$ is non-negative. Additivity, instead, is more complicated as it needs to be recovered on the lattice of subspaces.
+
+\begin{mathSection}
+\begin{coro}
+	A convex supremum is non-negative if and only if $f$ is non-negative and $f_{\emptyset} \geq 0$.
+\end{coro}
+\begin{proof}
+	Since the range of $cs_f$ is $[f_{\emptyset}, \sup(f(\Ens))]$, $cs_f$ is non negative if and only if $f_{\emptyset} \geq 0$. Since $f_{\emptyset} \leq \inf(f(\Ens))$, $f_{\emptyset} \geq 0$ only if $f$ is non-negative.
+\end{proof}
 \end{mathSection}
 
 \section{Axiom of entropy}
@@ -933,8 +948,6 @@ As we did for separateness, we extend the notion of orthogonality to sets of ens
 \end{proof}
 \end{mathSection}
 
-TODO: Put pictures to show that orthogonal elements are on "opposite sides"
-
 \section{Affine combinations and vector space embedding}
 
 In this section we will see how the bounds of entropy constrain ensemble spaces to embed into vector spaces. Moreover, the ensemble space must be bounded along any direction. In other words, the existence of an entropy rules out physically pathological cases that a convex space may otherwise allow.
@@ -1049,7 +1062,9 @@ It is important to note that while we can write affine combinations, not all aff
 \end{remark}
 \end{mathSection}
 
-TODO: we need to define infinite affine combinations
+TODO: review with Christine
+
+We still need to understand how to extend affine combination to the infinite case. The safest way is to require the two infinite $\sum_{i \in I} \frac{r_i}{r} \ens_i$ and $\sum_{i \notin I} \frac{-r_i}{r} \ens_i$ to converge and then require that the resulting problem to admit a solution.
 
 \subsection{Vector space embedding}
 
@@ -1755,9 +1770,9 @@ We now show that the metric tensor we defined reduces to the Fisher-Rao metric i
 		\end{aligned}
 	\end{equation}
 	which recovers the Fisher-Rao metric.
+	
+	This same calculation can be done in the case of a discrete classical space.
 \end{proof}
-
-TODO: add a note/proof for the discrete version
 
 \begin{remark}
 	For quantum mechanics, the situation is more complicated as there are different definitions of Fisher metrics (see \href{https://arxiv.org/pdf/2008.11178}{RLD Fisher Information Bound for Multiparameter
