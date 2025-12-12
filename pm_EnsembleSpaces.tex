@@ -555,7 +555,7 @@ While separateness extends to mixtures, the converse property (i.e. mixtures pre
 
 \subsection{Decomposability}
 
-Since mixture preserving separateness is a telletale of classicality, it is useful to find an alternative characterization. One of the different between classical and quantum ensemble spaces is that quantum ensembles allow multiple decomposition in terms of pure states. We see here that, in fact, the lack of multiple decomposition is equivalent to mixture preserving separateness.
+Since mixture preserving separateness is a telletale of classicality, it is insightful to find an alternative characterization. One of the different between classical and quantum ensemble spaces is that quantum ensembles allow multiple decomposition in terms of pure states. We see here that, in fact, the lack of multiple decomposition is equivalent to mixture preserving separateness.
 
 \begin{defn}
 	An ensemble is \textbf{decomposable} if it can be expressed as a mixture of two distinct ensembles. An ensemble is \textbf{separately decomposable} if it can be expressed as a mixture of two separate ensembles. An ensemble is \textbf{multidecomposable} if it can be expressed as two decompositions where a component of one is separate from both components of the other. That is, $\ens = \lambda \ens[a]_1 + \bar{\lambda} \ens[a]_2 = \mu \ens[b]_1 +\bar{\mu} \ens[b]_2$ and either $\ens[a]_1 \separate \ens[b]_j$ or $\ens[a]_2 \separate \ens[b]_j$. An ensemble is \textbf{monodecomposable} if it is not multidecomposable. An ensemble is \textbf{separately monodecomposable} if it is both separately decomposable and monodecomposable.
@@ -569,20 +569,33 @@ Since mixture preserving separateness is a telletale of classicality, it is usef
 	If $\ens \in \Ens$ is decomposable, then it has at least to distinct components, one of which must not be $\ens$. Since an extreme point as only itself as a component, then $\ens$ is not an extreme point. Conversely, if $\ens$ is an extreme point, it cannot be the mixture of two distinct components as $\ens$ has only itself as a component.
 \end{proof}
 
+\begin{defn}
+	An ensemble space is \textbf{separately decomposable} if every decomposable ensemble is separately decomposable, \textbf{multidecomposable} if every decomposable ensemble is multidecomposable, and \textbf{monodecomposable} if every decomposable ensemble is monodecomposable and \textbf{separately monodecomposable} if every decomposable ensemble is separately monodecomposable.
+\end{defn}
 
 \begin{prop}
-	An ensemble space $\Ens$ is monodecomposable if and only if mixtures preserve separateness in $\Ens$.
+	Discrete/continuous classical and quantum ensemble spaces are separately decomposable.
 \end{prop}
 
 \begin{proof}
-	Suppose mixtures do not preserve separateness. Then we can find $\ens,\ens[a],\ens[b], \ens[c] \in \Ens$ such that $\ens \separate \ens[a]$, $\ens \separate \ens[b]$ and $\ens \nseparate \ens[c] = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1)$. Since $\ens \nseparate \ens[c]$, we can find $\ens[d], \ens[f], \ens[g]$ such that $\ens[c] = \lambda \ens[d] + \bar{\lambda} \ens[f]$ and $\ens = \mu \ens[d] + \bar{\mu} \ens[g]$.  Since separateness extends to all mixtures (\ref{pm_es_separateExtendsMixtures}) and $\ens[a] \separate \ens[e] = \mu \ens[d] + \bar{\mu} \ens[g]$, then $\ens[a] \separate \ens[d]$. Similarly, $\ens[b] \separate \ens[d]$, which means that $\ens[c]$ is separately multidecomposable.
+	For a classical ensemble space, only Dirac measure are not decomposable. For a discrete classical space, every measure that is not the Dirac measure is the mixture of two measures with disjoint support. For a continuous classical space, there are no extreme points, and any absolutely continuous measure is the mixture of two absolutely continuous measures with disjoint support. Since measure with disjoint support are separate, every decomposable ensemble is separately decomposable.
+	
+	In quantum mechanics, every density operator is the mixture of its eigenstates. If the density operator does not correspond to a pure state, it will have at least two eigenstates. Every mixed state, then, is a mixture of two orthogonal ensembles. Since orthogonal ensembles cannot have a common component, every decomposable ensemble is separately decomposable.
+\end{proof}
+
+\begin{prop}
+	Given an ensemble space $\Ens$, every decomposable ensemble is monodecomposable if and only if mixtures preserve separateness in $\Ens$.
+\end{prop}
+
+\begin{proof}
+	Suppose mixtures do not preserve separateness in $\Ens$. Then we can find $\ens,\ens[a],\ens[b], \ens[c] \in \Ens$ such that $\ens \separate \ens[a]$, $\ens \separate \ens[b]$ and $\ens \nseparate \ens[c] = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1)$. Since $\ens \nseparate \ens[c]$, we can find $\ens[d], \ens[f], \ens[g]$ such that $\ens[c] = \lambda \ens[d] + \bar{\lambda} \ens[f]$ and $\ens = \mu \ens[d] + \bar{\mu} \ens[g]$.  Since separateness extends to all mixtures (\ref{pm_es_separateExtendsMixtures}) and $\ens[a] \separate \ens[e] = \mu \ens[d] + \bar{\mu} \ens[g]$, then $\ens[a] \separate \ens[d]$. Similarly, $\ens[b] \separate \ens[d]$, which means that $\ens[c]$ is separately multidecomposable. Therefore, if mixtures do not preserve separateness in $\Ens$, not all decomposable ensembles are monodecomposable.
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.3\textwidth]{tempimages/MonodecomposabilityIsMixturePreserveSeparateness.jpg}
 	\end{figure}
 	
-	Now suppose mixture do preserve separateness, and let $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$. Since $\ens[a]_1$ is a component of $\ens$, then $\ens \nseparate \ens[a]_1$. Since $\ens$ is a mixture of $\ens[b]_1$ and $\ens[b]_2$ and mixtures preserve separateness, then either $\ens[a]_1 \nseparate \ens[b]_1$ or $\ens[a]_1 \nseparate \ens[b]_2$. Similarly, $\ens[a]_2 \nseparate \ens[b]_1$ or $\ens[a]_2 \nseparate \ens[b]_2$. Therefore $\ens$ is not separately multidecomposable.
+	Now suppose mixture do preserve separateness, and let $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$ be a decomposable ensemble. Since $\ens[a]_1$ is a component of $\ens$, then $\ens \nseparate \ens[a]_1$. Since $\ens$ is a mixture of $\ens[b]_1$ and $\ens[b]_2$ and mixtures preserve separateness, then either $\ens[a]_1 \nseparate \ens[b]_1$ or $\ens[a]_1 \nseparate \ens[b]_2$. Similarly, $\ens[a]_2 \nseparate \ens[b]_1$ or $\ens[a]_2 \nseparate \ens[b]_2$. Therefore $\ens$ is not separately multidecomposable.
 \end{proof}
 
 
