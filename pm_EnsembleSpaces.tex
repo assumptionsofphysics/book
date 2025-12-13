@@ -557,9 +557,24 @@ While separateness extends to mixtures, the converse property (i.e. mixtures pre
 
 Since mixture preserving separateness is a telletale of classicality, it is insightful to find an alternative characterization. One of the different between classical and quantum ensemble spaces is that quantum ensembles allow multiple decomposition in terms of pure states. We see here that, in fact, the lack of multiple decomposition is equivalent to mixture preserving separateness.
 
+Note that, since a continuous classical ensemble space has no extreme points, we have to find a definition of multiple decomposability that makes no reference to the extreme points. Like for the definition of the entropy, we need to find a definition on mixtures of two elements that, when applied recursively, gives us the desired effect. The idea here that we will always have multiple decompositions in terms of over ensembles, but in classical spaces we cannot have multiple decomposition where all elements of one have no common components with one element of the other. So, if we start breaking an ensemble in separate components, while we may take different paths, we will reach the same final decomposition. \footnote{There is an open issue as it is not clear whether we want to require actual separate decomposition or separate decomposition in the limit. In the continuous classical case, for example, it is not clear whether we should require probability densities to be continuous or not. If continuity is required, a probability density cannot be split into two probability densities with disjoint support without creating a discontinuity. However, we may think of a sequence of decomposition into three, one with support $A$, one with support $B$ and one with support on both. In the limit, the mixing coefficient for the third becomes smaller and small, meaning that the first two approach a discontinuous one.}
+
 \begin{defn}
 	An ensemble is \textbf{decomposable} if it can be expressed as a mixture of two distinct ensembles. An ensemble is \textbf{separately decomposable} if it can be expressed as a mixture of two separate ensembles. An ensemble is \textbf{multidecomposable} if it can be expressed as two decompositions where a component of one is separate from both components of the other. That is, $\ens = \lambda \ens[a]_1 + \bar{\lambda} \ens[a]_2 = \mu \ens[b]_1 +\bar{\mu} \ens[b]_2$ and either $\ens[a]_1 \separate \ens[b]_j$ or $\ens[a]_2 \separate \ens[b]_j$. An ensemble is \textbf{monodecomposable} if it is not multidecomposable. An ensemble is \textbf{separately monodecomposable} if it is both separately decomposable and monodecomposable.
 \end{defn}
+	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{tempimages/MultipleDecomposition.jpg}
+\end{figure}
+
+\begin{remark}
+	Take a classical discrete space for three points which is a triangle (simplex). The only three elements that are not decomposable are the extreme points. Mixtures of two points are decomposable and are also separately decomposable in only one way. Mixtures of three points are also separately decomposable, but in multiple ways: as a mixture of $\ens_1$ and a mixture of $\ens_2$ and $\ens_3$, or as a mixture of $\ens_2$ and a mixture of $\ens_1$ and $\ens_3$. Note, however, that they are not separately multidecomposable as the different components are not separate.
+	
+	Take a Bloch ball for quantum mechanics. All the elements of the surface are not decomposable and they are all pairwise separate. The middle point can be seen as the equal mixture of any pair of opposite points. Therefore the middle point, as well as any other point not on the surface, is not only separately decomposable but also multidecomposable.
+	
+	To see why we require only one component to be separate from the other two, consider the cut triangle. Here we can have multiple decompositions where not all elements are separate.
+\end{remark}
 
 \begin{coro}
 	An ensemble $\ens \in \Ens$ is an extreme point if and only if it not decomposable.
@@ -570,7 +585,7 @@ Since mixture preserving separateness is a telletale of classicality, it is insi
 \end{proof}
 
 \begin{defn}
-	An ensemble space is \textbf{separately decomposable} if every decomposable ensemble is separately decomposable, \textbf{multidecomposable} if every decomposable ensemble is multidecomposable, and \textbf{monodecomposable} if every decomposable ensemble is monodecomposable and \textbf{separately monodecomposable} if every decomposable ensemble is separately monodecomposable.
+	An ensemble space is \textbf{separately decomposable} if every decomposable ensemble is separately decomposable, \textbf{multidecomposable} if every decomposable ensemble is multidecomposable, and \textbf{monodecomposable} if every decomposable ensemble is monodecomposable and \textbf{separately monodecomposable} if it is both separately decomposable and monodecomposable.
 \end{defn}
 
 \begin{prop}
@@ -598,6 +613,11 @@ Since mixture preserving separateness is a telletale of classicality, it is insi
 	Now suppose mixture do preserve separateness, and let $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$ be a decomposable ensemble. Since $\ens[a]_1$ is a component of $\ens$, then $\ens \nseparate \ens[a]_1$. Since $\ens$ is a mixture of $\ens[b]_1$ and $\ens[b]_2$ and mixtures preserve separateness, then either $\ens[a]_1 \nseparate \ens[b]_1$ or $\ens[a]_1 \nseparate \ens[b]_2$. Similarly, $\ens[a]_2 \nseparate \ens[b]_1$ or $\ens[a]_2 \nseparate \ens[b]_2$. Therefore $\ens$ is not separately multidecomposable.
 \end{proof}
 
+These definitions may be enough to prove that every finite dimensional separately monodecomposable convex space is a simplex. For the infinite case, it would be nice to compare this characterization to a Choquet simplex.
+
+\begin{conj}
+	A finite dimensional (i.e. there is a set of finitely many elements whose hull has non-empty interior) separately monodecomposable convex space is a simplex.
+\end{conj}
 
 \subsection{Convex subsets and convex hull}
 
@@ -1026,6 +1046,23 @@ As we did for separateness, we extend the notion of orthogonality to sets of ens
 	For 2, we will concentrate on the closed hull, since if two sets are orthogonal so are their subsets. Since mixtures preserve orthogonality, every finite mixture of $A$ is orthogonal to every finite mixture of $B$. To show that this extends to the topological closure, let $\ens[a]_i \in A$ and $\ens[b]_j \in B$ be two sequences of finite mixtures that converge in $A$ and $B$ respectively. Consider $f(p,\ens[a]_i, \ens[b]_j) = S(p \ens[a]_i + \bar{p} \ens[b]_j) - p S(\ens[a]_i) - \bar{p} S(\ens[b]_j)$. Since all mixtures are orthogonal, $f(p,\ens[a]_i, \ens[b]_j) = I(p,\bar{p})$. Note that $f$ is a continuous function, therefore the limits will also converge to $I(p,\bar{p})$. This means that every element in the closed hull of $A$ is orthogonal to every element in the closed hull of $B$.
 \end{proof}
 \end{mathSection}
+
+TODO: review with Christine
+
+We may want to extend the notion of separate decomposability to orthogonal decomposabilty, though it is not clear whether this will be useful or not. 
+
+\begin{defn}
+	An ensemble is \textbf{orthogonally decomposable} if it can be expressed as a mixture of two orthogonal ensembles. An ensemble is \textbf{orthogonally monodecomposable} if it is both orthogonally decomposable and monodecomposable.
+\end{defn}
+
+\begin{coro}
+	An ensemble that is orthogonally decomposable is also separately decomposable.
+\end{coro}
+
+\begin{proof}
+	Since orthogonality implies separateness \ref{pm_es_orthoProps}, an orthogonal decomposition is also a separate decomposition.
+\end{proof}
+
 
 \section{Affine combinations and vector space embedding}
 
@@ -2736,6 +2773,28 @@ Note, however, that the lattice of $\separate$-subspaces  of the cut triangle is
 
 \section{Open problems}
 
+\subsection{Classicality}
+
+\begin{defn}
+	An ensemble space $\Ens$ is \textbf{reducible} if every decomposable ensemble can be decomposed into ensembles with no common components and ensembles that have no common component are mutually exclusive. That is, it is separately decomposable and separateness implies orthogonality (i.e. $\ens_1 \separate \ens_2$ implies $\ens_1 \ortho \ens_2$).
+\end{defn}
+
+\begin{justification}
+	The idea of reducibility is that we can take ensembles and decompose them into parts that are mutually exclusive. This is the basic expectation in the classical case.
+	
+	If we assume reducibility, then, if an ensemble is a mixture of other ensembles, we must be able to express it as a mixture of separate ensembles. This justifies separate decomposability.
+	
+	Given that $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$, reductibility add the opposite implication. Therefore it excludes the case where two ensembles are orthogonal but not separate. This case describes two ensembles that have elements in common, but there is no ensemble corresponding to those common elements. That is, we cannot refine the ensembles into three separate ones: one with only elements of the first, one with only elements of the second and one with elements of both. In other words, we cannot reduce the coarser description of the system into finer separate descriptions. In the excluded case, then, the coarser description is irreducible into finer ensembles. This justifies that, under reducibility, separate ensemble must be orthogonal.
+\end{justification}
+
+\begin{prop}
+	Continuous and discrete classical ensemble spaces are reducible.
+\end{prop}
+
+\begin{proof}
+	As we saw before, classical ensemble spaces are separately decomposable. We also saw that both separateness and orthogonal both correspond to disjoint support. Therefore separateness implies orthogonality.
+\end{proof}
+
 \subsection{Classical contexts}
 
 One of the issues that still needs to be closed is how to characterize classical spaces and classical contexts within a non-classical theory. Part of the problem is isolating the different parts that may lead to different features that one may consider classical.
@@ -2787,31 +2846,23 @@ In the approach below, it made sense to close not just on convex combinations, b
 	\end{remark}
 \end{mathSection}
 
-\subsubsection{Decomposability}
+\subsubsection{Sets decomposability}
 
-We now want to find a characterization for a classical probability context: a set of ensembles that can be characterized by a family of classical probability measures. For finite discrete spaces, we want to recover the notion of a simplex. In a simplex, every element has a single decomposition in terms of extreme points. This characterization does not work in the continuous case as there are no extreme points. The trick, again, is being able to express this lack of multiple decompositions for finite mixtures.
+We now want to find a characterization for a classical probability context: a set of ensembles that can be characterized by a family of classical probability measures. Since this set can be a subset of, for example, a quantum ensemble space and this property must work recursively, the first step is to restring the notion of decomposability to sets.
 
-%A classical probability context will be a set of ensembles that we will map to a space of measures. From the ensembles we will need to define the points over which the probability are defined, the spectrum of the context (in analogy to the spectrum of a linear operator). The general idea is that these will be limits of ensembles that become more and more concentrated, which will be characterized using tools from order theory and topology. Once the spectrum is defined, we will use the fraction capacity to define the probability measure over the topology of the spectrum.
+\begin{defn}
+	Let $C$ be a convex set. The set is \textbf{separately/orthogonally decomposable} if every element of $C$ that is decomposable in $C$ is also separately/orthogonally decomposable in $C$. The set is \textbf{monodecomposable} if every element in $C$ that is decomposable in $C$ is monodecomposable in $C$. The set is \textbf{separately/orthogonally monodecomposable} if it is both separately/orthogonally decomposable and monodecomposable.
+\end{defn}
 
-%Technical details aside, we want definitions that capture the intuition of spaces of classical probability distributions in a way that works well for infinite dimensional spaces, is compatible with both discrete and continuous classical ensemble spaces but also with measurement contexts in quantum ensemble spaces. It is instructive to go through some of the different attempts to understand why we settled on these definitions, so that one can understand why they work.
+\begin{defn}
+	Let $C$ be a convex set. We say that \textbf{mixtures preserve separateness in $C$} if $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$ implies $\ens \separate p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$.
+\end{defn}
+
+\begin{prop}
+	A convex set $C$ is monodecomposable in $C$ if and only if mixtures preserve separateness in $C$.
+\end{prop}
 
 \begin{mathSection}
-	\begin{defn}
-		An ensemble is \textbf{decomposable} if it can be expressed as a mixture of two distinct ensembles. An ensemble is \textbf{separately/orthogonally decomposable} if it can be expressed as a mixture of two separate/orthogonal ensembles. An ensemble is \textbf{separately multidecomposable} if it can be expressed as two decompositions where a component of one is separate from both components of the other. That is, $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$ and either $\ens[a]_1 \separate \ens[b]_j$ or $\ens[a]_2 \separate \ens[b]_j$.
-	\end{defn}
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.4\textwidth]{tempimages/MultipleDecomposition.jpg}
-	\end{figure}
-	
-	\begin{remark}
-		Take a classical discrete space for three points which is a triangle (simplex). The only three elements that are not decomposable are the extreme points. Mixtures of two points are decomposable and are also separately decomposable in only one way. Mixtures of three points are also separately decomposable, but in multiple ways: as a mixture of $\ens_1$ and a mixture of $\ens_2$ and $\ens_3$, or as a mixture of $\ens_2$ and a mixture of $\ens_1$ and $\ens_3$. Note, however, that they are not separately multidecomposable as the different components are not separate.
-		
-		Take a Bloch ball for quantum mechanics. All the elements of the surface are not decomposable and they are all pairwise separate. The middle point can be seen as the equal mixture of any pair of opposite points. Therefore the middle point, as well as any other point not on the surface, is not only separately decomposable but also multidecomposable.
-		
-		To see why we require only one component to be separate from the other two, consider the cut triangle. Here we can have multiple decompositions where not all elements are separate.
-	\end{remark}
 	
 	\begin{figure}[H]
 		\centering
@@ -2819,9 +2870,11 @@ We now want to find a characterization for a classical probability context: a se
 	\end{figure}
 	
 	\begin{remark}
-		A convex set that is separately decomposable is not necessarily a flat (i.e. triangle within a sphere). A flat is not necessarily separately decomposable (i.e. open segment as a whole is a flat, but is not separately decomposable).
+		A convex set that is separately decomposable is not necessarily a flat (e.g. triangle within a sphere). A flat is not necessarily separately decomposable (e.g. open segment as a whole is a flat, but is not separately decomposable).
 	\end{remark}
 \end{mathSection}
+
+We can now define a classical probability context as a flat that does not allow multiple decompositions. The definition below may still need to be refined. In particular, we may want need to include the requirement of orthogonality during the decomposition for an actual classical context as classical probability implicitly requires that the cases are mutually exclusive. We would need a different name when the requirement is only on the convex structure, like below.
 
 \begin{mathSection}
 	\begin{defn}
@@ -3023,6 +3076,61 @@ Part of an original attempt to square measure and topology, sets with a nowhere 
 
 \subsection{Spectrum of a quantity}
 
+The definition of the spectrum of a quantity (i.e. the allowed values) is still an open problem. We leave here the latest attempt, more for inspiration and reference.
+
+\begin{defn}
+	Let $\Ens$ be an ensemble space and let $F : \Ens \to \mathbb{R}$ be a statistical quantity. Let $x,y \in \mathbb{R}$ such that $x \leq y$. We say $\ens[a]$ is \textbf{within $[x,y]$ of $F$} if $F(\ens) \in [x,y]$ for every component $\ens$ of $\ens[a]$. Analogous definitions apply for intervals bounded only on one side.
+	
+	We say $\ens[a] \in \Ens$ is \textbf{supported by $[x,y]$ of $F$} if:
+	\begin{enumerate}
+		\item $\ens[a]$ is within $[x,y]$ of $F$
+		\item let $\ens$ be in the flat generated by $\ens[a]$ and all ensembles within $(-\infty,x]$, then $F(\ens) \leq F(\ens[a])$
+		\item let $\ens$ be in the flat generated by $\ens[a]$ and all ensembles within $[y, +\infty)$, then $F(\ens[a]) \leq F(\ens)$.
+	\end{enumerate}
+	Analogous definition applies for intervals bounded only on one side.
+	
+	An \textbf{eigenstate} of $F$ is an ensemble $\ens[a] \in \Ens$ that is supported by a singleton $U=[a,a]$, where $a \in \mathbb{R}$ is called the respective \textbf{eigenvalue}. 
+\end{defn}
+
+\begin{prop}
+	Let $\Ens$ be a discrete classical ensemble space over the set of points $X$, and $F$ a statistical quantity. Then $F(X)$ is the set of possible eigenvalues, and an eigenstate is any ensemble that can be expressed as a mixture of points with the same eigenvalue.
+\end{prop}
+
+\begin{proof}
+	First we show that any extreme point $\ens[a] \in \Ens$ is an eigenstate with eigenvalue $F(\ens[a])$. First, we have $F(\ens[a]) \in [F(\ens[a]), F(\ens[a])]$, which satisfies the first condition for the support. Now let $\ens[b] \in \Ens$ be an ensemble within $(-\infty, F(\ens[a])]$. Let $\{\ens_i\}$ be the set of extreme points that are components of $\ens[b]$. Since $\{\ens_i\}$ are components of $\ens[b]$, $F(\ens_i) \leq F(\ens[a])$ since $\ens[b]$ is within $(-\infty, F(\ens[a])]$. Recall that orthogonality, for a classical space, coincides with disjoint support of the probability distribution. Also recall that, in a discrete classical ensemble space, all ensembles can be decomposed in terms of the extreme points. Then $\langle \{\ens[a], \ens[b]\} \rangle_{\ortho}$ is exactly $\hull(\{\ens_i\} \cup \{\ens[a]\})$. Given the linearity of $F$, for any convex combination $\ens$ of $\ens_i$ and $\ens[a]$ we have $F(\ens) \leq F(\ens[a])$. This satisfies the second condition for the support. The argument can be repeated with the upper bound, so the third condition is also satisfies. This means that any extreme point is $\ens[a]$ is an eigenstate of $F$ with eigenvalue $F(\ens[a])$.
+	
+	Note that the above argument works also if $\ens$ is a mixture of eigenstates with the same eigenvalues. 
+	
+	Lastly, we show that any ensemble that is a mixture of two extreme points with different eigenvalue is not an eigenstate.
+	Let $\ens = p \ens[a] + \bar{p} \ens[b]$ be a mixture of two extreme points $\ens[a], \ens[b] \in \Ens$ such that $F(\ens[a]) \neq F(\ens[b])$. Without loss of generality, suppose $F(\ens[a]) < F(\ens[b])$. Given the linearity of $F$, we have $F(\ens[a]) < F(\ens) < F(\ens[b])$. Therefore $\ens$ is not within $[F(\ens),F(\ens)]$, is not supported by $[F(\ens),F(\ens)]$ and therefore is not an eigenstate. This also means that any ensemble of extreme points with different eigenvalue is not an eigenstate.
+\end{proof}
+
+\begin{prop}
+	Let $\Ens$ be a continuous classical ensemble space over the symplectic manifold $X$, and $F$ a statistical quantity. Then $\rho \in \Ens$ is supported by $[x,y]$ of $F$ if and only if the $\int_{[x,y]} \rho d\mu = 1$. Moreover, $a \in \mathbb{R}$ is an eigenvalue if and only if there is an open set $U \subset X$ such that $f^{-1}(a) \supseteq U$ where $f : X \to \mathbb{R}$ is the state variable corresponding to $F$.
+\end{prop}
+
+\begin{proof}
+	Let $F$ be a statistical quantity over a continuous classical ensemble space. Then we can find $f : X \to \mathbb{R}$ such that $F(\rho) = \int_X f \rho d\mu$ for all $\rho \in \Ens$. Given an interval $[x,y] \subseteq \mathbb{R}$, then we can define $U_{[x,y]} = f^{-1}([x,y])$ which can be understood as the set of particle states for which the value of the property is within the bounds. Any probability distribution $\rho$ can be decomposed as
+	$$ \rho = p_{(-\infty, x]} \rho_{(-\infty, x]} + p_{[x,y]} \rho_{[x,y]} + p_{[y,-\infty)} \rho_{[y,-\infty)} $$
+	where
+	\begin{equation}
+		\begin{aligned}
+			p_{(-\infty, x]} &= \int_{U_{(-\infty, x]}} \rho d\mu &
+			p_{[x,y]} &= \int_{U_{[x,y]}} \rho d\mu  &
+			p_{[y,-\infty)} &= \int_{U_{[y,-\infty)}} \rho d\mu \\
+			\rho_{(-\infty, x]} &= \frac{\left.\rho\right|_{U_{(-\infty, x]}}}{p_{(-\infty, x]}} &
+			\rho_{[x,y]} &= \frac{\left.\rho\right|_{U_{[x,y]}}}{p_{[x,y]}} &
+			\rho_{[y,-\infty)} &= \frac{\left.\rho\right|_{U_{[y,-\infty)}}}{p_{[y,-\infty)}}
+		\end{aligned}
+	\end{equation}
+	
+	Suppose the support of $\rho$ is within $U_{[x,y]}$. Then $\int_X \rho d\mu \in [x,y]$. Since any of its components will also have support within $U_{[x,y]}$, the expectation of $f$ for all its components is also within $[x,y]$, within means that $\rho$ is within $[x,y]$ of $F$. Conversely, if the support of $\rho$ is not within $U_{[x,y]}$, then we can find a component whose support is either within $U_{(-\infty, x]}$ or $U_{[y,-\infty)}$. Therefore, $\rho$ is within $[x,y]$ of $F$ if and only if the support of $\rho$ is within $U_{[x,y]}$.
+	
+	Now suppose $\rho$ is within 
+	
+	Now we show that $\rho$ is supported by $[x,y]$ of $F$ if $\rho_f(f) = 0$ for all $f \notin [x,y]$ where $\rho_f$ is the probability density function (PDF) of $F$. Since $\rho$ is a probability measure and $f$ is a random variable, we can define a PDF $\rho_f$. This can also be understood as the marginal of $\rho$ over $f$. If $\phi$ is a component of $\rho$, the corresponding $\phi_f$ will be a component of $\rho_f$. If $\rho$ is supported by $[x,y]$ of $F$, then the expectation of $f$ for any component of $\rho_f$ must be within $[x,y]$. This can only happen if the support of $\rho_f$ is within $[x,y]$, as any component below or above those bounds would have expectation below or above the bounds. Conversely, if the support of $\rho_f$ is within $[x,y]$ Therefore, $\rho$ is within $[x,y]$ of $F$ if $\rho_f(f) = 0$ for all $f \notin [x,y]$ where $\rho_f$
+\end{proof}
+
 \section{Examples}
 
 In this section we explore some examples that appear throughout the discussion to exemplify some corner cases, some wanted and some unwanted.
@@ -3207,122 +3315,7 @@ Since the construction below wants to recover the points of the space from what 
 
 \iftrue
 
-\titledbreak{Experimental section}
-
-
-\section{Separability and sets}
-
-TODO: this should be cleaned up and added in the main text!
-
-Here we try to construct better definitions for separability of sets to generalize the ones we created for probability contexts.
-
-\begin{defn}
-	An ensemble is \textbf{orthogonally decomposable} if it can be expressed as a mixture of two orthogonal ensembles. An ensemble is \textbf{orthogonally monodecomposable} if it is both orthogonally decomposable and monodecomposable.
-\end{defn}
-
-\begin{proof}
-	Since orthogonality implies separateness \ref{pm_es_orthoProps}, an orthogonal decomposition is also a separate decomposition.
-\end{proof}
-
-\begin{coro}
-	An ensemble that is orthogonally decomposable is also separately decomposable.
-\end{coro}
-
-\begin{coro}
-	An ensemble that is orthogonally monodecomposable cannot be expressed as two mixtures where a component of one is orthogonal to both components of the other.
-\end{coro}
-
-
-
-\begin{prop}
-	Let $C$ be a convex set. An ensemble $\ens \in C$ is \textbf{decomposable in $C$} if it can be expressed as a mixture of two ensembles belonging to $C$. Similarly, an ensemble is separately/orthogonally decomposable in $C$ or multidecomposable/monodecomposable in $C$ if the respective mixtures can be made with elements of $C$.
-\end{prop}
-
-\begin{prop}
-	Let $C$ be a convex set. The set is \textbf{always separately/orthogonally decomposable} if every element of $C$ that is decomposable in $C$ is also separately/orthogonally decomposable in $C$. The set is \textbf{monodecomposable} if every element in $C$ is monodecomposable in $C$. The set is \textbf{always separately/orthogonally monodecomposable} if it is both always separately/orthogonally decomposable and monodecomposable.
-\end{prop}
-
-\begin{defn}
-	Let $C$ be a convex set. We say that \textbf{mixtures preserve separateness in $C$} if $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$ implies $\ens \separate p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$.
-	
-	TODO: notation should be clear that is separate in $C$.
-\end{defn}
-
-
-\begin{prop}
-	A convex set $C$ is monodecomposable if and only if mixtures preserve separateness in $C$.
-\end{prop}
-
-\begin{proof}
-	All statements of mixture as assumed in $C$.
-	
-	Suppose mixtures do not preserve separateness. Then we can find $\ens,\ens[a],\ens[b], \ens[c] \in \Ens$ such that $\ens \separate \ens[a]$, $\ens \separate \ens[b]$ and $\ens \nseparate \ens[c] = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1)$. Since $\ens \nseparate \ens[c]$, we can find $\ens[d], \ens[f], \ens[g]$ such that $\ens[c] = \lambda \ens[d] + \bar{\lambda} \ens[f]$ and $\ens = \mu \ens[d] + \bar{\mu} \ens[g]$.  Since separateness extends to all mixtures (\ref{pm_es_separateExtendsMixtures}) and $\ens[a] \separate \ens[e] = \mu \ens[d] + \bar{\mu} \ens[g]$, then $\ens[a] \separate \ens[d]$. Similarly, $\ens[b] \separate \ens[d]$, which means that $\ens[c]$ is separately multidecomposable.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.3\textwidth]{tempimages/MonodecomposabilityIsMixturePreserveSeparateness.jpg}
-\end{figure}
-	
-	Now suppose mixture do preserve separateness, and let $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$. Since $\ens[a]_1$ is a component of $\ens$, then $\ens \nseparate \ens[a]_1$. Since $\ens$ is a mixture of $\ens[b]_1$ and $\ens[b]_2$ and mixtures preserve separateness, then either $\ens[a]_1 \nseparate \ens[b]_1$ or $\ens[a]_1 \nseparate \ens[b]_2$. Similarly, $\ens[a]_2 \nseparate \ens[b]_1$ or $\ens[a]_2 \nseparate \ens[b]_2$. Therefore $\ens$ is not separately multidecomposable.
-\end{proof}
-
-
 \titledbreak{Old notes to be organized}
-
-\section{Spectrum of a quantity}
-
-\begin{defn}
-	Let $\Ens$ be an ensemble space and let $F : \Ens \to \mathbb{R}$ be a statistical quantity. Let $x,y \in \mathbb{R}$ such that $x \leq y$. We say $\ens[a]$ is \textbf{within $[x,y]$ of $F$} if $F(\ens) \in [x,y]$ for every component $\ens$ of $\ens[a]$. Analogous definitions apply for intervals bounded only on one side.
-	
-	We say $\ens[a] \in \Ens$ is \textbf{supported by $[x,y]$ of $F$} if:
-	\begin{enumerate}
-		\item $\ens[a]$ is within $[x,y]$ of $F$
-		\item let $\ens$ be in the flat generated by $\ens[a]$ and all ensembles within $(-\infty,x]$, then $F(\ens) \leq F(\ens[a])$
-		\item let $\ens$ be in the flat generated by $\ens[a]$ and all ensembles within $[y, +\infty)$, then $F(\ens[a]) \leq F(\ens)$.
-	\end{enumerate}
-	Analogous definition applies for intervals bounded only on one side.
-	
-	An \textbf{eigenstate} of $F$ is an ensemble $\ens[a] \in \Ens$ that is supported by a singleton $U=[a,a]$, where $a \in \mathbb{R}$ is called the respective \textbf{eigenvalue}. 
-\end{defn}
-
-\begin{prop}
-	Let $\Ens$ be a discrete classical ensemble space over the set of points $X$, and $F$ a statistical quantity. Then $F(X)$ is the set of possible eigenvalues, and an eigenstate is any ensemble that can be expressed as a mixture of points with the same eigenvalue.
-\end{prop}
-
-\begin{proof}
-	First we show that any extreme point $\ens[a] \in \Ens$ is an eigenstate with eigenvalue $F(\ens[a])$. First, we have $F(\ens[a]) \in [F(\ens[a]), F(\ens[a])]$, which satisfies the first condition for the support. Now let $\ens[b] \in \Ens$ be an ensemble within $(-\infty, F(\ens[a])]$. Let $\{\ens_i\}$ be the set of extreme points that are components of $\ens[b]$. Since $\{\ens_i\}$ are components of $\ens[b]$, $F(\ens_i) \leq F(\ens[a])$ since $\ens[b]$ is within $(-\infty, F(\ens[a])]$. Recall that orthogonality, for a classical space, coincides with disjoint support of the probability distribution. Also recall that, in a discrete classical ensemble space, all ensembles can be decomposed in terms of the extreme points. Then $\langle \{\ens[a], \ens[b]\} \rangle_{\ortho}$ is exactly $\hull(\{\ens_i\} \cup \{\ens[a]\})$. Given the linearity of $F$, for any convex combination $\ens$ of $\ens_i$ and $\ens[a]$ we have $F(\ens) \leq F(\ens[a])$. This satisfies the second condition for the support. The argument can be repeated with the upper bound, so the third condition is also satisfies. This means that any extreme point is $\ens[a]$ is an eigenstate of $F$ with eigenvalue $F(\ens[a])$.
-	
-	Note that the above argument works also if $\ens$ is a mixture of eigenstates with the same eigenvalues. 
-	
-	Lastly, we show that any ensemble that is a mixture of two extreme points with different eigenvalue is not an eigenstate.
-	Let $\ens = p \ens[a] + \bar{p} \ens[b]$ be a mixture of two extreme points $\ens[a], \ens[b] \in \Ens$ such that $F(\ens[a]) \neq F(\ens[b])$. Without loss of generality, suppose $F(\ens[a]) < F(\ens[b])$. Given the linearity of $F$, we have $F(\ens[a]) < F(\ens) < F(\ens[b])$. Therefore $\ens$ is not within $[F(\ens),F(\ens)]$, is not supported by $[F(\ens),F(\ens)]$ and therefore is not an eigenstate. This also means that any ensemble of extreme points with different eigenvalue is not an eigenstate.
-\end{proof}
-
-\begin{prop}
-	Let $\Ens$ be a continuous classical ensemble space over the symplectic manifold $X$, and $F$ a statistical quantity. Then $\rho \in \Ens$ is supported by $[x,y]$ of $F$ if and only if the $\int_{[x,y]} \rho d\mu = 1$. Moreover, $a \in \mathbb{R}$ is an eigenvalue if and only if there is an open set $U \subset X$ such that $f^{-1}(a) \supseteq U$ where $f : X \to \mathbb{R}$ is the state variable corresponding to $F$.
-\end{prop}
-
-\begin{proof}
-	Let $F$ be a statistical quantity over a continuous classical ensemble space. Then we can find $f : X \to \mathbb{R}$ such that $F(\rho) = \int_X f \rho d\mu$ for all $\rho \in \Ens$. Given an interval $[x,y] \subseteq \mathbb{R}$, then we can define $U_{[x,y]} = f^{-1}([x,y])$ which can be understood as the set of particle states for which the value of the property is within the bounds. Any probability distribution $\rho$ can be decomposed as
-	$$ \rho = p_{(-\infty, x]} \rho_{(-\infty, x]} + p_{[x,y]} \rho_{[x,y]} + p_{[y,-\infty)} \rho_{[y,-\infty)} $$
-	where
-	\begin{equation}
-		\begin{aligned}
-			p_{(-\infty, x]} &= \int_{U_{(-\infty, x]}} \rho d\mu &
-			p_{[x,y]} &= \int_{U_{[x,y]}} \rho d\mu  &
-			p_{[y,-\infty)} &= \int_{U_{[y,-\infty)}} \rho d\mu \\
-			\rho_{(-\infty, x]} &= \frac{\left.\rho\right|_{U_{(-\infty, x]}}}{p_{(-\infty, x]}} &
-			\rho_{[x,y]} &= \frac{\left.\rho\right|_{U_{[x,y]}}}{p_{[x,y]}} &
-			\rho_{[y,-\infty)} &= \frac{\left.\rho\right|_{U_{[y,-\infty)}}}{p_{[y,-\infty)}}
-		\end{aligned}
-	\end{equation}
-	
-	Suppose the support of $\rho$ is within $U_{[x,y]}$. Then $\int_X \rho d\mu \in [x,y]$. Since any of its components will also have support within $U_{[x,y]}$, the expectation of $f$ for all its components is also within $[x,y]$, within means that $\rho$ is within $[x,y]$ of $F$. Conversely, if the support of $\rho$ is not within $U_{[x,y]}$, then we can find a component whose support is either within $U_{(-\infty, x]}$ or $U_{[y,-\infty)}$. Therefore, $\rho$ is within $[x,y]$ of $F$ if and only if the support of $\rho$ is within $U_{[x,y]}$.
-	
-	Now suppose $\rho$ is within 
-	
-	Now we show that $\rho$ is supported by $[x,y]$ of $F$ if $\rho_f(f) = 0$ for all $f \notin [x,y]$ where $\rho_f$ is the probability density function (PDF) of $F$. Since $\rho$ is a probability measure and $f$ is a random variable, we can define a PDF $\rho_f$. This can also be understood as the marginal of $\rho$ over $f$. If $\phi$ is a component of $\rho$, the corresponding $\phi_f$ will be a component of $\rho_f$. If $\rho$ is supported by $[x,y]$ of $F$, then the expectation of $f$ for any component of $\rho_f$ must be within $[x,y]$. This can only happen if the support of $\rho_f$ is within $[x,y]$, as any component below or above those bounds would have expectation below or above the bounds. Conversely, if the support of $\rho_f$ is within $[x,y]$ Therefore, $\rho$ is within $[x,y]$ of $F$ if $\rho_f(f) = 0$ for all $f \notin [x,y]$ where $\rho_f$
-\end{proof}
 
 \section{Expectation values and measure}
 
@@ -3424,34 +3417,6 @@ Here we try to construct better definitions for separability of sets to generali
 
 \section{Reducibility}
 
-\subsection{Reducible ensemble spaces}
-
-\begin{defn}
-	An ensemble space $\Ens$ is \textbf{reducible} if separate ensembles are also orthogonal. That is, $\ens_1 \separate \ens_2$ implies $\ens_1 \ortho \ens_2$.
-\end{defn}
-
-\begin{justification}
-	Given that $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$, classical spaces add the opposite implication. Therefore they exclude the case where two ensembles are orthogonal but not separate. This case describes two ensembles that have elements in common, but there is no ensemble corresponding to those common elements. That is, we cannot refine the ensembles into three separate ones: one with only elements of the first, one with only elements of the second and one with elements of both. In other words, we cannot reduce the coarser description of the system into finer separate descriptions. In the excluded case, then, the coarser description is irreducible into finer ensembles. This justifies the definition.
-	
-	As we prove below, that case does not exist in classical mechanics, but exists in quantum mechanics. This justifies calling the property classical.
-\end{justification}
-
-\begin{prop}
-	Continuous and discrete classical ensemble spaces are reducible.
-\end{prop}
-
-\begin{proof}
-	In both cases, ensembles are probability measures: the first over the Borel algebra of a symplectic manifold; the second over the power set of countably many elements. In both cases, the upper bound of the entropy is maximized if and only if the probability measures being combined have disjoint support. This means that two ensembles are orthogonal if and only if the respective probability measures have disjoint support. Intuitively, two probability distributions can have a common sub-distribution if and only if they overlap. Therefore two ensembles representing probability measures with disjoint support are exactly ensembles that are separate. Therefore, in both cases, the ensemble space is reducible.
-\end{proof}
-
-\begin{conj}
-	An ensembles space is reducible only if it is classical.
-\end{conj}
-
-\begin{remark}
-	The reverse direction cannot, in general, work. Take the subspace of a finite classical discrete ensemble space such the maximum probability of any element is $k < 1$. This corresponds to a simplex of the same dimension, with the same center, but scaled in the interior. Given that it is a convex subset of an ensemble space, it will satisfy all the axioms, except it will contain no orthogonal ensembles. Yet, it contains separate ensembles, which cannot be orthogonal.
-\end{remark}
-
 \section{Ensemble subspaces}
 
 We now want to define a notion of subspace in a way that recovers the notions of subspaces we have in both classical and quantum mechanics. Given that orthogonality of subspaces in all three cases corresponds to ensembles saturate the upper entropy bound (i.e. orthogonal in the sense of the entropy), we will define the notion of subspaces based on the entropy.
@@ -3523,37 +3488,6 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 	Let $\Ens$ be a quantum ensemble space. Then each ensemble is a density operator defined over a Hilbert space $\mathcal{H}$. Consider two density operators. They will be orthogonal, that is the entropy increase is maximal, if and only if they are defined on orthogonal subspaces of $\mathcal{H}$. That is, $\ens_1 | \psi \> \neq 0$ only if $\ens_2 | \psi \> = 0$ and vice-versa. Therefore $X$ contains exactly all the mixed states whose support is a subspace of $\mathcal{H}$.
 \end{proof}
 
-\subsection{Statistical properties and quantities}
-
-
-
-\subsection{State capacity of ensemble spaces}
-
-%TODO: since we use X for subspaces, we should use some other letter (M?) for the classical manifold
-
-\begin{prop}
-	Let $\Ens$ be a continuous classical theory and $X \subseteq \Ens$ an ensemble subspace. Then $\scap(X)$ is the cardinality of the set $A \subseteq M$ of pure states associated to $X$. That is, $\scap(X) = \#A$.
-\end{prop}
-
-\begin{proof}
-	If $X$ is the set of all probability distributions over $n$ cases, the distribution with highest entropy is achieved by a continuous distribution and will be $S(p_i) = \log n$. Therefore the dimension of $X$ will be $n$.
-\end{proof}
-
-\begin{prop}
-	Let $\Ens$ be a continuous classical theory and $X \subseteq \Ens$ an ensemble subspace. Then $\scap(X)$ is the Liouville measure of the set $A \subseteq M$ associated to $X$. That is, $\scap(X) = \mu(A)$.
-\end{prop}
-
-\begin{proof}
-	Let $X \subseteq \Ens$ be an ensemble subspace and $A \subseteq M$ the associated regular open set. The highest entropy reachable by a distribution with support $A$ is $\log \mu(A)$ which corresponds to the uniform distribution. Therefore $\scap(X) = \mu(A)$.
-\end{proof}
-
-\begin{prop}
-	Let $\Ens$ be a quantum ensemble space and $X \subseteq \Ens$ an ensemble subspace. Then $\scap(X)$ is the dimension of the corresponding Hilbert subspace.
-\end{prop}
-
-\begin{proof}
-	Since $X$ is a subspace of a quantum ensemble space, $X$ is the set of mixed state whose support is a subspace of the corresponding Hilbert space. If it is finite dimensional, the ensemble with maximal entropy will correspond to the maximally mixed state $I/n$ where $n$ is the dimension of the subspace. The entropy will be given by $\log n$, which means $\scap(U) = n$. If $U$ is infinite dimensional, then there is no upper bound to the entropy and $\scap(U) = + \infty$.
-\end{proof}
 
 \subsection{Orthogonal decomposability}
 
@@ -3620,42 +3554,6 @@ We will now use the previous results where $X$ is an ensemble space and $R$ is t
 
 \begin{conj}
 	An ensemble space $\Ens$ is orthogonally decomposable if and only if every ensemble is compatible with some context.
-\end{conj}
-
-\section{Possible values of variables and spectrum}
-
-\begin{defn}
-	Let $C$ be a context. An \textbf{spectral element} of $C$ is a non-empty collection of subspaces $c \subset C$ such that
-	\begin{enumerate}
-		\item if $\{X_i\}_{i \in I} \in s$ then $\bigcap_{i \in I} X_i \in s$
-		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $X \subseteq Y$, then $Y \in s$
-		\item if $X \in s$ and $Y \in \mathfrak{L}$ such that $Y \subset X$ and $Y \neq \emptyset$, then there exists $Z \in s$ such that $Z \subset X$.
-	\end{enumerate}
-	The set of all elements of the context is called the \textbf{spectrum} of the context and is noted $\sigma(C)$.
-\end{defn}
-
-\begin{remark}
-	The above should correspond to an \href{https://en.wikipedia.org/wiki/Ultrafilter}{ultrafilter}.
-\end{remark}
-
-\begin{defn}
-	Let $C$ be a context and $X \in C$ be a subspace. A \textbf{spectral element} of $X$ is a spectral element $c \in \sigma(C)$ such that $X \in c$. The \textbf{spectral set} of $X$ is the collection of all its spectral elements. The standard topology of the spectrum $\sigma(C)$ is the one generated by the spectral sets of all subspaces $X \in C$.
-\end{defn}
-
-\begin{defn}
-	The set of states of a subspace $X \in \mathfrak{L}$ is the set $\support(X) = \{ s \in S(\Ens) \, | \, X \in s \}$. The topology of the pure states is the topology over the set of pure states generated by the set of states of all subspaces.
-\end{defn}
-
-\begin{conj}
-	Let $\Ens$ be a classical continuous ensemble space. Then $\sigma(\mathcal{L})$is the phase space manifold with the standard topology.
-\end{conj}
-
-\begin{conj}
-	TODO: Corresponding quantum case
-\end{conj}
-
-\begin{conj}
-	We can define a context from a statistical variable such that the spectrum corresponds to the possible values of the variable.
 \end{conj}
 
 \fi
