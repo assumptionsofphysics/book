@@ -2714,7 +2714,7 @@ We now show that if we start with the mere notion of orthogonality defined from 
 	\end{proof}
 \end{mathSection}
 
-\subsubsection{Separate and orthogonal subspaces}
+\subsection{Separate and orthogonal subspaces}
 
 Since orthogonality and separateness are irreflexive symmetric operations, they will both give a lattice of subspaces. Here we present a series of conjectures about these subspaces that we have yet to prove.
 
@@ -2773,45 +2773,12 @@ Note, however, that the lattice of $\separate$-subspaces  of the cut triangle is
 
 \section{Open problems}
 
-\subsection{Classicality}
-
-\begin{defn}
-	An ensemble space $\Ens$ is \textbf{reducible} if every decomposable ensemble can be decomposed into ensembles with no common components and ensembles that have no common component are mutually exclusive. That is, it is separately decomposable and separateness implies orthogonality (i.e. $\ens_1 \separate \ens_2$ implies $\ens_1 \ortho \ens_2$).
-\end{defn}
-
-\begin{justification}
-	The idea of reducibility is that we can take ensembles and decompose them into parts that are mutually exclusive. This is the basic expectation in the classical case.
-	
-	If we assume reducibility, then, if an ensemble is a mixture of other ensembles, we must be able to express it as a mixture of separate ensembles. This justifies separate decomposability.
-	
-	Given that $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$, reductibility add the opposite implication. Therefore it excludes the case where two ensembles are orthogonal but not separate. This case describes two ensembles that have elements in common, but there is no ensemble corresponding to those common elements. That is, we cannot refine the ensembles into three separate ones: one with only elements of the first, one with only elements of the second and one with elements of both. In other words, we cannot reduce the coarser description of the system into finer separate descriptions. In the excluded case, then, the coarser description is irreducible into finer ensembles. This justifies that, under reducibility, separate ensemble must be orthogonal.
-\end{justification}
-
-\begin{prop}
-	Continuous and discrete classical ensemble spaces are reducible.
-\end{prop}
-
-\begin{proof}
-	As we saw before, classical ensemble spaces are separately decomposable. We also saw that both separateness and orthogonal both correspond to disjoint support. Therefore separateness implies orthogonality.
-\end{proof}
-
-\subsection{Classical contexts}
-
-One of the issues that still needs to be closed is how to characterize classical spaces and classical contexts within a non-classical theory. Part of the problem is isolating the different parts that may lead to different features that one may consider classical.
-
-For example, finite discrete classical spaces are simplexes such that all extreme points are orthogonal to each other and have zero entropy. One may have a simplex where all extreme points are orthogonal, though the extreme points have different entropy. All features of a classical theory are there, expect that the entropy function has to be corrected to $S(\ens) = I(p_i) \sum_i p_i S(x_i)$. A weaker case is when the ensemble space may be a simplex, but the extreme points are not orthogonal.
-
-Whatever definition we may choose, it will need to work for the classical continuous case. Given that classical phase space is not, in general compact, the space of probability distribution is not a Choquet simplex. Moreover, even if we restrict to ourselves to the compact case, the Dirac measures cannot be in the ensemble space, as their entropy is minus infinity. 
-
-We will also want to define a classical context within a non-classical theory, to handle recovering classical probability for measurement outcomes. The basic idea is that a set of orthogonal states will form a simplex, so we can understand projection measurement as moving the system to one of those states. Ideally, a classical context should be a subset of an ensemble space that is a classical ensemble space. Again, one may want to differentiate the three cases: just a simplex, a simplex with orthogonal extreme points, or a simplex with orthogonal extreme points with the same entropy. An additional problem is the multiplicity of extreme points for the same measurement outcome. In that case, the set of post-measurement ensembles are not a simplex. It may be that the correct definition for a classical context would be the domain of a map to simplex that preserves orthogonality.
-
-A core insight is that simplexes do not admit multiple decomposition, therefore we have been looking for a definition in that sense. While we believe we have some partial results, these are elements that need to be revisited. We include them here as they may be useful, even as an anti-example.
-
 \subsubsection{Flats and affine combinations}
 
-In the approach below, it made sense to close not just on convex combinations, but all affine combinations. That is, if $\ens[a] = p \ens[b] + \bar{p} \ens[c]$ and two of the ensembles are in the set, then the other one is in the set as well. This allows us to get all the ensembles in the same hyperplane. We call this a flat. In the triangle example, the only flats available are the single vertexes, each side and the whole triangle. For the Bloch ball, if we took two elements, we would get the whole segment that connects them and extends to the surface. But if we get three points, we get a circle, which is not a simplex. This affine closure, essentially, allows us to remove ``ensembles from each other'' as much as possible, so that we can get to their most distinct, most separate, form.
+In some cases, it may useful to define sets closed under affine combinations instead of convex combinations. That is, if $\ens[a] = p \ens[b] + \bar{p} \ens[c]$ and two of the ensembles are in the set, then the other one is in the set as well. This allows us to get all the ensembles in the same hyperplane. We call this a flat. In the triangle example, the only flats available are the single vertexes, each side and the whole triangle. For the Bloch ball, if we took two elements, we would get the whole segment that connects them and extends to the surface. But if we get three points, we get a circle, which is not a simplex. This affine closure, essentially, allows us to remove ``ensembles from each other'' as much as possible, so that we can get to their most distinct, most separate, form.
 
-\begin{mathSection}
+It still needs to be understood what the best definition for flat is, their relationship with the topological closure, define a corresponding hull and so on. The following definition represent an early attempt that needs to be revised and finalized.
+
 	\begin{defn}
 		A \textbf{simplex} is a subset $U \subset \mathbb{R}^n$ that is the hull of finitely many affinely independent points. That is, $U = \hull(\{x_i\}_{i=0}^{n})$ such that $\{x_i - x_0\}_{i=1}^{n}$ are linearly independent.
 	\end{defn}
@@ -2844,11 +2811,53 @@ In the approach below, it made sense to close not just on convex combinations, b
 	\begin{remark}
 		In classical discrete ensemble spaces, any flat is a simplex. In classical continuous ensemble spaces, infinite dimensional flats will depend on what limits are allowed. In a quantum ensemble space, if we take three ensembles inside a Bloch ball, the corresponding flat will be a circle. If we take three orthogonal pure states, however, the corresponding flat will be a simplex.
 	\end{remark}
-\end{mathSection}
+
+
+\subsection{Reducibility}
+
+Another open question is the right characterization of classical spaces and classical contexts within a non-classical theory. Part of the problem is isolating the different parts that may lead to different features that one may consider classical.
+
+For example, finite discrete classical spaces are simplexes such that all extreme points are orthogonal to each other and have zero entropy. One may have a simplex where all extreme points are orthogonal, though the extreme points have different entropy. All features of a classical theory are there, expect that the entropy function has to be corrected to $S(\ens) = I(p_i) \sum_i p_i S(x_i)$. A weaker case is when the ensemble space may be a simplex, but the extreme points are not orthogonal.
+
+The definition will need to work for the classical continuous case. Given that classical phase space is not, in general compact, the space of probability distribution is not a Choquet simplex. Moreover, even if we restrict to ourselves to the compact case, the Dirac measures cannot be in the ensemble space, as their entropy is minus infinity. 
+
+We will also want to define a classical context within a non-classical theory, to handle recovering classical probability for measurement outcomes. The basic idea is that a set of orthogonal states will form a simplex, so we can understand projection measurement as moving the system to one of those states. Ideally, a classical context should be a subset of an ensemble space that is a classical ensemble space. Again, one may want to differentiate the three cases: just a simplex, a simplex with orthogonal extreme points, or a simplex with orthogonal extreme points with the same entropy. An additional problem is the multiplicity of extreme points for the same measurement outcome. In that case, the set of post-measurement ensembles are not a simplex. It may be that the correct definition for a classical context would be the domain of a map to simplex that preserves orthogonality.
+
+The general idea is that classical spaces allow ensembles to be decomposed into mutually exclusive, orthogonal, ensembles. If two ensembles have no common component, it is because they have no elements in common and are therefore mutually exclusive.
+
+\begin{defn}
+	An ensemble space $\Ens$ is \textbf{reducible} if every decomposable ensemble can be decomposed into ensembles with no common components and ensembles that have no common component are mutually exclusive. That is, it is separately decomposable and separateness implies orthogonality (i.e. $\ens_1 \separate \ens_2$ implies $\ens_1 \ortho \ens_2$).
+\end{defn}
+
+\begin{justification}
+	The idea of reducibility is that we can take ensembles and decompose them into parts that are mutually exclusive. This is the basic expectation in the classical case.
+	
+	If we assume reducibility, then, if an ensemble is a mixture of other ensembles, we must be able to express it as a mixture of separate ensembles. This justifies separate decomposability.
+	
+	Given that $\ens_1 \ortho \ens_2$ implies $\ens_1 \separate \ens_2$, reductibility add the opposite implication. Therefore it excludes the case where two ensembles are orthogonal but not separate. This case describes two ensembles that have elements in common, but there is no ensemble corresponding to those common elements. That is, we cannot refine the ensembles into three separate ones: one with only elements of the first, one with only elements of the second and one with elements of both. In other words, we cannot reduce the coarser description of the system into finer separate descriptions. In the excluded case, then, the coarser description is irreducible into finer ensembles. This justifies that, under reducibility, separate ensemble must be orthogonal.
+\end{justification}
+
+\begin{prop}
+	Continuous and discrete classical ensemble spaces are reducible.
+\end{prop}
+
+\begin{proof}
+	As we saw before, classical ensemble spaces are separately decomposable. We also saw that both separateness and orthogonal both correspond to disjoint support. Therefore separateness implies orthogonality.
+\end{proof}
+
+What we need to prove is that every reducible ensemble space can be represented by a subspace of probability measures. The strategy would be to prove the following series of conjectures. The lattice of $\ortho$-subspaces $\mathfrak{L}^{\ortho}$ forms a Boolean algebra. Using Stone's representation theorem for Boolean algebras, there is a set $X$ and $\mathfrak{L}^{\ortho}$ correspond to the clopen sets, and orthogonal subspaces correspond to disjoint sets. Set functions over clopen sets can be extended to the Borel algebra of $X$. Since the state capacity is additive over orthogonal sets, it is an additive set function when defined to the Borel algebra of $X$ and, therefore, it is a measure. Similarly, one finds that the fraction capacity becomes additive, and, given its other properties, it is a probability measure over $X$. Additionally, since every ensemble has a finite entropy and the state capacity gives us the supremum of the exponential of the entropy, the fraction capacity for a set of measure zero (i.e. minus infinity entropy) must be zero (i.e. no component can exist). 
+
+\begin{conj}
+	Every reducible ensemble space can be represented by a space of probability measures. That is, given a reducible ensemble space $\Ens$ there is a topological space $X$ such that each $\ens \in \Ens$ is represented by a unique probability measure $p_{\ens}$ over $X$ that is absolutely continuous with a measure $\mu$ over $X$.
+\end{conj}
+
+\subsection{Classical contexts}
+
+Classical contexts represent subsets of ensemble spaces that can be understood as classical regions. There is again the difference of just considering the convex structure (i.e. they form a simplex) or also add the entropic structure (i.e. separate ensembles are orthogonal). In the attempt below, we chose to only use the convex structure. These are still rough ideas that may need to be refined.
 
 \subsubsection{Sets decomposability}
 
-We now want to find a characterization for a classical probability context: a set of ensembles that can be characterized by a family of classical probability measures. Since this set can be a subset of, for example, a quantum ensemble space and this property must work recursively, the first step is to restring the notion of decomposability to sets.
+Since contexts set can be a subset of, for example, a quantum ensemble space and this property must work recursively, the first step is to restring the notion of decomposability to sets.
 
 \begin{defn}
 	Let $C$ be a convex set. The set is \textbf{separately/orthogonally decomposable} if every element of $C$ that is decomposable in $C$ is also separately/orthogonally decomposable in $C$. The set is \textbf{monodecomposable} if every element in $C$ that is decomposable in $C$ is monodecomposable in $C$. The set is \textbf{separately/orthogonally monodecomposable} if it is both separately/orthogonally decomposable and monodecomposable.
@@ -2862,8 +2871,6 @@ We now want to find a characterization for a classical probability context: a se
 	A convex set $C$ is monodecomposable in $C$ if and only if mixtures preserve separateness in $C$.
 \end{prop}
 
-\begin{mathSection}
-	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.4\textwidth]{tempimages/SeparableButNotFlat.jpg}
@@ -2872,7 +2879,6 @@ We now want to find a characterization for a classical probability context: a se
 	\begin{remark}
 		A convex set that is separately decomposable is not necessarily a flat (e.g. triangle within a sphere). A flat is not necessarily separately decomposable (e.g. open segment as a whole is a flat, but is not separately decomposable).
 	\end{remark}
-\end{mathSection}
 
 We can now define a classical probability context as a flat that does not allow multiple decompositions. The definition below may still need to be refined. In particular, we may want need to include the requirement of orthogonality during the decomposition for an actual classical context as classical probability implicitly requires that the cases are mutually exclusive. We would need a different name when the requirement is only on the convex structure, like below.
 
@@ -2977,7 +2983,7 @@ We can now define a classical probability context as a flat that does not allow 
 
 \subsubsection{Probability measures from classical probability contexts}
 
-The next step is to show that each ensemble in a classical probability context can be understood as a probability measure and vice-versa. The issue is how to recover the set of points, the spectrum $\sigma(C)$ of the context, and its topology and $\sigma$-algebra $\Sigma_{\sigma(C)}$. This is still an open problem.
+The next step is to show that each ensemble in a classical probability context can be understood as a probability measure and vice-versa. The issue is how to recover the set of points, the spectrum $\sigma(C)$ of the context, and its topology and $\sigma$-algebra $\Sigma_{\sigma(C)}$. This is still an open problem. The Stone's representation theorem can be used as a fallback, though it does not recover the correct points.
 
 \begin{conj}
 	Let $C \subseteq \Ens$ be a probability context and $\ens \in C$ be an ensemble in the context. The set function $p_{\ens} : \Sigma_{\sigma(C)} \to[0,1]$, defined such that $p^*_{\ens}(U) = \inf(\{ \fcap_{\ens}(A) \, | \, \sigma(A) \supseteq U \})$, is a measure. Therefore each ensemble of a probability context is associated with a unique measure over the spectrum.
