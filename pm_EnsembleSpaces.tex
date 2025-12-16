@@ -479,21 +479,17 @@ We now define the notions of separateness: two ensembles are separate, noted $\e
 	
 	6. Since an internal point cannot be separate from any ensemble, then two ensembles that are separate are not internal points, and therefore are boundary points.
 \end{proof}
-\end{mathSection}
-
-TODO: review with Christine
 
 \begin{prop}
-	Let $\Ens$ be a discrete or classical ensemble space. Then $\ens[a] \separate \ens[b]$ if and only if they correspond to measures with disjoint support.
+	Let $\Ens$ be a discrete or continuous classical ensemble space and let $\ens[a], \ens[b] \in \Ens$ be two probability measures over the corresponding sample space $X$. Then $\ens[a] \separate \ens[b]$ if and only if they have disjoint support.
 \end{prop}
 
 \begin{proof}
-	Note that the support of a convex combination of probability measures is the union of the support of the measures. Since we are restricting ourselves to probability measures that are absolutely continuous with respect with a measure $\mu$, if $p$ has support $U$, any measure $\lambda$ with support on a compact subset $V \subseteq U$ such that $\mu(V) \neq 0$ is a component of $p$. 
+	Note that the support of a convex combination of probability measures is the union of the support of the measures. Since we are restricting ourselves to probability measures that are absolutely continuous with respect to a measure $\mu$, if a probability measure $\ens[a]$ has support $U$, any probability measure $\ens[b]$ with support on a compact subset $V \subseteq U$ such that $\mu(V) \neq 0$ is a component of $\ens[a]$.
 	
-	Let $\ens[a], \ens[b] \in \Ens$ be two probability measures over the corresponding $X$ absolutely continuous with the corresponding $\mu$. Suppose $\ens[a]$ and $\ens[b]$ have overlapping support. The we can find a compact subset $U$ such that $\mu(U) \neq 0$ and is a subset of the intersection of their supports. Therefore, we can find a probability measure that is a component of both. Conversely, suppose they have disjoint support. Then they cannot have a common component, as the support of the common component would have to a non-empty subset of both supports.
+	Let $\ens[a], \ens[b] \in \Ens$ be two probability measures over the sample space $X$ that are absolutely continuous with respect to the corresponding $\mu$. Suppose $\ens[a]$ and $\ens[b]$ have overlapping support. The we can find a compact subset $U$ such that $\mu(U) \neq 0$ and is a subset of the intersection of their supports. Therefore, we can find a probability measure that is a component of both. Conversely, suppose they have disjoint support. Then they cannot have a common component, as the support of the common component would have to be a non-empty subset of both supports.
 \end{proof}
-
-----
+\end{mathSection}
 
 A key property of separateness is its relationship with mixtures. If an ensemble is separate from a mixture of two elements, it is separate from both elements and all their mixtures.
 
@@ -522,17 +518,11 @@ A key property of separateness is its relationship with mixtures. If an ensemble
 	We can repeat the argument switching $\ens_1$ with $\ens_2$ and find $\ens \separate \alpha \ens_1 + \bar{\alpha} \ens_2$ for all $\alpha \in [0, 1]$.
 \end{proof}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.3\textwidth]{tempimages/MixturesDoNotPreserveSeparateness.jpg}
-\end{figure}
-
 \end{mathSection}
-
-TODO: review with Christine
 
 While separateness extends to mixtures, the converse property (i.e. mixtures preserve separateness) is not necessarily true. While it is true for classical spaces, it is not true for quantum spaces. This converse property is, in effect, a telltale of classicality.
 
+\begin{mathSection}
 \begin{defn}
 	Let $\Ens$ be an ensemble space. We say that \textbf{mixtures preserve separateness in $\Ens$} if $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$ implies $\ens \separate p \ens[a] + \bar{p} \ens[b]$ for all $p \in [0,1]$ and $\ens, \ens[a], \ens[b] \in \Ens$.
 \end{defn}
@@ -545,6 +535,11 @@ While separateness extends to mixtures, the converse property (i.e. mixtures pre
 	Let $\Ens$ be a discrete or continuous classical ensemble space. Let $\ens, \ens[a], \ens[b] \in \Ens$ such that $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$. Then the support of $\ens$ is disjoint from the support of both $\ens[a]$ and $\ens[b]$. Since the support of a mixture of $\ens[a]$ and $\ens[b]$ is the union of the supports, $\ens$ has disjoint support from every mixture of $\ens[a]$ and $\ens[b]$. This means that mixtures preserve separateness in discrete/continuous classical ensemble spaces.
 \end{proof}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{tempimages/MixturesDoNotPreserveSeparateness.jpg}
+\end{figure}
+
 \begin{prop}
 	Mixtures do not preserve separateness in quantum ensemble spaces
 \end{prop}
@@ -552,15 +547,17 @@ While separateness extends to mixtures, the converse property (i.e. mixtures pre
 \begin{proof}
 	Let $\Ens$ be a quantum ensemble space. Let $\ens[a], \ens[b] \in \Ens$ be two orthogonal pure states and let $\ens[e] \in \Ens$ be another pure state that is the superposition of the two. These three states will be extreme points of a Bloch ball. Since they are all pure states, they are all extreme points and therefore are pairwise separate. Consider $\ens[o] = \frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]$. This will be the center of the Bloch ball and will not be separate from $\ens$. Therefore mixtures do not preserve separateness in $\Ens$.
 \end{proof}
+\end{mathSection}
 
 \subsection{Decomposability}
 
-Since mixture preserving separateness is a telletale of classicality, it is insightful to find an alternative characterization. One of the different between classical and quantum ensemble spaces is that quantum ensembles allow multiple decomposition in terms of pure states. We see here that, in fact, the lack of multiple decomposition is equivalent to mixture preserving separateness.
+Since mixture preserving separateness is a telltale of classicality, it is insightful to find an alternative characterization. One of the differences between classical and quantum ensemble spaces is that quantum ensembles allow multiple decomposition in terms of pure states. We see here that, in fact, the lack of multiple decomposition is equivalent to mixture preserving separateness.
 
-Note that, since a continuous classical ensemble space has no extreme points, we have to find a definition of multiple decomposability that makes no reference to the extreme points. Like for the definition of the entropy, we need to find a definition on mixtures of two elements that, when applied recursively, gives us the desired effect. The idea here that we will always have multiple decompositions in terms of over ensembles, but in classical spaces we cannot have multiple decomposition where all elements of one have no common components with one element of the other. So, if we start breaking an ensemble in separate components, while we may take different paths, we will reach the same final decomposition. \footnote{There is an open issue as it is not clear whether we want to require actual separate decomposition or separate decomposition in the limit. In the continuous classical case, for example, it is not clear whether we should require probability densities to be continuous or not. If continuity is required, a probability density cannot be split into two probability densities with disjoint support without creating a discontinuity. However, we may think of a sequence of decomposition into three, one with support $A$, one with support $B$ and one with support on both. In the limit, the mixing coefficient for the third becomes smaller and small, meaning that the first two approach a discontinuous one.}
+Note that, since a continuous classical ensemble space has no extreme points, we have to find a definition of multiple decomposability that makes no reference to the extreme points. Like for the definition of the entropy, we need to find a definition on mixtures of two elements that, when applied recursively, gives us the desired effect. The idea here is that we will always have multiple decompositions in terms of other ensembles, but in classical spaces we cannot have multiple decompositions where one element of the first decomposition has no common components with all elements of the second. So, if we start breaking an ensemble into separate components, while we may take different paths, we will reach the same final decomposition in terms of extreme points, if they exist.\footnote{There is an open issue as it is not clear whether we want to require actual separate decomposition or separate decomposition in the limit. In the continuous classical case, for example, it is not clear whether we should require probability densities to be continuous or not. If continuity is required, a probability density cannot be split into two probability densities with disjoint support without creating a discontinuity. However, we may think of a sequence of decomposition into three, one with support $A$, one with support $B$ and one with support on both. In the limit, the mixing coefficient for the third becomes smaller and smaller, meaning that the first two approach a discontinuous distribution.}
 
+\begin{mathSection}
 \begin{defn}
-	An ensemble is \textbf{decomposable} if it can be expressed as a mixture of two distinct ensembles. An ensemble is \textbf{separately decomposable} if it can be expressed as a mixture of two separate ensembles. An ensemble is \textbf{multidecomposable} if it can be expressed as two decompositions where a component of one is separate from both components of the other. That is, $\ens = \lambda \ens[a]_1 + \bar{\lambda} \ens[a]_2 = \mu \ens[b]_1 +\bar{\mu} \ens[b]_2$ and either $\ens[a]_1 \separate \ens[b]_j$ or $\ens[a]_2 \separate \ens[b]_j$. An ensemble is \textbf{monodecomposable} if it is not multidecomposable. An ensemble is \textbf{separately monodecomposable} if it is both separately decomposable and monodecomposable.
+	An ensemble is \textbf{decomposable} if it can be expressed as a mixture of two distinct ensembles. An ensemble is \textbf{separately decomposable} if it can be expressed as a mixture of two separate ensembles. An ensemble is \textbf{multidecomposable} if it can be expressed as two decompositions where a component of one is separate from both components of the other. That is, $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$ and either $\ens[a]_1 \separate \ens[b]_j$ or $\ens[a]_2 \separate \ens[b]_j$. An ensemble is \textbf{monodecomposable} if it is not multidecomposable. An ensemble is \textbf{separately monodecomposable} if it is both separately decomposable and monodecomposable.
 \end{defn}
 	
 \begin{figure}[H]
@@ -581,11 +578,11 @@ Note that, since a continuous classical ensemble space has no extreme points, we
 \end{coro}
 
 \begin{proof}
-	If $\ens \in \Ens$ is decomposable, then it has at least to distinct components, one of which must not be $\ens$. Since an extreme point as only itself as a component, then $\ens$ is not an extreme point. Conversely, if $\ens$ is an extreme point, it cannot be the mixture of two distinct components as $\ens$ has only itself as a component.
+	If $\ens \in \Ens$ is decomposable, then it has at least two distinct components, one of which must not be $\ens$. Since an extreme point has only itself as a component, then $\ens$ is not an extreme point. Conversely, if $\ens$ is an extreme point, it cannot be the mixture of two distinct components as $\ens$ has only itself as a component.
 \end{proof}
 
 \begin{defn}
-	An ensemble space is \textbf{separately decomposable} if every decomposable ensemble is separately decomposable, \textbf{multidecomposable} if every decomposable ensemble is multidecomposable, and \textbf{monodecomposable} if every decomposable ensemble is monodecomposable and \textbf{separately monodecomposable} if it is both separately decomposable and monodecomposable.
+	An ensemble space is \textbf{separately decomposable} if every decomposable ensemble is separately decomposable, \textbf{multidecomposable} if every decomposable ensemble is multidecomposable, \textbf{monodecomposable} if every decomposable ensemble is monodecomposable and \textbf{separately monodecomposable} if it is both separately decomposable and monodecomposable.
 \end{defn}
 
 \begin{prop}
@@ -593,30 +590,31 @@ Note that, since a continuous classical ensemble space has no extreme points, we
 \end{prop}
 
 \begin{proof}
-	For a classical ensemble space, only Dirac measure are not decomposable. For a discrete classical space, every measure that is not the Dirac measure is the mixture of two measures with disjoint support. For a continuous classical space, there are no extreme points, and any absolutely continuous measure is the mixture of two absolutely continuous measures with disjoint support. Since measure with disjoint support are separate, every decomposable ensemble is separately decomposable.
+	For a classical ensemble space, only Dirac measures are not decomposable. For a discrete classical space, every measure that is not the Dirac measure is the mixture of two measures with disjoint support. For a continuous classical space, there are no extreme points, and any absolutely continuous measure is the mixture of two absolutely continuous measures with disjoint support. Since measures with disjoint support are separate, every decomposable ensemble is separately decomposable.
 	
 	In quantum mechanics, every density operator is the mixture of its eigenstates. If the density operator does not correspond to a pure state, it will have at least two eigenstates. Every mixed state, then, is a mixture of two orthogonal ensembles. Since orthogonal ensembles cannot have a common component, every decomposable ensemble is separately decomposable.
 \end{proof}
 
 \begin{prop}
-	Given an ensemble space $\Ens$, every decomposable ensemble is monodecomposable if and only if mixtures preserve separateness in $\Ens$.
+	Given an ensemble space $\Ens$, $\Ens$ is monodecomposable if and only if mixtures preserve separateness in $\Ens$.
 \end{prop}
 
 \begin{proof}
-	Suppose mixtures do not preserve separateness in $\Ens$. Then we can find $\ens,\ens[a],\ens[b], \ens[c] \in \Ens$ such that $\ens \separate \ens[a]$, $\ens \separate \ens[b]$ and $\ens \nseparate \ens[c] = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1)$. Since $\ens \nseparate \ens[c]$, we can find $\ens[d], \ens[f], \ens[g]$ such that $\ens[c] = \lambda \ens[d] + \bar{\lambda} \ens[f]$ and $\ens = \mu \ens[d] + \bar{\mu} \ens[g]$.  Since separateness extends to all mixtures (\ref{pm_es_separateExtendsMixtures}) and $\ens[a] \separate \ens[e] = \mu \ens[d] + \bar{\mu} \ens[g]$, then $\ens[a] \separate \ens[d]$. Similarly, $\ens[b] \separate \ens[d]$, which means that $\ens[c]$ is separately multidecomposable. Therefore, if mixtures do not preserve separateness in $\Ens$, not all decomposable ensembles are monodecomposable.
+	Suppose mixtures do not preserve separateness in $\Ens$. Then we can find $\ens,\ens[a],\ens[b], \ens[c] \in \Ens$ such that $\ens \separate \ens[a]$, $\ens \separate \ens[b]$ and $\ens \nseparate \ens[c] = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1)$. Since $\ens \nseparate \ens[c]$, we can find $\ens[d], \ens[f], \ens[g]$ such that $\ens[c] = \lambda \ens[d] + \bar{\lambda} \ens[f]$ and $\ens = \mu \ens[d] + \bar{\mu} \ens[g]$.  Since separateness extends to all mixtures (\ref{pm_es_separateExtendsMixtures}) and $\ens[a] \separate \ens[e] = \mu \ens[d] + \bar{\mu} \ens[g]$, then $\ens[a] \separate \ens[d]$. Similarly, $\ens[b] \separate \ens[d]$, which means that $\ens[c]$ is separately multidecomposable. Therefore, if mixtures do not preserve separateness in $\Ens$, not all decomposable ensembles are monodecomposable which means $\Ens$ is not monodecomposable.
 	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.3\textwidth]{tempimages/MonodecomposabilityIsMixturePreserveSeparateness.jpg}
 	\end{figure}
 	
-	Now suppose mixture do preserve separateness, and let $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$ be a decomposable ensemble. Since $\ens[a]_1$ is a component of $\ens$, then $\ens \nseparate \ens[a]_1$. Since $\ens$ is a mixture of $\ens[b]_1$ and $\ens[b]_2$ and mixtures preserve separateness, then either $\ens[a]_1 \nseparate \ens[b]_1$ or $\ens[a]_1 \nseparate \ens[b]_2$. Similarly, $\ens[a]_2 \nseparate \ens[b]_1$ or $\ens[a]_2 \nseparate \ens[b]_2$. Therefore $\ens$ is not separately multidecomposable.
+	Now suppose mixtures do preserve separateness, and let $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$ be a decomposable ensemble. Since $\ens[a]_1$ is a component of $\ens$, then $\ens \nseparate \ens[a]_1$. Since $\ens$ is a mixture of $\ens[b]_1$ and $\ens[b]_2$ and mixtures preserve separateness, then either $\ens[a]_1 \nseparate \ens[b]_1$ or $\ens[a]_1 \nseparate \ens[b]_2$. Similarly, $\ens[a]_2 \nseparate \ens[b]_1$ or $\ens[a]_2 \nseparate \ens[b]_2$. Therefore $\ens$ is not multidecomposable. Since this applies to all decomposable ensembles $\ens$, $\Ens$ is monodecomposable.
 \end{proof}
+\end{mathSection}
 
-These definitions may be enough to prove that every finite dimensional separately monodecomposable convex space is a simplex. For the infinite case, it would be nice to compare this characterization to a Choquet simplex.
+These definitions may be enough to prove that every finite-dimensional separately monodecomposable convex space is a simplex. For the infinite case, it would be nice to compare this characterization to a Choquet simplex.
 
 \begin{conj}
-	A finite dimensional (i.e. there is a set of finitely many elements whose hull has non-empty interior) separately monodecomposable convex space is a simplex.
+	A finite-dimensional (i.e. there is a set of finitely many elements whose hull has non-empty interior) separately monodecomposable convex space is a simplex.
 \end{conj}
 
 \subsection{Convex subsets and convex hull}
@@ -1047,10 +1045,9 @@ As we did for separateness, we extend the notion of orthogonality to sets of ens
 \end{proof}
 \end{mathSection}
 
-TODO: review with Christine
-
 We may want to extend the notion of separate decomposability to orthogonal decomposabilty, though it is not clear whether this will be useful or not. 
 
+\begin{mathSection}
 \begin{defn}
 	An ensemble is \textbf{orthogonally decomposable} if it can be expressed as a mixture of two orthogonal ensembles. An ensemble is \textbf{orthogonally monodecomposable} if it is both orthogonally decomposable and monodecomposable.
 \end{defn}
@@ -1060,9 +1057,9 @@ We may want to extend the notion of separate decomposability to orthogonal decom
 \end{coro}
 
 \begin{proof}
-	Since orthogonality implies separateness \ref{pm_es_orthoProps}, an orthogonal decomposition is also a separate decomposition.
+	Since orthogonality implies separateness by \ref{pm_es_orthoProps}, an orthogonal decomposition is also a separate decomposition.
 \end{proof}
-
+\end{mathSection}
 
 \section{Affine combinations and vector space embedding}
 
@@ -1424,27 +1421,33 @@ Another constraint that the entropy imposes is that the ensemble space is bounde
 	\caption{$\Ens$ is the ensemble space and $V_{\ens}$ is the embedding vector space with origin $\ens$. Any affine line, like the dashed one in the picture, will intersect $\Ens$ over a finite range limited by the two elements $a$ and $b$ of the vector space (but not necessarily of the ensemble space).}
 \end{figure}
 
-The proof proceeds as follows. Suppose we take three points and assign them an entropy that is strictly concave: can we assign to always pick an entropy value that satisfies the bounds for any subsequent point? The answer is negative and figure \ref{pm_es_directionallyBound} represent the problem pictorially. On the horizontal axis we can imagine all the ensembles over a line, and on the vertical axis their entropy. We fix the entropy for the origin, the blue and the red point. What are the values for the next point, the green one, that satisfy the entropy bounds? Because of strict concavity, the green point must remain below the blue line. The green line represents the upper bound for the blue point, which means the green point must be above the purple line. If we go far enough, the blue and purple line meet, leaving no possible value for the entropy.
+The proof proceeds as follows. Suppose we take three points and assign them an entropy value consistent with the entropic bounds: can we always pick an entropy value that satisfies the bounds for any subsequent point in a given direction? The answer is negative and figure \ref{pm_es_directionallyBound} represents the problem pictorially. On the horizontal axis we can imagine all the ensembles over a line, and on the vertical axis their entropy. We fix the entropy for the origin, the blue and the red point. What are the values for the next point, the green one, that satisfy the entropy bounds? Because of strict concavity, the green point must remain below the blue line. The green line represents the upper bound for the blue point, which means the green point must be above the purple line. If we go far enough, the blue and purple line meet, leaving no possible value for the entropy.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{tempimages/BoundsFromEntropy.png}
+	\caption{Visual representation of the bounds. See proof for details.}\label{pm_es_directionallyBound}
+\end{figure}
 
 \begin{mathSection}
 \begin{defn}
-	A \textbf{line} $A \subseteq \Ens$ is a convex subset such that for any three elements one can be expressed as a mixture of the other two. That is, for all $\ens_1, \ens_2, \ens_3 \in A$ there exists a permutation $\sigma : \{1,2,3\} \to \{1,2,3\}$ and $p \in [0,1]$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}$.
+	A \textbf{line} $A \subseteq \Ens$ is a convex subset such that for any three elements one can be expressed as a mixture of the other two. That is, for all distinct $\ens_1, \ens_2, \ens_3 \in A$ there exists a permutation $\sigma : \{1,2,3\} \to \{1,2,3\}$ and $p \in (0,1)$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}$.
 \end{defn}
 
 \begin{prop}
-	Given $\ens[a], \ens[b] \in \Ens$, there is only one line that contains them.
+	Given two distinct $\ens[a], \ens[b] \in \Ens$, there is only one line that contains them.
 \end{prop}
 
 \begin{proof}
-	Since an ensemble space embeds into a vector space, given two ensembles there is only one affine line that connects them. A line is the intersection of the affine line with the ensemble space.
+	Since an ensemble space embeds into a vector space, given two distinct ensembles there is only one affine line that connects them. A line is the intersection of the affine line with the ensemble space.
 \end{proof}
 
 \begin{thrm}[Lines are bounded]
-	Let $A \subseteq \Ens$ be a line. Then we can find a bounded interval $V \subseteq \mathbb{R}$ and an invertible function $f : A \to V$ such that $f(p \ens[a] + \bar{p} \ens[b]) = p f(\ens[a]) + \bar{p} f(\ens[b])$ for all $\ens[a], \ens[b] \in A$.
+	Let $A \subseteq \Ens$ be a line. Then we can find a bounded interval $V \subset \mathbb{R}$ and an invertible function $f : A \to V$ such that $f(p \ens[a] + \bar{p} \ens[b]) = p f(\ens[a]) + \bar{p} f(\ens[b])$ for all $\ens[a], \ens[b] \in A$.
 \end{thrm}
 
 \begin{proof}
-	Let $A \subseteq \Ens$ be a line. Pick $\ens_0, \ens_1 \in A$. For any $\ens[a] \in A$, we can find an affine expression between $\ens_0$, $\ens_1$ and $\ens[a]$. Rearranging the terms, we can always write $\ens[a] = \bar{x}\ens_0 + x\ens_1$ where $x \in \mathbb{R}$. Note that $x$ uniquely determines $\ens[a]$. Therefore we can define $f(\ens[a]) \mapsto x$, and it will be an invertible function.
+	Let $A \subseteq \Ens$ be a line. Pick $\ens_0, \ens_1 \in A$. For any $\ens[a] \in A$, we can write it as an affine combination of $\ens_0$ and  $\ens_1$. That is, $\ens[a] = \bar{x}\ens_0 + x\ens_1$ where $x \in \mathbb{R}$. Note that $\ens[a]$ uniquely determines $x$. Therefore we can define $f(\ens[a]) \mapsto x$, and it will be an invertible function.
 	
 	We can verify that, given $\ens[a], \ens[b] \in A$, we have
 	\begin{equation}
@@ -1456,14 +1459,9 @@ The proof proceeds as follows. Suppose we take three points and assign them an e
 	
 	We are going to show that the image $V=f(A)$ must be a bounded set, or it would eventually violate the entropy bounds. Given a value $x \in V$, there will be an entropy value $S(f^{-1}(x))$ which we can write as a function of the real value $S(x)$. This function will need to satisfy continuity, strict concavity and the upper variability bound.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{tempimages/BoundsFromEntropy.png}
-	\caption{Visual representation of the bounds. See proof for details.}\label{pm_es_directionallyBound}
-\end{figure}
 	We are going to show that the function $S(x)$ cannot extend to plus infinity. The same argument can be applied by symmetry for minus infinity. We are going to assume that $S(0) = 0$ without loss of generality. If $S$ is not defined at zero, or if the value is different, we can apply a translation on the argument or on the value, which will not affect the concavity of the function.
 	
-	Let $0 < a < b \in V$ be two distinct values, with $S(a)$ and $S(b)$ their respective entropies. We are going to show that if we pick a $c > b$ sufficiently large, we are not going to find a value for $S(c)$ that satisfies the bounds. In the picture, we have the three points, $a$ in blue, $b$ in red, $c$ in green. The horizontal axis represent the value, the position of the ensemble along the affine line, while the vertical axis represents the entropy. Consider the points $a$, $b$ and $c$. Since the entropy is strictly concave, $c$ must be placed under the blue line which represents an upper bound on $S(c)$. Now consider $0$, $a$ and $c$. Since $a$ is a mixture of $0$ and $c$, $S(a)$ will need to satisfy the upper bound given by $S(0)$ and $S(c)$. In the diagram, the green line represents the upper bound on $S(a)$ for the specific choice of $c$ and $S(c)$. Since $a$ and $S(a)$ are fixed, this puts a lower bound on $S(c)$, which is represented by the purple curve. That is, the purple curve represents the minimum value we have to assign to $S(c)$ such that $S(a)$ still satisfies the upper bound between $0$ and $c$. As the picture shows, the two bounds meet at some point and cannot both be satisfied.
+	Let $0 < a < b \in V$ be two distinct values, with $S(a)$ and $S(b)$ their respective entropies. We are going to show that if we pick a $c > b$ sufficiently large, we are not going to find a value for $S(c)$ that satisfies the bounds. In the picture, we have the three points, $a$ in blue, $b$ in red, $c$ in green. The horizontal axis represents the value, the position of the ensemble along the affine line, while the vertical axis represents the entropy. Consider the points $a$, $b$ and $c$. Since the entropy is strictly concave, $c$ must be placed under the blue line which represents an upper bound on $S(c)$. Now consider $0$, $a$ and $c$. Since $a$ is a mixture of $0$ and $c$, $S(a)$ will need to satisfy the upper bound given by $S(0)$ and $S(c)$. In the diagram, the green line represents the upper bound on $S(a)$ for the specific choice of $c$ and $S(c)$. Since $a$ and $S(a)$ are fixed, this puts a lower bound on $S(c)$, which is represented by the purple curve. That is, the purple curve represents the minimum value we have to assign to $S(c)$ such that $S(a)$ still satisfies the upper bound between $0$ and $c$. As the picture shows, the two bounds meet at some point and cannot both be satisfied.
 	
 	From strict concavity, noting that $\frac{c-b}{c-a} + \frac{b-a}{c-a} = 1$, we have:
 	\begin{equation}
@@ -1511,11 +1509,11 @@ The proof proceeds as follows. Suppose we take three points and assign them an e
 \end{proof}
 
 \begin{remark}
-	Note that this does not mean that, along each direction, the line is closed in the vector space. That is, it may not include the extreme points. in the convex space. An open bounded interval, in fact, is still a convex space and we would be able to define an entropy on it.
+	Note that this does not mean that, along each direction, the line is closed in the vector space. That is, it may not include the extreme points in the convex space. An open bounded interval, in fact, is still a convex space and we would be able to define an entropy on it.
 \end{remark}
 \end{mathSection}
 
-The fact that the ensemble space is directionally bound gives us an intuitive property that we would, mistakenly, always think to be true. Suppose we have an ensemble $\ens$ and a sequence of ensembles $\ens[a]_i \in L$ on some line that contains $\ens$. Then $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$ if $p_i \to 1$. This does not work in a convex space if directions are unbounded. For example, suppose $\ens = \mathbb{R}$, which is a convex set but not directionally bounded. Let $\ens = 0$, $\ens[a]_i = i$ and $p_i = 1 - \frac{1}{i}$. Then $\left(1 - \frac{1}{i}\right) 0 + \frac{1}{i}{i} = 1$. Therefore $p_i \ens + \bar{p}_i \ens[a]_i \nto \ens$. It is, again, the entropy that guarantee that this intuitive property is satisfied. \footnote{It is an open question whether this property is guaranteed for a generic sequence $\ens[a]_i$, not necessarily on a line.}
+The fact that the ensemble space is directionally bounded gives us an intuitive property that we would, mistakenly, always think to be true. Suppose we have an ensemble $\ens$ and a sequence of ensembles $\ens[a]_i \in L$ on some line $L$ that contains $\ens$. Then $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$ if $p_i \to 1$. This does not work in a generic convex space if directions are unbounded. For example, suppose $\ens = \mathbb{R}$, which is a convex set but not directionally bounded. Let $\ens = 0$, $\ens[a]_i = i$ and $p_i = 1 - \frac{1}{i}$. Then $\left(1 - \frac{1}{i}\right) 0 + \frac{1}{i}{i} = 1$. Therefore $p_i \ens + \bar{p}_i \ens[a]_i \nto \ens$ even though $p_i \to 1$. It is, again, the entropy that guarantees that this intuitive property is satisfied.
 
 \begin{mathSection}
 	\begin{prop}
@@ -1526,6 +1524,13 @@ The fact that the ensemble space is directionally bound gives us an intuitive pr
 		Pick $\ens[a] \in L$ such that $\ens[a] \neq \ens$. Then every $\ens[a]_i$ can be expressed as an affine combination $\ens[a]_i = r_i \ens + \bar{r}_i \ens[a]$. We have $p_i \ens + \bar{p}_i \ens[a]_i = p_i \ens + \bar{p}_i \left( r_i \ens + \bar{r}_i \ens[a] \right) = \left( p_i + \bar{p}_i r_i \right) \ens + \bar{p}_i\bar{r}_i \ens[a]$. Since the ensemble space is directionally bounded, the sequence $r_i$ is bounded from below and above. This means that $\bar{p}_i \to 0$ implies $p_i + \bar{p}_i r_i \to 1$ and $\bar{p}_i\bar{r}_i \to 0$. Therefore by continuity $\left( p_i + \bar{p}_i r_i \right) \ens + \bar{p}_i\bar{r}_i \ens[a] \to 1 \ens + 0 \ens[a] = \ens$.
 	\end{proof}
 \end{mathSection}
+
+It is an open question whether this property is guaranteed for a generic sequence of ensembles $\ens[a]_i$, not necessarily on a line. At least, it should be extensible to the finite-dimensional case.
+
+\begin{conj}
+	Let $\ens \in \Ens$ and $\ens[a]_i \in \Ens$. Then $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$ if $p_i \to 1$.
+\end{conj}
+
 
 As discussed previously, it may be that the boundedness provided by the entropy forces all submixtures of convergent infinite mixtures to converge.
 
@@ -1554,7 +1559,7 @@ In this section we will see how the entropy imposes a geometric structure on the
 
 \subsection{Mixing entropy as pseudo-distance}
 
-The first observation is that the entropy can be used to define a pseudo-distance. If we mix two ensembles, in fact, the average entropy cannot decrease, and will stay the same if the two components of the mixture are the same ensemble. The increase, then, is zero if the two ensembles are equal, greater than zero if not, with the maximum if they are orthogonal. This means that the increase of entropy during mixing can be used to characterize how different two ensembles are.
+The first observation is that the entropy can be used to define a pseudo-distance. If we mix two ensembles, in fact, the average entropy cannot decrease and will stay the same if the two components of the mixture are the same ensemble. The increase, then, is zero if the two ensembles are equal, greater than zero if not, with the maximum if they are orthogonal. This means that the increase of entropy during mixing can be used to characterize how different two ensembles are.
 
 We define the mixing entropy as the increase in entropy for the equal mixture of two states. This satisfies all axioms for a distance, except the triangle inequality. The mixing entropy recovers the Jensen-Shannon divergence in both the classical and quantum case, and can therefore be seen as its generalization.
 
@@ -1599,11 +1604,11 @@ We define the mixing entropy as the increase in entropy for the equal mixture of
 \end{proof}
 
 \begin{remark}
-	The mixing entropy fails to be a distance function as it does not satisfy the triangle inequality. In the classical and quantum case, in fact, the JSD and QJSD are the square of a distance function. Given the current axiom, it is unlikely that this result can be generalized to the mixing entropy itself. The issue is that we do not have enough information about the relative entropy of 3 points, apart from the orthogonal case. It is very likely that, on physics ground, there should be constraints on the mixing entropy between three points.
+	The mixing entropy fails to be a distance function as it does not satisfy the triangle inequality. In the classical and quantum case, in fact, the JSD and QJSD are the square of a distance function. Given the current axiom, it is unlikely that this result can be generalized to the mixing entropy itself. The issue is that we do not have enough information about the relative entropy of 3 points, apart from the orthogonal case. It is very likely that, on physics grounds, there should be constraints on the mixing entropy between three points.
 \end{remark}
 \end{mathSection}
 
-Though the mixing entropy is not a distance function, we can still show that, like a distance, it decreases as one ensemble approaches another. The notion of two ensembles approaching is given by the convex structure: a convex space a mixture of $\ens[a]$ and $\ens[b]$ is closer to $\ens[a]$ than $\ens[b]$.
+Though the mixing entropy is not a distance function, we can still show that, like a distance, it decreases as one ensemble approaches another. The notion of two ensembles approaching is given by the convex structure: in a convex space, a mixture of $\ens[a]$ and $\ens[b]$ is closer to $\ens[a]$ than $\ens[b]$ is to $\ens[a]$.
 
 \begin{mathSection}
 \begin{prop}
@@ -1614,9 +1619,9 @@ Though the mixing entropy is not a distance function, we can still show that, li
 	First let us show that $\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]$ can be expressed as a mixture of $\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)$ and $p\ens[a] + \bar{p} \ens[b]$.
 	\begin{equation}
 		\begin{aligned}
-			\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b] &=  \frac{1-2p}{1-p}\left[\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right] + \frac{p}{1-p}\left[p\ens[a] + \bar{p} \ens[b]\right] \\
+			\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b] &= \frac{1}{2} \frac{1-2p + p - 2p^2 + 2p^2}{1-p} \ens[a] + \frac{1}{2}\left(1-2p+2p\right) \ens[b] \\
 			&= \left( \frac{1-2p}{1-p} \frac{1+p}{2} + \frac{2}{2} \frac{p^2}{1-p} \right) \ens[a] + \left( \frac{1-2p}{1-p} \frac{\bar{p}}{2}+ \frac{2}{2} \frac{p\bar{p}}{1-p} \right) \ens[b] \\
-			&= \frac{1}{2} \frac{1-2p + p - 2p^2 + 2p^2}{1-p} \ens[a] + \frac{1}{2}\left(1-2p+2p\right) \ens[b] = \frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]
+			&=  \frac{1-2p}{1-p}\left[\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right] + \frac{p}{1-p}\left[p\ens[a] + \bar{p} \ens[b]\right]
 		\end{aligned}
 	\end{equation}
 	From strict concavity we have
@@ -1630,9 +1635,10 @@ Though the mixing entropy is not a distance function, we can still show that, li
 	Now let us show that $p \ens[a] + \bar{p} \ens[b]$ can be expressed as a mixture of $\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)$ and $\ens[b]$.
 	\begin{equation}
 		\begin{aligned}
-			p \ens[a] + \bar{p} \ens[b] &= \frac{2p}{1+p}\left[\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right] + \frac{1-p}{1+p} \ens[b] \\
+			p \ens[a] + \bar{p} \ens[b]
+			&= p \ens[a] + \bar{p} \frac{p+1}{1+p}\ens[b] \\
 			&= \frac{2p}{1+p} \frac{1+p}{2} \ens[a] + \left( \frac{2p}{1+p} \frac{\bar{p}}{2}+ \frac{\bar{p}}{1+p} \right) \ens[b] \\
-			&= p \ens[a] + \bar{p} \frac{p+1}{1+p}\ens[b] = p \ens[a] +\bar{p} \ens[b]
+			&= \frac{2p}{1+p}\left[\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right] + \frac{1-p}{1+p} \ens[b]
 		\end{aligned}
 	\end{equation}
 	From strict concavity we have
@@ -1660,11 +1666,11 @@ Though the mixing entropy is not a distance function, we can still show that, li
 \end{proof}
 \end{mathSection}
 
-The fact that the mixing entropy decreases on all directions as we get closer to an ensemble allows us to create a notion of open ball, which allows to prove the topology is at least $\mathsf{T}_1$. The lack of the triangle inequality does not allow us to easily prove that we can always find disjoint balls centered at two different points, which is what typically is used to show that the topology is Hausdorff.\footnote{It is likely that we could at least show that in the finite dimensional case the topology is the standard one on $\mathbb{R}^n$, and that the embedding of the ensemble space into $\mathbb{R}^n$ is continuous.}
+The fact that the mixing entropy decreases from all directions as we get closer to an ensemble allows us to create a notion of open ball, which allows to prove the topology is at least Hausdorff.
 
 \begin{mathSection}
 \begin{defn}
-	Given $\ens[a] \in \Ens$ and $r \in [0,1]$, an entropic open ball is the set of all ensembles for which the mixing entropy from $\ens[a]$ is within $r$. That is, $B_r(\ens[a]) = \{\ens \in \Ens \, | \, MS(\ens[a], \ens) < r\}$.
+	Given $\ens[a] \in \Ens$ and $r \in (0,1]$, an entropic open ball is the set of all ensembles for which the mixing entropy from $\ens[a]$ is within $r$. That is, $B_r(\ens[a]) = \{\ens \in \Ens \, | \, MS(\ens[a], \ens) < r\}$.
 \end{defn}
 \begin{coro}
 	Every entropic open ball is an open set.
@@ -1681,22 +1687,25 @@ The fact that the mixing entropy decreases on all directions as we get closer to
 \begin{proof}
 	We will prove this in two ways. First, since the topology is second countable, the space is Hausdorff if and only if limits of sequences are unique. Let $\ens[a]_i$ be a sequence such that $\ens[a]_i \to \ens[a]$ and $\ens[a]_i \to \ens[b]$. We have $MS(\ens[a]_i, \ens[a]_i) = 0 \to 0$. Since $MS$ is continuous, we also have $MS(\ens[a]_i, \ens[a]_i) \to MS(\ens[a], \ens[b])$ which means $MS(\ens[a], \ens[b]) = 0$ and therefore $\ens[a] = \ens[b]$.
 	
-	Another way to show it, a space is Hausdorff if and only if any singleton $\{\ens\}$ is the intersection of all closed neighborhoods of $\ens$. For any $\ens$, the intersection of all closed neighborhoods will contain $\ens$, so we just need to show that no other elements can be in all closed neighborhood. Consider an entropic closed ball centered around $\ens$ with radius $r>0$. It will contain an entropic open ball of the same radius and is therefore a closed neighborhood of $\ens$. Given an element $\ens[a] \neq \ens$, a closed ball with radius less than $MS(\ens, \ens[a])$ will not contain $\ens[a]$. Therefore, the only element contained in all entropic closed balls is $\ens$, which means the intersection of all closed neighborhoods of $\ens$ contains only $\ens$.
+	As another way to show it, a space is Hausdorff if and only if any singleton $\{\ens\}$ is the intersection of all closed neighborhoods of $\ens$. For any $\ens$, the intersection of all closed neighborhoods will contain $\ens$, so we just need to show that no other elements can be in all closed neighborhoods. Consider an entropic closed ball centered around $\ens$ with radius $r>0$. It will contain an entropic open ball of the same radius and is therefore a closed neighborhood of $\ens$. Given an element $\ens[a] \neq \ens$, a closed ball with radius less than $MS(\ens, \ens[a])$ will not contain $\ens[a]$. Therefore, the only element contained in all entropic closed balls is $\ens$, which means the intersection of all closed neighborhoods of $\ens$ contains only $\ens$.
 \end{proof}
 
 \begin{remark}
-	Intuitively, we would expect the entropic balls to be convex. This intuition is supported by numeric calculation for both the \href{https://www.desmos.com/calculator/ama0u3u31d}{classical case} and the \href{https://www.desmos.com/calculator/6ga2hygwmm}{quantum case} (though the quantum case is not checked for a three dimensional quantum system). However, the current axioms allow us to use a different entropy function in a space that is not orthogonally decomposable: the extreme points are not orthogonal. In this case, one is able to create open balls that are not convex.
+	Intuitively, we would expect the entropic balls to be convex. This is true in both classical and quantum cases as the JSD is convex. However, the current axioms allow us to use a different entropy function in a space that is not orthogonally decomposable: the extreme points are not orthogonal. In this case, one is able to create open balls that are not convex.
 	
 	Whether this is physically relevant or not depends on whether there are additional physical constraints on the mixing entropy between three points, which is very likely.
 \end{remark}
 
+TODO: add figure
+
+TODO: Christine, review from here
 
 \begin{prop}
 	Let $U \subseteq \Ens$ be an open set. Let $\ens[a] \in U$ and $L \subseteq \Ens$ be a line containing $\ens[a]$. Then there is an $r \in (0,1]$ such that for all $\ens \in L$ such that $MS(\ens[a], \ens) < r$ we have $\ens \in U$.
 \end{prop}
 
 \begin{proof}
-	Let $U \subseteq \Ens$ be an open set, $\ens[a] \in U$ and $L \subseteq \Ens$ be a line containing $\ens[a]$. Take $\ens[b] \in L$ such that $\ens[b] \neq \ens[a]$. Let $f : [0,1] \to \Ens$ be such that $f(p) \mapsto p \ens[a] + \bar{p} \ens[b]$. Since the mixing operation is continuous, then $f$ is also continuous. This means that $f^{-1}(U)$ is an open subset of $[0,1]$. Since $\ens[a] \in U$, $1 \in f^{-1}(U)$ and therefore there will be an open interval $(\lambda, 1]$ such that $(\lambda, 1] \subseteq f^{-1}(U)$. Let $\ens[c] = \lambda \ens[a] + \bar{\lambda} \ens[b]$ and $r = MS(\ens[a], \ens[c])$. We have that, for all $p \in (0,1)$, $MS(\ens[a], p\ens[a] +\bar{p}\ens[c])<r$. We also have $p\ens[a] +\bar{p}\ens[c] = p\ens[a] +\bar{p}(\lambda \ens[a] + \bar{\lambda} \ens[b]) = (p + \bar{p}\lambda)\ens[a] + \bar{p}\bar{\lambda}\ens[b]$ where $p + \bar{p}\lambda = p + \lambda - p\lambda = \lambda - p\bar{\lambda} \geq \lambda$. Therefore $p\ens[a] +\bar{p}\ens[c] \in f((\lambda,1]) \subseteq U$.
+	Let $U \subseteq \Ens$ be an open set, $\ens[a] \in U$ and $L \subseteq \Ens$ be a line containing $\ens[a]$. Take $\ens[b] \in L$ such that $\ens[b] \neq \ens[a]$. Let $f : [0,1] \to \Ens$ be such that $f(p) \mapsto p \ens[a] + \bar{p} \ens[b]$. Since the mixing operation is continuous, then $f$ is also continuous. This means that $f^{-1}(U)$ is an open subset of $[0,1]$. Since $\ens[a] \in U$, $1 \in f^{-1}(U)$ and therefore there will be an open interval $(\lambda, 1]$ such that $(\lambda, 1] \subseteq f^{-1}(U)$. Let $\ens[c] = \lambda \ens[a] + \bar{\lambda} \ens[b]$ and $r = MS(\ens[a], \ens[c])$. We have that, for all $p \in (0,1]$, $MS(\ens[a], p\ens[a] +\bar{p}\ens[c])<r$. We also have $p\ens[a] +\bar{p}\ens[c] = p\ens[a] +\bar{p}(\lambda \ens[a] + \bar{\lambda} \ens[b]) = (p + \bar{p}\lambda)\ens[a] + \bar{p}\bar{\lambda}\ens[b]$ where $p + \bar{p}\lambda \in (\lambda, 1]$. Therefore $p\ens[a] +\bar{p}\ens[c] \in f((\lambda,1]) \subseteq U$.
 	
 	If $\ens[a]$ is an extreme point of $L$ (i.e. there is no $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$), then we are done. If $\ens[a]$ is not an extreme point, then we can find $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$. Repeat the previous procedure with $\ens[d]$ to find another $r'$ and the $t$ be the minimum between the two. Then we have that $t \in (0,1]$ such that for all $\ens \in L$ such that such that $MS(\ens[a], \ens) < r$, $\ens \in U$.
 \end{proof}
