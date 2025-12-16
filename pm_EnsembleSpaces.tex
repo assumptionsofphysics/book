@@ -1696,13 +1696,43 @@ The fact that the mixing entropy decreases from all directions as we get closer 
 	Whether this is physically relevant or not depends on whether there are additional physical constraints on the mixing entropy between three points, which is very likely.
 \end{remark}
 
-TODO: add figure
-
 TODO: Christine, review from here
 
 \begin{prop}
 	Let $U \subseteq \Ens$ be an open set. Let $\ens[a] \in U$ and $L \subseteq \Ens$ be a line containing $\ens[a]$. Then there is an $r \in (0,1]$ such that for all $\ens \in L$ such that $MS(\ens[a], \ens) < r$ we have $\ens \in U$.
 \end{prop}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+	%\draw [help lines] (0,0) grid (4,3);
+	
+	\node[above] at (2,2.6) {$\Ens$};
+	
+	\draw[-, thick] plot [smooth cycle] coordinates {(0.5,1.5)(1.5,0.3)(2.7,1)(2.6,2.5)(1,2.5)};
+	
+	\draw[-, thin] plot [smooth cycle] coordinates {(1.0,1.5)(1.75,1.0)(2.4,1.5)(2.3,2.2)(1.8,1.8)};
+	\node[below right] at (2.05,1.35) {$U$};
+
+	\coordinate (A) at (0,0.7);
+	\coordinate (B) at (3.5,2.5);
+
+	\def\a{0.4}
+	\def\b{0.5}
+	\def\c{0.6}
+
+	\filldraw [black] ($(A)!\b!(B)$) circle (1pt) node[below] {$\ens$};
+	\draw [gray] ($(A)!\b!(B)$) circle (12pt);
+	
+	\draw[dashed] (A) -- ($(A)!\a!(B)$);
+	\draw[-, thick] ($(A)!\a!(B)$) -- ($(A)!\b!(B)$);
+	\draw[-, thick] ($(A)!\b!(B)$) -- ($(A)!\c!(B)$);
+	\draw[dashed] ($(A)!\c!(B)$) -- (B) node[below] {$L$};
+	%\draw[dashed] (2, 2) -- (3, 2.5);
+	%\draw[-, thick] (1.5, 1.75) -- (2, 2) node[below] {$b$};
+	%\draw[dashed] (0.4,1.2) -- (1.5, 1.75) node[below] {$a$};
+	\end{tikzpicture}
+\end{figure}
 
 \begin{proof}
 	Let $U \subseteq \Ens$ be an open set, $\ens[a] \in U$ and $L \subseteq \Ens$ be a line containing $\ens[a]$. Take $\ens[b] \in L$ such that $\ens[b] \neq \ens[a]$. Let $f : [0,1] \to \Ens$ be such that $f(p) \mapsto p \ens[a] + \bar{p} \ens[b]$. Since the mixing operation is continuous, then $f$ is also continuous. This means that $f^{-1}(U)$ is an open subset of $[0,1]$. Since $\ens[a] \in U$, $1 \in f^{-1}(U)$ and therefore there will be an open interval $(\lambda, 1]$ such that $(\lambda, 1] \subseteq f^{-1}(U)$. Let $\ens[c] = \lambda \ens[a] + \bar{\lambda} \ens[b]$ and $r = MS(\ens[a], \ens[c])$. We have that, for all $p \in (0,1]$, $MS(\ens[a], p\ens[a] +\bar{p}\ens[c])<r$. We also have $p\ens[a] +\bar{p}\ens[c] = p\ens[a] +\bar{p}(\lambda \ens[a] + \bar{\lambda} \ens[b]) = (p + \bar{p}\lambda)\ens[a] + \bar{p}\bar{\lambda}\ens[b]$ where $p + \bar{p}\lambda \in (\lambda, 1]$. Therefore $p\ens[a] +\bar{p}\ens[c] \in f((\lambda,1]) \subseteq U$.
