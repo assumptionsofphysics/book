@@ -598,7 +598,29 @@ While separateness extends to mixtures, the converse property (i.e. mixtures pre
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.3\textwidth]{tempimages/MixturesDoNotPreserveSeparateness.jpg}
+	\begin{tikzpicture}
+		%\draw [help lines] (0,0) grid (4,4);
+		
+		\coordinate (center) at (2,2);
+		\def\radius{1.5}
+		\coordinate (b) at ($(center)+\radius*({cos(95)},{sin(95)})$);
+		\coordinate (a) at ($(center)+\radius*({cos(-85)},{sin(-85)})$);
+		\coordinate (e) at ($(center)+\radius*({cos(155)},{sin(155)})$);
+		\coordinate (f) at ($(center)+\radius*({cos(-25)},{sin(-25)})$);
+		\coordinate (o) at ($(a)!0.5!(b)$);
+		\coordinate (oa) at ($(a)!-0.2!(e)$);
+		\coordinate (ob) at ($(b)!-0.5!(e)$);
+		\draw [fill=ensembleFill, thick] (center) circle (\radius);
+		\filldraw [black] (a) circle (1pt) node[below left] {$\ens[a]$};
+		\filldraw [black] (b) circle (1pt) node[above left] {$\ens[b]$};
+		\filldraw [black] (e) circle (1pt) node[left] {$\ens$};
+		\filldraw [black] (o) circle (1pt) node[above right] {$\ens[o]$};
+		\filldraw [black] (f) circle (1pt);
+		\draw[] (e) -- (a) -- (b) -- (e) -- (f);
+		\draw[dashed] (b) -- (ob);
+		\draw[dashed] (a) -- (oa);	
+	\end{tikzpicture}
+	%\includegraphics[width=0.3\textwidth]{tempimages/MixturesDoNotPreserveSeparateness.jpg}
 \end{figure}
 
 \begin{prop}
