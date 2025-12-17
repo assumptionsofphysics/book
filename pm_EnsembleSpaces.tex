@@ -48,6 +48,10 @@
 	\noindent\rule{\textwidth}{0.5pt}  % Add a horizontal rule
 %	\vspace{1.5em}  % Add vertical space after the rule
 }
+
+
+\colorlet{ensembleFill}{black!10!white}
+
 \chapter{Ensemble spaces}
 
 In this chapter we aim to develop a general theory of states and processes that is applicable to any physical system. The core concept is that of an ensemble as we have found that ensembles in both classical and quantum mechanics have a very similar structure that can be abstracted and generalized. The goal is to find necessary requirements for ensembles that can serve as basic axioms and then further suitable assumptions to recover the different theories (e.g. classical, quantum or thermodynamics).
@@ -402,8 +406,25 @@ We can also characterize some ensembles based on what other ensembles they can a
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{tempimages/InteriorExteriorPoints.jpg}
-	\caption{The ensemble $\ens[a]$ is an extreme point in both spaces. $\ens[b]$ is a boundary point, but is not an extreme point (it is the mixture of the vertices on the same side). $\ens[c]$ is an internal point.}
+	\begin{tikzpicture}		
+		%\draw [help lines] (0,0) grid (10,3);
+		
+		\coordinate (center) at (1.5,1.2);
+		\def\angle{90}
+		\def\radius{1.5}
+		\draw[fill=ensembleFill, thick] ($(center)+\radius*({cos(0+\angle)},{sin(0+\angle)})$) node[right] {$\ens[a]$} -- ($(center)+\radius*({cos(120+\angle)},{sin(120+\angle)})$) node[midway, left] {$\ens[b]$} -- ($(center)+\radius*({cos(240+\angle)},{sin(240+\angle)})$) -- cycle  ;
+		\filldraw [black] ($(center)+\radius/2*({cos(60+\angle)},{sin(60+\angle)})$) circle (1pt);
+		\filldraw [black] ($(center)+\radius*({cos(0+\angle)},{sin(0+\angle)})$) circle (1pt);
+		\filldraw [black] ($(center)-\radius*(0,1/4)$) circle (1pt) node[above] {$\ens[c]$};
+		
+		\coordinate (center) at (5,1.5);
+		\def\radius{1.25}
+		\draw [fill=ensembleFill, thick] (center) circle (\radius);
+		\filldraw [black] ($(center)+\radius*({cos(45)},{sin(45)})$) circle (1pt) node[above right] {$\ens[a]$};
+		\filldraw [black] ($(center)-\radius*(0,1/4)$) circle (1pt) node[above] {$\ens[c]$};
+	\end{tikzpicture}
+	%\includegraphics[width=0.8\textwidth]{tempimages/InteriorExteriorPoints.jpg}
+	\caption{In both spaces, $\ens[a]$ is an extreme point while $\ens[c]$ is an internal point; $\ens[b]$ is a boundary point, but is not an extreme point (it is the mixture of the vertices on the same side). On the circle, all boundary points are extreme points.}
 \end{figure}
 
 \begin{prop}
