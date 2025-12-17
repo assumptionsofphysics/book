@@ -642,10 +642,71 @@ Note that, since a continuous classical ensemble space has no extreme points, we
 \begin{defn}
 	An ensemble is \textbf{decomposable} if it can be expressed as a mixture of two distinct ensembles. An ensemble is \textbf{separately decomposable} if it can be expressed as a mixture of two separate ensembles. An ensemble is \textbf{multidecomposable} if it can be expressed as two decompositions where a component of one is separate from both components of the other. That is, $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$ and either $\ens[a]_1 \separate \ens[b]_j$ or $\ens[a]_2 \separate \ens[b]_j$. An ensemble is \textbf{monodecomposable} if it is not multidecomposable. An ensemble is \textbf{separately monodecomposable} if it is both separately decomposable and monodecomposable.
 \end{defn}
-	
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.4\textwidth]{tempimages/MultipleDecomposition.jpg}
+	\begin{tikzpicture}		
+		%\draw [help lines] (0,0) grid (10,3);
+		
+		% Equilater triangle
+		\coordinate (center) at (1.5,1.2);
+		\def\angle{90}
+		\def\radius{1.5}
+		\coordinate (e1) at ($(center)+\radius*({cos(0+\angle)},{sin(0+\angle)})$);
+		\coordinate (e2) at ($(center)+\radius*({cos(120+\angle)},{sin(120+\angle)})$);
+		\coordinate (e3) at ($(center)+\radius*({cos(240+\angle)},{sin(240+\angle)})$);
+		\coordinate (a) at ($(e2)!0.7!(e3)$);
+		\coordinate (b) at ($(e1)!0.7!(e3)$);
+		\coordinate (e) at ($(e1)!0.768!(a)$);
+		\draw[fill=ensembleFill, thick] (e1) -- (e2) -- (e3) -- cycle;
+		\filldraw [black] (e1) circle (1pt) node[above] {$\ens_1$};
+		\filldraw [black] (e2) circle (1pt) node[below left] {$\ens_2$};
+		\filldraw [black] (e3) circle (1pt) node[below right] {$\ens_3$};
+		\filldraw [black] (a) circle (1pt);
+		\filldraw [black] (b) circle (1pt);
+		\filldraw [black] (e) circle (1pt);
+		\draw (e1) -- (a);
+		\draw (e2) -- (b);
+		
+		% Cut triangle
+		\coordinate (center) at (6,1.2);
+		\def\angle{90}
+		\def\radius{1.5}
+		\coordinate (t) at ($(center)+\radius*({cos(0+\angle)},{sin(0+\angle)})$);
+		\coordinate (e2) at ($(center)+\radius*({cos(120+\angle)},{sin(120+\angle)})$);
+		\coordinate (e3) at ($(center)+\radius*({cos(240+\angle)},{sin(240+\angle)})$);
+		\coordinate (e1) at ($(e2)!0.5!(t)$);
+		\coordinate (e4) at ($(e3)!0.5!(t)$);
+		\coordinate (a) at ($(e2)!0.7!(e3)$);
+		\coordinate (e) at ($(e1)!0.412!(a)$);
+		\draw[fill=ensembleFill, thick] (e1) -- (e2) -- (e3) -- (e4) -- cycle;
+		\filldraw [black] (e1) circle (1pt) node[above left] {$\ens_1$};
+		\filldraw [black] (e2) circle (1pt) node[below left] {$\ens_2$};
+		\filldraw [black] (e3) circle (1pt) node[below right] {$\ens_3$};
+		\filldraw [black] (e4) circle (1pt) node[above right] {$\ens_4$};
+		\filldraw [black] (a) circle (1pt);
+		\filldraw [black] (e) circle (1pt);
+		\draw (e1) -- (a);
+		\draw (e2) -- (e4);
+		
+		
+		\coordinate (center) at (10,1.5);
+		\def\radius{1.25}
+		\coordinate (b) at ($(center)+\radius*({cos(95)},{sin(95)})$);
+		\coordinate (a) at ($(center)+\radius*({cos(-85)},{sin(-85)})$);
+		\coordinate (e) at ($(center)+\radius*({cos(155)},{sin(155)})$);
+		\coordinate (f) at ($(center)+\radius*({cos(-25)},{sin(-25)})$);
+		\coordinate (o) at ($(a)!0.5!(b)$);
+		\draw [fill=ensembleFill, thick] (center) circle (\radius);
+		\filldraw [black] (a) circle (1pt);
+		\filldraw [black] (b) circle (1pt);
+		\filldraw [black] (e) circle (1pt);
+		\filldraw [black] (o) circle (1pt);
+		\filldraw [black] (f) circle (1pt);
+		\draw[] (e) -- (f);
+		\draw[] (a) -- (b);
+	\end{tikzpicture}
+	%\includegraphics[width=0.4\textwidth]{tempimages/MultipleDecomposition.jpg}
 \end{figure}
 
 \begin{remark}
