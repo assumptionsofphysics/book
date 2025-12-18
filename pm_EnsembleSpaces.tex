@@ -745,10 +745,30 @@ Note that, since a continuous classical ensemble space has no extreme points, we
 
 \begin{proof}
 	Suppose mixtures do not preserve separateness in $\Ens$. Then we can find $\ens,\ens[a],\ens[b], \ens[c] \in \Ens$ such that $\ens \separate \ens[a]$, $\ens \separate \ens[b]$ and $\ens \nseparate \ens[c] = p \ens[a] + \bar{p} \ens[b]$ for some $p \in (0,1)$. Since $\ens \nseparate \ens[c]$, we can find $\ens[d], \ens[f], \ens[g]$ such that $\ens[c] = \lambda \ens[d] + \bar{\lambda} \ens[f]$ and $\ens = \mu \ens[d] + \bar{\mu} \ens[g]$.  Since separateness extends to all mixtures (\ref{pm_es_separateExtendsMixtures}) and $\ens[a] \separate \ens[e] = \mu \ens[d] + \bar{\mu} \ens[g]$, then $\ens[a] \separate \ens[d]$. Similarly, $\ens[b] \separate \ens[d]$, which means that $\ens[c]$ is separately multidecomposable. Therefore, if mixtures do not preserve separateness in $\Ens$, not all decomposable ensembles are monodecomposable which means $\Ens$ is not monodecomposable.
-	
+
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.3\textwidth]{tempimages/MonodecomposabilityIsMixturePreserveSeparateness.jpg}
+		\begin{tikzpicture}
+			%\draw [help lines] (0,0) grid (4,4);
+			
+			\coordinate (e) at (1.6,0.5);
+			\coordinate (a) at (0.2,2.5);
+			\coordinate (b) at (3.0,2.5);
+			\coordinate (c) at ($(a)!0.4!(b)$);
+			\coordinate (d) at (0.3,0.4);
+			\coordinate (g) at ($(e)!-0.8!(d)$);
+			\coordinate (f) at ($(c)!-0.4!(d)$);
+			\filldraw [black] (e) circle (1pt) node[below] {$\ens$};
+			\filldraw [black] (a) circle (1pt) node[left] {$\ens[a]$};
+			\filldraw [black] (b) circle (1pt) node[right] {$\ens[b]$};
+			\filldraw [black] (c) circle (1pt) node[above left] {$\ens[c]$};
+			\filldraw [black] (d) circle (1pt) node[left] {$\ens[d]$};
+			\filldraw [black] (f) circle (1pt) node[right] {$\ens[f]$};
+			\filldraw [black] (g) circle (1pt) node[right] {$\ens[g]$};
+			\draw[thick] (a) -- (b) -- (e) -- cycle;
+			\draw[thick] (g) -- (d) -- (f);
+		\end{tikzpicture}
+		%\includegraphics[width=0.3\textwidth]{tempimages/MonodecomposabilityIsMixturePreserveSeparateness.jpg}
 	\end{figure}
 	
 	Now suppose mixtures do preserve separateness, and let $\ens = p \ens[a]_1 + \bar{p} \ens[a]_2 = \lambda \ens[b]_1 +\bar{\lambda} \ens[b]_2$ be a decomposable ensemble. Since $\ens[a]_1$ is a component of $\ens$, then $\ens \nseparate \ens[a]_1$. Since $\ens$ is a mixture of $\ens[b]_1$ and $\ens[b]_2$ and mixtures preserve separateness, then either $\ens[a]_1 \nseparate \ens[b]_1$ or $\ens[a]_1 \nseparate \ens[b]_2$. Similarly, $\ens[a]_2 \nseparate \ens[b]_1$ or $\ens[a]_2 \nseparate \ens[b]_2$. Therefore $\ens$ is not multidecomposable. Since this applies to all decomposable ensembles $\ens$, $\Ens$ is monodecomposable.
