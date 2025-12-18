@@ -1032,10 +1032,25 @@ As with the other axioms, we should now verify that the axiom of entropy is sati
 	
 	\begin{proof}
 		Let's first look at the classical continuous case. Every ensemble is represented by a distribution $\rho(x)$ with $\int_X \rho(x) d\mu=1$. The entropy is given by $S(\rho) = - \int_X \rho \log \rho d\mu$. This is a continuous function of $\rho$.
-		
+
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.5\textwidth]{tempimages/LogBound.jpg}
+			\begin{tikzpicture}
+			%\draw [help lines] (0,0) grid (4,4);				%\pgfplotsset{ticks=none}
+				\begin{axis}[
+					height=5.5cm,
+					width=7cm,
+					axis lines=middle,
+					xmin=-1,xmax=4,
+					ymin=-2,ymax=2
+					]
+					\addplot[black,samples=300]{-ln(x)/ln 2}
+					node [pos=0.4, right] {$-\log_2 x$};
+					\addplot[black,samples=30] {(1-x)/ln(2)}
+				    node [pos=0.7, left] {$\frac{1-x}{\ln 2}$};
+				\end{axis}
+			\end{tikzpicture}
+			%\includegraphics[width=0.5\textwidth]{tempimages/LogBound.jpg}
 		\end{figure}
 		
 		To show strict concavity, note that $- \log \rho \geq \frac{1-\rho}{\ln 2}$ with the equality holding if and only if $\rho=1$. We have
