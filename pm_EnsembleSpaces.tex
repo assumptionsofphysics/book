@@ -1036,7 +1036,8 @@ As with the other axioms, we should now verify that the axiom of entropy is sati
 		\begin{figure}[H]
 			\centering
 			\begin{tikzpicture}
-			%\draw [help lines] (0,0) grid (4,4);				%\pgfplotsset{ticks=none}
+			%\draw [help lines] (0,0) grid (4,4);
+			\pgfplotsset{ticks=none}
 				\begin{axis}[
 					height=5.5cm,
 					width=7cm,
@@ -1045,9 +1046,9 @@ As with the other axioms, we should now verify that the axiom of entropy is sati
 					ymin=-2,ymax=2
 					]
 					\addplot[black,samples=300]{-ln(x)/ln 2}
-					node [pos=0.4, right] {$-\log_2 x$};
+					node [pos=0.4, right] {$-\log_2 \rho$};
 					\addplot[black,samples=30] {(1-x)/ln(2)}
-				    node [pos=0.7, left] {$\frac{1-x}{\ln 2}$};
+				    node [pos=0.7, left] {$\frac{1-\rho}{\ln 2}$};
 				\end{axis}
 			\end{tikzpicture}
 			%\includegraphics[width=0.5\textwidth]{tempimages/LogBound.jpg}
@@ -1071,9 +1072,30 @@ As with the other axioms, we should now verify that the axiom of entropy is sati
 		The equality holds if and only if $\frac{p\rho_1 + \bar{p}\rho_2}{\rho_1} = 1$ which is exactly when $\rho_1 = \rho_2$.
 		
 		
+
 		\begin{figure}[H]
 			\centering
-			\includegraphics[width=0.5\textwidth]{tempimages/LogMonotone.jpg}
+			\begin{tikzpicture}
+				%\draw [help lines] (0,0) grid (4,4);
+				\pgfplotsset{ticks=none}
+				\begin{axis}[
+					height=5.5cm,
+					width=7cm,
+					axis lines=middle,
+					xmin=-1,xmax=4,
+					ymin=-2,ymax=2
+					]
+					\addplot[black,samples=300]{-ln(x)/ln 2}
+					node [pos=0.4, right] {$-\log_2 \rho$};
+					\addplot[dashed, gray] coordinates {(1.8,0) (1.8,-0.84799) (0,-0.84799)};
+					\addplot[dashed, gray] coordinates {(2.2,0) (2.2,-1.1375) (0,-1.1375)};
+				\end{axis}
+				\node at (3,2) [above] {$\rho$};
+				\node at (3.3,2) [above right] {$\rho+k$};
+				\node at (1.1,1) [above left] {$\scriptstyle -\log_2(\rho)$};
+				\node at (1.1,1) [below left] {$\scriptstyle -\log_2(\rho+k)$};
+			\end{tikzpicture}
+			%\includegraphics[width=0.5\textwidth]{tempimages/LogMonotone.jpg}
 		\end{figure}
 		For the upper bound, note that the logarithm is a strictly increasing function, and therefore $- \log(\rho + k) \leq -\log(\rho)$ for any $k \geq 0$, with equality holding if and only if $k=0$. We have
 		\begin{equation}
