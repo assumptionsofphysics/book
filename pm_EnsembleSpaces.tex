@@ -1384,8 +1384,40 @@ As we said before, the cancellative property is necessary and sufficient for the
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{tempimages/EnsembleDifferences.jpg}
-	\caption{This picture represents the motivation of the definition of the operations on the space of differences.}\label{pm_es_vectorJustification}
+	\begin{tikzpicture}
+		%\draw [help lines] (0,0) grid (4,4);
+		
+		\coordinate (label1) at (6,3);
+		\coordinate (label2) at (6,2);
+		\coordinate (label3) at (6,1);
+		\coordinate (a) at (2,2);
+		\coordinate (b) at (4,3);
+		\coordinate (c) at ($(a)!-1!(b)$);
+		\coordinate (d) at ($(a)!0.666!(b)$);
+		\coordinate (e) at (4.5,1);
+		\coordinate (f) at ($(b)!0.5!(e)$);
+		\draw[-Stealth] (a) -- (b);
+		\draw[-Stealth] (a) -- (c);
+		\draw[-Stealth] (a) -- (d);
+		\draw[-Stealth] (a) -- (e);
+		\draw[-Stealth] (a) -- (f);
+		\draw[dashed] (b) -- (e);
+		\filldraw [black] (a) circle (1pt) node[below] {$\ens[a]$};
+		\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
+		\filldraw [black] (c) circle (1pt) node[left] {$\ens[c]$};
+		\filldraw [black] (d) circle (1pt) node[above] {$\ens[d]$};
+		\filldraw [black] (e) circle (1pt) node[right] {$\ens[e]$};
+		\filldraw [black] (f) circle (1pt) node[right] {$\ens[f]$};
+		
+		\node at (label1) [right] {$\ens[a] = \frac{1}{2} \ens[b] + \frac{1}{2} \ens[c] \iff 1(\ens[c]-\ens[a]) = -1(\ens[b]-\ens[a])$};
+		
+		\node at (label2) [right] {$\ens[d] = \frac{1}{3} \ens[a] + \frac{2}{3} \ens[b] \iff 1(\ens[d]-\ens[a]) = \frac{2}{3}(\ens[b]-\ens[a])$};
+		
+		\node at (label3) [right] {$\ens[f] = \frac{1}{2} \ens[b] + \frac{1}{2} \ens[e] \iff 1(\ens[f]-\ens[a]) = \frac{1}{2}(\ens[b]-\ens[a]) + \frac{1}{2}(\ens[e]-\ens[a]) $};
+		
+	\end{tikzpicture}
+	%\includegraphics[width=0.7\textwidth]{tempimages/EnsembleDifferences.jpg}
+	\caption{Once a reference point is picked (i.e. $\ens[a]$ in the figure), the differences with respect to that point behave like elements of a vector space. The relationship between ensembles in terms of mixtures become vector space relationships between differences.}\label{pm_es_vectorJustification}
 \end{figure}
 
 Figure \ref{pm_es_vectorJustification} shows the motivation of the construction. We take an internal point $\ens[a] \in \Ens$ to be a reference, the origin. For any other ensemble $\ens[b]$, we imagine the change from $\ens[a]$ to $\ens[b]$ as the arrow that connects the first to the second. This is the ensemble difference $(\ens[b] - \ens[a])$. The negative of that difference would find an ensemble $\ens[c]$ in the opposite direction. Note that $\ens[a]$ now sits exactly in between $\ens[b]$ and $\ens[c]$, and therefore $\ens[a] = \frac{1}{2}\ens[b] + \frac{1}{2}\ens[c]$ if and only if $(\ens[b] - \ens[a]) = - (\ens[c]- \ens[a])$. That is, relationships between vectors are re-expressed as convex combinations of ensembles.
