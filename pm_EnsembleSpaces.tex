@@ -1852,7 +1852,7 @@ We define the mixing entropy as the increase in entropy for the equal mixture of
 Though the mixing entropy is not a distance function, we can still show that, like a distance, it decreases as one ensemble approaches another. The notion of two ensembles approaching is given by the convex structure: in a convex space, a mixture of $\ens[a]$ and $\ens[b]$ is closer to $\ens[a]$ than $\ens[b]$ is to $\ens[a]$.
 
 \begin{mathSection}
-\begin{prop}
+\begin{prop}\label{pm_es_mixingEntropyMonotonic}
 	Let $\ens[a], \ens[b] \in \Ens$. Then $MS(\ens[a], \ens[b]) \geq MS(\ens[a], p\ens[a]+\bar{p}\ens[b])$ with the equality holding if and only if $p=0$ or $\ens[a] = \ens[b]$.
 \end{prop}
 
@@ -1937,8 +1937,6 @@ The fact that the mixing entropy decreases from all directions as we get closer 
 	Whether this is physically relevant or not depends on whether there are additional physical constraints on the mixing entropy between three points, which is very likely.
 \end{remark}
 
-TODO: Christine, review from here
-
 \begin{prop}
 	Let $U \subseteq \Ens$ be an open set. Let $\ens[a] \in U$ and $L \subseteq \Ens$ be a line containing $\ens[a]$. Then there is an $r \in (0,1]$ such that for all $\ens \in L$ such that $MS(\ens[a], \ens) < r$ we have $\ens \in U$.
 \end{prop}
@@ -1962,13 +1960,13 @@ TODO: Christine, review from here
 	\def\b{0.5}
 	\def\c{0.6}
 
-	\filldraw [black] ($(A)!\b!(B)$) circle (1pt) node[below] {$\ens$};
-	\draw [gray] ($(A)!\b!(B)$) circle (12pt);
+	\filldraw [black] ($(A)!\b!(B)$) circle (1pt) node[below] {$\ens[a]$};
+	\draw [dotted,thick,gray] ($(A)!\b!(B)$) circle (12pt);
 	
-	\draw[dashed] (A) -- ($(A)!\a!(B)$);
+	\draw[dashed,gray] (A) -- ($(A)!\a!(B)$);
 	\draw[-, thick] ($(A)!\a!(B)$) -- ($(A)!\b!(B)$);
 	\draw[-, thick] ($(A)!\b!(B)$) -- ($(A)!\c!(B)$);
-	\draw[dashed] ($(A)!\c!(B)$) -- (B) node[below] {$L$};
+	\draw[dashed,gray] ($(A)!\c!(B)$) -- (B) node[below,black] {$L$};
 	%\draw[dashed] (2, 2) -- (3, 2.5);
 	%\draw[-, thick] (1.5, 1.75) -- (2, 2) node[below] {$b$};
 	%\draw[dashed] (0.4,1.2) -- (1.5, 1.75) node[below] {$a$};
@@ -1976,13 +1974,13 @@ TODO: Christine, review from here
 \end{figure}
 
 \begin{proof}
-	Let $U \subseteq \Ens$ be an open set, $\ens[a] \in U$ and $L \subseteq \Ens$ be a line containing $\ens[a]$. Take $\ens[b] \in L$ such that $\ens[b] \neq \ens[a]$. Let $f : [0,1] \to \Ens$ be such that $f(p) \mapsto p \ens[a] + \bar{p} \ens[b]$. Since the mixing operation is continuous, then $f$ is also continuous. This means that $f^{-1}(U)$ is an open subset of $[0,1]$. Since $\ens[a] \in U$, $1 \in f^{-1}(U)$ and therefore there will be an open interval $(\lambda, 1]$ such that $(\lambda, 1] \subseteq f^{-1}(U)$. Let $\ens[c] = \lambda \ens[a] + \bar{\lambda} \ens[b]$ and $r = MS(\ens[a], \ens[c])$. We have that, for all $p \in (0,1]$, $MS(\ens[a], p\ens[a] +\bar{p}\ens[c])<r$. We also have $p\ens[a] +\bar{p}\ens[c] = p\ens[a] +\bar{p}(\lambda \ens[a] + \bar{\lambda} \ens[b]) = (p + \bar{p}\lambda)\ens[a] + \bar{p}\bar{\lambda}\ens[b]$ where $p + \bar{p}\lambda \in (\lambda, 1]$. Therefore $p\ens[a] +\bar{p}\ens[c] \in f((\lambda,1]) \subseteq U$.
+	Let $U \subseteq \Ens$ be an open set, $\ens[a] \in U$ and $L \subseteq \Ens$ be a line containing $\ens[a]$. Take $\ens[b] \in L$ such that $\ens[b] \neq \ens[a]$. Let $f : [0,1] \to \Ens$ be such that $f(p) \mapsto p \ens[a] + \bar{p} \ens[b]$. Since the mixing operation is continuous, then $f$ is also continuous. This means that $f^{-1}(U)$ is an open subset of $[0,1]$. Since $\ens[a] \in U$, $1 \in f^{-1}(U)$ and therefore there will be an open interval $(\lambda, 1]$ such that $(\lambda, 1] \subseteq f^{-1}(U)$. Let $\ens[c] = \lambda \ens[a] + \bar{\lambda} \ens[b]$ and $r = MS(\ens[a], \ens[c])$. By \ref{pm_es_mixingEntropyMonotonic}, we have that, for all $p \in (0,1]$, $MS(\ens[a], p\ens[a] +\bar{p}\ens[c])<r$. We also have $p\ens[a] +\bar{p}\ens[c] = p\ens[a] +\bar{p}(\lambda \ens[a] + \bar{\lambda} \ens[b]) = (p + \bar{p}\lambda)\ens[a] + \bar{p}\bar{\lambda}\ens[b]$ where $p + \bar{p}\lambda \in (\lambda, 1]$. Therefore $p\ens[a] +\bar{p}\ens[c] \in f((\lambda,1]) \subseteq U$.
 	
-	If $\ens[a]$ is an extreme point of $L$ (i.e. there is no $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$), then we are done. If $\ens[a]$ is not an extreme point, then we can find $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$. Repeat the previous procedure with $\ens[d]$ to find another $r'$ and the $t$ be the minimum between the two. Then we have that $t \in (0,1]$ such that for all $\ens \in L$ such that such that $MS(\ens[a], \ens) < r$, $\ens \in U$.
+	If $\ens[a]$ is an extreme point of $L$ (i.e. there is no $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$), then we are done. If $\ens[a]$ is not an extreme point, then we can find $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$. Repeat the previous procedure with $\ens[d]$ to find another $r'$ and let $\hat{r}$ be the minimum between the two. Then we have that $\hat{r} \in (0,1]$ such that $\ens \in U$ for all $\ens \in L$ such that $MS(\ens[a], \ens) < \hat{r}$.
 \end{proof}
 \end{mathSection}
 	
-There are a number of conjectures on the topology generated by the entropic open ball that are probably all related. They are summarized here with some notes on what was understood:
+There are a number of conjectures on the topology generated by the entropic open ball that are probably all related. They are summarized here with some notes on what has been understood so far.
 
 \begin{conj}
 	For every sequence $\ens[a]_i \in \Ens$, $\ens[a]_i \to \ens[a]$ if and only if $MS(\ens[a], \ens[a]_i) \to 0$.
@@ -1993,15 +1991,15 @@ There are a number of conjectures on the topology generated by the entropic open
 \end{conj}
 
 \begin{conj}
-	Let $U \subseteq \Ens$ be an open set and $\ens[a] \in U$. Then we there exists an $r \in (0,1]$ such that $B_r(\ens[a]) \subseteq U$.
+	Let $U \subseteq \Ens$ be an open set and $\ens[a] \in U$. Then there exists an $r \in (0,1]$ such that $B_r(\ens[a]) \subseteq U$.
 \end{conj}
 
 \begin{remark}
-	These conjectures are likely the same. If the topology is generated by the entropic open balls, then convergence in mixing entropy is the convergence criteria associated with the topology. It also means that we can generate every open set with entropy open balls by fitting them insight every open set.
+	These conjectures are likely the same. If the topology is generated by the entropic open balls, then convergence in mixing entropy is the convergence criterion associated with the topology. It also means that we can generate every open set with entropic open balls by fitting them inside every open set.
 	
 	Note that all entropic open balls are open sets in the topology, since the mixing entropy is a continuous function. It suffices to prove that all open sets can be generated by open balls. We have shown that given a point in an open set we can find a finite range of mixing entropy along each direction. However, since we do not know if there is a non-zero infimum across all directions, we do not know whether we can ``fit'' an entropic open ball.
 	
-	Similarly, it is clear that if a sequence converge, the mixing distance goes to zero. However, we do not know whether there is an open set for which the mixing entropy goes to zero but the sequence does not converge. This would mean that a sequence is always eventually enters an entropic open ball of any size, but it may not enter all open sets.
+	Similarly, it is clear that if a sequence converges, the mixing entropy goes to zero. However, we do not know whether there is an open set for which the mixing entropy goes to zero but the sequence does not converge. This would mean that a sequence always eventually enters an entropic open ball of any size, but it may not enter all open sets.
 \end{remark}
 
 \begin{conj}
@@ -2017,7 +2015,7 @@ There are a number of conjectures on the topology generated by the entropic open
 \end{conj}
 
 \begin{conj}
-	An ensemble embeds continuously into a topological vector space.
+	An ensemble space embeds continuously into a topological vector space.
 \end{conj}
 
 \begin{conj}
@@ -2027,14 +2025,14 @@ There are a number of conjectures on the topology generated by the entropic open
 \begin{remark}
 	These are all about showing that mixing allows a continuous inverse. It is easy to show that mixing gives us a continuous bijection. The problem is showing that the inverse is continuous.
 	
-	Continuity of mixtures only shows that we can stretch open sets to bigger open sets. What we would need is to show that we can shrink open sets to open sets. For example, suppose $U$ is an open neighborhood of $\ens[a]$. The set $V = p \ens[a] + \bar{p} U$ is a set that contains $\ens[a]$ and it is a strict subset of $V$. The question is whether a sequence can stay in $U$, converge to $\ens[a]$ without ever entering $V$.
+	Continuity of mixtures only shows that we can stretch open sets to bigger open sets. What we would need is to show that we can shrink open sets to open sets. For example, suppose $U$ is an open neighborhood of $\ens[a]$. The set $V = p \ens[a] + \bar{p} U$ is a set that contains $\ens[a]$ and it is a subset of $U$. The question is whether a sequence can stay in $U$ and converge to $\ens[a]$ without ever entering $V$.
 \end{remark}
 
 Another open question is whether the mixing entropy, or the entropy directly, can be related to a generalized notion of inner product.
 
 \subsection{Entropic metric}
 
-The second observation is that the strict concavity of the entropy forces the Hessian to be negative definite. The negation of the Hessian, then, is a positive definite function of two variations. In general, the Hessian of a scalar function is not a tensor. However, the ensemble space is a linear space and that linearity has physical significance. It is only for coordinates linear with respect to the mixing coefficient that the convex combination of coordinates will equal the statistical mixture of the corresponding ensembles. Therefore the metric tensor corresponds to the Hessian calculated on that linear structure. When using non-linear coordinates, as long as the coordinates are smooth, one can always make the appropriate transformation to linear coordinates.
+Following the first observation that the mixing entropy is a pseudo-distance, the second observation is that the strict concavity of the entropy forces the Hessian to be negative definite. The negation of the Hessian, then, is a positive definite function of two variations. In general, the Hessian of a scalar function is not a tensor. However, the ensemble space is a linear space and that linearity has physical significance. It is only for coordinates linear with respect to the mixing coefficient that the convex combination of coordinates will equal the statistical mixture of the corresponding ensembles. Therefore we can define a metric tensor which corresponds to the negative Hessian calculated on that linear structure. When using non-linear coordinates, as long as the coordinates are smooth, one can always make the appropriate transformation to linear coordinates.
 
 \begin{mathSection}
 \begin{remark}
@@ -2054,7 +2052,7 @@ The second observation is that the strict concavity of the entropy forces the He
 \end{proof}
 
 \begin{defn}
-	Assuming $\Ens$ embeds in a topological vector space and given $\ens \in \Ens$, a \textbf{variation} $\delta \ens$ of $\ens$ is a vector in the ambient space such that $\forall t \in [0,1]$ $\ens + t \delta \ens \in \Ens$. Unless otherwise noted, we assume the variation is expressed on the affine structure. Note that it can be re-expressed through a non-linear map as long as the map is differentiable (i.e. it maps variations to variations).
+	Assuming $\Ens$ embeds in a topological vector space and given $\ens \in \Ens$, a \textbf{variation} $\delta \ens$ of $\ens$ is a vector in the ambient space such that $\forall t \in [0,1]$ $\ens + t \delta \ens \in \Ens$. The space of all variations at $\ens$ is noted $T_{\ens}$. Unless otherwise noted, we assume the variation is expressed on the affine structure. Note that it can be re-expressed through a non-linear map as long as the map is differentiable (i.e. it maps variations to variations).
 \end{defn}
 
 \begin{remark}
@@ -2062,7 +2060,7 @@ The second observation is that the strict concavity of the entropy forces the He
 \end{remark}
 
 \begin{defn}
-	Given an ensemble $\ens \subseteq \Ens$ and a variation $\delta \ens$ defined at that point, the \textbf{norm} of $\delta \ens$ is given by
+	Given an ensemble $\ens \in \Ens$ and a variation $\delta \ens$ defined at that point, the \textbf{norm} of $\delta \ens$ is given by
 	$$ \lVert \delta \ens \rVert_{\ens} = \sqrt{ 8 MS(\ens, \ens + \delta \ens) }.$$
 	The \textbf{metric tensor} (i.e. the inner product between $\delta \ens_1 , \delta \ens_2 \in T_{\ens}$) is given by
 	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert_{\ens}^2 - \lVert \delta \ens_1 \rVert_{\ens}^2 - \lVert \delta \ens_2 \rVert_{\ens}^2 \right).$$
@@ -2110,6 +2108,8 @@ The second observation is that the strict concavity of the entropy forces the He
 	\end{equation}
 \end{proof}
 \end{mathSection}
+
+TODO: Review with Christine from here
 
 We now show that the metric tensor we defined reduces to the Fisher-Rao metric in the classical case and to its quantum equivalent in the quantum case.
 
