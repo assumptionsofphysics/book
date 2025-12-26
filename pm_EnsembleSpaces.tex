@@ -2109,8 +2109,6 @@ Following the first observation that the mixing entropy is a pseudo-distance, th
 \end{proof}
 \end{mathSection}
 
-TODO: Review with Christine from here
-
 We now show that the metric tensor we defined reduces to the Fisher-Rao metric in the classical case and to its quantum equivalent in the quantum case.
 
 \begin{mathSection}
@@ -2169,13 +2167,12 @@ We now show that the metric tensor we defined reduces to the Fisher-Rao metric i
 \end{proof}
 
 \begin{remark}
-	For quantum mechanics, the situation is more complicated as there are different definitions of Fisher metrics (see \href{https://arxiv.org/pdf/2008.11178}{RLD Fisher Information Bound for Multiparameter
-		Estimation of Quantum Channels} or \href{https://link.springer.com/chapter/10.1007/978-4-431-54493-7_4}{Quantum Estimation Theory}). We will therefore just show a general connection, without worrying about the mathematical details.
+	For quantum mechanics, the situation is more complicated as there are different definitions of Fisher metrics\footnote{For details, see \href{https://iopscience.iop.org/article/10.1088/1367-2630/ac1186}{Vishal Katariya and Mark M Wilde 2021 New J. Phys. 23 073040} or \href{https://link.springer.com/chapter/10.1007/978-4-431-54493-7_4}{Watanabe, Y. (2014). Quantum Estimation Theory}.}. Additionally, we will take steps in the calculations that are already present in established literature, though the mathematical conditions for those steps to be well-defined are unclear. We will therefore just show a general connection, without worrying about the mathematical details.
 	
 \end{remark}
 
 \begin{prop}
-	For a quantum ensemble space, the metric corresponds to the Bures metric and the Quantum Fisher information metric.
+	For a quantum ensemble space, the metric corresponds to the Bures metric and the quantum Fisher information metric.
 \end{prop}
 
 \begin{proof}
@@ -2183,7 +2180,7 @@ We now show that the metric tensor we defined reduces to the Fisher-Rao metric i
 	\begin{equation}
 		S(\rho) = - \tr\left(\rho \log \rho\right).
 	\end{equation}
-	We take the first variation and have
+	where $\log$ will be the natural logarithm throughout this calculation. We take the first variation and have
 	\begin{equation}
 		\begin{aligned}
 			\delta S(\rho) &= - \delta \tr\left(\rho \log \rho\right)= - \tr\left(\delta \rho \log \rho + \rho \delta \log \rho\right) \\
@@ -2213,9 +2210,9 @@ We now show that the metric tensor we defined reduces to the Fisher-Rao metric i
 				\rho}{\partial \theta^j} d\theta^j\right) = \tr\left( \rho^{-1} \frac{\partial \rho}{\partial \theta^i }\frac{\partial \rho}{\partial \theta^j}\right) d\theta^i d\theta^j
 		\end{aligned}
 	\end{equation}
-	which recovers one version of the Fisher-Rao metric.
+	which recovers one version of the quantum Fisher-Rao metric.
 	
-	Recalling that the right logarithmic derivative (RLD) $L^R$ satisfies $\frac{\partial \rho}{\partial \theta} = \rho L^R$, we can write 
+	Noting that the right logarithmic derivative (RLD) $L^R$ satisfies $\frac{\partial \rho}{\partial \theta} = \rho L^R$, we can write 
 	\begin{equation}
 		\begin{aligned}
 			g_{\ens}(d\theta^i, d\theta^j) &= \tr\left( \rho^{-1} \frac{\partial \rho}{\partial \theta^i }\frac{\partial \rho}{\partial \theta^j}\right) d\theta^i d\theta^j = \tr(\rho^{-1}\rho L^R
@@ -2227,22 +2224,22 @@ We now show that the metric tensor we defined reduces to the Fisher-Rao metric i
 \end{proof}
 
 \begin{remark}
-	The feedback we received on the above derivation is contradictory, as some says we are handling the possible non-commutativity between $\rho$ and its variation $\delta \rho$ correctly and others say we aren't. Note that in all steps we are using the cyclical nature of the trace, and not commuting $\rho$ and its variation $\delta \rho$.
+	The feedback we received on the above derivation is contradictory, as some say we are handling the possible non-commutativity between $\rho$ and its variation $\delta \rho$ correctly and others say we aren't. Note that in all steps we are using the cyclical nature of the trace, and not commuting $\rho$ and its variation $\delta \rho$.
 \end{remark}
 
 \begin{remark}
-	Note that these results relate also to the \href{https://en.wikipedia.org/wiki/Ruppeiner_geometry}{Ruppeiner metric}, which is the Hessian of the entropy. They also relate to the Hessian metric as described in  \href{https://web.osu.cz/~Zusmanovich/seminar/2017/wolak/ostrava-11-17-hessian-pdf.pdf}{Hessian structures} \href{https://link.springer.com/chapter/10.1007/978-3-642-40020-9_4}{1}.
+	Note that these results relate also to the \href{https://en.wikipedia.org/wiki/Ruppeiner_geometry}{Ruppeiner metric}, which is the negation of the Hessian of the entropy. They also relate to the Hessian metric as described in \href{https://link.springer.com/chapter/10.1007/978-3-642-40020-9_4}{Shima, H. (2013). Lecture Notes in Computer Science, vol 8085}.
 \end{remark}
 \end{mathSection}
 
 \section{State capacity}
 
-In this section we are going to develop a generalized version of the count of states. In classical statistical mechanics, the entropy for a uniform distribution $\rho_U$ over a region of phase space $U$ is given by $S(\rho_U) = \log \mu(U)$, where $\mu$ is the count of states given by the Liouville measure. Since entropy is our stating point: we will define the state capacity of a set of ensembles as the highest exponential of the entropy achievable by mixing those ensembles. This definition works in general, and recovers both the classical Liouville measure and the dimensionality of a quantum subspace.
+In this section we are going to develop a generalized version of the count of states. In classical statistical mechanics, the entropy for a uniform distribution $\rho_U$ over a region of phase space $U$ is given by $S(\rho_U) = \log \mu(U)$, where $\mu$ is the count of states given by the Liouville measure. Since entropy is our starting point, we will define the state capacity of a set of ensembles as the highest exponential of the entropy achievable by mixing those ensembles. This definition works in general, and recovers both the classical Liouville measure and the dimensionality of a quantum subspace.
 
 Given an ensemble, we want to quantify the number of distinguishable cases over which the ensemble is spread. Since entropy characterizes the variability of the preparations of the ensemble, greater variability means the ensemble is spread over more cases. Therefore the count of distinguishable states must be a monotonic function of the entropy. The question is what function.
 
 The first hint that the exponential is the right function is the relationship $S(\rho_U) = \log \mu(U)$ in classical statistical mechanics. Another hint is that we will want this size to be multiplicative over independent distributions. That is, if we have two ensembles $\rho_1 \in \Ens_1$ and $\rho_2 \in \Ens_2$ of two different ensemble spaces, we can imagine the composite system $\rho = \rho_1 \rho_2$ representing the ensemble of the two independent ensembles. While the entropy should be additive, that is $S(\rho) = S_1(\rho_1) + S_2(\rho_2)$, the count of states should be multiplicative, that is $\mu(\rho) = \mu_1(\rho_1) \mu_2(\rho_2)$. This suggests the relationship $S(\rho) = \log \mu (\rho)$ for all ensembles. The other hint is that the spread can be, at most, additive. If we mix two ensembles, the spread can be at most over the configurations of both and not more. The following shows that the exponential of the entropy has exactly that property.\footnote{
-	Note that the state capacity for a single element corresponds to the ``ensemble volume'' defined in \href{https://arxiv.org/pdf/physics/9903045}{this work} and more recently \href{https://arxiv.org/pdf/1804.01343}{here}. It is connected to various uncertainty relationships, including a stronger form of the quantum uncertainty principle. It would be interesting to understand what results can be generalized to the ensemble space.}
+	Note that the state capacity for a single element corresponds to the ``ensemble volume'' defined in \href{https://journals.aps.org/pra/abstract/10.1103/PhysRevA.59.2602}{M.J.W. Hall 1999, Phys. Rev. A 59, 2602} and more recently \href{https://iopscience.iop.org/article/10.1088/1751-8121/aad50f}{M.J.W. Hall 2018 J. Phys. A: Math. Theor. 51 364001}. It is connected to various uncertainty relationships, including a stronger form of the quantum uncertainty principle. It would be interesting to understand what results can be generalized to the ensemble space.}
 
 \begin{mathSection}
 \begin{prop}[Exponential entropy subadditivity]\label{pm_es_exponentialEntropySubadditivity}
@@ -2252,7 +2249,7 @@ The first hint that the exponential is the right function is the relationship $S
 \begin{proof}
 	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens[a]$ and $\ens[b]$ are orthogonal by definition. Therefore the entropy maximum for the mixed ensemble will be achieved when the elements are orthogonal, for some value of $p$.
 	
-	Now fix the entropy of $\ens[a]$ and $\ens[b]$ to some values $S_a = S(\ens[a])$ and $S_b = S(\ens[b])$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression. Since $\ens[a]$ and $\ens[b]$ are orthogonal, $S(p \ens[a] + \bar{p}\ens[b]) =  - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b$ which is a smooth function of $p$.
+	Now fix the entropy of $\ens[a]$ and $\ens[b]$ to some values $S_a = S(\ens[a])$ and $S_b = S(\ens[b])$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression. Since $\ens[a]$ and $\ens[b]$ are orthogonal, $S(p \ens[a] + \bar{p}\ens[b]) =  - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b$ which is a smooth function of $p$. Let us find the maximum, which is a stationary point.
 	\begin{equation}
 		\begin{aligned}
 			0 &= \frac{d}{dp} S(p \ens[a] + \bar{p}\ens[b]) =\frac{d}{dp} \left( - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b \right) \\
@@ -2281,7 +2278,7 @@ The first hint that the exponential is the right function is the relationship $S
 \end{proof}
 
 \begin{remark}
-	We have proved that the exponential of the entropy gives us subadditivity. Ideally, we should prove that this is the only function with that characteristic.
+	We have proved that the exponential of the entropy gives us subadditivity. Ideally, we should prove that this is the only function of the entropy with that characteristic.
 \end{remark}
 
 \begin{conj}
@@ -2315,7 +2312,7 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 		\item increasing: $A \subseteq B \implies \scap(A) \leq \scap(B)$
 		\item subadditive: $\scap(A \cup B) \leq \scap(A) + \scap(B)$
 		\item additive over orthogonal sets: $A \ortho B \implies \scap(A \cup B) = \scap(A) + \scap(B)$ 
-		\item the state capacity is continuous from below.
+		\item continuous from below.
 	\end{enumerate}
 \end{prop}
 
@@ -2331,19 +2328,21 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 	5. By \ref{pm_es_convexSupremumProps}.
 \end{proof}
 
+TODO: make it for classical discrete
+
 \begin{remark}
-	The state capacity is not continuous from above. Let $\Ens$ be the Bloch ball. Let $\{\ens_i\}$ be a countable set of distinct pure states. Let $A_j = \{ \ens_i \, | \, i \geq j\}$. Then $\scap(A_j) > 1$ for all $j$ because $A_j$ contains at least two distinct pure states, and therefore the hull contains a mixture with entropy greater than zero. This means that $\lim\limits_{i \to \infty} \scap(A_i) >= 1$. However, $\bigcap A_j = \emptyset$ which means $\scap(\lim\limits_{i \to \infty} A_i) = 0$. This means that, in general, $\scap(\lim\limits_{i \to \infty} A_i) \neq \lim\limits_{i \to \infty} \scap(A_i)$ for a decreasing sequence.
+	The state capacity is not continuous from above. Let $\Ens$ be the Bloch ball. Let $\{\ens_i\}$ be a countable set of distinct pure states. Let $A_j = \{ \ens_i \, | \, i \geq j\}$. Then $\scap(A_j) > 1$ for all $j$ because $A_j$ contains at least two distinct pure states, and therefore the hull contains a mixture with entropy greater than zero. This means that $\lim\limits_{i \to \infty} \scap(A_i) \geq 1$. However, $\bigcap A_j = \emptyset$ which means $\scap(\lim\limits_{i \to \infty} A_i) = 0$. This means that, in general, $\scap(\lim\limits_{i \to \infty} A_i) \neq \lim\limits_{i \to \infty} \scap(A_i)$ for a decreasing sequence.
 \end{remark}
 
 \end{mathSection}
 
-The state capacity is additive over orthogonal set. Intuitively, orthogonal sets corresponds to mutually exclusive events, so it makes sense that the count of states is additive. Intuitively, the converse should be true as well: if the count of states is additive, the sets correspond to mutually exclusive events and therefore the sets are orthogonal. This leads to the following conjecture
+The state capacity is additive over orthogonal sets. Intuitively, orthogonal sets correspond to mutually exclusive events, so it makes sense that the count of states is additive. We would expect the converse to be true as well: if the count of states is additive, the sets correspond to mutually exclusive events and therefore the sets are orthogonal. This leads to the following conjecture:
 
 \begin{conj}
 	The state capacity is additive only on orthogonal sets. That is, if $\scap(A)<\infty$, $\scap(B)<\infty$ and $\scap(A \cup B) = \scap(A) +\scap(B)$, then $A \ortho B$.
 \end{conj}
 
-One should be able to prove that if the state capacity adds, then the states with highest entropy satisfy the upper variability bound and are orthogonal. What needs to be shown is that this is enough to say all elements are orthogonal. There is a series of nice results connected to this to expand the whole theory. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. If $\ens[a]$ is the ensemble with maximum entropy in $\chull(A)$, it should be true that all elements of the hull are components of $\ens[a]$. One should be able to show that, given two sequences with a convergent entropy and whose elements are orthogonal to each other, one can create another sequence that converges to an entropy higher than both of them. Another useful tool would be a type of sequence within $\hull(A)$ whose entropy always increases, tends to the supremum and each element is a component of the following. Also: the state with maximal entropy (it if exists) is an internal point. All internal points are in the $\sigma$-hull. We leave these series of conjecture for future work.
+One should be able to prove that if the state capacity adds, then the states with highest entropy satisfy the upper variability bound and are orthogonal. What needs to be shown is that this is enough to say all elements are orthogonal. There is a series of nice results connected to this to expand the whole theory. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. If $\ens[a]$ is the ensemble with maximum entropy in $\chull(A)$, it should be true that all elements of the hull are components of $\ens[a]$. One should be able to show that, given two sequences with a convergent entropy and whose elements are orthogonal to each other, one can create another sequence that converges to an entropy higher than both of them. Another useful tool would be a type of sequence within $\hull(A)$ whose entropy always increases, tends to the supremum and each element is a component of the following. Also, the state with maximal entropy (if it exists) is an internal point. All internal points are in the $\sigma$-hull. We leave these series of conjectures for future work.
 
 We now show that the state capacity recovers a notion of number of cases in all three target spaces. In the discrete classical case it recovers the number of points; in the continuous classical case, it recovers the Liouville volume; in the quantum case, it recovers the number of orthogonal pure states.
 
@@ -2369,9 +2368,11 @@ We now show that the state capacity recovers a notion of number of cases in all 
 \end{prop}
 
 \begin{proof}
-	Let $A$ be the set of density operators defined on a subspace $U$. The highest entropy is achieved by the maximally mixed state, which equals $\log(\dim(U))$. Therefore $\scap(A) = 2^{\log(\dim(U))} = \dim(U)$.
+	Let $A$ be the set of density operators defined on a finite-dimensional subspace $U$. The highest entropy is achieved by the maximally mixed state, and equals $\log(\dim(U))$. Therefore $\scap(A) = 2^{\log(\dim(U))} = \dim(U)$. Now let $U$ be infinite dimensional. Then there is no upper bound on the entropy, and therefore $\scap(A) = \infty = \dim(U)$.
 \end{proof}
 \end{mathSection}
+
+TODO: review with Christine from here.
 
 \section{Fraction capacity}
 
