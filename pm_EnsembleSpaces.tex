@@ -2330,10 +2330,8 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 	5. By \ref{pm_es_convexSupremumProps}.
 \end{proof}
 
-TODO: make it for classical discrete
-
 \begin{remark}
-	The state capacity is not continuous from above. Let $\Ens$ be the Bloch ball. Let $\{\ens_i\}$ be a countable set of distinct pure states. Let $A_j = \{ \ens_i \, | \, i \geq j\}$. Then $\scap(A_j) > 1$ for all $j$ because $A_j$ contains at least two distinct pure states, and therefore the hull contains a mixture with entropy greater than zero. This means that $\lim\limits_{i \to \infty} \scap(A_i) \geq 1$. However, $\bigcap A_j = \emptyset$ which means $\scap(\lim\limits_{i \to \infty} A_i) = 0$. This means that, in general, $\scap(\lim\limits_{i \to \infty} A_i) \neq \lim\limits_{i \to \infty} \scap(A_i)$ for a decreasing sequence.
+	The state capacity is not continuous from above. Let $\Ens$ be an ensemble space and $\ens[a], \ens[b] \in \Ens$ two distinct ensembles. Without loss of generality, let $S(\ens[a]) \leq S(\ens[b])$. Then $S(p \ens[a] + \bar{p} \ens[b]) \geq S(\ens[a])$ for all $p \in [0,1]$. Let $\{ \ens_i \} \subset \hull(\{\ens[a], \ens[b]\})$ be a sequence of mixtures of $\ens[a]$ and $\ens[b]$. Let $A_j = \{ \ens_i \, | \, i \geq j\}$ be the family of sets that contains all the elements of the sequence starting from $j$ respectively. This is a decreasing sequence, since $A_j \supseteq A_{j+i}$. We have that $\scap(A_j) \geq 2^{S(\ens[a])} > 0$ for all $j$, which means that $\lim\limits_{i \to \infty} \scap(A_i) \geq 2^{S(\ens[a])} > 0$. However, $\bigcap A_j = \emptyset$ which means $\scap(\lim\limits_{i \to \infty} A_i) = 0$. This means that, in general, $\scap(\lim\limits_{i \to \infty} A_i) \neq \lim\limits_{i \to \infty} \scap(A_i)$ for a decreasing sequence.
 \end{remark}
 
 \end{mathSection}
@@ -2490,7 +2488,7 @@ First we define the \textbf{fraction} of one element with respect to another. Fo
 	\caption{Discontinuity of fraction.}\label{pm_es_figFractionDiscontinuous}
 \end{figure}
 
-Intuitively, we would expect the fraction $\fraction_{\ens}(\ens[a])$ to be continuous both in $\ens[a]$ and $\ens$, but this is not the case. For example, as shown in Fig. \ref{pm_es_figFractionDiscontinuous}, let $\Ens$ be the Bloch ball and let $\ens[a]_i$ be a sequence of pure states (i.e. points on the surface) that converge to another pure state $\ens$. Since they are all extreme points, we have $\fraction_{\ens}(\ens[a]_i) = 0$ and $\fraction_{\ens[a]_i}(\ens) = 0$. However, $\fraction_{\ens}(\ens) = 1$. This is the recurring problem of the non-continuity at the edges. The following conjecture, however, may still be true:
+Intuitively, we would expect the fraction $\fraction_{\ens}(\ens[a])$ to be continuous both in $\ens[a]$ and $\ens$, but this is not the case. For example, as shown in Fig. \ref{pm_es_figFractionDiscontinuous}, let $\Ens$ be the Bloch ball and let $\ens[a]_i$ be a sequence of pure states (i.e. extreme points) that converge to another pure state $\ens$. Since they are all extreme points, we have $\fraction_{\ens}(\ens[a]_i) = 0$ and $\fraction_{\ens[a]_i}(\ens) = 0$ for all $i$. However, $\fraction_{\ens}(\ens) = 1$. This is the recurring problem of the non-continuity at the edges. The following conjecture, however, may still be true:
 \begin{conj}
 	The fraction $\fraction_{\ens}(\ens[a])$ is a continuous function both in $\ens[a]$ and $\ens$ in the algebraic interior.
 \end{conj}
@@ -2542,7 +2540,7 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	\end{coro}
 	
 	\begin{remark}
-		Since we have shown that the fraction is not a continuous function, we can use the same example to show that the fraction capacity of the closed hull is not necessarily the same as the fraction capacity of the convex hull. As previously shown in Fig. \ref{pm_es_figFractionCapacity}, let $\Ens$ be a Bloch ball and let $A=\{\ens[a]_i\}$ be a sequence of pure states (i.e. extreme points) that converge to another pure state $\ens \notin \{\ens[a]_i\}$. Since $\ens$ is an extreme point, it can only be written as a convex combination of itself. Since $\ens \notin A$, $\ens \notin \hull(A)$ and therefore $\fcap_{\ens}(\hull(A))=0$. However, since $\ens$ is the limit of the sequence, we have $\ens \in \chull(A)$, and therefore $\fcap_{\ens}(\chull(A)) = 1$. The fraction capacity of the closed hull, then, can be different from the fraction capacity of the convex hull.
+		Since we have shown that the fraction is not a continuous function, we can use the same example to show that the fraction capacity of the closed hull is not necessarily the same as the fraction capacity of the convex hull. As previously shown in Fig. \ref{pm_es_figFractionDiscontinuous}, let $\Ens$ be a Bloch ball and let $A=\{\ens[a]_i\}$ be a sequence of pure states (i.e. extreme points) that converge to another pure state $\ens \notin \{\ens[a]_i\}$. Since $\ens$ is an extreme point, it can only be written as a convex combination of itself. Since $\ens \notin A$, $\ens \notin \hull(A)$ and therefore $\fcap_{\ens}(\hull(A))=0$. However, since $\ens$ is the limit of the sequence, we have $\ens \in \chull(A)$, and therefore $\fcap_{\ens}(\chull(A)) = 1$. The fraction capacity of the closed hull, then, can be different from the fraction capacity of the convex hull.
 		
 		An open question is whether some type of equality still holds for internal points and the $\sigma$-hull of internal points. For example, $\fcap_{\ens}(\hull(A)) = \fcap_{\ens}(\shull(A))$ if $\ens$ is an internal point and $A$ is a set of internal points.
 	\end{remark}
@@ -2624,32 +2622,30 @@ We now show that the fraction capacity recovers probability over measurements in
 	\end{proof}
 \end{mathSection}
 
-TODO: Review with Christine from here
-
 \section{Statistical properties and quantities}
 
-In this section we define statistical quantities, which are the generalization of classical random variables and quantum observables. Given our ensembles first approach, statistical quantities are affine (linear) functions of ensembles as they represent an expectation over ensembles. The possible values of the quantities will need to be recovered with constructions that mimic spectral theory, though we will not want to talk about eigenstates and eigenvalues in the general case since these are not properly defined for a continuous quantity.
+In this section we define statistical quantities, which are the generalization of classical random variables and quantum observables. Given our ensemble-first approach, statistical quantities are affine (linear) functions of ensembles as they represent an expectation over ensembles. The possible values of the quantities will need to be recovered with constructions that mimic spectral theory, though we will not want to talk about eigenstates and eigenvalues in the general case since these are not properly defined for a continuous quantity.
 
 \subsection{Properties and quantities}
 
-These definitions extend the notion of properties and quantities that we defined for an experimental domain. In that case, we simply required that a property be a continuous map to a set of possible values for the property. For a statistical property, the set of values are a topological convex space, so that the property allows statistical mixing. For a quantity, the topological convex space is simply a linearly ordered property, which in this case will always be a real valued quantity. The convexity, the averaging operation, fills in the gaps in the linear order in case that not all intermediate values can be obtained.
+These definitions extend the notion of properties and quantities that we defined for an experimental domain. In that case, we simply required that a property be a continuous map to a set of possible values for the property. For a statistical property, the set of values are a topological convex space, so that the property allows statistical mixing. For a quantity, the topological convex space is simply a linearly ordered property, which in this case will always be a real-valued quantity. The convexity, the averaging operation, fills in the gaps in the linear order in case that all intermediate values can be obtained. For example, even if the values on the pure states are rationals or integers, the expectations will always span a contiguous interval of the reals.
 
 \begin{mathSection}
 	
 \begin{defn}
-	A \textbf{statistical property}, or simply property, is an attribute that allows statistical mixing. Formally, it is an continuous map $F : \Ens \to \mathcal{Q}$ where $\mathcal{Q}$ is a convex topological space such that $F(p \ens[a] + \bar{p} \ens[b]) = p F(\ens[a]) + \bar{p} F(\ens[b])$ (i.e. it is an affine map).
+	A \textbf{statistical property}, or simply property, is an attribute that allows statistical mixing. Formally, it is a continuous map $F : \Ens \to \mathcal{Q}$ where $\mathcal{Q}$ is a convex topological space such that $F(p \ens[a] + \bar{p} \ens[b]) = p F(\ens[a]) + \bar{p} F(\ens[b])$ (i.e. it is an affine map).
 	
-	A \textbf{statistical quantity}, or statistical variable, or simply variable, is a numerical statistical property. That is, it is a continuous linear real valued operator $F : \Ens \to \mathbb{R}$.
+	A \textbf{statistical quantity}, or statistical variable, or simply variable, is a numerical statistical property. That is, it is a continuous real-valued affine map $F : \Ens \to \mathbb{R}$.
 \end{defn}
 
 \begin{justification}
-	This definition extends the general definition of properties and quantities we already gave to the statistical case. As before, continuity is required since verifying the value of the quantity corresponds to verifying that we are dealing with a specific subset of ensembles.
+	This definition extends to the statistical case the general definition of properties and quantities we already gave in the previous chapter. As before, continuity is required since verifying the value of the quantity corresponds to verifying that we are dealing with a specific subset of ensembles.
 	
-	The ability to create convex combinations corresponds to the ability to create statistical averages. Therefore $\mathcal{Q}$ must be a convex set. Given that preparation instances are assumed to be independent, a mixture of the preparation will produce a mixture of the properties according to the same fraction coefficients.
+	The ability to create convex combinations corresponds to the ability to create statistical averages. Therefore $\mathcal{Q}$ must be a convex set. Given that preparation instances are assumed to be independent, a mixture of the preparations will produce a mixture of the properties according to the same fraction coefficients.
 	
-	Quantities are simply properties that are linearly ordered. The ability to create convex combinations becomes the ability to take weighted averages of the quantities. Regardless of whether one starts from integers, rationals or real valued quantities, the statistical averages will, in general, be a real number.
+	Quantities are simply properties that are linearly ordered. The ability to create convex combinations becomes the ability to take weighted averages of the quantities. Regardless of whether one starts from integers, rationals or real-valued quantities, the statistical averages will, in general, be a real number.
 	
-	Note that the numerical value cannot be infinite. The only way to measure infinity is if the measured average keeps increasing in time. This would be a contradiction on the assumption that the ensemble represent a reproducible collection of preparations.
+	Note that the numerical value cannot be infinite. Given that we can only measure the finite average of a finite sequence of outcomes, we must have that these sampled averages converge to the expectation. The only way this could happen for an infinite expectation would be if the sampled average kept increasing over time. But this would be a contradiction of the assumption that an ensemble represents a reproducible collection of preparations. Therefore, statistical variables with infinite expectations are not justified.
 \end{justification}
 
 \begin{remark}
@@ -2665,11 +2661,11 @@ Here we show that statistical quantities recover the standard random variables o
 
 \begin{mathSection}
 \begin{prop}
-	Let $\Ens$ be a classical probability space. Then each statistical quantity is the expectation of a random variable and vice-versa.
+	Let $\Ens$ be a discrete or continuous classical ensemble space. Then each statistical quantity is the expectation of a random variable and vice-versa.
 \end{prop}
 
 \begin{proof}
-	Let $\Ens$ be an ensemble space where each ensemble is a probability measure $\mu$ over some sample space $X$. Let $f : X \to \mathbb{R}$ be a random variable, then the expectation $F(\mu) \mapsto \int_{X} f d\mu$ is a continuous real affine map and is therefore a statistical quantity. Conversely, let $F : \Ens \to \mathbb{R}$ be a linear functional of the measures. Then, by Riesz representation theorem, we can write $F(\mu) = \int_{X} f d\mu$ from some $f : X \to \mathbb{R}$.
+	Let $\Ens$ be a discrete or continuous classical ensemble space over some sample space $X$. Let $f : X \to \mathbb{R}$ be a random variable and $p \in \Ens$ a probability measure, then the expectation $F(p) \mapsto \int_{X} f dp$ is a continuous real affine map and is therefore a statistical quantity. Conversely, let $F : \Ens \to \mathbb{R}$ be a linear functional of the measures. Then, by the Riesz representation theorem, we can write $F(p) = \int_{X} f dp$ for some $f : X \to \mathbb{R}$.
 \end{proof}
 \end{mathSection}
 
@@ -2681,33 +2677,36 @@ For a quantum system, we can show that all expectations of observables are stati
 \end{prop}
 
 \begin{proof}
-	Let $\Ens$ be a quantum ensemble space over some Hilbert space $\mathcal{H}$. Let $O : \mathcal{H} \to \mathcal{H}$ be Hermitian operator. Then $F(\rho) \mapsto \tr(\rho O)$ is a continuous real affine map of $\Ens$ and it is therefore a statistical quantity.
+	Let $\Ens$ be a quantum ensemble space over some Hilbert space $\mathcal{H}$. Let $O : \mathcal{H} \to \mathcal{H}$ be a Hermitian operator and $\rho$ be a density matrix. Then $F(\rho) \mapsto \tr(\rho O)$ is a continuous real affine map of $\Ens$ and it is therefore a statistical quantity.
 \end{proof}
 
 \begin{remark}
-	We still need to prove that the converse is true: every statistical quantity in quantum mechanics corresponds to an operator. We may need to constrain the problem to bounded quantities, and recover the unbounded only as a limit.
+	We still need to prove that the converse is true: every statistical quantity in quantum mechanics corresponds to an operator. We may need to constrain the problem to bounded quantities, and recover the unbounded ones only as a limit.
 \end{remark}
 \end{mathSection}
 
 
 \subsection{Quantifiable spaces and locally convex vector spaces}
 
-In physics, we typically are able to fully identify ensembles by using measurable quantities. An ensemble space is quantifiable, then, when we have enough statistical quantities to recover all ensemble. There is a subtle problem with infinity, though, that is still not completely closed.
+In physics, we typically are able to fully identify ensembles by using measurable quantities. An ensemble space is quantifiable, then, when we have enough statistical quantities to recover all ensembles. There is a subtle problem with infinity, though, that is still not completely closed.
 
-In principle, the space of ensemble may include quantities whose expectation is infinite over some distributions. In classical mechanics, for example, given any probability distribution $\rho$ with infinite support we can find a random variable $f$ such that $\int_X f \rho dx$ diverges. For example, we can simply set $f(x) = 1/\rho(x)$ where $\rho(x)\neq0$ and $\rho(x) = 0$ otherwise. This can be solved in classical mechanics because we can always find distributions with compact support, which will guarantee convergence for all functions. In quantum mechanics, however, a wavefunction with compact support on position will have non-compact support in momentum and vice-versa. However, the Schwartz wavefunctions will have finite expectation for all polynomial of position and momentum, and they are dense in the Hilbert space. What makes sense to expect physically, then, is that there is a set of quantities that physically define the system which will need finite expectation. These will need to remain finite under coordinate transformations and time evolution for the physics to make sense. All these details are yet to be understood and framed in a mathematically precise way. Yet, it is clear that we need, at least, to characterize the case where a set of statistical quantities fully characterize all ensembles.
+In principle, the space of ensembles may include quantities whose expectation is infinite over some distributions. In classical mechanics, for example, given any probability distribution $\rho$ with infinite support we can find a random variable $f$ such that $\int_X f \rho dx$ diverges. For example, we can simply set $f(x) = 1/\rho(x)$ where $\rho(x)\neq0$ and $f(x) = 0$ otherwise. This can be solved in classical mechanics because we can always find distributions with compact support, which will guarantee convergence for all functions. In quantum mechanics, however, a wavefunction with compact support in position will have non-compact support in momentum and vice-versa. However, if we were to restrict ourselves to the Schwartz wavefunctions we would have finite expectation for all polynomials of position and momentum, and they would be dense in the Hilbert space. What makes sense to expect physically, then, is that there is a set of quantities that physically define the system which will need finite expectation. These will need to remain finite under coordinate transformations and time evolution for the physics to make sense. All these details are yet to be understood and framed in a mathematically precise way. Yet, it is clear that we need, at least, to characterize the case where a set of statistical quantities fully characterizes all ensembles.
 
+\begin{mathSection}
 \begin{defn}
-	A \textbf{quantifiable} ensemble space is an ensemble space where each ensemble can be identified by a set of statistical variables. That is, there is family of statistical variables $F_i : \Ens \to \mathbb{R}$ such that, given $\ens_1, \ens_2 \in \Ens$, $F_i(\ens_1) = F_i(\ens_2)$ for all $i$ if and only if $\ens_1 = \ens_2$. Moreover, the topology is generated by those variables.
+	A \textbf{quantifiable} ensemble space is an ensemble space where each ensemble can be identified by a set of statistical quantities. That is, there is family of statistical variables $F_i : \Ens \to \mathbb{R}$ such that, given $\ens_1, \ens_2 \in \Ens$, $F_i(\ens_1) = F_i(\ens_2)$ for all $i$ if and only if $\ens_1 = \ens_2$. Moreover, the topology is generated by those quantities.
 \end{defn}
+\end{mathSection}
 
-We are going to show that the statistical variables can be used to construct semi-norms on the embedding vector space inducing a topology that is Hausdorff and locally convex. Since the statistical variables are continuous in both the topology of the ensemble space and on this topology of the embedding vector space, the embedding of the ensemble space is continuous. Note that this embedding is not necessarily a homeomorphism onto the image as convergence on the expectation of continuous variables (i.e. weak convergence) does not guarantee converge of the entropy (which requires converges through the inner product).
+We are going to show that the statistical quantities can be used to construct seminorms on the embedding vector space inducing a topology that is Hausdorff and locally convex. Since the statistical quantities are continuous in both the topology of the ensemble space and on this topology of the embedding vector space, the embedding of the ensemble space is continuous. Note that this embedding is not necessarily a homeomorphism onto the image as convergence of the expectation of continuous variables (i.e. weak convergence) does not guarantee convergence of the entropy (which requires, for example, convergence of the related inner products in the classical and quantum cases). Therefore, all the topological details of the ensemble space remain open even in this case.
 
+\begin{mathSection}
 \begin{prop}
-	A statistical variable $F$ induces a semi-norm on the vector space that embeds $\Ens$.
+	A statistical variable $F$ induces a seminorm on the vector space that embeds $\Ens$.
 \end{prop}
 
 \begin{proof}
-	Let $F$ be a variable on $\Ens$, let $\ens[a] \in \Ens$ an internal point and let $V_{\ens[a]}$ be the vector space of differences. Define $F_{\ens[a]} : V_{\ens[a]} \to \mathbb{R}$ such that $F_{\ens[a]}([r(\ens[b]-\ens[a])]) = |r (F(\ens[b]) - F(\ens[a]))|$.
+	Let $F$ be a variable on $\Ens$, let $\ens[a] \in \Ens$ be an internal point and let $V_{\ens[a]}$ be the vector space of differences. Define $F_{\ens[a]} : V_{\ens[a]} \to \mathbb{R}$ such that $F_{\ens[a]}([r(\ens[b]-\ens[a])]) = |r (F(\ens[b]) - F(\ens[a]))|$.
 	
 	First we show that $F_{\ens[a]}$ does not depend on the representative. If we have the zero class, then either $r=0$ or $\ens[b] = \ens[a]$. In both cases, the function evaluates to zero. For the non-zero class, we have
 	\begin{equation}
@@ -2723,7 +2722,7 @@ We are going to show that the statistical variables can be used to construct sem
 	\begin{equation}
 	\begin{aligned}
 		&F_{\ens[a]}([r(\ens[b]-\ens[a])] + [s(\ens[c]-\ens[a])])  \\
-		&= F_{\ens[a]}\left(\left[(r+s+k) \left(\left(\frac{r}{r+s+k}\ens[b] + \frac{s}{r+s+k} \ens[c] +\frac{k}{\alpha r+ \beta s+k} \ens[a] \right) - \ens[a]\right)\right]\right) \\
+		&= F_{\ens[a]}\left(\left[(r+s+k) \left(\left(\frac{r}{r+s+k}\ens[b] + \frac{s}{r+s+k} \ens[c] +\frac{k}{r+s+k} \ens[a] \right) - \ens[a]\right)\right]\right) \\
 		&= \left|(r+s+k)\left(F\left(\frac{r}{r+s+k}\ens[b] + \frac{s}{r+s+k} \ens[c] +\frac{k}{r+s+k} \ens[a]\right) - F(\ens[a]) \right)\right| \\
 		&= \left|r F(\ens[b]) + s F(\ens[c]) + k F(\ens[a]) - (r+s+k) F(\ens[a]) \right| \\
 		&= \left|r ( F(\ens[b]) - F(\ens[a]))  + s ( F(\ens[c]) - F(\ens[a])) \right| \\
@@ -2739,25 +2738,27 @@ We are going to show that the statistical variables can be used to construct sem
 \end{prop}
 
 \begin{proof}
-	Let $\Ens$ be a quantifiable ensemble space and $V_{\ens[a]}$ be the embedding vector space corresponding the the internal point $\ens[a] \in \Ens$. Consider all the semi-norms defined by the family of statistical variables that make $\Ens$ quantifiable. These will induce a topology on $V_{\ens[a]}$ making it a topological vector space (see \href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.2 in here}). Since the topology is generated by semi-norms, it is locally convex. Since the semi-norms fully identify each point, the topology is Hausdorff (see \href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.6 in here}).
+	Let $\Ens$ be a quantifiable ensemble space and $V_{\ens[a]}$ be the embedding vector space corresponding to the internal point $\ens[a] \in \Ens$. Consider all the seminorms defined by the family of statistical variables that make $\Ens$ quantifiable. These will induce a topology on $V_{\ens[a]}$ making it a topological vector space (see \href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.2 in here}). Since the topology is generated by seminorms, it is locally convex. Since the seminorms fully identify each point, the topology is Hausdorff (see \href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.6 in here}).
 	
-	Now consider $\Ens$ as embedded into $V_{\ens[a]}$. If $F : \Ens \to \mathbb{R}$ is a statistical variable, then $|r F(\ens[b]) - F(\ens[a]) |$ is also a statistical variable since difference, scalar multiplication and absolute value are all continuous. This means that the open ball given by the semi-norm on the vector space restricted to the ensemble space are the open sets as they correspond to the open balls in the ensemble space. Moreover, since $F_i$ are continuous in the ensemble space, a convergent sequence in the ensemble space will correspond to the convergence of all the semi-norms in the vector space, thus convergence in the topology generated by said semi-norms. The embedding, then, is continuous.
+	Now consider $\Ens$ as embedded into $V_{\ens[a]}$. If $F : \Ens \to \mathbb{R}$ is a statistical variable, then $|r F(\ens[b]) - F(\ens[a]) |$ is also a statistical variable since difference, scalar multiplication and absolute value are all continuous. This means that the open balls given by the seminorm on the vector space restricted to the ensemble space are open sets as they correspond to the open balls in the ensemble space. Moreover, since all elements of $F_i$, the statistical quantities that characterize the ensembles, are continuous in the ensemble space, a convergent sequence in the ensemble space will correspond to the convergence of all the seminorms in the vector space, thus convergence in the topology generated by said seminorms. The embedding, then, is continuous.
 \end{proof}
+\end{mathSection}
 
-At this point, we are not guaranteed that ensembles can be characterized by a countable family of statistical variables. The issue is that, while a second countable locally convex topology is generated by countably many semi-norms, we know that the topology of the ensemble space is second countable but we do not know whether the subtopology generated by the statistical variables through the semi-norms is second countable. Physically, it would mean that we have a way to experimentally distinguish between two ensembles (i.e. a second countable topology) but not through the expectation of statistical quantities. The entropy would, for example, provide other more stringent ways. It is not yet clear whether this is something that can indeed happen, and therefore a potential source of new physics, or we simply are missing a way to prove the result. Currently, the second option seems more likely.
+At this point, we are not guaranteed that ensembles can be characterized by a countable family of statistical variables. The issue is that, while a second countable locally convex topology is generated by countably many seminorms, we know that the topology of the ensemble space is second countable but we do not know whether the subtopology generated by the statistical variables through the seminorms is second countable. Physically, it would mean that we have a way to experimentally distinguish between two ensembles (i.e. a second countable topology) but not through the expectation of statistical quantities. The entropy would, for example, provide other more stringent ways. It is not yet clear whether this is something that can indeed happen, and therefore a potential source of new physics, or we simply are missing a way to prove the result. Currently, the second option seems more likely.
 
 If one is able to prove that the topology induced by the statistical variables is second countable, or if we simply impose that a countable family of statistical variables is enough to distinguish between ensembles, then the space is a metrizable second countable locally convex topological vector space.
 
+\begin{mathSection}
 \begin{prop}
-	If a quantifiable ensemble spaces is fully determined by countably many statistical variables, then it embeds continuously into a metrizable second countable locally convex topological vector space.
+	If a quantifiable ensemble space is fully determined by countably many statistical variables, then it embeds continuously into a metrizable second countable locally convex topological vector space.
 \end{prop}
 
 \begin{proof}
-	If a quantifiable ensemble space is characterized by countably many statistical variables, the topology induces on the vector space is second countable. A Hausdorff second countable topological vector space is metrizable.
+	If a quantifiable ensemble space is characterized by countably many statistical variables, the topology induced on the vector space is second countable. A Hausdorff second countable topological vector space is metrizable.
 \end{proof}
 
 \begin{remark}
-	Note that we are missing completeness in terms of the semi-norms to obtain a Fr\'echet space and it is unclear we are going to have it. For the classical case, suppose we restrict ourselves to all absolutely continuous probability measures with compact support. Expectation of all polynomials of position and momentum fully identify the measure. However, Dirac measures are also fully identified by those quantities, which can be achieved as the limit of a uniform distribution whose support shrinks to a point. That would give us a sequence of convergent expectation whose ensemble does not converge in the space.
+	Note that we are missing completeness in terms of the seminorms to obtain a Fr\'echet space and it is unclear we are going to have it. For the classical case, suppose we restrict ourselves to all absolutely continuous probability measures with compact support. Expectations of all polynomials of position and momentum fully identify the measure. However, Dirac measures are also fully identified by those quantities, which can be achieved as the limit of a uniform distribution whose support shrinks to a point. That would give us a sequence of convergent expectations whose corresponding ensembles do not converge in the space.
 \end{remark}
 
 \begin{prop}
@@ -2767,12 +2768,15 @@ If one is able to prove that the topology induced by the statistical variables i
 \begin{proof}
 	For discrete classical spaces, the expectation of the indicator of each extreme point defines a countable set of quantities that fully identifies the distribution.
 	
-	For continuous classical spaces, note that $L^1(\mathbb{R}^{2n})$ is a Hausdorff locally convex topological spaces.
+	For continuous classical spaces, note that $L^1(\mathbb{R}^{2n})$ is a Hausdorff second countable locally convex topological space.
 	
-	For quantum ensemble spaces, the expectation of projectors define a family of statistical variables that can distinguish any pair of mixed states.
+	For quantum ensemble spaces, the expectations of projectors define a family of statistical variables that can distinguish any pair of mixed states.
 \end{proof}
+\end{mathSection}
 
-An open problem is whether statistical quantities are required by ensemble spaces or they are an additional requirement. If we were able to show that ensemble spaces always embed continuously in a locally convex topological vector space, one may use the semi-norms to define quantities. Another approach is to investigate whether the existence of linear transformations parameterized by real quantities give us statistical quantities through the generators of the transformations. Physically, this would correspond to the assumption that time is a continuous quantity. It would also mean that, if time is not modeled as a real quantity, then the ensemble space would have to change.
+An open problem is whether statistical quantities are required by ensemble spaces or they are an additional requirement. If we were able to show that ensemble spaces always embed continuously into a locally convex second countable topological vector space, one may use the seminorms to define quantities. Another approach is to investigate whether the existence of linear transformations parameterized by real quantities, such as time evolution, gives us statistical quantities through the generators of the transformations. It would also mean that, if time is not modeled as a real-valued parameter, then the ensemble space would have to change.
+
+TODO: Review with Christine from here
 
 \subsection{Connection to Choquet theory}
 
