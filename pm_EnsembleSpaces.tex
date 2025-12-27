@@ -959,6 +959,8 @@ Later in the chapter, we will need to create the non-additive generalization for
 	But since $cs_f(A_i)$ is increasing, the supremum is exactly the limit. Therefore the convex supremum is continuous from below.
 \end{proof}
 
+%TODO: turn it into a theorem for a non-trivial ensemble space (i.e. assume existence of two distinct).
+
 \begin{remark}
 	Note that the convex supremum is not continuous from above. Let $\Ens$ be a disc embedded in $\mathbb{R}^2$. Let $f : \Ens \to \mathbb{R}$ be a non-trivial linear function. Then $f$ will have a maximum and a minimum on two opposite points $\ens[a]$ and $\ens[b]$ on the circle that encloses the disc. Take a line that divides the disc in two halves, leaving the minimum and the maximum on different halves. Then over that line $f$ will take the minimum value $m > f(\ens[b])$ on one of the extreme points of the line. Consider a countable collection $\{\ens_i\}$ of points over that line and let $A_j = \{ \ens_i \, | \, i \geq j \}$. This is a decreasing sequence of infinite sets, where we are taking one point out at a time.  We have $f(\ens_i) \geq m$ for all $i$ and therefore $cs_f(A_j) \geq m$ for all $j$, which means $\lim\limits_{j \to \infty} cs_f(A_j) \geq m$. However, $\bigcap A_j = \emptyset$ and $cs_f(\emptyset) = f_{\emptyset} \leq \inf(f(\Ens)) = f(\ens[b]) < m$. This means that, in general, $cs_f(\lim\limits_{j \to \infty} A_j) \neq \lim\limits_{j \to \infty} cs_f(A_j)$ for a decreasing sequence.
 \end{remark}
@@ -2372,8 +2374,6 @@ We now show that the state capacity recovers a notion of number of cases in all 
 \end{proof}
 \end{mathSection}
 
-TODO: review with Christine from here.
-
 \section{Fraction capacity}
 
 In this section we are going to define the \textbf{fraction capacity}, which can be understood as a generalization of probability that works with any ensemble space. In classical probability, additivity is justified by the mutual exclusivity of all elements of the sample space. In quantum mechanics, classical probability can be recovered only on orthogonal subspaces precisely because they represent mutually exclusive events. Therefore, the fraction capacity achieves the generalization not by focusing on probability of outcomes, but by focusing on mixing coefficient.
@@ -2411,14 +2411,15 @@ The fraction capacity tells us how much of an ensemble $\ens$ can be constructed
 		\draw (6, 0) foreach \x in {1,...,6} { -- (6 + \tGap * \x, 0) -- (6 + \tGap * \x, -\tHeight) (6 + \tGap * \x, 0) } -- ++(\tGap, 0);
 		\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(6 + \tGap * 1, \bHeight/5) (6 + \tGap * 2, \bHeight/5) (6 + \tGap * 4, \bHeight/5) (6 + \tGap * 5, \bHeight/5) (6 + \tGap * 6, \bHeight/5)};
 	\end{tikzpicture}
+	\caption{Visual representation of the fraction.}\label{pm_es_figFraction}
 	%\includegraphics[width=0.6\textwidth]{tempimages/Fraction.jpg}
 \end{figure}
 
-First we define the \textbf{fraction} of one element within another. For example, suppose $\ens_{123456}$ is a uniform distribution for a six-faced die. Suppose $\ens_3$ represents the outcome 3 with $100\%$ probability. Then $\ens$ can be understood as $\ens_{123456} = \frac{1}{6} \ens_3 + \frac{5}{6} \ens_{12456}$ where $\ens_{12456}$ is the uniform distribution over the outcomes 1,2,4,5 and 6. Note that $\frac{1}{6}$ is the highest coefficient we can put in front of $\ens_3$ in a convex combination and have $\ens_{123456}$ as a result, which coincides with the probability of obtaining 3 from a uniform distribution over six outcomes. That is what we define the fraction of $\ens_3$ in $\ens_{123456}$ to be.
+First we define the \textbf{fraction} of one element with respect to another. For example, as shown in Fig. \ref{pm_es_figFraction}, suppose $\ens_{123456}$ is a uniform distribution for a six-faced die. Suppose $\ens_3$ represents the outcome 3 with $100\%$ probability. Then $\ens_{123456}$ can be understood as $\ens_{123456} = \frac{1}{6} \ens_3 + \frac{5}{6} \ens_{12456}$ where $\ens_{12456}$ is the uniform distribution over the outcomes 1,2,4,5 and 6. Note that $\frac{1}{6}$ is the highest coefficient we can put in front of $\ens_3$ in a convex combination and have $\ens_{123456}$ as a result, which coincides with the probability of obtaining 3 from a uniform distribution over six outcomes. That is how we define the fraction of $\ens_3$ with respect to $\ens_{123456}$.
 
 \begin{mathSection}
 	\begin{defn}
-		Let $\ens, \ens[a] \in \Ens$ be two ensembles. The \textbf{fraction} of $\ens[a]$ in $\ens$ is the greatest mixing coefficient for which $\ens$ can be expressed as a mixture of $\ens[a]$. That is, $\fraction_{\ens}(\ens[a]) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens[b] \in \Ens \text{ s.t. }  \ens = p \ens[a] + \bar{p} \ens[b] \})$.
+		Let $\ens, \ens[a] \in \Ens$ be two ensembles. The \textbf{fraction} of $\ens[a]$ with respect to $\ens$ is the greatest mixing coefficient for which $\ens$ can be expressed as a mixture of $\ens[a]$. That is, $\fraction_{\ens}(\ens[a]) = \sup(\{ p \in [0,1] \, | \, \exists \, \ens[b] \in \Ens \text{ s.t. }  \ens = p \ens[a] + \bar{p} \ens[b] \})$.
 	\end{defn}
 
 \begin{figure}[H]
@@ -2426,8 +2427,8 @@ First we define the \textbf{fraction} of one element within another. For example
 	\begin{tikzpicture}
 		%\draw [help lines] (0,0) grid (4,3);
 		
-		\coordinate (A) at (0,0);
-		\coordinate (B) at (3,0);
+		\coordinate (A) at (3,0);
+		\coordinate (B) at (0,0);
 		
 		\coordinate (e) at ($(A)!0.7!(B)$);
 		\coordinate (a) at ($(A)!0.8!(B)$);
@@ -2441,19 +2442,19 @@ First we define the \textbf{fraction} of one element within another. For example
 		%\node at (A) {$($};
 		%\node at (B) {$)$};
 		%\filldraw [black,fill=white] (A) circle (3pt);
-		\filldraw [black] (e) circle (1pt) node[below] {$\ens$};
-		\filldraw [black] (a) circle (1pt) node[below] {$\ens[a]$};
-		\filldraw [black] (b1) circle (1pt) node[below] {$\ens[b]_1$};
-		\filldraw [black] (b2) circle (1pt) node[below] {$\ens[b]_2$};
+		\filldraw [black] (e) circle (1pt) node[above] {$\ens$};
+		\filldraw [black] (a) circle (1pt) node[above] {$\ens[a]$};
+		\filldraw [black] (b1) circle (1pt) node[above] {$\ens[b]_1$};
+		\filldraw [black] (b2) circle (1pt) node[above] {$\ens[b]_2$};
 		\filldraw [black] (b3) circle (1pt);
-		\filldraw [black] (b4) circle (1pt) node[below] {$\ens[b]_{\dots}$};
+		\filldraw [black] (b4) circle (1pt) node[above] {$\cdots$};
 		\filldraw [black] (b5) circle (1pt);
 	\end{tikzpicture}
 	%\includegraphics[width=0.4\textwidth]{tempimages/CapacitySupremum.jpg}
 \end{figure}
 	
 	\begin{remark}
-		We need to take the supremum as the maximum may not exist. For example, consider a discrete classical ensemble space and remove the extreme points. At the moment, there is no reason to rule out such space as unphysical.
+		We need to take the supremum as the maximum may not exist. For example, as shown in the figure, consider a discrete classical ensemble space and remove the extreme points. At the moment, there is no reason to rule out such space as unphysical.
 	\end{remark}
 	
 	\begin{coro}
@@ -2461,11 +2462,13 @@ First we define the \textbf{fraction} of one element within another. For example
 	\end{coro}
 	
 	\begin{proof}
-		Note that $\ens[a]$ is a component of $\ens$ if we can write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in (0,1]$ and $\ens[b] \in \Ens$. In this case, $\fraction_{\ens}(\ens[a]) \geq \lambda > 0$. Conversely, if $\fraction_{\ens}(\ens[a]) > 0$ we can find $\fraction_{\ens}(\ens[a]) \geq \lambda > 0$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\ens[b] \in \Ens$.
+		Note that $\ens[a]$ is a component of $\ens$ if we can write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in (0,1]$ and $\ens[b] \in \Ens$. In this case, $\fraction_{\ens}(\ens[a]) \geq \lambda > 0$. Conversely, if $\fraction_{\ens}(\ens[a]) > 0$ we can find $\lambda \in (0,\fraction_{\ens}(\ens[a])]$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\ens[b] \in \Ens$.
 	\end{proof}
 \end{mathSection}
 
-Intuitively, we would expect the fraction $\fraction_{\ens}(\ens[a])$ to be continuous both in $\ens[a]$ and $\ens$, but this is not the case. For example, let $\Ens$ be the Bloch ball and let $\ens[a]_i$ be a sequence of pure states (i.e. points on the surface) that converge to another pure state $\ens[a]$. Since they all are extreme points, we have $\fraction_{\ens[a]}(\ens[a]_i) = 0$ and $\fraction_{\ens[a]_i}(\ens[a]) = 0$. However, $\fraction_{\ens[a]}(\ens[a]) = 1$. This is the recurring problem of the non-continuity at the edges. The following conjecture, however, may still be true:
+TODO: add figure
+
+Intuitively, we would expect the fraction $\fraction_{\ens}(\ens[a])$ to be continuous both in $\ens[a]$ and $\ens$, but this is not the case. For example, let $\Ens$ be the Bloch ball and let $\ens[a]_i$ be a sequence of pure states (i.e. points on the surface) that converge to another pure state $\ens$. Since they are all extreme points, we have $\fraction_{\ens}(\ens[a]_i) = 0$ and $\fraction_{\ens[a]_i}(\ens) = 0$. However, $\fraction_{\ens}(\ens) = 1$. This is the recurring problem of the non-continuity at the edges. The following conjecture, however, may still be true:
 \begin{conj}
 	The fraction $\fraction_{\ens}(\ens[a])$ is a continuous function both in $\ens[a]$ and $\ens$ in the algebraic interior.
 \end{conj}
@@ -2499,16 +2502,17 @@ Intuitively, we would expect the fraction $\fraction_{\ens}(\ens[a])$ to be cont
 		\draw (6, 0) foreach \x in {1,...,6} { -- (6 + \tGap * \x, 0) -- (6 + \tGap * \x, -\tHeight) (6 + \tGap * \x, 0) } -- ++(\tGap, 0);
 		\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(6 + \tGap * 1, \bHeight/4) (6 + \tGap * 2, \bHeight/4)  (6 + \tGap * 5, \bHeight/4) (6 + \tGap * 6, \bHeight/4)};
 	\end{tikzpicture}
+	\caption{Visual representation of the fraction capacity.}\label{pm_es_figFractionCapacity}
 	%\includegraphics[width=0.6\textwidth]{tempimages/FractionCapacity.jpg}
 \end{figure}
 
-We now define \textbf{fraction capacity} of a set of ensembles for another ensemble. Like before, suppose $\ens_{123456}$ is a uniform distribution for a six-faced die, but now take $A = \{ \ens_3, \ens_4 \}$ as, respectively, the outcomes $3$ and $4$ with $100\%$ probability. Then $\ens$ can be understood as $\ens_{123456} = \frac{1}{3} \left(\frac{1}{2} \ens_3 + \frac{1}{2} \ens_4 \right) + \frac{2}{3} \ens_{1256}$, where $\ens_{1256}$ is the uniform distribution over outcomes 1,2,5 and 6. Again, note that $\frac{1}{3}$ is the highest coefficient we can put in front of any convex combinations of elements of $A$, and still make a convex combination that has $\ens$ as a result. That is what we define the fraction capacity of $A$ for $\ens_{123456}$ to be.
+We now define \textbf{fraction capacity} of a set of ensembles with respect to another ensemble. Like before, as shown in Fig. \ref{pm_es_figFractionCapacity}, suppose $\ens_{123456}$ is a uniform distribution for a six-faced die, but now take $A = \{ \ens_3, \ens_4 \}$ as, respectively, the outcomes $3$ and $4$ with $100\%$ probability. Then $\ens$ can be understood as $\ens_{123456} = \frac{1}{3} \left(\frac{1}{2} \ens_3 + \frac{1}{2} \ens_4 \right) + \frac{2}{3} \ens_{1256}$, where $\ens_{1256}$ is the uniform distribution over outcomes 1,2,5 and 6. Again, note that $\frac{1}{3}$ is the highest coefficient we can put in front of any convex combination of elements of $A$, and still make a convex combination that has $\ens$ as a result. That is how we define the fraction capacity of $A$ with respect to $\ens_{123456}$.
 
 The fraction capacity, then, defines how much of the ensemble $\ens$ can be constructed with elements of $A$. The term capacity is used first because, intuitively, it tells us how much $A$ can hold, and second because capacity is a name used to describe non-additive measures. The fraction capacity, in fact, has several nice properties. First, its value is always between zero and one, since the coefficient of a convex combination must be so bound. Second, it is monotone in the sense that if $A$ gets bigger, the fraction capacity cannot decrease. Third, it is subadditive, meaning that the fraction capacity of the union of two sets must be the sum of the respective fraction capacities or less. Fourth, it is continuous from below. Note that if subadditivity is replaced by additivity, these are exactly the defining properties of a probability measure, since additivity and continuity are equivalent to $\sigma$-additivity.
 
 \begin{mathSection}
 	\begin{defn}
-		Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a Borel set. The \textbf{fraction capacity} of $A$ for $\ens$ is the biggest fraction achievable with convex combinations of $A$. That is, $\fcap_{\ens}(A) = \sup(\fraction_{\ens}(\hull(A))\cup\{0\})$.
+		Let $\ens \in \Ens$ be an ensemble and $A \subseteq \Ens$ a subset. The \textbf{fraction capacity} of $A$ with respect to $\ens$ is the biggest fraction achievable with convex combinations of $A$. That is, $\fcap_{\ens}(A) = \sup(\fraction_{\ens}(\hull(A))\cup\{0\})$.
 	\end{defn}
 
 	\begin{coro}
@@ -2516,7 +2520,9 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	\end{coro}
 	
 	\begin{remark}
-		An open question is whether the type of hull matters in the definition of the fraction capacity. If the fraction is proven to be continuous, then it does not matter.
+		Since we have shown that the fraction is not a continuous function, we can use the same example to show that the fraction capacity of the closed hull is not necessarily the same as the fraction capacity of the convex hull. As in the example before (TODO: ref the figure), let $\Ens$ be a Bloch ball and let $A=\{\ens[a]_i\}$ be a sequence of pure states (i.e. extreme points) that converge to another pure state $\ens \notin \{\ens[a]_i\}$. Since $\ens$ is an extreme point, it can only be written as a convex combination of itself. Since $\ens \notin A$, $\ens \notin \hull(A)$ and therefore $\fcap_{\ens}(\hull(A))=0$. However, since $\ens$ is the limit of the sequence, we have $\ens \in \chull(A)$, and therefore $\fcap_{\ens}(\chull(A)) = 1$. The fraction capacity of the closed hull, then, can be different from the fraction capacity of the convex hull.
+		
+		An open question is whether some type of equality still holds for internal points and the $\sigma$-hull of internal points. For example, $\fcap_{\ens}(\hull(A)) = \fcap_{\ens}(\shull(A))$ if $\ens$ is an internal point and $A$ is a set of internal points.
 	\end{remark}
 
 	\begin{coro}
@@ -2528,7 +2534,7 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	\end{proof}
 	
 	\begin{prop}
-		The fraction capacity for an ensemble is a set function that is
+		The fraction capacity with respect to an ensemble is a set function that is
 		\begin{enumerate}
 			\item non-negative and unit bounded: $\fcap_{\ens}(A) \in [0,1]$
 			\item increasing: $A \subseteq B \implies \fcap_{\ens}(A) \leq \fcap_{\ens}(B)$
@@ -2538,13 +2544,13 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	\end{prop}
 	
 	\begin{proof}
-		1. By \ref{pm_es_convexSupremumProps}, $\fcap(A) \in [0, \sup(\fraction_{\ens}(\Ens))] = [0,1]$. 
+		1. By \ref{pm_es_convexSupremumProps}, $\fcap_{\ens}(A) \in [0, \sup(\fraction_{\ens}(\Ens))] = [0,1]$. 
 	
 		2. By \ref{pm_es_convexSupremumProps}.
 		
-		3. Let $A, B \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(A \cup B)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(A \cup B)$, we can write $\ens_1 = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. Therefore we have $\ens = p \lambda \ens[a] + p \bar{\lambda} \ens[b] + \bar{p} \ens_2$. By the definition of fraction capacity, we must have $p\lambda \leq \fcap_{\ens}(A)$ and $p\bar{\lambda} \leq \fcap_{\ens}(B)$, therefore $p = p\lambda + p\bar{\lambda} \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. 	Since $\fcap_{\ens}(A \cup B)$ is the supremum for a set of $p$s for which the expression always holds, we have $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. The fraction capacity is subadditive.
+		3. Let $A, B \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(A \cup B)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(A \cup B)$, we can write $\ens_1 = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. Therefore we have $\ens = p \lambda \ens[a] + p \bar{\lambda} \ens[b] + \bar{p} \ens_2$. By the definition of fraction capacity, we must have $p\lambda \leq \fcap_{\ens}(A)$ and $p\bar{\lambda} \leq \fcap_{\ens}(B)$, therefore $p = p\lambda + p\bar{\lambda} \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. 	Since $\fcap_{\ens}(A \cup B)$ is the supremum for a set of coefficients $p$ for which the expression always holds, we have $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. The fraction capacity is subadditive.
 	
-		2. By \ref{pm_es_convexSupremumProps}.
+		4. By \ref{pm_es_convexSupremumProps}.
 	\end{proof}
 	
 
@@ -2554,43 +2560,49 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	
 \end{mathSection}
 
-\begin{conj}
-	The fraction capacity $\fcap_{\ens}$ is additive over $A, B \subseteq \Ens$ if and only if there exists a $C \subseteq \Ens$ such that $A \separate B$, $B \separate C$, $A \separate C$ and $\ens \in \hull(A\cup B\cup C)$.
-\end{conj}
+One open question is whether subadditivity extends to the infinite case. Since additivity plus continuity implies $\sigma$-additivity\footnote{See for example \href{https://link.springer.com/book/10.1007/978-3-319-30690-2}{Michel Grabisch, Set Functions, Games and Capacities in Decision Making}.}, it may be true that subadditivity plus continuity implies $\sigma$-subadditivity.
 
 \begin{conj}
 	The fraction capacity is $\sigma$-subadditive. That is, $\fcap_{\ens}(\bigcup A_i) \leq \sum_i \fcap_{\ens}(A_i)$.
 \end{conj}
 
-\begin{remark}
-	In \href{https://link.springer.com/book/10.1007/978-3-319-30690-2}{Set Functions, Games and Capacities in Decision Making}, it is claimed that finite additivity plus continuity implies $\sigma$-additivity. The conjecture is that this generalizes to $\sigma$-subadditivity.
-\end{remark}
 
-We now show that fraction capacity recovers classical probability in the classical case. The key insight is that each event, each Borel set $A$, corresponds to a subspace of probability measures for which that event will be true. This is the set of probability measure whose support is always within the given Borel set $A$. A probability measure, then, can always be decomposed in a part for which that event will be true, the part supported by $A$, and a part for which that event will be false, the part supported by the complement. The fraction capacity correspond to the mixing coefficient of this decomposition.
+It is still an open question to understand exactly when the fraction capacity recovers additivity. We believe that this should be related to the ability to write an element as a mixture of separate components.
+
+\begin{conj}
+	The fraction capacity $\fcap_{\ens}$ is additive over $A, B \subseteq \Ens$ if and only if there exists a $C \subseteq \Ens$ such that $A \separate B$, $B \separate C$, $A \separate C$ and $\ens \in \hull(A\cup B\cup C)$.
+\end{conj}
+
+We now show that fraction capacity recovers classical probability in the classical case. The key insight is that each event, each Borel set $A$, corresponds to a subspace of probability measures for which that event will be true. This is the set of probability measure whose support is always within the given Borel set $A$. A probability measure, then, can always be decomposed in a part for which that event will be true, the part supported by $A$, and a part for which that event will be false, the part supported by the complement. The fraction capacity corresponds to the mixing coefficient of this decomposition.
+
+TODO: add example and figure
+
 \begin{mathSection}
 	\begin{prop}
-		Let $\Ens$ be a discrete or continuous classical ensemble space with sample space $X$. Let $A \in \Sigma_X$ be an event and $\Ens_A \subseteq \Ens$ the set of distributions with support contained in $A$. Let $p \in Ens$ a probability measure in the ensemble space. Then $p(A) = \fcap_{p}(\Ens_A)$. That is, the probability of an event is equal to the fraction capacity of the subspace corresponding to that event.
+		Let $\Ens$ be a discrete or continuous classical ensemble space with sample space $X$. Let $A \in \Sigma_X$ be an event and $\Ens_A \subseteq \Ens$ the set of distributions with support contained in $A$. Let $p \in \Ens$ a probability measure in the ensemble space. Then $p(A) = \fcap_{p}(\Ens_A)$. That is, the probability of an event is equal to the fraction capacity of the subspace corresponding to that event.
 	\end{prop}
 	\begin{proof}
-		Let $p \in \Ens$ be a probability measure over $X$, absolutely continuous with respect to the appropriate measure $\mu$ (i.e. discrete for discrete case and Liouville for continuous case). Given $A \in \Sigma$, we can write $p = p(A) p_A + p(A^{\complement}) p_{A^{\complement}}$ where  $p_A$ is a probability measure with support $A$ and $p_{A^{\complement}}$ is a probability measure with support to $A^{\complement}$.
+		Let $p \in \Ens$ be a probability measure over $X$, absolutely continuous with respect to the appropriate measure $\mu$ (i.e. discrete for the discrete case and Liouville for the continuous case). Given $A \in \Sigma_X$, we can write $p = p(A) p_A + p(A^{\complement}) p_{A^{\complement}}$ where  $p_A$ is a probability measure with support with $A$ and $p_{A^{\complement}}$ is a probability measure with support with $A^{\complement}$.
 		
 		Let $\Ens_A \subseteq \Ens$ be the subset of probability measures with support contained in $A$. Then $p_A \in \Ens_A$ and $\fcap_{p}(\Ens_A) \geq p(A)$. Given that $p_{A^{\complement}}$ has support disjoint from $A$, we can find no further component of $p$ that has support in $A$. Therefore $\fcap_{p}(\Ens_A) = p(A)$. The fraction capacity, then, recovers the probability.
 	\end{proof}
 \end{mathSection}
 	
-We now show that the fraction capacity recovers probability over measurements in the quantum case. The setup is essentially the same as of the classical case, except that we start with an observable $O$, and each Borel set $A$ for that observable will have a corresponding subspace of $\mathcal{H}$ and a projector $\Pi_A$. A post-measurement state of $O$ is mixed state that commutes with $O$, since it will commute with any projector that commutes with $O$. We can show, then, that the fraction capacity recovers the decomposition of any post-measurement state of $O$ over the subspace corresponding to $\Pi_A$.
+We now show that the fraction capacity recovers probability over measurements in the quantum case. The setup is essentially the same that as of the classical case, except that we start with an observable $O$, and each Borel set $A$ for that observable will have a corresponding subspace of $\mathcal{H}$ and a projector $\Pi_A$. A post-measurement state of $O$ is a mixed state that commutes with $O$, since it will commute with any projector that commutes with $O$. We can show, then, that the fraction capacity recovers the decomposition of any post-measurement state of $O$ over the subspace corresponding to $\Pi_A$.
 
 \begin{mathSection}
 	\begin{prop}
-		Let $\Ens$ be a quantum ensemble space associated to a Hilbert space $\mathcal{H}$. Let $O : \mathcal{H} \to \mathcal{H}$ be a quantum observable. Let $A \in \Sigma_{\mathbb{R}}$ be a Borel set and $\Pi_{A}$ be the projection associated with the subspace of $\mathcal{H}$ corresponding to the subset $A$ of the spectrum of $O$. Let $\Ens_A$ be the set of ensembles within that subspace. Let $\rho \in \Ens$ be a mixed state that commutes with $O$ (i.e. the ensemble resulting form a measurement of $O$). Then $\tr(\rho \Pi_A) = \fcap_{\rho}(\Ens_A)$.
+		Let $\Ens$ be a quantum ensemble space associated to a Hilbert space $\mathcal{H}$. Let $O : \mathcal{H} \to \mathcal{H}$ be a quantum observable. Let $A \in \Sigma_{\mathbb{R}}$ be a Borel set and $\Pi_{A}$ be the projector associated with the subspace of $\mathcal{H}$ corresponding to the subset $A$ of the spectrum of $O$. Let $\Ens_A$ be the set of ensembles within that subspace. Let $\rho \in \Ens$ be a mixed state that commutes with $O$ (i.e. the ensemble resulting from a measurement of $O$). Then $\tr(\rho \Pi_A) = \fcap_{\rho}(\Ens_A)$.
 	\end{prop}
 	
 	\begin{proof}
-		Let $\rho \in \Ens$ be a mixed state that commutes with $O$. Let $A \in \Sigma_{\mathbb{R}}$ be a Borel set and $\Pi_{A}$ be the projection associated with the subspace of $\mathcal{H}$ corresponding to the subset $A$ of the spectrum of $O$. Then we can write $\rho = \lambda \rho_A + \bar{\lambda} \rho_{A^{\complement}}$ where $\rho_A, \rho_{A^{\complement}} \in \Ens$ are such that $\tr(\rho_A \Pi_A) = 1$ and  $\tr(\rho_{A^{\complement}} \Pi_A) = 0$. We have $\tr(\rho \Pi_A) = \lambda$.
+		Let $\rho \in \Ens$ be a mixed state that commutes with $O$. Let $A \in \Sigma_{\mathbb{R}}$ be a Borel set and $\Pi_{A}$ be the projector associated with the subspace of $\mathcal{H}$ corresponding to the subset $A$ of the spectrum of $O$. Then we can write $\rho = \lambda \rho_A + \bar{\lambda} \rho_{A^{\complement}}$ where $\rho_A, \rho_{A^{\complement}} \in \Ens$ are such that $\tr(\rho_A \Pi_A) = 1$ and  $\tr(\rho_{A^{\complement}} \Pi_A) = 0$. We have $\tr(\rho \Pi_A) = \lambda$.
 		
-		Let $\Ens_A \subseteq \Ens$ be the subset of mixed states $d$ such that $\tr(d \Pi_A) = 1$. Then $d \in \Ens_A$ and $\fcap_{\rho}(\Ens_A) \geq \lambda$. Given that $\rho_{A^{\complement}}$ is in the subspace orthogonal to $\Ens_A$, we can find no further component of $\rho$ in that subspace. Therefore $\fcap_{p}(\Ens_A) = \lambda$. We have $\tr(\rho \Pi_A) = \lambda = \fcap_{p}(\Ens_A)$ The fraction capacity, then, recovers the probability.
+		Let $\Ens_A \subseteq \Ens$ be the subset of mixed states $d$ such that $\tr(d \Pi_A) = 1$. Then $d \in \Ens_A$ and $\fcap_{\rho}(\Ens_A) \geq \lambda$. Given that $\rho_{A^{\complement}}$ is in the subspace orthogonal to $\Ens_A$, we can find no further component of $\rho$ in that subspace. Therefore $\fcap_{\rho}(\Ens_A) = \lambda$. We have $\tr(\rho \Pi_A) = \lambda = \fcap_{\rho}(\Ens_A)$ The fraction capacity, then, recovers the probability.
 	\end{proof}
 \end{mathSection}
+
+TODO: Review with Christine from here
 
 \section{Statistical properties and quantities}
 
@@ -2697,7 +2709,7 @@ We are going to show that the statistical variables can be used to construct sem
 		&= F_{\ens[a]}([r(\ens[b]-\ens[a])]) + F_{\ens[a]}([s(\ens[c]-\ens[a])]).
 	\end{aligned}
 	\end{equation}
-	This means that $F_{\ens[a]}$ is sub-additive. Therefore $F_{\ens[a]}$ is a seminorm by \href{https://en.wikipedia.org/wiki/Seminorm}{definition}.
+	This means that $F_{\ens[a]}$ is subadditive. Therefore $F_{\ens[a]}$ is a seminorm by \href{https://en.wikipedia.org/wiki/Seminorm}{definition}.
 \end{proof}
 
 \begin{prop}
