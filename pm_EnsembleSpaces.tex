@@ -2466,9 +2466,31 @@ First we define the \textbf{fraction} of one element with respect to another. Fo
 	\end{proof}
 \end{mathSection}
 
-TODO: add figure
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}		
+		%\draw [help lines] (0,0) grid (10,3);
+		
+		\coordinate (center) at (1.5,1.5);
+		\def\radius{1.25}
+		\coordinate (e) at ($(center)+\radius*({cos(75)},{sin(75)})$);
+		\coordinate (a1) at ($(center)+\radius*({cos(-65)},{sin(-65)})$);
+		\coordinate (a2) at ($(center)+\radius*({cos(10)},{sin(10)})$);
+		\coordinate (a3) at ($(center)+\radius*({cos(48)},{sin(48)})$);
+		\coordinate (a4) at ($(center)+\radius*({cos(62)},{sin(62)})$);
+		\coordinate (a5) at ($(center)+\radius*({cos(70)},{sin(70)})$);
+		\draw [fill=ensembleFill, thick] (center) circle (\radius);
+		\filldraw [black] (e) circle (1pt) node[above] {$\ens$};
+		\filldraw [black] (a1) circle (1pt) node[below] {$\ens[a]_1$};
+		\filldraw [black] (a2) circle (1pt) node[right] {$\ens[a]_2$};
+		\filldraw [black] (a3) circle (1pt) node[right] {$\ens[a]_3$};
+		\filldraw [black] (a4) circle (1pt);
+		\filldraw [black] (a5) circle (1pt);
+	\end{tikzpicture}
+	\caption{Discontinuity of fraction.}\label{pm_es_figFractionDiscontinuous}
+\end{figure}
 
-Intuitively, we would expect the fraction $\fraction_{\ens}(\ens[a])$ to be continuous both in $\ens[a]$ and $\ens$, but this is not the case. For example, let $\Ens$ be the Bloch ball and let $\ens[a]_i$ be a sequence of pure states (i.e. points on the surface) that converge to another pure state $\ens$. Since they are all extreme points, we have $\fraction_{\ens}(\ens[a]_i) = 0$ and $\fraction_{\ens[a]_i}(\ens) = 0$. However, $\fraction_{\ens}(\ens) = 1$. This is the recurring problem of the non-continuity at the edges. The following conjecture, however, may still be true:
+Intuitively, we would expect the fraction $\fraction_{\ens}(\ens[a])$ to be continuous both in $\ens[a]$ and $\ens$, but this is not the case. For example, as shown in Fig. \ref{pm_es_figFractionDiscontinuous}, let $\Ens$ be the Bloch ball and let $\ens[a]_i$ be a sequence of pure states (i.e. points on the surface) that converge to another pure state $\ens$. Since they are all extreme points, we have $\fraction_{\ens}(\ens[a]_i) = 0$ and $\fraction_{\ens[a]_i}(\ens) = 0$. However, $\fraction_{\ens}(\ens) = 1$. This is the recurring problem of the non-continuity at the edges. The following conjecture, however, may still be true:
 \begin{conj}
 	The fraction $\fraction_{\ens}(\ens[a])$ is a continuous function both in $\ens[a]$ and $\ens$ in the algebraic interior.
 \end{conj}
@@ -2520,7 +2542,7 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	\end{coro}
 	
 	\begin{remark}
-		Since we have shown that the fraction is not a continuous function, we can use the same example to show that the fraction capacity of the closed hull is not necessarily the same as the fraction capacity of the convex hull. As in the example before (TODO: ref the figure), let $\Ens$ be a Bloch ball and let $A=\{\ens[a]_i\}$ be a sequence of pure states (i.e. extreme points) that converge to another pure state $\ens \notin \{\ens[a]_i\}$. Since $\ens$ is an extreme point, it can only be written as a convex combination of itself. Since $\ens \notin A$, $\ens \notin \hull(A)$ and therefore $\fcap_{\ens}(\hull(A))=0$. However, since $\ens$ is the limit of the sequence, we have $\ens \in \chull(A)$, and therefore $\fcap_{\ens}(\chull(A)) = 1$. The fraction capacity of the closed hull, then, can be different from the fraction capacity of the convex hull.
+		Since we have shown that the fraction is not a continuous function, we can use the same example to show that the fraction capacity of the closed hull is not necessarily the same as the fraction capacity of the convex hull. As previously shown in Fig. \ref{pm_es_figFractionCapacity}, let $\Ens$ be a Bloch ball and let $A=\{\ens[a]_i\}$ be a sequence of pure states (i.e. extreme points) that converge to another pure state $\ens \notin \{\ens[a]_i\}$. Since $\ens$ is an extreme point, it can only be written as a convex combination of itself. Since $\ens \notin A$, $\ens \notin \hull(A)$ and therefore $\fcap_{\ens}(\hull(A))=0$. However, since $\ens$ is the limit of the sequence, we have $\ens \in \chull(A)$, and therefore $\fcap_{\ens}(\chull(A)) = 1$. The fraction capacity of the closed hull, then, can be different from the fraction capacity of the convex hull.
 		
 		An open question is whether some type of equality still holds for internal points and the $\sigma$-hull of internal points. For example, $\fcap_{\ens}(\hull(A)) = \fcap_{\ens}(\shull(A))$ if $\ens$ is an internal point and $A$ is a set of internal points.
 	\end{remark}
