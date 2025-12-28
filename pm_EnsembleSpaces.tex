@@ -2832,42 +2832,47 @@ If one is able to prove that the topology induced by the statistical variables i
 
 An open problem is whether statistical quantities are required by ensemble spaces or they are an additional requirement. If we were able to show that ensemble spaces always embed continuously into a locally convex second countable topological vector space, one may use the seminorms to define quantities. Another approach is to investigate whether the existence of linear transformations parameterized by real quantities, such as time evolution, gives us statistical quantities through the generators of the transformations. It would also mean that, if time is not modeled as a real-valued parameter, then the ensemble space would have to change.
 
-TODO: Review with Christine from here
-
 \subsection{Connection to Choquet theory}
 
-We now want to establish a connection between ensemble spaces and Choquet theory. Specifically, we want to show that the fraction capacity restricted to the extreme points corresponds to the supremum of all possible measures that represents an ensemble. Moreover, the fraction capacity over the extreme point is additive exactly when the ensemble space is a Choquet simplex.
+We now want to establish a connection between ensemble spaces and Choquet theory. Specifically, we want to show that the fraction capacity restricted to the extreme points corresponds to the supremum of all possible measures that represent an ensemble. Moreover, the fraction capacity over the extreme points is additive exactly when the ensemble space is a Choquet simplex.
 
 The goal of Choquet theory is to study how a point of a compact convex set can be represented by a probability measure over its extreme points. First, we need to define what it means to represent an ensemble with a probability measure. Let $E$ be a convex subset of a locally convex topological vector space $V$ and $X$ the set of extreme points. We say that $\ens \in E$ is represented by a probability measure $p : \Sigma_{E} \to [0,1]$ if $F(\ens) = \int_E F dp$ for every continuous linear functional $F$ on $V$. Moreover, we say that $p$ is supported by the extreme points if $p(X) = 1$. Given any probability measure $p$ over the extreme points $X$, we can always find an $\ens \in E$ that is represented by $p$. Therefore, we have a map from the set of probability measures to the set of ensembles. Choquet theory characterizes how the map works in the opposite direction.
 
 The first question is whether each ensemble is represented by a probability measure. Choquet theory tells us that this is the case:
+\begin{mathSection}
 \begin{thrm}[Choquet-Bishop-de Leeuw]\label{pm_es_ChoquetExistence}
-	Let $E$ be a compact convex subset of a locally convex topological vector space $V$, and let $\ens \in E$. Then there exists a probability measure $p_{\ens}$ on $X$ which represents $\ens$ and is supported by the extreme points $X$.
+	Let $E$ be a compact convex subset of a locally convex topological vector space $V$, and let $\ens \in E$. Then there exists a probability measure $p_{\ens}$ on $E$ which represents $\ens$ and is supported by the extreme points $X$.
 \end{thrm}
+\end{mathSection}
 The second question is whether the representation is unique. Choquet theory has a clear answer.
+\begin{mathSection}
 \begin{thrm}[Choquet uniqueness]\label{pm_es_ChoquetUniqueness}
 	Let $E$ be a compact convex subset of a locally convex topological vector space $V$. Then $E$ is a Choquet simplex if and only if for each $\ens \in E$ there exists a unique measure $p_{\ens}$ which represents $\ens$ and is supported by the extreme points $X$.
 \end{thrm}
-The definition of a Choquet simplex is rather involved, so it is omitted. Intuitively, it is the generalization of the finite dimensional simplex. The key point is that $E$ is a Choquet simplex if and only if the ensemble space does not allow multiple decompositions in terms of extreme points.
+\end{mathSection}
+The definition of a Choquet simplex is rather involved, so it is omitted. Intuitively, it is the generalization of the finite-dimensional simplex. The key point is that $E$ is a Choquet simplex if and only if the ensemble space does not allow multiple decompositions in terms of extreme points.
 
 Note that there is a mismatch between ensemble spaces and the definition required by Choquet theory. While ensemble spaces are convex subsets of a vector space, they will not necessarily be compact. For example, in the classical continuous case, the space of absolutely continuous probability distributions is not compact, even if we restrict ourselves to a compact subset of phase space. The issue is that the extreme points, the Dirac distributions, are not ensembles. Moreover, ensemble spaces are equipped with an entropy, and therefore have more structure than required by Choquet theory.
 
-However, the link to Choquet theory is limited to the fraction capacity, which can be defined for any convex set. Therefore we are going to study the relationship between the fraction capacity in all cases where Choquet theory is applicable. If an ensemble space $\Ens$ is compact, the results will apply directly. If an ensemble space $\Ens$ admits some type of compactification $E$, like taking extending the space to all probability measures over a compact subset, then the results will apply to these extreme points that are not necessarily ensembles.
+However, the link we want to establish to Choquet theory is limited to the fraction capacity, which can be defined for any convex set. Therefore we are going to study the relationship between the fraction capacity in all cases where Choquet theory is applicable. If an ensemble space $\Ens$ is compact, the results will apply directly. If an ensemble space $\Ens$ admits some type of compactification $E$, like extending the space of ensembles to a compact set, then the results will apply to these extreme points that are not necessarily ensembles.
 
-We first note that there is a connection between mixtures and the representation through a probability measure. We can, in fact, write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $\ens$ can be represented by the probability measure $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$, and $p(\Ens \setminus \{\ens[a], \ens[b]\}) = 0$. Therefore, if $M_{\ens}$ is the set of probability measures that represent $\ens$, the fraction $\fraction_{\ens}(\ens[a])$ is given by the maximum value over $\{\ens[a]\}$ that can be taken by one of those measures. That is,  $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$.
+We first note that there is a connection between mixtures and the representation through a probability measure. We can, in fact, write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $\ens$ can be represented by the probability measure $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$, and $p(\Ens \setminus \{\ens[a], \ens[b]\}) = 0$. Therefore, if $M_{\ens}$ is the set of probability measures that represent $\ens$, the fraction $\fraction_{\ens}(\ens[a])$ is given by the maximum value over $\{\ens[a]\}$ that can be taken by one of those measures. That is,  $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, p \in M_{\ens} \}$.
 
+\begin{mathSection}
 \begin{prop}\label{pm_es_fractionSupChoquet}
-	Let $E$ be a compact convex subset of a locally convex topological vector space $V$ and define the fraction capacity as for an ensemble space. Let $\ens \in E$ be a point and $M_{\ens}$ be the set of measures that represent $\ens$. Then $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, M_{\ens} \}$ and $\fcap_{\ens}(A) = \sup \{ p(A) \, | \, M_{\ens} \}$.
+	Let $E$ be a compact convex subset of a locally convex topological vector space $V$ and define the fraction capacity as for an ensemble space. Let $\ens \in E$ be a point and $M_{\ens}$ be the set of measures that represent $\ens$. Then $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, p \in M_{\ens} \}$  for all $\ens[a] \in E$ and $\fcap_{\ens}(A) = \sup \{ p(A) \, | \, p \in M_{\ens} \}$ for all $A \subseteq E$.
 \end{prop}
 
 \begin{proof}
-	Let $\ens \in E$ and suppose $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ with $\ens[a], \ens[b] \in E$ and $\lambda \in [0,1]$. Then the measure $p$ such that $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$ and $p(E\setminus \{ \ens[a], \ens[b]\})=0$ represents $\ens$. In fact, for any statistical variable $F$ we have $F(\ens) = \lambda F(\ens[a]) + \bar{\lambda} F(\ens[b]) = \int_E F dp$. The converse is true as well. If $p \in M_{\ens}$ such that $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$ and $p(E\setminus \{ \ens[a], \ens[b]\})=0$, then $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$. Since a Dirac measure at a point $\ens[a]$ represents $\ens[a]$, the convex combination of two Dirac measures represents the convex combination of the two corresponding points. Now let $p \in M_{\ens}$ such that $p(\{\ens\}) \neq 1$. We can write it as $p = p(\{\ens[a]\}) \delta_{\ens[a]} + p(E \setminus \{\ens[a]\})\frac{p|_{E \setminus \{\ens[a]\}}}{p(E \setminus \{\ens[a]\})}$ where $\delta_{\ens[a]}$ is the Dirac measure over $\ens[a]$. But since every probability measure will represent an element of $E$, we can find $\ens[b] \in E$ that is represented by $\frac{p|_{E \setminus \{\ens[a]\}}}{p(E \setminus \{\ens[a]\})}$. Therefore there is $\hat{p} \in M_{\ens}$ such that $\hat{p}(\{\ens[a]\}) = p(\{\ens[a]\})$, $\hat{p}(\{\ens[b]\}) = p(E \setminus \{\ens[a]\})$ and $\hat{p}(E\setminus \{ \ens[a], \ens[b]\})=0$. Which means $\fraction_{\ens}(\ens[a]) = \sup(\{ \lambda \in [0,1] \, | \, \exists \, \ens[b] \in \Ens \text{ s.t. }  \ens = \lambda \ens[a] + \bar{\lambda} \ens[b] \}) = \sup \{ p(\{\ens[a]\}) \, | \, p \in M_{\ens} \}$.
+	Let $\ens \in E$ and suppose $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ with $\ens[a], \ens[b] \in E$ and $\lambda \in [0,1]$. Then the measure $p$ such that $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$ and $p(E\setminus \{ \ens[a], \ens[b]\})=0$ represents $\ens$. In fact, for any statistical variable $F$ we have $F(\ens) = \lambda F(\ens[a]) + \bar{\lambda} F(\ens[b]) = \int_E F dp$. The converse is true as well. If $p \in M_{\ens}$ such that $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$ and $p(E\setminus \{ \ens[a], \ens[b]\})=0$, then $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$. Since a Dirac measure at a point $\ens[a]$ represents $\ens[a]$, the convex combination of two Dirac measures represents the convex combination of the two corresponding points. Now let $p \in M_{\ens}$ such that $p(\{\ens[a]\}) \neq 1$. We can write it as $p = p(\{\ens[a]\}) \delta_{\ens[a]} + p(E \setminus \{\ens[a]\})\frac{p|_{E \setminus \{\ens[a]\}}}{p(E \setminus \{\ens[a]\})}$ where $\delta_{\ens[a]}$ is the Dirac measure over $\ens[a]$. But since every probability measure will represent an element of $E$, we can find $\ens[b] \in E$ that is represented by $\frac{p|_{E \setminus \{\ens[a]\}}}{p(E \setminus \{\ens[a]\})}$. Therefore there is $\hat{p} \in M_{\ens}$ such that $\hat{p}(\{\ens[a]\}) = p(\{\ens[a]\})$, $\hat{p}(\{\ens[b]\}) = p(E \setminus \{\ens[a]\})$ and $\hat{p}(E\setminus \{ \ens[a], \ens[b]\})=0$. Which means $\fraction_{\ens}(\ens[a]) = \sup(\{ \lambda \in [0,1] \, | \, \exists \, \ens[b] \in E \text{ s.t. }  \ens = \lambda \ens[a] + \bar{\lambda} \ens[b] \}) = \sup \{ p(\{\ens[a]\}) \, | \, p \in M_{\ens} \}$.
 	
-	Now let $A \subseteq \Ens$ be convex and let $M_A$ be the set of all measures whose support is in $A$. Each measure in $M_A$ will represent a point on $A$. Also, since the expectation a convex combinations of measures correspond to a convex combination of the expectations values, $M_A$ will be convex as well. If $p$ represents $\ens$ and $p(A) \neq 0$, then $\frac{p|_A}{p(A)}$ is a probability measure that represents an element $\ens[a] \in A$ such that $\ens = p(A) \ens[a] + p(A^{\complement}) \ens[b]$. Therefore $\fraction_{\ens}(A) = \sup \{ p(A) \, | \, p \in M_{\ens} \}$.
+	Now let $A \subseteq E$ be convex and let $M_A$ be the set of all measures whose support is in $A$. Each measure in $M_A$ will represent a point in $A$. Also, since the expectation of a convex combination of measures corresponds to a convex combination of the expectation values, $M_A$ will be convex as well. If $p$ represents $\ens$ and $p(A) \neq 0$, then $\frac{p|_A}{p(A)}$ is a probability measure that represents an element $\ens[a] \in A$ such that $\ens = p(A) \ens[a] + p(A^{\complement}) \ens[b]$. Therefore $\fraction_{\ens}(A) = \sup \{ p(A) \, | \, p \in M_{\ens} \}$.
 \end{proof}
+\end{mathSection}
 
-If we restrict the fraction capacity to the set $X$ of extreme points, it will represent the supremum of all probability measures over the extreme points. If $E$ is a Choquet simplex, then each ensembles will be represented by a unique measure over the extreme points, therefore the fraction capacity over the extreme points will coincide with that measure, and will be additive. Conversely, if the fraction capacity over the extreme points is additive, the fraction capacity must be the supremum over a single measure. If the fraction capacity over the extreme points is additive for all ensembles, then each ensemble is represented by a unique probability measure over the extreme points. In other words, the additivity of the fraction capacity over the extreme points exactly captures the single decomposition of ensembles into pure states and the Choquet simplex case.
+If we restrict the fraction capacity to the set $X$ of extreme points, it will represent the supremum of all probability measures over the extreme points. If $E$ is a Choquet simplex, then each ensemble will be represented by a unique measure over the extreme points, therefore the fraction capacity over the extreme points will coincide with that measure, and will be additive. Conversely, if the fraction capacity over the extreme points is additive, the fraction capacity must be the supremum over a single measure. If the fraction capacity over the extreme points is additive for all ensembles, then each ensemble is represented by a unique probability measure over the extreme points. In other words, the additivity of the fraction capacity over the extreme points exactly captures the single decomposition of ensembles into pure states and the Choquet simplex case.
 
+\begin{mathSection}
 \begin{prop}
 	Let $E$ be a compact convex subset of a locally convex topological vector space $V$. Then the following statements are equivalent:
 	\begin{enumerate}
@@ -2880,31 +2885,37 @@ If we restrict the fraction capacity to the set $X$ of extreme points, it will r
 \begin{proof}
 	By theorem \ref{pm_es_ChoquetUniqueness}, 1 and 2 are equivalent. 
 	
-	Now consider $\fraction_{\ens}|_X$. By \ref{pm_es_fractionSupChoquet}, $\fcap_{\ens}|_X$ gives us the supremum of all possible measures supported by $X$ that represent $\ens$. By \ref{pm_es_ChoquetExistence}, $\ens$ is represented by at least one measure. Suppose that it is represented by exactly one measure $p$. Then $\fraction_{\ens}|_X = p$ and therefore $\fraction_{\ens}|_X$ is additive. Now, suppose that $\ens$ is represented by at least two distinct measures $p_1$ and $p_2$. Then there will be a set $A \subseteq X$ such that $p_1(A) \neq p_2(A)$. Suppose, without loss of generality, that $p_1(A) > p_2(A)$. We will also have $p_1(A^{\complement}) = 1- p_1(A) < 1 - p_2(A) = p_2(A^{\complement})$. Therefore $\fcap_{\ens}(A \cup A^{\complement})=\fcap{\ens}(X) = 1 = p_1(A) + p_1(A^{\complement}) < p_1(A) + p_2(A^{\complement}) \leq \fcap_{\ens}(A) + \fcap_{\ens}(A^{\complement})$. The fraction capacity is therefore additive if and only if $\ens$ is represented by a single measure over the extreme points. Therefore 2 and 3 are equivalent.
+	Now consider $\fraction_{\ens}|_X$. By \ref{pm_es_fractionSupChoquet}, $\fcap_{\ens}|_X$ gives us the supremum of all possible measures supported by $X$ that represent $\ens$. By \ref{pm_es_ChoquetExistence}, $\ens$ is represented by at least one measure. Suppose that it is represented by exactly one measure $p$. Then $\fraction_{\ens}|_X = p$ and therefore $\fraction_{\ens}|_X$ is additive. Now, suppose that $\ens$ is represented by at least two distinct measures $p_1$ and $p_2$. Then there will be a set $A \subseteq X$ such that $p_1(A) \neq p_2(A)$. Suppose, without loss of generality, that $p_1(A) > p_2(A)$. We will also have $p_1(A^{\complement}) = 1- p_1(A) < 1 - p_2(A) = p_2(A^{\complement})$. Therefore $\fcap_{\ens}(A \cup A^{\complement})=\fcap_{\ens}(X) = 1 = p_1(A) + p_1(A^{\complement}) < p_1(A) + p_2(A^{\complement}) \leq \fcap_{\ens}(A) + \fcap_{\ens}(A^{\complement})$. The fraction capacity is therefore additive if and only if $\ens$ is represented by a single measure over the extreme points. Therefore 2 and 3 are equivalent.
 \end{proof}
+\end{mathSection}
 
 \subsection{Macrostates and thermodynamics}
 
-In this section we try to recover some elements of thermodynamics on the generalized ensemble space. We want to recover Gibbs' thermodynamics, which means an equation of state in terms of extensive quantities. Instead of extensive quantities, we are going to use statistical quantities. Note that the idea that all extensive quantities are statistical (i.e. the average during mixing) seems to work. The energy and the number or particles average during mixture. The idea that volume averages during mixture can be understood as the system oscillating between the different volumes defined by the components. It also seems that intensive quantities do not average during mixing. Temperature, for example, is only defined on equilibria (i.e. of Boltzmann distributions) and the mixture of two equilibria at different temperature is not an equilibrium. Still, we would need a general proof, which would require the notion of product spaces (i.e. intensitive/extensive quantities represent system/subsystem relationship).
+In this section we try to recover some elements of thermodynamics on the generalized ensemble space. We want to recover Gibbs' thermodynamics, which means an equation of state in terms of extensive quantities. Instead of extensive quantities, we are going to use statistical quantities. Note that the idea that all extensive quantities are statistical (i.e. the average during mixing) seems to work. In fact, in statistical mechanics the energy, the number of particles and the volume are averages over microstates. It also seems that intensive quantities do not average during mixing. Temperature, for example, is only defined on equilibria (i.e. of Boltzmann distributions) and the mixture of two equilibria at different temperatures is not an equilibrium. Still, we would need a general proof, which would require the notion of product spaces (i.e. intensive/extensive quantities represent system/subsystem relationship).
 
+\begin{mathSection}
 \begin{defn}
-	Let $\Ens$ be an ensemble space. Let $F : \Ens \to \mathcal{Q}$ be a statistical property. The \textbf{coarse graining} of $\Ens$ over $F$ is the set $\mathcal{M} \subseteq \Ens$ represented by the ensemble that maximize the entropy for each fixed value of the property. That is, there exists a map $\psi : \mathcal{Q} \to \mathcal{M}$ such that $F(\psi(x)) = x$ and $S(\psi(x)) \geq \ens$ for all $\ens \in \Ens$ such that $F(\ens) = x$. The \textbf{equation of state} is the map $S(x) \mapsto S(\psi(x))$ that returns the entropy given the value of the statistical property.
+	Let $\Ens$ be an ensemble space. Let $F : \Ens \to \mathcal{Q}$ be a statistical property. The \textbf{coarse graining} of $\Ens$ over $F$ is the set $\mathcal{M} \subseteq \Ens$ represented by the ensembles that maximize the entropy for each fixed value of the property. That is, there exists a map $\psi : \mathcal{Q} \to \mathcal{M}$ such that $F(\psi(x)) = x$ and $S(\psi(x)) \geq S(\ens)$ for all $\ens \in \Ens$ such that $F(\ens) = x$. The \textbf{equation of state} is the map $S : \mathcal{Q} \to \mathbb{R}$ defined as $S(x) \mapsto S(\psi(x))$ that returns the entropy given the value of the statistical property.
 \end{defn}
+\end{mathSection}
 
-The set of ensemble that maximize entropy will be a set of points fully identified by finitely many real numbers. We would expect this to be a manifold, though we still have to understand how the topology of the ensemble space related to the topology of $\mathcal{M}$.
+The set of ensembles that maximize entropy will be a set of points fully identified by finitely many real numbers. We would expect this to be a manifold, though we still have to understand how the topology of the ensemble space relates to the topology of $\mathcal{M}$.
 
+\begin{mathSection}
 \begin{conj}
-	Let $F : \Ens \to \mathbb{R}^n$ be a vector of statistical quantities. Then the corresponding coarse graining of $\mathcal{M}$ is a manifold. The equation of state $S : \mathbb{R}^n \to \mathbb{R}$ returns the entropy as a function of the statistical values.
+	Let $F : \Ens \to \mathbb{R}^n$ be a vector of statistical quantities. Then the corresponding coarse graining $\mathcal{M}$ of $\Ens$ is a manifold. The equation of state $S : \mathbb{R}^n \to \mathbb{R}$ returns the entropy as a function of the values of the statistical quantities.
 \end{conj}
 
 \begin{remark}
 	We need to prove that $\mathcal{M}$ inherits the topology from $\Ens$. Are we be able to recover the topological isolation of phase transitions? The quantities will typically be energy plus other extensive quantities (i.e. volume, number of particles, ...).
 \end{remark}
+\end{mathSection}
 
-What can we already prove, however, is that the entropy is a strictly concave function of the state variables. Note that, in this setting, the convex combination between state variables does not give a statistical mixture, but rather it give us the ensemble that maximizes entropy on the averaged constrain. Therefore, the concavity of the entropy on the coarse grained state is not the same concavity of the entropy on the ensemble space.
+What we can already prove, however, is that the entropy is a strictly concave function of the state variables. Note that, in this setting, the convex combination between state variables does not give a statistical mixture, but rather it gives us the ensemble that maximizes entropy on the averaged constraint. Therefore, the concavity of the entropy on the coarse grained state space is not the same concavity of the entropy on the ensemble space.
 
+\begin{mathSection}
 \begin{prop}
-	The equation of state is strictly concave. That is, $S(\lambda x + \bar{\lambda} y) \geq \lambda S(x) + \bar{\lambda} S(y)$ and the equality holds if and only if $x=y$.
+	Given a coarse graining $\mathcal{M}$ of $\Ens$, its equation of state is strictly concave. That is, $S(\lambda x + \bar{\lambda} y) \geq \lambda S(x) + \bar{\lambda} S(y)$ and the equality holds if and only if $x=y$.
 \end{prop}
 
 \begin{proof}
@@ -2919,7 +2930,7 @@ What can we already prove, however, is that the entropy is a strictly concave fu
 	\end{equation}
 	which shows that the equation of state is concave.
 	
-	Now suppose that $x=y$. Then on one side $S(\lambda x + \bar{\lambda} y) = S(x)$ and on the other side $\lambda S(x) + \bar{\lambda} S(y) = S(x)$. $S(\lambda x + \bar{\lambda} y) = \lambda S(x) + \bar{\lambda} S(y)$. Conversely, suppose that $x\neq y$. Then $\psi(x) \neq \psi(y)$. By the strict concavity of the entropy, we have
+	To show that the equation of state is strictly concave, suppose that $x=y$. Then on one side $S(\lambda x + \bar{\lambda} y) = S(x)$ and on the other side $\lambda S(x) + \bar{\lambda} S(y) = S(x)$. Therefore $S(\lambda x + \bar{\lambda} y) = \lambda S(x) + \bar{\lambda} S(y)$, which means the inequality holds with the equal. Conversely, suppose that $x\neq y$. Then $\psi(x) \neq \psi(y)$. By the strict concavity of the entropy, we have
 	\begin{equation}
 		\begin{aligned}
 			S(\lambda x + \bar{\lambda} y) &= S(\psi(\lambda x + \bar{\lambda} y)) \\
@@ -2928,12 +2939,13 @@ What can we already prove, however, is that the entropy is a strictly concave fu
 			&= \lambda S(x) + \bar{\lambda} S(y),
 		\end{aligned}
 	\end{equation}
-	which shows that the equation of state is strictly concave.
+	which shows that the equality holds if and only if $x=y$ and therefore the equation of state is strictly concave.
 \end{proof}
 
 \begin{remark}
-	In the case of thermodynamics, where the statistical property is a vector of statistical values, the equation of state will be concave in all arguments and in all combination of arguments.
+	In the case of thermodynamics, where the statistical property is a vector of statistical values, the equation of state will be concave in all arguments and in all combinations of arguments.
 \end{remark}
+\end{mathSection}
 
 
 \section{Orthogonal and separate subspaces}\label{pm_es_subspaceSection}
@@ -2944,9 +2956,9 @@ In this section we recover the notion of subspaces from orthogonality and separa
 
 We first present a generic construction, which is sometimes called orthogonality space or orthomodular space, and it sometimes appears in the context of Galois connections. The general idea is that given any irreflexive and symmetric relation, we can define a closure that gives us an orthocomplemented lattice. Since orthogonality and separateness, as defined before, satisfy those properties, they will each give a notion of subspace.
 
-To get an idea, we look at how orthogonality and orthogonal subspaces work in inner product spaces. Let $V$ be an inner product space. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all orthogonal to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were a subspace to begin with, then $U = (U^{\perp})^{\perp}$. Note that we can therefore define subspaces without having a notion of space, just by using the orthogonality relationship, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar some construction related to Galois connections.}
+To get an idea, we look at how orthogonality and orthogonal subspaces work in inner product spaces. Let $V$ be an inner product space. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all orthogonal to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were a subspace to begin with, then $U = (U^{\perp})^{\perp}$. Note that we can therefore define subspaces without having a notion of space, just by using the orthogonality relationship, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar to some constructions related to Galois connections.}
 
-The construction works for any binary relationship that is symmetric and irreflexive. For example, given two distributions, the fact they have disjoint support is a symmetric and irreflexive relationship: a distribution does not have disjoint support with respect to itself, and the order of comparison does not matter. We can then construct subspaces based on this relationship, and find sets of function that are all defined within different regions. In our case, separateness, as defined by the mixing function, and orthogonality, as defined by the entropy, are symmetric and irreflexive.
+The construction works for any binary relationship that is symmetric and irreflexive. For example, given two distributions, the fact that they have disjoint support is a symmetric and irreflexive relationship: a distribution does not have disjoint support with respect to itself, and the order of comparison does not matter. We can then construct subspaces based on this relationship, and find sets of functions that are all defined within different regions. In our case, separateness, as defined by the mixing function, and orthogonality, as defined by the entropy, are symmetric and irreflexive.
 
 We start with a generic set $X$ and a symmetric relation (i.e. if $aRb$ then $bRa$). We define the $R$-complement $U^R$ of all elements that are $R$-related to $U$ and study some useful properties. The symmetry of the relation is already enough to recover most of the properties we will need.
 
@@ -2957,7 +2969,7 @@ We start with a generic set $X$ and a symmetric relation (i.e. if $aRb$ then $bR
 	\end{defn}
 	
 	\begin{prop}\label{pm_es_rComplProps}
-		Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Then:
+		Let $X$ be a set and $R \subseteq X \times X$ a symmetric relation. Then
 		\begin{enumerate}
 			\item $U \subseteq V \implies V^{R} \subseteq U^{R}$
 			\item $U \subseteq (U^{R})^{R}$
@@ -2997,7 +3009,7 @@ We start with a generic set $X$ and a symmetric relation (i.e. if $aRb$ then $bR
 	\end{proof}
 \end{mathSection}
 
-The last two properties depends on both the symmetry and the irreflexivity.
+The next two properties depend on both the symmetry and the irreflexivity.
 
 \begin{mathSection}
 	\begin{prop}\label{pm_ensmblespaces_symirreflproperties}
@@ -3009,7 +3021,7 @@ The last two properties depends on both the symmetry and the irreflexivity.
 	\end{prop}
 	
 	\begin{proof}
-		1. Let $a \in U$. Since $R$ is irreflexive,  $aRa$ is false. Therefore it is not true that, for all $b \in U$, $aRb$. This means that $a \notin U^{R}$. Since that $a$ was arbitrary, $U \cap U^{R} \emptyset$.
+		1. Let $a \in U$. Since $R$ is irreflexive,  $aRa$ is false. Therefore it is not true that, for all $b \in U$, $aRb$. This means that $a \notin U^{R}$. Since $a$ was arbitrary, $U \cap U^{R} = \emptyset$.
 		
 		2. Suppose $a \in X^{R}$. Then for all $b \in X$, $aRb$. In particular, we would have $aRa$, which can't be true since $R$ is irreflexive. Therefore $a \notin X^{R}$ and, since $a$ is arbitrary, $X^{R} = \emptyset$.
 	\end{proof}
@@ -3019,7 +3031,7 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 
 \begin{mathSection}
 	\begin{defn}
-		Let $X$ be a set and $R \subseteq X \times X$ a irreflexive symmetric relation. Let $U \subseteq X$. The \textbf{$R$-closure of $U$} is $\langle U \rangle_R = (U^{R})^{R}$. An \textbf{$R$-subspace} of $X$ is a set $U \subseteq X$ such that $U = \langle U \rangle_R$. The \textbf{lattice of $R$-subspaces} is the set $\mathfrak{L} = \{ U \subseteq X \, | \, U = \langle U \rangle_R \}$ ordered by inclusion.
+		Let $X$ be a set and $R \subseteq X \times X$ an irreflexive symmetric relation. Let $U \subseteq X$. The \textbf{$R$-closure of $U$} is $\langle U \rangle_R = (U^{R})^{R}$. An \textbf{$R$-subspace} of $X$ is a set $U \subseteq X$ such that $U = \langle U \rangle_R$. The \textbf{lattice of $R$-subspaces} is the set $\mathfrak{L} = \{ U \subseteq X \, | \, U = \langle U \rangle_R \}$ ordered by inclusion.
 	\end{defn}
 	
 	\begin{coro}
@@ -3046,7 +3058,7 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 	
 	\begin{proof}
 		Note that 2 is satisfied because $A$ is an $R$-closure and 3 is already proven in \ref{pm_es_rComplProps}.
-		
+%TODO: check next
 		From \ref{pm_ensmblespaces_symirreflproperties} we have $A \wedge A^{R} = \emptyset$. Using \ref{pm_es_rComplProps}, we also have $X = \emptyset^{R} = (A \wedge A^{R}) ^{R} = ((A^{R} \vee (A^{R})^{R})^{R})^{R} = ((A^{R} \vee (A^{R})^{R})^{R})^{R} = ((A^{R} \vee A)^{R})^{R} = A^{R} \vee A$.
 	\end{proof}
 	
@@ -3059,7 +3071,7 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 	\end{coro}
 	
 	\begin{proof}
-		Every \href{https://en.wikipedia.org/wiki/Complemented_lattice#Orthocomplementation}{orthocomplemented lattice satisfy de Morgan's laws}.
+		Every orthocomplemented lattice satisfies de Morgan's laws.\footnote{See, for example, \href{https://en.wikipedia.org/wiki/Complemented_lattice}{Wikipedia}.}
 	\end{proof}
 	
 	\begin{coro}\label{pm_es_subspaceClosure}
@@ -3075,7 +3087,7 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 	\begin{proof}
 		1. The first property is true by the second property of \ref{pm_es_rComplProps}.
 		
-		2. Using the first property of \ref{pm_es_rComplProps} we have $U \subseteq V$ implies $V^{R} \subseteq U^{R}$ which in turns implies $(U^{R})^{R} \subseteq (V^{R})^{R}$. Therefore $\langle U \rangle_R \subseteq \langle V \rangle_R$.
+		2. Using the first property of \ref{pm_es_rComplProps} we have $U \subseteq V$ implies $V^{R} \subseteq U^{R}$ which in turn implies $(U^{R})^{R} \subseteq (V^{R})^{R}$. Therefore $\langle U \rangle_R \subseteq \langle V \rangle_R$.
 		
 		3. Using the fifth property of \ref{pm_es_rComplProps} we have $\langle \langle U \rangle_R \rangle_R = (((U^{R})^{R})^{R})^{R} = (U^{R})^{R} = \langle U \rangle_R$.
 	\end{proof}
@@ -3095,11 +3107,11 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 	\end{proof}
 \end{mathSection}
 
-We now show that if we start with the mere notion of orthogonality defined from an inner product vector space, we recover the notion of orthogonal component and subspaces. That is, the full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
+We now show that if we start with the mere notion of orthogonality defined from an inner product vector space, we recover the notion of orthogonal components and subspaces. That is, the full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
 
 \begin{mathSection}
 	\begin{prop}
-		Let $X$ be an inner product space and $R = \{(a,b) \,|\, \langle a , b\rangle = 0\}$. Then:
+		Let $X$ be an inner product space and $R = \{(a,b) \,|\, \langle a , b\rangle = 0\}$. Then
 		\begin{enumerate}
 			\item $R$ is an irreflexive and symmetric relation
 			\item $U^{R} = U^{\perp}$
@@ -3110,7 +3122,7 @@ We now show that if we start with the mere notion of orthogonality defined from 
 	\begin{proof}
 		1. Given that the inner product is symmetric, so will be $R$. Given that no vector is orthogonal to itself, $R$ is irreflexive.
 		
-		2. The orthogonal complex is defined as $U^\perp = \{ a \in X \, | \, \forall b \in U, \langle a , b\rangle = 0 \}$. Since $aRb \iff \langle a , b\rangle = 0$, $U^{R} = U^{\perp}$.
+		2. The orthogonal complement is defined as $U^\perp = \{ a \in X \, | \, \forall b \in U, \langle a , b\rangle = 0 \}$. Since $aRb \iff \langle a , b\rangle = 0$, $U^{R} = U^{\perp}$.
 		
 		3. We have $\langle U \rangle_R = (U^{\perp})^\perp$ which returns the smallest closed subspace that contains $U$.
 	\end{proof}
@@ -3120,24 +3132,29 @@ We now show that if we start with the mere notion of orthogonality defined from 
 
 Since orthogonality and separateness are irreflexive symmetric operations, they will both give a lattice of subspaces. Here we present a series of conjectures about these subspaces that we have yet to prove.
 
+\begin{mathSection}
 \begin{defn}
 	Let $\Ens$ be an ensemble space. An $\ortho$-subspace is an R-subspace defined by $\ortho$ and a $\separate$-subspace is an R-subspace defined by $\separate$.
 \end{defn}
+\end{mathSection}
 
-In the classical case, since both orthogonality and separateness coincide with disjoint support, a subspace consist of all the probability distribution whose support is within a given set $U$.\footnote{Clearly, not all closed sets will give a different subspace. For example, over $\mathbb{R}$, $[0,1]$ and $[0,1]\cup[2,2]$ will correspond to the same subspace. Characterizing that equivalence class is still an open question.}
+In the classical case, since both orthogonality and separateness coincide with disjoint support, a subspace consists of all the probability distribution whose support is within a given set $U$.\footnote{Clearly, not all closed sets will give a different subspace. For example, over $\mathbb{R}$, $[0,1]$ and $[0,1]\cup[2,2]$ will correspond to the same subspace. Characterizing that equivalence class is still an open question.}
 
+\begin{mathSection}
 \begin{prop}
-	Let $\Ens$ be a discrete or classical ensemble space over a sample space $X$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
+	Let $\Ens$ be a discrete or continuous classical ensemble space over a sample space $X$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
 \end{prop}
 
 \begin{proof}
 	Recall that in a classical ensemble space, $p \ortho \lambda$ if and only if $\lambda(\support(p)) = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigcup_{p \in A} \support(p)$ be the union of all supports. Then $\lambda \in A^{\ortho}$ (i.e. is orthogonal to all elements of $A$) if and only if $\lambda(U) = 0$. Conversely, $p \in A$ only if it is orthogonal to all elements, which means if and only if $p(U) = 1$. Therefore if $A$ is a subspace, there is a $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
 	
-	Conversely, let $A = \{ p \in \Ens \, | \, p(U) = 1\}$ for some $U \subseteq X$. Then and $A^{\ortho} = \{ p \in \Ens \, | \, p(U) = 0\}$. The orthogonal complement of the orthogonal complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
+	Conversely, let $A = \{ p \in \Ens \, | \, p(U) = 1\}$ for some $U \subseteq X$. Then $A^{\ortho} = \{ p \in \Ens \, | \, p(U) = 0\}$. The orthogonal complement of the orthogonal complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
 \end{proof}
+\end{mathSection}
 
-In the quantum case, the orthogonality coincide with orthogonality in the Hilbert space, and therefore an $\ortho$-subspace coincides with the set of density operators supported by a given subspace.
+In the quantum case, the orthogonality coincides with orthogonality in the Hilbert space, and therefore an $\ortho$-subspace coincides with the set of density operators supported by a given subspace.
 
+\begin{mathSection}
 \begin{prop}
 	Let $\Ens$ be a quantum ensemble space over a Hilbert space $\mathcal{H}$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a subspace $U \subseteq \mathcal{H}$ with a corresponding projector $\mathbf{1}_{U}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$. 
 \end{prop}
@@ -3145,34 +3162,36 @@ In the quantum case, the orthogonality coincide with orthogonality in the Hilber
 \begin{proof}
 	Recall that to each subspace $U \subseteq \mathcal{H}$ is associated a projector $\mathbf{1}_U$ whose eigenvectors with eigenvalue $1$ span $U$. Given a density operator $\rho \in \Ens$, its support is the subspace $U=\support(\rho)$ spanned by the non-zero eigenvectors. Therefore $\tr[\mathbf{1}_{U} \, \rho] = 1$ and $\tr[\mathbf{1}_{U^{\ortho}} \, \rho] = 0$.
 
-	Also recall that, for a quantum ensemble space, $\rho \ortho \sigma$ if and only if $\tr[ \mathbf{1}_{\support(\rho)} \, \sigma] = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigvee_{\rho \in A} \support(p)$ be the subspace $U$ spanned by all supports. Then $\sigma \in A^{\ortho}$  (i.e. is orthogonal to all elements of $A$) if and only if $\tr[\mathbf{1}_{U} \, \sigma] = 0$. Conversely, $\rho \in A$ if and only if it is orthogonal to all elements, which is the case if and only if $\tr[\mathbf{1}_{U} \, \rho] = 1$. Therefore if $A$ is a subspace, there is a subspace $U \subseteq \mathcal{H}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$.
+	Also recall that, for a quantum ensemble space, $\rho \ortho \sigma$ if and only if $\tr[ \mathbf{1}_{\support(\rho)} \, \sigma] = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigvee_{\rho \in A} \support(\rho)$ be the subspace $U$ spanned by all supports. Then $\sigma \in A^{\ortho}$  (i.e. is orthogonal to all elements of $A$) if and only if $\tr[\mathbf{1}_{U} \, \sigma] = 0$. Conversely, $\rho \in A$ if and only if it is orthogonal to all elements of $A^{\ortho}$, which is the case if and only if $\tr[\mathbf{1}_{U} \, \rho] = 1$. Therefore if $A$ is a subspace, there is a subspace $U \subseteq \mathcal{H}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$.
 	
-	Conversely, let $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$ for some subspace $U \subseteq \mathcal{H}$. The orthogonal complement $A^{\ortho}$ will be the set of all density operators $\sigma \in \Ens$ such that $\tr[\mathbf{1}_{U} \, \sigma] = 0$. The complement of the complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
+	Now let $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$ for some subspace $U \subseteq \mathcal{H}$. The orthogonal complement $A^{\ortho}$ will be the set of all density operators $\sigma \in \Ens$ such that $\tr[\mathbf{1}_{U} \, \sigma] = 0$. The complement of the complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
 \end{proof}
+\end{mathSection}
 
-Note that, in general, the two notions of subspaces, and therefore their lattices, will be different. Note that a feature of classical classical ensemble space is exactly that orthogonality and separateness coincide, which also means the two lattices will coincide.
+Note that, in general, the two notions of subspaces, and therefore their lattices, will be different. Note that a feature of classical ensemble spaces is exactly that orthogonality and separateness coincide, which also means the two lattices will coincide.
 
-Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthomodular, as one requires, for example, in quantum logic. The cut triangle \ref{pm_es_cutTriangle} is a counterexample. The only orthogonality relationship are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are $\bot = \emptyset$, $X= \{\ens[2]\}$, $Y= \{\ens[3]\}$, $A= \{p \ens[2] + \bar{p}\ens[a]\}$, $B= \{p \ens[3] + \bar{p}\ens[b]\}$ and $\top = \Ens$. As we can is see in fig. \ref{pm_es_figCutTriangleOrthoSubspaces}, the subspaces form an $M_6$ lattice, which is not orthomodular. In fact, $Y \subseteq B$ but $Y \vee (Y^{\ortho} \wedge B) = Y \vee (A \wedge B) = Y \vee \bot = Y \neq B$.
+Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthomodular, as one requires, for example, in quantum logic. The cut triangle \ref{pm_es_cutTriangle} is a counterexample. The only orthogonality relationships are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are the bottom $\bot = \emptyset$, $X= \{\ens[2]\}$, $Y= \{\ens[3]\}$, $A= \{p \ens[2] + \bar{p}\ens[a]\}$, $B= \{p \ens[3] + \bar{p}\ens[b]\}$ and the top $\top = \Ens$. As we can is see in Fig. \ref{pm_es_figCutTriangleOrthoSubspaces}, the subspaces form an $M_6$ lattice, which is not orthomodular. In fact, $Y \subseteq B$ but $Y \vee (Y^{\ortho} \wedge B) = Y \vee (A \wedge B) = Y \vee \bot = Y \neq B$.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces.jpg}\label{pm_es_figCutTriangleOrthoSubspaces}\caption{On the left, the cut triangle. On the right, the diagram of the orthogonal subspaces.}
+	\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces.jpg}\label{pm_es_figCutTriangleOrthoSubspaces}\caption{On the left, the cut triangle. On the right, the lattice of the orthogonal subspaces.}
 \end{figure}
 
-The lack of orthonormality is due to the multiple complements that are one a subset of the other. This means that $X \vee (X^\perp \wedge A) = X \vee (B \wedge A) = X \vee \bot = X$ instead of $A$, if the lattice where orthonormal. This leads to the following:
+The lack of orthomodularity is due to the multiple complements that where one is a subset of the other. This means that $X \vee (X^\perp \wedge A) = X \vee (B \wedge A) = X \vee \bot = X$ instead of $A$, if the lattice were orthomodular. This leads to the following:
 \begin{conj}
 	The lattice of $\ortho$-subspaces is orthomodular if and only if the ensemble space is orthogonally decomposable (i.e. every decomposable ensemble is orthogonally decomposable).
 \end{conj}
-If this is true, the requirement of orthonormality is an additional requirement that can be understood physically.
+If this is true, the requirement of orthomodularity is an additional requirement that can be understood physically.
 
-Note, however, that the lattice of $\separate$-subspaces  of the cut triangle is orthonormal, though not commutative. This shows how the two lattices can be very different.
+Note, however, that the lattice of $\separate$-subspaces  of the cut triangle is orthomodular, though not commutative. This shows how the two lattices can be very different.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces2.jpg}
-	\caption{In this diagram, the lower tier represents the singletons of the extreme points, the middle tier represents each side and the top tier represent the pairs of sides that are the $\separate$-complement of the extreme points. The red lines connect the complements. Note that the lattice is not a distributive (e.g. $A\vee (3 \wedge A2) = A \vee \bot = A \neq (A\vee 3) \wedge (A \vee A2) = BP \wedge A2 = A2$). In fact, $\{\bot, 3, A, A2, BP\}$ is an $N_5$ sub-lattice. }
+	\caption{In this diagram, the lower tier represents the singletons of the extreme points, the middle tier represents each side and the top tier represent the pairs of sides that are the $\separate$-complement of the extreme points. The red lines connect the complements. Note that the lattice is not distributive (e.g. $A\vee (3 \wedge A2) = A \vee \bot = A \neq (A\vee 3) \wedge (A \vee A2) = BP \wedge A2 = A2$). In fact, $\{\bot, 3, A, A2, BP\}$ is an $N_5$ sublattice. }
 \end{figure}
 
+TODO: Review with Christine from here
 
 \section{Examples}
 
