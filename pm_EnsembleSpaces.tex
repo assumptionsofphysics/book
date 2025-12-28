@@ -2595,7 +2595,63 @@ It is still an open question to understand exactly when the fraction capacity re
 
 We now show that fraction capacity recovers classical probability in the classical case. The key insight is that each event, each Borel set $A$, corresponds to a subspace of probability measures for which that event will be true. This is the set of probability measure whose support is always within the given Borel set $A$. A probability measure, then, can always be decomposed in a part for which that event will be true, the part supported by $A$, and a part for which that event will be false, the part supported by the complement. The fraction capacity corresponds to the mixing coefficient of this decomposition.
 
-TODO: add example and figure
+\begin{figure}[H]
+	\centering
+	\def\xstep{0.75em}
+	\def\bHeight{0.6}
+	\def\tHeight{0.1}
+	\def\tGap{0.3}
+	\begin{tikzpicture}
+		%\draw [help lines] (0,0) grid (10,3);
+		
+		\def\pa{1/13}
+		\def\pb{2/13}
+		\def\pc{3/13}
+		\def\pd{3/13}
+		\def\pe{2/13}
+		\def\pf{2/13}
+		
+		\node at (1,0.5) {$p$};
+		
+		\draw (0, 0) foreach \x in {1,...,6} { -- (\tGap * \x, 0) -- (\tGap * \x, -\tHeight) (\tGap * \x, 0) } -- ++(\tGap, 0);
+		\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(\tGap * 1, \bHeight * \pa) (\tGap * 2, \bHeight * \pb) (\tGap * 3, \bHeight * \pc) (\tGap * 4, \bHeight * \pd) (\tGap * 5, \bHeight * \pe) (\tGap * 6, \bHeight * \pf)};
+		
+		\node at (2.8,0) {$ = p(A)$};
+		
+		\def\pos{3.4}
+		\def\pa{1/9}
+		\def\pb{2/9}
+		\def\pc{3/9}
+		\def\pd{3/9}
+		\def\pe{0}
+		\def\pf{0}
+		\node at (4.6,0.5) {$p_A$};
+		
+		\draw (\pos, 0) foreach \x in {1,...,6} { -- (\pos + \tGap * \x, 0) -- (\pos + \tGap * \x, -\tHeight) (\pos + \tGap * \x, 0) } -- ++(\tGap, 0);
+		\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(\pos + \tGap * 1, \bHeight * \pa) (\pos + \tGap * 2, \bHeight * \pb) (\pos + \tGap * 3, \bHeight * \pc) (\pos + \tGap * 4, \bHeight * \pd) (\pos + \tGap * 5, \bHeight * \pe) (\pos + \tGap * 6, \bHeight * \pf)};
+		%\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(3 + \tGap * 3, \bHeight/2)(3 + \tGap * 4, \bHeight/2)};
+		
+		\node at (6.25,0) {$ + p(A^{\complement})$};
+		
+		
+		\def\pos{6.95}
+		\node at (8.15,0.5) {$p_{A^{\complement}}$};
+		\def\pa{0}
+		\def\pb{0}
+		\def\pc{0}
+		\def\pd{0}
+		\def\pe{2/4}
+		\def\pf{2/4}
+		
+		\draw (\pos, 0) foreach \x in {1,...,6} { -- (\pos + \tGap * \x, 0) -- (\pos + \tGap * \x, -\tHeight) (\pos + \tGap * \x, 0) } -- ++(\tGap, 0);
+		\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(\pos + \tGap * 1, \bHeight * \pa) (\pos + \tGap * 2, \bHeight * \pb) (\pos + \tGap * 3, \bHeight * \pc) (\pos + \tGap * 4, \bHeight * \pd) (\pos + \tGap * 5, \bHeight * \pe) (\pos + \tGap * 6, \bHeight * \pf)};
+		
+		%\draw (6, 0) foreach \x in {1,...,6} { -- (6 + \tGap * \x, 0) -- (6 + \tGap * \x, -\tHeight) (6 + \tGap * \x, 0) } -- ++(\tGap, 0);
+		%\draw plot[ybar, bar width={\tGap cm / 2}] coordinates{(6 + \tGap * 1, \bHeight/4) (6 + \tGap * 2, \bHeight/4)  (6 + \tGap * 5, \bHeight/4) (6 + \tGap * 6, \bHeight/4)};
+	\end{tikzpicture}
+	\caption{Connection between probability and fraction capacity.}
+\end{figure}
+
 
 \begin{mathSection}
 	\begin{prop}
