@@ -3017,6 +3017,7 @@ The next two properties depend on both the symmetry and the irreflexivity.
 		\begin{enumerate}
 			\item $U \cap U^{R} = \emptyset$
 			\item $X^{R} = \emptyset$
+			\item $(U \cup U^{R})^{R} = \emptyset$
 		\end{enumerate}
 	\end{prop}
 	
@@ -3215,7 +3216,33 @@ Note, however, that the lattice of $\separate$-subspaces  of the cut triangle is
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces2.jpg}
+	\begin{tikzpicture}
+		%\draw [help lines] (0,0) grid (10,3);
+		
+		\node (t) at (4.5,6) {$\top = \Ens$};
+		\node (2P) at (0,4.5) {$2P=AB \cup B3$};
+		\node (AP) at (3,4.5) {$AP=B3 \cup 23$};
+		\node (BP) at (6,4.5) {$BP=23 \cup A2$};
+		\node (3P) at (9,4.5) {$3P=A2 \cup AB$};
+		\node (B3) at (0,3) {$B3=\{pB+\bar{p}3\}$};
+		\node (23) at (3,3) {$23=\{p2+\bar{p}3\}$};
+		\node (A2) at (6,3) {$A2=\{pA+\bar{p}2\}$};
+		\node (AB) at (9,3) {$AB=\{pA+\bar{p}B\}$};
+		\node (3) at (0,1.5) {$3=\{\ens[3]\}$};
+		\node (2) at (3,1.5) {$2=\{\ens[2]\}$};
+		\node (A) at (6,1.5) {$A=\{\ens[a]\}$};
+		\node (B) at (9,1.5) {$B=\{\ens[b]\}$};
+		\node (b) at (4.5,0) {$\bot = \emptyset$};
+		\draw (b) -- (3) -- (B3) -- (2P) -- (t);
+		\draw (b) -- (2) -- (23) -- (AP) -- (t);
+		\draw (b) -- (A) -- (A2) -- (BP) -- (t);
+		\draw (b) -- (B) -- (AB) -- (3P) -- (t);
+		\draw (3) -- (23) -- (BP);
+		\draw (2) -- (A2) -- (3P);
+		\draw (A) -- (AB) -- (2P);
+		\draw (B) -- (B3) -- (AP);
+	\end{tikzpicture}
+	%\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces2.jpg}
 	\caption{In this diagram, the lower tier represents the singletons of the extreme points, the middle tier represents each side and the top tier represent the pairs of sides that are the $\separate$-complement of the extreme points. The red lines connect the complements. Note that the lattice is not distributive (e.g. $A\vee (3 \wedge A2) = A \vee \bot = A \neq (A\vee 3) \wedge (A \vee A2) = BP \wedge A2 = A2$). In fact, $\{\bot, 3, A, A2, BP\}$ is an $N_5$ sublattice. }
 \end{figure}
 
