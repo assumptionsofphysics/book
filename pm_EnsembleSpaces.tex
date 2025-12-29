@@ -3174,7 +3174,35 @@ Another question is whether the lattice of $\ortho$-subspaces has to be necessar
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces.jpg}\label{pm_es_figCutTriangleOrthoSubspaces}\caption{On the left, the cut triangle. On the right, the lattice of the orthogonal subspaces.}
+	\begin{tikzpicture}
+		%\draw [help lines] (0,0) grid (10,3);
+		
+		% Cut triangle
+		\coordinate (center) at (1.5,1.2);
+		\def\angle{90}
+		\def\radius{1.5}
+		\coordinate (t) at ($(center)+\radius*({cos(0+\angle)},{sin(0+\angle)})$);
+		\coordinate (e2) at ($(center)+\radius*({cos(120+\angle)},{sin(120+\angle)})$);
+		\coordinate (e3) at ($(center)+\radius*({cos(240+\angle)},{sin(240+\angle)})$);
+		\coordinate (a) at ($(e2)!0.5!(t)$);
+		\coordinate (b) at ($(e3)!0.5!(t)$);
+		\draw[fill=ensembleFill, thick] (a) -- (e2) node[midway,left] {$A$} -- (e3) -- (b) node[midway,right] {$B$} -- cycle;
+		\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
+		\filldraw [black] (e2) circle (1pt) node[below left] {$\ens[2]$};
+		\filldraw [black] (e3) circle (1pt) node[below right] {$\ens[3]$};
+		\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
+		\draw [dashed] (a) -- (t) -- (b);
+
+		\node (top) at (6,3) {$\top = \Ens$};
+		\node (a) at (5,2) {$A$};
+		\node (b) at (7,2) {$B$};
+		\node (x) at (5,1) {$X=\{\ens[2]\}$};
+		\node (y) at (7,1) {$Y=\{\ens[3]\}$};
+		\node (bot) at (6,0) {$\bot = \emptyset$};
+		\draw (bot) -- (x) -- (a) -- (top) -- (b) -- (y) -- (bot);
+	\end{tikzpicture}
+	%\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces.jpg}\label{pm_es_figCutTriangleOrthoSubspaces}
+	\caption{On the left, the cut triangle. On the right, the lattice of the orthogonal subspaces.}
 \end{figure}
 
 The lack of orthomodularity is due to the multiple complements that where one is a subset of the other. This means that $X \vee (X^\perp \wedge A) = X \vee (B \wedge A) = X \vee \bot = X$ instead of $A$, if the lattice were orthomodular. This leads to the following:
