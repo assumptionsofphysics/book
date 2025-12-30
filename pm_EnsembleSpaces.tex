@@ -3061,7 +3061,7 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 	
 	\begin{proof}
 		Note that 2 is satisfied because $A$ is an $R$-closure and 3 is already proven in \ref{pm_es_rComplProps}.
-		For 1, since the lattice is a $\bigcap$-structure, $A \wedge A^{R} = A \cap A^{R}$ and from \ref{pm_ensmblespaces_symirreflproperties} we have $A \cap A^{R} = \emptyset$. Since the lattice is a $\bigcap$-structure, $A \vee A^{R} \supseteq A \cup A^{R}$. Using \ref{pm_es_rComplProps} and \ref{pm_ensmblespaces_symirreflproperties} we have $((A \vee A^{R})^{R})^{R} \supseteq ((A \cup A^{R})^{R})^{R} = (\emptyset)^{R} = X$.
+		For 1, since the lattice is an $\bigcap$-structure, $A \wedge A^{R} = A \cap A^{R}$ and from \ref{pm_ensmblespaces_symirreflproperties} we have $A \cap A^{R} = \emptyset$. Since the lattice is an $\bigcap$-structure, $A \vee A^{R} \supseteq A \cup A^{R}$. Using \ref{pm_es_rComplProps} and \ref{pm_ensmblespaces_symirreflproperties} we have $((A \vee A^{R})^{R})^{R} \supseteq ((A \cup A^{R})^{R})^{R} = (\emptyset)^{R} = X$.
 	\end{proof}
 	
 	\begin{coro}
@@ -3172,7 +3172,7 @@ In the quantum case, the orthogonality coincides with orthogonality in the Hilbe
 
 Note that, in general, the two notions of subspaces, and therefore their lattices, will be different. Note that a feature of classical ensemble spaces is exactly that orthogonality and separateness coincide, which also means the two lattices will coincide.
 
-Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthomodular, as one requires, for example, in quantum logic. The cut triangle \ref{pm_es_cutTriangle} is a counterexample. The only orthogonality relationships are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are the bottom $\bot = \emptyset$, $X= \{\ens[2]\}$, $Y= \{\ens[3]\}$, $A= \{p \ens[2] + \bar{p}\ens[a]\}$, $B= \{p \ens[3] + \bar{p}\ens[b]\}$ and the top $\top = \Ens$. As we can is see in Fig. \ref{pm_es_figCutTriangleOrthoSubspaces}, the subspaces form an $M_6$ lattice, which is not orthomodular. In fact, $Y \subseteq B$ but $Y \vee (Y^{\ortho} \wedge B) = Y \vee (A \wedge B) = Y \vee \bot = Y \neq B$.
+Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthomodular, as one requires, for example, in quantum logic. The cut triangle \ref{pm_es_cutTriangle} is a counterexample. The only orthogonality relationships are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are the bottom $\bot = \emptyset$, $2= \{\ens[2]\}$, $3= \{\ens[3]\}$, $A2= \{p \ens[2] + \bar{p}\ens[a]\}$, $B3= \{p \ens[3] + \bar{p}\ens[b]\}$ and the top $\top = \Ens$. As we can is see in Fig. \ref{pm_es_figCutTriangleOrthoSubspaces}, the subspaces form an $M_6$ lattice, which is not orthomodular. In fact, $3 \subseteq B3$ but $3 \vee (3^{\ortho} \wedge B3) = 3 \vee (A2 \wedge B3) = 3 \vee \bot = 3 \neq B3$. The lack of orthomodularity is due to the multiple complements where one is a subset of the other.
 
 \begin{figure}[H]
 	\centering
@@ -3188,26 +3188,29 @@ Another question is whether the lattice of $\ortho$-subspaces has to be necessar
 		\coordinate (e3) at ($(center)+\radius*({cos(240+\angle)},{sin(240+\angle)})$);
 		\coordinate (a) at ($(e2)!0.5!(t)$);
 		\coordinate (b) at ($(e3)!0.5!(t)$);
-		\draw[fill=ensembleFill, thick] (a) -- (e2) node[midway,left] {$A$} -- (e3) -- (b) node[midway,right] {$B$} -- cycle;
+		\draw[fill=ensembleFill, thick] (a) -- (e2) node[midway,left] {$A2$} -- (e3) -- (b) node[midway,right] {$B3$} -- cycle;
 		\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
 		\filldraw [black] (e2) circle (1pt) node[below left] {$\ens[2]$};
 		\filldraw [black] (e3) circle (1pt) node[below right] {$\ens[3]$};
 		\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
 		\draw [dashed] (a) -- (t) -- (b);
 
-		\node (top) at (6,3) {$\top = \Ens$};
-		\node (a) at (5,2) {$A$};
-		\node (b) at (7,2) {$B$};
-		\node (x) at (5,1) {$X=\{\ens[2]\}$};
-		\node (y) at (7,1) {$Y=\{\ens[3]\}$};
-		\node (bot) at (6,0) {$\bot = \emptyset$};
-		\draw (bot) -- (x) -- (a) -- (top) -- (b) -- (y) -- (bot);
+		\node (t) at (6,3) {$\top = \Ens$};
+		\node (A2) at (5,2) {$A2$};
+		\node (B3) at (7,2) {$B3$};
+		\node (X) at (5,1) {$2=\{\ens[2]\}$};
+		\node (Y) at (7,1) {$3=\{\ens[3]\}$};
+		\node (b) at (6,0) {$\bot = \emptyset$};
+		\draw (b) -- (X) -- (A2) -- (t) -- (B3) -- (Y) -- (b);
+		\draw[color=red!75!black] (X) -- (B3);
+		\draw[color=red!75!black] (Y) -- (A2);
+		\draw[color=red!75!black] (t) -- (b);
 	\end{tikzpicture}
-	%\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces.jpg}\label{pm_es_figCutTriangleOrthoSubspaces}
-	\caption{On the left, the cut triangle. On the right, the lattice of the orthogonal subspaces.}
+	%\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces.jpg}
+	\caption{On the left, the cut triangle. On the right, the lattice of the orthogonal subspaces. The red lines connect the orthogonal complements.}\label{pm_es_figCutTriangleOrthoSubspaces}
 \end{figure}
 
-The lack of orthomodularity is due to the multiple complements that where one is a subset of the other. This means that $X \vee (X^\perp \wedge A) = X \vee (B \wedge A) = X \vee \bot = X$ instead of $A$, if the lattice were orthomodular. This leads to the following:
+This leads to the following:
 \begin{conj}
 	The lattice of $\ortho$-subspaces is orthomodular if and only if the ensemble space is orthogonally decomposable (i.e. every decomposable ensemble is orthogonally decomposable).
 \end{conj}
@@ -3244,34 +3247,65 @@ Note, however, that the lattice of $\separate$-subspaces  of the cut triangle is
 		\draw (B) -- (B3) -- (AP);
 	\end{tikzpicture}
 	%\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces2.jpg}
-	\caption{In this diagram, the lower tier represents the singletons of the extreme points, the middle tier represents each side and the top tier represent the pairs of sides that are the $\separate$-complement of the extreme points. The red lines connect the complements. Note that the lattice is not distributive (e.g. $A\vee (3 \wedge A2) = A \vee \bot = A \neq (A\vee 3) \wedge (A \vee A2) = BP \wedge A2 = A2$). In fact, $\{\bot, 3, A, A2, BP\}$ is an $N_5$ sublattice. }
+	\caption{In this diagram, the lower tier represents the singletons of the extreme points, the middle tier represents each side and the top tier represents the pairs of sides that are the $\separate$-complement of the extreme points. The red lines connect the complements. Note that the lattice is not distributive (e.g. $A\vee (3 \wedge A2) = A \vee \bot = A \neq (A\vee 3) \wedge (A \vee A2) = BP \wedge A2 = A2$). In fact, $\{\bot, 3, A, A2, BP\}$ is an $N_5$ sublattice. }
 \end{figure}
-
-TODO: Review with Christine from here
 
 \section{Examples}
 
-In this section we explore some examples that appear throughout the discussion to exemplify some corner cases, some wanted and some unwanted.
+In this section we plan to collect examples that appear throughout the chapter to exemplify corner cases, wanted or unwanted.
 
 \subsection{Cut triangle}
+
+The cut triangle is an example of a simple classical space with a constraint, which makes it an interesting candidate for testing concepts and definitions on a small deviation from the classical case.
 
 \begin{example}[Cut triangle]\label{pm_es_cutTriangle}
 	The cut triangle is the subset of probability measures over three elements where the probability of the first is constrained to be no more than $\frac{1}{2}$.
 \end{example}
 
-This ensemble space is the standard two simplex, a triangle, where the top is cutoff. This is the space of probability distributions $[p_1, p_2, p_3]$ such that $p_1 \leq \frac{1}{2}$, where entropy is the Shannon entropy. The extreme point of the space are $\ens[2] = [0,1,0]$, $\ens[3] = [0,0,1]$, $\ens[a] = [\frac{1}{2},\frac{1}{2},0]$ and $\ens[b] = [\frac{1}{2},0,\frac{1}{2}]$. Every ensemble that is decomposable is also separately decomposable but not necessarily orthogonally decomposable. Most ensembles, all those in the interior, are also separately multidecomposable. For example, $\ens[c]$ can be expressed as a mixture of $\ens[a]$ and $\ens[3]$, and of $\ens[b]$ and $\ens[2]$.
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}		
+		%\draw [help lines] (0,0) grid (10,3);
+		
+		\coordinate (center) at (1.5,1.2);
+		\def\angle{90}
+		\def\radius{1.5}
+		\coordinate (t) at ($(center)+\radius*({cos(0+\angle)},{sin(0+\angle)})$);
+		\coordinate (2) at ($(center)+\radius*({cos(120+\angle)},{sin(120+\angle)})$);
+		\coordinate (3) at ($(center)+\radius*({cos(240+\angle)},{sin(240+\angle)})$);
+		\coordinate (a) at ($(2)!0.5!(t)$);
+		\coordinate (b) at ($(3)!0.5!(t)$);
+		\coordinate (c) at ($(2)!0.666!(b)$);
+		\draw[fill=ensembleFill, thick] (a) -- (2) -- (3) -- (b) -- cycle;
+		\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
+		\filldraw [black] (2) circle (1pt) node[below left] {$\ens[2]$};
+		\filldraw [black] (3) circle (1pt) node[below right] {$\ens[3]$};
+		\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
+		\filldraw [black] (c) circle (1pt) node[below] {$\ens[c]$};
+		\draw (a) -- (3);
+		\draw (2) -- (b);
+	\end{tikzpicture}
+	\caption{Cut triangle.}\label{pm_es_figCutTriangle}
+	%\includegraphics[width=0.4\textwidth]{tempimages/MultipleDecomposition.jpg}
+\end{figure}
+
+This ensemble space is the standard two simplex, a triangle, where the top is cut off. This is the space of probability distributions $[p_1, p_2, p_3]$ such that $p_1 \leq \frac{1}{2}$, where entropy is the Shannon entropy. The extreme points of the space are $\ens[2] = [0,1,0]$, $\ens[3] = [0,0,1]$, $\ens[a] = [\frac{1}{2},\frac{1}{2},0]$ and $\ens[b] = [\frac{1}{2},0,\frac{1}{2}]$. Every ensemble that is decomposable is also separately decomposable but not necessarily orthogonally decomposable. Most ensembles, all those in the interior, are also separately multidecomposable. For example, $\ens[c]$ can be expressed as a mixture of $\ens[a]$ and $\ens[3]$, and of $\ens[b]$ and $\ens[2]$.
 
 \subsection{Real interval with right topology}
 
+This example shows how one can have a topological convex space that embeds in a vector space, but its topology is not compatible with the vector space operations. In a topological vector space, the multiplication by $-1$ forces sets that are the mirror image of open sets to be open. This is not guaranteed in a topological convex space.
+
+Note that the topology in the example is $\mathsf{T}_0$ but not $\mathsf{T}_1$. The existence of an entropy function forces the space to be at least Hausdorff, therefore this is not a valid ensemble space.
+
 \begin{example}[Real interval with right topology]
-	Let $\Ens$ be the interval $[0,1] \subset \mathbb{R}$ with the topology generated by sets of the form $(r,1]$. Since the topology is not $T_1$, it cannot be an ensemble space, but the mixing operation is continuous.
+	Let $\Ens$ be the interval $[0,1] \subset \mathbb{R}$ with the topology generated by sets of the form $(r,1]$. Since the topology is not $\mathsf{T}_1$, it cannot be an ensemble space, but the mixing operation is continuous.
 \end{example}
 
-To show that the mixing operation is continuous, it suffices to show that the inverse image of sets of the form $(r,1]$ is open. To do that, we show that each point in $+^{-1}((r,1]) = \{(p, a, b) \int [0,1]^3 \, | \, pa+\bar{p}b > r \}$ has an open neighborhood. First, note that sets of the form $(p,1]\times(a,1]\times(b,1]$ and $[0,p)\times(a,1]\times(b,1]$ are open because they are the product of open sets. Next note that if $pa+\bar{p}b>m$, then if $a>=b$, for any $\lambda>p$, $c>a$ and $d>b$, $\lambda c+\bar{\lambda}d>m$. This is because the convex combination can only increase if the elements increase and/or if the coefficient of the greater element increases. In terms of sets, if $pa+\bar{p}b>m$ and $a>=b$, $+((p,1],(a,1],(b,1]) \subseteq (m,1]$. Conversely, if $a<=b$, $+([0,p),(a,1],(b,1]) \subseteq (m,1]$. Now, let $pa+\bar{p}b=m>r$. Then $pa+\bar{p}b>\frac{m+r}{2}$. If $a>=b$, $+((p,1],(a,1],(b,1]) \subseteq \left(\frac{m+r}{2},1\right]\subseteq (m,1]$. If $a<b$,  $+([0,p),(a,1],(b,1]) \subseteq \left(\frac{m+r}{2},1\right]\subseteq (m,1]$. Therefore, every point in $+^{-1}((r,1])$ has an open neighborhood, and $+^{-1}((r,1])$ is an open set. This means that the mixing operation is continuous.
+To show that the mixing operation is continuous, it suffices to show that the inverse image of sets of the form $(r,1]$ is open. To do that, we show that each point in $+^{-1}((r,1]) = \{(p, a, b) \in [0,1]^3 \, | \, pa+\bar{p}b > r \}$ has an open neighborhood. First, note that sets of the form $(p,1]\times(a,1]\times(b,1]$ and $[0,p)\times(a,1]\times(b,1]$ are open because they are the product of open sets. Next note that if $pa+\bar{p}b>m$, then if $a\geq b$, for any $\lambda>p$, $c>a$ and $d>b$, $\lambda c+\bar{\lambda}d>m$. This is because the convex combination can only increase if the elements increase and/or if the coefficient of the greater element increases. In terms of sets, if $pa+\bar{p}b>m$ and $a \geq b$, $+((p,1],(a,1],(b,1]) \subseteq (m,1]$. Conversely, if $a\leq b$, $+([0,p),(a,1],(b,1]) \subseteq (m,1]$. Now, let $pa+\bar{p}b=m>r$. Then $pa+\bar{p}b>\frac{m+r}{2}$. If $a \geq b$, $+((p,1],(a,1],(b,1]) \subseteq \left(\frac{m+r}{2},1\right]\subseteq (m,1]$. If $a<b$,  $+([0,p),(a,1],(b,1]) \subseteq \left(\frac{m+r}{2},1\right]\subseteq (m,1]$. Therefore, every point in $+^{-1}((r,1])$ has an open neighborhood, and $+^{-1}((r,1])$ is an open set. This means that the mixing operation is continuous.
 
 \section{Lessons learned}
 
-This section summarized previous attempt that turned out to be failures. These lead to critical insights and therefore are kept here for reference.
+This section summarizes insights from previous attempts that failed. We collect them here for reference.
 
 \subsection{Entropy and convex structure}
 
@@ -3282,12 +3316,12 @@ This section summarized previous attempt that turned out to be failures. These l
 When defining the entropy given a space of probability distributions, there is typically an underlying assumption that all ``pure states'' are equivalent. That is, they have the same entropy. For example, in a discrete classical space, the entropy is typically $-\sum_i p_i \log p_i$ which assumes the entropy is zero for all extreme points. This assumption is not tenable in general.
 
 \begin{example}[Mixed gas]
-	Let's assume we have a mixture of two gasses at a fixed temperature and volume. The state is therefore defined by the variables $n_a$ and $n_b$. The entropy of each configuration is $\log 1 = 0$. If we have a uniform distribution over $[1,N_a]$ for $n_a$ and $[1,N_b]$ cases of $n_b$, the total number of cases is $N_a N_b$, and therefore the entropy of the joint state is $\log (N_a N_b)$. Now, suppose we cannot control the number of molecules for each gas, but only the total $n$. Each value of $n$ will not correspond the same variability of the elements of the ensemble. If we fix $n$ number of particles, in fact, there will be $n+1$ configuration possible, and therefore the entropy of each case should be $\log (n+1)$.
+	Let's assume we have a mixture of two gases at a fixed temperature and volume. The state is therefore defined by the variables $n_a$ and $n_b$ that represent the number of molecules of the respective gases. The entropy of each configuration is $\log 1 = 0$. If we have a uniform distribution over $[0,N_a]$ for $n_a$ and $[0,N_b]$ cases of $n_b$, the total number of cases is $(N_a + 1) (N_b + 1)$, and therefore the entropy of the joint state is $\log ((N_a + 1) (N_b + 1))$. Now, suppose we cannot control the number of molecules for each gas, but only the total $n$. Each value of $n$ will not correspond to the same variability of the elements of the ensemble. If we fix $n$ number of molecules, in fact, there will be $n+1$ configurations possible, and therefore the entropy of each case should be $\log (n+1)$.
 	
-	If we have the space of probability distribution over a single variable that represents the total number of particles, then we would not be able to know whether these are all indistinguishable or divided into two distinct types. Therefore we would not know which is the correct physical entropy.
+	If we have the space of probability distributions over a single variable that represents the total number of molecules, then we would not be able to know whether these are all indistinguishable or divided into two distinct types. Therefore we would not know which is the correct physical entropy.
 \end{example}
 
-Note that in quantum mechanics there is a tacit assumption that all states have the same entropy. We could imagine, however, a theory where the pure states, the ones that we can ideally prepare and control, are not all at the same entropy. This would bake into the space state that not all evolutions are reversible. There is no reason to exclude this case, and it may turn out to be what we need for future theories.
+Note that in quantum mechanics there is a tacit assumption that all pure states have the same entropy. We could imagine, however, a theory where the pure states, the ones that we can ideally prepare and control, are not all at the same entropy. This would bake into the state space that not all evolutions are reversible. There is no reason to exclude this case, and it may turn out to be what we need for future theories.
 
 \subsection{Continuity of affine combinations}
 
@@ -3295,30 +3329,30 @@ Note that in quantum mechanics there is a tacit assumption that all states have 
 	Mixing cannot be a homeomorphism.
 \end{insight}
 
-To answer whether the embedding of the ensemble space in the topology of the vector space is continuous, we wanted to understand whether the inverse of the mixing is continuous. Turns out, it can't be in general because of the extreme points.
+To answer whether the embedding of the ensemble space in the topology of the vector space is continuous, we wanted to understand whether the inverse of the mixing is continuous. It turns out, it can't be in general because of the extreme points.
 
 \begin{prop}
 	Let $\Ens = [0,1]$ and suppose that mixing is a homeomorphism, meaning $+_{p \ens[a]}(\ens[b]) = p\ens[a] + \bar{p}\ens[b]$ is a homeomorphism onto its image. Then $\Ens$ would have to have the discrete topology, which is not possible, since the topology must be second countable.
 \end{prop}
 
 \begin{proof}
-	Consider $+_{\frac{1}{2}0}([0,1])= [0,\frac{1}{2}]$. Since $[0,1] = \Ens$ is an open set, then $[0,\frac{1}{2}]$ is an open set as $+_{\frac{1}{2}0}([0,1])$ is a homeomorphism. Similarly, $+_{\frac{1}{2}1}([0,1])= [\frac{1}{2},1]$ is an open set. This means that $\{\frac{1}{2}\} = [0,\frac{1}{2}] \cap [\frac{1}{2},1]$ is an open set. This means that, for every $p \in [0,1]$, $+_{p0}(\{\frac{1}{2}\})= \{\frac{1}{2}(1-p)\}$ is an open set. Similarly, for every $p \in [0,1]$, $+_{p1}(\{\frac{1}{2}\})= \{\frac{1}{2}(1+p)\}$ is an open set. This means that every singleton is open, and the topology is discrete. The topology, then, cannot be second countable and $\Ens$ cannot be an ensemble space.
+	Consider $+_{\frac{1}{2}0}([0,1])= [0,\frac{1}{2}]$. Since $[0,1] = \Ens$ is an open set, then $[0,\frac{1}{2}]$ is an open set as $+_{\frac{1}{2}0}([0,1])$ is a homeomorphism. Similarly, $+_{\frac{1}{2}1}([0,1])= [\frac{1}{2},1]$ is an open set. This means that $\left\{\frac{1}{2}\right\} = [0,\frac{1}{2}] \cap [\frac{1}{2},1]$ is an open set. This means that, for every $p \in [0,1]$, $+_{p0}(\{\frac{1}{2}\})= \{\frac{1}{2}(1-p)\}$ is an open set. Similarly, for every $p \in [0,1]$, $+_{p1}(\{\frac{1}{2}\})= \{\frac{1}{2}(1+p)\}$ is an open set. This means that every singleton is open, and the topology is discrete. The topology, then, cannot be second countable and $\Ens$ cannot be an ensemble space.
 \end{proof}
 
 Note that, in the above example, $+_{\ens[a]\ens[b]} : [0,1] \to \Ens$ would also fail to be a homeomorphism, though it is not clear how this is related to the failure of continuous embedding in a topological vector space (probably failure of scalar multiplication?).
 
 The continuity of the mixing function means we can stretch open sets and still have open sets, but not, in general, shrink them. In retrospect, this makes sense as the bounds created by the boundaries of the convex set are of a different nature than the bounds of a finite precision measurement.
 
-\subsection{Convergence of points without converge of fraction}
+\subsection{Convergence of points without convergence of fraction}
 
 \begin{insight}
 	In a limit, the fraction does not necessarily converge to one.
 \end{insight}
 
-Since the fraction tells us how much an ensemble is part of another, an intuitive conjecture would be that if $\ens[a]_i \to \ens[a]$ then $\fraction_{\ens[a]}(\ens[a]_i) \to 1$. That is, the fraction increases as we get closer to the limit. This does not work because one can make a limit over the extreme point.
+Since the fraction tells us how much an ensemble is part of another, an intuitive conjecture would be that if $\ens[a]_i \to \ens[a]$ then $\fraction_{\ens[a]}(\ens[a]_i) \to 1$. That is, the fraction increases as we get closer to the limit. This does not work because one can make a limit over the extreme points.
 
 \begin{example}[Pure state convergence in a quantum space]
-	Let $\psi_i$ be a sequence of pure states and $\psi$ a pure state such that $\psi_i \to \psi$. For example, on Bloch sphere, it would be a sequence of points on the surface that converges to a point on the surface. Then, since they are all pure states, we have $\fraction_{\psi}(\psi_i) = 0$. This means $\psi_i \to \psi$ while $\fraction_{\psi}(\psi_i) \to 0 \neq 1$.
+	Let $\psi_i$ be a sequence of pure states and $\psi$ a pure state such that $\psi_i \to \psi$ and $\psi_i \neq \psi$ for all $i$. For example, on a Bloch sphere, it would be a sequence of points on the surface that converges to a point on the surface. Then, since they are all pure states, we have $\fraction_{\psi}(\psi_i) = 0$. This means $\psi_i \to \psi$ while $\fraction_{\psi}(\psi_i) \to 0 \neq 1$.
 \end{example}
 
 \subsection{Measures and topology}
@@ -3327,15 +3361,17 @@ Since the fraction tells us how much an ensemble is part of another, an intuitiv
 	Boundaries of open sets can have non-zero measure.
 \end{insight}
 
-An earlier attempt of trying to find a compatibility condition between measures and topology was to impose that boundaries of open sets have measure zero. The idea was that we cannot associate measure to non-terminating conditions. Though the conceptual idea is sensible, the specific implementation does not work. We can find a counterexample on the real line. 
+An earlier attempt when trying to find a compatibility condition between measures and topology was to impose that boundaries of open sets have measure zero. The idea was that we cannot associate a non-zero measure to non-terminating conditions. Though the conceptual idea is sensible, the specific implementation does not work. We can find a counterexample on the real line. 
 
 \begin{prop}
 	Let $\mu$ be the Lebesgue measure on the real line $\mathbb{R}$. There exists an open set $U$ such that $\mu(U) \neq \mu(\overline{U})$.
 \end{prop}
 
 \begin{proof}
-	Let $C$ be \href{https://en.wikipedia.org/wiki/Smith%E2%80%93Volterra%E2%80%93Cantor_set}{Smith–Volterra–Cantor}. This is a closed set with no interior for which $\mu(C) = \frac{1}{2}$. Let $U = (0,1) \setminus C$. We have that $U$ is an open set and with $\overline{U} = [0,1]$. We have $\mu(\overline{U}) = \mu([0,1]) = 1$ while $\mu(U) = \mu([0,1]) - \mu(C) = \frac{1}{2}$.
+	Let $C$ be the \href{https://en.wikipedia.org/wiki/Smith%E2%80%93Volterra%E2%80%93Cantor_set}{Smith–Volterra–Cantor} set. This is a closed set with no interior for which $\mu(C) = \frac{1}{2}$. Let $U = (0,1) \setminus C$. We have that $U$ is an open set and $\overline{U} = [0,1]$. We have $\mu(\overline{U}) = \mu([0,1]) = 1$ while $\mu(U) = \mu((0,1)) - \mu(C) = \frac{1}{2}$.
 \end{proof}
+
+TODO: Review with Christine from here
 
 \subsection{Subspaces from convex structure}\label{pm_es_failureConvexSubspace}
 
@@ -3343,7 +3379,7 @@ An earlier attempt of trying to find a compatibility condition between measures 
 	The convex structure, by itself, cannot define subspaces.
 \end{insight}
 
-Initially, we tried recovering the notion of subspaces purely from the convex structure. We did make some progress in the finite dimensional case, but ultimately this does not work. We identified two problems.
+Initially, we tried recovering the notion of subspaces purely from the convex structure. We did make some progress in the finite-dimensional case, but ultimately this does not work. We identified two problems.
 
 The original definition was as follows.
 
