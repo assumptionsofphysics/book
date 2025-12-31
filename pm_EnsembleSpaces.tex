@@ -1666,11 +1666,43 @@ Another constraint that the entropy imposes is that the ensemble space is bounde
 
 The proof proceeds as follows. Suppose we take three points and assign them an entropy value consistent with the entropic bounds: can we always pick an entropy value that satisfies the bounds for any subsequent point in a given direction? The answer is negative and figure \ref{pm-es-directionallyBound} represents the problem pictorially. On the horizontal axis we can imagine all the ensembles over a line, and on the vertical axis their entropy. We fix the entropy for the origin, the blue and the red point. What are the values for the next point, the green one, that satisfy the entropy bounds? Because of strict concavity, the green point must remain below the blue line. The green line represents the upper bound for the blue point, which means the green point must be above the purple line. If we go far enough, the blue and purple line meet, leaving no possible value for the entropy.
 
-TODO: redo in Tikz
-
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{tempimages/BoundsFromEntropy.png}
+	\begin{tikzpicture}
+		%\draw [help lines] (0,0) grid (4,4);
+		\def\ax{0}
+		\def\bx{1.9}
+		\def\cx{3.8}
+		\def\dx{5.7}
+		
+		\def\aS{0}
+		\def\bS{1}
+		\def\cS{1.5}
+		\def\dS{1.55}
+		
+		\def\xmin{-1}
+		\def\xmax{21.5}
+		
+		\begin{axis}[
+			height=5.5cm,
+			width=14cm,
+			axis lines=middle,
+			ylabel={$S$},
+			xlabel={$x$},
+			xlabel style={below left},
+			xmin=\xmin,xmax=\xmax,
+			ymin=-0.5,ymax=8.5
+			]
+			\addplot[only marks, black] coordinates { (\ax,\aS) };
+			\addplot[only marks, blue!75!black] coordinates { (\bx,\bS) };
+			\addplot[only marks, red!75!black] coordinates { (\cx,\cS) };
+			\addplot[only marks, green!75!black] coordinates { (\dx,\dS) };
+			\addplot[blue!75!black,samples=10,domain=\xmin:\xmax]{(x - \bx)/(\cx - \bx)*(\cS - \bS) + \bS};
+			\addplot[green!75!black,samples=50,domain=0:\dx]{-(x/\dx) * ln((x/\dx))/ln 2 - (1-(x/\dx)) * ln(1-(x/\dx))/ln 2 + x / \dx * \dS};
+			\addplot[blue!60!red,samples=300,domain=\bx:\xmax]{x/\bx*(\bS-(-(\bx/x) * ln((\bx/x))/ln 2 - (1-(\bx/x)) * ln(1-(\bx/x))/ln 2))};
+		\end{axis}
+	\end{tikzpicture}
+	%\includegraphics[width=0.7\textwidth]{tempimages/BoundsFromEntropy.png}
 	\caption{Visual representation of the bounds. See proof for details.}\label{pm-es-directionallyBound}
 \end{figure}
 
