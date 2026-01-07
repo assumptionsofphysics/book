@@ -262,7 +262,7 @@ Each assertion, by itself, would be fine but their combination makes it impossib
 \end{defn}
 
 
-\begin{axiom}[Axiom of context]\label{ax_statement}
+\begin{axiom}[Axiom of context]\label{pm-vs-axiomContext}
 	A \textbf{statement} $\stmt$ is an assertion that is either true or false. A \textbf{logical context} $\logCtx$ is the collection of all those statements that share a common semantics and have, therefore, well defined logical relationships. Formally, a logical context $\logCtx$ is a collection of elements called statements upon which is defined a function $\truth: \logCtx \to \Bool$.
 \end{axiom}
 
@@ -312,7 +312,7 @@ Note that the semantics, the meaning of the statements, plays an important role 
 	Given that an assignment for a set $S \subseteq \logCtx$ associates a truth value to each statement, it is identified by a map $a : S \to \Bool$. The assignment for a single statement is given by a single truth value $t \in \Bool$.
 \end{justification}
 
-\begin{axiom}[Axiom of possibility]\label{ax_possible_assignemetns}
+\begin{axiom}[Axiom of possibility]\label{pm-vs-axiomPossibility}
 	A \textbf{possible assignment} for a logical context $\logCtx$ is a map $a : \logCtx \to \Bool$ that assigns a truth value to each statement in a way consistent with the content of the statements. Formally, each logical context comes equipped with a set $\pAss \subseteq \Bool^{\logCtx}$ such that $\truth \in \pAss$. A map $a : \logCtx \to \Bool$ is a possible assignment for $\logCtx$ if $a \in \pAss$.
 \end{axiom}
 
@@ -360,7 +360,7 @@ Next we want to keep track of statements whose truth depends on the truth of oth
 Since statements are intangible, there are no limits to the number of arguments one statement may depend on. For example, consider the statement \statement{the mass of the electron is $511 \pm 0.5$ keV} and the set of all the statements of the form \statement{the mass of the electron is exactly $x$ keV} with $510.5 < x < 511.5$. If any of the latter is true then the original statement is true as well. Given that $x$ is a real number, that is uncountably many statements so the original statement can be seen as a function of uncountably many statements. Therefore we will assume we can always create a statement that arbitrarily depends on an arbitrary set of statements.
 
 \begin{mathSection}
-	\begin{defn}\label{def_dependence}
+	\begin{defn}\label{pm-vs-defStatementDependence}
 	Let $\bar{\stmt} \in \logCtx$ be a statement and $S \subseteq \logCtx$ be a set of statements. Then $\bar{\stmt}$ \textbf{depends on} $S$ (or it is a function of $S$)  if we can find an $f_\Bool : \Bool^S \to \Bool$ such that
 	$$a(\bar{\stmt}) = f_\Bool (\{a(\stmt)\}_{\stmt \in S})$$
 	for every possible assignment $a \in \pAss$. We say $\bar{s}$ depends on $S$ \textbf{through} $f_\Bool$. The relationship is illustrated by the following diagram:
@@ -383,7 +383,7 @@ Since statements are intangible, there are no limits to the number of arguments 
 	\end{tabular}
 \end{center}
 
-	\begin{axiom}[Axiom of closure]\label{ax_functions_of_statement}
+	\begin{axiom}[Axiom of closure]\label{pm-vs-axiomClosure}
 		We can always find a statement whose truth value arbitrarily depends on an arbitrary set of statements. Formally, let $S \subseteq \logCtx$ be a set of statements and $f_{\Bool} : \Bool^S \to \Bool$ an arbitrary function from an assignment of $S$ to a truth value. Then we can always find a statement $\bar{\stmt} \in \logCtx$ that depends on $S$ through $f_{\Bool}$.
 	\end{axiom}
 \begin{justification}
@@ -400,7 +400,7 @@ Since statements are intangible, there are no limits to the number of arguments 
 	for every indexed set $\{\stmt_i\}_{i \in I} \subseteq \logCtx$ and possible assignment $a \in \pAss$.
 \end{coro}
 \begin{proof}
-	Given $I$ and $f_\Bool : \Bool^I \to \Bool$ we can construct $f : \logCtx^I \to \logCtx$ as follows. Given an indexed set $\{\stmt_i\}_{i \in I} \in \logCtx^I$, let $S \subseteq \logCtx$ be the set of elements in the indexed set and define $\bar{f}_\Bool : \Bool^S \to \Bool$ such that $\bar{f}_\Bool(\{a(\stmt)\}_{\stmt \in S}) = f_{\Bool}(\{a(\stmt_i)\}_{i \in I})$. Then by axiom \ref{ax_functions_of_statement} we can find a statement $\bar{\stmt}$ that depends on $S$ through $\bar{f}_\Bool$ and we can set $f(\{\stmt_i\}_{i \in I}) = \bar{\stmt}$. We have $a(f(\{\stmt_i\}_{i \in I})) = f_{\Bool}(\{a(\stmt_i)\}_{i \in I})$ for all indexed sets and for all possible assignments.
+	Given $I$ and $f_\Bool : \Bool^I \to \Bool$ we can construct $f : \logCtx^I \to \logCtx$ as follows. Given an indexed set $\{\stmt_i\}_{i \in I} \in \logCtx^I$, let $S \subseteq \logCtx$ be the set of elements in the indexed set and define $\bar{f}_\Bool : \Bool^S \to \Bool$ such that $\bar{f}_\Bool(\{a(\stmt)\}_{\stmt \in S}) = f_{\Bool}(\{a(\stmt_i)\}_{i \in I})$. Then by axiom \ref{pm-vs-axiomClosure} we can find a statement $\bar{\stmt}$ that depends on $S$ through $\bar{f}_\Bool$ and we can set $f(\{\stmt_i\}_{i \in I}) = \bar{\stmt}$. We have $a(f(\{\stmt_i\}_{i \in I})) = f_{\Bool}(\{a(\stmt_i)\}_{i \in I})$ for all indexed sets and for all possible assignments.
 \end{proof}
 \end{mathSection}
 
@@ -439,7 +439,7 @@ Most languages, natural or symbolic, typically already provide similar operation
 	A logical context $\logCtx$ is closed under negation, arbitrary conjunction and arbitrary disjunction.
 \end{prop}
 \begin{proof}
-	Negation, arbitrary conjunction and arbitrary disjunction are particular truth functions. Their output always exists by axiom \eqref{ax_functions_of_statement}.
+	Negation, arbitrary conjunction and arbitrary disjunction are particular truth functions. Their output always exists by axiom \eqref{pm-vs-axiomClosure}.
 \end{proof}\end{mathSection}
 
 Now we have all the elements to define when two statements have the same logical content. Consider the two statements \statement{that animal is a bird} and \statement{that animal has feathers}: since all birds and only birds have feathers they give us the same information. Consider \statement{the mass of the electron is $511 \pm 0.5$ keV} and \statement{the mass of the electron is $0.511 \pm 0.0005$ MeV}: they represent the same measurement but in different units. So, how can we express the fact that two statements $\stmt_1$ and $\stmt_2$ give us the same information? The idea is that they can never be assigned opposite truth values. If we assigned true to the first, then the second must be true as well. If we assigned false to the first, then the second must be false.\footnote{This technique allows us to do something analogous to model theory. Two statements are equivalent if their truth is equal for all consistent truth assignments, which in our framework play the part of the models of model theory. But in our context the assignments are only hypothetical: there isn't a model in which \statement{this is a cat} and another in which \statement{this is a dog}. There is only one truth value, the one we find experimentally.}
@@ -526,7 +526,7 @@ There are a number of useful properties that statement equivalence satisfies.
 	Statement equivalence is defined in terms of truth equality within all possible assignments and will inherit reflexivity, symmetry and transitivity from it.
 \end{proof}
 
-\begin{coro}\label{boolean_properties}
+\begin{coro}\label{pm-vs-contextIsBoolean}
 	A logical context $\logCtx$ satisfies the following properties:
 	\begin{itemize}
 		\item associativity: $a \OR (b \OR c) \equiv (a \OR b) \OR c$, $a \AND (b \AND c) \equiv (a \AND b) \AND c$
@@ -558,7 +558,7 @@ The second will be true whenever the first is true. In this case we say the firs
 
 \begin{mathSection}
 
-\begin{defn}\label{def_statement_narrowness_and_compatibility}
+\begin{defn}\label{pm-vs-defNarrownessAndCompatibility}
 	Given two statements $\stmt_1$ and $\stmt_2$, we say that:
 	\begin{itemize}
 		\item $\stmt_1$ \textbf{is narrower than} $\stmt_2$ (noted $\stmt_1 \narrower \stmt_2$) if $\stmt_2$ is true whenever $\stmt_1$ is true simply because of their content. That is, for all $a \in \pAss$ if $a(\stmt_1)=\TRUE$ then $a(\stmt_2)=\TRUE$.
@@ -567,11 +567,11 @@ The second will be true whenever the first is true. In this case we say the firs
 	\end{itemize}
 	The negation of these properties will be noted by $\nnarrower$, $\nbroader$ , $\ncomp$ respectively.
 \end{defn}
-\begin{defn}\label{def_independent_statements}
+\begin{defn}\label{pm-vs-defStatementIndependence}
 	The elements of a set of statements $S \subseteq \logCtx$ are said to be \textbf{independent} (noted $\stmt_1 \indep \stmt_2$ for a set of two) if the assignment of any subset of statements does not depend on the assignment of the others. That is, a set of statements $S \subseteq \logCtx$ is independent if given a family  $\{t_{\stmt}\}_{\stmt \in S}$ such that each $t_{\stmt} \in \Bool$ is a possible assignment for the respective $\stmt$ we can always find $a \in \pAss$ such that $a(\stmt) = t_{\stmt}$ for all $\stmt \in S$.
 \end{defn}
 
-\begin{prop}\label{prop_narrowness_properties}
+\begin{prop}\label{pm-vs-narrownessProperties}
 	The above operations obey the following relationships:
 	\begin{enumerate}[label=(\roman*)]
 		\item 	$\stmt_1 \narrower \stmt_2$ if and only if $\stmt_1 \AND \NOT \stmt_2 \equiv \impossibility$
@@ -635,7 +635,7 @@ The assignment for which $a(\stmt_1) = a(\stmt_2) = \TRUE$ is exactly the assign
 	and is therefore a \textbf{partial order}.
 \end{prop}
 \begin{proof}
-	For reflexivity, $\stmt \AND \NOT \stmt \equiv \impossibility$ and therefore $s \narrower s$ by \ref{prop_narrowness_properties}.
+	For reflexivity, $\stmt \AND \NOT \stmt \equiv \impossibility$ and therefore $s \narrower s$ by \ref{pm-vs-narrownessProperties}.
 	
 	For antisymmetry, $\stmt_1 \AND \stmt_2 \equiv \stmt_1$ since $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \AND \stmt_2 \equiv \stmt_2$ since $\stmt_2 \narrower \stmt_1$. Therefore $\stmt_1 \equiv \stmt_2$. Conversely, suppose $\stmt_1 \equiv \stmt_2$. Then $\stmt_1 \AND \stmt_2 \equiv \stmt_1 \equiv \stmt_2$. Therefore $\stmt_1 \narrower \stmt_2$ and $\stmt_1 \broader \stmt_2$.
 	
@@ -643,11 +643,11 @@ The assignment for which $a(\stmt_1) = a(\stmt_2) = \TRUE$ is exactly the assign
 \end{proof}
 
 \begin{prop}
-	Every subset $S \subseteq \logCtx$ of statements has a supremum. That is, there exists an element $\bar{\stmt} \in \logCtx$ such that $\stmt \narrower \bar{\stmt}$ for all $\stmt \in S$. This, by definition, means the $\logCtx$ is a \textbf{complete} Boolean algebra and, as a consequence, that the distributivity and De Morgan laws in \ref{boolean_properties} hold in the infinite case.
+	Every subset $S \subseteq \logCtx$ of statements has a supremum. That is, there exists an element $\bar{\stmt} \in \logCtx$ such that $\stmt \narrower \bar{\stmt}$ for all $\stmt \in S$. This, by definition, means the $\logCtx$ is a \textbf{complete} Boolean algebra and, as a consequence, that the distributivity and De Morgan laws in \ref{pm-vs-contextIsBoolean} hold in the infinite case.
 \end{prop}
 
 \begin{proof}
-	Let $S \subseteq \logCtx$ be an arbitrary set of statements. Consider $\bar{\stmt}=\bigOR\limits_{\stmt[e] \in S} \stmt[e]$. This statement exists by \ref{ax_functions_of_statement}. Let $\stmt \in S$. Using the properties in \ref{boolean_properties} we have $\stmt \OR \bar{\stmt} \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in S} \stmt[e] \big) \equiv \stmt \OR \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \bigOR\limits_{\stmt[e] \in S} \stmt[e] = \bar{\stmt}$. By \ref{prop_narrowness_properties} we have $\stmt \narrower \bar{\stmt}$ for any $\stmt \in S$. Therefore any $S \subseteq \logCtx$ admits a supremum $\bar{\stmt}$.
+	Let $S \subseteq \logCtx$ be an arbitrary set of statements. Consider $\bar{\stmt}=\bigOR\limits_{\stmt[e] \in S} \stmt[e]$. This statement exists by \ref{pm-vs-axiomClosure}. Let $\stmt \in S$. Using the properties in \ref{pm-vs-contextIsBoolean} we have $\stmt \OR \bar{\stmt} \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in S} \stmt[e] \big) \equiv \stmt \OR \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \bigOR\limits_{\stmt[e] \in S} \stmt[e] = \bar{\stmt}$. By \ref{pm-vs-narrownessProperties} we have $\stmt \narrower \bar{\stmt}$ for any $\stmt \in S$. Therefore any $S \subseteq \logCtx$ admits a supremum $\bar{\stmt}$.
 	
 	A complete Boolean algebra is one such that every subset admits a supremum, therefore the algebra of statements is complete by definition. For a complete Boolean algebra infinite distributivity and De Morgan laws hold, therefore they will hold in the algebra of statements as well.
 \end{proof}
@@ -673,11 +673,11 @@ We finish this section by showing how every logical dependence among statements 
 Each of the cases is the conjunction of all independent statements where each one appears only once, negated or not. We call these expressions minterms. A function can always be expressed as the disjunction of all the minterms for which the function is true. This is called its disjunctive normal form because it is a canonical way to express the function in terms of disjunctions.
 
 \begin{mathSection}
-\begin{defn}\label{def_minterm}
+\begin{defn}\label{pm-vs-defMinterm}
 	Let $S \subseteq \logCtx$ be a set of statements. A \textbf{minterm} of $S$ is a conjunction where each element appears once and only once, either negated or not. That is, it is a statement $\stmt[m] \in \logCtx$ that can be written as $\stmt[m] \equiv \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt$ where $a : S \to \Bool$, $\NOT ^ \TRUE \, \stmt = \stmt$ and $\NOT ^ \FALSE \, \stmt = \NOT \stmt$. In this notation, in a given $a_0 \in \Bool^\logCtx$ we have $a_0(\stmt[m]) = \TRUE$ if and only if $a_0(\stmt) = a(\stmt)$ for all $\stmt \in S$.
 \end{defn}
 	
-	\begin{prop}\label{prop_disjunctive_normal_form}
+	\begin{prop}\label{pm-vs-disjunctiveNormalForm}
 		Let $\bar{\stmt} \in \logCtx$ be a statement that depends on a set of statements $S \subseteq \logCtx$ through $f_\Bool : \Bool^S \to \Bool$. Then we can express $\bar{\stmt}$ in its \textbf{disjunctive normal form} as a disjunction of minterms of $S$, that is $\bar{\stmt} \equiv \bigOR \limits_{a \in A} \left( \bigAND \limits_{\stmt \in S} (\NOT)^{a(\stmt)} \, \stmt \right)$ where $A \subseteq \Bool^S$ is a set of assignments for $S$. In this notation, in a given $a_0 \in \Bool^\logCtx$ we have $a_0(\bar{\stmt}) = \TRUE$ if and only if there is an $a \in A$ such that $a_0(\stmt) = a(\stmt)$ for all $\stmt \in S$.
 	\end{prop}
 	\begin{proof}
@@ -702,7 +702,7 @@ So we have to narrow the scope to those and only those statements that can be ve
 Note that certainty and impossibility are trivially verifiable since we know a priori that they are true and false respectively. Also note that if we have two statements that are equivalent, having a test that verifies one means we have a test that verifies the other as well. For example, since \statement{that animal is a bird} is equivalent to \statement{that animal has feathers}, checking whether the animal has feathers is equivalent to checking whether the animal is a bird. The subtlety here is that the evidence may be indirect and it is only the relationship between statements (i.e.~the theoretical model) that guarantees the validity of the verification. This should not worry us, though, because in this strict sense most experimental data is indirect. It comes from a chain of inductions (e.g. the pulse of light is produced, bounces off a moving target and changes frequency due to the Doppler effect, the light signal is transduced to an electronic signal which finally is displayed on the device) and therefore needs a theoretical framework to be properly understood.
 
 \begin{mathSection}
-\begin{axiom}[Axiom of verifiability]\label{ax_verifiable_statements}
+\begin{axiom}[Axiom of verifiability]\label{pm-vs-axiomVerifiability}
 	A \textbf{verifiable statement} is a statement that, if true, can be shown to be so experimentally. Formally, each logical context $\logCtx$ contains a set of statements $\vstmtSet \subseteq \logCtx$ whose elements are said to be verifiable. Moreover, we have the following properties:
 	\begin{itemize}
 		\item every certainty $\certainty \in \logCtx$ is verifiable
@@ -798,7 +798,7 @@ Note that, since the test always terminates, we can switch failure to success an
 	Certainties and impossibilities are decidable statements.
 \end{coro}
 \begin{proof}
-	Let $\certainty \in \logCtx$ be a certainty and $\impossibility \in \logCtx$ be an impossibility. By \ref{ax_verifiable_statements} they are verifiable statements. We also have $\certainty \equiv \NOT \impossibility$ therefore they are decidable by definition.
+	Let $\certainty \in \logCtx$ be a certainty and $\impossibility \in \logCtx$ be an impossibility. By \ref{pm-vs-axiomVerifiability} they are verifiable statements. We also have $\certainty \equiv \NOT \impossibility$ therefore they are decidable by definition.
 \end{proof}
 
 \end{mathSection}
@@ -808,7 +808,7 @@ We introduce decidable statements here because their definition and related prop
 Combining verifiable statements with conjunction (i.e.~the logical AND) is more straightforward. If we are able to verify that \emph{``that animal is a swan"} and that \emph{``that animal is black"}, we can verify that \emph{``that animal is a black swan"} by verifying both. If the tests for both are successful, then the test for the conjunction is successful. That is, if we have two or more verifiable statements, we can always construct an experimental test for the logical AND by running all tests one at a time and check if they are successful. Yet, the number of tests needs to be finite or we would never terminate, so we are limited to the conjunction of a finite number of verifiable statements.
 
 \begin{mathSection}
-	\begin{axiom}[Axiom of finite conjunction verifiability]\label{ax_verifiable_AND}
+	\begin{axiom}[Axiom of finite conjunction verifiability]\label{pm-vs-axiomFiniteConjunction}
 	The conjunction of a finite collection of verifiable statements is a verifiable statement. Formally, let $\{\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ be a finite collection of verifiable statements. Then the conjunction $\bigAND\limits_{i=1}^{n} \stmt_i \in \vstmtSet$ is a verifiable statement.
 	\end{axiom}
 	\begin{justification}
@@ -829,7 +829,7 @@ Combining verifiable statements with conjunction (i.e.~the logical AND) is more 
 Combining verifiable statements with disjunction (i.e.~the logical OR) is also straightforward. To verify that \emph{``the swan is black or white"} we can first test that \emph{``the swan is black"}. If that is verified that's enough: the swan is black or white. If not, we test that \emph{``the swan is white"}. That is, if we have two or more verifiable statements we can always construct an experimental test for the logical OR by running all tests and stopping at the first one that is successful. Because we stop at the first success, the number of tests can be countably infinite. As long as one test succeeds, which will always be the case when the overall test succeeds, it does not matter how many elements we are not going to verify later. But it cannot be more than countably infinite since the only way we have to find if one experimental test in the set is successful is testing them all one by one. Therefore we are limited to the disjunction of a countable number of verifiable statements.
 
 \begin{mathSection}
-	\begin{axiom}[Axiom of countable disjunction verifiability]\label{ax_verifiable_OR}
+	\begin{axiom}[Axiom of countable disjunction verifiability]\label{pm-vs-axiomCountableDisjunction}
 	The disjunction of a countable collection of verifiable statements is a verifiable statement. Formally, let $\{\stmt_i\}_{i=1}^{\infty} \subseteq \vstmtSet$ be a countable collection of verifiable statements. Then the disjunction $\bigOR\limits_{i=1}^{\infty} \stmt_i \in \vstmtSet$ is a verifiable statement.
 	\end{axiom}
 	\begin{justification}
@@ -850,15 +850,15 @@ Combining verifiable statements with disjunction (i.e.~the logical OR) is also s
 
 		Note that this cannot be generalized to uncountable infinite collections as the procedure would not be guaranteed to eventually run all tests. In fact, suppose the only way to test the uncountable disjunction is to test each statement individually. We would then need to, at least, run all of them for a finite time, say one minute. Even assuming arbitrary long time, we would only have countably many minutes at our disposal. Since the set of tests is uncountable, we are not going to be able to run each test for one minute. Therefore we are not justified to assume the uncountable disjunction of verifiable statements is verifiable.
 	\end{justification}
-	\begin{prop}\label{prop_decidable_AND_OR}
+	\begin{prop}\label{pm-vs-decidableConjunctionDisjunction}
 		The conjunction and disjunction of a finite collection of decidable statements are decidable. Formally, let $\{\stmt_i\}_{i=1}^{n} \subseteq \dstmtSet$ be a finite collection of decidable statements. Then the conjunction $\bigAND\limits_{i=1}^{n} \stmt_i \in \dstmtSet$ and the disjunction $\bigOR\limits_{i=1}^{n} \stmt_i \in \dstmtSet$ are decidable statements.
 	\end{prop}
 \begin{proof}
-	Let $\{\stmt_i\}_{i=1}^{n} \subseteq \dstmtSet$ be a finite collection of decidable statements. Then $\{\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ and $\{\NOT\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ are verifiable. Consider $\bigAND\limits_{i=1}^{n} \stmt_i$: this is the finite conjunction of verifiable statements and is therefore a verifiable statement by \ref{ax_verifiable_AND}. Consider its negation $\NOT \bigAND\limits_{i=1}^{n} \stmt_i \equiv \bigOR\limits_{i=1}^{n} \NOT \stmt_i$: this is the finite disjunction of verifiable statements and is therefore a verifiable statement by \ref{ax_verifiable_OR}. The finite conjunction of decidable statements is decidable by definition.
+	Let $\{\stmt_i\}_{i=1}^{n} \subseteq \dstmtSet$ be a finite collection of decidable statements. Then $\{\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ and $\{\NOT\stmt_i\}_{i=1}^{n} \subseteq \vstmtSet$ are verifiable. Consider $\bigAND\limits_{i=1}^{n} \stmt_i$: this is the finite conjunction of verifiable statements and is therefore a verifiable statement by \ref{pm-vs-axiomFiniteConjunction}. Consider its negation $\NOT \bigAND\limits_{i=1}^{n} \stmt_i \equiv \bigOR\limits_{i=1}^{n} \NOT \stmt_i$: this is the finite disjunction of verifiable statements and is therefore a verifiable statement by \ref{pm-vs-axiomCountableDisjunction}. The finite conjunction of decidable statements is decidable by definition.
 	
-	Similarly, consider $\bigOR\limits_{i=1}^{n} \stmt_i$: this is the finite disjunction of verifiable statements and is therefore a verifiable statement by \ref{ax_verifiable_OR}. Consider its negation $\NOT \bigOR\limits_{i=1}^{n} \stmt_i \equiv \bigAND\limits_{i=1}^{n} \NOT \stmt_i$: this is the finite conjunction of verifiable statements and is therefore a verifiable statement by \ref{ax_verifiable_AND}. The finite disjunction of decidable statements is decidable by definition.
+	Similarly, consider $\bigOR\limits_{i=1}^{n} \stmt_i$: this is the finite disjunction of verifiable statements and is therefore a verifiable statement by \ref{pm-vs-axiomCountableDisjunction}. Consider its negation $\NOT \bigOR\limits_{i=1}^{n} \stmt_i \equiv \bigAND\limits_{i=1}^{n} \NOT \stmt_i$: this is the finite conjunction of verifiable statements and is therefore a verifiable statement by \ref{pm-vs-axiomFiniteConjunction}. The finite disjunction of decidable statements is decidable by definition.
 	
-	Note that this cannot be generalized to infinite collection as it would require closure under infinite conjunction. Also note that this result is consistent with the experimental tests given in \ref{ax_verifiable_AND} and \ref{ax_verifiable_OR}.
+	Note that this cannot be generalized to infinite collection as it would require closure under infinite conjunction. Also note that this result is consistent with the experimental tests given in \ref{pm-vs-axiomFiniteConjunction} and \ref{pm-vs-axiomCountableDisjunction}.
 \end{proof}
 \end{mathSection}
 
@@ -876,7 +876,7 @@ Taken as a whole, finite conjunction and countable disjunction define the \textb
 	\caption{Comparing algebras of statements.}
 \end{table}
 
-Before we continue, it is interesting and useful to stop and understand the interplay between scientific and mathematical constructs.\footnote{It took us many many confusing years to fully understand where the scientific argument ends and the mathematical argument begins, what makes sense to assume physically and what makes sense to prove rigorously. Part of the confusion is that this line is not objective but it is based on what is considered ``precise" by a mathematician, which has evolved considerably through the centuries. The rule we follow is: in the mathematical formalism the only objects that can be left unspecified are the elements of a set.} Technically, \ref{ax_statement}, \ref{ax_possible_assignemetns}, \ref{ax_functions_of_statement}, \ref{ax_verifiable_statements}, \ref{ax_verifiable_AND} and \ref{ax_verifiable_OR} are the axioms of our mathematical formalism for statements. Note that the actual content of the statements, the methodology for which an assignment is deemed possible and the procedures for experimental verification are not formally defined: the math simply uses symbols to label and identify them. The only assumptions are that statements exist (organized in logical contexts with possible assignments, one of which is the true one), that some of them are verifiable and that they admit the associated algebra. The mathematical formalism does not know what the symbols actually represent: they may as well be pieces of cardboard painted black or white. The math can only derive consequence given the premise, but it does not know whether the premise makes actual sense. In other words, the way that we are making the framework mathematically precise is not by making everything mathematically precise: it is by omitting the details that are not amenable to a precise specification.
+Before we continue, it is interesting and useful to stop and understand the interplay between scientific and mathematical constructs.\footnote{It took us many many confusing years to fully understand where the scientific argument ends and the mathematical argument begins, what makes sense to assume physically and what makes sense to prove rigorously. Part of the confusion is that this line is not objective but it is based on what is considered ``precise" by a mathematician, which has evolved considerably through the centuries. The rule we follow is: in the mathematical formalism the only objects that can be left unspecified are the elements of a set.} Technically, \ref{pm-vs-axiomContext}, \ref{pm-vs-axiomPossibility}, \ref{pm-vs-axiomClosure}, \ref{pm-vs-axiomVerifiability}, \ref{pm-vs-axiomFiniteConjunction} and \ref{pm-vs-axiomCountableDisjunction} are the axioms of our mathematical formalism for statements. Note that the actual content of the statements, the methodology for which an assignment is deemed possible and the procedures for experimental verification are not formally defined: the math simply uses symbols to label and identify them. The only assumptions are that statements exist (organized in logical contexts with possible assignments, one of which is the true one), that some of them are verifiable and that they admit the associated algebra. The mathematical formalism does not know what the symbols actually represent: they may as well be pieces of cardboard painted black or white. The math can only derive consequence given the premise, but it does not know whether the premise makes actual sense. In other words, the way that we are making the framework mathematically precise is not by making everything mathematically precise: it is by omitting the details that are not amenable to a precise specification.
 
 We should stress this for a couple of reasons. First, the part that is not formalized is \emph{the most important part}. Discovering new science is exactly finding new things to study (i.e.~new statements), new connections between known objects (i.e.~new logical relationships) or devising new measurement techniques (i.e.~new experimental tests). The content of the statements, their semantic relationships and the procedure of the experimental tests \emph{is} the actual science. Everything that follows is, in a sense, the trivial bit and that is why it can be done generally. Which leads to the second reason: understanding whether statements and verifiable statements \emph{actually} follow the algebras we defined is crucial. The math just takes it at face value, it does not prove it. The justifications for our axioms, then, are the most critical part of this work and they are not mathematical proofs. If we botch them, we'll have a nice, consistent, rich but meaningless mathematical framework. Lastly, it has to be clear that something gets lost in the formalization. The mathematical framework cannot carry all the physics content: we removed the most important part! Different systems may have the same mathematical description, so the scientific content can never be entirely reconstructed from the math. That is why we always have to carefully bring it along.
 
@@ -902,7 +902,7 @@ Since some depend on others, we do not need to actually run all the tests. Once 
 Note that once we have tested the basis, we have tested any other verifiable statement that can be constructed from it. In the example before, once we tested the first four we have implicitly tested \statement{that animal is a black duck}. It is also true that impossibilities and certainties don't really need to be tested. We already know that \statement{that animal is a duck and a swan} is false. The idea, then, is to group verifiable statements into experimental domains that can be seen as all the experimental information one can gather for a particular subject. These will include the certainty, the impossibility and any other verifiable statement that can be constructed from a basis. The basis, though, has to be countable so that, by running one test at a time, we can hope to eventually reach any element.
 
 \begin{mathSection}
-\begin{defn}
+\begin{defn}\label{pm-vs-defExperimentalDomain}
 	An \textbf{experimental domain} $\edomain$ represents a set of verifiable statements that can be tested and possibly verified  in an indefinite amount of time. Formally, it is a set of statements, closed under finite conjunction and countable disjunction, that includes precisely the certainty, the impossibility, and a set of verifiable statements that can be generated from a countable basis.
 \end{defn}
 \begin{justification}
@@ -944,7 +944,7 @@ Unfortunately, not all possibilities are verifiable statements. Consider the sta
 What happens is that while the negation of a verifiable statement is not always a verifiable statement, it is still a statement that can be associated to an experimental test. As such, while we cannot verify the statement, we can still predict the outcome of its test, including non-termination. To be able to find all possibilities, then, we have to create the set of statements that can be associated with experimental tests regardless of termination, which will include negations. We call this set the theoretical domain and theoretical statements its elements.
 
 \begin{mathSection}
-\begin{defn}\label{1_def_theoretical_domain}
+\begin{defn}\label{pm-vs-defTheoreticalDomain}
 	The \textbf{theoretical domain} $\tdomain$ of an experimental domain $\edomain$ is the set of statements constructed from $\edomain$ to which we can associate a test regardless of termination. We call \textbf{theoretical statement} a statement that is part of a theoretical domain. More formally, $\tdomain$ is the set of all statements generated from $\edomain$ using negation, finite conjunction and countable disjunction.
 \end{defn}
 \begin{justification}
@@ -971,7 +971,7 @@ It will not contain the statement $\stmt=$\statement{the mass of the photon is e
 
 Note $\stmt$ can be seen as the limit of the sequence of ever increasing precision, but can also be seen as the conjunction for all those statements $\stmt=\bigAND\limits_{i=1}^{\infty} \stmt_i$. In fact, the mass of the photon is exactly 0 if and only if all the finite precision measurements will contain 0 in the range. It makes sense, then, that it is not part of the experimental domain because only finite conjunctions of verifiable statements are verifiable. But we expect $\stmt$ to be a possibility for the mass of the photon. Why should it be in the theoretical domain?
 
-Because of the De Morgan properties in \ref{boolean_properties}, we can express conjunctions in terms of negation and disjunction. So we have $\stmt=\bigAND\limits_{i=1}^{\infty} \stmt_i=\NOT \bigOR\limits_{i=1}^{\infty} \NOT\stmt_i$. Therefore by allowing negation we are also allowing countable conjunction and therefore we are including all the limits of sequences of verifiable statements.
+Because of the De Morgan properties in \ref{pm-vs-contextIsBoolean}, we can express conjunctions in terms of negation and disjunction. So we have $\stmt=\bigAND\limits_{i=1}^{\infty} \stmt_i=\NOT \bigOR\limits_{i=1}^{\infty} \NOT\stmt_i$. Therefore by allowing negation we are also allowing countable conjunction and therefore we are including all the limits of sequences of verifiable statements.
 
 % Not being used at this point, but keep around to cannibalize later. As we saw before, not all possibilities are verifiable statements. For example, if we are able to only verify \statement{there is extra-terrestrial life}, the opposite possibility will never have experimental confirmation. The possibility \statement{the mass of the photon is exactly 0 eV} is also not verifiable since we can only measure mass with finite precision. The second case, though, is different from the first. Given two different values of mass, we can in principle always find a resolution such that we can tell the two values apart experimentally. Similarly, we can tell the house sparrow (Passer domesticus) apart from the Italian sparrow (Passer italiae) because we have at least two verifiable statements (``it has a dark gray crown", ``it has a chestnut crown") that are incompatible with each other, but each compatible with one bird. In these cases, we say that the domain is experimentally distinguishable.
 
@@ -984,7 +984,7 @@ Because of the De Morgan properties in \ref{boolean_properties}, we can express 
 		Any countable conjunction $\stmt = \bigAND\limits_{i=1}^{\infty} \stmt_i$ is equivalent to the negation of disjunction of the negation: $\stmt = \NOT\bigOR\limits_{i=1}^{\infty} \NOT\stmt_i$. As the theoretical domain is closed under negation and countable disjunction, so it is closed under countable conjunction.  
 	\end{proof}
 
-	\begin{defn}\label{def_approximately_verifiable}
+	\begin{defn}\label{pm-vs-defApproximatelyVerifiable}
 		A theoretical statement $\stmt \in \tdomain$ is \textbf{approximately verifiable} if it is the limit of some sequence of verifiable statements. Formally, $\stmt \in \tdomain$ is approximately verifiable if there exists a sequence $\{\stmt_i\}_{i=1}^{\infty} \in \edomain$ such that $\stmt = \bigAND\limits_{i=1}^{\infty} \stmt_i$.
 	\end{defn}
 \end{mathSection}
@@ -1058,14 +1058,14 @@ For two statements $\bar{\stmt}_1$ and $\bar{\stmt}_2$ to be experimentally dist
 %TODO: with the definition as is, the impossibility can be experimentally distinguishable from any other statement. Maybe this does not make sense.
 
 \begin{mathSection}
-\begin{defn}\label{1_def_experimentally_distinguishable}
+\begin{defn}\label{pm-vs-defExperimentallyDistinguishable}
 	Let $\tstmt_1, \tstmt_2 \in \tdomain$ be two theoretical statements. We say they are \textbf{experimentally distinguishable} if there is an experimental test that can tell them apart. Formally, we can find a theoretical statement $\tstmt \in \tdomain$ such that $\tstmt_1 \narrower \ver(\tstmt)$ and $\tstmt_2 \narrower \fal(\tstmt)$.
 \end{defn}
 \begin{justification}
 	Suppose we have an experimental test $\expt$ constructible from those associated to $\edomain$ that can tell $\tstmt_1$ and $\tstmt_2$ apart. Then we must have that, without loss of generality, $\result(\expt, a) = \SUCCESS$ for all $a \in \pAss$ for which $a(\tstmt_1) = \TRUE$ and $\result(\expt, a) = \FAILURE$ for all $a \in \pAss$ for which $a(\tstmt_2) = \TRUE$. Without loss of generality, we can take $\expt$ to be an optimal test, since we could make it optimal by combining it with other tests. Let $\tstmt$ be a statement associated with that optimal test. Then we have $\tstmt_1 \narrower \ver(\tstmt)$ and $\tstmt_2 \narrower \fal(\tstmt)$. This justifies the definition.
 \end{justification}
 
-\begin{prop}\label{1_prop_experimentally_distinguishable_is_disjoint_approximations}
+\begin{prop}\label{pm-vs-experimentallyDistinguishableIsDisjointApproximation}
 	Two theoretical statements $\bar{\stmt}_1, \bar{\stmt}_2 \in \tdomain$ are experimentally distinguishable if and only if we can find two verifiable statements $\stmt_1, \stmt_2 \in \tdomain$ such that $\stmt_1 \ncomp \stmt_2$, $\bar{\stmt}_1 \narrower \stmt_1$ and $\bar{\stmt}_2 \narrower \stmt_2$.
 \end{prop}
 \begin{proof}
@@ -1080,7 +1080,7 @@ To sum up, verifiable statements are the only ones that, perhaps under some simp
 We have seen that the theoretical domain may contain more statements, but we want to make it clear that it never contains more information. That is, if we knew which verifiable statements were true and which weren't, we would automatically know which theoretical statements would be true or not. So it is not adding extra cases. It is essentially completing the list of answers by adding a ``no" if only ``yes" can be experimentally verified and vice-versa. To see that this is the case, we can show that a basis for an experimental domain $\edomain$ is also a basis for its theoretical domain $\tdomain$. That is, all verifiable and theoretical statements can be expressed as functions of the same basis. The difference is that a theoretical statement can be a function of the negation of the element of a basis.
 
 \begin{mathSection}
-\begin{prop}\label{prop_basis_for_theoretical_domain}
+\begin{prop}\label{pm-vs-basisForTheoreticalDomain}
 	The truth values of the statements of a basis $\basis$ for an experimental domain $\edomain$ are enough to determine the truth values for all statements in the associated theoretical domain $\tdomain$. More formally, all statements in the theoretical domain $\tdomain$ can be generated by negation, countable conjunction and countable disjunction from a basis $\basis$ of $\edomain$.
 \end{prop}
 
@@ -1093,7 +1093,7 @@ Having defined what a theoretical domain is, we can finally define what the poss
 
 \begin{mathSection}
 
-\begin{defn}\label{1_def_possibilities}
+\begin{defn}\label{pm-vs-defPossibilities}
 	A \textbf{possibility} for an experimental domain $\edomain$ is a statement $x \in \tdomain$ that, when true, determines the truth value for all statements in the theoretical domain. Formally, $x \nequiv \impossibility$ and for each $\mathsf{s} \in \tdomain$, either $x \narrower \mathsf{s}$ or $x \ncomp \mathsf{s}$. The \textbf{full possibilities}, or simply the \textbf{possibilities}, $X$ for $\edomain$ are the collection of all possibilities.
 \end{defn}
 
@@ -1103,12 +1103,12 @@ A possibility represents a complete answer for a scientific question. Only one o
 
 \begin{mathSection}
 	
-\begin{prop}\label{prop_poss_is_minterm}
+\begin{prop}\label{pm-vs-possibilitiesAreMinterms}
 	Let $\edomain$ be an experimental domain. A possibility for $\edomain$ is any minterm of a basis that is not impossible.
 \end{prop}
 
 \begin{proof}
-	Let $\basis \subseteq \edomain$ be a basis for $\edomain$. Let $x$ be a minterm of $\basis$. Any theoretical statement $\stmt \in \tdomain$ can be expressed as the disjunction of minterms of $\basis$ by \ref{prop_disjunctive_normal_form} and by \ref{prop_basis_for_theoretical_domain}. $x$ is either within the minterms needed to express $\stmt$, or not. If it is, $x \AND \stmt \equiv x$ and therefore $x \narrower \stmt$. If it's not, $x \AND \NOT \stmt \equiv x$ and therefore $x \ncomp \stmt$. Therefore a minterm is either narrower or incompatible with all theoretical statements and, if it is not impossible, it is a possibility by definition.
+	Let $\basis \subseteq \edomain$ be a basis for $\edomain$. Let $x$ be a minterm of $\basis$. Any theoretical statement $\stmt \in \tdomain$ can be expressed as the disjunction of minterms of $\basis$ by \ref{pm-vs-disjunctiveNormalForm} and by \ref{pm-vs-basisForTheoreticalDomain}. $x$ is either within the minterms needed to express $\stmt$, or not. If it is, $x \AND \stmt \equiv x$ and therefore $x \narrower \stmt$. If it's not, $x \AND \NOT \stmt \equiv x$ and therefore $x \ncomp \stmt$. Therefore a minterm is either narrower or incompatible with all theoretical statements and, if it is not impossible, it is a possibility by definition.
 	
 	Conversely, suppose $x \in \tdomain$ is a possibility. As it is a theoretical statement, it can be expressed as a disjunction of minterms of a basis $\basis$. Suppose it is the disjunction of more than one minterm. Then each minterm would be narrower than $x$, which cannot be. $x$ must be expressed by a single minterm. Therefore any possibility is a minterm.
 \end{proof}
@@ -1220,7 +1220,7 @@ Mathematicians designed this abstract mathematical structure because it is a use
 
 Let's go back to our verifiable statements and possibilities. For example, consider $\stmt_1=$\statement{the mass of the photon is less than $10^{-10}$ eV}. This can be expressed as $\stmt_1=\bigOR\limits_{0\leq x<10^{-10}}$\statement{the mass of the photon is precisely x eV}: the precise value must be in the given range of possibilities. Consider $\stmt_2=$\statement{the mass of the photon is greater than $10^{-20}$ eV}$=\bigOR\limits_{x>10^{-20}}$\statement{the mass of the photon is precisely x eV}. The conjunction is the intersection of the possible values: $\stmt_1\AND\stmt_2=$\statement{the mass of the photon is between $10^{-20}$ and $10^{-10}$ eV}$=\bigOR\limits_{10^{-20}< x<10^{-10}}$\statement{the mass of the photon is precisely x eV}. The disjunction is the union of the possible values: $\stmt_1\OR\stmt_2=$\statement{the mass of the photon can be anything}$=\bigOR\limits_{x\geq0}$\statement{the mass of the photon is precisely x eV}.
 
-This is something that works in general. In Proposition \ref{prop_disjunctive_normal_form} we saw that, if a statement is a function of other statements, it can be expressed as the disjunction of minterms of the arguments. A verifiable statement is a function of basis, so it can be expressed as the disjunction of minterms of a basis. But we have also seen that the minterms of a basis are the possibilities, so each verifiable statement can be expressed as the disjunction of possibilities.
+This is something that works in general. In Proposition \ref{pm-vs-disjunctiveNormalForm} we saw that, if a statement is a function of other statements, it can be expressed as the disjunction of minterms of the arguments. A verifiable statement is a function of basis, so it can be expressed as the disjunction of minterms of a basis. But we have also seen that the minterms of a basis are the possibilities, so each verifiable statement can be expressed as the disjunction of possibilities.
 
 
 Therefore each statement in the experimental domain defines a set of possibilities, which we call a verifiable set. Since certainty and impossibility are in the domain, the empty set and the full set of possibilities are verifiable sets. Since we can take finite conjunction and countable disjunction of verifiable statements, we can take finite intersection and countable union of verifiable sets. The collection of all verifiable sets forms a topology on the set of possibilities.
@@ -1358,9 +1358,9 @@ Another important property to classify topological spaces is the degree of separ
 
 How do these properties relate to experimental domains? Consider two possibilities for a domain, for example \statement{that is a cat} and \statement{that is a swan}. We can always find a verifiable statement, such as \statement{that animal has feathers}, that we can use to distinguish one possibility from the other. This means that, given two different possibilities, we can always find a verifiable set that contains one and not the other: the natural topology for any set of possibilities is always $\mathsf{T}_0$.
 
-Now suppose two possibilities are approximately verifiable as we defined in Definition \ref{def_approximately_verifiable}. For example, \statement{the mass of the photon is exactly 0 eV} or \statement{the mass of the photon is exactly $10^{-20}$ eV}. We can find two verifiable statements \statement{the mass of the photon is less than $10^{-25}$ eV} and \statement{the mass of the photon is more than $10^{-25}$ eV} each compatible with only one possibility. This means that, given two approximately verifiable possibilities, we can find two verifiable sets each containing only one possibility: if all possibilities are approximately verifiable then the natural topology is $\mathsf{T}_1$.
+Now suppose two possibilities are approximately verifiable as we defined in Definition \ref{pm-vs-defApproximatelyVerifiable}. For example, \statement{the mass of the photon is exactly 0 eV} or \statement{the mass of the photon is exactly $10^{-20}$ eV}. We can find two verifiable statements \statement{the mass of the photon is less than $10^{-25}$ eV} and \statement{the mass of the photon is more than $10^{-25}$ eV} each compatible with only one possibility. This means that, given two approximately verifiable possibilities, we can find two verifiable sets each containing only one possibility: if all possibilities are approximately verifiable then the natural topology is $\mathsf{T}_1$.
 
-Now suppose two possibilities are experimentally distinguishable as we defined in Definition \ref{1_def_experimentally_distinguishable}. Then, by \ref{1_prop_experimentally_distinguishable_is_disjoint_approximations}, we can find two disjoint approximations. In the example before, the two verifiable statements were in fact incompatible. This means that, given two approximately verifiable possibilities, we can find two disjoint verifiable sets each containing only one possibility: if all possibilities are experimentally distinguishable then the natural topology is $\mathsf{T}_2$.
+Now suppose two possibilities are experimentally distinguishable as we defined in Definition \ref{pm-vs-defExperimentallyDistinguishable}. Then, by \ref{pm-vs-experimentallyDistinguishableIsDisjointApproximation}, we can find two disjoint approximations. In the example before, the two verifiable statements were in fact incompatible. This means that, given two approximately verifiable possibilities, we can find two disjoint verifiable sets each containing only one possibility: if all possibilities are experimentally distinguishable then the natural topology is $\mathsf{T}_2$.
 
 \begin{mathSection}
 	\begin{prop}
@@ -1383,9 +1383,9 @@ Now suppose two possibilities are experimentally distinguishable as we defined i
 	The natural topology of a set of possibilities is Hausdorff (or $\mathsf{T}_2$) if and only if all possibilities are pairwise experimentally distinguishable.
 \end{prop}
 \begin{proof}
-	Suppose all possibilities in $X$ for an experimental domain $\edomain_X$ are pairwise experimentally distinguishable. Then, by \ref{1_prop_experimentally_distinguishable_is_disjoint_approximations}, given two possibilities $x_1, x_2 \in X$ we can find two verifiable statements $\stmt_1, \stmt_2 \in \edomain_X$ such that $\stmt_1 \ncomp \stmt_2$, $x_1 \narrower \stmt_1$ and $x_2 \narrower \stmt_2$. In terms of verifiable sets we have $U(\stmt_1) \cap U(\stmt_2) = \emptyset$, $x_1 \in U(\stmt_1)$ and $x_2 \in U(\stmt_2)$. The topology is $\mathsf{T}_2$.
+	Suppose all possibilities in $X$ for an experimental domain $\edomain_X$ are pairwise experimentally distinguishable. Then, by \ref{pm-vs-experimentallyDistinguishableIsDisjointApproximation}, given two possibilities $x_1, x_2 \in X$ we can find two verifiable statements $\stmt_1, \stmt_2 \in \edomain_X$ such that $\stmt_1 \ncomp \stmt_2$, $x_1 \narrower \stmt_1$ and $x_2 \narrower \stmt_2$. In terms of verifiable sets we have $U(\stmt_1) \cap U(\stmt_2) = \emptyset$, $x_1 \in U(\stmt_1)$ and $x_2 \in U(\stmt_2)$. The topology is $\mathsf{T}_2$.
 	
-	Conversely, suppose the natural topology $\mathsf{T}_X$ for the possibilities $X$ for an experimental domain $\edomain_X$ is $\mathsf{T}_2$. Given two possibilities $x_1, x_2 \in X$ we can find two verifiable sets $U_1, U_2 \in \mathsf{T}_X$ such that $U_1 \cap U_2 = \emptyset$, $x_1 \in U_1$ and $x_2 \in U_2$. Since $U_1, U_2 \in \mathsf{T}_X$, we can find two corresponding verifiable statements $\stmt_1, \stmt_2 \in \edomain_X$ such that $U(\stmt_1) = U_1$ and $U(\stmt_2) = U_2$. We have $\stmt_1 \ncomp \stmt_2$, $x_1 \narrower \stmt_1$ and $x_2 \narrower \stmt_2$ and by \ref{1_prop_experimentally_distinguishable_is_disjoint_approximations} the possibilities are pairwise experimentally distinguishable.
+	Conversely, suppose the natural topology $\mathsf{T}_X$ for the possibilities $X$ for an experimental domain $\edomain_X$ is $\mathsf{T}_2$. Given two possibilities $x_1, x_2 \in X$ we can find two verifiable sets $U_1, U_2 \in \mathsf{T}_X$ such that $U_1 \cap U_2 = \emptyset$, $x_1 \in U_1$ and $x_2 \in U_2$. Since $U_1, U_2 \in \mathsf{T}_X$, we can find two corresponding verifiable statements $\stmt_1, \stmt_2 \in \edomain_X$ such that $U(\stmt_1) = U_1$ and $U(\stmt_2) = U_2$. We have $\stmt_1 \ncomp \stmt_2$, $x_1 \narrower \stmt_1$ and $x_2 \narrower \stmt_2$ and by \ref{pm-vs-experimentallyDistinguishableIsDisjointApproximation} the possibilities are pairwise experimentally distinguishable.
 \end{proof}
 \end{mathSection}
 
@@ -1464,7 +1464,7 @@ Decidable domains have special characteristics and are easier to study. Since we
 	An experimental domain $\edomain_X$ is \textbf{decidable} if all statements in the domain are decidable. Formally, for every $\stmt \in \edomain_X$ we have $\NOT\stmt \in \edomain_X$.
 \end{defn}
 
-\begin{prop}\label{1_prop_decidable_domain_properties}
+\begin{prop}\label{pm-vs-decidableDomainProperties}
 	Let $\edomain_X$ be an experimental domain. The following are equivalent:
 	\begin{enumerate}
 		\item the experimental domain is decidable
@@ -1494,7 +1494,7 @@ Mathematically, the natural topology corresponds to the discrete topology: the o
 	A topology $\mathsf{T}_X$ on a set $X$ is called \textbf{discrete} if it contains every subset of $X$.
 \end{defn}
 
-\begin{thrm}[Decidability is discreteness]\label{thrm_decidablity_is_discreteness}
+\begin{thrm}[Decidability is discreteness]\label{pm-vs-decidabilityIsDiscreteness}
 	The natural topology of the possibilities $X$ for a domain $\edomain_X$ is discrete if and only if the domain is decidable.
 \end{thrm}
 \begin{proof}
@@ -1657,7 +1657,7 @@ An inference relationship is essentially an injection that preserves equivalence
 	\begin{defn}
 		An experimental domain $\edomain_Y$ is \textbf{dependent} on another experimental domain $\edomain_X$, noted $\edomain_Y \subseteq \edomain_X$, if there exists an inference relationship $\erel: \edomain_Y \to \edomain_X$.
 	\end{defn}
-	\begin{coro}\label{prop_domain_subset_is_dependence}
+	\begin{coro}\label{pm-cd-domainDependenceIsSubset}
 		Let $\edomain_X$ be an experimental domain. Let $\edomain_Y$ be a subset of statements of $\edomain_X$ that form an experimental domain (i.e. contains impossibility, certainty and is closed under finite conjunction and countable disjunction). Then $\edomain_Y \subseteq \edomain_X$.
 	\end{coro}
 	\begin{proof}
@@ -1676,7 +1676,7 @@ An inference relationship is essentially an injection that preserves equivalence
 		and is therefore an \textbf{equivalence relationship}.
 	\end{coro}
 	\begin{proof}
-		For reflexivity, $\edomain$ is a subset of $\edomain$ that is an experimental domain, therefore $\edomain \subseteq \edomain$ by \ref{prop_domain_subset_is_dependence}. Equivalence follows by symmetry.
+		For reflexivity, $\edomain$ is a subset of $\edomain$ that is an experimental domain, therefore $\edomain \subseteq \edomain$ by \ref{pm-cd-domainDependenceIsSubset}. Equivalence follows by symmetry.
 		
 		For symmetry, suppose $\edomain_X \equiv \edomain_Y$, then $\edomain_Y \subseteq \edomain_X$ and $\edomain_X \subseteq \edomain_Y$ and therefore $\edomain_Y \equiv \edomain_X$.
 		
@@ -1814,11 +1814,11 @@ More precisely, consider the verifiable statement $\stmt_Y=$\statement{the heigh
 	\end{proof}
 	\begin{coro}
 		A causal relationship between two domains is unique if it exists.
-	\end{coro}\label{prop_causal_relationship_unique}
+	\end{coro}\label{pm-cd-causalRelationshipUniqueness}
 	\begin{proof}
 		Suppose $f_1 : X \to Y$ and $f_2 : X \to Y$ are two causal relationships. Let $x \in X$. We have $x \narrower f_1(x)$ and $x \narrower f_2(x)$. This means $f_1(x) \comp f_2(x)$. But these are two possibilities of the same domain, so they are either incompatible or are the same possibilities. Therefore $f_1(x) \equiv f_2(x)$ for all $x \in X$. The causal relationships are the same.
 	\end{proof}
-	\begin{thrm}[Experimental Relationship Theorem]\label{2_thrm_experimental_relationship}
+	\begin{thrm}[Experimental Relationship Theorem]\label{pm-cd-experimentalRelationshipTheorem}
 		Inference and causal relationships are equivalent. More formally, let $\edomain_X$ and $\edomain_Y$ be two experimental domains. An inference relationship $\erel: \edomain_Y \to \edomain_X$ exists between them if and only if a causal relationship $f: X \to Y$ also exists.
 	\end{thrm}
 	\begin{proof}
@@ -1852,7 +1852,7 @@ Suppose we define some type of operation on one domain. For example, on the expe
 This means that if we capture some physical feature using some mathematical structure on one domain, then all equivalent domains will inherit the same structure. Moreover, the causal relationship is a function that preserves that structure. If the possibilities of one domain form a vector space, then the possibilities of an equivalent domain form a vector space and the causal relationship is an invertible linear transformation. If the possibilities of one domain form a group, then the possibilities of an equivalent domain form a group and the causal relationship is an isomorphism.\footnote{Domain equivalence is an isomorphism in whatever category (e.g. topological space, group, vector space, ...) used to model the experimental domain.} As we'll see much later, this is fundamental since deterministic and reversible evolution means equivalence of the domains describing the past, present and future states. Therefore deterministic and reversible motion is not ``just" a one to one map.
 
 \begin{mathSection}
-	\begin{thrm}[Domain Equivalence is Isomorphism]\label{thrm_domain_equivalence_is_isomorphism}
+	\begin{thrm}[Domain Equivalence is Isomorphism]\label{pm-cd-domainEquivalenceIsIsomorphism}
 		Let $\edomain_Y \equiv \edomain_X$ be two equivalent experimental domains. Suppose $\edomain_X$ is endowed with some mathematical structure. Then $\edomain_Y$ is also endowed with an equivalent structure and the experimental relationship preserves said structure.
 	\end{thrm}
 \begin{proof}
@@ -1872,7 +1872,7 @@ The main result of this section is that the possibilities of the combined domain
 
 Suppose $\edomain_X$ is the experimental domain generated by the two verifiable statements \statement{the patient is dead} and \statement{the patient is alive} and a second one $\edomain_Y$ generated by the two verifiable statements \statement{the patient is not in a coma} and \statement{the patient is in a coma}. The given verifiable statements also correspond to the possibilities for the respective domains.
 
-We can construct the combined domain $\edomain_X \times \edomain_Y$ by taking all possible disjunctions and conjunctions. What are the possibilities for the new domain? Since by \ref{prop_poss_is_minterm} the possibilities are minterms, we have the following cases to consider:
+We can construct the combined domain $\edomain_X \times \edomain_Y$ by taking all possible disjunctions and conjunctions. What are the possibilities for the new domain? Since by \ref{pm-vs-possibilitiesAreMinterms} the possibilities are minterms, we have the following cases to consider:
 \begin{itemize}
 	\item \statement{the patient is alive} $\AND$ \statement{the patient is in a coma}
 	\item \statement{the patient is alive} $\AND$ \statement{the patient is not in a coma}
@@ -1891,11 +1891,11 @@ The third one is impossible: the patient cannot be dead and in a coma. Therefore
 		We need to show that the combined experimental domain is indeed an experimental domain. It will contain the certainty and the impossibility since any of the original experimental domains contains them. It is closed under finite conjunction and countable disjunction by construction. To show that it has a countable basis, for each $i=1..\infty$ let $\basis_i \in \edomain_{X_i}$ be a countable basis for the respective domain. Consider $\basis=\bigcup\limits_{i=1}^\infty \basis_i$. From this set we can generate any $\edomain_{X_i}$ and therefore we can also generate all of $\edomain_{X}$. $\basis$ is a basis and it is countable since it is the union of a countable set of countable elements. Note that it is precisely because the basis needs to remain countable that we cannot extend the operation to an uncountable set of domains.
 	\end{proof}
 	
-	\begin{prop}\label{prop_combined_possibility}
+	\begin{prop}\label{pm-cd-combinedDomainPossibilities}
 		The possibilities for a combined domain are a subset of the Cartesian product of the possibilities for the individual domains. Formally, let $\{\edomain_{X_i}\}_{i=1}^{\infty}$ be a countable set of experimental domains and $\{X_i\}_{i=1}^{\infty}$ their respective possibilities. Let $X$ be the set of possibilities for the combined domain $\edomain_{X} = \bigtimes\limits_{i=1}^{\infty} \edomain_{X_i}$.  Then $X = \{ x = \bigAND\limits_{i=1}^{\infty} x_i \, | \, \{x_i\}_{i=1}^{\infty} \in \bigtimes\limits_{i=1}^{\infty} X_i, \, x \nequiv \impossibility \}$.
 	\end{prop}   
 	\begin{proof}
-		A possibility $x$ of the combined domain is a minterm of a basis $\basis \subseteq \edomain_{X}$. Since we can choose $\basis=\bigcup\limits_{i=1}^\infty \basis_i$ where $\basis_i \subseteq \edomain_{X_i}$ is a countable basis for each domain, $x$ is the conjunction $x \equiv \bigAND\limits_{i=1}^{\infty}x_i$ of minterms $x_i$ of $\basis_i$. Since $x$ is a possibility, it is not impossible and therefore none of the $x_i$ can be impossible. Since each $x_i$ is a minterm of the respective basis $\basis_i$ that is not impossible, it is a possibility by \ref{prop_poss_is_minterm}. Therefore a possibility $x$ of the combined domain is the conjunction of the possibilities $x_i$ of the original domains that is not impossible.
+		A possibility $x$ of the combined domain is a minterm of a basis $\basis \subseteq \edomain_{X}$. Since we can choose $\basis=\bigcup\limits_{i=1}^\infty \basis_i$ where $\basis_i \subseteq \edomain_{X_i}$ is a countable basis for each domain, $x$ is the conjunction $x \equiv \bigAND\limits_{i=1}^{\infty}x_i$ of minterms $x_i$ of $\basis_i$. Since $x$ is a possibility, it is not impossible and therefore none of the $x_i$ can be impossible. Since each $x_i$ is a minterm of the respective basis $\basis_i$ that is not impossible, it is a possibility by \ref{pm-vs-possibilitiesAreMinterms}. Therefore a possibility $x$ of the combined domain is the conjunction of the possibilities $x_i$ of the original domains that is not impossible.
 	\end{proof}
 
 	\begin{prop}
@@ -1911,7 +1911,7 @@ The third one is impossible: the patient cannot be dead and in a coma. Therefore
 	\end{coro}
 
 	\begin{proof}
-		Let $\resPoss$ be the residual possibility for the combined domain and $\resPoss_j$ the one for one of the original domains. We have $\resPoss_j \AND \resPoss \equiv \resPoss_j \AND \bigAND\limits_{i=1}^{\infty} \resPoss_i \equiv \bigAND\limits_{i=1}^{\infty} \resPoss_i \equiv \resPoss$. Therefore, by \ref{prop_narrowness_properties} $\resPoss \narrower \resPoss_j$.
+		Let $\resPoss$ be the residual possibility for the combined domain and $\resPoss_j$ the one for one of the original domains. We have $\resPoss_j \AND \resPoss \equiv \resPoss_j \AND \bigAND\limits_{i=1}^{\infty} \resPoss_i \equiv \bigAND\limits_{i=1}^{\infty} \resPoss_i \equiv \resPoss$. Therefore, by \ref{pm-vs-narrownessProperties} $\resPoss \narrower \resPoss_j$.
 		
 		Suppose that one of the original domains $\edomain_{X_j}$ is complete. Then the conjunction of the negation of its basis $\resPoss_j$ is an impossibility. This means the conjunction of the negation of the basis of the combined domain $\resPoss$ is also an impossibility and the combined domain is complete.
 	\end{proof}
@@ -2022,7 +2022,7 @@ In terms of topology, the possibilities of the combined domain are the Cartesian
 		\node at (1.5,8) {Number of Males vs.~Females};
 		\node at (10.5,8) { Number of Males vs.~Total Population};
 \end{tikzpicture}
-	\caption{Domain independence and projections. Given a population, the number of male and female members form independent domains: knowing something about one value tells us nothing about the other. Pictorially, a constraint on one side gives us a vertical or horizontal band, which projected on the other axis, gives us the full axis (i.e.~the certainty). On the other hand, the total population and the number of males are not independent domains: given the total population, the number of males cannot exceed that number; given the number of males, the total population cannot be lower than that number. Pictorially, we see that the combined domain does not span the whole plane. A constraint on one domain gives us, when projected, a constraint on the other domain.} \label{fig:2_relationships}
+	\caption{Domain independence and projections. Given a population, the number of male and female members form independent domains: knowing something about one value tells us nothing about the other. Pictorially, a constraint on one side gives us a vertical or horizontal band, which projected on the other axis, gives us the full axis (i.e.~the certainty). On the other hand, the total population and the number of males are not independent domains: given the total population, the number of males cannot exceed that number; given the number of males, the total population cannot be lower than that number. Pictorially, we see that the combined domain does not span the whole plane. A constraint on one domain gives us, when projected, a constraint on the other domain.} \label{pm-cd-fig-relationships}
 \end{figure}
 
 
@@ -2035,7 +2035,7 @@ In terms of topology, the possibilities of the combined domain are the Cartesian
 		Let $\{\edomain_{X_i}\}_{i=1}^{\infty}$ be a countable set of independent experimental domains and $X_i$ their respective possibilities. The set of possibilities $X$ of the combined experimental domain $\bigtimes\limits_{i=1}^{\infty} \edomain_{X_i}$ consists of all the possible conjunctions of the possibilities of each domain. That is: $X = \{ \bigAND\limits_{i=1}^{\infty} x_i \, | \, x_i \in X_i \}$. Notationally, we write $\edomain_X=\edomain_{\bigtimes\limits_{i=1}^{\infty} X_i}$.
 	\end{prop}
 	\begin{proof}
-		A possibility $x \equiv \bigAND\limits_{i=1}^{\infty}x_i$ for the combined domain is the conjunction of possibilities of each individual domain by \ref{prop_combined_possibility}. Since the domains are independent and since possibilities are neither certainties nor impossibilities, by \ref{def_independent_statements} there exists an assignment $a \in \pAss$ such that $a(x_i) = \TRUE$ for all $i=1..\infty$ and therefore $a(x)=\TRUE$. That is, each conjunction $x=\bigAND\limits_{i=1}^{\infty}x_i$ is not impossible and therefore is a possibility.
+		A possibility $x \equiv \bigAND\limits_{i=1}^{\infty}x_i$ for the combined domain is the conjunction of possibilities of each individual domain by \ref{pm-cd-combinedDomainPossibilities}. Since the domains are independent and since possibilities are neither certainties nor impossibilities, by \ref{pm-vs-defStatementIndependence} there exists an assignment $a \in \pAss$ such that $a(x_i) = \TRUE$ for all $i=1..\infty$ and therefore $a(x)=\TRUE$. That is, each conjunction $x=\bigAND\limits_{i=1}^{\infty}x_i$ is not impossible and therefore is a possibility.
 	\end{proof}
 	\begin{defn}
 		Let $\{(X_i, \mathsf{T}_i)\}_{i=1}^{\infty}$ be a countable set of topological spaces. Let $X=\bigtimes\limits_{i=1}^{\infty} X_i$ be the Cartesian product of the points. Let $\mathcal{B}$ be the collection of sets of the form $\bigtimes\limits_{i=1}^{\infty} U_{i}$, with $U_i \in \mathsf{T}_i$ and $U_i \neq X_i$ only finitely many times. The topology generated by $\mathcal{B}$ is called the \textbf{product topology}.
@@ -2063,7 +2063,7 @@ Another special case is combining a domain $\edomain_X$ with another $\edomain_Y
 		Let $\edomain_X$ and $\edomain_Y$ be two experimental domains such that $\edomain_Y \subseteq \edomain_X$ depends on the first. The possibilities of $\edomain_X \times \edomain_Y$ are the possibilities of $\edomain_X$.
 	\end{coro}
 	\begin{proof}
-		The possibilities of $\edomain_X \times \edomain_Y$ are the possibilities of $\edomain_X$ since they are equivalent domains. To be consistent with \ref{prop_combined_possibility}, we additionally show that they are also the subset of the Cartesian product. Let $f : X \to Y$ be the causal relationship between the domains, let $x$ and $y$ be two possibilities of the respective domains. We have $x \AND y \nequiv \impossibility$ if and only if $y = f(x)$, so the possibilities of $\edomain_X \times \edomain_Y$ are $x \AND f(x)$ for all $x \in X$. We also have $x \AND f(x) \equiv x$ since $x \narrower f(x)$.
+		The possibilities of $\edomain_X \times \edomain_Y$ are the possibilities of $\edomain_X$ since they are equivalent domains. To be consistent with \ref{pm-cd-combinedDomainPossibilities}, we additionally show that they are also the subset of the Cartesian product. Let $f : X \to Y$ be the causal relationship between the domains, let $x$ and $y$ be two possibilities of the respective domains. We have $x \AND y \nequiv \impossibility$ if and only if $y = f(x)$, so the possibilities of $\edomain_X \times \edomain_Y$ are $x \AND f(x)$ for all $x \in X$. We also have $x \AND f(x) \equiv x$ since $x \narrower f(x)$.
 	\end{proof}
 \end{mathSection}
 
@@ -2101,7 +2101,7 @@ In terms of the topology, the established possibilities of the combined domain a
 		Let $\{(X_i, \mathsf{T}_i)\}_{i=1}^{\infty}$ be a countable set of topological spaces. Let $X=\coprod\limits_{i=1}^{\infty} X_i$ be the disjoint union of the points. The \textbf{disjoint union topology} $\mathsf{T}$ is the topology for which $U \in \mathsf{T}$ if and only if $U \cap X_i \in \mathsf{T}_i$ for all $i \geq 1$.
 	\end{defn}
 
-	\begin{prop}\label{prop_disjoint_union_topology_is_closure}
+	\begin{prop}\label{pm-cd-disjointUnionTopologyIsClosure}
 		The disjoint union topology is generated by closing the topologies of the initial spaces under disjoint union.
 	\end{prop}
     \begin{proof}
@@ -2116,7 +2116,7 @@ In terms of the topology, the established possibilities of the combined domain a
 		Let $\{\edomain_{X_i}\}_{i=1}^{\infty}$ be a countable set of pair-wise incompatible domains. The natural topology for the established possibilities of the combined experimental domain $\edomain_{\coprod\limits_{i=1}^{\infty} X_i}$ is the disjoint union topology of the natural topology for the established possibilities of each domain.
 	\end{prop}
 	\begin{proof}
-		Given that the domains are incompatible, they are also incomplete. The only statement in each domain $\edomain_{X_i}$ compatible with the respective residual possibility $\mathring{x}_i$ will be the certainty $\certainty$. This means the natural topology restricted to the established possibilities contains all the verifiable sets associated to the impossibilities and to all verifiable statements. This will also be true for the combined domain $\edomain_{\coprod\limits_{i=1}^{\infty} X_i}$, if it is incomplete. If it is complete, then the established possibilities are the full possibilities and their natural topology coincides. Note that all verifiable statements in the combined domain can be generated from the verifiable statements of the individual domains. Also note that the conjunction between the different domains is an impossibility and therefore does not yield a new statement. Therefore all the statements whose verifiable sets form the topology on the established possibilities on the combined domain can be generated by the disjunction of all the statements whose verifiable sets form  the topology on the established possibilities on the individual domains. Therefore the topology of the combined space is simply closing the individual topologies under the disjoint union. The topology of the combined space is therefore the disjoint union topology by \ref{prop_disjoint_union_topology_is_closure}
+		Given that the domains are incompatible, they are also incomplete. The only statement in each domain $\edomain_{X_i}$ compatible with the respective residual possibility $\mathring{x}_i$ will be the certainty $\certainty$. This means the natural topology restricted to the established possibilities contains all the verifiable sets associated to the impossibilities and to all verifiable statements. This will also be true for the combined domain $\edomain_{\coprod\limits_{i=1}^{\infty} X_i}$, if it is incomplete. If it is complete, then the established possibilities are the full possibilities and their natural topology coincides. Note that all verifiable statements in the combined domain can be generated from the verifiable statements of the individual domains. Also note that the conjunction between the different domains is an impossibility and therefore does not yield a new statement. Therefore all the statements whose verifiable sets form the topology on the established possibilities on the combined domain can be generated by the disjunction of all the statements whose verifiable sets form  the topology on the established possibilities on the individual domains. Therefore the topology of the combined space is simply closing the individual topologies under the disjoint union. The topology of the combined space is therefore the disjoint union topology by \ref{pm-cd-disjointUnionTopologyIsClosure}
 	\end{proof}
 \end{mathSection}
 
@@ -2194,7 +2194,7 @@ Each line will tell us what statements are compatible and given the truth values
 		Additionally, if there exists a logic homomorphism $g : S_2 \to S_1$ such that $f \circ g = \Id_{S_1}$ and $g \circ f = \Id_{S_2}$ then $f$ is a \textbf{logic isomorphism} and $g$ is the \textbf{inverse} of $f$. Two logic isomorphisms $f : S_1 \to S_2$ and $g : S_1 \to S_2$ are equivalent if $f(\stmt)\equiv g(\stmt)$ for all $\stmt \in S_1$.
 	\end{defn}
 
-\begin{coro}\label{3_coro_logic_homomorphism_preserves_boolean}
+\begin{coro}\label{pm-cd-logicHomomorphismPreservesBooleanAlgebra}
 	Let $h : S_1 \to S_2$ be a logic homomorphism, then for every $\hat{\stmt} \in S_1$, $\hat{S} \subseteq S_1$ and $f_\Bool : \Bool^{\hat{S}} \to \Bool$ such that $a_1(\hat{\stmt}) = f_\Bool(\{ a_1(\stmt) \}_{\stmt \in \hat{S}})$ for all $a_1 \in \pAss[S_1]$, then $a_2(h(\hat{\stmt})) = f_\Bool(\{ a_2(h(\stmt)) \}_{\stmt \in \hat{S}})$ for all $a_2 \in \pAss[S_2]$. In particular:
 	\begin{itemize}
 		\item $h(\NOT \stmt) \equiv \NOT h(\stmt)$ for all $\stmt \in S_1$
@@ -2214,7 +2214,7 @@ Each line will tell us what statements are compatible and given the truth values
 \end{prop}
 
 \begin{proof}
-	Let $\tstmt_1 \in \bar{S}_1$ but $\tstmt_1 \notin S_1$. Then $\tstmt_1$ depends on $S_1$ through some $g_\Bool : \Bool^{S_1} \to \Bool$. Let $\bar{f}_1 : \bar{S}_1 \to \bar{S}_2$ and $\bar{f}_2 : \bar{S}_1 \to \bar{S}_2$ be two logic homomorphisms such that $\bar{f}_1(\stmt_1) \equiv \bar{f}_2(\stmt_1) \equiv f(\stmt_1)$ for all $\stmt_1 \in S_1$. Then by \ref{3_coro_logic_homomorphism_preserves_boolean} both $\bar{f}_1(\tstmt_1)$ and $\bar{f}_2(\tstmt_1)$ depend on $S_2$ through $g_\Bool$. This means that in every possible assignment $a \in \pAss[\bar{S}_2]$ we have $a(\bar{f}_1(\tstmt_1)) = a(\bar{f}_2(\tstmt_1))$  and therefore $\bar{f}_1(\tstmt_1) \equiv \bar{f}_2(\tstmt_1)$. Then $\bar{f}_1$ and $\bar{f}_2$ are equivalent.
+	Let $\tstmt_1 \in \bar{S}_1$ but $\tstmt_1 \notin S_1$. Then $\tstmt_1$ depends on $S_1$ through some $g_\Bool : \Bool^{S_1} \to \Bool$. Let $\bar{f}_1 : \bar{S}_1 \to \bar{S}_2$ and $\bar{f}_2 : \bar{S}_1 \to \bar{S}_2$ be two logic homomorphisms such that $\bar{f}_1(\stmt_1) \equiv \bar{f}_2(\stmt_1) \equiv f(\stmt_1)$ for all $\stmt_1 \in S_1$. Then by \ref{pm-cd-logicHomomorphismPreservesBooleanAlgebra} both $\bar{f}_1(\tstmt_1)$ and $\bar{f}_2(\tstmt_1)$ depend on $S_2$ through $g_\Bool$. This means that in every possible assignment $a \in \pAss[\bar{S}_2]$ we have $a(\bar{f}_1(\tstmt_1)) = a(\bar{f}_2(\tstmt_1))$  and therefore $\bar{f}_1(\tstmt_1) \equiv \bar{f}_2(\tstmt_1)$. Then $\bar{f}_1$ and $\bar{f}_2$ are equivalent.
 \end{proof}
 
 
@@ -2228,7 +2228,7 @@ Each line will tell us what statements are compatible and given the truth values
 	Let $S_v \subseteq S$ be set of statements \statement{$\stmt_x \narrower \stmt_y$}=\statement{$\stmt_x \ncomp \NOT \stmt_y$}=$\NOT$\statement{$\stmt_x \comp \NOT \stmt_y$} such that $\stmt_x \in \edomain_{X}$ and $\stmt_y \in \edomain_{Y}$ are verifiable. The set of verifiable statements $\vstmtSet \subseteq \logCtx$ for the relationship context is the set of statements generated by $S_v$ using finite conjunction and countable disjunctions.
 \end{defn}
 \begin{justification}
-	By constructions, the relationship context satisfies the axioms for a logical context. We have a set of elements and a set of possible assignments of which one is the truth, this satisfies axioms \ref{ax_statement} and \ref{ax_possible_assignemetns}. Some of the statements are verifiable and satisfy \ref{ax_verifiable_statements}. Closure for axioms \ref{ax_functions_of_statement}, \ref{ax_verifiable_AND} and \ref{ax_verifiable_OR} are satisfied by constructions. We need to clarify why and in what cases this construct makes physical sense.
+	By constructions, the relationship context satisfies the axioms for a logical context. We have a set of elements and a set of possible assignments of which one is the truth, this satisfies axioms \ref{pm-vs-axiomContext} and \ref{pm-vs-axiomPossibility}. Some of the statements are verifiable and satisfy \ref{pm-vs-axiomVerifiability}. Closure for axioms \ref{pm-vs-axiomClosure}, \ref{pm-vs-axiomFiniteConjunction} and \ref{pm-vs-axiomCountableDisjunction} are satisfied by constructions. We need to clarify why and in what cases this construct makes physical sense.
 	
 	The set $\{ \logCtx_i \}_{i \in I}$ consists of different contexts, each containing a copy of the domains $\edomain_X$ and $\edomain_Y$ with a different relationship between them. For example, if $\edomain_X$ is the domain for a light switch, up or down being the possibilities, and $\edomain_Y$ is the domain for the light, being on or off, in one context the two domain may have a causal relationship (i.e. the switch is wired to the light), in another they may have a different causal relationship (i.e. the switch is wired in the wrong way), and in yet another they may be independent (i.e. switch is not wired with the light). The logic isomorphisms $\{f_{i}\}_{i \in I}$ and $\{g_{i}\}_{i \in I}$ allow us to relate the statements that represent the same  assertion in the different contexts.
 	
@@ -2245,7 +2245,7 @@ Now that we have the right context, we have to understand what is the right basi
 	\begin{proof}
 		The only thing that needs to be checked is that the basis that generates $\edomain_{C(X,Y)}$ is countable. Since $\basis_X$ and $\basis_Y$ are countable, the set of statements of the form $\mathbin{\narrower}(\stmt[e]_x, \stmt[e]_y)$ with $\stmt[e]_x \in \basis_X$ and $ \stmt[e]_y \in \basis_Y$ is also countable.
 	\end{proof}
-\begin{prop}\label{2_prop_relationship_domain_is_space_of_continuous_functions}
+\begin{prop}\label{pm-cd-relationshipDomainIsContinuousFunctions}
 	The possibilities for a relationship domain $\edomain_{C(X,Y)}$ coincide with the possible experimental relationships between $X$ and $Y$. That is, for each possibility $z$ of $\edomain_{C(X,Y)}$ there exists a continuous function $f_z : X \to Y$ such that $z\equiv\bigAND\limits_{x\in X} ``x \narrower f_z(x)"$ and an $i \in I$ such that $\bar{g}_i(f_z(\bar{f}_i^{-1}(x_i))) \equiv f_c (x_i)$ for all $x_i \in X_i$ where $f_c$ is the causal relationship between $\edomain_{X_i}$ and $\edomain_{Y_i}$.
 \end{prop}
 \begin{proof}
@@ -2370,7 +2370,7 @@ We call a natural order for the possibility a linear order on them such that the
 	Let $(\mathcal{Q}, \leq)$ and $(\mathcal{P}, \leq)$ be two ordered sets. A function $f : \mathcal{Q} \to \mathcal{P}$ is \textbf{increasing} if for every $q_1, q_2 \in \mathcal{Q}$, $q_1 \leq q_2$ implies $f(q_1) \leq f(q_2)$. It is an \textbf{order isomorphism} if it is bijective and, for every $q_1, q_2 \in \mathcal{Q}$, $q_1 \leq q_2$ if and only if $f(q_1) \leq f(q_2)$.
 \end{defn}
 
-\begin{thrm}[Property ordering theorem]\label{3_thrm_property_ordering}
+\begin{thrm}[Property ordering theorem]\label{pm-pq-propertyOrdering}
 	An experimental domain $\edomain_X$ is fully characterized by a quantity $(\mathcal{Q}, \leq, q)$ if and only if it is naturally ordered and the possibilities are order isomorphic to the quantity.
 \end{thrm}
 \begin{proof}
@@ -2393,20 +2393,20 @@ The main result is that the above characterization of the basis of the domain is
 	Let $\edomain_X$ be a naturally ordered experimental domain and $X$ its possibilities. We define the following notation:
 	\statement{$x < x_1$}$=\bigOR\limits_{\{x \in X \, | \, x < x_1\}} x$, \statement{$x > x_1$}$=\bigOR\limits_{\{x \in X \, | \, x > x_1\}} x$, \statement{$x \leq x_1$}$=\bigOR\limits_{\{x \in X \, | \, x \leq x_1\}} x$ and \statement{$x \geq x_1$}$=\bigOR\limits_{\{x \in X \, | \, x \geq x_1\}} x$. That is, they represent statements like \statement{the value of the quantity $x$ is less than $x_1$}.
 \end{defn}
-\begin{coro}\label{3_coro_not_after_is_before_or_on}
+\begin{coro}\label{pm-pq-notAfterIsBeforeOrOn}
 	Based on the previous notation, $``x \leq x_1"\equiv \NOT ``x > x_1"$ and $``x \geq x_1"\equiv \NOT ``x < x_1"$.
 \end{coro}
 \begin{proof}
 	Note that $``x \leq x_1" \OR ``x > x_1" \equiv \bigOR\limits_{x \in X} x \equiv \certainty$ while $``x \leq x_1" \AND ``x > x_1" \equiv \bigOR\limits_{x \in \emptyset} x \equiv \impossibility$. Therefore one is the negation of the other. Similarly $``x < x_1" \OR ``x \geq x_1" \equiv \bigOR\limits_{x \in X} x \equiv \certainty$ while $``x < x_1" \AND ``x \geq x_1" \equiv \bigOR\limits_{x \in \emptyset} x \equiv \impossibility$.
 \end{proof}
-\begin{defn}\label{3_def_before_after_basis}
+\begin{defn}\label{pm-pq-defBeforeAfterBasis}
 	Let $\edomain_X$ be a naturally ordered experimental domain and $X$ its possibilities. Define $\basis_b = \{ ``x < x_1" \, | \, x_1 \in X \}$, $\basis_a = \{ ``x > x_1" \, | \, x_1 \in X \}$ and $B = \basis_b \cup \NOT (\basis_a)$.
 \end{defn}
 \begin{defn}
 	Let $(\mathcal{Q}, \leq)$ be an ordered set. Let $q_1, q_2 \in \mathcal{Q}$. Then $q_2$ is an \textbf{immediate successor} of $q_1$ and $q_1$ is an \textbf{immediate predecessor} of $q_2$ if there is no element strictly between them in the ordering. That is, $q_1 < q_2$ and there is no $q \in \mathcal{Q}$ such that $q_1 < q < q_2$. Two elements are \textbf{consecutive} if one is the immediate successor of the other.
 \end{defn}
 
-\begin{prop}\label{3_prop_basis_ordering}
+\begin{prop}\label{pm-pq-basisOrdering}
 	Let $\edomain_X$ be a naturally ordered experimental domain. Then $(\basis_b, \narrower)$, $(\basis_a, \broader)$ and $(B, \narrower)$ are linearly ordered sets. Moreover $(\basis_b, \narrower)$, $(\basis_a, \broader)$ are order isomorphic to $(X, \leq)$.
 \end{prop}
 \begin{proof}
@@ -2417,7 +2417,7 @@ The main result is that the above characterization of the basis of the domain is
 	To show that $B$ is linearly ordered, let $x_1, x_2 \in X$. If they both come from either $\basis_b$ or $\NOT(\basis_a)$ then they are already ordered by narrowness. If not, consider the two statements $``x < x_1"$ and $``x \leq x_2"\equiv \NOT ``x > x_2"$. As $X$ is linearly ordered, either $\{x \in X \, | \, x < x_1\} \subseteq \{x \in X \, | \, x \leq x_2\}$ or $\{x \in X \, | \, x \leq x_2\} \subseteq \{x \in X \, | \, x < x_1\}$. Therefore either $``x < x_1" \narrower ``x \leq x_2"$ or $``x \leq x_2" \narrower ``x < x_1"$. Which means $B = \basis_b \cup \NOT(\basis_a)$ is linearly ordered by $\narrower$.
 \end{proof}
 
-\begin{prop}\label{3_prop_generated_order}
+\begin{prop}\label{pm-pq-generatedOrder}
 	Let $\basis_b$ and $\basis_a$ be two sets of verifiable statements such that $B = \basis_b \cup \NOT(\basis_a)$ is linearly ordered by narrowness. Let $\edomain_b$ and $\edomain_a$ be the experimental domains they respectively generate and $D = \edomain_b \cup \NOT(\edomain_a)$. Then $(\edomain_b, \narrower)$, $(\edomain_a, \broader)$ and $(D, \narrower)$ are linearly ordered.
 \end{prop}
 
@@ -2431,7 +2431,7 @@ The main result is that the above characterization of the basis of the domain is
 	To show that $D=\edomain_b \cup \NOT (\edomain_a)$ is linearly ordered by narrowness, we only need to show that the countable disjunctions of elements of $\basis_b$ are either narrower or broader than the countable conjunctions of the negations of elements of $\basis_a$. Let $B_1 \subset \basis_b$ and $A_2 \subset \basis_a$. The disjunction $\stmt[b]_1 = \bigOR\limits_{\stmt[b] \in B_1} \stmt[b]$ represents the narrowest statement that is broader than all elements of $B_1$ while the conjunction $\NOT \stmt[a]_2 = \NOT \bigOR\limits_{\stmt[a] \in A_2} \stmt[a] = \bigAND\limits_{\stmt[a] \in A_2} \NOT \stmt[a]$ represents the broadest statement that is narrower than all elements of $\NOT(A_2)$. Suppose that for one element of $\NOT(A_2)$ we can find a broader statement in $B_1$. Then $\stmt[b]_1$, being broader than all elements in $B_1$, will be broader than that one element in $\NOT(A_2)$. But since $\NOT \stmt[a]_2$ is narrower than all elements in $\NOT(A_2)$, we have $\NOT \stmt[a]_2 \narrower \stmt[b]_1$. Conversely, suppose that for no element of $\NOT(A_2)$ we can find a broader statement in $B_1$. As $B$ is linearly ordered, it means that all elements in $\NOT(A_2)$ are broader than all elements in $B_1$. This means that all elements in $\NOT(A_2)$ are broader than $\stmt[b]_1$ and therefore $\stmt[b]_1 \narrower \NOT \stmt[a]_2$. Therefore $D$ is linearly ordered by narrowness.
 \end{proof}
 
-\begin{thrm}[Domain ordering theorem]\label{3_thrm_domain_ordering_theorem}
+\begin{thrm}[Domain ordering theorem]\label{pm-pq-domainOrderingTheorem}
 	An experimental domain $\edomain_X$ is naturally ordered if and only if it is the combination of two experimental domains $\edomain_X = \edomain_a \times \edomain_b$ such that:
 	\begin{enumerate}[label=(\roman*)]
 		\item $D = \edomain_b \cup \NOT(\edomain_a)$ is linearly ordered by narrowness
@@ -2441,9 +2441,9 @@ The main result is that the above characterization of the basis of the domain is
 \end{thrm}
 
 \begin{proof}
-	Let $\edomain_X$ be a naturally ordered experimental domain. Let $\basis_b$ and $\basis_a$ be defined as in \ref{3_def_before_after_basis} which means $\basis = \basis_b \cup \basis_a$ is the basis that generates the order topology. Let $\edomain_b$ be the domain generated by $\basis_b$ and $\edomain_a$ be the domain generated by $\basis_a$. Then $\edomain_X$ is generated from $\edomain_b$ and $\edomain_a$ by finite conjunction and countable disjunction and therefore $\edomain_X = \edomain_b \times \edomain_a$.
+	Let $\edomain_X$ be a naturally ordered experimental domain. Let $\basis_b$ and $\basis_a$ be defined as in \ref{pm-pq-defBeforeAfterBasis} which means $\basis = \basis_b \cup \basis_a$ is the basis that generates the order topology. Let $\edomain_b$ be the domain generated by $\basis_b$ and $\edomain_a$ be the domain generated by $\basis_a$. Then $\edomain_X$ is generated from $\edomain_b$ and $\edomain_a$ by finite conjunction and countable disjunction and therefore $\edomain_X = \edomain_b \times \edomain_a$.
 	
-	To prove (i), we have that $\basis_b$ and $\basis_a$ are linearly ordered by \ref{3_prop_basis_ordering}. We need to show that the linear ordering holds across the sets. Let $x_1, x_2 \in X$ and consider the two statements $``x < x_1"$ and $``x \leq x_2"\equiv \NOT ``x > x_2"$. As $X$ is linearly ordered, either $\{x \in X \, | \, x < x_1\} \subseteq \{x \in X \, | \, x \leq x_2\}$ or $\{x \in X \, | \, x \leq x_2\} \subseteq \{x \in X \, | \, x < x_1\}$. Therefore either $``x < x_1" \narrower ``x \leq x_2"$ or $``x \leq x_2" \narrower ``x < x_1"$. Which means $B = \basis_b \cup \NOT(\basis_a)$ is linearly ordered by $\narrower$. By \ref{3_prop_generated_order} the set $D = \edomain_b \cup \NOT(\edomain_a)$ is also linearly ordered.
+	To prove (i), we have that $\basis_b$ and $\basis_a$ are linearly ordered by \ref{pm-pq-basisOrdering}. We need to show that the linear ordering holds across the sets. Let $x_1, x_2 \in X$ and consider the two statements $``x < x_1"$ and $``x \leq x_2"\equiv \NOT ``x > x_2"$. As $X$ is linearly ordered, either $\{x \in X \, | \, x < x_1\} \subseteq \{x \in X \, | \, x \leq x_2\}$ or $\{x \in X \, | \, x \leq x_2\} \subseteq \{x \in X \, | \, x < x_1\}$. Therefore either $``x < x_1" \narrower ``x \leq x_2"$ or $``x \leq x_2" \narrower ``x < x_1"$. Which means $B = \basis_b \cup \NOT(\basis_a)$ is linearly ordered by $\narrower$. By \ref{pm-pq-generatedOrder} the set $D = \edomain_b \cup \NOT(\edomain_a)$ is also linearly ordered.
 
 	To prove (ii), let $\stmt_b \in \edomain_b$. Take $\stmt_a \in \edomain_a$ such that $\NOT \stmt_a$ is the narrowest statement in $\NOT (\edomain_a)$ that is broader than $\stmt_b$. This exists because $\edomain_a$ is closed by infinite disjunction. As $\NOT \stmt_a \broader \stmt_b$, let $X_1$ be the set of possibilities compatible with $\NOT \stmt_a$ but not compatible with $\stmt_b$. The set cannot have more than one element, or we could find an element $x_1 \in X_1$ such that $\stmt_b \narrower ``x \leq x_1" \snarrower \NOT \stmt_a$. If $X_1$ contains one possibility, then $\NOT \stmt_a$ is the immediate successor. If $X_1$ is empty then $\stmt_b \equiv \NOT \stmt_a$. Similarly, we can start with $\stmt_a \in \edomain_a$ and find $\stmt_b \in \edomain_b$ such that $\stmt_b$ is the broadest statement in $\edomain_b$ that is narrower than $\NOT \stmt_a$. Let $X_1$ be the set of possibilities compatible with $\NOT \stmt_a$ but not compatible with $\stmt_b$. If $X_1$ contains one possibility, then $\NOT \stmt_a$ is the immediate successor and if $X_1$ is empty then $\stmt_b \equiv \NOT \stmt_a$.
 	
@@ -2493,9 +2493,9 @@ A \textbf{beginning reference} has nothing before it. That is, $\stmt[b] \equiv 
 	Let $(\stmt[b], \stmt[o], \stmt[a])$ be a reference. Then $\stmt[b] \OR \stmt[o] \OR \stmt[a] \equiv \certainty$.
 \end{coro}
 \begin{proof}
-	By definition, we have $\NOT \stmt[b] \AND \NOT \stmt[a] \narrower \stmt[o]$ and by \ref{prop_narrowness_properties} $\NOT (\NOT \stmt[b] \AND \NOT \stmt[a]) \OR \stmt[o] \equiv \certainty \equiv \stmt[b] \OR \stmt[a] \OR \stmt[o]$.
+	By definition, we have $\NOT \stmt[b] \AND \NOT \stmt[a] \narrower \stmt[o]$ and by \ref{pm-vs-narrownessProperties} $\NOT (\NOT \stmt[b] \AND \NOT \stmt[a]) \OR \stmt[o] \equiv \certainty \equiv \stmt[b] \OR \stmt[a] \OR \stmt[o]$.
 \end{proof}
-\begin{defn}\label{3_def_reference}
+\begin{defn}\label{pm-pq-defReference}
 	A reference $\refStmt_1 = (\stmt[b]_1, \stmt[o]_1, \stmt[a]_1)$ is \textbf{finer} than another reference $\refStmt_2 = (\stmt[b]_2, \stmt[o]_2, \stmt[a]_2)$ if $\stmt[b]_1 \broader \stmt[b]_2$, $\stmt[o]_1 \narrower \stmt[o]_2$ and $\stmt[a]_1 \broader \stmt[a]_2$.
 \end{defn}
 \begin{coro}
@@ -2533,7 +2533,7 @@ Mathematically, this type of ordering is strict in the sense that it defines wha
 \begin{proof}
 	For irreflexivity, since the on statement can't be impossible, we have $\stmt[o] \comp \stmt[o]$ and therefore $\stmt[b] \OR \stmt[o] \comp \stmt[o] \OR \stmt[a]$. Therefore a reference is not before itself and the relationship is irreflexive.
 	
-	For transitivity, if $\refStmt_1 < \refStmt_2$, we have $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$ and therefore $\NOT (\stmt[b]_1 \OR \stmt[o]_1) \broader \stmt[o]_2 \OR \stmt[a]_2$ by \ref{prop_narrowness_properties}. Since $\stmt[b]_1 \OR \stmt[o]_1 \OR \stmt[a]_1 \equiv \certainty$, we have $\stmt[a]_1 \broader \NOT (\stmt[b]_1 \OR \stmt[o]_1)$. Similarly if $\refStmt_2 < \refStmt_3$ we'll have $\stmt[a]_2 \broader \NOT (\stmt[b]_2 \OR \stmt[o]_2) \broader \stmt[o]_3 \OR \stmt[a]_3$. Putting it all together $\NOT (\stmt[b]_1 \OR \stmt[o]_1) \broader \stmt[o]_2 \OR \stmt[a]_2 \broader \stmt[a]_2 \broader \NOT (\stmt[b]_2 \OR \stmt[o]_2) \broader \stmt[o]_3 \OR \stmt[a]_3$, which means $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_3 \OR \stmt[a]_3$.
+	For transitivity, if $\refStmt_1 < \refStmt_2$, we have $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$ and therefore $\NOT (\stmt[b]_1 \OR \stmt[o]_1) \broader \stmt[o]_2 \OR \stmt[a]_2$ by \ref{pm-vs-narrownessProperties}. Since $\stmt[b]_1 \OR \stmt[o]_1 \OR \stmt[a]_1 \equiv \certainty$, we have $\stmt[a]_1 \broader \NOT (\stmt[b]_1 \OR \stmt[o]_1)$. Similarly if $\refStmt_2 < \refStmt_3$ we'll have $\stmt[a]_2 \broader \NOT (\stmt[b]_2 \OR \stmt[o]_2) \broader \stmt[o]_3 \OR \stmt[a]_3$. Putting it all together $\NOT (\stmt[b]_1 \OR \stmt[o]_1) \broader \stmt[o]_2 \OR \stmt[a]_2 \broader \stmt[a]_2 \broader \NOT (\stmt[b]_2 \OR \stmt[o]_2) \broader \stmt[o]_3 \OR \stmt[a]_3$, which means $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_3 \OR \stmt[a]_3$.
 \end{proof}
 \begin{coro}
 	The relationship $\refStmt_1 \leq \refStmt_2$, defined to be true if $\refStmt_1 < \refStmt_2$ or $\refStmt_1 = \refStmt_2$, is a partial order.
@@ -2553,14 +2553,14 @@ Note that if a reference is strict, before and after statements are not compatib
 	Two references $\refStmt_1 = (\stmt[b]_1, \stmt[o]_1, \stmt[a]_1)$ and $\refStmt_2 = (\stmt[b]_2, \stmt[o]_2, \stmt[a]_2)$ are \textbf{aligned} if for any $\stmt_1 \in \{ \stmt[b]_1, \NOT\stmt[a]_1\}$ and $\stmt_2 \in \{ \stmt[b]_2, \NOT\stmt[a]_2\}$ we have 
 	$\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$. A set $R$ of references is aligned if every pair of references is aligned.
 \end{defn}
-\begin{prop}\label{3_prop_strict_alignment_is_ordering}
+\begin{prop}\label{pm-pq-strictAlignmentIsOrdering}
 	Let $R = \{(\stmt[b]_i, \stmt[o]_i, \stmt[a]_i)\}_{i\in I}$ be a set of aligned strict references. Let $\basis_b = \{\stmt[b]_i\}_{i\in I}$ and $\basis_a = \{\stmt[a]_i\}_{i\in I}$ be respectively the sets of before and after statements. Then the set $B = \basis_b \cup \NOT (\basis_a)$ is linearly ordered by narrowness.
 \end{prop}
 \begin{proof}
-	Let $R$ be a set of aligned strict references. Let $\stmt_1, \stmt_2 \in B$. Suppose they are taken from the same reference. If they are both before statements or both after statements, we have $\stmt_1 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$. If one is the before statement and the other is the not-after statement, since the reference is strict, we have $\stmt[b] \ncomp \stmt[a]$ and $\stmt[b] \narrower \NOT\stmt[a]$ by \ref{prop_narrowness_properties} and therefore $\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$. Now suppose they are taken from different references. Since they are aligned we have  $\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$ by definition.
+	Let $R$ be a set of aligned strict references. Let $\stmt_1, \stmt_2 \in B$. Suppose they are taken from the same reference. If they are both before statements or both after statements, we have $\stmt_1 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$. If one is the before statement and the other is the not-after statement, since the reference is strict, we have $\stmt[b] \ncomp \stmt[a]$ and $\stmt[b] \narrower \NOT\stmt[a]$ by \ref{pm-vs-narrownessProperties} and therefore $\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$. Now suppose they are taken from different references. Since they are aligned we have  $\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$ by definition.
 \end{proof}
 
-\begin{prop}\label{3_prop_ordered_references_are_aligned}
+\begin{prop}\label{pm-pq-orderedReferencesAreAligned}
 	Let $\refStmt_1 = ( \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 )$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 )$ be two references. If $\refStmt_1 \less \refStmt_2$ then $\stmt[b]_1 \narrower \stmt[b]_2$, $\stmt[a]_2 \narrower \stmt[a]_1$, $\stmt[b]_1 \narrower \NOT \stmt[a]_2$, $\NOT \stmt[a]_1 \narrower \stmt[b]_2$ and therefore the two references are aligned.
 \end{prop}
 \begin{proof}
@@ -2574,34 +2574,34 @@ Note that if a reference is strict, before and after statements are not compatib
 	
 	Since $\stmt[b]_1 \narrower \stmt[b]_2$, $\stmt[a]_2 \narrower \stmt[a]_1$, $\stmt[b]_1 \narrower \NOT \stmt[a]_2$ and $\NOT \stmt[a]_1 \narrower \stmt[b]_2$, the two references are aligned.
 \end{proof}
-\begin{prop}\label{3_prop_strict_references_ordering_condition}
+\begin{prop}\label{pm-pq-strictReferencesOrderingCondition}
 	Let $\refStmt_1 = ( \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 )$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 )$ be two strict references. Then $\refStmt_1 \less \refStmt_2$ if and only if $\NOT \stmt[a]_1 \narrower \stmt[b]_2$ .
 \end{prop}
 \begin{proof}
-	Let $\refStmt_1 \less \refStmt_2$. By \ref{3_prop_ordered_references_are_aligned}, we have $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Conversely, let $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Then $\NOT \stmt[a]_1 \ncomp \NOT \stmt[b]_2$. Because the references are strict, $\NOT \stmt[a]_1 \equiv \stmt[b]_1 \OR \stmt[o]_1$ and $\NOT \stmt[b]_2 \equiv \stmt[o]_2 \OR \stmt[a]_2$. Therefore $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$ and $\refStmt_1 \less \refStmt_2$ by definition.
+	Let $\refStmt_1 \less \refStmt_2$. By \ref{pm-pq-orderedReferencesAreAligned}, we have $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Conversely, let $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Then $\NOT \stmt[a]_1 \ncomp \NOT \stmt[b]_2$. Because the references are strict, $\NOT \stmt[a]_1 \equiv \stmt[b]_1 \OR \stmt[o]_1$ and $\NOT \stmt[b]_2 \equiv \stmt[o]_2 \OR \stmt[a]_2$. Therefore $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$ and $\refStmt_1 \less \refStmt_2$ by definition.
 \end{proof}
 
 \begin{defn}
 	A reference is the \textbf{immediate} predecessor of another if nothing can be found before the second and after the first. Formally, $\refStmt_1 \less \refStmt_2$ and $\stmt[a]_1 \ncomp \stmt[b]_2$. Two references are \textbf{consecutive} if one is the immediate successor of the other.
 \end{defn}
 
-\begin{prop}\label{3_prop_immediately_before_is_not_after}
+\begin{prop}\label{pm-pq-immediatelyBeforeIsNotAfter}
 	Let $\refStmt_1 = ( \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 )$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 )$ be two references. If $\refStmt_1$ is immediately before $\refStmt_2$ then $\stmt[b]_2 \equiv \NOT \stmt[a]_1$.
 \end{prop}
 \begin{proof}
-	Let $\refStmt_1$ be immediately before $\refStmt_2$. Then $\stmt[a]_1 \ncomp \stmt[b]_2$ which means $\stmt[b]_2 \narrower \NOT \stmt[a]_1$. By \ref{3_prop_ordered_references_are_aligned} we also have $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Therefore $\stmt[b]_2 \equiv \NOT \stmt[a]_1$.
+	Let $\refStmt_1$ be immediately before $\refStmt_2$. Then $\stmt[a]_1 \ncomp \stmt[b]_2$ which means $\stmt[b]_2 \narrower \NOT \stmt[a]_1$. By \ref{pm-pq-orderedReferencesAreAligned} we also have $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Therefore $\stmt[b]_2 \equiv \NOT \stmt[a]_1$.
 \end{proof}
 
-\begin{prop}\label{3_prop_strict_consecutive_before_is_not_after}
+\begin{prop}\label{pm-pq-strictConsecutiveBeforeIsNotAfter}
 	Let $\refStmt_1 = ( \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 )$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 )$ be two strict references. Then $\refStmt_1$ is immediately before $\refStmt_2$ if and only if $\stmt[b]_2 \equiv \NOT \stmt[a]_1$.
 \end{prop}
 \begin{proof}
-	Let $\refStmt_1$ be immediately before $\refStmt_2$. Then $\stmt[b]_2 \equiv \NOT \stmt[a]_1$ by \ref{3_prop_immediately_before_is_not_after}. Conversely, let $\stmt[b]_2 \equiv \NOT \stmt[a]_1$. Then $\refStmt_1 \less \refStmt_2$ by \ref{3_prop_strict_references_ordering_condition}. We also have $\stmt[a]_1 \ncomp \NOT \stmt[a]_1$, therefore $\stmt[a]_1 \ncomp \stmt[b]_2$ and $\refStmt_1$ is immediately before $\refStmt_2$ by definition.
+	Let $\refStmt_1$ be immediately before $\refStmt_2$. Then $\stmt[b]_2 \equiv \NOT \stmt[a]_1$ by \ref{pm-pq-immediatelyBeforeIsNotAfter}. Conversely, let $\stmt[b]_2 \equiv \NOT \stmt[a]_1$. Then $\refStmt_1 \less \refStmt_2$ by \ref{pm-pq-strictReferencesOrderingCondition}. We also have $\stmt[a]_1 \ncomp \NOT \stmt[a]_1$, therefore $\stmt[a]_1 \ncomp \stmt[b]_2$ and $\refStmt_1$ is immediately before $\refStmt_2$ by definition.
 \end{proof}
 
 \end{mathSection}
 
-If we have a set of references, we can generate an experimental domain by using the before and after statements as the basis. More specifically we can take all the before statements and generate the before domain $\edomain_b$ and all the after statements and generate the after domain $\edomain_a$. If the references are all strict and aligned, the set $D=\edomain_b \cup \NOT (\edomain_a)$ of all the before and not-after statements will be linearly ordered by narrowness. We recognize this as the first requirement of the domain ordering theorem \ref{3_thrm_domain_ordering_theorem}.
+If we have a set of references, we can generate an experimental domain by using the before and after statements as the basis. More specifically we can take all the before statements and generate the before domain $\edomain_b$ and all the after statements and generate the after domain $\edomain_a$. If the references are all strict and aligned, the set $D=\edomain_b \cup \NOT (\edomain_a)$ of all the before and not-after statements will be linearly ordered by narrowness. We recognize this as the first requirement of the domain ordering theorem \ref{pm-pq-domainOrderingTheorem}.
 
 \begin{mathSection}
 
@@ -2613,18 +2613,18 @@ If we have a set of references, we can generate an experimental domain by using 
 	Let $\edomain$ be a domain generated by a set of references $R$. A reference $\refStmt = ( \stmt[b], \stmt[o], \stmt[a] )$ is said to be aligned with $\edomain$ if $\stmt[b] \in \edomain_b$ and $\stmt[a] \in \edomain_a$.
 \end{defn}
 
-\begin{prop}\label{3_prop_basis_generate_ordering}
+\begin{prop}\label{pm-pq-basisGenerateOrdering}
 	Let $\edomain$ be an experimental domain generated by a set of aligned strict references $R$ and let $D=\edomain_b \cup \NOT (\edomain_a)$. Then $(D, \narrower)$ is linearly ordered.
 \end{prop}
 \begin{proof}
-	By \ref{3_prop_strict_alignment_is_ordering} we have that $B = \basis_b \cup \NOT(\basis_a)$ is aligned by narrowness. By \ref{3_prop_generated_order} the ordering extends to $D$.
+	By \ref{pm-pq-strictAlignmentIsOrdering} we have that $B = \basis_b \cup \NOT(\basis_a)$ is aligned by narrowness. By \ref{pm-pq-generatedOrder} the ordering extends to $D$.
 \end{proof}
 
 \end{mathSection}
 
 Having a set of aligned references is not necessarily enough to cover the whole space at all levels of precision. To do that we need to make sure that, for example, between two references that are not consecutive we can at least put a reference in between. Or that if we have two references that overlap, we can break them apart into finer ones that do not overlap and one is after the other.
 
-We call a set of references refinable if the domain they generate has the above mentioned properties. This allows us to break up the whole domain into a sequence of references that do not overlap, are linearly ordered and that cover the whole space. As we get to the finest references, their before statements will be immediately followed by the negation of their after statements, since there can't be any reference in between. Conceptually, this will give us the second and the third condition of the domain ordering theorem \ref{3_thrm_domain_ordering_theorem}.
+We call a set of references refinable if the domain they generate has the above mentioned properties. This allows us to break up the whole domain into a sequence of references that do not overlap, are linearly ordered and that cover the whole space. As we get to the finest references, their before statements will be immediately followed by the negation of their after statements, since there can't be any reference in between. Conceptually, this will give us the second and the third condition of the domain ordering theorem \ref{pm-pq-domainOrderingTheorem}.
 
 \begin{mathSection}
 \begin{defn}
@@ -2635,7 +2635,7 @@ We call a set of references refinable if the domain they generate has the above 
 	\end{itemize}
 \end{defn}
 
-\begin{prop}\label{3_prop_refinable_order_sequences}
+\begin{prop}\label{pm-pq-refinableOrderSequences}
 	Let $\edomain$ be an experimental domain generated by a set of refinable aligned strict references $R$.
 	\begin{enumerate}
 		\item If $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ such that $\stmt[b]_1 \snarrower \stmt[b]_2$, then there exists $\stmt[a] \in \edomain_a$ such that $\stmt[b]_1 \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
@@ -2651,28 +2651,28 @@ We call a set of references refinable if the domain they generate has the above 
 	For the third, suppose $\stmt[a]_1 \in \edomain_a$ and $\stmt[b]_2\in \edomain_b$ such that $\NOT \stmt[a]_1 \snarrower \stmt[b]_2$. Then $\refStmt_1 = ( \impossibility, \NOT \stmt[a]_1, \stmt[a]_1 )$ and  $\refStmt_2 = ( \stmt[b]_2, \NOT \stmt[b]_2, \impossibility)$ are strict references aligned with the domain such that $\refStmt_1 \less \refStmt_2$ but $\refStmt_2$ is not an immediate successor of $\refStmt_1$. This means we can find $\refStmt_3 = ( \stmt[b], \NOT \stmt[b] \AND \NOT \stmt[a], \stmt[a] )$ such that $\refStmt_1 < \refStmt_3 < \refStmt_2$ and therefore $\NOT \stmt[a]_1 \narrower \stmt[b] \snarrower \NOT \stmt[a] \narrower \NOT \stmt[b]_2$.
 \end{proof}
 
-\begin{prop}\label{3_prop_refinable_is_pair_ordering}
+\begin{prop}\label{pm-pq-refinableIsPairOrdering}
 	Let $\edomain$ be an experimental domain generated by a set of refinable aligned strict references. Then all elements of $D$ are part of a pair $(\stmt_b, \NOT \stmt_a)$ such that $\stmt_b \in \edomain_b$, $\stmt_a \in \edomain_a$ and $\NOT \stmt_a$ is the immediate successor of $\stmt_b$ in $D$ or $\stmt_b \equiv \NOT \stmt_a$. Moreover if $\stmt \in D$ has an immediate successor, then $\stmt \in \edomain_b$.
 \end{prop}
 \begin{proof}
 	Let $\edomain$ be an experimental domain generated by a set of refinable aligned strict references. Let $\stmt_b \in \edomain_b$. Let $A=\{\stmt[a] \in \edomain_a \, | \, \stmt[a] \OR \stmt_b \nequiv \certainty \}$. Let $\stmt_a=\bigOR\limits_{\stmt[a] \in A} \stmt[a]$. First we show that $\stmt_b \narrower \NOT \stmt_a$. We have $\stmt_b \AND \NOT \stmt_a \equiv \stmt_b \AND \NOT \bigOR\limits_{\stmt[a] \in A} \stmt[a] \equiv \stmt_b \AND \bigAND\limits_{\stmt[a] \in A} \NOT \stmt[a] \equiv \bigAND\limits_{\stmt[a] \in A} \stmt_b \AND \NOT \stmt[a]$. For all $\stmt[a] \in A$ we have $\stmt[a] \OR \stmt_b \nequiv \certainty$, $\NOT \stmt[a] \nnarrower \stmt_b$ which means $\stmt_b \narrower \NOT \stmt[a]$ because of the total order of $D$. This means that $\stmt_b \AND \NOT \stmt[a] \equiv \stmt_b$ for all $\stmt[a] \in A$, therefore $\stmt_b \AND \NOT \stmt_a \equiv \stmt_b$ and $\stmt_b \narrower \NOT \stmt_a$.
 	
-	Next we show that no statement $\stmt \in D$ is such that $\stmt_b \snarrower \stmt \snarrower \NOT \stmt_a$. Let $\stmt[a] \in \edomain_a$ such that $\stmt_b \snarrower \NOT \stmt[a]$. By construction $\stmt[a] \in A$ and therefore $\NOT \stmt_a \narrower \NOT \stmt[a]$. Therefore we can't have $\stmt_b \snarrower \stmt[a] \snarrower \NOT \stmt_a$. We also can't have $\stmt[b] \in \edomain_b$ such that $\stmt_b \snarrower \stmt[b] \snarrower \NOT \stmt_a$: by \ref{3_prop_refinable_order_sequences} we'd find $\stmt[a] \in \edomain_a$ such that $\stmt_b \snarrower \stmt[a] \narrower \stmt[b] \snarrower \NOT \stmt_a$ which was ruled out. So there are two cases. Either $\stmt_b \nequiv \NOT \stmt_a$ then $\stmt_b \snarrower \NOT \stmt_a$: $\NOT \stmt_a$ is the immediate successor of $\stmt[b]$. Or $\stmt_b \equiv \NOT \stmt_a$.
+	Next we show that no statement $\stmt \in D$ is such that $\stmt_b \snarrower \stmt \snarrower \NOT \stmt_a$. Let $\stmt[a] \in \edomain_a$ such that $\stmt_b \snarrower \NOT \stmt[a]$. By construction $\stmt[a] \in A$ and therefore $\NOT \stmt_a \narrower \NOT \stmt[a]$. Therefore we can't have $\stmt_b \snarrower \stmt[a] \snarrower \NOT \stmt_a$. We also can't have $\stmt[b] \in \edomain_b$ such that $\stmt_b \snarrower \stmt[b] \snarrower \NOT \stmt_a$: by \ref{pm-pq-refinableOrderSequences} we'd find $\stmt[a] \in \edomain_a$ such that $\stmt_b \snarrower \stmt[a] \narrower \stmt[b] \snarrower \NOT \stmt_a$ which was ruled out. So there are two cases. Either $\stmt_b \nequiv \NOT \stmt_a$ then $\stmt_b \snarrower \NOT \stmt_a$: $\NOT \stmt_a$ is the immediate successor of $\stmt[b]$. Or $\stmt_b \equiv \NOT \stmt_a$.
 	
 	The same reasoning can be applied starting from $\stmt_a \in \edomain_a$ to find a $\stmt_b \in \edomain_b$ such that $\stmt_b$ is the immediate predecessor of $\NOT \stmt_a$ or an equivalent statement. This shows that all elements of $D$ are paired.
 	
-	To show that if a statement in $D$ has a successor then it must be a before statement, let $\stmt_1, \stmt_2 \in D$ such that $\stmt_2$ is the immediate successor of $\stmt_1$. By \ref{3_prop_refinable_order_sequences}, in all cases where $\stmt_1 \notin \edomain_b$ and $\stmt_2 \notin \edomain_a$ we can always find another statement between the two. Then we must have that $\stmt_1 \in \edomain_b$ and $\stmt_2 \in \edomain_a$.
+	To show that if a statement in $D$ has a successor then it must be a before statement, let $\stmt_1, \stmt_2 \in D$ such that $\stmt_2$ is the immediate successor of $\stmt_1$. By \ref{pm-pq-refinableOrderSequences}, in all cases where $\stmt_1 \notin \edomain_b$ and $\stmt_2 \notin \edomain_a$ we can always find another statement between the two. Then we must have that $\stmt_1 \in \edomain_b$ and $\stmt_2 \in \edomain_a$.
 \end{proof}
 
-\begin{thrm}[Reference ordering theorem]\label{3_thrm_reference_ordering}
+\begin{thrm}[Reference ordering theorem]\label{pm-pq-referenceOrderingTheorem}
 	An experimental domain is naturally ordered if and only if it can be generated by a set of refinable aligned strict references.
 \end{thrm}
 \begin{proof}
-	Suppose $\edomain_X$ is an experimental domain generated by a set of refinable aligned strict references. Then by \ref{3_prop_basis_generate_ordering} and \ref{3_prop_refinable_is_pair_ordering} the domain satisfies the requirement of theorem \ref{3_thrm_domain_ordering_theorem} and therefore is naturally ordered.
+	Suppose $\edomain_X$ is an experimental domain generated by a set of refinable aligned strict references. Then by \ref{pm-pq-basisGenerateOrdering} and \ref{pm-pq-refinableIsPairOrdering} the domain satisfies the requirement of theorem \ref{pm-pq-domainOrderingTheorem} and therefore is naturally ordered.
 	
-	Now suppose $\edomain_X$ is naturally ordered. Define the set $\basis_b$, $\basis_a$ and $D$ as in \ref{3_def_before_after_basis}. Let $R = \{ (\stmt[b], \NOT \stmt[b] \AND \NOT \stmt[a], \stmt[a]) \, | \, \stmt[b] \in \basis_b, \stmt[a] \in \basis_a, \stmt[b] \snarrower \NOT \stmt[a] \}$ be the set of all references constructed from the basis. First let us verify they are references. The before and after statements are verifiable since they are part of the basis. The on statement $\NOT \stmt[b] \AND \NOT \stmt[a]$ is not impossible since $\stmt[b] \snarrower \NOT \stmt[a]$ means $\stmt[b] \ncomp \stmt[a]$ and $\stmt[b] \nequiv \NOT \stmt[a]$. The on statement is broader than $\NOT \stmt[b] \AND \NOT \stmt[a]$ as they are equivalent and it is broader than $\stmt[b] \AND \stmt[a]$ as that is impossible since $\stmt[b] \snarrower \NOT \stmt[a]$. Therefore $R$ is a set of references. Since the before and after statements of $R$ coincide with the basis of the domain, $\edomain_X$ is generated by $R$.
+	Now suppose $\edomain_X$ is naturally ordered. Define the set $\basis_b$, $\basis_a$ and $D$ as in \ref{pm-pq-defBeforeAfterBasis}. Let $R = \{ (\stmt[b], \NOT \stmt[b] \AND \NOT \stmt[a], \stmt[a]) \, | \, \stmt[b] \in \basis_b, \stmt[a] \in \basis_a, \stmt[b] \snarrower \NOT \stmt[a] \}$ be the set of all references constructed from the basis. First let us verify they are references. The before and after statements are verifiable since they are part of the basis. The on statement $\NOT \stmt[b] \AND \NOT \stmt[a]$ is not impossible since $\stmt[b] \snarrower \NOT \stmt[a]$ means $\stmt[b] \ncomp \stmt[a]$ and $\stmt[b] \nequiv \NOT \stmt[a]$. The on statement is broader than $\NOT \stmt[b] \AND \NOT \stmt[a]$ as they are equivalent and it is broader than $\stmt[b] \AND \stmt[a]$ as that is impossible since $\stmt[b] \snarrower \NOT \stmt[a]$. Therefore $R$ is a set of references. Since the before and after statements of $R$ coincide with the basis of the domain, $\edomain_X$ is generated by $R$.
 	
-	Now we show that $R$ consists of aligned strict references. We already saw that $\stmt[b] \ncomp \stmt[a]$ and we also have $\NOT \stmt[b] \AND \NOT \stmt[a]$ is incompatible with both $\stmt[b]$ and $\stmt[a]$. The references are strict. To show they are aligned, take two references. The before and not after statements are linearly ordered by \ref{3_prop_basis_ordering} which means the references are aligned.
+	Now we show that $R$ consists of aligned strict references. We already saw that $\stmt[b] \ncomp \stmt[a]$ and we also have $\NOT \stmt[b] \AND \NOT \stmt[a]$ is incompatible with both $\stmt[b]$ and $\stmt[a]$. The references are strict. To show they are aligned, take two references. The before and not after statements are linearly ordered by \ref{pm-pq-basisOrdering} which means the references are aligned.
 	
 	To show $R$ is refinable, note that each reference can be expressed as $(``x < x_1", ``x_1 \leq x \leq x_2", ``x > x_2")$ where $x_1, x_2 \in X$ and $``x_1 \leq x \leq x_2" \equiv ``x \geq x_1" \AND ``x \leq x_2"$. That is, every reference is identified by two possibilities $x_1, x_2$ such that $x_1 \leq x_2$. Therefore take two references $\refStmt_1, \refStmt_2 \in R$ and let $(x_1, x_2)$ and $(x_3, x_4)$ be the respective pair of possibilities we can use to express the references as we have shown. Suppose $\refStmt_1 < \refStmt_2$ but they are not consecutive. Then $``x \leq x_2" \snarrower ``x < x_3"$. That is, we can find $x_5 \in X$ such that  $x_2 < x_5 < x_3$ which means $``x \leq x_2" \narrower ``x < x_5"$ and $``x \leq x_5" \narrower ``x < x_3"$. Therefore the reference $\refStmt_3 \in R$ identified by $(x_5, x_5)$ is between the two references. On the other hand, assume the second reference is finer than the first. Then $x_1 \leq x_3$ and $x_4 \leq x_2$ with either $x_1 \neq x_3$ or $x_4 \neq x_2$. Consider the references $\refStmt_3, \refStmt_4 \in R$ identified by $(x_1, x_1)$ and $(x_2, x_2)$. Either $\refStmt_3 < \refStmt_2$ or $\refStmt_2 < \refStmt_4$. Also note that the before statements of $\refStmt_1$ and $\refStmt_3$ are the same and the after statements of $\refStmt_1$ and $\refStmt_4$ are the same. Therefore we satisfy all the requirements and the set $R$ is refinable by definition.
 \end{proof}
@@ -2739,17 +2739,17 @@ The natural question now is: under what conditions are the possibilities of a do
 	\end{enumerate}
 \end{thrm}
 \begin{proof}
-	For (1) to (2), let $\edomain_X$ be an experimental domain with a natural sparse order and let $X$ be its possibilities. Pick an ordered set $(\mathcal{Q}, \leq)$ that is order isomorphic to the possibilities and let $q: X \to \mathcal{Q}$ be an order isomorphism. By \ref{3_thrm_property_ordering} $\edomain_X$ is fully characterized by $(\mathcal{Q}, \leq, q)$. Since the order on $X$ is sparse, $X$ will be order isomorphic to a contiguous set of integers and so will $\mathcal{Q}$. Therefore $\mathcal{Q}$ has a sparse order as well and is therefore a discrete quantity.
+	For (1) to (2), let $\edomain_X$ be an experimental domain with a natural sparse order and let $X$ be its possibilities. Pick an ordered set $(\mathcal{Q}, \leq)$ that is order isomorphic to the possibilities and let $q: X \to \mathcal{Q}$ be an order isomorphism. By \ref{pm-pq-propertyOrdering} $\edomain_X$ is fully characterized by $(\mathcal{Q}, \leq, q)$. Since the order on $X$ is sparse, $X$ will be order isomorphic to a contiguous set of integers and so will $\mathcal{Q}$. Therefore $\mathcal{Q}$ has a sparse order as well and is therefore a discrete quantity.
 	
-	For (2) to (3), let $\edomain_X$ be an experimental domain fully characterized by $\mathcal{Q}$. Then by \ref{3_thrm_property_ordering} and by \ref{3_thrm_reference_ordering} it is generated by a set of refinable aligned strict references. Let $\refStmt_1$ and $\refStmt_2$ be two references aligned with the domain such that $\refStmt_1 < \refStmt_2$. Then the after statement of $\refStmt_1$ will be of the form $``x > q^{-1}(q_1)"$, the before statement of $\refStmt_2$ will be of the form $``x < q^{-1}(q_2)"$ for some $q_1, q_2 \in \mathcal{Q}$ such that $q_1 < q_2$. Let $\refStmt : \mathcal{Q} \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(q_i) = (``x < q^{-1}(q_i)", ``x \geq q^{-1}(q_i)" \AND ``x \leq q^{-1}(q_i)", ``x > q^{-1}(q_i)")$. Let $C = \{\refStmt_1\} \cup \{\refStmt(q_i) \, | \, q_i \in \mathcal{Q}, q_1 < q_i < q_2  \} \cup \{ \refStmt_2 \}$. This is the longest chain between $\refStmt_1$ and $\refStmt_2$ and it is finite because $\mathcal{Q}$ has a sparse ordering. The set of references that generate the domain, then, must have a sparse ordering.
+	For (2) to (3), let $\edomain_X$ be an experimental domain fully characterized by $\mathcal{Q}$. Then by \ref{pm-pq-propertyOrdering} and by \ref{pm-pq-referenceOrderingTheorem} it is generated by a set of refinable aligned strict references. Let $\refStmt_1$ and $\refStmt_2$ be two references aligned with the domain such that $\refStmt_1 < \refStmt_2$. Then the after statement of $\refStmt_1$ will be of the form $``x > q^{-1}(q_1)"$, the before statement of $\refStmt_2$ will be of the form $``x < q^{-1}(q_2)"$ for some $q_1, q_2 \in \mathcal{Q}$ such that $q_1 < q_2$. Let $\refStmt : \mathcal{Q} \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(q_i) = (``x < q^{-1}(q_i)", ``x \geq q^{-1}(q_i)" \AND ``x \leq q^{-1}(q_i)", ``x > q^{-1}(q_i)")$. Let $C = \{\refStmt_1\} \cup \{\refStmt(q_i) \, | \, q_i \in \mathcal{Q}, q_1 < q_i < q_2  \} \cup \{ \refStmt_2 \}$. This is the longest chain between $\refStmt_1$ and $\refStmt_2$ and it is finite because $\mathcal{Q}$ has a sparse ordering. The set of references that generate the domain, then, must have a sparse ordering.
 	
-	For (3) to (1), let $\edomain_X$ be an experimental domain generated by a set of refinable aligned strict references with a sparse order. By \ref{3_thrm_reference_ordering} $\edomain_X$ has a natural order. Let $\refStmt : X \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(x_i) = (``x < x_i", ``x \geq x_i" \AND ``x \leq x_i", ``x > x_i")$. Let $R=\{ \refStmt(x_i) \, | \, x_i \in X \}$. Then $R$ is order isomorphic to $X$. As the order on $R$ is sparse then the order on $X$ is sparse as well.
+	For (3) to (1), let $\edomain_X$ be an experimental domain generated by a set of refinable aligned strict references with a sparse order. By \ref{pm-pq-referenceOrderingTheorem} $\edomain_X$ has a natural order. Let $\refStmt : X \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(x_i) = (``x < x_i", ``x \geq x_i" \AND ``x \leq x_i", ``x > x_i")$. Let $R=\{ \refStmt(x_i) \, | \, x_i \in X \}$. Then $R$ is order isomorphic to $X$. As the order on $R$ is sparse then the order on $X$ is sparse as well.
 \end{proof}
 \end{mathSection}
 
 Now, consider the examples above of discrete quantities: in each case we can experimentally test whether we have a particular value or not. For example, we are always able to tell whether there are exactly three apples on the table or not.\footnote{Recall that this is not the case with continuous quantities. Because of finite precision, we are able to exclude that a given particle has exactly zero mass but it is not possible to conclusively show that it has zero mass.} This is not a coincidence: there is a direct link between the ability to have consecutive references and decidability.
 
-As we saw before in \ref{3_prop_strict_consecutive_before_is_not_after}, two consecutive references are such that the before statement of one is equal to the negation of the after statement of the other. But since before and after statements are both verifiable, it means their negation is also verifiable: they are decidable. And since before and after statements generate the domain, all statements in the domain are decidable. It turns out that this will work in reverse as well: whenever we have a domain consisting of only decidable statements, we can always create a discrete quantity that fully characterizes the experimental domain.
+As we saw before in \ref{pm-pq-strictConsecutiveBeforeIsNotAfter}, two consecutive references are such that the before statement of one is equal to the negation of the after statement of the other. But since before and after statements are both verifiable, it means their negation is also verifiable: they are decidable. And since before and after statements generate the domain, all statements in the domain are decidable. It turns out that this will work in reverse as well: whenever we have a domain consisting of only decidable statements, we can always create a discrete quantity that fully characterizes the experimental domain.
 
 
 \begin{mathSection}
@@ -2765,9 +2765,9 @@ As we saw before in \ref{3_prop_strict_consecutive_before_is_not_after}, two con
 	\end{prop}
 	
 	\begin{proof}
-		Let $\edomain_X$ be a decidable domain. Then by \ref{1_prop_decidable_domain_properties} the set of possibilities $X$ is countable and by \ref{thrm_decidablity_is_discreteness} the natural topology is discrete. Since $X$ is countable, there exists a bijective map $q: X \to \mathbb{Z}$. The map is a homeomorphism since the topology on both $X$ and $\mathbb{Z}$ is discrete. The domain $\edomain_X$ is fully identified by $(\mathbb{Z}, \leq, q)$.
+		Let $\edomain_X$ be a decidable domain. Then by \ref{pm-vs-decidableDomainProperties} the set of possibilities $X$ is countable and by \ref{pm-vs-decidabilityIsDiscreteness} the natural topology is discrete. Since $X$ is countable, there exists a bijective map $q: X \to \mathbb{Z}$. The map is a homeomorphism since the topology on both $X$ and $\mathbb{Z}$ is discrete. The domain $\edomain_X$ is fully identified by $(\mathbb{Z}, \leq, q)$.
 		
-		Let $\edomain_X$ be fully characterized by $(\mathbb{Z}, \leq, q)$. This means that $q : X \to \mathbb{Z}$ is a homeomorphism. The natural topology for $X$ is therefore discrete and the domain is decidable by \ref{thrm_decidablity_is_discreteness}.
+		Let $\edomain_X$ be fully characterized by $(\mathbb{Z}, \leq, q)$. This means that $q : X \to \mathbb{Z}$ is a homeomorphism. The natural topology for $X$ is therefore discrete and the domain is decidable by \ref{pm-vs-decidabilityIsDiscreteness}.
 	\end{proof}	
 	
 \end{mathSection}
@@ -2808,7 +2808,7 @@ Dense and complete linear orders exclude both the integers and the rationals, bu
 \begin{defn}
 	A linearly ordered set $\mathcal{Q}$ is \textbf{complete} if every non-empty bounded subset of $\mathcal{Q}$ has a supremum. This is, given $A \subset \mathcal{Q}$ such that $B = \{ q \in \mathcal{Q} \, | \, a \leq q \; \forall a \in A \}$ is not empty, then $B$ has a smallest element.
 \end{defn}
-\begin{thrm}\label{3_thrm_real_ordering}
+\begin{thrm}\label{pm-pq-realOrdering}
 	A linearly ordered set is dense, complete and has a countable dense subset if and only if it is order isomorphic to a contiguous subset of real numbers.
 \end{thrm}
 \begin{remark}
@@ -2826,7 +2826,7 @@ Note that the dense order on the references is enough to get a dense complete or
 	\begin{defn}
 		A \textbf{continuous quantity} for an experimental domain $\edomain_X$ is a quantity $(U, \leq, q)$ where $U \subseteq \mathbb{R}$ is a contiguous subset of the real numbers.
 	\end{defn}
-\begin{thrm}[Continuous ordering theorem]\label{3_thrm_continuous_ordering}
+\begin{thrm}[Continuous ordering theorem]\label{pm-pq-continuousOrdering}
 	Let $\edomain_X$ be an experimental domain. Then the following are equivalent:
 	\begin{enumerate}
 		\item the domain has a natural dense complete order that has a countable dense subset
@@ -2835,11 +2835,11 @@ Note that the dense order on the references is enough to get a dense complete or
 	\end{enumerate}
 \end{thrm}
 \begin{proof}
-	For (1) to (2). Let $\edomain_X$ be a domain with a natural dense complete order with a countable dense subset. Then by \ref{3_thrm_real_ordering} it is order isomorphic to a contiguous subset of the real numbers. Then by \ref{3_thrm_property_ordering} the domain is fully characterized by a continuous quantity $(U, \leq, q)$ where $U \subseteq \mathbb{R}$.
+	For (1) to (2). Let $\edomain_X$ be a domain with a natural dense complete order with a countable dense subset. Then by \ref{pm-pq-realOrdering} it is order isomorphic to a contiguous subset of the real numbers. Then by \ref{pm-pq-propertyOrdering} the domain is fully characterized by a continuous quantity $(U, \leq, q)$ where $U \subseteq \mathbb{R}$.
 	
-	For (2) to (3). Let $\edomain_X$ be a domain fully characterized by a continuous quantity. Then by \ref{3_thrm_property_ordering} and by \ref{3_thrm_reference_ordering} it is generated by a set of refinable aligned strict references.	Let $\refStmt_1$ and $\refStmt_2$ be two references aligned with the domain such that $\refStmt_1 < \refStmt_2$. Then the after statement of $\refStmt_1$ will be of the form $``x > q^{-1}(q_1)"$, the before statement of $\refStmt_2$ will be of the form $``x < q^{-1}(q_2)"$ for some $q_1, q_2 \in \mathcal{Q}$ such that $q_1 < q_2$. Let $\refStmt : \mathcal{Q} \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(q_i) = (``x < q^{-1}(q_i)", ``x \geq q^{-1}(q_i)" \AND ``x \leq q^{-1}(q_i)", ``x > q^{-1}(q_i)")$. Let $C = \{\refStmt_1\} \cup \{\refStmt(q_i) \, | \, q_i \in \mathcal{Q}, q_1 < q_i < q_2  \} \cup \{ \refStmt_2 \}$. As $\mathcal{Q}$ is dense, this chain will be infinite. Therefore the domain can be generated by a set of refinable aligned strict references with a dense order.
+	For (2) to (3). Let $\edomain_X$ be a domain fully characterized by a continuous quantity. Then by \ref{pm-pq-propertyOrdering} and by \ref{pm-pq-referenceOrderingTheorem} it is generated by a set of refinable aligned strict references.	Let $\refStmt_1$ and $\refStmt_2$ be two references aligned with the domain such that $\refStmt_1 < \refStmt_2$. Then the after statement of $\refStmt_1$ will be of the form $``x > q^{-1}(q_1)"$, the before statement of $\refStmt_2$ will be of the form $``x < q^{-1}(q_2)"$ for some $q_1, q_2 \in \mathcal{Q}$ such that $q_1 < q_2$. Let $\refStmt : \mathcal{Q} \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(q_i) = (``x < q^{-1}(q_i)", ``x \geq q^{-1}(q_i)" \AND ``x \leq q^{-1}(q_i)", ``x > q^{-1}(q_i)")$. Let $C = \{\refStmt_1\} \cup \{\refStmt(q_i) \, | \, q_i \in \mathcal{Q}, q_1 < q_i < q_2  \} \cup \{ \refStmt_2 \}$. As $\mathcal{Q}$ is dense, this chain will be infinite. Therefore the domain can be generated by a set of refinable aligned strict references with a dense order.
 	
-	For (3) to (1). Let $\edomain_X$ be an experimental domain generated by a set of refinable aligned strict references with a dense order. By \ref{3_thrm_reference_ordering} $\edomain_X$ has a natural order. Let $\refStmt : X \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(x_i) = (``x < x_i", ``x \geq x_i" \AND ``x \leq x_i", ``x > x_i")$. Let $R=\{ \refStmt(x_i) \, | \, x_i \in X \}$. Then $R$ is order isomorphic to $X$. As the order on $R$ is dense then the order on $X$ is dense as well. Let $\edomain_b$ be the before domain. By \ref{3_prop_basis_ordering} it is order isomorphic to $X$. Let $\basis_b \subseteq \edomain_b$ be a countable basis for the domain. As it is a subset of a linearly ordered set, it will also be a linearly ordered set. As the basis is ordered by narrowness, finite conjunctions and disjunctions of basis elements will return a basis element. Therefore every element in $\edomain_b$ is equivalent to the disjunction of a countable set of elements of $\basis_b$. Let $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ be two statements such that $\stmt[b]_1 \snarrower \stmt[b]_2$. Let $B_1, B_2 \subset \basis_b$ be the set of basis elements such that $\stmt[b]_1 = \bigOR\limits_{\stmt \in B_1} \stmt$ and $\stmt[b]_2 = \bigOR\limits_{\stmt \in B_2} \stmt$. Since $\stmt[b]_1 \nequiv \stmt[b]_2$, there must be a $\stmt[b] \in B_2$ such that $\stmt[b] \notin B_1$. Because of the ordering of the basis, we have $\stmt[b]_1 \snarrower \stmt[b] \narrower \stmt[b]_2$. The basis $\basis_b$ is dense in $\edomain_b$. Moreover, $\edomain_b$ is complete. Let $B \subseteq \edomain_b$ then $\bigOR\limits_{\stmt \in B} \stmt$ is in $\edomain_b$ and, since it is the narrowest statement that is broader than any statement in $B$, it is the supremum of $B$. As $\edomain_b$ is complete and has a countable dense subset so does $X$ and therefore it has a continuous order.
+	For (3) to (1). Let $\edomain_X$ be an experimental domain generated by a set of refinable aligned strict references with a dense order. By \ref{pm-pq-referenceOrderingTheorem} $\edomain_X$ has a natural order. Let $\refStmt : X \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(x_i) = (``x < x_i", ``x \geq x_i" \AND ``x \leq x_i", ``x > x_i")$. Let $R=\{ \refStmt(x_i) \, | \, x_i \in X \}$. Then $R$ is order isomorphic to $X$. As the order on $R$ is dense then the order on $X$ is dense as well. Let $\edomain_b$ be the before domain. By \ref{pm-pq-basisOrdering} it is order isomorphic to $X$. Let $\basis_b \subseteq \edomain_b$ be a countable basis for the domain. As it is a subset of a linearly ordered set, it will also be a linearly ordered set. As the basis is ordered by narrowness, finite conjunctions and disjunctions of basis elements will return a basis element. Therefore every element in $\edomain_b$ is equivalent to the disjunction of a countable set of elements of $\basis_b$. Let $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ be two statements such that $\stmt[b]_1 \snarrower \stmt[b]_2$. Let $B_1, B_2 \subset \basis_b$ be the set of basis elements such that $\stmt[b]_1 = \bigOR\limits_{\stmt \in B_1} \stmt$ and $\stmt[b]_2 = \bigOR\limits_{\stmt \in B_2} \stmt$. Since $\stmt[b]_1 \nequiv \stmt[b]_2$, there must be a $\stmt[b] \in B_2$ such that $\stmt[b] \notin B_1$. Because of the ordering of the basis, we have $\stmt[b]_1 \snarrower \stmt[b] \narrower \stmt[b]_2$. The basis $\basis_b$ is dense in $\edomain_b$. Moreover, $\edomain_b$ is complete. Let $B \subseteq \edomain_b$ then $\bigOR\limits_{\stmt \in B} \stmt$ is in $\edomain_b$ and, since it is the narrowest statement that is broader than any statement in $B$, it is the supremum of $B$. As $\edomain_b$ is complete and has a countable dense subset so does $X$ and therefore it has a continuous order.
 \end{proof}
 \end{mathSection}
 
@@ -2859,7 +2859,7 @@ Mathematically, we call the standard topology on the real numbers the one genera
 	
 	Conversely, let $a \in \mathbb{R}$ be a real number. Let $\{U_i\}_{i \in I}$ be the collection of all sets $U_i = (a_i, b_i)$ such that $a_i, b_i \in \mathbb{Q}$ and $a < a_i$. These sets are in the basis of the standard topology. We have $\bigcup\limits_{i \in I} U_i = (a, \infty)$. In the same way, let $b \in \mathbb{R}$ be a real number. Let $\{V_j\}_{j \in J}$ be the collection of all sets $V_j = (a_j, b_j)$ such that $a_j, b_j \in \mathbb{Q}$ and $b_j < b$. These sets are in the basis of the standard topology. We have $\bigcup\limits_{j \in J} V_j = (-\infty, b)$. The basis of the order topology can be generated by the standard topology.
 \end{proof}
-\begin{prop}\label{3_prop_real_open_sets_are_intervals}
+\begin{prop}\label{pm-pq-realOpenSetsAreIntervals}
 	Let $U \in \mathsf{T}_\mathbb{R}$ be a set in the standard topology on the reals. Then $U = \bigcup\limits_{i=1}^{\infty} V_i$ is the countable disjunction of open intervals $V_i = (a_i,b_i)$ where $a_i, b_i \in \mathbb{R} \cup \{ -\infty, \infty \}$.
 \end{prop}
 \begin{proof}
@@ -2878,9 +2878,9 @@ We stress here that it is the immediate successors of the references that matter
 	A naturally ordered experimental domain $\edomain_X$ is characterized by a continuous quantity if and only if none of the verifiable statements are decidable except for the certainty and the impossibility.
 \end{prop}
 \begin{proof}
-	Let $\edomain_X$ be a naturally ordered domain for which none of the verifiable statements are decidable except for the certainty and the impossibility. Then it is generated by a refinable set of aligned strict references $R$. Let $\refStmt_1=(\stmt[b]_1, \NOT \stmt[b]_1 \AND \NOT \stmt[a]_1, \stmt[a]_1)$ be a reference aligned with the domain that admits a successor. Then $\stmt[a]_1$ is a verifiable statement that is not impossible and therefore it is not decidable given the properties of $\edomain_X$. This means there can't be an immediate successor for $\refStmt_1$: by \ref{3_prop_strict_consecutive_before_is_not_after} the before statement of the immediate successor would have to be equivalent to $\NOT\stmt[a]_1$ which is not verifiable. Therefore if $\refStmt_3$ is a reference such that $\refStmt_1 < \refStmt_3$, we can find yet another reference $\refStmt_2$ aligned with the domain such that $\refStmt_1 < \refStmt_2 < \refStmt_3$. The order on $R$ is dense and by \ref{3_thrm_continuous_ordering} the domain is fully characterized by a continuous quantity.
+	Let $\edomain_X$ be a naturally ordered domain for which none of the verifiable statements are decidable except for the certainty and the impossibility. Then it is generated by a refinable set of aligned strict references $R$. Let $\refStmt_1=(\stmt[b]_1, \NOT \stmt[b]_1 \AND \NOT \stmt[a]_1, \stmt[a]_1)$ be a reference aligned with the domain that admits a successor. Then $\stmt[a]_1$ is a verifiable statement that is not impossible and therefore it is not decidable given the properties of $\edomain_X$. This means there can't be an immediate successor for $\refStmt_1$: by \ref{pm-pq-strictConsecutiveBeforeIsNotAfter} the before statement of the immediate successor would have to be equivalent to $\NOT\stmt[a]_1$ which is not verifiable. Therefore if $\refStmt_3$ is a reference such that $\refStmt_1 < \refStmt_3$, we can find yet another reference $\refStmt_2$ aligned with the domain such that $\refStmt_1 < \refStmt_2 < \refStmt_3$. The order on $R$ is dense and by \ref{pm-pq-continuousOrdering} the domain is fully characterized by a continuous quantity.
 	
-	Conversely, let $\edomain_X$ be a domain characterized by a continuous quantity $(U, \leq, q)$. Take a contingent verifiable statement $\stmt \in \edomain_X$ and a possibility $x_0 \in X$ such that $x_0 \comp \stmt$. Consider the value $q_0 \in \mathbb{R}$ such that $q(x_0) = q_0$. Because $\stmt$ is verifiable, it will correspond to a set $V$ of the topology of the quantity, which by \ref{3_prop_real_open_sets_are_intervals} is the union of open intervals. Since $x_0 \comp \stmt$ then $q_0 \in V$. Find the interval $(q_1, q_2)$ that contains $q_0$. We can find $q_4, q_5 \in (q_1, q_2)$ such that $q_4 < q_0 < q_5$. We'll also have $\hat{q} \in V$ for all $q_4 < \hat{q} < q_5$. That is, for any value that is compatible with $\stmt$ we can find a contiguous finite interval surrounding the value with all elements compatible with $\stmt$.
+	Conversely, let $\edomain_X$ be a domain characterized by a continuous quantity $(U, \leq, q)$. Take a contingent verifiable statement $\stmt \in \edomain_X$ and a possibility $x_0 \in X$ such that $x_0 \comp \stmt$. Consider the value $q_0 \in \mathbb{R}$ such that $q(x_0) = q_0$. Because $\stmt$ is verifiable, it will correspond to a set $V$ of the topology of the quantity, which by \ref{pm-pq-realOpenSetsAreIntervals} is the union of open intervals. Since $x_0 \comp \stmt$ then $q_0 \in V$. Find the interval $(q_1, q_2)$ that contains $q_0$. We can find $q_4, q_5 \in (q_1, q_2)$ such that $q_4 < q_0 < q_5$. We'll also have $\hat{q} \in V$ for all $q_4 < \hat{q} < q_5$. That is, for any value that is compatible with $\stmt$ we can find a contiguous finite interval surrounding the value with all elements compatible with $\stmt$.
 	
 	Consider now the statement $\stmt$. Because it is contingent, it will not be compatible with at least one possibility and therefore one value in $U$. The set $V$ will contain some interval with at least one finite endpoint $q_0$. Since it is the endpoint of an open interval, we cannot find $q_1 < q_0 < q_2$ such that $\hat{q} \notin V$ for all $q_1 < \hat{q} < q_2$. That is, there is at least one value incompatible with $\stmt$ that does not admit a finite interval surrounding it with all elements incompatible with $\stmt$.
 	
@@ -3304,13 +3304,13 @@ In principle, we can even extend $\pi : \logCtx \to \tdomain_Y$ to be defined on
 
 Some mathematical structures are defined on points (i.e. vector spaces, ordering) and others on their $\sigma$-algebras. In our context, verifiable statements are the only elements that are actually physical, therefore it would be nice to always define the structures on the experimental domain (i.e. the topology) and show that it induces a unique structure on the theoretical statements and possibilities (and vice-versa).
 
-We have already implemented this approach in a couple of areas. Theoretical domains are constructed from experimental domains (see \ref{1_def_theoretical_domain}) and so are the possibilities (see \ref{1_def_possibilities}). Theorem \ref{2_thrm_experimental_relationship} shows that causal relationship on the possibilities is equivalent to an inference relationship on the verifiable domain. Theorem \ref{3_thrm_domain_ordering_theorem} shows that ordering of the possibilities is equivalent to the ordering of the basis according to narrowness.
+We have already implemented this approach in a couple of areas. Theoretical domains are constructed from experimental domains (see \ref{pm-vs-defTheoreticalDomain}) and so are the possibilities (see \ref{pm-vs-defPossibilities}). Theorem \ref{pm-cd-experimentalRelationshipTheorem} shows that causal relationship on the possibilities is equivalent to an inference relationship on the verifiable domain. Theorem \ref{pm-pq-domainOrderingTheorem} shows that ordering of the possibilities is equivalent to the ordering of the basis according to narrowness.
 
 We need to understand how this can be achieved for other structures, such as measures, metrics, groups, vector spaces, inner products, ...
 
 \subsection{Space of possible combined domains}
 
-It should be possible to better characterize the space of all possible combined domains. As we show in \ref{2_prop_relationship_domain_is_space_of_continuous_functions} that the space of the possible experimental relationships is the space of topologically continuous functions, there should be an analogue for the space of all possible combined domains. For example, one should be able to show that the combined domain is an immersion within the product topology. Is that the only constraint? How can that be characterized? Can we create an experimental domain to distinguish them?
+It should be possible to better characterize the space of all possible combined domains. As we show in \ref{pm-cd-relationshipDomainIsContinuousFunctions} that the space of the possible experimental relationships is the space of topologically continuous functions, there should be an analogue for the space of all possible combined domains. For example, one should be able to show that the combined domain is an immersion within the product topology. Is that the only constraint? How can that be characterized? Can we create an experimental domain to distinguish them?
 
 \subsection{Limited precision}
 
