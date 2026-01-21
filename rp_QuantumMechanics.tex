@@ -145,6 +145,7 @@ More remarkably, the interior points of the sphere represent mixed states. There
 
 As we have already seen in classical mechanics, re-expressing the same mathematical framework in different equivalent ways brings out new understanding. This will be even more clear in quantum mechanics, as the standard Hilbert space formulation is as good for calculations it is bad for understanding.
 
+\subsection{Different Representations of pure states}
 First of all, we should note that wave-functions do not provide a unique representation for states. The reader may already be aware that a change in norm or phase does not change the physics. Intuitively, all the physics is given by the born rule
 \begin{equation}
 	p(\phi|\psi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}.
@@ -481,6 +482,7 @@ is equivalent to \ref{rp-qm-uev-condSchroedingerEq}.
 
 TODO: make sure to discuss the invertibility condition!
 
+\subsubsection{Time evolution preserves the inner product}
 Note that if the evolution is unitary, then the inner product is conserved. In fact
 \begin{equation}
 	\begin{aligned}
@@ -494,6 +496,7 @@ The argument works in reverse as well: an infinitesimal time evolution operator 
 \end{equation}
 is equivalent to \ref{rp-qm-uev-condUnitaryEvolution}.
 
+\subsubsection{Time evolution preserves the norm}
 In particular, unitary evolution will preserve the norm of vectors, since $|\psi|^2 = \<\psi | \psi \>$. Note that the inner product can be expressed, through the polarization identity, in terms of the norm.
 \begin{equation}
 	\begin{aligned}
@@ -515,6 +518,7 @@ Therefore condition
 \end{equation}
 is equivalent to condition \ref{rp-qm-uev-condInnerProductPreserved}.
 
+\subsubsection{Time evolution preserves the Born rule}
 We now look at the square of the inner product between two states infinitesimally close in time. We have
 \begin{equation}
 	\begin{aligned}
@@ -550,6 +554,7 @@ This means that $A = A^{\dagger}$ and therefore $U_{dt} = 1 + A dt$ is unitary. 
 \end{equation}
 is yet another equivalent condition to unitary evolution.
 
+\subsubsection{States change perpendicularly in time}
 The above two conditions make sense if we understand what happens geometrically. A unitary evolution is effectively a rotation in the Hilbert space, that is why the norm is conserved. An infinitesimal unitary evolution, then, is an infinitesimal rotation so the change is tangent to the circle, and therefore perpendicular with respect to the original vector. This is why the projection of the new vector onto the old one is equal to the norm.
 
 However, perpendicular does not mean orthogonal in this case. In the complex plane, a multiplication by $\imath$ gives us a perpendicular vector that is not orthogonal with respect to the inner product. To see this
@@ -568,6 +573,7 @@ Note how $A + A^{\dagger}$ gives us the change in the norm of $\psi$ during the 
 \end{equation}
 is yet another equivalent condition to \ref{rp-qm-uev-condSchroedingerEq}.
 
+\subsubsection{Time evolution preserves orthonormal bases}
 Another way to characterize unitary evolution is through what happens to an orthonormal basis $|e_i\>$. Given that a unitary evolution preserves the inner product, we have $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$. Therefore the unitary evolution maps an orthonormal basis to another orthonormal basis. The converse is also true, if $U_{dt}$ is linear and maps an orthonormal basis to another orthonormal basis, then the inner product is preserves. To see this, we can simply expand any vector in terms of the basis vector. That is
 \begin{equation}
 	\begin{aligned}
@@ -594,6 +600,7 @@ which means the inner product is preserved.
 
 In classical mechanics we saw that Hamiltonian evolution was equivalent to determinism and reversibility. The same applies to quantum mechanics, as we will see by looking at different but equivalent conditions.
 
+\subsubsection{Determinism and Reversibility}
 Suppose we start with a pure state $\rho(t) = |\psi(t) \> \< \psi(t)|$, meaning that the $\psi$ is prepared with 100\% probability. If $U_{dt}$ is unitary, $\rho(t+\Delta t) = U_{dt}|\psi(t) \> \< \psi(t)|U_{dt}^{\dagger} = |U_{dt}\psi(t) \> \< U_{dt}\psi(t)| = |\psi(t+\Delta t) \> \< \psi(t+\Delta t)|$, which means the final state is also a pure state. There is a one-to-one correspondence between initial and finial state, and therefore the evolution is deterministic and reversible. Conversely, if the evolution is deterministic and reversible, if we start with a pure state $\rho(t) = |\psi(t) \> \< \psi(t)|$, then the final state will have to be $\rho(t+\Delta t) = |\psi(t+\Delta t) \> \< \psi(t+\Delta t)|$. Given that both $\rho(t)$ and $\rho(t + \Delta t)$ are trace one operators, the norm of both $\psi(t)$ and $\psi(t+\Delta t)$ must be unitary. That is, a deterministic and reversible evolution must preserve the norm. Which means that 
 \begin{equation}\label{rp-qm-uev-condDetRev}
 	\tag{DR-EV}
@@ -601,6 +608,7 @@ Suppose we start with a pure state $\rho(t) = |\psi(t) \> \< \psi(t)|$, meaning 
 \end{equation}
 is equivalent to \ref{rp-qm-uev-condSchroedingerEq}.
 
+\subsubsection{Preserving probability distributions}
 The same argument can be developed on probability distributions, similarly to what we have seen in classical mechanics. If we start with a probability distribution, the final probability distribution must be the same as all the probability for one case must be mapped and only mapped to a single other case. That is, suppose that we start with a mixed state $\rho(t) = p_i |e_i(t) \> \<e_i(t)|$, meaning that it can be understood as a classical mixture of a set of orthogonal states. If we have a deterministic and reversibile evolution, the final state must be $\rho(t+ \Delta t) = p_i |U_{dt}e_i(t) \> \<U_{\Delta t} e_i(t)|$. This is the case if and only if time evolution maps an orthonormal basis to an orthonormal basis. This means the evolution is unitary and 
 \begin{equation}\label{rp-qm-uev-condProbTrans}
 	\tag{DR-EV}
@@ -608,6 +616,7 @@ The same argument can be developed on probability distributions, similarly to wh
 \end{equation}
 is another equivalent condition.
 
+\subsubsection{Information entropy}
 When looking at classical mechanics, we saw that determinism and reversibility could be expressed as conservation of information entropy. This is true for quantum mechanics as well. Let $\rho(t)= p_i |e_i(t) \> \<e_i(t)|$. If $U_{dt}$ is unitary, we have $\rho(t+ \Delta t) = p_i |U_{dt}e_i(t) \> \<U_{\Delta t} e_i(t)|$. Since the transformed orthonormal basis is still an orthonormal basis, the entropy in both cases is given by $- \sum_i p_i \log p_i$, which means it is conserved.
 
 Conversely, if an evolution preserves entropy then pure states must be mapped to pure states because all pure states and only pure states have zero entropy. Moreover, we saw that the square of the inner product characterizes the entropy of the mixture of a pair of states, which must be conserved if entropy is to be conserved. In particular, orthogonal states must remain orthogonal since they maximize entropy increase. Therefore, an evolution that preserves entropy is one that preserver orthonormality and therefore it is unitary. That is, condition
@@ -617,6 +626,7 @@ Conversely, if an evolution preserves entropy then pure states must be mapped to
 \end{equation}
 is equivalent to \ref{rp-qm-uev-condSchroedingerEq}.
 
+\subsubsection{Quasi-static processes}
 Note that in quantum mechanics both information entropy and thermodynamic entropy coincide, in the sense that we do not have two different definition in quantum statistical mechanics as we have in classical statistical mechanics (i.e. logarithm of count of states and Shannon entropy). However, we saw that projectors are more fundamental as they are implied by the mere definition of a Hilbert space, and projectors can be understood as equilibration processes. In thermodynamics, reversible processes are quasi-static processes. We can show that unitary evolution is, in this sense, a quasi-static process: unitary evolution can be understood as an infinite sequence of projections that perturb the system minimally.
 
 To give intuition, suppose that a beam of light passes through two linear polarizers, the first oriented vertically and the second horizontally. No light will pass through. Recall, in fact, that the intensity decreases by a factor of $\cos^2 \varphi$ where $\varphi$ is the difference in angle between the polarizers. However, if you put another polarizer in between at a 45 degree angle, then some light will have a chance to be pass through. You can put another two polarizers so that the angle between any consecutive pairs is 22.5 degrees. More light will go through. We can imagine to repeat this process, until we have a large sequence of polarizers at a small angle. In that case, $\cos^2 \varphi \approx 1 - \frac{\varphi^2}{2}$. Note that, to a first order, all light will go through. Therefore, in the limit, the net effect of the polarizers is to rotate the polarization of light from vertical to horizontal. This idea generalizes.
