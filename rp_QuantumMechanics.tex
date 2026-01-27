@@ -900,10 +900,10 @@ Convergence is defined w.r.t the topology implicitly defined through the inner p
 Note that we had to explicitly define an \emph{order} for the basis elements, since \eqref{eq:schauder} may not converge unconditionally.
 
 
-\subsection{Ambiguous trace}\label{rp_qm_trace}
+\subsection{Physical states and well-defined moments}\label{rp_qm_trace}
 For an explicit example where the order of basis matters consider the state
 \begin{equation}
-	\rho = \sum_{n=1}^{\infty} p_{n} | \psi_{n} \rangle \langle \psi_{n} | = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ 1 }{ n^{2} }
+	\rho = \sum_{n=1}^{\infty} p_{n} | \psi_{n} \rangle \langle \psi_{n} | = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ 1 }{ n^{2} } | \psi_{n} \rangle \langle \psi_{n} |
 \end{equation}
 and the observable
 \begin{equation}
@@ -920,7 +920,56 @@ While calculating the expectation value of $\mathcal{O}$ for $\rho$ in our ONB, 
 \end{equation}
 This series is \emph{conditionally} convergent and according to Riemann's rearrangement theorem it can therefore take \emph{any} value in $[-\infty, +\infty]$ or not converge at all, just by rearranging the order of its terms, which is equivalent to a reordering of the basis elements.
 
-TODO: add the equivalent example with a pure state and show that it can't be in the domain of the unbounded operator.
+\subsubsection{Example for pure states}
+One can construct a similar example with a pure state. Consider
+\begin{equation}
+	\psi = \sum_{n=1}^{\infty} \psi_{n} | \psi_{n} \rangle = \frac{ \sqrt{6} }{ \pi } \sum_{n=1}^{\infty} \frac{ 1 }{ n } | \psi_{n} \rangle
+\end{equation}
+and then calculate the expectation value as
+\begin{equation}
+	\begin{split}
+		\langle \mathcal{O} \rangle_{\psi} := \langle \psi | \mathcal{O} | \psi \rangle = \sum_{n=1}^{\infty} \psi_{n} \mathcal{O}_{n} = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} n }{ n^{2} } = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} }{ n } = \frac{ 6 }{ \pi^{2} } \ln ( 2 ) \; .
+	\end{split}
+\end{equation}
+The result is the same and will depend on the order of the basis elements in the same way.
+
+However, for a pure state we can consider the domain of the operator as an indicator of what states have well defined expectation values. Let's check if $\psi$ could possibly be in the domain of $\mathcal{O}$. For that, calculate
+\begin{equation}
+	\begin{split}
+		\mathcal{O} | \psi \rangle &= \sum_{m=1}^{\infty} (-1)^{m} m | \psi_{m} \rangle \langle \psi_{m} | \frac{ \sqrt{6} }{ \pi } \sum_{n=1}^{\infty} \frac{ 1 }{ n } | \psi_{n} \rangle \\
+		&= \frac{ \sqrt{6} }{ \pi } \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} (-1)^{m} \frac{ m }{ n } | \psi_{m} \rangle \langle \psi_{m} | \psi_{n} \rangle \\
+		&= \frac{ \sqrt{6} }{ \pi } \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} (-1)^{m} \frac{ m }{ n } \delta_{mn} | \psi_{m} \rangle \\
+		&= \frac{ \sqrt{6} }{ \pi } \sum_{n=1}^{\infty} (-1)^{n} | \psi_{n} \rangle
+	\end{split}
+\end{equation}
+and notice that the result is not normalized
+\begin{equation}
+	|| \mathcal{O} \psi ||^{2} = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} | (-1)^{n} |^{2} = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} 1 = \infty
+\end{equation}
+and we conclude that $\psi$ can not be in any sensible domain of $\mathcal{O}$.
+
+
+\subsubsection{Operator domain and the second moment}
+The previous observation that the domain indicates what states have finite expectation values can be generalized. Consider any unbounded observables $\mathcal{O} : \mathcal{D}_{\mathcal{O}} \to L^{2}(\mathbb{R}^{n})$ and let's assume a very conservative domain of
+\begin{equation}
+	\mathcal{D}_{\mathcal{O}} = \mathcal{D}_{\mathrm{max}} := \left\{ \psi \in L^{2}(\mathbb{R}^{n}) \; | \;  \mathcal{O} \psi \in L^{2}(\mathbb{R}^{n}) \right\} \; ,
+\end{equation}
+i.e., the resulting function must at least be in $L^{2}(\mathbb{R}^{n})$.
+
+Then, by definition it must be true that
+\begin{equation}
+	|| \mathcal{O} \psi ||^{2} < \infty
+\end{equation}
+which is equivalent to
+\begin{equation}
+	|| \mathcal{O} \psi ||^{2} = \langle \psi | \mathcal{O}^{\dagger} \mathcal{O} | \psi \rangle = \langle \psi | \mathcal{O}^{2} | \psi \rangle = \langle \mathcal{O}^{2} \rangle_{\psi} < \infty
+\end{equation}
+which means that at least the second moment has to be well-defined.
+
+\begin{insight}
+	States in the domain of unbounded operator must have at least a well-defined second moment.
+\end{insight}
+
 
 \section{WARNINGS}
 
