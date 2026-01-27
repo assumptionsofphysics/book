@@ -881,6 +881,47 @@ where $\psi, \phi \in D(O)$ (i.e. the operator is defined on the vectors).
 \subsection{Wavefunctions and equivalent classes}
 
 
+\subsection{Schauder basis}
+Usually, one defines a basis $B$ of a vector space $V$ in linear algebra as a linearly independent subset of $V$ that spans $V$. More explicitly
+\begin{description}
+	\item[linear independence] means that every \emph{finite} subset $\{e_{1}, \ldots, e_{n}\} \subset B$ is linearly independent, i.e., $a_{1} e_{1} + \ldots + a_{n} e_{n} = 0 \iff \forall 1 < i < n: a_{i} = 0$.
+	\item[spanning] means that for every vector $v \in V$ there exists a finite linear combination of some elements in $B$, s.t., $v = a_{1} e_{1} + \ldots + a_{n} e_{n}$.
+\end{description}
+
+This definition is unpractical\footnote{I couldn't find any explicit example for a definition of a basis in the above sense for a separable Hilbert space. In fact, since it's existence is only guaranteed by the axiom of choice, I suspect it to be impossible to explicitly construct an example.} for infinite-dimensional Hilbert spaces and the typical notion of basis differs from this. To differentiate we call the previous defintion that of a Hamel basis, while the following is called a Schauder basis.
+
+A \textbf{Schauder basis} $B$ of a separable Hilbert space $\mathcal{H}$ is a \emph{sequence} $e_{n}$ of vectors, s.t., for every vector $v \in \mathcal{H}$ there exists a \emph{unique} sequence $a_{n}$ such that
+\begin{equation}\label{eq:schauder}
+	v = \sum_{n=1}^{\infty} a_{n} e_{n} \; .
+\end{equation}
+
+Convergence is defined w.r.t the topology implicitly defined through the inner product on the Hilbert space.
+
+Note that we had to explicitly define an \emph{order} for the basis elements, since \eqref{eq:schauder} may not converge unconditionally.
+
+
+\subsection{Ambiguous trace}\label{rp_qm_trace}
+For an explicit example where the order of basis matters consider the state
+\begin{equation}
+	\rho = \sum_{n=1}^{\infty} p_{n} | \psi_{n} \rangle \langle \psi_{n} | = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ 1 }{ n^{2} }
+\end{equation}
+and the observable
+\begin{equation}
+	\mathcal{O} = \sum_{n=1}^{\infty} \mathcal{O}_{n} | \psi_{n} \rangle \langle \psi_{n} | = \sum_{n=1}^{\infty} (-1)^{n} n | \psi_{n} \rangle \langle \psi_{n} |
+\end{equation}
+with some domain $\mathcal{D}_{\mathcal{O}}$, which makes $\mathcal{O}$ into a self-adjoint operator. Both of them are defined w.r.t. some ONB $\{ \psi_{n} \}_{n=1}^{\infty} \subset \mathcal{H}$.
+%with some domain $\mathcal{D}_{\mathcal{O}}$, which makes $\mathcal{O}$ into a self-adjoint operator\footnote{TODO find such a domain or prove that it exists.}. Both of them are defined w.r.t. some ONB $\{ \psi_{n} \}_{n=1}^{\infty} \subset \mathcal{H}$.
+
+While calculating the expectation value of $\mathcal{O}$ for $\rho$ in our ONB, we encounter the harmonic series\footnote{This is of course no coincidence, but by construction.}
+\begin{equation}
+	\begin{split}
+		\langle \mathcal{O} \rangle_{\rho} := \trace \left( \rho \mathcal{O} \right) &= \sum_{n=1}^{\infty} p_{n} \mathcal{O}_{n} = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} n }{ n^{2} } = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} }{ n } = \frac{ 6 }{ \pi^{2} } \ln ( 2 )
+	\end{split}
+\end{equation}
+This series is \emph{conditionally} convergent and according to Riemann's rearrangement theorem it can therefore take \emph{any} value in $[-\infty, +\infty]$ or not converge at all, just by rearranging the order of its terms, which is equivalent to a reordering of the basis elements.
+
+TODO: add the equivalent example with a pure state and show that it can't be in the domain of the unbounded operator.
+
 \section{WARNINGS}
 
 \textbf{Every state (even if I restrict to Schwartz space) is an eigenstate of some projection, observable and unitary, because $|\psi \> \< \psi|$ is always defined.}
