@@ -62,7 +62,7 @@ By ensemble we mean what is usually meant in statistical mechanics: we have a pr
 
 At this point, we have identified three main requirements for ensembles. First, they must be experimentally well defined. This means that there need to be enough experimentally verifiable statements to fully characterize them. This will impose a topology on the ensemble space. Second, we can always perform statistical mixtures: given two ensembles, we can create a third one by selecting the first or the second according to a certain probability. This will impose a convex structure on the ensemble space. Third, ensembles will need a well-defined entropy which quantifies the variability of the elements within the ensemble. Since the variability cannot decrease when performing a statistical mixture and can only increase up to the variability introduced by the selection, the entropy will have to satisfy certain bounds. From these axioms, many general results can be proven. An ensemble space will be a convex subset of a vector space that will extend over a bounded interval in each direction. The concavity of the entropy will impose a metric over the space, turning it into a geometric space. Each ensemble can be characterized by a subadditive measure, which becomes a probability measure in the classical case. This makes the space of physical theories a lot more constrained than one may imagine at first.
 
-Many problems are still open, as they touch unsettled mathematical questions, particularly in the infinite dimensional case. Therefore this chapter will include conjectures that may or may not be true, which the reader is encouraged to try proving (or disproving).
+Many problem are still open, as they touch unsettled mathematical questions, particularly in the infinite dimensional case. Therefore this chapter will include conjectures that may or may not be true, which the reader is encouraged to try proving (or disproving).
 
 Note: all $\log$s are assumed to be in base 2.
 
@@ -212,7 +212,7 @@ As we saw before, an ensemble is the collection of all outputs of a preparation 
 		\item \textbf{Identity}: $1 \ens[a] + 0 \ens[b] = \ens[a]$
 		\item \textbf{Idempotence}:  $p \ens[a] + \bar{p} \ens[a] = \ens[a]$ for all $p \in [0,1]$
 		\item \textbf{Commutativity}: $p \ens[a] + \bar{p} \ens[b] = \bar{p} \ens[b] + p \ens[a]$ for all $p \in [0,1]$
-		\item \textbf{Associativity}: $p_1 \ens_1 + \bar{p}_1\left(\frac{1-p_1-p_3}{\bar{p}_1}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) =  \bar{p}_3\left(\frac{p_1}{\bar{p}_3} \ens_1 +  \frac{1-p_1-p_3}{\bar{p}_3}\ens_2\right) + p_3 \ens_3$ where $p_1, p_3 \in [0,1)$ and $p_1 + p_3 \leq 1$
+		\item \textbf{Associativity}: $p_1 \ens_1 + \bar{p}_1\left(\frac{p_2}{\bar{p}_1}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) =  \bar{p}_3\left(\frac{p_1}{\bar{p}_3} \ens_1 +  \frac{p_2}{\bar{p}_3}\ens_2\right) + p_3 \ens_3$ where $p_1, p_3 \in [0,1)$ and $p_1 + p_3 \leq 1$ and $p_2 = 1 - p_1 - p_3$
 	\end{itemize}
 \end{axiom}
 
@@ -454,9 +454,17 @@ It is an open question whether this result generalizes to infinite mixtures. Tha
 
 For topological vector spaces, the algebraic interior and the topological interior are related. For example, if $A$ is a convex subset of a TVS with non-empty topological interior, then the algebraic and topological interior coincide. It is an open question how many of these results hold for topological convex spaces as well. As an example, we would like to prove the following.
 
+TODO: reorganize
+
 \begin{conj}
-	Let $\Ens$ be an ensemble space with a $T_1$ topology. The set of boundary points $B_{\Ens}$ is a closed set and therefore $I_{\Ens}$ is an open set.
+	Let $\Ens$ be an ensemble space. The set of boundary points $B_{\Ens}$ is not necessarily a closed set and therefore $I_{\Ens}$ is an open set.
 \end{conj}
+\begin{proof}
+	Let $\Ens = \{ p_i \in \ell^1 \, | \,  \sum p_ i =1, \; p_i \in [0,1]\}$ be the set of probability distributions over countably infinitely many elements with the topology of $\ell^1$. Let $\ens \in I_{\Ens}$ be an interior point of $\Ens$. Since $\ens$ is in the interior, it corresponds to a probability distribution $p_i$ such that $p_i \in (0,1)$ for all $i$.
+	
+	Let $B_{r}(\ens) \subseteq \ell^1$ be an open ball of radius $r$ centered around $\ens$. Since $\sum p_i = 1$, there must be a $j$ such that $p_j < \frac{r}{2}$. Suppose, without loss of generality, that $j \neq 1$. Now consider the probability distribution given by $\lambda_i = (p_1 + p_j, p_2, \dots, p_{j-1}, 0, p_{j+1}, \dots)$. Since $\lambda_j = 0$, then $\lambda_i$ is a boundary point of $\Ens$. The distance between the two distribution will be $\sum|p_i - \lambda_i| = |p_j| + |-p_j| = 2 p_j < r$, which means $\lambda_i \in B_{r}(\ens)$. Therefore, the open ball around any internal point will contain a boundary point. Therefore the interior of $I_{\Ens}$ is the empty set, and $I_{\Ens}$ is not an open set.
+\end{proof}
+
 One may be able to show that the limit of a sequence of boundary points cannot be an interior point in the topological sense.
 
 We now define the notions of separateness: two ensembles are separate, noted $\ens[a] \separate \ens[b]$ if they do not have a common component. That is, they are not a mixture of a common ensemble. In classical ensemble spaces, this is equivalent to probability measures with disjoint support, which is the extension of the concept. Separateness is a useful concept to characterize the relationship between ensembles as it has some useful properties. Most of all, it is an irreflexive symmetric relation: nothing is separate from itself and if $\ens[a] \separate \ens[b]$, then $\ens[b] \separate \ens[a]$.\footnote{Note that orthogonality in inner product vector spaces is also an irreflexive symmetric relationship.}
