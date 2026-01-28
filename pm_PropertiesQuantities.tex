@@ -1,0 +1,648 @@
+\chapter{Properties and quantities}
+
+In this chapter we will introduce the idea of \textbf{properties}, which we use to label the possibilities of an experimental domain. For example, we may use names to distinguish among people, fur color to distinguish among cats, pressure to distinguish the state of a gas. In particular, we'll define a \textbf{quantity} as a property that has a magnitude: we can compare two different values and determine which one is greater or smaller.
+
+Instead of simply assuming we have quantities, we will need to construct them from the verifiable statements of an experimental domain. To do that, we will prove three theorems that will give necessary and sufficient conditions for that construction, clarifying how quantities are defined experimentally. These theorems will allow us to understand how the ordering of the values for a quantity are linked to the logical relationships between the verifiable statements, and in particular how the ordering of values is linked to the ordering defined by narrowness.
+
+After characterizing quantities in general, we will see the cases of \textbf{discrete} and \textbf{continuous} quantities. We will see how discrete quantities are linked to decidability, the ability to verify both a statement and its negation, while continuous quantities are linked to a lack thereof. We will then discuss how the requirements for continuous quantities cannot be truly realized in practice and what happens when that idealization fails.
+
+\section{Properties}
+
+Whether the result of direct observation or not, a physical object is most often identified by its properties and their values. A person may be identified by name and date of birth; a bird may be characterized by the color of its beak; the state of a particle may be qualified by its position and momentum.
+
+In this section we define how in general we can use properties to label the possibilities of an experimental domain. Each property will specify a continuous function from the possibilities to the topological space of the possible property values. Some properties may fully identify each possibility, as they assign distinct values, and some may also fully characterize which statements are verifiable.
+
+Suppose $\edomain_X$ is a domain for animal identification and $X$, its possibilities, are all animal species. Providing good names and definitions for species is a whole scientific subject by itself (i.e. taxonomy) with its own rules (i.e. the International Code of Zoological Nomenclature). The ICZN assigns each species a name composed of two Latin words. For example, \statement{Passer domesticus} is the official name for the house sparrow while \statement{Passer italiae} is the one for the Italian sparrow. This means that identifying an animal species is equivalent to identifying its name. Therefore the domain to identify the species name $\edomain_{\mathcal{Q}} \equiv \edomain_X$ is equivalent to the one for identifying the actual species and we have an experimental relationship $q: X \to \mathcal{Q}$ between them. As each species is given a unique name this is the most discriminating type of property: one that covers the whole range of possibilities and fully identifies each of them. But this is a special case.
+
+The ICZN also assigns a genus (pl. genera) to each species, which corresponds to the first part of the species name. For example, both aforementioned sparrows are of the genus \statement{Passer} while all swans, black or white, are of the genus \statement{Cygnus}. Now suppose that $\mathcal{Q}$ is the set of all names for all genera and $q: X \to \mathcal{Q}$ is the function that gives us the genus name for each species. We can still use this as a label for our possibilities, but it does not fully identify them.
+
+On a different note, we could decide to distinguish species by their morphological attributes. For example, if $\mathcal{Q}$ is the set of all colors, we can imagine a function that gives us the beak color for each species. The function is partial, not defined on all elements, as not all species have a beak or its color may not be unique. We have $q: U \to \mathcal{Q}$ where $U \subseteq X$ is the set where the property is defined. To be consistent, though, we must at least be able to tell in what cases the property is actually defined. For example, we must be able to tell whether an animal has a beak. Therefore there must be a verifiable statement that is true if and only if the property is well defined. The set $U$, then, must correspond to the verifiable set of said statement.
+
+Other examples of properties include: postal addresses for buildings, tax ID numbers for people, generation for fundamental particles, position of the center of mass of a body. In all these cases, the general pattern is that we assign a label to a possibility from an established set.
+
+\begin{mathSection}
+	\begin{defn}
+		A \textbf{property} for an experimental domain $\edomain_X$ is any attribute we can use to distinguish between its possibilities. Formally, it is a tuple $(\mathcal{Q}, q)$ where $\mathcal{Q}$ is a topological space and $q : U \to \mathcal{Q}$ is a continuous function where $U \in \mathsf{T}_X$ is a verifiable set of possibilities.
+	\end{defn}
+	\begin{justification}
+		Suppose $q$ is a physical property that can be assigned to distinguish the set of possibilities $U \subseteq X$. We must be able to tell experimentally whether the property is defined for each possibility. Therefore we are justified to assume that $U$ is a verifiable set. Let $\mathcal{Q}$ be the set of possible values for the property. Each element of $U$ will be matched with a possible value. Therefore we are justified to assume there is a function $q : U \to \mathcal{Q}$ that specifies that mapping.
+		
+		As we must be able to experimentally distinguish between the values in $\mathcal{Q}$, there must be a collection $\mathsf{T}_Q$ of verifiable sets that corresponds to the possible verifiable statements associated to the quantity. Therefore we are justified to assume $\mathcal{Q}$ is a topological space. Moreover, since the property value is determined by each possibility, the function $q$ establishes a causal relationship between the two and therefore we are justified to assume $q$ is a continuous function.
+	\end{justification}
+\end{mathSection}
+
+Note that we have not defined a property as an experimental domain. The possibility of the domain for a property would be a statement like \statement{the species name for this animal is Passer domesticus} while the value is just the object \statement{Passer domesticus}. The idea is that the property and its values are defined independently of the particular object. For example, distance in meters is defined independently of whether we later want to measure the earth diameter or its distance to the moon.\footnote{While in principle we could envision a formal construction of properties and their values purely built on top of the notion of statement (e.g. define the value \emph{red} to be the set of all statements that claim that something is of that color) we are not going to do so. While appealing in some respects, it is not clear whether such a construction would actually help to clarify underlying assumptions while it is clear it would distract from other more critical issues.}
+
+The fact that the property and its values are defined more generally leads to some subtle issues: even if each possibility of the domain corresponds to one property value and each verifiable statement of the property is equivalent to a verifiable statement of the domain, the reverse may not be true. Consider the experimental domain for identifying negatively charged fundamental particles. In this case, each particle will correspond to a unique value of mass, and by measuring the mass we can infer the particle. But for each possible value of mass we will not have a possible fundamental particle. Moreover, the verifiable statement \statement{this particle is an electron} would correspond to an infinitely precise statement of the form \statement{the mass of the particle is exactly 510998.9461... eV} which is not verifiable. The reason is that identifying a negatively charged particle is not the same as measuring its mass with arbitrary precision: in the first case we can stop when there is only one possible particle within the finite range of our measurement. Now consider the experimental domain for the position of the center of mass of a particle along a particular direction. Not only is the distance from a fixed point enough to identify the position, but for each value of the distance we also have a possible position of the particle.
+
+We say that a property fully characterizes an experimental domain if each possible value of a property corresponds to a possibility of the domain, like in the case of the distance from a reference and position of a particle. The idea is that it tells us what cases are possible and how they are experimentally verified. Instead, we say that a property fully identifies an experimental domain if each possibility corresponds to a unique value, like in the case of the mass of a negatively charged particle. The idea is that the value of the property allows us to uniquely identify the possibility but nothing more.
+
+\begin{mathSection}
+	\begin{defn}
+		The possibilities of an experimental domain are \textbf{fully identified} by a property if its value is enough to uniquely determine a possibility. Formally, let $(\mathcal{Q}, q)$ be a property for an experimental domain $\edomain_X$. Then the possibilities $X$ are fully identified if $q: X \to \mathcal{Q}$ is injective.
+	\end{defn}
+	
+	\begin{defn}
+		An experimental domain is \textbf{fully characterized} by a property if all verifiable statements in the domain correspond to verifiable statements on the property and vice-versa. Formally, let $(\mathcal{Q}, q)$ be a property for an experimental domain $\edomain_X$. Then it is fully characterized if $q: X \to \mathcal{Q}$ is a homeomorphism.
+	\end{defn}
+\end{mathSection}
+
+\section{Quantities and ordering}
+
+We now focus our attention on those properties that can be quantified. The number of people in a group can be quantified by an integer, the distance between two objects can be quantified in meters, the force acting on a body can be quantified by the magnitude of a vector expressed in Newtons. The defining characteristic for a quantity is that a value can be greater, smaller or equal to another.
+
+In this section we will define a quantity as a property with a linear order which we assume given a priori, and study its relationship with the experimental domain. We will define the order topology, which assumes one can experimentally verify whether a value is before or after another one. We will see that a domain is fully characterized by a quantity only if the possibilities themselves can be ordered, and how this ordering, in the end, is uniquely characterized by statement narrowness: 10 is less than 42 because \statement{the quantity is less than 10} is narrower than \statement{the quantity is less than 42}.
+
+As the defining characteristic for a quantity is the ability to compare its values, then the values must be ordered in some fashion from smaller to greater. Therefore, given two different values, one must be before the other. Mathematically, we call linear order an order with such a characteristic as we can imagine the elements positioned along a line. Note that vectors are not linearly ordered: no direction is greater than the other. Therefore, in this context, a vector will not strictly be a quantity but a collection of quantities.\footnote{In other languages, there are two words to differentiate quantity as in ``physical quantity" (e.g. grandezza, Gr\"osse, grandeur) and as in ``amount" (e.g. quantit\`a, Menge, quantit\'e). It is the second meaning of quantity that is captured here.}
+
+We also have to define how this order can be experimentally verified. The idea is that we should, at least, be able to verify that the value of a given quantity is before or after a set value. This allows us to construct bounds such as \statement{the mass of the electron is $511 \pm 0.5$ keV} which we take to be equivalent to \statement{the mass of the electron is more than 510.5 keV but less than 511.5 keV}.\footnote{The sentence \statement{the mass of the electron is $511 \pm 0.5$ keV} could instead be referring to statistical uncertainty instead of an accuracy bound and would constitute a different statement when the different meaning is attached. We will be treating these types of statistical statements later in the book, but suffice it to say that they cannot be defined before statements that identify bounds.} For integers, this also allows us to verify particular numbers as \statement{the earth has one natural satellite} is equivalent to \statement{the earth has more than zero natural satellites and fewer than two}. Therefore we will define the order topology as the one generated by sets of the type $(a, \infty)$ and $(-\infty, b)$.
+
+A quantity, then, is an ordered property with the order topology.
+
+\begin{mathSection}
+	\begin{defn}
+		A \textbf{linear order} on a set $\mathcal{Q}$ is a relationship $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ such that:
+		\begin{enumerate}
+			\item (antisymmetry) if $q_1 \leq q_2$ and $q_2 \leq q_1$ then $q_1 = q_2$
+			\item (transitivity) if $q_1 \leq q_2$ and $q_2 \leq q_3$ then $q_1 \leq q_3$
+			\item (total) at least $q_1 \leq q_2$ or $q_2 \leq q_1$
+		\end{enumerate}
+		A set together with a linear order is called a \textbf{linearly ordered set}.
+	\end{defn}
+	\begin{defn}
+		Let $(\mathcal{Q}, \leq )$ be a linearly ordered set. The \textbf{order topology} is the topology generated by the collections of sets of the form:
+		$$(a, \infty) = \{q \in \mathcal{Q} \, | \, a < q\} \;,\; (-\infty, b) = \{q \in \mathcal{Q} \, | \, q < b\}.$$
+	\end{defn}
+	\begin{defn}
+		A \textbf{quantity} for an experimental domain $\edomain_X$ is a linearly ordered property. Formally, it is a tuple $(\mathcal{Q}, \leq, q)$ where $(\mathcal{Q}, q)$ is a property, $\leq : \mathcal{Q} \times \mathcal{Q} \to \mathbb{B}$ is a linear order and $\mathcal{Q}$ is a topological space with the order topology with respect to $\leq$.
+	\end{defn}
+\end{mathSection}
+
+As for properties, the quantity values are just symbols used to label the different cases. The set $\mathcal{Q}$ may correspond to the integers, real numbers or a set of words ordered alphabetically.\footnote{When consulting the dictionary, we use the fact that we can experimentally tell whether the word we are looking for is before or after the one we randomly selected.} The units are not captured by the numbers themselves: they are captured by the function $q$ that allows us to map statements to numbers and vice-versa.
+
+As we want to understand quantities better, we concentrate on those experimental domains that are fully characterized by a quantity. For example, the domain for the mass of a system will be fully characterized by a real number greater than or equal to zero. Each possibility will be identified by a number which will correspond to the mass expressed in a particular unit, say in Kg. As the values of the mass are ordered, we can also say that the possibilities themselves are ordered. That is, \statement{the mass of the system is 1 Kg} precedes \statement{the mass of the system is 2 Kg}. This ordering of the possibilities will be linked to the natural topology as \statement{the mass of the system is less than 2 Kg}, the disjunction of all possibilities that come before a particular possibility, is a verifiable statement precisely because it corresponds to a continuous interval of the linear order.
+
+We call a natural order for the possibility a linear order on them such that the order topology is the natural topology. An experimental domain is fully characterized by a quantity if and only if it is naturally ordered and that quantity is ordered in the same way: it is order isomorphic. In other words, we can only assign a quantity to an experimental domain if it already has a natural ordering of the same type.
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\edomain_X$ be an experimental domain and $X$ its possibilities. We say $\leq : X \times X \to \mathbb{B}$ is a \textbf{natural order} for the possibilities of the domain if the order topology constructed from that ordering coincides with the natural topology. We say the domain and the possibilities are \textbf{naturally ordered} if they admit a natural order.
+	\end{defn}
+	\begin{defn}
+		Let $(\mathcal{Q}, \leq)$ and $(\mathcal{P}, \leq)$ be two ordered sets. A function $f : \mathcal{Q} \to \mathcal{P}$ is \textbf{increasing} if for every $q_1, q_2 \in \mathcal{Q}$, $q_1 \leq q_2$ implies $f(q_1) \leq f(q_2)$. It is an \textbf{order isomorphism} if it is bijective and, for every $q_1, q_2 \in \mathcal{Q}$, $q_1 \leq q_2$ if and only if $f(q_1) \leq f(q_2)$.
+	\end{defn}
+	
+	\begin{thrm}[Property ordering theorem]\label{pm-pq-propertyOrdering}
+		An experimental domain $\edomain_X$ is fully characterized by a quantity $(\mathcal{Q}, \leq, q)$ if and only if it is naturally ordered and the possibilities are order isomorphic to the quantity.
+	\end{thrm}
+	\begin{proof}
+		Suppose $\edomain_X$ is fully characterized by a quantity $(\mathcal{Q}, \leq_q, q)$. Since $q$ is a bijection, we can define an ordering $\leq_x : X \times X \to \mathbb{B}$ such that $x_1 \leq_x x_2$ if and only if $q(x_1) \leq_q q(x_2)$. As $q$ is now an order isomorphism, sets of the type $(q_1, \infty)$ will be mapped to $(q^{-1}(q_1), \infty)$, and sets of the type $(-\infty, q_2)$ will be mapped to $(-\infty, q^{-1}(q_2))$ for all $q_1, q_2 \in \mathcal{Q}$. As $q$ is also a homeomorphism, it will map a basis of one space to and only to a basis of the other. This means the collection of sets of the type $(x_1, \infty)$ and $(-\infty, x_2)$ form a basis, and therefore the ordering $\leq_x$ is a natural order.
+		
+		We can run the argument in reverse, by assuming we have a naturally ordered experimental domain, finding  a set $\mathcal{Q}$ that is order isomorphic to the possibility and showing that the topology induced by the isomorphism is the order topology.
+	\end{proof}
+\end{mathSection}
+
+Now that we have established that the linear ordering is something already present in the domain, we can show it is actually based on the ordering of verifiable statements in terms of narrowness. That is, \statement{the mass of the system is 1 Kg} is before \statement{the mass of the system is 2 Kg} precisely because \statement{the mass of the system is less than 1 Kg} is narrower than \statement{the mass of the system is less than 2 Kg}. The set of statements $\basis_b$ of the form \statement{the mass of the system is less than $q_1$ Kg} are linearly ordered by narrowness, and their ordering is the same as the ordering of the possibilities/values. Similarly, the set of statements $\basis_a$ of the form \statement{the mass of the system is more than $q_1$ Kg} is also ordered by narrowness but with the reverse ordering of the possibilities/values. These are the very statements whose verifiable sets define the order topology and therefore jointly constitute a basis for the experimental domain.
+
+Now consider the statement $\stmt_1=$\statement{the mass of the system is less than or equal to 1 Kg} with $\stmt_2=$\statement{the mass of the system is less than 1 Kg}. We have $\stmt_2 \narrower \stmt_1$. In fact, if we replace the value in $\stmt_2$ with anything less than 1 Kg we'll still have $\stmt_2 \narrower \stmt_1$. Instead if we use a value greater than 1 Kg we'd have $\stmt_1 \narrower \stmt_2$. In other words, if we call $B$ the set that includes both the less-than-or-equal and less-than statements this is also linearly ordered by narrowness. But \statement{the mass of the system is less than or equal to 1 Kg} is equivalent to $\NOT$\statement{the mass of the system is greater than 1 Kg}. In other words, $B=\basis_b \cup \NOT(\basis_a)$ contains all the statements like \statement{the mass of the system is less than $q_1$ Kg} and $\NOT$\statement{the mass of the system is more than $q_1$ Kg} and these are all linearly ordered by narrowness.
+
+The ordering of $B$ can be further characterized. Note that $\stmt_1=$\statement{the mass of the system is less than or equal to 1 Kg} is the immediate successor of $\stmt_2=$\statement{the mass of the system is less than 1 Kg}. That is, they are different and there can't be any other statement in $B$ that is broader than $\stmt_2$ but narrower than $\stmt_1$ since they differ for a single case. This will happen for any mass value. So $B$ is composed of two exact copies of the ordering of $X$, where each element of one copy is immediately followed by an element of the other copy. Moreover, if a statement in $B$ has an immediate successor, there must be only one case that separates the two. If we call $q_1$ the value of that case, then the statement must be of the form \statement{the mass of the system is less than $q_1$ Kg} while its immediate successor is of the form \statement{the mass of the system is less than or equal to $q_1$ Kg}: the successor is broader by just the possibility associated with $q_1$. Therefore statements in B that have an immediate successor must be in $\basis_b$ as well.
+
+The main result is that the above characterization of the basis of the domain is necessary and sufficient to order the possibilities. If an experimental domain has a basis composed of two parts $\basis_b$ and $\basis_a$ such that $B=\basis_b \cup \NOT(\basis_a)$ is linearly ordered by narrowness with those characteristics, then the experimental domain is naturally ordered. The possibilities can be written as $x \equiv \NOT \stmt_b \AND \NOT \stmt_a$ where $\stmt_b \in \basis_b$ and $\NOT \stmt_a$ is the immediate successor. In fact, \statement{the mass of the system is 1 Kg} is equivalent to \statement{the mass of the system is not less than 1 Kg and not more than 1 Kg}. Note that, because of negation, the possibilities may not in general be verifiable.
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\edomain_X$ be a naturally ordered experimental domain and $X$ its possibilities. We define the following notation:
+		\statement{$x < x_1$}$=\bigOR\limits_{\{x \in X \, | \, x < x_1\}} x$, \statement{$x > x_1$}$=\bigOR\limits_{\{x \in X \, | \, x > x_1\}} x$, \statement{$x \leq x_1$}$=\bigOR\limits_{\{x \in X \, | \, x \leq x_1\}} x$ and \statement{$x \geq x_1$}$=\bigOR\limits_{\{x \in X \, | \, x \geq x_1\}} x$. That is, they represent statements like \statement{the value of the quantity $x$ is less than $x_1$}.
+	\end{defn}
+	\begin{coro}\label{pm-pq-notAfterIsBeforeOrOn}
+		Based on the previous notation, $``x \leq x_1"\equiv \NOT ``x > x_1"$ and $``x \geq x_1"\equiv \NOT ``x < x_1"$.
+	\end{coro}
+	\begin{proof}
+		Note that $``x \leq x_1" \OR ``x > x_1" \equiv \bigOR\limits_{x \in X} x \equiv \certainty$ while $``x \leq x_1" \AND ``x > x_1" \equiv \bigOR\limits_{x \in \emptyset} x \equiv \impossibility$. Therefore one is the negation of the other. Similarly $``x < x_1" \OR ``x \geq x_1" \equiv \bigOR\limits_{x \in X} x \equiv \certainty$ while $``x < x_1" \AND ``x \geq x_1" \equiv \bigOR\limits_{x \in \emptyset} x \equiv \impossibility$.
+	\end{proof}
+	\begin{defn}\label{pm-pq-defBeforeAfterBasis}
+		Let $\edomain_X$ be a naturally ordered experimental domain and $X$ its possibilities. Define $\basis_b = \{ ``x < x_1" \, | \, x_1 \in X \}$, $\basis_a = \{ ``x > x_1" \, | \, x_1 \in X \}$ and $B = \basis_b \cup \NOT (\basis_a)$.
+	\end{defn}
+	\begin{defn}
+		Let $(\mathcal{Q}, \leq)$ be an ordered set. Let $q_1, q_2 \in \mathcal{Q}$. Then $q_2$ is an \textbf{immediate successor} of $q_1$ and $q_1$ is an \textbf{immediate predecessor} of $q_2$ if there is no element strictly between them in the ordering. That is, $q_1 < q_2$ and there is no $q \in \mathcal{Q}$ such that $q_1 < q < q_2$. Two elements are \textbf{consecutive} if one is the immediate successor of the other.
+	\end{defn}
+	
+	\begin{prop}\label{pm-pq-basisOrdering}
+		Let $\edomain_X$ be a naturally ordered experimental domain. Then $(\basis_b, \narrower)$, $(\basis_a, \broader)$ and $(B, \narrower)$ are linearly ordered sets. Moreover $(\basis_b, \narrower)$, $(\basis_a, \broader)$ are order isomorphic to $(X, \leq)$.
+	\end{prop}
+	\begin{proof}
+		Let $f : X \to \basis_b$ be defined such that $f(x_1) = ``x < x_1"$. As there is one and only one statement $``x < x_1"$ for each $x_1 \in X$, $f$ is a bijection. Suppose $x_1 \leq x_2$, we have $f(x_2) \equiv \bigOR\limits_{\{x \in X \, | \, x < x_2\}} x \equiv \left( \bigOR\limits_{\{x \in X \, | \, x < x_1\}} x\right) \OR \left( \bigOR\limits_{\{x \in X \, | \, x < x_2\}} x \right)\equiv f(x_1) \OR f(x_2)$ and therefore $f(x_1) \narrower f(x_2)$. On the other hand if $f(x_1) \narrower f(x_2)$ then as sets $(-\infty, x_1) \subseteq (-\infty, x_2)$ which means $x_1 \leq x_2$. This means that $f$ is an order isomorphism between $(\basis_b, \narrower)$ and $(X, \leq)$.
+		
+		Similarly, let $g : X \to \basis_a$ be defined such that $g(x_1) = ``x > x_1"$. As there is one and only one statement $``x > x_1"$ for each $x_1 \in X$, $g$ is a bijection. Suppose $x_1 \leq x_2$, we have $g(x_1) \equiv \bigOR\limits_{\{x \in X \, | \, x > x_1\}} x \equiv \left( \bigOR\limits_{\{x \in X \, | \, x > x_1\}} x \right) \OR \left(\bigOR\limits_{\{x \in X \, | \, x > x_2\}} x \right) \equiv g(x_1) \OR g(x_2)$ and therefore $g(x_1) \broader g(x_2)$. On the other hand if $g(x_1) \broader g(x_2)$ then as sets $(x_1, \infty) \supseteq (x_2, \infty)$ which means $x_1 \leq x_2$. This means that $g$ is an order isomorphism between $(\basis_a, \broader)$ and $(X, \leq)$.
+		
+		To show that $B$ is linearly ordered, let $x_1, x_2 \in X$. If they both come from either $\basis_b$ or $\NOT(\basis_a)$ then they are already ordered by narrowness. If not, consider the two statements $``x < x_1"$ and $``x \leq x_2"\equiv \NOT ``x > x_2"$. As $X$ is linearly ordered, either $\{x \in X \, | \, x < x_1\} \subseteq \{x \in X \, | \, x \leq x_2\}$ or $\{x \in X \, | \, x \leq x_2\} \subseteq \{x \in X \, | \, x < x_1\}$. Therefore either $``x < x_1" \narrower ``x \leq x_2"$ or $``x \leq x_2" \narrower ``x < x_1"$. Which means $B = \basis_b \cup \NOT(\basis_a)$ is linearly ordered by $\narrower$.
+	\end{proof}
+	
+	\begin{prop}\label{pm-pq-generatedOrder}
+		Let $\basis_b$ and $\basis_a$ be two sets of verifiable statements such that $B = \basis_b \cup \NOT(\basis_a)$ is linearly ordered by narrowness. Let $\edomain_b$ and $\edomain_a$ be the experimental domains they respectively generate and $D = \edomain_b \cup \NOT(\edomain_a)$. Then $(\edomain_b, \narrower)$, $(\edomain_a, \broader)$ and $(D, \narrower)$ are linearly ordered.
+	\end{prop}
+	
+	\begin{proof}
+		First we show that $(\edomain_b, \narrower)$ is linearly ordered. We have that $\basis_b$ is linearly ordered by narrowness because it is a subset of $B$ which is linearly ordered by narrowness. Note that the conjunction of a finite set of statements linearly ordered by narrowness will return the narrowest element and the disjunction of a finite set of statements linearly ordered by narrowness will return the broadest element. The countable disjunction, instead, can introduce new elements. But using those elements again will not introduce new ones: the disjunction of countable disjunctions will still be a countable disjunction; the finite conjunction of countable disjunctions is the countable disjunction of finite conjunctions, which returns elements of the original set and therefore reduces to countable conjunctions. Therefore, when forming $\edomain_b$ the only new elements will be the countable disjunctions.
+		
+		Consider two countable sets $B_1, B_2 \subseteq \basis_b$. Their disjunctions $\stmt[b]_1 = \bigOR\limits_{\stmt[b] \in B_1} \stmt[b]$ and $\stmt[b]_2 = \bigOR\limits_{\stmt[b] \in B_2} \stmt[b]$ represent the narrowest statement that is broader than all elements of the respective set. Suppose that for each element of $B_1$ we can find a broader element in $B_2$. Then $\stmt[b]_2$, being broader than all elements of $B_2$, will be broader than all elements of $B_1$. But since $\stmt[b]_1$ is the narrowest element that is broader than all elements in $B_1$, we have $\stmt[b]_2 \broader \stmt[b]_1$. Conversely, suppose there is some element in $B_1$ for which there is no broader element in $B_2$. Since the initial set is fully ordered, it means that that element of $B_1$ is broader than all the elements in $B_2$. This means that element is broader than $\stmt[b]_2$ and since $\stmt[b]_1$ is broader than all elements in $B_1$ we have $\stmt[b]_1 \broader \stmt[b]_2$. Therefore the domain $\edomain_b$ generated by $\basis_b$ is linearly ordered by narrowness.
+		
+		Now we show that $(\edomain_a, \broader)$ is linearly ordered. The basis $\basis_a$ is linearly ordered by broadness because the negation of its elements are part of $B$ and are ordered by narrowness. Note that broadness is the opposite order of narrowness and therefore a set linearly ordered by one is linearly ordered by the other. Therefore $\basis_a$ is also linearly ordered by narrowness and so is $\edomain_a$ by the previous argument. Therefore $\edomain_a$ is ordered by broadness.
+		
+		To show that $D=\edomain_b \cup \NOT (\edomain_a)$ is linearly ordered by narrowness, we only need to show that the countable disjunctions of elements of $\basis_b$ are either narrower or broader than the countable conjunctions of the negations of elements of $\basis_a$. Let $B_1 \subset \basis_b$ and $A_2 \subset \basis_a$. The disjunction $\stmt[b]_1 = \bigOR\limits_{\stmt[b] \in B_1} \stmt[b]$ represents the narrowest statement that is broader than all elements of $B_1$ while the conjunction $\NOT \stmt[a]_2 = \NOT \bigOR\limits_{\stmt[a] \in A_2} \stmt[a] = \bigAND\limits_{\stmt[a] \in A_2} \NOT \stmt[a]$ represents the broadest statement that is narrower than all elements of $\NOT(A_2)$. Suppose that for one element of $\NOT(A_2)$ we can find a broader statement in $B_1$. Then $\stmt[b]_1$, being broader than all elements in $B_1$, will be broader than that one element in $\NOT(A_2)$. But since $\NOT \stmt[a]_2$ is narrower than all elements in $\NOT(A_2)$, we have $\NOT \stmt[a]_2 \narrower \stmt[b]_1$. Conversely, suppose that for no element of $\NOT(A_2)$ we can find a broader statement in $B_1$. As $B$ is linearly ordered, it means that all elements in $\NOT(A_2)$ are broader than all elements in $B_1$. This means that all elements in $\NOT(A_2)$ are broader than $\stmt[b]_1$ and therefore $\stmt[b]_1 \narrower \NOT \stmt[a]_2$. Therefore $D$ is linearly ordered by narrowness.
+	\end{proof}
+	
+	\begin{thrm}[Domain ordering theorem]\label{pm-pq-domainOrderingTheorem}
+		An experimental domain $\edomain_X$ is naturally ordered if and only if it is the combination of two experimental domains $\edomain_X = \edomain_a \times \edomain_b$ such that:
+		\begin{enumerate}[label=(\roman*)]
+			\item $D = \edomain_b \cup \NOT(\edomain_a)$ is linearly ordered by narrowness
+			\item all elements of $D$ are part of a pair $(\stmt_b, \NOT \stmt_a)$ such that $\stmt_b \in \edomain_b$, $\stmt_a \in \edomain_a$ and $\NOT \stmt_a$ is either the immediate successor of $\stmt_b$ in $D$ or $\stmt_b \equiv \NOT \stmt_a$
+			\item if $\stmt \in D$ has an immediate successor, then $\stmt \in \edomain_b$
+		\end{enumerate}
+	\end{thrm}
+	
+	\begin{proof}
+		Let $\edomain_X$ be a naturally ordered experimental domain. Let $\basis_b$ and $\basis_a$ be defined as in \ref{pm-pq-defBeforeAfterBasis} which means $\basis = \basis_b \cup \basis_a$ is the basis that generates the order topology. Let $\edomain_b$ be the domain generated by $\basis_b$ and $\edomain_a$ be the domain generated by $\basis_a$. Then $\edomain_X$ is generated from $\edomain_b$ and $\edomain_a$ by finite conjunction and countable disjunction and therefore $\edomain_X = \edomain_b \times \edomain_a$.
+		
+		To prove (i), we have that $\basis_b$ and $\basis_a$ are linearly ordered by \ref{pm-pq-basisOrdering}. We need to show that the linear ordering holds across the sets. Let $x_1, x_2 \in X$ and consider the two statements $``x < x_1"$ and $``x \leq x_2"\equiv \NOT ``x > x_2"$. As $X$ is linearly ordered, either $\{x \in X \, | \, x < x_1\} \subseteq \{x \in X \, | \, x \leq x_2\}$ or $\{x \in X \, | \, x \leq x_2\} \subseteq \{x \in X \, | \, x < x_1\}$. Therefore either $``x < x_1" \narrower ``x \leq x_2"$ or $``x \leq x_2" \narrower ``x < x_1"$. Which means $B = \basis_b \cup \NOT(\basis_a)$ is linearly ordered by $\narrower$. By \ref{pm-pq-generatedOrder} the set $D = \edomain_b \cup \NOT(\edomain_a)$ is also linearly ordered.
+		
+		To prove (ii), let $\stmt_b \in \edomain_b$. Take $\stmt_a \in \edomain_a$ such that $\NOT \stmt_a$ is the narrowest statement in $\NOT (\edomain_a)$ that is broader than $\stmt_b$. This exists because $\edomain_a$ is closed by infinite disjunction. As $\NOT \stmt_a \broader \stmt_b$, let $X_1$ be the set of possibilities compatible with $\NOT \stmt_a$ but not compatible with $\stmt_b$. The set cannot have more than one element, or we could find an element $x_1 \in X_1$ such that $\stmt_b \narrower ``x \leq x_1" \snarrower \NOT \stmt_a$. If $X_1$ contains one possibility, then $\NOT \stmt_a$ is the immediate successor. If $X_1$ is empty then $\stmt_b \equiv \NOT \stmt_a$. Similarly, we can start with $\stmt_a \in \edomain_a$ and find $\stmt_b \in \edomain_b$ such that $\stmt_b$ is the broadest statement in $\edomain_b$ that is narrower than $\NOT \stmt_a$. Let $X_1$ be the set of possibilities compatible with $\NOT \stmt_a$ but not compatible with $\stmt_b$. If $X_1$ contains one possibility, then $\NOT \stmt_a$ is the immediate successor and if $X_1$ is empty then $\stmt_b \equiv \NOT \stmt_a$.
+		
+		To prove (iii), let $\stmt_1, \stmt_2 \in D$ such that $\stmt_2$ is the immediate successor of $\stmt_1$. This means we can write $\stmt_2 \equiv \stmt_1 \OR x_1$ for some $x_1 \in X$. This means $\stmt_1 \equiv ``x < x_1"$ while $\stmt_2 \equiv ``x \leq x_1"$ and therefore $\stmt_1 \in \basis_b$.
+		
+		Now we need to prove the opposite direction. Now let $\edomain_X = \edomain_b \times \edomain_a$ be an experimental domain as described in the theorem. Let $X$ be the set of all statements of the form $x = \NOT \stmt_b \AND \NOT \stmt_a$ for which $\stmt_b \in \edomain_b$, $\stmt_a \in \edomain_a$ and $\NOT \stmt_a$ is the immediate successor of $\stmt_b$ in $D$. All statements in $X$ are possibilities. In fact, take $x = \NOT \stmt_b \AND \NOT \stmt_a \in X$ and $\stmt \in D$. It is not impossible because $\stmt_b \snarrower \NOT \stmt_a$. Since $\NOT \stmt_a$ is the immediate successor of $\stmt_b$, we either have $\stmt \narrower \stmt_b \narrower \stmt_b \OR \stmt_a \equiv \NOT x$ or $\stmt \broader \NOT \stmt_a \broader x$. That is, $x \ncomp \stmt$ or $x \narrower \stmt$. And since the theoretical domain of $\edomain_X$ can be generated from $D$, $x$ is either narrower than or incompatible with any other statement in the theoretical domain. Therefore $x$ is a possibility.
+		
+		Now we show that $X$, as defined, covers all possibilities. Let $x$ be a possibility for $\edomain_x$. Let $F_x=\{\stmt \in D| x \ncomp \stmt \}$ and $T_x=\{\stmt \in D \, | \, x \narrower \stmt \}$. Since $x$ is a possibility $F_x \cup T_x = D$ and since $D$ is linearly ordered, $\stmt_1 \snarrower \stmt_2$ for all $\stmt_1 \in F_x$ and $\stmt_2 \in T_x$. Let $\stmt[f]_x = \bigOR\limits_{\stmt \in F_x} \stmt$ and $\stmt[t]_x = \bigAND\limits_{\stmt \in T_x} \stmt$. To see that $\stmt[f]_x \in D$, let $\stmt[f]'_x = \bigOR\limits_{\stmt \in F_x\cap\edomain_b} \stmt$. This will be in $F_x$ as it is in $\edomain_b$ and will be false if $x$ is true. Because of (ii), there can be only one statement in $F_x \cap \NOT(\edomain_a)$ that is broader than $\stmt[f]'_x$ but narrower than the other elements of $\edomain_b$ that are not in $F_x$, therefore $\stmt[f]_x$ is in $D$ as it has been reduced to a finite disjunction. Similarly, $\stmt[t]_x \in D$. Let $\stmt[t]'_x = \bigAND\limits_{\stmt \in T_x\cap \NOT(\edomain_a)} \stmt$. This will be in $T_x$ as it is in $\NOT (\edomain_a)$ and will be true if $x$ is true. Because of (ii), there can be only one statement in $T_x \cap \edomain_b$ that is narrower than $\stmt[t]'_x$ but broader than the other elements of $\edomain_a$ that are not in $T_x$, therefore $\stmt[t]_x$ is in $D$ as it has been reduced to a finite conjunction.
+		
+		Consider $\NOT \stmt[f]_x \AND \stmt[t]_x$: if true then $\stmt[f]_x$ will be false, and so will all statements in $F_x$ since they are narrower; also $\stmt[t]_x$ will be true, and so will all statements in $T_x$ since they are broader. We have $x \equiv \NOT \stmt[f]_x \AND \stmt[t]_x$. Since $x$ is not impossible, $\stmt[f]_x \nequiv \stmt[t]_x$. Since all statements in $D$ are either in $F_x$ or $T_x$, $\stmt[t]_x$ is the immediate successor of $\stmt[f]_x$. Therefore by (iii) $\stmt[f]_x \in \edomain_b$,  $\NOT \stmt[t]_x \in \edomain_a$ and $x \in X$.
+		
+		Now we show that $X$ can be given a natural ordering. Let $\basis_b \subseteq \edomain_b$ be the set of statements that have an immediate successor in $D$ and $\basis_a \subseteq \edomain_a$ be the set of the negation of the immediate successors. Let $(\cdot)^{++} : \basis_b \to \basis_a$ be the function such that $\NOT(\stmt[b]^{++}) = \NOT \stmt[b]^{++}$ is the immediate successor of $\stmt[b]$. Let $\stmt[b] : X \to \basis_b$ be the function such that $x \equiv \NOT \stmt[b](x) \AND \NOT \stmt[b](x) ^{++}$. On $X$ define the ordering $\leq$ such that $x_1 \leq x_2$ if and only if $\stmt[b](x_1) \narrower \stmt[b](x_2)$. Since $(\basis_b, \narrower)$ is linearly ordered so is $(X, \leq)$. To show that the ordering is natural, suppose $x_1 < x_2$ then $\stmt[b](x_1) \snarrower \NOT \stmt[b](x_1) ^{++} \narrower \stmt[b](x_2)$ and therefore $x_1 \narrower \stmt[b](x_2)$. We also have $\NOT \stmt[b](x_1) ^{++} \narrower \stmt[b](x_2) \snarrower \NOT \stmt[b](x_2) ^{++}$ and therefore $x_2 \narrower \stmt[b](x_1) ^{++}$. This means that given a possibility $x_1 \in X$, all and only the possibilities lower than $x_1$ are compatible with $\stmt[b](x_1)$ and therefore $\stmt[b](x_1) \equiv ``x < x_1"$, while all and only the possibilities greater than $x_1$ are compatible with $\stmt[b](x_1)^{++}$ and therefore $\stmt[b](x_1)^{++} \equiv ``x > x_1"$. The topology is the order topology and the domain has a natural ordering.
+	\end{proof}
+	
+\end{mathSection}
+
+\section{References and experimental ordering}
+
+In the previous section we have characterized what a quantity is and how it relates to an experimental domain. But as we saw in the first chapters, the possibilities of a domain are not objects that exist a priori: they are defined based on what can be verified experimentally. Therefore simply assigning an ordering to the possibilities of a domain does not answer the more fundamental question: how are quantities actually constructed? How do we, in practice, create a system of references that allows us to measure a quantity at a given level of precision? What are the assumptions we make in that process?
+
+In this section we construct ordering from the idea of a reference that physically defines a boundary between a \emph{before} and an \emph{after}. In general, a reference has an extent and may overlap with others. We define ordering in terms of references that are clearly before and after others. We see that the possibilities have a natural ordering only if they are generated from a set of references that is refinable (we can always find finer ones that do not overlap) and for which before/on/after are mutually exclusive cases. The possibilities, then, are the finest references possible.
+
+We are by now so used to the ideas of real numbers, negative numbers and the number zero that it is difficult to realize that these are mental constructs that are, in the end, somewhat recent in the history of humankind. Yet geometry itself started four thousand years ago as an experimentally discovered collection of rules concerning lengths, areas and angles. That is, human beings were measuring quantities well before the real numbers were invented. So, how does one construct instruments that measure values?
+
+To measure position, we can use a ruler, which is a series of equally spaced marks. We give a label to each mark (e.g. a number) and note which two marks are closest to the target position (e.g. between 1.2 and 1.3 cm). To measure weight, we can use a balance and a set of equally prepared reference weights. The balance can clearly tell us whether one side is heavier than the other, so we use it to compare the target with a number of reference weights and note the two closest (e.g. between 300 and 400 grams). A clock gives us a series of events to compare to (e.g. earth's rotation on its axis, the ticks of a clock). We can pour water from a reference container into another as many times as are needed to measure its volume. In all these cases what actually happens is similar: we have a reference (e.g. a mark on a ruler, a set of equally prepared weights, a number of ticks of a clock) and it is fairly easy to tell whether what we are measuring is before (e.g shorter, lighter, sooner) or after (e.g. longer, heavier, later) the reference.
+
+Note that determining whether the quantity is exactly equal to the reference is not as easy: the mark on the ruler has a width, the balance has friction, the tick of our clock will last a finite amount of time. That is, the reference itself can only be compared up to a finite level of precision. This may be a problem when constructing the references themselves: how do we know that the marks on our ruler are equally spaced, or that the weights are equally prepared, or that ticks of our clock are equally timed? It is a circular problem in the sense that, in a way, we need instruments of measurement to be able to create instruments of measurement. Yet, even if our references can't be perfectly compared and are not perfectly equal, we can still say whether the value is well before or well after any of them.
+
+To make matters worse, the object we are measuring may itself have an extent. If we are measuring the position of a tiny ball, it may be clearly before or clearly after the nearest mark, but it may also be partly before, partly on and partly after. One may try to sidestep the problem by measuring part of the object, say the position of the center of mass or of its closest part. But this assumes we have a process to interact with only part of the object, and that part can only be before, on or after the reference. It may be a reasonable assumption in many cases but we have to be mindful that we made that assumption: our general definition will have to be able to work in the less ideal cases.
+
+In our general mathematical theory of experimental science, we can capture the above discussion with the following definitions. A reference is represented by a set of three statements: they tell us whether the object is before, on or after a specific reference. To make sense, these have to satisfy the following minimal requirements. The before and the after statements must be verifiable, as otherwise they would not be usable as references. As the reference must be somewhere, the on statement cannot be an impossibility. If the object is not before and not after the reference, then it must be on the reference. If the object is before and after the reference, then it must also be on the reference. These requirements recognize that, in general, a reference has an extent and so does the object being measured.
+
+We can compare the extent of two references and say that one is finer than the other if the on statement is narrower than the other, and the before and after statements are wider. This corresponds to a finer tick of a ruler or a finer pulse in our timing system. We say that a reference is strict if the before, on and after statements are incompatible. That is, the three cases are distinct and can't be true at the same time.
+
+\begin{mathSection}
+	\begin{defn}
+		A \textbf{reference} defines a before, an on and an after relationship between itself and another object. Formally a reference $\refStmt = ( \stmt[b], \stmt[o], \stmt[a] )$ is a tuple of three statements such that:
+		\begin{enumerate}
+			\item we can verify whether the object is before or after the reference: $\stmt[b]$ and $\stmt[a]$ are verifiable statements
+			\item the object can be on the reference: $\stmt[o] \nequiv \impossibility$
+			\item if it's not before or after, it's on the reference: $\NOT \stmt[b] \AND \NOT \stmt[a] \narrower \stmt[o]$
+			\item if it's before and after, it's also on the reference: $\stmt[b] \AND \stmt[a] \narrower \stmt[o]$
+		\end{enumerate}
+		A \textbf{beginning reference} has nothing before it. That is, $\stmt[b] \equiv \impossibility$. An \textbf{ending reference} has nothing after it. That is, $\stmt[a] \equiv \impossibility$. A \textbf{terminal reference} is either beginning or ending.
+	\end{defn}
+	\begin{coro}
+		Let $(\stmt[b], \stmt[o], \stmt[a])$ be a reference. Then $\stmt[b] \OR \stmt[o] \OR \stmt[a] \equiv \certainty$.
+	\end{coro}
+	\begin{proof}
+		By definition, we have $\NOT \stmt[b] \AND \NOT \stmt[a] \narrower \stmt[o]$ and by \ref{pm-vs-narrownessProperties} $\NOT (\NOT \stmt[b] \AND \NOT \stmt[a]) \OR \stmt[o] \equiv \certainty \equiv \stmt[b] \OR \stmt[a] \OR \stmt[o]$.
+	\end{proof}
+	\begin{defn}\label{pm-pq-defReference}
+		A reference $\refStmt_1 = (\stmt[b]_1, \stmt[o]_1, \stmt[a]_1)$ is \textbf{finer} than another reference $\refStmt_2 = (\stmt[b]_2, \stmt[o]_2, \stmt[a]_2)$ if $\stmt[b]_1 \broader \stmt[b]_2$, $\stmt[o]_1 \narrower \stmt[o]_2$ and $\stmt[a]_1 \broader \stmt[a]_2$.
+	\end{defn}
+	\begin{coro}
+		The finer relationship between references is a partial order.
+	\end{coro}
+	\begin{proof}
+		As the finer relationship is directly based on narrowness, it inherits its reflexivity, antisymmetry and transitivity properties and is therefore a partial order.
+	\end{proof}
+	\begin{defn}
+		A reference is \textbf{strict} if its before, on and after statements are incompatible. Formally, $\refStmt = (\stmt[b], \stmt[o], \stmt[a])$ is such that $\stmt[b] \ncomp \stmt[a]$ and $\stmt[o] \equiv \NOT \stmt[b] \AND \NOT \stmt[a]$. A reference is \textbf{loose} if it is not strict.
+	\end{defn}
+	\begin{remark}
+		In general, we can't turn a loose reference into a strict one. The on statement can be made strict by replacing it with $\NOT \stmt[b] \AND \NOT \stmt[a]$. This is possible because $\stmt[o]$ is not required to be verifiable. The before (and after) statements would need to be replaced with statements like $\stmt[b] \AND \NOT \stmt[a]$, which are not in general verifiable because of the negation.
+	\end{remark}
+\end{mathSection}
+
+To measure a quantity we will have many references one after the other: a ruler will have many marks, a scale will have many reference weights, a clock will keep ticking. What does it mean that a reference comes after another in terms of the before/on/after statements?
+
+If reference $\refStmt_1$ is before reference $\refStmt_2$ we expect that if the value measured is before the first it will also be before the second, and if it is after the second it will also be after the first. Note that this is not enough, though, because as references have an extent they may overlap. And if they overlap one can't be after the other. To have an ordering properly defined we must have that the first reference is entirely before the second. That is, if the value measured is on the first it will be before the second and if it is on the second it will be after the first.
+
+Mathematically, this type of ordering is strict in the sense that it defines what is strictly before and strictly after. It does not define what happens in the overlap, in between cases. One may be tempted to define the ordering based on how the references overlap, but that requires refining the references and, in the end, it means we are defining an ordering on those refined references, not the original ones.
+
+\begin{mathSection}
+	\begin{defn}
+		A reference is before another if whenever an object is found before or on the first it cannot be on or after the second. Formally, $\refStmt_1 \less \refStmt_2$ if and only if $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$.
+	\end{defn}
+	\begin{prop}
+		Reference ordering satisfies the following properties:
+		\begin{itemize}
+			\item irreflexivity: not $\refStmt < \refStmt$
+			\item transitivity: if $\refStmt_1 < \refStmt_2$ and $\refStmt_2 < \refStmt_3$ then $\refStmt_1 < \refStmt_3$
+		\end{itemize}
+		and is therefore a \textbf{strict partial order}.
+	\end{prop}
+	\begin{proof}
+		For irreflexivity, since the on statement can't be impossible, we have $\stmt[o] \comp \stmt[o]$ and therefore $\stmt[b] \OR \stmt[o] \comp \stmt[o] \OR \stmt[a]$. Therefore a reference is not before itself and the relationship is irreflexive.
+		
+		For transitivity, if $\refStmt_1 < \refStmt_2$, we have $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$ and therefore $\NOT (\stmt[b]_1 \OR \stmt[o]_1) \broader \stmt[o]_2 \OR \stmt[a]_2$ by \ref{pm-vs-narrownessProperties}. Since $\stmt[b]_1 \OR \stmt[o]_1 \OR \stmt[a]_1 \equiv \certainty$, we have $\stmt[a]_1 \broader \NOT (\stmt[b]_1 \OR \stmt[o]_1)$. Similarly if $\refStmt_2 < \refStmt_3$ we'll have $\stmt[a]_2 \broader \NOT (\stmt[b]_2 \OR \stmt[o]_2) \broader \stmt[o]_3 \OR \stmt[a]_3$. Putting it all together $\NOT (\stmt[b]_1 \OR \stmt[o]_1) \broader \stmt[o]_2 \OR \stmt[a]_2 \broader \stmt[a]_2 \broader \NOT (\stmt[b]_2 \OR \stmt[o]_2) \broader \stmt[o]_3 \OR \stmt[a]_3$, which means $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_3 \OR \stmt[a]_3$.
+	\end{proof}
+	\begin{coro}
+		The relationship $\refStmt_1 \leq \refStmt_2$, defined to be true if $\refStmt_1 < \refStmt_2$ or $\refStmt_1 = \refStmt_2$, is a partial order.
+	\end{coro}
+\end{mathSection}
+
+As we saw, two references may overlap and therefore an ordering between them cannot be defined. But references can overlap in different ways.
+
+Suppose we have a vertical line one millimeter thick and call the left side the part before the line and the right side the part after. We can have another vertical line of the same thickness overlapping but we can also have a horizontal line which will also, at some point, overlap. The case of the two vertical lines is something that, through finding finer references, can be given a linear order. The case of the vertical and horizontal line, instead, cannot. Intuitively, the vertical lines are aligned while the horizontal and vertical are not.
+
+Conceptually, the overlapping vertical lines are aligned because we can imagine narrower lines around the borders, and those lines will be ordered references in the above sense: each line would be completely before or after, without intersection. This means that the before and not-after statements of one reference are either narrower or broader than the before and not-after statements of the other. That is, alignment can also be defined in terms of narrowness of statements.
+
+Note that if a reference is strict, before and after statements are not compatible and therefore the before statement is narrower than the not-after statement. This means that, given a set of aligned strict references, the set of all before and not-after statements is linearly ordered by narrowness. As we saw in the previous section, this was a necessary condition for the possibilities of a domain to be linearly ordered and therefore aligned strict references play a crucial role.
+
+\begin{mathSection}
+	\begin{defn}
+		Two references $\refStmt_1 = (\stmt[b]_1, \stmt[o]_1, \stmt[a]_1)$ and $\refStmt_2 = (\stmt[b]_2, \stmt[o]_2, \stmt[a]_2)$ are \textbf{aligned} if for any $\stmt_1 \in \{ \stmt[b]_1, \NOT\stmt[a]_1\}$ and $\stmt_2 \in \{ \stmt[b]_2, \NOT\stmt[a]_2\}$ we have 
+		$\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$. A set $R$ of references is aligned if every pair of references is aligned.
+	\end{defn}
+	\begin{prop}\label{pm-pq-strictAlignmentIsOrdering}
+		Let $R = \{(\stmt[b]_i, \stmt[o]_i, \stmt[a]_i)\}_{i\in I}$ be a set of aligned strict references. Let $\basis_b = \{\stmt[b]_i\}_{i\in I}$ and $\basis_a = \{\stmt[a]_i\}_{i\in I}$ be respectively the sets of before and after statements. Then the set $B = \basis_b \cup \NOT (\basis_a)$ is linearly ordered by narrowness.
+	\end{prop}
+	\begin{proof}
+		Let $R$ be a set of aligned strict references. Let $\stmt_1, \stmt_2 \in B$. Suppose they are taken from the same reference. If they are both before statements or both after statements, we have $\stmt_1 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$. If one is the before statement and the other is the not-after statement, since the reference is strict, we have $\stmt[b] \ncomp \stmt[a]$ and $\stmt[b] \narrower \NOT\stmt[a]$ by \ref{pm-vs-narrownessProperties} and therefore $\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$. Now suppose they are taken from different references. Since they are aligned we have  $\stmt_1 \narrower \stmt_2$ or $\stmt_2 \narrower \stmt_1$ by definition.
+	\end{proof}
+	
+	\begin{prop}\label{pm-pq-orderedReferencesAreAligned}
+		Let $\refStmt_1 = ( \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 )$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 )$ be two references. If $\refStmt_1 \less \refStmt_2$ then $\stmt[b]_1 \narrower \stmt[b]_2$, $\stmt[a]_2 \narrower \stmt[a]_1$, $\stmt[b]_1 \narrower \NOT \stmt[a]_2$, $\NOT \stmt[a]_1 \narrower \stmt[b]_2$ and therefore the two references are aligned.
+	\end{prop}
+	\begin{proof}
+		We have $\stmt[b]_1 \OR \stmt[o]_1 \equiv (\stmt[b]_1 \OR \stmt[o]_1) \AND \certainty \equiv (\stmt[b]_1 \OR \stmt[o]_1) \AND (\stmt[b]_2 \OR \stmt[o]_2 \OR \stmt[a]_2) \equiv ((\stmt[b]_1 \OR \stmt[o]_1) \AND \stmt[b]_2) \OR ((\stmt[b]_1 \OR \stmt[o]_1) \AND (\stmt[o]_2 \OR \stmt[a]_2)) \equiv ((\stmt[b]_1 \OR \stmt[o]_1) \AND \stmt[b]_2) \OR \impossibility \equiv (\stmt[b]_1 \OR \stmt[o]_1) \AND \stmt[b]_2$. Therefore $\stmt[b]_1 \OR \stmt[o]_1 \narrower \stmt[b]_2$. And since $\stmt[b]_1 \narrower \stmt[b]_1 \OR \stmt[o]_1$, we have $\stmt[b]_1 \narrower \stmt[b]_2$.
+		
+		Similarly, we have $\stmt[o]_2 \OR \stmt[a]_2 \equiv (\stmt[o]_2 \OR \stmt[a]_2) \AND \certainty \equiv (\stmt[o]_2 \OR \stmt[a]_2) \AND (\stmt[b]_1 \OR \stmt[o]_1 \OR \stmt[a]_1) \equiv ((\stmt[o]_2 \OR \stmt[a]_2) \AND (\stmt[b]_1 \OR \stmt[o]_1)) \OR ((\stmt[o]_2 \OR \stmt[a]_2) \AND \stmt[a]_1) \equiv \impossibility \OR ((\stmt[o]_2 \OR \stmt[a]_2) \AND \stmt[a]_1) \equiv (\stmt[o]_2 \OR \stmt[a]_2) \AND \stmt[a]_1$. Therefore $\stmt[a]_2 \OR \stmt[o]_2 \narrower \stmt[a]_1$. And since $\stmt[a]_2 \narrower \stmt[o]_2 \OR \stmt[a]_2$, we have $\stmt[a]_2 \narrower \stmt[a]_1$.
+		
+		Since $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$, we have $\stmt[b]_1 \ncomp \stmt[a]_2$ which means $\stmt[b]_1 \narrower \NOT \stmt[a]_2$.
+		
+		Since $\stmt[b]_1 \OR \stmt[o]_1 \OR \stmt[a]_1 \equiv \certainty$, we have $\NOT \stmt[a]_1 \narrower \stmt[b]_1 \OR \stmt[o]_1$. Similarly $\NOT \stmt[b]_2 \narrower \stmt[o]_2 \OR \stmt[a]_2$. Since $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$, $\NOT \stmt[a]_1 \ncomp \NOT \stmt[b]_2$ and therefore $\NOT \stmt[a]_1 \narrower \stmt[b]_2$.
+		
+		Since $\stmt[b]_1 \narrower \stmt[b]_2$, $\stmt[a]_2 \narrower \stmt[a]_1$, $\stmt[b]_1 \narrower \NOT \stmt[a]_2$ and $\NOT \stmt[a]_1 \narrower \stmt[b]_2$, the two references are aligned.
+	\end{proof}
+	\begin{prop}\label{pm-pq-strictReferencesOrderingCondition}
+		Let $\refStmt_1 = ( \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 )$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 )$ be two strict references. Then $\refStmt_1 \less \refStmt_2$ if and only if $\NOT \stmt[a]_1 \narrower \stmt[b]_2$ .
+	\end{prop}
+	\begin{proof}
+		Let $\refStmt_1 \less \refStmt_2$. By \ref{pm-pq-orderedReferencesAreAligned}, we have $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Conversely, let $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Then $\NOT \stmt[a]_1 \ncomp \NOT \stmt[b]_2$. Because the references are strict, $\NOT \stmt[a]_1 \equiv \stmt[b]_1 \OR \stmt[o]_1$ and $\NOT \stmt[b]_2 \equiv \stmt[o]_2 \OR \stmt[a]_2$. Therefore $\stmt[b]_1 \OR \stmt[o]_1 \ncomp \stmt[o]_2 \OR \stmt[a]_2$ and $\refStmt_1 \less \refStmt_2$ by definition.
+	\end{proof}
+	
+	\begin{defn}
+		A reference is the \textbf{immediate} predecessor of another if nothing can be found before the second and after the first. Formally, $\refStmt_1 \less \refStmt_2$ and $\stmt[a]_1 \ncomp \stmt[b]_2$. Two references are \textbf{consecutive} if one is the immediate successor of the other.
+	\end{defn}
+	
+	\begin{prop}\label{pm-pq-immediatelyBeforeIsNotAfter}
+		Let $\refStmt_1 = ( \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 )$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 )$ be two references. If $\refStmt_1$ is immediately before $\refStmt_2$ then $\stmt[b]_2 \equiv \NOT \stmt[a]_1$.
+	\end{prop}
+	\begin{proof}
+		Let $\refStmt_1$ be immediately before $\refStmt_2$. Then $\stmt[a]_1 \ncomp \stmt[b]_2$ which means $\stmt[b]_2 \narrower \NOT \stmt[a]_1$. By \ref{pm-pq-orderedReferencesAreAligned} we also have $\NOT \stmt[a]_1 \narrower \stmt[b]_2$. Therefore $\stmt[b]_2 \equiv \NOT \stmt[a]_1$.
+	\end{proof}
+	
+	\begin{prop}\label{pm-pq-strictConsecutiveBeforeIsNotAfter}
+		Let $\refStmt_1 = ( \stmt[b]_1, \stmt[o]_1, \stmt[a]_1 )$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[o]_2, \stmt[a]_2 )$ be two strict references. Then $\refStmt_1$ is immediately before $\refStmt_2$ if and only if $\stmt[b]_2 \equiv \NOT \stmt[a]_1$.
+	\end{prop}
+	\begin{proof}
+		Let $\refStmt_1$ be immediately before $\refStmt_2$. Then $\stmt[b]_2 \equiv \NOT \stmt[a]_1$ by \ref{pm-pq-immediatelyBeforeIsNotAfter}. Conversely, let $\stmt[b]_2 \equiv \NOT \stmt[a]_1$. Then $\refStmt_1 \less \refStmt_2$ by \ref{pm-pq-strictReferencesOrderingCondition}. We also have $\stmt[a]_1 \ncomp \NOT \stmt[a]_1$, therefore $\stmt[a]_1 \ncomp \stmt[b]_2$ and $\refStmt_1$ is immediately before $\refStmt_2$ by definition.
+	\end{proof}
+	
+\end{mathSection}
+
+If we have a set of references, we can generate an experimental domain by using the before and after statements as the basis. More specifically we can take all the before statements and generate the before domain $\edomain_b$ and all the after statements and generate the after domain $\edomain_a$. If the references are all strict and aligned, the set $D=\edomain_b \cup \NOT (\edomain_a)$ of all the before and not-after statements will be linearly ordered by narrowness. We recognize this as the first requirement of the domain ordering theorem \ref{pm-pq-domainOrderingTheorem}.
+
+\begin{mathSection}
+	
+	\begin{defn}
+		Let $R = \{( \stmt[b]_i, \stmt[o]_i, \stmt[a]_i )\}_{i \in I}$ be a set of references. Let $\basis_b = \{\stmt[b]_i\}_{i \in I}$ be the set of all before statements and $\basis_a = \{\stmt[a]_i\}_{i \in I}$ be the set of all after statements. The experimental domain $\edomain$ generated by $R$ is the one generated by all before and after statements $\basis_b \cup \basis_a$. The before domain $\edomain_b$ is the domain generated only by the before statements $\basis_b$ and the after domain $\edomain_a$ is the domain generated only by the after statements $\basis_a$.
+	\end{defn}
+	
+	\begin{defn}
+		Let $\edomain$ be a domain generated by a set of references $R$. A reference $\refStmt = ( \stmt[b], \stmt[o], \stmt[a] )$ is said to be aligned with $\edomain$ if $\stmt[b] \in \edomain_b$ and $\stmt[a] \in \edomain_a$.
+	\end{defn}
+	
+	\begin{prop}\label{pm-pq-basisGenerateOrdering}
+		Let $\edomain$ be an experimental domain generated by a set of aligned strict references $R$ and let $D=\edomain_b \cup \NOT (\edomain_a)$. Then $(D, \narrower)$ is linearly ordered.
+	\end{prop}
+	\begin{proof}
+		By \ref{pm-pq-strictAlignmentIsOrdering} we have that $B = \basis_b \cup \NOT(\basis_a)$ is aligned by narrowness. By \ref{pm-pq-generatedOrder} the ordering extends to $D$.
+	\end{proof}
+	
+\end{mathSection}
+
+Having a set of aligned references is not necessarily enough to cover the whole space at all levels of precision. To do that we need to make sure that, for example, between two references that are not consecutive we can at least put a reference in between. Or that if we have two references that overlap, we can break them apart into finer ones that do not overlap and one is after the other.
+
+We call a set of references refinable if the domain they generate has the above mentioned properties. This allows us to break up the whole domain into a sequence of references that do not overlap, are linearly ordered and that cover the whole space. As we get to the finest references, their before statements will be immediately followed by the negation of their after statements, since there can't be any reference in between. Conceptually, this will give us the second and the third condition of the domain ordering theorem \ref{pm-pq-domainOrderingTheorem}.
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\edomain$ be an experimental domain generated by a set of aligned references $R$. The set of references is \textbf{refinable} if, given two strict references $\refStmt_1 = ( \stmt[b]_1, \stmt[o]_1, \stmt[a]_1)$ and $\refStmt_2 = ( \stmt[b]_2, \stmt[o]_2, \stmt[a]_2)$ aligned with $\edomain$, we can always:
+		\begin{itemize}
+			\item find an intermediate one if they are not consecutive; that is, if $\refStmt[r]_1 < \refStmt[r]_2$ but $\refStmt[r]_2$ is not the immediate successor of $\refStmt[r]_1$, then we can find a strict reference $\refStmt_3$ aligned with $\edomain$ such that $\refStmt[r]_1 < \refStmt[r]_3 < \refStmt[r]_2$.
+			\item refine overlapping references if one is finer than the other; that is, if $\stmt[o]_2 \snarrower \stmt[o]_1$, we can find a strict reference $\refStmt_3$ aligned with $\edomain$ such that $\stmt[o]_3 \narrower \stmt[o]_1$ and either $\stmt[b]_3 \equiv \stmt[b]_1$ and $\refStmt_3 < \refStmt_2$ or $\stmt[a]_3 \equiv \stmt[a]_1$ and $\refStmt_2 < \refStmt_3$.
+		\end{itemize}
+	\end{defn}
+	
+	\begin{prop}\label{pm-pq-refinableOrderSequences}
+		Let $\edomain$ be an experimental domain generated by a set of refinable aligned strict references $R$.
+		\begin{enumerate}
+			\item If $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ such that $\stmt[b]_1 \snarrower \stmt[b]_2$, then there exists $\stmt[a] \in \edomain_a$ such that $\stmt[b]_1 \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
+			\item If $\stmt[a]_1, \stmt[a]_2 \in \edomain_a$ such that $\NOT \stmt[a]_1 \snarrower \NOT \stmt[a]_2$, then there exists $\stmt[b] \in \edomain_b$ such that $\NOT \stmt[a]_1 \narrower \stmt[b] \snarrower \NOT \stmt[a]_2$.
+			\item If $\stmt[a]_1 \in \edomain_a$ and $\stmt[b]_2\in \edomain_b$ such that $\NOT \stmt[a]_1 \snarrower \stmt[b]_2$, then there exists $\stmt[b] \in \edomain_b$ and $\stmt[a] \in \edomain_a$ such that $\NOT \stmt[a]_1 \narrower \stmt[b] \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
+		\end{enumerate}
+	\end{prop}
+	\begin{proof}
+		For the first, suppose $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ such that $\stmt[b]_1 \snarrower \stmt[b]_2$. Then $\refStmt_1 = ( \stmt[b]_1, \NOT \stmt[b]_1, \impossibility )$ and  $\refStmt_2 = ( \stmt[b]_2, \NOT \stmt[b]_2, \impossibility)$ are strict references aligned with the domain such that $\NOT \stmt[b]_2 \snarrower \NOT \stmt[b]_1$. This means we can find $\refStmt_3 = ( \stmt[b]_1, \NOT \stmt[b]_1 \AND \NOT \stmt[a], \stmt[a] )$ for some $\stmt[a] \in \edomain_a$ such that $\refStmt_3 < \refStmt_2$ and therefore $\stmt[b]_1 \snarrower \NOT \stmt[a] \narrower \stmt[b]_2$.
+		
+		For the second, suppose $\stmt[a]_1, \stmt[a]_2 \in \edomain_a$ such that $\NOT \stmt[a]_1 \snarrower \NOT \stmt[a]_2$. Then $\refStmt_1 = ( \impossibility, \NOT \stmt[a]_2, \stmt[a]_2 )$ and  $\refStmt_2 = ( \impossibility, \NOT \stmt[a]_1, \stmt[a]_1)$ are strict references aligned with the domain such that $\NOT \stmt[a]_1 \snarrower \NOT \stmt[a]_2$. This means we can find $\refStmt_3 = ( \stmt[b], \NOT \stmt[b] \AND \NOT \stmt[a]_2, \stmt[a]_2 )$ for some $\stmt[b] \in \edomain_b$ such that $\refStmt_3 < \refStmt_2$ and therefore $\NOT \stmt[a]_1 \narrower \stmt[b] \snarrower \NOT \stmt[a]_2$.
+		
+		For the third, suppose $\stmt[a]_1 \in \edomain_a$ and $\stmt[b]_2\in \edomain_b$ such that $\NOT \stmt[a]_1 \snarrower \stmt[b]_2$. Then $\refStmt_1 = ( \impossibility, \NOT \stmt[a]_1, \stmt[a]_1 )$ and  $\refStmt_2 = ( \stmt[b]_2, \NOT \stmt[b]_2, \impossibility)$ are strict references aligned with the domain such that $\refStmt_1 \less \refStmt_2$ but $\refStmt_2$ is not an immediate successor of $\refStmt_1$. This means we can find $\refStmt_3 = ( \stmt[b], \NOT \stmt[b] \AND \NOT \stmt[a], \stmt[a] )$ such that $\refStmt_1 < \refStmt_3 < \refStmt_2$ and therefore $\NOT \stmt[a]_1 \narrower \stmt[b] \snarrower \NOT \stmt[a] \narrower \NOT \stmt[b]_2$.
+	\end{proof}
+	
+	\begin{prop}\label{pm-pq-refinableIsPairOrdering}
+		Let $\edomain$ be an experimental domain generated by a set of refinable aligned strict references. Then all elements of $D$ are part of a pair $(\stmt_b, \NOT \stmt_a)$ such that $\stmt_b \in \edomain_b$, $\stmt_a \in \edomain_a$ and $\NOT \stmt_a$ is the immediate successor of $\stmt_b$ in $D$ or $\stmt_b \equiv \NOT \stmt_a$. Moreover if $\stmt \in D$ has an immediate successor, then $\stmt \in \edomain_b$.
+	\end{prop}
+	\begin{proof}
+		Let $\edomain$ be an experimental domain generated by a set of refinable aligned strict references. Let $\stmt_b \in \edomain_b$. Let $A=\{\stmt[a] \in \edomain_a \, | \, \stmt[a] \OR \stmt_b \nequiv \certainty \}$. Let $\stmt_a=\bigOR\limits_{\stmt[a] \in A} \stmt[a]$. First we show that $\stmt_b \narrower \NOT \stmt_a$. We have $\stmt_b \AND \NOT \stmt_a \equiv \stmt_b \AND \NOT \bigOR\limits_{\stmt[a] \in A} \stmt[a] \equiv \stmt_b \AND \bigAND\limits_{\stmt[a] \in A} \NOT \stmt[a] \equiv \bigAND\limits_{\stmt[a] \in A} \stmt_b \AND \NOT \stmt[a]$. For all $\stmt[a] \in A$ we have $\stmt[a] \OR \stmt_b \nequiv \certainty$, $\NOT \stmt[a] \nnarrower \stmt_b$ which means $\stmt_b \narrower \NOT \stmt[a]$ because of the total order of $D$. This means that $\stmt_b \AND \NOT \stmt[a] \equiv \stmt_b$ for all $\stmt[a] \in A$, therefore $\stmt_b \AND \NOT \stmt_a \equiv \stmt_b$ and $\stmt_b \narrower \NOT \stmt_a$.
+		
+		Next we show that no statement $\stmt \in D$ is such that $\stmt_b \snarrower \stmt \snarrower \NOT \stmt_a$. Let $\stmt[a] \in \edomain_a$ such that $\stmt_b \snarrower \NOT \stmt[a]$. By construction $\stmt[a] \in A$ and therefore $\NOT \stmt_a \narrower \NOT \stmt[a]$. Therefore we can't have $\stmt_b \snarrower \stmt[a] \snarrower \NOT \stmt_a$. We also can't have $\stmt[b] \in \edomain_b$ such that $\stmt_b \snarrower \stmt[b] \snarrower \NOT \stmt_a$: by \ref{pm-pq-refinableOrderSequences} we'd find $\stmt[a] \in \edomain_a$ such that $\stmt_b \snarrower \stmt[a] \narrower \stmt[b] \snarrower \NOT \stmt_a$ which was ruled out. So there are two cases. Either $\stmt_b \nequiv \NOT \stmt_a$ then $\stmt_b \snarrower \NOT \stmt_a$: $\NOT \stmt_a$ is the immediate successor of $\stmt[b]$. Or $\stmt_b \equiv \NOT \stmt_a$.
+		
+		The same reasoning can be applied starting from $\stmt_a \in \edomain_a$ to find a $\stmt_b \in \edomain_b$ such that $\stmt_b$ is the immediate predecessor of $\NOT \stmt_a$ or an equivalent statement. This shows that all elements of $D$ are paired.
+		
+		To show that if a statement in $D$ has a successor then it must be a before statement, let $\stmt_1, \stmt_2 \in D$ such that $\stmt_2$ is the immediate successor of $\stmt_1$. By \ref{pm-pq-refinableOrderSequences}, in all cases where $\stmt_1 \notin \edomain_b$ and $\stmt_2 \notin \edomain_a$ we can always find another statement between the two. Then we must have that $\stmt_1 \in \edomain_b$ and $\stmt_2 \in \edomain_a$.
+	\end{proof}
+	
+	\begin{thrm}[Reference ordering theorem]\label{pm-pq-referenceOrderingTheorem}
+		An experimental domain is naturally ordered if and only if it can be generated by a set of refinable aligned strict references.
+	\end{thrm}
+	\begin{proof}
+		Suppose $\edomain_X$ is an experimental domain generated by a set of refinable aligned strict references. Then by \ref{pm-pq-basisGenerateOrdering} and \ref{pm-pq-refinableIsPairOrdering} the domain satisfies the requirement of theorem \ref{pm-pq-domainOrderingTheorem} and therefore is naturally ordered.
+		
+		Now suppose $\edomain_X$ is naturally ordered. Define the set $\basis_b$, $\basis_a$ and $D$ as in \ref{pm-pq-defBeforeAfterBasis}. Let $R = \{ (\stmt[b], \NOT \stmt[b] \AND \NOT \stmt[a], \stmt[a]) \, | \, \stmt[b] \in \basis_b, \stmt[a] \in \basis_a, \stmt[b] \snarrower \NOT \stmt[a] \}$ be the set of all references constructed from the basis. First let us verify they are references. The before and after statements are verifiable since they are part of the basis. The on statement $\NOT \stmt[b] \AND \NOT \stmt[a]$ is not impossible since $\stmt[b] \snarrower \NOT \stmt[a]$ means $\stmt[b] \ncomp \stmt[a]$ and $\stmt[b] \nequiv \NOT \stmt[a]$. The on statement is broader than $\NOT \stmt[b] \AND \NOT \stmt[a]$ as they are equivalent and it is broader than $\stmt[b] \AND \stmt[a]$ as that is impossible since $\stmt[b] \snarrower \NOT \stmt[a]$. Therefore $R$ is a set of references. Since the before and after statements of $R$ coincide with the basis of the domain, $\edomain_X$ is generated by $R$.
+		
+		Now we show that $R$ consists of aligned strict references. We already saw that $\stmt[b] \ncomp \stmt[a]$ and we also have $\NOT \stmt[b] \AND \NOT \stmt[a]$ is incompatible with both $\stmt[b]$ and $\stmt[a]$. The references are strict. To show they are aligned, take two references. The before and not after statements are linearly ordered by \ref{pm-pq-basisOrdering} which means the references are aligned.
+		
+		To show $R$ is refinable, note that each reference can be expressed as $(``x < x_1", ``x_1 \leq x \leq x_2", ``x > x_2")$ where $x_1, x_2 \in X$ and $``x_1 \leq x \leq x_2" \equiv ``x \geq x_1" \AND ``x \leq x_2"$. That is, every reference is identified by two possibilities $x_1, x_2$ such that $x_1 \leq x_2$. Therefore take two references $\refStmt_1, \refStmt_2 \in R$ and let $(x_1, x_2)$ and $(x_3, x_4)$ be the respective pair of possibilities we can use to express the references as we have shown. Suppose $\refStmt_1 < \refStmt_2$ but they are not consecutive. Then $``x \leq x_2" \snarrower ``x < x_3"$. That is, we can find $x_5 \in X$ such that  $x_2 < x_5 < x_3$ which means $``x \leq x_2" \narrower ``x < x_5"$ and $``x \leq x_5" \narrower ``x < x_3"$. Therefore the reference $\refStmt_3 \in R$ identified by $(x_5, x_5)$ is between the two references. On the other hand, assume the second reference is finer than the first. Then $x_1 \leq x_3$ and $x_4 \leq x_2$ with either $x_1 \neq x_3$ or $x_4 \neq x_2$. Consider the references $\refStmt_3, \refStmt_4 \in R$ identified by $(x_1, x_1)$ and $(x_2, x_2)$. Either $\refStmt_3 < \refStmt_2$ or $\refStmt_2 < \refStmt_4$. Also note that the before statements of $\refStmt_1$ and $\refStmt_3$ are the same and the after statements of $\refStmt_1$ and $\refStmt_4$ are the same. Therefore we satisfy all the requirements and the set $R$ is refinable by definition.
+	\end{proof}
+\end{mathSection}
+
+To recap, experimentally we construct ordering by placing references and being able to tell whether the object measured is before or after. We can define a linear order on the possibilities, and therefore a quantity, only when the set of references meets special conditions. The references must be strict, meaning that before, on and after are mutually exclusive. They must be aligned, meaning that the before and not-after statement must be ordered by narrowness. They must be refinable, meaning when they overlap we can always find finer references with well defined before/after relationships. If all these conditions apply, we have a linear order. If any of these conditions fail, a linear order cannot be defined.
+
+The possibilities, then, correspond to the finest references we can construct within the domain. That is, given a value $q_0$, we have the possibility \statement{the value of the property is $q_0$} and we have the reference (\statement{the value of the property is less than $q_0$}, \statement{the value of the property is $q_0$}, \statement{the value of the property is more than $q_0$}).
+
+\section{Discrete quantities}
+
+Now that we have seen the general conditions to have a naturally ordered experimental domain, we study common types of quantities and under what conditions they arise. We start with discrete ones: the number of chromosomes for a species, the number of inhabitants of a country or the atomic number for an element are all discrete quantities. These are quantities that are fully characterized by integers (positive or negative).
+
+We will see that discrete quantities have a simple characterization: between two references there can only be a finite number of other references.
+
+The first thing we want to do is characterize the ordering of the integers. That is, we want to find necessary and sufficient conditions for an ordered set of elements to be isomorphic to a subset of integers. First we note that between any two integers there are always finitely many elements. Let's call sparse an ordered set that has that property: that between two elements there are only finitely many. This is enough to say that the order is isomorphic to the integers.
+
+In fact, if an ordered set is sparse we can always go from any element to another in finitely many steps. Therefore we can pick one element, call it zero, go forward one element at a time and assign a positive integer to all the following elements or go backward one element at a time and assign a negative integer to all the preceding elements.
+
+
+\begin{mathSection}
+	\begin{defn}
+		A \textbf{chain} is a linearly ordered subset of an ordered set. A chain between two elements is a chain where the two elements are the greatest and smallest elements.
+	\end{defn}
+	\begin{defn}
+		An ordered set is \textbf{sparse} if every chain between any two elements is finite.
+	\end{defn}
+	\begin{coro}
+		Every element in a sparse linearly ordered set that has a predecessor (or successor) has an immediate predecessor (or successor).
+	\end{coro}
+	\begin{proof}
+		Let $\mathcal{Q}$ be a sparse linearly ordered set. Suppose $q_1 \in \mathcal{Q}$ has a predecessor (or successor) $q_0$. Now consider the set $C = \{q \in \mathcal{Q} \, | \, q_0 \leq q \leq q_1 \}$ (or $C = \{q \in \mathcal{Q} \, | \, q_1 \leq q \leq q_0 \}$). Since $\mathcal{Q}$ is linearly ordered, so will $C$ and therefore $C$ is a chain. Since $\mathcal{Q}$ is sparse, $C$ is finite and there will be an immediate predecessor (or successor) $q_2$. Since $C$ must contain all elements between $q_1$ and $q_2$, and there are none, $q_2$ is immediate predecessor (or successor) of $q_1$ in $\mathcal{Q}$.
+	\end{proof}
+	
+	\begin{remark}
+		The converse of the corollary, that a linearly ordered set in which every element that has a predecessor (or successor) has an immediate predecessor (or successor) is sparse, is not true. Consider the integers with the following ordering $\{0, 1, 2, 3, ... , -3, -2, -1\}$. All elements have an immediate predecessor/successor or no predecessor/successor, yet $3$ and $-3$ have infinitely many elements in between.
+	\end{remark}
+	\begin{prop}
+		A linear order is sparse if and only if it is isomorphic to a contiguous subset of the integers.
+	\end{prop}
+	\begin{proof}
+		Let $\mathcal{Q}$ be a sparse linearly ordered set. Pick an element $q_0 \in \mathcal{Q}$. Let $q : \mathcal{Q} \to \mathbb{Z}$ such that it returns $0$ for $q_0$, $1$ for its immediate successor (if it exists), $-1$ for its immediate predecessor (if it exists), $2$ for the immediate successor of the immediate successor (if it exists) and so on. Since the order is sparse, all elements will eventually be reached through a chain of immediate successors/predecessors and will be assigned a value. The function is injective and order preserving, so it is an isomorphism over $q(\mathcal{Q})$, which, by construction, is a contiguous subset of the integers
+		
+		Conversely, let $\mathcal{Q}$ be an ordered set isomorphic to a contiguous subset of the integers and let $q : \mathcal{Q} \to \mathbb{Z}$ be the isomorphism. The number of elements between two elements of the set will be equal to the number of elements between the two corresponding integers, which is always finite.
+	\end{proof}
+	
+\end{mathSection}
+
+We can now define a discrete quantity as one for which the ordering is sparse. While this may typically correspond to a set of contiguous integers, it is not necessary. For example, a set of names ordered alphabetically, the set of orbitals for a hydrogen atom, the possible energies for a quantum harmonic oscillator, these are all discrete quantities even if the label we use is not an integer.
+
+The natural question now is: under what conditions are the possibilities of a domain ordered like the integers? The answer is straightforward: when the references within the domain have a sparse order. That is, between two references we can only put finitely many ordered references.
+
+\begin{mathSection}
+	\begin{defn}
+		A \textbf{discrete quantity} for an experimental domain $\edomain_X$ is a quantity $(\mathcal{Q}, \leq, q)$ for which the ordering is sparse.
+	\end{defn}
+	
+	\begin{thrm}[Discrete ordering theorem]
+		Let $\edomain_X$ be an experimental domain. Then the following are equivalent:
+		\begin{enumerate}
+			\item the domain has a natural sparse order
+			\item the domain is fully characterized by a discrete quantity
+			\item the domain is generated by a set of refinable aligned strict references with a sparse order
+		\end{enumerate}
+	\end{thrm}
+	\begin{proof}
+		For (1) to (2), let $\edomain_X$ be an experimental domain with a natural sparse order and let $X$ be its possibilities. Pick an ordered set $(\mathcal{Q}, \leq)$ that is order isomorphic to the possibilities and let $q: X \to \mathcal{Q}$ be an order isomorphism. By \ref{pm-pq-propertyOrdering} $\edomain_X$ is fully characterized by $(\mathcal{Q}, \leq, q)$. Since the order on $X$ is sparse, $X$ will be order isomorphic to a contiguous set of integers and so will $\mathcal{Q}$. Therefore $\mathcal{Q}$ has a sparse order as well and is therefore a discrete quantity.
+		
+		For (2) to (3), let $\edomain_X$ be an experimental domain fully characterized by $\mathcal{Q}$. Then by \ref{pm-pq-propertyOrdering} and by \ref{pm-pq-referenceOrderingTheorem} it is generated by a set of refinable aligned strict references. Let $\refStmt_1$ and $\refStmt_2$ be two references aligned with the domain such that $\refStmt_1 < \refStmt_2$. Then the after statement of $\refStmt_1$ will be of the form $``x > q^{-1}(q_1)"$, the before statement of $\refStmt_2$ will be of the form $``x < q^{-1}(q_2)"$ for some $q_1, q_2 \in \mathcal{Q}$ such that $q_1 < q_2$. Let $\refStmt : \mathcal{Q} \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(q_i) = (``x < q^{-1}(q_i)", ``x \geq q^{-1}(q_i)" \AND ``x \leq q^{-1}(q_i)", ``x > q^{-1}(q_i)")$. Let $C = \{\refStmt_1\} \cup \{\refStmt(q_i) \, | \, q_i \in \mathcal{Q}, q_1 < q_i < q_2  \} \cup \{ \refStmt_2 \}$. This is the longest chain between $\refStmt_1$ and $\refStmt_2$ and it is finite because $\mathcal{Q}$ has a sparse ordering. The set of references that generate the domain, then, must have a sparse ordering.
+		
+		For (3) to (1), let $\edomain_X$ be an experimental domain generated by a set of refinable aligned strict references with a sparse order. By \ref{pm-pq-referenceOrderingTheorem} $\edomain_X$ has a natural order. Let $\refStmt : X \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(x_i) = (``x < x_i", ``x \geq x_i" \AND ``x \leq x_i", ``x > x_i")$. Let $R=\{ \refStmt(x_i) \, | \, x_i \in X \}$. Then $R$ is order isomorphic to $X$. As the order on $R$ is sparse then the order on $X$ is sparse as well.
+	\end{proof}
+\end{mathSection}
+
+Now, consider the examples above of discrete quantities: in each case we can experimentally test whether we have a particular value or not. For example, we are always able to tell whether there are exactly three apples on the table or not.\footnote{Recall that this is not the case with continuous quantities. Because of finite precision, we are able to exclude that a given particle has exactly zero mass but it is not possible to conclusively show that it has zero mass.} This is not a coincidence: there is a direct link between the ability to have consecutive references and decidability.
+
+As we saw before in \ref{pm-pq-strictConsecutiveBeforeIsNotAfter}, two consecutive references are such that the before statement of one is equal to the negation of the after statement of the other. But since before and after statements are both verifiable, it means their negation is also verifiable: they are decidable. And since before and after statements generate the domain, all statements in the domain are decidable. It turns out that this will work in reverse as well: whenever we have a domain consisting of only decidable statements, we can always create a discrete quantity that fully characterizes the experimental domain.
+
+
+\begin{mathSection}
+	\begin{prop}
+		The order topology for the integers is discrete.
+	\end{prop}
+	\begin{proof}
+		Each singleton $\{z\} \subseteq \mathbb{Z}$ is in the order topology since $\{z\} = (z-1, \infty) \cap (-\infty, z+1)$. Each arbitrary set of integers is the union of singletons and is therefore in the order topology as well. The order topology on the integers is discrete.
+	\end{proof}
+	
+	\begin{prop}
+		An experimental domain is decidable if and only if it is fully characterized by a discrete quantity.
+	\end{prop}
+	
+	\begin{proof}
+		Let $\edomain_X$ be a decidable domain. Then by \ref{pm-vs-decidableDomainProperties} the set of possibilities $X$ is countable and by \ref{pm-vs-decidabilityIsDiscreteness} the natural topology is discrete. Since $X$ is countable, there exists a bijective map $q: X \to \mathbb{Z}$. The map is a homeomorphism since the topology on both $X$ and $\mathbb{Z}$ is discrete. The domain $\edomain_X$ is fully identified by $(\mathbb{Z}, \leq, q)$.
+		
+		Let $\edomain_X$ be fully characterized by $(\mathbb{Z}, \leq, q)$. This means that $q : X \to \mathbb{Z}$ is a homeomorphism. The natural topology for $X$ is therefore discrete and the domain is decidable by \ref{pm-vs-decidabilityIsDiscreteness}.
+	\end{proof}	
+	
+\end{mathSection}
+
+Note that, since any discrete order leads to a decidable domain and a discrete topology, any reordering of the possibilities will give the same exact domain. This means that, while we can always assign a natural order, the order itself may not necessarily be meaningful. For example, we can always take a finite group of objects and arbitrarily assign each a unique integer to identify it. In the discrete case the domain itself is not enough to pick a unique order, though the set of aligned references that are used to generate the domain is.
+
+Also note that for the link between decidability and discrete quantities to apply, it is crucial the quantity is measurable: that we can actually experimentally ascertain its values. Consider the domain with the possibilities \statement{there is no extra-terrestrial life} and \statement{there is extra-terrestrial life}. We can arbitrarily label 0 the former and 1 the latter. But since we cannot verify the first statement, we cannot really ``measure'' 0. In that case, the domain is fully identified by the discrete quantity, but not fully characterized.
+
+\section{Arbitrary precision and continuous quantities}
+
+The second type of quantities we want to consider are continuous ones: the average wingspan for a species, the population density of a country or the mass of a proton are all continuous quantities. These are quantities that are fully characterized by real numbers.
+
+We will see that also continuous quantities have a simple characterization: between two references there can always be an infinite number of other references.
+
+Similar to what we did for the integers, we want to characterize the ordering of the real numbers. This will be a little bit more involved as we will need a few more requirements. First of all we note that between two real numbers there are always infinitely many real numbers. Let's call dense an ordered set that has that property. This is not enough to identify the real numbers, though; the rational numbers are also dense.
+
+One reason real numbers are used over the rationals is that they contain all the limits. This property can be restated in terms of ordering in the following way. Suppose $(\mathcal{Q}, \leq)$ is a linearly ordered set. Take a set $A \subset \mathcal{Q}$ that is bounded. That is, the set $B = \{ q \in \mathcal{Q} \, | \, a \leq q \; \forall a \in A  \}$ of elements that are greater than all the elements of $A$ is not empty. Then we say that $(\mathcal{Q}, \leq)$ is complete if $B$ has a smallest element. One can show that the rationals are not complete. Say $A$ contains all rationals less than $\pi$, then there is no smallest rational value that is greater than all elements of $A$.
+
+Dense and complete linear orders exclude both the integers and the rationals, but they don't pick out only the reals. To do that we take advantage of two results of order theory. The first is that all dense countable ordered sets are isomorphic to the rational numbers. The second is that from any linear order one can construct its completion (i.e. you add all the missing limits), which is unique up to an order isomorphism. Suppose that $(\mathcal{Q}, \leq)$ has a countable subset $Q \subset \mathcal{Q}$ that is dense in $\mathcal{Q}$. That is, for every two distinct elements $q_1, q_2 \in \mathcal{Q}$ where $q_1 < q_2$ we can find an element $q \in Q$ such that $q_1 < q < q_2$. If $\mathcal{Q}$ is dense, $Q$ will also be and therefore will be order isomorphic to the rationals, since it is countable. If $\mathcal{Q}$ is complete, then it will be the completion of its dense set $Q$, and therefore it will be order isomorphic to the reals.
+
+\begin{mathSection}
+	\begin{defn}
+		An ordered set is said to be \textbf{dense} if between any two elements there exists an infinite chain.
+	\end{defn}
+	\begin{coro}
+		An ordered set is dense if and only if between two elements we can always find another one.
+	\end{coro}
+	\begin{proof}
+		We give a definition of dense that is different from the typical definition because we want it to be formally similar to our definition of sparse. Here we show that our definition of dense is equivalent to the standard one.
+		
+		Let $(\mathcal{Q}, \leq)$ be a dense ordered set. Let $q_1, q_2 \in \mathcal{Q}$ then we can find an infinite chain between them. Take an element $q$ within that chain that is not an endpoint. We have $q_1 < q < q_2$.
+		
+		Now let $(\mathcal{Q}, \leq)$ be a linearly ordered set such that between two elements we can always find another one.  Let $q_a, q_b \in \mathcal{Q}$ and let $C \subset \mathcal{Q}$ contain $q_a$, $q_b$, an element $q_1$ such that $q_a < q_1 < q_b$, an element $q_2$ such that $q_1 < q_2 < q_b$, an element $q_3$ such that $q_2 < q_3 < q_b$ and so on. Then $C$ is a chain between $q_a$ and $q_b$ that contains infinitely many elements.
+	\end{proof}
+	\begin{defn}
+		A subset $A \subset \mathcal{Q}$ of a linearly ordered set is \textbf{dense} in $\mathcal{Q}$ if given $q_1, q_2 \in \mathcal{Q}$ such that $q_1 < q_2$ we can find $q \in A$ such that $q_1 \leq q \leq q_2$.
+	\end{defn}
+	\begin{defn}
+		A linearly ordered set $\mathcal{Q}$ is \textbf{complete} if every non-empty bounded subset of $\mathcal{Q}$ has a supremum. This is, given $A \subset \mathcal{Q}$ such that $B = \{ q \in \mathcal{Q} \, | \, a \leq q \; \forall a \in A \}$ is not empty, then $B$ has a smallest element.
+	\end{defn}
+	\begin{thrm}\label{pm-pq-realOrdering}
+		A linearly ordered set is dense, complete and has a countable dense subset if and only if it is order isomorphic to a contiguous subset of real numbers.
+	\end{thrm}
+	\begin{remark}
+		Proving this theorem would go beyond the scope of this book so we will take it as a given. The general idea is as follows. Show that the completion of an ordered set is unique up to an isomorphism. Show that the given set is the completion of the countable dense subset. Show that the countable dense subset is order isomorphic to a subset of the rational numbers. Show that the real numbers are the completion of the rational numbers. Then the set is isomorphic to a subset of the real numbers.
+	\end{remark}
+\end{mathSection}
+
+We can now define a continuous quantity as one for which the values are a contiguous subset of the real numbers. While in principle we could define it on a generic set that is order isomorphic to the real numbers, we do not have any other example of such a set.
+
+The natural question now is: under what conditions are the possibilities of a domain ordered like the real numbers? The answer is straightforward: when the references within the domain have a dense order. That is, between two references we can put infinitely many ordered references. Intuitively, between two marks of a ruler we can keep putting finer and finer marks.
+
+Note that the dense order on the references is enough to get a dense complete order on the possibilities that has a countable dense subset. The completion comes without extra conditions because experimental domains are closed under countable disjunctions. New references, in fact, can be constructed as limits of others and, since they will be just other references they will have the same properties. The countable dense subset simply corresponds to the countable basis of the domain.
+
+\begin{mathSection}
+	\begin{defn}
+		A \textbf{continuous quantity} for an experimental domain $\edomain_X$ is a quantity $(U, \leq, q)$ where $U \subseteq \mathbb{R}$ is a contiguous subset of the real numbers.
+	\end{defn}
+	\begin{thrm}[Continuous ordering theorem]\label{pm-pq-continuousOrdering}
+		Let $\edomain_X$ be an experimental domain. Then the following are equivalent:
+		\begin{enumerate}
+			\item the domain has a natural dense complete order that has a countable dense subset
+			\item the domain is fully characterized by a continuous quantity
+			\item the domain is generated by a set of refinable aligned strict references with a dense order
+		\end{enumerate}
+	\end{thrm}
+	\begin{proof}
+		For (1) to (2). Let $\edomain_X$ be a domain with a natural dense complete order with a countable dense subset. Then by \ref{pm-pq-realOrdering} it is order isomorphic to a contiguous subset of the real numbers. Then by \ref{pm-pq-propertyOrdering} the domain is fully characterized by a continuous quantity $(U, \leq, q)$ where $U \subseteq \mathbb{R}$.
+		
+		For (2) to (3). Let $\edomain_X$ be a domain fully characterized by a continuous quantity. Then by \ref{pm-pq-propertyOrdering} and by \ref{pm-pq-referenceOrderingTheorem} it is generated by a set of refinable aligned strict references.	Let $\refStmt_1$ and $\refStmt_2$ be two references aligned with the domain such that $\refStmt_1 < \refStmt_2$. Then the after statement of $\refStmt_1$ will be of the form $``x > q^{-1}(q_1)"$, the before statement of $\refStmt_2$ will be of the form $``x < q^{-1}(q_2)"$ for some $q_1, q_2 \in \mathcal{Q}$ such that $q_1 < q_2$. Let $\refStmt : \mathcal{Q} \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(q_i) = (``x < q^{-1}(q_i)", ``x \geq q^{-1}(q_i)" \AND ``x \leq q^{-1}(q_i)", ``x > q^{-1}(q_i)")$. Let $C = \{\refStmt_1\} \cup \{\refStmt(q_i) \, | \, q_i \in \mathcal{Q}, q_1 < q_i < q_2  \} \cup \{ \refStmt_2 \}$. As $\mathcal{Q}$ is dense, this chain will be infinite. Therefore the domain can be generated by a set of refinable aligned strict references with a dense order.
+		
+		For (3) to (1). Let $\edomain_X$ be an experimental domain generated by a set of refinable aligned strict references with a dense order. By \ref{pm-pq-referenceOrderingTheorem} $\edomain_X$ has a natural order. Let $\refStmt : X \to \edomain_X \times \tdomain_X \times \edomain_X$ be the function such that $\refStmt(x_i) = (``x < x_i", ``x \geq x_i" \AND ``x \leq x_i", ``x > x_i")$. Let $R=\{ \refStmt(x_i) \, | \, x_i \in X \}$. Then $R$ is order isomorphic to $X$. As the order on $R$ is dense then the order on $X$ is dense as well. Let $\edomain_b$ be the before domain. By \ref{pm-pq-basisOrdering} it is order isomorphic to $X$. Let $\basis_b \subseteq \edomain_b$ be a countable basis for the domain. As it is a subset of a linearly ordered set, it will also be a linearly ordered set. As the basis is ordered by narrowness, finite conjunctions and disjunctions of basis elements will return a basis element. Therefore every element in $\edomain_b$ is equivalent to the disjunction of a countable set of elements of $\basis_b$. Let $\stmt[b]_1, \stmt[b]_2 \in \edomain_b$ be two statements such that $\stmt[b]_1 \snarrower \stmt[b]_2$. Let $B_1, B_2 \subset \basis_b$ be the set of basis elements such that $\stmt[b]_1 = \bigOR\limits_{\stmt \in B_1} \stmt$ and $\stmt[b]_2 = \bigOR\limits_{\stmt \in B_2} \stmt$. Since $\stmt[b]_1 \nequiv \stmt[b]_2$, there must be a $\stmt[b] \in B_2$ such that $\stmt[b] \notin B_1$. Because of the ordering of the basis, we have $\stmt[b]_1 \snarrower \stmt[b] \narrower \stmt[b]_2$. The basis $\basis_b$ is dense in $\edomain_b$. Moreover, $\edomain_b$ is complete. Let $B \subseteq \edomain_b$ then $\bigOR\limits_{\stmt \in B} \stmt$ is in $\edomain_b$ and, since it is the narrowest statement that is broader than any statement in $B$, it is the supremum of $B$. As $\edomain_b$ is complete and has a countable dense subset so does $X$ and therefore it has a continuous order.
+	\end{proof}
+\end{mathSection}
+
+Another way to think about the verifiable statements of a domain characterized by a continuous quantity is in terms of finite but arbitrarily small precision. That is, when we measure a continuous quantity we can verify statements of the form \statement{the value is $1 \pm 0.5$}. The verifiable statement is in terms of a range and the extremes are rational numbers. It is instructive to know, then, that the topology for the real numbers can be generated by those types of statements. In terms of references this means that all our verifiable statements could be expressed as verifying that the value is between two references from a countable set of possible references. This, again, maps well to what one can and does do in scientific practice.
+
+Mathematically, we call the standard topology on the real numbers the one generated by the open intervals between rational numbers, and we can show that this is exactly the order topology. Moreover, every verifiable set is the disjoint union of open intervals.
+
+\begin{mathSection}
+	\begin{defn}
+		We call \textbf{standard topology} on the real numbers $\mathbb{R}$ the one generated by the collections of sets $\mathcal{B} = \{ (a,b) \subset \mathbb{R} \; | \; a,b \in \mathbb{Q} \}$ of all open intervals between rational numbers $\mathbb{Q}$.
+	\end{defn}
+	\begin{prop}
+		The order topology on the real numbers is the standard topology.
+	\end{prop}
+	\begin{proof}
+		To show that they are equivalent, we show that the basis of one generates the basis of the other. Let $a,b \in \mathbb{Q}$ be two rationals. The sets $(-\infty, b)$ and $(a, \infty)$ are in the basis of the order topology. Their intersection is the set $(a, b)$ of the standard topology. The basis of the standard topology can be generated by the order topology.
+		
+		Conversely, let $a \in \mathbb{R}$ be a real number. Let $\{U_i\}_{i \in I}$ be the collection of all sets $U_i = (a_i, b_i)$ such that $a_i, b_i \in \mathbb{Q}$ and $a < a_i$. These sets are in the basis of the standard topology. We have $\bigcup\limits_{i \in I} U_i = (a, \infty)$. In the same way, let $b \in \mathbb{R}$ be a real number. Let $\{V_j\}_{j \in J}$ be the collection of all sets $V_j = (a_j, b_j)$ such that $a_j, b_j \in \mathbb{Q}$ and $b_j < b$. These sets are in the basis of the standard topology. We have $\bigcup\limits_{j \in J} V_j = (-\infty, b)$. The basis of the order topology can be generated by the standard topology.
+	\end{proof}
+	\begin{prop}\label{pm-pq-realOpenSetsAreIntervals}
+		Let $U \in \mathsf{T}_\mathbb{R}$ be a set in the standard topology on the reals. Then $U = \bigcup\limits_{i=1}^{\infty} V_i$ is the countable disjunction of open intervals $V_i = (a_i,b_i)$ where $a_i, b_i \in \mathbb{R} \cup \{ -\infty, \infty \}$.
+	\end{prop}
+	\begin{proof}
+		The set $U$ can be expressed as the union of some collection $B \subseteq \basis$ of open rational intervals. From $B$ construct $B_1 \subseteq B$ by picking an element of $B$ and keep adding any element that is not-disjoint from an element in $B$. If there are elements left over, construct $B_2 \subseteq B$ with the same procedure and continue until there are no elements left.
+		
+		Take $V_1 = \bigcup\limits_{V \in B_1} V$ the union of all elements of $B_1$. Since we are taking the countable union of open rational intervals, and because of the overlap of these intervals, the result will be an open interval over the real numbers. Repeating for all $B_i$ will give us a collection of disjoint open intervals $\{ V_i \}_{i=1}^{\infty}$ such that $U = \bigcup\limits_{i=1}^{\infty} V_i$.
+	\end{proof}
+\end{mathSection}
+
+In the previous section we saw how the ability to have consecutive references is linked to decidability. In the case of continuous quantities, the inability to have consecutive references means we cannot have decidable before or after statements, otherwise we could use them to create consecutive references. So, while for integer quantities references have immediate successors and predecessors and all statements are decidable, for a continuous quantity references do not have immediate successors and predecessors and the statements are only verifiable.
+
+We stress here that it is the immediate successors of the references that matter, not the immediate successors of possibilities/values. Take the rationals, for example. As values, they do not have immediate successors or predecessors: their order is dense. But we can construct a reference with \statement{the rational quantity is more than $\pi$} as an after statement and a reference that has \statement{the rational quantity is less than $\pi$} as a before statement. Since $\pi$ is not a rational number, there are no values in between: the two references are consecutive. This can never happen with the reals, because all limit values are possible values. So, while the rationals do not admit consecutive values, it is only the reals that never admit consecutive references.\footnote{Mathematically, this construction corresponds to the Cauchy limits or the Dedekind cuts that one uses to construct the reals. The idea is that experimental domains already have them built into their structure in a way that corresponds better to physical concepts.}
+
+\begin{mathSection}
+	\begin{prop}
+		A naturally ordered experimental domain $\edomain_X$ is characterized by a continuous quantity if and only if none of the verifiable statements are decidable except for the certainty and the impossibility.
+	\end{prop}
+	\begin{proof}
+		Let $\edomain_X$ be a naturally ordered domain for which none of the verifiable statements are decidable except for the certainty and the impossibility. Then it is generated by a refinable set of aligned strict references $R$. Let $\refStmt_1=(\stmt[b]_1, \NOT \stmt[b]_1 \AND \NOT \stmt[a]_1, \stmt[a]_1)$ be a reference aligned with the domain that admits a successor. Then $\stmt[a]_1$ is a verifiable statement that is not impossible and therefore it is not decidable given the properties of $\edomain_X$. This means there can't be an immediate successor for $\refStmt_1$: by \ref{pm-pq-strictConsecutiveBeforeIsNotAfter} the before statement of the immediate successor would have to be equivalent to $\NOT\stmt[a]_1$ which is not verifiable. Therefore if $\refStmt_3$ is a reference such that $\refStmt_1 < \refStmt_3$, we can find yet another reference $\refStmt_2$ aligned with the domain such that $\refStmt_1 < \refStmt_2 < \refStmt_3$. The order on $R$ is dense and by \ref{pm-pq-continuousOrdering} the domain is fully characterized by a continuous quantity.
+		
+		Conversely, let $\edomain_X$ be a domain characterized by a continuous quantity $(U, \leq, q)$. Take a contingent verifiable statement $\stmt \in \edomain_X$ and a possibility $x_0 \in X$ such that $x_0 \comp \stmt$. Consider the value $q_0 \in \mathbb{R}$ such that $q(x_0) = q_0$. Because $\stmt$ is verifiable, it will correspond to a set $V$ of the topology of the quantity, which by \ref{pm-pq-realOpenSetsAreIntervals} is the union of open intervals. Since $x_0 \comp \stmt$ then $q_0 \in V$. Find the interval $(q_1, q_2)$ that contains $q_0$. We can find $q_4, q_5 \in (q_1, q_2)$ such that $q_4 < q_0 < q_5$. We'll also have $\hat{q} \in V$ for all $q_4 < \hat{q} < q_5$. That is, for any value that is compatible with $\stmt$ we can find a contiguous finite interval surrounding the value with all elements compatible with $\stmt$.
+		
+		Consider now the statement $\stmt$. Because it is contingent, it will not be compatible with at least one possibility and therefore one value in $U$. The set $V$ will contain some interval with at least one finite endpoint $q_0$. Since it is the endpoint of an open interval, we cannot find $q_1 < q_0 < q_2$ such that $\hat{q} \notin V$ for all $q_1 < \hat{q} < q_2$. That is, there is at least one value incompatible with $\stmt$ that does not admit a finite interval surrounding it with all elements incompatible with $\stmt$.
+		
+		Now consider the previous finding as it relates to $\NOT \stmt$. There will be at least one value compatible with $\NOT \stmt$ that does not admit a finite interval surrounding it with only elements compatible with $\NOT \stmt$. But since this cannot happen for a verifiable statement, then $\NOT \stmt$ is not a verifiable statement and $\stmt$ is not decidable.
+	\end{proof}
+\end{mathSection}
+
+The integers and the reals, then, are the only two possible orders defined experimentally that are, in a sense, regular. That is, the order relationships look the same no matter where you are in the order. You have an immediate successor (or not) regardless of what reference you have. You can only put finitely many references (or not) between any two references. For any other ordering, instead, some references will have an immediate successor and some won't. In this sense integers and reals are very special and that is why they are fundamental in physics.
+
+\section{When ordering breaks down}
+
+As we have identified the necessary and sufficient conditions to define an order from experimental verification, we can reflect on whether these are achievable in practice or they are idealizations. We need to be able to create references that are strict (before/on/after mutually exclusive), aligned (references can be fully before or after each other) and refinable (overlapping references can be divided into finer sequential ones). Are these always reasonable expectations?
+
+In the case of discrete quantities, they indubitably are. The domain is decidable so the possibilities themselves are verifiable statements. We can actually confirm that \statement{there are 3 ducks on the table}. Therefore it is clear that this can be and is achieved.
+
+In the case of continuous quantities, instead, things are a lot more problematic. In some cases, you start with what you think is a continuous quantity but then you realize that it was a discrete one. For example, an amount of water seems continuous but if you keep refining your references you see that it consists of discrete molecules. That is, you can't really go on refining references indefinitely. But that's not the only way the continuous order can break down.
+
+Suppose you want to refine the marks on a ruler over and over, getting more and more precise position measurements. You start with 1 mm thick lines, you reduce them to 0.1 mm and make more of them and so on. At some point you'll reach single molecules or single atoms, but those have spatial extension as well. We can reach fundamental particles, but those too have an extent (i.e. their wavefunctions can overlap). We can imagine using more wavelike features, but the spatial resolution will be linked to higher and higher energies through higher wave-numbers. So it is not clear we continue having ever finer references.
+
+On a similar note, if a reference is, in the end, realized through a set of particles, it stands to reason that if we reduce the number of particles the reference will become finer. If single particles are the finest reference, we don't have that many choices. But how are we going to be able to tell our references apart, since, for example, all electrons are indistinguishable from each other? How can we place them ever increasingly close to each other so that they don't scatter and switch place?
+
+Moreover, it is not clear how our references can be strict. That is, that the object we measure is always either before, on or after the reference. If the object we are measuring is of smaller extent than our references then we can reasonably pretend they are strict. But if both the references and what we are measuring are single particles, it would seem we have a problem.
+
+It would appear, then, that the conditions for a continuous quantity can never really be ultimately met. And if those conditions can't be met, it's not that we don't have the real numbers: we don't have ordering at all. Strictness, alignment and refinability are requirements for order in general. And if space and time can't be truly given an ordering, other derived quantities, like velocity, acceleration, mass, energy and so on would inherit the problems.
+
+In both cases the real numbers are just an approximation we can make by pretending we can get finer and finer strict and aligned references. This may be contrary to the way many people see the relationship between mathematical and physical objects. Some may feel that the geometric description, with its infinite precision, is the perfect one while the physical one, with the inherent measurement bounds, is the less precise one. Actually, it is quite the opposite: the bounds of a measurement better qualify our description and knowledge while the geometrical description provides a simplified, idealized and therefore less precise account. In other words, $3.14 \pm 0.005$ is an exact physical description while  $\pi$ is the approximation.
+
+We again stress the fact that the approximation can break down in different ways. It may break down because we reach a finest element or it may break down because we do not have finer, strict and aligned references anymore, which is what we expect to happen for space and time. We'd have a structure where coarse references, at some point, are to a good approximation refinable/strict/aligned and therefore approximately ordered while the really fine ones are not. Note that a lot of physical ideas and mathematical tools rest on the idea that there is a well defined ordering. Causality and deterministic motion require that time is linearly ordered. Differentiation and integration also require the reals to be linearly ordered. All these tools, then, need to be fundamentally reshaped. The general theory, then, is telling us that there is a lot of work that needs to be redone if we are to construct a physical theory that works in those regimes.
+
+
+\section{Summary}
+
+In this chapter we have seen how our general mathematical theory of experimental science handles properties and quantities. These are what we typically use in practice to distinguish between the possible cases and are what we measure experimentally.
+
+Mathematically, each possibility is mapped to an element of a topological space whose verifiable sets correspond to verifiable statements. This construction maps to what happens in manifolds, where the points of the space are in one-to-one correspondence with a suitable Euclidean space. Our construction is more general and works for non-numeric properties as well.
+
+We have seen that quantities are particular types of properties characterized by a linear order. In this case the topology is the order topology given by the linear order, which represents the ability to experimentally compare two different values and tell which one is greater. The property ordering theorem and the domain ordering theorem give us the necessary and sufficient conditions under which an experimental domain is fully characterized by a quantity.
+
+To construct a system of measurement for a quantity, we saw that all we need is to define a set of references: objects that partition the cases into a before and after. In general, though, references can overlap as they will have some physical extent and may not be aligned. The reference ordering theorem tells us that an ordering on the possibilities emerges only if the references are refinable (we can always break apart overlapping references), aligned (the before and not-after statements are ordered by narrowness) and strict (the value is always either before, on or after the reference).
+
+We defined discrete quantities as the ones that can be associated with integers and continuous quantities as the ones that can be associated with real numbers. Physically, the defining characteristic of the first is that between two references we can only put finitely many references while the defining characteristic of the second is that between two references we can always put infinitely many. Mathematically, the ordering in the second case is automatically complete because experimental domains will already contain all the limits in the form of countable disjunctions.
+
+It is important to note that the requirements for continuous quantities cannot really be physically realized. Continuous quantities, then, should really be thought of as an idealization: the limit of an infinite process of subdivision. To go past the idealization, either we lose the idea of having infinitely many references between two, in which case we revert to discrete quantities, or we lose the ordering altogether.
