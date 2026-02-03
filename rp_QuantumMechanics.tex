@@ -5,10 +5,17 @@
 
 \newcommand{\indicator}[1][A] {\mathbf{1}_{#1}} % Ensemble space
 
+\newtheorem{openproblemth}[equation]{Open problem}
+\newenvironment{openproblem}[2]{\begin{openproblemth}[#1]\label{label} \textnormal{[Tags: Tag1, Tag2]}}{\end{openproblemth}}
 
 %TODO: decide whether the identity operator should be 1 or $I$ or something else
 
 \chapter{Quantum mechanics}
+
+
+\begin{openproblem}{Title}{Tag1, Tag2}
+	This is the description
+\end{openproblem}
 
 % TODO: review classical uncertainty principle
 
@@ -28,51 +35,54 @@ In this section we will review the standard formulations of quantum mechanics in
 
 \subsubsection{Sketch of results}
 
+How to break up the different assumptions for quantum states.
+\begin{itemize}
+	\item[QP] Space of pure states by themselves tells us nothing. Complex projective spaces are symplectic spaces, and are symplectic manifolds in finite dimension. We can write Hamiltonians and do classical mechanics with probability distributions over the states.
+	\item[QE] Convex space of density operators tells you more, but not everything. We know they form a convex subset of a vector space. We know which ensembles allow multiple decompositions and we can define observables as statistical quantities (i.e. linear functionals of the ensembles). However, we do not know what the entropy is. For example, take the Bloch ball with the standard entropoy. Take an inner ball and discard the rest. Now, the entropy difference between pure states and maximally mixed state is not 1, therefore a variable cannot extract one bit of information. This means that opposite states are not orthogonal (i.e. you could mistake up for down with a single measurement).
+	\item[BR] Conjecture. If we add orthogonal decomposability, we should be able to recover the Born rule, and the Born rule tells us ensembles are orthogonally decomposable. One should be able to show that all "effects" (i.e. linear functionals of ensembles that are either zero or one in the edges orthogonal to the gradients) have orthogonal eigenspaces of either zero or one, and therefore can extract one bit of information. That should be enough to define the entropy, find the Born rule, etc...
+\end{itemize}
+
 Define BT (Base Theory) as a set of ensembles that can be mixed.
 
 Over BT
 \begin{itemize}
-	\item[?] State space and topology is not enough to identify classical vs quantum
+	\item[?] QP is not enough to identify classical vs quantum
+	\item[?] QE $\implies$ QP 
+	\item[?] QE is enough to rule out classical, but not to fully identify quantum
+	\item[?] QE $+$ BR $=$ QST
 \end{itemize}
 
 The following are equivalent over BT
 \begin{itemize}
-	\item[QST-RAY] A pure quantum state is represented by a ray
-	\item[QST-ENS] Ensembles are density operators (recover pure states as extreme points, recover ensembles as mixtures)
-	\item[QST-SUBS] A pure state is a density operator with only one non-zero eigenvector (i.e. start with pure state representation directly in ensemble space)
-	\item[QST-PROJ] A pure state is a projector
-	\item[QST-EQ] A pure states is (?)
+	\item[QP-RAY] A pure quantum state is represented by a ray
+	\item[QE-ENS] Ensembles are density operators (recover pure states as extreme points, recover ensembles as mixtures)
+	\item[QP-SUBS] A pure state is a density operator with only one non-zero eigenvector
+	\item[QE $\implies$ QP] Show that pure states are ensembles with only one non-zero eigenvector (i.e. they are extreme points)
+	\item[QP-PROJ] A pure state is a projector
+	\item[QE-OBS] The set of random variables over probability distributions that are mapped univocally under multiple decompositions fully identify the space of quantum ensembles (i.e. we can either start with the space of quantum ensembles and rule out those random variables that are not the same over equivalence classes of probability distributions, or we can start with the "nice" random variables, and find the ensembles as equivalence classes of probability distributions).
 \end{itemize}
 
-The following are established over QST
+The following are established over QE
 \begin{itemize}
-	\item[?] State space and topology is not enough to identify classical vs quantum
 	\item[?] Superposition is multiple decomposition
 	\item[?] The linearity of statistical mixing is a physical requirement. The linearity of the Hilbert space is a mathematical convenience.
-	\item[?] The choice of a basis in the Hilbert space is a choice of a maximal set of orthogonal states plus a choice of gauge (i.e. a phase for each element of the basis).
+	\item[?] The choice of a basis in the Hilbert space is a choice of a maximal set of orthogonal states (not necessarily mutually exclusive) plus a choice of gauge (i.e. a phase for each element of the basis).
+\end{itemize}
+
+The following are equivalent over QE
+\begin{itemize}
+	\item[BR-ME] Orthogonal states are mutually exclusive
+	\item[BR-PROB] The probability of measuring a final state given an initial state is well-defined.
+	\item[BR-ANG] The born rule returns the cosine(?) of the angles between pure
+	\item[BR-ENT] The entropy is the von Neumann entropy
+\end{itemize}
+
+Over BT
+\begin{itemize}
+	\item[QST] QE + BR
 \end{itemize}
 
 The following are equivalent over QST
-\begin{itemize}
-	\item[BR-OBS] Expectations are defined for all observables and for all ensembles
-	\item[BR-PROB] The probability of measuring a final state given an initial state is well-defined.
-	\item[BR-ANG] The angles between pure states are well defined.
-	\item[BR-ENT] The entropy is well-defined for all ensembles
-\end{itemize}
-
-Alternatively
-\begin{itemize}
-	\item[QPT] The pure states are rays in a Hilbert space
-	\item[BR] Born rule in terms of probability of something?
-	\item[QST] Ensemble space is QPT + BR
-\end{itemize}
-
-Requires QST as base theory
-\begin{itemize}
-	\item 
-\end{itemize}
-
-The following are equivalent over QST+BR
 \begin{itemize}
 	\item[DR-SCEQ] The equation
 	\item[DR-UNIT] Unitary evolution
@@ -86,7 +96,7 @@ The following are equivalent over QST+BR
 	\item[DR-INFO] The evolution preserves information entropy
 \end{itemize}
 
-Over QST+BR+PM $\implies$ DR-PSEQ and DR-MSEQ, and QST+BR+DR $\implies$ PM-DEQ
+Over QST+PM $\implies$ DR-PSEQ and DR-MSEQ, and QST+DR $\implies$ PM-DEQ
 \begin{itemize}
 	\item[DR-PSEQ] The evolution is quasi-static process
 	\item[DR-MSEQ] The evolution is an infinite sequence of reversible measurements.
