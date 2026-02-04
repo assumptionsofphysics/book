@@ -52,6 +52,8 @@
 
 \colorlet{ensembleFill}{black!10!white}
 
+\newenvironment{openproblem}[3]{\section{Open problem: #1}\label{#2} \emph{Tags: #3} \newline \newline}{}
+
 \chapter{Ensemble spaces}
 
 In this chapter we aim to develop a general theory of states and processes that is applicable to any physical system. The core concept is that of an ensemble as we have found that ensembles in both classical and quantum mechanics have a very similar structure that can be abstracted and generalized. The goal is to find necessary requirements for ensembles that can serve as basic axioms and then further suitable assumptions to recover the different theories (e.g. classical, quantum or thermodynamics).
@@ -3519,11 +3521,15 @@ Since the construction in terms of subspaces recovered the algebra of regular op
 
 There are still several open problems, with half-finished or failed attempts. Here we collect some of the ideas and trials, which likely include wrong results. They should mainly serve as inspiration for future attempts.
 
-\section{Flats and affine combinations}
+\begin{openproblem}{Affine sets and affine hulls}{pm-es-affineHullProblem}{Ensemble spaces, Convex spaces, Affine spaces}
+	In the context of ensemble spaces, we have defined closures in terms of convex combinations. It may be useful to also define closures in terms of affine combinations. It needs to be understood whether this is useful, and how to make sure that these closures work for infinite dimensional spaces.
+\end{openproblem}
+
+The following notes represent an early attempt. It needs to be understood whether this is at all needed and, in that case, revised and finalized. We used the term flat in this notes, but if may be better to first define an affine set as one closed under affine combinations and then the affine hull. This would be more consistent with the previous definitions and some of the literature.
 
 In some cases, it may useful to define sets closed under affine combinations instead of convex combinations. That is, if $\ens[a] = p \ens[b] + \bar{p} \ens[c]$ and two of the ensembles are in the set, then the other one is in the set as well. This allows us to get all the ensembles in the same hyperplane. We call this a flat. In the triangle example, the only flats available are the single vertexes, each side and the whole triangle. For the Bloch ball, if we took two elements, we would get the whole segment that connects them and extends to the surface. But if we get three points, we get a circle, which is not a simplex. This affine closure, essentially, allows us to remove ``ensembles from each other'' as much as possible, so that we can get to their most distinct, most separate, form.
 
-It still needs to be understood what the best definition for flat is, its relationship with the topological closure, its corresponding hull and so on. The following definition represent an early attempt that needs to be revised and finalized.
+It still needs to be understood what the best definition for flat is, its relationship with the topological closure, its corresponding hull and so on.
 
 \begin{defn}
 	A \textbf{simplex} is a subset $U \subset \mathbb{R}^n$ that is the hull of finitely many affinely independent points. That is, $U = \hull(\{x_i\}_{i=0}^{n})$ such that $\{x_i - x_0\}_{i=1}^{n}$ are linearly independent.
