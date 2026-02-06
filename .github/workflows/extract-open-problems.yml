@@ -1,0 +1,50 @@
+name: Extract open problems
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Clone book repository
+      - uses: actions/checkout@v4
+        with:
+          path: book
+
+      # Runs a single command using the runners shell
+      #- name: Run a one-line script
+      #  run: grep openproblem *
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          # Clone tools repository (it has the script)
+          git clone https://github.com/assumptionsofphysics/tools tools
+          # Clone autogen repository (target for the file)
+          git clone https://gcarcassi:${{ secrets.AUTOGEN_TOKEN }}@github.com/assumptionsofphysics/autogen autogen
+          # Output the directory contents for debugging
+          ls -l
+          # Run the script
+          python tools/problem-scraper/extractOpenProblems.py autogen/openproblems.json book/pm_EnsembleSpaces.tex
+          # Output of the script for debugging
+          cat autogen/openproblems.json
+          # Add possible changes
+          cd autogen
+          git add openproblems.json
+          # Commit and push only if there were changes
+          if ! git diff --cached --quiet; then
+            git config user.name "gcarcassi[bot]"
+            git config user.email "gabriele.carcassi@gmail.com"
+            git commit -m "Updating open problems"
+            git push
+          else
+            echo "No changes to commit."
+          fi
