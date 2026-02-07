@@ -1,0 +1,37 @@
+name: Build book
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          # Clone autogen repository (target for the file)
+          git clone https://gcarcassi:${{ secrets.AUTOGEN_TOKEN }}@github.com/assumptionsofphysics/autogen autogen
+          # Output the directory contents for debugging
+          ls -l
+          # Use latexonline to build latest version
+          cd autogen
+          curl "https://latexonline.cc/compile?git=https%3A%2F%2Fgithub.com%2Fassumptionsofphysics%2Fbook&target=book.tex&command=pdflatex&trackId=1505754735843" -o AssumptionsOfPhysicsDraft.pdf
+          ls -l
+          git add AssumptionsOfPhysicsDraft.pdf
+          # Commit and push only if there were changes
+          if ! git diff --cached --quiet; then
+            git config user.name "gcarcassi[bot]"
+            git config user.email "gabriele.carcassi@gmail.com"
+            git commit -m "Updating book draft"
+            git push
+          else
+            echo "No changes to commit."
+          fi
