@@ -2022,7 +2022,7 @@ Given that the Hamiltonian constraint on the extended phase space plays the same
 \end{equation}
 
 Under the full kinematic assumption, we have
-\begin{equation}
+\begin{equation}\label{rp-cm-emHamiltonianConstraintDerivation}
 	\begin{aligned}
 	\partial_{u^\alpha} p_\beta &= mg_{\alpha \beta} \\
 	p_{\alpha} &= mg_{\alpha \beta} u^\beta + \mathfrak{q} A_{\alpha} \\
@@ -2063,7 +2063,7 @@ Now we can express the forms in terms of state variables and perform variable su
 	\end{aligned}
 \end{equation}
 We introduce the following two expressions
-\begin{equation}
+\begin{equation}\label{rp-cm-emTensorAndInertialPseudotensor}
 	\begin{aligned}
 		F_{\alpha\beta} &= \partial_{x^\alpha} A_\beta - \partial_{x^\beta} A_\alpha \\
 		G_{\alpha\beta\gamma} &= \partial_{x^\alpha} g_{\beta \gamma} - \partial_{x^\beta} g_{\alpha \gamma} 
@@ -2632,7 +2632,7 @@ Given that position determines the unit system, condition \ref{rp-cm-fke-condUni
 
 Note that, in principle, a more complete account of Newtonian mechanics could be given. This has not been pursued given how Lagrangian and Hamiltonian mechanics play a much bigger role in field theories and in quantum mechanics.
 
-\section{Directional degree of freedom}
+\section{Directional degree of freedom}\label{rp-cm-secDirectionDOF}
 
 When recovering the structure of phase space, we only relied on the premise that $q^i$ define the units. We are now going to use that premise to define a directional degree of freedom, that is a degree of freedom that identifies a direction in space. We will see that, since a DOF must be composed of two variables, the only directional DOFs that are possible are those in three dimensional space.
 
@@ -2985,3 +2985,111 @@ All the elements of classical mechanics, both physically and mathematically, can
 %	\includegraphics[width=\columnwidth]{images/ClassicalDiagram.png}
 %	\caption{TODO: redraw this diagram in tikz and update outdated text}\label{fig_classical_diagram}
 %\end{figure}
+
+
+\ifdraft
+
+\openproblembreak
+
+\openproblem{Extend the classical uncertainty principle }{rp-cm-extendClassicalUncertainty}{Classical mechanics, Poisson brackets, Symplectic group, Statistics, Information theory}
+{Currently, the classical uncertainty principle is fully worked out for canonical variables of a single DOF. We would like to generalize the expression for non-canonical variables, relating it to the Poisson brackets, and to multiple DOF.}
+
+To extend to non-canonical variables, we may use a generalized (non-linear non-canonical) coordinate change and study how the entropy/uncertainty changes. These changes will be related to the Jacobian which, for a single DOF, is connected to the Poisson bracket. Therefore it should be possible to formulate the minimum uncertainty relationship based on the Poisson brackets between variables (likely, the expectation of the Poisson bracket).
+
+To extend to the multiple DOF case, we essentially want to study how the covariance matrix (i.e. a symmetric matrix/rank two tensor) over phase space (i.e. a symplectic manifold) under all possible linear Hamiltonian evolutions (i.e. the symplectic group). That is, under the symplectic group.
+
+In symplectic geometry, it is standard to use the block matrices given by the conjugate quantities. That is:
+\begin{equation}
+	\Sigma = \left[\begin{array}{cc}
+		\Sigma_{q^i q^j} & \Sigma_{q^i p_j} \\
+		\Sigma_{p_i q^j} & \Sigma_{p_i p_j} 
+	\end{array} \right]
+\end{equation}
+But this does not help us understand how the uncertainty can move from one DOF to the other. We would like to study the following decomposition:
+\begin{equation}
+	\Sigma = \left[\begin{array}{cccc}
+		\Sigma_{(q^1 p_1)(q^1 p_1)} & \Sigma_{(q^1 p_1)(q^2 p_2)} & \cdots & \Sigma_{(q^1 p_1)(q^n p_n)} \\
+		\Sigma_{(q^2 p_2)(q^1 p_1)} & \Sigma_{(q^2 p_2)(q^2 p_2)} & \cdots & \Sigma_{(q^2 p_2)(q^n p_n)} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		\Sigma_{(q^n p_n)(q^1 p_1)} & \Sigma_{(q^n p_n)(q^2 p_2)} & \cdots & \Sigma_{(q^n p_n)(q^n p_n)}
+	\end{array} \right]
+\end{equation}
+The diagonal blocks represent the uncertainty within a DOF. The off-diagonal blocks represent correlations between DOFs. What we want to understand how the uncertainty travels during Hamiltonian evolution.
+
+For example, if we start with a packet with no correlation across multiple degrees of freedom and equal uncertainty within each d.o.f. (a condition related to thermodynamic equilibrium), do we find that the uncertainty in each d.o.f. cannot become lower than the initial one?
+Still starting from the previous case, is it true that the uncertainty within a d.o.f. can only increase if we are adding a correlation to another d.o.f.? Does it mean that the “equipartition of entropy” over uncorrelated d.o.f. is the lowest bound?
+
+The idea is to explore more in general the relationship between information theory, Hamiltonian mechanics and thermodynamics. The conjecture is that Hamiltonian dynamics preserves, at least locally, the entropic relationships that one would find at equilibrium. The classical uncertainty relationship is essentially an interplay between the total uncertainty (which is conserved) and the ones along the individual variables (which can be increased by introducing correlations between them).
+
+\openproblem{Find a geometric characterization for $G_{\alpha\beta\gamma}$}{rp-cm-geometricInterpretationOfG}{Classical mechanics, Differential geometry, Riemmanian geometry, General relativity}{In \ref{rp-cm-emTensorAndInertialPseudotensor} we have found that the pseudo-tensor $G_{\alpha\beta\gamma} = \partial_{x^\alpha} g_{\beta \gamma} - \partial_{x^\beta} g_{\alpha \gamma}$ plays a fundamental role in connecting the symplectic form (and therefore the geometry/entropy of classical mechanics) to the geometry of space-time. We still lack a good geometric and physical understanding of that object.}
+
+As we saw before, the expression appears with the EM tensor in the spatial-temporal part of the symplectic form when it is expressed in terms of position and velocity. It also appears as a “correction” for the raised anti-symmetrized covariant derivative. This means the expression should have both geometrical and physical significance, which merits further study. In Cartesian coordinates, or in general in any coordinate system for which the metric tensor is constant, $G_{\alpha\beta\gamma}$ is zero. Conversely, we can imagine non-inertial coordinate systems on flat space for which $G_{\alpha\beta\gamma}$ is not zero.
+
+What we would like to understand, then, are things like:
+\begin{itemize}
+	\item What does $G_{\alpha\beta\gamma}$ represent geometrically?
+	\item Is it related to non-inertiality of frames and therefore the presence of inertial forces?
+	\item Can we characterize coordinate systems for which $G_{\alpha\beta\gamma}=0$? Can we always have such coordinate systems regardless of curvature for at least a neighbourhood of each point?
+\end{itemize}
+
+As for characterizing $G_{\alpha\beta\gamma}=0$, note that if $\partial_{\alpha} g_{\beta \gamma} - \partial_{\beta} g_{\alpha \gamma}$, we are saying that, for each fixed $\gamma$, the curl is zero. Then, at least locally, $g_{\alpha \beta} = \partial_\alpha h_\beta$ where $h_\beta$ is a covector of vector potentials. Since $g_{\alpha \beta}$ is symmetric, $\partial_\alpha h_\beta = \partial_\beta h_\alpha$. Which means $\partial_\alpha h_\beta - \partial_\beta h_\alpha = 0$. This, again, is a zero curl and therefore $h_\alpha = \partial_\alpha S$. Therefore, $g_{\alpha\beta} = \partial_\alpha \partial_\beta S$ the metric is the Hessian of a scalar function. Does this link to Hessian geometry in a way that is physically interesting?
+
+\openproblem{How much of general relativity is already in particle dynamics}{rp-cm-linkBetweenEmAndG}{Classical mechanics, Differential geometry, Riemmanian geometry, General relativity}
+{In \ref{rp-cm-emHamiltonianConstraintDerivation} we have derived the equation for massive particles under gravitational and electromagnetic fields. It still needs to be understood whether the two fields can be chosen independently or they must satisfy some relationships, which may lead to a hint of general relativity in particle mechanics.}
+
+The general idea is that the Hamiltonian constraint is a constant for all states and it is also the generator of the affine parameter. The question is whether this poses a constraint across $g_{\alpha\beta}$ and $A_\alpha$. If there is, it would mean that there are some hints of general relativity in plain particle dynamics. If there isn’t, then the link between curvature and energy is a separate assumption from those required to derive particle dynamics under scalar and potential forces. It is likely that there isn't.
+
+\openproblem{Special relativity as a theory of integration}{rp-cm-relativityAsIntegraion}{Classical mechanics, Riemannian geometry, Measure theory}
+{See how much of special relativity can be recovered simply by positing normalization of probability over space across coordinate transformations.}
+
+The idea is that while space and time variables have the same role when identifying an event (i.e. they are all coordinates), they play different roles under integration. If we have a probability distribution, for example,
+the constraint is not
+
+$$ \int_X \rho(x, t) dx dt = 1 $$
+
+but rather
+
+$$ \int_U \rho(x, t) dx = 1 $$
+
+for all surfaces $U$ at equal time. A boosted observer will see time and space mix, but the constraint will have to apply at equal time of the boosted observer. Space-like surfaces, then, would be identifiable as those surfaces over which the probability constraint is satisfied. Therefore, a coordinate transformation cannot mix space-like with non-space-like surfaces.
+
+Alternatively, the distribution could be assumed to be in position/time/velocity as these would be the variables needed to specify the initial conditions.
+
+The goal is to remove the postulate of the invariance of the speed of light. The ability to express constraints, such as unitary probability, in a coordinate independent way would be a requirement for the principle of relativity itself. The idea is that integrating in time vs space becomes relative to the observer and therefore there must be a unique way to change units of space into time. The speed of light, then, would not be a speed but the constant that translates time intervals into spatial intervals (i.e. it is the ratio between the measure on space and time).
+
+\openproblem{Classical relativistic directional DOF (Classical spin analogue)}{rp-cm-classicalRelatisticSpin}{Classical mechanics, Quantum mechanics, Spin, Hamiltonian mechanics, Symplectic geometry}
+{While we have worked out a non-relativistic direction DOF, we have not worked out a relativistic one. Another way to look at the same problem is work out a classical analogue of a spin 1/2 system.}
+
+In Hamiltonian mechanics, the phase space of a free particle
+is given by the conjugate quantities $[ q^i \; p_i ]$ and the Hamiltonian
+$H=\frac{1}{2m} p_i g^{ij}p_j$. In the extended phase space, the variables become
+$[q^\alpha \; p_\alpha]=[ t \; q^i \; -E \; p_i]$ and the extended Hamiltonian is
+$\mathcal{H}=\frac{1}{2m} p_\alpha g^{\alpha\beta}p_\beta - \frac{1}{2}mc^2$. Note that
+the extended Hamiltonian functions both as a constraint and as the generator
+of the affine parameter (proper time for particles and minus proper time
+for antiparticles).
+
+If we take a spatial direction as a degree of freedom, as we had seen in section \ref{rp-cm-secDirectionDOF}, phase space is the two-sphere (the only sphere that is also a symplectic manifold) identified by all
+unitary vectors of components $S_i$. The conjugate quantities are given by the angle over a plane and the component perpendicular to the plane. For example, we have $\{\theta^{xy}, S_z\}=1$. The Hamiltonian
+is given by $H=\mu B^{k}S_k$. The problem is to find the ``correct'' space with the ``correct'' conjugate variables
+for the relativistic case.
+
+This problem is connected to the problem of finding a classical analogue of a spin 1/2 system. The state space for a spin 1/2 system, in fact, is just a 2-sphere, the space of directions in space. Picking the state of a spin 1/2 system, then, is exactly like picking a direction in space. The corresponding relativistic space, then, is the space of all possible orientations boosted in all directions. This means keeping track of the vector of spin at rest plus its boost.
+
+At rest, the vector of spin is simply $S_\alpha = [ 0 \; S_x \; S_y \; S_z ]$, which is a space-like vector. Similarly, at rest the velocity is $u^\alpha = [c \; 0 \; 0 \; 0]$ is a time-like vector. The two vectors are therefore orthogonal $S_\alpha u^\alpha = 0$. Suppose we are in a rest frame for which spin is oriented along $z$, then we can write
+\begin{align*}
+	u^\alpha &= c \frac{1}{2} (n_R^\alpha + n_L^\alpha) \\
+	s_\alpha &= \frac{\hbar}{2} \frac{1}{2} (n_R^\alpha - n_L^\alpha)
+\end{align*}
+where 
+\begin{align*}
+	n_R^\alpha &= [ 1 \; 0 \; 0 \; 1 ] \\
+	n_L^\alpha &= [ 1 \; 0 \; 0 \; -1 ]
+\end{align*}
+Since the relationship is valid in one frame, it will be valid in all frames. Note that these correspond exactly to the right and left components for a Dirac field, which means that these quantity do fully identify a boosted spinor. What still needs to be understood are the conjugate quantities.
+
+It is not clear whether the correct generalization is a direction in space-time, or a plane of rotation
+in space-time. In the first case, we would expect spin to generalize to a four-vector
+while in the second case to a two-form (i.e. an anti-symmetric rank two tensor).
+
+\fi
