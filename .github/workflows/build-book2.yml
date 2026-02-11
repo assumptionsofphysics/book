@@ -24,12 +24,13 @@ jobs:
       - name: Run a multi-line script
         run: |
           # Output the directory contents for debugging
-          ls -l
+          ls -l book
           # Clone autogen repository (target for the file)
           git clone https://gcarcassi:${{ secrets.AUTOGEN_TOKEN }}@github.com/assumptionsofphysics/autogen autogen
           cd autogen
-          mv ../book.pdf AssumptionsOfPhysicsDraft.pdf
-          git add AssumptionsOfPhysicsDraft.pdf
+          mv book/book.pdf AssumptionsOfPhysicsDraft2.pdf
+          ls -l
+          git add AssumptionsOfPhysicsDraft2.pdf
           # Commit and push only if there were changes
           if ! git diff --cached --quiet; then
             git config user.name "gcarcassi[bot]"
