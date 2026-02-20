@@ -748,12 +748,120 @@ Projections are processes with equilibria (all fine states are equilibria)
 * Unitary evolution is quasi-static evolution (like in thermodynamics)
   - Make the parallel to S-matrix calculation where we put initial state at minus infinity, and final state at plus infinity for a process that actually last "femtoseconds"
   
-\section{next}
 
-Observables
+
+\section{Observables}
+\subsection{Observables are self-adjoint operators (textbook definition)}
+\begin{defn}
+	Observables are associated with self-adjoint operators $\mathcal{O} : \mathcal{D}_{\mathcal{O}} \to \mathcal{H}$, where the domain $\mathcal{D}_{\mathcal{O}}$ is a dense subset\footnote{On a Hilbert space continuous is equivalent to bounded. Unbounded observables are therefore either discontinuous or have a restricted domain.} of $\mathcal{H}$.
+
+	This means that the adjoint $\mathcal{O}^{\dagger}$ of $\mathcal{O}$, implicitly defined by
+	\begin{equation}\label{rp_qm_adjoint}
+		\langle \mathcal{O}^{\dagger} \psi | \phi \rangle = \langle \psi | \mathcal{O} \phi \rangle
+	\end{equation}
+	with domain
+	\begin{equation}\label{rp_qm_adjoint_dom}
+		\mathcal{D}_{\mathcal{O}^{\dagger}} = \left\{ \psi \in \mathcal{H} \; \middle| \; \exists \xi \in \mathcal{H}: \forall \phi \in \mathcal{D}_{\mathcal{O}}: \langle \xi | \phi \rangle = \langle \psi | \mathcal{O} \phi \rangle \right\}
+	\end{equation}
+	is identical to $\mathcal{O}$ itself, including their domains.
+\end{defn}
+
+
+\subsection{Observables are generators of unitary transformations}
+\begin{thrm}[Stone's Theorem]\label{th:stone}
+	For any strongly continuous one-parameter unitary group $U_{t}: \mathcal{H} \to \mathcal{H}$, there exists a unique self-adjoint operator $A: \mathcal{D}_{A} \to \mathcal{H}$, with dense domain
+	\begin{equation}
+		\mathcal{D}_{A} = \left\{ \psi \in \mathcal{H} \, \middle| \, \lim_{\epsilon \to 0} \frac{ 1 }{ i \epsilon } ( U_{\epsilon} ( \psi ) - \psi ) \; \text{exists} \right\}
+	\end{equation}
+	that generates the group via
+	\begin{equation}
+		U_{t} = e^{itA}
+	\end{equation}
+
+	Conversely, any self-adjoint operator generates a strongly continuous one-parameter unitary group.
+\end{thrm}
+
+\begin{remark}
+	The domain $\mathcal{D}_{A}$ coincides with all of $\mathcal{H}$, if and only if the map $t \to U_{t}$ is continuous w.r.t. the operator norm.
+\end{remark}
+
+TODO Do we want to use this? Something like this holds in classical mechanics, too. Maybe we can find a common reason then.
+
+
+\subsection{WORK IN PROGRESS: Observables have real spectrum}
+From Wikipedia:
+\begin{itemize}
+	\item Self-adjoint operators have real spectrum, but there are also unbounded operators with real spectrum that are \textbf{NOT} self-adjoint.
+	\item Symmetric operators with a real spectrum are self-adjoint (Wikipedia references \cite{bebiano19}).
+\end{itemize}
+
+I don't need a spectral theorem to talk about the spectrum. The theorems are about spectral decompoisitons (diagonalization).
+
+There exist multiple different versions of the spectral theorem in the literature
+\begin{itemize}
+	\item In terms of projection valued measures (PVMs) (see Theorem 10.4 in~\cite{hall13})
+	\item In terms of multiplication operators (see Theorem 10.10 in~\cite{hall13})
+	\item A nuclear spectral theorem in the context of rigged Hilbert spaces (Sec. 4.5 in~\cite{gelfand64})
+\end{itemize}
+TODO Figure out which one we want to use.
+
+TODO Find formulation of nuclear spectral theorem that doesn't require too many prerequisites.
+
+XXX There is no general spectral theorem for unbounded operators, but maybe for normal operators. Characterizing self-adjoint operators as those with real spectrum might be hard (or not useful). Alternatively, they might be exaclty those constructed from a projection-valued measure on the real line.
+
+\begin{thrm}[Spectral Theorem]\label{rp_qm_obs_spectral_pvm}
+	Suppose $A$ is a self-adjoint operator on $\mathcal{H}$. Then there is a unique projection-valued measure $\mu^{A}$ on $\sigma(A)$ with values in $\mathcal{B}(\mathcal{H})$ such that
+	\begin{equation}
+		\int_{\sigma(A)} \lambda \mathrm d\mu^{A}(\lambda) = A \; .
+	\end{equation}
+\end{thrm}
+
+\begin{thrm}[Spectral Theorem {[}Multiplication Operators{]}]\label{rp_qm_obs_spectral_mult}
+	Suppose $A$ is a self-adjoint operator on $\mathcal{H}$. Then there is a $\sigma$-finite measure space $(X, \mu)$, a measurable, real-valued function $h$ on $X$, and a unitary map $U: \mathcal{H} \to L^{2}(X, \mu)$ such that
+	\begin{equation}
+		U(\mathcal{D}_{A}) = \{ \psi \in L^{2}(X, \mu) \, | \, h \psi \in L^{2}(X, \mu) \}
+	\end{equation}
+	and such that
+	\begin{equation}
+		(UAU^{-1}( \psi ))(x) = h(x) \psi(x)
+	\end{equation}
+	for all $\psi \in U(\mathcal{D}_{A})$.
+\end{thrm}
+
+\subsection{WORK IN PROGRESS: Observables are linear functionals of observables}
+In~\cite{hall13} we can find the converse claim, i.e., states are linear functionals of observables (and more).
+\begin{thrm}\label{th:hall}
+	Let $\Phi: \mathcal{B}(\mathcal{H}) \to \mathbb{C}$ be a \textbf{family of expectation values}, i.e.,
+	\begin{itemize}
+		\item $\Phi( \alpha A + \beta B ) = \alpha \Phi( A ) + \beta \Phi( B )$
+		\item $\Phi( \id_{\mathcal{H}} ) = 1$
+		\item $\Phi( A ) \in \mathbb{R}$ for $A$ self-adjoint and $\Phi(A) \ge 0$ if $A$ is non-negative as well
+		\item $\Phi$ is strongly continuous in the sense that for any sequence $\{A_{n}\}_{n=1}^{\infty} \subset \mathcal{B}(\mathcal{H})$ with $|| A_{n} \psi - A \psi || \to 0 \quad \forall \psi \in \mathcal{H}$ it follows that $\Phi(A_{n}) \to \Phi(A)$.
+	\end{itemize}
+
+	Then there exists a unique density matrix $\rho$, s.t.
+	\begin{equation}\label{eq:born}
+		\Phi(A) = \trace(\rho A) \; .
+	\end{equation}
+
+	Conversely, any density matrix defines a family of expectation values via eq. \eqref{eq:born}.
+\end{thrm}
+
+Issues:
+\begin{itemize}
+	\item It's obviously in the wrong direction. We don't want to characterize observables before states.
+	\item Not all observables are represented by bounded operators.
+	\item Not all bounded operators represent observables.
+\end{itemize}
+
+TODO Find finite-dimensional proof of what we actually want. Should be easier.
+
+
+\subsection{TODO list}
 * (?) Convex maps of mixed states are Hermitian operators
 * Is it useful to note that any observable is compatible to some unitary? That is, any observable is left unchanged by a unitary?
 
+\section{next}
 Open quantum systems
 * Review open quantum system (Lindblad master equation)
 * (?) recover CPTP maps 
@@ -979,11 +1087,11 @@ As we have seen before expectation values of observables are not always well-def
 
 Consider the state
 \begin{equation}
-	\rho = \sum_{n=1}^{\infty} p_{n} | \psi_{n} \rangle \langle \psi_{n} | = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ 1 }{ n^{2} } | \psi_{n} \rangle \langle \psi_{n} |
+	\rho = \sum_{n=1}^{\infty} p_{n} | \psi_{n} \> \< \psi_{n} | = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ 1 }{ n^{2} } | \psi_{n} \> \< \psi_{n} |
 \end{equation}
 and the observable
 \begin{equation}
-	\mathcal{O} = \sum_{n=1}^{\infty} \mathcal{O}_{n} | \psi_{n} \rangle \langle \psi_{n} | = \sum_{n=1}^{\infty} (-1)^{n} n | \psi_{n} \rangle \langle \psi_{n} |
+	\mathcal{O} = \sum_{n=1}^{\infty} \mathcal{O}_{n} | \psi_{n} \> \< \psi_{n} | = \sum_{n=1}^{\infty} (-1)^{n} n | \psi_{n} \> \< \psi_{n} |
 \end{equation}
 with some domain $\mathcal{D}_{\mathcal{O}}$, which makes $\mathcal{O}$ into a self-adjoint operator. Both of them are defined w.r.t. some ONB $\{ \psi_{n} \}_{n=1}^{\infty} \subset \mathcal{H}$.
 %with some domain $\mathcal{D}_{\mathcal{O}}$, which makes $\mathcal{O}$ into a self-adjoint operator\footnote{TODO find such a domain or prove that it exists.}. Both of them are defined w.r.t. some ONB $\{ \psi_{n} \}_{n=1}^{\infty} \subset \mathcal{H}$.
@@ -991,7 +1099,7 @@ with some domain $\mathcal{D}_{\mathcal{O}}$, which makes $\mathcal{O}$ into a s
 While calculating the expectation value of $\mathcal{O}$ for $\rho$ in our ONB, we encounter the harmonic series\footnote{This is of course no coincidence, but by construction.}
 \begin{equation}
 	\begin{split}
-		\langle \mathcal{O} \rangle_{\rho} := \trace \left( \rho \mathcal{O} \right) &= \sum_{n=1}^{\infty} p_{n} \mathcal{O}_{n} = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} n }{ n^{2} } = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} }{ n } = \frac{ 6 }{ \pi^{2} } \ln ( 2 )
+		\< \mathcal{O} \>_{\rho} := \trace \left( \rho \mathcal{O} \right) &= \sum_{n=1}^{\infty} p_{n} \mathcal{O}_{n} = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} n }{ n^{2} } = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} }{ n } = \frac{ 6 }{ \pi^{2} } \ln ( 2 )
 	\end{split}
 \end{equation}
 This series is \emph{conditionally} convergent and according to Riemann's rearrangement theorem it can therefore take \emph{any} value in $[-\infty, +\infty]$ or not converge at all, just by rearranging the order of its terms, which is equivalent to a reordering of the basis elements.
@@ -999,12 +1107,12 @@ This series is \emph{conditionally} convergent and according to Riemann's rearra
 \subsubsection{Example for pure states}
 One can construct a similar example with a pure state. Consider
 \begin{equation}
-	\psi = \sum_{n=1}^{\infty} \psi_{n} | \psi_{n} \rangle = \frac{ \sqrt{6} }{ \pi } \sum_{n=1}^{\infty} \frac{ 1 }{ n } | \psi_{n} \rangle
+	\psi = \sum_{n=1}^{\infty} \psi_{n} | \psi_{n} \> = \frac{ \sqrt{6} }{ \pi } \sum_{n=1}^{\infty} \frac{ 1 }{ n } | \psi_{n} \>
 \end{equation}
 and then calculate the expectation value as
 \begin{equation}
 	\begin{split}
-		\langle \mathcal{O} \rangle_{\psi} := \langle \psi | \mathcal{O} | \psi \rangle = \sum_{n=1}^{\infty} | \psi_{n} |^{2} \mathcal{O}_{n} = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} n }{ n^{2} } = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} }{ n } = \frac{ 6 }{ \pi^{2} } \ln ( 2 ) \; .
+		\< \mathcal{O} \>_{\psi} := \< \psi | \mathcal{O} | \psi \> = \sum_{n=1}^{\infty} | \psi_{n} |^{2} \mathcal{O}_{n} = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} n }{ n^{2} } = \frac{ 6 }{ \pi^{2} } \sum_{n=1}^{\infty} \frac{ (-1)^{n} }{ n } = \frac{ 6 }{ \pi^{2} } \ln ( 2 ) \; .
 	\end{split}
 \end{equation}
 The result is the same and will depend on the order of the basis elements in the same way.
@@ -1014,10 +1122,10 @@ While it's obvious that such a state can never be found in the lab, we need a cr
 For a pure state we can consider the domain of the operator as an indicator of what states have well defined expectation values. Let's check if $\psi$ could possibly be in the domain of $\mathcal{O}$. For that, calculate
 \begin{equation}
 	\begin{split}
-		\mathcal{O} | \psi \rangle &= \sum_{m=1}^{\infty} (-1)^{m} m | \psi_{m} \rangle \langle \psi_{m} | \frac{ \sqrt{6} }{ \pi } \sum_{n=1}^{\infty} \frac{ 1 }{ n } | \psi_{n} \rangle \\
-		&= \frac{ \sqrt{6} }{ \pi } \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} (-1)^{m} \frac{ m }{ n } | \psi_{m} \rangle \langle \psi_{m} | \psi_{n} \rangle \\
-		&= \frac{ \sqrt{6} }{ \pi } \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} (-1)^{m} \frac{ m }{ n } \delta_{mn} | \psi_{m} \rangle \\
-		&= \frac{ \sqrt{6} }{ \pi } \sum_{n=1}^{\infty} (-1)^{n} | \psi_{n} \rangle
+		\mathcal{O} | \psi \> &= \sum_{m=1}^{\infty} (-1)^{m} m | \psi_{m} \> \< \psi_{m} | \frac{ \sqrt{6} }{ \pi } \sum_{n=1}^{\infty} \frac{ 1 }{ n } | \psi_{n} \> \\
+		&= \frac{ \sqrt{6} }{ \pi } \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} (-1)^{m} \frac{ m }{ n } | \psi_{m} \> \< \psi_{m} | \psi_{n} \> \\
+		&= \frac{ \sqrt{6} }{ \pi } \sum_{m=1}^{\infty} \sum_{n=1}^{\infty} (-1)^{m} \frac{ m }{ n } \delta_{mn} | \psi_{m} \> \\
+		&= \frac{ \sqrt{6} }{ \pi } \sum_{n=1}^{\infty} (-1)^{n} | \psi_{n} \>
 	\end{split}
 \end{equation}
 and notice that the result is not normalized
@@ -1040,7 +1148,7 @@ Then, by definition it must be true that
 \end{equation}
 which is equivalent to
 \begin{equation}
-	|| \mathcal{O} \psi ||^{2} = \langle \psi | \mathcal{O}^{\dagger} \mathcal{O} | \psi \rangle = \langle \psi | \mathcal{O}^{2} | \psi \rangle = \langle \mathcal{O}^{2} \rangle_{\psi} < \infty
+	|| \mathcal{O} \psi ||^{2} = \< \psi | \mathcal{O}^{\dagger} \mathcal{O} | \psi \> = \< \psi | \mathcal{O}^{2} | \psi \> = \< \mathcal{O}^{2} \>_{\psi} < \infty
 \end{equation}
 which means that at least the second moment has to be well-defined.
 
@@ -1068,4 +1176,26 @@ Questions:
 
 
 
-  
+\begin{thebibliography}{9}
+	\bibitem{hall13}
+		Brian C. Hall.
+		\textit{Quantum Theory for Mathematicians},
+		Springer, New York,
+		2013,
+		\url{http://dx.doi.org/10.1007/978-1-4614-7116-5}.
+
+	\bibitem{gelfand64}
+		I. M. Gelfand and N. Y. Vilenkin.
+		\textit{Generalized functions. Applications of harmonic analysis},
+		Academic Press, New York
+		1964.
+
+	\bibitem{bebiano19}
+		N. Bebiano and J. da Providência
+		\textit{Non-self-adjoint operators with real spectra and extensions of quantum mechanics},
+		Journal of Mathematical Physics \textbf{60}(1),
+		2019,
+		\url{https://doi.org/10.1063/1.5048577}.
+
+
+\end{thebibliography}
