@@ -417,7 +417,7 @@ We can also characterize some ensembles based on what other ensembles they can a
 	\caption{In both spaces, $\ens[a]$ is an extreme point while $\ens[c]$ is an internal point; $\ens[b]$ is a boundary point, but is not an extreme point (it is the mixture of the vertices on the same side). On the circle, all boundary points are extreme points.}
 \end{figure}
 
-\begin{prop}
+\begin{prop}\label{pm-es-internalPointsConvex}
 	The set of all internal points $I_{\Ens}$ is a convex set.
 \end{prop}
 \begin{proof}
@@ -440,22 +440,22 @@ where $\lambda = p p_1+\bar{p} p_2$ and $\ens[b] = \frac{p \bar{p}_{1}}{\bar{\la
 \end{proof}
 \end{mathSection}
 
-It is an open question whether this result generalizes to infinite mixtures. That is, whether the infinite mixture of internal points is still an internal point. To generalize the previous proof to the infinite case, one would need to show that the infinite mixture of $\ens[b]_i$ converges. If conjecture \ref{pm-es-conjSubmixturesConverge} is true, that is if submixtures of convergent infinite mixtures converge, then the infinite mixture of $\ens[b]_i$ would converge as it is a submixture of $\ens$. We leave this as conjecture \ref{pm-es-conjAlgebraicInteriorSigmaConvex}.
+It is an open question whether \ref{pm-es-internalPointsConvex} generalizes to the infinite case. That is, whether $I_{\Ens}$ is $\sigma$-convex. One would need to show that if the infinite mixture of internal points exists, then it must be an internal point. If conjecture \ref{pm-es-conjSubmixturesConverge} is true, that is if submixtures of convergent infinite mixtures converge, then the infinite mixture of $\ens[b]_i$ would converge as it is a submixture of $\ens$. We leave this as conjecture \ref{pm-es-conjAlgebraicInteriorSigmaConvex}.
 
-For topological vector spaces, the algebraic interior and the topological interior are related. For example, if $A$ is a convex subset of a TVS with non-empty topological interior, then the algebraic and topological interior coincide. It is an open question how many of these results hold for topological convex spaces as well. As an example, we would like to prove the following.
+What we can show is that the algebraic interior $I_{\Ens}$ is not an open set. As a counter-example, consider the space $\Ens = \{ p_i \in \ell^1 \, | \,  \sum p_ i =1, \; p_i \in [0,1]\}$ of all probability distributions over countably infinitely many elements. Note that $\ens \in \Ens$ is an interior point if and only if $\ens = \sum p_i x_i$ where $p_i \neq 0$ for all $i$. Now consider a distribution an internal point $\ens = \sum p_i x_i$. This is the limit of an infinite mixture where all the finite mixture have non-zero coefficients for the finitely many elements. Therefore $\ens$, in internal point, can be expressed as a limit of boundary points. This means $I_{\Ens}$ cannot be open, as we would have a sequence of points outside $I_{\Ens}$ that converge to one of its points.
 
-TODO: reorganize
+We prove the same fact by showing that, in that same case, every open set will include boundary points.
 
-\begin{conj}
+\begin{mathSection}
+\begin{prop}
 	Let $\Ens$ be an ensemble space. The set of boundary points $B_{\Ens}$ is not necessarily a closed set and therefore $I_{\Ens}$ is not necessarily an open set.
-\end{conj}
+\end{prop}
 \begin{proof}
 	Let $\Ens = \{ p_i \in \ell^1 \, | \,  \sum p_ i =1, \; p_i \in [0,1]\}$ be the set of probability distributions over countably infinitely many elements with the topology of $\ell^1$. Let $\ens \in I_{\Ens}$ be an interior point of $\Ens$. Since $\ens$ is in the interior, it corresponds to a probability distribution $p_i$ such that $p_i \in (0,1)$ for all $i$.
 	
 	Let $B_{r}(\ens) \subseteq \ell^1$ be an open ball of radius $r$ centered around $\ens$. Since $\sum p_i = 1$, there must be a $j$ such that $p_j < \frac{r}{2}$. Suppose, without loss of generality, that $j \neq 1$. Now consider the probability distribution given by $\lambda_i = (p_1 + p_j, p_2, \dots, p_{j-1}, 0, p_{j+1}, \dots)$. Since $\lambda_j = 0$, then $\lambda_i$ is a boundary point of $\Ens$. The distance between the two distribution will be $\sum|p_i - \lambda_i| = |p_j| + |-p_j| = 2 p_j < r$, which means $\lambda_i \in B_{r}(\ens)$. Therefore, the open ball around any internal point will contain a boundary point. Therefore the interior of $I_{\Ens}$ is the empty set, and $I_{\Ens}$ is not an open set.
 \end{proof}
-
-One may be able to show that the limit of a sequence of boundary points cannot be an interior point in the topological sense.
+\end{mathSection}
 
 We now define the notions of separateness: two ensembles are separate, noted $\ens[a] \separate \ens[b]$ if they do not have a common component. That is, they are not a mixture of a common ensemble. In classical ensemble spaces, this is equivalent to probability measures with disjoint support, which is the extension of the concept. Separateness is a useful concept to characterize the relationship between ensembles as it has some useful properties. Most of all, it is an irreflexive symmetric relation: nothing is separate from itself and if $\ens[a] \separate \ens[b]$, then $\ens[b] \separate \ens[a]$.\footnote{Note that orthogonality in inner product vector spaces is also an irreflexive symmetric relationship.}
 
