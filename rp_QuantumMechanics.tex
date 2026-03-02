@@ -169,30 +169,56 @@ More remarkably, the interior points of the sphere represent mixed states. There
 As we have already seen in classical mechanics, re-expressing the same mathematical framework in different equivalent ways brings out new understanding. This will be even more important in quantum mechanics as the postulates mix different mathematical and physical features, and it is not clear what corresponds to what.
 
 \subsection{Different Representations of pure states}
-First of all, we should note that wave-functions do not provide a unique representation for states. The reader may already be aware that a change in norm or phase does not change the physics. Intuitively, all the physics is given by the born rule
-\begin{equation}
-	p(\phi|\psi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}.
+Let's start restating and analyzing the following condition:
+\begin{equation}\label{rp-qm-qp-condStatesAreRays}
+	\tag{QP-RAY}
+	\eqtext{The state of a quantum system is represented by a ray $c | \psi\>$ of a complex inner product space $\mathcal{H}$.}
 \end{equation}
-If we chage $\psi$ with $\rho e^{\imath \theta} \psi$, we have
+As the state is represented by a ray, a change in norm or phase does not change the physics. Since all the physics is given by the Born rule
+\begin{equation}
+	p(\phi|\psi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>},
+\end{equation}
+we can simply verify the Born rule is invariant if we change $\psi$ to $\rho e^{\imath \theta} \psi$:
 \begin{equation}
 	p(\phi|\rho e^{\imath \theta}\psi) = \frac{\< \phi |\rho e^{\imath \theta}\psi \>\<\rho e^{\imath \theta}\psi | \phi \>}{\< \rho e^{\imath \theta}\psi | \rho e^{\imath \theta}\psi \>\< \phi | \phi \>} = \frac{\rho e^{\imath \theta}\rho e^{-\imath \theta}}{\rho e^{-\imath \theta}\rho e^{\imath \theta}}\frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}=\frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}.
 \end{equation}
 
-There is another detail, however, that is often neglected, maybe because it applies only to continuous variables. The inner production between two wave functions is given by:
+A quantum state, then, is not represented by a single vector, but an equivalence class of vectors that give the same results under the Born rule. On the continuum, with wavefunctions $\psi(x)$, there is an additional degeneracy. The inner production between two wave functions is given by:
 \begin{equation}
 	\< \phi | \psi \> = \int_X \phi^*(x) \psi(x) dx.
 \end{equation}
-Note that integrals do not change if we change the value of the wave-function over a set of measure zero. For example, if we changed $\psi(x)$ such had it returned zero over the rationals, the inner product wouldn't change. If the physics is given by the Born rule through the inner product, then the physics does not change. Mathematically, when we write the vector $|\psi \>$ we are actually talking about the set of all functions that are equivalent to the wave function $\psi(x)$. This is not something peculiar to quantum mechanics. In fact, this happens in classical probability as well. If we have a probability density $\rho(x,p)$, a change over a measure zero set will not change the expectation of any variable.
+Note that the integral does not vary under a change of $\phi(x)$ over over a set of measure zero. For example, if we changed $\psi(x)$ such had it returned zero over the rationals, the inner product wouldn't change, therefore the physical state does not change either. Mathematically, when we write the vector $|\psi \>$ we are actually talking about the set of all functions that are equivalent to the wave function $\psi(x)$. This is not something peculiar to quantum mechanics, as it this happens in classical probability as well. If we have a probability density $\rho(x,p)$, a change over a measure zero set will not change the expectation of any variable. To recap, a quantum state is represented by a ray, which is an equivalence class of vectors, which is an equivalence class of wavefunctions.
 
-Since the representation in terms of Hilbert spaces already removes the second issue, is there a representation of states that eliminates the first as well? Turns out that there is. In a sense, working with Hilbert space is somewhat a conceptual no man's land. We are aware that we are dealing with probabilistic objects, but we are not really working with full fledged statistical mixtures. A lot things become clearer once we look at the quantum statistical framework as a whole and compare it to the classical statistical framework.
+Since every ray is a one-dimensional subspace of the vector space, we can associate each state with the projector $\indicator[\psi] = \frac{| \psi \> \< \psi |}{\< \psi | \psi \>}$. Note that the projector is invariant under the choice of representative vector. In fact,
+\begin{equation}
+	\rho_{c\psi} = \frac{| c \psi \> \< c\psi |}{\< c\psi | \psi c\>} = \frac{ c | \psi \> \< \psi | c^*}{ |c|^2 \< \psi | \psi \>}  = \frac{| \psi \> \< \psi |}{\< \psi | \psi \>} =\rho_{\psi}.
+\end{equation}
+Therefore, given any representative $|\psi \>$ of $\psi$, we get the same projector $\indicator[\psi]$. Conversely, note that given any vector $\phi \in \mathcal{H}$ we have
+\begin{equation}
+	\indicator[\psi] |\phi\> = \frac{| \psi \> \< \psi |\phi\>}{\< \psi | \psi \>} = c \frac{| \psi \>}{\< \psi | \psi \>}.
+\end{equation}
+That is, the projector applied to any vector returns the component of that vector along $\psi$. Therefore, the projector applied to the whole vector space returns the one-dimensional subspace, the ray. This means that
+\begin{equation}\label{rp-qm-qp-condStatesAreProjectors}
+	\tag{QP-PROJ}
+	\eqtext{The state $\psi$ of a quantum system is represented by a one dimensional projector $\indicator[\psi] = \frac{| \psi \> \< \psi |}{\< \psi | \psi \>}$ of a complex inner product space $\mathcal{H}$.}
+\end{equation}
+is equivalent to \ref{rp-qm-qp-condStatesAreRays}.
 
-Let us look, then, at the space of all possible statistical mixtures. In quantum statistical mechanics, a state is represented by a density operator $\rho$. Mathematically, this is an operator $\rho : \mathcal{H} \to \mathcal{H}$ that is positive semi-definite trace one self-adjoint operator. In fact, since $\< \psi | \rho | \psi \>$ returns the probability to measure $\psi$ given the state $\rho$, $\rho$ is an observable. Since the probability cannot be negative, $\rho$ is positive semi-definite. Since the probability has to sum to one, it is a trace one operator.
+A one-dimensional projector is also a density operator, as it has only one non-zero eigenvalue which is one. Therefore it is a positive definite Hermitian operator with trace-one. Moreover, projectors have special properties among all the density operators. First of all, they are the only density operators for which $\rho = \rho^2$, since 0 and 1 are the only eigenvalues that, when squared, are equal to themselves. Therefore 
+\begin{equation}\label{rp-qm-qp-condStatesAreIdempotent}
+	\tag{QP-IDEM}
+	\eqtext{The state of a quantum system is represented by a density operator $\rho_{\psi}$ such that $\rho_{\psi} = \rho_{\psi}^2$}
+\end{equation}
+is equivalent to \ref{rp-qm-qp-condStatesAreProjectors}.
 
-Every pure state $\psi$ can be represented as the density operator $\rho_{\psi} = \frac{| \psi \> \< \psi |}{\< \psi | \psi \>}$. Note that, in fact, that $\rho_{\psi}$ is trace one and a change of phase will leave it unchanged. Also note that $\frac{| \psi \> \< \psi |}{\< \psi | \psi \>} = \indicator[\psi]$ is the projector corresponding by the subspace spanned by $\psi$.
-\begin{insight}
-	A state is equally represented by a ray $c|\psi\>$, by a density operator $\rho_{\psi}$ where $c|\psi\>$ is the only non-zero eigenvector, or by a the projector $\indicator[\psi]$ corresponding to the subspace $c|\psi\>$.
-\end{insight}
-We now have three equivalent ways to represent pure states.
+A way to characterize pure states among ensembles is that pure states cannot be expressed as a non-trivial combination of other ensemble. That is, if $\rho_{\psi}$ represents a pure state, then the statistical mixture $\rho_{\psi} = p_1 \rho_1 + p_2 \rho_2$ implies that either $\rho_1=\rho_2=\rho_{\psi}$ or one of the two addends is equal to $\rho_{\psi}$ and the corresponding coefficient is one. Mathematically, we say that pure states are the extreme points of the convex set formed by all ensembles. Therefore 
+\begin{equation}\label{rp-qm-qp-condStatesAreExtremePoints}
+	\tag{QP-EXTR}
+	\eqtext{The state of a quantum system is represented by a density operator $\rho_{\phi}$ that cannot be expressed as non-trivial sum of other density operators.}
+\end{equation}
+is equivalent to \ref{rp-qm-qp-condStatesAreProjectors}.
+
+Having different equivalent ways to characterize quantum states will be useful as different results are easier to see under different characterization and they help build a broader intuition.
 
 \subsection{Two linearities: superposition and statistical mixing}
 
