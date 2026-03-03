@@ -168,7 +168,7 @@ More remarkably, the interior points of the sphere represent mixed states. There
 
 As we have already seen in classical mechanics, re-expressing the same mathematical framework in different equivalent ways brings out new understanding. This will be even more important in quantum mechanics as the postulates mix different mathematical and physical features, and it is not clear what corresponds to what.
 
-\subsection{Different Representations of pure states}
+\subsection{Quantum state representations}
 Let's start restating and analyzing the following condition:
 \begin{equation}\label{rp-qm-qp-condStatesAreRays}
 	\tag{QP-RAY}
@@ -219,6 +219,49 @@ A way to characterize pure states among ensembles is that pure states cannot be 
 is equivalent to \ref{rp-qm-qp-condStatesAreProjectors}.
 
 Having different equivalent ways to characterize quantum states will be useful as different results are easier to see under different characterization and they help build a broader intuition.
+
+\subsection{Quantum ensembles representations}
+
+Let us know proceed to statistical ensemble with the following
+\begin{equation}\label{rp-qm-qe-condEnsemblesAreDensityOperators}
+	\tag{QE-DENS}
+	\eqtext{A statistical ensemble for a quantum system is represented by a density operator $\rho$, a positive semi-definite, self-adjoint operator of trace one.}
+\end{equation}
+
+As we saw before, we can characterize pure states as those ensembles that cannot be expressed as a non-trivial statistical mixture. Therefore condition \ref{rp-qm-qe-condEnsemblesAreDensityOperators} implies \ref{rp-qm-qp-condStatesAreExtremePoints}. The converse, however, is not true.
+
+Suppose we assume \ref{rp-qm-qp-condStatesAreRays}. For a two-dimensional quantum system, the state space is the Bloch sphere. A classical directional DOF is also represented by a two-sphere, with the space of ensemble given by the space of probability measures over the sphere. What is different in quantum mechanics is that the same ensemble can be expressed as different mixtures in terms of pure states. For example, the maximally mixed state can be recovered by a uniform distribution over the whole sphere or by a uniform distribution over any two opposite points. Therefore, knowing the state space is not enough to know which statistical mixtures actually represent the same ensemble. Therefore, \ref{rp-qm-qp-condStatesAreRays} and \ref{rp-qm-qp-condStatesAreExtremePoints} do not imply \ref{rp-qm-qe-condEnsemblesAreDensityOperators}.
+
+Since condition \ref{rp-qm-qe-condEnsemblesAreDensityOperators} is stronger than \ref{rp-qm-qp-condStatesAreRays}, we should understand what is the mathematical structure implied by the first that is not necessary on the second. Note that, to construct the projective space, we do not need the inner product structure. The vector space structure is sufficient. Therefore, consider the map $m : \mathcal{H} \to \mathcal{H}$ on the Bloch sphere defined by
+\begin{equation}
+	\begin{aligned}
+		m(c^+|z^+\>+c^- |z^-\>) &= c^+|z^+\> + c^- |x^+\> \\
+		m &= |z^+\>\<z^+| + |x^+\>\<z^-| = |z^+\>\<z^+| + \left(\frac{\sqrt{2}}{2}|z^+\>+\frac{\sqrt{2}}{2}|z^-\>\right)\<z^-| \\
+		&= |z^+\>\<z^+| + \frac{\sqrt{2}}{2} |z^+\>\<z^-| + \frac{\sqrt{2}}{2}|z^-\>\<z^-| \\
+		m(|\psi\>) &= M |\psi\> = \begin{bmatrix} 1 & \frac{\sqrt{2}}{2} \\ 0 & \frac{\sqrt{2}}{2} \end{bmatrix} |\psi\>
+	\end{aligned}
+\end{equation}
+This is a linear map, and therefore it is also colinear: maps rays to rays. It will also map projectors to projectors and therefore will preserve \ref{rp-qm-qp-condStatesAreRays} and all its equivalent conditions.
+
+However, it does not map ensembles to ensemble, density operators to density operators, as the trace is not preserved.
+\begin{equation}
+	\begin{aligned}
+	m(\rho) &= M \rho M^\dagger \\
+	M^\dagger M &= \begin{bmatrix} 1 & 0 \\ \frac{\sqrt{2}}{2} & \frac{\sqrt{2}}{2} \end{bmatrix} \begin{bmatrix} 1 & \frac{\sqrt{2}}{2} \\ 0 & \frac{\sqrt{2}}{2} \end{bmatrix} = \begin{bmatrix} 1 & \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & 1 \end{bmatrix} \\
+	 \rho_{x^+} M^{\dagger} M &= \begin{bmatrix} \frac{1}{2} & \frac{1}{2}  \\ \frac{1}{2}  & \frac{1}{2}  \end{bmatrix} \begin{bmatrix} 1 & \frac{\sqrt{2}}{2} \\ \frac{\sqrt{2}}{2} & 1 \end{bmatrix} = \begin{bmatrix} \frac{1+ \sqrt{2}}{2} & \frac{1+ \sqrt{2}}{2} \\ \frac{1+ \sqrt{2}}{2} & \frac{1+ \sqrt{2}}{2} \end{bmatrix} \\
+	\tr[m(\rho_{x^+})] &= \tr[M \rho_{x^+} M^{\dagger}] = \tr[ \rho_{x^+} M^{\dagger} M] = 1+ \sqrt{2} \\
+	\end{aligned}
+\end{equation}
+If $m$ were unitary, instead, we would have $M M^\dagger = I$ and therefore the trace would be preserved. Therefore, unitary maps, and therefore preservation of the inner product, is sufficient to map density operator to density operators and preserving their convex structure (i.e. the output of the mixture is the mixture of the outputs). Therefore, not all maps that map rays to rays map ensembles to ensembles.
+
+The converse is also not true: mapping ensembles to ensembles does not necessarily mean mapping pure states to pure states. If we have an open quantum system, for example, it may increase entropy and therefore map pure states to mixed states. We should, therefore, find out which maps map ensembles to ensembles and also distinct pure states to distinct pure states.
+
+On the Bloch ball, such a map would be an affine map (i.e. $m(p_1\rho_1 + p_2 \rho_2) = p_1 m(\rho_1) + p_2 m(\rho_2) $) that maps the sphere to itself. An affine map can be expressed as a linear map together with a translation. Translations would necessarily move points out of the ball. Linear maps are restricted to rotations, stretch/shrink and reflections. Stretch/shrink operations would also move points out of the ball. Therefore the only transformation possible are rotations and reflections.
+
+Rotations on the projective space can always be represented as unitary operations in the vector space, though, as we will see later, this is not necessary. Reflections on the projective space can be represented as anti-unitary operations.
+
+TODO: finish
+
 
 \subsection{Two linearities: superposition and statistical mixing}
 
