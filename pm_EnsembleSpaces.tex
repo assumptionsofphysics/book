@@ -1890,6 +1890,37 @@ Though the mixing entropy is not a distance function, we can still show that, li
 \end{prop}
 
 \begin{proof}
+	Note that, since $MS(\ens[a], \ens[b]) = 0$ if and only if $\ens[a]=\ens[b]$, the result holds with equality for all $p \in [0,1]$ if and only if $\ens[a]=\ens[b]$. For the rest of the proof, we will therefore assume $\ens[a] \neq \ens[b]$
+	
+    The result holds trivially for $p = 1$. In fact, $MS(\ens[a], \ens[b]) \geq MS(\ens[a], p\ens[a]+\bar{p}\ens[b]) = MS(\ens[a], \ens[a]) = 0$.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}		
+		\coordinate (a)   at (0,0);
+		\coordinate (7ab)   at (1,0);
+		\coordinate (3ab)   at (2,0);
+		\coordinate (ab)   at (4,0);
+		\coordinate (b)   at (8,0);
+		\coordinate (p)   at (7,0);
+		\coordinate (t1)   at (.5,0);
+		\coordinate (t2)   at (.25,0);
+		\coordinate (t3)   at (.125,0);
+		
+		\draw[-, thick] (a) -- (b);
+		\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
+		\filldraw [black] (7ab) circle (1pt) node[below] {$\frac{7}{8}\ens[a] + \frac{1}{8}\ens[b]$};
+		\filldraw [black] (3ab) circle (1pt) node[above] {$\frac{3}{4}\ens[a] + \frac{1}{4}\ens[b]$};
+		\filldraw [black] (ab) circle (1pt) node[below] {$\frac{1}{2}\ens[a] + \frac{1}{2}\ens[b]$};
+		\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
+		\filldraw [black] (p) circle (1pt) node[above] {$p\ens[a] + \bar{p}\ens[b]$};
+		\filldraw [black] (t1) circle (1pt) node[above] {};
+		\filldraw [black] (t2) circle (1pt) node[above] {};
+		\filldraw [black] (t3) circle (1pt) node[above] {};
+	\end{tikzpicture}
+\end{figure}
+	
+    Let us show that the inequality holds for $0 \le p \le \frac{1}{2}$.
 	First let us show that $\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]$ can be expressed as a mixture of $\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)$ and $p\ens[a] + \bar{p} \ens[b]$.
 	\begin{equation}
 		\begin{aligned}
@@ -1937,6 +1968,47 @@ Though the mixing entropy is not a distance function, we can still show that, li
 		\end{aligned}
 	\end{equation}
 	The equality holds only if $p=0$.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}		
+		\coordinate (a)   at (0,0);
+		\coordinate (7ab)   at (1,0);
+		\coordinate (3ab)   at (2,0);
+		\coordinate (ab)   at (4,0);
+		\coordinate (b)   at (8,0);
+		\coordinate (p)   at (3.25,0);
+		\coordinate (t1)   at (.5,0);
+		\coordinate (t2)   at (.25,0);
+		\coordinate (t3)   at (.125,0);
+		
+		\draw[-, thick] (a) -- (b);
+		\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
+		\filldraw [black] (7ab) circle (1pt) node[above] {$\frac{7}{8}\ens[a] + \frac{1}{8}\ens[b]$};
+		\filldraw [black] (3ab) circle (1pt) node[below] {$\frac{3}{4}\ens[a] + \frac{1}{4}\ens[b]$};
+		\filldraw [black] (ab) circle (1pt) node[below] {$\frac{1}{2}\ens[a] + \frac{1}{2}\ens[b]$};
+		\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
+		\filldraw [black] (p) circle (1pt) node[above] {$p\ens[a] + \bar{p}\ens[b]$};
+		\filldraw [black] (t1) circle (1pt) node[above] {};
+		\filldraw [black] (t2) circle (1pt) node[above] {};
+		\filldraw [black] (t3) circle (1pt) node[above] {};
+	\end{tikzpicture}
+\end{figure}
+
+	Let us show that the results also holds for to $\frac{1}{2} < p < 1$.
+	Since $\{1 - \frac{1}{2^n}\}_{n=0}^{\infty}$ is a strictly decreasing sequence that starts at $1$ and converges to 0, there exists a unique $n \in \mathbb{N}$ such that $1 - \frac{1}{2^n} \le p \le 1 - \frac{1}{2^{n+1}}$. Let us show that $p\ens[a] + \bar{p}\ens[b]$ can be written as $\lambda\ens[a] + \bar{\lambda}[(1-\frac{1}{2^{n}})\ens[a] + \frac{1}{2^{n}}\ens[b]]$ where $0 \le \lambda \le \frac{1}{2}$.
+	\begin{equation}
+		\begin{aligned}
+			p\ens[a] + \bar{p}\ens[b] 
+			&= \frac{2^n - 1 + 2^np - 2^n + 1}{2^n} \ens[a] + \frac{1+2^n (1-p) -1}{2^n} \ens[b] \\ 
+			&= \left( \left( 2^n p - 2^n + 1 \right) - \left( 2^n p - 2^n + 1 \right) + 1 - \frac{1}{2^n} + \frac{ 2^n p - 2^n + 1}{2^n} \right) \ens[a] \\ 
+			&+ \frac{1 - \left( 2^n p - 2^n + 1 \right)}{2^n} \ens[b] \\ 
+			&= \left( 2^n p - 2^n + 1 \right) \ens[a] + \left( 1 - \left( 2^np - 2^n + 1 \right) \right) \left[\left(1-\frac{1}{2^n}\right) \ens[a] + \frac{1}{2^n} \ens[b]\right] \\
+			&= \lambda \ens[a] + \bar{\lambda} \left[\left(1-\frac{1}{2^n}\right) \ens[a] + \frac{1}{2^n} \ens[b]\right]
+		\end{aligned}
+	\end{equation}
+	where $\lambda = 2^n p - 2^n + 1$.
+	Note that $0 \le \lambda \le \frac{1}{2}$ if $1 - \frac{1}{2^n} \le p \le 1 - \frac{1}{2^{n+1}}$. Thus, from the first part of the proof, we get $MS(p\ens[a], \bar{p} \ens[b]) \le MS(\ens[a], (1-\frac{1}{2^n}) \ens[a] + \frac{1}{2^n}\ens[b])$. Note that this result is recursive for $p = 1 - \frac{1}{2^n}$. Therefore, we can use induction to show $MS(p\ens[a], \bar{p} \ens[b]) \le MS(\ens[a], (1-\frac{1}{2^n}) \ens[a] + \frac{1}{2^n}\ens[b]) \le MS(\ens[a], \ens[b])$.
 \end{proof}
 \end{mathSection}
 
