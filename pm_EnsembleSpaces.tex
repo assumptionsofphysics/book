@@ -12,6 +12,8 @@
 \newcommand\hull{\mathrm{hull}}
 \newcommand\shull{\mathrm{shull}}
 \newcommand\chull{\mathrm{chull}}
+\newcommand\ahull{\mathrm{ahull}}
+\newcommand\cahull{\mathrm{cahull}}
 \newcommand\support{\mathrm{supp}}
 \newcommand\scap{\mathrm{scap}}
 \newcommand\fraction{\mathrm{frac}}
@@ -1549,6 +1551,10 @@ While the motivation is straightforward, the construction is complicated by the 
 		This means that $\left[r\frac{\bar{p}}{p}(\ens[c] - \ens[a])\right]$ is the inverse of $[r(\ens[b] - \ens[a])]$ and that the addition is an abelian group.
 	\end{proof}
 	
+	\begin{remark}
+		Note that, right now, the construction of the embedding vector space requires an internal point, though there is nothing in the axioms that requires internal points to exist.
+	\end{remark}
+	
 	\begin{thrm}[Differences form a vector space]
 		Let $\ens[a] \in \Ens$ be an internal point and let $V = \{ [r(\ens[b]-\ens[a])] \}$ be the set of equivalence classes of ensemble differences from $\ens[a]$. Then $V$ is a vector space under scalar multiplication and addition.
 	\end{thrm}
@@ -1582,6 +1588,14 @@ While the motivation is straightforward, the construction is complicated by the 
 	\begin{defn}
 		Given an internal point $\ens[a]$, the \textbf{natural embedding} of $\Ens$ into $V_{\ens[a]}$ is the map $\iota_{\ens[a]} : \Ens \hookrightarrow V_{\ens[a]}$, defined as $\iota_{\ens[a]}(\ens) \to [1(\ens - \ens[a])]$, that maps each ensemble to its difference from $\ens[a]$.
 	\end{defn}
+	
+	\begin{coro}
+		The natural embedding of $\Ens$ into $V_{\ens[a]}$ preserves affine combinations is injective.
+	\end{coro}
+	
+	\begin{proof}
+		In each equivalence class, there is a unique element with coefficient one. Therefore the mapping is injective.
+	\end{proof}
 	
 	\begin{coro}
 		The natural embedding of $\Ens$ into $V_{\ens[a]}$ preserves affine combinations. That is, $\iota\left(\sum_{i=1}^n r_i \ens_i \right) = \sum_{i=1}^n r_i \iota(\ens_i)$.
@@ -1652,6 +1666,121 @@ Intuitively, this tells us that we cannot have a mixture of two different elemen
 		We have $p\ens[a] + \bar{p} \ens[b] = \ens[b] = p\ens[b] + \bar{p} \ens[b]$ for some $p \in (0,1]$. Therefore $\ens[a] = \ens[b]$.
 	\end{proof}
 \end{mathSection}
+
+\subsection{Affine subsets and affine hull}
+
+TODO: review with Christine
+
+Since ensemble spaces embed in vector spaces, it is useful to define affine sets and affine hulls as closures over not only convex combinations but affine combinations. We can then relate these construction to the intersection of subspaces of the embedding vector spaces with the ensemble spaces. This allows us to define affine basis and affine dimensionality of the ensemble space in a way that they map to the usual notions of basis and dimensionality in vector spaces.
+
+A set is affine if it allows all possible finite affine combinations. To extend this to the infinite case we use the topology. A set is closed and affine if it includes all limits of finite affine combinations. Note that we have not yet defined infinite affine combination, which is left as an open problem.
+
+TODO: create open problem for infinite affine combinations; if the limit of finite affine combinations exists, does it also exist the limit of the convex combinations used to define the finite affine combinations?
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\Ens$ be an ensemble space. We say the set $A \subseteq \Ens$ is \textbf{affine} if it closed under finite affine combinations (i.e. given $r \in \mathbb{R}$ and $\ens[a],\ens[b] \in A$, $r\ens[a] + \bar{r} \ens[b] \in A$ if it exists), and \textbf{closed and affine} if it is both affine and topologically closed.
+	\end{defn}
+	
+	\begin{remark}
+		The above definition does not need infinite affine combinations to be defined because it just uses topological closure. Since affine combinations, unlike convex combination, go ``in both directions'', it is not useful to define an affine analogue of $\sigma$-convex sets as they would coincide with closed and affine sets.
+	\end{remark}
+\end{mathSection}
+
+Given a set of ensembles $A$, we can ask for all ensembles that can be constructed from $A$. The affine hull of $A$ is the set of all finite affine combinations of $A$ while the closed affine hull of $A$ is the set of all topological limits of finite affine combinations of $A$.
+
+\begin{mathSection}
+\begin{defn}
+	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{affine hull} of $A$, noted $\ahull(A)$ is the set of all finite affine combinations of elements contained in $A$ (i.e. it is the smallest affine set that contains $A$). The \textbf{closed affine hull} of $A$, noted $\cahull(A)$ is the smallest closed affine set that contains $A$. 
+\end{defn}
+\end{mathSection}
+
+We still need to prove the following conjecture:
+\begin{conj}
+	The topological closure of the affine hull is an affine set and, therefore, the closed affine hull.
+\end{conj}
+
+Having defined affine sets, we can define a notion of affine independence. In intuitively, for a set linearly independent vectors, one vector cannot be expressed as a linear combination of the other. We, therefore, define an affinely independent set of ensembles as one in which every ensemble cannot be expressed as an affine combinations of the other. We can then define a notion of affine basis as a set of ensembles whose affine hull is the whole space.
+
+\begin{mathSection}
+\begin{defn}
+	A set $A \subseteq \Ens$ of ensembles is said to be \textbf{affinely independent} provided that $\forall \ens[a]\in A, \ens[a]\notin\ahull(A\backslash\{\ens[a]\})$. An \textbf{affine basis} $\mathcal{B} \subseteq \Ens$ of ensembles is an affinely independent set of ensembles whose affine hull $\ahull(\mathcal{B}) = \Ens$ is the whole space.
+\end{defn}
+
+\begin{remark}
+	We use the affine hull to match the standard definitions in a vector space. It may be, however, that using closed affine hull may make more physical sense.
+\end{remark}
+
+TODO: hulls are closure operations
+
+\begin{coro}
+	Let $\ens[a] \in \Ens$ be an internal point. If $\mathcal{B} \subseteq \Ens$ is a basis, then we can find $\ens \in \mathcal{B}$ such that $\{\ens[a]\} \cup \mathcal{B} \setminus \{\ens\}$ is a basis. That is, every basis can be centered at any internal point.
+\end{coro}
+
+\begin{proof}
+	Since $\mathcal{B}$ is a basis, $\ens[a] = \sum_{i=1}^n r_i \ens[b]_i$ for some $n$, $\{r_i\} \in (0,1]$ and $\{\ens[b]_i\} \in \mathcal{B}$. Consider  $\mathcal{B}' = \{\ens[a]\} \cup \mathcal{B} \setminus \{\ens[b]_1\}$. Since $\ens[b_1] = \frac{1}{r_1} \left(\ens[a] - \sum_{i=2}^n r_i \ens[b]_i\right)$, $\ens[b]_1 \in \ahull(\mathcal{B}')$ and therefore $\ahull(\mathcal{B}') = \ahull(\mathcal{B}' \cup \{\ens[b]_1\}) \supseteq \ahull(\mathcal{B}) = \Ens$. Which means $\ahull(\mathcal{B}') = \Ens$.
+	
+	Note that, since $\mathcal{B} \setminus \{\ens[b]_1\} = \mathcal{B}' \setminus \{\ens[a]\} $, we have $\ahull( \mathcal{B} \setminus \{\ens[b]_1\} ) = \ahull( \mathcal{B}' \setminus \{\ens[a]\} )$, which means that $\ens[a] \notin \ahull( \mathcal{B}' \setminus \{\ens[a]\} )$. Now, suppose $\ens[b] \in \ahull( \mathcal{B}' \setminus \{\ens[b]\} )$ for some $\ens[b] \in \mathcal{B}'$, which means $\ens[b] \neq \ens[a]$. Then we can write $\ens[b] = r_a \ens[a] + \sum_{i=1}^n r_i \ens[b]_i$ for some $n$, $\{r_i\} \in (0,1]$ and $\{\ens[b]_i\} \in \mathcal{B}' \cup \mathcal{B} \setminus \{ \ens[b]\}$. Since $\ens[a]\neq\ens[b]$, $r_a \in [0,1)$. If $r_a$ is zero, then we would have $\ens[b] \in \ahull (\mathcal{B} \setminus \{\ens[b]\})$, which can't be.  If $r_a \neq 0$, since $r_a \neq 1$ we would be able to re-express $\ens[b]$ as an affine combinations of elements of $(\mathcal{B} \setminus \{\ens[b]\})$. But this, again, is not possible, therefore  $\ens[b] \in \ahull( \mathcal{B}' \setminus \{\ens[b]\} )$ for all $b \notin \mathcal{B}'$. Which means $\mathcal{B}'$ is a basis.
+\end{proof}
+\end{mathSection}
+
+Having defined affine independence and affine hull on ensemble spaces, we want to show that these notions corresponds to linear independence and linear span of the embedding vector spaces.
+
+\begin{mathSection}
+\begin{prop}
+	Let $A \subseteq \Ens$ be a set of ensembles containing an internal ensemble $\ens[a] \in \Ens$. Then the affine hull of $A$ is exactly the intersection between the span of $\iota_{\ens[a]}(A)$ and the ensemble space. That is, $\iota_{\ens[a]}(\ahull(A)) = \vspan(\iota_{\ens[a]}(A \setminus \{\ens[a]\})) \cap \iota_{\ens[a]}(\Ens)$.
+\end{prop}
+\begin{proof}
+	Since $\iota_{\ens[a]}$ is an embedding that preserves affine combination, $\iota_{\ens[a]}$ is a bijection between the affine hull of $A$ and the affine hull of $\iota_{\ens[a]}(A)$ that lies in $\iota_{\ens[a]}(\Ens)$. Note that, since $\iota_{\ens[a]}(\ens[a])=0$, $\ahull(\iota_{\ens[a]}(A)) = \vspan(\iota_{\ens[a]}(A \setminus \{\ens[a]\}))$. The reason is that every linear combination of vectors can be expressed as an affine combinations of the same vector plus the origin: $\sum_{i=1}^n r_i v_i = \sum_{i=1}^n r_i v_i + (1-\sum_{i=1}^n r_i) 0$. Putting it all together, we have $\iota_{\ens[a]}(\ahull(A)) = \ahull(\iota_{\ens[a]}(A)) \cap \iota_{\ens[a]}(\Ens) =  \vspan(\iota_{\ens[a]}(A)) \cap \iota_{\ens[a]}(\Ens)$.
+\end{proof}
+
+\begin{coro}
+	Let $A \subseteq \Ens$ be a set of ensembles containing an internal ensemble $\ens[a] \in \Ens$. Then $A$ is affinely independent if and only if $\iota_{\ens[a]}(A \setminus \{\ens[a]\})$ is linearly independent.
+\end{coro}
+
+\begin{proof}
+	Since $\iota_{\ens[a]}$ is an affine bijection, $\ens \in \ahull(A)$ if and only if $\iota_{\ens[a]}(\ens) \in \ahull(\iota_{\ens[a]}(A)) = \vspan(\iota_{\ens[a]}(A \setminus \{\ens[a]\}))$.
+\end{proof}
+
+\begin{coro}
+	Let $A \subseteq \Ens$ be a set of ensembles containing an internal ensemble $\ens[a] \in \Ens$. Then $\ahull(A) = \Ens$ if and only if $\vspan(\iota_{\ens[a]}(A)\setminus\{\ens[a]\}) = V_{\ens[a]}$.
+\end{coro}
+\begin{proof}
+	Since the map $\iota_{\ens[a]}$ is injective, if $\ahull(A) \subset \Ens$ then $\iota_{\ens[a]}(\ahull(A)) = \vspan(\iota_{\ens[a]}(A \setminus \{\ens[a]\})) \cap \iota_{\ens[a]}(\Ens) \subset \iota_{\ens[a]}(\Ens)$. This means $\vspan(\iota_{\ens[a]}(A \setminus \{\ens[a]\}))$ does not include all elements of $\iota_{\ens[a]}(\Ens)$ and therefore $\vspan(\iota_{\ens[a]}(A \setminus \{\ens[a]\})) \subset V_{\ens[a]}$.
+	
+	If $\ahull(A) = \Ens$, then $\iota_{\ens[a]}(\ahull(A)) = \iota_{\ens[a]}(\Ens)$. Now consider $v = [r(\ens[b] - \ens[a])] \in V_{\ens[a]} \setminus \iota_{\ens[a]}(\Ens)$. Note that $r \neq 0$, since the origin corresponds to $0 = \iota_{\ens[a]}(\ens[a]) \in \iota_{\ens[a]}(\Ens)$. Then $ v = r [1(\ens[b] - \ens[a])] = r \iota_{\ens[a]}(\ens[b]) \in \iota_{\ens[a]}(\Ens)$. Therefore every element that is not in $\iota_{\ens[a]}(\Ens)$ is in its span. This means $\vspan(\iota_{\ens[a]}(A)\setminus\{\ens[a]\}) = V_{\ens[a]}$.
+\end{proof}
+\end{mathSection}
+
+We are now in the position to show that the notion of affine basis correspond to the notion of vector space basis. This allows us to easily show that affine basis always exist and that a notion of affine dimension for the ensemble space can be defined.
+
+\begin{mathSection}
+\begin{prop}
+	Let $B_{\ens[a]} \subseteq \Ens$ be a set of ensembles containing an internal ensemble $\ens[a] \in \Ens$. Then $B_{\ens[a]}$ is a basis of the ensemble space if and only if $\iota_{\ens[a]}(B_{\ens[a]}\setminus\{\ens[a]\})$ is a basis of $V_{\ens[a]}$.
+\end{prop}
+
+\begin{proof}
+	The set $B_{\ens[a]}$ is affinely independent if and only if $\iota_{\ens[a]}(B_{\ens[a]}\setminus\{\ens[a]\})$ is linearly independent. The affine hull of $B_{\ens[a]}$ is $\Ens$ if and only if the linear span of $\iota_{\ens[a]}(B_{\ens[a]}\setminus\{\ens[a]\})$ is $V_{\ens[a]}$. Therefore $B_{\ens[a]}$ is an affine basis of $\Ens$ if and only if $\iota_{\ens[a]}(B_{\ens[a]}\setminus\{\ens[a]\})$ is a vector space basis of $V_{\ens[a]}$.
+\end{proof}
+
+\begin{coro}
+	All ensemble spaces admit an affine basis. Let $B_1, B_2 \subseteq \Ens$ be two basis of an ensemble space $\Ens$ then $|B_1| = |B_2|$
+\end{coro}
+
+\begin{proof}
+	Since the statements are true for vector space basis, and affine basis map to vector spaces basis, then the statements are true for affine basis as well.
+\end{proof}
+
+\begin{defn}
+	The affine dimension of an ensemble space is the cardinality of its affine basis minus one. That is, $\dim(\Ens) = |B|-1$ where $B \subseteq \Ens$ is an affine basis of $\Ens$.
+\end{defn}
+\end{mathSection}
+
+With a notion of dimension, we should be able to show that the embedding is a continuous map.
+
+\begin{conj}
+	Every finite-dimensional ensemble space $\Ens$ is affinely homeomorphic to a bounded convex subset of a finite-dimensional topological vector space. That is, the set of internal points of $\Ens$ is not empty, and for every internal point $\ens[a] \in \Ens$ there exists an affine topological embedding $\iota_{\ens[a]} : \Ens \to V_{a}$ into a topological vector space $V_{a}$ where $\iota_{\ens[a]}(\Ens) \subseteq V_{a}$ is a bounded convex subset.
+\end{conj}
 
 \subsection{Boundedness of lines}
 
