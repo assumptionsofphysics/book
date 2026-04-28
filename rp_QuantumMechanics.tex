@@ -55,24 +55,85 @@ How to break up the different assumptions for quantum states.
 	The expectation of a statistical variable is the trace of some self-adjoint operator. That is, let $E[X\mid \cdot] : D(\mathcal{H}) \to \mathbb{R}$ be an affine continuous functional over density operators, then there exists a self-adjoint operator $X : \mathcal{H} \to \mathcal{H}$ such that $E[X\mid \rho] = \tr(X\rho)$.
 \end{conj}
 
-\begin{condition}[Conditional expectation]{BR-EXP}
-	The conditional probability $p : P(\mathcal{H}) \times P(\mathcal{H}) \to [0,1]$ is given by the expectation the Born rule. That is, $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.
+\begin{condition}[Mutual exclusivity conditions]{MUTEX-QM}
+	Mutually exclusive states have zero conditional probability and maximize the entropy during mixing. That is, let $\psi_i \in P(\mathcal{H})$ be a countable sequence of states. Then $p(\psi_i | \psi_j) = 0$ for all $i \neq j$ if and only if $S(\sum_i p_i \psi_i) = - \sum_i p_i \log p_i$ for all $p_i$ such that $\sum_i p_i = 1$.
 \end{condition}
 
-\begin{condition}[Born rule]{BR-BORN}
+\begin{condition}[Conditional expectation from Born rule]{BR-BORN}
 	The conditional probability $p : P(\mathcal{H}) \times P(\mathcal{H}) \to [0,1]$ is given by the Born rule. That is, $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.
+\end{condition}
+
+\begin{condition}[Conditional expectation from projective angle]{BR-ANG}
+	The conditional probability $p : P(\mathcal{H}) \times P(\mathcal{H}) \to [0,1]$ is given by the cosine square of the projective angle. That is, $p(\psi|\phi) = \cos^2 \theta_{\psi\phi}$.
+\end{condition}
+
+\begin{condition}[Conditional expectation is the expectation of projectors]{BR-IND}
+	The conditional probability $p : P(\mathcal{H}) \times P(\mathcal{H}) \to [0,1]$ is given by the expectation of the corresponding projector. That is, $p(\psi|\phi) = E_{\rho_{\phi}}[\indicator[\psi]] = \tr(\indicator[\psi] \rho_{\phi})$.
+\end{condition}
+
+\begin{condition}[Conditional expectation is the projectors' inner product]{BR-INPR}
+	The conditional probability $p : P(\mathcal{H}) \times P(\mathcal{H}) \to [0,1]$ is given by the inner product between projectors. That is, $p(\psi|\phi) =   \tr(\indicator[\psi] \indicator[\phi])$.
+\end{condition}
+
+\begin{condition}[Orthogonality is mutual exclusivity]{BR-MUTEX}
+	Two states are mutually exclusive if and only if they are orthogonal. That is, $\psi$ and $\phi$ are mutually exclusive if and only if $\<\psi|\phi\>=0$.
 \end{condition}
 
 \begin{condition}[Von Neumann entropy]{BR-ENT}
 	The entropy $S : D(\mathcal{H}) \to \mathbb{R}$ for an ensemble $\rho \in D(\mathcal{H})$ is given by the Shannon entropy. That is, $S(\rho) = -\tr(\rho \log \rho)$.
 \end{condition}
 
-\begin{condition}[Mutual exclusivity conditions]{MUTEX-QM}
-	Mutually exclusive states have zero conditional probability and maximize the entropy during mixing. That is, let $\psi_i \in P(\mathcal{H})$ be a countable sequence of states. Then $p(\psi_i | \psi_j) = 0$ for all $i \neq j$ if and only if $S(\sum_i p_i \psi_i) = - \sum_i p_i \log p_i$ for all $p_i$ such that $\sum_i p_i = 1$.
+\begin{condition}[Schroedinger equation]{DR-SCEQ}
+	The evolution follows the equation $\imath \hbar \frac{d}{dt} \psi(t) = H \psi(t)$ where $H$ is a self-adjoint operator.
 \end{condition}
 
+\begin{condition}[Unitary evolution]{DR-UNIT}
+	The evolution is unitary: $U^{\dagger}_{dt} U_{dt} = U_{dt} U^{\dagger}_{dt} = 1$. 
+\end{condition}
 
+\begin{condition}[Inner product preservation]{DR-INN}
+	The evolution preserves the inner product : $\< U_{dt} \phi | U_{dt} \psi\> =\<  \phi | \psi \>$.
+\end{condition}
 
+\begin{condition}[Linear and norm preservation]{DR-NORM}
+	The evolution is linear and preserves the norm: $\< \psi(t) | \psi(t) \> = \< \psi(t+dt) | \psi(t+dt) \>$.
+\end{condition}
+
+\begin{condition}[Unitary Born rule]{DR-UBOR}
+	The square of the inner product between to states infinitesimally close in time is one: $|\< \psi(t) | \psi(t + dt) \> |^2 = 1$.
+\end{condition}
+
+\begin{condition}[Perpendicular change]{DR-PERP}
+	The state change is perpendicular to the original state in the complex plane: $\< \psi(t) | d\psi(dt) \>$ is imaginary. 
+\end{condition}
+
+\begin{condition}[Orthogonality preservation]{DR-OBAS}
+	The evolution is linear and maps orthonormal basis to orthonormal basis: $\< U_{d t} e_i | U_{d t} e_j \> = \< e_i | e_j \> = \delta_{ij}$.
+\end{condition}
+
+\begin{condition}[Determinism and reversibility]{DR-EV}
+	The evolution is deterministic and reversible
+\end{condition}
+
+\begin{condition}[Probability preservation]{DR-PROB}
+	The evolution preserves probability distributions.
+\end{condition}
+
+\begin{condition}[Mutual exclusivity preservation]{DR-MUTEX}
+	The evolution preserves mutual exclusivity between ensembles.
+\end{condition}
+
+\begin{condition}[Information preservation]{DR-INFO}
+	The evolution preserves information entropy.
+\end{condition}
+
+\begin{condition}[Quasi-static process]{DR-PSEQ}
+	Time evolution is a quasi-static process
+\end{condition}
+
+\begin{condition}[Series of measurements]{DR-MSEQ}
+	The evolution is an infinite sequence of reversible measurements.
+\end{condition}
 
 \subsection{Proposed index}
 \begin{enumerate}
