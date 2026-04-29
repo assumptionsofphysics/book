@@ -2,7 +2,7 @@
 
 % TODO: review classical uncertainty principle
 
-\section{The postulates of quantum mechanics}
+\section{Notes}
 
 In this section we will review the standard formulations of quantum mechanics in terms of projective Hilbert spaces.
 
@@ -201,7 +201,11 @@ How to break up the different assumptions for quantum states.
 \item[PM-DEQ] Projection measurements are process with equilibria that commute with a det/rev process.
 	\item Unphysicality of non-Hermitian Hamiltonians
 \end{itemize}
-	\item Composite systems
+	\item Composite system
+	* Show that system composition of quantum systems that is itself a quantum system gives the tensor product
+	* Review the arguments in the paper
+	* see if using a Segre embedding would make our life easier
+	
 	\item Fermion and Bosons as indistinguishibility of components (requires tensor product)
 \end{enumerate}
 
@@ -211,55 +215,67 @@ In QST, infinite dimension
 \end{itemize}
 
 
-\subsection{States}
+\section{The postulates of quantum mechanics}
 
-The first postulate of quantum mechanics characterizes how states are represented in the mathematical framework.
+In this section we are going to summarize the standard Hilbert space formulation of quantum mechanics. The goal is to have a general understanding of the math and how it naively maps to the physics. We will also define the notation that we are going to use throughout this chapter.
+
+The first postulate of quantum mechanics characterizes how states are represented in the mathematical framework. 
 \renewcommand{\thepostulate}{ST}
 \begin{postulate}[State postulate]\label{rp_qm_postState}
 	The state space of a quantum system is represented by the projective space $\mathrm{P}(\mathcal{H})$ of a complex Hilbert space $\mathcal{H}$. A state is represented by a ray of the Hilbert space $\mathcal{H}$. An ensemble is represented by a density operator $\rho : \mathcal{H} \to \mathcal{H}$, that is a positive semi-definite trace one self-adjoint operator.
 \end{postulate}
 \renewcommand{\thepostulate}{\Roman{assump}}
-In terms of notation, we will mostly follow the convention most used by physicists,\footnote{Vectors will be noted as $|\psi\>$ instead by a simple letter $v$. The inner product will be noted as $\< \phi | \psi \> $, with a vertical line instead of a comma, and it will be linear in the first term instead of the second term. } with some addition or modification to make the connection to the math more clear. Mathematically, a complex Hilbert space $\mathcal{H}$ has three defining properties. It is a vector space, meaning that it is closed under addition $+ : \mathcal{H} \times \mathcal{H} \to \mathcal{H}$ and scalar multiplication $\cdot : \mathbb{C} \times \mathcal{H} \to \mathcal{H}$. It has an inner product, meaning that it is equipped with a map $\< \; \cdot \; | \; \cdot \; \> : \mathcal{H} \times \mathcal{H} \to \mathbb{C}$ that is positive-definite, linear in the second argument and conjugate symmetric. It is a complete metric space with respect to the distance function induced by the inner product, meaning that, given a sequence of vectors $|\psi_i\>$, if the series given by their norm $\sum_i |\psi_i|$ converges, then the series of given by the vectors $\sum_i |\psi_i\>$ converges as well. A ray of a Hilbert space is a one dimensional subspace. That is, given a vector $|\psi\>$, the corresponding ray is the set of all vectors given by $c |\psi\>$. With a slight abuse of notation, we will use $\psi$ to indicate the ray identified by the vector $|\psi\>$.
+
+In terms of notation, we will mostly follow the convention most used by physicists, with some addition or modification to make the connection to the math more clear. A state $\psi \in \mathrm{P}(\mathcal{H})$ is a ray, which is an equivalence class $\psi = \{c | \psi \> \mid c \in \mathbb{C}\setminus {0}\}$ for some vector $| \psi \> \in \mathcal{H}$. A wavefunction $\psi(x^i)$ is the representation of a vector $| \psi \>$, where $x^i$ represent the possible values (i.e. the joint spectrum) of a complete set of commuting observables. Note that, over a continuous spectrum, such representation is not unique as it can differ on a set of measure zero. We will note $\mathrm{D}(\mathcal{H})$ for the set of all mixed states, and will consider $\mathrm{P}(\mathcal{H})$ a subset of $\mathrm{D}(\mathcal{H})$ since every ray is associated to a unique density operator. If we want to specify the density operator for a particular state, we will write $\rho_{\psi}$.
+
+Mathematically, a complex Hilbert space $\mathcal{H}$ has three defining properties. It is a vector space, meaning that it is closed under addition $+ : \mathcal{H} \times \mathcal{H} \to \mathcal{H}$ and scalar multiplication $\cdot : \mathbb{C} \times \mathcal{H} \to \mathcal{H}$. It has an inner product, meaning that it is equipped with a map $\< \; \cdot \; | \; \cdot \; \> : \mathcal{H} \times \mathcal{H} \to \mathbb{C}$ that is positive-definite, linear in the second argument and conjugate symmetric. It is a complete metric space in the sense that every Cauchy sequence converges,  which can be characterized in the following way: given a sequence of vectors $|\psi_i\>$, if the series given by their norm $\sum_i \sqrt{\<\psi_i|\psi_i\>}$ converges, then the series given by the vectors $\sum_i |\psi_i\>$ converges as well.
 
 The second postulate of quantum mechanics characterizes observables.
 \renewcommand{\thepostulate}{OBS}
 \begin{postulate}[Observable postulate]\label{rp_qm_postObs}
-	An observable is represented by a self-adjoint operator $O : \mathcal{H} \to \mathcal{H}$. Given a state $|\psi\>$, the expectation is given by $\<\psi | O | \psi \>$, and, given an ensemble $\rho$, the expectation is given by $\tr(O\rho)$.
+	An observable is represented by a self-adjoint operator $O : \mathcal{D}(O) \subseteq \mathcal{H} \to \mathcal{H}$. Given a state $|\psi\>$, the expectation is given by $\frac{\<\psi | O | \psi \>}{\<\psi | \psi \>}$, and, given an ensemble $\rho$, the expectation is given by $\tr(O\rho)$.
 \end{postulate}
 \renewcommand{\thepostulate}{\Roman{assump}}
 
+The expectations are guaranteed to be real numbers precisely because $O$ is self-adjoint. Also note that, given the completeness of $\mathcal{H}$, a self-adjoint operator is defined over the whole space if and only if it is bounded. In physics, we are also interested in unbounded observables, like position, momentum, energy, number of particles and so on. In this case, we require that the domain $\mathcal{D}(O)$ is dense in $\mathcal{H}$.
+
+The third postulate characterizes the effect of projective measurements.
 \renewcommand{\thepostulate}{PROJ}
 \begin{postulate}[Projection measurement postulate]\label{rp_qm_postProjMeas}
-	A projection measurement is defined by a set $M = \{\indicator[i]\}$ of projectors, representing the measurement outcomes, such that $\sum_i \indicator[i] = I$. If $|\psi\> \in \mathcal{H}$ represents the state before the measurement interaction, the ensemble after the interaction will be $\rho_{M} = \sum_i \indicator[i] \indicator[\psi]$ and the state after the measurement of the $i$-th outcome is $|\phi_i\> = \frac{\indicator[i]|\psi\>}{\sqrt{\< \psi | \indicator[i] | \psi \>}}$ with probability $\< \psi | \indicator[i] | \psi \>$. If $\rho$ is the ensemble before the measurement interaction, the ensemble after the interaction will be $\rho_{M} = \sum_i \indicator[i] \rho$ and the state after the measurement of the $i$-th outcome is $\hat{\rho}_i = \frac{\indicator[i] \rho}{\tr(\indicator[i] \rho)}$ with probability $\tr(\indicator[i] \rho)$.
+	A projection measurement is defined by a set $M = \{\indicator[i]\}$ of projectors, representing the measurement outcomes, such that $\sum_i \indicator[i] = I$. If $|\psi\> \in \mathcal{H}$ represents the state before the measurement interaction, the ensemble after the interaction will be $\rho_{M} = \sum_i \indicator[i] \indicator[\psi] \indicator[i]$ and the state after the measurement of the $i$-th outcome is $|\phi_i\> = \frac{\indicator[i]|\psi\>}{\sqrt{\< \psi | \indicator[i] | \psi \>}}$ with probability $\frac{\<\psi | \indicator[i] | \psi \>}{\<\psi | \psi \>}$. If $\rho$ is the ensemble before the measurement interaction, the ensemble after the interaction will be $\rho_{M} = \sum_i \indicator[i] \rho \indicator[i]$ and the state after the measurement of the $i$-th outcome is $\hat{\rho}_i = \frac{\indicator[i] \rho \indicator[i]}{\tr(\indicator[i] \rho)}$ with probability $\tr(\indicator[i] \rho)$.
 \end{postulate}
 \renewcommand{\thepostulate}{\Roman{assump}}
 
+Note that we use $\indicator[V]$ for a projector onto subspace $V$. Projectors in quantum mechanics play a similar role to indicators in classical probability, so this notation will allow us to make the parallel more evident, and show exactly what works the same and what works differently. Given a state $\psi$, the corresponding projector is $\indicator[\psi] = \frac{| \psi \> \<\psi |}{\<\psi | \psi \>}$.
+
+The projection postulate implicitly defines the Born rule. Given a state $\phi$, the observable that returns one if the state is $\phi$ and zero if not is exactly $O_{\phi} = \indicator[\phi]$. This means that the probability of measuring $\phi$ given $\psi$ is $p(\phi | \psi) = \frac{\<\psi | \indicator[\phi] | \psi \>}{\<\psi | \psi \>} = \frac{\<\psi | \phi \> \<\phi | \psi \>}{\<\psi | \psi \>\<\phi | \phi \>}$. Note the expression gives the same result for all elements of the same ray. Moreover, since the inner product over continuous spectrum is an integral, two wavefunctions that differ over a set of measure zero will always give the same result. In this sense, the mathematics is consistent as all physical outcomes depend only on the rays.
+
+The fourth postulate characterizes time evolution.
 \renewcommand{\thepostulate}{UNIT}
 \begin{postulate}[Time evolution postulate]\label{rp_qm_postUnitEvol}
-	The time evolution of a state vector $|\psi\>$ is given by $d_t |\psi(t)\> = \frac{H}{\imath \hbar} |\psi(t)\>$ where $H$ is a self-adjoint operator. The time evolution of an ensemble $\rho$ is given by $d_t \rho = \left[\frac{H}{\imath\hbar}, \rho\right]$.
+	Time evolution of a state vector $|\psi\>$ is given by $d_t |\psi(t)\> = \frac{H}{\imath \hbar} |\psi(t)\>$ where $H$ is an observable, typically called Hamiltonian. The time evolution of an ensemble $\rho$ is given by $d_t \rho = \frac{\left[H, \rho\right]}{\imath\hbar}$.
 \end{postulate}
 \renewcommand{\thepostulate}{\Roman{assump}}
 
+Note that we will tend to group $\imath \hbar$ in the denominators as it makes the pattern given by the Lie algebraic structure and its connection to classical mechanics more clear. For example:
+\begin{equation}
+	\begin{aligned}
+	\imath \hbar d_t |\psi(t)\> = H |\psi(t)\> & \implies d_t |\psi(t)\> = \frac{H}{\imath \hbar} |\psi(t)\> \\
+e^{- \frac{\imath}{\hbar} H t} &\implies e^{\frac{H t}{\imath \hbar}} \\
+d_t O = \frac{\imath}{\hbar} [H, O] &\implies d_t O = \frac{[O,H]}{\imath\hbar}\\
+d_t \rho = - \frac{\imath}{\hbar} [H, \rho] &\implies d_t \rho = \frac{[H,\rho]}{\imath\hbar}\\
+[X,P] = \imath\hbar &\implies \frac{[X,P]}{\imath \hbar} = 1 \\
+&\cdots
+	\end{aligned}
+\end{equation}
+Not only the notation is more consistent across equations, it brings out the connection between the Poisson bracket and commutator divided by $\imath\hbar$. In particular, the order/sign difference between the evolution of an observable $O$ and a mixed state $\rho$ is exactly the same in classical mechanics between a quantity and the probability density.
+
+The last postulate characterizes composite systems.
 \renewcommand{\thepostulate}{COMP}
 \begin{postulate}[Composition postulate]\label{rp_qm_postComp}
-	Given two quantum systems associated with the Hilbert spaces $\mathcal{H}_1$ and $\mathcal{H}_2$, their composite system is associates with the tensor product $\mathcal{H}_1 \otimes \mathcal{H}_2$.
+	Given two quantum systems associated with the Hilbert spaces $\mathcal{H}_1$ and $\mathcal{H}_2$, their composite system is associated with the tensor product $\mathcal{H}_1 \otimes \mathcal{H}_2$. An observable $O_1$ for the first system becomes $O_1 \otimes I_2$ in the composite, and an observable $O_2$ for the second system becomes $I_1 \otimes O_2$, where $I_1$ and $I_2$ are the identities in the respective spaces.
 \end{postulate}
 \renewcommand{\thepostulate}{\Roman{assump}}
-
-
-
-Review of the mathematical formulation of quantum mechanics
-* wave-function (postulates - rays of Hilbert space)
-- states are rays in Hilbert space
-- observables are Hermitian operator inner product, Born rule, projection as final state
-- composite systems (tensor product)
-- unitary evolution
-* mixtures and entropy
-
-Composite system
-* Show that system composition of quantum systems that is itself a quantum system gives the tensor product
-* Review the arguments in the paper
-* see if using a Segre embedding would make our life easier
 
 \subsection{Bloch sphere review}
 
