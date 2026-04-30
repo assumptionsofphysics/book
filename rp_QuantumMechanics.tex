@@ -294,26 +294,129 @@ More remarkably, the interior points of the sphere represent mixed states. There
 
 In this section we will analyze the state postulate to understand what each mathematical structure represent. The complex vector space structure by itself defines pure states, but nothing else. The inner product structure is needed to define ensembles and statistical mixing, but does not require the Born rule. The Born rule links the inner product with probability, linking orthogonality with mutual exclusivity.
 
-\subsection{Quantum state representations}
-Let's start restating and analyzing the following condition:
-\begin{equation}\label{rp-qm-qp-condStatesAreRays}
-	\tag{QP-RAY}
-	\eqtext{The state of a quantum system is represented by a ray $c | \psi\>$ of a complex inner product space $\mathcal{H}$.}
-\end{equation}
-As the state is represented by a ray, a change in norm or phase does not change the physics. Since all the physics is given by the Born rule
+When analyzing the relationship between physical objects and the mathematical structures used to represent them, there can be three cases. The representation may be faithful in the sense that the physics is exactly specified by the math. For example, if we represent the number of particles in a box with a natural number, each possible mathematical value corresponds to a possible physical configuration. The representation may be redundant, in the sense that the math includes arbitrary choices that do not change the physics, and therefore one typically chooses the most useful mathematical representation in each specific case. For example, the potential of the electromagnetic field is not uniquely constrained by the physics, so one is free to choose a gauge that is best suited for the problem. The representation may be unphysical, in the sense that the mathematical representation includes cases that are not physically meaningful, typically for convenience of calculation. For example, even though a charge distribution is a real valued function, in the presence of poles it may be useful to extend to a complex function to integrate it.
+
+The postulates of quantum mechanics just give us the mathematical framework, without stating exactly this type of relationships. We know, for example, that the physics is in the rays and the Born rule. What part, then, of the Hilbert space is redundant, like the choice of gauge for a potential, and which part is unphysical, like the extension from real to complex valued charge distributions? Do all rays correspond to physically meaningful states? Since linearity is defined on the vectors, and the vectors themselves are not the physical object, does the linearity of the vector space correspond to a physical requirement? These are the questions we will answer in this section.
+
+\subsection{Vector vs projective space}
+
+In order to make a thorough analysis, a common strategy in Reverse Physics is to break the mathematical structure into the smallest structures required for the physical definition. The most basic item in quantum mechanics is the notion of state, which is defined as a ray in a Hilbert space. However, the definition of rays and projective space do not require the inner product: just the vector space structure. The vector space needs to be complex, as the projective space will be different depending on the scalar field. Therefore, let us start with the following basic condition.
+
+\begin{condition}[Quantum states are rays]{QP-RAY}
+	The state space of the system is represented by the projective space given by the rays of a complex vector space $\mathcal{H}$.
+\end{condition}
+
+We should verify that physics only depends on the ray, and, since the ray is an equivalence class, not the choice of representative. Since all the physics is given by the Born rule
 \begin{equation}
 	p(\phi|\psi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>},
 \end{equation}
-we can simply verify the Born rule is invariant if we change $\psi$ to $\rho e^{\imath \theta} \psi$:
+we can verify that the Born rule is indeed invariant under the change of representative $|\psi\>$ to $c |\psi\>$ with $c \in \mathbb{C} \setminus \{0\}$:
 \begin{equation}
-	p(\phi|\rho e^{\imath \theta}\psi) = \frac{\< \phi |\rho e^{\imath \theta}\psi \>\<\rho e^{\imath \theta}\psi | \phi \>}{\< \rho e^{\imath \theta}\psi | \rho e^{\imath \theta}\psi \>\< \phi | \phi \>} = \frac{\rho e^{\imath \theta}\rho e^{-\imath \theta}}{\rho e^{-\imath \theta}\rho e^{\imath \theta}}\frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}=\frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}.
+	p(\phi|c \psi) = \frac{\< \phi |c\psi \>\<c\psi | \phi \>}{\< c\psi | c\psi \>\< \phi | \phi \>} = \frac{c c^*}{c^* c}\frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}=\frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}.
 \end{equation}
 
-A quantum state, then, is not represented by a single vector, but an equivalence class of vectors that give the same results under the Born rule. On the continuum, with wavefunctions $\psi(x)$, there is an additional degeneracy. The inner production between two wave functions is given by:
+Moreover, on the continuum the inner product between two wave functions is given by:
 \begin{equation}
 	\< \phi | \psi \> = \int_X \phi^*(x) \psi(x) dx.
 \end{equation}
-Note that the integral does not vary under a change of $\phi(x)$ over over a set of measure zero. For example, if we changed $\psi(x)$ such had it returned zero over the rationals, the inner product wouldn't change, therefore the physical state does not change either. Mathematically, when we write the vector $|\psi \>$ we are actually talking about the set of all functions that are equivalent to the wave function $\psi(x)$. This is not something peculiar to quantum mechanics, as it this happens in classical probability as well. If we have a probability density $\rho(x,p)$, a change over a measure zero set will not change the expectation of any variable. To recap, a quantum state is represented by a ray, which is an equivalence class of vectors, which is an equivalence class of wavefunctions.
+Note that the integral does not vary under a change of $\phi(x)$ or $\psi(x)$ over a set of measure zero. For example, if we changed $\psi(x)$ such that it returned zero over the rationals, the inner product wouldn't change, therefore the physical state does not change either. This is not something peculiar to quantum mechanics, as this happens in classical probability as well. If we have a probability density $\rho(x,p)$, a change over a measure zero set will not change the expectation of any variable.\footnote{Mathematically, the probability density function (PDF) is the Radon-Nikodym derivative of the cumulative distribution function (CDF) with respect to the Lebesgue measure, which is defined up to a measure zero set.} The representation in terms of wave-functions, then, is redundant and we choose those that, for example, are normalized and, to the extent possible, are continuous.
+
+But if the choice of a particular wave-function is redundant, and the linearity of the vector space is, ultimately, addition and scalar multiplication over wave-functions, what part of this linearity is physically faithful and what part is physically redundant?
+
+To test whether the linearity of the Hilbert space is a physical constraint or is a choice of representation, we look for a non-linear transformation that leaves the Born rule invariant. Since the Born rule determines the physics, and the Born rule depends on the modulus of the inner product but not its phase, a non-linear transformation that preserves the modulus of the inner product does not change the physics.
+
+Note that, trivially, an anti-linear map does not preserve the inner product, it conjugates it, but they are already widely known to preserve the Born rule. This is, effectively, exchanging the bras with the kets in the representation. Since the addition is not affected, the non-linearity is minor. We are looking for something that breaks linearity in a more significant way.
+
+Consider a two-state system and let $|z^+\>$ and $|z^-\>$ be two orthonormal state vectors. Every vector in the Hilbert space can be expressed as a linear combination $|\psi\> = c_{+} | z^+ \> + c_{-} | z^- \>$. Now consider the map $m : \mathcal{H} \to \mathcal{H}$ defined by $m(0) \mapsto 0$ and, on non-zero vectors, by
+\begin{equation}
+	\begin{aligned}
+	m(c_{+} | z^+ \> + c_{-} | z^- \>) \mapsto e^{\imath \theta \frac{|c_{+}|^2}{|c_{+}|^2+|c_{-}|^2}} ( c_{+} | z^+ \> + c_{-}  | z^- \>),
+	\end{aligned}
+\end{equation}
+where $\theta \in (0,2\pi)$ is an arbitrary constant. Note that $\frac{|c_{+}|^2}{|c_{+}|^2+|c_{-}|^2} = p(z^+|\psi)$ is the probability of measuring $z^+$ given the state $\psi$. On the Bloch ball, if we put $z^-$ at the bottom and $z^+$ at the top, the expression gives us the normalized vertical height from the bottom to the top of the sphere as seen in Fig. \ref{rp-qm-figNonLinear}. The map is therefore introducing a phase shift that depends on the vertical position. Since it is introducing only a total phase shift, it will map a vector to a physically equivalent vector. The physics will not change, and we do not expect the Born rule to change. However, since the shift is not linear, we will not expect the inner product to be conserved since only linear maps can preserve the inner product.
+
+
+\begin{figure}[h]
+	\centering
+	
+	\begin{tikzpicture}[scale = 1.0, line cap=round, line join=round, >=Triangle]
+		% equator
+		\draw [rotate around={0.:(0.,0.)},dash pattern=on 3pt off 3pt] (0,0) ellipse (2cm and 0.9cm);
+		% axis
+		\draw [lightgray] (0,-2) -- (0,2);
+		\draw [lightgray] (0.82,0.82) -- (-0.82,-0.82);
+		\draw [lightgray] (-2,0) -- (2,0);
+		% main circle
+		\draw(0,0) circle (2cm);
+		\draw [->] (0,0) -- (0.70,1.07);
+		\draw [dashed] (0,1.54) -- (0.7,1.08);
+		\draw [thick] (0,-2) -- (0,1.54);
+		% symbols
+		\draw (0.70,1.07) node[right] {$|\psi\>$};
+		\draw (0,2) node[above] {$|z^+\>$};
+		\draw (0,-2) node[below] {$|z^-\>$};
+		\draw [->] (3,-2) -- node[right] {$p(z^+|\psi)$} (3,+2);
+		\draw (3,-2) node[left] {$0$};
+		\draw (3,2) node[left] {$1$};
+		
+		%\draw (0.4,1.65) node[anchor=north west] {$|\psi\>$};
+		% decoration
+		\scriptsize
+		%\draw [fill] (0,0) circle (1.5pt);
+		%\draw [fill] (0.7,1.1) circle (0.5pt);
+	\end{tikzpicture} 
+	\caption{\label{rp-qm-figNonLinear}Probability is vertical height on the Bloch sphere.}
+\end{figure}
+
+Let's verify all of this in the math. First, the map is collinear, meaning that it maps a ray to another ray. That is:
+\begin{equation}
+	\begin{aligned}
+		m(k(c_{+} | z^+ \> + c_{-} | z^- \>)) &= m(kc_{+} | z^+ \> + k c_{-} | z^- \>) = e^{\imath \theta \frac{|kc_{+}|^2}{|kc_{+}|^2+|kc_{-}|^2}} ( k c_{+} | z^+ \> + k c_{-}  | z^- \>) \\
+		&= k e^{\imath \theta \frac{|k|^2|c_{+}|^2}{|k|^2(|c_{+}|^2+|c_{-}|^2)}} ( c_{+} | z^+ \> + c_{-}  | z^- \>) = k e^{\imath \theta \frac{|c_{+}|^2}{|c_{+}|^2+|c_{-}|^2}} \left( c_{+} | z^+ \> + c_{-}  | z^- \> \right) \\
+		&= k \, m(c_{+} | z^+ \> + c_{-} | z^- \>) \\
+	\end{aligned}
+\end{equation}
+In fact, we can see that each ray is mapped to the same ray. We can verify that the map is not linear. In fact:
+\begin{equation}
+	\begin{aligned}
+		m(|z^+\>) &= e^{\imath \theta} |z^+\> \\
+		m(|z^-\>) &= | z^- \>\\
+		m(|z^+\> + |z^-\>) &= e^{\frac{\imath \theta}{2}}( |z^+\> +  | z^- \>) \neq m(|z^+\>) + m(|z^-\>) = e^{\imath \theta} |z^+\> + | z^- \>.
+	\end{aligned}
+\end{equation}
+The inner product becomes:
+\begin{equation}
+	\begin{aligned}
+		\<m(v) | m(w) \> &= e^{-\imath \theta \frac{|v_{+}|^2}{|v_{+}|^2+|v_{-}|^2}} e^{\imath \theta \frac{|w_{+}|^2}{|w_{+}|^2+|w_{-}|^2}} \< v | w \>,
+	\end{aligned}
+\end{equation}
+which is manifestly not conserved. However, for the Born rule we have:
+\begin{equation}
+	\begin{aligned}
+		\<m(v) | m(v) \> &= e^{-\imath \theta \frac{|v_{+}|^2}{|v_{+}|^2+|v_{-}|^2}} e^{\imath \theta \frac{|v_{+}|^2}{|v_{+}|^2+|v_{-}|^2}} \< v | v \> = \< v | v \> \\
+		p(m(v)|m(w)) &= \frac{\< m(v) | m(w) \>\< m(w) | m(v) \>}{\< m(v) | m(v) \>\< m(w) | m(w) \>} \\
+		&= \frac{e^{-\imath \theta \frac{|v_{+}|^2}{|v_{+}|^2+|v_{-}|^2}} e^{\imath \theta \frac{|w_{+}|^2}{|w_{+}|^2+|w_{-}|^2}} \< v | w \> e^{-\imath \theta \frac{|w_{+}|^2}{|w_{+}|^2+|w_{-}|^2}}e^{\imath \theta \frac{|v_{+}|^2}{|v_{+}|^2+|v_{-}|^2}}  \< w | v \>}{\< v | v \>\< w | w \>} \\
+		&= \frac{\< v | w \>\< w | v \>}{\< v | v \>\< w | w \>} = p(v|w).
+	\end{aligned}
+\end{equation}
+As expected, the Born rule is conserved while the inner product is not.
+
+We should also note that $m$ is not just a bijective map, but also a diffeomorphism. This means that every other relationship in quantum mechanics can be expressed in this non-linear space through $m$. This includes superposition relationships, expectation of observables and time evolution. These relationships would become considerably more complicated for likely no benefit. Therefore, the fact that we use an underlying linear vector space is, technically, not a physical requirement: it's mathematical convenience.
+
+\begin{thrm}[Linearity is a choice]
+	The linearity of the Hilbert space in quantum mechanics is not constrained by the physics. That is, there exist non-linear transformations that preserve the Born rule, making a non-linear representation of quantum states possible.
+\end{thrm}
+
+However, the physics allows such convenient representation. Why is that the case?
+
+
+
+\subsection{Quantum state representations}
+
+
+A quantum state, then, is not represented by a single vector, but an equivalence class of vectors that give the same results under the Born rule. On the continuum, with wavefunctions $\psi(x)$, there is an additional degeneracy.  Mathematically, when we write the vector $|\psi \>$ we are actually talking about the set of all functions that are equivalent to the wave function $\psi(x)$.
+
+  To recap, a quantum state is represented by a ray, which is an equivalence class of vectors, which is an equivalence class of wavefunctions.
 
 Since every ray is a one-dimensional subspace of the vector space, we can associate each state with the projector $\indicator[\psi] = \frac{| \psi \> \< \psi |}{\< \psi | \psi \>}$. Note that the projector is invariant under the choice of representative vector. In fact,
 \begin{equation}
