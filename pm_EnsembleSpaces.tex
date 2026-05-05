@@ -4377,9 +4377,106 @@ Note that the componential closure of a convex set it convex, and therefore the 
 				\draw[thick] (a) -- (b);
 				\draw[dashed] (d) -- (e);
 			\end{tikzpicture}
-			\caption{The set $\{\ens[a], \ens[b]\}$ is componential, but its convex hull (the segment) is not: $\ens[c]$ is on the segment but can be decomposed into $\ens[d]$ and $\ens[e]$, which lie outside.}
+			\caption{The set $\{\ens[a], \ens[b]\}$ is componential, but its convex hull (the segment) is not: $\ens[c]$ is in the convex hull but can be decomposed into $\ens[d]$ and $\ens[e]$, which lie outside of the hull.}
 		\end{figure}
 	\end{remark}
+\end{mathSection}
+
+\begin{mathSection}
+	\begin{prop}
+		Every $\ortho$-subspace is facial.
+	\end{prop}
+	
+	\begin{proof}
+		Let $X \subseteq \Ens$ be an $\ortho$-subspace, that is $X = (X^\ortho)^\ortho$.
+		
+		To show that $X$ is componential, let $\ens \in X$ and $\ens = p\ens[a] + \bar{p}\ens[b]$ for some $p \in (0,1)$ and $\ens[a], \ens[b] \in \Ens$. Let $\ens[f] \in X^\ortho$. Since $\ens \in X = (X^\ortho)^\ortho$, we have $\ens \ortho \ens[f]$. Since mixtures preserve orthogonality and $\ens = p\ens[a] + \bar{p}\ens[b]$, we have $\ens[a] \ortho \ens[f]$ and $\ens[b] \ortho \ens[f]$. Since this holds for all $\ens[f] \in X^\ortho$, we have $\ens[a], \ens[b] \in (X^\ortho)^\ortho = X$. Therefore $X$ is componential.
+		
+		To show that $X$ is convex, let $\ens[a], \ens[b] \in X$ and $p \in [0,1]$. Let $\ens[f] \in X^\ortho$. Since $\ens[a] \ortho \ens[f]$ and $\ens[b] \ortho \ens[f]$, by mixtures preserve orthogonality, $p\ens[a] + \bar{p}\ens[b] \ortho \ens[f]$. Since this holds for all $\ens[f] \in X^\ortho$, we have $p\ens[a] + \bar{p}\ens[b] \in (X^\ortho)^\ortho = X$. Therefore $X$ is convex.
+		
+		Since $X$ is both convex and componential, it is facial.
+	\end{proof}
+	
+	\begin{prop}
+		Every $\separate$-subspace is componential.
+	\end{prop}
+	
+	\begin{proof}
+		Let $X \subseteq \Ens$ be a $\separate$-subspace, that is $X = (X^\separate)^\separate$. Let $\ens \in X$ and $\ens = p\ens[a] + \bar{p}\ens[b]$ for some $p \in (0,1)$ and $\ens[a], \ens[b] \in \Ens$. Let $\ens[f] \in X^\separate$. Since $\ens \in X = (X^\separate)^\separate$, we have $\ens \separate \ens[f]$. Since separateness extends to all mixtures (\ref{pm-es-separateExtendsMixtures}) and $\ens = p\ens[a] + \bar{p}\ens[b]$, we have $\ens[a] \separate \ens[f]$ and $\ens[b] \separate \ens[f]$. Since this holds for all $\ens[f] \in X^\separate$, we have $\ens[a], \ens[b] \in (X^\separate)^\separate = X$. Therefore $X$ is componential.
+	\end{proof}
+	
+	\begin{prop}
+		A $\separate$-subspace is not necessarily convex, and therefore not necessarily facial.
+	\end{prop}
+	
+	\begin{proof}
+		Let $\Ens$ be a two-dimensional quantum ensemble space (i.e. a Bloch ball). Let $\ens[a]$ be a pure state and consider $\{ \ens[a]\}^\separate$. Since $\{\ens[a]\}^\separate = ((\{\ens[a]\}^\separate)^\separate)^\separate$, $\{ \ens[a]\}^\separate$ is a $\separate$-subspace. It will contain only extreme points different from $\ens[a]$, that is the surface of the sphere without a point. This means that $\{ \ens[a]\}^\separate$ is a $\separate$-subspace but is not convex.
+	\end{proof}
+	
+	\begin{coro}
+		The $\separate$-subspaces are facial if and only if mixtures preserve separateness. That is, the following are equivalent:
+		\begin{enumerate}
+			\item $\Ens$ is monodecomposable
+			\item mixtures preserve separateness in $\Ens$
+			\item every $\separate$-subspace is convex
+			\item every $\separate$-subspace is facial
+		\end{enumerate}
+	\end{coro}
+	
+	\begin{proof}
+		The equivalence of 1 and 2 was shown previously. 
+		
+		$2 \implies 3$: Let $X = (X^\separate)^\separate$ be a $\separate$-subspace and let $\ens[a], \ens[b] \in X$. Let $\ens[f] \in X^\separate$. Then $\ens[a] \separate \ens[f]$ and $\ens[b] \separate \ens[f]$. Since mixtures preserve separateness, $p\ens[a] + \bar{p}\ens[b] \separate \ens[f]$. Since this holds for all $\ens[f] \in X^\separate$, we have $p\ens[a] + \bar{p}\ens[b] \in (X^\separate)^\separate = X$. Therefore $X$ is convex.
+		
+		$3 \implies 4$: Since $\separate$-subspaces are always componential, convexity implies they are facial.
+		
+		$4 \implies 3$: Facial implies convex by definition.
+		
+		$3 \implies 2$: Suppose every $\separate$-subspace is convex. Let $\ens \separate \ens[a]$ and $\ens \separate \ens[b]$. Then $\ens[a], \ens[b] \in \{\ens\}^\separate$. Since $\{\ens\}^\separate = ((\{\ens\}^\separate)^\separate)^\separate$ is a $\separate$-subspace, it is convex by assumption, and therefore $p\ens[a] + \bar{p}\ens[b] \in \{\ens\}^\separate$. This means $\ens \separate p\ens[a] + \bar{p}\ens[b]$. Therefore mixtures preserve separateness.
+	\end{proof}
+\end{mathSection}
+
+Summary: Assume WLOG $F(\ens_1) \geq F(\ens_2)$. For any $\ens' = \alpha\ens[a] + \beta\ens_1 + \gamma\ens_2 \in \hull({\ens[a], \ens_1, \ens_2})$, write $\ens' = (\alpha+\gamma)\ens[d] + \beta\ens_1$ where $\ens[d] = \frac{\alpha}{\alpha+\gamma}\ens[a] + \frac{\gamma}{\alpha+\gamma}\ens_2$. Since $F(\ens[a]) \leq F(\ens_1)$ and $F(\ens_2) \leq F(\ens_1)$, we have $F(\ens[d]) \leq F(\ens_1)$. By $\ens_1 \in S_f$: $F(\face({\ens[d], \ens_1})) \subseteq (-\infty, f]$. Since $\ens' \in \hull({\ens[d], \ens_1})$, every component of $\ens'$ is in $\face({\ens[d], \ens_1})$ and therefore has $F \leq f$.
+Since this holds for all $\ens' \in \hull({\ens[a], \ens_1, \ens_2})$, we have $F(\face({\ens[a], \ens_1, \ens_2})) = F(\component(\hull({\ens[a], \ens_1, \ens_2}))) \subseteq (-\infty, f]$.
+And since $\face({\ens[a], \ens}) = \face({\ens[a], \ens_1, \ens_2})$, we have $F(\face({\ens[a], \ens})) \subseteq (-\infty, f]$. Therefore $\ens \in S_f$.
+
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\Ens$ be an ensemble space and $F : \Ens \to \mathbb{R}$ a statistical quantity. An ensemble $\ens \in \Ens$ is \textbf{supported by $(-\infty, f]$ of $F$} if for all $\ens[a] \in \Ens$ with $F(\ens[a]) \leq F(\ens)$, we have $F(\face(\{\ens[a], \ens\})) \subseteq (-\infty, f]$. The set of all ensembles supported by $(-\infty, f]$ of $F$ is noted $S_f^F$, or simply $S_f$ when $F$ is clear from context.
+	\end{defn}
+	
+	\begin{prop}
+		The set $S_f$ is componential.
+	\end{prop}
+	
+	\begin{proof}
+		Let $\ens \in S_f$ and $\ens = p\ens[c] + \bar{p}\ens[b]$ for some $p \in (0,1)$ and $\ens[c], \ens[b] \in \Ens$. We show that $\ens[c] \in S_f$. Let $\ens[a] \in \Ens$ with $F(\ens[a]) \leq F(\ens[c])$. We need to show that $F(\face(\{\ens[a], \ens[c]\})) \subseteq (-\infty, f]$.
+		
+		Let $\ens[d] = p\ens[a] + \bar{p}\ens[b]$. By linearity of $F$ and $F(\ens[a]) \leq F(\ens[c])$:
+		\begin{equation}
+			F(\ens[d]) = pF(\ens[a]) + \bar{p}F(\ens[b]) \leq pF(\ens[c]) + \bar{p}F(\ens[b]) = F(\ens).
+		\end{equation}
+		Since $\ens[d] = p\ens[a] + \bar{p}\ens[b]$, $\ens[a]$ is a component of $\ens[d]$ and therefore $\ens[a] \in \face(\{\ens[d]\}) \subseteq \face(\{\ens[d], \ens\})$. Since $\ens = p\ens[c] + \bar{p}\ens[b]$, $\ens[c]$ is a component of $\ens$ and therefore $\ens[c] \in \face(\{\ens\}) \subseteq \face(\{\ens[d], \ens\})$. Since $\face(\{\ens[d], \ens\})$ is a face containing both $\ens[a]$ and $\ens[c]$, by minimality $\face(\{\ens[a], \ens[c]\}) \subseteq \face(\{\ens[d], \ens\})$.
+		
+		Since $F(\ens[d]) \leq F(\ens)$ and $\ens \in S_f$, we have $F(\face(\{\ens[d], \ens\})) \subseteq (-\infty, f]$. Therefore $F(\face(\{\ens[a], \ens[c]\})) \subseteq F(\face(\{\ens[d], \ens\})) \subseteq (-\infty, f]$.
+	\end{proof}
+
+	\begin{prop}
+		The set $S_f$ is convex.
+	\end{prop}
+	
+	\begin{proof}
+		Let $\ens_1, \ens_2 \in S_f$ and $\ens = q\ens_1 + \bar{q}\ens_2$ for some $q \in [0,1]$. We show that $\ens \in S_f$. Let $\ens[a] \in \Ens$ with $F(\ens[a]) \leq F(\ens)$. We need to show that $F(\face(\{\ens[a], \ens\})) \subseteq (-\infty, f]$.
+		
+		Since $\ens_1$ and $\ens_2$ are components of $\ens$, we have $\ens_1, \ens_2 \in \face(\{\ens\}) \subseteq \face(\{\ens[a], \ens\})$. Therefore $\face(\{\ens[a], \ens_1, \ens_2\}) \subseteq \face(\{\ens[a], \ens\})$. Conversely, since $\ens \in \hull(\{\ens_1, \ens_2\}) \subseteq \face(\{\ens[a], \ens_1, \ens_2\})$, we have $\face(\{\ens[a], \ens\}) \subseteq \face(\{\ens[a], \ens_1, \ens_2\})$. Therefore $\face(\{\ens[a], \ens\}) = \face(\{\ens[a], \ens_1, \ens_2\}) = \component(\hull(\{\ens[a], \ens_1, \ens_2\}))$.
+		
+		Without loss of generality, assume $F(\ens_1) \geq F(\ens_2)$. Since $F(\ens[a]) \leq F(\ens) \leq F(\ens_1)$ and $F(\ens_2) \leq F(\ens_1)$, any convex combination of $\ens[a]$ and $\ens_2$ has $F$-value at most $F(\ens_1)$.
+		
+		Let $\ens' = \alpha\ens[a] + \beta\ens_1 + \gamma\ens_2 \in \hull(\{\ens[a], \ens_1, \ens_2\})$ with $\alpha + \beta + \gamma = 1$. We can rewrite $\ens' = \beta\ens_1 + \bar{\beta}\ens[d]$ where $\ens[d] = \frac{\alpha}{\bar{\beta}}\ens[a] + \frac{\gamma}{\bar{\beta}}\ens_2$ is a convex combination of $\ens[a]$ and $\ens_2$. Therefore $F(\ens[d]) \leq F(\ens_1)$. Since $\ens_1 \in S_f$, we have $F(\face(\{\ens[d], \ens_1\})) \subseteq (-\infty, f]$. Since $\ens' \in \hull(\{\ens[d], \ens_1\}) \subseteq \face(\{\ens[d], \ens_1\})$, every component of $\ens'$ is in $\face(\{\ens[d], \ens_1\})$ and therefore has $F$-value at most $f$.
+		
+		Since this holds for all $\ens' \in \hull(\{\ens[a], \ens_1, \ens_2\})$, we have $F(\component(\hull(\{\ens[a], \ens_1, \ens_2\}))) \subseteq (-\infty, f]$. Therefore $F(\face(\{\ens[a], \ens\})) \subseteq (-\infty, f]$ and $\ens \in S_f$.
+	\end{proof}
 \end{mathSection}
 
 It may be possible if we use the lattice of affine sets (called flats in the definitions below). 
