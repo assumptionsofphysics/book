@@ -7,6 +7,7 @@
 %\DeclareMathOperator{\cospan}{cospan}
 \newcommand\mix{\mathrm{mix}}
 \newcommand\component{\mathrm{comp}}
+\newcommand\face{\mathrm{face}}
 \newcommand\cospan{\mathrm{cospan}}
 \newcommand\dist{\mathrm{dist}}
 \newcommand\hull{\mathrm{hull}}
@@ -4180,7 +4181,208 @@ Part of an original attempt to square measure and topology, sets with a nowhere 
 
 \openproblem{Spectrum of a quantity}{pm-es-quantitySpectrum}{Ensemble spaces}{Spectral theory, Topological vector spaces, Order theory}{}{We are looking for a definition of the spectrum of a quantity (i.e. linear functional) that can be defined for a general ensemble space (i.e. convex space). It would already be helpful to establish whether the entropic structure is required, or whether the convex structure is sufficient.}
 
-We leave here the latest attempt, more for inspiration and reference.
+The main open issue is to understand whether the spectrum \textbf{requires} a notion of entropy or not. In both classical and quantum mechanics, given a quantity $f$, every Borel set $A \subseteq \mathbb{R}$ of $f$ corresponds to a subspace of ensembles that is orthogonal to the subspace corresponding to $A^{\complement}$. For example, in classical mechanics it would correspond to all measures supported by $A$ and in quantum mechanics all density operators for which the eigenspace for $1$ is a subspace of $A$. We could therefore start by taking sets like $(-\infty, a)$ and $(-\infty, a]$ and find the biggest orthogonal subspace that contains only ensembles with expectation $<a$ or $\leq a$. Subspaces for all other Borel sets can be recovered closing the lattice. For each subspace $A$ in the lattice, we can then define a statistical variable that is one for all elements of $A$ and zero for all elements of $A^{\ortho}$. This recovers the probability. This type of definition would recover the notion in classical and quantum mechanics, but would only work on orthogonally decomposable ensemble spaces.
+
+Below is outlined an idea for extending the notion without requiring the lattice of orthogonal subspaces. The idea is that orthogonal subspaces are affine sets and include all the components. Maybe those properties are enough to define the lattice of supported ensembles.
+
+Let us first define a component set as one that includes all the components of its elements. We can then create a closure operation that, given a set, returns the set of all its components. This, again, gives us an intersection structure.
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is \textbf{componential} if it contains all components of its elements. That is, if $\ens \in A$ and $\ens = p\ens[a] + \bar{p}\ens[b]$ for some $p \in (0,1)$ and $\ens[a], \ens[b] \in \Ens$, then $\ens[a], \ens[b] \in A$.
+	\end{defn}
+	
+	\begin{defn}
+		Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{componential closure} of $A$, noted $\component(A)$, is the set of all components of elements of $A$. That is, $\component(A) = \{ \ens[a] \in \Ens \mid \exists\, \ens \in A,\, \ens[b] \in \Ens,\, p \in (0,1] \text{ s.t. } \ens = p\ens[a] + \bar{p}\ens[b] \}$.
+	\end{defn}
+	\begin{prop}
+		The componential closure $\component$ is a closure operator. That is:
+		\begin{enumerate}
+			\item \textbf{extensive}: $A \subseteq \component(A)$
+			\item \textbf{increasing}: $A \subseteq B \implies \component(A) \subseteq \component(B)$
+			\item \textbf{idempotent}: $\component(\component(A)) = \component(A)$
+		\end{enumerate}
+	\end{prop}
+	
+	\begin{proof}
+		1. Every element of $A$ is a component of itself by idempotence of mixing ($\ens = p\ens + \bar{p}\ens$). Therefore $A \subseteq \component(A)$.
+		
+		2. Let $\ens[a] \in \component(A)$. Then there exists $\ens \in A$ such that $\ens = p\ens[a] + \bar{p}\ens[b]$. Since $A \subseteq B$, $\ens \in B$ and therefore $\ens[a] \in \component(B)$.
+		
+		3. Let $\ens[c] \in \component(\component(A))$. Then there exists $\ens[a] \in \component(A)$ such that $\ens[a] = \lambda\ens[c] + \bar{\lambda}\ens[d]$ for some $\lambda \in (0,1]$ and $\ens[d] \in \Ens$. Since $\ens[a] \in \component(A)$, there exists $\ens \in A$ such that $\ens = p\ens[a] + \bar{p}\ens[b]$ for some $p \in (0,1]$ and $\ens[b] \in \Ens$. Substituting, $\ens = p\lambda\ens[c] + p\bar{\lambda}\ens[d] + \bar{p}\ens[b]$, which means $\ens[c]$ is a component of $\ens \in A$. Therefore $\ens[c] \in \component(A)$.
+	\end{proof}
+	
+	\begin{coro}
+		A subset $A \subseteq \Ens$ is componential if and only if $A = \component(A)$.
+	\end{coro}
+	
+	\begin{proof}
+		Let $A \subseteq \Ens$ be componential. By extensivity, $A \subseteq \component(A)$. By definition, every component of an element of $A$ is in $A$, therefore $\component(A) \subseteq A$. Thus $A = \component(A)$. Conversely, if $A = \component(A)$, then $A$ contains all components of its elements and is therefore componential.
+	\end{proof}
+	
+	\begin{prop}
+		The set of all componential sets of $\Ens$, ordered by inclusion, is a topped $\bigcap$-structure and therefore a complete lattice.
+	\end{prop}
+	
+	\begin{proof}
+		Since $\component$ is a closure operator, the set of all componential sets, ordered by inclusion, is a topped $\bigcap$-structure and therefore a complete lattice.
+	\end{proof}
+\end{mathSection}
+
+We can now define a face, like in convex geometry, to be a set that is both convex and has all its components. We also define a notion of facial closure, that, given a set, returns all the ensembles generated by taking affine combinations and their components.
+
+\begin{mathSection}
+	\begin{defn}
+		Let $\Ens$ be an ensemble space. A \textbf{facial} set ( or a \textbf{face}) is a convex componential set. That is, a subset $A \subseteq \Ens$ that is both convex and componential.
+	\end{defn}
+	
+	\begin{defn}
+		Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{facial hull} of $A$, noted $\face(A)$, is the smallest facial set that contains $A$.
+	\end{defn}
+	
+	\begin{prop}
+		The facial hull $\face$ is a closure operator. That is:
+		\begin{enumerate}
+			\item \textbf{extensive}: $A \subseteq \face(A)$
+			\item \textbf{increasing}: $A \subseteq B \implies \face(A) \subseteq \face(B)$
+			\item \textbf{idempotent}: $\face(\face(A)) = \face(A)$
+		\end{enumerate}
+	\end{prop}
+	
+	\begin{proof}
+		Since the intersection of facial sets is facial (intersections preserve both convexity and the componential property), the set of all facial sets containing $A$ is non-empty (as $\Ens$ is facial) and its intersection is the smallest facial set containing $A$. The three closure properties follow from the standard argument for intersection-defined closures.
+	\end{proof}
+	
+	\begin{prop}
+		The set of all facial sets of $\Ens$, ordered by inclusion, is a topped $\bigcap$-structure and therefore a complete lattice.
+	\end{prop}
+	
+	\begin{proof}
+		Since $\face$ is a closure operator, the set of all facial sets, ordered by inclusion, is a topped $\bigcap$-structure and therefore a complete lattice.
+	\end{proof}
+	
+\end{mathSection}
+
+ Interestingly, these are also affine, which means that the notions of convex component set and affine component set coincide.
+
+\begin{mathSection}
+	
+	\begin{prop}
+		Every facial set is an affine set.
+	\end{prop}
+	
+	\begin{proof}
+		Let $A \subseteq \Ens$ be facial and let $\ens[a], \ens[b] \in A$. Suppose $\ens = r\ens[a] + \bar{r}\ens[b]$ exists in $\Ens$ for some $r \in \mathbb{R}$ with $r + \bar{r} = 1$. If $r \in [0,1]$, then $\ens$ is a convex combination of $\ens[a]$ and $\ens[b]$, so $\ens \in A$ by convexity. If $r > 1$, then $\ens[a] = \frac{1}{r}\ens + \frac{-\bar{r}}{r}\ens[b]$, which means $\ens[a]$ is a convex combination of $\ens$ and $\ens[b]$ with $\frac{1}{r} \in (0,1)$. Therefore $\ens$ is a component of $\ens[a] \in A$, and since $A$ is componential, $\ens \in A$. If $r < 0$, then $\bar{r} > 1$ and $\ens[b] = \frac{1}{\bar{r}}\ens + \frac{-r}{\bar{r}}\ens[a]$, which means $\ens$ is a component of $\ens[b] \in A$, and therefore $\ens \in A$.
+	\end{proof}
+	
+	\begin{coro}
+		The notions of convex componential set and affine componential set coincide. That is, a set is facial if and only if it is both affine and componential.
+	\end{coro}
+	
+	\begin{proof}
+		Every convex componential set is affine by the previous proposition, and therefore an affine componential set. Conversely, every affine componential set is convex since affine sets are convex.
+	\end{proof}
+\end{mathSection}
+
+Note that the componential closure of a convex set it convex, and therefore the facial closure is the componential closure of the convex hull. The converse does not hold: the convex hull of a componential set is not, in general, componential.
+
+\begin{mathSection}
+	\begin{prop}
+		The componential closure of a convex set is convex, and therefore facial.
+	\end{prop}
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			%\draw [help lines] (0,0) grid (10,5);
+			
+			\coordinate (a) at (-0.5,3);
+			\coordinate (b) at (4,2.5);
+			\coordinate (c) at (0.7,0);
+			\coordinate (dp) at (3,0);
+			\coordinate (d) at ($(b)!1.3!(dp)$);
+			\coordinate (e1) at ($(a)!0.4!(c)$);
+			\coordinate (e2) at ($(b)!0.4!(dp)$);
+			\coordinate (e3) at ($(e1)!0.6!(e2)$);
+			\coordinate (pab) at ($(a)!0.6!(b)$);
+			\coordinate (pcdp) at ($(c)!0.6!(dp)$);
+			
+			% Oval around e1, e2, e3 to represent A
+			\draw[fill=ensembleFill, thick, rounded corners=10pt] 
+			($(e1)+(-0.6,-0.5)$) -- ($(e1)+(-0.6,0.5)$) -- ($(e2)+(0.6,0.5)$) -- ($(e2)+(0.6,-0.5)$) -- cycle;
+			\node at ($(e2)+(0.8,0)$) {$A$};
+			
+			\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
+			\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
+			\filldraw [black] (c) circle (1pt) node[below left] {$\ens[c]$};
+			\filldraw [black] (d) circle (1pt) node[below] {$\ens[d]$};
+			\filldraw [black] (dp) circle (1pt) node[below right] {$\ens[d']$};
+			\filldraw [black] (e1) circle (1pt) node[left] {$\ens_1$};
+			\filldraw [black] (e2) circle (1pt) node[right] {$\ens_2$};
+			\filldraw [black] (e3) circle (1pt) node[above right] {$\ens_3$};
+			\filldraw [black] (pab) circle (1pt) node[above] {$p\ens[a]+\bar{p}\ens[b]$};
+			\filldraw [black] (pcdp) circle (1pt) node[below] {$p\ens[c]+\bar{p}\ens[d']$};
+			
+			\draw[thick] (a) -- (c);
+			\draw[thick] (b) -- (dp);
+			\draw[thick] (e1) -- (e2);
+			\draw[dashed] (pab) -- (pcdp);
+			\draw[dotted] (b) -- (d);
+		\end{tikzpicture}
+	\end{figure}
+	
+	\begin{proof}
+		Let $A \subseteq \Ens$ be convex and let $\ens[a], \ens[b] \in \component(A)$. Then there exist $\ens_1, \ens_2 \in A$ such that $\ens_1 = \lambda_1 \ens[a] + \bar{\lambda}_1 \ens[c]$ and $\ens_2 = \lambda_2 \ens[b] + \bar{\lambda}_2 \ens[d]$ for some $\lambda_1, \lambda_2 \in (0,1]$ and $\ens[c], \ens[d] \in \Ens$.
+		
+		Without loss of generality, suppose $\lambda_1 \leq \lambda_2$. Since $\ens[b]$ is a component of $\ens_2$ with coefficient $\lambda_2 \geq \lambda_1$, we can rewrite $\ens_2 = \lambda_1 \ens[b] + \bar{\lambda}_1 \ens[d']$ where $\ens[d'] = \frac{\lambda_2 - \lambda_1}{\bar{\lambda}_1} \ens[b] + \frac{\bar{\lambda}_2}{\bar{\lambda}_1} \ens[d]$ is a convex combination and therefore an element of $\Ens$.
+		
+		Now let $p \in [0,1]$ and consider $\ens_3 = p \ens_1 + \bar{p} \ens_2 \in A$ by convexity. Expanding:
+		\begin{equation}
+			\begin{aligned}
+				\ens_3 &= p(\lambda_1 \ens[a] + \bar{\lambda}_1 \ens[c]) + \bar{p}(\lambda_1 \ens[b] + \bar{\lambda}_1 \ens[d']) \\
+				&= \lambda_1(p \ens[a] + \bar{p} \ens[b]) + \bar{\lambda}_1(p \ens[c] + \bar{p} \ens[d']).
+			\end{aligned}
+		\end{equation}
+		Therefore $p\ens[a] + \bar{p}\ens[b]$ is a component of $\ens_3 \in A$, which means $p\ens[a] + \bar{p}\ens[b] \in \component(A)$. Since $\component(A)$ is convex and componential (by idempotence), it is facial.
+	\end{proof}
+	
+	\begin{coro}
+		The facial hull of a set is the componential closure of its convex hull. That is, $\face(A) = \component(\hull(A))$.
+	\end{coro}
+	
+	\begin{proof}
+		Since $\hull(A)$ is convex, $\component(\hull(A))$ is facial by the previous proposition. Since $A \subseteq \hull(A) \subseteq \component(\hull(A))$, and $\face(A)$ is the smallest facial set containing $A$, we have $\face(A) \subseteq \component(\hull(A))$. Conversely, since $\face(A)$ is facial and contains $A$, it is convex and contains $A$, therefore $\hull(A) \subseteq \face(A)$. Since $\face(A)$ is componential and contains $\hull(A)$, we have $\component(\hull(A)) \subseteq \face(A)$. Therefore $\face(A) = \component(\hull(A))$.
+	\end{proof}
+	
+	\begin{remark}
+		The convex hull of a componential set is not necessarily componential. For example, let $\Ens$ be a disc and let $A = \{\ens[a], \ens[b]\}$ be two extreme points on the boundary. The set $A$ is componential (vacuously, since extreme points have no non-trivial components). However, $\hull(A)$ is the segment between them, which is not componential: any point $\ens[c]$ in the interior of the segment can be decomposed into components that lie outside the segment.
+		
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (center) at (2,1.5);
+				\def\radius{1.25}
+				\draw [fill=ensembleFill, thick] (center) circle (\radius);
+				
+				\coordinate (a) at ($(center)+\radius*({cos(150)},{sin(150)})$);
+				\coordinate (b) at ($(center)+\radius*({cos(10)},{sin(10)})$);
+				\coordinate (c) at ($(a)!0.5!(b)$);
+				\coordinate (d) at ($(center)+\radius*({cos(69)},{sin(69)})$);
+				\coordinate (e) at ($(center)+\radius*({cos(238)},{sin(238)})$);
+				
+				\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
+				\filldraw [black] (b) circle (1pt) node[right] {$\ens[b]$};
+				\filldraw [black] (c) circle (1pt) node[below right] {$\ens[c]$};
+				\filldraw [black] (d) circle (1pt) node[above] {$\ens[d]$};
+				\filldraw [black] (e) circle (1pt) node[below] {$\ens[e]$};
+				\draw[thick] (a) -- (b);
+				\draw[dashed] (d) -- (e);
+			\end{tikzpicture}
+			\caption{The set $\{\ens[a], \ens[b]\}$ is componential, but its convex hull (the segment) is not: $\ens[c]$ is on the segment but can be decomposed into $\ens[d]$ and $\ens[e]$, which lie outside.}
+		\end{figure}
+	\end{remark}
+\end{mathSection}
+
+It may be possible if we use the lattice of affine sets (called flats in the definitions below). 
 
 \begin{defn}
 	Let $\Ens$ be an ensemble space and let $F : \Ens \to \mathbb{R}$ be a statistical quantity. Let $x,y \in \mathbb{R}$ such that $x \leq y$. We say $\ens[a]$ is \textbf{within $[x,y]$ of $F$} if $F(\ens) \in [x,y]$ for every component $\ens$ of $\ens[a]$. Analogous definitions apply for intervals bounded only on one side.
