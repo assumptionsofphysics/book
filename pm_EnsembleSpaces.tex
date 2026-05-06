@@ -4179,13 +4179,19 @@ Part of an original attempt to square measure and topology, sets with a nowhere 
 \end{mathSection}
 
 
-\openproblem{Spectrum of a quantity}{pm-es-quantitySpectrum}{Ensemble spaces}{Spectral theory, Topological vector spaces, Order theory}{}{We are looking for a definition of the spectrum of a quantity (i.e. linear functional) that can be defined for a general ensemble space (i.e. convex space). It would already be helpful to establish whether the entropic structure is required, or whether the convex structure is sufficient.}
+\openproblem{Spectrum of a quantity}{pm-es-quantitySpectrum}{Ensemble spaces}{Spectral theory, Topological vector spaces, Order theory}{}{We are looking for a definition of the spectrum of a statistical quantity (i.e. a continuous affine functional) that can be defined for a general ensemble space (i.e. convex space). The definition should recover the classical spectrum (i.e. Borel sets of a random variable  and the corresponding subspaces of distributions supported on those sets) and the quantum spectrum (eigenvalues and eigenspaces of observables).}
 
-The main open issue is to understand whether the spectrum \textbf{requires} a notion of entropy or not. In both classical and quantum mechanics, given a quantity $f$, every Borel set $A \subseteq \mathbb{R}$ of $f$ corresponds to a subspace of ensembles that is orthogonal to the subspace corresponding to $A^{\complement}$. For example, in classical mechanics it would correspond to all measures supported by $A$ and in quantum mechanics all density operators for which the eigenspace for $1$ is a subspace of $A$. We could therefore start by taking sets like $(-\infty, a)$ and $(-\infty, a]$ and find the biggest orthogonal subspace that contains only ensembles with expectation $<a$ or $\leq a$. Subspaces for all other Borel sets can be recovered closing the lattice. For each subspace $A$ in the lattice, we can then define a statistical variable that is one for all elements of $A$ and zero for all elements of $A^{\ortho}$. This recovers the probability. This type of definition would recover the notion in classical and quantum mechanics, but would only work on orthogonally decomposable ensemble spaces.
+In both classical and quantum mechanics, given a quantity $F : \Ens \to \mathbb{R}$, every Borel set $A \subseteq \mathbb{R}$ is associated to an $\ortho$-subspace $S(A)$ of ensembles. Its complement $A^{\complement}$ is associated to the orthogonal subspace $S(A^{\complement}) = S(A)^\ortho$. For example, in classical mechanics $S(A)$ would correspond to all measures supported by $A$ and in quantum mechanics all density operators for which the eigenspace for $1$ is a subspace of $S(A)$. In the simplest case of a zero-one variable (i.e. effect/indicator functions/projectors), $S(\{0\})$ contains all ensembles that have zero expectation and $S(\{1\})$ contains all ensembles that have expectation one. Probability distributions can be recovered by such variables for each Borel set.
 
-Below is outlined an idea for extending the notion without requiring the lattice of orthogonal subspaces. The idea is that orthogonal subspaces are affine sets and include all the components. Maybe those properties are enough to define the lattice of supported ensembles.
+The first open problem is defining, for a general ensemble space and for a general statistical variable, what is the exact relationship between $S(A)$ and $S(A^{\complement})$ and what does it mean that the other elements of the space have an expectation ``in between.'' For an orthogonally decomposable space and for a zero-one variable, the issue is easy because it is clear that the two orthogonal subspaces take the extreme values. If we relax these conditions, it is unclear what definition will work.
 
-Let us first define a component set as one that includes all the components of its elements. We can then create a closure operation that, given a set, returns the set of all its components. This, again, gives us an intersection structure.
+The second open problem is understanding whether the notion of orthogonality is required or not. Mathematically, it may be natural to look for opposite faces (i.e. affine set that contain all the components), since orthogonal subspaces are faces. However, this may create problems. Consider, in fact, an ensemble space shaped like a square. If the lines at constant value for a statistical variable are diagonal, intermediate value would have two faces on one side instead of one. Note that this case is effectively excluded by requiring orthogonal decomposability, as one cannot consistently put an entropy function for which all extreme points are orthogonal to each other.
+
+Therefore, we do not exclude the idea that there may be a physical requirement on the notion of orthogonality which may make this extension not work. For example, an effect can turn into a probability value of an experiment if and only if the outcomes are mutually exclusive. If they are not, we cannot have a clear association between the two subspaces and the two distinguishable outcome of an experiment. The question is whether we may still be able to talk about statistical quantities in these case. 
+
+Below we leave the definition of componentiality (i.e. the property of a set of ensembles to have all its components) and of faces (i.e. affine sets that are also componential) as these clearly play a role in a potential generalization. We also show a couple of attempts at this generalization and why they didn't work.
+
+Let as define a set to be componential if it contains all the components of its elements. As in the case of convex and affine sets, this natually leads to a closure operation.
 
 \begin{mathSection}
 	\begin{defn}
@@ -4382,6 +4388,8 @@ Note that the componential closure of a convex set it convex, and therefore the 
 	\end{remark}
 \end{mathSection}
 
+Lastly, we show that every $\ortho$-subspace is a facial set, while $\separate$-subspaces are componential but not necessarily convex. In fact, they are convex if and only if we are in the classical case.
+
 \begin{mathSection}
 	\begin{prop}
 		Every $\ortho$-subspace is facial.
@@ -4479,60 +4487,38 @@ And since $\face({\ens[a], \ens}) = \face({\ens[a], \ens_1, \ens_2})$, we have $
 	\end{proof}
 \end{mathSection}
 
-It may be possible if we use the lattice of affine sets (called flats in the definitions below). 
+We now list a couple of attempt of defining ensembles supported by a Borel set that ultimately didn't work.
 
-\begin{defn}
-	Let $\Ens$ be an ensemble space and let $F : \Ens \to \mathbb{R}$ be a statistical quantity. Let $x,y \in \mathbb{R}$ such that $x \leq y$. We say $\ens[a]$ is \textbf{within $[x,y]$ of $F$} if $F(\ens) \in [x,y]$ for every component $\ens$ of $\ens[a]$. Analogous definitions apply for intervals bounded only on one side.
-	
-	We say $\ens[a] \in \Ens$ is \textbf{supported by $[x,y]$ of $F$} if:
-	\begin{enumerate}
-		\item $\ens[a]$ is within $[x,y]$ of $F$
-		\item let $\ens$ be in the flat generated by $\ens[a]$ and all ensembles within $(-\infty,x]$, then $F(\ens) \leq F(\ens[a])$
-		\item let $\ens$ be in the flat generated by $\ens[a]$ and all ensembles within $[y, +\infty)$, then $F(\ens[a]) \leq F(\ens)$.
-	\end{enumerate}
-	Analogous definition applies for intervals bounded only on one side.
-	
-	An \textbf{eigenstate} of $F$ is an ensemble $\ens[a] \in \Ens$ that is supported by a singleton $U=[a,a]$, where $a \in \mathbb{R}$ is called the respective \textbf{eigenvalue}. 
-\end{defn}
+\begin{mathSection}
+	\begin{remark}[Failed attempt 1: support via affine hull]
+		An earlier attempt defined an ensemble $\ens[a]$ to be \textbf{supported by $(-\infty, f]$ of $F$} if:
+		\begin{enumerate}
+			\item $\ens[a]$ is within $(-\infty, f]$ of $F$, meaning $F(\ens') \leq f$ for all components $\ens'$ of $\ens[a]$
+			\item for all $\ens$ in $\ahull(\{\ens[a]\} \cup W_{[f, +\infty)})$, we have $F(\ens[a]) \leq F(\ens)$
+		\end{enumerate}
+		where $W_{[f, +\infty)} = \{\ens \in \Ens \mid F(\ens') \geq f \text{ for all components } \ens' \text{ of } \ens\}$ is the set of all ensembles within $[f, +\infty)$.
+		
+		The idea behind condition 2 is to ensure that $\ens[a]$ does not extend in the direction of increasing $F$: when taking affine combinations with ensembles entirely above $f$, the value of $F$ can only increase. This would select ensembles that are ``pushed against the boundary'' in the direction of decreasing $F$.
+		
+		However, this definition is too restrictive in the classical case. Consider the discrete classical ensemble space over three points $\{x_0, x_1, x_2\}$ with $F(x_0) = 0$, $F(x_1) = 1$, $F(x_2) = 2$, and take $f = 1$. The expected result is that all distributions supported on $\{x_0, x_1\}$ (the edge $x_0 x_1$) are supported by $(-\infty, 1]$. However, let $\ens[a] = \frac{1}{2}x_0 + \frac{1}{2}x_1$ with $F(\ens[a]) = \frac{1}{2}$. We have $W_{[1, +\infty)}$ = edge $x_1 x_2$ (distributions supported on $\{x_1, x_2\}$). The affine hull $\ahull(\{\ens[a]\} \cup \text{edge } x_1 x_2)$ is the whole triangle, which contains $x_0$ with $F(x_0) = 0 < \frac{1}{2} = F(\ens[a])$. Therefore condition 2 fails, and $\ens[a] \notin S_1$.
+		
+		The definition only selects extreme points at eigenvalues (e.g. $x_0$ and $x_1$ individually), not the full face of distributions supported below $f$. The problem is that the affine hull is too large: it reaches in all directions, including those perpendicular to $F$, which in the classical case brings in points below $\ens[a]$.
+	\end{remark}
+\end{mathSection}
 
-\begin{prop}
-	Let $\Ens$ be a discrete classical ensemble space over the set of points $X$, and $F$ a statistical quantity. Then $F(X)$ is the set of possible eigenvalues, and an eigenstate is any ensemble that can be expressed as a mixture of points with the same eigenvalue.
-\end{prop}
-
-\begin{proof}
-	First we show that any extreme point $\ens[a] \in \Ens$ is an eigenstate with eigenvalue $F(\ens[a])$. First, we have $F(\ens[a]) \in [F(\ens[a]), F(\ens[a])]$, which satisfies the first condition for the support. Now let $\ens[b] \in \Ens$ be an ensemble within $(-\infty, F(\ens[a])]$. Let $\{\ens_i\}$ be the set of extreme points that are components of $\ens[b]$. Since $\{\ens_i\}$ are components of $\ens[b]$, $F(\ens_i) \leq F(\ens[a])$ since $\ens[b]$ is within $(-\infty, F(\ens[a])]$. Recall that orthogonality, for a classical space, coincides with disjoint support of the probability distribution. Also recall that, in a discrete classical ensemble space, all ensembles can be decomposed in terms of the extreme points. Then $\langle \{\ens[a], \ens[b]\} \rangle_{\ortho}$ is exactly $\hull(\{\ens_i\} \cup \{\ens[a]\})$. Given the linearity of $F$, for any convex combination $\ens$ of $\ens_i$ and $\ens[a]$ we have $F(\ens) \leq F(\ens[a])$. This satisfies the second condition for the support. The argument can be repeated with the upper bound, so the third condition is also satisfies. This means that any extreme point is $\ens[a]$ is an eigenstate of $F$ with eigenvalue $F(\ens[a])$.
-	
-	Note that the above argument works also if $\ens$ is a mixture of eigenstates with the same eigenvalues. 
-	
-	Lastly, we show that any ensemble that is a mixture of two extreme points with different eigenvalue is not an eigenstate.
-	Let $\ens = p \ens[a] + \bar{p} \ens[b]$ be a mixture of two extreme points $\ens[a], \ens[b] \in \Ens$ such that $F(\ens[a]) \neq F(\ens[b])$. Without loss of generality, suppose $F(\ens[a]) < F(\ens[b])$. Given the linearity of $F$, we have $F(\ens[a]) < F(\ens) < F(\ens[b])$. Therefore $\ens$ is not within $[F(\ens),F(\ens)]$, is not supported by $[F(\ens),F(\ens)]$ and therefore is not an eigenstate. This also means that any ensemble of extreme points with different eigenvalue is not an eigenstate.
-\end{proof}
-
-\begin{prop}
-	Let $\Ens$ be a continuous classical ensemble space over the symplectic manifold $X$, and $F$ a statistical quantity. Then $\rho \in \Ens$ is supported by $[x,y]$ of $F$ if and only if the $\int_{[x,y]} \rho d\mu = 1$. Moreover, $a \in \mathbb{R}$ is an eigenvalue if and only if there is an open set $U \subset X$ such that $f^{-1}(a) \supseteq U$ where $f : X \to \mathbb{R}$ is the state variable corresponding to $F$.
-\end{prop}
-
-\begin{proof}
-	Let $F$ be a statistical quantity over a continuous classical ensemble space. Then we can find $f : X \to \mathbb{R}$ such that $F(\rho) = \int_X f \rho d\mu$ for all $\rho \in \Ens$. Given an interval $[x,y] \subseteq \mathbb{R}$, then we can define $U_{[x,y]} = f^{-1}([x,y])$ which can be understood as the set of particle states for which the value of the property is within the bounds. Any probability distribution $\rho$ can be decomposed as
-	$$ \rho = p_{(-\infty, x]} \rho_{(-\infty, x]} + p_{[x,y]} \rho_{[x,y]} + p_{[y,-\infty)} \rho_{[y,-\infty)} $$
-	where
-	\begin{equation}
-		\begin{aligned}
-			p_{(-\infty, x]} &= \int_{U_{(-\infty, x]}} \rho d\mu &
-			p_{[x,y]} &= \int_{U_{[x,y]}} \rho d\mu  &
-			p_{[y,-\infty)} &= \int_{U_{[y,-\infty)}} \rho d\mu \\
-			\rho_{(-\infty, x]} &= \frac{\left.\rho\right|_{U_{(-\infty, x]}}}{p_{(-\infty, x]}} &
-			\rho_{[x,y]} &= \frac{\left.\rho\right|_{U_{[x,y]}}}{p_{[x,y]}} &
-			\rho_{[y,-\infty)} &= \frac{\left.\rho\right|_{U_{[y,-\infty)}}}{p_{[y,-\infty)}}
-		\end{aligned}
-	\end{equation}
-	
-	Suppose the support of $\rho$ is within $U_{[x,y]}$. Then $\int_X \rho d\mu \in [x,y]$. Since any of its components will also have support within $U_{[x,y]}$, the expectation of $f$ for all its components is also within $[x,y]$, within means that $\rho$ is within $[x,y]$ of $F$. Conversely, if the support of $\rho$ is not within $U_{[x,y]}$, then we can find a component whose support is either within $U_{(-\infty, x]}$ or $U_{[y,-\infty)}$. Therefore, $\rho$ is within $[x,y]$ of $F$ if and only if the support of $\rho$ is within $U_{[x,y]}$.
-	
-	Now suppose $\rho$ is within 
-	
-	Now we show that $\rho$ is supported by $[x,y]$ of $F$ if $\rho_f(f) = 0$ for all $f \notin [x,y]$ where $\rho_f$ is the probability density function (PDF) of $F$. Since $\rho$ is a probability measure and $f$ is a random variable, we can define a PDF $\rho_f$. This can also be understood as the marginal of $\rho$ over $f$. If $\phi$ is a component of $\rho$, the corresponding $\phi_f$ will be a component of $\rho_f$. If $\rho$ is supported by $[x,y]$ of $F$, then the expectation of $f$ for any component of $\rho_f$ must be within $[x,y]$. This can only happen if the support of $\rho_f$ is within $[x,y]$, as any component below or above those bounds would have expectation below or above the bounds. Conversely, if the support of $\rho_f$ is within $[x,y]$ Therefore, $\rho$ is within $[x,y]$ of $F$ if $\rho_f(f) = 0$ for all $f \notin [x,y]$ where $\rho_f$
-\end{proof}
+\begin{mathSection}
+	\begin{remark}[Failed attempt 2: support via facial hull]
+		A second attempt defined an ensemble $\ens$ to be \textbf{supported by $(-\infty, f]$ of $F$} if for all $\ens[a] \in \Ens$ with $F(\ens[a]) \leq F(\ens)$, we have $F(\face(\{\ens[a], \ens\})) \subseteq (-\infty, f]$.
+		
+		The idea is that if we take the facial hull of $\ens$ together with any ensemble of lower $F$-value, the resulting face should remain below $f$. This would detect whether $\ens$ has hidden components above $f$ (since the facial hull includes all components of all mixtures).
+		
+		One can show that the set $S_f$ defined this way is both componential and convex (and therefore facial). For the componential property: if $\ens \in S_f$ and $\ens = p\ens[c] + \bar{p}\ens[b]$, then for any $\ens[a]$ with $F(\ens[a]) \leq F(\ens[c])$, one constructs $\ens[d] = p\ens[a] + \bar{p}\ens[b]$ which satisfies $F(\ens[d]) \leq F(\ens)$, and uses $\face(\{\ens[a], \ens[c]\}) \subseteq \face(\{\ens[d], \ens\})$ to transfer the bound. For convexity: if $\ens_1, \ens_2 \in S_f$ with (say) $F(\ens_1) \geq F(\ens_2)$, any point in $\hull(\{\ens[a], \ens_1, \ens_2\})$ can be regrouped as a mixture of $\ens_1$ with a convex combination of $\ens[a]$ and $\ens_2$, which has $F$-value $\leq F(\ens_1)$, allowing the condition on $\ens_1$ to apply.
+		
+		However, this definition fails in the classical case for a different reason. Consider again the triangle with $F(x_0) = 0$, $F(x_1) = 1$, $F(x_2) = 2$ and $f = 1$. Take $\ens = x_1$ and $\ens[a] = \frac{2}{3}x_0 + \frac{1}{3}x_2$ with $F(\ens[a]) = \frac{2}{3} \leq 1 = F(\ens)$. The facial hull $\face(\{\ens[a], \ens\})$ includes the components of $\ens[a]$, which are $x_0$ and $x_2$. Therefore $\face(\{\ens[a], \ens\})$ contains $x_2$ with $F(x_2) = 2 > 1$, and $x_1 \notin S_1$.
+		
+		The problem is that the condition $F(\ens[a]) \leq F(\ens)$ allows test elements $\ens[a]$ whose average is below $F(\ens)$ but whose components reach above $f$. The facial hull then pulls in these high-$F$ components, causing the condition to fail even for ensembles that should be supported.
+	\end{remark}
+\end{mathSection}
 
 \openproblem{Conditional expectation values}{pm-es-expectations}{Ensemble spaces}{Probability, Non-additive measures}{}{There should be a way to generalize the notion of conditional expectation to a generic ensemble space. The general idea should be that, given a target ensemble and a set of ensembles, we find the biggest component of the target that is a mixture of ensembles of the set. The expectation of a quantity for the target ensemble restricted to that set would be the quantity evaluated on the representative. In classical probability, it would recover the expectation of a random variable conditioned to an event.}
 
