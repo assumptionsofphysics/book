@@ -3626,6 +3626,108 @@ When defining the entropy given a space of probability distributions, there is t
 
 Note that in quantum mechanics there is a tacit assumption that all pure states have the same entropy. We could imagine, however, a theory where the pure states, the ones that we can ideally prepare and control, are not all at the same entropy. This would bake into the state space that not all evolutions are reversible. There is no reason to exclude this case, and it may turn out to be what we need for future theories.
 
+\section{Entropy and continuity}
+
+\begin{insight}
+	The Shannon entropy is not continuous in the standard topology for probability measures.
+\end{insight}
+
+For probability densities, the standard strong topology is the $L^1$ topology. For probability measures, the corresponding topology is the total variation topology. These topologies coincide whenever the measures are absolutely continuous with respect to a common reference measure. That is, if $dp_\rho=\rho\,d\mu$ and $dp_\sigma=\sigma\,d\mu$, then
+\begin{equation}
+	\|p_\rho-p_\sigma\|_{\mathrm{TV}}
+	=
+	\frac{1}{2}\|\rho-\sigma\|_{L^1(\mu)}.
+\end{equation}
+In this topology, the mixing entropy (i.e. the Jensen--Shannon divergence) is continuous, and, in fact, it generates the same topology. This is because it can be bound on both side by the $L^1$ norm: 
+\begin{equation}
+	\frac{1}{8\ln 2}\|\rho-\sigma\|_{L^1(\mu)}^2
+	\leq
+	\operatorname{MS}(\rho,\sigma)
+	\leq
+	\frac{1}{2}\|\rho-\sigma\|_{L^1(\mu)}.
+\end{equation}
+One may therefore expect the Shannon entropy to be continuous in this topology. This is true in the finite dimensional case, but it is false in infinite-dimensional spaces.
+
+\begin{example}[Entropy discontinuity in total variation]
+	Consider the space of probability distributions over $\mathbb{N}$ with the $\ell^1$ topology. Let $\delta_1$ be the point distribution on the first outcome, with entropy $S(\delta_1) = 0$. Define a sequence $p^{(n)}$ by
+	\[
+	p^{(n)}_1 = 1 - \tfrac{1}{n}, \qquad
+	p^{(n)}_i = \tfrac{1}{n 2^n} \text{ for } 2 \leq i \leq 2^n + 1, \qquad
+	p^{(n)}_i = 0 \text{ otherwise}.
+	\]
+	That is, a fraction $\frac{1}{n}$ of the probability is moved away from the first outcome and spread uniformly over $2^n$ new outcomes. Since $\|p^{(n)} - \delta_1\|_1 = \frac{2}{n} \to 0$, the sequence converges in $\ell^1$ and total variation.
+	
+	The entropy, however, does not converge to the entropy of the limit. Since the supports of $(1-\frac{1}{n})\delta_1$ and the uniform tail are disjoint:
+	\[
+	S(p^{(n)}) = I\!\left(\tfrac{1}{n}, 1 - \tfrac{1}{n}\right) + \left(1 - \tfrac{1}{n}\right) \cdot 0 + \tfrac{1}{n} \log 2^n
+	= I\!\left(\tfrac{1}{n}, 1 - \tfrac{1}{n}\right) + 1,
+	\]
+	where $I(p, \bar{p}) = -p \log p - \bar{p}\log\bar{p}$ is the entropy of the mixing coefficients. Since $I(1/n, 1-1/n) \to 0$, we have $S(p^{(n)}) \to 1 \neq 0 = S(\delta_1)$.
+	
+	The mixing entropy, on the other hand, does converge to zero. The midpoint $m^{(n)} = \frac{1}{2}p^{(n)} + \frac{1}{2}\delta_1$ has probability $1 - \frac{1}{2n}$ on outcome $1$ and $\frac{1}{2n2^n}$ on each of the $2^n$ tail outcomes. Again using the disjoint support decomposition:
+	\[
+	S(m^{(n)}) = I\!\left(\tfrac{1}{2n}, 1 - \tfrac{1}{2n}\right) + \left(1 - \tfrac{1}{2n}\right) \cdot 0 + \tfrac{1}{2n} \log 2^n
+	= I\!\left(\tfrac{1}{2n}, 1 - \tfrac{1}{2n}\right) + \tfrac{1}{2}.
+	\]
+	Therefore:
+	\[
+	MS(p^{(n)}, \delta_1) = S(m^{(n)}) - \tfrac{1}{2}S(p^{(n)}) - \tfrac{1}{2}S(\delta_1)
+	= I\!\left(\tfrac{1}{2n}, 1 - \tfrac{1}{2n}\right) + \tfrac{1}{2} - \tfrac{1}{2}\left[I\!\left(\tfrac{1}{n}, 1 - \tfrac{1}{n}\right) + 1\right] \to 0.
+	\]
+	Thus the mixing entropy converges to zero even though the entropy itself does not converge. This is possible because the mixing entropy measures only the distinguishability between the two distributions, not their absolute variability: the tail of $p^{(n)}$ carries finite entropy but vanishing weight, so it contributes to $S(p^{(n)})$ but not to $MS(p^{(n)}, \delta_1)$.
+	
+	\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\def\barw{0.25}
+		\def\hscale{0.5}
+		
+		% n=1: 2 outcomes
+		\node[left] at (0,3) {$p^{(1)}$};
+		\draw[->] (0,2.4) -- (5,2.4);
+		\draw[->] (0,2.4) -- (0,3.6);
+		\filldraw[black!30] ({1*\hscale - \barw/2},2.4) rectangle +(\barw,0.5);
+		\filldraw[black!70] ({2*\hscale - \barw/2},2.4) rectangle +(\barw,0.5);
+		\node[below] at ({1*\hscale},2.4) {\small $1$};
+		\node[below] at ({2*\hscale},2.4) {\small $2$};
+		
+		% n=2: 5 outcomes
+		\node[left] at (0,1.5) {$p^{(2)}$};
+		\draw[->] (0,0.9) -- (5,0.9);
+		\draw[->] (0,0.9) -- (0,2.1);
+		\filldraw[black!30] ({1*\hscale - \barw/2},0.9) rectangle +(\barw,0.75);
+		\foreach \i in {2,3,4,5} {
+			\filldraw[black!70] ({\i*\hscale - \barw/2},0.9) rectangle +(\barw,0.125);
+			\node[below] at ({\i*\hscale},0.9) {\small $\i$};
+		}
+		\node[below] at ({1*\hscale},0.9) {\small $1$};
+		
+		% n=3: 9 outcomes
+		\node[left] at (0,0) {$p^{(3)}$};
+		\draw[->] (0,-0.6) -- (5,-0.6);
+		\draw[->] (0,-0.6) -- (0,0.6);
+		\filldraw[black!30] ({1*\hscale - \barw/2},-0.6) rectangle +(\barw,0.833);
+		\foreach \i in {2,3,4,5,6,7,8,9} {
+			\filldraw[black!70] ({\i*\hscale - \barw/2},-0.6) rectangle +(\barw,0.042);
+			\node[below] at ({\i*\hscale},-0.6) {\small $\i$};
+		}
+		\node[below] at ({1*\hscale},-0.6) {\small $1$};
+		
+		% Annotations
+		\node[right] at (6,2.7) {$\|p^{(n)}-\delta_1\|_1=\frac{2}{n}\to0$};
+		\node[right] at (6,1.7) {$MS(p^{(n)},\delta_1)\to0$};
+		\node[right] at (6,0.7) {$S(p^{(n)})\to 1 \neq 0 = S(\delta_1)$};
+	\end{tikzpicture}
+		\caption{A vanishing fraction of probability mass spread over exponentially many outcomes. The distributions converge to $\delta_1$ in $\ell^1$/total variation/Jensen--Shannon divergence, but the entropy does not converge.}
+	\end{figure}
+\end{example}
+
+\begin{insight}
+	If entropy and statistical mixing are continuous, then convergence must imply convergence in the standard topology for probability measures.
+\end{insight}
+
+While the standard topology does not make entropy continuous, the continuity of the entropy and statistical mixing forces the standard topology. That is, suppose $\tau$ is a topology on a space of finite-entropy probability densities such that statistical mixing $p\rho + \bar{p}\sigma$ and the entropy $S(\rho)=-\int_X \rho\log\rho\,d\mu$ are continuous. Then the mixing entropy $MS(\rho, \sigma)$ is continuous, which means $\tau$ must include the topology generated by $MS$, which is the the standard strong topology on probability measures. Therefore, the standard topology is necessary but not sufficient: any physically meaningful ensemble topology with continuous entropy must refine the usual topology of probability measures.
+
 \subsection{Continuity of affine combinations}
 
 \begin{insight}
