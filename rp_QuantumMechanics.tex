@@ -153,9 +153,13 @@ How to break up the different assumptions for quantum states.
 			\item[QE-DENS] A quantum ensemble is represented density operator
 			\item[QE $\implies$ QP] Recover pure states as extreme points
 			\item[QP $\nimplies$ QE] We could imagine ensembles as probability distributions
-			\item[?] Superposition is multiple decomposition
-			\item[?] The linearity of statistical mixing is a physical requirement. The linearity of the Hilbert space is a mathematical convenience.
+			\item[?] Superposition is multiple decomposition (Comparing linear structure of ensembles vs vectors)
+			\item[?] The linearity of statistical mixing is a physical requirement. 
+			\item[?] The linearity of the Hilbert space is a mathematical convenience.
 			\item[?] The choice of a basis in the Hilbert space is a choice of a maximal set of orthogonal states (not necessarily mutually exclusive) plus a choice of gauge (i.e. a phase for each element of the basis).
+			\item[?] Pure states are not enough
+			\item[?] Decompose state requirements into 3
+			\item[?] Inner product is about geometry, shouldn't be about process
 		\end{enumerate}
 		\item Born rule
 		\begin{enumerate}
@@ -214,10 +218,12 @@ In QST, infinite dimension
 	\item A pure state is in the domain of an observable if and only if the expectation of the second moment is finite
 \end{itemize}
 
+\subsection{Formulations of quantum mechanics}
 
-\section{The postulates of quantum mechanics}
 
-In this section we are going to summarize the standard Hilbert space formulation of quantum mechanics. The goal is to have a general understanding of the math and how it naively maps to the physics. We will also define the notation that we are going to use throughout this chapter.
+\subsection{The postulates of quantum mechanics}
+
+Let us first review the standard Hilbert space formulation of quantum mechanics. The goal is to have a general understanding of the math and how it naively maps to the physics. We will also define the notation that we are going to use throughout this chapter.
 
 The first postulate of quantum mechanics characterizes how states are represented in the mathematical framework. 
 \renewcommand{\thepostulate}{ST}
@@ -290,27 +296,55 @@ More remarkably, the interior points of the sphere represent mixed states. There
 	\rho = \frac{\overline{\rho \rho_2}}{\overline{\rho_1 \rho_2}} \rho_1 + \frac{\overline{\rho_1 \rho}}{\overline{\rho_1 \rho_2}} \rho_2.
 \end{equation}
 
-\section{States and ensembles}
+\subsection{The problem with the current formulations}
 
-In this section we will analyze the state postulate to understand what each mathematical structure represent. The complex vector space structure by itself defines pure states, but nothing else. The inner product structure is needed to define ensembles and statistical mixing, but does not require the Born rule. The Born rule links the inner product with probability, linking orthogonality with mutual exclusivity.
+The goal of Reverse Physics is finding exactly which mathematical condition correspond to which physical premise. We will want, for example, to understand which physical assumptions lead to the complex projective space or to unitary evolution. This will be a lot hard for quantum mechanics than for classical mechanics given the current status of the theory. First of all, there is no general consensus as to what quantum states represent, and therefore we will need to find a minimal set of operational characterizations on which every interpretation must agree. Second, the mathematics itself does not cleanly separate what elements should be considered physically meaningful and what simply mathematical artifacts. But most of all, the mathematical formulation bundles many aspects together, making it difficult to implement a careful analysis. Therefore, we will need to first disentangle the standard formulation into a set of distinct conditions, so that we can better analyze their logical relationships and find alternative but equivalent premises.
 
-When analyzing the relationship between physical objects and the mathematical structures used to represent them, there can be three cases. The representation may be faithful in the sense that the physics is exactly specified by the math. For example, if we represent the number of particles in a box with a natural number, each possible mathematical value corresponds to a possible physical configuration. The representation may be redundant, in the sense that the math includes arbitrary choices that do not change the physics, and therefore one typically chooses the most useful mathematical representation in each specific case. For example, the potential of the electromagnetic field is not uniquely constrained by the physics, so one is free to choose a gauge that is best suited for the problem. The representation may be unphysical, in the sense that the mathematical representation includes cases that are not physically meaningful, typically for convenience of calculation. For example, even though a charge distribution is a real valued function, in the presence of poles it may be useful to extend to a complex function to integrate it.
+Unlike in classical mechanics, then, where we could essentially find the conditions organically, we need to set some conditions upfront. The choice will only be clear in further sections, when we'll take each condition and analyze it further. Let us go through them with a minimal motivation.
 
-The postulates of quantum mechanics just give us the mathematical framework, without stating exactly this type of relationships. We know, for example, that the physics is in the rays and the Born rule. What part, then, of the Hilbert space is redundant, like the choice of gauge for a potential, and which part is unphysical, like the extension from real to complex valued charge distributions? Do all rays correspond to physically meaningful states? Since linearity is defined on the vectors, and the vectors themselves are not the physical object, does the linearity of the vector space correspond to a physical requirement? These are the questions we will answer in this section.
+\begin{condition}[Quantum states are rays]{QP-RAY}
+	The state space of the system is represented by a complex projective space $P(\mathcal{H})$. That is, a state $\psi \in P(\mathcal{H})$ is a ray $\psi = \{c |\psi\> \mid c \in \mathbb{C} \setminus \{ 0\} \}$ of some complex vector space $\mathcal{H}$.
+\end{condition}
+
+Note that the vector space itself is not the primary object, but simply a way to characterize the projective space. Also note that $\mathcal{H}$ is just a complex vector space, with no inner product and not necessarily complete. None of these are necessary to characterize the complex projective space.
+
+\begin{condition}[Quantum ensembles are density operators]{QE-DENS}
+	The ensemble space of the system is represented by the set of density operators acting on a complex inner product space $\mathcal{H}$. That is, an ensemble $\rho \in D(\mathcal{H})$ is a positive semi-definite trace one self-adjoint operator $\rho : \mathcal{H} \to \mathcal{H}$. 
+\end{condition}
+
+The characterization of ensembles is separate from that of pure states, as we will need to understand whether one implies the other. Note that $\mathcal{H}$ is equipped with an inner product as the definition of trace one operators requires an inner product.
+
+\begin{condition}[Conditional expectation from Born rule]{BR-BORN}
+	The conditional probability $p( \cdot \mid \cdot) : P(\mathcal{H}) \times P(\mathcal{H}) \to [0,1]$ is given by the Born rule. That is, $p(\psi|\phi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}$.
+\end{condition}
+
+The Born rule links the inner product to the conditional probability.
+
+\begin{condition}[Observables are self-adjoint operators]{QM-OBS}
+	The space of observables is given by the continuous self-adoint operators defined over the whole state space. Given a state vector $|\psi\>$, the expectation is given by $\frac{\<\psi | O | \psi \>}{\<\psi | \psi \>}$, and, given an ensemble $\rho$, the expectation is given by $\tr(O\rho)$.
+\end{condition}
+
+In contrast with postulate \ref{rp_qm_postObs}, we require self-adjoint to be continuous and defined on the whole space. As we will see later, these seem the correct physical requirements: the expectation must exist for all states (whole space), be a real numbers (self-adjoint) and lead to small changes for small state changes. Since these cannot 
+
+We'll proceed to analyze each one, its relationships with the others and other possible equivalent characterizations. We will see that they form a sequence of increasingly stronger conditions, where each is implied by the next but not vice-versa.
+
+\section{States and projective space}
+
+In this section we will analyze the state postulate to understand what each mathematical structure represent. The complex vector space structure by itself defines pure states, but nothing else. The inner product structure is needed to define ensembles and statistical mixing, but does not require the Born rule. The Born rule links the inner product with probability, linking orthogonality with mutual exclusivity. (TODO: revise summary once the section is finished)
+
+%When analyzing the relationship between physical objects and the mathematical structures used to represent them, there can be three cases. The representation may be faithful in the sense that the physics is exactly specified by the math. For example, if we represent the number of particles in a box with a natural number, each possible mathematical value corresponds to a possible physical configuration. The representation may be redundant, in the sense that the math includes arbitrary choices that do not change the physics, and therefore one typically chooses the most useful mathematical representation in each specific case. For example, the potential of the electromagnetic field is not uniquely constrained by the physics, so one is free to choose a gauge that is best suited for the problem. The representation may be unphysical, in the sense that the mathematical representation includes cases that are not physically meaningful, typically for convenience of calculation. For example, even though a charge distribution is a real valued function, in the presence of poles it may be useful to extend to a complex function to integrate it.
+
+%The postulates of quantum mechanics just give us the mathematical framework, without stating exactly this type of relationships. We know, for example, that the physics is in the rays and the Born rule. What part, then, of the Hilbert space is redundant, like the choice of gauge for a potential, and which part is unphysical, like the extension from real to complex valued charge distributions? Do all rays correspond to physically meaningful states? Since linearity is defined on the vectors, and the vectors themselves are not the physical object, does the linearity of the vector space correspond to a physical requirement?
+
+
 
 \subsection{Vector vs projective space}
 
-In order to make a thorough analysis, a common strategy in Reverse Physics is to break the mathematical structure into the smallest structures required for the physical definition. The most basic item in quantum mechanics is the notion of state, which is defined as a ray in a Hilbert space. However, the definition of rays and projective space do not require the inner product: just the vector space structure. The vector space needs to be complex, as the projective space will be different depending on the scalar field. Therefore, let us start with the following basic condition.
-
-\begin{condition}[Quantum states are rays]{QP-RAY}
-	The state space of the system is represented by the projective space given by the rays of a complex vector space $\mathcal{H}$.
-\end{condition}
-
-We should verify that physics only depends on the ray, and, since the ray is an equivalence class, not the choice of representative. Since all the physics is given by the Born rule
+Note that \ref{QP-RAY} asserts that the state space is given by the projective space, and the role of the vector space is only to identify the correct projective space. We should therefore verify that physics only depends on the ray, and, since the ray is an equivalence class, not the choice of representative. Given that all physical outcomes are given by the Born rule
 \begin{equation}
 	p(\phi|\psi) = \frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>},
 \end{equation}
-we can verify that the Born rule is indeed invariant under the change of representative $|\psi\>$ to $c |\psi\>$ with $c \in \mathbb{C} \setminus \{0\}$:
+we just need to verify that the Born rule is indeed invariant under the change of representative $|\psi\>$ to $c |\psi\>$ with $c \in \mathbb{C} \setminus \{0\}$:
 \begin{equation}
 	p(\phi|c \psi) = \frac{\< \phi |c\psi \>\<c\psi | \phi \>}{\< c\psi | c\psi \>\< \phi | \phi \>} = \frac{c c^*}{c^* c}\frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}=\frac{\< \phi | \psi \>\< \psi | \phi \>}{\< \psi | \psi \>\< \phi | \phi \>}.
 \end{equation}
@@ -320,6 +354,15 @@ Moreover, on the continuum the inner product between two wave functions is given
 	\< \phi | \psi \> = \int_X \phi^*(x) \psi(x) dx.
 \end{equation}
 Note that the integral does not vary under a change of $\phi(x)$ or $\psi(x)$ over a set of measure zero. For example, if we changed $\psi(x)$ such that it returned zero over the rationals, the inner product wouldn't change, therefore the physical state does not change either. This is not something peculiar to quantum mechanics, as this happens in classical probability as well. If we have a probability density $\rho(x,p)$, a change over a measure zero set will not change the expectation of any variable.\footnote{Mathematically, the probability density function (PDF) is the Radon-Nikodym derivative of the cumulative distribution function (CDF) with respect to the Lebesgue measure, which is defined up to a measure zero set.} The representation in terms of wave-functions, then, is redundant and we choose those that, for example, are normalized and, to the extent possible, are continuous.
+
+Conversely, $p(\psi|\phi) = 1$ if and only if $\psi = \phi$. Therefore, two different rays are physically distinguishable. This means that 
+
+This means that the ray representation is faithful
+\begin{thrm}
+	Condition \ref{QP-RAY} provides a
+\end{thrm}
+
+In physics, one typically assumes that the system is associated with a Hilbert space, and then 
 
 But if the choice of a particular wave-function is redundant, and the linearity of the vector space is, ultimately, addition and scalar multiplication over wave-functions, what part of this linearity is physically faithful and what part is physically redundant?
 
@@ -368,7 +411,7 @@ where $\theta \in (0,2\pi)$ is an arbitrary constant. Note that $\frac{|c_{+}|^2
 	\caption{\label{rp-qm-figNonLinear}Probability is vertical height on the Bloch sphere.}
 \end{figure}
 
-Let's verify all of this in the math. First, the map is collinear, meaning that it maps a ray to another ray. That is:
+Let's verify all of this in the math. First, $m$ maps a ray to another ray. That is:
 \begin{equation}
 	\begin{aligned}
 		m(k(c_{+} | z^+ \> + c_{-} | z^- \>)) &= m(kc_{+} | z^+ \> + k c_{-} | z^- \>) = e^{\imath \theta \frac{|kc_{+}|^2}{|kc_{+}|^2+|kc_{-}|^2}} ( k c_{+} | z^+ \> + k c_{-}  | z^- \>) \\
@@ -470,7 +513,7 @@ Since condition \ref{rp-qm-qe-condEnsemblesAreDensityOperators} is stronger than
 		m(|\psi\>) &= M |\psi\> = \begin{bmatrix} 1 & \frac{\sqrt{2}}{2} \\ 0 & \frac{\sqrt{2}}{2} \end{bmatrix} |\psi\>
 	\end{aligned}
 \end{equation}
-This is a linear map, and therefore it is also colinear: maps rays to rays. It will also map projectors to projectors and therefore will preserve \ref{rp-qm-qp-condStatesAreRays} and all its equivalent conditions.
+This is a linear map, and therefore it maps rays to rays. It will also map projectors to projectors and therefore will preserve \ref{rp-qm-qp-condStatesAreRays} and all its equivalent conditions.
 
 However, it does not map ensembles to ensemble, density operators to density operators, as the trace is not preserved.
 \begin{equation}
@@ -559,7 +602,7 @@ Note, however, that while the linearity of statistical mixture is a physically n
 \end{equation}
 where $\theta \in (0,2\pi)$ is an arbitrary constant. The map is introducing a phase shift that is proportional to the cosine of the angle along the vertical direction. Since it is introducing only a total phase shift, it will map a vector to a physically equivalent vector. The physics will not change, and we do not expect the Born rule to change. However, since the shift is not linear, we will not expect the inner product to me conserved since only linear maps can preserve the inner product.
 
-Let's verify all of this in the math. First, the map is colinear, meaning that it maps a ray to another ray. That is:
+Let's verify all of this in the math. First, $m$ maps a ray to another ray. That is:
 \begin{equation}
 	\begin{aligned}
 	m(k(c_{\psi} | \psi \> + c_{\phi} | \phi \>)) &= m(kc_{\psi} | \psi \> + k c_{\phi} | \phi \>) = e^{\imath \theta \frac{|kc_{\phi}|}{\sqrt{|kc_{\psi}|^2+|kc_{\phi}|^2}}} ( k c_{\psi} | \psi \> + k c_{\phi}  | \phi \>) \\
