@@ -2027,6 +2027,7 @@ We define the mixing entropy as the increase in entropy for the equal mixture of
 \begin{prop}
 	The mixing entropy $MS(\ens[a], \ens[b])$ satisfies the following:
 	\begin{enumerate}
+		\item \textbf{continuity}
 		\item \textbf{non-negativity}: $MS(\ens[a], \ens[b]) \geq 0$
 		\item \textbf{identity of indiscernibles}: $MS(\ens[a], \ens[b]) = 0 \iff \ens[a]=\ens[b]$
 		\item \textbf{unit boundedness}: $MS(\ens[a], \ens[b]) \leq 1$
@@ -2036,19 +2037,29 @@ We define the mixing entropy as the increase in entropy for the equal mixture of
 \end{prop}
 
 \begin{proof}
-	For 1, by strict concavity, $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) \geq \frac{1}{2} S(\ens[a]) + \frac{1}{2} S(\ens[b])$, which means $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) - \left(\frac{1}{2} S(\ens[a]) + \frac{1}{2} S(\ens[b])\right) = MS(\ens[a], \ens[b]) \geq 0$.
+	For 1, note that $MS$ is the composition of continuous functions, and is therefore continuous.
 	
-	For 2, the concavity is strict and therefore the equality holds if and only if $\ens[a] = \ens[b]$.
+	For 2, by strict concavity, $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) \geq \frac{1}{2} S(\ens[a]) + \frac{1}{2} S(\ens[b])$, which means $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) - \left(\frac{1}{2} S(\ens[a]) + \frac{1}{2} S(\ens[b])\right) = MS(\ens[a], \ens[b]) \geq 0$.
 	
-	For 3, by the upper variability bound, $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) \leq I(\frac{1}{2}, \frac{1}{2}) + \frac{1}{2} S(\ens[a]) + \frac{1}{2} S(\ens[b])$, which means $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) - \left(\frac{1}{2} S(\ens[a]) + \frac{1}{2} S(\ens[b])\right) = MS(\ens[a], \ens[b]) \leq I(\frac{1}{2}, \frac{1}{2}) = 1$.
+	For 3, the concavity is strict and therefore the equality holds if and only if $\ens[a] = \ens[b]$.
 	
-	For 4, the upper variability bound is saturated if and only if $\ens[a] \ortho \ens[b]$.
+	For 4, by the upper variability bound, $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) \leq I(\frac{1}{2}, \frac{1}{2}) + \frac{1}{2} S(\ens[a]) + \frac{1}{2} S(\ens[b])$, which means $S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right) - \left(\frac{1}{2} S(\ens[a]) + \frac{1}{2} S(\ens[b])\right) = MS(\ens[a], \ens[b]) \leq I(\frac{1}{2}, \frac{1}{2}) = 1$.
 	
-	For 5, by commutativity of mixing and of addition the definition of the mixing entropy is symmetric.
+	For 5, the upper variability bound is saturated if and only if $\ens[a] \ortho \ens[b]$.
+	
+	For 6, by commutativity of mixing and of addition the definition of the mixing entropy is symmetric.
+\end{proof}
+
+\begin{coro}\label{pm-es-mixingEntropyConverge}
+	Let $\ens[a]_i \to \ens[a]$, then $MS(\ens[a]_i, \ens[a]) \to 0$.
+\end{coro}
+
+\begin{proof}
+	Since $MS$ is continuous, $\lim\limits_{i \to \infty} MS(\ens[a]_i, \ens[a]) = MS\left(\lim\limits_{i \to \infty} \ens[a]_i, \ens[a]\right) = MS(\ens[a], \ens[a]) = 0$.
 \end{proof}
 
 \begin{prop}
-	In discrete and continuous classical cases, the mixing entropy coincides with the Jensen-Shannon divergence. In quantum spaces it coincindes with the quantum Jensen-Shannon divergence.
+	In discrete and continuous classical cases, the mixing entropy coincides with the Jensen-Shannon divergence. In quantum spaces it coincides with the quantum Jensen-Shannon divergence.
 \end{prop}
 
 \begin{proof}
@@ -2176,8 +2187,8 @@ Though the mixing entropy is not a distance function, we can still show that, li
 	\end{tikzpicture}
 \end{figure}
 
-	Let us show that the results also holds for to $\frac{1}{2} < p < 1$.
-	Since $\{1 - \frac{1}{2^n}\}_{n=0}^{\infty}$ is a strictly decreasing sequence that starts at $1$ and converges to 0, there exists a unique $n \in \mathbb{N}$ such that $1 - \frac{1}{2^n} \le p \le 1 - \frac{1}{2^{n+1}}$. Let us show that $p\ens[a] + \bar{p}\ens[b]$ can be written as $\lambda\ens[a] + \bar{\lambda}[(1-\frac{1}{2^{n}})\ens[a] + \frac{1}{2^{n}}\ens[b]]$ where $0 \le \lambda \le \frac{1}{2}$.
+	Let us show that the result also holds for to $\frac{1}{2} < p < 1$.
+	Since $\{1 - \frac{1}{2^n}\}_{n=0}^{\infty}$ is a strictly increasing sequence that starts at $1$ and converges to 0, there exists an $n \in \mathbb{N}$ such that $1 - \frac{1}{2^n} \le p \le 1 - \frac{1}{2^{n+1}}$. Let us show that $p\ens[a] + \bar{p}\ens[b]$ can be written as $\lambda\ens[a] + \bar{\lambda}[(1-\frac{1}{2^{n}})\ens[a] + \frac{1}{2^{n}}\ens[b]]$ where $0 \le \lambda \le \frac{1}{2}$.
 	\begin{equation}
 		\begin{aligned}
 			p\ens[a] + \bar{p}\ens[b] 
@@ -2189,7 +2200,7 @@ Though the mixing entropy is not a distance function, we can still show that, li
 		\end{aligned}
 	\end{equation}
 	where $\lambda = 2^n p - 2^n + 1$.
-	Note that $0 \le \lambda \le \frac{1}{2}$ if $1 - \frac{1}{2^n} \le p \le 1 - \frac{1}{2^{n+1}}$. Thus, from the first part of the proof, we get $MS(p\ens[a], \bar{p} \ens[b]) \le MS(\ens[a], (1-\frac{1}{2^n}) \ens[a] + \frac{1}{2^n}\ens[b])$. Note that this result is recursive for $p = 1 - \frac{1}{2^n}$. Therefore, we can use induction to show $MS(p\ens[a], \bar{p} \ens[b]) \le MS(\ens[a], (1-\frac{1}{2^n}) \ens[a] + \frac{1}{2^n}\ens[b]) \le MS(\ens[a], \ens[b])$.
+	Note that $0 \le \lambda \le \frac{1}{2}$ if $1 - \frac{1}{2^n} \le p \le 1 - \frac{1}{2^{n+1}}$. Thus, from the first part of the proof, we get $MS(\ens[a], p\ens[a] + \bar{p} \ens[b]) \le MS(\ens[a], (1-\frac{1}{2^n}) \ens[a] + \frac{1}{2^n}\ens[b])$. Note that this result is recursive for $p = 1 - \frac{1}{2^n}$. Therefore, we can use induction to show $MS(\ens[a], p\ens[a] + \bar{p} \ens[b]) \le MS(\ens[a], (1-\frac{1}{2^n}) \ens[a] + \frac{1}{2^n}\ens[b]) \le MS(\ens[a], \ens[b])$.
 \end{proof}
 \end{mathSection}
 
@@ -2221,6 +2232,10 @@ The fact that the mixing entropy decreases from all directions as we get closer 
 	Intuitively, we would expect the entropic balls to be convex. This is true in both classical and quantum cases as the JSD is convex. However, the current axioms allow us to use a different entropy function in a space that is not orthogonally decomposable: the extreme points are not orthogonal. In this case, one is able to create open balls that are not convex.
 	
 	Whether this is physically relevant or not depends on whether there are additional physical constraints on the mixing entropy between three points, which is very likely.
+\end{remark}
+
+\begin{remark}
+	Since the mixing entropy coincides with the JSD in the classical case, and, as shown in lesson learned \ref{pm-es-lessonEntropyContinuity}, the entropy is not in general continuous in the topology generated by the JSD, the topology generated by the open balls of the mixing entropy should be considered a subtopology of the ensemble space. Most importantly, the converse of corollary \ref{pm-es-mixingEntropyConverge} does not hold in general. That is, $MS(\ens[a]_i, \ens[a]) \to 0$ does not necessarily imply that $\ens[a]_i \to \ens[a]$. 
 \end{remark}
 
 \begin{prop}
@@ -2265,32 +2280,8 @@ The fact that the mixing entropy decreases from all directions as we get closer 
 	If $\ens[a]$ is an extreme point of $L$ (i.e. there is no $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$), then we are done. If $\ens[a]$ is not an extreme point, then we can find $\ens[d] \in L$ such that $p\ens[b] + \bar{p}\ens[d] = \ens[a]$. Repeat the previous procedure with $\ens[d]$ to find another $r'$ and let $\hat{r}$ be the minimum between the two. Then we have that $\hat{r} \in (0,1]$ such that $\ens \in U$ for all $\ens \in L$ such that $MS(\ens[a], \ens) < \hat{r}$.
 \end{proof}
 \end{mathSection}
-	
-There are a number of conjectures on the topology generated by the entropic open ball that are probably all related. They are summarized here with some notes on what has been understood so far.
 
-\begin{conj}
-	For every sequence $\ens[a]_i \in \Ens$, $\ens[a]_i \to \ens[a]$ if and only if $MS(\ens[a], \ens[a]_i) \to 0$.
-\end{conj}
-
-\begin{conj}
-	The topology of the ensemble space is generated by the entropic open balls.
-\end{conj}
-
-\begin{conj}
-	Let $U \subseteq \Ens$ be an open set and $\ens[a] \in U$. Then there exists an $r \in (0,1]$ such that $B_r(\ens[a]) \subseteq U$.
-\end{conj}
-
-\begin{remark}
-	These conjectures are likely the same. If the topology is generated by the entropic open balls, then convergence in mixing entropy is the convergence criterion associated with the topology. It also means that we can generate every open set with entropic open balls by fitting them inside every open set.
-	
-	Note that all entropic open balls are open sets in the topology, since the mixing entropy is a continuous function. It suffices to prove that all open sets can be generated by open balls. We have shown that given a point in an open set we can find a finite range of mixing entropy along each direction. However, since we do not know if there is a non-zero infimum across all directions, we do not know whether we can ``fit'' an entropic open ball.
-	
-	Similarly, it is clear that if a sequence converges, the mixing entropy goes to zero. However, we do not know whether there is an open set for which the mixing entropy goes to zero but the sequence does not converge. This would mean that a sequence always eventually enters an entropic open ball of any size, but it may not enter all open sets.
-\end{remark}
-
-\begin{conj}
-	Let $\ens[a], \ens[b]_i\in \Ens$ and $\ens[c]_i = p \ens[a] +\bar{p} \ens[b]_i$ for some $p \in (0,1)$. Then $\ens[b]_i \to \ens[b]$ if and only if $\ens[c]_i \to \ens[c]$. 
-\end{conj}
+While the mixing entropy is defined through the entropy, the topology that it generates does not guarantee the continuity of the entropy. To see this, consider the mixture $(1-\epsilon)\ens[a] + \epsilon \ens[b]$ as a small variation around $\ens[a]$. By Proposition \ref{pm-es-mixingEntropyMonotonic}, as $\epsilon \to 0$, $MS(\ens[a], (1-\epsilon)\ens[a] + \epsilon\ens[b]) \to 0$ regardless of $\ens[b]$. However, if $\ens[a] \ortho \ens[b]$, the entropy is $S((1-\epsilon)\ens[a] + \epsilon\ens[b]) = I(1-\epsilon, \epsilon) + (1-\epsilon)S(\ens[a]) + \epsilon S(\ens[b])$. In an infinite-dimensional space, $S(\ens[b])$ can be arbitrarily large, so a small mixture with a sufficiently high-entropy ensemble produces a large entropy change even though the mixing entropy remains small.
 
 TODO: reorganize
 
