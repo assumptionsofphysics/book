@@ -313,11 +313,94 @@ which means it converges. However, let $I = \{2,4,6,\dots\}$. We have
 \end{equation*}
 Therefore the convex combination of all even elements of the series diverges.
 
-Note that the above counterexample works because the series is effectively the sum of two divergent series. The axiom of entropy will force the ensemble space to have a bounded intersection with every affine line. Therefore the above problem would not exist, because one cannot produce a divergent series from a bounded interval of the real line. It is not clear, though, whether this is enough to show that submixtures of convergent infinite mixtures converge. We leave this as conjecture \ref{pm-es-conjSubmixturesConverge}.
+Note that the above counterexample works because the series is effectively the sum of two divergent series. A notion of boundedness is therefore useful, but it will not be sufficient. We would need a notion of completeness, which is for now left as open problem \ref{pm-es-ensembleSpaceCompleteness}.
 
-TODO: review
+We now define a notion of boundedness (i.e. sets with a ``finite range'') in a way that mimic boundedness in topological vector spaces. In a TVS, a set $A$ is bounded if every neighborhood of the origin can be stretched to include $A$. For a topological convex space, we have no origin and no way to stretch sets. However, given a point $\ens \in A$, the set of all convex combinations $p \ens + \bar{p} A$ is a copy of $A$ shrunk around $\ens$. Therefore, we can say a set $A$ is bounded around an ensemble $\ens$ if, for every open neighborhood $U$ of $\ens$, there is a $p$ such that we can shrink $A$ to be inside of $U$.
 
-An open problem is whether we can extend infinite convex combinations to integral. That is, given a probability measure $p : \Sigma_{\Ens} \to [0,1]$ defined over the Borel algebra of the ensemble space, we can define the mixture $\int_{\Ens} \ens \, dp$ as the limit of the convex combinations. 
+\begin{mathSection}
+	\begin{defn}\label{pm-es-boundedSet}
+		Let $\Ens$ be an ensemble space and $\ens \in \Ens$. A set $A \subseteq \Ens$ is \textbf{bounded around $\ens$} if for every open neighborhood $U$ of $\ens$, there exists $p \in [0,1)$ such that $p\ens + \bar{p}A \subseteq U$.
+	\end{defn}
+\end{mathSection}
+
+There is a useful alternative property that fully characterizes bounded sets. Consider the sequences $p_i \ens + \bar{p}_i \ens[a]_i$, where $p_i \to 1$. Intuitively, the only way for this sequence to not converge to $\ens$ is if the sequence $\ens[a]_i$ gets further and further away from $\ens$, faster than the mixing brings it closer to $\ens$. If $\ens[a]_i$ are from a bounded set around $\ens$, we would expect this sequence to converge. In fact, it turns out that a set $A$ is bounded if and only if all such sequences converge.
+	
+\begin{mathSection}
+	\begin{prop}\label{pm-es-convergenceToOneIsBoundedness}
+		Let $\Ens$ be an ensemble space and $\ens \in \Ens$. A set $A \subseteq \Ens$ is bounded around $\ens$ if and only if for every sequence $p_i \to 1$ and every sequence $\ens[a]_i \in A$, $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$.
+	\end{prop}
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}
+			%\draw [help lines] (0,0) grid (10,6);
+			
+			% The ensemble space
+			\draw[-, thick] plot [smooth cycle] coordinates {(0.5,1.5)(2,0.2)(5,0.5)(6,2)(5.5,4.5)(3,5.5)(0.5,4)};
+			\node[above] at (5.5,4.6) {$B$};
+			
+			% U neighborhood
+			\draw[-, thin] plot [smooth cycle] coordinates {(2.2,2.8)(3,2.2)(4.2,2.8)(4,4)(3,4.2)(2.3,3.8)};
+			\node[above right] at (3.5,4.2) {$U$};
+			
+			% V neighborhood
+			\draw[-, dashed] plot [smooth cycle] coordinates {(2.7,3.0)(3.2,2.7)(3.8,3.0)(3.7,3.6)(3.2,3.8)(2.8,3.5)};
+			\node[left] at (2.8,3.4) {$V$};
+			
+			% Point a
+			\coordinate (e) at (3.2,3.3);
+			\filldraw [black] (e) circle (1pt) node[above] {$\ens$};
+			
+			% Points b_i in A (spread out)
+			\coordinate (a1) at (1.2,1.5);
+			\coordinate (a2) at (5.2,1.2);
+			\coordinate (a3) at (4.8,4.2);
+			\filldraw [black] (a1) circle (1pt) node[left] {$\ens[a]_1$};
+			\filldraw [black] (a2) circle (1pt) node[left] {$\ens[a]_2$};
+			\filldraw [black] (a3) circle (1pt) node[right] {$\ens[a]_3$};
+			
+			% c_i = pa + (1-p)b_i in V
+			\coordinate (b1) at ($(e)!0.25!(a1)$);
+			\coordinate (b2) at ($(e)!0.25!(a2)$);
+			\coordinate (b3) at ($(e)!0.25!(a3)$);
+			\filldraw [black] (b1) circle (1pt) node[below] {$\ens[b]_1$};
+			\filldraw [black] (b2) circle (1pt) node[below] {$\ens[b]_2$};
+			\filldraw [black] (b3) circle (1pt) node[above right] {$\ens[b]_3$};
+			
+			% p_i a + (1-p_i) b_i between a and c_i
+			\coordinate (r1) at ($(e)!0.4!(b1)$);
+			\coordinate (r2) at ($(e)!0.3!(b2)$);
+			\coordinate (r3) at ($(e)!0.5!(b3)$);
+			\filldraw [gray] (r1) circle (1pt);
+			\filldraw [gray] (r2) circle (1pt);
+			\filldraw [gray] (r3) circle (1pt);
+			
+			% Lines from a to b_i (dashed, showing the mixing direction)
+			\draw[dotted, gray] (e) -- (a1);
+			\draw[dotted, gray] (e) -- (a2);
+			\draw[dotted, gray] (e) -- (a3);
+			
+			% Annotations
+			\node[right] at (6.5,4.0) {$\ens[b]_i = p\ens+\bar{p}\ens[a]_i \in V$};
+			\node[right] at (6.5,3.2) {\textcolor{gray}{$p_i\ens+\bar{p}_i\ens[a]_i = \lambda_i\ens+\bar{\lambda}_i\ens[b]_i \in U$}};
+			\node[right] at (6.5,2.4) {$\lambda_i\ens+\bar{\lambda}_i\ens[b] \in U$ for all $\ens[b]\in V$, $\lambda_i \in [0,1]$};
+		\end{tikzpicture}
+		\caption{Boundedness shrinks all of $A$ into the neighborhood $V$ (giving the $\ens[b]_i$); the tube lemma guarantees that any further mixture of $\ens$ with a point of $V$ stays in $U$ (giving the gray points).}
+	\end{figure}
+	
+	\begin{proof}
+		$(\Rightarrow)$: Let $U$ be an open neighborhood of $\ens$. Since the map $(\lambda, \ens[b]) \mapsto \lambda \ens + \bar{\lambda} \ens[b]$ is continuous and sends $[0,1] \times \{\ens\}$ to $\ens \in U$, by the tube lemma (using compactness of $[0,1]$), there exists an open neighborhood $V$ of $\ens$ such that $\lambda \ens + \bar{\lambda} \ens[b] \in U$ for all $\ens[b] \in V$ and all $\lambda \in [0,1]$.
+		
+		Since $A$ is bounded around $\ens$, there exists $p \in [0,1)$ such that $p\ens + \bar{p}A \subseteq V$. Since $p_i \to 1$, there exists $n$ such that $p_i \geq p$ for all $i > n$. For such $i$, let $\ens[b]_i = p\ens + \bar{p}\ens[a]_i \in V$ and $\lambda_i = \frac{p_i - p}{\bar{p}} \in [0,1]$. Then
+		\begin{equation}
+			\lambda_i \ens + \bar{\lambda}_i \ens[b]_i = \frac{p_i - p}{\bar{p}} \ens + \frac{1 - p - p_i + p}{\bar{p}} (p\ens + \bar{p}\ens[a]_i) = \frac{p_i - p + p - p p_i}{\bar{p}} \ens + \frac{1 - p_i}{\bar{p}} \bar{p} \ens[a] = p_i \ens + \bar{p}_i \ens[a]_i.
+		\end{equation}
+		Since $\ens[b]_i \in V$ and $\lambda_i \in [0,1]$, the choice of $V$ gives $p_i \ens + \bar{p}_i \ens[a]_i \in U$ for all $i > n$. Since $U$ was arbitrary, $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$.
+		
+		$(\Leftarrow)$: We prove the contrapositive. Suppose $A$ is not bounded around $\ens$. Then there exists an open neighborhood $U$ of $\ens$ such that for every $p \in [0,1)$, there exists $\ens[a] \in A$ with $p\ens + \bar{p}\ens[a] \notin U$. Setting $p_i = 1 - \frac{1}{i}$, for each $i$ choose $\ens[a]_i \in A$ such that $p_i\ens + \bar{p}_i\ens[a]_i \notin U$. Then $p_i \to 1$ but the sequence $p_i\ens + \bar{p}_i\ens[a]_i$ never enters $U$, and therefore does not converge to $\ens$.
+	\end{proof}
+\end{mathSection}
+
+An open problem is whether we can extend infinite convex combinations to integral. That is, given a probability measure $p : \Sigma_{\Ens} \to [0,1]$ defined over the Borel algebra of the ensemble space, we can define the mixture $\int_{\Ens} \ens \, dp$ as the limit of the convex combinations.
 
 \subsection{Common components and separateness}
 
@@ -1988,7 +2071,7 @@ The proof proceeds as follows. Suppose we take three points and assign them an e
 \end{remark}
 \end{mathSection}
 
-The fact that the ensemble space is directionally bounded gives us an intuitive property that we would, mistakenly, always think to be true. Suppose we have an ensemble $\ens$ and a sequence of ensembles $\ens[a]_i \in L$ on some line $L$ that contains $\ens$. Then $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$ if $p_i \to 1$. This does not work in a generic convex space if directions are unbounded. For example, suppose $\ens = \mathbb{R}$, which is a convex set but not directionally bounded. Let $\ens = 0$, $\ens[a]_i = i$ and $p_i = 1 - \frac{1}{i}$. Then $\left(1 - \frac{1}{i}\right) 0 + \frac{1}{i}{i} = 1$. Therefore $p_i \ens + \bar{p}_i \ens[a]_i \nto \ens$ even though $p_i \to 1$. It is, again, the entropy that guarantees that this intuitive property is satisfied.
+Since every direction is bounded, recalling \ref{pm-es-convergenceToOneIsBoundedness}, we can show that $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$ whenever $p_i \to 1$, provided that all $\ens[a]_i$ are on the same line.
 
 \begin{mathSection}
 	\begin{prop}
@@ -1999,38 +2082,11 @@ The fact that the ensemble space is directionally bounded gives us an intuitive 
 		Pick $\ens[a] \in L$ such that $\ens[a] \neq \ens$. Then every $\ens[a]_i$ can be expressed as an affine combination $\ens[a]_i = r_i \ens + \bar{r}_i \ens[a]$. We have $p_i \ens + \bar{p}_i \ens[a]_i = p_i \ens + \bar{p}_i \left( r_i \ens + \bar{r}_i \ens[a] \right) = \left( p_i + \bar{p}_i r_i \right) \ens + \bar{p}_i\bar{r}_i \ens[a]$. Since the ensemble space is directionally bounded, the sequence $r_i$ is bounded from below and above. This means that $\bar{p}_i \to 0$ implies $p_i + \bar{p}_i r_i \to 1$ and $\bar{p}_i\bar{r}_i \to 0$. Therefore by continuity $\left( p_i + \bar{p}_i r_i \right) \ens + \bar{p}_i\bar{r}_i \ens[a] \to 1 \ens + 0 \ens[a] = \ens$.
 	\end{proof}
 \end{mathSection}
-
-It is an open question whether this property is guaranteed for a generic sequence of ensembles $\ens[a]_i$, not necessarily on a line. At least, it should be extensible to the finite-dimensional case.
+This is not, however, enough to show that $\Ens$ is bounded. A set, in fact, could be bounded in every direction but still be unbounded as there is always a direction with a greater bound. That is, directional boundedness is a pointwise one-dimensional property, while boundedness around a point is a uniform property over all directions. Therefore, the question as to whether all ensemble spaces are bounded is open.
 
 \begin{conj}
-	Let $\ens \in \Ens$ and $\ens[a]_i \in \Ens$. Then $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$ if $p_i \to 1$.
+	Every ensemble space $\Ens$ is bounded around every point.
 \end{conj}
-
-
-As discussed previously, it may be that the boundedness provided by the entropy forces all submixtures of convergent infinite mixtures to converge.
-
-\begin{conj}\label{pm-es-conjSubmixturesConverge}
-	Let $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$. Then, given $I \subseteq \mathbb{N}$, $\sum_{i \in I} \frac{p_i}{p_I} \ens_i$ converges where $p_I = \sum_{i \in I} p_i$.
-\end{conj}
-
-\begin{conj}\label{pm-es-conjAlgebraicInteriorSigmaConvex}
-	The set of all internal points $I_{\Ens}$ is closed under infinite convex combinations.
-\end{conj}
-
-
-%TODO: for topology, the ensemble space is a convex neighbourhood of the origin, which means it is an absorbing set.
-
-%\begin{prop}
-%	The ensemble space is, as a subset of the embedding vector space, a radial set and, since the vector space is real, an absorbing set.
-%\end{prop}
-
-%\begin{proof}
-%	Let $\ens[a] \in \Ens$ be an internal point and $\Ens \subseteq V_{\ens[a]}$ be the ensemble space as a subset of the embedding vector space. Since $\ens[a]$ is an internal point, for every direction there exist a finite segment that starts from $\ens[a]$ and proceeds in that direction. Therefore the ensemble space is a radial set. Moreover, since in a real vector space \href{https://en.wikipedia.org/wiki/Radial_set#Relation_to_absorbing_sets}{every radial is absorbing}, the ensemble space is an absorbing set. TODO: find a better reference.
-%\end{proof}
-
-\section{Entropic geometry}
-
-In this section we will see how the entropy imposes a geometric structure on the ensemble space. The core idea is that, since the entropy is strictly concave, its Hessian is negative definite. The negation is therefore a positive definite, real-valued function of two variations and plays the role of a metric tensor.
 
 \subsection{Mixing entropy as pseudo-distance}
 
