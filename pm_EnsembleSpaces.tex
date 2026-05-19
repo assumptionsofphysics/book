@@ -3880,7 +3880,24 @@ Since the construction in terms of subspaces recovered the algebra of regular op
 
 Ideally, we would want to define convex integrals as follows. Let $p : \Sigma_{\Ens} \to [0,1]$ be a probability measure defined on the Borel algebra $\Sigma_{\Ens}$ of the ensemble space. A partition of $\Ens$ is a countable family of non-empty Borel sets $\{A_i\}_{i=1}^{\infty} \subseteq \Sigma_{\Ens}$ that are pairwise disjoint (i.e. $A_i \cap A_j = \emptyset$ for all $i \neq j$) and covering (i.e. $\bigcup_{i=1}^{\infty} A_i = \Ens$). Given a partition, a set of representatives for the partition is a set $\{\ens[a]_i\}_{i=1}^{\infty}$ such that $\ens[a]_i \in A_i$ for all $i$. An approximation of $p$ over a partition $\{A_i\}_{i=1}^{\infty}$ with representatives $\{\ens[a]_i\}_{i=1}^{\infty}$ is the ensemble, if it exists, given by $\sum_{i=1}^{\infty} p(A_i) \ens[a]_i$. The general idea is to find a notion of increased refinement of the partitions so that the limit of the approximations can be shown, if it exists, to be independent of the particular sequence of partitions and of the choice of representatives.
 
+\openproblem{Ensemble space completeness}{pm-es-ensembleSpaceCompleteness}{Ensemble spaces}{Convex spaces, Topological vector spaces, Uniform spaces}{}
+{We need a notion of completeness for ensemble spaces that is intrinsic to their structure as topological convex spaces. Such a notion should explain when infinite mixtures converge, when submixtures of convergent mixtures also converge, and how this relates to possible embeddings into topological vector spaces.}
 
+In topological vector spaces, completeness is defined in terms of Cauchy nets or filters. A net is Cauchy if its elements eventually become arbitrarily close to one another, where ``closeness'' is defined using neighborhoods of the zero vector and subtraction. Completeness is useful because it guarantees that Cauchy processes actually converge in the space. In the context of ensemble spaces, an analogous notion would be useful to determine when infinite mixtures are well-defined, when limits of preparation procedures remain valid ensembles, and when submixtures of convergent mixtures must themselves converge. This would be especially important in infinite-dimensional spaces, where boundedness alone is not sufficient unless one also has a suitable completeness condition.
+
+The difficulty is that a topological convex space does not have subtraction as a primitive operation. In a topological vector space, the expression \(x_i-x_j\) allows one to compare two elements of a net and define Cauchy convergence. In a topological convex space, we only have convex combinations, and it is not clear what should replace this comparison. One possible route is to equip ensemble spaces with a compatible uniform structure, so that Cauchy filters and Cauchy nets can be defined through entourages rather than through subtraction. The open question is whether such a uniformity can be defined canonically from the convex and topological structure, or whether additional physical structure is required.
+
+The entropy may provide such additional structure. The mixing entropy
+\[
+MS(\ens[a],\ens[b])
+=
+S\left(\frac{1}{2}\ens[a]+\frac{1}{2}\ens[b]\right)
+-
+\frac{1}{2}S(\ens[a])
+-
+\frac{1}{2}S(\ens[b])
+\]
+is non-negative, symmetric, vanishes only when \(\ens[a]=\ens[b]\), and is bounded above by one. Thus it behaves like a pseudo-distance, though it need not satisfy the triangle inequality. In the standard classical case it coincides with the Jensen--Shannon divergence, and in the quantum case with the quantum Jensen--Shannon divergence. It is therefore natural to ask whether \(MS\), \(\sqrt{MS}\), or a related entropic construction can define a useful uniformity or Cauchy structure on ensemble spaces. Such a structure may provide the right notion of completeness for infinite mixtures and may clarify the relationship between the intrinsic topology of an ensemble space and possible embeddings into topological vector spaces.
 
 \openproblem{Classicality as reducibility}{pm-es-reducibility}{Ensemble spaces}{Convex spaces}{}
 {We still need a solid characterization of the ensemble space for classical theories. Effectively, we are looking for a characterization of a convex space to be a symplex without extreme points, such that the extreme points can be understood as limits, and not elements of the convex space.}
