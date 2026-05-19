@@ -1403,6 +1403,26 @@ It is important to note that while we can write affine combinations, not all aff
 
 We still need to understand how to extend affine combination to the infinite case. The safest way is to require the two infinite mixtures $\sum_{i \in I} \frac{r_i}{r} \ens_i$ and $\sum_{i \notin I} \frac{-r_i}{r} \ens_i$ to converge and then require that the resulting affine problem admit a solution.
 
+While the mixing operation is continuous, it is unclear whether, under current axioms, affine combinations are continuous. Solving this problem would also allow us to understand whether the embedding in the vector space is continuous.
+
+\begin{conj}[Affine combinations are continuous]
+	Let $\ens[a] \in \Ens$ and let $p \in [0,1)$. Let $+_{p\ens[a]} : \Ens \to \Ens$ be the curried function $+_{p\ens[a]}(\ens[b]) = p\ens[a] + \bar{p}\ens[b]$. The function is a homeomorphism between $\Ens$ and $+_{p\ens[a]}(\Ens)$. That is, $+_{p\ens[a]}$ is a topological embedding.
+\end{conj}
+
+Since it is easy to show that mixing gives us a continuous bijection, the problem is showing that the inverse is continuous. Continuity of mixtures only shows that we can stretch open sets to bigger open sets. What we would need is to show that we can shrink open sets to open sets. For example, suppose $U$ is an open neighborhood of $\ens[a]$. The set $V = p \ens[a] + \bar{p} U$ is a set that contains $\ens[a]$ and it is a subset of $U$. The question is whether a sequence can stay in $U$ and converge to $\ens[a]$ without ever entering $V$. Our intuition would say that it can't, though the intuition may fail in the infinite dimensional case.
+
+If we restrict the endpoint of the mixture, we do have a homeomorphism onto the image. The proof uses a later result, the topology is Hausdorff, that is guaranteed by the entropy.
+
+\begin{prop}
+	Let $\ens[a], \ens[b] \in \Ens$ be two distinct ensembles.	Let $+_{\ens[a]\ens[b]} : [0,1] \to \Ens$ be the curried function $+_{\ens[a]\ens[b]}(p) = p\ens[a] + \bar{p}\ens[b]$. The function is a homeomorphism between $[0,1]$ and $+_{\ens[a]\ens[b]}([0,1])$.
+\end{prop}
+
+\begin{proof}
+	The map $+_{\ens[a]\ens[b]}$ is continuous since $+$ is continuous by the axiom of mixture. Since $\ens[a]$ and $\ens[b]$ are distinct, by \ref{pm-es-uniqueMixtureCoefficient}, $p\ens[a] + \bar{p} \ens[b] = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $p=\lambda$, which means $+_{\ens[a]\ens[b]}$ is injective, and it is therefore bijective onto its image. The domain of $+_{\ens[a]\ens[b]}$ is $[0,1]$, which is a compact. The image $+_{\ens[a]\ens[b]}([0,1])$ is a Hausdorff space since $\Ens$ is Hausdorff by \ref{pm-es-Hausdorff}. Putting it all together, $+_{\ens[a]\ens[b]}$ is a continuous bijective function from a compact space to a Hausdorff space and is therefore a homeomorphism.
+\end{proof}
+
+Note that the curried function $+{p\ens[a]}(\ens[b]) = p\ens[a] + \bar{p}\ens[b]$ is continuous and bijective onto its image, but it is not necessarily an open map. Let, in fact, $\Ens = [0,1]$ and take $p = 0.5$ and $\ens[a] = 0.5$. Then $+{p\ens[a]}(\Ens) = [0.25,0.75]$ which is not an open set in the topology of $\Ens$. The map effectively shrinks sets by half, and the isolated points at the algebraic boundary are no longer isolated points in the bulk. Note that $[0.25,0.75]$ is, however, open in the subspace topology of its image. The map, then, may fail to be open into $\Ens$, while still being open onto its image; this is exactly the condition needed for it to be a homeomorphism onto its image.
+
 \subsection{Vector space embedding}
 
 As we said before, the cancellative property is necessary and sufficient for the embedding of a convex space into a vector space. While this can be proved with a short mathematical proof, it would be an abstract construction which would not give us any insight into what is actually being represented physically. Therefore, after choosing an internal point $\ens[a] \in \Ens$ as an origin, we will construct a vector space from the ground up, as the space of differences between ensembles. This will also justify why, locally at every point, this space becomes the space of variations.
@@ -2283,38 +2303,7 @@ The fact that the mixing entropy decreases from all directions as we get closer 
 
 While the mixing entropy is defined through the entropy, the topology that it generates does not guarantee the continuity of the entropy. To see this, consider the mixture $(1-\epsilon)\ens[a] + \epsilon \ens[b]$ as a small variation around $\ens[a]$. By Proposition \ref{pm-es-mixingEntropyMonotonic}, as $\epsilon \to 0$, $MS(\ens[a], (1-\epsilon)\ens[a] + \epsilon\ens[b]) \to 0$ regardless of $\ens[b]$. However, if $\ens[a] \ortho \ens[b]$, the entropy is $S((1-\epsilon)\ens[a] + \epsilon\ens[b]) = I(1-\epsilon, \epsilon) + (1-\epsilon)S(\ens[a]) + \epsilon S(\ens[b])$. In an infinite-dimensional space, $S(\ens[b])$ can be arbitrarily large, so a small mixture with a sufficiently high-entropy ensemble produces a large entropy change even though the mixing entropy remains small.
 
-TODO: reorganize
-
-\begin{remark}
-	Note that the curried function $+_{p\ens[a]}(\ens[b]) = p\ens[a] + \bar{p}\ens[b]$ is continuous and bijective, but it's not an open map over $\Ens$. Let, in fact, $\Ens = [0,1]$ and take $p = 0.5$ and $\ens[a] = 0.5$. Then $+_{p\ens[a]}(\Ens) = [0.25,0.75]$ which is not an open set in the topology of $\Ens$. The map effectively shrinks sets by half, and the isolated points at the algebraic boundary are no longer isolated points in the bulk. Note that $[0.25,0.75]$ is, however, an open set in the subspace topology. It may be, then, that the map is open on the subspace topology.
-\end{remark}
-
-\begin{conj}[Affine combinations are continuous]
-	Let $\ens \in \Ens$ and let $p \in [0,1]$. Let $+_{p\ens[a]} : \Ens \to \Ens$ be the curried function $+_{p\ens[a]}(\ens[b]) = p\ens[a] + \bar{p}\ens[b]$. The function is a homeomorphism between $\Ens$ and $+_{p\ens[a]}(\Ens)$. That is, $+_{p\ens[a]}$ is a topological embedding.
-\end{conj}
-
-\begin{conj}
-	An ensemble space embeds continuously into a topological vector space.
-\end{conj}
-
-TODO: reorganize
-
-\begin{prop}
-	Let $\ens[a], \ens[b] \in \Ens$ be two distinct ensembles.	Let $+_{\ens[a]\ens[b]} : [0,1] \to \Ens$ be the curried function $+_{\ens[a]\ens[b]}(p) = p\ens[a] + \bar{p}\ens[b]$. The function is a homeomorphism between $[0,1]$ and $+_{\ens[a]\ens[b]}([0,1])$.
-\end{prop}
-
-\begin{proof}
-	The map $+_{\ens[a]\ens[b]}$ is continuous as it $+$ is continuous by the axiom of mixture. Since $\ens[a]$ and $\ens[b]$ are distinct, by \ref{pm-es-uniqueMixtureCoefficient}, $p\ens[a] + \bar{p} \ens[b] = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $p=\lambda$, which means $+_{\ens[a]\ens[b]}$ is injective, and it is therefore bijective onto its image. The domain of $+_{\ens[a]\ens[b]}$ is $[0,1]$, which is a compact. The image $+_{\ens[a]\ens[b]}([0,1])$ is a Hausdorff space since $\Ens$ is Hausdorff by \ref{pm-es-Hausdorff}. Putting it all together, $+_{\ens[a]\ens[b]}$ is a continuous bijective function from a compact space to a Hausdorff space and is therefore a homeomorphism.
-\end{proof}
-
-
-\begin{remark}
-	These are all about showing that mixing allows a continuous inverse. It is easy to show that mixing gives us a continuous bijection. The problem is showing that the inverse is continuous.
-	
-	Continuity of mixtures only shows that we can stretch open sets to bigger open sets. What we would need is to show that we can shrink open sets to open sets. For example, suppose $U$ is an open neighborhood of $\ens[a]$. The set $V = p \ens[a] + \bar{p} U$ is a set that contains $\ens[a]$ and it is a subset of $U$. The question is whether a sequence can stay in $U$ and converge to $\ens[a]$ without ever entering $V$.
-\end{remark}
-
-Another open question is whether the mixing entropy, or the entropy directly, can be related to a generalized notion of inner product.
+An open question is whether the mixing entropy, or the entropy directly, can be related to a generalized notion of inner product.
 
 \subsection{Entropic metric}
 
@@ -3034,15 +3023,15 @@ In principle, the space of ensembles may include quantities whose expectation is
 
 \begin{mathSection}
 \begin{defn}
-	A \textbf{quantifiable} ensemble space is an ensemble space where each ensemble can be identified by a set of statistical quantities. That is, there is family of statistical variables $F_i : \Ens \to \mathbb{R}$ such that, given $\ens_1, \ens_2 \in \Ens$, $F_i(\ens_1) = F_i(\ens_2)$ for all $i$ if and only if $\ens_1 = \ens_2$. Moreover, the topology is generated by those quantities.
+	A \textbf{quantifiable} ensemble space is an ensemble space where each ensemble can be identified by a set of statistical quantities or, equivalently, ensembles are separated by statistical quantities. That is, there is a family of statistical quantities $F_i : \Ens \to \mathbb{R}$ such that, given $\ens_1, \ens_2 \in \Ens$, $F_i(\ens_1) = F_i(\ens_2)$ for all $i$ if and only if $\ens_1 = \ens_2$. An ensemble space is \textbf{topologically quantifiable} if statistical quantities determine convergence. That is, the topology is generated by the statistical quantities.
 \end{defn}
 \end{mathSection}
 
-We are going to show that the statistical quantities can be used to construct seminorms on the embedding vector space inducing a topology that is Hausdorff and locally convex. Since the statistical quantities are continuous in both the topology of the ensemble space and on this topology of the embedding vector space, the embedding of the ensemble space is continuous. Note that this embedding is not necessarily a homeomorphism onto the image as convergence of the expectation of continuous variables (i.e. weak convergence) does not guarantee convergence of the entropy (which requires, for example, convergence of the related inner products in the classical and quantum cases). Therefore, all the topological details of the ensemble space remain open even in this case.
+We are going to show that the statistical quantities can be used to construct seminorms on the embedding vector space, inducing a topology that is Hausdorff and locally convex. Since the statistical quantities are continuous both in the topology of the ensemble space and in the topology induced on the embedding vector space, the embedding of the ensemble space is continuous. Note that the topology generated by the statistical quantities is not necessarily the topology of the ensemble space, as convergence of the expectation of continuous variables (i.e. weak convergence) does not guarantee convergence of the entropy (which requires, for example, convergence of the related inner products in the classical and quantum cases). Therefore, the embedding is not necessarily a homeomorphism onto the image with the full topology, but only with the topology generated by the statistical quantities. These coincide only in the case of a topologically quantifiable ensemble space. Finding equivalent characterizations of topologically quantifiable spaces is an open problem.
 
 \begin{mathSection}
 \begin{prop}
-	A statistical variable $F$ induces a seminorm on the vector space that embeds $\Ens$.
+	A statistical variable $F$ induces a seminorm on the embedding vector space $V_{\ens[a]}$.
 \end{prop}
 
 \begin{proof}
@@ -3074,13 +3063,13 @@ We are going to show that the statistical quantities can be used to construct se
 \end{proof}
 
 \begin{prop}
-	A quantifiable ensemble space embeds continuously into a Hausdorff locally convex topological vector space.
+	Let $\Ens$ be a quantifiable ensemble space and let $\ens[a]\in\Ens$ be an internal point. Equip the embedding vector space $V_{\ens[a]}$ with the locally convex topology generated by the seminorms induced by the statistical quantities. Then $V_{\ens[a]}$ is Hausdorff and locally convex, and the natural embedding $\iota_{\ens[a]}:\Ens\to V_{\ens[a]}$ is continuous. If, moreover, $\Ens$ is topologically quantifiable, then $\iota_{\ens[a]}$ is a homeomorphism onto its image.
 \end{prop}
 
 \begin{proof}
-	Let $\Ens$ be a quantifiable ensemble space and $V_{\ens[a]}$ be the embedding vector space corresponding to the internal point $\ens[a] \in \Ens$. Consider all the seminorms defined by the family of statistical variables that make $\Ens$ quantifiable. These will induce a topology on $V_{\ens[a]}$ making it a topological vector space (see \href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.2 in here}). Since the topology is generated by seminorms, it is locally convex. Since the seminorms fully identify each point, the topology is Hausdorff (see \href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.6 in here}).
+	Let $\Ens$ be a quantifiable ensemble space and $V_{\ens[a]}$ be the embedding vector space corresponding to the internal point $\ens[a] \in \Ens$. Consider all the seminorms defined by the family of statistical variables that make $\Ens$ quantifiable. These will induce a topology on $V_{\ens[a]}$ making it a topological vector space (see \href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.2 in here}). Since the topology is generated by seminorms, it is locally convex. Since the seminorms fully identify each point, the topology is Hausdorff (see \href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.6 in here}). Since the semi-norms are equivalently defined on $\Ens$, if $U \subseteq V_{\ens[a]}$ is an open subset of $V_{\ens[a]}$, then $U \vert_{\Ens}$ is an open subset of $\Ens$. Therefore the natural embedding $\iota_{\ens[a]}:\Ens\to V_{\ens[a]}$ is continuous.
 	
-	Now consider $\Ens$ as embedded into $V_{\ens[a]}$. If $F : \Ens \to \mathbb{R}$ is a statistical variable, then $|r F(\ens[b]) - F(\ens[a]) |$ is also a statistical variable since difference, scalar multiplication and absolute value are all continuous. This means that the open balls given by the seminorm on the vector space restricted to the ensemble space are open sets as they correspond to the open balls in the ensemble space. Moreover, since all elements of $F_i$, the statistical quantities that characterize the ensembles, are continuous in the ensemble space, a convergent sequence in the ensemble space will correspond to the convergence of all the seminorms in the vector space, thus convergence in the topology generated by said seminorms. The embedding, then, is continuous.
+	Now let $\Ens$ be topologically quantifiable. Then, since the topology generated by the statistical quantities is the topology of $\Ens$, $\iota_{\ens[a]}:\Ens\to V_{\ens[a]}$ is a topological embedding. 
 \end{proof}
 \end{mathSection}
 
