@@ -886,7 +886,7 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 
 \begin{mathSection}
 \begin{defn}
-	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{convex hull} of $A$, noted $\hull(A)$ is the set of all finite mixtures of elements contained in $A$ (i.e. it is the smallest convex set that contains $A$). The \textbf{$\sigma$-hull} of $A$, noted $\shull(A)$ is the set of all infinite mixtures of elements contained in $A$ (i.e. it is the smallest $\sigma$-convex set that contains $A$). The \textbf{closed hull} of $A$, noted $\chull(A)$ is the smallest closed convex set that contains $A$. 
+	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{convex hull} of $A$, noted $\hull(A)$ is the set of all finite mixtures of elements contained in $A$ (i.e. it is the smallest convex set that contains $A$). The \textbf{$\sigma$-hull} of $A$, noted $\shull(A)$ is the set generated from $A$ by allowing infinite mixtures (i.e. it is the smallest $\sigma$-convex set that contains $A$). The \textbf{closed hull} of $A$, noted $\chull(A)$ is the smallest closed convex set that contains $A$. 
 \end{defn}
 
 \begin{remark}
@@ -2498,55 +2498,32 @@ We now show that the metric tensor we defined reduces to the Fisher-Rao metric i
 \end{remark}
 
 \begin{prop}
-	For a quantum ensemble space, the metric corresponds to the Bures metric and the quantum Fisher information metric.
+	For a quantum ensemble space, the metric corresponds to the BKM metric.
 \end{prop}
 
 \begin{proof}
-	Since we are working in a quantum ensemble space, each ensemble is a density operator $\rho$. The entropy is given by the von Neumann entropy
+	Since we are working in a quantum ensemble space, each ensemble is a density operator $\rho$. Assume $\rho$ is full-rank. If it is not full rank, restrict variations to the subspace in which it is full-rank. A variation will then be of the form $\rho + t \delta\rho_1$ where $\delta \rho_1$ is a traceless self-adjoint operator. The entropy is given by the von Neumann entropy
 	\begin{equation}
-		S(\rho) = - \tr\left(\rho \log \rho\right).
+		S(\rho) = - \tr\left(\rho \log \rho\right),
 	\end{equation}
-	where $\log$ will be the natural logarithm throughout this calculation. We take the first variation and have
-	\begin{equation}
-		\begin{aligned}
-			\delta S(\rho) &= - \delta \tr\left(\rho \log \rho\right)= - \tr\left(\delta \rho \log \rho + \rho \delta \log \rho\right) \\
-			&= - \tr\left(\delta \rho \log \rho + \rho \rho^{-1} \delta \rho \right) \\
-			&= - \tr\left(\left(\log \rho + 1 \right) \delta \rho \right).
-		\end{aligned}
-	\end{equation}
-	We take the second variation and have
+	where $\log$ will be the natural logarithm throughout this calculation. Recall that $d_t \tr(f(X+tA))\big|_{t=0} = \tr(f'(X)A)$ where $f$ is a sufficiently regular scalar function and $f'$ its derivative. Let $f(x) = x \log x$ which means $f'(x) = \log x + 1$. We take the first variation and have
 	\begin{equation}
 		\begin{aligned}
-			\delta^2 S(\rho) &= - \delta \tr\left(\left(\log \rho + 1 \right) \delta \rho \right) \\
-			&= - \tr\left(\delta \left(\log \rho + 1 \right) \delta \rho + \left(\log \rho + 1 \right) \delta \delta \rho \right) \\
-			&= - \tr\left(\rho^{-1} \delta \rho \delta \rho + \left(\log \rho + 1 \right) \delta \delta \rho \right).
+			\delta S(\rho) &= d_t S(\rho + t\delta\rho_1)\big|_{t=0} = - d_t \tr(f(\rho + t \delta \rho_1))\big|_{t=0} = -\tr(f'(\rho)\delta \rho_1) \\
+			&= - \tr((\log \rho + I) \delta \rho_1) = - \tr(\log \rho \delta \rho_1)
 		\end{aligned}
 	\end{equation}
-	Note that $\delta \rho$ is defined in a linear chart, therefore $\delta \delta \rho = 0$. Therefore we have 
-	\begin{equation}
-		\begin{aligned}
-			\frac{\partial^2 S}{\partial \rho^2}(\delta \rho, \delta \rho) &= - \tr\left(\rho^{-1} \delta \rho \delta \rho \right).
-		\end{aligned}
-	\end{equation}
-	Let us consider a family of ensembles charted by a set of parameters $\theta^i$, not necessarily forming a linear chart. We have
-	\begin{equation}
-		\begin{aligned}
-			g_{\ens}(d\theta^i, d\theta^j) &= - \frac{\partial^2 S}{\partial \rho^2}\left(\frac{\partial 
-				\rho}{\partial \theta^i} d\theta^i, \frac{\partial 
-				\rho}{\partial \theta^j} d\theta^j\right) = \tr\left( \rho^{-1} \frac{\partial \rho}{\partial \theta^i }\frac{\partial \rho}{\partial \theta^j}\right) d\theta^i d\theta^j
-		\end{aligned}
-	\end{equation}
-	which recovers one version of the quantum Fisher-Rao metric.
+	where the last step used the fact that $\delta \rho_1$ is traceless.
 	
-	Noting that the right logarithmic derivative (RLD) $L^R$ satisfies $\frac{\partial \rho}{\partial \theta} = \rho L^R$, we can write 
+	For the second variation, note that the expression is no longer of the form $\tr(f(X))$ but is of the form $\tr(f(X)A)$ where $A$ doesn't necessarily commute with $X$. Therefore, we cannot simply take the derivative of $f$ as a scalar function but need the full derivative on the operator. Recall that $d_t \log(\rho + t \delta\rho_2)\big|_{t=0} = \int_0^\infty (\rho + \lambda I)^{-1} \delta \rho_2 (\rho + \lambda I)^{-1} d\lambda$. The second variation becomes
 	\begin{equation}
 		\begin{aligned}
-			g_{\ens}(d\theta^i, d\theta^j) &= \tr\left( \rho^{-1} \frac{\partial \rho}{\partial \theta^i }\frac{\partial \rho}{\partial \theta^j}\right) d\theta^i d\theta^j = \tr(\rho^{-1}\rho L^R
-			_i \rho L^R_j)d\theta^i d\theta^j = \tr(\rho L^R
-			_i L^R_j)d\theta^i d\theta^j
+			\delta^2 S(\rho) &= - d_t \tr\left(\log(\rho + t \delta\rho_2) \delta \rho_1 \right) \big|_{t=0} =  -  \tr\left(d_t \log(\rho + t \delta\rho_2)\big|_{t=0} \delta \rho_1 \right)   \\
+			&= - \tr\left(\int_0^\infty (\rho + \lambda I)^{-1} \delta \rho_2 (\rho + \lambda I)^{-1} d\lambda \; \delta \rho_1 \right) \\
+			&= - \int_0^\infty \tr\left(\delta \rho_1  (\rho + \lambda I)^{-1} \delta \rho_2 (\rho + \lambda I)^{-1} \right) d\lambda.
 		\end{aligned}
 	\end{equation}
-	which recovers the RLD Fisher information.
+	Therefore $g_\rho(\delta\rho_1,\delta\rho_2)=-\delta^2S(\rho)(\delta\rho_1,\delta\rho_2)$ is the BKM metric.
 \end{proof}
 
 \begin{remark}
