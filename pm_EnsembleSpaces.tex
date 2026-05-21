@@ -2535,54 +2535,73 @@ We now show that the metric tensor we defined reduces to the Fisher-Rao metric i
 
 In this section we are going to develop a generalized version of the count of states. In classical statistical mechanics, the entropy for a uniform distribution $\rho_U$ over a region of phase space $U$ is given by $S(\rho_U) = \log \mu(U)$, where $\mu$ is the count of states given by the Liouville measure. Since entropy is our starting point, we will define the state capacity of a set of ensembles as the highest exponential of the entropy achievable by mixing those ensembles. This definition works in general, and recovers both the classical Liouville measure and the dimensionality of a quantum subspace.
 
-Given an ensemble, we want to quantify the number of distinguishable cases over which the ensemble is spread. Since entropy characterizes the variability of the preparations of the ensemble, greater variability means the ensemble is spread over more cases. Therefore the count of distinguishable states must be a monotonic function of the entropy. The question is what function.
+Given an ensemble, we want to quantify the number of distinguishable cases over which the ensemble is spread. The relationship $S(\rho_U) = \log \mu(U)$ in classical statistical mechanics gives us a hint as to what is the right expression, but, as usual, we want a principled way to find the answer.
 
-The first hint that the exponential is the right function is the relationship $S(\rho_U) = \log \mu(U)$ in classical statistical mechanics. Another hint is that we will want this size to be multiplicative over independent distributions. That is, if we have two ensembles $\rho_1 \in \Ens_1$ and $\rho_2 \in \Ens_2$ of two different ensemble spaces, we can imagine the composite system $\rho = \rho_1 \rho_2$ representing the ensemble of the two independent ensembles. While the entropy should be additive, that is $S(\rho) = S_1(\rho_1) + S_2(\rho_2)$, the count of states should be multiplicative, that is $\mu(\rho) = \mu_1(\rho_1) \mu_2(\rho_2)$. This suggests the relationship $S(\rho) = \log \mu (\rho)$ for all ensembles. The other hint is that the spread can be, at most, additive. If we mix two ensembles, the spread can be at most over the configurations of both and not more. The following shows that the exponential of the entropy has exactly that property.\footnote{
-	Note that the state capacity for a single element corresponds to the ``ensemble volume'' defined in \href{https://journals.aps.org/pra/abstract/10.1103/PhysRevA.59.2602}{M.J.W. Hall 1999, Phys. Rev. A 59, 2602} and more recently \href{https://iopscience.iop.org/article/10.1088/1751-8121/aad50f}{M.J.W. Hall 2018 J. Phys. A: Math. Theor. 51 364001}. It is connected to various uncertainty relationships, including a stronger form of the quantum uncertainty principle. It would be interesting to understand what results can be generalized to the ensemble space.}
+First of all, since entropy characterizes the variability of the preparations of the ensemble, greater variability means the ensemble is spread over more cases. Therefore, the spread will be a continuous and increasing function of the entropy. That is, $sp(\ens)=f(S(\ens))$. Moreover, the count of states cannot be negative or zero for a particular ensemble, and cannot be infinite either. Therefore, $sp : \Ens \to (0,+\infty)$. When mixing two ensembles $\ens[a]$ and $\ens[b]$, the spread can at most sum. That is, $sp(p\ens[a] + \bar{p} \ens[b]) \leq sp(\ens[a]) +sp(\ens[b])$. The sum can be achieved only when two ensembles are mutually exclusive, as they must be spread on perfectly distinguishable cases. In fact, when $\ens[a] \ortho \ens[b]$, there will be a specific $p_*$ that will maximize the spread of the mixture.
+
+To sum up, we are looking for a function $f$ that satisfies the following:
+\begin{itemize}
+	\item \textbf{Continuity}
+	\item \textbf{Positivity}: $f : \mathbb{R} \to (0,+\infty)$
+	\item \textbf{Increasing}: $x \leq y \implies f(x) \leq f(y)$
+	\item \textbf{Subadditivity}: $f(S(p\ens[a]+\bar{p}\ens[b])) \leq f(S(\ens[a])) + f(S(\ens[b]))$
+	\item \textbf{Saturable additivity}: if $\ens[a] \ortho \ens[b]$ then we can find $p_* \in [0,1]$ such that $f(S(p_*\ens[a]+\bar{p}_*\ens[b])) = f(S(\ens[a])) + f(S(\ens[b]))$
+\end{itemize} 
+Up to a multiplicative constant, there is only one $f$ that satisfies these requirements: the exponential. Therefore, the fact that the count of states is the exponential of the entropy is not just an experimental fact, but a logical necessity.\footnote{Note that the state capacity for a single element corresponds to the ``ensemble volume'' defined in \href{https://journals.aps.org/pra/abstract/10.1103/PhysRevA.59.2602}{M.J.W. Hall 1999, Phys. Rev. A 59, 2602} and more recently \href{https://iopscience.iop.org/article/10.1088/1751-8121/aad50f}{M.J.W. Hall 2018 J. Phys. A: Math. Theor. 51 364001}. It is connected to various uncertainty relationships, including a stronger form of the quantum uncertainty principle. It would be interesting to understand what results can be generalized to the ensemble space.}
 
 \begin{mathSection}
-\begin{prop}[Exponential entropy subadditivity]\label{pm-es-exponentialEntropySubadditivity}
-	Let $\ens[a], \ens[b] \in \Ens$ and $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$. Then $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])}$, with the equality holding if and only if $\ens[a] \ortho \ens[b]$ and $p = \frac{2^{S(\ens[a])}}{2^{S(\ens[a])} + 2^{S(\ens[b])}}$.
-\end{prop}
-
-\begin{proof}
-	If $p$ is fixed, the upper variability bound of entropy is saturated only if $\ens[a]$ and $\ens[b]$ are orthogonal by definition. Therefore the entropy maximum for the mixed ensemble will be achieved when the elements are orthogonal, for some value of $p$.
+	\begin{prop}[Optimal mixing of orthogonal ensembles]\label{pm-es-optimalOrthogonalMixing}
+		Let $\ens[a], \ens[b] \in \Ens$ be orthogonal ensembles. Then the entropy of $p\ens[a] + \bar{p}\ens[b]$ is maximized at $p_* = \frac{2^{S(\ens[a])}}{2^{S(\ens[a])}+2^{S(\ens[b])}}$, and the maximum value is $S(p_*\ens[a]+\bar{p}_*\ens[b]) = \log(2^{S(\ens[a])}+2^{S(\ens[b])})$.
+	\end{prop}
 	
-	Now fix the entropy of $\ens[a]$ and $\ens[b]$ to some values $S_a = S(\ens[a])$ and $S_b = S(\ens[b])$. The entropy of the mixture depends only on $p$, so we need to find the $p$ that maximizes the expression. Since $\ens[a]$ and $\ens[b]$ are orthogonal, $S(p \ens[a] + \bar{p}\ens[b]) =  - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b$ which is a smooth function of $p$. Let us find the maximum, which is a stationary point.
-	\begin{equation}
-		\begin{aligned}
-			0 &= \frac{d}{dp} S(p \ens[a] + \bar{p}\ens[b]) =\frac{d}{dp} \left( - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b \right) \\
-			&= - \log p - 1 + \log \bar{p} + 1 + S_a - S_b \\
-			\log \frac{p}{\bar{p}} &= \log 2^{S_a} - \log 2^{S_b} \\
-			\log \frac{p}{1-p} &= \log \frac{2^{S_a}}{2^{S_b}}  \\
-			p 2^{S_b} &= (1-p) 2^{S_a}  \\
-			p (2^{S_a} + 2^{S_b}) &= 2^{S_a}  \\
-			p &= \frac{2^{S_a}}{2^{S_a} + 2^{S_b}}  \\
-		\end{aligned}
-	\end{equation}
-	Note that since the entropy is strictly concave, the stationary point must correspond to a maximum. Having found the value of $p$ that maximizes the entropy, we can calculate the maximum entropy.
-	\begin{equation}
-		\begin{aligned}
-			\bar{p} &= 1- \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} = \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \\
-			S(p \ens[a] + \bar{p}\ens[b]) &= - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b  \\
-			&= - \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} - \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \\
-			&+ \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log 2^{S_a} + \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log 2^{S_b} \\
-			&= \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) + \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) \\
-			&= \frac{2^{S_a} + 2^{S_b}}{2^{S_a} + 2^{S_b}} \log \left( 2^{S_a} + 2^{S_b} \right) \\
-			\log 2^{S(p \ens[a] + \bar{p}\ens[b])} &= \log \left( 2^{S_a} + 2^{S_b} \right) \\
-			2^{S(p \ens[a] + \bar{p}\ens[b])} &=  2^{S_a} + 2^{S_b}  \\
-		\end{aligned}
-	\end{equation}
-	Therefore the maximum entropy obtainable through a mixture is $S(p \ens[a] + \bar{p}\ens[b]) = \log (2^{S(\ens[a])} + 2^{S(\ens[b])})$ which is obtained when $\ens[a]$ and $\ens[b]$ are orthogonal and $p = \frac{2^{S(\ens[a])}}{2^{S(\ens[a])} + 2^{S(\ens[b])}}$.
-\end{proof}
+	\begin{proof}
+		Since $\ens[a] \ortho \ens[b]$, the entropy of the mixture is $S(p\ens[a]+\bar{p}\ens[b]) = I(p,\bar{p}) + pS(\ens[a]) + \bar{p}S(\ens[b])$, which is a smooth function of $p$. Let us find the maximum $p_*$, which is a stationary point.
+		\begin{equation}
+			\begin{aligned}
+				0 &= \frac{d}{dp} S(p \ens[a] + \bar{p}\ens[b]) \big|_{p=p_*} =\frac{d}{dp} \left( - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b \right) \big|_{p=p_*} \\
+				&= - \log p_* - \frac{1}{\ln 2} + \log \bar{p}_* + \frac{1}{\ln 2} + S_a - S_b \\
+				\log \frac{p_*}{\bar{p_*}} &= \log 2^{S_a} - \log 2^{S_b} \\
+				\log \frac{p_*}{1-p_*} &= \log \frac{2^{S_a}}{2^{S_b}}  \\
+				p_* 2^{S_b} &= (1-p_*) 2^{S_a}  \\
+				p_* (2^{S_a} + 2^{S_b}) &= 2^{S_a}  \\
+				p_* &= \frac{2^{S_a}}{2^{S_a} + 2^{S_b}}  \\
+			\end{aligned}
+		\end{equation}
+		Since the entropy is strictly concave, the stationary point is a maximum. We now find the value for the entropy:
+		\begin{equation}
+			\begin{aligned}
+				\bar{p}_* &= 1- \frac{2^{S_a}}{2^{S_a} + 2^{S_b}} = \frac{2^{S_b}}{2^{S_a} + 2^{S_b}} \\
+				S(p_*\ens[a]+\bar{p}_*\ens[b]) &= -p_*\log p_* - \bar{p}_*\log\bar{p}_* + p_*S(\ens[a]) + \bar{p}_*S(\ens[b]) \\
+				&= \frac{2^{S(\ens[a])}}{2^{S(\ens[a])}+2^{S(\ens[b])}}\log(2^{S(\ens[a])}+2^{S(\ens[b])}) + \frac{2^{S(\ens[b])}}{2^{S(\ens[a])}+2^{S(\ens[b])}}\log(2^{S(\ens[a])}+2^{S(\ens[b])}) \\
+				&= \log(2^{S(\ens[a])}+2^{S(\ens[b])}).
+			\end{aligned}
+		\end{equation}
+	\end{proof}
+	
+	\begin{prop}[Subadditivity of exponential entropy]\label{pm-es-exponentialEntropySubadditivity}
+		Let $\ens[a], \ens[b] \in \Ens$ and $\ens = p\ens[a] + \bar{p}\ens[b]$ for some $p \in [0,1]$. Then $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])}$, with equality holding if and only if $\ens[a] \ortho \ens[b]$ and $p = \frac{2^{S(\ens[a])}}{2^{S(\ens[a])}+2^{S(\ens[b])}}$.
+	\end{prop}
+	
+	\begin{proof}
+		By the upper variability bound, $S(p\ens[a]+\bar{p}\ens[b]) \leq I(p,\bar{p}) + pS(\ens[a]) + \bar{p}S(\ens[b])$, with equality if and only if $\ens[a] \ortho \ens[b]$. By \ref{pm-es-optimalOrthogonalMixing}, the right-hand side is maximized at $p_* = \frac{2^{S(\ens[a])}}{2^{S(\ens[a])}+2^{S(\ens[b])}}$ with maximum value $\log(2^{S(\ens[a])}+2^{S(\ens[b])})$. Therefore $S(\ens) \leq \log(2^{S(\ens[a])}+2^{S(\ens[b])})$, which gives $2^{S(\ens)} \leq 2^{S(\ens[a])}+2^{S(\ens[b])}$. The equality holds if and only if both the upper variability bound is saturated ($\ens[a] \ortho \ens[b]$) and the maximum over $p$ is achieved when $p = p_*$.
+	\end{proof}
+	
+	\begin{prop}[Uniqueness of exponential entropy capacity]\label{pm-es-uniquenessExponentialEntropy}
+		Let $f : \mathbb{R} \to ()0,+\infty)$ be a continuous increasing function such that $f(S(p\ens[a]+\bar{p}\ens[b])) \leq f(S(\ens[a]))+f(S(\ens[b]))$ for all $\ens[a],\ens[b]\in\Ens$ and $p\in[0,1]$, with equality for some $p \in (0,1)$ whenever $\ens[a]\ortho\ens[b]$. Then $f(S)=c \cdot 2^S$ for some $c>0$.
+	\end{prop}
+	
+	\begin{proof}
+		Let $\ens[a],\ens[b]\in\Ens$ be orthogonal ensembles. By assumption, there exists $p_0\in(0,1)$ such that $f(S(p_0\ens[a]+\bar{p}_0\ens[b])) = f(S(\ens[a]))+f(S(\ens[b]))$. By \ref{pm-es-optimalOrthogonalMixing}, the entropy of the mixture is maximized at $p_*$, so $S(p_0\ens[a]+\bar{p}_0\ens[b]) \leq S(p_*\ens[a]+\bar{p}_*\ens[b])$. Since $f$ is increasing:
+		\begin{equation}
+			f(S(\ens[a]))+f(S(\ens[b])) = f(S(p_0\ens[a]+\bar{p}_0\ens[b])) \leq f(S(p_*\ens[a]+\bar{p}_*\ens[b])) = f(\log(2^{S(\ens[a])}+2^{S(\ens[b])})).
+		\end{equation}
+		On the other hand, applying subadditivity to the mixture with coefficient $p_*$:
+		\begin{equation}
+			f(\log(2^{S(\ens[a])}+2^{S(\ens[b])})) = f(S(p_*\ens[a]+\bar{p}_*\ens[b])) \leq f(S(\ens[a]))+f(S(\ens[b])).
+		\end{equation}
+		Combining, $f(\log(2^{S(\ens[a])}+2^{S(\ens[b])})) = f(S(\ens[a]))+f(S(\ens[b]))$. Define $h:(0,+\infty)\to[0,+\infty)$ by $h(x)=f(\log x)$. Since $f$ is continuous, so is $h$. Setting $x=2^{S(\ens[a])}$ and $y=2^{S(\ens[b])}$, we have $h(x+y)=h(x)+h(y)$. By \href{https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation}{Cauchy's functional equation}, $h(x)=cx$ for some $c>0$. Substituting back, $f(S)=c \cdot 2^S$.
+	\end{proof}
 
-\begin{remark}
-	We have proved that the exponential of the entropy gives us subadditivity. Ideally, we should prove that this is the only function of the entropy with that characteristic.
-\end{remark}
-
-\begin{conj}
-	Let $f : \mathbb{R} \to \mathbb{R}$ be a continuous function such that $f(S(p\ens[a]+\bar{p}\ens[b])) \leq f(S(\ens[a])) + f(S(\ens[b]))$ and the equality can be verified in some condition. Then $f(x) = \kappa^x$ for some arbitrary constant $\kappa$.
-\end{conj}
 \end{mathSection}
 
 Given a set of ensembles, we can ask what spread is reachable by a mixture in terms of the number of distinguishable states. We call this the state capacity as it represents the maximum potential spread reachable by the set, and because it turns out to be a non-additive measure.\footnote{In some literature, capacities are non-additive measures.} The state capacity is monotone, subadditive and recovers additivity over orthogonal sets.
