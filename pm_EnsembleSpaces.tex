@@ -2378,6 +2378,20 @@ While the mixing entropy is defined through the entropy, the topology that it ge
 
 An open question is whether the mixing entropy, or the entropy directly, can be related to a generalized notion of inner product.
 
+TODO: review/add preamble
+
+\begin{prop}
+	Let $\Delta\subseteq\Ens$ be a simplex whose affine dimension equals the affine dimension of $\Ens$. Then every point $\ens[a]\in\Delta\setminus B_\Delta$ is a topological interior point of $\Delta$.
+\end{prop}
+
+\begin{proof}
+	Since $B_\Delta$ is compact and $MS(\ens[a],\cdot)$ is continuous, the set $MS(\ens[a],B_\Delta)$ is compact in $\mathbb{R}$. Since $\ens[a]\notin B_\Delta$, we have $MS(\ens[a],\ens)>0$ for all $\ens\in B_\Delta$, and therefore there exists $r>0$ such that $MS(\ens[a],\ens)\geq r$ for all $\ens\in B_\Delta$.
+	
+	We show that the entropic open ball $B_r(\ens[a])\subseteq\Delta$. Suppose for contradiction that $\ens[e]\in B_r(\ens[a])$ with $\ens[e]\notin\Delta$. Consider the segment from $\ens[a]$ to $\ens[e]$. Since $\ens[a]\in\Delta$ and $\ens[e]\notin\Delta$, and since $\Delta$ is compact and therefore closed, the segment must exit $\Delta$ at some point $\ens[b]=p\ens[a]+\bar{p}\ens[e]$ with $p\in(0,1)$. Since $\Delta$ has the same affine dimension as $\Ens$, the segment is contained in the affine hull of $\Delta$. Since $\ens[a]\in\Delta\setminus B_\Delta$, its barycentric coordinates are all strictly positive, and since these vary linearly along the segment, the exit point must have at least one zero coordinate and therefore $\ens[b]\in B_\Delta$. By \ref{pm-es-mixingEntropyMonotonic}, $MS(\ens[a],\ens[b])\leq MS(\ens[a],\ens[e])<r$, contradicting $MS(\ens[a],\ens)\geq r$ for all $\ens\in B_\Delta$.
+	
+	Therefore $B_r(\ens[a])\subseteq\Delta$, and $\ens[a]$ is a topological interior point.
+\end{proof}
+
 \subsection{Entropic metric}
 
 Following the first observation that the mixing entropy is a pseudo-distance, the second observation is that the strict concavity of the entropy forces the Hessian to be negative definite. The negation of the Hessian, then, is a positive definite function of two variations. In general, the Hessian of a scalar function is not a tensor. However, the ensemble space is a linear space and that linearity has physical significance. It is only for coordinates linear with respect to the mixing coefficient that the convex combination of coordinates will equal the statistical mixture of the corresponding ensembles. Therefore we can define a metric tensor which corresponds to the negative Hessian calculated on that linear structure. When using non-linear coordinates, as long as the coordinates are smooth, one can always make the appropriate transformation to linear coordinates.
