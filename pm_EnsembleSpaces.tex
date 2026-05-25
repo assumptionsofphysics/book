@@ -1943,6 +1943,56 @@ We are now in the position to show that the notion of affine basis corresponds t
 \end{defn}
 \end{mathSection}
 
+TODO: fix narrative
+
+\begin{prop}
+	If an ensemble space permits a basis with finite cardinality, then it contains an internal point.
+\end{prop}
+
+\begin{proof}
+	Let $\mathcal{B} = \{\ens[b]_i\}_{i=1}^n$ be a basis for the ensemble space $\Ens$. The result is trivial if $n = 1$. Let $\ens[b] = \sum_{i = 1}^n\frac{1}{n}\ens[b]_i$ be the equal mixture of the elements of $\mathcal{B}$. Let $\ens[a] \in \Ens$. Since $\mathcal{B}$ is a basis for $\Ens$, there exist $\{r_i\}_{i=1}^n \subseteq \mathbb{R}$ such that $\sum_{i=1}^nr_i = 1$ and $\ens[a] = \sum_{i=1}^nr_i\ens[b]_i$.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}		
+			\coordinate (e1)   at (-3,0);
+			\coordinate (e2)   at (3,0);
+			\coordinate (e3)   at (0,4.5);
+			\coordinate (b1)   at (-2,.5);
+			\coordinate (b2)   at (1,.75);
+			\coordinate (b3)   at (.5,3);
+			\coordinate (b)    at (-.17,1.4167);
+			\coordinate (a)    at (1.5,1.25);
+			\coordinate (a')   at (-.5,1.455);
+			
+			%ensemble space
+			\draw[-, thick] (e1) -- (e2);
+			\draw[-, thick] (e2) -- (e3);
+			\draw[-, thick] (e3) -- (e1);
+			%dashed circle and line
+			\draw[-, thick] (a') -- (a);
+			\draw [dashed] (b) circle (.75);
+			%nodes
+			\filldraw [black] (b1) circle (1pt) node[right] {$\ens[b]_1$};
+			\filldraw [black] (b2) circle (1pt) node[right] {$\ens[b]_2$};
+			\filldraw [black] (b3) circle (1pt) node[left] {$\ens[b]_3$};
+			\filldraw [black] (b) circle (1pt) node[below] {$\ens[b]$};
+			\filldraw [black] (a) circle (1pt) node[above] {$\ens[a]$};
+			\filldraw [black] (a') circle (1pt) node[above] {$\ens[a]'$};
+		\end{tikzpicture}
+	\end{figure}
+	
+	Since $\frac{\frac{1}{n} - pr_i}{\bar{p}} \to \frac{1}{n}$ as $p \to 0$, we can choose $p$ sufficiently small so that $0 \le \frac{\frac{1}{n} - pr_i}{\bar{p}} \le 1$ for all $i \in [1,n]$. Let $\ens[a]' = \sum_{i=1}^n\frac{\frac{1}{n} - pr_i}{\bar{p}}\ens[b]_i \in \Ens$. Note that $\sum_{i=1}^n\frac{\frac{1}{n} - pr_i}{\bar{p}} = 1$. We have
+	\begin{equation}
+		p\ens[a] + \bar{p}\ens[a]' = p\sum_{i=1}^n r_i\ens[b]_i + \bar{p}\sum_{i=1}^n \frac{\frac{1}{n} - pr_i}{\bar{p}}\ens[b]_i = \sum_{i=1}^n (pr_i + \frac{1}{n} - pr_i) \ens[b]_i = \sum_{i=1}^n\frac{1}{n}\ens[b]_i = \ens[b]
+	\end{equation}
+	So $\ens[b]$ is an an internal point.
+\end{proof}
+
+\begin{coro}
+	If an ensemble space is finite dimensional, then it has an internal ensemble. Hence, it embeds into a vector space.
+\end{coro}
+
 With a notion of dimension, we should be able to show that the embedding is a continuous map.
 
 \begin{conj}
