@@ -1793,10 +1793,57 @@ TODO: create open problem for infinite affine combinations; if the limit of fini
 		Let $\Ens$ be an ensemble space. We say the set $A \subseteq \Ens$ is \textbf{affine} if it closed under finite affine combinations (i.e. given $r \in \mathbb{R}$ and $\ens[a],\ens[b] \in A$, $r\ens[a] + \bar{r} \ens[b] \in A$ if it exists), and \textbf{closed and affine} if it is both affine and topologically closed.
 	\end{defn}
 	
-
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.4\textwidth]{tempimages/FlatVsConvex.jpg}
+		
+		\begin{tikzpicture}
+			\coordinate (p1) at (-5,-1.25);
+			\coordinate (p2) at (2.5,-1.25);
+			\coordinate (p3) at (5, 1.25);
+			\coordinate (p4) at (-2.5, 1.25);
+			\coordinate (e1) at (1.65,1.25);
+			\coordinate (e2) at (-1.55,1.25);
+			
+			\coordinate (a) at (-.68,-.38);
+			\coordinate (b) at (.08,.45);
+			\coordinate (c) at (.8,0);
+			
+			% sphere
+			\draw [dash pattern=on 3pt off 3pt] (2,0) arc(0.:180:2cm and .9cm); 
+			\draw [] (-2,0) arc(180:360:2cm and .9cm);
+			
+			\draw [dash pattern=on 3pt off 3pt] (0,-2) arc(-90:90:.9cm and 2cm);
+			% \draw [dash pattern=on 3pt off 3pt] (0,-2) arc(-90:-38.5:.9cm and 2cm);
+			% \draw [dash pattern=on 3pt off 3pt] (25:.9cm and 2cm) arc(25:90:.9cm and 2cm);
+			
+			\draw [] (0,2) arc(90:205:.9cm and 2cm);
+			\draw [dash pattern=on 3pt off 3pt] (205:.9cm and 2cm) arc (205:220:.9cm and 2cm);
+			\draw [] (220:.9cm and 2cm) arc (220:270:.9cm and 2cm);
+			
+			\draw (2,0) arc (0:180:2cm);
+			\draw [dash pattern=on 3pt off 3pt] (180:2cm) arc (180:219:2cm);
+			\draw (219:2cm) arc (219:321:2cm);
+			\draw [dash pattern=on 3pt off 3pt] (321:2cm) arc (321:360:2cm);
+			% axis
+			\draw [lightgray] (0,-2) -- (0,2);
+			\draw [lightgray] (0.82,0.82) -- (-0.82,-0.82);
+			\draw [lightgray] (-2,0) -- (2,0);
+			% plane
+			\draw [black] (p1) -- (p2);
+			\draw [black] (p2) -- (p3);
+			\draw [black] (p3) -- (e1);
+			\draw [dash pattern=on 3pt off 3pt] (e1) -- (e2);
+			\draw [black] (e2) -- (p4);
+			\draw [black] (p4) -- (p1);
+			% triangle
+			\draw [black] (a) -- (b);
+			\draw [black] (b) -- (c);
+			\draw [black] (c) -- (a);
+			\filldraw [black] (a) circle (1pt);
+			\filldraw [black] (b) circle (1pt);
+			\filldraw [black] (c) circle (1pt);
+			\scriptsize
+		\end{tikzpicture} 
 		\caption{Affine vs convex set. The ball is the ensemble space. The triangle represents a convex subset. The disc containing the triangle is the affine closure of the triangle in the ensemble space. The plane is the affine closure/span of the triangle in the embedding vector space centered at one of the three ensembles.}
 	\end{figure}
 	
