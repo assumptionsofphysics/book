@@ -2494,29 +2494,38 @@ TODO: review/add preamble
 \end{prop}
 
 \begin{proof}
-	Let $n=\dim(\Ens)$. Since $\ens[a]$ is algebraically internal in $A$, we can find ensembles $\ens_1,\dots,\ens_n\in A$ such that the directions from $\ens[a]$ to $\ens_i$ form an affine basis. Since $\ens[a]$ is algebraically internal in $A$, for each $\ens_i$ there exists $\ens_i'\in A$ and $p_i\in(0,1)$ such that
-	\begin{equation}
-		\ens[a]=p_i\ens_i+\bar p_i\ens_i'.
-	\end{equation}
-	Thus, for each basis direction, $A$ contains points on both sides of $\ens[a]$.
+	Let $n=\dim(\Ens)$. Since $\ens[a]$ is algebraically internal in $A$, for each direction we can find points in $A$ on both sides of $\ens[a]$. Specifically, we can find $\ens_1,\dots,\ens_n\in A$ whose directions from $\ens[a]$ form a basis, and for each $\ens_i$ a corresponding $\ens_i'\in A$ and $p_i\in(0,1)$ such that $\ens[a]=p_i\ens_i+\bar p_i\ens_i'$.
 	
-	Choose sufficiently small mixtures of these points with $\ens[a]$ so that the resulting $n+1$ points form a simplex $\Delta\subseteq A$ of full affine dimension with $\ens[a]\in\Delta\setminus B_\Delta$. Since $A$ is convex and all vertices of $\Delta$ lie in $A$, we have $\Delta\subseteq A$.
-	
-	By the previous proposition, $\ens[a]$ is a topological interior point of $\Delta$. Therefore there exists an open neighborhood $U$ of $\ens[a]$ such that
-	\begin{equation}
-		U\subseteq\Delta.
-	\end{equation}
-	Since $\Delta\subseteq A$, we have $U\subseteq A$. Therefore $\ens[a]$ is a topological interior point of $A$.
+	By taking sufficiently small mixtures of these points with $\ens[a]$, we can construct a simplex $\Delta\subseteq A$ of full affine dimension with $\ens[a]\in\Delta\setminus B_\Delta$. By the previous proposition, $\ens[a]$ is a topological interior point of $\Delta$, and since $\Delta\subseteq A$, it is a topological interior point of $A$.
 \end{proof}
+
+TODO: review. Also, if A has an interior point, it must already be of the same dimensions.
 
 \begin{prop}
 	Let $A\subseteq\Ens$ be a finite-dimensional convex set whose affine dimension equals the affine dimension of $\Ens$. If $\ens[a]\in A$ is an algebraic internal point of $A$, then $\ens[a]$ is a topological interior point of $A$.
 \end{prop}
 
 \begin{proof}
-	Let $n=\dim(\Ens)$. Since $\ens[a]$ is algebraically internal in $A$, for each direction we can find points in $A$ on both sides of $\ens[a]$. Specifically, we can find $\ens_1,\dots,\ens_n\in A$ whose directions from $\ens[a]$ form a basis, and for each $\ens_i$ a corresponding $\ens_i'\in A$ and $p_i\in(0,1)$ such that $\ens[a]=p_i\ens_i+\bar p_i\ens_i'$.
+	Let $n=\dim(\Ens)$. Since $A$ has the same affine dimension as $\Ens$, we can find $\ens[b]_1,\dots,\ens[b]_n\in A$ such that $\{\ens[a],\ens[b]_1,\dots,\ens[b]_n\}$ is affinely independent. Since $\ens[a]$ is algebraically internal in $A$, for each $\ens[b]_i$ there exists $\ens[c]_i\in A$ and $p_i\in(0,1)$ such that $\ens[a]=p_i\ens[b]_i+\bar p_i\ens[c]_i$. That is, for each affine direction determined by $\ens[b]_i$, the set $A$ contains an ensemble on the opposite side of $\ens[a]$.
 	
-	By taking sufficiently small mixtures of these points with $\ens[a]$, we can construct a simplex $\Delta\subseteq A$ of full affine dimension with $\ens[a]\in\Delta\setminus B_\Delta$. By the previous proposition, $\ens[a]$ is a topological interior point of $\Delta$, and since $\Delta\subseteq A$, it is a topological interior point of $A$.
+	Choose $\epsilon\in(0,1)$ small enough that $\frac{n\epsilon\bar p_i}{p_i}\leq 1$ for all $i$, and define
+	\begin{equation}
+		\ens[d]_i=\epsilon\ens[b]_i+\bar\epsilon\ens[a], \qquad
+		\ens[e]_i=\frac{n\epsilon\bar p_i}{p_i}\ens[c]_i+\left(1-\frac{n\epsilon\bar p_i}{p_i}\right)\ens[a], \qquad
+		\ens[d]_0=\frac{1}{n}\sum_{i=1}^n \ens[e]_i.
+	\end{equation}
+	These are convex combinations of elements of $A$, and therefore $\ens[d]_0, \ens[d]_1, \dots, \ens[d]_n \in A$. Consider the simplex $\Delta=\hull(\{\ens[d]_0,\ens[d]_1,\dots,\ens[d]_n\})$. The generating points are affinely independent because $\{\ens[a],\ens[b]_1,\dots,\ens[b]_n\}$ is affinely independent and the construction only rescales the corresponding affine directions from $\ens[a]$.
+	
+	We show that $\ens[a]\in\Delta\setminus B_\Delta$. From $\ens[a]=p_i\ens[b]_i+\bar p_i\ens[c]_i$ we have $\ens[c]_i-\ens[a]=-\frac{p_i}{\bar p_i}(\ens[b]_i-\ens[a])$, and therefore
+	\begin{equation}
+		\ens[e]_i - \ens[a] = \frac{n\epsilon\bar p_i}{p_i}(\ens[c]_i-\ens[a]) = -n\epsilon(\ens[b]_i-\ens[a]), \qquad
+		\ens[d]_i - \ens[a] = \epsilon(\ens[b]_i-\ens[a]).
+	\end{equation}
+	Therefore $\ens[d]_0 - \ens[a] = \frac{1}{n}\sum_{i=1}^n(\ens[e]_i - \ens[a]) = -\epsilon\sum_{i=1}^n(\ens[b]_i-\ens[a])$, and consequently
+	\begin{equation}
+		\frac{1}{n+1}\ens[d]_0+\sum_{i=1}^n\frac{1}{n+1}\ens[d]_i = \ens[a].
+	\end{equation}
+	All coefficients are strictly positive, so $\ens[a]\in\Delta\setminus B_\Delta$. Since $\Delta\subseteq A$ (by convexity of $A$), the previous proposition gives that $\ens[a]$ is a topological interior point of $\Delta$, and therefore of $A$.
 \end{proof}
 
 \subsection{Entropic metric}
