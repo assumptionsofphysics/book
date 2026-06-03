@@ -315,7 +315,7 @@ Therefore the convex combination of all even elements of the series diverges.
 
 Note that the above counterexample works because the series is effectively the sum of two divergent series. A notion of boundedness is therefore useful, but it will not be sufficient. We would need a notion of completeness, which is for now left as open problem \ref{pm-es-ensembleSpaceCompleteness}.
 
-We now define a notion of boundedness (i.e. sets with a ``finite range'') in a way that mimic boundedness in topological vector spaces. In a TVS, a set $A$ is bounded if every neighborhood of the origin can be stretched to include $A$. For a topological convex space, we have no origin and no way to stretch sets. However, given a point $\ens \in A$, the set of all convex combinations $p \ens + \bar{p} A$ is a copy of $A$ shrunk around $\ens$. Therefore, we can say a set $A$ is bounded around an ensemble $\ens$ if, for every open neighborhood $U$ of $\ens$, there is a $p$ such that we can shrink $A$ to be inside of $U$.
+We now define a notion of boundedness (i.e. sets with a ``finite range'') in a way that mimics boundedness in topological vector spaces. In a TVS, a set $A$ is bounded if every neighborhood of the origin can be stretched to include $A$. For a topological convex space, we have no origin and no way to stretch sets. However, given a point $\ens \in A$, the set of all convex combinations $p \ens + \bar{p} A$ is a copy of $A$ shrunk around $\ens$. Therefore, we can say a set $A$ is bounded around an ensemble $\ens$ if, for every open neighborhood $U$ of $\ens$, there is a $p$ such that we can shrink $A$ to be inside of $U$.
 
 \begin{mathSection}
 	\begin{defn}\label{pm-es-boundedSet}
@@ -388,15 +388,15 @@ There is a useful alternative property that fully characterizes bounded sets. Co
 	\end{figure}
 	
 	\begin{proof}
-		$(\Rightarrow)$: Let $U$ be an open neighborhood of $\ens$. Since the map $(\lambda, \ens[b]) \mapsto \lambda \ens + \bar{\lambda} \ens[b]$ is continuous and sends $[0,1] \times \{\ens\}$ to $\ens \in U$, by the tube lemma (using compactness of $[0,1]$), there exists an open neighborhood $V$ of $\ens$ such that $\lambda \ens + \bar{\lambda} \ens[b] \in U$ for all $\ens[b] \in V$ and all $\lambda \in [0,1]$.
+		Suppose $A$ is bounded around $\ens$. Let $U$ be an open neighborhood of $\ens$. Let $+_{\ens} : [0,1] \times \Ens \to \Ens$ be the map defined by $+_{\ens}(p, \ens[b]) \mapsto p \ens + \bar{\lambda} \ens[b]$. This map is continuous, and therefore $+_{\ens}^{-1}(U)$ is open with $[0,1]\times\{\ens[e]\} \subseteq +_{\ens}^{-1}(U)$. Since $[0,1]\times\{\ens[e]\}$ is compact, by the \href{https://en.wikipedia.org/wiki/Tube_lemma}{tube lemma}, there exists an open neighborhood $V$ of $\ens$ such that $p \ens + \bar{p} \ens[b] \in U$ for all $\ens[b] \in V$ and all $p \in [0,1]$.
 		
 		Since $A$ is bounded around $\ens$, there exists $p \in [0,1)$ such that $p\ens + \bar{p}A \subseteq V$. Since $p_i \to 1$, there exists $n$ such that $p_i \geq p$ for all $i > n$. For such $i$, let $\ens[b]_i = p\ens + \bar{p}\ens[a]_i \in V$ and $\lambda_i = \frac{p_i - p}{\bar{p}} \in [0,1]$. Then
 		\begin{equation}
-			\lambda_i \ens + \bar{\lambda}_i \ens[b]_i = \frac{p_i - p}{\bar{p}} \ens + \frac{1 - p - p_i + p}{\bar{p}} (p\ens + \bar{p}\ens[a]_i) = \frac{p_i - p + p - p p_i}{\bar{p}} \ens + \frac{1 - p_i}{\bar{p}} \bar{p} \ens[a] = p_i \ens + \bar{p}_i \ens[a]_i.
+			\lambda_i \ens + \bar{\lambda}_i \ens[b]_i = \frac{p_i - p}{\bar{p}} \ens + \frac{1 - p - p_i + p}{\bar{p}} (p\ens + \bar{p}\ens[a]_i) = \frac{p_i - p + p - p p_i}{\bar{p}} \ens + \frac{1 - p_i}{\bar{p}} \bar{p} \ens[a]_i = p_i \ens + \bar{p}_i \ens[a]_i.
 		\end{equation}
 		Since $\ens[b]_i \in V$ and $\lambda_i \in [0,1]$, the choice of $V$ gives $p_i \ens + \bar{p}_i \ens[a]_i \in U$ for all $i > n$. Since $U$ was arbitrary, $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$.
 		
-		$(\Leftarrow)$: We prove the contrapositive. Suppose $A$ is not bounded around $\ens$. Then there exists an open neighborhood $U$ of $\ens$ such that for every $p \in [0,1)$, there exists $\ens[a] \in A$ with $p\ens + \bar{p}\ens[a] \notin U$. Setting $p_i = 1 - \frac{1}{i}$, for each $i$ choose $\ens[a]_i \in A$ such that $p_i\ens + \bar{p}_i\ens[a]_i \notin U$. Then $p_i \to 1$ but the sequence $p_i\ens + \bar{p}_i\ens[a]_i$ never enters $U$, and therefore does not converge to $\ens$.
+		Conversely, suppose for every sequence $p_i \to 1$ and every sequence $\ens[a]_i \in A$, $p_i \ens + \bar{p}_i \ens[a]_i \to \ens[e]$. Now, suppose $A$ is not bounded around $\ens$. Then there exists an open neighborhood $U$ of $\ens$ such that for every $p \in [0,1)$, there exists $\ens[a] \in A$ with $p\ens + \bar{p}\ens[a] \notin U$. Setting $p_i = 1 - \frac{1}{i}$, for each $i$ choose $\ens[a]_i \in A$ such that $p_i\ens + \bar{p}_i\ens[a]_i \notin U$. Then $p_i \to 1$ but the sequence $p_i\ens + \bar{p}_i\ens[a]_i$ never enters $U$, and therefore does not converge to $\ens$.
 	\end{proof}
 \end{mathSection}
 
@@ -1671,7 +1671,7 @@ While the motivation is straightforward, the construction is complicated by the 
 	\end{thrm}
 	
 	\begin{proof}
-		Scalar multiplication is compatible with the multiplication between scalars since $r(s(t(\ens[b] - \ens[a])))= r((st)(\ens[b]-\ens[a])) = (rst)(\ens[b]-\ens[a]) = (rs)(t(\ens[b]-\ens[a]))$. The identity of the scalars is the identity of scalar multiplication since $1(r(\ens[b]-\ens[a])) = r(\ens[b] - \ens[a])$. Scalar multiplication is distributive with respect to vector addition:
+		Scalar multiplication is compatible with the multiplication between scalars since $r(s(t(\ens[b] - \ens[a])))= r((st)(\ens[b]-\ens[a])) = (rst)(\ens[b]-\ens[a]) = (rs)(t(\ens[b]-\ens[a]))$. The identity of the scalars is the identity of scalar multiplication since $1(r(\ens[b]-\ens[a])) = r(\ens[b] - \ens[a])$. Scalar multiplication is distributive with respect to vector addition
 		\begin{equation}
 			\begin{aligned}
 				&t\left(\left[r(\ens[b] - \ens[a])\right] + \left[s(\ens[c] - \ens[a])\right]\right) \\
@@ -1679,14 +1679,14 @@ While the motivation is straightforward, the construction is complicated by the 
 				&= \left[t(r+s+k) \left(\left(\frac{r}{r+s+k}\ens[b] + \frac{s}{r+s+k} \ens[c] +\frac{k}{r+s+k} \ens[a] \right) - \ens[a]\right)\right] \\
 				&= \left[(tr+ts+tk) \left(\left(\frac{tr}{tr+ts+tk}\ens[b] + \frac{ts}{tr+ts+tk} \ens[c] +\frac{tk}{tr+ts+tk} \ens[a] \right) - \ens[a]\right)\right] \\
 				&= \left[(tr+ts+k') \left(\left(\frac{tr}{tr+ts+k'}\ens[b] + \frac{ts}{tr+ts+k'} \ens[c] +\frac{k'}{tr+ts+k'} \ens[a] \right) - \ens[a]\right)\right] \\
-				&\left[tr(\ens[b] - \ens[a])\right] + \left[ts(\ens[c] - \ens[a])\right].
+				&=\left[tr(\ens[b] - \ens[a])\right] + \left[ts(\ens[c] - \ens[a])\right].
 			\end{aligned}
 		\end{equation}
 		Scalar multiplication is distributive with respect to scalar addition
 		\begin{equation}
 			\begin{aligned}
 				&s\left[r(\ens[b] - \ens[a])\right] + t\left[r(\ens[b] - \ens[a])\right] \\
-				&\left[sr(\ens[b] - \ens[a])\right] + \left[tr(\ens[b] - \ens[a])\right] \\
+				&=\left[sr(\ens[b] - \ens[a])\right] + \left[tr(\ens[b] - \ens[a])\right] \\
 				&= \left[(sr+tr+k) \left(\left(\frac{sr}{sr+tr+k}\ens[b] + \frac{tr}{sr+tr+k} \ens[b] +\frac{k}{sr+tr+k} \ens[a] \right) - \ens[a]\right)\right] \\
 				&= \left[(sr+tr+k) \left(\left(\frac{sr+tr}{sr+tr+k}\ens[b] + \frac{k}{sr+tr+k} \ens[a] \right) - \ens[a]\right)\right] \\
 				&= [((s+t)r)(\ens[b]-\ens[a])] \\
