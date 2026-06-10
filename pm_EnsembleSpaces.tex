@@ -2397,134 +2397,84 @@ We define the mixing entropy as the increase in entropy for the equal mixture of
 \end{remark}
 \end{mathSection}
 
-Though the mixing entropy is not a distance function, we can still show that, like a distance, it decreases as one ensemble approaches another. The notion of two ensembles approaching is given by the convex structure: in a convex space, a mixture of $\ens[a]$ and $\ens[b]$ is closer to $\ens[a]$ than $\ens[b]$ is to $\ens[a]$.
+Though the mixing entropy is not a distance function, we can still show that, like a distance, it satisfies something like a triangle inequality over a line and it decreases as one ensemble approaches another. The notion of two ensembles approaching is given by the convex structure: in a convex space, a mixture of $\ens[a]$ and $\ens[b]$ is closer to $\ens[a]$ than $\ens[b]$ is to $\ens[a]$.
 
 \begin{mathSection}
-\begin{prop}\label{pm-es-mixingEntropyMonotonic}
-	Let $\ens[a], \ens[b] \in \Ens$. Then $MS(\ens[a], \ens[b]) \geq MS(\ens[a], p\ens[a]+\bar{p}\ens[b])$ with the equality holding if and only if $p=0$ or $\ens[a] = \ens[b]$.
+	
+\begin{prop}
+	Let $\ens[a],\ens[b] \in \Ens$. Then $MS(\ens[a],\ens[b]) \ge MS(\ens[a],p\ens[a]+\bar{p}\ens[b])+MS(\ens[b],p\ens[a]+\bar{p}\ens[b])$ with equality if and only if $\ens[a]=\ens[b]$ or $p \in \{0,1\}$.
 \end{prop}
-
+	
 \begin{proof}
-	Note that, since $MS(\ens[a], \ens[b]) = 0$ if and only if $\ens[a]=\ens[b]$, the result holds with equality for all $p \in [0,1]$ if and only if $\ens[a]=\ens[b]$. For the rest of the proof, we will therefore assume $\ens[a] \neq \ens[b]$
-	
-    The result holds trivially for $p = 1$. In fact, $MS(\ens[a], \ens[b]) \geq MS(\ens[a], p\ens[a]+\bar{p}\ens[b]) = MS(\ens[a], \ens[a]) = 0$.
-
-\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}		
-		\coordinate (a)   at (0,0);
-		\coordinate (7ab)   at (1,0);
-		\coordinate (3ab)   at (2,0);
-		\coordinate (ab)   at (4,0);
-		\coordinate (b)   at (8,0);
-		\coordinate (p)   at (7,0);
-		\coordinate (t1)   at (.5,0);
-		\coordinate (t2)   at (.25,0);
-		\coordinate (t3)   at (.125,0);
-		
-		\draw[-, thick] (a) -- (b);
-		\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
-		\filldraw [black] (7ab) circle (1pt) node[below] {$\frac{7}{8}\ens[a] + \frac{1}{8}\ens[b]$};
-		\filldraw [black] (3ab) circle (1pt) node[above] {$\frac{3}{4}\ens[a] + \frac{1}{4}\ens[b]$};
-		\filldraw [black] (ab) circle (1pt) node[below] {$\frac{1}{2}\ens[a] + \frac{1}{2}\ens[b]$};
-		\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
-		\filldraw [black] (p) circle (1pt) node[above] {$p\ens[a] + \bar{p}\ens[b]$};
-		\filldraw [black] (t1) circle (1pt) node[above] {};
-		\filldraw [black] (t2) circle (1pt) node[above] {};
-		\filldraw [black] (t3) circle (1pt) node[above] {};
-	\end{tikzpicture}
-\end{figure}
-	
-    Let us show that the inequality holds for $0 \le p \le \frac{1}{2}$.
-	First let us show that $\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]$ can be expressed as a mixture of $\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)$ and $p\ens[a] + \bar{p} \ens[b]$.
+	Let $S_{\ens[a]\ens[b]}:[0,1] \to \mathbb{R}$ be the map $S_{\ens[a]\ens[b]}(p) \mapsto S(p\ens[a]+\bar{p}\ens[b])$. First we show $S_{\ens[a]\ens[b]}$ is concave. Let $x,y \in [0,1]$. For all $t \in [0,1]$ we have
 	\begin{equation}
 		\begin{aligned}
-			\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b] &= \frac{1}{2} \frac{1-2p + p - 2p^2 + 2p^2}{1-p} \ens[a] + \frac{1}{2}\left(1-2p+2p\right) \ens[b] \\
-			&= \left( \frac{1-2p}{1-p} \frac{1+p}{2} + \frac{2}{2} \frac{p^2}{1-p} \right) \ens[a] + \left( \frac{1-2p}{1-p} \frac{\bar{p}}{2}+ \frac{2}{2} \frac{p\bar{p}}{1-p} \right) \ens[b] \\
-			&=  \frac{1-2p}{1-p}\left[\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right] + \frac{p}{1-p}\left[p\ens[a] + \bar{p} \ens[b]\right]
+			S_{\ens[a]\ens[b]}((1-t)x+ty) &= S\left([(1-t)x+ty]\ens[a] + \overline{[(1-t)x + ty]}\ens[b]\right) \\
+			&= S\left((1-t)[x\ens[a]+\bar{x}\ens[b]]+t[y\ens[a]+\bar{y}\ens[b]]\right) \\
+			&\ge (1-t)S(x\ens[a]+\bar{x}\ens[b]) + tS(y\ens[a]+\bar{y}\ens[b]) \\
+			&= (1-t)S_{\ens[a]\ens[b]}(x)+tS_{\ens[a]\ens[b]}(y)
 		\end{aligned}
 	\end{equation}
-	From strict concavity we have
-	\begin{equation}
-		\begin{aligned}
-			S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b] \right) &\geq  \frac{1-2p}{1-p}S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) + \frac{p}{1-p} S\left(p\ens[a] + \bar{p} \ens[b]\right).
-		\end{aligned}
-	\end{equation}
-	Note that the equality holds only if $p=0$, in which case the second mixing coefficient is zero.
+	with equality if and only if $x\ens[a]+\bar{x}\ens[b] = y\ens[a]+\bar{y} \ens[b]$. Hence $S_{\ens[a]\ens[b]}$ is concave.
 	
-	Now let us show that $p \ens[a] + \bar{p} \ens[b]$ can be expressed as a mixture of $\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)$ and $\ens[b]$.
-	\begin{equation}
-		\begin{aligned}
-			p \ens[a] + \bar{p} \ens[b]
-			&= p \ens[a] + \bar{p} \frac{p+1}{1+p}\ens[b] \\
-			&= \frac{2p}{1+p} \frac{1+p}{2} \ens[a] + \left( \frac{2p}{1+p} \frac{\bar{p}}{2}+ \frac{\bar{p}}{1+p} \right) \ens[b] \\
-			&= \frac{2p}{1+p}\left[\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right] + \frac{1-p}{1+p} \ens[b]
-		\end{aligned}
-	\end{equation}
-	From strict concavity we have
-	\begin{equation}
-		\begin{aligned}
-			S\left(p \ens[a] + \bar{p} \ens[b] \right)&\geq \frac{2p}{1+p} S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) + \frac{1-p}{1+p} S(\ens[b]) \\
-			-S(\ens[b]) &\geq \frac{1+p}{1-p} \frac{2p}{1+p} S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) - \frac{1+p}{1-p} S\left(p \ens[a] + \bar{p} \ens[b] \right) \\
-			&= \frac{2p}{1-p} S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) - \frac{1+p}{1-p} S\left(p \ens[a] + \bar{p} \ens[b] \right).
-		\end{aligned}
-	\end{equation}
-	Note that the equality holds only if $p=0$, in which case the first mixing coefficient is zero.
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}		
+			\coordinate (a)   at (0,0);
+			\coordinate (b)   at (8,0);
+			\coordinate (p)   at (2,0);
+			\coordinate (l)   at (1,0);
+			\coordinate (u)   at (5,0);
+			\coordinate (m)    at (4,0);
+			
+			\draw[-, thick] (a) -- (b);
+			\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
+			\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
+			\filldraw [black] (p) circle (1pt) node[above] {$p\ens[a] + \bar{p}\ens[b]$};
+			\filldraw [black] (u) circle (1pt) node[above] {$\frac{p}{2}\ens[a]+\frac{2-p}{2}\ens[b]$};
+			\filldraw [black] (l) circle (1pt) node[below] {$\frac{p+1}{2}\ens[a]+\frac{1-p}{2}\ens[b]$};
+			\filldraw [black] (m) circle (1pt) node[below] {$\frac{1}{2}\ens[a]+\frac{1}{2}\ens[b]$};
+		\end{tikzpicture}
+	\end{figure}
 	
+	We can use $S_{ab}$ to break the expression of the mixing entropy. Aided by the figure above, we have
+	\begin{equation}
+		\begin{aligned}
+			MS(\ens[a],\ens[b]) &= S_{\ens[a]\ens[b]}\left(\frac{1}{2}\right)-\frac{1}{2}(S_{\ens[a]\ens[b]}(1)+S_{\ens[a]\ens[b]}(0)) \\
+			MS(\ens[a],p\ens[a]+\bar{p}\ens[b]) &= S_{\ens[a]\ens[b]}\left(\frac{p+1}{2}\right)-\frac{1}{2}(S_{\ens[a]\ens[b]}(1)+S_{\ens[a]\ens[b]}(p)) \\
+			MS(\ens[b],p\ens[a]+\bar{p}\ens[b]) &= S_{\ens[a]\ens[b]}\left(\frac{p}{2}\right)-\frac{1}{2}(S_{\ens[a]\ens[b]}(0)+S_{\ens[a]\ens[b]}(p))
+		\end{aligned}
+	\end{equation}
+	Thus
+	\begin{equation}
+		\begin{aligned}
+			MS(\ens[a],p\ens[a]+\bar{p}\ens[b]) + MS(\ens[b],p\ens[a]+\bar{p}\ens[b]) &= S_{\ens[a]\ens[b]}\left(\frac{p+1}{2}\right)+S_{\ens[a]\ens[b]}\left(\frac{p}{2}\right)\\&-S_{\ens[a]\ens[b]}(p)-\frac{1}{2}(S_{\ens[a]\ens[b]}(1)+S_{\ens[a]\ens[b]}(0))
+		\end{aligned}
+	\end{equation}
+	Since $p = (1-p)\frac{p}{2} + p\frac{p+1}{2}$, we get $S_{\ens[a]\ens[b]}(p) \ge (1-p)S_{\ens[a]\ens[b]}(\frac{p}{2}) + pS_{\ens[a]\ens[b]}(\frac{p+1}{2})$. Since $\frac{1}{2} = p\frac{p}{2} + (1-p)\frac{p+1}{2}$, we get $S_{\ens[a]\ens[b]}(\frac{1}{2}) \ge pS_{\ens[a]\ens[b]}(\frac{p}{2}) + (1-p)S_{\ens[a]\ens[b]}(\frac{p+1}{2})$. Therefore
+	\begin{equation}
+		\begin{aligned}
+			S_{\ens[a]\ens[b]}(p) + S_{\ens[a]\ens[b]}\left(\frac{1}{2}\right) &\ge (1-p)S_{\ens[a]\ens[b]}\left(\frac{p}{2}\right) + pS_{\ens[a]\ens[b]}\left(\frac{p+1}{2}\right) + pS_{\ens[a]\ens[b]}\left(\frac{p}{2}\right) + (1-p)S_{\ens[a]\ens[b]}\left(\frac{p+1}{2}\right) \\ &= S_{\ens[a]\ens[b]}\left(\frac{p}{2}\right) + S_{\ens[a]\ens[b]}\left(\frac{p+1}{2}\right)
+		\end{aligned}
+	\end{equation}
 	Putting it all together
 	\begin{equation}
 		\begin{aligned}
-			MS(\ens[a],\ens[b]) &= S\left(\frac{1}{2} \ens[a] + \frac{1}{2} \ens[b]\right)- \frac{1}{2} S(\ens[a]) - \frac{1}{2} S(\ens[b]) \\
-			&\geq \frac{1-2p}{1-p}S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) + \frac{p}{1-p} S\left(p\ens[a] + \bar{p} \ens[b]\right) - \frac{1}{2} S(\ens[a]) \\
-			&+ \frac{1}{2}\left[\frac{2p}{1-p} S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) - \frac{1+p}{1-p} S\left(p \ens[a] + \bar{p} \ens[b] \right)\right] \\
-			&= \left(\frac{1-2p + p}{1-p}\right)S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) - \frac{1}{2} S(\ens[a]) + \frac{1}{2}\left(\frac{2p-1-p}{1-p}\right) S\left(p\ens[a] + \bar{p} \ens[b]\right) \\
-			&= S\left(\frac{1}{2} \ens[a] + \frac{1}{2}\left(p\ens[a] + \bar{p} \ens[b]\right)\right) - \frac{1}{2} S(\ens[a]) - \frac{1}{2} S\left(p\ens[a] + \bar{p} \ens[b]\right) \\
-			&= MS(\ens[a], p\ens[a] + \bar{p} \ens[b]).
+			MS(\ens[a],p\ens[a]+\bar{p}\ens[b]) + MS(\ens[b],p\ens[a]+\bar{p}\ens[b]) &\le S_{\ens[a]\ens[b]}(p) + S_{\ens[a]\ens[b]}\left(\frac{1}{2}\right) - S_{\ens[a]\ens[b]}(p) - \frac{1}{2}(S_{\ens[a]\ens[b]}(1) + S_{\ens[a]\ens[b]}(0)) \\ &= MS(\ens[a],\ens[b])
 		\end{aligned}
 	\end{equation}
-	The equality holds only if $p=0$.
-
-\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}		
-		\coordinate (a)   at (0,0);
-		\coordinate (7ab)   at (1,0);
-		\coordinate (3ab)   at (2,0);
-		\coordinate (ab)   at (4,0);
-		\coordinate (b)   at (8,0);
-		\coordinate (p)   at (3.25,0);
-		\coordinate (t1)   at (.5,0);
-		\coordinate (t2)   at (.25,0);
-		\coordinate (t3)   at (.125,0);
-		
-		\draw[-, thick] (a) -- (b);
-		\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
-		\filldraw [black] (7ab) circle (1pt) node[above] {$\frac{7}{8}\ens[a] + \frac{1}{8}\ens[b]$};
-		\filldraw [black] (3ab) circle (1pt) node[below] {$\frac{3}{4}\ens[a] + \frac{1}{4}\ens[b]$};
-		\filldraw [black] (ab) circle (1pt) node[below] {$\frac{1}{2}\ens[a] + \frac{1}{2}\ens[b]$};
-		\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
-		\filldraw [black] (p) circle (1pt) node[above] {$p\ens[a] + \bar{p}\ens[b]$};
-		\filldraw [black] (t1) circle (1pt) node[above] {};
-		\filldraw [black] (t2) circle (1pt) node[above] {};
-		\filldraw [black] (t3) circle (1pt) node[above] {};
-	\end{tikzpicture}
-\end{figure}
-
-	Let us show that the result also holds for to $\frac{1}{2} < p < 1$.
-	Since $\{1 - \frac{1}{2^n}\}_{n=0}^{\infty}$ is a strictly increasing sequence that starts at $1$ and converges to 0, there exists an $n \in \mathbb{N}$ such that $1 - \frac{1}{2^n} \le p \le 1 - \frac{1}{2^{n+1}}$. Let us show that $p\ens[a] + \bar{p}\ens[b]$ can be written as $\lambda\ens[a] + \bar{\lambda}[(1-\frac{1}{2^{n}})\ens[a] + \frac{1}{2^{n}}\ens[b]]$ where $0 \le \lambda \le \frac{1}{2}$.
-	\begin{equation}
-		\begin{aligned}
-			p\ens[a] + \bar{p}\ens[b] 
-			&= \frac{2^n - 1 + 2^np - 2^n + 1}{2^n} \ens[a] + \frac{1+2^n (1-p) -1}{2^n} \ens[b] \\ 
-			&= \left( \left( 2^n p - 2^n + 1 \right) - \left( 2^n p - 2^n + 1 \right) + 1 - \frac{1}{2^n} + \frac{ 2^n p - 2^n + 1}{2^n} \right) \ens[a] \\ 
-			&+ \frac{1 - \left( 2^n p - 2^n + 1 \right)}{2^n} \ens[b] \\ 
-			&= \left( 2^n p - 2^n + 1 \right) \ens[a] + \left( 1 - \left( 2^np - 2^n + 1 \right) \right) \left[\left(1-\frac{1}{2^n}\right) \ens[a] + \frac{1}{2^n} \ens[b]\right] \\
-			&= \lambda \ens[a] + \bar{\lambda} \left[\left(1-\frac{1}{2^n}\right) \ens[a] + \frac{1}{2^n} \ens[b]\right]
-		\end{aligned}
-	\end{equation}
-	where $\lambda = 2^n p - 2^n + 1$.
-	Note that $0 \le \lambda \le \frac{1}{2}$ if $1 - \frac{1}{2^n} \le p \le 1 - \frac{1}{2^{n+1}}$. Thus, from the first part of the proof, we get $MS(\ens[a], p\ens[a] + \bar{p} \ens[b]) \le MS(\ens[a], (1-\frac{1}{2^n}) \ens[a] + \frac{1}{2^n}\ens[b])$. Note that this result is recursive for $p = 1 - \frac{1}{2^n}$. Therefore, we can use induction to show $MS(\ens[a], p\ens[a] + \bar{p} \ens[b]) \le MS(\ens[a], (1-\frac{1}{2^n}) \ens[a] + \frac{1}{2^n}\ens[b]) \le MS(\ens[a], \ens[b])$.
+	
+	If $p \in \{0,1\}$, then the equality holds trivially. Otherwise, by the equality condition of $S_{\ens[a]\ens[b]}$, the equality holds if and only if $\frac{p}{2}\ens[a] + \frac{2-p}{2}\ens[b] = \frac{p+1}{2}\ens[a] + \frac{1-p}{2}\ens[b]$, and this occurs if and only if $\ens[a]=\ens[b]$ since ensemble spaces are cancellative.
 \end{proof}
+
+\begin{coro}\label{pm-es-mixingEntropyMonotonic}
+	Let $\ens[a],\ens[b] \in \Ens$. Then $MS(\ens[a],\ens[b]) \ge MS(\ens[a],p\ens[a]+\bar{p}\ens[b])$ with equality if and only if $p=0$ or $\ens[a]=\ens[b]$.
+\end{coro}
+
+\begin{proof}
+	We have $MS(\ens[a],\ens[b]) \ge MS(\ens[a],p\ens[a]+\bar{p}\ens[b]) + MS(\ens[b],p\ens[a]+\bar{p}\ens[b])$. Since $MS(p\ens[a]+\bar{p}\ens[b],\ens[b]) \ge 0$ with equality holding if and only if $p=0$ or $\ens[a]=\ens[b]$, the result follows.
+\end{proof}
+	
 \end{mathSection}
 
 The fact that the mixing entropy decreases from all directions as we get closer to an ensemble allows us to create a notion of open ball, which allows to prove the topology is at least Hausdorff.
