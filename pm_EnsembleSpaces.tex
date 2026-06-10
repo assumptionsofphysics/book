@@ -321,6 +321,69 @@ We now define a notion of boundedness (i.e. sets with a ``finite range'') in a w
 	\begin{defn}\label{pm-es-boundedSet}
 		Let $\Ens$ be an ensemble space and $\ens \in \Ens$. A set $A \subseteq \Ens$ is \textbf{bounded around $\ens$} if for every open neighborhood $U$ of $\ens$, there exists $p \in [0,1)$ such that $p\ens + \bar{p}A \subseteq U$.
 	\end{defn}
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=0.75]
+		\coordinate (e) at (0,0);
+		\coordinate (U) at (-1.3,2.7);
+		\coordinate (A) at (5,1.9);
+		\coordinate (A') at (0.2,1.5);
+		
+		\coordinate (Aoffset) at (1,-1);
+		
+		\coordinate (A1) at ($(0.7, 3.2) + (Aoffset)$);
+		\coordinate (A2) at ($(1.5,4.0) + (Aoffset)$);
+		\coordinate (A3) at ($(2.3,3.7) + (Aoffset)$);
+		\coordinate (A4) at ($(3.1,3.2) + (Aoffset)$);
+		\coordinate (A5) at ($(2.6,2.5) + (Aoffset)$);
+		\coordinate (A6) at ($(1.7,2.1) + (Aoffset)$);
+		\coordinate (A7) at ($(2.1,1.5) + (Aoffset)$);
+		\coordinate (A8) at ($(3.3,1.5) + (Aoffset)$);
+		\coordinate (A9) at ($(3.2,0.8) + (Aoffset)$);
+		\coordinate (A10) at ($(2.2,0.4) + (Aoffset)$);
+		\coordinate (A11) at ($(1.1,0.6) + (Aoffset)$);
+		\coordinate (A12) at ($(0.7,1.5) + (Aoffset)$);
+		\coordinate (A13) at ($(0.8,2.3) + (Aoffset)$);
+		
+		\coordinate (U1) at (-1.2,1.4);
+		\coordinate (U2) at (-0.3,1.9);
+		\coordinate (U3) at (0.8,1.7);
+		\coordinate (U4) at (1.7,1.1);
+		\coordinate (U5) at (1.9,0.1);
+		\coordinate (U6) at (1.8,-1);
+		\coordinate (U7) at (3.2,-1.2);
+		\coordinate (U8) at (3.0,-1.9);
+		\coordinate (U9) at (1.5,-2.1);
+		\coordinate (U10) at (0,-1.9);
+		\coordinate (U11) at (-1.0,-1.2);
+		\coordinate (U12) at (-1.4,0.2);
+		
+		\def\As{1.3}
+		\def\Bs{.58}
+		\def\Us{1.4}
+		
+		
+		%U
+		\draw [dashed] plot [smooth cycle] coordinates {($(e)!\Us!(U1)$) ($(e)!\Us!(U2)$) ($(e)!\Us!(U3)$) ($(e)!\Us!(U4)$) ($(e)!\Us!(U5)$) ($(e)!\Us!(U6)$) ($(e)!\Us!(U7)$) ($(e)!\Us!(U8)$) ($(e)!\Us!(U9)$) ($(e)!\Us!(U10)$) ($(e)!\Us!(U11)$) ($(e)!\Us!(U12)$)};
+		
+		%A
+		\draw [] plot [smooth cycle] coordinates {($(e)!\As!(A1)$) ($(e)!\As!(A2)$) ($(e)!\As!(A3)$) ($(e)!\As!(A4)$) ($(e)!\As!(A5)$) ($(e)!\As!(A6)$) ($(e)!\As!(A7)$) ($(e)!\As!(A8)$) ($(e)!\As!(A9)$) ($(e)!\As!(A10)$) ($(e)!\As!(A11)$) ($(e)!\As!(A12)$) ($(e)!\As!(A13)$)};
+		
+		%p\ens[e]+\bar{p}A
+		\draw [] plot [smooth cycle] coordinates {($(e)!\Bs!(A1)$) ($(e)!\Bs!(A2)$) ($(e)!\Bs!(A3)$) ($(e)!\Bs!(A4)$) ($(e)!\Bs!(A5)$) ($(e)!\Bs!(A6)$) ($(e)!\Bs!(A7)$) ($(e)!\Bs!(A8)$) ($(e)!\Bs!(A9)$) ($(e)!\Bs!(A10)$) ($(e)!\Bs!(A11)$) ($(e)!\Bs!(A12)$) ($(e)!\Bs!(A13)$)};
+		
+		\filldraw [black] (e) circle (1pt) node [below] {$\ens[e]$};
+		
+		\node at (U) {$U$};
+		\node at (A) {$A$};
+		\node at (A') {$p\ens[e]+\bar{p}A$};
+		
+		\draw [dashed] (e) -- (52.82:4);
+		\draw [dashed] (e) -- (-12.4:3.25);
+	\end{tikzpicture}
+	\caption{The set $A$ is bounded around $\ens$ as we can ``shrink it'' inside any open neighborhood $U$ by using convex combinations.}\label{pm-es-figBoundedDefinition}
+\end{figure}	
+
 \end{mathSection}
 
 There is a useful alternative property that fully characterizes bounded sets. Consider the sequences $p_i \ens + \bar{p}_i \ens[a]_i$, where $p_i \to 1$. Intuitively, the only way for this sequence to not converge to $\ens$ is if the sequence $\ens[a]_i$ gets further and further away from $\ens$, faster than the mixing brings it closer to $\ens$. If $\ens[a]_i$ are from a bounded set around $\ens$, we would expect this sequence to converge. In fact, it turns out that a set $A$ is bounded if and only if all such sequences converge.
@@ -330,65 +393,135 @@ There is a useful alternative property that fully characterizes bounded sets. Co
 		Let $\Ens$ be an ensemble space and $\ens \in \Ens$. A set $A \subseteq \Ens$ is bounded around $\ens$ if and only if for every sequence $p_i \to 1$ and every sequence $\ens[a]_i \in A$, $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$.
 	\end{prop}
 	\begin{figure}[H]
-		\centering
-		\begin{tikzpicture}
-			%\draw [help lines] (0,0) grid (10,6);
-			
-			% The ensemble space
-			\draw[-, thick] plot [smooth cycle] coordinates {(0.5,1.5)(2,0.2)(5,0.5)(6,2)(5.5,4.5)(3,5.5)(0.5,4)};
-			\node[above] at (5.5,4.6) {$B$};
-			
-			% U neighborhood
-			\draw[-, thin] plot [smooth cycle] coordinates {(2.2,2.8)(3,2.2)(4.2,2.8)(4,4)(3,4.2)(2.3,3.8)};
-			\node[above right] at (3.5,4.2) {$U$};
-			
-			% V neighborhood
-			\draw[-, dashed] plot [smooth cycle] coordinates {(2.7,3.0)(3.2,2.7)(3.8,3.0)(3.7,3.6)(3.2,3.8)(2.8,3.5)};
-			\node[left] at (2.8,3.4) {$V$};
-			
-			% Point a
-			\coordinate (e) at (3.2,3.3);
-			\filldraw [black] (e) circle (1pt) node[above] {$\ens$};
-			
-			% Points b_i in A (spread out)
-			\coordinate (a1) at (1.2,1.5);
-			\coordinate (a2) at (5.2,1.2);
-			\coordinate (a3) at (4.8,4.2);
-			\filldraw [black] (a1) circle (1pt) node[left] {$\ens[a]_1$};
-			\filldraw [black] (a2) circle (1pt) node[left] {$\ens[a]_2$};
-			\filldraw [black] (a3) circle (1pt) node[right] {$\ens[a]_3$};
-			
-			% c_i = pa + (1-p)b_i in V
-			\coordinate (b1) at ($(e)!0.25!(a1)$);
-			\coordinate (b2) at ($(e)!0.25!(a2)$);
-			\coordinate (b3) at ($(e)!0.25!(a3)$);
-			\filldraw [black] (b1) circle (1pt) node[below] {$\ens[b]_1$};
-			\filldraw [black] (b2) circle (1pt) node[below] {$\ens[b]_2$};
-			\filldraw [black] (b3) circle (1pt) node[above right] {$\ens[b]_3$};
-			
-			% p_i a + (1-p_i) b_i between a and c_i
-			\coordinate (r1) at ($(e)!0.4!(b1)$);
-			\coordinate (r2) at ($(e)!0.3!(b2)$);
-			\coordinate (r3) at ($(e)!0.5!(b3)$);
-			\filldraw [gray] (r1) circle (1pt);
-			\filldraw [gray] (r2) circle (1pt);
-			\filldraw [gray] (r3) circle (1pt);
-			
-			% Lines from a to b_i (dashed, showing the mixing direction)
-			\draw[dotted, gray] (e) -- (a1);
-			\draw[dotted, gray] (e) -- (a2);
-			\draw[dotted, gray] (e) -- (a3);
-			
-			% Annotations
-			\node[right] at (6.5,4.0) {$\ens[b]_i = p\ens+\bar{p}\ens[a]_i \in V$};
-			\node[right] at (6.5,3.2) {\textcolor{gray}{$p_i\ens+\bar{p}_i\ens[a]_i = \lambda_i\ens+\bar{\lambda}_i\ens[b]_i \in U$}};
-			\node[right] at (6.5,2.4) {$\lambda_i\ens+\bar{\lambda}_i\ens[b] \in U$ for all $\ens[b]\in V$, $\lambda_i \in [0,1]$};
-		\end{tikzpicture}
-		\caption{Boundedness shrinks all of $A$ into the neighborhood $V$ (giving the $\ens[b]_i$); the tube lemma guarantees that any further mixture of $\ens$ with a point of $V$ stays in $U$ (giving the gray points).}
+	\centering
+	\begin{tikzpicture}[scale=0.85]
+		%\draw [help lines] (0,-5) grid (7,5);
+		
+		\coordinate (A) at (4.25,2.98);
+		\coordinate (U) at (5.70,0.48);
+		\coordinate (V) at (3.10,0.20);
+		\coordinate (e) at (0.00,0.00);
+		\coordinate (A') at (0.20,-0.82);
+		
+		\coordinate (a1) at (-3.60,2.63);
+		\coordinate (a2) at (-1.50,3.63);
+		\coordinate (a3) at (1.20,4.23);
+		\coordinate (a4) at (2.60,2.03);
+		
+		\coordinate (A1) at (-4.95,1.98);
+		\coordinate (A2) at (-4.35,3.48);
+		\coordinate (A3) at (-2.75,4.38);
+		\coordinate (A4) at (-0.85,4.78);
+		\coordinate (A5) at (0.95,4.98);
+		\coordinate (A6) at (3.15,4.78);
+		\coordinate (A7) at (4.15,4.38);
+		\coordinate (A8) at (4.15,3.48);
+		\coordinate (A9) at (3.65,2.98);
+		\coordinate (A10) at (3.85,2.53);
+		\coordinate (A11) at (4.25,2.18);
+		\coordinate (A12) at (4.35,1.28);
+		\coordinate (A13) at (4.15,0.38);
+		\coordinate (A14) at (3.75,-0.62);
+		\coordinate (A15) at (2.75,-1.32);
+		\coordinate (A16) at (1.05,-1.57);
+		\coordinate (A17) at (-0.45,-1.47);
+		\coordinate (A18) at (-2.05,-1.07);
+		\coordinate (A19) at (-3.45,-0.47);
+		\coordinate (A20) at (-4.55,0.53);
+		
+		\coordinate (U1) at (-2.25,-1.32);
+		\coordinate (U2) at (-1.35,-1.82);
+		\coordinate (U3) at (-0.55,-2.92);
+		\coordinate (U4) at (0.95,-2.92);
+		\coordinate (U5) at (2.85,-2.52);
+		\coordinate (U6) at (3.95,-2.42);
+		\coordinate (U7) at (4.95,-1.32);
+		\coordinate (U8) at (5.45,0.78);
+		\coordinate (U9) at (5.15,1.78);
+		\coordinate (U10) at (3.95,2.23);
+		\coordinate (U11) at (2.45,2.53);
+		\coordinate (U12) at (0.55,2.63);
+		\coordinate (U13) at (-1.15,2.28);
+		\coordinate (U14) at (-2.15,1.18);
+		\coordinate (U15) at (-2.55,-0.02);
+		
+		\coordinate (V1) at (-2.05,0.28);
+		\coordinate (V2) at (-1.80,1.33);
+		\coordinate (V3) at (-1.00,1.93);
+		\coordinate (V4) at (0.45,2.23);
+		\coordinate (V5) at (1.55,1.98);
+		\coordinate (V6) at (3.10,1.23);
+		\coordinate (V7) at (2.65,0.28);
+		\coordinate (V8) at (3.10,-0.67);
+		\coordinate (V9) at (1.50,-1.17);
+		\coordinate (V10) at (0.05,-1.27);
+		\coordinate (V11) at (-1.50,-0.87);
+		\coordinate (V12) at (-1.80,-0.27);
+		
+		\def\pas{.9}
+		\def\pbs{.62}
+		\def\pcs{.25}
+		\def\pds{.2}
+		
+		\def\As{1/3};
+		
+		%A
+		\draw [] plot [smooth cycle] coordinates {(A1) (A2) (A3) (A4) (A5) (A6) (A7) (A8) (A9) (A10) (A11) (A12) (A13) (A14) (A15) (A16) (A17) (A18) (A19) (A20)};
+		\node at (A) {$A$};;
+		
+		%U
+		\draw [dashed] plot [smooth cycle] coordinates {(U1) (U2) (U3) (U4) (U5) (U6) (U7) (U8) (U9) (U10) (U11) (U12) (U13) (U14) (U15)};
+		\node at (U) {$U$};
+		
+		%V
+		\draw [dashed] plot [smooth cycle] coordinates {(V1) (V2) (V3) (V4) (V5) (V6) (V7) (V8) (V9) (V10) (V11) (V12)};
+		\node at (V) {$V$};
+		
+		%A'
+		\draw [] plot [smooth cycle] coordinates {($(e)!\As!(A1)$) ($(e)!\As!(A2)$) ($(e)!\As!(A3)$) ($(e)!\As!(A4)$) ($(e)!\As!(A5)$) ($(e)!\As!(A6)$) ($(e)!\As!(A7)$) ($(e)!\As!(A8)$) ($(e)!\As!(A9)$) ($(e)!\As!(A10)$) ($(e)!\As!(A11)$) ($(e)!\As!(A12)$) ($(e)!\As!(A13)$) ($(e)!\As!(A14)$) ($(e)!\As!(A15)$) ($(e)!\As!(A16)$) ($(e)!\As!(A17)$) ($(e)!\As!(A18)$) ($(e)!\As!(A19)$) ($(e)!\As!(A20)$)};
+		\node at (A') {$p\ens[e]+\bar{p}A$};
+		
+		% Base point
+		\filldraw [black] (e) circle (1pt) node [below] {$\ens[e]$};
+		
+		%Rays and labeled points
+		\draw [] (e) -- (a1);
+		\draw [] (e) -- (a2);
+		\draw [] (e) -- (a3);
+		\draw [] (e) -- (a4);
+		
+		\filldraw [black] (a1) circle (1pt) node [above] {$\ens[a]_1$};
+		\filldraw [black] (a2) circle (1pt) node [above] {$\ens[a]_2$};
+		\filldraw [black] (a3) circle (1pt) node [above] {$\ens[a]_3$};
+		\filldraw [black] (a4) circle (1pt) node [above] {$\ens[a]_4$};
+		
+		%e_i
+		\coordinate (e1) at ($(e)!\pas!(a1)$);
+		\coordinate (e2) at ($(e)!\pbs!(a2)$);
+		\coordinate (e3) at ($(e)!\pcs!(a3)$);
+		\coordinate (e4) at ($(e)!\pds!(a4)$);
+		
+		\filldraw [black] (e1) circle (1pt) node [right, xshift=-.05cm, yshift=.1cm] {$\ens[e]_1$};
+		\filldraw [black] (e2) circle (1pt) node [right] {$\ens[e]_2$};
+		\filldraw [black] (e3) circle (1pt) node [right, xshift=-.03cm, yshift=-.05cm] {$\ens[e]_3$};
+		\filldraw [black] (e4) circle (1pt) node [below, xshift=.1cm] {$\ens[e]_4$};
+		
+		%b_i
+		\coordinate (b1) at ($(e)!\As!(a1)$);
+		\coordinate (b2) at ($(e)!\As!(a2)$);
+		\coordinate (b3) at ($(e)!\As!(a3)$);
+		\coordinate (b4) at ($(e)!\As!(a4)$);
+		
+		\filldraw [black] (b1) circle (1pt) node [below, xshift=-.03cm, yshift=.1cm] {$\ens[b]_1$};
+		\filldraw [black] (b2) circle (1pt) node [left, xshift=.03cm] {$\ens[b]_2$};
+		\filldraw [black] (b3) circle (1pt) node [left] {$\ens[b]_3$};
+		\filldraw [black] (b4) circle (1pt) node [right, xshift=-.05cm, yshift=-.15cm] {$\ens[b]_4$};
+	\end{tikzpicture}
+		\caption{The tube lemma guarantees that if $\ens \in U$, we can find an open set of $V$ such that all convex combinations $p \ens + \bar{p} V$ stay in $U$. Since $A$ is bounded, it can fit into $V$. Since the coefficients $p_i \to 1$, at some point they will become larger than the rescaling of $A$ inside $V$.}
 	\end{figure}
 	
 	\begin{proof}
-		Suppose $A$ is bounded around $\ens$. Let $U$ be an open neighborhood of $\ens$. Let $+_{\ens} : [0,1] \times \Ens \to \Ens$ be the map defined by $+_{\ens}(p, \ens[b]) \mapsto p \ens + \bar{\lambda} \ens[b]$. This map is continuous, and therefore $+_{\ens}^{-1}(U)$ is open with $[0,1]\times\{\ens[e]\} \subseteq +_{\ens}^{-1}(U)$. Since $[0,1]\times\{\ens[e]\}$ is compact, by the \href{https://en.wikipedia.org/wiki/Tube_lemma}{tube lemma}, there exists an open neighborhood $V$ of $\ens$ such that $p \ens + \bar{p} \ens[b] \in U$ for all $\ens[b] \in V$ and all $p \in [0,1]$.
+		Suppose $A$ is bounded around $\ens$. Let $U$ be an open neighborhood of $\ens$. Let $+_{\ens} : [0,1] \times \Ens \to \Ens$ be the map defined by $+_{\ens}(p, \ens[b]) \mapsto p \ens + \bar{p} \ens[b]$. This map is continuous, and therefore $+_{\ens}^{-1}(U)$ is open with $[0,1]\times\{\ens[e]\} \subseteq +_{\ens}^{-1}(U)$. Since $[0,1]$ is compact, by the \href{https://en.wikipedia.org/wiki/Tube_lemma}{tube lemma}, there exists an open neighborhood $V$ of $\ens$ such that $p \ens + \bar{p} \ens[b] \in U$ for all $\ens[b] \in V$ and all $p \in [0,1]$.
 		
 		Since $A$ is bounded around $\ens$, there exists $p \in [0,1)$ such that $p\ens + \bar{p}A \subseteq V$. Since $p_i \to 1$, there exists $n$ such that $p_i \geq p$ for all $i > n$. For such $i$, let $\ens[b]_i = p\ens + \bar{p}\ens[a]_i \in V$ and $\lambda_i = \frac{p_i - p}{\bar{p}} \in [0,1]$. Then
 		\begin{equation}
