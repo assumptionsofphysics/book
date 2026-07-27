@@ -1590,8 +1590,6 @@ In an ensemble space, the continuity and the strict concavity of the entropy for
 	Since $S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\lambda\ens[a] + \bar{\lambda}\ens[b]) + \bar{\lambda} S(\lambda\ens[a] + \bar{\lambda}\ens[b]) = \lambda S(\ens[a]) + \bar{\lambda} S(\ens[b])$, $\ens[a] = \ens[b]$ by strict concavity.
 \end{proof}
 
-TODO: review
-
 \begin{coro}\label{pm-es-uniqueMixtureCoefficient}
 	Let $\ens[a], \ens[b] \in \Ens$ and $p,\lambda \in [0,1]$. Then $p\ens[a] + \bar{p} \ens[b] = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $\ens[a] = \ens[b]$ or $p=\lambda$.
 \end{coro}
@@ -1599,7 +1597,7 @@ TODO: review
 \begin{proof}
 	Suppose that $\ens[a] = \ens[b]$ then $p\ens[a] + \bar{p} \ens[b] = p\ens[a] + \bar{p} \ens[a] = \ens[a] = \lambda \ens[a] + \bar{\lambda} \ens[a] = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for all $p,\lambda \in [0,1]$. Suppose $p=\lambda$. Then $p\ens[a] + \bar{p} \ens[b] = \lambda \ens[a] + \bar{\lambda} \ens[b]$.
 	
-	Now suppose $p\ens[a] + \bar{p} \ens[b] = \lambda \ens[a] + \bar{\lambda} \ens[b]$. If $p=\lambda$, the relationship is satisfied for all $\ens[a],\ens[b] \in \Ens$. Without loss of generality, suppose $p \geq \lambda$. We have
+	Now suppose $p\ens[a] + \bar{p} \ens[b] = \lambda \ens[a] + \bar{\lambda} \ens[b]$. If $p=\lambda$, the relationship is satisfied for all $\ens[a],\ens[b] \in \Ens$. Without loss of generality, suppose $p > \lambda$. We have
 	\begin{align}
 		\lambda \ens[a] + \bar{\lambda} \ens[b] &= p \ens[a] + \bar{p} \ens[b] = \lambda \ens[a] + (p-\lambda) \ens[a] + \bar{p} \ens[b] = \lambda \ens[a] + \bar{\lambda}\left(\frac{p-\lambda}{\bar{\lambda}} \ens[a] + \frac{\bar{p}}{\bar{\lambda}} \ens[b] \right).
 	\end{align}
@@ -1644,15 +1642,17 @@ Since it is easy to show that mixing gives us a continuous bijection, the proble
 
 If we restrict the endpoint of the mixture, we do have a homeomorphism onto the image. The proof uses a later result, the topology is Hausdorff, that is guaranteed by the entropy.
 
+\begin{mathSection}
 \begin{prop}
-	Let $\ens[a], \ens[b] \in \Ens$ be two distinct ensembles.	Let $+_{\ens[a]\ens[b]} : [0,1] \to \Ens$ be the curried function $+_{\ens[a]\ens[b]}(p) = p\ens[a] + \bar{p}\ens[b]$. The function is a homeomorphism between $[0,1]$ and $+_{\ens[a]\ens[b]}([0,1])$.
+	Let $\Ens$ be Hausdorff and let $\ens[a], \ens[b] \in \Ens$ be two distinct ensembles. Let $+_{\ens[a]\ens[b]} : [0,1] \to \Ens$ be the curried function $+_{\ens[a]\ens[b]}(p) = p\ens[a] + \bar{p}\ens[b]$. Then $+_{\ens[a]\ens[b]}$ is a topological embedding.
 \end{prop}
 
 \begin{proof}
-	The map $+_{\ens[a]\ens[b]}$ is continuous since $+$ is continuous by the axiom of mixture. Since $\ens[a]$ and $\ens[b]$ are distinct, by \ref{pm-es-uniqueMixtureCoefficient}, $p\ens[a] + \bar{p} \ens[b] = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $p=\lambda$, which means $+_{\ens[a]\ens[b]}$ is injective, and it is therefore bijective onto its image. The domain of $+_{\ens[a]\ens[b]}$ is $[0,1]$, which is a compact. The image $+_{\ens[a]\ens[b]}([0,1])$ is a Hausdorff space since $\Ens$ is Hausdorff by \ref{pm-es-Hausdorff}. Putting it all together, $+_{\ens[a]\ens[b]}$ is a continuous bijective function from a compact space to a Hausdorff space and is therefore a homeomorphism.
+	The map $+_{\ens[a]\ens[b]}$ is continuous since mixing is continuous. Since $\ens[a]$ and $\ens[b]$ are distinct, by \ref{pm-es-uniqueMixtureCoefficient}, $p\ens[a] + \bar{p} \ens[b] = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $p=\lambda$, which means $+_{\ens[a]\ens[b]}$ is injective, and it is therefore bijective onto its image. The domain of $+_{\ens[a]\ens[b]}$ is $[0,1]$, which is compact. The image $+_{\ens[a]\ens[b]}([0,1])$ is a Hausdorff space since $\Ens$ is assumed to be Hausdorff (and later proved to be by \ref{pm-es-Hausdorff}). Putting it all together, $+_{\ens[a]\ens[b]}$ is a continuous bijective function from a compact space to a Hausdorff space and is therefore a homeomorphism onto its image.
 \end{proof}
+\end{mathSection}
 
-Note that the curried function $+{p\ens[a]}(\ens[b]) = p\ens[a] + \bar{p}\ens[b]$ is continuous and bijective onto its image, but it is not necessarily an open map. Let, in fact, $\Ens = [0,1]$ and take $p = 0.5$ and $\ens[a] = 0.5$. Then $+{p\ens[a]}(\Ens) = [0.25,0.75]$ which is not an open set in the topology of $\Ens$. The map effectively shrinks sets by half, and the isolated points at the algebraic boundary are no longer isolated points in the bulk. Note that $[0.25,0.75]$ is, however, open in the subspace topology of its image. The map, then, may fail to be open into $\Ens$, while still being open onto its image; this is exactly the condition needed for it to be a homeomorphism onto its image.
+Note that the curried function $+_{p\ens[a]}(\ens[b]) = p\ens[a] + \bar{p}\ens[b]$ is a topological embedding (i.e. homeomorphism onto its image), but it is not necessarily an open map. Let, in fact, $\Ens = [0,1]$ and take $p = 0.5$ and $\ens[a] = 0.5$. Then $+_{p\ens[a]}(\Ens) = [0.25,0.75]$ which is not an open set in the topology of $\Ens$. The map effectively shrinks sets by half, and the isolated points at the algebraic boundary are no longer isolated points in the bulk. Note that $[0.25,0.75]$ is, however, open in the subspace topology of its image. The map, then, may fail to be open into $\Ens$, while still being open onto its image; this is exactly the condition needed for it to be a topological embedding.
 
 \subsection{Vector space embedding}
 
@@ -1878,7 +1878,9 @@ While the motivation is straightforward, the construction is complicated by the 
 	\end{proof}
 \end{mathSection}
 
-We leave open whether the ensemble space embeds continuously in a topological vector space, and whether the topological vector space would have to be a locally convex. The first step would be to check whether this is true in the finite-dimensional case.
+We leave open whether the ensemble space embeds continuously in a topological vector space, and whether the topological vector space would have to be locally convex. The first step would be to check whether this is true in the finite-dimensional case.
+
+TODO: add disc counter-example?
 
 \begin{mathSection}
 	\begin{remark}
@@ -2073,6 +2075,8 @@ We are now in the position to show that the notion of affine basis corresponds t
 	The set $B_{\ens[a]}$ is affinely independent if and only if $\iota_{\ens[a]}(B_{\ens[a]}\setminus\{\ens[a]\})$ is linearly independent. The affine hull of $B_{\ens[a]}$ is $\Ens$ if and only if the linear span of $\iota_{\ens[a]}(B_{\ens[a]}\setminus\{\ens[a]\})$ is $V_{\ens[a]}$. Therefore $B_{\ens[a]}$ is an affine basis of $\Ens$ if and only if $\iota_{\ens[a]}(B_{\ens[a]}\setminus\{\ens[a]\})$ is a vector space basis of $V_{\ens[a]}$.
 \end{proof}
 
+TODO: rethink
+
 \begin{coro}
 	All ensemble spaces admit an affine basis. Let $B_1, B_2 \subseteq \Ens$ be two basis of an ensemble space $\Ens$ then $|B_1| = |B_2|$.
 \end{coro}
@@ -2171,7 +2175,7 @@ It would be interesting to have equivalent characterizations for simplexes in fi
 Another approach would be to have a characterization based on lower dimensional affine subsets.
 
 \begin{conj}
-	Every ensemble space of dimension one or less is a simplex. A finite-dimensional ensemble space of dimension two or more is a simplex  if and only if the affine hull of every set of three affinely independent ensembles is a simplex.
+	A finite-dimensional ensemble space of dimension two or more is a simplex  if and only if the affine hull of every set of three affinely independent ensembles is a triangle.
 \end{conj}
 
 \subsection{Boundedness of lines}
@@ -2331,7 +2335,7 @@ The proof proceeds as follows. Suppose we take three points and assign them an e
 \end{remark}
 \end{mathSection}
 
-TODO: maybe re-express with new terms?
+TODO: maybe re-express with new definition of bounded?
 
 Since every direction is bounded, recalling \ref{pm-es-convergenceToOneIsBoundedness}, we can show that $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$ whenever $p_i \to 1$, provided that all $\ens[a]_i$ are on the same line.
 
