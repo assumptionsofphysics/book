@@ -247,17 +247,22 @@ The axiom of mixture only guarantees the existence of a mixture between two ense
 
 \begin{mathSection}
 \begin{defn}[Finite mixture]
-	Let $\{e_i\}_{i=1}^{n} \subseteq \Ens$ be a finite subset of ensembles and $\{p_i\} \in [0,1]$ be a finite set of coefficients such that $\sum_{i=1}^{n} p_i = 1$, then the \textbf{finite mixture}, noted $\ens[a] = \sum_{i=1}^{n} p_i \ens_i$, is defined to be
+	Let $\{\ens_i\}_{i=1}^{n} \subseteq \Ens$ be a finite sequence of ensembles and $\{p_i\}_{i=1}^{n} \subseteq [0,1]$ be a finite sequence of coefficients such that $\sum_{i=1}^{n} p_i = 1$, then the \textbf{finite mixture}, noted $\ens[a] = \sum_{i=1}^{n} p_i \ens_i$, is defined to be either $e_j$ if $p_j=1$ for some $j$ or
 	\begin{equation}
 		\begin{split}
 	p_1 \ens_1 + (1-p_1)\left( \tfrac{p_2}{1-p_1} \ens_2 + \tfrac{1-p_1-p_2}{1-p_1} \left( \tfrac{p_3}{1-p_1-p_2} \ens_3 +  \tfrac{1-\sum_{i=1}^{3}p_i}{1-p_1-p_2}\Bigl(\ldots \right.\right. \\
-\left.\left.\left.+\tfrac{1-\sum_{i=1}^{n-2}p_i}{1-\sum_{i=1}^{n-3}p_i}\left(\tfrac{p_{n-1}}{1- \sum_{i=1}^{n-2}p_i} \ens_{n-1} + \tfrac{p_n}{1- \sum_{i=1}^{n-2}p_i}\ens_n\right)\right) \right) \right).
+\left.\left.\left.+\tfrac{1-\sum_{i=1}^{n-2}p_i}{1-\sum_{i=1}^{n-3}p_i}\left(\tfrac{p_{n-1}}{1- \sum_{i=1}^{n-2}p_i} \ens_{n-1} + \tfrac{p_n}{1- \sum_{i=1}^{n-2}p_i}\ens_n\right)\right) \right) \right)
 		\end{split}
 	\end{equation}
+	if $p_i \neq 1$ for all $i$.
 \end{defn}
 
-\begin{check}
-	For the definition to work, we need to make sure that the final ensemble does not depend on the order of mixing. We first check with three elements. Let $p_1, p_2, p_3 \in [0,1]$ with $p_1+p_2+p_3=1$. By commutativity, we can switch the second with the third element:
+\begin{coro}
+	A finite mixture does not depend on the ordering of the pairs of ensembles and mixing coefficients. That is, $\sum_{i=1}^{n} p_i \ens_i =\sum_{i=1}^{n} p_{\sigma(i)} \ens_{\sigma(i)}$ where $\sigma : [1,n] \to [1,n]$ is a permutation.
+\end{coro}
+
+\begin{proof}
+	We first check with three elements. Let $p_1, p_2, p_3 \in [0,1]$ with $p_1+p_2+p_3=1$. By commutativity, we can switch the second with the third element:
 	\begin{equation}
 	\begin{aligned}
 		p_1 \ens[e]_1 + p_2 \ens[e]_2 + p_3 \ens_3 &= p_1 \ens_1 + \bar{p}_1\left(\frac{p_2}{\bar{p}_1}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) = p_1 \ens_1 + \bar{p}_1\left(\frac{p_3}{\bar{p}_1} \ens_3 +  \frac{p_2}{\bar{p}_1}\ens_2\right) \\
@@ -276,7 +281,7 @@ The axiom of mixture only guarantees the existence of a mixture between two ense
 	Since switching the first with the second is equivalent to switching the second with the third and the third with the first, we can reach all permutations.
 	
 	Note that the definition is recursive, therefore we can use proof by induction. The base case is a sequence of two elements. By commutativity, the order does not matter. Given a sequence of $n$ elements, the inductive hypothesis is that the order does not matter for the last $n-1$ elements. Therefore, it suffices to show that we can switch the first and the second element. Note that we can sum the last $n-2$ elements, thus converting this to a problem of three elements. We proved before that we can switch the first with the second element, and we can now re-expand the third element into the full sequence. Therefore, the order of mixing does not matter for any finite mixture. 
-\end{check}
+\end{proof}
 
 \begin{remark}
 	Note that we can collect and expand convex combinations into other convex combinations. Because coefficients always sum to one, when breaking the expression in two, we can always calculate the new coefficients from one part. For example, $p_a \ens[a] + p_b \ens[b] + p_c \ens[c] + p_d \ens[d] = p(\frac{p_a}{p} \ens[a] + \frac{p_b}{p} \ens[b]) + \bar{p}(\frac{p_c}{\bar{p}} \ens[c] + \frac{p_d}{\bar{p}} \ens[d])$ where $p = p_a + p_b$ is defined only on the left part. Since $1 = p + \bar{p} = p_a +p_b + p_c + p_d$, we automatically have that $\bar{p} = p_c + p_d$.
@@ -289,7 +294,7 @@ Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in t
 
 \begin{mathSection}
 \begin{defn}[Infinite mixture]
-	Let $\{e_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\} \in [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$. Then the ensemble $\ens[a]$ is an \textbf{infinite mixture} of those ensembles if it is a topological limit of the sequence of finite mixtures $\sum_{i=1}^{n} \frac{p_i}{p_n} \ens_i$, where $p_n = \sum_{i=1}^{n} p_i$. If the infinite mixture is unique, we write $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$.
+	Let $\{\ens_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\}_{i=1}^{\infty} \subseteq [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$. Then the ensemble $\ens[a]$ is an \textbf{infinite mixture} of those ensembles if it is a topological limit of the sequence of finite mixtures $\sum_{i=1}^{n} \frac{p_i}{p_n} \ens_i$, where $p_n = \sum_{i=1}^{n} p_i$ with $n$ sufficiently large that $p_n \neq 0$. If the infinite mixture is unique, we write $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$.
 \end{defn}
 
 \begin{remark}
@@ -313,7 +318,11 @@ which means it converges. However, let $I = \{2,4,6,\dots\}$. We have
 \end{equation*}
 Therefore the convex combination of all even elements of the series diverges.
 
-Note that the above counterexample works because the series is effectively the sum of two divergent series. A notion of boundedness is therefore useful, but it will not be sufficient. We would need a notion of completeness, which is for now left as open problem \ref{pm-es-ensembleSpaceCompleteness}.
+Note that the above counterexample works because the series is effectively the sum of two divergent series. A notion of boundedness is therefore useful, but it will not be sufficient. We would need a notion of completeness, which is for now left as an open problem. \draftcomment{For more details, see \ref{pm-es-ensembleSpaceCompleteness}.}
+
+Another open problem is whether we can extend infinite convex combinations to integrals. That is, given a probability measure $p : \Sigma_{\Ens} \to [0,1]$ defined over the Borel algebra of the ensemble space, we would want to define the mixture $\int_{\Ens} \ens \, dp$ as the limit of the convex combinations that represent approximations over finer and finer partitions. \draftcomment{For more details, see \ref{pm-es-ConvexIntegralProblem}.}
+
+\subsection{Boundedness}
 
 We now define a notion of boundedness (i.e. sets with a ``finite range'') in a way that mimics boundedness in topological vector spaces. In a TVS, a set $A$ is bounded if every neighborhood of the origin can be stretched to include $A$. For a topological convex space, we have no origin and no way to stretch sets. However, given a point $\ens \in A$, the set of all convex combinations $p \ens + \bar{p} A$ is a copy of $A$ shrunk around $\ens$. Therefore, we can say a set $A$ is bounded around an ensemble $\ens$ if, for every open neighborhood $U$ of $\ens$, there is a $p$ such that we can shrink $A$ to be inside of $U$.
 
@@ -533,8 +542,6 @@ There is a useful alternative property that fully characterizes bounded sets. Co
 	\end{proof}
 \end{mathSection}
 
-An open problem is whether we can extend infinite convex combinations to integral. That is, given a probability measure $p : \Sigma_{\Ens} \to [0,1]$ defined over the Borel algebra of the ensemble space, we can define the mixture $\int_{\Ens} \ens \, dp$ as the limit of the convex combinations.
-
 \subsection{Common components and separateness}
 
 The convex structure allows us to characterize ensembles based on whether they can be mixed into one another. For example, we can ask whether an ensemble is or is not the mixture of some other ensembles; or whether two ensembles can be expressed as a mixture of a common component.
@@ -661,24 +668,30 @@ where $\lambda = p p_1+\bar{p} p_2$ and $\ens[b] = \frac{p \bar{p}_{1}}{\bar{\la
 \end{proof}
 \end{mathSection}
 
-It is an open question whether \ref{pm-es-internalPointsConvex} generalizes to the infinite case. That is, whether $I_{\Ens}$ is $\sigma$-convex. One would need to show that if the infinite mixture of internal points exists, then it must be an internal point. If conjecture \ref{pm-es-conjSubmixturesConverge} is true, that is if submixtures of convergent infinite mixtures converge, then the infinite mixture of $\ens[b]_i$ would converge as it is a submixture of $\ens$. We leave this as conjecture \ref{pm-es-conjAlgebraicInteriorSigmaConvex}.
+It is an open question whether \ref{pm-es-internalPointsConvex} generalizes to $\sigma$-convexity. One would need to show that if the infinite mixture of internal points exists, then it must be an internal point.
 
-What we can show is that the algebraic interior $I_{\Ens}$ is not an open set. As a counter-example, consider the space $\Ens = \{ p_i \in \ell^1 \, | \,  \sum p_ i =1, \; p_i \in [0,1]\}$ of all probability distributions over countably infinitely many elements. Note that $\ens \in \Ens$ is an interior point if and only if $\ens = \sum p_i x_i$ where $p_i \neq 0$ for all $i$. Now consider a distribution an internal point $\ens = \sum p_i x_i$. This is the limit of an infinite mixture where all the finite mixture have non-zero coefficients for the finitely many elements. Therefore $\ens$, in internal point, can be expressed as a limit of boundary points. This means $I_{\Ens}$ cannot be open, as we would have a sequence of points outside $I_{\Ens}$ that converge to one of its points.
+TODO: Does this connect to future conjectures or not?
+
+TODO: consolidate these two examples
+
+What we can show is that the algebraic interior $I_{\Ens}$ is not necessarily an open set. As a counter-example, consider the space $\Ens = \{ p_i \in \ell^1 \, | \,  \sum p_ i =1, \; p_i \in [0,1]\}$ of all probability distributions over countably infinitely many elements. Note that $\ens \in \Ens$ is an interior point if and only if $\ens = \sum p_i x_i$ where $p_i \neq 0$ for all $i$. Now consider a distribution an internal point $\ens = \sum p_i x_i$. This is the limit of an infinite mixture where all the finite mixture have non-zero coefficients for the finitely many elements. Therefore $\ens$, in internal point, can be expressed as a limit of boundary points. This means $I_{\Ens}$ cannot be open, as we would have a sequence of points outside $I_{\Ens}$ that converge to one of its points.
 
 We prove the same fact by showing that, in that same case, every open set will include boundary points.
 
 \begin{mathSection}
-\begin{prop}
+\begin{example}
 	Let $\Ens$ be an ensemble space. The set of boundary points $B_{\Ens}$ is not necessarily a closed set and therefore $I_{\Ens}$ is not necessarily an open set.
-\end{prop}
+\end{example}
 \begin{proof}
 	Let $\Ens = \{ p_i \in \ell^1 \, | \,  \sum p_ i =1, \; p_i \in [0,1]\}$ be the set of probability distributions over countably infinitely many elements with the topology of $\ell^1$. Let $\ens \in I_{\Ens}$ be an interior point of $\Ens$. Since $\ens$ is in the interior, it corresponds to a probability distribution $p_i$ such that $p_i \in (0,1)$ for all $i$.
 	
 	Let $B_{r}(\ens) \subseteq \ell^1$ be an open ball of radius $r$ centered around $\ens$. Since $\sum p_i = 1$, there must be a $j$ such that $p_j < \frac{r}{2}$. Suppose, without loss of generality, that $j \neq 1$. Now consider the probability distribution given by $\lambda_i = (p_1 + p_j, p_2, \dots, p_{j-1}, 0, p_{j+1}, \dots)$. Since $\lambda_j = 0$, then $\lambda_i$ is a boundary point of $\Ens$. The distance between the two distribution will be $\sum|p_i - \lambda_i| = |p_j| + |-p_j| = 2 p_j < r$, which means $\lambda_i \in B_{r}(\ens)$. Therefore, the open ball around any internal point will contain a boundary point. Therefore the interior of $I_{\Ens}$ is the empty set, and $I_{\Ens}$ is not an open set.
+	
+	Technically, $\Ens$ is not an ensemble space since, as we mentioned in the review of standard cases, the $\ell^1$ topology does not guarantee the continuity of the entropy. Therefore, we should ask whether $I_{\Ens}$ is an open set in this better topology. But if it where open, we would be able to construct a sequence of boundary points whose probability distribution would converge to the probability distribution of $\ens$, our internal point. Since we would expect this topology to still be locally convex, the sequence of ensembles would not converge even if the entropy and all continuous affine functional do converge. However, on physics ground, the convergence of all experimentally accessible quantities has to be enough for the convergence of the ensemble.
 \end{proof}
 \end{mathSection}
 
-We now define the notions of separateness: two ensembles are separate, noted $\ens[a] \separate \ens[b]$ if they do not have a common component. That is, they are not a mixture of a common ensemble. In classical ensemble spaces, this is equivalent to probability measures with disjoint support, which is the extension of the concept. Separateness is a useful concept to characterize the relationship between ensembles as it has some useful properties. Most of all, it is an irreflexive symmetric relation: nothing is separate from itself and if $\ens[a] \separate \ens[b]$, then $\ens[b] \separate \ens[a]$.\footnote{Note that orthogonality in inner product vector spaces is also an irreflexive symmetric relationship.}
+We now define the notion of separateness: two ensembles are separate, noted $\ens[a] \separate \ens[b]$ if they do not have a common component. That is, they are not a mixture of a common ensemble. In classical ensemble spaces, this is equivalent to probability measures with disjoint support, which is the extension of the concept. Separateness is a useful concept to characterize the relationship between ensembles as it has some useful properties. Most of all, it is an irreflexive symmetric relation: nothing is separate from itself and if $\ens[a] \separate \ens[b]$, then $\ens[b] \separate \ens[a]$.\footnote{Note that orthogonality in inner product vector spaces is also an irreflexive symmetric relationship.}
 
 \begin{mathSection}
 \begin{defn}
@@ -995,11 +1008,8 @@ Note that, since a continuous classical ensemble space has no extreme points, we
 \end{proof}
 \end{mathSection}
 
-These definitions may be enough to prove that every finite-dimensional separately monodecomposable convex space is a simplex. For the infinite case, it would be nice to compare this characterization to a Choquet simplex.
+These definitions may be enough to prove that every finite-dimensional separately monodecomposable convex space is a simplex, which would allow us to define a simplex without the notion of affine independence. For the infinite case, it would be nice to compare this characterization to a Choquet simplex. We leave this as conjectures \ref{em-es-conjSimplexMonodecomposable} and \ref{em-es-conjChoquetSimplexMonodecomposable}.
 
-\begin{conj}
-	A finite-dimensional (i.e. there is a set of finitely many elements whose hull has non-empty interior) separately monodecomposable convex space is a simplex.
-\end{conj}
 
 \subsection{Convex subsets and convex hull}
 
@@ -2148,14 +2158,21 @@ Lastly, with the notion of affine independence we can define the notion of simpl
 \end{proof}
 \end{mathSection}
 
-It would be interesting to have equivalent characterizations for simplexes in finite dimensions to find suitable ones to extended in the infinite-dimensional case.
+It would be interesting to have equivalent characterizations for simplexes in finite dimensions to find suitable ones to extended in the infinite-dimensional case. As mentioned before, monodecomposability seems like a good candidate, which leads to the following conjectures.
 
-TODO: review the conjucture (with monodecomposability)
+\begin{conj}\label{em-es-conjSimplexMonodecomposable}
+	A finite-dimensional separately monodecomposable convex space is a simplex.
+\end{conj}
+
+\begin{conj}\label{em-es-conjChoquetSimplexMonodecomposable}
+	A Choquet simplex is monodecomposable.
+\end{conj}
+
+Another approach would be to have a characterization based on lower dimensional affine subsets.
 
 \begin{conj}
 	Every ensemble space of dimension one or less is a simplex. A finite-dimensional ensemble space of dimension two or more is a simplex  if and only if the affine hull of every set of three affinely independent ensembles is a simplex.
 \end{conj}
-
 
 \subsection{Boundedness of lines}
 
