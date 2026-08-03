@@ -159,13 +159,15 @@ Setting ensembles as a primary notion also solves another conceptual problem. Th
 
 \begin{mathSection}\label{pm-es-axiomEnsemble}
 	\begin{axiom}[Axiom of ensemble] 
-		The state of a system is given by an \textbf{ensemble}, which represents the collection of all possible outputs of a preparation procedure for a physical system. The set of all possible ensembles for a physical system is its \textbf{ensemble space}. Formally, an ensemble space is a $\mathsf{T}_0$ second countable topological space where each element is called an ensemble.
+		The state of a system is given by an \textbf{ensemble}, which represents the collection of all possible outputs of a preparation procedure for a physical system. The set of all possible ensembles for a physical system is its \textbf{ensemble space}. Formally, an ensemble space is a non-empty $\mathsf{T}_0$ second countable topological space where each element is called an ensemble.
 	\end{axiom}
 	
 	\begin{justification}
 		In experimental settings, preparation procedures never prepare a system exactly in the same configuration. Experimental results, then, are always in terms of statistical preparations and statistical measurements. A physical theory must be able to talk about the possible statistical descriptions within the theory. States, then, can be understood as ensembles, idealized statistical descriptions, as those are what is connected to experimental practice.
 		
 		Equivalently, reproducibility is a basic requirement of a physical theory. A physical law, then, must be understood as describing a relationship that always exists whenever the same set of circumstances is replicated. Given that we need to always be able to replicate those circumstances ``one more time'', the relationship is about countably infinite preparations and results: ensembles. Therefore, to the extent that physics is about reproducible experimental results, the basic theoretical description of a system is in terms of ensembles. This justifies the use of ensembles as the fundamental object to describe the state of a system.\footnote{Note that reproducibility also already implies that all properties that characterize an ensemble must be relative to the procedure. If the properties depended, for example, on absolute space or absolute time, then different practitioners would not be able to prepare the same ensemble.}
+		
+		For a system to be defined experimentally, we need to have at least one way to prepare it. Therefore, the ensemble space for a system cannot be empty.
 		
 		Ensembles are experimentally defined objects, and therefore they are possibilities of an experimental domain. This means that an ensemble space is a $\mathsf{T}_0$ second countable topological space where each element is an ensemble and the topology is induced by the verifiable statements.
 	\end{justification}
@@ -262,7 +264,9 @@ The axiom of mixture only guarantees the existence of a mixture between two ense
 \end{coro}
 
 \begin{proof}
-	We first check with three elements. Let $p_1, p_2, p_3 \in [0,1]$ with $p_1+p_2+p_3=1$. By commutativity, we can switch the second with the third element:
+	If $p_i = 1$ for some $i$, then for any permutation $p_{\sigma(j)} = 1$ if and only if $i = \sigma(j)$. Therefore the mixture will be $\ens_{\sigma(j)} = \ens_{i}$.
+	
+	Suppose now that $p_i \neq 1$ for all $i$. If there are only two elements, the corollary is true by commutativity of mixing. For three elements, let $p_1, p_2, p_3 \in [0,1)$ with $p_1+p_2+p_3=1$. By commutativity, we can switch the second with the third element:
 	\begin{equation}
 	\begin{aligned}
 		p_1 \ens[e]_1 + p_2 \ens[e]_2 + p_3 \ens_3 &= p_1 \ens_1 + \bar{p}_1\left(\frac{p_2}{\bar{p}_1}\ens_2 + \frac{p_3}{\bar{p}_1}\ens_3\right) = p_1 \ens_1 + \bar{p}_1\left(\frac{p_3}{\bar{p}_1} \ens_3 +  \frac{p_2}{\bar{p}_1}\ens_2\right) \\
@@ -1101,6 +1105,9 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 	For the $\sigma$-hull, we need an infinite-dimensional example. Conceptually, we are using the fact that a uniform distribution over the whole $[0,1]$ is the infinite convex combination of uniform distributions over countably many sets that cover the whole $[0,1]$. Let $\Ens$ be the space of probability measures defined over $[0,1] \subseteq \mathbb{R}$. Let $\{\ens[a]_i\}_{i=1}^{\infty}$ be the sequence of uniform distributions over $\left[\frac{1}{i+1}, \frac{1}{i}\right]$. Let $\ens$ be the uniform distribution over $[0,1]$. We have $\ens = \sum \frac{1}{i(i+1)} \ens[a]_i$ where $\sum \frac{1}{i(i+1)} = 1$. Therefore $\ens$ is the countable convex combination of $\ens[a]_i$. Let $A_j = \{ \ens[a]_i \, | \, i \leq j\}$. Note that $\ens[a]_i \separate \ens[a]_j$ for all $i \neq j$. Therefore, $\{\ens[a]_i\}$ are exactly all extreme points of $\shull(\bigcup A_j)$. This means that $\ens \notin \shull(A_j)$ for all $j$ while $\ens \in \shull(\bigcup A_j)$. Therefore the $\sigma$-hull of the limit is not the limit of the $\sigma$-hulls.
 \end{remark}
 
+\begin{remark}
+	In general, $\hull$, $\shull$ and $\chull$ is not continuous from above. Consider $[0,1]$. Let $A_i = \{0\} \cup \{\frac{1}{2} + \frac{1}{j+1} \mid j \ge i\} \subseteq \Ens$. Note that $A_{i+1} \subseteq A_i$, so $A_i$ is decreasing. Then $\hull(\lim\limits_{i \to \infty}(A_i)) = \hull(\{0\}) = \{0\}$. However, $\lim\limits_{i \to \infty}(\hull(A_i)) = \lim\limits_{i \to \infty}([0,\frac{1}{2} + \frac{1}{i+1}]) = [0,\frac{1}{2}]$. Since we are in finite dimension, $\hull=\shull=\chull$
+\end{remark}
 
 \begin{prop}
 	The topological closure of the hull is a convex set and, therefore, the closed hull.
@@ -2004,7 +2011,40 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 	Let $A \subseteq \Ens$ be a subset of an ensemble space. The \textbf{affine hull} of $A$, noted $\ahull(A)$ is the set of all finite affine combinations of elements contained in $A$ (i.e. it is the smallest affine set that contains $A$). The \textbf{closed affine hull} of $A$, noted $\cahull(A)$ is the smallest closed affine set that contains $A$. 
 \end{defn}
 
-TODO: hulls are closure operations
+\begin{coro}
+	Given $A \subseteq \Ens$, $\ahull(A) \subseteq \cahull(A)$.
+\end{coro}
+
+\begin{prop}
+	The affine hull and closed affine hull operators are closures. That is, $\ahull$ satisfies the following three properties:
+	\begin{enumerate}
+		\item \textbf{extensive}: $A \subseteq \ahull(A)$
+		\item  \textbf{increasing}: $A \subseteq B \implies \ahull(A) \subseteq \ahull(B)$
+		\item \textbf{idempotent}: $\ahull(\ahull(A)) = \ahull(A)$
+	\end{enumerate}
+	and similarly does $\cahull$.
+\end{prop}
+
+\begin{proof}
+	1. Every element of $A$ is trivially an affine combination of elements $A$. Since $\ahull(A) \subseteq \cahull(A)$, $A \subseteq \cahull(A)$ as well.
+	
+	2. Let $\ens[e] \in \ahull(A)$. Then $\ens[e]$ can be written as the finite affine combination of elements in $A$. Since $A \subseteq B$, $\ens[e]$ can be written as the finite affine combination of elements in $B$ and therefore $\ens[e] \in \ahull(B)$. The same logic applies for the closed affine hull.
+	
+	3. Since $\ahull(\ahull(A))$ is the smallest affine set containing $\ahull(A)$, and since $\ahull(A)$ is an affine subset, then $\ahull(\ahull(A))$ must be $\ahull(A)$ since no smaller affine set can contain all elements of $\ahull(A)$. The same logic applies for the closed affine hull.
+\end{proof}
+
+\begin{defn}
+	We note $\mathfrak{af}_{\Ens}$ the set of all affine subsets of $\Ens$ and $\mathfrak{caf}_{\Ens}$ the set of all closed affine subsets of $\Ens$.
+\end{defn}
+
+\begin{prop}
+	$\mathfrak{af}_{\Ens}$ and $\mathfrak{caf}_{\Ens}$, as posets ordered by inclusion, are topped $\bigcap$-structures and therefore complete lattices.
+\end{prop}
+
+\begin{proof}
+	Theorem 7.3 in Davey and Priestley's ``Introduction to Lattice and Order'' states that, given a closure operator, the set of all closed sets, ordered by inclusion, is a topped $\bigcap$-structure and, therefore, a complete lattice. Since $\mathfrak{af}_{\Ens}$ and $\mathfrak{caf}_{\Ens}$ are generated by closures, the theorem applies.
+\end{proof}
+
 \end{mathSection}
 
 We still need to prove the following conjecture:
@@ -2024,6 +2064,17 @@ Having defined affine sets, we can define a notion of affine independence. Intui
 \end{remark}
 
 TODO: when defining affine combinations, show that you can "make any element explicit"
+
+
+\begin{thrm}
+	Every ensemble space admits an affine basis.
+\end{thrm}
+
+\begin{proof}
+	Note that a set $\mathcal{B}$ is an affine basis if and only if it is a maximal affinely independent set. If $\mathcal{B}$ is a basis, then $\ahull(\mathcal{B}) = \Ens$ by definition. Thus, there is no ensemble that we can add that would keep $\mathcal{B}$ affinely independent. Conversely, if $\mathcal{B}$ is a maximal affinely independent set, then $\ahull(\mathcal{B}) = \Ens$. Otherwise, we could find an ensemble not in $\ahull(\mathcal{B})$, which would then be affinely independent from $\mathcal{B}$. So $\mathcal{B}$ is not maximal, a contradiction.
+	
+	Consider the poset of the affinely independent subsets of $\Ens$ ordered by inclusion. Let $\mathcal{C}$ be a chain of affinely independent subsets. Let $U$ be the union of all the sets in $\mathcal{C}$. Given $\ens[e]_1, \ens[e]_2, \ldots, \ens[e]_n \in U$, since this is a finite number of ensembles and $\mathcal{C}$ is a chain, there exists $C \in \mathcal{C}$ such that $\ens[e]_1, \ens[e]_2, \ldots, \ens[e]_n \in C$. Thus, the ensembles are affinely independent since $C$ is affinely independent, so $U$ is affinely independent and hence an upper bound for $\mathcal{C}$ in the poset. By Zorn's lemma, there exists some maximal affinely independent set $\mathcal{B}$, which is a basis.
+\end{proof}
 
 \begin{prop}
 	Let $\ens[a] \in \Ens$ be an internal point. If $\mathcal{B} \subseteq \Ens$ is a basis, then we can find $\ens \in \mathcal{B}$ such that $\{\ens[a]\} \cup \mathcal{B} \setminus \{\ens\}$ is a basis. That is, every basis can be changed to include an internal point, if one exists.
@@ -2093,52 +2144,56 @@ TODO: rethink
 TODO: fix narrative
 
 \begin{prop}
-	If an ensemble space permits a basis with finite cardinality, then it contains an internal point.
+	Every finite-dimensional ensemble space contains an internal point. 
 \end{prop}
 
 \begin{proof}
-	Let $\mathcal{B} = \{\ens[b]_i\}_{i=1}^n$ be a basis for the ensemble space $\Ens$. The result is trivial if $n = 1$. Let $\ens[b] = \sum_{i = 1}^n\frac{1}{n}\ens[b]_i$ be the equal mixture of the elements of $\mathcal{B}$. Let $\ens[a] \in \Ens$. Since $\mathcal{B}$ is a basis for $\Ens$, there exist $\{r_i\}_{i=1}^n \subseteq \mathbb{R}$ such that $\sum_{i=1}^nr_i = 1$ and $\ens[a] = \sum_{i=1}^nr_i\ens[b]_i$.
+	Let $\mathcal{B} = \{\ens[b]_i\}_{i=1}^n$ be a basis for the ensemble space $\Ens$. If $n = 1$, then $\Ens$ is a singleton which is an internal point, so assume that $n > 1$. Let $\ens[b] = \sum_{i = 1}^n\frac{1}{n}\ens[b]_i$ be the equal mixture of the basis. Given $\ens[a] \in \Ens$, since $\mathcal{B}$ is a basis, there exist affine coefficients $r_i \in \mathbb{R}$ so that $\ens[a] = \sum_{i=1}^nr_i\ens[b]_i$.
 	
 	\begin{figure}[h]
 		\centering
-		\begin{tikzpicture}		
-			\coordinate (e1)   at (-3,0);
-			\coordinate (e2)   at (3,0);
-			\coordinate (e3)   at (0,4.5);
-			\coordinate (b1)   at (-2,.5);
-			\coordinate (b2)   at (1,.75);
-			\coordinate (b3)   at (.5,3);
-			\coordinate (b)    at (-.17,1.4167);
-			\coordinate (a)    at (1.5,1.25);
-			\coordinate (a')   at (-.5,1.455);
+		\begin{tikzpicture}
+			\def\radius{2.7}
+			\def\initialAngle{-15}
+			
+			\coordinate (e1)   at (\initialAngle:\radius);
+			\coordinate (e2)   at (\initialAngle + 120:\radius);
+			\coordinate (e3)   at (\initialAngle + 240:\radius);
+			\coordinate (b1)   at (-.8,-1.0);
+			\coordinate (b2)   at (.7,-.6);
+			\coordinate (b3)   at (-.25,1.3);
+			%\coordinate (b)    at ($(b1)!.5!(b2)!.5!(b3)$);
+			\coordinate (b)    at (barycentric cs:b1=1,b2=1,b3=1);
+			\coordinate (a)    at (1.6,-.35);
+			\coordinate (c)   at ($(b)!-.2!(a)$);
 			
 			%ensemble space
 			\draw[-, thick] (e1) -- (e2);
 			\draw[-, thick] (e2) -- (e3);
 			\draw[-, thick] (e3) -- (e1);
-			%dashed circle and line
-			\draw[-, thick] (a') -- (a);
-			\draw [dashed] (b) circle (.75);
+			
+			\draw[-, thick] (c) -- (a);
 			%nodes
-			\filldraw [black] (b1) circle (1pt) node[right] {$\ens[b]_1$};
+			\filldraw [black] (b1) circle (1pt) node[left] {$\ens[b]_1$};
 			\filldraw [black] (b2) circle (1pt) node[right] {$\ens[b]_2$};
 			\filldraw [black] (b3) circle (1pt) node[left] {$\ens[b]_3$};
-			\filldraw [black] (b) circle (1pt) node[below] {$\ens[b]$};
+			\filldraw [black] (b) circle (1pt) node[above] {$\ens[b]$};
 			\filldraw [black] (a) circle (1pt) node[above] {$\ens[a]$};
-			\filldraw [black] (a') circle (1pt) node[above] {$\ens[a]'$};
+			\filldraw [black] (c) circle (1pt) node[above] {$\ens[c]$};
 		\end{tikzpicture}
 	\end{figure}
 	
-	Since $\frac{\frac{1}{n} - pr_i}{\bar{p}} \to \frac{1}{n}$ as $p \to 0$, we can choose $p$ sufficiently small so that $0 \le \frac{\frac{1}{n} - pr_i}{\bar{p}} \le 1$ for all $i \in [1,n]$. Let $\ens[a]' = \sum_{i=1}^n\frac{\frac{1}{n} - pr_i}{\bar{p}}\ens[b]_i \in \Ens$. Note that $\sum_{i=1}^n\frac{\frac{1}{n} - pr_i}{\bar{p}} = 1$. We have
+	Since $\frac{\frac{1}{n} - pr_i}{\bar{p}} \to \frac{1}{n}$ as $p \to 0$, we can choose $p$ sufficiently small so that $0 \le \frac{\frac{1}{n} - pr_i}{\bar{p}} \le 1$ for all $i \in [1,n]$. Let $\ens[c] = \sum_{i=1}^n\frac{\frac{1}{n} - pr_i}{\bar{p}}\ens[b]_i \in \Ens$. Note that $\sum_{i=1}^n\frac{\frac{1}{n} - pr_i}{\bar{p}} = 1$. We have
 	\begin{equation}
-		p\ens[a] + \bar{p}\ens[a]' = p\sum_{i=1}^n r_i\ens[b]_i + \bar{p}\sum_{i=1}^n \frac{\frac{1}{n} - pr_i}{\bar{p}}\ens[b]_i = \sum_{i=1}^n (pr_i + \frac{1}{n} - pr_i) \ens[b]_i = \sum_{i=1}^n\frac{1}{n}\ens[b]_i = \ens[b]
+		p\ens[a] + \bar{p}\ens[c] = p\sum_{i=1}^n r_i\ens[b]_i + \bar{p}\sum_{i=1}^n \frac{\frac{1}{n} - pr_i}{\bar{p}}\ens[b]_i = \sum_{i=1}^n (pr_i + \frac{1}{n} - pr_i) \ens[b]_i = \sum_{i=1}^n\frac{1}{n}\ens[b]_i = \ens[b].
 	\end{equation}
 	So $\ens[b]$ is an internal point.
 \end{proof}
 
 \begin{coro}
-	If an ensemble space is finite-dimensional, then it has an internal ensemble. Hence, it embeds into a vector space.
+	For every finite-dimensional ensemble space $\Ens$, there exists a natural embedding $\iota_{\ens[a]} : \Ens \to V_{\ens[a]}$ where $\ens[a]$ is an internal point.
 \end{coro}
+
 
 With a notion of dimension, we should be able to show that the embedding is a continuous map.
 
