@@ -1390,11 +1390,16 @@ We note that the Shannon entropy in our framework does not represent an absolute
 			I\left(\left\{ \frac{1}{nm}\right\}_{i=1}^{nm}\right) &=I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) + I\left(\left\{ \frac{1}{m}\right\}_{i=1}^{m}\right).
 		\end{aligned}
 	\end{equation}
-	Note that $f(n) = I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right)$ is a function of $n$ only, such that $f(nm) = f(n) + f(m)$. Since $I$ is continuous, by \href{https://en.wikipedia.org/wiki/Cauchy%27s_functional_equation}{Cauchy's functional equation} we have $f(n) = \kappa \log n$. Since the entropy is strictly concave, $\kappa$ must be positive. Therefore
+	Note that $f(n) = I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right)$ is a function of $n$ only, such that $f(nm) = f(n) + f(m)$. Since $I$ is symmetric and concave, it reaches its maximum when all coefficients are equal. Since adding a coefficient equal to zero does not change its value, we have
 	\begin{equation}
-		I\left(\left\{ \frac{1}{n}\right\}_{i=1}^{n}\right) = \kappa \log n
+		f(n)=I\left(\frac{1}{n},\ldots,\frac{1}{n},0\right)
+		\leq I\left(\frac{1}{n+1},\ldots,\frac{1}{n+1}\right)=f(n+1).
 	\end{equation}
-	for some $\kappa>0$.
+	Therefore $f$ is increasing. Now let $k_m$ be the integer such that $2^{k_m}\leq n^m<2^{k_m+1}$. We have
+	\begin{equation}
+		k_m f(2)\leq m f(n)\leq(k_m+1)f(2).
+	\end{equation}
+	Dividing by $m$ and taking the limit as $m\to\infty$, we have $\frac{k_m}{m}\to\log n$ and therefore $f(n)=f(2)\log n$. Setting $\kappa=f(2)$, we have $f(n)=\kappa\log n$. Since the entropy is strictly concave, $\kappa>0$.
 	
 	We now show that if the coefficients $p_i$ are rationals, $I_n\left(\left\{ p_i\right\}_{i=1}^{n}\right) = - \kappa \sum_{i=1}^{n} p_i \log p_i$. Let $\{p_i\}_{i=1}^{n}$ be rational coefficients for a convex combination. We can write them as $p_i = \frac{m_i}{m}$ where $\{m_i\}, m \in \mathbb{Z}^+$ and $m$ is the least common denominator. Since $p_i$ are the coefficients of a convex combination, we must have $\sum_{i=1}^{n} m_i = m$. Since $m_i$ is a positive integer, we can write $m_i = \sum_{j=1}^{m_i} 1$. We now take $m$ orthogonal ensembles $\ens[a]_{ij}$ where $1 \leq i \leq n$ and $1 \leq j \leq m_i$. We have
 	\begin{equation}
