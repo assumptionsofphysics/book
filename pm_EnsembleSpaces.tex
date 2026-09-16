@@ -686,6 +686,7 @@ We prove the same fact by showing that, in that same case, every open set will i
 \begin{example}
 	Let $\Ens$ be an ensemble space. The set of boundary points $B_{\Ens}$ is not necessarily a closed set and therefore $I_{\Ens}$ is not necessarily an open set.
 \end{example}
+
 \begin{proof}
 	Let $\Ens = \{ p_i \in \ell^1 \, | \,  \sum p_ i =1, \; p_i \in [0,1]\}$ be the set of probability distributions over countably infinitely many elements with the topology of $\ell^1$. Let $\ens \in I_{\Ens}$ be an interior point of $\Ens$. Since $\ens$ is in the interior, it corresponds to a probability distribution $p_i$ such that $p_i \in (0,1)$ for all $i$.
 	
@@ -1640,6 +1641,20 @@ It is important to note that while we can write affine combinations, not all aff
 \begin{remark}
 	In the same way that not all infinite convex combinations yield valid ensembles, not all finite or infinite affine combinations yield valid ensembles.
 \end{remark}
+
+TODO: add corollary about permutations of ensemble and affine coefficient pairs.
+
+TODO: add exposition about the following proposition (i.e. affine combinations behave like linear combinations in vector spaces). It may need to be moved to the affine basis section.
+
+\begin{prop}
+	If $\ens[a] = \sum_{i=1}^n r_i\ens[e]_i$ is an affine combination and $r_j \ne 0$, then $\ens[e]_j = \frac{1}{r_j}\ens[a] + \sum_{i \ne j} \frac{-r_i}{r_j}\ens[e]_i$ as an affine combination.
+\end{prop}
+
+\begin{proof}
+	Note that the coefficients on the right sum to one. That is, $\frac{1}{r_j} + \sum_{i \ne j} \frac{-r_i}{r_j} = \frac{1 - (1 - r_j)}{r_j} = 1$, so $\frac{1}{r_j}\ens[a] + \sum_{i \ne j} \frac{-r_i}{r_j}\ens[e]_i$ is an affine combination, if it exists. By the definition of affine combination, we can write $\sum_{i \in I}\frac{r_i}{r}\ens[e]_i = \frac{1}{r}\ens[a] + \sum_{i \notin I}\frac{-r_i}{r}\ens[e]_i$ where $I = \{i \in [1,n] \mid r_i \ge 0\}$ and $r = \sum_{i \in I} r_i$. There are two cases based on the sign of $r_j$. If $r_j > 0$, then $j \in I$, so $\frac{r_j}{r}\ens[e]_j + \sum_{i \in I \setminus \{j\}}\frac{r_i}{r}\ens[e]_i = \frac{1}{r}\ens[a] + \sum_{i \notin I}\frac{-r_i}{r}\ens[e]_i$. The non-negative coefficients in $\frac{1}{r_j}\ens[a] + \sum_{i \ne j} \frac{-r_i}{r_j}\ens[e]_i$ are $\frac{1}{r_j}$ and $\frac{-r_i}{r_j}$ for $i \notin I$, and their sum is $\frac{1}{r_j} + \sum_{i \notin I} \frac{-r_i}{r_j} = \frac{1 - (1 - r)}{r_j} = \frac{r}{r_j}$. Applying the definition of affine combination gives $\frac{1 / r_j}{r / r_j}\ens[a] + \sum_{i \notin I} \frac{-r_i / r_j}{r / r_j}\ens[e]_i = \frac{1}{r / r_j}\ens[e]_j + \sum_{i \in I \setminus \{j\}} \frac{r_i / r_j}{r / r_j}\ens[e]_i$, and consequently $\frac{1}{r}\ens[a] + \sum_{i \notin I} \frac{-r_i}{r}\ens[e]_i = \frac{r_j}{r}\ens[e]_j + \sum_{i \in I \setminus \{j\}} \frac{r_i}{r}\ens[e]_i$ as convex combinations.
+	
+	In the case where $r_j < 0$, we have $j \notin I$, so $\sum_{i \in I}\frac{r_i}{r}\ens[e]_i = \frac{1}{r}\ens[a] + \frac{-r_j}{r}\ens[e]_j + \sum_{i \notin I \cup \{j\}}\frac{-r_i}{r}\ens[e]_i$. The non-negative coefficients in $\frac{1}{r_j}\ens[a] + \sum_{i \ne j} \frac{-r_i}{r_j}\ens[e]_i$ are $\frac{-r_i}{r_j}$ for $i \in I$, and their sum is $\sum_{i \in I} \frac{-r_i}{r_j} = \frac{-r}{r_j}$. Applying the definition of affine combination yields $\sum_{i \in I} \frac{-r_i / r_j}{-r / r_j}\ens[e]_i = \frac{1}{-r / r_j}\ens[e]_j + \frac{-1 / r_j}{-r / r_j}\ens[a] + \sum_{i \notin I \cup \{j\}} \frac{r_i / r_j}{-r / r_j}\ens[e]_i$, and thus $\sum_{i \in I} \frac{r_i}{r}\ens[e]_i = \frac{1}{r}\ens[a] + \frac{-r_j}{r}\ens[e]_j + \sum_{i \notin I \cup \{j\}} \frac{-r_i}{r}\ens[e]_i$ as convex combinations. In either case, the resulting convex equality is exactly the equality obtained from a valid affine combination, so the affine combination exists and equals $\ens[e]_j$.
+\end{proof}
 \end{mathSection}
 
 We still need to understand how to extend affine combination to the infinite case. The safest way is to require the two infinite mixtures $\sum_{i \in I} \frac{r_i}{r} \ens_i$ and $\sum_{i \notin I} \frac{-r_i}{r} \ens_i$ to converge and then require that the resulting affine problem admit a solution.
@@ -1651,6 +1666,10 @@ While the mixing operation is continuous, it is unclear whether, under current a
 \end{conj}
 
 Since it is easy to show that mixing gives us a continuous bijection, the problem is showing that the inverse is continuous. Continuity of mixtures only shows that we can stretch open sets to bigger open sets. What we would need is to show that we can shrink open sets to open sets. For example, suppose $U$ is an open neighborhood of $\ens[a]$. The set $V = p \ens[a] + \bar{p} U$ is a set that contains $\ens[a]$ and it is a subset of $U$. The question is whether a sequence can stay in $U$ and converge to $\ens[a]$ without ever entering $V$. Our intuition would say that it can't, though the intuition may fail in the infinite-dimensional case.
+
+TODO: add exposition about how affine combinations are not continuous in general, even in finite dimensions. That is, the disk counterexample demonstrates that $\iota_{\ens[a]}$ does not need to be a topological embedding. Therefore, the previous paragraphs are not longer necessary.
+
+TODO: "disk" v.s. "disc"
 
 If we restrict the endpoint of the mixture, we do have a homeomorphism onto the image. The proof uses a later result, the topology is Hausdorff, that is guaranteed by the entropy.
 
@@ -2066,10 +2085,8 @@ Having defined affine sets, we can define a notion of affine independence. Intui
 
 \begin{remark}
 	We use the affine hull to match the standard definitions in a vector space. In the infinite case, however, there may be a need for another definition that uses the closed affine hull.
+	TODO: is this needed?
 \end{remark}
-
-TODO: when defining affine combinations, show that you can "make any element explicit"
-
 
 \begin{thrm}
 	Every ensemble space admits an affine basis.
@@ -2100,7 +2117,7 @@ TODO: when defining affine combinations, show that you can "make any element exp
 \end{proof}
 
 \begin{prop}
-	If $\mathcal{B}_1, \mathcal{B}_2 \subseteq \Ens$ are affine bases, then $|\mathcal{B}_1| = |\mathcal{B}_2|$. That is, all bases have the same cardinality.
+	If $\mathcal{B}_1, \mathcal{B}_2 \subseteq \Ens$ are affine bases, then $|\mathcal{B}_1| = |\mathcal{B}_2|$. That is, all affine bases have the same cardinality.
 \end{prop}
 
 \begin{proof}
@@ -2110,8 +2127,12 @@ TODO: when defining affine combinations, show that you can "make any element exp
 \end{proof}
 
 \begin{coro}
-	TODO: affine independent sets have cardinality smaller than a basis.
+	Affinely independent sets have cardinality less than or equal to the cardinality of any basis.
 \end{coro}
+
+\begin{proof}
+	Let $S \subseteq \Ens$ be an affinely indepedent set. By Zorn's lemma, $S$ is contained in a maximal affinely independent set $\mathcal{B}$, which is a basis. Therefore, $|S| \le |\mathcal{B}|$. Since every affine basis of $\Ens$ has the same cardinality, the result follows.
+\end{proof}
 
 \begin{defn}
 	The \textbf{affine dimension} of an ensemble space is the cardinality of any affine basis minus one. That is, $\dim(\Ens) = |\mathcal{B}|-1$ where $\mathcal{B} \subseteq \Ens$ is an affine basis of $\Ens$.
