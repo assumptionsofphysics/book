@@ -249,14 +249,14 @@ The axiom of mixture only guarantees the existence of a mixture between two ense
 
 \begin{mathSection}
 \begin{defn}[Finite mixture]
-	Let $\{\ens_i\}_{i=1}^{n} \subseteq \Ens$ be a finite sequence of ensembles and $\{p_i\}_{i=1}^{n} \subseteq [0,1]$ be a finite sequence of coefficients such that $\sum_{i=1}^{n} p_i = 1$, then the \textbf{finite mixture}, noted $\ens[a] = \sum_{i=1}^{n} p_i \ens_i$, is defined to be either $\ens[e]_j$ if $p_j=1$ for some $j$ or
+	Let $\{\ens_i\}_{i=1}^{n} \subseteq \Ens$ be a finite sequence of ensembles and $\{p_i\}_{i=1}^{n} \subseteq [0,1]$ be a finite sequence of coefficients such that $\sum_{i=1}^{n} p_i = 1$, then the \textbf{finite mixture}, noted $\ens[a] = \sum_{i=1}^{n} p_i \ens_i$, is defined to be 
 	\begin{equation}
 		\begin{split}
 	p_1 \ens_1 + (1-p_1)\left( \tfrac{p_2}{1-p_1} \ens_2 + \tfrac{1-p_1-p_2}{1-p_1} \left( \tfrac{p_3}{1-p_1-p_2} \ens_3 +  \tfrac{1-\sum_{i=1}^{3}p_i}{1-p_1-p_2}\Bigl(\ldots \right.\right. \\
 \left.\left.\left.+\tfrac{1-\sum_{i=1}^{n-2}p_i}{1-\sum_{i=1}^{n-3}p_i}\left(\tfrac{p_{n-1}}{1- \sum_{i=1}^{n-2}p_i} \ens_{n-1} + \tfrac{p_n}{1- \sum_{i=1}^{n-2}p_i}\ens_n\right)\right) \right) \right)
 		\end{split}
 	\end{equation}
-	if $p_i \neq 1$ for all $i$.
+	if $p_i \neq 0$ for all $i$. Otherwise, it is defined as $\sum_{i \in I} p_i \ens_i$ where $I = \{ i \in [1,n] \, \mid \, p_i \neq 0 \}$.
 \end{defn}
 
 \begin{coro}
@@ -298,7 +298,7 @@ Whether an infinite mixture $\sum_{i=1}^\infty p_i \ens_i$ converges or not in t
 
 \begin{mathSection}
 \begin{defn}[Infinite mixture]
-	Let $\{\ens_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\}_{i=1}^{\infty} \subseteq [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$. Then the ensemble $\ens[a]$ is an \textbf{infinite mixture} of those ensembles if it is a topological limit of the sequence of finite mixtures $\sum_{i=1}^{n} \frac{p_i}{p_n} \ens_i$, where $p_n = \sum_{i=1}^{n} p_i$ with $n$ sufficiently large that $p_n \neq 0$. If the infinite mixture is unique, we write $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$.
+	Let $\{\ens_i\}_{i=1}^{\infty} \subseteq \Ens$ be a sequence of ensembles and $\{p_i\}_{i=1}^{\infty} \subseteq [0,1]$ be a sequence of coefficients such that $\sum_{i=1}^{\infty} p_i = 1$. Then the ensemble $\ens[a]$ is an \textbf{infinite mixture} of those ensembles if it is a topological limit of the sequence of finite mixtures $\sum_{i=1}^{n} \frac{p_i}{P_n} \ens_i$, where $P_n = \sum_{i=1}^{n} p_i$ with $n$ sufficiently large that $P_n \neq 0$. If the infinite mixture is unique, we write $\ens[a] = \sum_{i=1}^{\infty} p_i \ens_i$.
 \end{defn}
 
 \begin{remark}
@@ -668,33 +668,11 @@ for some $p_1, p_2 \in (0,1]$. Now let $p \in [0,1]$ and $\ens = p \ens_1+\bar{p
 	&=\lambda \ens[a] + \bar{\lambda} \left(\frac{p \bar{p}_{1}}{\bar{\lambda}} \ens[b]_1+\frac{\bar{p} \bar{p}_{2}}{\bar{\lambda}} \ens[b]_2\right) = \lambda \ens[a] + \bar{\lambda} \ens[b] \\
 \end{aligned}
 \end{equation}
-where $\lambda = p p_1+\bar{p} p_2$ and $\ens[b] = \frac{p \bar{p}_{1}}{\bar{\lambda}} \ens[b]_1+\frac{\bar{p} \bar{p}_{2}}{\bar{\lambda}} \ens[b]_2$. Therefore, given any $\ens[a] \in \Ens$, we can find a $\ens[b] \in \Ens$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in (0,1]$. This means the convex combination of internal points is an internal point, and $I_{\varepsilon}$ is a convex set.
+where $\lambda = p p_1+\bar{p} p_2$ and $\ens[b] = \frac{p \bar{p}_{1}}{\bar{\lambda}} \ens[b]_1+\frac{\bar{p} \bar{p}_{2}}{\bar{\lambda}} \ens[b]_2$. Therefore, given any $\ens[a] \in \Ens$, we can find a $\ens[b] \in \Ens$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in (0,1]$. This means the convex combination of internal points is an internal point, and $I_{\Ens}$ is a convex set.
 \end{proof}
 \end{mathSection}
 
-It is an open question whether \ref{pm-es-internalPointsConvex} generalizes to $\sigma$-convexity. One would need to show that if the infinite mixture of internal points exists, then it must be an internal point.
-
-TODO: Does this connect to future conjectures or not?
-
-TODO: consolidate these two examples
-
-What we can show is that the algebraic interior $I_{\Ens}$ is not necessarily an open set. As a counter-example, consider the space $\Ens = \{ p_i \in \ell^1 \, | \,  \sum p_ i =1, \; p_i \in [0,1]\}$ of all probability distributions over countably infinitely many elements. Note that $\ens \in \Ens$ is an interior point if and only if $\ens = \sum p_i x_i$ where $p_i \neq 0$ for all $i$. Now consider a distribution an internal point $\ens = \sum p_i x_i$. This is the limit of an infinite mixture where all the finite mixture have non-zero coefficients for the finitely many elements. Therefore $\ens$, in internal point, can be expressed as a limit of boundary points. This means $I_{\Ens}$ cannot be open, as we would have a sequence of points outside $I_{\Ens}$ that converge to one of its points.
-
-We prove the same fact by showing that, in that same case, every open set will include boundary points.
-
-\begin{mathSection}
-\begin{example}
-	Let $\Ens$ be an ensemble space. The set of boundary points $B_{\Ens}$ is not necessarily a closed set and therefore $I_{\Ens}$ is not necessarily an open set.
-\end{example}
-
-\begin{proof}
-	Let $\Ens = \{ p_i \in \ell^1 \, | \,  \sum p_ i =1, \; p_i \in [0,1]\}$ be the set of probability distributions over countably infinitely many elements with the topology of $\ell^1$. Let $\ens \in I_{\Ens}$ be an interior point of $\Ens$. Since $\ens$ is in the interior, it corresponds to a probability distribution $p_i$ such that $p_i \in (0,1)$ for all $i$.
-	
-	Let $B_{r}(\ens) \subseteq \ell^1$ be an open ball of radius $r$ centered around $\ens$. Since $\sum p_i = 1$, there must be a $j$ such that $p_j < \frac{r}{2}$. Suppose, without loss of generality, that $j \neq 1$. Now consider the probability distribution given by $\lambda_i = (p_1 + p_j, p_2, \dots, p_{j-1}, 0, p_{j+1}, \dots)$. Since $\lambda_j = 0$, then $\lambda_i$ is a boundary point of $\Ens$. The distance between the two distribution will be $\sum|p_i - \lambda_i| = |p_j| + |-p_j| = 2 p_j < r$, which means $\lambda_i \in B_{r}(\ens)$. Therefore, the open ball around any internal point will contain a boundary point. Therefore the interior of $I_{\Ens}$ is the empty set, and $I_{\Ens}$ is not an open set.
-	
-	Technically, $\Ens$ is not an ensemble space since, as we mentioned in the review of standard cases, the $\ell^1$ topology does not guarantee the continuity of the entropy. Therefore, we should ask whether $I_{\Ens}$ is an open set in this better topology. But if it where open, we would be able to construct a sequence of boundary points whose probability distribution would converge to the probability distribution of $\ens$, our internal point. Since we would expect this topology to still be locally convex, the sequence of ensembles would not converge even if the entropy and all continuous affine functional do converge. However, on physics ground, the convergence of all experimentally accessible quantities has to be enough for the convergence of the ensemble.
-\end{proof}
-\end{mathSection}
+Note that the set of internal points $I_{\Ens}$ may actually not be very interesting. In the infinite case, in fact, it is often empty. Consider the space $\Ens = \{ p_i \in \ell^1 \, | \,  \sum p_ i =1, \; p_i \in [0,1]\}$ of all probability distributions over countably infinitely many elements. If $\ens \in \Ens$ is such that $p_i=0$ for some $i$, then $x_i$ is not a component of $\ens$, and therefore $\ens$ is not an internal point. Conversely, if $\ens \in \Ens$ is such that $p_i \neq 0$ for all $i$, we can find $\ens[a] \in \Ens$ such that it represents a sequence of $\lambda_i$ that converges to zero more slowly than the one for $\ens$. Therefore, $\ens[a]$ cannot be a component of $\ens$ and $\ens$ is not internal. Therefore the algebraic interior is empty. Note that the problem is simply the existence of different rates of convergence in the infinite case, which is likely something that will happen in most spaces we are interested in.
 
 We now define the notion of separateness: two ensembles are separate, noted $\ens[a] \separate \ens[b]$ if they do not have a common component. That is, they are not a mixture of a common ensemble. In classical ensemble spaces, this is equivalent to probability measures with disjoint support, which is the extension of the concept. Separateness is a useful concept to characterize the relationship between ensembles as it has some useful properties. Most of all, it is an irreflexive symmetric relation: nothing is separate from itself and if $\ens[a] \separate \ens[b]$, then $\ens[b] \separate \ens[a]$.\footnote{Note that orthogonality in inner product vector spaces is also an irreflexive symmetric relationship.}
 
@@ -733,8 +711,8 @@ We now define the notion of separateness: two ensembles are separate, noted $\en
 		\item every ensemble is a component of itself
 		\item if $\ens[a]$ is a component of $\ens[b]$, then $\ens[a]$ and $\ens[b]$ have a common component and therefore they are not separate
 		\item separateness is an irreflexive symmetric relation
-		\item an ensemble is an extreme point if and only if it is separate from all other ensembles
-		\item an ensemble is an internal point if and only if it is not separate from any ensemble
+		\item distinct extreme points are separate
+		\item an internal point has a common component with (i.e. is not separate from) any ensemble
 		\item if two ensembles are separate, then they are boundary points
 	\end{enumerate}
 \end{coro}
@@ -746,7 +724,7 @@ We now define the notion of separateness: two ensembles are separate, noted $\en
 	
 	3. Since every ensemble is a component of itself, every ensemble has a common component with itself and therefore is not separate from itself. This proves that separateness is irreflexive. The definition of common component is symmetric and therefore so is separateness.
 	
-	4. An extreme point has only itself as a component, therefore it can have a common component only with itself.
+	4. Two distinct extreme points have only themselves as components, therefore they cannot have a common component.
 	
 	5. Every ensemble is a component of an internal point, therefore every ensemble is not separate from an internal point
 	
@@ -754,13 +732,13 @@ We now define the notion of separateness: two ensembles are separate, noted $\en
 \end{proof}
 
 \begin{prop}
-	Let $\Ens$ be a discrete or continuous classical ensemble space and let $\ens[a], \ens[b] \in \Ens$ be two probability measures over the corresponding sample space $X$. Then $\ens[a] \separate \ens[b]$ if and only if they have disjoint support.
+	Let $\Ens$ be a discrete or continuous classical ensemble space and let $\ens[a], \ens[b] \in \Ens$ be two probability measures over the corresponding sample space $X$. Then $\ens[a] \separate \ens[b]$ if and only if they are mutually singular (i.e. their supports are disjoint, up to a set of measure zero).
 \end{prop}
 
 \begin{proof}
-	Note that the support of a convex combination of probability measures is the union of the support of the measures. Since we are restricting ourselves to probability measures that are absolutely continuous with respect to a measure $\mu$, if a probability measure $\ens[a]$ has support $U$, any probability measure $\ens[b]$ with support on a compact subset $V \subseteq U$ such that $\mu(V) \neq 0$ is a component of $\ens[a]$.
+	Let $\ens[a], \ens[b] \in \Ens$ be two probability measures over the sample space $X$ that are absolutely continuous with respect to the corresponding $\mu$. Let $\rho_a$ and $\rho_b$ be the corresponding probability densities.
 	
-	Let $\ens[a], \ens[b] \in \Ens$ be two probability measures over the sample space $X$ that are absolutely continuous with respect to the corresponding $\mu$. Suppose $\ens[a]$ and $\ens[b]$ have overlapping support. The we can find a compact subset $U$ such that $\mu(U) \neq 0$ and is a subset of the intersection of their supports. Therefore, we can find a probability measure that is a component of both. Conversely, suppose they have disjoint support. Then they cannot have a common component, as the support of the common component would have to be a non-empty subset of both supports.
+	If $\ens[a]$ and $\ens[b]$ are not mutually singular, then $\min(\rho_a,\rho_b)$ has positive integral. After normalization, it defines a probability measure that is a component of both. Conversely, a common component must have positive measure within both supports, so the measures cannot be mutually singular. This means that $\ens[a]$ and $\ens[b]$ have a common component if and only if they are not mutually singular.
 \end{proof}
 \end{mathSection}
 
@@ -768,7 +746,7 @@ A key property of separateness is its relationship with mixtures. If an ensemble
 
 \begin{mathSection}
 \begin{prop}[Separateness extends to all mixtures]\label{pm-es-separateExtendsMixtures}
-	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ has no common component with a mixture of $\ens_1$ and $\ens_2$ then it has no common component with any mixture of $\ens_1$ and $\ens_2$ and with either $\ens_1$ or $\ens_2$. That is, if $\ens \separate p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \separate p \ens_1 + \bar{p} \ens_2$ for all $p \in [0, 1]$.
+	Let $\ens,\ens_1,\ens_2 \in \Ens$. If $\ens$ has no common component with a mixture of $\ens_1$ and $\ens_2$ then it has no common component with any mixture of $\ens_1$ and $\ens_2$ and with either $\ens_1$ or $\ens_2$. That is, if $\ens \separate p \ens_1 + \bar{p} \ens_2$ for some $p \in (0, 1)$ then $\ens \separate \lambda \ens_1 + \bar{\lambda} \ens_2$ for all $\lambda \in [0, 1]$.
 \end{prop}
 
 \begin{figure}[H]
@@ -1013,7 +991,7 @@ Note that, since a continuous classical ensemble space has no extreme points, we
 \end{proof}
 \end{mathSection}
 
-These definitions may be enough to prove that every finite-dimensional separately monodecomposable convex space is a simplex, which would allow us to define a simplex without the notion of affine independence. For the infinite case, it would be nice to compare this characterization to a Choquet simplex. We leave this as conjectures \ref{em-es-conjSimplexMonodecomposable} and \ref{em-es-conjChoquetSimplexMonodecomposable}.
+These definitions may be enough to prove that every finite-dimensional separately monodecomposable convex space is a simplex, which would allow us to define a simplex without the notion of affine independence. For the infinite case, it would be nice to compare this characterization to a Choquet simplex. We leave these as conjectures \ref{em-es-conjSimplexMonodecomposable} and \ref{em-es-conjChoquetSimplexMonodecomposable}.
 
 
 \subsection{Convex subsets and convex hull}
@@ -1022,7 +1000,7 @@ In many cases, we will need to discuss the sets that contain all their possible 
 
 \begin{mathSection}
 \begin{defn}
-	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is \textbf{convex} if it closed under finite mixtures (i.e. $\ens[a],\ens[b] \in A$ implies $p\ens[a] + \bar{p} \ens[b] \in A$ with $p \in [0,1]$), \textbf{$\sigma$-convex} if it is closed under infinite mixtures (i.e. $\ens[a]_i \in A$ implies $\sum_i p_i \ens[a]_i \in A$ for all possible infinite mixtures) and \textbf{closed and convex} if it is both convex and topologically closed.
+	Let $\Ens$ be an ensemble space. We say $A \subseteq \Ens$ is \textbf{convex} if it is closed under finite mixtures (i.e. $\ens[a],\ens[b] \in A$ implies $p\ens[a] + \bar{p} \ens[b] \in A$ with $p \in [0,1]$), \textbf{$\sigma$-convex} if it is closed under infinite mixtures (i.e. $\ens[a]_i \in A$ implies $\sum_i p_i \ens[a]_i \in A$ for all possible infinite mixtures) and \textbf{closed and convex} if it is both convex and topologically closed.
 \end{defn}
 
 \begin{coro}
@@ -1038,7 +1016,7 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \end{defn}
 
 \begin{remark}
-	Note that, given a set $A$, not all elements of $\chull(A)$ can be understood as infinite mixtures. That is, we can have $\shull(A) \subset \chull(A)$. For example, let $\Ens$ be the line segment $[0,1]$ and consider the set $A=\left\{\frac{1}{2^i}\right\}_{i=0}^{\infty}$. Every point in $(0,1]$ can be expressed as a finite mixture of two elements of $A$, for example, $1$ and any number smaller than the target number. However, zero cannot be expressed as a convex combination of positive numbers, and therefore it is not an infinite mixture of $A$. However, zero is the limit of the sequence, and therefore it will be in the topological closure of $A$. This shows that the difference between $\sigma$-hull and convex hull exists already in finite dimensions. The convex hull and the $\sigma$-hull, instead, are the same in finite dimensions because \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory%27s_theorem_%28convex_hull%29}{Carathéodory's theorem} allows us to rewrite any infinite convex combination into a finite one.
+	Note that, given a set $A$, not all elements of $\chull(A)$ can be understood as infinite mixtures. That is, we can have $\shull(A) \subset \chull(A)$. For example, let $\Ens$ be the line segment $[0,1]$ and consider the set $A=\left\{\frac{1}{2^i}\right\}_{i=0}^{\infty}$. Every point in $(0,1]$ can be expressed as a finite mixture of two elements of $A$, for example, $1$ and any number smaller than the target number. However, zero cannot be expressed as a convex combination of positive numbers, and therefore it is not an infinite mixture of $A$. However, zero is the limit of the sequence, and therefore it will be in the topological closure of $A$. This shows that the difference between $\sigma$-hull and closed hull exists already in finite dimensions. The convex hull and the $\sigma$-hull, instead, are the same in finite dimensions because \href{https://en.wikipedia.org/wiki/Carath%C3%A9odory%27s_theorem_%28convex_hull%29}{Carathéodory's theorem} allows us to rewrite any infinite convex combination into a finite one.
 	
 	For an example in which all hulls are different, consider the space of probability distributions $\Ens$ over countably many elements $X = \{x_i\}_{i=1}^{\infty}$. Let $\ens[a]_{ip} = p x_i + \bar{p} x_{i+1}$ and let $A = \left\{ \ens[a]_{ip}  \, | \, i \geq 1, p \in (0,1)  \right\} \subset \Ens$ be the set of all non-trivial mixtures of pairs of consecutive elements. A probability distribution with support over the full $X$ cannot be expressed as a finite convex combination of elements of $A$, and will therefore not be in the convex hull. However, it can be expressed as an infinite convex combination, and therefore it will be in the $\sigma$-hull. An element $x_i \in X$, is not in the $\sigma$-hull, but it will be in the closed hull, as $x_i = \lim_{p \to 1} p x_i + \bar{p} x_{i+1} = \lim_{p \to 1} \ens[a]_{ip} \in \chull(A)$.
 \end{remark}
@@ -1101,7 +1079,7 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \begin{remark}
 	Note that $\shull$ and $\chull$ are not, in general, continuous from below. This is because, in general, the union of closures is not the closure of the union. This is true, in particular, with topological closures, which is part of the definition of $\chull$.
 	
-	For example, consider the sequence $A_i = \left[0, 1-\frac{1}{i}\right) \subseteq \mathbb{R}$. These are convex sets therefore their closed hull is simply their topological closure. That is, $\chull(A_i) = \left[0, 1-\frac{1}{i}\right]$. We have $\lim\limits_{i \to \infty} A_i = \bigcup A_i = \left[0, 1\right)$ and $\lim\limits_{i \to \infty} \chull(A_i) = \bigcup \chull(A_i) = \left[0, 1\right)$ which is not a closed set and therefore different from $\chull(A) = [0,1]$. The closed hull of the limit is not the limit of the convex hull, even in a finite-dimensional space.
+	For example, consider the sequence $A_i = \left[0, 1-\frac{1}{i}\right) \subseteq \mathbb{R}$. These are convex sets therefore their closed hull is simply their topological closure. That is, $\chull(A_i) = \left[0, 1-\frac{1}{i}\right]$. We have $\lim\limits_{i \to \infty} A_i = \bigcup A_i = \left[0, 1\right)$ and $\lim\limits_{i \to \infty} \chull(A_i) = \bigcup \chull(A_i) = \left[0, 1\right)$ which is not a closed set and therefore different from $\chull(A) = [0,1]$. The closed hull of the limit is not the limit of the closed hull, even in a finite-dimensional space.
 	
 	For the $\sigma$-hull, we need an infinite-dimensional example. Conceptually, we are using the fact that a uniform distribution over the whole $[0,1]$ is the infinite convex combination of uniform distributions over countably many sets that cover the whole $[0,1]$. Let $\Ens$ be the space of probability measures defined over $[0,1] \subseteq \mathbb{R}$. Let $\{\ens[a]_i\}_{i=1}^{\infty}$ be the sequence of uniform distributions over $\left[\frac{1}{i+1}, \frac{1}{i}\right]$. Let $\ens$ be the uniform distribution over $[0,1]$. We have $\ens = \sum \frac{1}{i(i+1)} \ens[a]_i$ where $\sum \frac{1}{i(i+1)} = 1$. Therefore $\ens$ is the countable convex combination of $\ens[a]_i$. Let $A_j = \{ \ens[a]_i \, | \, i \leq j\}$. Note that $\ens[a]_i \separate \ens[a]_j$ for all $i \neq j$. Therefore, $\{\ens[a]_i\}$ are exactly all extreme points of $\shull(\bigcup A_j)$. This means that $\ens \notin \shull(A_j)$ for all $j$ while $\ens \in \shull(\bigcup A_j)$. Therefore the $\sigma$-hull of the limit is not the limit of the $\sigma$-hulls.
 \end{remark}
@@ -1127,23 +1105,13 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 \end{proof}
 \end{mathSection}
 
-There may be a relationship between the algebraic notion of $\sigma$-convexity and the topological notion of interior. For example, let $U$ be a convex open set. While it clearly cannot be closed convex, is it $\sigma$-convex? The idea is that convexity can only return points that are ``inside'' the set, and $\sigma$-convexity is required to fill in all the limits. If that is true, it would be natural to look at some sort of converse. Clearly, not all $\sigma$-convex sets are open, since all closed convex sets are also $\sigma$-convex. The question becomes whether, for $\sigma$-convex sets, the notion of algebraic boundary and topological boundary coincides. These questions raise the following conjectures.
+There may be a relationship between the algebraic notion of $\sigma$-convexity and the topological notion of interior. For example, let $U$ be a convex open set. While it need not be closed convex, is it $\sigma$-convex? The idea is that convexity can only return points that are ``inside'' the set, and $\sigma$-convexity is required to fill in all the limits. If that is true, it would be natural to look at some sort of converse, though it is not clear, at this point, what that would be.
 
 \begin{conj}
 	Let $U \subseteq \Ens$ be a convex open set. Then $U$ is $\sigma$-convex.
 \end{conj}
 
-\begin{defn}
-	Given a set $A \subset \Ens$, $\ens[a] \in A$ is an internal point of $A$ if for any $\ens \in \Ens$ we can find $\ens[b] \in A$ such that $\ens[a] = p \ens + \bar{p} \ens[b]$ for some $p \in (0,1]$.
-\end{defn}
-
-\begin{conj}
-	 Let $A \subseteq \Ens$ and let $\ens[a] \in \chull(A)$ be an internal point of $\chull(A)$. Then $\ens[a] \in \shull(A)$.
-\end{conj}
-
-TODO: review
-
-We close this subsection by showing a useful relationship about the convex sets and the topology. Namely, the hull of finitely many elements is a compact set.
+We close this subsection by showing a useful relationship between convexity and topology. Namely, the hull of finitely many elements is a compact set.
 
 \begin{mathSection}
 \begin{defn}[Polytope]
@@ -1180,14 +1148,14 @@ Later in the chapter, we will need to create the non-additive generalization for
 \begin{proof}
 	1. If $A$ is empty, $cs_f(A) = f_{\emptyset}$. If $A$ is non-empty, $cs_f(A)$ is the supremum of the subset of values returned by $f(\hull(A))$, which means $f_{\emptyset} \leq \inf(f(\Ens)) \leq cs_f(A) \leq \sup(f(\Ens))$. Therefore $cs_f(A) \in [f_{\emptyset}, \sup(f(\Ens))]$ for all $A$.
 
-	2. If $A = B = \emptyset$, then $cs_f(A) = cs_f(B)$. If $B \neq \emptyset$, $cs_f(A) = f_{\emptyset} \leq \inf(\Ens) \leq cs_f(B)$. In the last case, since the $\hull$ is an increasing function, the image of a set through a map is an increasing function and the supremum is an increasing function, the convex supremum is an increasing function.
+	2. If $A=\emptyset$, then $cs_f(A)=f_{\emptyset}\leq cs_f(B)$. If $A\neq\emptyset$, then $\hull(A)\subseteq\hull(B)$, so $f(\hull(A))\subseteq f(\hull(B))$, and therefore $cs_f(A)\leq cs_f(B)$.
 	
 	3. Let $A_i \subseteq \Ens$ be an increasing sequence and $A = \bigcup A_i$. Since $cs_f$ is increasing, $cs_f(A_i)$ is also an increasing sequence. Since $\hull$ is continuous from below, we have:
 	\begin{equation}
 		\begin{aligned}
-			cs_f(A) &= \sup(f(\hull(A))\cup\{f_{\emptyset}\}) = \sup(f(\bigcup\hull(A_i))\cup\{f_{\emptyset}\})\\
-			&= \sup(\bigcup f(\hull(A_i))\cup\{f_{\emptyset}\}) = \sup(\bigcup (\sup(f(\hull(A_i))\cup\{f_{\emptyset}\}))) \\
-			&= \sup(\bigcup cs_f(A_i)).
+			cs_f(A) &= \sup(f(\hull(A))\cup\{f_{\emptyset}\}) = \sup(f(\bigcup_i\hull(A_i))\cup\{f_{\emptyset}\})\\
+			&= \sup(\bigcup_i f(\hull(A_i))\cup\{f_{\emptyset}\}) = \sup_i(\sup(f(\hull(A_i))\cup\{f_{\emptyset}\})) \\
+			&= \sup_i(cs_f(A_i)).
 		\end{aligned}
 	\end{equation}
 	But since $cs_f(A_i)$ is increasing, the supremum is exactly the limit. Therefore the convex supremum is continuous from below.
