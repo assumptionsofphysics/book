@@ -1206,7 +1206,7 @@ Thinking of ensembles and the variability of their instances, then, makes it cle
 	\begin{itemize}
 		\item \textbf{Continuity}\footnote{Currently, we are imposing that the entropy is continuous. There may be a chance that this requirement is redundant, as strict concavity and the upper variability bound may already impose this. We have found proofs that show that real-valued convex/concave functions of real values are continuous. These proofs fail at the extreme points, but the upper variability bound may fix this. Another open question is whether differentiability is also an independent requirement.}
 		\item \textbf{Strict concavity}: $S(p\ens[a] + \bar{p} \ens[b]) \geq p S(\ens[a]) + \bar{p} S(\ens[b])$ with the equality holding if and only if $\ens[a] = \ens[b]$ or $p \in \{0,1\}$
-		\item \textbf{Upper variability bound}: there exists a universal function $I(p, \bar{p})$ (i.e. the same for all ensemble spaces) such that $S(p\ens[a] + \bar{p} \ens[b]) \leq I(p, \bar{p}) + p S(\ens[a]) + \bar{p} S(\ens[b])$; if the equality holds for all $p \in [0,1]$, $\ens[a]$ and $\ens[b]$ are \textbf{mutually exclusive} or \textbf{orthogonal}, noted $\ens[a] \ortho \ens[b]$
+		\item \textbf{Upper variability bound}: there exists a universal function $I(p, \bar{p})$ (i.e. the same for all ensemble spaces) such that $S(p\ens[a] + \bar{p} \ens[b]) \leq I(p, \bar{p}) + p S(\ens[a]) + \bar{p} S(\ens[b])$; if the equality holds for one $p \in (0,1)$, then it holds for all $p \in [0,1]$, $\ens[a]$ and $\ens[b]$ are \textbf{mutually exclusive} or \textbf{orthogonal}, noted $\ens[a] \ortho \ens[b]$
 		\item \textbf{Mixtures preserve orthogonality}:\footnote{It is unclear whether ``mixtures preserve orthogonality'' is an independent axiom. Intuitively, the following argument tells us that it is. Take the 2-dimensional simplex (i.e. a triangle) that represents a classical discrete probability space over three elements. Take the standard entropy, which will satisfy ``mixtures preserve orthogonality''. This is because the middle point has entropy $\log 3$. We can imagine redefining the entropy so that it is a little bit lower in the center but it is unchanged on the sides. However, one needs to provide an actual example and show that it satisfies all axioms. It may also be that only one direction of the implication is an independent axiom. That is, that orthogonality with the components implies orthogonality with the mixtures. This is what does not hold for separateness.} $\ens[a] \ortho \ens[b]$ and $\ens[a] \ortho \ens[c]$ if and only if $\ens[a] \ortho p \ens[b] + \bar{p} \ens[c]$ for any $p \in (0,1)$
 	\end{itemize}
 \end{axiom}
@@ -2344,8 +2344,10 @@ The proof proceeds as follows. Suppose we take three points and assign them an e
 
 \begin{mathSection}
 \begin{defn}
-	A \textbf{line} $A \subseteq \Ens$ is a convex subset such that for any three elements one can be expressed as a mixture of the other two. That is, for all distinct $\ens_1, \ens_2, \ens_3 \in A$ there exists a permutation $\sigma : \{1,2,3\} \to \{1,2,3\}$ and $p \in (0,1)$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}$.
+	A \textbf{line} $A \subseteq \Ens$ is a maximal convex subset such that for any three elements one can be expressed as a mixture of the other two. That is, for all distinct $\ens_1, \ens_2, \ens_3 \in A$ there exists a permutation $\sigma : \{1,2,3\} \to \{1,2,3\}$ and $p \in (0,1)$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}$.
 \end{defn}
+
+%TODO: line can also be defined as a one-dimensional affine set
 
 \begin{prop}
 	Given two distinct $\ens[a], \ens[b] \in \Ens$, there is only one line that contains them.
@@ -2505,20 +2507,29 @@ We define the mixing entropy as the increase in entropy for the equal mixture of
 \end{proof}
 
 \begin{remark}
-	The mixing entropy fails to be a distance function as it does not satisfy the triangle inequality. In the classical and quantum case, in fact, the JSD and QJSD are the square of a distance function. Given the current axiom, it is unlikely that this result can be generalized to the mixing entropy itself. The issue is that we do not have enough information about the relative entropy of 3 points, apart from the orthogonal case. It is very likely that, on physics grounds, there should be constraints on the mixing entropy between three points.
+	The mixing entropy fails to be a distance function as it does not satisfy the triangle inequality. In the classical and quantum case, in fact, the JSD and QJSD are the square of a distance function. Given the current axiom, the result cannot be generalized to the mixing entropy itself, as counterexamples can be constructed. The issue is that we do not have enough information about the relative entropy of 3 points, apart from the orthogonal case.
+	
+	On physics grounds, there may be additional constraints on the mixing entropy between three points. For example, we may impose that, for every $\ens[a],\ens[b],\ens[c]\in\Ens$ and every $p\in[0,1]$, $pMS(\ens[a],\ens[c])+\bar{p}MS(\ens[b],\ens[c]) \geq p\bar{p}MS(\ens[a],\ens[b])$.
+	Intuitively, no ensemble $\ens[c]$ can be very similar to two ensembles that are dissimilar. The variability between the two alternatives places a lower bound on their average mixing entropy with the reference. Together with the properties already established, this condition is equivalent to requiring that the square root of the mixing entropy is a distance function. To see this, define $d(\ens[a],\ens[b])=\sqrt{MS(\ens[a],\ens[b])}$. Non-negativity, symmetry and identity of indiscernibles are already established. Let $u=d(\ens[a],\ens[c])$ and $v=d(\ens[b],\ens[c])$. If $u,v>0$, choose $p=\frac{v}{u+v}$, so $\bar{p}=\frac{u}{u+v}$. Dividing the proposed bound by $p\bar{p}$ gives
+	\begin{equation}
+		d(\ens[a],\ens[b])^2
+		\leq \frac{u^2}{\bar{p}}+\frac{v^2}{p}
+		= u(u+v)+v(u+v)=(u+v)^2=\left(d(\ens[a],\ens[c]) + d(\ens[b],\ens[c])\right)^2.
+	\end{equation}
+	Taking square roots recovers the triangle inequality. If either $u$ or $v$ is zero, $\ens[c]$ coincides with one of the other ensembles and the triangle inequality holds trivially. Therefore $d$ is a distance function and $MS=d^2$. Whether this constraint can be justified by an additional physical requirement remains an open question.
 \end{remark}
 \end{mathSection}
 
-Though the mixing entropy is not a distance function, we can still show that, like a distance, it satisfies something like a triangle inequality over a line and it decreases as one ensemble approaches another. The notion of two ensembles approaching is given by the convex structure: in a convex space, a mixture of $\ens[a]$ and $\ens[b]$ is closer to $\ens[a]$ than $\ens[b]$ is to $\ens[a]$.
+Though the mixing entropy is not a distance function, we can find interesting bounds. If we have two ensembles $\ens[a]$ and $\ens[b]$, and then pick a mixture $\ens[c]$, then the mixing entropy between the endpoints cannot be smaller than the sum of the two mixing entropies. This also tells us that, if we get closer to an ensemble along a given direction, the mixing entropy decreases: a mixture of $\ens[a]$ and $\ens[b]$ is closer to $\ens[a]$ than $\ens[b]$ is to $\ens[a]$. We can also find an upper bound that depends only on the mixing coefficient, which is useful in some cases to recover uniform convergence.
 
 \begin{mathSection}
 	
 \begin{prop}\label{pm-es-mixingEntropyIntervalBound}
-	Let $\ens[a],\ens[b] \in \Ens$. Then $MS(\ens[a],\ens[b]) \ge MS(\ens[a],p\ens[a]+\bar{p}\ens[b])+MS(\ens[b],p\ens[a]+\bar{p}\ens[b])$ with equality if and only if $\ens[a]=\ens[b]$ or $p \in \{0,1\}$.
+	Let $\ens[a],\ens[b] \in \Ens$. Then $MS(\ens[a],\ens[b]) \ge MS(\ens[a],p\ens[a]+\bar{p}\ens[b])+MS(p\ens[a]+\bar{p}\ens[b],\ens[b])$ with equality if and only if $\ens[a]=\ens[b]$ or $p \in \{0,1\}$.
 \end{prop}
 	
 \begin{proof}
-	Let $S_{\ens[a]\ens[b]}:[0,1] \to \mathbb{R}$ be the map $S_{\ens[a]\ens[b]}(p) \mapsto S(p\ens[a]+\bar{p}\ens[b])$. First we show $S_{\ens[a]\ens[b]}$ is concave. Let $x,y \in [0,1]$. For all $t \in [0,1]$ we have
+	Let $S_{\ens[a]\ens[b]}:[0,1] \to \mathbb{R}$ be the map $S_{\ens[a]\ens[b]}(p) \mapsto S(p\ens[a]+\bar{p}\ens[b])$. First we show $S_{\ens[a]\ens[b]}$ is concave. Let $x,y \in [0,1]$. For all $t \in (0,1)$ we have
 	\begin{equation}
 		\begin{aligned}
 			S_{\ens[a]\ens[b]}((1-t)x+ty) &= S\left([(1-t)x+ty]\ens[a] + \overline{[(1-t)x + ty]}\ens[b]\right) \\
@@ -2586,7 +2597,28 @@ Though the mixing entropy is not a distance function, we can still show that, li
 \begin{proof}
 	We have $MS(\ens[a],\ens[b]) \ge MS(\ens[a],p\ens[a]+\bar{p}\ens[b]) + MS(\ens[b],p\ens[a]+\bar{p}\ens[b])$. Since $MS(p\ens[a]+\bar{p}\ens[b],\ens[b]) \ge 0$ with equality holding if and only if $p=0$ or $\ens[a]=\ens[b]$, the result follows.
 \end{proof}
+
+\begin{prop}
+	Let $\ens[a], \ens[c] \in \Ens$ and $\ens[b] = p\ens[a] + \bar{p}\ens[c]$ with $p \in (0,1)$. Then $MS(\ens[a],\ens[b]) \leq \frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right)$.
+\end{prop}
+
+\begin{proof}
+	Let $\ens = \frac{1}{2}\ens[a] + \frac{1}{2}\ens[b] = \frac{1+p}{2}\ens[a] + \frac{1-p}{2}\ens[c]$. The upper variability bound gives
+	\begin{equation}
+		S(\ens) \leq I\left(\frac{1+p}{2},\frac{1-p}{2}\right) + \frac{1+p}{2}S(\ens[a]) + \frac{1-p}{2}S(\ens[c]).
+	\end{equation}
 	
+	Since $\ens[b] = p\ens[a] + \bar{p}\ens[c] = p\ens[a] + \left(\frac{p(1-p)}{1+p} + \frac{1-p}{1+p}\right)\ens[c] = \frac{2p}{1+p}\left(\frac{1+p}{2}\ens[a] + \frac{1-p}{2}\ens[c]\right) + \frac{1-p}{1+p}\ens[c] = \frac{2p}{1+p}\ens + \frac{1-p}{1+p}\ens[c]$, concavity gives $S(\ens[b]) \geq \frac{2p}{1+p}S(\ens) + \frac{1-p}{1+p}S(\ens[c])$, and therefore
+	\begin{equation}
+		S(\ens[c]) \leq \frac{1+p}{1-p} \left( S(\ens[b]) - \frac{2p}{1+p}S(\ens) \right) = \frac{2}{1-p} \left( \frac{1+p}{2} S(\ens[b]) - pS(\ens) \right).
+	\end{equation}
+	Eliminating $S(\ens[c])$ yields
+	\begin{equation}
+		(1+p)S(\ens) \leq I\left(\frac{1+p}{2},\frac{1-p}{2}\right) + \frac{1+p}{2}\left[S(\ens[a])+S(\ens[b])\right],
+	\end{equation}
+	which gives the result.
+\end{proof}
+
 \end{mathSection}
 
 The fact that the mixing entropy decreases from all directions as we get closer to an ensemble allows us to create a notion of open ball, which allows to prove the topology is at least Hausdorff.
