@@ -2778,46 +2778,98 @@ The mixing entropy bound established above tells us how much mixing is needed to
 
 \subsection{Entropic metric}
 
-Following the first observation that the mixing entropy is a pseudo-distance, the second observation is that the strict concavity of the entropy forces the Hessian to be negative definite. The negation of the Hessian, then, is a positive definite function of two variations. In general, the Hessian of a scalar function is not a tensor. However, the ensemble space is a linear space and that linearity has physical significance. It is only for coordinates linear with respect to the mixing coefficient that the convex combination of coordinates will equal the statistical mixture of the corresponding ensembles. Therefore we can define a metric tensor which corresponds to the negative Hessian calculated on that linear structure. When using non-linear coordinates, as long as the coordinates are smooth, one can always make the appropriate transformation to linear coordinates.
+Following the first observation that the mixing entropy is a pseudo-distance, the second observation is that the strict concavity of the entropy forces the Hessian to be negative semi-definite. The negation of the Hessian, then, is a positive semi-definite function of two variations. In general, the Hessian of a scalar function is not a tensor. However, the ensemble space has a linear structure and that linearity has physical significance. It is only for coordinates linear with respect to the mixing coefficient that the convex combination of coordinates will equal the statistical mixture of the corresponding ensembles. Therefore, when the entropy is smooth and its Hessian is negative definite, we can define a metric tensor which corresponds to the negative Hessian calculated on that linear structure. When using non-linear coordinates, as long as the coordinates are smooth, one can always make the appropriate transformation to linear coordinates.
 
 \begin{mathSection}
 \begin{remark}
 	In this section we will assume that an ensemble space embeds continuously into a topological vector space, even though we have not yet proved it. We are going to talk about variations $\delta \ens$ on the space, even though it is not yet clear exactly which mathematical approach is best to make variations well-defined. We are also going to talk about a metric tensor even though the space is not, in general, a manifold. All these issues will need to be resolved in due time.
 \end{remark}
-	
-\begin{defn}
-	An ensemble space is \textbf{smooth} at $\ens \in \Ens$ if the entropy is twice differentiable with respect to all admissible variations at $\ens$. It is smooth if it is smooth at every ensemble under construction.
-\end{defn}
-
-\begin{remark}
-	In the standard finite-dimensional classical and quantum cases, entropy is smooth on the algebraic interior and, more generally, along each fixed-support face. It is not smooth in directions that turn on a previously zero probability/eigenvalue.
-\end{remark}
-
-\begin{prop}
-	Discrete and continuous classical ensemble spaces and quantum ensemble spaces are smooth.
-\end{prop}
-
-\begin{proof}
-	In both the discrete classical case and the quantum case the entropy of an ensemble is the Shannon entropy of a decomposition in terms of pure states. The Shannon entropy is a smooth function of the coefficients. For the continuous classical case, the differential entropy is a smooth function of the probability density, which is linear under mixture. Therefore the entropy is always smooth with respect to mixing coefficients.
-\end{proof}
 
 \begin{defn}
-	Assuming $\Ens$ embeds in a topological vector space and given $\ens \in \Ens$, a \textbf{variation} $\delta \ens$ of $\ens$ is a vector in the ambient space such that $\forall t \in [0,1]$ $\ens + t \delta \ens \in \Ens$. The space of all variations at $\ens$ is noted $T_{\ens}$. Unless otherwise noted, we assume the variation is expressed on the affine structure. Note that it can be re-expressed through a non-linear map as long as the map is differentiable (i.e. it maps variations to variations).
+	Assuming $\Ens$ embeds in a topological vector space and given $\ens \in \Ens$, a \textbf{variation} $\delta \ens$ of $\ens$ is a vector in the ambient space such that $\forall t \in [0,\epsilon]$ $\ens + t \delta \ens \in \Ens$ for some $\epsilon \in (0,1]$. The space of all variations at $\ens$ is noted $T_{\ens}$. Unless otherwise noted, we assume the variation is expressed on the affine structure. Note that it can be re-expressed through a non-linear map as long as the map is differentiable (i.e. it maps variations to variations).
 \end{defn}
 
 \begin{remark}
 	Note that since an ensemble space is a convex subset of a real vector space, coordinate systems that are linear with respect to the vector space are privileged. It is only in these coordinates, in fact, that linear combinations correspond to mixtures. The strict concavity of the entropy is therefore guaranteed in these coordinates and only these coordinates. Given the special physical significance of these coordinates, all differential objects and properties will be defined in these coordinates.
 \end{remark}
+	
+\begin{defn}
+	An \textbf{entropically regular region} is a subset $E \subseteq \Ens$ of the ensemble space where, with respect to all admissible variations in $E$, the entropy is at least twice differentiable and the Hessian is negative definite.
+\end{defn}
+
+\begin{prop}
+	In a discrete classical ensemble space, the ensembles with a fixed finite support form an entropically regular region. In a quantum ensemble space, the ensembles with a fixed finite-dimensional support subspace form an entropically regular region.
+\end{prop}
+
+\begin{proof}
+	In the discrete classical case, let $A$ be the fixed finite support. Every distribution $p$ in the region has $p_i>0$ for all $x_i\in A$. The entropy is a finite sum of smooth functions. Along a variation $\delta p$ within the region, we have
+	\begin{equation}
+		\left.\frac{d^2}{dt^2}S(p+t\delta p)\right|_{t=0}
+		= -\frac{1}{\ln 2}\sum_{x_i\in A}\frac{(\delta p_i)^2}{p_i},
+	\end{equation}
+	which is negative whenever $\delta p\neq0$. Therefore the Hessian is negative definite.
+	
+	In the quantum case, restrict all operators to the fixed finite-dimensional support subspace. Every density matrix $\rho$ in the region is then positive definite. The matrix logarithm, and therefore the entropy, is smooth there. Along a traceless self-adjoint variation $\delta\rho$, taking the second derivative and using the derivative of the matrix logarithm gives
+	\begin{equation}
+		\begin{aligned}
+			\left.\frac{d^2}{dt^2}S(\rho+t\delta\rho)\right|_{t=0}
+			&= -\tr\left(\left.\frac{d}{dt}\log(\rho+t\delta\rho)\right|_{t=0}\delta\rho\right) \\
+			&= -\frac{1}{\ln 2}\int_0^\infty
+			\tr\left(\delta\rho(\rho+\lambda I)^{-1}\delta\rho(\rho+\lambda I)^{-1}\right)d\lambda.
+		\end{aligned}
+	\end{equation}
+	Let $R=(\rho+\lambda I)^{-1}$. By cyclicity of the trace, the integrand is $\tr((R^{1/2}\delta\rho R^{1/2})^2)$, which is positive whenever $\delta\rho\neq0$. The integral is finite because $\rho$ is positive definite and the integrand decays as $\lambda^{-2}$ at infinity. Therefore the Hessian is negative definite, and both regions are entropically regular.
+\end{proof}
+
+\begin{remark}
+	Keeping the support fixed is not enough in the infinite case, not even the countable one. Consider two probability distributions over $X = \{x_i\}_{i=0}^{\infty}$ given by
+	$$ p_i = \frac{3}{4}4^{-i}, \qquad q_i = \frac{1}{2}2^{-i}. $$
+	Both have support $X$ and decay exponentially. They are normalized, since $\sum_i p_i = \frac{3/4}{1-1/4} = 1$ and $\sum_i q_i = \frac{1/2}{1-1/2} = 1$. Their entropies are finite:
+	\begin{equation}
+		\begin{aligned}
+			S(p) &= -\sum_{i=0}^{\infty} p_i \left(\log\frac{3}{4}-2i\right) = \log\frac{4}{3}+\frac{2}{3}, \\
+			S(q) &= - \sum_{i=0}^{\infty} q_i (-1-i) = 2.
+		\end{aligned}
+	\end{equation}
+	
+	Let $r(t) = (1-t)p+tq$ for $t \in [0,1]$. All these distributions have the same support and finite entropy, since
+	$$ S(r(t)) \leq I(t,1-t)+(1-t)S(p)+tS(q) \leq 3. $$
+	Let $f(t)=S(r(t))$. The geometric decay allows us to take the first derivative term by term, including the right derivative at $t=0$. We have
+	\begin{equation}
+		\begin{aligned}
+			f'(t) &= -\sum_{i=0}^{\infty}(q_i-p_i)\log r_i(t), \\
+			f'(0) &= -\sum_{i=0}^{\infty}(q_i-p_i)\left(\log\frac{3}{4}-2i\right) = \frac{4}{3}.
+		\end{aligned}
+	\end{equation}
+	
+	For $t>0$, the difference quotient for the second derivative is
+	\begin{equation}
+	\begin{aligned}
+		\frac{f'(t)-f'(0)}{t}
+		&= -\frac{1}{t}\left[\sum_{i=0}^{\infty}(q_i-p_i)\log r_i(t)-\sum_{i=0}^{\infty}(q_i-p_i)\log p_i\right] \\
+		&= -\sum_{i=0}^{\infty}\frac{q_i-p_i}{t}\left[\log r_i(t)-\log p_i\right] = -\sum_{i=0}^{\infty}\frac{q_i-p_i}{t}\log\frac{r_i(t)}{p_i}.
+	\end{aligned}
+	\end{equation}
+	Each summand after the minus sign is non-negative, and its limit is
+	\begin{equation}
+		\lim_{t\to0^+}\frac{q_i-p_i}{t}\log\frac{r_i(t)}{p_i}
+		= \frac{(q_i-p_i)^2}{p_i\ln 2}
+		= \frac{1}{\ln 2}\left(\frac{1}{3}-2^{-i}+\frac{3}{4}4^{-i}\right).
+	\end{equation}
+	These limits approach $\frac{1}{3\ln 2}$ as $i\to\infty$, so their sum diverges. Since all summands are non-negative, the difference quotient tends to $-\infty$. Therefore the entropy is not twice differentiable with respect to the mixing coefficient at $t=0$, even though the support is unchanged and the entropy is finite throughout the mixture.
+	
+	Similar counter-examples can be constructed in quantum mechanics and on compact support of continuous distributions.
+\end{remark}
 
 \begin{defn}
 	Given an ensemble $\ens \in \Ens$ and a variation $\delta \ens$ defined at that point, the \textbf{norm} of $\delta \ens$ is given by
-	$$ \lVert \delta \ens \rVert_{\ens} = \sqrt{ 8 MS(\ens, \ens + \delta \ens) }.$$
+	$$ \lVert \delta \ens \rVert_{\ens} =\sqrt{\lim_{t\to0^+}\frac{8MS(\ens,\ens+t\delta\ens)}{t^2}}=\lim_{t\to0^+}\frac{\sqrt{8MS(\ens,\ens+t\delta\ens)}}{t}.$$
 	The \textbf{metric tensor} (i.e. the inner product between $\delta \ens_1 , \delta \ens_2 \in T_{\ens}$) is given by
 	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = \frac{1}{2} \left( \lVert \delta \ens_1 + \delta \ens_2 \rVert_{\ens}^2 - \lVert \delta \ens_1 \rVert_{\ens}^2 - \lVert \delta \ens_2 \rVert_{\ens}^2 \right).$$
 \end{defn}
 
 \begin{thrm}
-	Let $\Ens$ be a smooth ensemble space. Then, on the affine structure, we have
+	Let $E \subseteq \Ens$ be an entropically regular region. Then, on the affine structure, we have
 	$$ \lVert \delta \ens \rVert_{\ens}^2 = - \frac{\partial^2 S}{\partial \ens^2}(\delta \ens , \delta \ens) $$
 	and 
 	$$ g_{\ens}( \delta \ens_1, \delta \ens_2 ) = - \frac{\partial^2 S}{\partial \ens ^2}( \delta \ens_1, \delta \ens_2 ).$$
@@ -2827,24 +2879,24 @@ Following the first observation that the mixing entropy is a pseudo-distance, th
 	To recover the first two expressions, we simply have to calculate the leading term. Since the entropy is twice differentiable, on the affine structure, we can expand it as
 	\begin{equation}
 		\begin{aligned}
-			S(\ens + \delta \ens) &= S(\ens) + \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3).
+			S(\ens + t \delta \ens) &= S(\ens) + t \frac{\partial S}{\partial \ens} \delta \ens + \frac{t^2}{2} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + o(t^2).
 		\end{aligned}
 	\end{equation}
 	Expanding the definition of $MS$, we have
 	\begin{equation}
 		\begin{aligned}
-			MS(\ens, \ens + \delta \ens) &= S\left(\frac{1}{2} \ens + \frac{1}{2}(\ens + \delta \ens) \right) - \frac{1}{2} S(\ens) - \frac{1}{2} S(\ens+\delta \ens) \\
-			&=  S\left(\ens + \frac{1}{2} \delta \ens \right) - \frac{1}{2} S(\ens) - \frac{1}{2} S(\ens+\delta \ens) \\
-			&= S(\ens) + \frac{\partial S}{\partial \ens} \frac{1}{2}\delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \frac{1}{2}\delta \ens \frac{1}{2}\delta \ens + O(\delta \ens ^3) \\
-			&- \frac{1}{2} S(\ens) - \frac{1}{2} \left( S(\ens) + \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{2} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3) \right) \\
-			&= S(\ens) + \frac{1}{2} \frac{\partial S}{\partial \ens} \delta \ens + \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens \\
-			&- S(\ens) - \frac{1}{2} \frac{\partial S}{\partial \ens} \delta \ens - \frac{1}{4} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3) \\
-			&= - \frac{1}{8} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + O(\delta \ens ^3).
+			MS(\ens, \ens + t \delta \ens) &= S\left(\frac{1}{2} \ens + \frac{1}{2}(\ens + t \delta \ens) \right) - \frac{1}{2} S(\ens) - \frac{1}{2} S(\ens+t \delta \ens) \\
+			&=  S\left(\ens + t \frac{1}{2} \delta \ens \right) - \frac{1}{2} S(\ens) - \frac{1}{2} S(\ens+ t \delta \ens) \\
+			&= S(\ens) + t \frac{\partial S}{\partial \ens} \frac{1}{2}\delta \ens + \frac{t^2}{2} \frac{\partial^2 S}{\partial \ens^2} \frac{1}{2}\delta \ens \frac{1}{2}\delta \ens + o(t^2) \\
+			&- \frac{1}{2} S(\ens) - \frac{1}{2} \left( S(\ens) + t \frac{\partial S}{\partial \ens} \delta \ens + \frac{t^2}{2} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + o(t^2) \right) \\
+			&= S(\ens) + \frac{t}{2} \frac{\partial S}{\partial \ens} \delta \ens + \frac{t^2}{8} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens \\
+			&- S(\ens) - \frac{t}{2} \frac{\partial S}{\partial \ens} \delta \ens - \frac{t^2}{4} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + o(t^2) \\
+			&= - \frac{t^2}{8} \frac{\partial^2 S}{\partial \ens^2} \delta \ens \delta \ens + o(t^2).
 		\end{aligned}
 	\end{equation}
 	
 	Therefore
-	$$ \lVert \delta \ens \rVert^2 = 8 MS(\ens, \ens + \delta \ens) = -  \frac{\partial^2 S}{\partial \ens^2} (\delta \ens, \delta \ens).$$
+	$$ \lVert \delta \ens \rVert^2 = \lim_{t\to0^+}\frac{8MS(\ens,\ens+t\delta\ens)}{t^2} = -  \frac{\partial^2 S}{\partial \ens^2} (\delta \ens, \delta \ens).$$
 	
 	We can now substitute the norm in the definition of the metric tensor. We have
 	\begin{equation}
@@ -2863,15 +2915,17 @@ We now show that the metric tensor we defined reduces to the Fisher-Rao metric i
 
 \begin{mathSection}
 \begin{prop}
-	For a continuous classical ensemble space, the metric corresponds to the Fisher-Rao metric.
+	In discrete and continuous classical ensemble space, the metric of an entropically regular finite-dimensional region corresponds to the Fisher-Rao metric.
 \end{prop}
 
 \begin{proof}
-	Let $\Ens$ be a continuous classical ensemble space. Each ensemble is a classical probability density $\rho$. Let $V \subseteq \Ens$ be a manifold of probability distributions over $X$ parametrized by $\theta^i$. The \href{https://en.wikipedia.org/wiki/Fisher_information_metric}{Fisher-Rao metric} is defined as:
+	Let $\Ens$ be a continuous classical ensemble space. Each ensemble is a classical probability density $\rho$. Let $E \subseteq \Ens$ be a manifold of probability distributions over $X$ parametrized by $\theta^i$. The \href{https://en.wikipedia.org/wiki/Fisher_information_metric}{Fisher-Rao metric} is defined as:
 	\begin{equation}
 		g_{ij} =- \int_X \frac{\partial^2 \log \rho}{\partial \theta^i \partial \theta^j} \rho dx.
 	\end{equation}
-	where $\log$ will be the natural logarithm throughout this calculation. Recall that for a continuous classical ensemble, the entropy is given by
+	where $\log$ will be the natural logarithm throughout this calculation. We want to show that the metric tensor recovers this expression.
+	
+	Recall that for a continuous classical ensemble, the entropy is given by
 	\begin{equation}
 		S(\rho) =- \int_X \rho \log \rho dx.
 	\end{equation}
@@ -2911,7 +2965,7 @@ We now show that the metric tensor we defined reduces to the Fisher-Rao metric i
 				\rho}{\partial \theta^j} d\theta^j\right) = - \int_X \rho dx \frac{\partial^2 \log \rho}{\partial \theta^i \partial \theta^j}d\theta^i d\theta^j
 		\end{aligned}
 	\end{equation}
-	which recovers the Fisher-Rao metric.
+	which recovers the Fisher-Rao metric. Therefore $E$ is an entropically regular region if and only if the Fisher-Rao metric is well-defined on the whole region.
 	
 	This same calculation can be done in the case of a discrete classical space.
 \end{proof}
@@ -2922,11 +2976,11 @@ We now show that the metric tensor we defined reduces to the Fisher-Rao metric i
 \end{remark}
 
 \begin{prop}
-	For a quantum ensemble space, the metric corresponds to the BKM metric.
+	For a quantum ensemble space, the metric corresponds to the Bogoliubov–Kubo–Mori (BKM) metric.
 \end{prop}
 
 \begin{proof}
-	Since we are working in a quantum ensemble space, each ensemble is a density operator $\rho$. Assume $\rho$ is full-rank. If it is not full rank, restrict variations to the subspace in which it is full-rank. A variation will then be of the form $\rho + t \delta\rho_1$ where $\delta \rho_1$ is a traceless self-adjoint operator. The entropy is given by the von Neumann entropy
+	Since we are working in a quantum ensemble space, each ensemble is a density operator $\rho$. Assume $\rho$ is full-rank. If it is not full rank, restrict variations to the subspace in which it is full-rank. A varied ensemble will then be of the form $\rho + t \delta\rho_1$ where $\delta \rho_1$ is a traceless self-adjoint operator. The entropy is given by the von Neumann entropy
 	\begin{equation}
 		S(\rho) = - \tr\left(\rho \log \rho\right),
 	\end{equation}
