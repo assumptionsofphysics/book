@@ -2050,7 +2050,7 @@ Given a set of ensembles $A$, we can ask for all ensembles that can be construct
 In general, the closure of an affine set is not an affine set. This would be true if the convex space is a full vector space, instead of a strict convex subset of a vector space.
 
 \begin{mathSection}
-\begin{example}[The closure of an affine set need not be affine]
+\begin{example}\label{pm-es-closureAffineCounterexample}[The closure of an affine set need not be affine]
 	Let $\Ens$ be the space of discrete probability distributions over countably many elements $X = \{x_i\}_{i=0}^{\infty}$ with the $\ell^1$ topology. Let $A = \{ \sum_i p_i x_i \in \Ens \, | \, \sum_{i=0}^{\infty} i p_i = 1 \}$ be the set of distributions with mean one. The set $A$ is affine because the mean of any finite affine combination of its elements is still one.
 	
 	For $k \geq 1$, consider the sequence:
@@ -2519,7 +2519,7 @@ We define the mixing entropy as the increase in entropy for the equal mixture of
 \end{proof}
 
 \begin{remark}
-	The mixing entropy fails to be a distance function as it does not satisfy the triangle inequality. In the classical and quantum case, in fact, the JSD and QJSD are the square of a distance function. Given the current axiom, the result cannot be generalized to the mixing entropy itself, as counterexamples can be constructed. The issue is that we do not have enough information about the relative entropy of 3 points, apart from the orthogonal case.
+	The mixing entropy fails to be a distance function as it does not satisfy the triangle inequality. In the classical and quantum case, in fact, the JSD and QJSD are the square of a distance function. Given the current axiom, the result cannot be generalized to the mixing entropy itself, as counterexamples can be constructed (see \ref{pm-es-nonorthogonalSimplex}). The issue is that we do not have enough information about the relative entropy of 3 points, apart from the orthogonal case.
 	
 	On physics grounds, there may be additional constraints on the mixing entropy between three points. For example, we may impose that, for every $\ens[a],\ens[b],\ens[c]\in\Ens$ and every $p\in[0,1]$, $pMS(\ens[a],\ens[c])+\bar{p}MS(\ens[b],\ens[c]) \geq p\bar{p}MS(\ens[a],\ens[b])$.
 	Intuitively, no ensemble $\ens[c]$ can be very similar to two ensembles that are dissimilar. The variability between the two alternatives places a lower bound on their average mixing entropy with the reference. Together with the properties already established, this condition is equivalent to requiring that the square root of the mixing entropy is a distance function. To see this, define $d(\ens[a],\ens[b])=\sqrt{MS(\ens[a],\ens[b])}$. Non-negativity, symmetry and identity of indiscernibles are already established. Let $u=d(\ens[a],\ens[c])$ and $v=d(\ens[b],\ens[c])$. If $u,v>0$, choose $p=\frac{v}{u+v}$, so $\bar{p}=\frac{u}{u+v}$. Dividing the proposed bound by $p\bar{p}$ gives
@@ -3029,7 +3029,7 @@ Up to a multiplicative constant, there is only one $f$ that satisfies these requ
 	\end{prop}
 	
 	\begin{proof}
-		Since $\ens[a] \ortho \ens[b]$, the entropy of the mixture is $S(p\ens[a]+\bar{p}\ens[b]) = I(p,\bar{p}) + pS(\ens[a]) + \bar{p}S(\ens[b])$, which is a smooth function of $p$. Let us find the maximum $p_*$, which is a stationary point.
+		Since $\ens[a] \ortho \ens[b]$, the entropy of the mixture is $S(p\ens[a]+\bar{p}\ens[b]) = I(p,\bar{p}) + pS(\ens[a]) + \bar{p}S(\ens[b])$, which is a smooth function of $p$. For convenience, let $S_a=S(\mathsf a)$ and $S_b=S(\mathsf b)$. Let us find the maximum $p_*$, which is a stationary point.
 		\begin{equation}
 			\begin{aligned}
 				0 &= \frac{d}{dp} S(p \ens[a] + \bar{p}\ens[b]) \big|_{p=p_*} =\frac{d}{dp} \left( - p \log p - \bar{p} \log \bar{p} + p S_a + \bar{p} S_b \right) \big|_{p=p_*} \\
@@ -3061,7 +3061,7 @@ Up to a multiplicative constant, there is only one $f$ that satisfies these requ
 	\end{proof}
 	
 	\begin{prop}[Uniqueness of exponential entropy]\label{pm-es-uniquenessExponentialEntropy}
-		Let $f : \mathbb{R} \to (0,+\infty)$ be a continuous increasing function such that $f(S(p\ens[a]+\bar{p}\ens[b])) \leq f(S(\ens[a]))+f(S(\ens[b]))$ for all $\ens[a],\ens[b]\in\Ens$ and $p\in[0,1]$, with equality for some $p \in (0,1)$ whenever $\ens[a]\ortho\ens[b]$. Then $f(S)=c \cdot 2^S$ for some $c>0$.
+		Let $f : \mathbb{R} \to (0,+\infty)$ be a continuous increasing function such that, in every ensemble space $\Ens$,  $f(S(p\ens[a]+\bar{p}\ens[b])) \leq f(S(\ens[a]))+f(S(\ens[b]))$ for all $\ens[a],\ens[b]\in\Ens$ and $p\in[0,1]$, with equality for some $p \in (0,1)$ whenever $\ens[a]\ortho\ens[b]$. Then $f(S)=c \cdot 2^S$ for some $c>0$.
 	\end{prop}
 	
 	\begin{proof}
@@ -3113,26 +3113,22 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 	
 	2. By \ref{pm-es-convexSupremumProps}.
 	
-	3. Let $A, B \subseteq \Ens$ and let $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. By \ref{pm-es-exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])} \leq \scap(A) + \scap(B)$. Since this is true for any finite mixture of elements of $A$ and $B$, it will be true for any element of $\hull(A \cup B)$. Consequently, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\scap(A \cup B) \leq \scap(A) + \scap(B)$ (i.e. the state capacity is subadditive).
+	3. Let $A, B \subseteq \Ens$ and let $\ens = p \ens[a] + \bar{p} \ens[b]$ for some $p \in [0,1]$, $\ens[a] \in \hull(A)$ and $\ens[b] \in \hull(B)$. By \ref{pm-es-exponentialEntropySubadditivity} and the definition of state capacity, $2^{S(\ens)} \leq 2^{S(\ens[a])} + 2^{S(\ens[b])} \leq \scap(A) + \scap(B)$. Since this is true for any finite mixture of elements of $A$ and $B$, it will be true for any element of $\hull(A \cup B)$. Consequently, the supremum of the exponential entropy cannot exceed the sum of the state capacities. Therefore $\scap(A \cup B) \leq \scap(A) + \scap(B)$ (i.e. the state capacity is subadditive).
 	
-	4. Let $A, B \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[a]_i\} \subseteq A$ be a sequence of ensembles such that $2^{S(\ens[a]_i)} \to \scap(A)$ and let $\{\ens[b]_i\} \subseteq B$ be a sequence of ensembles such that $2^{S(\ens[b]_i)} \to \scap(B)$. Consider $\ens_i = p_i \ens[a]_i + \bar{p_i} \ens[b]_i$ where $p_i = \frac{2^{S(\ens[a]_i)}}{2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}}$. Then, by \ref{pm-es-exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}$. This means that $2^{S(\ens_i)} \to \scap(A) + \scap(B)$. Therefore $\scap(A \cup B)$ must be at least $\scap(A) + \scap(B)$. Combining with the previous result, $\scap(A \cup B) = \scap(A) + \scap(B)$. Therefore the state capacity, as a set function, is additive over orthogonal sets of ensembles.
+	4. Let $A, B \subseteq \Ens$ be two orthogonal subsets. Let $\{\ens[a]_i\} \subseteq \hull(A)$ be a sequence of ensembles such that $2^{S(\ens[a]_i)} \to \scap(A)$ and let $\{\ens[b]_i\} \subseteq \hull(B)$ be a sequence of ensembles such that $2^{S(\ens[b]_i)} \to \scap(B)$. Consider $\ens_i = p_i \ens[a]_i + \bar{p_i} \ens[b]_i$ where $p_i = \frac{2^{S(\ens[a]_i)}}{2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}}$. Then, by \ref{pm-es-exponentialEntropySubadditivity}, $2^{S(\ens_i)} = 2^{S(\ens[a]_i)} + 2^{S(\ens[b]_i)}$. This means that $2^{S(\ens_i)} \to \scap(A) + \scap(B)$. Therefore $\scap(A \cup B)$ must be at least $\scap(A) + \scap(B)$. Combining with the previous result, $\scap(A \cup B) = \scap(A) + \scap(B)$. Therefore the state capacity, as a set function, is additive over orthogonal sets of ensembles.
 
 	5. By \ref{pm-es-convexSupremumProps}.
 \end{proof}
 
 \begin{remark}
-	The state capacity is not continuous from above. Let $\Ens$ be an ensemble space and $\ens[a], \ens[b] \in \Ens$ two distinct ensembles. Without loss of generality, let $S(\ens[a]) \leq S(\ens[b])$. Then $S(p \ens[a] + \bar{p} \ens[b]) \geq S(\ens[a])$ for all $p \in [0,1]$. Let $\{ \ens_i \} \subset \hull(\{\ens[a], \ens[b]\})$ be a sequence of mixtures of $\ens[a]$ and $\ens[b]$. Let $A_j = \{ \ens_i \, | \, i \geq j\}$ be the family of sets that contains all the elements of the sequence starting from $j$ respectively. This is a decreasing sequence, since $A_j \supseteq A_{j+i}$. We have that $\scap(A_j) \geq 2^{S(\ens[a])} > 0$ for all $j$, which means that $\lim\limits_{i \to \infty} \scap(A_i) \geq 2^{S(\ens[a])} > 0$. However, $\bigcap A_j = \emptyset$ which means $\scap(\lim\limits_{i \to \infty} A_i) = 0$. This means that, in general, $\scap(\lim\limits_{i \to \infty} A_i) \neq \lim\limits_{i \to \infty} \scap(A_i)$ for a decreasing sequence.
+	The state capacity is not continuous from above. Let $\Ens$ be an ensemble space and $\ens[a], \ens[b] \in \Ens$ two distinct ensembles. Without loss of generality, let $S(\ens[a]) \leq S(\ens[b])$. Then $S(p \ens[a] + \bar{p} \ens[b]) \geq S(\ens[a])$ for all $p \in [0,1]$. Let $\{ \ens_i \} \subset \hull(\{\ens[a], \ens[b]\})$ be a sequence of pairwise distinct mixtures of $\ens[a]$ and $\ens[b]$. Let $A_j = \{ \ens_i \, | \, i \geq j\}$ be the family of sets that contains all the elements of the sequence starting from $j$ respectively. This is a decreasing sequence, since $A_j \supseteq A_{j+i}$. We have that $\scap(A_j) \geq 2^{S(\ens[a])} > 0$ for all $j$, which means that $\lim\limits_{i \to \infty} \scap(A_i) \geq 2^{S(\ens[a])} > 0$. However, $\bigcap A_j = \emptyset$ which means $\scap(\lim\limits_{i \to \infty} A_i) = 0$. This means that, in general, $\scap(\lim\limits_{i \to \infty} A_i) \neq \lim\limits_{i \to \infty} \scap(A_i)$ for a decreasing sequence.
 \end{remark}
 
 \end{mathSection}
 
-The state capacity is additive over orthogonal sets. Intuitively, orthogonal sets correspond to mutually exclusive events, so it makes sense that the count of states is additive. We would expect the converse to be true as well: if the count of states is additive, the sets correspond to mutually exclusive events and therefore the sets are orthogonal. This leads to the following conjecture:
+The state capacity is additive over orthogonal sets. Intuitively, orthogonal sets correspond to mutually exclusive events, so it makes sense that the count of states is additive. We would expect the converse to be true as well: if the count of states is additive, the sets correspond to mutually exclusive events and therefore the sets are orthogonal. However, this is not true under current axioms (see \ref{pm-es-nonorthogonalSimplex}). Since in the same example mixing entropy fails to be the square of a distance function, the issues may be related. We may be missing a condition that regulates the entropy between three arbitrary ensembles.
 
-\begin{conj}
-	The state capacity is additive only on orthogonal sets. That is, if $\scap(A)<\infty$, $\scap(B)<\infty$ and $\scap(A \cup B) = \scap(A) +\scap(B)$, then $A \ortho B$.
-\end{conj}
-
-One should be able to prove that if the state capacity adds, then the states with highest entropy satisfy the upper variability bound and are orthogonal. What needs to be shown is that this is enough to say all elements are orthogonal. There is a series of nice results connected to this to expand the whole theory. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. If $\ens[a]$ is the ensemble with maximum entropy in $\chull(A)$, it should be true that all elements of the hull are components of $\ens[a]$. One should be able to show that, given two sequences with a convergent entropy and whose elements are orthogonal to each other, one can create another sequence that converges to an entropy higher than both of them. Another useful tool would be a type of sequence within $\hull(A)$ whose entropy always increases, tends to the supremum and each element is a component of the following. Also, the state with maximal entropy (if it exists) is an internal point. All internal points are in the $\sigma$-hull. We leave these series of conjectures for future work.
+Regardless of the previous problem, there may be other interesting properties to explore. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. If $\ens[a]$ is the ensemble with maximum entropy in $\chull(A)$, it should be true that all elements of the hull are components of $\ens[a]$. One should be able to show that, given two sequences with a convergent entropy and whose elements are orthogonal to each other, one can create another sequence that converges to an entropy higher than both of them. Another useful tool would be a type of sequence within $\hull(A)$ whose entropy never decreases, tends to the supremum and each element is a component of the following. Also, the state with maximal entropy (if it exists) is an internal point. All internal points are in the $\sigma$-hull. We leave these series of conjectures for future work.
 
 We now show that the state capacity recovers a notion of number of cases in all three target spaces. In the discrete classical case it recovers the number of points; in the continuous classical case, it recovers the Liouville volume; in the quantum case, it recovers the number of orthogonal pure states.
 
@@ -4253,6 +4249,110 @@ The cut triangle is an example of a simple classical space with a constraint, wh
 \end{figure}
 
 This ensemble space is the standard two simplex, a triangle, where the top is cut off. This is the space of probability distributions $[p_1, p_2, p_3]$ such that $p_1 \leq \frac{1}{2}$, where entropy is the Shannon entropy. The extreme points of the space are $\ens[2] = [0,1,0]$, $\ens[3] = [0,0,1]$, $\ens[a] = [\frac{1}{2},\frac{1}{2},0]$ and $\ens[b] = [\frac{1}{2},0,\frac{1}{2}]$. Every ensemble that is decomposable is also separately decomposable but not necessarily orthogonally decomposable. Most ensembles, all those in the interior, are also separately multidecomposable. For example, $\ens[c]$ can be expressed as a mixture of $\ens[a]$ and $\ens[3]$, and of $\ens[b]$ and $\ens[2]$.
+
+\subsection{Simplex with non-orthogonal extreme points}
+
+This ensemble space is a two-dimensional simplex with a different entropy definition that still satisfies the axioms but has pathological behavior. For example, the mixing entropy is not the square of a distance function and the state capacity can be additive over non-orthogonal sets.
+
+\begin{example}[Simplex with non-orthogonal extreme points]\label{pm-es-nonorthogonalSimplex}
+	Let $\Ens = \{[x,y,z] \in [0,1]^3 \, | \, x+y+z=1\}$ with the usual topology and mixing operation. Define the entropy by
+	\begin{equation}
+		S(x,y,z) = -x\log x-y\log y+(x+y)\log(x+y)-z^2,
+	\end{equation}
+	where logarithms are base two and $0\log0=0$. Let
+	\begin{equation}
+		\ens[a]=[1,0,0], \qquad
+		\ens[b]=[0,1,0], \qquad
+		\ens[c]=[0,0,1].
+	\end{equation}
+\end{example}
+
+The axioms of ensemble and mixture hold because $\Ens$ is a standard finite-dimensional simplex. The entropy is continuous, including at the boundary. To show strict concavity, write $S=F-z^2$, where
+\begin{equation}
+	F(x,y,z) = (x+y)I\left(\frac{x}{x+y},\frac{y}{x+y}\right)
+\end{equation}
+when $x+y>0$, and $F(\ens[c])=0$. Let $\ens_i=[x_i,y_i,z_i]$, $t_i=x_i+y_i$ and $t=pt_1+\bar{p}t_2$. When $t_1,t_2>0$, the normalized coordinates of the mixture are convex combinations with coefficients $\frac{pt_1}{t}$ and $\frac{\bar{p}t_2}{t}$. By concavity of $I$,
+\begin{equation}
+	\begin{aligned}
+		F(p\ens_1+\bar{p}\ens_2)
+		&= tI\left(\frac{px_1+\bar{p}x_2}{t},
+		\frac{py_1+\bar{p}y_2}{t}\right) \\
+		&\geq pt_1I\left(\frac{x_1}{t_1},\frac{y_1}{t_1}\right)
+		+\bar{p}t_2I\left(\frac{x_2}{t_2},\frac{y_2}{t_2}\right) \\
+		&= pF(\ens_1)+\bar{p}F(\ens_2).
+	\end{aligned}
+\end{equation}
+The boundary cases follow by continuity. The term $-z^2$ makes $S$ strictly concave when $z_1 \neq z_2$. When $z_1=z_2$ and $\ens_1 \neq \ens_2$, strict concavity follows from that of $I$. Therefore $S$ is strictly concave.
+
+To verify the upper variability bound, let $H$ be the ordinary Shannon entropy over the three coordinates and define $\phi(z)=I(z,1-z)+z^2$. Then $S=H-\phi$ and, for $z\in(0,1)$,
+\begin{equation}
+	\phi''(z)
+	=2-\frac{1}{(\ln2)z(1-z)}
+	\leq 2-\frac{4}{\ln2}<0.
+\end{equation}
+Thus $\phi$ is strictly concave on $[0,1]$. Let $\ens=p\ens_1+\bar{p}\ens_2$ and $z=pz_1+\bar{p}z_2$. We have
+\begin{equation}
+	\begin{aligned}
+		S(\ens)-pS(\ens_1)-\bar{p}S(\ens_2)
+		&= H(\ens)-pH(\ens_1)-\bar{p}H(\ens_2) \\
+		&\quad-\left[\phi(z)-p\phi(z_1)-\bar{p}\phi(z_2)\right] \\
+		&\leq H(\ens)-pH(\ens_1)-\bar{p}H(\ens_2) \\
+		&\leq I(p,\bar{p}).
+	\end{aligned}
+\end{equation}
+For $p\in(0,1)$, equality requires both $z_1=z_2$ and disjoint supports of the coordinate distributions. These conditions force $z_1=z_2=0$ and $\{\ens_1,\ens_2\}=\{\ens[a],\ens[b]\}$. Conversely,
+\begin{equation}
+	S(p\ens[a]+\bar{p}\ens[b])
+	-pS(\ens[a])-\bar{p}S(\ens[b])
+	=I(p,\bar{p})
+\end{equation}
+for every $p\in[0,1]$. Therefore $\ens[a]$ and $\ens[b]$ form the only orthogonal pair.
+
+Mixtures preserve orthogonality. In fact, $\ens[a]$ is orthogonal to a nontrivial mixture if and only if that mixture equals $\ens[b]$. Since $\ens[b]$ is extreme, this happens if and only if both components equal $\ens[b]$, and hence both are orthogonal to $\ens[a]$. The same argument applies with $\ens[a]$ and $\ens[b]$ interchanged. No other ensemble has an orthogonal partner. Therefore all entropy axioms are satisfied.
+
+Now let $A=\{\ens[a],\ens[c]\}$ and $B=\{\ens[b],\ens[c]\}$. On either hull the entropy is $-z^2$, with maximum zero. On the whole simplex,
+\begin{equation}
+	S(x,y,z)
+	=(1-z)I\left(\frac{x}{1-z},\frac{y}{1-z}\right)-z^2
+	\leq 1-z-z^2 \leq 1
+\end{equation}
+for $z<1$, while $S(\ens[c])=-1$. The maximum is one, attained at $[\frac12,\frac12,0]$. Since $\hull(A\cup B)=\Ens$,
+\begin{equation}
+	\scap(A)=\scap(B)=1, \qquad
+	\scap(A\cup B)=2=\scap(A)+\scap(B).
+\end{equation}
+However, $A$ and $B$ share $\ens[c]$ and therefore are not orthogonal. Moreover, the entropy maximum on $\hull(A)$ is $\ens[a]$, which is not internal relative to $\hull(A)$ and does not have $\ens[c]$ as a component.
+
+Finally, let
+\begin{equation}
+	\ens[u]=\frac12\ens[a]+\frac12\ens[c]
+	=\left[\frac12,0,\frac12\right], \qquad
+	\ens[v]=\frac12\ens[b]+\frac12\ens[c]
+	=\left[0,\frac12,\frac12\right].
+\end{equation}
+Direct calculation gives
+\begin{equation}
+	\begin{aligned}
+		MS(\ens[u],\ens[v])
+		&=\frac14-\frac12\left(-\frac14\right)
+		-\frac12\left(-\frac14\right)
+		=\frac12, \\
+		MS(\ens[u],\ens[c])
+		=MS(\ens[v],\ens[c])
+		&=-\frac9{16}-\frac12\left(-\frac14\right)
+		-\frac12(-1)
+		=\frac1{16}.
+	\end{aligned}
+\end{equation}
+Consequently,
+\begin{equation}
+	\sqrt{MS(\ens[u],\ens[v])}
+	=\frac1{\sqrt2}
+	>\frac12
+	=\sqrt{MS(\ens[u],\ens[c])}
+	+\sqrt{MS(\ens[c],\ens[v])}.
+\end{equation}
+The square root of mixing entropy fails the triangle inequality, so mixing entropy is not the square of a distance function.
 
 \subsection{Real interval with right topology}
 
