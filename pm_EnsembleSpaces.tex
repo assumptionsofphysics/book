@@ -1194,7 +1194,7 @@ Note that a measure is a monotonic set function continuous from below that is al
 
 \section{Axiom of entropy}
 
-In this section we will see how characterizing the variability of the elements within an ensemble leads to the standard notion of entropy. The entropy will have to satisfy a few basic properties justified by the notion of variability which will be enough to recover the usual Shannon formula. It will also provide us with another basic notion to compare ensembles: two ensembles are mutually exclusive, or orthogonal, if they have no elements in common, which means the entropy will maximally increase during mixing. The interaction between orthogonality and separateness is enough to understand the differences between classical and quantum systems.
+In this section we will see how characterizing the variability of the elements within an ensemble leads to the standard notion of entropy. The entropy will have to satisfy few basic properties justified by the notion of variability which will be enough to recover the usual Shannon formula. It will also provide us with another basic notion to compare ensembles: two ensembles are mutually exclusive, or orthogonal, if they have no elements in common, which means the entropy will maximally increase during mixing. The interaction between orthogonality and separateness is enough to understand the differences between classical and quantum systems.
 
 We saw that our basic notion of state is that of an ensemble. Since an ensemble represents all possible preparations of equivalent systems prepared according to the same procedure, we want to characterize how much those instances are different from each other. To be truly general, we want to be able to make this characterization without assuming what the individual instances are. First of all, the variability should be an experimentally well-defined quantity, and it should therefore be a continuous function in the natural topology. It should also be compatible with statistical mixing. Intuitively, the variability cannot decrease during mixing which makes the entropy a strictly concave function. Variability will have a maximal increase when mixing ensembles that are mutually exclusive: no instance of one can be confused with an instance of the other. In that case, the increase of the variability is fully characterized by the mixing coefficients. We say that two mutually exclusive ensembles are orthogonal, as this property will correspond mathematically to orthogonality in the space of distributions. Lastly, if one ensemble has no instances in common with other two, then it has no instance in common with any mixture of the two.
 
@@ -2256,6 +2256,8 @@ With a notion of dimension, we should be able to show that, in finite dimension,
 \end{conj}
 
 Lastly, with the notion of affine independence we can define the notion of simplex, which is going to be useful to characterize classical ensemble spaces.
+
+TODO: show that the boundary is actually the algebraic boundary
 
 \begin{mathSection}
 \begin{defn}
@@ -3641,7 +3643,7 @@ TODO: add descriptions, explanations, and motivation throughout this section.
 \begin{proof}
 	If $\dim(A)=0$, then $A$ is a singleton and is therefore closed since $\Ens$ is Hausdorff. If $\dim(A) = k > 0$, then using an affine basis of $A$ we can find a simplex $\Delta = \hull(\{\ens[a]_0,\ldots,\ens[a]_k\})$ with a relative algebraic internal point $\ens[a] \in \Delta \setminus B_\Delta$. Since $\Delta$ and $B_\Delta$ are compact, they are also closed because $\Ens$ is Hausdorff.
 	
-	Since $\Ens$ is second countable, it is first countable, so it is sufficient to show sequential closure. Suppose $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ such that $\ens[b]_i \to \ens[b]$. We need to show that $\ens[b] \in A$. If $\ens[b]_i \in \Delta$ for infinitely many $i$, then $\ens[b] \in \Delta \subseteq A$ by the closure of $\Delta$, so without loss of generality assume that $\ens[b]_i \notin \Delta$ for all $i$. Thus, by \ref{pm-es-passThroughSimplexBoundary}, there exists $p_i \in (0,1)$ such that $\ens[c]_i = p_i\ens[a] + \bar{p_i}\ens[b]_i \in B_\Delta$ for each $i \in \mathbb{N}$.
+	TODO: make minor improvements in exposition. Since $\Ens$ is second countable, it is first countable, so it is sufficient to show sequential closure. Suppose $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ such that $\ens[b]_i \to \ens[b]$. We need to show that $\ens[b] \in A$. If $\ens[b]_i \in \Delta$ for infinitely many $i$, then $\ens[b] \in \Delta \subseteq A$ by the closure of $\Delta$, so without loss of generality assume that $\ens[b]_i \notin \Delta$ for all $i$. Thus, by \ref{pm-es-passThroughSimplexBoundary}, there exists $p_i \in (0,1)$ such that $\ens[c]_i = p_i\ens[a] + \bar{p_i}\ens[b]_i \in B_\Delta$ for each $i \in \mathbb{N}$.
 	
 	\begin{figure}[H]
 		\centering
@@ -3697,7 +3699,7 @@ TODO: add descriptions, explanations, and motivation throughout this section.
 			\filldraw [black] (b4) circle (1pt) node [above] {$\ens[b]_4$};
 			\filldraw [black] (b) circle (1pt) node [right] {$\ens[b]$};
 		\end{tikzpicture}
-		\caption{Given a sequence $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ converging to $\ens[b] \notin \Delta$, we can assume the sequence eventually exits $\Delta$. Then each segment connecting $\ens[a]$ to $\ens[b]_i$ intersects $B_\Delta$ at $\ens[c]_i$. Some subsequence of $\{\ens[c]_i\}_{i=1}^\infty$ converges to $\ens[c] = p\ens[a] + \bar{p}\ens[b] \in B_\Delta \subseteq A$. Then $\ens[b] \in A$ since $A$ is affine.}
+		\caption{TODO: move c, d, F(E) on the F axis. Label the fibers F inverse of c . Given a sequence $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ converging to $\ens[b] \notin \Delta$, we can assume the sequence eventually exits $\Delta$. Then each segment connecting $\ens[a]$ to $\ens[b]_i$ intersects $B_\Delta$ at $\ens[c]_i$. Some subsequence of $\{\ens[c]_i\}_{i=1}^\infty$ converges to $\ens[c] = p\ens[a] + \bar{p}\ens[b] \in B_\Delta \subseteq A$. Then $\ens[b] \in A$ since $A$ is affine.}
 	\end{figure}
 	
 	Since $[0,1]$ is compact, there exists a subsequence $\{p_{i_n}\}_{n=1}^{\infty}$ and a $p \in [0,1]$ so that $p_{i_n} \to p$. By continuity of mixing, $\ens[c]_{i_n} \to  p\ens[a] + \bar{p}\ens[b]$. Note that $p\ens[a] + \bar{p}\ens[b] \in B_\Delta$ since $B_\Delta$ is closed, and $\bar{p} \not= 0$ because otherwise we would have $p\ens[a] + \bar{p}\ens[b] = \ens[a] \notin B_\Delta$. Since $A$ is affine, $\ens[b] = \frac{1}{\bar{p}}(p\ens[a] + \bar{p}\ens[b]) - \frac{p}{\bar{p}}\ens[a] \in A$. 
