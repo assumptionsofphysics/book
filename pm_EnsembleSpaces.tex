@@ -3130,25 +3130,29 @@ Given a set of ensembles, we can ask what spread is reachable by a mixture in te
 
 The state capacity is additive over orthogonal sets. Intuitively, orthogonal sets correspond to mutually exclusive events, so it makes sense that the count of states is additive. We would expect the converse to be true as well: if the count of states is additive, the sets correspond to mutually exclusive events and therefore the sets are orthogonal. However, this is not true under current axioms (see \ref{pm-es-nonorthogonalSimplex}). Since in the same example mixing entropy fails to be the square of a distance function, the issues may be related. We may be missing a condition that regulates the entropy between three arbitrary ensembles.
 
-Regardless of the previous problem, there may be other interesting properties to explore. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. If $\ens[a]$ is the ensemble with maximum entropy in $\chull(A)$, it should be true that all elements of the hull are components of $\ens[a]$. One should be able to show that, given two sequences with a convergent entropy and whose elements are orthogonal to each other, one can create another sequence that converges to an entropy higher than both of them. Another useful tool would be a type of sequence within $\hull(A)$ whose entropy never decreases, tends to the supremum and each element is a component of the following. Also, the state with maximal entropy (if it exists) is an internal point. All internal points are in the $\sigma$-hull. We leave these series of conjectures for future work.
+Intuitively, one may expect that the entropy maximizer for an affine subset is in its algebraic interior (i.e. has every other ensemble as component) because, typically, mixing increases the average entropy. However, this does not work in infinite dimension, as the algebraic interior is often empty, or on a constrained finite-dimensional discrete classical space. For example, in the cut triangle (see \ref{pm-es-cutTriangle}), the maximizer on either halved side is a vertex.
+
+Regardless of the previous problem, there may be other interesting properties to explore. If $\ens[a] \ortho \ens[b]$ then $\ens[a]$ is orthogonal to all the components of $\ens[b]$. One should be able to show that, given two sequences with a convergent entropy and whose elements are orthogonal to each other, one can create another sequence that converges to an entropy higher than both of them. Another useful tool would be a type of sequence within $\hull(A)$ whose entropy never decreases, tends to the supremum and each element is a component of the following. We leave these series of conjectures for future work.
 
 We now show that the state capacity recovers a notion of number of cases in all three target spaces. In the discrete classical case it recovers the number of points; in the continuous classical case, it recovers the Liouville volume; in the quantum case, it recovers the number of orthogonal pure states.
 
+%TODO: some of these definitions may be extended when we have a notion of face
+
 \begin{mathSection}
 \begin{prop}
-	Let $\Ens$ be a discrete classical ensemble space. Let $U \subseteq \{s_i\}$ be a subset of the corresponding (extreme) points and $A$ be the set of probability distributions whose support is a subset of $U$. Then $\scap(A) = \#U$.
+	Let $\Ens$ be a discrete classical ensemble space. Let  $U \subseteq X$ be a subset of the corresponding sample space and $A$ be the set of probability measures whose support is a subset of $U$. Then $\scap(A) = \#U$.
 \end{prop}
 
 \begin{proof}
-	Let $A$ be the set of probability distributions defined over a discrete countable set $U$. The highest entropy is achieved by the uniform distribution, which equals $\log (\#U)$. Therefore $\scap(A) = 2^{\log(\#U)} = \#U$.
+	Suppose $U$ is empty. Then $A=\emptyset$ and $\scap(A) = 0 = \#U$. Suppose $U$ is finite and non-empty. The highest entropy is achieved by the uniform distribution, which equals $\log (\#U)$. Therefore $\scap(A) = 2^{\log(\#U)} = \#U$. Suppose $U$ is infinite. Then $A$ contains a sequence of uniform distributions of increasing support. Therefore, there is no finite supremum for the entropy and $\scap(A) = +\infty = \#U$.
 \end{proof}
 
 \begin{prop}
-	Let $\Ens$ be a continuous classical ensemble space. Let $U \subseteq X$ be a subset of the corresponding symplectic manifold (i.e. phase space) and $A$ be the set of probability distributions whose support is a subset of $U$. Then $\scap(A) = \mu(U)$ where $\mu(U)$ is the Liouville measure.
+	Let $\Ens$ be a continuous classical ensemble space. Let $U \subseteq X$ be a measurable subset of the corresponding symplectic manifold (i.e. phase space) and $A$ be the set of probability distributions whose support is a subset of $U$. Then $\scap(A) = \mu(U)$ where $\mu(U)$ is the Liouville measure.
 \end{prop}
 
 \begin{proof}
-	Let $A$ be the set of probability distributions whose support is a subset of $U$. The highest entropy is achieved by the uniform distribution, which equals $\log(\mu(U))$. Therefore $\scap(A) = 2^{\log(\mu(U))} = \mu(U)$.
+	Suppose $\mu(U)=0$. Then $A=\emptyset$ since $\Ens$ contains only probability measures absolutely continuous with respect to $\mu$. Therefore, $\scap(A) = 0 = \mu(U)$. Suppose $0 < \mu(U) < + \infty$. The highest entropy is achieved by the uniform distribution, which equals $\log(\mu(U))$. Therefore $\scap(A) = 2^{\log(\mu(U))} = \mu(U)$. Lastly, suppose $\mu(U) = + \infty$. Then $A$ contains a sequence of uniform distributions with a support of increasing finite measure without bound. Therefore, there is no finite supremum for the entropy and $\scap(A) = +\infty = \mu(U)$.
 \end{proof}
 
 \begin{prop}
@@ -3156,7 +3160,7 @@ We now show that the state capacity recovers a notion of number of cases in all 
 \end{prop}
 
 \begin{proof}
-	Let $A$ be the set of density operators defined on a finite-dimensional subspace $U$. The highest entropy is achieved by the maximally mixed state, and equals $\log(\dim(U))$. Therefore $\scap(A) = 2^{\log(\dim(U))} = \dim(U)$. Now let $U$ be infinite-dimensional. Then there is no upper bound on the entropy, and therefore $\scap(A) = \infty = \dim(U)$.
+	Suppose $\dim(U)=0$. Then $A=\emptyset$ and $\scap(A) = 0 = \dim(U)$. Suppose $0 < \dim(U) < + \infty$. The highest entropy is achieved by the maximally mixed state, which equals $\log(\dim(U))$. Therefore $\scap(A) = 2^{\log(\dim(U))} = \dim(U)$.  Lastly, suppose $\dim(U) = + \infty$. Then $A$ contains a sequence of maximally mixed states over subspaces of increasing dimensions without bound. Therefore, there is no finite supremum for the entropy and $\scap(A) = +\infty = \dim(U)$.	
 \end{proof}
 \end{mathSection}
 
