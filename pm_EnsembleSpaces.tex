@@ -3247,13 +3247,16 @@ First we define the \textbf{fraction} of one element with respect to another. Fo
 		We need to take the supremum as the maximum may not exist. For example, as shown in the figure, consider a discrete classical ensemble space and remove the extreme points. At the moment, there is no reason to rule out such space as unphysical.
 	\end{remark}
 	
-	\begin{coro}
-		Let $\ens, \ens[a] \in \Ens$, then $\fraction_{\ens}(\ens[a]) = 0$ if and only if $\ens[a]$ is not a component of $\ens$.
-	\end{coro}
+	\begin{prop}\label{pm-es-fractionOneZero}
+		Let $\ens, \ens[a] \in \Ens$. Then $\fraction_{\ens}(\ens[a]) = 1$ if and only if $\ens = \ens[a]$ and $\fraction_{\ens}(\ens[a]) = 0$ if and only if $\ens[a]$ is not a component of $\ens$.
+	\end{prop}
 	
 	\begin{proof}
+		If $\ens = \ens[a]$, then $\fraction_{\ens}(\ens[a]) = 1$. Conversely, suppose $\fraction_{\ens}(\ens[a]) = 1$ and $\ens \neq \ens[a]$. By the definition of the supremum, we can find coefficients $p_i \in (0,1)$ tending to $1$ and ensembles $\ens[b]_i \in \Ens$ such that $\ens = p_i \ens[a] + \bar{p}_i \ens[b]_i$. All $\ens[b]_i$ lie on the bounded line through $\ens[a]$ and $\ens$. Therefore, by \ref{pm-es-convergenceToOneIsBoundedness}, $\ens = p_i \ens[a] + \bar{p}_i \ens[b]_i \to \ens[a]$.		Since $\Ens$ is Hausdorff by \ref{pm-es-Hausdorff}, the constant sequence at $\ens$ has a unique limit. Therefore $\ens = \ens[a]$, a contradiction.
+		
 		Note that $\ens[a]$ is a component of $\ens$ if we can write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in (0,1]$ and $\ens[b] \in \Ens$. In this case, $\fraction_{\ens}(\ens[a]) \geq \lambda > 0$. Conversely, if $\fraction_{\ens}(\ens[a]) > 0$ we can find $\lambda \in (0,\fraction_{\ens}(\ens[a])]$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\ens[b] \in \Ens$.
 	\end{proof}
+
 \end{mathSection}
 
 \begin{figure}[H]
@@ -3282,7 +3285,7 @@ First we define the \textbf{fraction} of one element with respect to another. Fo
 
 Intuitively, we would expect the fraction $\fraction_{\ens}(\ens[a])$ to be continuous both in $\ens[a]$ and $\ens$, but this is not the case. For example, as shown in Fig. \ref{pm-es-fig-fractionDiscontinuous}, let $\Ens$ be the Bloch ball and let $\ens[a]_i$ be a sequence of pure states (i.e. extreme points) that converge to another pure state $\ens$. Since they are all extreme points, we have $\fraction_{\ens}(\ens[a]_i) = 0$ and $\fraction_{\ens[a]_i}(\ens) = 0$ for all $i$. However, $\fraction_{\ens}(\ens) = 1$. This is the recurring problem of the non-continuity at the edges. The following conjecture, however, may still be true:
 \begin{conj}
-	The fraction $\fraction_{\ens}(\ens[a])$ is a continuous function both in $\ens[a]$ and $\ens$ in the algebraic interior.
+	In finite dimensions, the fraction $\fraction_{\ens}(\ens[a])$ is a continuous function both in $\ens[a]$ and $\ens$ in the algebraic interior.
 \end{conj}
 
 
@@ -3342,7 +3345,7 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	\end{coro}
 	
 	\begin{proof}
-		Note that $\ens = 1 \ens[a] + 0 \ens[b]$ if and only if $\ens = \ens[a]$. Therefore, let $\ens[a], \ens[b] \in \Ens$ such that $\ens[a] \neq \ens[b]$. We have $\fcap_{\ens[a]}(\{\ens[a]\}) = 1$ and $\fcap_{\ens[b]}(\{\ens[a]\}) \neq 1$. Which means $\fcap_{\ens[a]} \neq \fcap_{\ens[b]}$.
+		Recall that, by \ref{pm-es-fractionOneZero}, $\fraction_{\ens}(\ens[a]) = 1$ if and only if $\ens = \ens[a]$. Therefore, let $\ens[a], \ens[b] \in \Ens$ such that $\ens[a] \neq \ens[b]$. We have $\fcap_{\ens[a]}(\{\ens[a]\}) = 1$ and $\fcap_{\ens[b]}(\{\ens[a]\}) \neq 1$. Which means $\fcap_{\ens[a]} \neq \fcap_{\ens[b]}$.
 	\end{proof}
 	
 	\begin{prop}
@@ -3360,7 +3363,7 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 	
 		2. By \ref{pm-es-convexSupremumProps}.
 		
-		3. Let $A, B \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(A \cup B)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(A \cup B)$, we can write $\ens_1 = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in [0,1]$, $\ens[a] \in A$ and $\ens[b] \in B$. Therefore we have $\ens = p \lambda \ens[a] + p \bar{\lambda} \ens[b] + \bar{p} \ens_2$. By the definition of fraction capacity, we must have $p\lambda \leq \fcap_{\ens}(A)$ and $p\bar{\lambda} \leq \fcap_{\ens}(B)$, therefore $p = p\lambda + p\bar{\lambda} \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. 	Since $\fcap_{\ens}(A \cup B)$ is the supremum for a set of coefficients $p$ for which the expression always holds, we have $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. The fraction capacity is subadditive.
+		3. Let $A, B \subseteq \Ens$ and let $p \in [0,1]$ such that $\ens = p \ens_1 + \bar{p} \ens_2$ for some $\ens_1 \in \hull(A \cup B)$ and $\ens_2 \in \Ens$. Since $\ens_1 \in \hull(A \cup B)$, we can write $\ens_1 = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in [0,1]$, $\ens[a] \in \hull(A)$ and $\ens[b] \in \hull(B)$. Therefore we have $\ens = p \lambda \ens[a] + p \bar{\lambda} \ens[b] + \bar{p} \ens_2$. By the definition of fraction capacity, we must have $p\lambda \leq \fcap_{\ens}(A)$ and $p\bar{\lambda} \leq \fcap_{\ens}(B)$, therefore $p = p\lambda + p\bar{\lambda} \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. 	Since $\fcap_{\ens}(A \cup B)$ is the supremum for a set of coefficients $p$ for which the expression always holds, we have $\fcap_{\ens}(A \cup B) \leq \fcap_{\ens}(A) + \fcap_{\ens}(B)$. The fraction capacity is subadditive.
 	
 		4. By \ref{pm-es-convexSupremumProps}.
 	\end{proof}
@@ -3369,23 +3372,132 @@ The fraction capacity, then, defines how much of the ensemble $\ens$ can be cons
 \begin{remark}
 	The fraction capacity is, in general, not continuous from above. Let $\Ens$ be the Bloch ball. Let $\ens \in \Ens$ be the maximally mixed state (i.e. the center of the sphere). Let $\{\ens_i\}$ be a countable set of distinct pure states. Let $A_j = \{ \ens_i \, | \, i \geq j\}$. Then $\fcap_{\ens}(A_j) \geq \frac{1}{2}$ for all $j$ because $A_j$ contains at least one pure state. This means that $\lim\limits_{i \to \infty} \fcap_{\ens}(A_i) \geq \frac{1}{2}$. However, $\bigcap A_j = \emptyset$ which means $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) = 0$. This means that, in general, $\fcap_{\ens}(\lim\limits_{i \to \infty} A_i) \neq \lim\limits_{i \to \infty} \fcap_{\ens}(A_i)$ for a decreasing sequence.
 \end{remark}
+
+\begin{coro}
+	The fraction capacity is $\sigma$-subadditive. That is, $\fcap_{\ens}(\bigcup A_i) \leq \sum_i \fcap_{\ens}(A_i)$.
+\end{coro}
+\begin{proof}
+	Let $\{A_i\}$ be a sequence of subsets of $\Ens$ and let $B_n = \bigcup_{i=1}^n A_i$. The sequence $\{B_n\}$ is increasing and $\lim\limits_{n \to \infty} B_n = \bigcup_i A_i$. By repeatedly applying subadditivity, $\fcap_{\ens}(B_n) \leq \sum_{i=1}^n \fcap_{\ens}(A_i)$. Therefore, by continuity from below,
+	\begin{equation}
+		\begin{aligned}
+			\fcap_{\ens}(\bigcup_i A_i)= \lim\limits_{n \to \infty} \fcap_{\ens}(B_n) \leq \lim\limits_{n \to \infty} \sum_{i=1}^n \fcap_{\ens}(A_i) = \sum_i \fcap_{\ens}(A_i).
+		\end{aligned}
+	\end{equation}
+	The fraction capacity is $\sigma$-subadditive.
+\end{proof}
 	
 \end{mathSection}
 
-One open question is whether subadditivity extends to the infinite case. Since additivity plus continuity implies $\sigma$-additivity\footnote{See for example \href{https://link.springer.com/book/10.1007/978-3-319-30690-2}{Michel Grabisch, Set Functions, Games and Capacities in Decision Making}.}, it may be true that subadditivity plus continuity implies $\sigma$-subadditivity.
+The fraction capacity, then, is a non-additive measure that is unit bounded and $\sigma$-subadditive, just like a probability measure. It is not, in general, additive over disjoint sets. This is because, in classical probability theory, the disjoint sets are assumed to be mutually exclusive events. In this more general setting, then, it is the entropy that, through orthogonality, tells us which events correspond to mutually exclusive preparations. Consistently, we do find that the fraction capacity is additive over orthogonal subsets.
 
-\begin{conj}
-	The fraction capacity is $\sigma$-subadditive. That is, $\fcap_{\ens}(\bigcup A_i) \leq \sum_i \fcap_{\ens}(A_i)$.
-\end{conj}
+\begin{mathSection}
+\begin{prop}[Maximality of orthogonal components]\label{pm-es-orthogonalComponentMaximality}
+	Let $\ens \in \Ens$ and $A \subseteq \Ens$. Suppose $\ens = p\ens[a] + \bar{p}\ens[b]$ for some $p \in [0,1]$, $\ens[a] \in \hull(A)$ and $\ens[b] \in \Ens$ such that $\{\ens[b]\} \ortho A$. Then $\fcap_{\ens}(A) = p$.
+\end{prop}
 
+\begin{proof}
+	By definition, $\fcap_{\ens}(A) \geq p$. Let $\ens[c] \in \hull(A)$ and suppose $\ens = q\ens[c] + \bar{q}\ens[d]$ for some $q \in [0,1]$ and $\ens[d] \in \Ens$. We want to show that $q \leq p$.
+	
+	Since orthogonality extends to convex hulls, $\ens[a] \ortho \ens[b]$ and $\ens[c] \ortho \ens[b]$. Let $\ens_t = t\ens + \bar{t}\ens[b]$ for $t \in (0,1)$. Using the two decompositions of $\ens$, we have
+	\begin{equation}
+		\begin{aligned}
+			\ens_t &= t(p\ens[a] + \bar{p}\ens[b]) + \bar{t}\ens[b] = tp\ens[a] + (t\bar{p} + \bar{t})\ens[b] = tp\ens[a] + (1-tp)\ens[b] \\
+			&= t(q\ens[c] + \bar{q}\ens[d]) + \bar{t}\ens[b] = tq\ens[c] + t\bar{q}\ens[d]
+			+ (q+\bar{q})\bar{t}\ens[b] = q(t\ens[c] + \bar{t}\ens[b])
+			+ \bar{q}(t\ens[d] + \bar{t}\ens[b]).
+		\end{aligned}
+	\end{equation}
+	We can now calculate the entropy using the first decomposition and bound it using the second. By orthogonality and concavity,
+	\begin{equation}
+		\begin{aligned}
+			I(tp,\overline{tp}) + tp S(\ens[a]) + (1-tp) S(\ens[b])
+			&= S(\ens_t) \\
+			&\geq q S(t\ens[c] + \bar{t}\ens[b])
+			+ \bar{q} S(t\ens[d] + \bar{t}\ens[b]) \\
+			&= q\left(I(t,\bar{t}) + t S(\ens[c])
+			+ \bar{t} S(\ens[b])\right)
+			+ \bar{q} S(t\ens[d] + \bar{t}\ens[b]) \\
+			&\geq q\left(I(t,\bar{t}) + t S(\ens[c])
+			+ \bar{t} S(\ens[b])\right)
+			+ \bar{q}\left(t S(\ens[d]) + \bar{t} S(\ens[b])\right) \\
+			&= q I(t,\bar{t}) + tq S(\ens[c])
+			+ t\bar{q} S(\ens[d]) + \bar{t} S(\ens[b]).
+		\end{aligned}
+	\end{equation}
+	Rearranging the inequality,
+	\begin{equation}
+		I(tp,\overline{tp}) - q I(t,\bar{t})
+		\geq t\left(q S(\ens[c]) + \bar{q} S(\ens[d])
+		- p S(\ens[a]) - \bar{p} S(\ens[b])\right).
+	\end{equation}
+	
+	We now examine the inequality as $t \to 0^+$. Recall that $I(u,\bar{u}) = -(u\log u + \bar{u}\log\bar{u})$. Therefore,
+	\begin{equation}
+		\begin{aligned}
+			\frac{I(u,\bar{u})}{-u\log u}
+			&= 1+\frac{\bar{u}\log\bar{u}}{u\log u} = 1+\frac{\bar{u}}{\log u}
+			\frac{\log\bar{u}}{u}
+			\to 1,
+		\end{aligned}
+	\end{equation}
+	since $\log(1-u)/u$ has a finite limit and $\log u \to -\infty$. For $p>0$, we consequently have
+	\begin{equation}
+		\begin{aligned}
+			\frac{I(tp,\overline{tp})}{-t\log t}
+			&= p\frac{\log(tp)}{\log t}
+			\frac{I(tp,\overline{tp})}{-tp\log(tp)} = p\left(1+\frac{\log p}{\log t}\right)
+			\frac{I(tp,\overline{tp})}{-tp\log(tp)}
+			\to p.
+		\end{aligned}
+	\end{equation}
+	For $p=0$, the same limit is immediate because $I(0,1)=0$.
+	
+	Dividing the entropy inequality by $-t\log t>0$ gives
+	\begin{equation}
+		\frac{I(tp,\overline{tp})}{-t\log t}
+		- q\frac{I(t,\bar{t})}{-t\log t}
+		\geq
+		\frac{q S(\ens[c]) + \bar{q} S(\ens[d])
+			- p S(\ens[a]) - \bar{p} S(\ens[b])}{-\log t}.
+	\end{equation}
+	All entropy values on the right are fixed and finite. Taking $t \to 0^+$ therefore gives $p-q \geq 0$, and hence $q \leq p$.
+	
+	Since every admissible mixing coefficient for an element of $\hull(A)$ is bounded by $p$, we have $\fcap_{\ens}(A) \leq p$. Together with the reverse inequality established at the beginning, $\fcap_{\ens}(A) = p$.
+\end{proof}
 
-It is still an open question to understand exactly when the fraction capacity recovers additivity. We believe that this should be related to the ability to write an element as a mixture of separate components.
+\begin{prop}[Additivity over mutual exclusivity]
+	Let $A,B \subseteq \Ens$ be orthogonal subsets and let $\ens \in \hull(A \cup B)$. Then $\fcap_{\ens}(A \cup B) = \fcap_{\ens}(A)+\fcap_{\ens}(B) = 1$. Moreover, let $A,B,C \subseteq \Ens$ be pairwise orthogonal subsets and let $\ens \in \hull(A\cup B\cup C)$. Then $\fcap_{\ens}(A \cup B) = \fcap_{\ens}(A) + \fcap_{\ens}(B)$.
+\end{prop}
 
-\begin{conj}
-	The fraction capacity $\fcap_{\ens}$ is additive over $A, B \subseteq \Ens$ if and only if there exists a $C \subseteq \Ens$ such that $A \separate B$, $B \separate C$, $A \separate C$ and $\ens \in \hull(A\cup B\cup C)$.
-\end{conj}
+\begin{proof}
+	If $A$ or $B$ is empty, the result follows directly from the definition. Otherwise, since $\ens \in \hull(A \cup B)$, we can write $\ens = p\ens[a] + \bar{p}\ens[b]$ for some $p \in [0,1]$, $\ens[a] \in \hull(A)$ and $\ens[b] \in \hull(B)$.
+	
+	Since orthogonality extends to convex hulls, $\{\ens[a]\} \ortho B$ and $\{\ens[b]\} \ortho A$. By \ref{pm-es-orthogonalComponentMaximality}, $\fcap_{\ens}(A)=p$ and $\fcap_{\ens}(B)=\bar{p}$.
+	Since $\ens \in \hull(A \cup B)$, we also have $\fcap_{\ens}(A \cup B)=1$. Therefore,
+	\begin{equation}
+		\fcap_{\ens}(A \cup B) = 1 = p + \bar{p} = \fcap_{\ens}(A) + \fcap_{\ens}(B).
+	\end{equation}
+	
+	For the second part, if $A$ or $B$ is empty, the result follows directly from the definition. If $C$ is empty, the first part applies. Otherwise, we can write $\ens = \alpha\ens[a] + \beta\ens[b] + \gamma\ens[c]$ with $\ens[a] \in \hull(A)$, $\ens[b] \in \hull(B)$, $\ens[c] \in \hull(C)$ and non-negative coefficients that sum to one.
+	
+	By definition, $\fcap_{\ens}(A) \geq \alpha$ and $\fcap_{\ens}(B \cup C) \geq \beta+\gamma$. Since $A \ortho (B \cup C)$, the first part gives
+	\begin{equation}
+		\alpha
+		\leq \fcap_{\ens}(A)
+		= 1-\fcap_{\ens}(B \cup C)
+		\leq 1-(\beta+\gamma)
+		= \alpha.
+	\end{equation}
+	Therefore $\fcap_{\ens}(A)=\alpha$. Applying the same argument to $B$ and $A \cup B$ gives $\fcap_{\ens}(B)=\beta$ and $\fcap_{\ens}(A \cup B)=\alpha+\beta$. Consequently,
+	\begin{equation}
+		\fcap_{\ens}(A \cup B)
+		= \alpha+\beta
+		= \fcap_{\ens}(A)+\fcap_{\ens}(B).
+	\end{equation}
+\end{proof}
+\end{mathSection}
 
-We now show that fraction capacity recovers classical probability in the classical case. The key insight is that each event, each Borel set $A$, corresponds to a subspace of probability measures for which that event will be true. This is the set of probability measure whose support is always within the given Borel set $A$. A probability measure, then, can always be decomposed in a part for which that event will be true, the part supported by $A$, and a part for which that event will be false, the part supported by the complement. The fraction capacity corresponds to the mixing coefficient of this decomposition.
+We now show that fraction capacity recovers classical probability in the classical case. The key insight is that each event, each Borel set $A$, corresponds to a subspace of probability measures for which that event will be true. This is the set of probability measures whose support is always within the given Borel set $A$. A probability measure, then, can always be decomposed into a part for which that event will be true, the part supported by $A$, and a part for which that event will be false, the part supported by the complement. The fraction capacity corresponds to the mixing coefficient of this decomposition.
 
 \begin{figure}[H]
 	\centering
@@ -3447,27 +3559,34 @@ We now show that fraction capacity recovers classical probability in the classic
 
 \begin{mathSection}
 	\begin{prop}
-		Let $\Ens$ be a discrete or continuous classical ensemble space with sample space $X$. Let $A \in \Sigma_X$ be an event and $\Ens_A \subseteq \Ens$ the set of distributions with support contained in $A$. Let $p \in \Ens$ a probability measure in the ensemble space. Then $p(A) = \fcap_{p}(\Ens_A)$. That is, the probability of an event is equal to the fraction capacity of the subspace corresponding to that event.
+		Let $\Ens$ be a discrete or continuous classical ensemble space with sample space $X$. Let $A \in \Sigma_X$ be an event and $\Ens_A \subseteq \Ens$ the set of distributions with support contained in $A$. Let $p \in \Ens$ be a probability measure in the ensemble space. Then $p(A) = \fcap_{p}(\Ens_A)$. That is, the probability of an event is equal to the fraction capacity of the subspace corresponding to that event.
 	\end{prop}
-	\begin{proof}
-		Let $p \in \Ens$ be a probability measure over $X$, absolutely continuous with respect to the appropriate measure $\mu$ (i.e. discrete for the discrete case and Liouville for the continuous case). Given $A \in \Sigma_X$, we can write $p = p(A) p_A + p(A^{\complement}) p_{A^{\complement}}$ where  $p_A$ is a probability measure with support with $A$ and $p_{A^{\complement}}$ is a probability measure with support with $A^{\complement}$.
-		
-		Let $\Ens_A \subseteq \Ens$ be the subset of probability measures with support contained in $A$. Then $p_A \in \Ens_A$ and $\fcap_{p}(\Ens_A) \geq p(A)$. Given that $p_{A^{\complement}}$ has support disjoint from $A$, we can find no further component of $p$ that has support in $A$. Therefore $\fcap_{p}(\Ens_A) = p(A)$. The fraction capacity, then, recovers the probability.
+\begin{proof}
+	If $p(A)=0$, no element of $\hull(\Ens_A)$ is a component of $p$. By \ref{pm-es-fractionOneZero}, their fractions are all zero, so $\fcap_p(\Ens_A)=0$. If $p(A)=1$, then $p \in \Ens_A$ and $\fraction_p(p)=1$ by the same proposition, so $\fcap_p(\Ens_A)=1$.
+	
+	Now suppose $0<p(A)<1$. Let $p_A$ and $p_{A^{\complement}}$ be the normalized restrictions of $p$ to $A$ and $A^{\complement}$. Then
+	\begin{equation}
+		p=p(A)p_A+p(A^{\complement})p_{A^{\complement}}.
+	\end{equation}
+	Since $p_A \in \Ens_A$ and $\{p_{A^{\complement}}\} \ortho \Ens_A$, \ref{pm-es-orthogonalComponentMaximality} gives $\fcap_p(\Ens_A)=p(A)$.
 	\end{proof}
 \end{mathSection}
 	
-We now show that the fraction capacity recovers probability over measurements in the quantum case. The setup is essentially the same that as of the classical case, except that we start with an observable $O$, and each Borel set $A$ for that observable will have a corresponding subspace of $\mathcal{H}$ and a projector $\Pi_A$. A post-measurement state of $O$ is a mixed state that commutes with $O$, since it will commute with any projector that commutes with $O$. We can show, then, that the fraction capacity recovers the decomposition of any post-measurement state of $O$ over the subspace corresponding to $\Pi_A$.
+We now show that the fraction capacity recovers probability over measurements in the quantum case. The setup is essentially the same as that of the classical case, except that we start with an observable $O$, and each Borel set $A$ for that observable will have a corresponding subspace of $\mathcal{H}$ and a projector $\Pi_A$. A post-measurement state of $O$ is a mixed state that commutes with $O$, since measurements remove coherence across eigenspaces corresponding to different eigenvalues of $O$. We can show, then, that the fraction capacity recovers the decomposition of any post-measurement state of $O$ over the subspace corresponding to $\Pi_A$.
 
 \begin{mathSection}
 	\begin{prop}
 		Let $\Ens$ be a quantum ensemble space associated to a Hilbert space $\mathcal{H}$. Let $O : \mathcal{H} \to \mathcal{H}$ be a quantum observable. Let $A \in \Sigma_{\mathbb{R}}$ be a Borel set and $\Pi_{A}$ be the projector associated with the subspace of $\mathcal{H}$ corresponding to the subset $A$ of the spectrum of $O$. Let $\Ens_A$ be the set of ensembles within that subspace. Let $\rho \in \Ens$ be a mixed state that commutes with $O$ (i.e. the ensemble resulting from a measurement of $O$). Then $\tr(\rho \Pi_A) = \fcap_{\rho}(\Ens_A)$.
 	\end{prop}
+\begin{proof}
+	Let $\lambda=\tr(\rho \Pi_A)$. If $\lambda=0$, no element of $\hull(\Ens_A)$ is a component of $\rho$. By \ref{pm-es-fractionOneZero}, their fractions are all zero, so $\fcap_\rho(\Ens_A)=0$. If $\lambda=1$, then $\rho \in \Ens_A$ and $\fraction_\rho(\rho)=1$ by the same proposition, so $\fcap_\rho(\Ens_A)=1$.
 	
-	\begin{proof}
-		Let $\rho \in \Ens$ be a mixed state that commutes with $O$. Let $A \in \Sigma_{\mathbb{R}}$ be a Borel set and $\Pi_{A}$ be the projector associated with the subspace of $\mathcal{H}$ corresponding to the subset $A$ of the spectrum of $O$. Then we can write $\rho = \lambda \rho_A + \bar{\lambda} \rho_{A^{\complement}}$ where $\rho_A, \rho_{A^{\complement}} \in \Ens$ are such that $\tr(\rho_A \Pi_A) = 1$ and  $\tr(\rho_{A^{\complement}} \Pi_A) = 0$. We have $\tr(\rho \Pi_A) = \lambda$.
-		
-		Let $\Ens_A \subseteq \Ens$ be the subset of mixed states $d$ such that $\tr(d \Pi_A) = 1$. Then $d \in \Ens_A$ and $\fcap_{\rho}(\Ens_A) \geq \lambda$. Given that $\rho_{A^{\complement}}$ is in the subspace orthogonal to $\Ens_A$, we can find no further component of $\rho$ in that subspace. Therefore $\fcap_{\rho}(\Ens_A) = \lambda$. We have $\tr(\rho \Pi_A) = \lambda = \fcap_{\rho}(\Ens_A)$ The fraction capacity, then, recovers the probability.
-	\end{proof}
+	Now suppose $0<\lambda<1$. Let $\rho_A$ and $\rho_{A^{\complement}}$ be the normalized restrictions of $\rho$ to the subspaces corresponding to $A$ and $A^{\complement}$. Since $\rho$ commutes with $O$, it preserves these subspaces, and therefore
+	\begin{equation}
+		\rho=\lambda\rho_A+\bar{\lambda}\rho_{A^{\complement}}.
+	\end{equation}
+	Since $\rho_A \in \Ens_A$ and $\{\rho_{A^{\complement}}\} \ortho \Ens_A$, \ref{pm-es-orthogonalComponentMaximality} gives $\fcap_\rho(\Ens_A)=\lambda=\tr(\rho \Pi_A)$.
+\end{proof}
 \end{mathSection}
 
 \section{Statistical properties and quantities}
