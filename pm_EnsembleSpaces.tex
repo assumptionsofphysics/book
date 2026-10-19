@@ -4052,31 +4052,21 @@ If we restrict the integral fraction capacity to the set $X$ of extreme points, 
 
 \subsection{Macrostates and thermodynamics}
 
-In this section we try to recover some elements of thermodynamics on the generalized ensemble space. We want to recover Gibbs' thermodynamics, which means an equation of state in terms of extensive quantities. Instead of extensive quantities, we are going to use statistical quantities. Note that the idea that all extensive quantities are statistical (i.e. the average during mixing) seems to work. In fact, in statistical mechanics the energy, the number of particles and the volume are averages over microstates. It also seems that intensive quantities do not average during mixing. Temperature, for example, is only defined on equilibria (i.e. of Boltzmann distributions) and the mixture of two equilibria at different temperatures is not an equilibrium. Still, we would need a general proof, which would require the notion of product spaces (i.e. intensive/extensive quantities represent system/subsystem relationship).
+In this section we try to recover some elements of thermodynamics on the generalized ensemble space. We want to recover Gibbs' thermodynamics, which means an equation of state in terms of extensive quantities. Instead of extensive quantities, we are going to use statistical quantities. Note that the idea that all extensive quantities are statistical (i.e. the average during mixing) seems to work. In fact, in statistical mechanics the energy, the number of particles and the volume are averages over microstates. It also seems that intensive quantities do not average during mixing. Temperature, for example, is only defined on equilibria (i.e. of Boltzmann distributions) and the mixture of two equilibria at different temperatures is, in general, not an equilibrium. Still, we would need a general proof, which would require the notion of product spaces (i.e. intensive/extensive quantities represent system/subsystem relationship).
 
 \begin{mathSection}
 \begin{defn}
-	Let $\Ens$ be an ensemble space. Let $F : \Ens \to \mathcal{Q}$ be a statistical property. The \textbf{coarse graining} of $\Ens$ over $F$ is the set $\mathcal{M} \subseteq \Ens$ represented by the ensembles that maximize the entropy for each fixed value of the property. That is, there exists a map $\psi : \mathcal{Q} \to \mathcal{M}$ such that $F(\psi(x)) = x$ and $S(\psi(x)) \geq S(\ens)$ for all $\ens \in \Ens$ such that $F(\ens) = x$. The \textbf{equation of state} is the map $S : \mathcal{Q} \to \mathbb{R}$ defined as $S(x) \mapsto S(\psi(x))$ that returns the entropy given the value of the statistical property.
+	Let $\Ens$ be an ensemble space. Let $F : \Ens \to \mathcal{Q}$ be a statistical property. The \textbf{coarse graining} of $\Ens$ over $F$ is the set $\mathcal{M} \subseteq \Ens$ represented by the ensembles that maximize the entropy for each fixed value of the property. That is, there exists a map $\psi : \mathcal{Q} \to \mathcal{M}$ such that $F(\psi(x)) = x$ and $S(\psi(x)) \geq S(\ens)$ for all $\ens \in \Ens$ such that $F(\ens) = x$. The \textbf{equation of state} is the map $S : \mathcal{Q} \to \mathbb{R}$ defined as $x \mapsto S(\psi(x))$ that returns the entropy given the value of the statistical property.
+	
+	In particular, let $F : \Ens \to \mathbb{R}^n$ be a vector of $n$ statistical quantities, called state variables. Then $S : \mathcal{Q} \subseteq \mathbb{R}^n \to \mathbb{R}$ returns the entropy as a function of the values of the state variables.
 \end{defn}
 \end{mathSection}
 
-The set of ensembles that maximize entropy will be a set of points fully identified by finitely many real numbers. We would expect this to be a manifold, though we still have to understand how the topology of the ensemble space relates to the topology of $\mathcal{M}$.
-
-\begin{mathSection}
-\begin{conj}
-	Let $F : \Ens \to \mathbb{R}^n$ be a vector of statistical quantities. Then the corresponding coarse graining $\mathcal{M}$ of $\Ens$ is a manifold. The equation of state $S : \mathbb{R}^n \to \mathbb{R}$ returns the entropy as a function of the values of the statistical quantities.
-\end{conj}
-
-\begin{remark}
-	We need to prove that $\mathcal{M}$ inherits the topology from $\Ens$. Are we be able to recover the topological isolation of phase transitions? The quantities will typically be energy plus other extensive quantities (i.e. volume, number of particles, ...).
-\end{remark}
-\end{mathSection}
-
-What we can already prove, however, is that the entropy is a strictly concave function of the state variables. Note that, in this setting, the convex combination between state variables does not give a statistical mixture, but rather it gives us the ensemble that maximizes entropy on the averaged constraint. Therefore, the concavity of the entropy on the coarse grained state space is not the same concavity of the entropy on the ensemble space.
+We can now show that the entropy is a strictly concave function of the state variables. Note that, in this setting, the convex combination between state variables does not give a statistical mixture, but rather it gives us the ensemble that maximizes entropy on the averaged constraint. Therefore, the concavity of the entropy on the coarse grained state space is not the same concavity of the entropy on the ensemble space.
 
 \begin{mathSection}
 \begin{prop}
-	Given a coarse graining $\mathcal{M}$ of $\Ens$, its equation of state is strictly concave. That is, $S(\lambda x + \bar{\lambda} y) \geq \lambda S(x) + \bar{\lambda} S(y)$ and the equality holds if and only if $x=y$.
+	Given a coarse graining $\mathcal{M}$ of $\Ens$, its equation of state is strictly concave. That is, $S(\lambda x + \bar{\lambda} y) \geq \lambda S(x) + \bar{\lambda} S(y)$ and the equality holds if and only if $x=y$ or $\lambda \in \{0,1\}$.
 \end{prop}
 
 \begin{proof}
@@ -4091,7 +4081,7 @@ What we can already prove, however, is that the entropy is a strictly concave fu
 	\end{equation}
 	which shows that the equation of state is concave.
 	
-	To show that the equation of state is strictly concave, suppose that $x=y$. Then on one side $S(\lambda x + \bar{\lambda} y) = S(x)$ and on the other side $\lambda S(x) + \bar{\lambda} S(y) = S(x)$. Therefore $S(\lambda x + \bar{\lambda} y) = \lambda S(x) + \bar{\lambda} S(y)$, which means the inequality holds with the equal. Conversely, suppose that $x\neq y$. Then $\psi(x) \neq \psi(y)$. By the strict concavity of the entropy, we have
+	If $\lambda \in \{0,1\}$, the equality is immediate. If $\lambda \in (0,1)$, suppose that $x=y$. Then on one side $S(\lambda x + \bar{\lambda} y) = S(x)$ and on the other side $\lambda S(x) + \bar{\lambda} S(y) = S(x)$. Therefore $S(\lambda x + \bar{\lambda} y) = \lambda S(x) + \bar{\lambda} S(y)$, which means the inequality holds with equality. Conversely, suppose that $x\neq y$. Then $\psi(x) \neq \psi(y)$. By the strict concavity of the entropy, we have
 	\begin{equation}
 		\begin{aligned}
 			S(\lambda x + \bar{\lambda} y) &= S(\psi(\lambda x + \bar{\lambda} y)) \\
@@ -4104,20 +4094,20 @@ What we can already prove, however, is that the entropy is a strictly concave fu
 \end{proof}
 
 \begin{remark}
-	In the case of thermodynamics, where the statistical property is a vector of statistical values, the equation of state will be concave in all arguments and in all combinations of arguments.
+	In the case of thermodynamics, where the statistical property is a vector of state variables, the equation of state will be concave in all arguments and in all combinations of arguments.
 \end{remark}
 \end{mathSection}
 
 
 \section{Orthogonal and separate subspaces}\label{pm-es-subspaceSection}
 
-In this section we recover the notion of subspaces from orthogonality and separateness. Since orthogonality as defined from the entropy coincides with the orthogonality of the inner product for classical and quantum ensemble spaces, orthogonal subspaces as defined here will coincide with those defined by the inner product.
+In this section we recover the notion of subspaces from orthogonality and separateness. Since orthogonality as defined from the entropy coincides with the orthogonality of the inner product for classical and quantum ensemble spaces, orthogonal subspaces as defined here will coincide with orthogonally closed subspaces defined by the inner product.
 
 \subsection{Irreflexive symmetric relations and topped $\cap$-structures}
 
-We first present a generic construction, which is sometimes called orthogonality space or orthomodular space, and it sometimes appears in the context of Galois connections. The general idea is that given any irreflexive and symmetric relation, we can define a closure that gives us an orthocomplemented lattice. Since orthogonality and separateness, as defined before, satisfy those properties, they will each give a notion of subspace.
+We first present a generic construction, which is sometimes called orthogonality space, and it sometimes appears in the context of Galois connections. The general idea is that given any irreflexive and symmetric relation, we can define a closure that gives us an orthocomplemented lattice. Since orthogonality and separateness, as defined before, satisfy those properties, they will each give a notion of subspace.
 
-To get an idea, we look at how orthogonality and orthogonal subspaces work in inner product spaces. Let $V$ be an inner product space. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all orthogonal to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were a subspace to begin with, then $U = (U^{\perp})^{\perp}$. Note that we can therefore define subspaces without having a notion of space, just by using the orthogonality relationship, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar to some constructions related to Galois connections.}
+To get an idea, we look at how orthogonality and orthogonal subspaces work in inner product spaces. Let $V$ be an inner product space. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all orthogonal to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were an orthogonally closed subspace to begin with, then $U = (U^{\perp})^{\perp}$. Note that we can therefore define subspaces without having a notion of space, just by using the orthogonality relationship, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar to some constructions related to Galois connections.}
 
 The construction works for any binary relationship that is symmetric and irreflexive. For example, given two distributions, the fact that they have disjoint support is a symmetric and irreflexive relationship: a distribution does not have disjoint support with respect to itself, and the order of comparison does not matter. We can then construct subspaces based on this relationship, and find sets of functions that are all defined within different regions. In our case, separateness, as defined by the mixing function, and orthogonality, as defined by the entropy, are symmetric and irreflexive.
 
@@ -4146,11 +4136,11 @@ We start with a generic set $X$ and a symmetric relation (i.e. if $aRb$ then $bR
 		
 		2. By expanding the definition of complement, we have $(U^{R})^{R}=\{ a \in X \, | \, \forall b \in U^{R}, aRb \} = \{ a \in X \, | \, \forall b \in \{ c \in X \, | \, \forall d \in U, cRd  \}, aRb \} = \{ a \in X \, | \, \forall b \in X \, s.t. (\forall d \in U, bRd), aRb \}$.
 		
-		Let $a \in U$ and let $b \in X$ such that $\forall d \in U, bRd$. Since $a \in U$ and $bRd$ for all $b \in U$, we have $bRa$ in particular. Since $R$ is symmetric, $aRb$. Given that $b$ was arbitrary, we conclude that $\forall b \in X \, s.t. (\forall d \in U, bRd), aRb$. Therefore $a \in (U^{R})^{R}$ by definition of complement. Given that $a$ was arbitrary, $U \in (U^{R})^{R}$.
+		Let $a \in U$ and let $b \in X$ such that $\forall d \in U, bRd$. Since $a \in U$ and $bRd$ for all $d \in U$, we have $bRa$ in particular. Since $R$ is symmetric, $aRb$. Given that $b$ was arbitrary, we conclude that $\forall b \in X \, s.t. (\forall d \in U, bRd), aRb$. Therefore $a \in (U^{R})^{R}$ by definition of complement. Given that $a$ was arbitrary, $U \subseteq (U^{R})^{R}$.
 		
 		3. We again expand the definition and have $((U^{R})^{R})^{R} = \{ a \in X \, | \, \forall b \in (U^{R})^{R}, aRb \}$.
 		
-		Let $x \in ((U^{R})^{R})^{R}$. Then $\forall b \in (U^{R})^{R}, xRb$ by definition of the complement. Since by 1. $U \subset (U^{R})^{R}$, we can restrict the previous expression to only the elements of $U$, and therefore $\forall b \in U, xRb$. But this means that $x \in U^{R}$ by definition of the complement. Since $x$ was arbitrary, $((U^{R})^{R})^{R} \subseteq U^{R}$. But by 1., we also have $U^{R} \subseteq ((U^{R})^{R})^{R}$ since $U^{R}$ is just a set onto which we can apply the complement twice . By two-way containment, we have $U^{R} = ((U^{R})^{R})^{R}$.
+		Let $x \in ((U^{R})^{R})^{R}$. Then $\forall b \in (U^{R})^{R}, xRb$ by definition of the complement. Since by 2. $U \subseteq (U^{R})^{R}$, we can restrict the previous expression to only the elements of $U$, and therefore $\forall b \in U, xRb$. But this means that $x \in U^{R}$ by definition of the complement. Since $x$ was arbitrary, $((U^{R})^{R})^{R} \subseteq U^{R}$. But by 2., we also have $U^{R} \subseteq ((U^{R})^{R})^{R}$ since $U^{R}$ is just a set onto which we can apply the complement twice. By two-way containment, we have $U^{R} = ((U^{R})^{R})^{R}$.
 		
 		4. Let $U, V \subseteq X$ such that $U^{R} = (V^{R})^{R}$. Applying the complement on each side, $(U^{R})^{R} = ((V^{R})^{R})^{R}$. By the previous property $((V^{R})^{R})^{R} = V^{R}$ and therefore $(U^{R})^{R} = V^{R}$. Switching $U$ and $V$ proves the other direction.
 		
@@ -4170,7 +4160,7 @@ We start with a generic set $X$ and a symmetric relation (i.e. if $aRb$ then $bR
 	\end{proof}
 \end{mathSection}
 
-The next two properties depend on both the symmetry and the irreflexivity.
+The next two properties also use irreflexivity.
 
 \begin{mathSection}
 	\begin{prop}\label{pm-es-symirreflproperties}
@@ -4205,7 +4195,7 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 		The set $\mathfrak{L}$ is a collection of subsets of $X$. Let $\{U_i\}_{i \in I} \subseteq \mathfrak{L}$ be a non-empty family. Then, using the definition of subspace, and the third and fifth properties of \ref{pm-es-rComplProps}, we have
 		\begin{align*}
 			\bigcap_{i \in I} U_i &= \bigcap_{i \in I} (U_i^{R})^{R} = (\bigcup_{i \in I} U_i^{R})^{R} \\
-			&= (((\bigcup_{i \in I} (U_i^{R})^{R})^{R})^{R} = ((\bigcap_{i \in I} (U_i^{R})^{R})^{R})^{R} \\
+			&= (((\bigcup_{i \in I} U_i^{R})^{R})^{R})^{R} = ((\bigcap_{i \in I} (U_i^{R})^{R})^{R})^{R} \\
 			&= ((\bigcap_{i \in I} U_i)^{R})^{R}.
 		\end{align*}
 		Therefore $\bigcap_{i \in I} U_i \in \mathfrak{L}$. This means $\mathfrak{L}$ is an $\bigcap$-structure. Using the second property of \ref{pm-es-symirreflproperties}, $X = \emptyset^{R} = (X^{R})^{R}$. Therefore $\mathfrak{L}$ is a topped $\bigcap$-structure. This also means that it is a complete lattice.
@@ -4252,7 +4242,7 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 		
 		2. Using the first property of \ref{pm-es-rComplProps} we have $U \subseteq V$ implies $V^{R} \subseteq U^{R}$ which in turn implies $(U^{R})^{R} \subseteq (V^{R})^{R}$. Therefore $\langle U \rangle_R \subseteq \langle V \rangle_R$.
 		
-		3. Using the fifth property of \ref{pm-es-rComplProps} we have $\langle \langle U \rangle_R \rangle_R = (((U^{R})^{R})^{R})^{R} = (U^{R})^{R} = \langle U \rangle_R$.
+		3. Using the third property of \ref{pm-es-rComplProps} we have $\langle \langle U \rangle_R \rangle_R = (((U^{R})^{R})^{R})^{R} = (U^{R})^{R} = \langle U \rangle_R$.
 	\end{proof}
 	
 	\begin{prop}
@@ -4264,36 +4254,36 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 	\end{prop}
 	
 	\begin{proof}
-		1. Let $U \subseteq X$ and $V \in \mathfrak{L}$ such that $U \subseteq V$ and $V \subseteq \langle U \rangle_R$. Since $U \subseteq V$, using the second property of \ref{pm-es-subspaceClosure}, $\langle U \rangle_R \subseteq \langle V \rangle_R = V$. Since $V \subseteq \langle U \rangle_R$ and  $\langle U \rangle_R \subseteq  V$, $\langle U \rangle_R = V$. This means that no $R$-subspace that contains $U$ is smaller than $\langle U \rangle_R$.
+		1. Let $U \subseteq X$ and $V \in \mathfrak{L}$ such that $U \subseteq V$. Since $U \subseteq V$, using the second property of \ref{pm-es-subspaceClosure}, $\langle U \rangle_R \subseteq \langle V \rangle_R = V$. This means that no $R$-subspace that contains $U$ is smaller than $\langle U \rangle_R$.
 		
-		2. Since $U, V \in \mathfrak{L}$, $U = (U^{R})^{R} = V^{R}$ which, by the fourth property of \ref{pm-es-rComplProps}, implies $U^{R} = (V^{R})^{R} = V$. Switching $U$ and $V$ proves the other direction.
+		2. If $U= V^{R}$, $U = (U^{R})^{R} = V^{R}$ which, by the fourth property of \ref{pm-es-rComplProps}, implies $U^{R} = (V^{R})^{R} = V$. Switching $U$ and $V$ proves the other direction.
 	\end{proof}
 \end{mathSection}
 
-We now show that if we start with the mere notion of orthogonality defined from an inner product vector space, we recover the notion of orthogonal components and subspaces. That is, the full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
+We now show that if we start with the mere notion of orthogonality defined from an inner product vector space, we recover the notion of orthogonal components and subspaces. That is, the full structure of orthogonally closed subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
 
 \begin{mathSection}
 	\begin{prop}
-		Let $X$ be an inner product space and $R = \{(a,b) \,|\, \langle a , b\rangle = 0\}$. Then
+		Let $V$ be an inner product space, $X = V \setminus \{0\}$ and $R = \{(a,b) \,|\, \langle a , b\rangle = 0\}$ with $a,b \in X$. Then
 		\begin{enumerate}
 			\item $R$ is an irreflexive and symmetric relation
-			\item $U^{R} = U^{\perp}$
-			\item $\langle U \rangle_R = \cl_X (\vspan(U))$
+			\item $U^{R} = U^{\perp_V} \setminus \{0\}$
+			\item $\langle U \rangle_R = (U^{\perp_V})^{\perp_V} \setminus \{0\}$.
 		\end{enumerate}
 	\end{prop}
 	
 	\begin{proof}
-		1. Given that the inner product is symmetric, so will be $R$. Given that no vector is orthogonal to itself, $R$ is irreflexive.
+		1. Given that the inner product is conjugate symmetric, so will be $R$. Given that no nonzero vector is orthogonal to itself, $R$ is irreflexive.
 		
-		2. The orthogonal complement is defined as $U^\perp = \{ a \in X \, | \, \forall b \in U, \langle a , b\rangle = 0 \}$. Since $aRb \iff \langle a , b\rangle = 0$, $U^{R} = U^{\perp}$.
+		2. The orthogonal complement is defined as $U^\perp = \{ a \in V \, | \, \forall b \in U, \langle a , b\rangle = 0 \}$. Since $aRb \iff \langle a , b\rangle = 0$, $U^{R} = U^{\perp_V} \setminus \{0\}$.
 		
-		3. We have $\langle U \rangle_R = (U^{\perp})^\perp$ which returns the smallest closed subspace that contains $U$.
+		3. We have $\langle U \rangle_R = (U^{\perp_V})^{\perp_V} \setminus \{0\}$ which returns the smallest orthogonally closed subspace that contains $U$.
 	\end{proof}
 \end{mathSection}
 
 \subsection{Separate and orthogonal subspaces}
 
-Since orthogonality and separateness are irreflexive symmetric operations, they will both give a lattice of subspaces. Here we present a series of conjectures about these subspaces that we have yet to prove.
+Since orthogonality and separateness are irreflexive symmetric relations, they will both give a lattice of subspaces. Here we present results and conjectures about these subspaces that we have yet to prove.
 
 \begin{mathSection}
 \begin{defn}
@@ -4301,15 +4291,19 @@ Since orthogonality and separateness are irreflexive symmetric operations, they 
 \end{defn}
 \end{mathSection}
 
-In the classical case, since both orthogonality and separateness coincide with disjoint support, a subspace consists of all the probability distribution whose support is within a given set $U$.\footnote{Clearly, not all closed sets will give a different subspace. For example, over $\mathbb{R}$, $[0,1]$ and $[0,1]\cup[2,2]$ will correspond to the same subspace. Characterizing that equivalence class is still an open question.}
+In the classical case, since both orthogonality and separateness coincide with disjoint support, a subspace consists of all the probability distribution whose support is within a given set $U$. Two sets $U$ and $V$ will correspond to the same subspace if they differ from a measure zero subset (i.e. $\mu(U\Delta V)=0$).
 
 \begin{mathSection}
 \begin{prop}
-	Let $\Ens$ be a discrete or continuous classical ensemble space over a sample space $X$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
+	Let $\Ens$ be a discrete or continuous classical ensemble space over a sample space $X$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a measurable $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
 \end{prop}
 
 \begin{proof}
-	Recall that in a classical ensemble space, $p \ortho \lambda$ if and only if $\lambda(\support(p)) = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigcup_{p \in A} \support(p)$ be the union of all supports. Then $\lambda \in A^{\ortho}$ (i.e. is orthogonal to all elements of $A$) if and only if $\lambda(U) = 0$. Conversely, $p \in A$ only if it is orthogonal to all elements, which means if and only if $p(U) = 1$. Therefore if $A$ is a subspace, there is a $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
+	Let $A \subseteq \Ens$ be an $\ortho$-subspace. Since $L^1(X,\mu)$ is separable, choose a countable $L^1$-dense subset $D \subseteq A$ and let
+	\begin{equation}
+	U = \bigcup_{p \in D} \left\{x \in X \, \middle| \, \frac{dp}{d\mu}(x)>0\right\},
+	\end{equation}
+	where $\mu$ is the counting measure in the discrete case and the Liouville measure in the continuous case. Every $p \in D$ satisfies $p(U)=1$, so by $L^1$-continuity the same holds for every $p \in A$. Thus $\lambda \in A^{\ortho}$ if and only if $\lambda(U)=0$: the forward implication follows by countable additivity, and the reverse follows because every $p \in A$ is concentrated on $U$. Taking the orthogonal complement again gives $A = (A^{\ortho})^{\ortho} = \{p \in \Ens \, | \, p(U)=1\}$.
 	
 	Conversely, let $A = \{ p \in \Ens \, | \, p(U) = 1\}$ for some $U \subseteq X$. Then $A^{\ortho} = \{ p \in \Ens \, | \, p(U) = 0\}$. The orthogonal complement of the orthogonal complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
 \end{proof}
@@ -4319,13 +4313,13 @@ In the quantum case, the orthogonality coincides with orthogonality in the Hilbe
 
 \begin{mathSection}
 \begin{prop}
-	Let $\Ens$ be a quantum ensemble space over a Hilbert space $\mathcal{H}$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a subspace $U \subseteq \mathcal{H}$ with a corresponding projector $\mathbf{1}_{U}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$. 
+	Let $\Ens$ be a quantum ensemble space over a Hilbert space $\mathcal{H}$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a closed subspace $U \subseteq \mathcal{H}$ with a corresponding projector $\mathbf{1}_{U}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$. 
 \end{prop}
 
 \begin{proof}
-	Recall that to each subspace $U \subseteq \mathcal{H}$ is associated a projector $\mathbf{1}_U$ whose eigenvectors with eigenvalue $1$ span $U$. Given a density operator $\rho \in \Ens$, its support is the subspace $U=\support(\rho)$ spanned by the non-zero eigenvectors. Therefore $\tr[\mathbf{1}_{U} \, \rho] = 1$ and $\tr[\mathbf{1}_{U^{\ortho}} \, \rho] = 0$.
+	Recall that to each closed subspace $U \subseteq \mathcal{H}$ is associated a projector $\mathbf{1}_U$ whose eigenvectors with eigenvalue $1$ span $U$. Given a density operator $\rho \in \Ens$, its support is the subspace $U=\support(\rho)$, the closed linear span of its eigenvectors with non-zero eigenvalues. Therefore $\tr[\mathbf{1}_{U} \, \rho] = 1$ and $\tr[\mathbf{1}_{U^{\ortho}} \, \rho] = 0$.
 
-	Also recall that, for a quantum ensemble space, $\rho \ortho \sigma$ if and only if $\tr[ \mathbf{1}_{\support(\rho)} \, \sigma] = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigvee_{\rho \in A} \support(\rho)$ be the subspace $U$ spanned by all supports. Then $\sigma \in A^{\ortho}$  (i.e. is orthogonal to all elements of $A$) if and only if $\tr[\mathbf{1}_{U} \, \sigma] = 0$. Conversely, $\rho \in A$ if and only if it is orthogonal to all elements of $A^{\ortho}$, which is the case if and only if $\tr[\mathbf{1}_{U} \, \rho] = 1$. Therefore if $A$ is a subspace, there is a subspace $U \subseteq \mathcal{H}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$.
+	Also recall that, for a quantum ensemble space, $\rho \ortho \sigma$ if and only if $\tr[ \mathbf{1}_{\support(\rho)} \, \sigma] = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigvee_{\rho \in A} \support(\rho)$ be the closed linear span of all supports. Then $\sigma \in A^{\ortho}$  (i.e. is orthogonal to all elements of $A$) if and only if $\tr[\mathbf{1}_{U} \, \sigma] = 0$. Conversely, $\rho \in A$ if and only if it is orthogonal to all elements of $A^{\ortho}$, which is the case if and only if $\tr[\mathbf{1}_{U} \, \rho] = 1$. Therefore if $A$ is a subspace, there is a subspace $U \subseteq \mathcal{H}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$.
 	
 	Now let $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$ for some subspace $U \subseteq \mathcal{H}$. The orthogonal complement $A^{\ortho}$ will be the set of all density operators $\sigma \in \Ens$ such that $\tr[\mathbf{1}_{U} \, \sigma] = 0$. The complement of the complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
 \end{proof}
@@ -4333,7 +4327,7 @@ In the quantum case, the orthogonality coincides with orthogonality in the Hilbe
 
 Note that, in general, the two notions of subspaces, and therefore their lattices, will be different. Note that a feature of classical ensemble spaces is exactly that orthogonality and separateness coincide, which also means the two lattices will coincide.
 
-Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthomodular, as one requires, for example, in quantum logic. The cut triangle \ref{pm-es-cutTriangle} is a counterexample. The only orthogonality relationships are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are the bottom $\bot = \emptyset$, $2= \{\ens[2]\}$, $3= \{\ens[3]\}$, $A2= \{p \ens[2] + \bar{p}\ens[a]\}$, $B3= \{p \ens[3] + \bar{p}\ens[b]\}$ and the top $\top = \Ens$. As we can is see in Fig. \ref{pm-es-fig-cutTriangleOrthoSubspaces}, the subspaces form an $M_6$ lattice, which is not orthomodular. In fact, $3 \subseteq B3$ but $3 \vee (3^{\ortho} \wedge B3) = 3 \vee (A2 \wedge B3) = 3 \vee \bot = 3 \neq B3$. The lack of orthomodularity is due to the multiple complements where one is a subset of the other.
+Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthomodular, as one requires, for example, in quantum logic. The cut triangle \ref{pm-es-cutTriangle} is a counterexample. The only orthogonality relationships are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are the bottom $\bot = \emptyset$, $2= \{\ens[2]\}$, $3= \{\ens[3]\}$, $A2= \{p \ens[2] + \bar{p}\ens[a]\}$, $B3= \{p \ens[3] + \bar{p}\ens[b]\}$ and the top $\top = \Ens$. As we can see in Fig. \ref{pm-es-fig-cutTriangleOrthoSubspaces}, the subspaces form an $O_6$ lattice, which is not orthomodular. In fact, $3 \subseteq B3$ but $3 \vee (3^{\ortho} \wedge B3) = 3 \vee (A2 \wedge B3) = 3 \vee \bot = 3 \neq B3$. The lack of orthomodularity is due to the multiple complements where one is a subset of the other.
 
 \begin{figure}[H]
 	\centering
@@ -4373,9 +4367,9 @@ Another question is whether the lattice of $\ortho$-subspaces has to be necessar
 
 This leads to the following:
 \begin{conj}
-	The lattice of $\ortho$-subspaces is orthomodular if and only if the ensemble space is orthogonally decomposable (i.e. every decomposable ensemble is orthogonally decomposable).
+	The lattice of $\ortho$-subspaces is orthomodular if the ensemble space is orthogonally decomposable (i.e. every decomposable ensemble is orthogonally decomposable).
 \end{conj}
-If this is true, the requirement of orthomodularity is an additional requirement that can be understood physically.
+If this is true, the requirement of orthomodularity is an additional requirement that can be understood physically. It would also be nice to find a necessary and sufficient characterization of the lattice for orthogonally decomposable spaces.
 
 Note, however, that the lattice of $\separate$-subspaces  of the cut triangle is orthomodular, though not commutative. This shows how the two lattices can be very different.
 
