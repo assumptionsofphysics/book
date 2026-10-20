@@ -4291,6 +4291,247 @@ Since orthogonality and separateness are irreflexive symmetric relations, they w
 \end{defn}
 \end{mathSection}
 
+We can further characterize the lattice of separate subspaces as a Boolean algebra. Since the lattice is already orthocomplemented, we just need to show that if two subspaces are disjoint, then one is a subset of the complement of the other. Each separate subspace contains all the components of its ensembles, so any component shared by ensembles from two subspaces must itself belong to both. Disjoint subspaces are therefore separate, which gives the lattice its Boolean structure.
+
+\begin{mathSection}
+	\begin{prop}
+		Let $\Ens$ be an ensemble space. The lattice of $\separate$-subspaces is a complete Boolean algebra.
+	\end{prop}
+	
+	\begin{proof}
+		The lattice is already complete and orthocomplemented. It remains to verify the Boolean criterion: for any two $\separate$-subspaces $A,B$,
+		\begin{equation}
+			A \cap B = \emptyset \quad \Longrightarrow \quad A \subseteq B^{\separate}.
+		\end{equation}
+		
+		First, every $\separate$-subspace contains all components of its elements. Let $\ens[a] \in A$ and let $\ens[c]$ be a component of $\ens[a]$. Every ensemble in $A^{\separate}$ is separate from $\ens[a]$ and therefore from $\ens[c]$, since any common component with $\ens[c]$ would also be a common component with $\ens[a]$. Thus $\ens[c] \in (A^{\separate})^{\separate}=A$.
+		
+		Now let $A,B$ be two $\separate$-subspaces with $A \cap B = \emptyset$. If $\ens[a] \in A$ and $\ens[b] \in B$ had a common component $\ens[c]$, the previous argument would give $\ens[c] \in A \cap B$, a contradiction. Therefore $A \separate B$, which means $A \subseteq B^{\separate}$. The criterion is satisfied, so the lattice is Boolean.
+	\end{proof}
+\end{mathSection}
+
+The fraction capacity need not be additive on the lattice of subspaces. We can, however, require that the capacities of a subspace and its complement sum to one, as the probabilities of an event and its complement do in classical probability. This requirement already constrains the structure of the subspaces and makes the fraction capacity preserve statistical mixing.
+
+\begin{mathSection}
+	\begin{prop}\label{pm-es-complementaryFractionCapacity}
+		Let $\Ens$ be an ensemble space and let $R$ be either $\separate$ or $\ortho$. Suppose that, for every $\ens \in \Ens$ and every $R$-subspace $A$,
+		\begin{equation}
+			\fcap_{\ens}(A) + \fcap_{\ens}(A^R) = 1.
+		\end{equation}
+		Then:
+		\begin{enumerate}
+			\item for every $R$-subspace $A$, the fraction capacity is affine in the ensemble:
+			\begin{equation}
+				\fcap_{p\ens[a]+\bar{p}\ens[b]}(A)
+				= p\fcap_{\ens[a]}(A)+\bar{p}\fcap_{\ens[b]}(A)
+			\end{equation}
+			for all $\ens[a],\ens[b] \in \Ens$ and $p \in [0,1]$;
+			\item if $R=\separate$, then $\Ens$ is monodecomposable;
+			\item if $R=\ortho$, then the lattice of $\ortho$-subspaces is a complete Boolean subalgebra of the lattice of $\separate$-subspaces, with the same complements.
+		\end{enumerate}
+	\end{prop}
+	
+	\begin{proof}
+		1. We first show that the fraction capacity is concave in the ensemble for any subset $A$. The result is immediate if $A=\emptyset$. Otherwise, consider decompositions
+		\begin{equation}
+			\ens[a] = \lambda\ens[a]_1+\bar{\lambda}\ens[a]_2,
+			\qquad
+			\ens[b] = \mu\ens[b]_1+\bar{\mu}\ens[b]_2,
+		\end{equation}
+		with $\ens[a]_1,\ens[b]_1 \in \hull(A)$. Mixing gives
+		\begin{equation}
+			p\ens[a]+\bar{p}\ens[b]
+			= p\lambda\ens[a]_1+\bar{p}\mu\ens[b]_1
+			+p\bar{\lambda}\ens[a]_2+\bar{p}\bar{\mu}\ens[b]_2.
+		\end{equation}
+		The first two terms have total coefficient $p\lambda+\bar{p}\mu$ and, when this is nonzero, their normalized mixture belongs to $\hull(A)$. Therefore
+		\begin{equation}
+			\fcap_{p\ens[a]+\bar{p}\ens[b]}(A)
+			\geq p\lambda+\bar{p}\mu.
+		\end{equation}
+		Taking the suprema over the two decompositions gives
+		\begin{equation}
+			\fcap_{p\ens[a]+\bar{p}\ens[b]}(A)
+			\geq p\fcap_{\ens[a]}(A)+\bar{p}\fcap_{\ens[b]}(A).
+		\end{equation}
+		
+		Now let $A$ be an $R$-subspace. Applying the same inequality to $A^R$ and using the hypothesis gives
+		\begin{equation}
+			\begin{aligned}
+				\fcap_{p\ens[a]+\bar{p}\ens[b]}(A)
+				&= 1-\fcap_{p\ens[a]+\bar{p}\ens[b]}(A^R) \\
+				&\leq 1-p\fcap_{\ens[a]}(A^R)
+				-\bar{p}\fcap_{\ens[b]}(A^R) \\
+				&= p\fcap_{\ens[a]}(A)+\bar{p}\fcap_{\ens[b]}(A).
+			\end{aligned}
+		\end{equation}
+		The two inequalities establish affinity.
+		
+		2. Suppose $R=\separate$. Recall that every $\separate$-subspace contains all components of its elements. If $\ens \in A^{\separate}$, then $\fcap_{\ens}(A^{\separate})=1$, so the hypothesis gives $\fcap_{\ens}(A)=0$. Conversely, if $\ens$ has a common component with an element of $A$, that component belongs to $A$ and has a positive fraction in $\ens$. Thus
+		\begin{equation}
+			\fcap_{\ens}(A)=0
+			\quad\Longleftrightarrow\quad
+			\ens \in A^{\separate}.
+		\end{equation}
+		Applying this also to $A^{\separate}$ gives
+		\begin{equation}
+			\fcap_{\ens}(A)=1
+			\quad\Longleftrightarrow\quad
+			\ens \in A.
+		\end{equation}
+		By affinity, a mixture of two ensembles in $A$ also has fraction capacity one in $A$, and therefore belongs to $A$. Every $\separate$-subspace is consequently convex. In particular, $\{\ens\}^{\separate}$ is convex for every $\ens$, which means mixtures preserve separateness. As previously shown, this is equivalent to monodecomposability.
+		
+		3. Suppose $R=\ortho$. Since mixtures preserve orthogonality, every $\ortho$-subspace is convex and contains all components of its elements.
+		
+		We first show that $\fcap_{\ens}(A)=1$ implies $\ens \in A$. Since $A$ is convex, there are decompositions
+		\begin{equation}
+			\ens = \lambda\ens[a]+\bar{\lambda}\ens[c],
+			\qquad \ens[a] \in A,
+		\end{equation}
+		with $\lambda$ arbitrarily close to one. Let $\ens[b] \in A^{\ortho}$. We have
+		\begin{equation}
+			\frac{1}{2}\ens+\frac{1}{2}\ens[b]
+			= \lambda\left(\frac{1}{2}\ens[a]+\frac{1}{2}\ens[b]\right)
+			+\bar{\lambda}\left(\frac{1}{2}\ens[c]+\frac{1}{2}\ens[b]\right).
+		\end{equation}
+		Concavity at this mixture and the upper variability bound for $S(\ens)$ give
+		\begin{equation}
+			\begin{aligned}
+				MS(\ens,\ens[b])
+				&\geq \lambda MS(\ens[a],\ens[b])
+				+\bar{\lambda}MS(\ens[c],\ens[b])
+				-\frac{1}{2}I(\lambda,\bar{\lambda}) \\
+				&\geq \lambda-\frac{1}{2}I(\lambda,\bar{\lambda}),
+			\end{aligned}
+		\end{equation}
+		since $\ens[a] \ortho \ens[b]$ and mixing entropy is non-negative. Taking $\lambda \to 1$ gives $MS(\ens,\ens[b])=1$, so $\ens \ortho \ens[b]$. Since this holds for every $\ens[b] \in A^{\ortho}$, we have $\ens \in A$. The converse is immediate, hence
+		\begin{equation}
+			\fcap_{\ens}(A)=1
+			\quad\Longleftrightarrow\quad
+			\ens \in A.
+		\end{equation}
+		
+		Since $A$ is convex and contains all components of its elements, $\ens$ has positive fraction capacity in $A$ if and only if it shares a component with an element of $A$. Therefore
+		\begin{equation}
+			\begin{aligned}
+				A^{\separate}
+				&= \{\ens \in \Ens \mid \fcap_{\ens}(A)=0\} \\
+				&= \{\ens \in \Ens \mid \fcap_{\ens}(A^{\ortho})=1\}
+				= A^{\ortho}.
+			\end{aligned}
+		\end{equation}
+		Applying this also to $A^{\ortho}$ gives
+		\begin{equation}
+			(A^{\separate})^{\separate}
+			= (A^{\ortho})^{\separate}
+			= (A^{\ortho})^{\ortho}
+			= A.
+		\end{equation}
+		Thus every $\ortho$-subspace is a $\separate$-subspace and the complements agree. Arbitrary meets are intersections in both lattices, and arbitrary joins agree by de Morgan's laws. The orthogonal lattice is therefore a complete Boolean subalgebra of the separate lattice.
+	\end{proof}
+\end{mathSection}
+
+As orthogonal subspaces effectively define mutually exclusive events, we can investigate what happens when the fraction capacity becomes a probability measure on the lattice of orthogonal subspaces. Interestingly, this requirement forces the lattice itself to be a complete Boolean algebra. If these probabilities also distinguish ensembles, they give a representation in terms of classical probability theory that preserves statistical mixing. 
+
+\begin{mathSection}
+\begin{prop}\label{pm-es-probabilityRepresentation}
+	Let $\Ens$ be an ensemble space and let $\mathfrak{L}^{\ortho}$ be its lattice of $\ortho$-subspaces. For each $\ens \in \Ens$, define
+	\begin{equation}
+		\mu_{\ens}(A) = \fcap_{\ens}(A),
+		\qquad A \in \mathfrak{L}^{\ortho}.
+	\end{equation}
+	Suppose these functions are $\sigma$-additive over mutually orthogonal subspaces:
+	\begin{equation}
+		\mu_{\ens}\left(\bigvee_{i=1}^{\infty} A_i\right)
+		= \sum_{i=1}^{\infty}\mu_{\ens}(A_i)
+	\end{equation}
+	for every pairwise orthogonal sequence $\{A_i\} \subseteq \mathfrak{L}^{\ortho}$. Suppose also that they uniquely identify ensembles, that is $\mu_{\ens[a]}=\mu_{\ens[b]}$ implies $\ens[a]=\ens[b]$.
+	
+	Then $\mathfrak{L}^{\ortho}$ is a complete Boolean algebra. Moreover, there exist a measurable space $(X,\Sigma)$ and a surjective map $q:\Sigma \to \mathfrak{L}^{\ortho}$ preserving complements and countable joins such that
+	\begin{equation}
+		P_{\ens}(U) = \mu_{\ens}(q(U)),
+		\qquad U \in \Sigma,
+	\end{equation}
+	is a countably additive probability measure for every $\ens \in \Ens$. The map $\ens \mapsto P_{\ens}$ is injective and affine, with a convex image. Finally, $\ens$ is extreme if and only if
+	\begin{equation}
+		P_{\ens}(U) \in \{0,1\}
+		\qquad \text{for every } U \in \Sigma.
+	\end{equation}
+\end{prop}
+
+\begin{proof}
+	Since $A$ and $A^{\ortho}$ are orthogonal and their join is $\Ens$, additivity gives
+	\begin{equation}
+		\fcap_{\ens}(A)+\fcap_{\ens}(A^{\ortho})
+		= \mu_{\ens}(\Ens) = 1.
+	\end{equation}
+	By \ref{pm-es-complementaryFractionCapacity}, $\mathfrak{L}^{\ortho}$ is a complete Boolean algebra and each $\mu_{\ens}(A)$ is affine in $\ens$. Disjoint subspaces are therefore orthogonal, so the assumed $\sigma$-additivity applies to every disjoint sequence.
+	
+	By the Loomis--Sikorski representation theorem, there exist a measurable space $(X,\Sigma)$ and a surjective map $q:\Sigma \to \mathfrak{L}^{\ortho}$ with $q(X)=\Ens$ such that
+	\begin{equation}
+		\begin{aligned}
+			q(X \setminus U) &= q(U)^{\ortho}, \\
+			q\left(\bigcup_{i=1}^{\infty} U_i\right)
+			&= \bigvee_{i=1}^{\infty} q(U_i).
+		\end{aligned}
+	\end{equation}
+	Define $P_{\ens}(U)=\mu_{\ens}(q(U))$. Non-negativity follows from the fraction capacity, and
+	\begin{equation}
+		P_{\ens}(X)=\mu_{\ens}(\Ens)=1.
+	\end{equation}
+	If $\{U_i\} \subseteq \Sigma$ is pairwise disjoint, then the subspaces $q(U_i)$ are pairwise disjoint and therefore orthogonal. Hence
+	\begin{equation}
+		\begin{aligned}
+			P_{\ens}\left(\bigcup_{i=1}^{\infty} U_i\right)
+			&= \mu_{\ens}\left(\bigvee_{i=1}^{\infty} q(U_i)\right) = \sum_{i=1}^{\infty}\mu_{\ens}(q(U_i))
+			= \sum_{i=1}^{\infty}P_{\ens}(U_i).
+		\end{aligned}
+	\end{equation}
+	Thus $P_{\ens}$ is a countably additive probability measure on $(X,\Sigma)$.
+	
+	Affinity of the fraction capacity gives
+	\begin{equation}
+		\begin{aligned}
+			P_{p\ens[a]+\bar{p}\ens[b]}(U)
+			&= \mu_{p\ens[a]+\bar{p}\ens[b]}(q(U)) = p\mu_{\ens[a]}(q(U))+\bar{p}\mu_{\ens[b]}(q(U)) = pP_{\ens[a]}(U)+\bar{p}P_{\ens[b]}(U).
+		\end{aligned}
+	\end{equation}
+	The map $\ens \mapsto P_{\ens}$ is therefore affine and its image is convex. Since $q$ is surjective, equality of $P_{\ens[a]}$ and $P_{\ens[b]}$ implies equality of $\mu_{\ens[a]}$ and $\mu_{\ens[b]}$. The identification assumption then gives $\ens[a]=\ens[b]$, so the map is injective.
+	
+	Now suppose $\ens$ is extreme. Its only component is itself. Since every $\ortho$-subspace is convex, we have
+	\begin{equation}
+		P_{\ens}(U)
+		= \begin{cases}
+			1 & \ens \in q(U), \\
+			0 & \ens \notin q(U).
+		\end{cases}
+	\end{equation}
+	Thus $P_{\ens}$ takes only the values zero and one.
+	
+	Conversely, suppose $P_{\ens}$ takes only the values zero and one, and let
+	\begin{equation}
+		\ens = p\ens[a]+\bar{p}\ens[b],
+		\qquad p \in (0,1).
+	\end{equation}
+	For every $U \in \Sigma$, affinity gives
+	\begin{equation}
+		P_{\ens}(U)
+		= pP_{\ens[a]}(U)+\bar{p}P_{\ens[b]}(U).
+	\end{equation}
+	Since both terms on the right have values in $[0,1]$, their weighted average can equal zero or one only if
+	\begin{equation}
+		P_{\ens[a]}(U)
+		= P_{\ens[b]}(U)
+		= P_{\ens}(U).
+	\end{equation}
+	This holds for every measurable set, so injectivity gives $\ens[a]=\ens[b]=\ens$. Therefore $\ens$ is extreme.
+\end{proof}
+
+\begin{remark}
+	Under the assumptions of the proposition, the $\ortho$-lattice is Boolean, like the $\separate$-lattice, but it is not necessarily the same lattice. It is, however, a sublattice.
+\end{remark}
+\end{mathSection}
+
 In the classical case, since both orthogonality and separateness coincide with disjoint support, a subspace consists of all the probability distribution whose support is within a given set $U$. Two sets $U$ and $V$ will correspond to the same subspace if they differ from a measure zero subset (i.e. $\mu(U\Delta V)=0$).
 
 \begin{mathSection}
