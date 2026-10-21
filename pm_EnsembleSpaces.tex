@@ -2070,6 +2070,8 @@ In general, the closure of an affine set is not an affine set. This would be tru
 
 Having defined the affine hull, we can now define the notion of algebraic interior, exterior and boundary relative to a set and its affine hull. Intuitively, given a set $A \subseteq \Ens$, its algebraic interior includes all those points from which we can move in any direction within the set. Its algebraic exterior, instead, consists of all those points that have a finite region that separates them from $A$. Finally, the algebraic boundary consists of all the points that sit in the middle.
 
+TODO: change algebraic exterior point to external point
+
 \begin{mathSection}
 \begin{defn}
 	Let $A \subseteq \Ens$ be a subset of an ensemble space. An ensemble $\ens \in A$ is an \textbf{internal point relative to $A$} if for every $\ens[a] \in \ahull(A)$ there exists $\epsilon > 0$ such that the affine combination $r\ens[a] + \bar{r}\ens$ exists and belongs to $A$ for every $r \in (-\epsilon,\epsilon)$. The \textbf{relative algebraic interior} of $A$, noted $I_A$, is the set of all internal points relative to $A$.
@@ -3679,289 +3681,6 @@ In this section we show how the statistical quantities can be used to construct 
 \end{proof}
 \end{mathSection}
 
-
-\subsection{Finite-dimensional ensemble spaces}
-
-We now use the properties of the mixing entropy to show that every finite-dimensional affine subset is a bounded set.
-
-First, we establish a couple of generally useful facts valid for any finite-dimensional convex set $A$. Any internal point $\ens[a] \in A$ is also an internal point of a simplex that fits inside $A$ and it has the same dimension of $A$. Moreover, we can find an open ball around $\ens[a]$ that intersects $A$ fully within the simplex. That is, in the subspace topology of the affine hull of $A$, $\ens[a]$ is an interior point.
-
-\begin{mathSection}
-	\begin{prop}\label{pm-es-internalPointSimplex}
-		Let $A \subseteq \Ens$ be a finite-dimensional convex set and let $\ens[a]$ be an internal point relative to $A$. Then there exists a simplex $\Delta \subseteq A$ of the same affine dimension as $A$ such that $\ens[a]$ is internal relative to $\Delta$.
-	\end{prop}
-	
-	\begin{proof}
-		Let $n = \dim(A)$. If $n=0$, then $A = \{\ens[a]\}$ and the result holds with $\Delta=A$.
-		
-		Suppose $n>0$. Choose $\ens[b]_1, \dots, \ens[b]_n \in A$ such that $\{\ens[a], \ens[b]_1, \dots, \ens[b]_n\}$ is an affine basis of $\ahull(A)$. Since $\ens[a]$ is internal relative to $A$ and there are only finitely many $\ens[b]_i$, we can choose $\epsilon \in (0,1)$ small enough that all the affine combinations
-		\begin{equation}
-			\ens[e]_i = -n\epsilon\ens[b]_i + (1+n\epsilon)\ens[a]
-		\end{equation}
-		exist and belong to $A$. Define
-		\begin{equation}
-			\ens[d]_i = \epsilon\ens[b]_i + \bar{\epsilon}\ens[a],
-			\qquad
-			\ens[d]_0 = \frac{1}{n}\sum_{i=1}^n \ens[e]_i.
-		\end{equation}
-		These are convex combinations of elements of $A$, and therefore $\ens[d]_0, \dots, \ens[d]_n \in A$.
-		
-		We first show that $\ens[a]$ is the equal mixture of these ensembles. We have
-		\begin{equation}
-			\begin{aligned}
-				\ens[d]_0
-				&= \frac{1}{n}\sum_{i=1}^n
-				\left[-n\epsilon\ens[b]_i + (1+n\epsilon)\ens[a]\right] = -\epsilon\sum_{i=1}^n \ens[b]_i + (1+n\epsilon)\ens[a].
-			\end{aligned}
-		\end{equation}
-		Consequently,
-		\begin{equation}
-			\begin{aligned}
-				\frac{1}{n+1}\sum_{i=0}^n \ens[d]_i
-				&= \frac{1}{n+1}\ens[d]_0
-				+ \sum_{i=1}^n \frac{1}{n+1}\ens[d]_i = \frac{1}{n+1}
-				\left[-\epsilon\sum_{i=1}^n \ens[b]_i + (1+n\epsilon)\ens[a]\right]
-				+ \sum_{i=1}^n \frac{1}{n+1}
-				\left[\epsilon\ens[b]_i + \bar{\epsilon}\ens[a]\right] \\
-				&= \sum_{i=1}^n \frac{-\epsilon+\epsilon}{n+1}\ens[b]_i
-				+ \frac{1+n\epsilon+n\bar{\epsilon}}{n+1}\ens[a] = \frac{1+n\epsilon+n-n\epsilon}{n+1}\ens[a] = \ens[a].
-			\end{aligned}
-		\end{equation}
-		
-		Let $D = \{\ens[d]_0, \dots, \ens[d]_n\}$. The preceding calculation shows that $\ens[a] \in \hull(D)$. Rearranging the definition of $\ens[d]_i$ gives
-		\begin{equation}
-			\ens[b]_i = \frac{1}{\epsilon}\ens[d]_i
-			- \frac{\bar{\epsilon}}{\epsilon}\ens[a].
-		\end{equation}
-		Therefore $\ens[b]_i \in \ahull(D)$ for every $i$. Since $\{\ens[a], \ens[b]_1, \dots, \ens[b]_n\}$ is an affine basis of $\ahull(A)$ and $D \subseteq A$, we have $\ahull(D) = \ahull(A)$. These $n+1$ ensembles generate an affine set of dimension $n$, so they are affinely independent. Thus $\Delta = \hull(D)$ is a simplex of dimension $n$ contained in $A$, and $\ahull(\Delta) = \ahull(A)$. Lastly, since $\ens[a]$ is the equal mixture of all the generators, its affine coefficients are all strictly positive. Therefore $\ens[a]$ is internal relative to $\Delta$.
-	\end{proof}
-	
-	\begin{prop}\label{pm-es-simplexEntropicNeighborhood}
-		Let $\Delta \subseteq \Ens$ be a simplex and let $\ens[a]$ be an internal point relative to $\Delta$. Then there exists $r \in (0,1]$ such that $B_r(\ens[a])\cap\ahull(\Delta) \subseteq \Delta$. In particular, $\ens[a]$ is a topological interior point of $\Delta$ relative to $\ahull(\Delta)$.
-	\end{prop}
-	
-	\begin{proof}
-		If $\Delta = \{\ens[a]\}$, the result holds with $r=1$. Otherwise, since $B_\Delta$ is compact and $MS(\ens[a],\cdot)$ is continuous and strictly positive on it, let
-		\begin{equation}
-			r = \min_{\ens[b] \in B_\Delta} MS(\ens[a],\ens[b]) \in (0,1].
-		\end{equation}
-		
-		Let $\ens[e] \in \ahull(\Delta)\setminus\Delta$. Since $\Delta$ is convex and closed and $\ens[a]$ is internal relative to $\Delta$, the segment from $\ens[a]$ to $\ens[e]$ meets $B_\Delta$ at some $\ens[b]$. By \ref{pm-es-mixingEntropyMonotonic}, $MS(\ens[a],\ens[e]) \geq MS(\ens[a],\ens[b]) \geq r$.	Therefore $B_r(\ens[a])\cap\ahull(\Delta) \subseteq \Delta$. Since the entropic ball is open and contains $\ens[a]$, the final claim follows.
-	\end{proof}
-\end{mathSection}
-
-We can use the previous two propositions to show that, given a finite-dimensional affine subset $A$, every neighborhood of an internal point of $A$ can fit a simplex. Since the smaller simplex still contains an entropic ball, this gives us a bridge between mixing entropy and the topology.
-
-\begin{mathSection}
-	\begin{prop}\label{pm-es-finiteDimensionalEntropicNeighborhood}
-		Let $A \subseteq \Ens$ be a finite-dimensional affine subset and let $\ens[a]$ be an internal point relative to $A$. For every open neighborhood $U$ of $\ens[a]$, there exists $r \in (0,1]$ such that $B_r(\ens[a]) \cap A \subseteq U$.
-	\end{prop}
-	
-	\begin{proof}
-		By \ref{pm-es-internalPointSimplex}, choose a simplex $\Delta \subseteq A$ such that $\ahull(\Delta)=A$ and $\ens[a]$ is internal relative to $\Delta$. The map $(p,\ens[b]) \mapsto p\ens[a]+\bar{p}\ens[b]$ from $[0,1]\times\Delta$ to $\Ens$ is continuous. Its inverse image of $U$ is open and contains $\{1\}\times\Delta$. Since $\Delta$ is compact, the tube lemma gives $\lambda \in [0,1)$ such that
-		\begin{equation}
-			\Delta_\lambda = \lambda\ens[a]+\bar{\lambda}\Delta \subseteq U.
-		\end{equation}
-		
-		Since $\lambda<1$, the contraction preserves affine independence and the affine hull, so $\Delta_\lambda$ is a simplex with $\ahull(\Delta_\lambda)=A$. It also preserves the strictly positive coefficients expressing $\ens[a]$ as a mixture of the generators, so $\ens[a]$ remains internal relative to $\Delta_\lambda$. By \ref{pm-es-simplexEntropicNeighborhood}, there exists $r \in (0,1]$ such that $B_r(\ens[a])\cap A = B_r(\ens[a])\cap\ahull(\Delta_\lambda) \subseteq \Delta_\lambda \subseteq U$.
-	\end{proof}
-\end{mathSection}
-
-The mixing entropy bound established above tells us how much mixing is needed to bring ensembles inside an entropic ball. Crucially, the same mixing coefficient works for every ensemble in the set. This means we can shrink the whole set into any neighborhood of any internal point of $A$, which is precisely the idea of boundedness.
-
-\begin{mathSection}
-	\begin{prop}\label{pm-es-finiteDimensionalAffineBoundedness}
-		Every finite-dimensional affine subset $A \subseteq \Ens$ is bounded around every internal point relative to $A$.
-	\end{prop}
-	
-	\begin{proof}
-		Let $\ens[a]$ be an internal point relative to $A$ and let $U$ be an open neighborhood of $\ens[a]$. By \ref{pm-es-finiteDimensionalEntropicNeighborhood}, choose $r \in (0,1]$ such that $B_r(\ens[a])\cap A \subseteq U$.
-		
-		Since $\frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right)\to0$ as $p\to1$, the upper bound on mixing entropy gives a single $p \in (0,1)$ such that, for every $\ens[c] \in A$, $MS(\ens[a],p\ens[a]+\bar{p}\ens[c]) \leq \frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right) < r$.
-		Since $A$ is convex, $p\ens[a]+\bar{p}A \subseteq B_r(\ens[a])\cap A \subseteq U$. Therefore $A$ is bounded around $\ens[a]$.
-	\end{proof}
-\end{mathSection}
-
-TODO: add descriptions, explanations, and motivation throughout this section.
-
-\begin{mathSection}
-\begin{lemma}\label{pm-es-passThroughSimplexBoundary}
-	Let $\Delta$ be a simplex, then every segment that connects a point in the relative algebraic interior with a point in the relative algebraic exterior passes through its boundary. 
-	That is, let $\Delta = \hull(\{\ens[a]_0,\ens[a]_1,\ldots,\ens[a]_n\})$ be a simplex with  $\ens[a] = \sum_{i=0}^np_i\ens[a]_i \in \Delta \setminus B_\Delta$ and $\ens[b] = \sum_{i=0}^nr_i\ens[a]_i \in \ahull(\{\ens[a]_0,\ens[a]_1,\ldots,\ens[a]_n\}) \setminus \Delta$. If $\lambda = \max\{\frac{-r_i}{p_i-r_i} \mid r_i < 0\}$, then $\lambda\ens[a] + \bar{\lambda}\ens[b] \in B_\Delta$.
-\end{lemma}
-
-\begin{proof}
-	Note that at least one $r_i < 0$ because $\ens[b] \notin \Delta$, so $\lambda$ exists. In addition, $\lambda \in (0,1)$ since $\frac{-r_i}{p_i-r_i} \in (0,1)$ if $r_i < 0$.
-	
-	We need to show that $\lambda\ens[a] + \bar{\lambda}\ens[b] = \sum_{i=0}^n(\lambda p_i + \bar{\lambda}r_i)\ens[a]_i \in B_\Delta$. Since the $\ens[a]_i$ are affinely independent, it is sufficient to show that the $\lambda p_i + \bar{\lambda}r_i$ sum to $1$ and are all non-negative with at least one $0$. Firstly, we have $\sum_{i=0}^n (\lambda p_i + \bar{\lambda}r_i) = \lambda + \bar{\lambda} = 1$. Let $j \in [0,n]$ such that $\lambda = \frac{-r_j}{p_j-r_j}$. Then $\lambda p_j + \bar{\lambda} r_j = \frac{-r_j p_j}{p_j - r_j} + \frac{p_jr_j}{p_j - r_j} = 0$. Finally, if $\lambda p_i + \bar{\lambda}r_i < 0$, then $r_i < 0$. But in that case, $\lambda < \frac{-r_i}{p_i-r_i}$, contradicting the definition of $\lambda$.
-\end{proof}
-
-\begin{prop}\label{pm-es-affineSetsClosed}
-	Let $A\subseteq\Ens$ be a finite-dimensional affine subset. Then $A$ is closed.
-\end{prop}
-
-\begin{proof}
-	If $\dim(A)=0$, then $A$ is a singleton and is therefore closed since $\Ens$ is Hausdorff. If $\dim(A) = k > 0$, then using an affine basis of $A$ we can find a simplex $\Delta = \hull(\{\ens[a]_0,\ldots,\ens[a]_k\})$ with a relative algebraic internal point $\ens[a] \in \Delta \setminus B_\Delta$. Since $\Delta$ and $B_\Delta$ are compact, they are also closed because $\Ens$ is Hausdorff.
-	
-	Since $\Ens$ is second countable, it is first countable, so it is sufficient to show sequential closure. Suppose $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ such that $\ens[b]_i \to \ens[b]$ for some $\ens[b] \in \Ens$. We need to show that $\ens[b] \in A$. If $\ens[b]_i \in \Delta$ for infinitely many $i$, then $\ens[b] \in \Delta \subseteq A$ by the closure of $\Delta$, so without loss of generality assume that $\ens[b]_i \notin \Delta$ for all $i$. Thus, by \ref{pm-es-passThroughSimplexBoundary}, there exists $p_i \in (0,1)$ such that $\ens[c]_i = p_i\ens[a] + \bar{p_i}\ens[b]_i \in B_\Delta$ for each $i \in \mathbb{N}$.
-	
-	\begin{figure}[H]
-		\centering
-		\begin{tikzpicture}
-			\coordinate (a0) at (-1.5,-1.5);
-			\coordinate (a1) at (3,-.75);
-			\coordinate (a2) at (0,2.25);
-			\coordinate (a) at (0,0);
-			
-			\coordinate (c1) at ($(a1)!0.32!(a0)$);
-			\coordinate (c2) at ($(a1)!0.44!(a2)$);
-			\coordinate (c3) at ($(a1)!0.56!(a2)$);
-			\coordinate (c4) at ($(a1)!.68!(a2)$);
-			\coordinate (c)  at ($(a1)!0.64!(a2)$);
-			
-			\coordinate (b1) at ($(a)!1.3!(c1)$);
-			\coordinate (b2) at ($(a)!1.45!(c2)$);
-			\coordinate (b3) at ($(a)!1.85!(c3)$);
-			\coordinate (b4) at ($(a)!2.30!(c4)$);
-			\coordinate (b)  at ($(a)!2.5!(c)$);
-			
-			%triangle
-			\draw[] (a0) -- (a1) -- (a2) -- cycle;
-			
-			%lines
-			\draw [] (a) -- (c1);
-			\draw [dashed] (c1) -- (b1);
-			\draw [] (a) -- (c2);
-			\draw [dashed] (c2) -- (b2);
-			\draw [] (a) -- (c3);
-			\draw [dashed] (c3) -- (b3);
-			\draw [] (a) -- (c4);
-			\draw [dashed] (c4) -- (b4);
-			\draw [] (a) -- (c);
-			\draw [dashed] (c) -- (b);
-			
-			%points
-			\filldraw [black] (a0) circle (1pt) node[below left] {$\ens[a]_0$};
-			\filldraw [black] (a1) circle (1pt) node[below right] {$\ens[a]_1$};
-			\filldraw [black] (a2) circle (1pt) node[above] {$\ens[a]_2$};
-			
-			\filldraw [black] (a) circle (1pt) node[left] {$\ens[a]$};
-			
-			\filldraw [black] (c1) circle (1pt) node [above, xshift=.05cm, yshift=-.05cm] {$\ens[c]_1$};
-			\filldraw [black] (c2) circle (1pt) node [right, yshift=-.08cm] {$\ens[c]_2$};
-			\filldraw [black] (c3) circle (1pt) node [right, yshift=-.04cm, xshift=-.02cm] {$\ens[c]_3$};
-			\filldraw [black] (c4) circle (1pt) node [above, yshift=.05cm, xshift=-.05cm] {$\ens[c]_4$};
-			\filldraw [black] (c) circle (1pt) node [right, xshift=-.03cm] {$\ens[c]$};
-			
-			\filldraw [black] (b1) circle (1pt) node [right] {$\ens[b]_1$};
-			\filldraw [black] (b2) circle (1pt) node [right] {$\ens[b]_2$};
-			\filldraw [black] (b3) circle (1pt) node [right] {$\ens[b]_3$};
-			\filldraw [black] (b4) circle (1pt) node [above] {$\ens[b]_4$};
-			\filldraw [black] (b) circle (1pt) node [right] {$\ens[b]$};
-		\end{tikzpicture}
-		\caption{Given a sequence $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ converging to $\ens[b] \notin \Delta$, we can assume the sequence eventually exits $\Delta$. Then each segment connecting $\ens[a]$ to $\ens[b]_i$ intersects $B_\Delta$ at $\ens[c]_i$. Some subsequence of $\{\ens[c]_i\}_{i=1}^\infty$ converges to $\ens[c] = p\ens[a] + \bar{p}\ens[b] \in B_\Delta \subseteq A$. Then $\ens[b] \in A$ since $A$ is affine.}
-	\end{figure}
-	
-	Since $[0,1]$ is compact, there exists a subsequence $\{p_{i_n}\}_{n=1}^{\infty}$ and a $p \in [0,1]$ so that $p_{i_n} \to p$. By continuity of mixing, $\ens[c]_{i_n} \to  p\ens[a] + \bar{p}\ens[b]$. Note that $p\ens[a] + \bar{p}\ens[b] \in B_\Delta$ since $B_\Delta$ is closed, and $\bar{p} \not= 0$ because otherwise we would have $p\ens[a] + \bar{p}\ens[b] = \ens[a] \notin B_\Delta$. Since $A$ is affine, $\ens[b] = \frac{1}{\bar{p}}(p\ens[a] + \bar{p}\ens[b]) - \frac{p}{\bar{p}}\ens[a] \in A$. 
-\end{proof}
-
-
-\begin{prop}\label{pm-es-affineFunctionalContinuous}
-	Suppose $\Ens$ is finite-dimensional and $F: \Ens \to \mathbb{R}$ is an affine functional. Then $F$ is continuous.
-\end{prop}
-
-\begin{proof}
-	Since $\Ens$ is second countable, it is first countable, so it is sufficient to show sequential continuity. Suppose for a contradiction that $\{\ens[e]_i\}_{i=1}^\infty$ is a sequence of ensembles such that $\ens[e]_i \to \ens[e]$ but $F(\ens[e]_i) \not\to F(\ens[e])$.
-	
-	Since $F(\ens[e]_i) \not\to F(\ens[e])$, there exists an open interval $(c,d) \subseteq \mathbb{R}$ containing $F(\ens[e])$ such that $F(\ens[e]_i) \not\in (c,d)$ for infinitely many $i \in \mathbb{N}$. Consider the case where $F(\ens[e]_i) \le c$ for infinitely many $i$. The case where $F(\ens[e]_i) \ge d$ is similar.
-	
-	\begin{figure}[H]
-		\centering
-		\begin{tikzpicture}
-			\def\l{2.5}
-			
-			\coordinate (e) at (0,0);
-			\coordinate (Fe) at (35:\l);
-			\coordinate (-Fe) at ($(e)!-1!(Fe)$);
-			\coordinate (d) at ($(Fe)+(-1.5,1.5)$);
-			\coordinate (c) at ($(Fe)+(1,-1)$);
-			\coordinate (-d) at ($(-Fe)+(-1.5,1.5)$);
-			\coordinate (-c) at ($(-Fe)+(1,-1)$);
-			
-			\coordinate (a1) at ($(-c)!.4!(c)$);
-			\coordinate (a2) at ($(-c)!.52!(c)$);
-			\coordinate (a3) at ($(-c)!.7!(c)$);
-			
-			\coordinate (e1) at ($(e)!1.8!(a1)$);
-			\coordinate (e2) at ($(e)!2.3!(a2)$);
-			\coordinate (e3) at ($(e)!1.9!(a3)$);
-			
-			\coordinate (F1) at ($(-c)!1.25!(c)$);
-			\coordinate (F2) at ($(-d)!1.25!(d)$);
-			
-			\draw [dashed] (Fe) -- (-Fe);
-			\draw [] (d) -- (-d);
-			\draw [] (c) -- (-c);
-			
-			\filldraw [] (e) circle (1pt) node [above left] {$\ens[e]$};
-			
-			\node at (Fe) [above right] {$F(\ens[e])$};
-			\node at ($(c)+(.3,.2)$) [above right] {$c$};
-			\node at ($(d)+(.3,.2)$) [above right] {$d$};
-			
-			\node at (-c) [below left] {$F^{-1}(\{c\})$};
-			\node at (-d) [below left] {$F^{-1}(\{d\})$};
-			
-			\filldraw [] (a1) circle (1pt) node [left] {$\ens[a]_1$};
-			\filldraw [] (a2) circle (1pt) node [above] {$\ens[a]_2$};
-			\filldraw [] (a3) circle (1pt) node [above] {$\ens[a]_3$};
-			
-			\draw [] (e) -- (e1);
-			\draw [] (e) -- (e2);
-			\draw [] (e) -- (e3);
-			
-			\filldraw [] (e1) circle (1pt) node [right] {$\ens[e]_1$};
-			\filldraw [] (e2) circle (1pt) node [right] {$\ens[e]_2$};
-			\filldraw [] (e3) circle (1pt) node [right] {$\ens[e]_3$};
-			
-			\draw [->] ($(F1)+(.3,-.3)$) -- ($(F2)+(-.3,.3)$);
-			
-			\draw [] ($(F1)+(-.1,-.08)$) -- ($(F1)+(.1,.08)$);
-			\draw [] ($(F2)+(-.1,-.08)$) -- ($(F2)+(.1,.08)$);
-			
-			\coordinate (P) at ($(e)!1.5!(Fe)$);
-			\draw [] ($(P)+(-.1,-.08)$) -- ($(P)+(.1,.08)$);
-			
-			\node at (F2) [right, xshift=6] {$F$};
-		\end{tikzpicture}
-		\caption{TODO: move c, d, F(E) on the F axis. Label the fibers F inverse of c . Given a sequence $\{\ens[c]_i\}_{i=1}^\infty$ converging to $\ens[e]$ with $F(\ens[e]_i) \le c$ for all $i$, the line segment connecting $\ens[e]_i$ with $\ens[e]$ passes through $F^{-1}(c)$. TODO: review caption}
-	\end{figure}
-	
-	Without loss of generality, suppose $F(\ens[e]_i) \le c$ for every $i$. Note that the fiber $F^{-1}(\{c\}) = \{\ens[a] \in \Ens \mid F(\ens[a]) = c\}$ is an affine set. That is, if $\sum_{j=0}^mr_j\ens[b]_j$ is an affine combination of elements in $F^{-1}(\{c\})$, then $F(\sum_{j=0}^mr_j\ens[b]_j) = \sum_{j=0}^mr_jF(\ens[b]_j) = c$. So $F^{-1}(\{c\})$ is closed by \ref{pm-es-affineSetsClosed}.
-	
-	For each $i \in \mathbb{N}$, let $p_i = \frac{c - F(\ens[e]_i)}{F(\ens[e]) - F(\ens[e]_i)}$. Note that each $p_i \in [0,1)$ since $F(\ens[e]_i) \le c < F(\ens[e])$. Then let $\ens[a]_i = p_i\ens[e] + \bar{p_i}\ens[e]_i$ for each $i \in \mathbb{N}$. Since $F$ preserves affine combinations
-	\begin{equation}
-		\begin{aligned}
-			F(\ens[a]_i) &= F(p_i\ens[e] + \bar{p_i}\ens[e]_i) = p_iF(\ens[e]) + \bar{p_i}F(\ens[e]_i) = \frac{c - F(\ens[e]_i)}{F(\ens[e]) - F(\ens[e]_i)} F(\ens[e]) + \frac{F(\ens[e]) - c}{F(\ens[e]) - F(\ens[e]_i)} F(\ens[e]_i) \\ 
-			&= \frac{cF(\ens[e]) - cF(\ens[e]_i)}{F(\ens[e]) - F(\ens[e]_i)} = c
-		\end{aligned}
-	\end{equation}
-	Since $p_i \in [0,1]$, a subsequence of $\{p_i\}_{i=1}^\infty$ converges to $p \in [0,1]$. Therefore, the corresponding subsequence of $\{\ens[a]_i\}_{i=1}^\infty$ converges to $p\ens[e] + \bar{p}\ens[e] = \ens[e]$ by continuity of mixing. Since a subsequence of $\{\ens[a]_i\}_{i=1}^\infty \subseteq F^{-1}(\{c\})$ converges to $\ens[e]$ and $F^{-1}(\{c\})$ is closed, we get $\ens[e] \in F^{-1}(\{c\})$. Thus, $F(\ens[e]) = c$, a contradiction.
-\end{proof}
-
-\begin{prop}
-	Suppose $\Ens$ is a finite-dimensional ensemble space and $\iota_{\ens[a]} : \Ens \to V_{\ens[a]}$ is a natural embedding where $\ens[a] \in \Ens$ is an internal point and $V_{\ens[a]}$ is a Hausdorff topological vector space. Then $\iota_{\ens[a]}$ is continuous. Moreover, if the topology of $\Ens$ is generated by the affine functionals, then $\iota_{\ens[a]}$ is a topological embedding.
-	
-	TODO: natural embedding naming confusion (e.g. "affine embedding")
-\end{prop}
-
-\begin{proof}
-	Because $V_{\ens[a]}$ is a finite-dimensional Hausdorff topological vector space, its topology is generated by a set of coordinate functionals corresponding to a basis. Let $L : V_{\ens[a]} \to \mathbb{R}$ be any such linear functional. Since $\iota_{\ens[a]}$ preserves affine combinations, $L \circ \iota_{\ens[a]} : \Ens \to \mathbb{R}$ is an affine functional. So by \ref{pm-es-affineFunctionalContinuous}, $L \circ \iota_{\ens[a]}$ is continuous. For every open subset $U \subseteq \mathbb{R}$, $\iota_{\ens[a]}^{-1}(L^{-1}(U)) = (L \circ \iota_{\ens[a]})^{-1}(U)$ is open in $\Ens$. Then since the topology on $V_{\ens[a]}$ is generated by the linear coordinate functionals, $\iota_{\ens[a]}$ is continuous.
-	
-	Now suppose that the topology of $\Ens$ is generated by the affine functionals, and let $F : \Ens \to \mathbb{R}$ be an affine functional. Since $\iota_{\ens[a]} : \Ens \to \iota_{\ens[a]}(\Ens)$ is bijective and preserves affine combinations, $\iota_{\ens[a]}^{-1} : \iota_{\ens[a]}(\Ens) \to \Ens$ also preserves affine combinations. Therefore, $F \circ \iota_{\ens[a]}^{-1} : \iota_{\ens[a]}(\Ens) \to \mathbb{R}$ is an affine functional on a subset of a vector space. Since $\iota_{\ens[a]}(\Ens) \subseteq V_{\ens[a]}$ is a full-dimensional subset, $F \circ \iota_{\ens[a]}^{-1}$ extends to an affine functional on all of $V_{\ens[a]}$, hence $F \circ \iota_{\ens[a]}^{-1}$ is continuous as an affine map. Therefore, for every open subset $U \subseteq \mathbb{R}$, $\iota_{\ens[a]}(F^{-1}(U)) = (F \circ \iota_{\ens[a]}^{-1})^{-1}(U)$ is open. Since the topology on $\Ens$ is generated by the affine functionals, $\iota_{\ens[a]}^{-1} : \iota_{\ens[a]}(\Ens) \to \Ens$ is continuous, so $\iota_{\ens[a]}$ is a topological embedding.
-\end{proof}
-\end{mathSection}
-
 \subsection{Connection to Choquet theory}
 
 The goal of Choquet theory is to study how a point of a compact convex set can be represented by a probability measure over its extreme points. In some cases, this can be understood as representing an ensemble as a probability measure over pure states. Therefore, it is interesting to establish a connection between ensemble spaces and Choquet theory. Specifically, we want to show that the fraction capacity can be used to recover the supremum of all possible measures that represent an ensemble. Moreover, this leads to an additive measure exactly when the ensemble space is a Choquet simplex.
@@ -4653,9 +4372,299 @@ Note, however, that the lattice of $\separate$-subspaces  of the cut triangle is
 	\caption{In this diagram, the lower tier represents the singletons of the extreme points, the middle tier represents each side and the top tier represents the pairs of sides that are the $\separate$-complement of the extreme points. The red lines connect the complements. Note that the lattice is not distributive (e.g. $A\vee (3 \wedge A2) = A \vee \bot = A \neq (A\vee 3) \wedge (A \vee A2) = BP \wedge A2 = A2$). In fact, $\{\bot, 3, A, A2, BP\}$ is an $N_5$ sublattice. }
 \end{figure}
 
+
+\section{Finite-dimensional ensemble spaces}
+
+In this section we prove some interesting results that are valid in finite-dimensional ensemble spaces or finite-dimensional subsets.
+
+\subsection{Boundedness of finite-dimensional subsets}
+
+We now use the properties of the mixing entropy to show that every finite-dimensional affine subset is a bounded set.
+
+First, we establish a couple of generally useful facts valid for any finite-dimensional convex set $A$. Any internal point $\ens[a] \in A$ is also an internal point of a simplex that fits inside $A$ and it has the same dimension of $A$. Moreover, we can find an open ball around $\ens[a]$ that intersects $A$ fully within the simplex. That is, in the subspace topology of the affine hull of $A$, $\ens[a]$ is an interior point.
+
+\begin{mathSection}
+	\begin{prop}\label{pm-es-internalPointSimplex}
+		Let $A \subseteq \Ens$ be a finite-dimensional convex set and let $\ens[a]$ be an internal point relative to $A$. Then there exists a simplex $\Delta \subseteq A$ of the same affine dimension as $A$ such that $\ens[a]$ is internal relative to $\Delta$.
+	\end{prop}
+	
+	\begin{proof}
+		Let $n = \dim(A)$. If $n=0$, then $A = \{\ens[a]\}$ and the result holds with $\Delta=A$.
+		
+		Suppose $n>0$. Choose $\ens[b]_1, \dots, \ens[b]_n \in A$ such that $\{\ens[a], \ens[b]_1, \dots, \ens[b]_n\}$ is an affine basis of $\ahull(A)$. Since $\ens[a]$ is internal relative to $A$ and there are only finitely many $\ens[b]_i$, we can choose $\epsilon \in (0,1)$ small enough that all the affine combinations
+		\begin{equation}
+			\ens[e]_i = -n\epsilon\ens[b]_i + (1+n\epsilon)\ens[a]
+		\end{equation}
+		exist and belong to $A$. Define
+		\begin{equation}
+			\ens[d]_i = \epsilon\ens[b]_i + \bar{\epsilon}\ens[a],
+			\qquad
+			\ens[d]_0 = \frac{1}{n}\sum_{i=1}^n \ens[e]_i.
+		\end{equation}
+		These are convex combinations of elements of $A$, and therefore $\ens[d]_0, \dots, \ens[d]_n \in A$.
+		
+		We first show that $\ens[a]$ is the equal mixture of these ensembles. We have
+		\begin{equation}
+			\begin{aligned}
+				\ens[d]_0
+				&= \frac{1}{n}\sum_{i=1}^n
+				\left[-n\epsilon\ens[b]_i + (1+n\epsilon)\ens[a]\right] = -\epsilon\sum_{i=1}^n \ens[b]_i + (1+n\epsilon)\ens[a].
+			\end{aligned}
+		\end{equation}
+		Consequently,
+		\begin{equation}
+			\begin{aligned}
+				\frac{1}{n+1}\sum_{i=0}^n \ens[d]_i
+				&= \frac{1}{n+1}\ens[d]_0
+				+ \sum_{i=1}^n \frac{1}{n+1}\ens[d]_i = \frac{1}{n+1}
+				\left[-\epsilon\sum_{i=1}^n \ens[b]_i + (1+n\epsilon)\ens[a]\right]
+				+ \sum_{i=1}^n \frac{1}{n+1}
+				\left[\epsilon\ens[b]_i + \bar{\epsilon}\ens[a]\right] \\
+				&= \sum_{i=1}^n \frac{-\epsilon+\epsilon}{n+1}\ens[b]_i
+				+ \frac{1+n\epsilon+n\bar{\epsilon}}{n+1}\ens[a] = \frac{1+n\epsilon+n-n\epsilon}{n+1}\ens[a] = \ens[a].
+			\end{aligned}
+		\end{equation}
+		
+		Let $D = \{\ens[d]_0, \dots, \ens[d]_n\}$. The preceding calculation shows that $\ens[a] \in \hull(D)$. Rearranging the definition of $\ens[d]_i$ gives
+		\begin{equation}
+			\ens[b]_i = \frac{1}{\epsilon}\ens[d]_i
+			- \frac{\bar{\epsilon}}{\epsilon}\ens[a].
+		\end{equation}
+		Therefore $\ens[b]_i \in \ahull(D)$ for every $i$. Since $\{\ens[a], \ens[b]_1, \dots, \ens[b]_n\}$ is an affine basis of $\ahull(A)$ and $D \subseteq A$, we have $\ahull(D) = \ahull(A)$. These $n+1$ ensembles generate an affine set of dimension $n$, so they are affinely independent. Thus $\Delta = \hull(D)$ is a simplex of dimension $n$ contained in $A$, and $\ahull(\Delta) = \ahull(A)$. Lastly, since $\ens[a]$ is the equal mixture of all the generators, its affine coefficients are all strictly positive. Therefore $\ens[a]$ is internal relative to $\Delta$.
+	\end{proof}
+	
+	\begin{prop}\label{pm-es-simplexEntropicNeighborhood}
+		Let $\Delta \subseteq \Ens$ be a simplex and let $\ens[a]$ be an internal point relative to $\Delta$. Then there exists $r \in (0,1]$ such that $B_r(\ens[a])\cap\ahull(\Delta) \subseteq \Delta$. In particular, $\ens[a]$ is a topological interior point of $\Delta$ relative to $\ahull(\Delta)$.
+	\end{prop}
+	
+	\begin{proof}
+		If $\Delta = \{\ens[a]\}$, the result holds with $r=1$. Otherwise, since $B_\Delta$ is compact and $MS(\ens[a],\cdot)$ is continuous and strictly positive on it, let
+		\begin{equation}
+			r = \min_{\ens[b] \in B_\Delta} MS(\ens[a],\ens[b]) \in (0,1].
+		\end{equation}
+		
+		Let $\ens[e] \in \ahull(\Delta)\setminus\Delta$. Since $\Delta$ is convex and closed and $\ens[a]$ is internal relative to $\Delta$, the segment from $\ens[a]$ to $\ens[e]$ meets $B_\Delta$ at some $\ens[b]$. By \ref{pm-es-mixingEntropyMonotonic}, $MS(\ens[a],\ens[e]) \geq MS(\ens[a],\ens[b]) \geq r$.	Therefore $B_r(\ens[a])\cap\ahull(\Delta) \subseteq \Delta$. Since the entropic ball is open and contains $\ens[a]$, the final claim follows.
+	\end{proof}
+\end{mathSection}
+
+We can use the previous two propositions to show that, given a finite-dimensional affine subset $A$, every neighborhood of an internal point of $A$ can fit a simplex. Since the smaller simplex still contains an entropic ball, this gives us a bridge between mixing entropy and the topology.
+
+\begin{mathSection}
+	\begin{prop}\label{pm-es-finiteDimensionalEntropicNeighborhood}
+		Let $A \subseteq \Ens$ be a finite-dimensional affine subset and let $\ens[a]$ be an internal point relative to $A$. For every open neighborhood $U$ of $\ens[a]$, there exists $r \in (0,1]$ such that $B_r(\ens[a]) \cap A \subseteq U$.
+	\end{prop}
+	
+	\begin{proof}
+		By \ref{pm-es-internalPointSimplex}, choose a simplex $\Delta \subseteq A$ such that $\ahull(\Delta)=A$ and $\ens[a]$ is internal relative to $\Delta$. The map $(p,\ens[b]) \mapsto p\ens[a]+\bar{p}\ens[b]$ from $[0,1]\times\Delta$ to $\Ens$ is continuous. Its inverse image of $U$ is open and contains $\{1\}\times\Delta$. Since $\Delta$ is compact, the tube lemma gives $\lambda \in [0,1)$ such that
+		\begin{equation}
+			\Delta_\lambda = \lambda\ens[a]+\bar{\lambda}\Delta \subseteq U.
+		\end{equation}
+		
+		Since $\lambda<1$, the contraction preserves affine independence and the affine hull, so $\Delta_\lambda$ is a simplex with $\ahull(\Delta_\lambda)=A$. It also preserves the strictly positive coefficients expressing $\ens[a]$ as a mixture of the generators, so $\ens[a]$ remains internal relative to $\Delta_\lambda$. By \ref{pm-es-simplexEntropicNeighborhood}, there exists $r \in (0,1]$ such that $B_r(\ens[a])\cap A = B_r(\ens[a])\cap\ahull(\Delta_\lambda) \subseteq \Delta_\lambda \subseteq U$.
+	\end{proof}
+\end{mathSection}
+
+The mixing entropy bound established above tells us how much mixing is needed to bring ensembles inside an entropic ball. Crucially, the same mixing coefficient works for every ensemble in the set. This means we can shrink the whole set into any neighborhood of any internal point of $A$, which is precisely the idea of boundedness.
+
+\begin{mathSection}
+	\begin{prop}\label{pm-es-finiteDimensionalAffineBoundedness}
+		Every finite-dimensional affine subset $A \subseteq \Ens$ is bounded around every internal point relative to $A$.
+	\end{prop}
+	
+	\begin{proof}
+		Let $\ens[a]$ be an internal point relative to $A$ and let $U$ be an open neighborhood of $\ens[a]$. By \ref{pm-es-finiteDimensionalEntropicNeighborhood}, choose $r \in (0,1]$ such that $B_r(\ens[a])\cap A \subseteq U$.
+		
+		Since $\frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right)\to0$ as $p\to1$, the upper bound on mixing entropy gives a single $p \in (0,1)$ such that, for every $\ens[c] \in A$, $MS(\ens[a],p\ens[a]+\bar{p}\ens[c]) \leq \frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right) < r$.
+		Since $A$ is convex, $p\ens[a]+\bar{p}A \subseteq B_r(\ens[a])\cap A \subseteq U$. Therefore $A$ is bounded around $\ens[a]$.
+	\end{proof}
+\end{mathSection}
+
+\subsection{Topology for finite-dimensional ensemble spaces}
+
+TODO: add descriptions, explanations, and motivation throughout this section.
+
+\begin{mathSection}
+	\begin{lemma}\label{pm-es-passThroughSimplexBoundary}
+		Let $\Delta$ be a simplex, then every segment that connects a point in the relative algebraic interior with a point in the relative algebraic exterior passes through its boundary. 
+		That is, let $\Delta = \hull(\{\ens[a]_0,\ens[a]_1,\ldots,\ens[a]_n\})$ be a simplex with  $\ens[a] = \sum_{i=0}^np_i\ens[a]_i \in \Delta \setminus B_\Delta$ and $\ens[b] = \sum_{i=0}^nr_i\ens[a]_i \in \ahull(\{\ens[a]_0,\ens[a]_1,\ldots,\ens[a]_n\}) \setminus \Delta$. If $\lambda = \max\{\frac{-r_i}{p_i-r_i} \mid r_i < 0\}$, then $\lambda\ens[a] + \bar{\lambda}\ens[b] \in B_\Delta$.
+	\end{lemma}
+	
+	\begin{proof}
+		Note that at least one $r_i < 0$ because $\ens[b] \notin \Delta$, so $\lambda$ exists. In addition, $\lambda \in (0,1)$ since $\frac{-r_i}{p_i-r_i} \in (0,1)$ if $r_i < 0$.
+		
+		We need to show that $\lambda\ens[a] + \bar{\lambda}\ens[b] = \sum_{i=0}^n(\lambda p_i + \bar{\lambda}r_i)\ens[a]_i \in B_\Delta$. Since the $\ens[a]_i$ are affinely independent, it is sufficient to show that the $\lambda p_i + \bar{\lambda}r_i$ sum to $1$ and are all non-negative with at least one $0$. Firstly, we have $\sum_{i=0}^n (\lambda p_i + \bar{\lambda}r_i) = \lambda + \bar{\lambda} = 1$. Let $j \in [0,n]$ such that $\lambda = \frac{-r_j}{p_j-r_j}$. Then $\lambda p_j + \bar{\lambda} r_j = \frac{-r_j p_j}{p_j - r_j} + \frac{p_jr_j}{p_j - r_j} = 0$. Finally, if $\lambda p_i + \bar{\lambda}r_i < 0$, then $r_i < 0$. But in that case, $\lambda < \frac{-r_i}{p_i-r_i}$, contradicting the definition of $\lambda$.
+	\end{proof}
+	
+	\begin{prop}\label{pm-es-affineSetsClosed}
+		Let $A\subseteq\Ens$ be a finite-dimensional affine subset. Then $A$ is closed.
+	\end{prop}
+	
+	\begin{proof}
+		If $\dim(A)=0$, then $A$ is a singleton and is therefore closed since $\Ens$ is Hausdorff. If $\dim(A) = k > 0$, then using an affine basis of $A$ we can find a simplex $\Delta = \hull(\{\ens[a]_0,\ldots,\ens[a]_k\})$ with a relative algebraic internal point $\ens[a] \in \Delta \setminus B_\Delta$. Since $\Delta$ and $B_\Delta$ are compact, they are also closed because $\Ens$ is Hausdorff.
+		
+		Since $\Ens$ is second countable, it is first countable, so it is sufficient to show sequential closure. Suppose $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ such that $\ens[b]_i \to \ens[b]$ for some $\ens[b] \in \Ens$. We need to show that $\ens[b] \in A$. If $\ens[b]_i \in \Delta$ for infinitely many $i$, then $\ens[b] \in \Delta \subseteq A$ by the closure of $\Delta$, so without loss of generality assume that $\ens[b]_i \notin \Delta$ for all $i$. Thus, by \ref{pm-es-passThroughSimplexBoundary}, there exists $p_i \in (0,1)$ such that $\ens[c]_i = p_i\ens[a] + \bar{p_i}\ens[b]_i \in B_\Delta$ for each $i \in \mathbb{N}$.
+		
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				\coordinate (a0) at (-1.5,-1.5);
+				\coordinate (a1) at (3,-.75);
+				\coordinate (a2) at (0,2.25);
+				\coordinate (a) at (0,0);
+				
+				\coordinate (c1) at ($(a1)!0.32!(a0)$);
+				\coordinate (c2) at ($(a1)!0.44!(a2)$);
+				\coordinate (c3) at ($(a1)!0.56!(a2)$);
+				\coordinate (c4) at ($(a1)!.68!(a2)$);
+				\coordinate (c)  at ($(a1)!0.64!(a2)$);
+				
+				\coordinate (b1) at ($(a)!1.3!(c1)$);
+				\coordinate (b2) at ($(a)!1.45!(c2)$);
+				\coordinate (b3) at ($(a)!1.85!(c3)$);
+				\coordinate (b4) at ($(a)!2.30!(c4)$);
+				\coordinate (b)  at ($(a)!2.5!(c)$);
+				
+				%triangle
+				\draw[] (a0) -- (a1) -- (a2) -- cycle;
+				
+				%lines
+				\draw [] (a) -- (c1);
+				\draw [dashed] (c1) -- (b1);
+				\draw [] (a) -- (c2);
+				\draw [dashed] (c2) -- (b2);
+				\draw [] (a) -- (c3);
+				\draw [dashed] (c3) -- (b3);
+				\draw [] (a) -- (c4);
+				\draw [dashed] (c4) -- (b4);
+				\draw [] (a) -- (c);
+				\draw [dashed] (c) -- (b);
+				
+				%points
+				\filldraw [black] (a0) circle (1pt) node[below left] {$\ens[a]_0$};
+				\filldraw [black] (a1) circle (1pt) node[below right] {$\ens[a]_1$};
+				\filldraw [black] (a2) circle (1pt) node[above] {$\ens[a]_2$};
+				
+				\filldraw [black] (a) circle (1pt) node[left] {$\ens[a]$};
+				
+				\filldraw [black] (c1) circle (1pt) node [above, xshift=.05cm, yshift=-.05cm] {$\ens[c]_1$};
+				\filldraw [black] (c2) circle (1pt) node [right, yshift=-.08cm] {$\ens[c]_2$};
+				\filldraw [black] (c3) circle (1pt) node [right, yshift=-.04cm, xshift=-.02cm] {$\ens[c]_3$};
+				\filldraw [black] (c4) circle (1pt) node [above, yshift=.05cm, xshift=-.05cm] {$\ens[c]_4$};
+				\filldraw [black] (c) circle (1pt) node [right, xshift=-.03cm] {$\ens[c]$};
+				
+				\filldraw [black] (b1) circle (1pt) node [right] {$\ens[b]_1$};
+				\filldraw [black] (b2) circle (1pt) node [right] {$\ens[b]_2$};
+				\filldraw [black] (b3) circle (1pt) node [right] {$\ens[b]_3$};
+				\filldraw [black] (b4) circle (1pt) node [above] {$\ens[b]_4$};
+				\filldraw [black] (b) circle (1pt) node [right] {$\ens[b]$};
+			\end{tikzpicture}
+			\caption{Given a sequence $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ converging to $\ens[b] \notin \Delta$, we can assume the sequence eventually exits $\Delta$. Then each segment connecting $\ens[a]$ to $\ens[b]_i$ intersects $B_\Delta$ at $\ens[c]_i$. Some subsequence of $\{\ens[c]_i\}_{i=1}^\infty$ converges to $\ens[c] = p\ens[a] + \bar{p}\ens[b] \in B_\Delta \subseteq A$. Then $\ens[b] \in A$ since $A$ is affine.}
+		\end{figure}
+		
+		Since $[0,1]$ is compact, there exists a subsequence $\{p_{i_n}\}_{n=1}^{\infty}$ and a $p \in [0,1]$ so that $p_{i_n} \to p$. By continuity of mixing, $\ens[c]_{i_n} \to  p\ens[a] + \bar{p}\ens[b]$. Note that $p\ens[a] + \bar{p}\ens[b] \in B_\Delta$ since $B_\Delta$ is closed, and $\bar{p} \not= 0$ because otherwise we would have $p\ens[a] + \bar{p}\ens[b] = \ens[a] \notin B_\Delta$. Since $A$ is affine, $\ens[b] = \frac{1}{\bar{p}}(p\ens[a] + \bar{p}\ens[b]) - \frac{p}{\bar{p}}\ens[a] \in A$. 
+	\end{proof}
+	
+	
+	\begin{prop}\label{pm-es-affineFunctionalContinuous}
+		Suppose $\Ens$ is finite-dimensional and $F: \Ens \to \mathbb{R}$ is an affine functional. Then $F$ is continuous.
+	\end{prop}
+	
+	\begin{proof}
+		Since $\Ens$ is second countable, it is first countable, so it is sufficient to show sequential continuity. Suppose for a contradiction that $\{\ens[e]_i\}_{i=1}^\infty$ is a sequence of ensembles such that $\ens[e]_i \to \ens[e]$ but $F(\ens[e]_i) \not\to F(\ens[e])$.
+		
+		Since $F(\ens[e]_i) \not\to F(\ens[e])$, there exists an open interval $(c,d) \subseteq \mathbb{R}$ containing $F(\ens[e])$ such that $F(\ens[e]_i) \not\in (c,d)$ for infinitely many $i \in \mathbb{N}$. Consider the case where $F(\ens[e]_i) \le c$ for infinitely many $i$. The case where $F(\ens[e]_i) \ge d$ is similar.
+		
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				\def\l{2.5}
+				
+				\coordinate (e) at (0,0);
+				\coordinate (Fe) at (35:\l);
+				\coordinate (-Fe) at ($(e)!-1!(Fe)$);
+				\coordinate (d) at ($(Fe)+(-1.5,1.5)$);
+				\coordinate (c) at ($(Fe)+(1,-1)$);
+				\coordinate (-d) at ($(-Fe)+(-1.5,1.5)$);
+				\coordinate (-c) at ($(-Fe)+(1,-1)$);
+				
+				\coordinate (a1) at ($(-c)!.4!(c)$);
+				\coordinate (a2) at ($(-c)!.52!(c)$);
+				\coordinate (a3) at ($(-c)!.7!(c)$);
+				
+				\coordinate (e1) at ($(e)!1.8!(a1)$);
+				\coordinate (e2) at ($(e)!2.3!(a2)$);
+				\coordinate (e3) at ($(e)!1.9!(a3)$);
+				
+				\coordinate (F1) at ($(-c)!1.25!(c)$);
+				\coordinate (F2) at ($(-d)!1.25!(d)$);
+				
+				\draw [dashed] (Fe) -- (-Fe);
+				\draw [] (d) -- (-d);
+				\draw [] (c) -- (-c);
+				
+				\filldraw [] (e) circle (1pt) node [above left] {$\ens[e]$};
+				
+				\node at (Fe) [above right] {$F(\ens[e])$};
+				\node at ($(c)+(.3,.2)$) [above right] {$c$};
+				\node at ($(d)+(.3,.2)$) [above right] {$d$};
+				
+				\node at (-c) [below left] {$F^{-1}(\{c\})$};
+				\node at (-d) [below left] {$F^{-1}(\{d\})$};
+				
+				\filldraw [] (a1) circle (1pt) node [left] {$\ens[a]_1$};
+				\filldraw [] (a2) circle (1pt) node [above] {$\ens[a]_2$};
+				\filldraw [] (a3) circle (1pt) node [above] {$\ens[a]_3$};
+				
+				\draw [] (e) -- (e1);
+				\draw [] (e) -- (e2);
+				\draw [] (e) -- (e3);
+				
+				\filldraw [] (e1) circle (1pt) node [right] {$\ens[e]_1$};
+				\filldraw [] (e2) circle (1pt) node [right] {$\ens[e]_2$};
+				\filldraw [] (e3) circle (1pt) node [right] {$\ens[e]_3$};
+				
+				\draw [->] ($(F1)+(.3,-.3)$) -- ($(F2)+(-.3,.3)$);
+				
+				\draw [] ($(F1)+(-.1,-.08)$) -- ($(F1)+(.1,.08)$);
+				\draw [] ($(F2)+(-.1,-.08)$) -- ($(F2)+(.1,.08)$);
+				
+				\coordinate (P) at ($(e)!1.5!(Fe)$);
+				\draw [] ($(P)+(-.1,-.08)$) -- ($(P)+(.1,.08)$);
+				
+				\node at (F2) [right, xshift=6] {$F$};
+			\end{tikzpicture}
+			\caption{TODO: move c, d, F(E) on the F axis. Label the fibers F inverse of c . Given a sequence $\{\ens[c]_i\}_{i=1}^\infty$ converging to $\ens[e]$ with $F(\ens[e]_i) \le c$ for all $i$, the line segment connecting $\ens[e]_i$ with $\ens[e]$ passes through $F^{-1}(c)$. TODO: review caption}
+		\end{figure}
+		
+		Without loss of generality, suppose $F(\ens[e]_i) \le c$ for every $i$. Note that the fiber $F^{-1}(\{c\}) = \{\ens[a] \in \Ens \mid F(\ens[a]) = c\}$ is an affine set. That is, if $\sum_{j=0}^mr_j\ens[b]_j$ is an affine combination of elements in $F^{-1}(\{c\})$, then $F(\sum_{j=0}^mr_j\ens[b]_j) = \sum_{j=0}^mr_jF(\ens[b]_j) = c$. So $F^{-1}(\{c\})$ is closed by \ref{pm-es-affineSetsClosed}.
+		
+		For each $i \in \mathbb{N}$, let $p_i = \frac{c - F(\ens[e]_i)}{F(\ens[e]) - F(\ens[e]_i)}$. Note that each $p_i \in [0,1)$ since $F(\ens[e]_i) \le c < F(\ens[e])$. Then let $\ens[a]_i = p_i\ens[e] + \bar{p_i}\ens[e]_i$ for each $i \in \mathbb{N}$. Since $F$ preserves affine combinations
+		\begin{equation}
+			\begin{aligned}
+				F(\ens[a]_i) &= F(p_i\ens[e] + \bar{p_i}\ens[e]_i) = p_iF(\ens[e]) + \bar{p_i}F(\ens[e]_i) = \frac{c - F(\ens[e]_i)}{F(\ens[e]) - F(\ens[e]_i)} F(\ens[e]) + \frac{F(\ens[e]) - c}{F(\ens[e]) - F(\ens[e]_i)} F(\ens[e]_i) \\ 
+				&= \frac{cF(\ens[e]) - cF(\ens[e]_i)}{F(\ens[e]) - F(\ens[e]_i)} = c
+			\end{aligned}
+		\end{equation}
+		Since $p_i \in [0,1]$, a subsequence of $\{p_i\}_{i=1}^\infty$ converges to $p \in [0,1]$. Therefore, the corresponding subsequence of $\{\ens[a]_i\}_{i=1}^\infty$ converges to $p\ens[e] + \bar{p}\ens[e] = \ens[e]$ by continuity of mixing. Since a subsequence of $\{\ens[a]_i\}_{i=1}^\infty \subseteq F^{-1}(\{c\})$ converges to $\ens[e]$ and $F^{-1}(\{c\})$ is closed, we get $\ens[e] \in F^{-1}(\{c\})$. Thus, $F(\ens[e]) = c$, a contradiction.
+	\end{proof}
+	
+	\begin{prop}
+		Suppose $\Ens$ is a finite-dimensional ensemble space and $\iota_{\ens[a]} : \Ens \to V_{\ens[a]}$ is a natural embedding where $\ens[a] \in \Ens$ is an internal point and $V_{\ens[a]}$ is a Hausdorff topological vector space. Then $\iota_{\ens[a]}$ is continuous. Moreover, if the topology of $\Ens$ is generated by the affine functionals, then $\iota_{\ens[a]}$ is a topological embedding.
+		
+		TODO: natural embedding naming confusion (e.g. "affine embedding")
+	\end{prop}
+	
+	\begin{proof}
+		Because $V_{\ens[a]}$ is a finite-dimensional Hausdorff topological vector space, its topology is generated by a set of coordinate functionals corresponding to a basis. Let $L : V_{\ens[a]} \to \mathbb{R}$ be any such linear functional. Since $\iota_{\ens[a]}$ preserves affine combinations, $L \circ \iota_{\ens[a]} : \Ens \to \mathbb{R}$ is an affine functional. So by \ref{pm-es-affineFunctionalContinuous}, $L \circ \iota_{\ens[a]}$ is continuous. For every open subset $U \subseteq \mathbb{R}$, $\iota_{\ens[a]}^{-1}(L^{-1}(U)) = (L \circ \iota_{\ens[a]})^{-1}(U)$ is open in $\Ens$. Then since the topology on $V_{\ens[a]}$ is generated by the linear coordinate functionals, $\iota_{\ens[a]}$ is continuous.
+		
+		Now suppose that the topology of $\Ens$ is generated by the affine functionals, and let $F : \Ens \to \mathbb{R}$ be an affine functional. Since $\iota_{\ens[a]} : \Ens \to \iota_{\ens[a]}(\Ens)$ is bijective and preserves affine combinations, $\iota_{\ens[a]}^{-1} : \iota_{\ens[a]}(\Ens) \to \Ens$ also preserves affine combinations. Therefore, $F \circ \iota_{\ens[a]}^{-1} : \iota_{\ens[a]}(\Ens) \to \mathbb{R}$ is an affine functional on a subset of a vector space. Since $\iota_{\ens[a]}(\Ens) \subseteq V_{\ens[a]}$ is a full-dimensional subset, $F \circ \iota_{\ens[a]}^{-1}$ extends to an affine functional on all of $V_{\ens[a]}$, hence $F \circ \iota_{\ens[a]}^{-1}$ is continuous as an affine map. Therefore, for every open subset $U \subseteq \mathbb{R}$, $\iota_{\ens[a]}(F^{-1}(U)) = (F \circ \iota_{\ens[a]}^{-1})^{-1}(U)$ is open. Since the topology on $\Ens$ is generated by the affine functionals, $\iota_{\ens[a]}^{-1} : \iota_{\ens[a]}(\Ens) \to \Ens$ is continuous, so $\iota_{\ens[a]}$ is a topological embedding.
+	\end{proof}
+\end{mathSection}
+
+
 \section{Examples}
 
-In this section we plan to collect examples that appear throughout the chapter to exemplify corner cases, wanted or unwanted.
+In this section we collect examples that appear throughout the chapter to exemplify corner cases, wanted or unwanted.
 
 \subsection{Cut triangle}
 
