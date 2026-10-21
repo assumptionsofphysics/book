@@ -1854,6 +1854,8 @@ We should note that this construction is provisional as it assumes the origin of
 		In each equivalence class, there is at most one element with coefficient one. Therefore the mapping is injective.
 	\end{proof}
 	
+	%TODO: review the term natural embedding to specify that it an affine embedding
+	
 	\begin{coro}
 		The natural embedding of $\Ens$ into $V_{\ens[a]}$ preserves affine combinations. That is, $\iota\left(\sum_{i=1}^n r_i \ens_i \right) = \sum_{i=1}^n r_i \iota(\ens_i)$.
 	\end{coro}
@@ -3489,7 +3491,9 @@ We now show that the fraction capacity recovers probability over measurements in
 
 \section{Statistical properties and quantities}
 
-In this section we define statistical quantities, which are the generalization of classical random variables and quantum observables. Given our ensemble-first approach, statistical quantities are affine (linear) functions of ensembles as they represent an expectation over ensembles. The possible values of the quantities will need to be recovered with constructions that mimic spectral theory, though we will not want to talk about eigenstates and eigenvalues in the general case since these are not properly defined for a continuous quantity.
+In this section we begin the work to define the generalization of classical random variables and quantum observables. There are three main concepts we will want to have in the final theory: a statistical quantity is a real-valued quantity compatible with mixing (i.e. a continuous affine functional); a random variable is a continuous affine map to probability measures equipped with the total variation topology; a moment-continuous random variable is a random variable for which all moments are statistical quantities.
+
+For now, we concentrate on the statistical quantities, as they are foundational for the other two, and leave the rest for future work.
 
 \subsection{Properties and quantities}
 
@@ -3500,7 +3504,7 @@ These definitions extend the notion of properties and quantities that we defined
 \begin{defn}
 	A \textbf{statistical property}, or simply property, is an attribute that allows statistical mixing. Formally, it is a continuous map $F : \Ens \to \mathcal{Q}$ where $\mathcal{Q}$ is a convex topological space such that $F(p \ens[a] + \bar{p} \ens[b]) = p F(\ens[a]) + \bar{p} F(\ens[b])$ (i.e. it is an affine map).
 	
-	A \textbf{statistical quantity}, or statistical variable, or simply variable, is a numerical statistical property. That is, it is a continuous real-valued affine map $F : \Ens \to \mathbb{R}$.
+	A \textbf{statistical quantity} is a numerical statistical property. That is, it is a continuous real-valued affine map $F : \Ens \to \mathbb{R}$.
 \end{defn}
 
 \begin{justification}
@@ -3510,11 +3514,11 @@ These definitions extend the notion of properties and quantities that we defined
 	
 	Quantities are simply properties that are linearly ordered. The ability to create convex combinations becomes the ability to take weighted averages of the quantities. Regardless of whether one starts from integers, rationals or real-valued quantities, the statistical averages will, in general, be a real number.
 	
-	Note that the numerical value cannot be infinite. Given that we can only measure the finite average of a finite sequence of outcomes, we must have that these sampled averages converge to the expectation. The only way this could happen for an infinite expectation would be if the sampled average kept increasing over time. But this would be a contradiction of the assumption that an ensemble represents a reproducible collection of preparations. Therefore, statistical variables with infinite expectations are not justified.
+	Note that the numerical value cannot be infinite. Given that we can only measure the finite average of a finite sequence of outcomes, we must have that these sampled averages converge to the expectation. The only way this could happen for an infinite expectation would be if the sampled average grew without bound in magnitude as the sample size increased. Such averages would fail to provide a stable numerical characterization of the preparation, as required for a statistical quantity. Therefore, we require statistical quantities to have finite values.
 \end{justification}
 
 \begin{remark}
-	Note that variables will have a contiguous range on the ensembles because, given two ensembles with different values, we can mix them to obtain any intermediate value. This does not mean that the variable can take all possible values on pure states. For example, the number of particles in a pure state will necessarily be a non-negative integer, but we can mix those to create ensembles that have non-integer average number of particles.
+	Note that statistical quantities will have a contiguous range on the ensembles because, given two ensembles with different values, we can mix them to obtain any intermediate value. This does not mean that the statistical quantities can take all possible values on pure states. For example, in classical systems, the number of particles in a pure state will necessarily be a non-negative integer, but we can mix those to create ensembles that have non-integer average number of particles.
 \end{remark}
 
 \begin{coro}
@@ -3522,56 +3526,88 @@ These definitions extend the notion of properties and quantities that we defined
 \end{coro}
 \end{mathSection}
 
-Here we show that statistical quantities recover the standard random variables of classical mechanics. That is, every statistical variable is a random variable and every random variable is a statistical variable.
+In a classical ensemble space, bounded statistical quantities are exactly the expectations of bounded random variables. That is, the expectation of every bounded random variable is a bounded statistical quantity, and every bounded statistical quantity is the expectation of some bounded random variable.
 
 \begin{mathSection}
 \begin{prop}
-	Let $\Ens$ be a discrete or continuous classical ensemble space. Then each statistical quantity is the expectation of a random variable and vice-versa.
+	Let $\Ens$ be a discrete or continuous classical ensemble space over a sample space $X$ and let $M \geq 0$. Then each bounded statistical quantity is the expectation of a bounded random variable and vice-versa. That is, $F : \Ens \to [-M,M] \subseteq \mathbb{R}$ is a statistical quantity if and only if there exists a measurable function $f : X \to [-M,M] \subseteq \mathbb{R}$ such that $F(p) = \int_X f dp$ for all $p \in \Ens$. 
 \end{prop}
 
 \begin{proof}
-	Let $\Ens$ be a discrete or continuous classical ensemble space over some sample space $X$. Let $f : X \to \mathbb{R}$ be a random variable and $p \in \Ens$ a probability measure, then the expectation $F(p) \mapsto \int_{X} f dp$ is a continuous real affine map and is therefore a statistical quantity. Conversely, let $F : \Ens \to \mathbb{R}$ be a linear functional of the measures. Then, by the Riesz representation theorem, we can write $F(p) = \int_{X} f dp$ for some $f : X \to \mathbb{R}$.
+	Let $\mu$ be the counting measure in the discrete case and the Liouville measure in the continuous case. Identify each probability measure with its density in $L^1(X,\mu)$.
+	
+	Let $f : X \to [-M,M]$ be measurable and define $F(\rho) = \int_X f \rho d\mu$. Since $\rho$ is a probability density, $|F(\rho)| \leq M$. Linearity of the integral makes $F$ affine. Moreover,
+	\begin{equation}
+		\begin{aligned}
+			|F(\rho)-F(\sigma)| &= \left|\int_X f(\rho-\sigma)d\mu\right| \leq \int_X |f| |\rho-\sigma|d\mu \leq M \|\rho-\sigma\|_1.
+		\end{aligned}
+	\end{equation}
+	Therefore $F$ is continuous in the $L^1$ topology and in any refinement, including the ensemble topology. Thus $F$ is a statistical quantity.
+
+	Conversely, let $F : \Ens \to [-M,M]$ be a statistical quantity. Since $F$ is an affine functional defined on all non-negative integrable functions of norm one, it can be extended to every real-valued $g \in L^1(X,\mu)$ by
+	\begin{equation}
+		\widetilde{F}(g) = \|g^+\|_1 F\left(\frac{g^+}{\|g^+\|_1}\right)-\|g^-\|_1 F\left(\frac{g^-}{\|g^-\|_1}\right).
+	\end{equation}
+	where $g^\pm=\max(\pm g,0)$ and a term is omitted if its norm is zero. This is the unique bounded linear extension. That is, $|\widetilde F(g)|\le M\|g\|_1$ and $\widetilde{F}|_{\Ens} = F$.
+
+	By $L^1$--$L^\infty$ duality, there exists a real measurable function $f$ with $\|f\|_\infty \leq M$ such that $\widetilde{F}(g)=\int_X f g d\mu$. Changing $f$ on a set of measure zero if necessary, we can take $f : X \to [-M,M]$. Restricting to probability densities gives $F(p)=\int_X f dp$, as required.
 \end{proof}
 \end{mathSection}
 
-For a quantum system, we can show that all expectations of observables are statistical quantities.
+Similarly, in a quantum ensemble space, bounded statistical quantities are exactly the expectations of bounded observables. That is, the expectation of every bounded observable is a bounded statistical quantity, and every bounded statistical quantity is the expectation of some bounded observable.
 
 \begin{mathSection}
 \begin{prop}
-	Let $\Ens$ be a quantum ensemble space. All expectations of observables are statistical quantities.
+	Let $\Ens$ be a quantum ensemble space over a Hilbert space $\mathcal{H}$ and let $M \geq 0$. Then each bounded statistical quantity is the expectation of a bounded observable and vice-versa. That is, $F : \Ens \to [-M,M] \subseteq \mathbb{R}$ is a statistical quantity if and only if there exists a bounded self-adjoint operator $O : \mathcal{H} \to \mathcal{H}$ with $\|O\| \leq M$ such that $F(\rho) = \tr(\rho O)$ for all $\rho \in \Ens$.
 \end{prop}
 
 \begin{proof}
-	Let $\Ens$ be a quantum ensemble space over some Hilbert space $\mathcal{H}$. Let $O : \mathcal{H} \to \mathcal{H}$ be a Hermitian operator and $\rho$ be a density matrix. Then $F(\rho) \mapsto \tr(\rho O)$ is a continuous real affine map of $\Ens$ and it is therefore a statistical quantity.
+	Equip the real vector space of self-adjoint trace-class operators with the trace norm $\|A\|_1=\tr |A|$, where $|A|=\sqrt{A^2}$.
+	
+	Let $O : \mathcal{H} \to \mathcal{H}$ be self-adjoint with $\|O\| \leq M$ and define $F(\rho)=\tr(\rho O)$. Since $\rho$ is a density operator, $F(\rho)$ is real and $|F(\rho)| \leq M$. Linearity of the trace makes $F$ affine. Moreover,
+	\begin{equation}
+		\begin{aligned}
+			|F(\rho)-F(\sigma)| &= |\tr((\rho-\sigma)O)| \leq \|O\| \|\rho-\sigma\|_1 \leq M \|\rho-\sigma\|_1.
+		\end{aligned}
+	\end{equation}
+	Therefore $F$ is continuous in the trace-norm topology and in any refinement, including the ensemble topology. Thus $F$ is a statistical quantity.
+	
+	Conversely, let $F : \Ens \to [-M,M]$ be a statistical quantity. Since $F$ is an affine functional defined on all positive trace-class operators of norm one, it can be extended to every self-adjoint trace-class operator $A$ by
+	\begin{equation}
+		\widetilde{F}(A) = \|A^+\|_1 F\left(\frac{A^+}{\|A^+\|_1}\right)-\|A^-\|_1 F\left(\frac{A^-}{\|A^-\|_1}\right).
+	\end{equation}
+	where $A^\pm=(|A|\pm A)/2$ and a term is omitted if its norm is zero. This is the unique bounded linear extension. That is, $|\widetilde F(A)|\le M\|A\|_1$ and $\widetilde{F}|_{\Ens} = F$.
+	
+	By the duality between self-adjoint trace-class operators and bounded self-adjoint operators, there exists a bounded self-adjoint operator $O$ with $\|O\| \leq M$ such that $\widetilde{F}(A)=\tr(AO)$. Restricting to density operators gives $F(\rho)=\tr(\rho O)$, as required.
 \end{proof}
-
-\begin{remark}
-	We still need to prove that the converse is true: every statistical quantity in quantum mechanics corresponds to an operator. We may need to constrain the problem to bounded quantities, and recover the unbounded ones only as a limit.
-\end{remark}
 \end{mathSection}
 
 
-\subsection{Quantifiable spaces and locally convex vector spaces}
+\subsection{Statistical quantities, seminorms and locally convex vector spaces}
 
-In physics, we typically are able to fully identify ensembles by using measurable quantities. An ensemble space is quantifiable, then, when we have enough statistical quantities to recover all ensembles. There is a subtle problem with infinity, though, that is still not completely closed.
+%TODO: the following paragraphs will need to be redone once random variables are introduced
 
-In principle, the space of ensembles may include quantities whose expectation is infinite over some distributions. In classical mechanics, for example, given any probability distribution $\rho$ with infinite support we can find a random variable $f$ such that $\int_X f \rho dx$ diverges. For example, we can simply set $f(x) = 1/\rho(x)$ where $\rho(x)\neq0$ and $f(x) = 0$ otherwise. This can be solved in classical mechanics because we can always find distributions with compact support, which will guarantee convergence for all functions. In quantum mechanics, however, a wavefunction with compact support in position will have non-compact support in momentum and vice-versa. However, if we were to restrict ourselves to the Schwartz wavefunctions we would have finite expectation for all polynomials of position and momentum, and they would be dense in the Hilbert space. What makes sense to expect physically, then, is that there is a set of quantities that physically define the system which will need finite expectation. These will need to remain finite under coordinate transformations and time evolution for the physics to make sense. All these details are yet to be understood and framed in a mathematically precise way. Yet, it is clear that we need, at least, to characterize the case where a set of statistical quantities fully characterizes all ensembles.
+%In physics, we typically are able to fully identify ensembles by using measurable quantities. An ensemble space is quantifiable, then, when we have enough statistical quantities to recover all ensembles. There is a subtle problem with infinity, though, that is still not completely closed.
 
-\begin{mathSection}
-\begin{defn}
-	A \textbf{quantifiable} ensemble space is an ensemble space where each ensemble can be identified by a set of statistical quantities or, equivalently, ensembles are separated by statistical quantities. That is, there is a family of statistical quantities $F_i : \Ens \to \mathbb{R}$ such that, given $\ens_1, \ens_2 \in \Ens$, $F_i(\ens_1) = F_i(\ens_2)$ for all $i$ if and only if $\ens_1 = \ens_2$. An ensemble space is \textbf{topologically quantifiable} if statistical quantities determine convergence. That is, the topology is generated by the statistical quantities.
-\end{defn}
-\end{mathSection}
+%In principle, the space of ensembles may include quantities whose expectation is infinite over some distributions. In classical mechanics, for example, given any probability distribution $\rho$ with infinite support we can find a random variable $f$ such that $\int_X f \rho dx$ diverges. For example, we can simply set $f(x) = 1/\rho(x)$ where $\rho(x)\neq0$ and $f(x) = 0$ otherwise. This can be solved in classical mechanics because we can always find distributions with compact support, which will guarantee convergence for all functions. In quantum mechanics, however, a wavefunction with compact support in position will have non-compact support in momentum and vice-versa. However, if we were to restrict ourselves to the Schwartz wavefunctions we would have finite expectation for all polynomials of position and momentum, and they would be dense in the Hilbert space. What makes sense to expect physically, then, is that there is a set of quantities that physically define the system which will need finite expectation. These will need to remain finite under coordinate transformations and time evolution for the physics to make sense. All these details are yet to be understood and framed in a mathematically precise way. Yet, it is clear that we need, at least, to characterize the case where a set of statistical quantities fully characterizes all ensembles.
 
-We are going to show that the statistical quantities can be used to construct seminorms on the embedding vector space, inducing a topology that is Hausdorff and locally convex. Since the statistical quantities are continuous both in the topology of the ensemble space and in the topology induced on the embedding vector space, the embedding of the ensemble space is continuous. Note that the topology generated by the statistical quantities is not necessarily the topology of the ensemble space, as convergence of the expectation of continuous variables (i.e. weak convergence) does not guarantee convergence of the entropy (which requires, for example, convergence of the related inner products in the classical and quantum cases). Therefore, the embedding is not necessarily a homeomorphism onto the image with the full topology, but only with the topology generated by the statistical quantities. These coincide only in the case of a topologically quantifiable ensemble space. Finding equivalent characterizations of topologically quantifiable spaces is an open problem.
+% TODO: better definition will need to be created for when state spaces, like classical and quantum, can be characterized by random variables with a proper topology
+
+%\begin{mathSection}
+%\begin{defn}
+%	A \textbf{quantifiable} ensemble space is an ensemble space where each ensemble can be identified by a set of statistical quantities or, equivalently, ensembles are separated by statistical quantities. That is, there is a family of statistical quantities $F_i : \Ens \to \mathbb{R}$ such that, given $\ens_1, \ens_2 \in \Ens$, $F_i(\ens_1) = F_i(\ens_2)$ for all $i$ if and only if $\ens_1 = \ens_2$. An ensemble space is \textbf{topologically quantifiable} if statistical quantities determine convergence. That is, the topology is generated by the statistical quantities.
+%\end{defn}
+%\end{mathSection}
+
+In this section we show how the statistical quantities can be used to construct seminorms on the embedding vector space. This creates a bridge between the topology of the ensemble space and its embedding vector space. Note that the topology generated by the statistical quantities is not necessarily the topology of the ensemble space, as convergence of all statistical quantities (i.e. weak convergence) does not guarantee total variation convergence of probability distributions or convergence of the entropy. Therefore, the embedding is not necessarily a homeomorphism onto the image with the full topology, but only with the topology generated by the statistical quantities.
 
 \begin{mathSection}
 \begin{prop}
-	A statistical variable $F$ induces a seminorm on the embedding vector space $V_{\ens[a]}$.
+	A statistical quantity $F$ induces a seminorm on the embedding vector space $V_{\ens[a]}$.
 \end{prop}
 
 \begin{proof}
-	Let $F$ be a variable on $\Ens$, let $\ens[a] \in \Ens$ be an internal point and let $V_{\ens[a]}$ be the vector space of differences. Define $F_{\ens[a]} : V_{\ens[a]} \to \mathbb{R}$ such that $F_{\ens[a]}([r(\ens[b]-\ens[a])]) = |r (F(\ens[b]) - F(\ens[a]))|$.
+	Let $F$ be a statistical quantity on $\Ens$, let $\ens[a] \in \Ens$ be an internal point and let $V_{\ens[a]}$ be the vector space of differences. Define $F_{\ens[a]} : V_{\ens[a]} \to \mathbb{R}$ such that $F_{\ens[a]}([r(\ens[b]-\ens[a])]) = |r (F(\ens[b]) - F(\ens[a]))|$.
 	
 	First we show that $F_{\ens[a]}$ does not depend on the representative. If we have the zero class, then either $r=0$ or $\ens[b] = \ens[a]$. In both cases, the function evaluates to zero. For the non-zero class, we have
 	\begin{equation}
@@ -3599,47 +3635,50 @@ We are going to show that the statistical quantities can be used to construct se
 \end{proof}
 
 \begin{prop}
-	Let $\Ens$ be a quantifiable ensemble space and let $\ens[a]\in\Ens$ be an internal point. Equip the embedding vector space $V_{\ens[a]}$ with the locally convex topology generated by the seminorms induced by the statistical quantities. Then $V_{\ens[a]}$ is Hausdorff and locally convex, and the natural embedding $\iota_{\ens[a]}:\Ens\to V_{\ens[a]}$ is continuous. If, moreover, $\Ens$ is topologically quantifiable, then $\iota_{\ens[a]}$ is a homeomorphism onto its image.
+	Let $\Ens$ be an ensemble space and let $\ens[a]\in\Ens$ be an internal point. Equip the embedding vector space $V_{\ens[a]}$ with the topology generated by the seminorms induced by the statistical quantities. Then $V_{\ens[a]}$ is a locally convex topological vector space, and the natural embedding $\iota_{\ens[a]}:\Ens\to V_{\ens[a]}$ is continuous. If the statistical quantities separate ensembles, then $V_{\ens[a]}$ is Hausdorff.
 \end{prop}
-
 \begin{proof}
-	Let $\Ens$ be a quantifiable ensemble space and $V_{\ens[a]}$ be the embedding vector space corresponding to the internal point $\ens[a] \in \Ens$. Consider all the seminorms defined by the family of statistical variables that make $\Ens$ quantifiable. These will induce a topology on $V_{\ens[a]}$ making it a topological vector space (see \href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.2 in here}). Since the topology is generated by seminorms, it is locally convex. Since the seminorms fully identify each point, the topology is Hausdorff (see \href{https://personal.math.ubc.ca/~cass/research/pdf/TVS.pdf}{Prop 2.6 in here}). Since the semi-norms are equivalently defined on $\Ens$, if $U \subseteq V_{\ens[a]}$ is an open subset of $V_{\ens[a]}$, then $U \vert_{\Ens}$ is an open subset of $\Ens$. Therefore the natural embedding $\iota_{\ens[a]}:\Ens\to V_{\ens[a]}$ is continuous.
+	By the preceding proposition, each statistical quantity $F$ induces a seminorm $F_{\ens[a]}$ on $V_{\ens[a]}$. The topology generated by these seminorms makes addition and scalar multiplication continuous. Since finite intersections of seminorm balls form convex neighborhoods of zero, $V_{\ens[a]}$ is a locally convex topological vector space.
 	
-	Now let $\Ens$ be topologically quantifiable. Then, since the topology generated by the statistical quantities is the topology of $\Ens$, $\iota_{\ens[a]}:\Ens\to V_{\ens[a]}$ is a topological embedding. 
+	To show continuity of the natural embedding, let $v=[r(\ens[b]-\ens[a])] \in V_{\ens[a]}$. For every statistical quantity $F$ and every $\ens \in \Ens$, we have
+	\begin{equation}
+		\begin{aligned}
+			F_{\ens[a]}(\iota_{\ens[a]}(\ens)-v)
+			&= |F(\ens)-F(\ens[a])-r(F(\ens[b])-F(\ens[a]))|.
+		\end{aligned}
+	\end{equation}
+	Since $F$ is continuous, the inverse image of every translated seminorm ball is open in $\Ens$. Finite intersections of these balls form a basis for the topology of $V_{\ens[a]}$. Therefore $\iota_{\ens[a]}$ is continuous.
+	
+	Finally, suppose the statistical quantities separate ensembles. Let $v=[r(\ens[b]-\ens[a])] \neq 0$. Then $r\neq0$ and $\ens[b]\neq\ens[a]$, so there exists a statistical quantity $F$ such that $F(\ens[b])\neq F(\ens[a])$. Thus
+	\begin{equation}
+		F_{\ens[a]}(v)=|r|\,|F(\ens[b])-F(\ens[a])|>0.
+	\end{equation}
+	Since every non-zero vector has a non-zero value under some defining seminorm, $V_{\ens[a]}$ is Hausdorff.
+\end{proof}
+
+\begin{prop}
+	Bounded statistical quantities separate ensembles in discrete classical, continuous classical, and quantum ensemble spaces.
+\end{prop}
+\begin{proof}
+	For discrete or continuous classical ensemble spaces, let $p,q \in \Ens$ be distinct probability measures. Then there exists a measurable set $A \subseteq X$ such that $p(A)\neq q(A)$. The expectation of the indicator of $A$ defines a bounded statistical quantity $F$ by the classical correspondence established above. We have
+	\begin{equation}
+		F(p)=p(A)\neq q(A)=F(q).
+	\end{equation}
+	Therefore bounded statistical quantities separate classical ensembles.
+	
+	For quantum ensemble spaces, let $\rho,\sigma \in \Ens$ be distinct density operators and set $O=\rho-\sigma$. Since $O$ is bounded and self-adjoint, its expectation defines a bounded statistical quantity $F(\tau)=\tr(\tau O)$ by the quantum correspondence established above. We have
+	\begin{equation}
+		\begin{aligned}
+			F(\rho)-F(\sigma)
+			&= \tr(\rho O)-\tr(\sigma O) \\
+			&= \tr((\rho-\sigma)O) \\
+			&= \tr(O^2)>0.
+		\end{aligned}
+	\end{equation}
+	The last inequality holds because $O^2$ is a non-zero positive trace-class operator. Therefore bounded statistical quantities separate quantum ensembles.
 \end{proof}
 \end{mathSection}
 
-At this point, we are not guaranteed that ensembles can be characterized by a countable family of statistical variables. The issue is that, while a second countable locally convex topology is generated by countably many seminorms, we know that the topology of the ensemble space is second countable but we do not know whether the subtopology generated by the statistical variables through the seminorms is second countable. Physically, it would mean that we have a way to experimentally distinguish between two ensembles (i.e. a second countable topology) but not through the expectation of statistical quantities. The entropy would, for example, provide other more stringent ways. It is not yet clear whether this is something that can indeed happen, and therefore a potential source of new physics, or we simply are missing a way to prove the result. Currently, the second option seems more likely.
-
-If one is able to prove that the topology induced by the statistical variables is second countable, or if we simply impose that a countable family of statistical variables is enough to distinguish between ensembles, then the space is a metrizable second countable locally convex topological vector space.
-
-\begin{mathSection}
-\begin{prop}
-	If a quantifiable ensemble space is fully determined by countably many statistical variables, then it embeds continuously into a metrizable second countable locally convex topological vector space.
-\end{prop}
-
-\begin{proof}
-	If a quantifiable ensemble space is characterized by countably many statistical variables, the topology induced on the vector space is second countable. A Hausdorff second countable topological vector space is metrizable.
-\end{proof}
-
-\begin{remark}
-	Note that we are missing completeness in terms of the seminorms to obtain a Fr\'echet space and it is unclear we are going to have it. For the classical case, suppose we restrict ourselves to all absolutely continuous probability measures with compact support. Expectations of all polynomials of position and momentum fully identify the measure. However, Dirac measures are also fully identified by those quantities, which can be achieved as the limit of a uniform distribution whose support shrinks to a point. That would give us a sequence of convergent expectations whose corresponding ensembles do not converge in the space.
-\end{remark}
-
-\begin{prop}
-	Discrete/continuous classical ensemble spaces and quantum ensemble spaces are quantifiable.
-\end{prop}
-
-\begin{proof}
-	For discrete classical spaces, the expectation of the indicator of each extreme point defines a countable set of quantities that fully identifies the distribution.
-	
-	For continuous classical spaces, note that $L^1(\mathbb{R}^{2n})$ is a Hausdorff second countable locally convex topological space.
-	
-	For quantum ensemble spaces, the expectations of projectors define a family of statistical variables that can distinguish any pair of mixed states.
-\end{proof}
-\end{mathSection}
-
-An open problem is whether statistical quantities are required by ensemble spaces or they are an additional requirement. If we were able to show that ensemble spaces always embed continuously into a locally convex second countable topological vector space, one may use the seminorms to define quantities. Another approach is to investigate whether the existence of linear transformations parameterized by real quantities, such as time evolution, gives us statistical quantities through the generators of the transformations. It would also mean that, if time is not modeled as a real-valued parameter, then the ensemble space would have to change.
 
 \subsection{Finite-dimensional ensemble spaces}
 
@@ -3764,7 +3803,7 @@ TODO: add descriptions, explanations, and motivation throughout this section.
 \begin{proof}
 	If $\dim(A)=0$, then $A$ is a singleton and is therefore closed since $\Ens$ is Hausdorff. If $\dim(A) = k > 0$, then using an affine basis of $A$ we can find a simplex $\Delta = \hull(\{\ens[a]_0,\ldots,\ens[a]_k\})$ with a relative algebraic internal point $\ens[a] \in \Delta \setminus B_\Delta$. Since $\Delta$ and $B_\Delta$ are compact, they are also closed because $\Ens$ is Hausdorff.
 	
-	TODO: make minor improvements in exposition. Since $\Ens$ is second countable, it is first countable, so it is sufficient to show sequential closure. Suppose $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ such that $\ens[b]_i \to \ens[b]$. We need to show that $\ens[b] \in A$. If $\ens[b]_i \in \Delta$ for infinitely many $i$, then $\ens[b] \in \Delta \subseteq A$ by the closure of $\Delta$, so without loss of generality assume that $\ens[b]_i \notin \Delta$ for all $i$. Thus, by \ref{pm-es-passThroughSimplexBoundary}, there exists $p_i \in (0,1)$ such that $\ens[c]_i = p_i\ens[a] + \bar{p_i}\ens[b]_i \in B_\Delta$ for each $i \in \mathbb{N}$.
+	Since $\Ens$ is second countable, it is first countable, so it is sufficient to show sequential closure. Suppose $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ such that $\ens[b]_i \to \ens[b]$ for some $\ens[b] \in \Ens$. We need to show that $\ens[b] \in A$. If $\ens[b]_i \in \Delta$ for infinitely many $i$, then $\ens[b] \in \Delta \subseteq A$ by the closure of $\Delta$, so without loss of generality assume that $\ens[b]_i \notin \Delta$ for all $i$. Thus, by \ref{pm-es-passThroughSimplexBoundary}, there exists $p_i \in (0,1)$ such that $\ens[c]_i = p_i\ens[a] + \bar{p_i}\ens[b]_i \in B_\Delta$ for each $i \in \mathbb{N}$.
 	
 	\begin{figure}[H]
 		\centering
@@ -3820,7 +3859,7 @@ TODO: add descriptions, explanations, and motivation throughout this section.
 			\filldraw [black] (b4) circle (1pt) node [above] {$\ens[b]_4$};
 			\filldraw [black] (b) circle (1pt) node [right] {$\ens[b]$};
 		\end{tikzpicture}
-		\caption{TODO: move c, d, F(E) on the F axis. Label the fibers F inverse of c . Given a sequence $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ converging to $\ens[b] \notin \Delta$, we can assume the sequence eventually exits $\Delta$. Then each segment connecting $\ens[a]$ to $\ens[b]_i$ intersects $B_\Delta$ at $\ens[c]_i$. Some subsequence of $\{\ens[c]_i\}_{i=1}^\infty$ converges to $\ens[c] = p\ens[a] + \bar{p}\ens[b] \in B_\Delta \subseteq A$. Then $\ens[b] \in A$ since $A$ is affine.}
+		\caption{Given a sequence $\{\ens[b]_i\}_{i=1}^\infty \subseteq A$ converging to $\ens[b] \notin \Delta$, we can assume the sequence eventually exits $\Delta$. Then each segment connecting $\ens[a]$ to $\ens[b]_i$ intersects $B_\Delta$ at $\ens[c]_i$. Some subsequence of $\{\ens[c]_i\}_{i=1}^\infty$ converges to $\ens[c] = p\ens[a] + \bar{p}\ens[b] \in B_\Delta \subseteq A$. Then $\ens[b] \in A$ since $A$ is affine.}
 	\end{figure}
 	
 	Since $[0,1]$ is compact, there exists a subsequence $\{p_{i_n}\}_{n=1}^{\infty}$ and a $p \in [0,1]$ so that $p_{i_n} \to p$. By continuity of mixing, $\ens[c]_{i_n} \to  p\ens[a] + \bar{p}\ens[b]$. Note that $p\ens[a] + \bar{p}\ens[b] \in B_\Delta$ since $B_\Delta$ is closed, and $\bar{p} \not= 0$ because otherwise we would have $p\ens[a] + \bar{p}\ens[b] = \ens[a] \notin B_\Delta$. Since $A$ is affine, $\ens[b] = \frac{1}{\bar{p}}(p\ens[a] + \bar{p}\ens[b]) - \frac{p}{\bar{p}}\ens[a] \in A$. 
@@ -3895,7 +3934,7 @@ TODO: add descriptions, explanations, and motivation throughout this section.
 			
 			\node at (F2) [right, xshift=6] {$F$};
 		\end{tikzpicture}
-		\caption{Given a sequence $\{\ens[c]_i\}_{i=1}^\infty$ converging to $\ens[e]$ with $F(\ens[e]_i) \le c$ for all $i$, the line segment connecting $\ens[e]_i$ with $\ens[e]$ passes through $F^{-1}(c)$. TODO: review caption}
+		\caption{TODO: move c, d, F(E) on the F axis. Label the fibers F inverse of c . Given a sequence $\{\ens[c]_i\}_{i=1}^\infty$ converging to $\ens[e]$ with $F(\ens[e]_i) \le c$ for all $i$, the line segment connecting $\ens[e]_i$ with $\ens[e]$ passes through $F^{-1}(c)$. TODO: review caption}
 	\end{figure}
 	
 	Without loss of generality, suppose $F(\ens[e]_i) \le c$ for every $i$. Note that the fiber $F^{-1}(\{c\}) = \{\ens[a] \in \Ens \mid F(\ens[a]) = c\}$ is an affine set. That is, if $\sum_{j=0}^mr_j\ens[b]_j$ is an affine combination of elements in $F^{-1}(\{c\})$, then $F(\sum_{j=0}^mr_j\ens[b]_j) = \sum_{j=0}^mr_jF(\ens[b]_j) = c$. So $F^{-1}(\{c\})$ is closed by \ref{pm-es-affineSetsClosed}.
@@ -3925,88 +3964,116 @@ TODO: add descriptions, explanations, and motivation throughout this section.
 
 \subsection{Connection to Choquet theory}
 
-We now want to establish a connection between ensemble spaces and Choquet theory. Specifically, we want to show that the fraction capacity restricted to the extreme points corresponds to the supremum of all possible measures that represent an ensemble. Moreover, the fraction capacity over the extreme points is additive exactly when the ensemble space is a Choquet simplex.
+The goal of Choquet theory is to study how a point of a compact convex set can be represented by a probability measure over its extreme points. In some cases, this can be understood as representing an ensemble as a probability measure over pure states. Therefore, it is interesting to establish a connection between ensemble spaces and Choquet theory. Specifically, we want to show that the fraction capacity can be used to recover the supremum of all possible measures that represent an ensemble. Moreover, this leads to an additive measure exactly when the ensemble space is a Choquet simplex.
 
-The goal of Choquet theory is to study how a point of a compact convex set can be represented by a probability measure over its extreme points. First, we need to define what it means to represent an ensemble with a probability measure. Let $E$ be a convex subset of a locally convex topological vector space $V$ and $X$ the set of extreme points. We say that $\ens \in E$ is represented by a probability measure $p : \Sigma_{E} \to [0,1]$ if $F(\ens) = \int_E F dp$ for every continuous linear functional $F$ on $V$. Moreover, we say that $p$ is supported by the extreme points if $p(X) = 1$. Given any probability measure $p$ over the extreme points $X$, we can always find an $\ens \in E$ that is represented by $p$. Therefore, we have a map from the set of probability measures to the set of ensembles. Choquet theory characterizes how the map works in the opposite direction.
+Before starting, we should stress that Choquet theory is not general enough for our purposes. Many ensemble spaces, like the continuous classical ones, will not have extreme points or be compact. This means that, unfortunately, the connection is of limited practical usefulness. It is, however, interesting to develop new insights and for a future development of a Choquet theory extension to our more general case.
+
+First, we need to define what it means to represent an ensemble with a probability measure. Let $E$ be a compact convex subset of a Hausdorff, second-countable (and therefore metrizable) locally convex topological vector space $V$ and $X$ the set of extreme points. We say that $\ens \in E$ is represented by a probability measure $p : \Sigma_{E} \to [0,1]$ if $F(\ens) = \int_E F dp$ for every continuous linear functional $F$ on $V$. Given any probability measure $p$, we can always find a unique $\ens \in E$ that is represented by $p$. That is, we have a map $r : M_1(E) \to E$, called the resultant map, from the set of probability measures to the set of ensembles. Since $X$ is a Borel set, we can in particular study probability measures that are supported by the extreme points. That is, $p(X) = 1$. The goal of Choquet theory is to characterize how the map  $r$ works in the opposite direction.
 
 The first question is whether each ensemble is represented by a probability measure. Choquet theory tells us that this is the case:
 \begin{mathSection}
 \begin{thrm}[Choquet-Bishop-de Leeuw]\label{pm-es-ChoquetExistence}
-	Let $E$ be a compact convex subset of a locally convex topological vector space $V$, and let $\ens \in E$. Then there exists a probability measure $p_{\ens}$ on $E$ which represents $\ens$ and is supported by the extreme points $X$.
+	Let $E$ be a compact convex subset of a metrizable locally convex topological vector space $V$, and let $\ens \in E$. Then there exists a probability measure $p_{\ens}$ on $E$ which represents $\ens$ and is supported by the extreme points $X$.
 \end{thrm}
 \end{mathSection}
 The second question is whether the representation is unique. Choquet theory has a clear answer.
 \begin{mathSection}
 \begin{thrm}[Choquet uniqueness]\label{pm-es-ChoquetUniqueness}
-	Let $E$ be a compact convex subset of a locally convex topological vector space $V$. Then $E$ is a Choquet simplex if and only if for each $\ens \in E$ there exists a unique measure $p_{\ens}$ which represents $\ens$ and is supported by the extreme points $X$.
+	Let $E$ be a compact convex subset of a metrizable locally convex topological vector space $V$. Then $E$ is a Choquet simplex if and only if for each $\ens \in E$ there exists a unique measure $p_{\ens}$ which represents $\ens$ and is supported by the extreme points $X$.
 \end{thrm}
 \end{mathSection}
 The definition of a Choquet simplex is rather involved, so it is omitted. Intuitively, it is the generalization of the finite-dimensional simplex. The key point is that $E$ is a Choquet simplex if and only if the ensemble space does not allow multiple decompositions in terms of extreme points.
 
 Note that there is a mismatch between ensemble spaces and the definition required by Choquet theory. While ensemble spaces are convex subsets of a vector space, they will not necessarily be compact. For example, in the classical continuous case, the space of absolutely continuous probability distributions is not compact, even if we restrict ourselves to a compact subset of phase space. The issue is that the extreme points, the Dirac distributions, are not ensembles. Moreover, ensemble spaces are equipped with an entropy, and therefore have more structure than required by Choquet theory.
 
-However, the link we want to establish to Choquet theory is limited to the fraction capacity, which can be defined for any convex set. Therefore we are going to study the relationship between the fraction capacity in all cases where Choquet theory is applicable. If an ensemble space $\Ens$ is compact, the results will apply directly. If an ensemble space $\Ens$ admits some type of compactification $E$, like extending the space of ensembles to a compact set, then the results will apply to these extreme points that are not necessarily ensembles.
+However, the link we want to establish to Choquet theory is limited to the fraction capacity, which can be defined for any convex set. Moreover, given that the fraction capacity is defined on convex hull and the real suprema, its definition does not depend on the topology used. Therefore, the problem of characterizing the fraction capacity in all cases where Choquet theory is applicable is well posed. If an ensemble space $\Ens$ is compact, the results will apply directly. If an ensemble space $\Ens$ admits a compact convex extension $E$, like extending the space of ensembles to a compact set, then the results will apply to the fraction capacity computed in $E$, whose extreme points are not necessarily ensembles.
 
-We first note that there is a connection between mixtures and the representation through a probability measure. We can, in fact, write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $\ens$ can be represented by the probability measure $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$, and $p(\Ens \setminus \{\ens[a], \ens[b]\}) = 0$. Therefore, if $M_{\ens}$ is the set of probability measures that represent $\ens$, the fraction $\fraction_{\ens}(\ens[a])$ is given by the maximum value over $\{\ens[a]\}$ that can be taken by one of those measures. That is,  $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, p \in M_{\ens} \}$.
+We first note that there is a connection between mixtures and the representation through a probability measure. We can, in fact, write every mixture of two distinct ensembles $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ if and only if $\ens$ can be represented by the probability measure $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$, and $p(\Ens \setminus \{\ens[a], \ens[b]\}) = 0$. Therefore, if $M_{\ens}$ is the set of probability measures that represent $\ens$, the fraction $\fraction_{\ens}(\ens[a])$ is given by the maximum value over $\{\ens[a]\}$ that can be taken by one of those measures. That is,  $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, p \in M_{\ens} \}$. However, on a continuum countable combinations of the extreme points may not reach all ensembles. For example, consider $E = M_1([0,1])$. The uniform distribution over $[0,1]$ cannot be expressed as a countable mixture of extreme points, but only as a convex integral. When computing the fraction capacity, then, we have to compute it not on a subset $A \subseteq E$ directly, but rather on the set $r(M_1(A))$ of all ensembles reachable from $A$ through a convex integral.
 
 \begin{mathSection}
+\begin{defn}
+	Let $E$ be a compact convex subset of a locally convex topological vector space $V$ and define the fraction capacity as for an ensemble space. Let $r : M_1(E) \to E$ be the resultant map. Let $\ens \in E$ be a point, $A \subset E$ a Borel set, $M_1(A)$ the set of probability measures defined on $A$ and $r(M_1(A))$ the set of their resultants. Then the \textbf{integral fraction capacity} for $\ens$ is defined to be $\mathrm{ifcap}_{\ens}(A) = \fcap_{\ens}(r(M_1(A)))$.
+\end{defn}
+	
 \begin{prop}\label{pm-es-fractionSupChoquet}
-	Let $E$ be a compact convex subset of a locally convex topological vector space $V$ and define the fraction capacity as for an ensemble space. Let $\ens \in E$ be a point and $M_{\ens}$ be the set of measures that represent $\ens$. Then $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, p \in M_{\ens} \}$  for all $\ens[a] \in E$ and $\fcap_{\ens}(A) = \sup \{ p(A) \, | \, p \in M_{\ens} \}$ for all $A \subseteq E$.
+	  Let $\ens \in E$ be a point and $M_{\ens}$ be the set of measures that represent $\ens$. Then $\fraction_{\ens}(\ens[a]) = \sup \{ p(\{\ens[a]\}) \, | \, p \in M_{\ens} \}$  for all $\ens[a] \in E$ and $\mathrm{ifcap}_{\ens}(A) = \sup \{ p(A) \, | \, p \in M_{\ens} \}$ for all Borel sets $A \subseteq E$.
 \end{prop}
 
 \begin{proof}
-	Let $\ens \in E$ and suppose $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ with $\ens[a], \ens[b] \in E$ and $\lambda \in [0,1]$. Then the measure $p$ such that $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$ and $p(E\setminus \{ \ens[a], \ens[b]\})=0$ represents $\ens$. In fact, for any statistical variable $F$ we have $F(\ens) = \lambda F(\ens[a]) + \bar{\lambda} F(\ens[b]) = \int_E F dp$. The converse is true as well. If $p \in M_{\ens}$ such that $p(\{\ens[a]\}) = \lambda$, $p(\{\ens[b]\}) = \bar{\lambda}$ and $p(E\setminus \{ \ens[a], \ens[b]\})=0$, then $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$. Since a Dirac measure at a point $\ens[a]$ represents $\ens[a]$, the convex combination of two Dirac measures represents the convex combination of the two corresponding points. Now let $p \in M_{\ens}$ such that $p(\{\ens[a]\}) \neq 1$. We can write it as $p = p(\{\ens[a]\}) \delta_{\ens[a]} + p(E \setminus \{\ens[a]\})\frac{p|_{E \setminus \{\ens[a]\}}}{p(E \setminus \{\ens[a]\})}$ where $\delta_{\ens[a]}$ is the Dirac measure over $\ens[a]$. But since every probability measure will represent an element of $E$, we can find $\ens[b] \in E$ that is represented by $\frac{p|_{E \setminus \{\ens[a]\}}}{p(E \setminus \{\ens[a]\})}$. Therefore there is $\hat{p} \in M_{\ens}$ such that $\hat{p}(\{\ens[a]\}) = p(\{\ens[a]\})$, $\hat{p}(\{\ens[b]\}) = p(E \setminus \{\ens[a]\})$ and $\hat{p}(E\setminus \{ \ens[a], \ens[b]\})=0$. Which means $\fraction_{\ens}(\ens[a]) = \sup(\{ \lambda \in [0,1] \, | \, \exists \, \ens[b] \in E \text{ s.t. }  \ens = \lambda \ens[a] + \bar{\lambda} \ens[b] \}) = \sup \{ p(\{\ens[a]\}) \, | \, p \in M_{\ens} \}$.
+	We first prove the second identity. If $A=\emptyset$, both sides are zero. Otherwise, let $B=r(M_1(A))$. We regard measures on $A$ as measures on $E$ concentrated on $A$.
 	
-	Now let $A \subseteq E$ be convex and let $M_A$ be the set of all measures whose support is in $A$. Each measure in $M_A$ will represent a point in $A$. Also, since the expectation of a convex combination of measures corresponds to a convex combination of the expectation values, $M_A$ will be convex as well. If $p$ represents $\ens$ and $p(A) \neq 0$, then $\frac{p|_A}{p(A)}$ is a probability measure that represents an element $\ens[a] \in A$ such that $\ens = p(A) \ens[a] + p(A^{\complement}) \ens[b]$. Therefore $\fraction_{\ens}(A) = \sup \{ p(A) \, | \, p \in M_{\ens} \}$.
+	Let $p \in M_{\ens}$ and $t=p(A)$. If $t=0$, the inequality $\mathrm{ifcap}_{\ens}(A) \geq p(A)$ is immediate. If $t=1$, then $\ens \in B$ and $\mathrm{ifcap}_{\ens}(A)=1$. For $0<t<1$, let $\ens[b] = r\left(\frac{p|_A}{t}\right)$ and $	\ens[c] = r\left(\frac{p|_{A^{\complement}}}{\bar{t}}\right)$.
+	By definition of representation, $\ens = t\ens[b] + \bar{t}\ens[c]$. Since $\ens[b] \in B$, we have
+	\begin{equation}
+		\mathrm{ifcap}_{\ens}(A)
+		= \fcap_{\ens}(B)
+		\geq \fraction_{\ens}(\ens[b])
+		\geq t = p(A).
+	\end{equation}
+	Taking the supremum over $p \in M_{\ens}$ gives one inequality.
+	
+	Conversely, suppose $\ens = \lambda\ens[b] + \bar{\lambda}\ens[c]$, where $\ens[b] \in \hull(B)$, $\ens[c] \in E$ and $\lambda \in [0,1]$. A finite mixture of resultants of measures concentrated on $A$ is represented by the corresponding mixture of those measures. Thus there exists a probability measure $q$ concentrated on $A$ which represents $\ens[b]$.	The measure $p=\lambda q+\bar{\lambda}\delta_{\ens[c]}$ therefore represents $\ens$, where $\delta_{\ens[c]}$ is the Dirac measure at $\ens[c]$. Moreover, $p(A) = \lambda+\bar{\lambda}\delta_{\ens[c]}(A) \geq \lambda$. Taking the supremum over all admissible mixing coefficients gives
+	\begin{equation}
+		\mathrm{ifcap}_{\ens}(A)
+		= \fcap_{\ens}(B)
+		\leq \sup \{p(A) \, | \, p \in M_{\ens}\}.
+	\end{equation}
+	Together with the reverse inequality, this proves the second identity.
+	
+	Finally, $r(M_1(\{\ens[a]\}))=\{\ens[a]\}$, so $\mathrm{ifcap}_{\ens}(\{\ens[a]\}) = \fcap_{\ens}(\{\ens[a]\}) = \fraction_{\ens}(\ens[a])$.	Applying the second identity to $A=\{\ens[a]\}$ proves the first.
 \end{proof}
 \end{mathSection}
 
-If we restrict the fraction capacity to the set $X$ of extreme points, it will represent the supremum of all probability measures over the extreme points. If $E$ is a Choquet simplex, then each ensemble will be represented by a unique measure over the extreme points, therefore the fraction capacity over the extreme points will coincide with that measure, and will be additive. Conversely, if the fraction capacity over the extreme points is additive, the fraction capacity must be the supremum over a single measure. If the fraction capacity over the extreme points is additive for all ensembles, then each ensemble is represented by a unique probability measure over the extreme points. In other words, the additivity of the fraction capacity over the extreme points exactly captures the single decomposition of ensembles into pure states and the Choquet simplex case.
+If we restrict the integral fraction capacity to the set $X$ of extreme points, it will represent the supremum of all probability measures over the extreme points. If $E$ is a Choquet simplex, then each ensemble will be represented by a unique measure over the extreme points, therefore the integral fraction capacity over the extreme points will coincide with that measure, and will be additive. Conversely, if the integral fraction capacity over the extreme points is additive, the integral fraction capacity must be the supremum over a single measure. If the integral fraction capacity over the extreme points is additive for all ensembles, then each ensemble is represented by a unique probability measure over the extreme points. In other words, the additivity of the integral fraction capacity over the extreme points exactly captures the single decomposition of ensembles into pure states and the Choquet simplex case.
 
 \begin{mathSection}
 \begin{prop}
-	Let $E$ be a compact convex subset of a locally convex topological vector space $V$. Then the following statements are equivalent:
+	The following statements are equivalent:
 	\begin{enumerate}
 		\item $E$ is a Choquet simplex
-		\item each ensemble is uniquely represented by a measure over its extreme points $X$
-		\item the fraction capacity restricted over the extreme points is additive
+		\item each ensemble is uniquely represented by a probability measure over its extreme points $X$
+		\item the integral fraction capacity restricted over the extreme points is additive for all $\ens \in E$.
 	\end{enumerate}
 \end{prop}
 
 \begin{proof}
-	By theorem \ref{pm-es-ChoquetUniqueness}, 1 and 2 are equivalent. 
+	By theorem \ref{pm-es-ChoquetUniqueness}, 1 and 2 are equivalent.
 	
-	Now consider $\fraction_{\ens}|_X$. By \ref{pm-es-fractionSupChoquet}, $\fcap_{\ens}|_X$ gives us the supremum of all possible measures supported by $X$ that represent $\ens$. By \ref{pm-es-ChoquetExistence}, $\ens$ is represented by at least one measure. Suppose that it is represented by exactly one measure $p$. Then $\fraction_{\ens}|_X = p$ and therefore $\fraction_{\ens}|_X$ is additive. Now, suppose that $\ens$ is represented by at least two distinct measures $p_1$ and $p_2$. Then there will be a set $A \subseteq X$ such that $p_1(A) \neq p_2(A)$. Suppose, without loss of generality, that $p_1(A) > p_2(A)$. We will also have $p_1(A^{\complement}) = 1- p_1(A) < 1 - p_2(A) = p_2(A^{\complement})$. Therefore $\fcap_{\ens}(A \cup A^{\complement})=\fcap_{\ens}(X) = 1 = p_1(A) + p_1(A^{\complement}) < p_1(A) + p_2(A^{\complement}) \leq \fcap_{\ens}(A) + \fcap_{\ens}(A^{\complement})$. The fraction capacity is therefore additive if and only if $\ens$ is represented by a single measure over the extreme points. Therefore 2 and 3 are equivalent.
+	Fix $\ens \in E$. For Borel subsets of $X$, the supremum in \ref{pm-es-fractionSupChoquet} can be restricted to measures supported by $X$: keep the part already on $X$ and replace the remainder by a Choquet representation with the same weight and resultant. In particular, $\mathrm{ifcap}_{\ens}(X)=1$.
+	
+	If $\ens$ has a unique representing probability measure $p$ supported by $X$, then $\mathrm{ifcap}_{\ens}(A)=p(A)$ for every Borel $A \subseteq X$. Therefore the integral fraction capacity over $X$ is additive.
+	
+	Conversely, suppose the integral fraction capacity over $X$ is additive. Let $p$ be any representing probability measure supported by $X$, whose existence follows from theorem \ref{pm-es-ChoquetExistence}. For every Borel $A \subseteq X$,
+	\begin{equation}
+		\begin{aligned}
+			p(A)
+			&\leq \mathrm{ifcap}_{\ens}(A)
+			= 1-\mathrm{ifcap}_{\ens}(X\setminus A) \\
+			&\leq 1-p(X\setminus A)
+			= p(A).
+		\end{aligned}
+	\end{equation}
+	Thus every such measure agrees with $\mathrm{ifcap}_{\ens}$ on all Borel subsets of $X$, so the representation is unique. Since $\ens$ was arbitrary, 2 and 3 are equivalent.
 \end{proof}
 \end{mathSection}
 
 \subsection{Macrostates and thermodynamics}
 
-In this section we try to recover some elements of thermodynamics on the generalized ensemble space. We want to recover Gibbs' thermodynamics, which means an equation of state in terms of extensive quantities. Instead of extensive quantities, we are going to use statistical quantities. Note that the idea that all extensive quantities are statistical (i.e. the average during mixing) seems to work. In fact, in statistical mechanics the energy, the number of particles and the volume are averages over microstates. It also seems that intensive quantities do not average during mixing. Temperature, for example, is only defined on equilibria (i.e. of Boltzmann distributions) and the mixture of two equilibria at different temperatures is not an equilibrium. Still, we would need a general proof, which would require the notion of product spaces (i.e. intensive/extensive quantities represent system/subsystem relationship).
+In this section we try to recover some elements of thermodynamics on the generalized ensemble space. We want to recover Gibbs' thermodynamics, which means an equation of state in terms of extensive quantities. Instead of extensive quantities, we are going to use statistical quantities. Note that the idea that all extensive quantities are statistical (i.e. the average during mixing) seems to work. In fact, in statistical mechanics the energy, the number of particles and the volume are averages over microstates. It also seems that intensive quantities do not average during mixing. Temperature, for example, is only defined on equilibria (i.e. of Boltzmann distributions) and the mixture of two equilibria at different temperatures is, in general, not an equilibrium. Still, we would need a general proof, which would require the notion of product spaces (i.e. intensive/extensive quantities represent system/subsystem relationship).
 
 \begin{mathSection}
 \begin{defn}
-	Let $\Ens$ be an ensemble space. Let $F : \Ens \to \mathcal{Q}$ be a statistical property. The \textbf{coarse graining} of $\Ens$ over $F$ is the set $\mathcal{M} \subseteq \Ens$ represented by the ensembles that maximize the entropy for each fixed value of the property. That is, there exists a map $\psi : \mathcal{Q} \to \mathcal{M}$ such that $F(\psi(x)) = x$ and $S(\psi(x)) \geq S(\ens)$ for all $\ens \in \Ens$ such that $F(\ens) = x$. The \textbf{equation of state} is the map $S : \mathcal{Q} \to \mathbb{R}$ defined as $S(x) \mapsto S(\psi(x))$ that returns the entropy given the value of the statistical property.
+	Let $\Ens$ be an ensemble space. Let $F : \Ens \to \mathcal{Q}$ be a statistical property. The \textbf{coarse graining} of $\Ens$ over $F$ is the set $\mathcal{M} \subseteq \Ens$ represented by the ensembles that maximize the entropy for each fixed value of the property. That is, there exists a map $\psi : \mathcal{Q} \to \mathcal{M}$ such that $F(\psi(x)) = x$ and $S(\psi(x)) \geq S(\ens)$ for all $\ens \in \Ens$ such that $F(\ens) = x$. The \textbf{equation of state} is the map $S : \mathcal{Q} \to \mathbb{R}$ defined as $x \mapsto S(\psi(x))$ that returns the entropy given the value of the statistical property.
+	
+	In particular, let $F : \Ens \to \mathbb{R}^n$ be a vector of $n$ statistical quantities, called state variables. Then $S : \mathcal{Q} \subseteq \mathbb{R}^n \to \mathbb{R}$ returns the entropy as a function of the values of the state variables.
 \end{defn}
 \end{mathSection}
 
-The set of ensembles that maximize entropy will be a set of points fully identified by finitely many real numbers. We would expect this to be a manifold, though we still have to understand how the topology of the ensemble space relates to the topology of $\mathcal{M}$.
-
-\begin{mathSection}
-\begin{conj}
-	Let $F : \Ens \to \mathbb{R}^n$ be a vector of statistical quantities. Then the corresponding coarse graining $\mathcal{M}$ of $\Ens$ is a manifold. The equation of state $S : \mathbb{R}^n \to \mathbb{R}$ returns the entropy as a function of the values of the statistical quantities.
-\end{conj}
-
-\begin{remark}
-	We need to prove that $\mathcal{M}$ inherits the topology from $\Ens$. Are we be able to recover the topological isolation of phase transitions? The quantities will typically be energy plus other extensive quantities (i.e. volume, number of particles, ...).
-\end{remark}
-\end{mathSection}
-
-What we can already prove, however, is that the entropy is a strictly concave function of the state variables. Note that, in this setting, the convex combination between state variables does not give a statistical mixture, but rather it gives us the ensemble that maximizes entropy on the averaged constraint. Therefore, the concavity of the entropy on the coarse grained state space is not the same concavity of the entropy on the ensemble space.
+We can now show that the entropy is a strictly concave function of the state variables. Note that, in this setting, the convex combination between state variables does not give a statistical mixture, but rather it gives us the ensemble that maximizes entropy on the averaged constraint. Therefore, the concavity of the entropy on the coarse grained state space is not the same concavity of the entropy on the ensemble space.
 
 \begin{mathSection}
 \begin{prop}
-	Given a coarse graining $\mathcal{M}$ of $\Ens$, its equation of state is strictly concave. That is, $S(\lambda x + \bar{\lambda} y) \geq \lambda S(x) + \bar{\lambda} S(y)$ and the equality holds if and only if $x=y$.
+	Given a coarse graining $\mathcal{M}$ of $\Ens$, its equation of state is strictly concave. That is, $S(\lambda x + \bar{\lambda} y) \geq \lambda S(x) + \bar{\lambda} S(y)$ and the equality holds if and only if $x=y$ or $\lambda \in \{0,1\}$.
 \end{prop}
 
 \begin{proof}
@@ -4021,7 +4088,7 @@ What we can already prove, however, is that the entropy is a strictly concave fu
 	\end{equation}
 	which shows that the equation of state is concave.
 	
-	To show that the equation of state is strictly concave, suppose that $x=y$. Then on one side $S(\lambda x + \bar{\lambda} y) = S(x)$ and on the other side $\lambda S(x) + \bar{\lambda} S(y) = S(x)$. Therefore $S(\lambda x + \bar{\lambda} y) = \lambda S(x) + \bar{\lambda} S(y)$, which means the inequality holds with the equal. Conversely, suppose that $x\neq y$. Then $\psi(x) \neq \psi(y)$. By the strict concavity of the entropy, we have
+	If $\lambda \in \{0,1\}$, the equality is immediate. If $\lambda \in (0,1)$, suppose that $x=y$. Then on one side $S(\lambda x + \bar{\lambda} y) = S(x)$ and on the other side $\lambda S(x) + \bar{\lambda} S(y) = S(x)$. Therefore $S(\lambda x + \bar{\lambda} y) = \lambda S(x) + \bar{\lambda} S(y)$, which means the inequality holds with equality. Conversely, suppose that $x\neq y$. Then $\psi(x) \neq \psi(y)$. By the strict concavity of the entropy, we have
 	\begin{equation}
 		\begin{aligned}
 			S(\lambda x + \bar{\lambda} y) &= S(\psi(\lambda x + \bar{\lambda} y)) \\
@@ -4034,20 +4101,20 @@ What we can already prove, however, is that the entropy is a strictly concave fu
 \end{proof}
 
 \begin{remark}
-	In the case of thermodynamics, where the statistical property is a vector of statistical values, the equation of state will be concave in all arguments and in all combinations of arguments.
+	In the case of thermodynamics, where the statistical property is a vector of state variables, the equation of state will be concave in all arguments and in all combinations of arguments.
 \end{remark}
 \end{mathSection}
 
 
 \section{Orthogonal and separate subspaces}\label{pm-es-subspaceSection}
 
-In this section we recover the notion of subspaces from orthogonality and separateness. Since orthogonality as defined from the entropy coincides with the orthogonality of the inner product for classical and quantum ensemble spaces, orthogonal subspaces as defined here will coincide with those defined by the inner product.
+In this section we recover the notion of subspaces from orthogonality and separateness. Since orthogonality as defined from the entropy coincides with the orthogonality of the inner product for classical and quantum ensemble spaces, orthogonal subspaces as defined here will coincide with orthogonally closed subspaces defined by the inner product.
 
 \subsection{Irreflexive symmetric relations and topped $\cap$-structures}
 
-We first present a generic construction, which is sometimes called orthogonality space or orthomodular space, and it sometimes appears in the context of Galois connections. The general idea is that given any irreflexive and symmetric relation, we can define a closure that gives us an orthocomplemented lattice. Since orthogonality and separateness, as defined before, satisfy those properties, they will each give a notion of subspace.
+We first present a generic construction, which is sometimes called orthogonality space, and it sometimes appears in the context of Galois connections. The general idea is that given any irreflexive and symmetric relation, we can define a closure that gives us an orthocomplemented lattice. Since orthogonality and separateness, as defined before, satisfy those properties, they will each give a notion of subspace.
 
-To get an idea, we look at how orthogonality and orthogonal subspaces work in inner product spaces. Let $V$ be an inner product space. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all orthogonal to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were a subspace to begin with, then $U = (U^{\perp})^{\perp}$. Note that we can therefore define subspaces without having a notion of space, just by using the orthogonality relationship, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar to some constructions related to Galois connections.}
+To get an idea, we look at how orthogonality and orthogonal subspaces work in inner product spaces. Let $V$ be an inner product space. If we take a set $U \subseteq V$ of vectors, we can define the set $U^{\perp}$ of all the vectors that are orthogonal to all elements of $U$. This will return the subspace orthogonal to all elements of $U$. We can also define $(U^{\perp})^{\perp}$ as the set of all the vectors that are orthogonal to all elements of $U^{\perp}$. The set $(U^{\perp})^{\perp}$ will contain all the elements of $U$, because they are all orthogonal to all elements of $U^{\perp}$ by definition, but it will also include all the elements in the same subspace. If $U$ were an orthogonally closed subspace to begin with, then $U = (U^{\perp})^{\perp}$. Note that we can therefore define subspaces without having a notion of space, just by using the orthogonality relationship, by looking for sets such that $U = (U^{\perp})^{\perp}$.\footnote{This type of construction is similar to some constructions related to Galois connections.}
 
 The construction works for any binary relationship that is symmetric and irreflexive. For example, given two distributions, the fact that they have disjoint support is a symmetric and irreflexive relationship: a distribution does not have disjoint support with respect to itself, and the order of comparison does not matter. We can then construct subspaces based on this relationship, and find sets of functions that are all defined within different regions. In our case, separateness, as defined by the mixing function, and orthogonality, as defined by the entropy, are symmetric and irreflexive.
 
@@ -4076,11 +4143,11 @@ We start with a generic set $X$ and a symmetric relation (i.e. if $aRb$ then $bR
 		
 		2. By expanding the definition of complement, we have $(U^{R})^{R}=\{ a \in X \, | \, \forall b \in U^{R}, aRb \} = \{ a \in X \, | \, \forall b \in \{ c \in X \, | \, \forall d \in U, cRd  \}, aRb \} = \{ a \in X \, | \, \forall b \in X \, s.t. (\forall d \in U, bRd), aRb \}$.
 		
-		Let $a \in U$ and let $b \in X$ such that $\forall d \in U, bRd$. Since $a \in U$ and $bRd$ for all $b \in U$, we have $bRa$ in particular. Since $R$ is symmetric, $aRb$. Given that $b$ was arbitrary, we conclude that $\forall b \in X \, s.t. (\forall d \in U, bRd), aRb$. Therefore $a \in (U^{R})^{R}$ by definition of complement. Given that $a$ was arbitrary, $U \in (U^{R})^{R}$.
+		Let $a \in U$ and let $b \in X$ such that $\forall d \in U, bRd$. Since $a \in U$ and $bRd$ for all $d \in U$, we have $bRa$ in particular. Since $R$ is symmetric, $aRb$. Given that $b$ was arbitrary, we conclude that $\forall b \in X \, s.t. (\forall d \in U, bRd), aRb$. Therefore $a \in (U^{R})^{R}$ by definition of complement. Given that $a$ was arbitrary, $U \subseteq (U^{R})^{R}$.
 		
 		3. We again expand the definition and have $((U^{R})^{R})^{R} = \{ a \in X \, | \, \forall b \in (U^{R})^{R}, aRb \}$.
 		
-		Let $x \in ((U^{R})^{R})^{R}$. Then $\forall b \in (U^{R})^{R}, xRb$ by definition of the complement. Since by 1. $U \subset (U^{R})^{R}$, we can restrict the previous expression to only the elements of $U$, and therefore $\forall b \in U, xRb$. But this means that $x \in U^{R}$ by definition of the complement. Since $x$ was arbitrary, $((U^{R})^{R})^{R} \subseteq U^{R}$. But by 1., we also have $U^{R} \subseteq ((U^{R})^{R})^{R}$ since $U^{R}$ is just a set onto which we can apply the complement twice . By two-way containment, we have $U^{R} = ((U^{R})^{R})^{R}$.
+		Let $x \in ((U^{R})^{R})^{R}$. Then $\forall b \in (U^{R})^{R}, xRb$ by definition of the complement. Since by 2. $U \subseteq (U^{R})^{R}$, we can restrict the previous expression to only the elements of $U$, and therefore $\forall b \in U, xRb$. But this means that $x \in U^{R}$ by definition of the complement. Since $x$ was arbitrary, $((U^{R})^{R})^{R} \subseteq U^{R}$. But by 2., we also have $U^{R} \subseteq ((U^{R})^{R})^{R}$ since $U^{R}$ is just a set onto which we can apply the complement twice. By two-way containment, we have $U^{R} = ((U^{R})^{R})^{R}$.
 		
 		4. Let $U, V \subseteq X$ such that $U^{R} = (V^{R})^{R}$. Applying the complement on each side, $(U^{R})^{R} = ((V^{R})^{R})^{R}$. By the previous property $((V^{R})^{R})^{R} = V^{R}$ and therefore $(U^{R})^{R} = V^{R}$. Switching $U$ and $V$ proves the other direction.
 		
@@ -4100,7 +4167,7 @@ We start with a generic set $X$ and a symmetric relation (i.e. if $aRb$ then $bR
 	\end{proof}
 \end{mathSection}
 
-The next two properties depend on both the symmetry and the irreflexivity.
+The next two properties also use irreflexivity.
 
 \begin{mathSection}
 	\begin{prop}\label{pm-es-symirreflproperties}
@@ -4135,7 +4202,7 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 		The set $\mathfrak{L}$ is a collection of subsets of $X$. Let $\{U_i\}_{i \in I} \subseteq \mathfrak{L}$ be a non-empty family. Then, using the definition of subspace, and the third and fifth properties of \ref{pm-es-rComplProps}, we have
 		\begin{align*}
 			\bigcap_{i \in I} U_i &= \bigcap_{i \in I} (U_i^{R})^{R} = (\bigcup_{i \in I} U_i^{R})^{R} \\
-			&= (((\bigcup_{i \in I} (U_i^{R})^{R})^{R})^{R} = ((\bigcap_{i \in I} (U_i^{R})^{R})^{R})^{R} \\
+			&= (((\bigcup_{i \in I} U_i^{R})^{R})^{R})^{R} = ((\bigcap_{i \in I} (U_i^{R})^{R})^{R})^{R} \\
 			&= ((\bigcap_{i \in I} U_i)^{R})^{R}.
 		\end{align*}
 		Therefore $\bigcap_{i \in I} U_i \in \mathfrak{L}$. This means $\mathfrak{L}$ is an $\bigcap$-structure. Using the second property of \ref{pm-es-symirreflproperties}, $X = \emptyset^{R} = (X^{R})^{R}$. Therefore $\mathfrak{L}$ is a topped $\bigcap$-structure. This also means that it is a complete lattice.
@@ -4182,7 +4249,7 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 		
 		2. Using the first property of \ref{pm-es-rComplProps} we have $U \subseteq V$ implies $V^{R} \subseteq U^{R}$ which in turn implies $(U^{R})^{R} \subseteq (V^{R})^{R}$. Therefore $\langle U \rangle_R \subseteq \langle V \rangle_R$.
 		
-		3. Using the fifth property of \ref{pm-es-rComplProps} we have $\langle \langle U \rangle_R \rangle_R = (((U^{R})^{R})^{R})^{R} = (U^{R})^{R} = \langle U \rangle_R$.
+		3. Using the third property of \ref{pm-es-rComplProps} we have $\langle \langle U \rangle_R \rangle_R = (((U^{R})^{R})^{R})^{R} = (U^{R})^{R} = \langle U \rangle_R$.
 	\end{proof}
 	
 	\begin{prop}
@@ -4194,36 +4261,36 @@ We now define a notion of $R$-subspace by requiring that a subspace is the $R$-c
 	\end{prop}
 	
 	\begin{proof}
-		1. Let $U \subseteq X$ and $V \in \mathfrak{L}$ such that $U \subseteq V$ and $V \subseteq \langle U \rangle_R$. Since $U \subseteq V$, using the second property of \ref{pm-es-subspaceClosure}, $\langle U \rangle_R \subseteq \langle V \rangle_R = V$. Since $V \subseteq \langle U \rangle_R$ and  $\langle U \rangle_R \subseteq  V$, $\langle U \rangle_R = V$. This means that no $R$-subspace that contains $U$ is smaller than $\langle U \rangle_R$.
+		1. Let $U \subseteq X$ and $V \in \mathfrak{L}$ such that $U \subseteq V$. Since $U \subseteq V$, using the second property of \ref{pm-es-subspaceClosure}, $\langle U \rangle_R \subseteq \langle V \rangle_R = V$. This means that no $R$-subspace that contains $U$ is smaller than $\langle U \rangle_R$.
 		
-		2. Since $U, V \in \mathfrak{L}$, $U = (U^{R})^{R} = V^{R}$ which, by the fourth property of \ref{pm-es-rComplProps}, implies $U^{R} = (V^{R})^{R} = V$. Switching $U$ and $V$ proves the other direction.
+		2. If $U= V^{R}$, $U = (U^{R})^{R} = V^{R}$ which, by the fourth property of \ref{pm-es-rComplProps}, implies $U^{R} = (V^{R})^{R} = V$. Switching $U$ and $V$ proves the other direction.
 	\end{proof}
 \end{mathSection}
 
-We now show that if we start with the mere notion of orthogonality defined from an inner product vector space, we recover the notion of orthogonal components and subspaces. That is, the full structure of subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
+We now show that if we start with the mere notion of orthogonality defined from an inner product vector space, we recover the notion of orthogonal components and subspaces. That is, the full structure of orthogonally closed subspaces of an inner product space can be fully recovered only from pairwise orthogonality.
 
 \begin{mathSection}
 	\begin{prop}
-		Let $X$ be an inner product space and $R = \{(a,b) \,|\, \langle a , b\rangle = 0\}$. Then
+		Let $V$ be an inner product space, $X = V \setminus \{0\}$ and $R = \{(a,b) \,|\, \langle a , b\rangle = 0\}$ with $a,b \in X$. Then
 		\begin{enumerate}
 			\item $R$ is an irreflexive and symmetric relation
-			\item $U^{R} = U^{\perp}$
-			\item $\langle U \rangle_R = \cl_X (\vspan(U))$
+			\item $U^{R} = U^{\perp_V} \setminus \{0\}$
+			\item $\langle U \rangle_R = (U^{\perp_V})^{\perp_V} \setminus \{0\}$.
 		\end{enumerate}
 	\end{prop}
 	
 	\begin{proof}
-		1. Given that the inner product is symmetric, so will be $R$. Given that no vector is orthogonal to itself, $R$ is irreflexive.
+		1. Given that the inner product is conjugate symmetric, so will be $R$. Given that no nonzero vector is orthogonal to itself, $R$ is irreflexive.
 		
-		2. The orthogonal complement is defined as $U^\perp = \{ a \in X \, | \, \forall b \in U, \langle a , b\rangle = 0 \}$. Since $aRb \iff \langle a , b\rangle = 0$, $U^{R} = U^{\perp}$.
+		2. The orthogonal complement is defined as $U^\perp = \{ a \in V \, | \, \forall b \in U, \langle a , b\rangle = 0 \}$. Since $aRb \iff \langle a , b\rangle = 0$, $U^{R} = U^{\perp_V} \setminus \{0\}$.
 		
-		3. We have $\langle U \rangle_R = (U^{\perp})^\perp$ which returns the smallest closed subspace that contains $U$.
+		3. We have $\langle U \rangle_R = (U^{\perp_V})^{\perp_V} \setminus \{0\}$ which returns the smallest orthogonally closed subspace that contains $U$.
 	\end{proof}
 \end{mathSection}
 
 \subsection{Separate and orthogonal subspaces}
 
-Since orthogonality and separateness are irreflexive symmetric operations, they will both give a lattice of subspaces. Here we present a series of conjectures about these subspaces that we have yet to prove.
+Since orthogonality and separateness are irreflexive symmetric relations, they will both give a lattice of subspaces. Here we present results and conjectures about these subspaces that we have yet to prove.
 
 \begin{mathSection}
 \begin{defn}
@@ -4231,15 +4298,260 @@ Since orthogonality and separateness are irreflexive symmetric operations, they 
 \end{defn}
 \end{mathSection}
 
-In the classical case, since both orthogonality and separateness coincide with disjoint support, a subspace consists of all the probability distribution whose support is within a given set $U$.\footnote{Clearly, not all closed sets will give a different subspace. For example, over $\mathbb{R}$, $[0,1]$ and $[0,1]\cup[2,2]$ will correspond to the same subspace. Characterizing that equivalence class is still an open question.}
+We can further characterize the lattice of separate subspaces as a Boolean algebra. Since the lattice is already orthocomplemented, we just need to show that if two subspaces are disjoint, then one is a subset of the complement of the other. Each separate subspace contains all the components of its ensembles, so any component shared by ensembles from two subspaces must itself belong to both. Disjoint subspaces are therefore separate, which gives the lattice its Boolean structure.
 
 \begin{mathSection}
-\begin{prop}
-	Let $\Ens$ be a discrete or continuous classical ensemble space over a sample space $X$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
+	\begin{prop}
+		Let $\Ens$ be an ensemble space. The lattice of $\separate$-subspaces is a complete Boolean algebra.
+	\end{prop}
+	
+	\begin{proof}
+		The lattice is already complete and orthocomplemented. It remains to verify the Boolean criterion: for any two $\separate$-subspaces $A,B$,
+		\begin{equation}
+			A \cap B = \emptyset \quad \Longrightarrow \quad A \subseteq B^{\separate}.
+		\end{equation}
+		
+		First, every $\separate$-subspace contains all components of its elements. Let $\ens[a] \in A$ and let $\ens[c]$ be a component of $\ens[a]$. Every ensemble in $A^{\separate}$ is separate from $\ens[a]$ and therefore from $\ens[c]$, since any common component with $\ens[c]$ would also be a common component with $\ens[a]$. Thus $\ens[c] \in (A^{\separate})^{\separate}=A$.
+		
+		Now let $A,B$ be two $\separate$-subspaces with $A \cap B = \emptyset$. If $\ens[a] \in A$ and $\ens[b] \in B$ had a common component $\ens[c]$, the previous argument would give $\ens[c] \in A \cap B$, a contradiction. Therefore $A \separate B$, which means $A \subseteq B^{\separate}$. The criterion is satisfied, so the lattice is Boolean.
+	\end{proof}
+\end{mathSection}
+
+The fraction capacity need not be additive on the lattice of subspaces. We can, however, require that the capacities of a subspace and its complement sum to one, as the probabilities of an event and its complement do in classical probability. This requirement already constrains the structure of the subspaces and makes the fraction capacity preserve statistical mixing.
+
+\begin{mathSection}
+	\begin{prop}\label{pm-es-complementaryFractionCapacity}
+		Let $\Ens$ be an ensemble space and let $R$ be either $\separate$ or $\ortho$. Suppose that, for every $\ens \in \Ens$ and every $R$-subspace $A$,
+		\begin{equation}
+			\fcap_{\ens}(A) + \fcap_{\ens}(A^R) = 1.
+		\end{equation}
+		Then:
+		\begin{enumerate}
+			\item for every $R$-subspace $A$, the fraction capacity is affine in the ensemble:
+			\begin{equation}
+				\fcap_{p\ens[a]+\bar{p}\ens[b]}(A)
+				= p\fcap_{\ens[a]}(A)+\bar{p}\fcap_{\ens[b]}(A)
+			\end{equation}
+			for all $\ens[a],\ens[b] \in \Ens$ and $p \in [0,1]$;
+			\item if $R=\separate$, then $\Ens$ is monodecomposable;
+			\item if $R=\ortho$, then the lattice of $\ortho$-subspaces is a complete Boolean subalgebra of the lattice of $\separate$-subspaces, with the same complements.
+		\end{enumerate}
+	\end{prop}
+	
+	\begin{proof}
+		1. We first show that the fraction capacity is concave in the ensemble for any subset $A$. The result is immediate if $A=\emptyset$. Otherwise, consider decompositions
+		\begin{equation}
+			\ens[a] = \lambda\ens[a]_1+\bar{\lambda}\ens[a]_2,
+			\qquad
+			\ens[b] = \mu\ens[b]_1+\bar{\mu}\ens[b]_2,
+		\end{equation}
+		with $\ens[a]_1,\ens[b]_1 \in \hull(A)$. Mixing gives
+		\begin{equation}
+			p\ens[a]+\bar{p}\ens[b]
+			= p\lambda\ens[a]_1+\bar{p}\mu\ens[b]_1
+			+p\bar{\lambda}\ens[a]_2+\bar{p}\bar{\mu}\ens[b]_2.
+		\end{equation}
+		The first two terms have total coefficient $p\lambda+\bar{p}\mu$ and, when this is nonzero, their normalized mixture belongs to $\hull(A)$. Therefore
+		\begin{equation}
+			\fcap_{p\ens[a]+\bar{p}\ens[b]}(A)
+			\geq p\lambda+\bar{p}\mu.
+		\end{equation}
+		Taking the suprema over the two decompositions gives
+		\begin{equation}
+			\fcap_{p\ens[a]+\bar{p}\ens[b]}(A)
+			\geq p\fcap_{\ens[a]}(A)+\bar{p}\fcap_{\ens[b]}(A).
+		\end{equation}
+		
+		Now let $A$ be an $R$-subspace. Applying the same inequality to $A^R$ and using the hypothesis gives
+		\begin{equation}
+			\begin{aligned}
+				\fcap_{p\ens[a]+\bar{p}\ens[b]}(A)
+				&= 1-\fcap_{p\ens[a]+\bar{p}\ens[b]}(A^R) \\
+				&\leq 1-p\fcap_{\ens[a]}(A^R)
+				-\bar{p}\fcap_{\ens[b]}(A^R) \\
+				&= p\fcap_{\ens[a]}(A)+\bar{p}\fcap_{\ens[b]}(A).
+			\end{aligned}
+		\end{equation}
+		The two inequalities establish affinity.
+		
+		2. Suppose $R=\separate$. Recall that every $\separate$-subspace contains all components of its elements. If $\ens \in A^{\separate}$, then $\fcap_{\ens}(A^{\separate})=1$, so the hypothesis gives $\fcap_{\ens}(A)=0$. Conversely, if $\ens$ has a common component with an element of $A$, that component belongs to $A$ and has a positive fraction in $\ens$. Thus
+		\begin{equation}
+			\fcap_{\ens}(A)=0
+			\quad\Longleftrightarrow\quad
+			\ens \in A^{\separate}.
+		\end{equation}
+		Applying this also to $A^{\separate}$ gives
+		\begin{equation}
+			\fcap_{\ens}(A)=1
+			\quad\Longleftrightarrow\quad
+			\ens \in A.
+		\end{equation}
+		By affinity, a mixture of two ensembles in $A$ also has fraction capacity one in $A$, and therefore belongs to $A$. Every $\separate$-subspace is consequently convex. In particular, $\{\ens\}^{\separate}$ is convex for every $\ens$, which means mixtures preserve separateness. As previously shown, this is equivalent to monodecomposability.
+		
+		3. Suppose $R=\ortho$. Since mixtures preserve orthogonality, every $\ortho$-subspace is convex and contains all components of its elements.
+		
+		We first show that $\fcap_{\ens}(A)=1$ implies $\ens \in A$. Since $A$ is convex, there are decompositions
+		\begin{equation}
+			\ens = \lambda\ens[a]+\bar{\lambda}\ens[c],
+			\qquad \ens[a] \in A,
+		\end{equation}
+		with $\lambda$ arbitrarily close to one. Let $\ens[b] \in A^{\ortho}$. We have
+		\begin{equation}
+			\frac{1}{2}\ens+\frac{1}{2}\ens[b]
+			= \lambda\left(\frac{1}{2}\ens[a]+\frac{1}{2}\ens[b]\right)
+			+\bar{\lambda}\left(\frac{1}{2}\ens[c]+\frac{1}{2}\ens[b]\right).
+		\end{equation}
+		Concavity at this mixture and the upper variability bound for $S(\ens)$ give
+		\begin{equation}
+			\begin{aligned}
+				MS(\ens,\ens[b])
+				&\geq \lambda MS(\ens[a],\ens[b])
+				+\bar{\lambda}MS(\ens[c],\ens[b])
+				-\frac{1}{2}I(\lambda,\bar{\lambda}) \\
+				&\geq \lambda-\frac{1}{2}I(\lambda,\bar{\lambda}),
+			\end{aligned}
+		\end{equation}
+		since $\ens[a] \ortho \ens[b]$ and mixing entropy is non-negative. Taking $\lambda \to 1$ gives $MS(\ens,\ens[b])=1$, so $\ens \ortho \ens[b]$. Since this holds for every $\ens[b] \in A^{\ortho}$, we have $\ens \in A$. The converse is immediate, hence
+		\begin{equation}
+			\fcap_{\ens}(A)=1
+			\quad\Longleftrightarrow\quad
+			\ens \in A.
+		\end{equation}
+		
+		Since $A$ is convex and contains all components of its elements, $\ens$ has positive fraction capacity in $A$ if and only if it shares a component with an element of $A$. Therefore
+		\begin{equation}
+			\begin{aligned}
+				A^{\separate}
+				&= \{\ens \in \Ens \mid \fcap_{\ens}(A)=0\} \\
+				&= \{\ens \in \Ens \mid \fcap_{\ens}(A^{\ortho})=1\}
+				= A^{\ortho}.
+			\end{aligned}
+		\end{equation}
+		Applying this also to $A^{\ortho}$ gives
+		\begin{equation}
+			(A^{\separate})^{\separate}
+			= (A^{\ortho})^{\separate}
+			= (A^{\ortho})^{\ortho}
+			= A.
+		\end{equation}
+		Thus every $\ortho$-subspace is a $\separate$-subspace and the complements agree. Arbitrary meets are intersections in both lattices, and arbitrary joins agree by de Morgan's laws. The orthogonal lattice is therefore a complete Boolean subalgebra of the separate lattice.
+	\end{proof}
+\end{mathSection}
+
+As orthogonal subspaces effectively define mutually exclusive events, we can investigate what happens when the fraction capacity becomes a probability measure on the lattice of orthogonal subspaces. Interestingly, this requirement forces the lattice itself to be a complete Boolean algebra. If these probabilities also distinguish ensembles, they give a representation in terms of classical probability theory that preserves statistical mixing. 
+
+\begin{mathSection}
+\begin{prop}\label{pm-es-probabilityRepresentation}
+	Let $\Ens$ be an ensemble space and let $\mathfrak{L}^{\ortho}$ be its lattice of $\ortho$-subspaces. For each $\ens \in \Ens$, define
+	\begin{equation}
+		\mu_{\ens}(A) = \fcap_{\ens}(A),
+		\qquad A \in \mathfrak{L}^{\ortho}.
+	\end{equation}
+	Suppose these functions are $\sigma$-additive over mutually orthogonal subspaces:
+	\begin{equation}
+		\mu_{\ens}\left(\bigvee_{i=1}^{\infty} A_i\right)
+		= \sum_{i=1}^{\infty}\mu_{\ens}(A_i)
+	\end{equation}
+	for every pairwise orthogonal sequence $\{A_i\} \subseteq \mathfrak{L}^{\ortho}$. Suppose also that they uniquely identify ensembles, that is $\mu_{\ens[a]}=\mu_{\ens[b]}$ implies $\ens[a]=\ens[b]$.
+	
+	Then $\mathfrak{L}^{\ortho}$ is a complete Boolean algebra. Moreover, there exist a measurable space $(X,\Sigma)$ and a surjective map $q:\Sigma \to \mathfrak{L}^{\ortho}$ preserving complements and countable joins such that
+	\begin{equation}
+		P_{\ens}(U) = \mu_{\ens}(q(U)),
+		\qquad U \in \Sigma,
+	\end{equation}
+	is a countably additive probability measure for every $\ens \in \Ens$. The map $\ens \mapsto P_{\ens}$ is injective and affine, with a convex image. Finally, $\ens$ is extreme if and only if
+	\begin{equation}
+		P_{\ens}(U) \in \{0,1\}
+		\qquad \text{for every } U \in \Sigma.
+	\end{equation}
 \end{prop}
 
 \begin{proof}
-	Recall that in a classical ensemble space, $p \ortho \lambda$ if and only if $\lambda(\support(p)) = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigcup_{p \in A} \support(p)$ be the union of all supports. Then $\lambda \in A^{\ortho}$ (i.e. is orthogonal to all elements of $A$) if and only if $\lambda(U) = 0$. Conversely, $p \in A$ only if it is orthogonal to all elements, which means if and only if $p(U) = 1$. Therefore if $A$ is a subspace, there is a $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
+	Since $A$ and $A^{\ortho}$ are orthogonal and their join is $\Ens$, additivity gives
+	\begin{equation}
+		\fcap_{\ens}(A)+\fcap_{\ens}(A^{\ortho})
+		= \mu_{\ens}(\Ens) = 1.
+	\end{equation}
+	By \ref{pm-es-complementaryFractionCapacity}, $\mathfrak{L}^{\ortho}$ is a complete Boolean algebra and each $\mu_{\ens}(A)$ is affine in $\ens$. Disjoint subspaces are therefore orthogonal, so the assumed $\sigma$-additivity applies to every disjoint sequence.
+	
+	By the Loomis--Sikorski representation theorem, there exist a measurable space $(X,\Sigma)$ and a surjective map $q:\Sigma \to \mathfrak{L}^{\ortho}$ with $q(X)=\Ens$ such that
+	\begin{equation}
+		\begin{aligned}
+			q(X \setminus U) &= q(U)^{\ortho}, \\
+			q\left(\bigcup_{i=1}^{\infty} U_i\right)
+			&= \bigvee_{i=1}^{\infty} q(U_i).
+		\end{aligned}
+	\end{equation}
+	Define $P_{\ens}(U)=\mu_{\ens}(q(U))$. Non-negativity follows from the fraction capacity, and
+	\begin{equation}
+		P_{\ens}(X)=\mu_{\ens}(\Ens)=1.
+	\end{equation}
+	If $\{U_i\} \subseteq \Sigma$ is pairwise disjoint, then the subspaces $q(U_i)$ are pairwise disjoint and therefore orthogonal. Hence
+	\begin{equation}
+		\begin{aligned}
+			P_{\ens}\left(\bigcup_{i=1}^{\infty} U_i\right)
+			&= \mu_{\ens}\left(\bigvee_{i=1}^{\infty} q(U_i)\right) = \sum_{i=1}^{\infty}\mu_{\ens}(q(U_i))
+			= \sum_{i=1}^{\infty}P_{\ens}(U_i).
+		\end{aligned}
+	\end{equation}
+	Thus $P_{\ens}$ is a countably additive probability measure on $(X,\Sigma)$.
+	
+	Affinity of the fraction capacity gives
+	\begin{equation}
+		\begin{aligned}
+			P_{p\ens[a]+\bar{p}\ens[b]}(U)
+			&= \mu_{p\ens[a]+\bar{p}\ens[b]}(q(U)) = p\mu_{\ens[a]}(q(U))+\bar{p}\mu_{\ens[b]}(q(U)) = pP_{\ens[a]}(U)+\bar{p}P_{\ens[b]}(U).
+		\end{aligned}
+	\end{equation}
+	The map $\ens \mapsto P_{\ens}$ is therefore affine and its image is convex. Since $q$ is surjective, equality of $P_{\ens[a]}$ and $P_{\ens[b]}$ implies equality of $\mu_{\ens[a]}$ and $\mu_{\ens[b]}$. The identification assumption then gives $\ens[a]=\ens[b]$, so the map is injective.
+	
+	Now suppose $\ens$ is extreme. Its only component is itself. Since every $\ortho$-subspace is convex, we have
+	\begin{equation}
+		P_{\ens}(U)
+		= \begin{cases}
+			1 & \ens \in q(U), \\
+			0 & \ens \notin q(U).
+		\end{cases}
+	\end{equation}
+	Thus $P_{\ens}$ takes only the values zero and one.
+	
+	Conversely, suppose $P_{\ens}$ takes only the values zero and one, and let
+	\begin{equation}
+		\ens = p\ens[a]+\bar{p}\ens[b],
+		\qquad p \in (0,1).
+	\end{equation}
+	For every $U \in \Sigma$, affinity gives
+	\begin{equation}
+		P_{\ens}(U)
+		= pP_{\ens[a]}(U)+\bar{p}P_{\ens[b]}(U).
+	\end{equation}
+	Since both terms on the right have values in $[0,1]$, their weighted average can equal zero or one only if
+	\begin{equation}
+		P_{\ens[a]}(U)
+		= P_{\ens[b]}(U)
+		= P_{\ens}(U).
+	\end{equation}
+	This holds for every measurable set, so injectivity gives $\ens[a]=\ens[b]=\ens$. Therefore $\ens$ is extreme.
+\end{proof}
+
+\begin{remark}
+	Under the assumptions of the proposition, the $\ortho$-lattice is Boolean, like the $\separate$-lattice, but it is not necessarily the same lattice. It is, however, a sublattice.
+\end{remark}
+\end{mathSection}
+
+In the classical case, since both orthogonality and separateness coincide with disjoint support, a subspace consists of all the probability distribution whose support is within a given set $U$. Two sets $U$ and $V$ will correspond to the same subspace if they differ from a measure zero subset (i.e. $\mu(U\Delta V)=0$).
+
+\begin{mathSection}
+\begin{prop}
+	Let $\Ens$ be a discrete or continuous classical ensemble space over a sample space $X$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a measurable $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
+\end{prop}
+
+\begin{proof}
+	Let $A \subseteq \Ens$ be an $\ortho$-subspace. Since $L^1(X,\mu)$ is separable, choose a countable $L^1$-dense subset $D \subseteq A$ and let
+	\begin{equation}
+	U = \bigcup_{p \in D} \left\{x \in X \, \middle| \, \frac{dp}{d\mu}(x)>0\right\},
+	\end{equation}
+	where $\mu$ is the counting measure in the discrete case and the Liouville measure in the continuous case. Every $p \in D$ satisfies $p(U)=1$, so by $L^1$-continuity the same holds for every $p \in A$. Thus $\lambda \in A^{\ortho}$ if and only if $\lambda(U)=0$: the forward implication follows by countable additivity, and the reverse follows because every $p \in A$ is concentrated on $U$. Taking the orthogonal complement again gives $A = (A^{\ortho})^{\ortho} = \{p \in \Ens \, | \, p(U)=1\}$.
 	
 	Conversely, let $A = \{ p \in \Ens \, | \, p(U) = 1\}$ for some $U \subseteq X$. Then $A^{\ortho} = \{ p \in \Ens \, | \, p(U) = 0\}$. The orthogonal complement of the orthogonal complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
 \end{proof}
@@ -4249,13 +4561,13 @@ In the quantum case, the orthogonality coincides with orthogonality in the Hilbe
 
 \begin{mathSection}
 \begin{prop}
-	Let $\Ens$ be a quantum ensemble space over a Hilbert space $\mathcal{H}$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a subspace $U \subseteq \mathcal{H}$ with a corresponding projector $\mathbf{1}_{U}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$. 
+	Let $\Ens$ be a quantum ensemble space over a Hilbert space $\mathcal{H}$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a closed subspace $U \subseteq \mathcal{H}$ with a corresponding projector $\mathbf{1}_{U}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$. 
 \end{prop}
 
 \begin{proof}
-	Recall that to each subspace $U \subseteq \mathcal{H}$ is associated a projector $\mathbf{1}_U$ whose eigenvectors with eigenvalue $1$ span $U$. Given a density operator $\rho \in \Ens$, its support is the subspace $U=\support(\rho)$ spanned by the non-zero eigenvectors. Therefore $\tr[\mathbf{1}_{U} \, \rho] = 1$ and $\tr[\mathbf{1}_{U^{\ortho}} \, \rho] = 0$.
+	Recall that to each closed subspace $U \subseteq \mathcal{H}$ is associated a projector $\mathbf{1}_U$ whose eigenvectors with eigenvalue $1$ span $U$. Given a density operator $\rho \in \Ens$, its support is the subspace $U=\support(\rho)$, the closed linear span of its eigenvectors with non-zero eigenvalues. Therefore $\tr[\mathbf{1}_{U} \, \rho] = 1$ and $\tr[\mathbf{1}_{U^{\ortho}} \, \rho] = 0$.
 
-	Also recall that, for a quantum ensemble space, $\rho \ortho \sigma$ if and only if $\tr[ \mathbf{1}_{\support(\rho)} \, \sigma] = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigvee_{\rho \in A} \support(\rho)$ be the subspace $U$ spanned by all supports. Then $\sigma \in A^{\ortho}$  (i.e. is orthogonal to all elements of $A$) if and only if $\tr[\mathbf{1}_{U} \, \sigma] = 0$. Conversely, $\rho \in A$ if and only if it is orthogonal to all elements of $A^{\ortho}$, which is the case if and only if $\tr[\mathbf{1}_{U} \, \rho] = 1$. Therefore if $A$ is a subspace, there is a subspace $U \subseteq \mathcal{H}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$.
+	Also recall that, for a quantum ensemble space, $\rho \ortho \sigma$ if and only if $\tr[ \mathbf{1}_{\support(\rho)} \, \sigma] = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigvee_{\rho \in A} \support(\rho)$ be the closed linear span of all supports. Then $\sigma \in A^{\ortho}$  (i.e. is orthogonal to all elements of $A$) if and only if $\tr[\mathbf{1}_{U} \, \sigma] = 0$. Conversely, $\rho \in A$ if and only if it is orthogonal to all elements of $A^{\ortho}$, which is the case if and only if $\tr[\mathbf{1}_{U} \, \rho] = 1$. Therefore if $A$ is a subspace, there is a subspace $U \subseteq \mathcal{H}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$.
 	
 	Now let $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$ for some subspace $U \subseteq \mathcal{H}$. The orthogonal complement $A^{\ortho}$ will be the set of all density operators $\sigma \in \Ens$ such that $\tr[\mathbf{1}_{U} \, \sigma] = 0$. The complement of the complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
 \end{proof}
@@ -4263,7 +4575,7 @@ In the quantum case, the orthogonality coincides with orthogonality in the Hilbe
 
 Note that, in general, the two notions of subspaces, and therefore their lattices, will be different. Note that a feature of classical ensemble spaces is exactly that orthogonality and separateness coincide, which also means the two lattices will coincide.
 
-Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthomodular, as one requires, for example, in quantum logic. The cut triangle \ref{pm-es-cutTriangle} is a counterexample. The only orthogonality relationships are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are the bottom $\bot = \emptyset$, $2= \{\ens[2]\}$, $3= \{\ens[3]\}$, $A2= \{p \ens[2] + \bar{p}\ens[a]\}$, $B3= \{p \ens[3] + \bar{p}\ens[b]\}$ and the top $\top = \Ens$. As we can is see in Fig. \ref{pm-es-fig-cutTriangleOrthoSubspaces}, the subspaces form an $M_6$ lattice, which is not orthomodular. In fact, $3 \subseteq B3$ but $3 \vee (3^{\ortho} \wedge B3) = 3 \vee (A2 \wedge B3) = 3 \vee \bot = 3 \neq B3$. The lack of orthomodularity is due to the multiple complements where one is a subset of the other.
+Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthomodular, as one requires, for example, in quantum logic. The cut triangle \ref{pm-es-cutTriangle} is a counterexample. The only orthogonality relationships are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are the bottom $\bot = \emptyset$, $2= \{\ens[2]\}$, $3= \{\ens[3]\}$, $A2= \{p \ens[2] + \bar{p}\ens[a]\}$, $B3= \{p \ens[3] + \bar{p}\ens[b]\}$ and the top $\top = \Ens$. As we can see in Fig. \ref{pm-es-fig-cutTriangleOrthoSubspaces}, the subspaces form an $O_6$ lattice, which is not orthomodular. In fact, $3 \subseteq B3$ but $3 \vee (3^{\ortho} \wedge B3) = 3 \vee (A2 \wedge B3) = 3 \vee \bot = 3 \neq B3$. The lack of orthomodularity is due to the multiple complements where one is a subset of the other.
 
 \begin{figure}[H]
 	\centering
@@ -4303,9 +4615,9 @@ Another question is whether the lattice of $\ortho$-subspaces has to be necessar
 
 This leads to the following:
 \begin{conj}
-	The lattice of $\ortho$-subspaces is orthomodular if and only if the ensemble space is orthogonally decomposable (i.e. every decomposable ensemble is orthogonally decomposable).
+	The lattice of $\ortho$-subspaces is orthomodular if the ensemble space is orthogonally decomposable (i.e. every decomposable ensemble is orthogonally decomposable).
 \end{conj}
-If this is true, the requirement of orthomodularity is an additional requirement that can be understood physically.
+If this is true, the requirement of orthomodularity is an additional requirement that can be understood physically. It would also be nice to find a necessary and sufficient characterization of the lattice for orthogonally decomposable spaces.
 
 Note, however, that the lattice of $\separate$-subspaces  of the cut triangle is orthomodular, though not commutative. This shows how the two lattices can be very different.
 
