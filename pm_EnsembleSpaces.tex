@@ -480,7 +480,7 @@ There is a useful alternative property that fully characterizes bounded sets. Co
 		
 		%A
 		\draw [] plot [smooth cycle] coordinates {(A1) (A2) (A3) (A4) (A5) (A6) (A7) (A8) (A9) (A10) (A11) (A12) (A13) (A14) (A15) (A16) (A17) (A18) (A19) (A20)};
-		\node at (A) {$A$};;
+		\node at (A) {$A$};
 		
 		%U
 		\draw [dashed] plot [smooth cycle] coordinates {(U1) (U2) (U3) (U4) (U5) (U6) (U7) (U8) (U9) (U10) (U11) (U12) (U13) (U14) (U15)};
@@ -1909,7 +1909,7 @@ As an example of a convex space that is non-cancellative, does not embed in a ve
 \begin{example}[Self-mixture]
 	Let $\Ens = \{\ens[a], \ens[b]\}$ be a set endowed with the convex structure that satisfies identity, idempotence, commutativity and such that $p \ens[a] + \bar{p} \ens[b]$ equals $\ens[a]$ if $p=1$ and $\ens[b]$ otherwise. Identity, idempotence and commutativity are satisfied by construction. For associativity, note that the final result of multiple mixtures is $\ens[a]$ if and only if all elements of the mixtures are $\ens[a]$. The order does not matter, and therefore associativity is satisfied. Therefore such structure satisfies at least the axiom of mixture without the requirement of continuity.
 	
-	For continuity, we need to look at the inverse image under the mixing operation. Note that $+^{-1}(\emptyset) = \emptyset$ and $+^{-1}(\Ens) = [0,1] \times \Ens \times \Ens$. Since $\emptyset$ and $\Ens$ must be in any topology of $\Ens$, the continuity condition is satisfied for these sets. Next, we have  $+^{-1}(\{\ens[a]\}) = [0,1] \times \{\ens[a]\} \times \{\ens[a]\} \cup [1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0] \times \{\ens[b]\} \times \{\ens[a]\}$. Note that $[0]$ and $[1]$ are not open sets, therefore $\{\ens[a]\}$ cannot be in the topology of $\Ens$ or mixing would not be continuous. Finally, $+^{-1}(\{\ens[b]\}) = [0,1] \times \{\ens[b]\} \times \{\ens[b]\} \cup [0,1) \times \{\ens[a]\} \times \{\ens[b]\} \cup (0,1] \times \{\ens[b]\} \times \{\ens[a]\} = [0,1) \times \Ens \times \{\ens[b]\} \cup (0,1] \times \{\ens[b]\} \times \Ens$. Since $(0,1]$ and $[0,1)$ are open subsets of $[0,1]$, \{$\ens[b]\}$ can be an open set. Since the topology must be $\textsf{T}_0$, we must include at least $\{\ens[b]\}$ and therefore $\mathsf{T}_{\Ens} = \{\emptyset, \{\ens[b]\}, \{\ens[a], \ens[b]\}\}$ is a $\mathsf{T}_0$ second countable topology for which mixing is continuous. This means that the example satisfies both the axioms of ensemble and of mixture.
+	For continuity, we need to look at the inverse image under the mixing operation. Note that $+^{-1}(\emptyset) = \emptyset$ and $+^{-1}(\Ens) = [0,1] \times \Ens \times \Ens$. Since $\emptyset$ and $\Ens$ must be in any topology of $\Ens$, the continuity condition is satisfied for these sets. Next, we have  $+^{-1}(\{\ens[a]\}) = [0,1] \times \{\ens[a]\} \times \{\ens[a]\} \cup [1] \times \{\ens[a]\} \times \{\ens[b]\} \cup [0] \times \{\ens[b]\} \times \{\ens[a]\}$. Note that $[0]$ and $[1]$ are not open sets, therefore $\{\ens[a]\}$ cannot be in the topology of $\Ens$ or mixing would not be continuous. Finally, $+^{-1}(\{\ens[b]\}) = [0,1] \times \{\ens[b]\} \times \{\ens[b]\} \cup [0,1) \times \{\ens[a]\} \times \{\ens[b]\} \cup (0,1] \times \{\ens[b]\} \times \{\ens[a]\} = [0,1) \times \Ens \times \{\ens[b]\} \cup (0,1] \times \{\ens[b]\} \times \Ens$. Since $(0,1]$ and $[0,1)$ are open subsets of $[0,1]$, $\{\ens[b]\}$ can be an open set. Since the topology must be $\textsf{T}_0$, we must include at least $\{\ens[b]\}$ and therefore $\mathsf{T}_{\Ens} = \{\emptyset, \{\ens[b]\}, \{\ens[a], \ens[b]\}\}$ is a $\mathsf{T}_0$ second countable topology for which mixing is continuous. This means that the example satisfies both the axioms of ensemble and of mixture.
 \end{example}
 
 It is therefore the entropy that rules out this case. If the entropy of the two ensembles is different, it would jump from $S(\ens[a])$ directly to $S(\ens[b])$ for an infinitesimal mixture which violates the upper bound. If $S(\ens[a])$ equals $S(\ens[b])$, the entropy of the mixture of $\ens[a]$ and $\ens[b]$ is also the same, so the two ensembles cannot possibly be different by strict concavity.
@@ -2671,108 +2671,6 @@ The fact that the mixing entropy decreases from all directions as we get closer 
 \end{mathSection}
 
 While the mixing entropy is defined through the entropy, the topology that it generates does not guarantee the continuity of the entropy. To see this, consider the mixture $(1-\epsilon)\ens[a] + \epsilon \ens[b]$ as a small variation around $\ens[a]$. By Proposition \ref{pm-es-mixingEntropyMonotonic}, as $\epsilon \to 0$, $MS(\ens[a], (1-\epsilon)\ens[a] + \epsilon\ens[b]) \to 0$ regardless of $\ens[b]$. However, if $\ens[a] \ortho \ens[b]$, the entropy is $S((1-\epsilon)\ens[a] + \epsilon\ens[b]) = I(1-\epsilon, \epsilon) + (1-\epsilon)S(\ens[a]) + \epsilon S(\ens[b])$. In an infinite-dimensional space, $S(\ens[b])$ can be arbitrarily large, so a small mixture with a sufficiently high-entropy ensemble produces a large entropy change even though the mixing entropy remains small.
-
-\subsection{Boundedness and finite dimensions}
-
-We now use the properties of the mixing entropy to show that every finite-dimensional affine subset is a bounded set.
-
-First, we establish a couple of generally useful facts valid for any finite-dimensional convex set $A$. Any internal point $\ens[a] \in A$ is also an internal point of a simplex that fits inside $A$ and it has the same dimension of $A$. Moreover, we can find an open ball around $\ens[a]$ that intersects $A$ fully within the simplex. That is, in the subspace topology of the affine hull of $A$, $\ens[a]$ is an interior point.
-
-\begin{mathSection}
-\begin{prop}\label{pm-es-internalPointSimplex}
-	Let $A \subseteq \Ens$ be a finite-dimensional convex set and let $\ens[a]$ be an internal point relative to $A$. Then there exists a simplex $\Delta \subseteq A$ of the same affine dimension as $A$ such that $\ens[a]$ is internal relative to $\Delta$.
-\end{prop}
-
-\begin{proof}
-	Let $n = \dim(A)$. If $n=0$, then $A = \{\ens[a]\}$ and the result holds with $\Delta=A$.
-	
-	Suppose $n>0$. Choose $\ens[b]_1, \dots, \ens[b]_n \in A$ such that $\{\ens[a], \ens[b]_1, \dots, \ens[b]_n\}$ is an affine basis of $\ahull(A)$. Since $\ens[a]$ is internal relative to $A$ and there are only finitely many $\ens[b]_i$, we can choose $\epsilon \in (0,1)$ small enough that all the affine combinations
-	\begin{equation}
-		\ens[e]_i = -n\epsilon\ens[b]_i + (1+n\epsilon)\ens[a]
-	\end{equation}
-	exist and belong to $A$. Define
-	\begin{equation}
-		\ens[d]_i = \epsilon\ens[b]_i + \bar{\epsilon}\ens[a],
-		\qquad
-		\ens[d]_0 = \frac{1}{n}\sum_{i=1}^n \ens[e]_i.
-	\end{equation}
-	These are convex combinations of elements of $A$, and therefore $\ens[d]_0, \dots, \ens[d]_n \in A$.
-	
-	We first show that $\ens[a]$ is the equal mixture of these ensembles. We have
-	\begin{equation}
-		\begin{aligned}
-			\ens[d]_0
-			&= \frac{1}{n}\sum_{i=1}^n
-			\left[-n\epsilon\ens[b]_i + (1+n\epsilon)\ens[a]\right] = -\epsilon\sum_{i=1}^n \ens[b]_i + (1+n\epsilon)\ens[a].
-		\end{aligned}
-	\end{equation}
-	Consequently,
-	\begin{equation}
-		\begin{aligned}
-			\frac{1}{n+1}\sum_{i=0}^n \ens[d]_i
-			&= \frac{1}{n+1}\ens[d]_0
-			+ \sum_{i=1}^n \frac{1}{n+1}\ens[d]_i = \frac{1}{n+1}
-			\left[-\epsilon\sum_{i=1}^n \ens[b]_i + (1+n\epsilon)\ens[a]\right]
-			+ \sum_{i=1}^n \frac{1}{n+1}
-			\left[\epsilon\ens[b]_i + \bar{\epsilon}\ens[a]\right] \\
-			&= \sum_{i=1}^n \frac{-\epsilon+\epsilon}{n+1}\ens[b]_i
-			+ \frac{1+n\epsilon+n\bar{\epsilon}}{n+1}\ens[a] = \frac{1+n\epsilon+n-n\epsilon}{n+1}\ens[a] = \ens[a].
-		\end{aligned}
-	\end{equation}
-	
-	Let $D = \{\ens[d]_0, \dots, \ens[d]_n\}$. The preceding calculation shows that $\ens[a] \in \hull(D)$. Rearranging the definition of $\ens[d]_i$ gives
-	\begin{equation}
-		\ens[b]_i = \frac{1}{\epsilon}\ens[d]_i
-		- \frac{\bar{\epsilon}}{\epsilon}\ens[a].
-	\end{equation}
-	Therefore $\ens[b]_i \in \ahull(D)$ for every $i$. Since $\{\ens[a], \ens[b]_1, \dots, \ens[b]_n\}$ is an affine basis of $\ahull(A)$ and $D \subseteq A$, we have $\ahull(D) = \ahull(A)$. These $n+1$ ensembles generate an affine set of dimension $n$, so they are affinely independent. Thus $\Delta = \hull(D)$ is a simplex of dimension $n$ contained in $A$, and $\ahull(\Delta) = \ahull(A)$. Lastly, since $\ens[a]$ is the equal mixture of all the generators, its affine coefficients are all strictly positive. Therefore $\ens[a]$ is internal relative to $\Delta$.
-\end{proof}
-
-\begin{prop}\label{pm-es-simplexEntropicNeighborhood}
-	Let $\Delta \subseteq \Ens$ be a simplex and let $\ens[a]$ be an internal point relative to $\Delta$. Then there exists $r \in (0,1]$ such that $B_r(\ens[a])\cap\ahull(\Delta) \subseteq \Delta$. In particular, $\ens[a]$ is a topological interior point of $\Delta$ relative to $\ahull(\Delta)$.
-\end{prop}
-
-\begin{proof}
-	If $\Delta = \{\ens[a]\}$, the result holds with $r=1$. Otherwise, since $B_\Delta$ is compact and $MS(\ens[a],\cdot)$ is continuous and strictly positive on it, let
-	\begin{equation}
-		r = \min_{\ens[b] \in B_\Delta} MS(\ens[a],\ens[b]) \in (0,1].
-	\end{equation}
-	
-	Let $\ens[e] \in \ahull(\Delta)\setminus\Delta$. Since $\Delta$ is convex and closed and $\ens[a]$ is internal relative to $\Delta$, the segment from $\ens[a]$ to $\ens[e]$ meets $B_\Delta$ at some $\ens[b]$. By \ref{pm-es-mixingEntropyMonotonic}, $MS(\ens[a],\ens[e]) \geq MS(\ens[a],\ens[b]) \geq r$.	Therefore $B_r(\ens[a])\cap\ahull(\Delta) \subseteq \Delta$. Since the entropic ball is open and contains $\ens[a]$, the final claim follows.
-\end{proof}
-\end{mathSection}
-
-We can use the previous two propositions to show that, given a finite-dimensional affine subset $A$, every neighborhood of an internal point of $A$ can fit a simplex. Since the smaller simplex still contains an entropic ball, this gives us a bridge between mixing entropy and the topology.
-
-\begin{mathSection}
-\begin{prop}\label{pm-es-finiteDimensionalEntropicNeighborhood}
-	Let $A \subseteq \Ens$ be a finite-dimensional affine subset and let $\ens[a]$ be an internal point relative to $A$. For every open neighborhood $U$ of $\ens[a]$, there exists $r \in (0,1]$ such that $B_r(\ens[a]) \cap A \subseteq U$.
-\end{prop}
-
-\begin{proof}
-	By \ref{pm-es-internalPointSimplex}, choose a simplex $\Delta \subseteq A$ such that $\ahull(\Delta)=A$ and $\ens[a]$ is internal relative to $\Delta$. The map $(p,\ens[b]) \mapsto p\ens[a]+\bar{p}\ens[b]$ from $[0,1]\times\Delta$ to $\Ens$ is continuous. Its inverse image of $U$ is open and contains $\{1\}\times\Delta$. Since $\Delta$ is compact, the tube lemma gives $\lambda \in [0,1)$ such that
-	\begin{equation}
-		\Delta_\lambda = \lambda\ens[a]+\bar{\lambda}\Delta \subseteq U.
-	\end{equation}
-	
-	Since $\lambda<1$, the contraction preserves affine independence and the affine hull, so $\Delta_\lambda$ is a simplex with $\ahull(\Delta_\lambda)=A$. It also preserves the strictly positive coefficients expressing $\ens[a]$ as a mixture of the generators, so $\ens[a]$ remains internal relative to $\Delta_\lambda$. By \ref{pm-es-simplexEntropicNeighborhood}, there exists $r \in (0,1]$ such that $B_r(\ens[a])\cap A = B_r(\ens[a])\cap\ahull(\Delta_\lambda) \subseteq \Delta_\lambda \subseteq U$.
-\end{proof}
-\end{mathSection}
-
-The mixing entropy bound established above tells us how much mixing is needed to bring ensembles inside an entropic ball. Crucially, the same mixing coefficient works for every ensemble in the set. This means we can shrink the whole set into any neighborhood of any internal point of $A$, which is precisely the idea of boundedness.
-
-\begin{mathSection}
-\begin{prop}\label{pm-es-finiteDimensionalAffineBoundedness}
-	Every finite-dimensional affine subset $A \subseteq \Ens$ is bounded around every internal point relative to $A$.
-\end{prop}
-
-\begin{proof}
-	Let $\ens[a]$ be an internal point relative to $A$ and let $U$ be an open neighborhood of $\ens[a]$. By \ref{pm-es-finiteDimensionalEntropicNeighborhood}, choose $r \in (0,1]$ such that $B_r(\ens[a])\cap A \subseteq U$.
-	
-	Since $\frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right)\to0$ as $p\to1$, the upper bound on mixing entropy gives a single $p \in (0,1)$ such that, for every $\ens[c] \in A$, $MS(\ens[a],p\ens[a]+\bar{p}\ens[c]) \leq \frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right) < r$.
-	Since $A$ is convex, $p\ens[a]+\bar{p}A \subseteq B_r(\ens[a])\cap A \subseteq U$. Therefore $A$ is bounded around $\ens[a]$.
-	\end{proof}
-\end{mathSection}
 
 \subsection{Entropic metric}
 
@@ -3745,6 +3643,106 @@ An open problem is whether statistical quantities are required by ensemble space
 
 \subsection{Finite-dimensional ensemble spaces}
 
+We now use the properties of the mixing entropy to show that every finite-dimensional affine subset is a bounded set.
+
+First, we establish a couple of generally useful facts valid for any finite-dimensional convex set $A$. Any internal point $\ens[a] \in A$ is also an internal point of a simplex that fits inside $A$ and it has the same dimension of $A$. Moreover, we can find an open ball around $\ens[a]$ that intersects $A$ fully within the simplex. That is, in the subspace topology of the affine hull of $A$, $\ens[a]$ is an interior point.
+
+\begin{mathSection}
+	\begin{prop}\label{pm-es-internalPointSimplex}
+		Let $A \subseteq \Ens$ be a finite-dimensional convex set and let $\ens[a]$ be an internal point relative to $A$. Then there exists a simplex $\Delta \subseteq A$ of the same affine dimension as $A$ such that $\ens[a]$ is internal relative to $\Delta$.
+	\end{prop}
+	
+	\begin{proof}
+		Let $n = \dim(A)$. If $n=0$, then $A = \{\ens[a]\}$ and the result holds with $\Delta=A$.
+		
+		Suppose $n>0$. Choose $\ens[b]_1, \dots, \ens[b]_n \in A$ such that $\{\ens[a], \ens[b]_1, \dots, \ens[b]_n\}$ is an affine basis of $\ahull(A)$. Since $\ens[a]$ is internal relative to $A$ and there are only finitely many $\ens[b]_i$, we can choose $\epsilon \in (0,1)$ small enough that all the affine combinations
+		\begin{equation}
+			\ens[e]_i = -n\epsilon\ens[b]_i + (1+n\epsilon)\ens[a]
+		\end{equation}
+		exist and belong to $A$. Define
+		\begin{equation}
+			\ens[d]_i = \epsilon\ens[b]_i + \bar{\epsilon}\ens[a],
+			\qquad
+			\ens[d]_0 = \frac{1}{n}\sum_{i=1}^n \ens[e]_i.
+		\end{equation}
+		These are convex combinations of elements of $A$, and therefore $\ens[d]_0, \dots, \ens[d]_n \in A$.
+		
+		We first show that $\ens[a]$ is the equal mixture of these ensembles. We have
+		\begin{equation}
+			\begin{aligned}
+				\ens[d]_0
+				&= \frac{1}{n}\sum_{i=1}^n
+				\left[-n\epsilon\ens[b]_i + (1+n\epsilon)\ens[a]\right] = -\epsilon\sum_{i=1}^n \ens[b]_i + (1+n\epsilon)\ens[a].
+			\end{aligned}
+		\end{equation}
+		Consequently,
+		\begin{equation}
+			\begin{aligned}
+				\frac{1}{n+1}\sum_{i=0}^n \ens[d]_i
+				&= \frac{1}{n+1}\ens[d]_0
+				+ \sum_{i=1}^n \frac{1}{n+1}\ens[d]_i = \frac{1}{n+1}
+				\left[-\epsilon\sum_{i=1}^n \ens[b]_i + (1+n\epsilon)\ens[a]\right]
+				+ \sum_{i=1}^n \frac{1}{n+1}
+				\left[\epsilon\ens[b]_i + \bar{\epsilon}\ens[a]\right] \\
+				&= \sum_{i=1}^n \frac{-\epsilon+\epsilon}{n+1}\ens[b]_i
+				+ \frac{1+n\epsilon+n\bar{\epsilon}}{n+1}\ens[a] = \frac{1+n\epsilon+n-n\epsilon}{n+1}\ens[a] = \ens[a].
+			\end{aligned}
+		\end{equation}
+		
+		Let $D = \{\ens[d]_0, \dots, \ens[d]_n\}$. The preceding calculation shows that $\ens[a] \in \hull(D)$. Rearranging the definition of $\ens[d]_i$ gives
+		\begin{equation}
+			\ens[b]_i = \frac{1}{\epsilon}\ens[d]_i
+			- \frac{\bar{\epsilon}}{\epsilon}\ens[a].
+		\end{equation}
+		Therefore $\ens[b]_i \in \ahull(D)$ for every $i$. Since $\{\ens[a], \ens[b]_1, \dots, \ens[b]_n\}$ is an affine basis of $\ahull(A)$ and $D \subseteq A$, we have $\ahull(D) = \ahull(A)$. These $n+1$ ensembles generate an affine set of dimension $n$, so they are affinely independent. Thus $\Delta = \hull(D)$ is a simplex of dimension $n$ contained in $A$, and $\ahull(\Delta) = \ahull(A)$. Lastly, since $\ens[a]$ is the equal mixture of all the generators, its affine coefficients are all strictly positive. Therefore $\ens[a]$ is internal relative to $\Delta$.
+	\end{proof}
+	
+	\begin{prop}\label{pm-es-simplexEntropicNeighborhood}
+		Let $\Delta \subseteq \Ens$ be a simplex and let $\ens[a]$ be an internal point relative to $\Delta$. Then there exists $r \in (0,1]$ such that $B_r(\ens[a])\cap\ahull(\Delta) \subseteq \Delta$. In particular, $\ens[a]$ is a topological interior point of $\Delta$ relative to $\ahull(\Delta)$.
+	\end{prop}
+	
+	\begin{proof}
+		If $\Delta = \{\ens[a]\}$, the result holds with $r=1$. Otherwise, since $B_\Delta$ is compact and $MS(\ens[a],\cdot)$ is continuous and strictly positive on it, let
+		\begin{equation}
+			r = \min_{\ens[b] \in B_\Delta} MS(\ens[a],\ens[b]) \in (0,1].
+		\end{equation}
+		
+		Let $\ens[e] \in \ahull(\Delta)\setminus\Delta$. Since $\Delta$ is convex and closed and $\ens[a]$ is internal relative to $\Delta$, the segment from $\ens[a]$ to $\ens[e]$ meets $B_\Delta$ at some $\ens[b]$. By \ref{pm-es-mixingEntropyMonotonic}, $MS(\ens[a],\ens[e]) \geq MS(\ens[a],\ens[b]) \geq r$.	Therefore $B_r(\ens[a])\cap\ahull(\Delta) \subseteq \Delta$. Since the entropic ball is open and contains $\ens[a]$, the final claim follows.
+	\end{proof}
+\end{mathSection}
+
+We can use the previous two propositions to show that, given a finite-dimensional affine subset $A$, every neighborhood of an internal point of $A$ can fit a simplex. Since the smaller simplex still contains an entropic ball, this gives us a bridge between mixing entropy and the topology.
+
+\begin{mathSection}
+	\begin{prop}\label{pm-es-finiteDimensionalEntropicNeighborhood}
+		Let $A \subseteq \Ens$ be a finite-dimensional affine subset and let $\ens[a]$ be an internal point relative to $A$. For every open neighborhood $U$ of $\ens[a]$, there exists $r \in (0,1]$ such that $B_r(\ens[a]) \cap A \subseteq U$.
+	\end{prop}
+	
+	\begin{proof}
+		By \ref{pm-es-internalPointSimplex}, choose a simplex $\Delta \subseteq A$ such that $\ahull(\Delta)=A$ and $\ens[a]$ is internal relative to $\Delta$. The map $(p,\ens[b]) \mapsto p\ens[a]+\bar{p}\ens[b]$ from $[0,1]\times\Delta$ to $\Ens$ is continuous. Its inverse image of $U$ is open and contains $\{1\}\times\Delta$. Since $\Delta$ is compact, the tube lemma gives $\lambda \in [0,1)$ such that
+		\begin{equation}
+			\Delta_\lambda = \lambda\ens[a]+\bar{\lambda}\Delta \subseteq U.
+		\end{equation}
+		
+		Since $\lambda<1$, the contraction preserves affine independence and the affine hull, so $\Delta_\lambda$ is a simplex with $\ahull(\Delta_\lambda)=A$. It also preserves the strictly positive coefficients expressing $\ens[a]$ as a mixture of the generators, so $\ens[a]$ remains internal relative to $\Delta_\lambda$. By \ref{pm-es-simplexEntropicNeighborhood}, there exists $r \in (0,1]$ such that $B_r(\ens[a])\cap A = B_r(\ens[a])\cap\ahull(\Delta_\lambda) \subseteq \Delta_\lambda \subseteq U$.
+	\end{proof}
+\end{mathSection}
+
+The mixing entropy bound established above tells us how much mixing is needed to bring ensembles inside an entropic ball. Crucially, the same mixing coefficient works for every ensemble in the set. This means we can shrink the whole set into any neighborhood of any internal point of $A$, which is precisely the idea of boundedness.
+
+\begin{mathSection}
+	\begin{prop}\label{pm-es-finiteDimensionalAffineBoundedness}
+		Every finite-dimensional affine subset $A \subseteq \Ens$ is bounded around every internal point relative to $A$.
+	\end{prop}
+	
+	\begin{proof}
+		Let $\ens[a]$ be an internal point relative to $A$ and let $U$ be an open neighborhood of $\ens[a]$. By \ref{pm-es-finiteDimensionalEntropicNeighborhood}, choose $r \in (0,1]$ such that $B_r(\ens[a])\cap A \subseteq U$.
+		
+		Since $\frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right)\to0$ as $p\to1$, the upper bound on mixing entropy gives a single $p \in (0,1)$ such that, for every $\ens[c] \in A$, $MS(\ens[a],p\ens[a]+\bar{p}\ens[c]) \leq \frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right) < r$.
+		Since $A$ is convex, $p\ens[a]+\bar{p}A \subseteq B_r(\ens[a])\cap A \subseteq U$. Therefore $A$ is bounded around $\ens[a]$.
+	\end{proof}
+\end{mathSection}
+
 TODO: add descriptions, explanations, and motivation throughout this section.
 
 \begin{mathSection}
@@ -3869,8 +3867,11 @@ TODO: add descriptions, explanations, and motivation throughout this section.
 			\filldraw [] (e) circle (1pt) node [above left] {$\ens[e]$};
 			
 			\node at (Fe) [above right] {$F(\ens[e])$};
-			\node at (c) [above right] {$c$};
-			\node at (d) [above right] {$d$};
+			\node at ($(c)+(.3,.2)$) [above right] {$c$};
+			\node at ($(d)+(.3,.2)$) [above right] {$d$};
+			
+			\node at (-c) [below left] {$F^{-1}(\{c\})$};
+			\node at (-d) [below left] {$F^{-1}(\{d\})$};
 			
 			\filldraw [] (a1) circle (1pt) node [left] {$\ens[a]_1$};
 			\filldraw [] (a2) circle (1pt) node [above] {$\ens[a]_2$};
@@ -3884,7 +3885,13 @@ TODO: add descriptions, explanations, and motivation throughout this section.
 			\filldraw [] (e2) circle (1pt) node [right] {$\ens[e]_2$};
 			\filldraw [] (e3) circle (1pt) node [right] {$\ens[e]_3$};
 			
-			\draw [->] (F1) -- (F2);
+			\draw [->] ($(F1)+(.3,-.3)$) -- ($(F2)+(-.3,.3)$);
+			
+			\draw [] ($(F1)+(-.1,-.08)$) -- ($(F1)+(.1,.08)$);
+			\draw [] ($(F2)+(-.1,-.08)$) -- ($(F2)+(.1,.08)$);
+			
+			\coordinate (P) at ($(e)!1.5!(Fe)$);
+			\draw [] ($(P)+(-.1,-.08)$) -- ($(P)+(.1,.08)$);
 			
 			\node at (F2) [right, xshift=6] {$F$};
 		\end{tikzpicture}
