@@ -377,7 +377,7 @@ Again, we want to stress that this notion of equivalence is not based on the tru
 			
 			For (ii), consider $\stmt_1 \AND \stmt_2 \equiv \stmt_1 \AND \stmt_2 \OR \impossibility$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \impossibility$. We have $\stmt_1 \AND \stmt_2 \OR \impossibility \equiv ( \stmt_1 \AND \stmt_2 ) \OR (\stmt_1 \AND \NOT \stmt_2) \equiv \stmt_1 \AND (\stmt_2 \OR \NOT \stmt_2) \equiv \stmt_1 \AND \certainty \equiv \stmt_1$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_1$. The same logic can be applied in reverse.
 			
-			For (iii), consider $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \AND \certainty \equiv (\stmt_1 \OR \stmt_2) \AND (\NOT \stmt_2 \OR \stmt_2) \equiv (\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \impossibility$. We have $(\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2 \equiv \impossibility \OR \stmt_2 \equiv \stmt_2$. Therefore $\stmt_1 \AND \stmt_2 \equiv \stmt_2$. The same logic can be applied in reverse.
+			For (iii), consider $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \AND \certainty \equiv (\stmt_1 \OR \stmt_2) \AND (\NOT \stmt_2 \OR \stmt_2) \equiv (\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2$. Since $\stmt_1 \narrower \stmt_2$, $\stmt_1 \AND \NOT \stmt_2 \equiv \impossibility$. We have $(\stmt_1 \AND \NOT \stmt_2) \OR \stmt_2 \equiv \impossibility \OR \stmt_2 \equiv \stmt_2$. Therefore $\stmt_1 \OR \stmt_2 \equiv \stmt_2$. The same logic can be applied in reverse.
 			
 			For (iv), consider the following truth table 
 			\begin{center}
@@ -398,7 +398,7 @@ Again, we want to stress that this notion of equivalence is not based on the tru
 			
 			For (vii), we have $\stmt_1 \AND \stmt_2 \AND \NOT \stmt_1 \equiv \stmt_1 \AND \NOT \stmt_1 \AND \stmt_2 \equiv \impossibility \AND \stmt_2 \equiv \impossibility$. Therefore $\stmt_1 \AND \stmt_2 \narrower \stmt_1$.
 			
-			For (viii), suppose $\stmt_1 \narrower \stmt_2$. We have $\NOT \stmt_1 \OR \stmt_2 \equiv \NOT \stmt_1 \OR ( \stmt_1 \OR \stmt_2 ) \equiv (\NOT \stmt_1 \OR \stmt_1) \OR \stmt_2 \equiv \certainty \OR \stmt_2 \equiv \certainty$. Conversely, suppose $\NOT \stmt_1 \OR \stmt_2 \equiv \certainty$. We have $\stmt_1 \OR \stmt_2 \equiv \stmt_1 \OR \stmt_2 \OR \certainty \equiv \stmt_1 \OR \stmt_2 \OR (\NOT \stmt_1 \OR \stmt_2) \equiv (\stmt_1 \OR \NOT \stmt_1) \OR \stmt_2 \equiv \certainty \OR \stmt_2 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$.
+			For (viii), suppose $\stmt_1 \narrower \stmt_2$. We have $\NOT \stmt_1 \OR \stmt_2 \equiv \NOT \stmt_1 \OR ( \stmt_1 \OR \stmt_2 ) \equiv (\NOT \stmt_1 \OR \stmt_1) \OR \stmt_2 \equiv \certainty \OR \stmt_2 \equiv \certainty$. Conversely, suppose $\NOT \stmt_1 \OR \stmt_2 \equiv \certainty$. We have $\stmt_1 \OR \stmt_2 \equiv (\stmt_1 \OR \stmt_2) \AND \certainty \equiv (\stmt_1 \OR \stmt_2) \AND (\NOT \stmt_1 \OR \stmt_2) \equiv (\stmt_1 \AND \NOT \stmt_1) \OR \stmt_2 \equiv \impossibility \OR \stmt_2 \equiv \stmt_2$ and therefore $\stmt_1 \narrower \stmt_2$.
 		\end{proof}
 		
 		\begin{prop}
@@ -419,11 +419,11 @@ Again, we want to stress that this notion of equivalence is not based on the tru
 		\end{proof}
 		
 		\begin{prop}
-			Every subset $S \subseteq \logCtx$ of statements has a supremum. That is, there exists an element $\bar{\stmt} \in \logCtx$ such that $\stmt \narrower \bar{\stmt}$ for all $\stmt \in S$. This, by definition, means the $\logCtx$ is a \textbf{complete} Boolean algebra and, as a consequence, that the distributivity and De Morgan laws in \ref{pm-vs-contextIsBoolean} hold in the infinite case.
+			Every subset $S \subseteq \logCtx$ of statements has a supremum. That is, there exists an element $\bar{\stmt} \in \logCtx$ such that $\stmt \narrower \bar{\stmt}$ for all $\stmt \in S$ and $\bar{\stmt} \narrower \stmt[t]$ for every $\stmt[t] \in \logCtx$ such that $\stmt \narrower \stmt[t]$ for all $\stmt \in S$. This, by definition, means the $\logCtx$ is a \textbf{complete} Boolean algebra and, as a consequence, that the distributivity and De Morgan laws in \ref{pm-vs-contextIsBoolean} hold in the infinite case.
 		\end{prop}
 		
 		\begin{proof}
-			Let $S \subseteq \logCtx$ be an arbitrary set of statements. Consider $\bar{\stmt}=\bigOR\limits_{\stmt[e] \in S} \stmt[e]$. This statement exists by \ref{pm-vs-axiomClosure}. Let $\stmt \in S$. Using the properties in \ref{pm-vs-contextIsBoolean} we have $\stmt \OR \bar{\stmt} \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in S} \stmt[e] \big) \equiv \stmt \OR \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \bigOR\limits_{\stmt[e] \in S} \stmt[e] = \bar{\stmt}$. By \ref{pm-vs-narrownessProperties} we have $\stmt \narrower \bar{\stmt}$ for any $\stmt \in S$. Therefore any $S \subseteq \logCtx$ admits a supremum $\bar{\stmt}$.
+			Let $S \subseteq \logCtx$ be an arbitrary set of statements. Consider $\bar{\stmt}=\bigOR\limits_{\stmt[e] \in S} \stmt[e]$. This statement exists by \ref{pm-vs-axiomClosure}. Let $\stmt \in S$. Using the properties in \ref{pm-vs-contextIsBoolean} we have $\stmt \OR \bar{\stmt} \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in S} \stmt[e] \big) \equiv \stmt \OR \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \stmt \OR \big(\bigOR\limits_{\stmt[e] \in (S \setminus \{\stmt\})} \stmt[e] \big) \equiv \bigOR\limits_{\stmt[e] \in S} \stmt[e] = \bar{\stmt}$. By \ref{pm-vs-narrownessProperties} we have $\stmt \narrower \bar{\stmt}$ for any $\stmt \in S$. Now let $\stmt[t] \in \logCtx$ be such that $\stmt \narrower \stmt[t]$ for all $\stmt \in S$, and let $a \in \pAss$ be a possible assignment such that $a(\bar{\stmt}) = \TRUE$. Then $a(\stmt) = \TRUE$ for some $\stmt \in S$ and, since $\stmt \narrower \stmt[t]$, $a(\stmt[t]) = \TRUE$. Therefore $\bar{\stmt} \narrower \stmt[t]$. Therefore any $S \subseteq \logCtx$ admits a supremum $\bar{\stmt}$.
 			
 			A complete Boolean algebra is one such that every subset admits a supremum, therefore the algebra of statements is complete by definition. For a complete Boolean algebra infinite distributivity and De Morgan laws hold, therefore they will hold in the algebra of statements as well.
 		\end{proof}
@@ -965,7 +965,7 @@ Again, we want to stress that this notion of equivalence is not based on the tru
 			\end{enumerate}
 		\end{prop}
 		\begin{proof}
-			To prove 2 from 1, let $\edomain_X$ be an experimental domain and $X$ its possibilities. Suppose $X$ is finite. Since any statement in $\edomain_X$ can generated from $X$ using finite conjunction, $\edomain_X$ must be finite as well.
+			To prove 2 from 1, let $\edomain_X$ be an experimental domain and $X$ its possibilities. Suppose $X$ is finite. Since any statement in $\edomain_X$ can be generated from $X$ using finite disjunction, $\edomain_X$ must be finite as well.
 			
 			To prove 3 from 2, let $\edomain_X$ contain finitely many verifiable statements. Then a basis will consist of finitely many statements as it is a subset of the domain.
 			
@@ -983,7 +983,7 @@ Again, we want to stress that this notion of equivalence is not based on the tru
 	
 	\section{Topological spaces}
 	
-	Now that we have defined what experimental domains are, we want to explore the link between them and some fundamental mathematical structures. The main result of this section is that an experimental domain provides a natural topology for its possibilities. Each verifiable statement can be seen as the disjunction of a set of possibilities. Performing finite conjunction and countable disjunction of verifiable statements means performing finite union and countable intersection on those sets of possibilities.
+	Now that we have defined what experimental domains are, we want to explore the link between them and some fundamental mathematical structures. The main result of this section is that an experimental domain provides a natural topology for its possibilities. Each verifiable statement can be seen as the disjunction of a set of possibilities. Performing finite conjunction and countable disjunction of verifiable statements means performing finite intersection and countable union on those sets of possibilities.
 	
 	Topological spaces were developed in the first half of the 1900s as a generalization of metric spaces. The idea is to define a notion of closeness without having to define an actual distance.\footnote{In science and engineering, one talks about topology also when discussing the structure of a molecule, an electronic circuit or a computer network. These types of structures (i.e.~nodes connected by vertices) are studied by graph theory and should not be confused with point-set topology.} Other branches of math (e.g. metric spaces, differential geometry, Lie algebras) now see their foundation on topological spaces, which therefore play a very important role in mathematics as a whole. In our case, this notion of closeness will map to how hard it is to tell possibilities apart. That is, possibilities that are topologically closer are more difficult to distinguish experimentally.
 	
@@ -1119,14 +1119,14 @@ Again, we want to stress that this notion of equivalence is not based on the tru
 	
 	\begin{mathSection}
 		\begin{defn}
-			A topology for $X$ is \textbf{Kolmogorov} (or $\mathsf{T}_0$) if for every two elements $x_1, x_2 \in X$ there exists a verifiable set $U \in \mathsf{T}_X$ containing one element but not the other. That is: either $x_1 \in U$ while $x_2 \notin U$ or $x_1 \notin U$ while $x_2 \in U$.
+			A topology for $X$ is \textbf{Kolmogorov} (or $\mathsf{T}_0$) if for every two distinct elements $x_1, x_2 \in X$ there exists a verifiable set $U \in \mathsf{T}_X$ containing one element but not the other. That is: either $x_1 \in U$ while $x_2 \notin U$ or $x_1 \notin U$ while $x_2 \in U$.
 		\end{defn}
 		\begin{defn}
-			A topology for $X$ is \textbf{Fr\'echet} (or $\mathsf{T}_1$) if for every two elements $x_1, x_2 \in X$ there exist two, not necessarily disjoint, verifiable sets $U_1, U_2 \in \mathsf{T}_X$ each containing only one element. That is: $x_1 
-			\in U_1$ and $x_2 \in U_2$.
+			A topology for $X$ is \textbf{Fr\'echet} (or $\mathsf{T}_1$) if for every two distinct elements $x_1, x_2 \in X$ there exist two, not necessarily disjoint, verifiable sets $U_1, U_2 \in \mathsf{T}_X$ each containing only one of the two elements. That is: $x_1 
+			\in U_1$, $x_2 \notin U_1$, $x_2 \in U_2$ and $x_1 \notin U_2$.
 		\end{defn}
 		\begin{defn}
-			A topology for $X$ is \textbf{Hausdorff} (or $\mathsf{T}_2$) if for every two elements $x_1, x_2 \in X$ there exist two disjoint verifiable sets $U_1, U_2 \in \mathsf{T}_X$ each containing one element. That is: $U_1 \cap U_2 = \emptyset$, $x_1 
+			A topology for $X$ is \textbf{Hausdorff} (or $\mathsf{T}_2$) if for every two distinct elements $x_1, x_2 \in X$ there exist two disjoint verifiable sets $U_1, U_2 \in \mathsf{T}_X$ each containing one element. That is: $U_1 \cap U_2 = \emptyset$, $x_1 
 			\in U_1$ and $x_2 \in U_2$.
 		\end{defn}
 		\begin{remark}
@@ -1139,7 +1139,7 @@ Again, we want to stress that this notion of equivalence is not based on the tru
 	
 	Now suppose two possibilities are approximately verifiable as we defined in Definition \ref{pm-vs-defApproximatelyVerifiable}. For example, \statement{the mass of the photon is exactly 0 eV} or \statement{the mass of the photon is exactly $10^{-20}$ eV}. We can find two verifiable statements \statement{the mass of the photon is less than $10^{-25}$ eV} and \statement{the mass of the photon is more than $10^{-25}$ eV} each compatible with only one possibility. This means that, given two approximately verifiable possibilities, we can find two verifiable sets each containing only one possibility: if all possibilities are approximately verifiable then the natural topology is $\mathsf{T}_1$.
 	
-	Now suppose two possibilities are experimentally distinguishable as we defined in Definition \ref{pm-vs-defExperimentallyDistinguishable}. Then, by \ref{pm-vs-experimentallyDistinguishableIsDisjointApproximation}, we can find two disjoint approximations. In the example before, the two verifiable statements were in fact incompatible. This means that, given two approximately verifiable possibilities, we can find two disjoint verifiable sets each containing only one possibility: if all possibilities are experimentally distinguishable then the natural topology is $\mathsf{T}_2$.
+	Now suppose two possibilities are experimentally distinguishable as we defined in Definition \ref{pm-vs-defExperimentallyDistinguishable}. Then, by \ref{pm-vs-experimentallyDistinguishableIsDisjointApproximation}, we can find two disjoint approximations. In the example before, the two verifiable statements were in fact incompatible. This means that, given two experimentally distinguishable possibilities, we can find two disjoint verifiable sets each containing only one possibility: if all possibilities are experimentally distinguishable then the natural topology is $\mathsf{T}_2$.
 	
 	\begin{mathSection}
 		\todo{gjoihtoeir}{It should be provable that the natural topology is sober}
@@ -1185,7 +1185,7 @@ Again, we want to stress that this notion of equivalence is not based on the tru
 	
 	Note that $\sigma$-algebras are also closed under countable intersections, since these can be expressed in terms of complements and countable unions.
 	
-	In the previous section we saw how each verifiable statement can be expressed as the conjunction of a set of possibilities, how the operations on statements can be expressed as operations on the verifiable sets and how all the verifiable sets form a topology. The same is true for theoretical statements, with the only difference being that we will end up with a collection of sets that is closed under complement and countable union since the theoretical domain is closed under negation and countable disjunction.
+	In the previous section we saw how each verifiable statement can be expressed as the disjunction of a set of possibilities, how the operations on statements can be expressed as operations on the verifiable sets and how all the verifiable sets form a topology. The same is true for theoretical statements, with the only difference being that we will end up with a collection of sets that is closed under complement and countable union since the theoretical domain is closed under negation and countable disjunction.
 	
 	\begin{mathSection}
 		
