@@ -5212,6 +5212,51 @@ The core of the problem is that the lattice of subspaces recovers the Boolean al
 
 Since the construction in terms of subspaces recovered the algebra of regular open (or closed) sets, and wanted to recover the points as limits, the above proposition implies that this is not possible. We would not be able to know, for example, whether the points form a circle or a real line. Even if we knew that they form a real line, and knew what half-lines we have, we would not know how to stitch them back together, as we could do it with $\{0\}$ or with $\{\infty\}$. We would need to know, at least, which intervals correspond to a finite interval (e.g. a finite entropy), which requires more structure.
 
+\subsection{Topology of affine extensions}\label{pm-es-lessonTopologyExtensions}
+
+\begin{insight}
+	Even if affine combinations are continuous on the ensemble space, the topology of a convex space need not uniquely determine a compatible locally convex topology on its affine extension.
+\end{insight}
+
+When constructing an affine extension, one may expect its topology to be uniquely determined by requiring that the original space retain its topology. This already fails for classical probability distributions, even when the underlying affine extension is fixed.
+
+\begin{example}[Different topologies on mass-one signed measures]
+	Let $\Ens$ be the space of probability distributions over $X = \{x_i\}_{i=1}^{\infty}$ with the $\ell^1$ topology. Identifying each $x_i$ with the corresponding pure state, each ensemble is written as $\ens = \sum_i p_i x_i$. Its affine extension is the space of mass-one signed measures
+	\begin{equation}
+		A = \left\{a = \sum_i a_i x_i \,\middle|\, (a_i) \in \ell^1,\; \sum_i a_i = 1\right\}.
+	\end{equation}
+	Indeed, the normalized positive and negative parts express every element of $A$ as an affine combination of probability distributions.
+	
+	On the coefficient space $\ell^1$, consider the two norms
+	\begin{equation}
+		\|a\|_1 = \sum_i |a_i|,
+		\qquad
+		\|a\|_\infty = \sup_i |a_i|.
+	\end{equation}
+	Both define locally convex topologies. Their restrictions to $\Ens$ coincide. To see this, let $\ens_n = \sum_i p_i^{(n)} x_i$ and $\ens = \sum_i p_i x_i$ be probability distributions such that $\|\ens_n-\ens\|_\infty \to 0$. Then $p_i^{(n)} \to p_i$ for every $i$, and
+	\begin{equation}
+		\|\ens_n-\ens\|_1
+		= 2 - 2\sum_i \min(p_i^{(n)},p_i)
+		\to 0
+	\end{equation}
+	by dominated convergence, since $\min(p_i^{(n)},p_i) \leq p_i$ and $\sum_i p_i=1$. Conversely, $\|\ens_n-\ens\|_\infty \leq \|\ens_n-\ens\|_1$.
+	
+	The induced topologies on $A$, however, are different. Define
+	\begin{equation}
+		a^{(n)} = x_1 + \frac{1}{n}\sum_{i=1}^{n}
+		(x_{2i}-x_{2i-1}).
+	\end{equation}
+	Each $a^{(n)}$ has total signed mass one, while
+	\begin{equation}
+		\|a^{(n)}-x_1\|_\infty = \frac{1}{n} \to 0,
+		\qquad
+		\|a^{(n)}-x_1\|_1 = 2.
+	\end{equation}
+	Therefore the two topologies agree on probability distributions but differ on their affine extension.
+\end{example}
+
+Since probability distributions affinely span $A$, any affine map fixing every probability distribution must be the identity on $A$. Thus the two extensions cannot be identified by an affine homeomorphism preserving the original space. A compatible topology on an affine or linear extension therefore requires an additional choice or condition.
+
 \ifdraft
 
 \openproblembreak
