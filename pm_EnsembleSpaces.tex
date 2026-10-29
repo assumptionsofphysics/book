@@ -4292,8 +4292,6 @@ In the quantum case, the orthogonality coincides with orthogonality in the Hilbe
 \end{proof}
 \end{mathSection}
 
-Note that, in general, the two notions of subspaces, and therefore their lattices, will be different. Note that a feature of classical ensemble spaces is exactly that orthogonality and separateness coincide, which also means the two lattices will coincide.
-
 Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthomodular, as one requires, for example, in quantum logic. The cut triangle \ref{pm-es-cutTriangle} is a counterexample. The only orthogonality relationships are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are the bottom $\bot = \emptyset$, $2= \{\ens[2]\}$, $3= \{\ens[3]\}$, $A2= \{p \ens[2] + \bar{p}\ens[a]\}$, $B3= \{p \ens[3] + \bar{p}\ens[b]\}$ and the top $\top = \Ens$. As we can see in Fig. \ref{pm-es-fig-cutTriangleOrthoSubspaces}, the subspaces form an $O_6$ lattice, which is not orthomodular. In fact, $3 \subseteq B3$ but $3 \vee (3^{\ortho} \wedge B3) = 3 \vee (A2 \wedge B3) = 3 \vee \bot = 3 \neq B3$. The lack of orthomodularity is due to the multiple complements where one is a subset of the other.
 
 \begin{figure}[H]
@@ -4332,44 +4330,67 @@ Another question is whether the lattice of $\ortho$-subspaces has to be necessar
 	\caption{On the left, the cut triangle. On the right, the lattice of the orthogonal subspaces. The red lines connect the orthogonal complements.}\label{pm-es-fig-cutTriangleOrthoSubspaces}
 \end{figure}
 
-This leads to the following:
-\begin{conj}
-	The lattice of $\ortho$-subspaces is orthomodular if the ensemble space is orthogonally decomposable (i.e. every decomposable ensemble is orthogonally decomposable).
-\end{conj}
-If this is true, the requirement of orthomodularity is an additional requirement that can be understood physically. It would also be nice to find a necessary and sufficient characterization of the lattice for orthogonally decomposable spaces.
-
-Note, however, that the lattice of $\separate$-subspaces  of the cut triangle is orthomodular, though not commutative. This shows how the two lattices can be very different.
+In contrast, the lattice of $\separate$-subspaces of the cut triangle is the Boolean algebra on its four extreme points. Its atoms are the four singletons. The join of two adjacent vertices is the side connecting them, while the join of two opposite vertices contains only those two vertices. The join of three vertices are the separate complements of a single vertex. Since each subspace is determined by the extreme points it contains, we have $2^4 = 16$ subspaces, as shown in Fig. \ref{pm-es-fig-cutTriangleSeparateSubspaces}.
 
 \begin{figure}[H]
 	\centering
-	\begin{tikzpicture}
-		%\draw [help lines] (0,0) grid (10,3);
-		
-		\node (t) at (4.5,6) {$\top = \Ens$};
-		\node (2P) at (0,4.5) {$2P=AB \cup B3$};
-		\node (AP) at (3,4.5) {$AP=B3 \cup 23$};
-		\node (BP) at (6,4.5) {$BP=23 \cup A2$};
-		\node (3P) at (9,4.5) {$3P=A2 \cup AB$};
-		\node (B3) at (0,3) {$B3=\{pB+\bar{p}3\}$};
-		\node (23) at (3,3) {$23=\{p2+\bar{p}3\}$};
-		\node (A2) at (6,3) {$A2=\{pA+\bar{p}2\}$};
-		\node (AB) at (9,3) {$AB=\{pA+\bar{p}B\}$};
-		\node (3) at (0,1.5) {$3=\{\ens[3]\}$};
-		\node (2) at (3,1.5) {$2=\{\ens[2]\}$};
-		\node (A) at (6,1.5) {$A=\{\ens[a]\}$};
-		\node (B) at (9,1.5) {$B=\{\ens[b]\}$};
-		\node (b) at (4.5,0) {$\bot = \emptyset$};
-		\draw (b) -- (3) -- (B3) -- (2P) -- (t);
-		\draw (b) -- (2) -- (23) -- (AP) -- (t);
-		\draw (b) -- (A) -- (A2) -- (BP) -- (t);
-		\draw (b) -- (B) -- (AB) -- (3P) -- (t);
-		\draw (3) -- (23) -- (BP);
-		\draw (2) -- (A2) -- (3P);
-		\draw (A) -- (AB) -- (2P);
-		\draw (B) -- (B3) -- (AP);
+	\begin{tikzpicture}[x=0.9cm,every node/.style={font=\small,fill=white,inner sep=2pt}]
+		\node (t) at (0,6) {$\top = \Ens$};
+		\node (sep3) at (-4.5,4.5) {$3^{\separate}$};
+		\node (sepB) at (-1.5,4.5) {$B^{\separate}$};
+		\node (sepA) at (1.5,4.5) {$A^{\separate}$};
+		\node (sep2) at (4.5,4.5) {$2^{\separate}$};
+
+		\node (A2) at (-6,3) {$A2$};
+		\node (B2) at (-3,3) {$B2$};
+		\node (E23) at (-1,3) {$23$};
+		\node (AB) at (1,3) {$AB$};
+		\node (A3) at (3,3) {$A3$};
+		\node (B3) at (6,3) {$B3$};
+
+		\node (e2) at (-4.5,1.5) {$2 = \{\ens[2]\}$};
+		\node (ea) at (-1.5,1.5) {$A = \{\ens[a]\}$};
+		\node (eb) at (1.5,1.5) {$B = \{\ens[b]\}$};
+		\node (e3) at (4.5,1.5) {$3 = \{\ens[3]\}$};
+		\node (b) at (0,0) {$\bot = \emptyset$};
+
+		\draw (b) -- (e2);
+		\draw (b) -- (ea);
+		\draw (b) -- (eb);
+		\draw (b) -- (e3);
+
+		\draw (e2) -- (A2);
+		\draw (e2) -- (B2);
+		\draw (e2) -- (E23);
+		\draw (ea) -- (A2);
+		\draw (ea) -- (AB);
+		\draw (ea) -- (A3);
+		\draw (eb) -- (B2);
+		\draw (eb) -- (AB);
+		\draw (eb) -- (B3);
+		\draw (e3) -- (E23);
+		\draw (e3) -- (A3);
+		\draw (e3) -- (B3);
+
+		\draw (A2) -- (sep3);
+		\draw (A2) -- (sepB);
+		\draw (B2) -- (sep3);
+		\draw (B2) -- (sepA);
+		\draw (E23) -- (sepB);
+		\draw (E23) -- (sepA);
+		\draw (AB) -- (sep3);
+		\draw (AB) -- (sep2);
+		\draw (A3) -- (sepB);
+		\draw (A3) -- (sep2);
+		\draw (B3) -- (sepA);
+		\draw (B3) -- (sep2);
+
+		\draw (sep3) -- (t);
+		\draw (sepB) -- (t);
+		\draw (sepA) -- (t);
+		\draw (sep2) -- (t);
 	\end{tikzpicture}
-	%\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces2.jpg}
-	\caption{In this diagram, the lower tier represents the singletons of the extreme points, the middle tier represents each side and the top tier represents the pairs of sides that are the $\separate$-complement of the extreme points. The red lines connect the complements. Note that the lattice is not distributive (e.g. $A\vee (3 \wedge A2) = A \vee \bot = A \neq (A\vee 3) \wedge (A \vee A2) = BP \wedge A2 = A2$). In fact, $\{\bot, 3, A, A2, BP\}$ is an $N_5$ sublattice. }
+	\caption{The Boolean lattice of $\separate$-subspaces of the cut triangle. The middle tier contains four sides, $A2$, $AB$, $B3$ and $23$, and two pairs of opposite vertices, $A3$ and $B2$. The next tier contains the complements of the four atoms. Edges indicate inclusion between consecutive tiers.}\label{pm-es-fig-cutTriangleSeparateSubspaces}
 \end{figure}
 
 
