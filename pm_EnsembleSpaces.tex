@@ -4009,7 +4009,7 @@ We now show that if we start with the mere notion of orthogonality defined from 
 
 \subsection{Separate and orthogonal subspaces}
 
-Since orthogonality and separateness are irreflexive symmetric relations, they will both give a lattice of subspaces. Here we present results and conjectures about these subspaces that we have yet to prove.
+Since orthogonality and separateness are irreflexive symmetric relations, they will both give a lattice of subspaces. Here we present some results about these subspaces.
 
 \begin{mathSection}
 \begin{defn}
@@ -4017,7 +4017,144 @@ Since orthogonality and separateness are irreflexive symmetric relations, they w
 \end{defn}
 \end{mathSection}
 
-We can further characterize the lattice of separate subspaces as a Boolean algebra. Since the lattice is already orthocomplemented, we just need to show that if two subspaces are disjoint, then one is a subset of the complement of the other. Each separate subspace contains all the components of its ensembles, so any component shared by ensembles from two subspaces must itself belong to both. Disjoint subspaces are therefore separate, which gives the lattice its Boolean structure.
+Currently, we are using all possible sets instead of restricting ourselves to Borel sets, which should be the better strategy. To do that, we still need to check whether the separate/orthogonal closure of a Borel set is a Borel set.
+
+In the classical case, since both orthogonality and separateness coincide with disjoint support, a subspace consists of all the probability distributions whose support is within a given set $U$. Two sets $U$ and $V$ will correspond to the same subspace if they differ by a measure zero subset (i.e. $\mu(U\Delta V)=0$).
+
+\begin{mathSection}
+	\begin{prop}
+		Let $\Ens$ be a discrete or continuous classical ensemble space over a sample space $X$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a measurable $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
+	\end{prop}
+	
+	\begin{proof}
+		Let $A \subseteq \Ens$ be an $\ortho$-subspace. Since $L^1(X,\mu)$ is separable, choose a countable $L^1$-dense subset $D \subseteq A$ and let
+		\begin{equation}
+			U = \bigcup_{p \in D} \left\{x \in X \, \middle| \, \frac{dp}{d\mu}(x)>0\right\},
+		\end{equation}
+		where $\mu$ is the counting measure in the discrete case and the Liouville measure in the continuous case. Every $p \in D$ satisfies $p(U)=1$, so by $L^1$-continuity the same holds for every $p \in A$. Thus $\lambda \in A^{\ortho}$ if and only if $\lambda(U)=0$: the forward implication follows by countable additivity, and the reverse follows because every $p \in A$ is concentrated on $U$. Taking the orthogonal complement again gives $A = (A^{\ortho})^{\ortho} = \{p \in \Ens \, | \, p(U)=1\}$.
+		
+		Conversely, let $A = \{ p \in \Ens \, | \, p(U) = 1\}$ for some $U \subseteq X$. Then $A^{\ortho} = \{ p \in \Ens \, | \, p(U) = 0\}$. The orthogonal complement of the orthogonal complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
+	\end{proof}
+\end{mathSection}
+
+In the quantum case, the orthogonality coincides with orthogonality in the Hilbert space, and therefore an $\ortho$-subspace coincides with the set of density operators supported by a given subspace.
+
+\begin{mathSection}
+	\begin{prop}
+		Let $\Ens$ be a quantum ensemble space over a Hilbert space $\mathcal{H}$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a closed subspace $U \subseteq \mathcal{H}$ with a corresponding projector $\mathbf{1}_{U}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$. 
+	\end{prop}
+	
+	\begin{proof}
+		Recall that to each closed subspace $U \subseteq \mathcal{H}$ is associated a projector $\mathbf{1}_U$ whose eigenvectors with eigenvalue $1$ span $U$. Given a density operator $\rho \in \Ens$, its support is the subspace $U=\support(\rho)$, the closed linear span of its eigenvectors with non-zero eigenvalues. Therefore $\tr[\mathbf{1}_{U} \, \rho] = 1$ and $\tr[\mathbf{1}_{U^{\ortho}} \, \rho] = 0$.
+		
+		Also recall that, for a quantum ensemble space, $\rho \ortho \sigma$ if and only if $\tr[ \mathbf{1}_{\support(\rho)} \, \sigma] = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigvee_{\rho \in A} \support(\rho)$ be the closed linear span of all supports. Then $\sigma \in A^{\ortho}$  (i.e. is orthogonal to all elements of $A$) if and only if $\tr[\mathbf{1}_{U} \, \sigma] = 0$. Conversely, $\rho \in A$ if and only if it is orthogonal to all elements of $A^{\ortho}$, which is the case if and only if $\tr[\mathbf{1}_{U} \, \rho] = 1$. Therefore if $A$ is a subspace, there is a subspace $U \subseteq \mathcal{H}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$.
+		
+		Now let $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$ for some subspace $U \subseteq \mathcal{H}$. The orthogonal complement $A^{\ortho}$ will be the set of all density operators $\sigma \in \Ens$ such that $\tr[\mathbf{1}_{U} \, \sigma] = 0$. The complement of the complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
+	\end{proof}
+\end{mathSection}
+
+Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthomodular, as one requires, for example, in quantum logic. The cut triangle \ref{pm-es-cutTriangle} is a counterexample. The only orthogonality relationships are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are the bottom $\bot = \emptyset$, $2= \{\ens[2]\}$, $3= \{\ens[3]\}$, $A2= \{p \ens[2] + \bar{p}\ens[a]\}$, $B3= \{p \ens[3] + \bar{p}\ens[b]\}$ and the top $\top = \Ens$. As we can see in Fig. \ref{pm-es-fig-cutTriangleOrthoSubspaces}, the subspaces form an $O_6$ lattice, which is not orthomodular. In fact, $3 \subseteq B3$ but $3 \vee (3^{\ortho} \wedge B3) = 3 \vee (A2 \wedge B3) = 3 \vee \bot = 3 \neq B3$. The lack of orthomodularity is due to the multiple complements where one is a subset of the other.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		%\draw [help lines] (0,0) grid (10,3);
+		
+		% Cut triangle
+		\coordinate (center) at (1.5,1.2);
+		\def\angle{90}
+		\def\radius{1.5}
+		\coordinate (t) at ($(center)+\radius*({cos(0+\angle)},{sin(0+\angle)})$);
+		\coordinate (e2) at ($(center)+\radius*({cos(120+\angle)},{sin(120+\angle)})$);
+		\coordinate (e3) at ($(center)+\radius*({cos(240+\angle)},{sin(240+\angle)})$);
+		\coordinate (a) at ($(e2)!0.5!(t)$);
+		\coordinate (b) at ($(e3)!0.5!(t)$);
+		\draw[fill=ensembleFill, thick] (a) -- (e2) node[midway,left] {$A2$} -- (e3) -- (b) node[midway,right] {$B3$} -- cycle;
+		\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
+		\filldraw [black] (e2) circle (1pt) node[below left] {$\ens[2]$};
+		\filldraw [black] (e3) circle (1pt) node[below right] {$\ens[3]$};
+		\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
+		\draw [dashed] (a) -- (t) -- (b);
+		
+		\node (t) at (6,3) {$\top = \Ens$};
+		\node (A2) at (5,2) {$A2$};
+		\node (B3) at (7,2) {$B3$};
+		\node (X) at (5,1) {$2=\{\ens[2]\}$};
+		\node (Y) at (7,1) {$3=\{\ens[3]\}$};
+		\node (b) at (6,0) {$\bot = \emptyset$};
+		\draw (b) -- (X) -- (A2) -- (t) -- (B3) -- (Y) -- (b);
+		\draw[color=red!75!black] (X) -- (B3);
+		\draw[color=red!75!black] (Y) -- (A2);
+		\draw[color=red!75!black] (t) -- (b);
+	\end{tikzpicture}
+	%\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces.jpg}
+	\caption{On the left, the cut triangle. On the right, the lattice of the orthogonal subspaces. The red lines connect the orthogonal complements.}\label{pm-es-fig-cutTriangleOrthoSubspaces}
+\end{figure}
+
+In contrast, the lattice of $\separate$-subspaces of the cut triangle is the Boolean algebra on its four extreme points. Its atoms are the four singletons. The join of two adjacent vertices is the side connecting them, while the join of two opposite vertices contains only those two vertices. The join of three vertices are the separate complements of the remaining vertex. Since each subspace is determined by the extreme points it contains, we have $2^4 = 16$ subspaces, as shown in Fig. \ref{pm-es-fig-cutTriangleSeparateSubspaces}.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[x=0.9cm,every node/.style={font=\small,fill=white,inner sep=2pt}]
+		\node (t) at (0,6) {$\top = \Ens$};
+		\node (sep3) at (-4.5,4.5) {$3^{\separate}$};
+		\node (sepB) at (-1.5,4.5) {$B^{\separate}$};
+		\node (sepA) at (1.5,4.5) {$A^{\separate}$};
+		\node (sep2) at (4.5,4.5) {$2^{\separate}$};
+		
+		\node (A2) at (-6,3) {$A2$};
+		\node (B2) at (-3,3) {$B2$};
+		\node (E23) at (-1,3) {$23$};
+		\node (AB) at (1,3) {$AB$};
+		\node (A3) at (3,3) {$A3$};
+		\node (B3) at (6,3) {$B3$};
+		
+		\node (e2) at (-4.5,1.5) {$2 = \{\ens[2]\}$};
+		\node (ea) at (-1.5,1.5) {$A = \{\ens[a]\}$};
+		\node (eb) at (1.5,1.5) {$B = \{\ens[b]\}$};
+		\node (e3) at (4.5,1.5) {$3 = \{\ens[3]\}$};
+		\node (b) at (0,0) {$\bot = \emptyset$};
+		
+		\draw (b) -- (e2);
+		\draw (b) -- (ea);
+		\draw (b) -- (eb);
+		\draw (b) -- (e3);
+		
+		\draw (e2) -- (A2);
+		\draw (e2) -- (B2);
+		\draw (e2) -- (E23);
+		\draw (ea) -- (A2);
+		\draw (ea) -- (AB);
+		\draw (ea) -- (A3);
+		\draw (eb) -- (B2);
+		\draw (eb) -- (AB);
+		\draw (eb) -- (B3);
+		\draw (e3) -- (E23);
+		\draw (e3) -- (A3);
+		\draw (e3) -- (B3);
+		
+		\draw (A2) -- (sep3);
+		\draw (A2) -- (sepB);
+		\draw (B2) -- (sep3);
+		\draw (B2) -- (sepA);
+		\draw (E23) -- (sepB);
+		\draw (E23) -- (sepA);
+		\draw (AB) -- (sep3);
+		\draw (AB) -- (sep2);
+		\draw (A3) -- (sepB);
+		\draw (A3) -- (sep2);
+		\draw (B3) -- (sepA);
+		\draw (B3) -- (sep2);
+		
+		\draw (sep3) -- (t);
+		\draw (sepB) -- (t);
+		\draw (sepA) -- (t);
+		\draw (sep2) -- (t);
+	\end{tikzpicture}
+	\caption{The Boolean lattice of $\separate$-subspaces of the cut triangle. The middle tier contains four sides, $A2$, $AB$, $B3$ and $23$, and two pairs of opposite vertices, $A3$ and $B2$. The next tier contains the complements of the four atoms. Edges indicate inclusion between consecutive tiers.}\label{pm-es-fig-cutTriangleSeparateSubspaces}
+\end{figure}
+
+The fact that the lattice of separate subspaces is a Boolean algebra is actually a more general property. Since the lattice is already orthocomplemented, we just need to show that if two subspaces are disjoint, then one is a subset of the complement of the other. Each separate subspace contains all the components of its ensembles, so any component shared by ensembles from two subspaces must itself belong to both. Disjoint subspaces are therefore separate, which gives the lattice its Boolean structure.
 
 \begin{mathSection}
 	\begin{prop}
@@ -4258,141 +4395,7 @@ As orthogonal subspaces effectively define mutually exclusive events, we can inv
 \end{remark}
 \end{mathSection}
 
-In the classical case, since both orthogonality and separateness coincide with disjoint support, a subspace consists of all the probability distribution whose support is within a given set $U$. Two sets $U$ and $V$ will correspond to the same subspace if they differ from a measure zero subset (i.e. $\mu(U\Delta V)=0$).
-
-\begin{mathSection}
-\begin{prop}
-	Let $\Ens$ be a discrete or continuous classical ensemble space over a sample space $X$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a measurable $U \subseteq X$ such that $A = \{ p \in \Ens \, | \, p(U) = 1\}$.
-\end{prop}
-
-\begin{proof}
-	Let $A \subseteq \Ens$ be an $\ortho$-subspace. Since $L^1(X,\mu)$ is separable, choose a countable $L^1$-dense subset $D \subseteq A$ and let
-	\begin{equation}
-	U = \bigcup_{p \in D} \left\{x \in X \, \middle| \, \frac{dp}{d\mu}(x)>0\right\},
-	\end{equation}
-	where $\mu$ is the counting measure in the discrete case and the Liouville measure in the continuous case. Every $p \in D$ satisfies $p(U)=1$, so by $L^1$-continuity the same holds for every $p \in A$. Thus $\lambda \in A^{\ortho}$ if and only if $\lambda(U)=0$: the forward implication follows by countable additivity, and the reverse follows because every $p \in A$ is concentrated on $U$. Taking the orthogonal complement again gives $A = (A^{\ortho})^{\ortho} = \{p \in \Ens \, | \, p(U)=1\}$.
-	
-	Conversely, let $A = \{ p \in \Ens \, | \, p(U) = 1\}$ for some $U \subseteq X$. Then $A^{\ortho} = \{ p \in \Ens \, | \, p(U) = 0\}$. The orthogonal complement of the orthogonal complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
-\end{proof}
-\end{mathSection}
-
-In the quantum case, the orthogonality coincides with orthogonality in the Hilbert space, and therefore an $\ortho$-subspace coincides with the set of density operators supported by a given subspace.
-
-\begin{mathSection}
-\begin{prop}
-	Let $\Ens$ be a quantum ensemble space over a Hilbert space $\mathcal{H}$. Then $A \subseteq \Ens$ is an $\ortho$-subspace if and only if there exists a closed subspace $U \subseteq \mathcal{H}$ with a corresponding projector $\mathbf{1}_{U}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$. 
-\end{prop}
-
-\begin{proof}
-	Recall that to each closed subspace $U \subseteq \mathcal{H}$ is associated a projector $\mathbf{1}_U$ whose eigenvectors with eigenvalue $1$ span $U$. Given a density operator $\rho \in \Ens$, its support is the subspace $U=\support(\rho)$, the closed linear span of its eigenvectors with non-zero eigenvalues. Therefore $\tr[\mathbf{1}_{U} \, \rho] = 1$ and $\tr[\mathbf{1}_{U^{\ortho}} \, \rho] = 0$.
-
-	Also recall that, for a quantum ensemble space, $\rho \ortho \sigma$ if and only if $\tr[ \mathbf{1}_{\support(\rho)} \, \sigma] = 0$. Let $A \subseteq \Ens$ be an $\ortho$-subspace. Let $U = \bigvee_{\rho \in A} \support(\rho)$ be the closed linear span of all supports. Then $\sigma \in A^{\ortho}$  (i.e. is orthogonal to all elements of $A$) if and only if $\tr[\mathbf{1}_{U} \, \sigma] = 0$. Conversely, $\rho \in A$ if and only if it is orthogonal to all elements of $A^{\ortho}$, which is the case if and only if $\tr[\mathbf{1}_{U} \, \rho] = 1$. Therefore if $A$ is a subspace, there is a subspace $U \subseteq \mathcal{H}$ such that $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$.
-	
-	Now let $A = \{ \rho \in \Ens \, | \, \tr[\mathbf{1}_{U} \, \rho] = 1\}$ for some subspace $U \subseteq \mathcal{H}$. The orthogonal complement $A^{\ortho}$ will be the set of all density operators $\sigma \in \Ens$ such that $\tr[\mathbf{1}_{U} \, \sigma] = 0$. The complement of the complement will return $A$, which means $A = (A^{\ortho})^{\ortho}$ is a subspace.
-\end{proof}
-\end{mathSection}
-
-Another question is whether the lattice of $\ortho$-subspaces has to be necessarily orthomodular, as one requires, for example, in quantum logic. The cut triangle \ref{pm-es-cutTriangle} is a counterexample. The only orthogonality relationships are $\ens[2] \ortho p \ens[3] + \bar{p}\ens[b]$ and $\ens[3] \ortho p \ens[2] + \bar{p}\ens[a]$. This means that the only $\ortho$-subspaces are the bottom $\bot = \emptyset$, $2= \{\ens[2]\}$, $3= \{\ens[3]\}$, $A2= \{p \ens[2] + \bar{p}\ens[a]\}$, $B3= \{p \ens[3] + \bar{p}\ens[b]\}$ and the top $\top = \Ens$. As we can see in Fig. \ref{pm-es-fig-cutTriangleOrthoSubspaces}, the subspaces form an $O_6$ lattice, which is not orthomodular. In fact, $3 \subseteq B3$ but $3 \vee (3^{\ortho} \wedge B3) = 3 \vee (A2 \wedge B3) = 3 \vee \bot = 3 \neq B3$. The lack of orthomodularity is due to the multiple complements where one is a subset of the other.
-
-\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-		%\draw [help lines] (0,0) grid (10,3);
-		
-		% Cut triangle
-		\coordinate (center) at (1.5,1.2);
-		\def\angle{90}
-		\def\radius{1.5}
-		\coordinate (t) at ($(center)+\radius*({cos(0+\angle)},{sin(0+\angle)})$);
-		\coordinate (e2) at ($(center)+\radius*({cos(120+\angle)},{sin(120+\angle)})$);
-		\coordinate (e3) at ($(center)+\radius*({cos(240+\angle)},{sin(240+\angle)})$);
-		\coordinate (a) at ($(e2)!0.5!(t)$);
-		\coordinate (b) at ($(e3)!0.5!(t)$);
-		\draw[fill=ensembleFill, thick] (a) -- (e2) node[midway,left] {$A2$} -- (e3) -- (b) node[midway,right] {$B3$} -- cycle;
-		\filldraw [black] (a) circle (1pt) node[above left] {$\ens[a]$};
-		\filldraw [black] (e2) circle (1pt) node[below left] {$\ens[2]$};
-		\filldraw [black] (e3) circle (1pt) node[below right] {$\ens[3]$};
-		\filldraw [black] (b) circle (1pt) node[above right] {$\ens[b]$};
-		\draw [dashed] (a) -- (t) -- (b);
-
-		\node (t) at (6,3) {$\top = \Ens$};
-		\node (A2) at (5,2) {$A2$};
-		\node (B3) at (7,2) {$B3$};
-		\node (X) at (5,1) {$2=\{\ens[2]\}$};
-		\node (Y) at (7,1) {$3=\{\ens[3]\}$};
-		\node (b) at (6,0) {$\bot = \emptyset$};
-		\draw (b) -- (X) -- (A2) -- (t) -- (B3) -- (Y) -- (b);
-		\draw[color=red!75!black] (X) -- (B3);
-		\draw[color=red!75!black] (Y) -- (A2);
-		\draw[color=red!75!black] (t) -- (b);
-	\end{tikzpicture}
-	%\includegraphics[width=0.7\textwidth]{tempimages/CutTriangleSubspaces.jpg}
-	\caption{On the left, the cut triangle. On the right, the lattice of the orthogonal subspaces. The red lines connect the orthogonal complements.}\label{pm-es-fig-cutTriangleOrthoSubspaces}
-\end{figure}
-
-In contrast, the lattice of $\separate$-subspaces of the cut triangle is the Boolean algebra on its four extreme points. Its atoms are the four singletons. The join of two adjacent vertices is the side connecting them, while the join of two opposite vertices contains only those two vertices. The join of three vertices are the separate complements of a single vertex. Since each subspace is determined by the extreme points it contains, we have $2^4 = 16$ subspaces, as shown in Fig. \ref{pm-es-fig-cutTriangleSeparateSubspaces}.
-
-\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}[x=0.9cm,every node/.style={font=\small,fill=white,inner sep=2pt}]
-		\node (t) at (0,6) {$\top = \Ens$};
-		\node (sep3) at (-4.5,4.5) {$3^{\separate}$};
-		\node (sepB) at (-1.5,4.5) {$B^{\separate}$};
-		\node (sepA) at (1.5,4.5) {$A^{\separate}$};
-		\node (sep2) at (4.5,4.5) {$2^{\separate}$};
-
-		\node (A2) at (-6,3) {$A2$};
-		\node (B2) at (-3,3) {$B2$};
-		\node (E23) at (-1,3) {$23$};
-		\node (AB) at (1,3) {$AB$};
-		\node (A3) at (3,3) {$A3$};
-		\node (B3) at (6,3) {$B3$};
-
-		\node (e2) at (-4.5,1.5) {$2 = \{\ens[2]\}$};
-		\node (ea) at (-1.5,1.5) {$A = \{\ens[a]\}$};
-		\node (eb) at (1.5,1.5) {$B = \{\ens[b]\}$};
-		\node (e3) at (4.5,1.5) {$3 = \{\ens[3]\}$};
-		\node (b) at (0,0) {$\bot = \emptyset$};
-
-		\draw (b) -- (e2);
-		\draw (b) -- (ea);
-		\draw (b) -- (eb);
-		\draw (b) -- (e3);
-
-		\draw (e2) -- (A2);
-		\draw (e2) -- (B2);
-		\draw (e2) -- (E23);
-		\draw (ea) -- (A2);
-		\draw (ea) -- (AB);
-		\draw (ea) -- (A3);
-		\draw (eb) -- (B2);
-		\draw (eb) -- (AB);
-		\draw (eb) -- (B3);
-		\draw (e3) -- (E23);
-		\draw (e3) -- (A3);
-		\draw (e3) -- (B3);
-
-		\draw (A2) -- (sep3);
-		\draw (A2) -- (sepB);
-		\draw (B2) -- (sep3);
-		\draw (B2) -- (sepA);
-		\draw (E23) -- (sepB);
-		\draw (E23) -- (sepA);
-		\draw (AB) -- (sep3);
-		\draw (AB) -- (sep2);
-		\draw (A3) -- (sepB);
-		\draw (A3) -- (sep2);
-		\draw (B3) -- (sepA);
-		\draw (B3) -- (sep2);
-
-		\draw (sep3) -- (t);
-		\draw (sepB) -- (t);
-		\draw (sepA) -- (t);
-		\draw (sep2) -- (t);
-	\end{tikzpicture}
-	\caption{The Boolean lattice of $\separate$-subspaces of the cut triangle. The middle tier contains four sides, $A2$, $AB$, $B3$ and $23$, and two pairs of opposite vertices, $A3$ and $B2$. The next tier contains the complements of the four atoms. Edges indicate inclusion between consecutive tiers.}\label{pm-es-fig-cutTriangleSeparateSubspaces}
-\end{figure}
-
+There is still a lot of work that needs to be done to characterize these lattices and, in particular, understand when the $\ortho$-lattice properly characterizes a classical space.
 
 \section{Finite-dimensional ensemble spaces}
 
