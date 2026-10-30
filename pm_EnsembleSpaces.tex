@@ -2062,15 +2062,13 @@ In general, the closure of an affine set is not an affine set. This would be tru
 
 Having defined the affine hull, we can now define the notion of algebraic interior, exterior and boundary relative to a set and its affine hull. Intuitively, given a set $A \subseteq \Ens$, its algebraic interior includes all those points from which we can move in any direction within the set. Its algebraic exterior, instead, consists of all those points that have a finite region that separates them from $A$. Finally, the algebraic boundary consists of all the points that sit in the middle.
 
-TODO: change algebraic exterior point to external point
-
 \begin{mathSection}
 \begin{defn}
 	Let $A \subseteq \Ens$ be a subset of an ensemble space. An ensemble $\ens \in A$ is an \textbf{internal point relative to $A$} if for every $\ens[a] \in \ahull(A)$ there exists $\epsilon > 0$ such that the affine combination $r\ens[a] + \bar{r}\ens$ exists and belongs to $A$ for every $r \in (-\epsilon,\epsilon)$. The \textbf{relative algebraic interior} of $A$, noted $I_A$, is the set of all internal points relative to $A$.
 	
-	An ensemble $\ens \in \ahull(A)\setminus A$ is an \textbf{exterior point relative to $A$} if for every $\ens[a] \in \ahull(A)$ there exists $\epsilon > 0$ such that, for every $r \in (-\epsilon,\epsilon)$, the affine combination $r\ens[a] + \bar{r}\ens$ does not belong to $A$ whenever it exists. The \textbf{relative algebraic exterior} of $A$, noted $E_A$, is the set of all exterior points relative to $A$.
+	An ensemble $\ens \in \ahull(A)\setminus A$ is an \textbf{external point relative to $A$} if for every $\ens[a] \in \ahull(A)$ there exists $\epsilon > 0$ such that, for every $r \in (-\epsilon,\epsilon)$, the affine combination $r\ens[a] + \bar{r}\ens$ does not belong to $A$ whenever it exists. The \textbf{relative algebraic exterior} of $A$, noted $E_A$, is the set of all external points relative to $A$.
 	
-	An ensemble $\ens \in \ahull(A)$ is a \textbf{boundary point relative to $A$} if it is neither internal nor exterior relative to $A$. The \textbf{relative algebraic boundary} of $A$, noted $B_A$, is the set of all boundary points relative to $A$. That is, $B_A = \ahull(A)\setminus(I_A\cup E_A)$.
+	An ensemble $\ens \in \ahull(A)$ is a \textbf{boundary point relative to $A$} if it is neither internal nor external relative to $A$. The \textbf{relative algebraic boundary} of $A$, noted $B_A$, is the set of all boundary points relative to $A$. That is, $B_A = \ahull(A)\setminus(I_A\cup E_A)$.
 \end{defn}
 \end{mathSection}
 
@@ -2274,7 +2272,7 @@ Lastly, with the notion of affine independence we can define the notion of simpl
 	
 	Now we show $\Delta \setminus B_{\Delta} \subseteq I_{\Delta}$. If $\ens[e] \in \Delta \setminus \left(\bigcup_{i=1}^{n} \hull(A\setminus\{\ens[a]_i\})\right)$, then $\ens[e] = \sum_{i=1}^n p_i\ens[a]_i$ where each $p_i \in (0,1)$. Suppose $\ens[a] = \sum_{i=1}^n r_i\ens[a]_i \in \ahull(\Delta)$. Then there exists $\epsilon > 0$ such that if $r \in (-\epsilon, \epsilon)$, all affine coefficients of $r\ens[a] + \bar{r}\ens[e] = \sum_{i=1}^n (rr_i + \bar{r}p_i)\ens[a]_i$ are positive. As a result, $r\ens[a] + \bar{r}\ens[e] \in \Delta$, so $\ens[e]$ is a internal point relative to $\Delta$.
 	
-	Finally, we demonstrate $\ahull(\Delta) \setminus \Delta \subseteq E_{\Delta}$. Suppose $\ens[e] = \sum_{i=1}^n \lambda_i\ens[a]_i \in \ahull(\Delta) \setminus \Delta$, and let $\ens[a] = \sum_{i=1}^n r_i\ens[a]_i \in \ahull(\Delta)$. Since $\ens[e] \in \ahull(\Delta) \setminus \Delta$, $\lambda_j < 0$ for some $j \in [1,n]$. Then there exists $\epsilon > 0$ such that for all $r \in (-\epsilon, \epsilon)$, $rr_j + \bar{r}\lambda_j < 0$. Thus, if $r\ens[a] + \bar{r}\ens[e]$ exists, then $r\ens[a] + \bar{r}\ens[e] = \sum_{i=1}^n (rr_i + \bar{r}\lambda_i)\ens[a]_i \notin \Delta$. Hence, $\ens[e]$ is an exterior point relative to $\Delta$.
+	Finally, we demonstrate $\ahull(\Delta) \setminus \Delta \subseteq E_{\Delta}$. Suppose $\ens[e] = \sum_{i=1}^n \lambda_i\ens[a]_i \in \ahull(\Delta) \setminus \Delta$, and let $\ens[a] = \sum_{i=1}^n r_i\ens[a]_i \in \ahull(\Delta)$. Since $\ens[e] \in \ahull(\Delta) \setminus \Delta$, $\lambda_j < 0$ for some $j \in [1,n]$. Then there exists $\epsilon > 0$ such that for all $r \in (-\epsilon, \epsilon)$, $rr_j + \bar{r}\lambda_j < 0$. Thus, if $r\ens[a] + \bar{r}\ens[e]$ exists, then $r\ens[a] + \bar{r}\ens[e] = \sum_{i=1}^n (rr_i + \bar{r}\lambda_i)\ens[a]_i \notin \Delta$. Hence, $\ens[e]$ is an external point relative to $\Delta$.
 	
 	Since we partitioned $\ahull(\Delta)$ into these three sets, the equalities follow because $I_{\Delta}$, $E_{\Delta}$, and $B_{\Delta}$ are disjoint.
 \end{proof}
