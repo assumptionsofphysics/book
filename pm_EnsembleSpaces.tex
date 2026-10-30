@@ -4881,20 +4881,21 @@ One may therefore expect the Shannon entropy to be continuous in this topology. 
 		\def\barw{0.25}
 		\def\hscale{0.5}
 		
-		% n=1: 2 outcomes
+		% n=1: 2 nonzero outcomes
 		\node[left] at (0,3) {$p^{(1)}$};
 		\draw[->] (0,2.4) -- (5,2.4);
 		\draw[->] (0,2.4) -- (0,3.6);
-		\filldraw[black!30] ({1*\hscale - \barw/2},2.4) rectangle +(\barw,0.5);
-		\filldraw[black!70] ({2*\hscale - \barw/2},2.4) rectangle +(\barw,0.5);
+		\foreach \i in {2,3} {
+			\filldraw[black!70] ({\i*\hscale - \barw/2},2.4) rectangle +(\barw,0.5);
+			\node[below] at ({\i*\hscale},2.4) {\small $\i$};
+		}
 		\node[below] at ({1*\hscale},2.4) {\small $1$};
-		\node[below] at ({2*\hscale},2.4) {\small $2$};
 		
 		% n=2: 5 outcomes
 		\node[left] at (0,1.5) {$p^{(2)}$};
 		\draw[->] (0,0.9) -- (5,0.9);
 		\draw[->] (0,0.9) -- (0,2.1);
-		\filldraw[black!30] ({1*\hscale - \barw/2},0.9) rectangle +(\barw,0.75);
+		\filldraw[black!30] ({1*\hscale - \barw/2},0.9) rectangle +(\barw,0.5);
 		\foreach \i in {2,3,4,5} {
 			\filldraw[black!70] ({\i*\hscale - \barw/2},0.9) rectangle +(\barw,0.125);
 			\node[below] at ({\i*\hscale},0.9) {\small $\i$};
@@ -4905,9 +4906,9 @@ One may therefore expect the Shannon entropy to be continuous in this topology. 
 		\node[left] at (0,0) {$p^{(3)}$};
 		\draw[->] (0,-0.6) -- (5,-0.6);
 		\draw[->] (0,-0.6) -- (0,0.6);
-		\filldraw[black!30] ({1*\hscale - \barw/2},-0.6) rectangle +(\barw,0.833);
+		\filldraw[black!30] ({1*\hscale - \barw/2},-0.6) rectangle +(\barw,{2/3});
 		\foreach \i in {2,3,4,5,6,7,8,9} {
-			\filldraw[black!70] ({\i*\hscale - \barw/2},-0.6) rectangle +(\barw,0.042);
+			\filldraw[black!70] ({\i*\hscale - \barw/2},-0.6) rectangle +(\barw,{1/24});
 			\node[below] at ({\i*\hscale},-0.6) {\small $\i$};
 		}
 		\node[below] at ({1*\hscale},-0.6) {\small $1$};
