@@ -1484,7 +1484,7 @@ We may want to extend the notion of separate decomposability to orthogonal decom
 
 \section{Affine combinations and vector space embedding}
 
-In this section we will see how the bounds of entropy constrain ensemble spaces to embed into vector spaces. Moreover, the ensemble space must be bounded along any direction. In other words, the existence of an entropy rules out physically pathological cases that a convex space may otherwise allow.
+In this section we will see how the bounds of entropy constrain ensemble spaces to embed into vector spaces. In other words, the existence of an entropy rules out physically pathological cases that a convex space may otherwise allow.
 
 %First of all, the bounds make it possible to define a unique inverse for statistical mixture. This allows us to define affine combinations, and to show that the ensemble space is embedded into a vector space. Lastly, the bounds will force this embedding to be into a subset of a bounded set of the vector space.
 
@@ -2138,6 +2138,18 @@ Most notably, many key results about vector space bases are true for affine base
 \begin{defn}
 	The \textbf{affine dimension} of an ensemble space is the cardinality of any affine basis minus one. That is, $\dim(\Ens) = |\mathcal{B}|-1$ where $\mathcal{B} \subseteq \Ens$ is an affine basis of $\Ens$.
 \end{defn}
+
+\begin{defn}
+	A \textbf{line} $L \subseteq \Ens$ is a one-dimensional affine subset of $\Ens$.
+\end{defn}
+
+\begin{prop}
+	Given two distinct $\ens[a], \ens[b] \in \Ens$, there is only one line that contains them.
+\end{prop}
+
+\begin{proof}
+	The affine hull $\ahull(\{\ens[a],\ens[b]\})$ is one-dimensional. Any line containing both ensembles has $\{\ens[a],\ens[b]\}$ as an affine basis and therefore equals this affine hull.
+\end{proof}
 \end{mathSection}
 
 We can also see that affine independence and affine hull in ensemble spaces are related to the notions of linear independence and linear span, respectively, in the embedding vector spaces.
@@ -2287,182 +2299,6 @@ It would be interesting to have equivalent characterizations for simplexes in fi
 \begin{conj}\label{em-es-conjChoquetSimplexMonodecomposable}
 	A Choquet simplex is monodecomposable.
 \end{conj}
-
-\subsection{Boundedness of lines}
-
-Another constraint that the entropy imposes is that the ensemble space is bounded along every direction. That is, if we take two ensembles, these will identify an affine line in the embedding vector space that will, at some point, exit the ensemble space in both directions.
-
-\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}
-		%\draw [help lines] (0,0) grid (10,3);
-		\coordinate (O) at (1, 1);
-		\coordinate (x) at (0, 0);
-		\coordinate (y) at (3, 1);
-		\coordinate (z) at (1, 3);
-		
-		\node[below left] at (z) {$V_{\ens}$};
-		\node[above] at (2,2.6) {$\Ens$};
-		\node[below right] at (O) {$\ens$};
-		
-		\draw[-] (O) -- (x);
-		\draw[-] (O) -- (y);
-		\draw[-] (O) -- (z);
-		
-		\draw[-, thick] plot [smooth cycle] coordinates {(0.5,1.5)(1.5,0.3)(2.7,1)(2.6,2.5)(1,2.5)};
-		
-		\draw[dashed] (2, 2) -- (3, 2.5);
-		\draw[-, thick] (1.5, 1.75) -- (2, 2) node[below] {$b$};
-		\draw[dashed] (0.4,1.2) -- (1.5, 1.75) node[below] {$a$};
-	\end{tikzpicture}
-	%\includegraphics[width=0.4\textwidth]{tempimages/BoundedEnsembleSpace.jpg}
-	\caption{$\Ens$ is the ensemble space and $V_{\ens}$ is the embedding vector space with origin $\ens$. Any affine line, like the dashed one in the picture, will intersect $\Ens$ over a finite range limited by the two elements $a$ and $b$ of the vector space (but not necessarily of the ensemble space).}
-\end{figure}
-
-The proof proceeds as follows. Suppose we take three points and assign them an entropy value consistent with the entropic bounds: can we always pick an entropy value that satisfies the bounds for any subsequent point in a given direction? The answer is negative and figure \ref{pm-es-directionallyBound} represents the problem pictorially. On the horizontal axis we can imagine all the ensembles over a line, and on the vertical axis their entropy. We fix the entropy for the origin, the blue and the red point. What are the values for the next point, the green one, that satisfy the entropy bounds? Because of strict concavity, the green point must remain below the blue line. The green line represents the upper bound for the blue point, which means the green point must be above the purple line. If we go far enough, the blue and purple line meet, leaving no possible value for the entropy.
-
-\begin{figure}[H]
-	\centering
-	\begin{tikzpicture}
-		%\draw [help lines] (0,0) grid (4,4);
-		\def\ax{0}
-		\def\bx{1.9}
-		\def\cx{3.8}
-		\def\dx{5.7}
-		
-		\def\aS{0}
-		\def\bS{1}
-		\def\cS{1.5}
-		\def\dS{1.55}
-		
-		\def\xmin{-1}
-		\def\xmax{21.5}
-		
-		\begin{axis}[
-			height=5.5cm,
-			width=14cm,
-			axis lines=middle,
-			ylabel={$S$},
-			xlabel={$x$},
-			xlabel style={below left},
-			xmin=\xmin,xmax=\xmax,
-			ymin=-0.5,ymax=8.5
-			]
-			\addplot[only marks, black] coordinates { (\ax,\aS) };
-			\addplot[only marks, blue!75!black] coordinates { (\bx,\bS) };
-			\addplot[only marks, red!75!black] coordinates { (\cx,\cS) };
-			\addplot[only marks, green!75!black] coordinates { (\dx,\dS) };
-			\addplot[blue!75!black,samples=10,domain=\xmin:\xmax]{(x - \bx)/(\cx - \bx)*(\cS - \bS) + \bS};
-			\addplot[green!75!black,samples=50,domain=0:\dx]{-(x/\dx) * ln((x/\dx))/ln 2 - (1-(x/\dx)) * ln(1-(x/\dx))/ln 2 + x / \dx * \dS};
-			\addplot[blue!60!red,samples=300,domain=\bx:\xmax]{x/\bx*(\bS-(-(\bx/x) * ln((\bx/x))/ln 2 - (1-(\bx/x)) * ln(1-(\bx/x))/ln 2))};
-		\end{axis}
-	\end{tikzpicture}
-	%\includegraphics[width=0.7\textwidth]{tempimages/BoundsFromEntropy.png}
-	\caption{Visual representation of the bounds. See proof for details.}\label{pm-es-directionallyBound}
-\end{figure}
-
-\begin{mathSection}
-\begin{defn}
-	A \textbf{line} $A \subseteq \Ens$ is a maximal convex subset such that for any three elements one can be expressed as a mixture of the other two. That is, for all distinct $\ens_1, \ens_2, \ens_3 \in A$ there exists a permutation $\sigma : \{1,2,3\} \to \{1,2,3\}$ and $p \in (0,1)$ such that $\ens_{\sigma(1)} = p \ens_{\sigma(2)} + \bar{p} \ens_{\sigma(3)}$.
-\end{defn}
-
-%TODO: line can also be defined as a one-dimensional affine set
-
-\begin{prop}
-	Given two distinct $\ens[a], \ens[b] \in \Ens$, there is only one line that contains them.
-\end{prop}
-
-\begin{proof}
-	Since an ensemble space embeds into a vector space, given two distinct ensembles there is only one affine line that connects them. A line is the intersection of the affine line with the ensemble space.
-\end{proof}
-
-\begin{thrm}[Lines are bounded]
-	Let $A \subseteq \Ens$ be a line. Then we can find a bounded interval $V \subset \mathbb{R}$ and an invertible function $f : A \to V$ such that $f(p \ens[a] + \bar{p} \ens[b]) = p f(\ens[a]) + \bar{p} f(\ens[b])$ for all $\ens[a], \ens[b] \in A$.
-\end{thrm}
-
-\begin{proof}
-	Let $A \subseteq \Ens$ be a line. Pick $\ens_0, \ens_1 \in A$. For any $\ens[a] \in A$, we can write it as an affine combination of $\ens_0$ and  $\ens_1$. That is, $\ens[a] = \bar{x}\ens_0 + x\ens_1$ where $x \in \mathbb{R}$. Note that $\ens[a]$ uniquely determines $x$. Therefore we can define $f(\ens[a]) \mapsto x$, and it will be an invertible function.
-	
-	We can verify that, given $\ens[a], \ens[b] \in A$, we have
-	\begin{equation}
-		\begin{aligned}
-			f(p\ens[a] + \bar{p} \ens[b]) &= f(p\bar{x}_a \ens_0 + px_a \ens_1 + \bar{p}\bar{x}_b \ens_0 + \bar{p}x_b \ens_1) = f((p\bar{x}_a + \bar{p}\bar{x}_b) \ens_0 + (px_a + \bar{p}x_b) \ens_1) \\
-			&= px_a + \bar{p}x_b = pf(\ens[a]) + \bar{p}f(\ens[b]).
-		\end{aligned}
-	\end{equation}
-	
-	We are going to show that the image $V=f(A)$ must be a bounded set, or it would eventually violate the entropy bounds. Given a value $x \in V$, there will be an entropy value $S(f^{-1}(x))$ which we can write as a function of the real value $S(x)$. This function will need to satisfy continuity, strict concavity and the upper variability bound.
-
-	We are going to show that the function $S(x)$ cannot extend to plus infinity. The same argument can be applied by symmetry for minus infinity. We are going to assume that $S(0) = 0$ without loss of generality. If $S$ is not defined at zero, or if the value is different, we can apply a translation on the argument or on the value, which will not affect the concavity of the function.
-	
-	Let $0 < a < b \in V$ be two distinct values, with $S(a)$ and $S(b)$ their respective entropies. We are going to show that if we pick a $c > b$ sufficiently large, we are not going to find a value for $S(c)$ that satisfies the bounds. In the picture, we have the three points, $a$ in blue, $b$ in red, $c$ in green. The horizontal axis represents the value, the position of the ensemble along the affine line, while the vertical axis represents the entropy. Consider the points $a$, $b$ and $c$. Since the entropy is strictly concave, $c$ must be placed under the blue line which represents an upper bound on $S(c)$. Now consider $0$, $a$ and $c$. Since $a$ is a mixture of $0$ and $c$, $S(a)$ will need to satisfy the upper bound given by $S(0)$ and $S(c)$. In the diagram, the green line represents the upper bound on $S(a)$ for the specific choice of $c$ and $S(c)$. Since $a$ and $S(a)$ are fixed, this puts a lower bound on $S(c)$, which is represented by the purple curve. That is, the purple curve represents the minimum value we have to assign to $S(c)$ such that $S(a)$ still satisfies the upper bound between $0$ and $c$. As the picture shows, the two bounds meet at some point and cannot both be satisfied.
-	
-	From strict concavity, noting that $\frac{c-b}{c-a} + \frac{b-a}{c-a} = 1$, we have:
-	\begin{equation}
-		\begin{aligned}
-			S(b) &= S\left(\frac{c-b}{c-a} a + \frac{b-a}{c-a} c\right) > \frac{c-b}{c-a} S(a) + \frac{b-a}{c-a} S(c)\\
-			(b-a)S(c) &< (c-a) S(b) - (c-b) S(a) = (c-a) S(b) - (c-a) S(a) + (b-a) S(a) \\
-			S(c) &< \frac{S(b) - S(a)}{(b-a)} (c-a) + S(a) \\
-		\end{aligned}
-	\end{equation}
-	
-	From the upper bound, noting that $\frac{c-a}{c} + \frac{a}{c} = 1$ and recalling we assumed $S(0) = 0$, we have:
-	\begin{equation}
-		\begin{aligned}
-			S(a) &= S\left(\frac{c-a}{c} 0 + \frac{a}{c} c\right) \leq I\left(\frac{c-a}{c}, \frac{a}{c}\right) + \frac{c-a}{c} S(0) +\frac{a}{c} S(c) \\
-			\frac{a}{c} S(c) &\geq S(a) - I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
-			S(c) &\geq \frac{c}{a} \left[ S(a) - I\left(\frac{c-a}{c}, \frac{a}{c}\right) \right]
-		\end{aligned}
-	\end{equation}
-	
-	Combining the bounds, we have:
-	\begin{equation}
-		\begin{aligned}
-			\frac{S(b) - S(a)}{(b-a)} (c-a) + S(a) &> \frac{c}{a} \left[ S(a) - I\left(\frac{c-a}{c}, \frac{a}{c}\right) \right] \\
-			(c-a) S(b) - (c-a)S(a) + (b-a) S(a) &> \frac{c(b-a)}{a} S(a) - \frac{c(b-a)}{a} I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
-			a (c-a) S(b) - a(c-b) S(a) &> c(b-a)S(a) - c(b-a) I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
-			a (c-a) S(b) + (-ac +ab -bc +ac) S(a) &> - c(b-a) I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
-			a (c-a) S(b) -b (c-a) S(a) &> - c(b-a) I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
-			a  S(b) - b S(a) &> - \frac{c(b-a)}{(c-a)} I\left(\frac{c-a}{c}, \frac{a}{c}\right) \\
-		\end{aligned}
-	\end{equation}
-	
-	Since $b > a$, $c > a$ and $I(p,\bar{p}) > 0$ for all $p \in (0,1)$, the right hand side of the inequality is always negative. As $c$ increases, the right hand side will go to zero, since $\lim\limits_{c\to \infty}\frac{c(b-a)}{c-a} = b-a$ and $\lim\limits_{c\to \infty} I\left(\frac{c-a}{c}, \frac{a}{c}\right) = I(1,0) = 0$. The left hand side is a constant. If the constant is positive, the inequality is always satisfied. If it is negative, it will not be satisfied for all $c$.
-	
-	From strict concavity, noting that $\frac{b-a}{b} + \frac{a}{b} = 1$, we have
-	\begin{equation}
-		\begin{aligned}
-			S(a) &= S\left(\frac{b-a}{b} 0 + \frac{a}{b} b\right) > \frac{b-a}{b} S(0) + \frac{a}{b} S(b) = \frac{a}{b} S(b)\\
-			b S(a) &> a S(b)  \\
-			0 &> a S(b) - b S(a)\\
-		\end{aligned}
-	\end{equation}
-	This shows that the left hand side of the previous inequality is negative, and therefore the bounds cannot be satisfied over the whole $\mathbb{R}$.
-	
-	This means that $V = f(A)$ must be bounded and therefore every line is a segment as embedded in the vector space.
-\end{proof}
-
-\begin{remark}
-	Note that this does not mean that, along each direction, the line is closed in the vector space. That is, it may not include the extreme points in the convex space. An open bounded interval, in fact, is still a convex space and we would be able to define an entropy on it.
-\end{remark}
-\end{mathSection}
-
-TODO: maybe re-express with new definition of bounded?
-
-Since every direction is bounded, recalling \ref{pm-es-convergenceToOneIsBoundedness}, we can show that $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$ whenever $p_i \to 1$, provided that all $\ens[a]_i$ are on the same line.
-
-\begin{mathSection}
-	\begin{prop}
-		Let $L \subseteq \Ens$ be a line. Let $\ens \in L$ and $\ens[a]_i \in L$. Then $p_i \ens + \bar{p}_i \ens[a]_i \to \ens$ if $p_i \to 1$.
-	\end{prop}
-	
-	\begin{proof}
-		Pick $\ens[a] \in L$ such that $\ens[a] \neq \ens$. Then every $\ens[a]_i$ can be expressed as an affine combination $\ens[a]_i = r_i \ens + \bar{r}_i \ens[a]$. We have $p_i \ens + \bar{p}_i \ens[a]_i = p_i \ens + \bar{p}_i \left( r_i \ens + \bar{r}_i \ens[a] \right) = \left( p_i + \bar{p}_i r_i \right) \ens + \bar{p}_i\bar{r}_i \ens[a]$. Since the ensemble space is directionally bounded, the sequence $r_i$ is bounded from below and above. This means that $\bar{p}_i \to 0$ implies $p_i + \bar{p}_i r_i \to 1$ and $\bar{p}_i\bar{r}_i \to 0$. Therefore by continuity $\left( p_i + \bar{p}_i r_i \right) \ens + \bar{p}_i\bar{r}_i \ens[a] \to 1 \ens + 0 \ens[a] = \ens$.
-	\end{proof}
-\end{mathSection}
-This is not, however, enough to show that $\Ens$ is bounded. A set, in fact, could be bounded in every direction but still be unbounded as there is always a direction with a greater bound. That is, directional boundedness is a pointwise one-dimensional property, while boundedness around a point is a uniform property over all directions.
-
-In general, an ensemble space will not be bounded. Consider the space of Schwartz probability sequences. Since the topology is generated by semi-norms with no upper bound (with the exception of $|i^0 p_i|$), the whole space cannot be shrunk into any open neighborhood with bounded semi-norm with a finite mixing coefficient. Therefore, in general, ensemble spaces are not be bounded.
 
 \section{Entropic geometry}
 
@@ -2617,7 +2453,7 @@ Though the mixing entropy is not a distance function, we can find interesting bo
 	We have $MS(\ens[a],\ens[b]) \ge MS(\ens[a],p\ens[a]+\bar{p}\ens[b]) + MS(\ens[b],p\ens[a]+\bar{p}\ens[b])$. Since $MS(p\ens[a]+\bar{p}\ens[b],\ens[b]) \ge 0$ with equality holding if and only if $p=0$ or $\ens[a]=\ens[b]$, the result follows.
 \end{proof}
 
-\begin{prop}
+\begin{prop}\label{pm-es-mixingEntropyUniformBound}
 	Let $\ens[a], \ens[c] \in \Ens$ and $\ens[b] = p\ens[a] + \bar{p}\ens[c]$ with $p \in (0,1)$. Then $MS(\ens[a],\ens[b]) \leq \frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right)$.
 \end{prop}
 
@@ -3155,7 +2991,7 @@ First we define the \textbf{fraction} of one element with respect to another. Fo
 	\end{prop}
 	
 	\begin{proof}
-		If $\ens = \ens[a]$, then $\fraction_{\ens}(\ens[a]) = 1$. Conversely, suppose $\fraction_{\ens}(\ens[a]) = 1$ and $\ens \neq \ens[a]$. By the definition of the supremum, we can find coefficients $p_i \in (0,1)$ tending to $1$ and ensembles $\ens[b]_i \in \Ens$ such that $\ens = p_i \ens[a] + \bar{p}_i \ens[b]_i$. All $\ens[b]_i$ lie on the bounded line through $\ens[a]$ and $\ens$. Therefore, by \ref{pm-es-convergenceToOneIsBoundedness}, $\ens = p_i \ens[a] + \bar{p}_i \ens[b]_i \to \ens[a]$.		Since $\Ens$ is Hausdorff by \ref{pm-es-Hausdorff}, the constant sequence at $\ens$ has a unique limit. Therefore $\ens = \ens[a]$, a contradiction.
+		If $\ens = \ens[a]$, then $\fraction_{\ens}(\ens[a]) = 1$. Conversely, suppose $\fraction_{\ens}(\ens[a]) = 1$ and $\ens \neq \ens[a]$. By the definition of the supremum, we can find coefficients $p_i \in (0,1)$ tending to $1$ and ensembles $\ens[b]_i \in \Ens$ such that $\ens = p_i \ens[a] + \bar{p}_i \ens[b]_i$. By \ref{pm-es-mixingEntropyUniformBound}, $0 \leq MS(\ens[a],\ens) \leq \frac{1}{1+p_i}I\left(\frac{1+p_i}{2},\frac{1-p_i}{2}\right)$. The right-hand side tends to zero as $p_i \to 1$, so $MS(\ens[a],\ens)=0$. Therefore $\ens=\ens[a]$, a contradiction.
 		
 		Note that $\ens[a]$ is a component of $\ens$ if we can write $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\lambda \in (0,1]$ and $\ens[b] \in \Ens$. In this case, $\fraction_{\ens}(\ens[a]) \geq \lambda > 0$. Conversely, if $\fraction_{\ens}(\ens[a]) > 0$ we can find $\lambda \in (0,\fraction_{\ens}(\ens[a])]$ such that $\ens = \lambda \ens[a] + \bar{\lambda} \ens[b]$ for some $\ens[b] \in \Ens$.
 	\end{proof}
@@ -4502,7 +4338,19 @@ The mixing entropy bound established above tells us how much mixing is needed to
 		Since $\frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right)\to0$ as $p\to1$, the upper bound on mixing entropy gives a single $p \in (0,1)$ such that, for every $\ens[c] \in A$, $MS(\ens[a],p\ens[a]+\bar{p}\ens[c]) \leq \frac{1}{1+p}I\left(\frac{1+p}{2},\frac{1-p}{2}\right) < r$.
 		Since $A$ is convex, $p\ens[a]+\bar{p}A \subseteq B_r(\ens[a])\cap A \subseteq U$. Therefore $A$ is bounded around $\ens[a]$.
 	\end{proof}
+
+	\begin{coro}
+		Every line admits an affine bijection onto a bounded interval of $\mathbb{R}$.
+	\end{coro}
+
+	\begin{proof}
+		Let $L$ be a line and choose distinct $\ens[a],\ens[b] \in L$. Let $f:L\to\mathbb{R}$ be the affine coordinate with $f(\ens[a])=0$ and $f(\ens[b])=1$. Its image is an interval by convexity.
+
+		If $f(L)$ were unbounded above, we could choose $\ens[c]_i \in L$ with $t_i=f(\ens[c]_i)>1$ and $t_i\to+\infty$. Then $\ens[b]=(1-\frac{1}{t_i})\ens[a]+\frac{1}{t_i}\ens[c]_i$, so $\fraction_{\ens[b]}(\ens[a])=1$, contradicting \ref{pm-es-fractionOneZero}. Exchanging $\ens[a]$ and $\ens[b]$ rules out unboundedness below.
+	\end{proof}
 \end{mathSection}
+
+The whole ensemble space need not be bounded in infinite dimensions. Consider the space of Schwartz probability sequences with its Schwartz topology. The seminorm $P(\ens)=\sup_{i\geq1}i|p_i|$, where $\ens=\sum_i p_i x_i$, is unbounded: $P(x_n)=n$. For every fixed $\ens$ and $\lambda\in[0,1)$, $P(\lambda\ens+\bar{\lambda}x_n)\geq\bar{\lambda}n$. Therefore no fixed mixing coefficient can shrink the whole space into a neighborhood of $\ens$ on which $P$ is bounded.
 
 \subsection{Topology for finite-dimensional ensemble spaces}
 
